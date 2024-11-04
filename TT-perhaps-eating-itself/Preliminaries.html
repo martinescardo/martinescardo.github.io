@@ -1,0 +1,400 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+><head
+  ><title
+    >Preliminaries</title
+    ><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"
+     /><meta http-equiv="Content-Style-Type" content="text/css"
+     /><link href="Agda.css" rel="stylesheet" type="text/css"
+     /></head
+  ><body
+  ><pre
+    ><a name="1" class="Comment"
+      >Chuangjie Xu &amp; Martin Escardo, 2014</a
+      ><a name="36"
+      >
+
+\begin{code}
+
+</a
+      ><a name="52" class="Keyword"
+      >module</a
+      ><a name="58"
+      > </a
+      ><a name="59" href="Preliminaries.html#1" class="Module"
+      >Preliminaries</a
+      ><a name="72"
+      > </a
+      ><a name="73" class="Keyword"
+      >where</a
+      ><a name="78"
+      >
+
+</a
+      ><a name="80" class="Keyword"
+      >open</a
+      ><a name="84"
+      > </a
+      ><a name="85" class="Keyword"
+      >import</a
+      ><a name="91"
+      > </a
+      ><a name="92" href="Agda.Primitive.html#1" class="Module"
+      >Agda.Primitive</a
+      ><a name="106"
+      > </a
+      ><a name="107" class="Keyword"
+      >using</a
+      ><a name="112"
+      > </a
+      ><a name="113" class="Symbol"
+      >(</a
+      ><a name="114"
+      >Level </a
+      ><a name="120" class="Symbol"
+      >;</a
+      ><a name="121"
+      > lzero </a
+      ><a name="128" class="Symbol"
+      >;</a
+      ><a name="129"
+      > lsuc </a
+      ><a name="135" class="Symbol"
+      >;</a
+      ><a name="136"
+      > _&#8852;_</a
+      ><a name="140" class="Symbol"
+      >)</a
+      ><a name="141"
+      >
+
+</a
+      ><a name="143" class="Keyword"
+      >data</a
+      ><a name="147"
+      > </a
+      ><a name="148" href="Preliminaries.html#148" class="Datatype"
+      >[]</a
+      ><a name="150"
+      > </a
+      ><a name="151" class="Symbol"
+      >{</a
+      ><a name="152" href="Preliminaries.html#152" class="Bound"
+      >i</a
+      ><a name="153"
+      > </a
+      ><a name="154" class="Symbol"
+      >:</a
+      ><a name="155"
+      > </a
+      ><a name="156" href="Agda.Primitive.html#379" class="Postulate"
+      >Level</a
+      ><a name="161" class="Symbol"
+      >}</a
+      ><a name="162"
+      > </a
+      ><a name="163" class="Symbol"
+      >:</a
+      ><a name="164"
+      > </a
+      ><a name="165" class="PrimitiveType"
+      >Set</a
+      ><a name="168"
+      > </a
+      ><a name="169" href="Preliminaries.html#152" class="Bound"
+      >i</a
+      ><a name="170"
+      > </a
+      ><a name="171" class="Keyword"
+      >where</a
+      ><a name="176"
+      >
+ </a
+      ><a name="178" href="Preliminaries.html#178" class="InductiveConstructor"
+      >&#8902;</a
+      ><a name="179"
+      > </a
+      ><a name="180" class="Symbol"
+      >:</a
+      ><a name="181"
+      > </a
+      ><a name="182" href="Preliminaries.html#148" class="Datatype"
+      >[]</a
+      ><a name="184"
+      >
+
+</a
+      ><a name="187" class="Keyword"
+      >record</a
+      ><a name="193"
+      > </a
+      ><a name="194" href="Preliminaries.html#194" class="Record"
+      >&#931;</a
+      ><a name="195"
+      > </a
+      ><a name="196" class="Symbol"
+      >{</a
+      ><a name="197" href="Preliminaries.html#197" class="Bound"
+      >i</a
+      ><a name="198"
+      > </a
+      ><a name="199" href="Preliminaries.html#199" class="Bound"
+      >j</a
+      ><a name="200"
+      > </a
+      ><a name="201" class="Symbol"
+      >:</a
+      ><a name="202"
+      > </a
+      ><a name="203" href="Agda.Primitive.html#379" class="Postulate"
+      >Level</a
+      ><a name="208" class="Symbol"
+      >}{</a
+      ><a name="210" href="Preliminaries.html#210" class="Bound"
+      >A</a
+      ><a name="211"
+      > </a
+      ><a name="212" class="Symbol"
+      >:</a
+      ><a name="213"
+      > </a
+      ><a name="214" class="PrimitiveType"
+      >Set</a
+      ><a name="217"
+      > </a
+      ><a name="218" href="Preliminaries.html#197" class="Bound"
+      >i</a
+      ><a name="219" class="Symbol"
+      >}(</a
+      ><a name="221" href="Preliminaries.html#221" class="Bound"
+      >B</a
+      ><a name="222"
+      > </a
+      ><a name="223" class="Symbol"
+      >:</a
+      ><a name="224"
+      > </a
+      ><a name="225" href="Preliminaries.html#210" class="Bound"
+      >A</a
+      ><a name="226"
+      > </a
+      ><a name="227" class="Symbol"
+      >&#8594;</a
+      ><a name="228"
+      > </a
+      ><a name="229" class="PrimitiveType"
+      >Set</a
+      ><a name="232"
+      > </a
+      ><a name="233" href="Preliminaries.html#199" class="Bound"
+      >j</a
+      ><a name="234" class="Symbol"
+      >)</a
+      ><a name="235"
+      > </a
+      ><a name="236" class="Symbol"
+      >:</a
+      ><a name="237"
+      > </a
+      ><a name="238" class="PrimitiveType"
+      >Set</a
+      ><a name="241" class="Symbol"
+      >(</a
+      ><a name="242" href="Preliminaries.html#197" class="Bound"
+      >i</a
+      ><a name="243"
+      > </a
+      ><a name="244" href="Agda.Primitive.html#626" class="Primitive Operator"
+      >&#8852;</a
+      ><a name="245"
+      > </a
+      ><a name="246" href="Preliminaries.html#199" class="Bound"
+      >j</a
+      ><a name="247" class="Symbol"
+      >)</a
+      ><a name="248"
+      > </a
+      ><a name="249" class="Keyword"
+      >where</a
+      ><a name="254"
+      >
+ </a
+      ><a name="256" class="Keyword"
+      >constructor</a
+      ><a name="267"
+      > </a
+      ><a name="268" href="Preliminaries.html#268" class="InductiveConstructor Operator"
+      >_,_</a
+      ><a name="271"
+      >
+ </a
+      ><a name="273" class="Keyword"
+      >field</a
+      ><a name="278"
+      >
+  </a
+      ><a name="281" href="Preliminaries.html#281" class="Field"
+      >pr&#8321;</a
+      ><a name="284"
+      > </a
+      ><a name="285" class="Symbol"
+      >:</a
+      ><a name="286"
+      > </a
+      ><a name="287" href="Preliminaries.html#210" class="Bound"
+      >A</a
+      ><a name="288"
+      >
+  </a
+      ><a name="291" href="Preliminaries.html#291" class="Field"
+      >pr&#8322;</a
+      ><a name="294"
+      > </a
+      ><a name="295" class="Symbol"
+      >:</a
+      ><a name="296"
+      > </a
+      ><a name="297" href="Preliminaries.html#221" class="Bound"
+      >B</a
+      ><a name="298"
+      > </a
+      ><a name="299" href="Preliminaries.html#281" class="Bound"
+      >pr&#8321;</a
+      ><a name="302"
+      >
+
+</a
+      ><a name="304" class="Keyword"
+      >open</a
+      ><a name="308"
+      > </a
+      ><a name="309" href="Preliminaries.html#194" class="Module"
+      >&#931;</a
+      ><a name="310"
+      > </a
+      ><a name="311" class="Keyword"
+      >public</a
+      ><a name="317"
+      >
+
+</a
+      ><a name="319" class="Keyword"
+      >data</a
+      ><a name="323"
+      > </a
+      ><a name="324" href="Preliminaries.html#324" class="Datatype Operator"
+      >_&#8801;_</a
+      ><a name="327"
+      > </a
+      ><a name="328" class="Symbol"
+      >{</a
+      ><a name="329" href="Preliminaries.html#329" class="Bound"
+      >i</a
+      ><a name="330"
+      > </a
+      ><a name="331" class="Symbol"
+      >:</a
+      ><a name="332"
+      > </a
+      ><a name="333" href="Agda.Primitive.html#379" class="Postulate"
+      >Level</a
+      ><a name="338" class="Symbol"
+      >}{</a
+      ><a name="340" href="Preliminaries.html#340" class="Bound"
+      >A</a
+      ><a name="341"
+      > </a
+      ><a name="342" class="Symbol"
+      >:</a
+      ><a name="343"
+      > </a
+      ><a name="344" class="PrimitiveType"
+      >Set</a
+      ><a name="347"
+      > </a
+      ><a name="348" href="Preliminaries.html#329" class="Bound"
+      >i</a
+      ><a name="349" class="Symbol"
+      >}</a
+      ><a name="350"
+      > </a
+      ><a name="351" class="Symbol"
+      >:</a
+      ><a name="352"
+      > </a
+      ><a name="353" href="Preliminaries.html#340" class="Bound"
+      >A</a
+      ><a name="354"
+      > </a
+      ><a name="355" class="Symbol"
+      >&#8594;</a
+      ><a name="356"
+      > </a
+      ><a name="357" href="Preliminaries.html#340" class="Bound"
+      >A</a
+      ><a name="358"
+      > </a
+      ><a name="359" class="Symbol"
+      >&#8594;</a
+      ><a name="360"
+      > </a
+      ><a name="361" class="PrimitiveType"
+      >Set</a
+      ><a name="364"
+      > </a
+      ><a name="365" href="Preliminaries.html#329" class="Bound"
+      >i</a
+      ><a name="366"
+      > </a
+      ><a name="367" class="Keyword"
+      >where</a
+      ><a name="372"
+      >
+ </a
+      ><a name="374" href="Preliminaries.html#374" class="InductiveConstructor"
+      >refl</a
+      ><a name="378"
+      > </a
+      ><a name="379" class="Symbol"
+      >:</a
+      ><a name="380"
+      > </a
+      ><a name="381" class="Symbol"
+      >{</a
+      ><a name="382" href="Preliminaries.html#382" class="Bound"
+      >a</a
+      ><a name="383"
+      > </a
+      ><a name="384" class="Symbol"
+      >:</a
+      ><a name="385"
+      > </a
+      ><a name="386" href="Preliminaries.html#340" class="Bound"
+      >A</a
+      ><a name="387" class="Symbol"
+      >}</a
+      ><a name="388"
+      > </a
+      ><a name="389" class="Symbol"
+      >&#8594;</a
+      ><a name="390"
+      > </a
+      ><a name="391" href="Preliminaries.html#382" class="Bound"
+      >a</a
+      ><a name="392"
+      > </a
+      ><a name="393" href="Preliminaries.html#324" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="394"
+      > </a
+      ><a name="395" href="Preliminaries.html#382" class="Bound"
+      >a</a
+      ><a name="396"
+      >
+
+\end{code}
+</a
+      ></pre
+    ></body
+  ></html
+>

@@ -1,0 +1,370 @@
+<!DOCTYPE HTML>
+<html><head><meta charset="utf-8"><title>PathPrelude</title><link rel="stylesheet" href="Agda.css"></head><body><pre><a id="1" class="Comment">-- File by Andrea Vezzosi (https://github.com/Saizan/cubical-demo)</a>
+
+<a id="69" class="Symbol">{-#</a> <a id="73" class="Keyword">OPTIONS</a> <a id="81" class="Option">--cubical</a> <a id="91" class="Symbol">#-}</a>
+<a id="95" class="Keyword">module</a> <a id="102" href="PathPrelude.html" class="Module">PathPrelude</a> <a id="114" class="Keyword">where</a>
+
+<a id="121" class="Keyword">open</a> <a id="126" class="Keyword">import</a> <a id="133" href="Primitives.html" class="Module">Primitives</a> <a id="144" class="Keyword">public</a>
+<a id="151" class="Keyword">open</a> <a id="156" class="Keyword">import</a> <a id="163" href="Primitives.html" class="Module">Primitives</a> <a id="174" class="Keyword">public</a> <a id="181" class="Keyword">using</a> <a id="187" class="Symbol">()</a> <a id="190" class="Keyword">renaming</a> <a id="199" class="Symbol">(</a><a id="200" href="Primitives.html#1137" class="Postulate">Sub</a> <a id="204" class="Symbol">to</a> <a id="207" href="Primitives.html#1137" class="Postulate">_[_↦_]</a><a id="213" class="Symbol">)</a>
+
+<a id="216" class="Keyword">module</a> <a id="223" href="PathPrelude.html#223" class="Module">_</a> <a id="225" class="Symbol">{</a><a id="226" href="PathPrelude.html#226" class="Bound">ℓ</a><a id="227" class="Symbol">}</a> <a id="229" class="Symbol">{</a><a id="230" href="PathPrelude.html#230" class="Bound">A</a> <a id="232" class="Symbol">:</a> <a id="234" class="PrimitiveType">Set</a> <a id="238" href="PathPrelude.html#226" class="Bound">ℓ</a><a id="239" class="Symbol">}</a> <a id="241" class="Keyword">where</a>
+  <a id="249" href="PathPrelude.html#249" class="Function">refl</a> <a id="254" class="Symbol">:</a> <a id="256" class="Symbol">{</a><a id="257" href="PathPrelude.html#257" class="Bound">x</a> <a id="259" class="Symbol">:</a> <a id="261" href="PathPrelude.html#230" class="Bound">A</a><a id="262" class="Symbol">}</a> <a id="264" class="Symbol">→</a> <a id="266" href="PathPrelude.html#257" class="Bound">x</a> <a id="268" href="Primitives.html#413" class="Function Operator">≡</a> <a id="270" href="PathPrelude.html#257" class="Bound">x</a>
+  <a id="274" href="PathPrelude.html#249" class="Function">refl</a> <a id="279" class="Symbol">{</a><a id="280" class="Argument">x</a> <a id="282" class="Symbol">=</a> <a id="284" href="PathPrelude.html#284" class="Bound">x</a><a id="285" class="Symbol">}</a> <a id="287" class="Symbol">=</a> <a id="289" class="Symbol">λ</a> <a id="291" href="PathPrelude.html#291" class="Bound">_</a> <a id="293" class="Symbol">→</a> <a id="295" href="PathPrelude.html#284" class="Bound">x</a>
+
+  <a id="300" href="PathPrelude.html#300" class="Function">sym</a> <a id="304" class="Symbol">:</a> <a id="306" class="Symbol">{</a><a id="307" href="PathPrelude.html#307" class="Bound">x</a> <a id="309" href="PathPrelude.html#309" class="Bound">y</a> <a id="311" class="Symbol">:</a> <a id="313" href="PathPrelude.html#230" class="Bound">A</a><a id="314" class="Symbol">}</a> <a id="316" class="Symbol">→</a> <a id="318" href="PathPrelude.html#307" class="Bound">x</a> <a id="320" href="Primitives.html#413" class="Function Operator">≡</a> <a id="322" href="PathPrelude.html#309" class="Bound">y</a> <a id="324" class="Symbol">→</a> <a id="326" href="PathPrelude.html#309" class="Bound">y</a> <a id="328" href="Primitives.html#413" class="Function Operator">≡</a> <a id="330" href="PathPrelude.html#307" class="Bound">x</a>
+  <a id="334" href="PathPrelude.html#300" class="Function">sym</a> <a id="338" href="PathPrelude.html#338" class="Bound">p</a> <a id="340" class="Symbol">=</a> <a id="342" class="Symbol">λ</a> <a id="344" href="PathPrelude.html#344" class="Bound">i</a> <a id="346" class="Symbol">→</a> <a id="348" href="PathPrelude.html#338" class="Bound">p</a> <a id="350" class="Symbol">(</a><a id="351" href="Agda.Primitive.Cubical.html#252" class="Primitive Operator">~</a> <a id="353" href="PathPrelude.html#344" class="Bound">i</a><a id="354" class="Symbol">)</a>
+
+  <a id="359" href="PathPrelude.html#359" class="Function">trans&#39;</a> <a id="366" class="Symbol">:</a> <a id="368" class="Symbol">{</a><a id="369" href="PathPrelude.html#369" class="Bound">x</a> <a id="371" href="PathPrelude.html#371" class="Bound">y</a> <a id="373" href="PathPrelude.html#373" class="Bound">z</a> <a id="375" class="Symbol">:</a> <a id="377" href="PathPrelude.html#230" class="Bound">A</a><a id="378" class="Symbol">}</a> <a id="380" class="Symbol">→</a> <a id="382" href="PathPrelude.html#369" class="Bound">x</a> <a id="384" href="Primitives.html#413" class="Function Operator">≡</a> <a id="386" href="PathPrelude.html#371" class="Bound">y</a> <a id="388" class="Symbol">→</a> <a id="390" href="PathPrelude.html#371" class="Bound">y</a> <a id="392" href="Primitives.html#413" class="Function Operator">≡</a> <a id="394" href="PathPrelude.html#373" class="Bound">z</a> <a id="396" class="Symbol">→</a> <a id="398" href="PathPrelude.html#369" class="Bound">x</a> <a id="400" href="Primitives.html#413" class="Function Operator">≡</a> <a id="402" href="PathPrelude.html#373" class="Bound">z</a>
+  <a id="406" href="PathPrelude.html#359" class="Function">trans&#39;</a> <a id="413" class="Symbol">{</a><a id="414" class="Argument">y</a> <a id="416" class="Symbol">=</a> <a id="418" href="PathPrelude.html#418" class="Bound">y</a><a id="419" class="Symbol">}</a> <a id="421" href="PathPrelude.html#421" class="Bound">p</a> <a id="423" href="PathPrelude.html#423" class="Bound">q</a> <a id="425" href="PathPrelude.html#425" class="Bound">i</a> <a id="427" class="Symbol">=</a> <a id="429" href="Agda.Primitive.Cubical.html#1051" class="Primitive">primComp</a> <a id="438" class="Symbol">(λ</a> <a id="441" href="PathPrelude.html#441" class="Bound">_</a> <a id="443" class="Symbol">→</a> <a id="445" href="PathPrelude.html#230" class="Bound">A</a><a id="446" class="Symbol">)</a> <a id="448" class="Symbol">_</a>
+                                 <a id="483" class="Symbol">(λ</a> <a id="486" class="Symbol">{</a> <a id="488" href="PathPrelude.html#488" class="Bound">j</a> <a id="490" class="Symbol">(</a><a id="491" href="PathPrelude.html#425" class="Bound">i</a> <a id="493" class="Symbol">=</a> <a id="495" href="Agda.Primitive.Cubical.html#101" class="InductiveConstructor">i0</a><a id="497" class="Symbol">)</a> <a id="499" class="Symbol">→</a> <a id="501" href="PathPrelude.html#421" class="Bound">p</a> <a id="503" class="Symbol">(</a><a id="504" href="Agda.Primitive.Cubical.html#252" class="Primitive Operator">~</a> <a id="506" href="PathPrelude.html#488" class="Bound">j</a><a id="507" class="Symbol">)</a>
+                                    <a id="545" class="Symbol">;</a> <a id="547" href="PathPrelude.html#547" class="Bound">j</a> <a id="549" class="Symbol">(</a><a id="550" href="PathPrelude.html#425" class="Bound">i</a> <a id="552" class="Symbol">=</a> <a id="554" href="Agda.Primitive.Cubical.html#131" class="InductiveConstructor">i1</a><a id="556" class="Symbol">)</a> <a id="558" class="Symbol">→</a> <a id="560" href="PathPrelude.html#423" class="Bound">q</a> <a id="562" href="PathPrelude.html#547" class="Bound">j</a> <a id="564" class="Symbol">})</a>
+                                 <a id="600" href="PathPrelude.html#418" class="Bound">y</a>
+
+  <a id="605" href="PathPrelude.html#605" class="Function">trans</a> <a id="611" class="Symbol">:</a> <a id="613" class="Symbol">{</a><a id="614" href="PathPrelude.html#614" class="Bound">x</a> <a id="616" href="PathPrelude.html#616" class="Bound">y</a> <a id="618" href="PathPrelude.html#618" class="Bound">z</a> <a id="620" class="Symbol">:</a> <a id="622" href="PathPrelude.html#230" class="Bound">A</a><a id="623" class="Symbol">}</a> <a id="625" class="Symbol">→</a> <a id="627" href="PathPrelude.html#614" class="Bound">x</a> <a id="629" href="Primitives.html#413" class="Function Operator">≡</a> <a id="631" href="PathPrelude.html#616" class="Bound">y</a> <a id="633" class="Symbol">→</a> <a id="635" href="PathPrelude.html#616" class="Bound">y</a> <a id="637" href="Primitives.html#413" class="Function Operator">≡</a> <a id="639" href="PathPrelude.html#618" class="Bound">z</a> <a id="641" class="Symbol">→</a> <a id="643" href="PathPrelude.html#614" class="Bound">x</a> <a id="645" href="Primitives.html#413" class="Function Operator">≡</a> <a id="647" href="PathPrelude.html#618" class="Bound">z</a>
+  <a id="651" href="PathPrelude.html#605" class="Function">trans</a> <a id="657" class="Symbol">{</a><a id="658" class="Argument">x</a> <a id="660" class="Symbol">=</a> <a id="662" href="PathPrelude.html#662" class="Bound">x</a><a id="663" class="Symbol">}</a> <a id="665" href="PathPrelude.html#665" class="Bound">p</a> <a id="667" href="PathPrelude.html#667" class="Bound">q</a> <a id="669" href="PathPrelude.html#669" class="Bound">i</a> <a id="671" class="Symbol">=</a> <a id="673" href="Agda.Primitive.Cubical.html#1051" class="Primitive">primComp</a> <a id="682" class="Symbol">(λ</a> <a id="685" href="PathPrelude.html#685" class="Bound">_</a> <a id="687" class="Symbol">→</a> <a id="689" href="PathPrelude.html#230" class="Bound">A</a><a id="690" class="Symbol">)</a> <a id="692" class="Symbol">_</a> <a id="694" class="Symbol">(λ</a> <a id="697" class="Symbol">{</a> <a id="699" href="PathPrelude.html#699" class="Bound">j</a> <a id="701" class="Symbol">(</a><a id="702" href="PathPrelude.html#669" class="Bound">i</a> <a id="704" class="Symbol">=</a> <a id="706" href="Agda.Primitive.Cubical.html#101" class="InductiveConstructor">i0</a><a id="708" class="Symbol">)</a> <a id="710" class="Symbol">→</a> <a id="712" href="PathPrelude.html#662" class="Bound">x</a>
+                                                <a id="762" class="Symbol">;</a> <a id="764" href="PathPrelude.html#764" class="Bound">j</a> <a id="766" class="Symbol">(</a><a id="767" href="PathPrelude.html#669" class="Bound">i</a> <a id="769" class="Symbol">=</a> <a id="771" href="Agda.Primitive.Cubical.html#131" class="InductiveConstructor">i1</a><a id="773" class="Symbol">)</a> <a id="775" class="Symbol">→</a> <a id="777" href="PathPrelude.html#667" class="Bound">q</a> <a id="779" href="PathPrelude.html#764" class="Bound">j</a> <a id="781" class="Symbol">})</a> <a id="784" class="Symbol">(</a><a id="785" href="PathPrelude.html#665" class="Bound">p</a> <a id="787" href="PathPrelude.html#669" class="Bound">i</a><a id="788" class="Symbol">)</a>
+
+  <a id="793" href="PathPrelude.html#793" class="Function">cong</a> <a id="798" class="Symbol">:</a> <a id="800" class="Symbol">∀</a> <a id="802" class="Symbol">{</a><a id="803" href="PathPrelude.html#803" class="Bound">ℓ&#39;</a><a id="805" class="Symbol">}</a> <a id="807" class="Symbol">{</a><a id="808" href="PathPrelude.html#808" class="Bound">B</a> <a id="810" class="Symbol">:</a> <a id="812" class="PrimitiveType">Set</a> <a id="816" href="PathPrelude.html#803" class="Bound">ℓ&#39;</a><a id="818" class="Symbol">}</a> <a id="820" class="Symbol">{</a><a id="821" href="PathPrelude.html#821" class="Bound">x</a> <a id="823" href="PathPrelude.html#823" class="Bound">y</a> <a id="825" class="Symbol">:</a> <a id="827" href="PathPrelude.html#230" class="Bound">A</a><a id="828" class="Symbol">}</a> <a id="830" class="Symbol">→</a> <a id="832" class="Symbol">(</a><a id="833" href="PathPrelude.html#833" class="Bound">f</a> <a id="835" class="Symbol">:</a> <a id="837" href="PathPrelude.html#230" class="Bound">A</a> <a id="839" class="Symbol">→</a> <a id="841" href="PathPrelude.html#808" class="Bound">B</a><a id="842" class="Symbol">)</a> <a id="844" class="Symbol">→</a> <a id="846" href="PathPrelude.html#821" class="Bound">x</a> <a id="848" href="Primitives.html#413" class="Function Operator">≡</a> <a id="850" href="PathPrelude.html#823" class="Bound">y</a> <a id="852" class="Symbol">→</a> <a id="854" href="PathPrelude.html#833" class="Bound">f</a> <a id="856" href="PathPrelude.html#821" class="Bound">x</a> <a id="858" href="Primitives.html#413" class="Function Operator">≡</a> <a id="860" href="PathPrelude.html#833" class="Bound">f</a> <a id="862" href="PathPrelude.html#823" class="Bound">y</a>
+  <a id="866" href="PathPrelude.html#793" class="Function">cong</a> <a id="871" href="PathPrelude.html#871" class="Bound">f</a> <a id="873" href="PathPrelude.html#873" class="Bound">p</a> <a id="875" class="Symbol">=</a> <a id="877" class="Symbol">λ</a> <a id="879" href="PathPrelude.html#879" class="Bound">i</a> <a id="881" class="Symbol">→</a> <a id="883" href="PathPrelude.html#871" class="Bound">f</a> <a id="885" class="Symbol">(</a><a id="886" href="PathPrelude.html#873" class="Bound">p</a> <a id="888" href="PathPrelude.html#879" class="Bound">i</a><a id="889" class="Symbol">)</a>
+
+  <a id="894" class="Keyword">infix</a>  <a id="901" class="Number">3</a> <a id="903" href="PathPrelude.html#1157" class="Function Operator">_≡-qed</a>
+  <a id="912" class="Keyword">infixr</a> <a id="919" class="Number">2</a> <a id="921" href="PathPrelude.html#1017" class="Function Operator">_≡⟨⟩_</a> <a id="927" href="PathPrelude.html#1074" class="Function Operator">_≡⟨_⟩_</a>
+  <a id="936" class="Keyword">infix</a>  <a id="943" class="Number">1</a> <a id="945" href="PathPrelude.html#957" class="Function Operator">≡-proof_</a>
+
+  <a id="957" href="PathPrelude.html#957" class="Function Operator">≡-proof_</a> <a id="966" class="Symbol">:</a> <a id="968" class="Symbol">{</a><a id="969" href="PathPrelude.html#969" class="Bound">x</a> <a id="971" href="PathPrelude.html#971" class="Bound">y</a> <a id="973" class="Symbol">:</a> <a id="975" href="PathPrelude.html#230" class="Bound">A</a><a id="976" class="Symbol">}</a> <a id="978" class="Symbol">→</a> <a id="980" href="PathPrelude.html#969" class="Bound">x</a> <a id="982" href="Primitives.html#413" class="Function Operator">≡</a> <a id="984" href="PathPrelude.html#971" class="Bound">y</a> <a id="986" class="Symbol">→</a> <a id="988" href="PathPrelude.html#969" class="Bound">x</a> <a id="990" href="Primitives.html#413" class="Function Operator">≡</a> <a id="992" href="PathPrelude.html#971" class="Bound">y</a>
+  <a id="996" href="PathPrelude.html#957" class="Function Operator">≡-proof</a> <a id="1004" href="PathPrelude.html#1004" class="Bound">x≡y</a> <a id="1008" class="Symbol">=</a> <a id="1010" href="PathPrelude.html#1004" class="Bound">x≡y</a>
+
+  <a id="1017" href="PathPrelude.html#1017" class="Function Operator">_≡⟨⟩_</a> <a id="1023" class="Symbol">:</a> <a id="1025" class="Symbol">(</a><a id="1026" href="PathPrelude.html#1026" class="Bound">x</a> <a id="1028" class="Symbol">{</a><a id="1029" href="PathPrelude.html#1029" class="Bound">y</a><a id="1030" class="Symbol">}</a> <a id="1032" class="Symbol">:</a> <a id="1034" href="PathPrelude.html#230" class="Bound">A</a><a id="1035" class="Symbol">)</a> <a id="1037" class="Symbol">→</a> <a id="1039" href="PathPrelude.html#1026" class="Bound">x</a> <a id="1041" href="Primitives.html#413" class="Function Operator">≡</a> <a id="1043" href="PathPrelude.html#1029" class="Bound">y</a> <a id="1045" class="Symbol">→</a> <a id="1047" href="PathPrelude.html#1026" class="Bound">x</a> <a id="1049" href="Primitives.html#413" class="Function Operator">≡</a> <a id="1051" href="PathPrelude.html#1029" class="Bound">y</a>
+  <a id="1055" class="Symbol">_</a> <a id="1057" href="PathPrelude.html#1017" class="Function Operator">≡⟨⟩</a> <a id="1061" href="PathPrelude.html#1061" class="Bound">x≡y</a> <a id="1065" class="Symbol">=</a> <a id="1067" href="PathPrelude.html#1061" class="Bound">x≡y</a>
+
+  <a id="1074" href="PathPrelude.html#1074" class="Function Operator">_≡⟨_⟩_</a> <a id="1081" class="Symbol">:</a> <a id="1083" class="Symbol">(</a><a id="1084" href="PathPrelude.html#1084" class="Bound">x</a> <a id="1086" class="Symbol">{</a><a id="1087" href="PathPrelude.html#1087" class="Bound">y</a> <a id="1089" href="PathPrelude.html#1089" class="Bound">z</a><a id="1090" class="Symbol">}</a> <a id="1092" class="Symbol">:</a> <a id="1094" href="PathPrelude.html#230" class="Bound">A</a><a id="1095" class="Symbol">)</a> <a id="1097" class="Symbol">→</a> <a id="1099" href="PathPrelude.html#1084" class="Bound">x</a> <a id="1101" href="Primitives.html#413" class="Function Operator">≡</a> <a id="1103" href="PathPrelude.html#1087" class="Bound">y</a> <a id="1105" class="Symbol">→</a> <a id="1107" href="PathPrelude.html#1087" class="Bound">y</a> <a id="1109" href="Primitives.html#413" class="Function Operator">≡</a> <a id="1111" href="PathPrelude.html#1089" class="Bound">z</a> <a id="1113" class="Symbol">→</a> <a id="1115" href="PathPrelude.html#1084" class="Bound">x</a> <a id="1117" href="Primitives.html#413" class="Function Operator">≡</a> <a id="1119" href="PathPrelude.html#1089" class="Bound">z</a>
+  <a id="1123" class="Symbol">_</a> <a id="1125" href="PathPrelude.html#1074" class="Function Operator">≡⟨</a> <a id="1128" href="PathPrelude.html#1128" class="Bound">x≡y</a> <a id="1132" href="PathPrelude.html#1074" class="Function Operator">⟩</a> <a id="1134" href="PathPrelude.html#1134" class="Bound">y≡z</a> <a id="1138" class="Symbol">=</a> <a id="1140" href="PathPrelude.html#605" class="Function">trans</a> <a id="1146" href="PathPrelude.html#1128" class="Bound">x≡y</a> <a id="1150" href="PathPrelude.html#1134" class="Bound">y≡z</a>
+
+  <a id="1157" href="PathPrelude.html#1157" class="Function Operator">_≡-qed</a> <a id="1164" class="Symbol">:</a> <a id="1166" class="Symbol">(</a><a id="1167" href="PathPrelude.html#1167" class="Bound">x</a> <a id="1169" class="Symbol">:</a> <a id="1171" href="PathPrelude.html#230" class="Bound">A</a><a id="1172" class="Symbol">)</a> <a id="1174" class="Symbol">→</a> <a id="1176" href="PathPrelude.html#1167" class="Bound">x</a> <a id="1178" href="Primitives.html#413" class="Function Operator">≡</a> <a id="1180" href="PathPrelude.html#1167" class="Bound">x</a>
+  <a id="1184" class="Symbol">_</a> <a id="1186" href="PathPrelude.html#1157" class="Function Operator">≡-qed</a>  <a id="1193" class="Symbol">=</a> <a id="1195" href="PathPrelude.html#249" class="Function">refl</a>
+
+<a id="1201" href="PathPrelude.html#1201" class="Function">fill</a> <a id="1206" class="Symbol">:</a> <a id="1208" class="Symbol">{</a><a id="1209" href="PathPrelude.html#1209" class="Bound">ℓ</a> <a id="1211" class="Symbol">:</a> <a id="1213" href="Agda.Primitive.Cubical.html#58" class="Datatype">I</a> <a id="1215" class="Symbol">→</a> <a id="1217" class="Symbol">_}</a> <a id="1220" class="Symbol">→</a> <a id="1222" class="Symbol">(</a><a id="1223" href="PathPrelude.html#1223" class="Bound">A</a> <a id="1225" class="Symbol">:</a> <a id="1227" class="Symbol">(</a><a id="1228" href="PathPrelude.html#1228" class="Bound">i</a> <a id="1230" class="Symbol">:</a> <a id="1232" href="Agda.Primitive.Cubical.html#58" class="Datatype">I</a><a id="1233" class="Symbol">)</a> <a id="1235" class="Symbol">→</a> <a id="1237" class="PrimitiveType">Set</a> <a id="1241" class="Symbol">(</a><a id="1242" href="PathPrelude.html#1209" class="Bound">ℓ</a> <a id="1244" href="PathPrelude.html#1228" class="Bound">i</a><a id="1245" class="Symbol">))</a> <a id="1248" class="Symbol">→</a> <a id="1250" class="Symbol">(</a><a id="1251" href="PathPrelude.html#1251" class="Bound">φ</a> <a id="1253" class="Symbol">:</a> <a id="1255" href="Agda.Primitive.Cubical.html#58" class="Datatype">I</a><a id="1256" class="Symbol">)</a> <a id="1258" class="Symbol">→</a>
+  <a id="1262" class="Symbol">((</a><a id="1264" href="PathPrelude.html#1264" class="Bound">i</a> <a id="1266" class="Symbol">:</a> <a id="1268" href="Agda.Primitive.Cubical.html#58" class="Datatype">I</a><a id="1269" class="Symbol">)</a> <a id="1271" class="Symbol">→</a> <a id="1273" href="Agda.Primitive.Cubical.html#600" class="Primitive">Partial</a> <a id="1281" class="Symbol">(</a><a id="1282" href="PathPrelude.html#1223" class="Bound">A</a> <a id="1284" href="PathPrelude.html#1264" class="Bound">i</a><a id="1285" class="Symbol">)</a> <a id="1287" href="PathPrelude.html#1251" class="Bound">φ</a><a id="1288" class="Symbol">)</a> <a id="1290" class="Symbol">→</a> <a id="1292" href="PathPrelude.html#1223" class="Bound">A</a> <a id="1294" href="Agda.Primitive.Cubical.html#101" class="InductiveConstructor">i0</a> <a id="1297" class="Symbol">→</a> <a id="1299" class="Symbol">(</a><a id="1300" href="PathPrelude.html#1300" class="Bound">i</a> <a id="1302" class="Symbol">:</a> <a id="1304" href="Agda.Primitive.Cubical.html#58" class="Datatype">I</a><a id="1305" class="Symbol">)</a> <a id="1307" class="Symbol">→</a> <a id="1309" href="PathPrelude.html#1223" class="Bound">A</a> <a id="1311" href="PathPrelude.html#1300" class="Bound">i</a>
+<a id="1313" href="PathPrelude.html#1201" class="Function">fill</a> <a id="1318" href="PathPrelude.html#1318" class="Bound">A</a> <a id="1320" href="PathPrelude.html#1320" class="Bound">φ</a> <a id="1322" href="PathPrelude.html#1322" class="Bound">u</a> <a id="1324" href="PathPrelude.html#1324" class="Bound">azero</a> <a id="1330" href="PathPrelude.html#1330" class="Bound">i</a> <a id="1332" class="Symbol">=</a> <a id="1334" href="Primitives.html#1586" class="Function">unsafeComp</a> <a id="1345" class="Symbol">(λ</a> <a id="1348" href="PathPrelude.html#1348" class="Bound">j</a> <a id="1350" class="Symbol">→</a> <a id="1352" href="PathPrelude.html#1318" class="Bound">A</a> <a id="1354" class="Symbol">(</a><a id="1355" href="PathPrelude.html#1330" class="Bound">i</a> <a id="1357" href="Agda.Primitive.Cubical.html#202" class="Primitive Operator">∧</a> <a id="1359" href="PathPrelude.html#1348" class="Bound">j</a><a id="1360" class="Symbol">))</a> <a id="1363" class="Symbol">(</a><a id="1364" href="PathPrelude.html#1320" class="Bound">φ</a> <a id="1366" href="Agda.Primitive.Cubical.html#227" class="Primitive Operator">∨</a> <a id="1368" href="Agda.Primitive.Cubical.html#252" class="Primitive Operator">~</a> <a id="1370" href="PathPrelude.html#1330" class="Bound">i</a><a id="1371" class="Symbol">)</a>
+  <a id="1375" class="Symbol">(λ</a> <a id="1378" href="PathPrelude.html#1378" class="Bound">j</a> <a id="1380" class="Symbol">→</a> <a id="1382" href="Primitives.html#1620" class="Function">unsafePOr</a> <a id="1392" href="PathPrelude.html#1320" class="Bound">φ</a> <a id="1394" class="Symbol">(</a><a id="1395" href="Agda.Primitive.Cubical.html#252" class="Primitive Operator">~</a> <a id="1397" href="PathPrelude.html#1330" class="Bound">i</a><a id="1398" class="Symbol">)</a> <a id="1400" class="Symbol">(</a><a id="1401" href="PathPrelude.html#1322" class="Bound">u</a> <a id="1403" class="Symbol">(</a><a id="1404" href="PathPrelude.html#1330" class="Bound">i</a> <a id="1406" href="Agda.Primitive.Cubical.html#202" class="Primitive Operator">∧</a> <a id="1408" href="PathPrelude.html#1378" class="Bound">j</a><a id="1409" class="Symbol">))</a> <a id="1412" class="Symbol">λ</a> <a id="1414" class="Symbol">{</a> <a id="1416" class="Symbol">(</a><a id="1417" href="PathPrelude.html#1330" class="Bound">i</a> <a id="1419" class="Symbol">=</a> <a id="1421" href="Agda.Primitive.Cubical.html#101" class="InductiveConstructor">i0</a><a id="1423" class="Symbol">)</a> <a id="1425" class="Symbol">→</a> <a id="1427" href="PathPrelude.html#1324" class="Bound">azero</a> <a id="1433" class="Symbol">})</a> <a id="1436" href="PathPrelude.html#1324" class="Bound">azero</a>
+
+<a id="1443" href="PathPrelude.html#1443" class="Function">transp</a> <a id="1450" class="Symbol">:</a> <a id="1452" class="Symbol">{</a><a id="1453" href="PathPrelude.html#1453" class="Bound">ℓ</a> <a id="1455" class="Symbol">:</a> <a id="1457" href="Agda.Primitive.Cubical.html#58" class="Datatype">I</a> <a id="1459" class="Symbol">→</a> <a id="1461" class="Symbol">_}</a> <a id="1464" class="Symbol">→</a> <a id="1466" class="Symbol">(</a><a id="1467" href="PathPrelude.html#1467" class="Bound">A</a> <a id="1469" class="Symbol">:</a> <a id="1471" class="Symbol">(</a><a id="1472" href="PathPrelude.html#1472" class="Bound">i</a> <a id="1474" class="Symbol">:</a> <a id="1476" href="Agda.Primitive.Cubical.html#58" class="Datatype">I</a><a id="1477" class="Symbol">)</a> <a id="1479" class="Symbol">→</a> <a id="1481" class="PrimitiveType">Set</a> <a id="1485" class="Symbol">(</a><a id="1486" href="PathPrelude.html#1453" class="Bound">ℓ</a> <a id="1488" href="PathPrelude.html#1472" class="Bound">i</a><a id="1489" class="Symbol">))</a> <a id="1492" class="Symbol">→</a> <a id="1494" href="PathPrelude.html#1467" class="Bound">A</a> <a id="1496" href="Agda.Primitive.Cubical.html#101" class="InductiveConstructor">i0</a> <a id="1499" class="Symbol">→</a> <a id="1501" href="PathPrelude.html#1467" class="Bound">A</a> <a id="1503" href="Agda.Primitive.Cubical.html#131" class="InductiveConstructor">i1</a>
+<a id="1506" href="PathPrelude.html#1443" class="Function">transp</a> <a id="1513" href="PathPrelude.html#1513" class="Bound">A</a> <a id="1515" href="PathPrelude.html#1515" class="Bound">x</a> <a id="1517" class="Symbol">=</a> <a id="1519" href="Agda.Primitive.Cubical.html#1051" class="Primitive">primComp</a> <a id="1528" href="PathPrelude.html#1513" class="Bound">A</a> <a id="1530" href="Agda.Primitive.Cubical.html#101" class="InductiveConstructor">i0</a> <a id="1533" class="Symbol">(λ</a> <a id="1536" href="PathPrelude.html#1536" class="Bound">_</a> <a id="1538" class="Symbol">→</a> <a id="1540" href="Agda.Primitive.Cubical.html#664" class="Postulate">empty</a><a id="1545" class="Symbol">)</a> <a id="1547" href="PathPrelude.html#1515" class="Bound">x</a>
+
+<a id="1550" href="PathPrelude.html#1550" class="Function">transp⁻¹</a> <a id="1559" class="Symbol">:</a> <a id="1561" class="Symbol">{</a><a id="1562" href="PathPrelude.html#1562" class="Bound">ℓ</a> <a id="1564" class="Symbol">:</a> <a id="1566" href="Agda.Primitive.Cubical.html#58" class="Datatype">I</a> <a id="1568" class="Symbol">→</a> <a id="1570" class="Symbol">_}</a> <a id="1573" class="Symbol">→</a> <a id="1575" class="Symbol">(</a><a id="1576" href="PathPrelude.html#1576" class="Bound">A</a> <a id="1578" class="Symbol">:</a> <a id="1580" class="Symbol">(</a><a id="1581" href="PathPrelude.html#1581" class="Bound">i</a> <a id="1583" class="Symbol">:</a> <a id="1585" href="Agda.Primitive.Cubical.html#58" class="Datatype">I</a><a id="1586" class="Symbol">)</a> <a id="1588" class="Symbol">→</a> <a id="1590" class="PrimitiveType">Set</a> <a id="1594" class="Symbol">(</a><a id="1595" href="PathPrelude.html#1562" class="Bound">ℓ</a> <a id="1597" href="PathPrelude.html#1581" class="Bound">i</a><a id="1598" class="Symbol">))</a> <a id="1601" class="Symbol">→</a> <a id="1603" href="PathPrelude.html#1576" class="Bound">A</a> <a id="1605" href="Agda.Primitive.Cubical.html#131" class="InductiveConstructor">i1</a> <a id="1608" class="Symbol">→</a> <a id="1610" href="PathPrelude.html#1576" class="Bound">A</a> <a id="1612" href="Agda.Primitive.Cubical.html#101" class="InductiveConstructor">i0</a>
+<a id="1615" href="PathPrelude.html#1550" class="Function">transp⁻¹</a> <a id="1624" href="PathPrelude.html#1624" class="Bound">A</a> <a id="1626" class="Symbol">=</a> <a id="1628" href="PathPrelude.html#1443" class="Function">transp</a> <a id="1635" class="Symbol">(λ</a> <a id="1638" href="PathPrelude.html#1638" class="Bound">i</a> <a id="1640" class="Symbol">→</a> <a id="1642" href="PathPrelude.html#1624" class="Bound">A</a> <a id="1644" class="Symbol">(</a><a id="1645" href="Agda.Primitive.Cubical.html#252" class="Primitive Operator">~</a> <a id="1647" href="PathPrelude.html#1638" class="Bound">i</a><a id="1648" class="Symbol">))</a>
+
+<a id="1652" href="PathPrelude.html#1652" class="Function">toPathP</a> <a id="1660" class="Symbol">:</a> <a id="1662" class="Symbol">∀{</a><a id="1664" href="PathPrelude.html#1664" class="Bound">ℓ</a><a id="1665" class="Symbol">}{</a><a id="1667" href="PathPrelude.html#1667" class="Bound">A</a> <a id="1669" class="Symbol">:</a> <a id="1671" href="Agda.Primitive.Cubical.html#58" class="Datatype">I</a> <a id="1673" class="Symbol">→</a> <a id="1675" class="PrimitiveType">Set</a> <a id="1679" href="PathPrelude.html#1664" class="Bound">ℓ</a><a id="1680" class="Symbol">}{</a><a id="1682" href="PathPrelude.html#1682" class="Bound">x</a> <a id="1684" class="Symbol">:</a> <a id="1686" href="PathPrelude.html#1667" class="Bound">A</a> <a id="1688" href="Agda.Primitive.Cubical.html#101" class="InductiveConstructor">i0</a><a id="1690" class="Symbol">}{</a><a id="1692" href="PathPrelude.html#1692" class="Bound">y</a> <a id="1694" class="Symbol">:</a> <a id="1696" href="PathPrelude.html#1667" class="Bound">A</a> <a id="1698" href="Agda.Primitive.Cubical.html#131" class="InductiveConstructor">i1</a><a id="1700" class="Symbol">}</a> <a id="1702" class="Symbol">→</a> <a id="1704" href="PathPrelude.html#1443" class="Function">transp</a> <a id="1711" href="PathPrelude.html#1667" class="Bound">A</a> <a id="1713" href="PathPrelude.html#1682" class="Bound">x</a> <a id="1715" href="Primitives.html#413" class="Function Operator">≡</a> <a id="1717" href="PathPrelude.html#1692" class="Bound">y</a> <a id="1719" class="Symbol">→</a> <a id="1721" href="Primitives.html#261" class="Postulate">PathP</a> <a id="1727" href="PathPrelude.html#1667" class="Bound">A</a> <a id="1729" href="PathPrelude.html#1682" class="Bound">x</a> <a id="1731" href="PathPrelude.html#1692" class="Bound">y</a>
+<a id="1733" href="PathPrelude.html#1652" class="Function">toPathP</a> <a id="1741" class="Symbol">{</a><a id="1742" href="PathPrelude.html#1742" class="Bound">ℓ</a><a id="1743" class="Symbol">}</a> <a id="1745" class="Symbol">{</a><a id="1746" href="PathPrelude.html#1746" class="Bound">A</a><a id="1747" class="Symbol">}</a> <a id="1749" class="Symbol">{</a><a id="1750" href="PathPrelude.html#1750" class="Bound">x</a><a id="1751" class="Symbol">}</a> <a id="1753" class="Symbol">{</a><a id="1754" href="PathPrelude.html#1754" class="Bound">y</a><a id="1755" class="Symbol">}</a> <a id="1757" href="PathPrelude.html#1757" class="Bound">p</a> <a id="1759" href="PathPrelude.html#1759" class="Bound">i</a> <a id="1761" class="Symbol">=</a> <a id="1763" href="Agda.Primitive.Cubical.html#1051" class="Primitive">primComp</a> <a id="1772" class="Symbol">(λ</a> <a id="1775" href="PathPrelude.html#1775" class="Bound">_</a> <a id="1777" class="Symbol">→</a> <a id="1779" href="PathPrelude.html#1746" class="Bound">A</a> <a id="1781" href="PathPrelude.html#1759" class="Bound">i</a><a id="1782" class="Symbol">)</a> <a id="1784" href="PathPrelude.html#1807" class="Function">φ</a> <a id="1786" href="PathPrelude.html#1827" class="Function">u</a> <a id="1788" class="Symbol">(</a><a id="1789" href="PathPrelude.html#1918" class="Function">xPathP</a> <a id="1796" href="PathPrelude.html#1759" class="Bound">i</a><a id="1797" class="Symbol">)</a>
+  <a id="1801" class="Keyword">where</a> <a id="1807" href="PathPrelude.html#1807" class="Function">φ</a> <a id="1809" class="Symbol">=</a> <a id="1811" href="Agda.Primitive.Cubical.html#252" class="Primitive Operator">~</a> <a id="1813" href="PathPrelude.html#1759" class="Bound">i</a> <a id="1815" href="Agda.Primitive.Cubical.html#227" class="Primitive Operator">∨</a> <a id="1817" href="PathPrelude.html#1759" class="Bound">i</a>
+        <a id="1827" href="PathPrelude.html#1827" class="Function">u</a> <a id="1829" class="Symbol">:</a> <a id="1831" href="Agda.Primitive.Cubical.html#58" class="Datatype">I</a> <a id="1833" class="Symbol">→</a> <a id="1835" href="Agda.Primitive.Cubical.html#638" class="Primitive">PartialP</a> <a id="1844" href="PathPrelude.html#1807" class="Function">φ</a> <a id="1846" class="Symbol">(λ</a> <a id="1849" href="PathPrelude.html#1849" class="Bound">z</a> <a id="1851" class="Symbol">→</a> <a id="1853" href="PathPrelude.html#1746" class="Bound">A</a> <a id="1855" href="PathPrelude.html#1759" class="Bound">i</a><a id="1856" class="Symbol">)</a>
+        <a id="1866" href="PathPrelude.html#1827" class="Function">u</a> <a id="1868" class="Symbol">_</a> <a id="1870" class="Symbol">(</a><a id="1871" href="PathPrelude.html#1759" class="Bound">i</a> <a id="1873" class="Symbol">=</a> <a id="1875" href="Agda.Primitive.Cubical.html#101" class="InductiveConstructor">i0</a><a id="1877" class="Symbol">)</a> <a id="1879" class="Symbol">=</a> <a id="1881" href="PathPrelude.html#1750" class="Bound">x</a>
+        <a id="1891" href="PathPrelude.html#1827" class="Function">u</a> <a id="1893" href="PathPrelude.html#1893" class="Bound">j</a> <a id="1895" class="Symbol">(</a><a id="1896" href="PathPrelude.html#1759" class="Bound">i</a> <a id="1898" class="Symbol">=</a> <a id="1900" href="Agda.Primitive.Cubical.html#131" class="InductiveConstructor">i1</a><a id="1902" class="Symbol">)</a> <a id="1904" class="Symbol">=</a> <a id="1906" href="PathPrelude.html#1757" class="Bound">p</a> <a id="1908" href="PathPrelude.html#1893" class="Bound">j</a>
+        <a id="1918" href="PathPrelude.html#1918" class="Function">xPathP</a> <a id="1925" class="Symbol">:</a> <a id="1927" href="Primitives.html#261" class="Postulate">PathP</a> <a id="1933" href="PathPrelude.html#1746" class="Bound">A</a> <a id="1935" href="PathPrelude.html#1750" class="Bound">x</a> <a id="1937" class="Symbol">(</a><a id="1938" href="PathPrelude.html#1443" class="Function">transp</a> <a id="1945" href="PathPrelude.html#1746" class="Bound">A</a> <a id="1947" href="PathPrelude.html#1750" class="Bound">x</a> <a id="1949" class="Symbol">)</a>
+        <a id="1959" href="PathPrelude.html#1918" class="Function">xPathP</a> <a id="1966" href="PathPrelude.html#1966" class="Bound">j</a> <a id="1968" class="Symbol">=</a> <a id="1970" href="PathPrelude.html#1201" class="Function">fill</a> <a id="1975" href="PathPrelude.html#1746" class="Bound">A</a> <a id="1977" class="Symbol">_</a> <a id="1979" class="Symbol">(λ</a> <a id="1982" href="PathPrelude.html#1982" class="Bound">_</a> <a id="1984" class="Symbol">→</a> <a id="1986" href="Agda.Primitive.Cubical.html#664" class="Postulate">empty</a><a id="1991" class="Symbol">)</a> <a id="1993" href="PathPrelude.html#1750" class="Bound">x</a> <a id="1995" href="PathPrelude.html#1966" class="Bound">j</a>
+
+<a id="1998" href="PathPrelude.html#1998" class="Function">transp-refl</a> <a id="2010" class="Symbol">:</a> <a id="2012" class="Symbol">∀{</a><a id="2014" href="PathPrelude.html#2014" class="Bound">ℓb</a><a id="2016" class="Symbol">}</a> <a id="2018" class="Symbol">→</a> <a id="2020" class="Symbol">{</a><a id="2021" href="PathPrelude.html#2021" class="Bound">B</a> <a id="2023" class="Symbol">:</a> <a id="2025" class="PrimitiveType">Set</a> <a id="2029" href="PathPrelude.html#2014" class="Bound">ℓb</a><a id="2031" class="Symbol">}</a> <a id="2033" class="Symbol">→</a> <a id="2035" class="Symbol">(</a><a id="2036" href="PathPrelude.html#2036" class="Bound">x</a> <a id="2038" class="Symbol">:</a> <a id="2040" href="PathPrelude.html#2021" class="Bound">B</a><a id="2041" class="Symbol">)</a> <a id="2043" class="Symbol">→</a> <a id="2045" href="Agda.Primitive.Cubical.html#1051" class="Primitive">primComp</a> <a id="2054" class="Symbol">(λ</a> <a id="2057" href="PathPrelude.html#2057" class="Bound">j</a> <a id="2059" class="Symbol">→</a> <a id="2061" href="PathPrelude.html#2021" class="Bound">B</a><a id="2062" class="Symbol">)</a> <a id="2064" href="Agda.Primitive.Cubical.html#101" class="InductiveConstructor">i0</a> <a id="2067" class="Symbol">(λ</a> <a id="2070" href="PathPrelude.html#2070" class="Bound">j</a> <a id="2072" class="Symbol">→</a> <a id="2074" href="Agda.Primitive.Cubical.html#664" class="Postulate">empty</a><a id="2079" class="Symbol">)</a> <a id="2081" href="PathPrelude.html#2036" class="Bound">x</a> <a id="2083" href="Primitives.html#413" class="Function Operator">≡</a> <a id="2085" href="PathPrelude.html#2036" class="Bound">x</a>
+<a id="2087" href="PathPrelude.html#1998" class="Function">transp-refl</a> <a id="2099" class="Symbol">{</a><a id="2100" class="Argument">B</a> <a id="2102" class="Symbol">=</a> <a id="2104" href="PathPrelude.html#2104" class="Bound">B</a><a id="2105" class="Symbol">}</a> <a id="2107" href="PathPrelude.html#2107" class="Bound">x</a> <a id="2109" href="PathPrelude.html#2109" class="Bound">i</a> <a id="2111" class="Symbol">=</a> <a id="2113" href="Agda.Primitive.Cubical.html#1051" class="Primitive">primComp</a> <a id="2122" class="Symbol">(λ</a> <a id="2125" href="PathPrelude.html#2125" class="Bound">_</a> <a id="2127" class="Symbol">→</a> <a id="2129" href="PathPrelude.html#2104" class="Bound">B</a><a id="2130" class="Symbol">)</a> <a id="2132" href="PathPrelude.html#2109" class="Bound">i</a> <a id="2134" class="Symbol">((λ</a> <a id="2138" class="Symbol">{</a> <a id="2140" href="PathPrelude.html#2140" class="Bound">j</a> <a id="2142" class="Symbol">(</a><a id="2143" href="PathPrelude.html#2109" class="Bound">i</a> <a id="2145" class="Symbol">=</a> <a id="2147" href="Agda.Primitive.Cubical.html#131" class="InductiveConstructor">i1</a><a id="2149" class="Symbol">)</a> <a id="2151" class="Symbol">→</a> <a id="2153" href="PathPrelude.html#2107" class="Bound">x</a> <a id="2155" class="Symbol">}))</a> <a id="2159" href="PathPrelude.html#2107" class="Bound">x</a>
+
+<a id="2162" href="PathPrelude.html#2162" class="Function">transp-pi</a> <a id="2172" class="Symbol">:</a> <a id="2174" class="Symbol">∀{</a><a id="2176" href="PathPrelude.html#2176" class="Bound">ℓb</a><a id="2178" class="Symbol">}</a> <a id="2180" class="Symbol">→</a> <a id="2182" class="Symbol">{</a><a id="2183" href="PathPrelude.html#2183" class="Bound">B</a> <a id="2185" class="Symbol">:</a> <a id="2187" class="PrimitiveType">Set</a> <a id="2191" href="PathPrelude.html#2176" class="Bound">ℓb</a><a id="2193" class="Symbol">}</a> <a id="2195" class="Symbol">→</a> <a id="2197" class="Symbol">{</a><a id="2198" href="PathPrelude.html#2198" class="Bound">ℓa</a> <a id="2201" class="Symbol">:</a> <a id="2203" href="Agda.Primitive.Cubical.html#58" class="Datatype">I</a> <a id="2205" class="Symbol">→</a> <a id="2207" class="Symbol">_}</a> <a id="2210" class="Symbol">→</a> <a id="2212" class="Symbol">(</a><a id="2213" href="PathPrelude.html#2213" class="Bound">A</a> <a id="2215" class="Symbol">:</a> <a id="2217" class="Symbol">(</a><a id="2218" href="PathPrelude.html#2218" class="Bound">i</a> <a id="2220" class="Symbol">:</a> <a id="2222" href="Agda.Primitive.Cubical.html#58" class="Datatype">I</a><a id="2223" class="Symbol">)</a> <a id="2225" class="Symbol">→</a> <a id="2227" class="PrimitiveType">Set</a> <a id="2231" class="Symbol">(</a><a id="2232" href="PathPrelude.html#2198" class="Bound">ℓa</a> <a id="2235" href="PathPrelude.html#2218" class="Bound">i</a><a id="2236" class="Symbol">))</a> <a id="2239" class="Symbol">→</a> <a id="2241" class="Symbol">(</a><a id="2242" href="PathPrelude.html#2242" class="Bound">f</a> <a id="2244" class="Symbol">:</a> <a id="2246" class="Symbol">(</a><a id="2247" href="PathPrelude.html#2183" class="Bound">B</a> <a id="2249" class="Symbol">→</a> <a id="2251" href="PathPrelude.html#2213" class="Bound">A</a> <a id="2253" href="Agda.Primitive.Cubical.html#101" class="InductiveConstructor">i0</a><a id="2255" class="Symbol">))</a> <a id="2258" class="Symbol">→</a> <a id="2260" class="Symbol">(λ</a> <a id="2263" href="PathPrelude.html#2263" class="Bound">x</a> <a id="2265" class="Symbol">→</a> <a id="2267" href="PathPrelude.html#1443" class="Function">transp</a> <a id="2274" href="PathPrelude.html#2213" class="Bound">A</a> <a id="2276" class="Symbol">(</a><a id="2277" href="PathPrelude.html#2242" class="Bound">f</a> <a id="2279" href="PathPrelude.html#2263" class="Bound">x</a><a id="2280" class="Symbol">))</a> <a id="2283" href="Primitives.html#413" class="Function Operator">≡</a> <a id="2285" href="PathPrelude.html#1443" class="Function">transp</a> <a id="2292" class="Symbol">(λ</a> <a id="2295" href="PathPrelude.html#2295" class="Bound">i</a> <a id="2297" class="Symbol">→</a> <a id="2299" class="Symbol">(</a><a id="2300" href="PathPrelude.html#2183" class="Bound">B</a> <a id="2302" class="Symbol">→</a> <a id="2304" href="PathPrelude.html#2213" class="Bound">A</a> <a id="2306" href="PathPrelude.html#2295" class="Bound">i</a><a id="2307" class="Symbol">))</a> <a id="2310" href="PathPrelude.html#2242" class="Bound">f</a>
+<a id="2312" href="PathPrelude.html#2162" class="Function">transp-pi</a> <a id="2322" class="Symbol">{</a><a id="2323" class="Argument">B</a> <a id="2325" class="Symbol">=</a> <a id="2327" href="PathPrelude.html#2327" class="Bound">B</a><a id="2328" class="Symbol">}</a> <a id="2330" href="PathPrelude.html#2330" class="Bound">A</a> <a id="2332" href="PathPrelude.html#2332" class="Bound">f</a> <a id="2334" href="PathPrelude.html#2334" class="Bound">i</a> <a id="2336" href="PathPrelude.html#2336" class="Bound">x</a> <a id="2338" class="Symbol">=</a> <a id="2340" class="Symbol">(</a><a id="2341" href="Agda.Primitive.Cubical.html#1051" class="Primitive">primComp</a> <a id="2350" href="PathPrelude.html#2330" class="Bound">A</a> <a id="2352" href="Agda.Primitive.Cubical.html#101" class="InductiveConstructor">i0</a> <a id="2355" class="Symbol">(λ</a> <a id="2358" href="PathPrelude.html#2358" class="Bound">i</a> <a id="2360" class="Symbol">→</a> <a id="2362" href="Agda.Primitive.Cubical.html#664" class="Postulate">empty</a><a id="2367" class="Symbol">))</a> <a id="2370" class="Symbol">(</a><a id="2371" href="PathPrelude.html#2332" class="Bound">f</a> <a id="2373" class="Symbol">(</a><a id="2374" href="PathPrelude.html#1998" class="Function">transp-refl</a> <a id="2386" href="PathPrelude.html#2336" class="Bound">x</a> <a id="2388" class="Symbol">(</a><a id="2389" href="Agda.Primitive.Cubical.html#252" class="Primitive Operator">~</a> <a id="2391" href="PathPrelude.html#2334" class="Bound">i</a><a id="2392" class="Symbol">)))</a>
+
+<a id="2397" class="Keyword">module</a> <a id="2404" href="PathPrelude.html#2404" class="Module">_</a> <a id="2406" class="Symbol">{</a><a id="2407" href="PathPrelude.html#2407" class="Bound">ℓa</a> <a id="2410" href="PathPrelude.html#2410" class="Bound">ℓb</a><a id="2412" class="Symbol">}</a> <a id="2414" class="Symbol">{</a><a id="2415" href="PathPrelude.html#2415" class="Bound">A</a> <a id="2417" class="Symbol">:</a> <a id="2419" class="PrimitiveType">Set</a> <a id="2423" href="PathPrelude.html#2407" class="Bound">ℓa</a><a id="2425" class="Symbol">}</a> <a id="2427" class="Symbol">{</a><a id="2428" href="PathPrelude.html#2428" class="Bound">B</a> <a id="2430" class="Symbol">:</a> <a id="2432" href="PathPrelude.html#2415" class="Bound">A</a> <a id="2434" class="Symbol">→</a> <a id="2436" class="PrimitiveType">Set</a> <a id="2440" href="PathPrelude.html#2410" class="Bound">ℓb</a><a id="2442" class="Symbol">}</a> <a id="2444" class="Keyword">where</a>
+  <a id="2452" href="PathPrelude.html#2452" class="Function">funUnImp</a> <a id="2461" class="Symbol">:</a> <a id="2463" class="Symbol">({</a><a id="2465" href="PathPrelude.html#2465" class="Bound">x</a> <a id="2467" class="Symbol">:</a> <a id="2469" href="PathPrelude.html#2415" class="Bound">A</a><a id="2470" class="Symbol">}</a> <a id="2472" class="Symbol">→</a> <a id="2474" href="PathPrelude.html#2428" class="Bound">B</a> <a id="2476" href="PathPrelude.html#2465" class="Bound">x</a><a id="2477" class="Symbol">)</a> <a id="2479" class="Symbol">→</a> <a id="2481" class="Symbol">(</a><a id="2482" href="PathPrelude.html#2482" class="Bound">x</a> <a id="2484" class="Symbol">:</a> <a id="2486" href="PathPrelude.html#2415" class="Bound">A</a><a id="2487" class="Symbol">)</a> <a id="2489" class="Symbol">→</a> <a id="2491" href="PathPrelude.html#2428" class="Bound">B</a> <a id="2493" href="PathPrelude.html#2482" class="Bound">x</a>
+  <a id="2497" href="PathPrelude.html#2452" class="Function">funUnImp</a> <a id="2506" href="PathPrelude.html#2506" class="Bound">f</a> <a id="2508" href="PathPrelude.html#2508" class="Bound">x</a> <a id="2510" class="Symbol">=</a> <a id="2512" href="PathPrelude.html#2506" class="Bound">f</a> <a id="2514" class="Symbol">{</a><a id="2515" href="PathPrelude.html#2508" class="Bound">x</a><a id="2516" class="Symbol">}</a>
+
+  <a id="2521" href="PathPrelude.html#2521" class="Function">funExt</a> <a id="2528" class="Symbol">:</a> <a id="2530" class="Symbol">{</a><a id="2531" href="PathPrelude.html#2531" class="Bound">f</a> <a id="2533" href="PathPrelude.html#2533" class="Bound">g</a> <a id="2535" class="Symbol">:</a> <a id="2537" class="Symbol">(</a><a id="2538" href="PathPrelude.html#2538" class="Bound">x</a> <a id="2540" class="Symbol">:</a> <a id="2542" href="PathPrelude.html#2415" class="Bound">A</a><a id="2543" class="Symbol">)</a> <a id="2545" class="Symbol">→</a> <a id="2547" href="PathPrelude.html#2428" class="Bound">B</a> <a id="2549" href="PathPrelude.html#2538" class="Bound">x</a><a id="2550" class="Symbol">}</a> <a id="2552" class="Symbol">→</a> <a id="2554" class="Symbol">((</a><a id="2556" href="PathPrelude.html#2556" class="Bound">x</a> <a id="2558" class="Symbol">:</a> <a id="2560" href="PathPrelude.html#2415" class="Bound">A</a><a id="2561" class="Symbol">)</a> <a id="2563" class="Symbol">→</a> <a id="2565" href="PathPrelude.html#2531" class="Bound">f</a> <a id="2567" href="PathPrelude.html#2556" class="Bound">x</a> <a id="2569" href="Primitives.html#413" class="Function Operator">≡</a> <a id="2571" href="PathPrelude.html#2533" class="Bound">g</a> <a id="2573" href="PathPrelude.html#2556" class="Bound">x</a><a id="2574" class="Symbol">)</a> <a id="2576" class="Symbol">→</a> <a id="2578" href="PathPrelude.html#2531" class="Bound">f</a> <a id="2580" href="Primitives.html#413" class="Function Operator">≡</a> <a id="2582" href="PathPrelude.html#2533" class="Bound">g</a>
+  <a id="2586" href="PathPrelude.html#2521" class="Function">funExt</a> <a id="2593" href="PathPrelude.html#2593" class="Bound">p</a> <a id="2595" class="Symbol">=</a> <a id="2597" class="Symbol">λ</a> <a id="2599" href="PathPrelude.html#2599" class="Bound">i</a> <a id="2601" href="PathPrelude.html#2601" class="Bound">x</a> <a id="2603" class="Symbol">→</a> <a id="2605" href="PathPrelude.html#2593" class="Bound">p</a> <a id="2607" href="PathPrelude.html#2601" class="Bound">x</a> <a id="2609" href="PathPrelude.html#2599" class="Bound">i</a>
+
+  <a id="2614" href="PathPrelude.html#2614" class="Function">funExtImp</a> <a id="2624" class="Symbol">:</a> <a id="2626" class="Symbol">{</a><a id="2627" href="PathPrelude.html#2627" class="Bound">f</a> <a id="2629" href="PathPrelude.html#2629" class="Bound">g</a> <a id="2631" class="Symbol">:</a> <a id="2633" class="Symbol">{</a><a id="2634" href="PathPrelude.html#2634" class="Bound">x</a> <a id="2636" class="Symbol">:</a> <a id="2638" href="PathPrelude.html#2415" class="Bound">A</a><a id="2639" class="Symbol">}</a> <a id="2641" class="Symbol">→</a> <a id="2643" href="PathPrelude.html#2428" class="Bound">B</a> <a id="2645" href="PathPrelude.html#2634" class="Bound">x</a><a id="2646" class="Symbol">}</a> <a id="2648" class="Symbol">→</a> <a id="2650" class="Symbol">((</a><a id="2652" href="PathPrelude.html#2652" class="Bound">x</a> <a id="2654" class="Symbol">:</a> <a id="2656" href="PathPrelude.html#2415" class="Bound">A</a><a id="2657" class="Symbol">)</a> <a id="2659" class="Symbol">→</a> <a id="2661" href="PathPrelude.html#2627" class="Bound">f</a> <a id="2663" class="Symbol">{</a><a id="2664" href="PathPrelude.html#2652" class="Bound">x</a><a id="2665" class="Symbol">}</a> <a id="2667" href="Primitives.html#413" class="Function Operator">≡</a> <a id="2669" href="PathPrelude.html#2629" class="Bound">g</a> <a id="2671" class="Symbol">{</a><a id="2672" href="PathPrelude.html#2652" class="Bound">x</a><a id="2673" class="Symbol">})</a> <a id="2676" class="Symbol">→</a>
+                                       <a id="2717" class="Symbol">{</a><a id="2718" href="PathPrelude.html#2718" class="Bound">x</a> <a id="2720" class="Symbol">:</a> <a id="2722" href="PathPrelude.html#2415" class="Bound">A</a><a id="2723" class="Symbol">}</a> <a id="2725" class="Symbol">→</a> <a id="2727" href="PathPrelude.html#2627" class="Bound">f</a> <a id="2729" class="Symbol">{</a><a id="2730" href="PathPrelude.html#2718" class="Bound">x</a><a id="2731" class="Symbol">}</a> <a id="2733" href="Primitives.html#413" class="Function Operator">≡</a> <a id="2735" href="PathPrelude.html#2629" class="Bound">g</a> <a id="2737" class="Symbol">{</a><a id="2738" href="PathPrelude.html#2718" class="Bound">x</a><a id="2739" class="Symbol">}</a>
+  <a id="2743" href="PathPrelude.html#2614" class="Function">funExtImp</a> <a id="2753" href="PathPrelude.html#2753" class="Bound">p</a> <a id="2755" class="Symbol">{</a><a id="2756" href="PathPrelude.html#2756" class="Bound">x</a><a id="2757" class="Symbol">}</a> <a id="2759" class="Symbol">=</a> <a id="2761" class="Symbol">λ</a> <a id="2763" href="PathPrelude.html#2763" class="Bound">i</a> <a id="2765" class="Symbol">→</a> <a id="2767" href="PathPrelude.html#2753" class="Bound">p</a> <a id="2769" href="PathPrelude.html#2756" class="Bound">x</a> <a id="2771" href="PathPrelude.html#2763" class="Bound">i</a>
+
+<a id="2774" class="Comment">{-
+module _ {ℓ} {A : Set ℓ} where
+  singl : (a : A) → Set ℓ
+  singl a = Σ[ x ∈ A ] (a ≡ x)
+
+  contrSingl : {a b : A} (p : a ≡ b) → _≡_ {A = singl a} (a , refl) (b , p)
+  contrSingl p = λ i → ((p i) , λ j → p (i ∧ j))
+
+
+module _ {ℓ ℓ&#39;} {A : Set ℓ} {x : A}
+         (P : ∀ y → x ≡ y → Set ℓ&#39;) (d : P x ((λ i → x))) where
+
+  pathJ : (y : A) → (p : x ≡ y) → P y p
+  pathJ _ p = transp (λ i → uncurry P (contrSingl p i)) d
+
+  pathJprop : pathJ _ refl ≡ d
+  pathJprop i = primComp (λ _ → P x refl) i (λ {j (i = i1) → d}) d
+
+
+module _ {ℓ ℓ&#39;} {A : Set ℓ} {P : A → Set ℓ&#39;} where
+  subst : {a b : A} (p : Path a b) → P a → P b
+  subst {a} {b} p pzero = pathJ {ℓ} {ℓ&#39;} (λ (y : A) → λ _ → P y) pzero b p
+
+  substInv : {a x : A} (p : Path a x) → P x → P a
+  substInv p  =  subst (λ i → p (~ i))
+
+injective : ∀ {ℓa ℓb} → {A : Set ℓa} → {B : Set ℓb} → (f : A → B) → Set (ℓ-max ℓa ℓb)
+injective {_} {_} {A} f = {azero a1 : A} → f azero ≡ f a1 → azero ≡ a1
+
+module _ {ℓ} {Azero A1 : Set ℓ} (A : Azero ≡ A1) {φ : I} (azero : A i0)
+         (p : Partial (Σ A1 λ y → PathP (λ i → A i) azero y) φ) where
+  -- primComp using only Path
+  compP : A i1
+  compP = primComp (λ i → A i) φ (λ i o → p o .snd i) azero
+
+  -- fill using only Path
+  fillP : ∀ j → A j
+  fillP j = primComp (λ i → A (i ∧ j)) (φ ∨ ~ j)
+    (λ { i (φ = i1) → p itIsOne .snd (i ∧ j); i (j = i0) → azero }) azero
+
+transpP : ∀ {ℓ ℓ&#39;} {A : Set ℓ}{B : A → Set ℓ&#39;} {x y : A} → x ≡ y → B x → B y
+transpP {B = B} p = pathJ (λ y _ → B _ → B y) (λ x → x) _ p
+
+transpP≡subst : ∀ {ℓ ℓ&#39;} {A : Set ℓ}{B : A → Set ℓ&#39;} {x y : A} → (p : x ≡ y) → transpP {B = B} p ≡ subst {P = B} p
+transpP≡subst {A = A} {B} {x} {y} p = sym (transp-pi (λ j → uncurry (λ (y : A) → λ _ → B y) (contrSingl p j)) (λ x → x))
+
+coe : ∀ {ℓ} {A B : Set ℓ} → A ≡ B → A → B
+coe {A = A} = transpP {B = λ X → X}
+
+module _ {ℓ} (A : Set ℓ) where
+  isContr : Set ℓ
+  isContr = Σ[ x ∈ A ] (∀ y → x ≡ y)
+
+  isProp  : Set ℓ
+  isProp  = (x y : A) → x ≡ y
+
+  isSet   : Set ℓ
+  isSet   = (x y : A) → (p q : x ≡ y) → p ≡ q
+
+module _ {ℓ} {A : Set ℓ} where
+  contr : isContr A → (φ : I) → (u : Partial A φ) → A
+  contr (c , p) φ u = primComp (λ _ → A) φ (λ i o → p (u o) i) c
+
+  lemContr : (contr1 : ∀ φ → Partial A φ → A)
+             → (contr2 : ∀ u → u ≡ (contr1 i1 λ { _ → u})) → isContr A
+  lemContr contr1 contr2 = x , (λ y → let module M = Aux y in
+      trans (contr2 x) (trans (λ i → M.v i) (sym (contr2 y))))
+    where x = contr1 i0 empty
+          module Aux (y : A) (i : I) where
+            φ = ~ i ∨ i
+            u : Partial A φ
+            u = λ { (i = i0) → x ; (i = i1) → y }
+            v = contr1 φ u
+
+  contrIsProp : isContr A → isProp A
+  contrIsProp h a b i = primComp (λ _ → A) _ (λ j →
+    \ { (i = i0) → snd h a j; (i = i1) → snd h b j }) (fst h)
+
+module _ {ℓ ℓ&#39; : I → _} {T : ∀ i → Set (ℓ i)} {A : ∀ i → Set (ℓ&#39; i)}
+         (f : ∀ i → T i → A i) (φ : I) (t : ∀ i → Partial (T i) φ)
+         (tzero : T i0 {- [ φ ↦ t i0 ] -}) where
+  private
+    c1 c2 : A i1
+    c1 = unsafeComp A φ (λ i → (λ { (φ = i1) → f i (t i itIsOne)})) (f i0 tzero)
+    c2 = f i1 (unsafeComp T φ t tzero)
+
+    azero = f i0 tzero
+
+    a : ∀ i → Partial (A i) φ
+    a i = (λ { (φ = i1) → f i ((t i) itIsOne)})
+
+    u : ∀ i → A i
+    u = fill A φ a azero
+
+    v : ∀ i → T i
+    v = fill T φ t tzero
+
+  pres : c1 ≡ c2
+  pres j = unsafeComp A (φ ∨ (j ∨ ~ j)) (λ i → primPOr φ (j ∨ ~ j)
+    (a i) \ { (j = i1) → f i (v i); (j = i0) → u i}) azero
+
+fiber : ∀ {ℓ ℓ&#39;} {E : Set ℓ} {B : Set ℓ&#39;} (f : E → B) (y : B) → Set (ℓ-max ℓ ℓ&#39;)
+fiber {E = E} f y = Σ[ x ∈ E ] y ≡ f x
+
+module _ {ℓ ℓ&#39;} (A : Set ℓ) (B : Set ℓ&#39;) where
+  isEquiv : (A → B) → Set (ℓ-max ℓ ℓ&#39;)
+  isEquiv f = (y : B) → isContr (fiber f y)
+
+  infix 4 _≃_
+  _≃_ = Σ _ isEquiv
+
+  module _ (f : _≃_) (φ : I) (t : Partial A φ) (a : B {- [ φ ↦ f t ] -})
+           (p : PartialP φ (λ o → a ≡ fst f (t o))) where
+    equiv : fiber (fst f) a -- [ φ ↦ (t , λ j → a) ]
+    equiv = contr ((snd f) a) φ (λ o → t o , (λ i → p o i))
+
+    equivFunc : A
+    equivFunc = fst equiv
+
+    equivProof : a ≡ fst f equivFunc
+    equivProof = snd equiv
+
+{-# BUILTIN ISEQUIV isEquiv #-}
+
+idEquiv : ∀ {ℓ} → {A : Set ℓ} → A ≃ A
+idEquiv {A = A} = idFun A , (λ y → (y , refl) , contrSingl ∘ snd)
+
+module _ {ℓ} {A B : Set ℓ} (P : A ≡ B) where
+  private
+    E ~E : I → Set ℓ
+    E  = λ i → P i
+    ~E = λ i → P (~ i)
+
+    f : A → B
+    f = transp E
+
+    g : B → A
+    g = transp ~E
+
+    u : PathP (λ i → A → E i) (idFun A) f
+    u i x = fill E i0 (λ _ → empty) x i
+
+    v : PathP (λ i → B → E i) g (idFun B)
+    v i y = fill ~E i0 (λ _ → empty) y (~ i)
+
+    fiberPath : (y : B) → (xβzero xβ1 : fiber f y) → xβzero ≡ xβ1
+    fiberPath y (xzero , βzero) (x1 , β1) k = ω , λ j → δ j where
+      module _ (j : I) where
+        private
+          sys : A → ∀ i → PartialP (~ j ∨ j) (λ _ → E (~ i))
+          sys x i = λ {(j = i0) → v (~ i) y ; (j = i1) → u (~ i) x}
+        ωzero = primComp ~E _ (sys xzero) (βzero j)
+        ω1 = primComp ~E _ (sys x1) (β1 j)
+        θzero = fill ~E _ (sys xzero) (βzero j)
+        θ1 = fill ~E _ (sys x1) (β1 j)
+      sys = λ {j (k = i0) → ωzero j ; j (k = i1) → ω1 j}
+      ω = primComp (λ _ → A) _ sys (g y)
+      θ = fill (λ _ → A) _ sys (g y)
+      δ = λ (j : I) → primComp E ((~ j ∨ j) ∨ (~ k ∨ k))
+            (λ i → λ { (j = i0) → v i y ; (k = i0) → θzero j (~ i)
+                     ; (j = i1) → u i ω ; (k = i1) → θ1 j (~ i) }) (θ j)
+
+    γ : (y : B) → y ≡ f (g y)
+    γ y j = primComp E _ (λ i → λ { (j = i0) → v i y
+                                  ; (j = i1) → u i (g y) }) (g y)
+
+  pathToEquiv : A ≃ B
+  pathToEquiv = f , (λ y → (g y , γ y) , fiberPath y _)
+
+pathToEquivProof : ∀ {ℓ} (E : I → Set ℓ) → isEquiv (E i0) (E i1) (transp E)
+pathToEquivProof E = snd (pathToEquiv P)
+  where P : E i0 ≡ E i1
+        P i = E i
+
+{-# BUILTIN PATHTOEQUIV pathToEquivProof #-}
+
+module GluePrims where
+  primitive
+    primGlue    : ∀ {ℓ ℓ&#39;} (A : Set ℓ) (φ : I)
+      → (T : Partial (Set ℓ&#39;) φ) → (f : PartialP φ (λ o → T o → A))
+      → (pf : PartialP φ (λ o → isEquiv (T o) A (f o))) → Set ℓ&#39;
+    prim^glue   : ∀ {ℓ ℓ&#39;} {A : Set ℓ} {φ : I}
+      → {T : Partial (Set ℓ&#39;) φ} → {f : PartialP φ (λ o → T o → A)}
+      → {pf : PartialP φ (λ o → isEquiv (T o) A (f o))}
+      → PartialP φ T → A → primGlue A φ T f pf
+    prim^unglue : ∀ {ℓ ℓ&#39;} {A : Set ℓ} {φ : I}
+      → {T : Partial (Set ℓ&#39;) φ} → {f : PartialP φ (λ o → T o → A)}
+      → {pf : PartialP φ (λ o → isEquiv (T o) A (f o))}
+      → primGlue A φ T f pf → A
+
+open GluePrims public renaming (prim^glue to glue ; prim^unglue to unglue)
+
+module Unsafe&#39;&#39; (dummy : Set1) = GluePrims
+module Unsafe&#39;&#39;&#39; = Unsafe&#39;&#39; Set -- using () renaming (prim^glue to unsafeGlue) public
+
+unsafeGlue = Unsafe&#39;&#39;&#39;.prim^glue
+
+Glue : ∀ {ℓ ℓ&#39;} (A : Set ℓ) → (φ : I) → (T : Partial (Set ℓ&#39;) φ)
+  (f : (PartialP φ (λ o → T o ≃ A))) → Set ℓ&#39;
+Glue A φ T f = primGlue A φ T (λ o → fst (f o)) (λ o → snd (f o))
+
+equivToPath : ∀ {ℓ} {A B : Set ℓ} → A ≃ B → A ≡ B
+equivToPath {_} {A} {B} f i = Glue B (~ i ∨ i)
+  (λ {(i = i0) → A ; (i = i1) → B})
+  (λ {(i = i0) → f ; (i = i1) → idEquiv})
+
+primitive
+  primFaceForall : (I → I) → I
+
+module FaceForall (φ : I → I) where
+  δ = primFaceForall φ
+  postulate
+    ∀v : ∀ i → IsOne (φ i) → IsOne ((δ ∨ (φ i0 ∧ ~ i)) ∨ (φ i1 ∧ i))
+    ∀e : IsOne δ → ∀ i → IsOne (φ i)
+
+module _ {ℓ ℓ&#39;} {A : Set ℓ} {φ : I} {T : Partial (Set ℓ&#39;) φ}
+           {f : (PartialP φ λ o → T o ≃ A)} where
+  fwdGlueIso : PartialP φ (λ o → Glue A φ T f → T o)
+  fwdGlueIso (φ = i1) = idFun _
+
+  backGlueIso : PartialP φ (λ o → T o → Glue A φ T f)
+  backGlueIso (φ = i1) = idFun _
+
+  lemGlueIso : (b : PartialP φ (λ _ → Glue A φ T f)) → PartialP φ λ o →
+                 (unglue {φ = φ} (b o)) ≡ (fst (f o) (fwdGlueIso o (b o)))
+  lemGlueIso _ (φ = i1) = refl
+
+module CompGlue {ℓ ℓ&#39; : I → _} (A : ∀ i → Set (ℓ i))
+                (φ : I → I) (T : ∀ i → Partial (Set (ℓ&#39; i)) (φ i))
+                (f : ∀ i → PartialP (φ i) λ o → T i o ≃ A i)
+                where
+  B : ∀ i → Set (ℓ&#39; i)
+  B = λ i → Glue (A i) (φ i) (T i) (f i)
+
+  module Local (ψ : I) (b : ∀ i → Partial (B i) ψ)
+               (bzero : B i0 {- [ ψ ↦ b i0 ] -}) where
+    a : ∀ i → Partial (A i) ψ
+    a i = λ o → unglue {φ = φ i} (b i o)
+
+    module Forall (δ : I) (∀e : IsOne δ → ∀ i → IsOne (φ i)) where
+      azero : A i0
+      azero = unglue {φ = φ i0} bzero
+
+      a1&#39; = unsafeComp A ψ a azero
+
+      t1&#39; : PartialP δ (λ o → T i1 (∀e o i1))
+      t1&#39; o = unsafeComp (λ i → T i (∀e o i)) ψ
+                (λ i o&#39; → fwdGlueIso {φ = φ i} (∀e o i) (b i o&#39;))
+                (fwdGlueIso {φ = φ i0} (∀e o i0) bzero)
+
+      ω : PartialP δ _
+      ω o = pres (λ i → fst (f i (∀e o i))) ψ
+              (λ i x → fwdGlueIso {φ = φ i} (∀e o i) (b i x))
+              (fwdGlueIso {φ = φ i0} (∀e o i0) bzero)
+
+      a1&#39;&#39; = unsafeComp (λ _ → A i1) (δ ∨ ψ)
+              (λ j → unsafePOr δ ψ (λ o → ω o j) (a i1)) a1&#39;
+
+      g : PartialP (φ i1) _
+      g o = (equiv (T i1 _) (A i1) (f i1 o) (δ ∨ ψ)
+        (unsafePOr δ ψ t1&#39; (λ o&#39; → fwdGlueIso {φ = φ i1} o (b i1 o&#39;))) a1&#39;&#39;
+        ((unsafePOr δ ψ (λ {(δ = i1) → refl})
+          ((λ{ (ψ = i1) → lemGlueIso {φ = φ i1} (λ _ → b i1 itIsOne) o })))))
+      t1 α : PartialP (φ i1) _
+      t1 o = fst (g o)
+      α o = snd (g o)
+
+      a1 = unsafeComp (λ j → A i1) (φ i1 ∨ ψ)
+             (λ j → unsafePOr (φ i1) ψ (λ o → α o j) (a i1)) a1&#39;&#39;
+
+      b1 : Glue _ (φ i1) (T i1) (f i1)
+      b1 = unsafeGlue {φ = φ i1} t1 a1
+    b1 = Forall.b1 (FaceForall.δ φ) (FaceForall.∀e φ)
+
+compGlue : {ℓ ℓ&#39; : I → _} (A : ∀ i → Set (ℓ i)) (φ : I → I)
+           (T : ∀ i → Partial (Set (ℓ&#39; i)) (φ i))
+           (f : ∀ i → PartialP (φ i) λ o → (T i o) → (A i)) →
+           (pf : ∀ i → PartialP (φ i) (λ o → isEquiv (T i o) (A i) (f i o))) →
+           let B : ∀ i → Set (ℓ&#39; i)
+               B = λ i → primGlue (A i) (φ i) (T i) (f i) (pf i)
+           in  (ψ : I) (b : ∀ i → Partial (B i) ψ) (bzero : B i0) → B i1
+compGlue A φ T f pf ψ b bzero =
+  CompGlue.Local.b1 A φ T (λ i p → (f i p) , (pf i p)) ψ b bzero
+
+{-# BUILTIN COMPGLUE compGlue #-}
+
+-}</a>
+</pre><script type="text/javascript"> var sc_project=4273194; var sc_invisible=1; var sc_partition=48; var sc_click_stat=1; var sc_security="47eab21e"; </script> <script type="text/javascript" src="http://www.statcounter.com/counter/counter.js"></script><noscript><div class="statcounter"><a title="site stats" href="http://www.statcounter.com/" target="_blank"><img class="statcounter" src="http://c.statcounter.com/4273194/0/47eab21e/1/" alt="site stats" ></a></div></noscript></body></html>

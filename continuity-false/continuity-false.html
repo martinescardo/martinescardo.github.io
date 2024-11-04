@@ -1,0 +1,546 @@
+<!DOCTYPE HTML>
+<html><head><meta charset="utf-8"><title>continuity-false</title><link rel="stylesheet" href="Agda.css"></head><body><pre class="Agda"><a id="1" class="Background">
+          In intensional Martin-Löf type theory,
+          if all functions (ℕ → ℕ) → ℕ are continuous, then 0 = 1
+
+                 Martín Escardó
+                 University of Birmingham, UK
+
+                 27 Nov 2013, last updated 04 Dec 2013
+
+
+1. Introduction
+2. Informal proof of the theorem
+3. Formal proof in Agda notation
+4. Discussion
+   References
+
+
+Introduction
+------------
+
+In Brouwer&#39;s intuitionistic mathematics, it can be proved that all
+functions f : (ℕ → ℕ) → ℕ are continuous [5]. This means that the
+value f(α) depends only on a finite prefix of the infinite sequence
+α : ℕ → ℕ. Then, of course, Brouwer&#39;s mathematics is incompatible with
+excluded middle, as excluded middle easily defines non-continuous
+functions.
+
+Intensional Martin-Löf type theory (MLTT) [2] is an alternative
+foundation for constructive mathematics [5]. Like Bishop&#39;s
+constructive mathematics [5], it is compatible with classical
+mathematics. It doesn&#39;t prove or disprove excluded middle, which can
+be consistently postulated, albeit with loss of computational content,
+for the purposes of developing classical mathematics.
+
+In the version of (intensional) MLTT considered here, we have identity
+types Id X x y (written x = y and called propositional equality), some
+basic types such as that of natural numbers (written ℕ) and that of
+finite sequences of natural numbers of length n (written Vec ℕ n), and
+dependent type constructors Π (written ∀) and Σ.  We have the
+eliminator J for identity types, but not Streicher&#39;s eliminator K, and
+we don&#39;t have the equality reflection rule. We don&#39;t have the axiom of
+function extensionality (any two pointwise equal functions are equal).
+
+A possible formulation of continuity in MLTT under the so-called BHK
+(Brouwer-Heyting-Kolmogorov) interpretation Σ of the quantifier ∃ is
+
+  ∀(α : ℕ → ℕ). Σ(n : ℕ). ∀(β : ℕ → ℕ). α =[n] β → f(α) = f(β),
+
+where α =[n] β means that the sequences α and β agree at the first n
+positions.
+
+We show in MLTT that, with this formulation of continuity, if all
+functions f : (ℕ → ℕ) → ℕ are continuous, then 0 = 1.
+
+We write the proof both informally and formally in Agda notation [3].
+See Bauer [1] for a related well-known phenomenon with the same proof
+ingredients used here.
+
+We emphasize that our proof doesn&#39;t use the axiom of function
+extensionality (any two pointwise equal functions are equal), which
+anyway is not available in MLTT (but is in Homotopy Type Theory
+(HoTT)). It also doesn&#39;t require universes.
+
+In HoTT [2], there is an alternative constructive existential
+quantifier, written ∃, corresponding to the topos theoretic
+existential quantifier, in which witnesses are hidden, but can be
+disclosed via unique choice, formulated as the axiom of description by
+Coquand [6].
+
+Brouwer&#39;s continuity axiom with Σ replaced by ∃ is consistent with
+MLTT, even when MLTT is extended with the axiom of function
+extensionality. Hopefully it is compatible with the HoTT extensions of
+MLTT too, but this is an open problem.
+
+
+2. Informal proof of the theorem
+--------------------------------
+
+The proof in this section is the informal rendering of the formal
+proof given in Section 3 below. It is based on a proof attributed to
+van Dalen and Troelstra by Bauer [1] for a different theorem.
+
+Write
+
+  Baire = ℕ → ℕ
+
+to denote the type of sequences, and let
+
+  0^ω = the infinite sequence of zeros,
+
+and
+
+  0^n k^ω = the sequence of n many zeros followed by infinitely many k&#39;s.
+
+Then
+
+  (0^n k^ω) =[n] 0^ω     and    (0^n k^ω)(n) = k.
+
+Assume that all functions are continuous, with the Σ-formulation of
+continuity as in the introduction:
+
+ ∀(f : Baire → ℕ). ∀(α : Baire). Σ(n : ℕ). ∀(β : Baire). α =[n] β → f(α) = f(β).
+
+By projection, with α = 0^ω, this gives a modulus-of-continuity
+function
+
+ M : (Baire → ℕ) → ℕ
+
+such that
+
+ ∀(f : Baire → ℕ). ∀(β : Baire). 0^ω =[M f] β → f(0^ω) = f(β).    (0)
+
+We use M to define a non-continuous function f : Baire → ℕ and hence
+get a contradiction. What this really says is that no such function M
+can be continuous. See the discussion in Section 4 below.  Notice also
+that if we were using ∃ rather than Σ to define continuity, as
+discussed in the introduction, we would need choice to get M.
+
+Let
+
+  m = M(λ α. 0),
+
+and define f : Baire → ℕ by
+
+  f β = M(λ α. β(α m)).
+
+Observe that, by simply expanding the definitions, with the
+understanding that 0^ω defined above is λ i. 0,
+
+  f(0^ω) = m.
+
+By the defining property (0) of M,
+
+  ∀(β : Baire). 0^ω =[ M f ] β → m = f β.    (1)
+
+
+Case 0. M f = 0.
+------
+
+By (1),
+
+  ∀(β : Baire). m = f β.
+
+The choice β i = i gives
+
+  m = f(λ i. i) = M(λ α. α m).
+
+By the defining property (0) of M, this means that
+
+  ∀(α : Baire). 0^ω =[ m ] α → 0 = α m.
+
+But this gives 0 = 1 if we choose e.g. the sequence α = 0^m 1^ω.
+
+
+Case 1. M f &gt; 0.
+------
+
+For any β : Baire, by the continuity of λ α. β(α m), by the definition
+of f, and by the defining property (0) of M, we have that
+
+  ∀(α : Baire). 0^ω =[ f β ] α → β 0 = β(α m).
+
+Considering
+
+  β = 0^(M f) 1^ω,
+
+this gives
+
+  ∀(α : Baire). 0^ω =[ m ] α → β 0 = β(α m),
+
+because f β = m as 0^ω =[ M f ] β and f(0^ω) = m. Considering
+
+  α = 0^m (M f)^ω,
+
+this in turn gives 0 = β 0 = β(α m) = β(M f) = 1. Q.E.D.
+
+
+3. Formal proof in Agda notation
+--------------------------------
+
+The main reason for giving a formal proof is to be certain that the
+above argument doesn&#39;t use function extensionality (any two pointwise
+equal functions are equal) inadvertently.
+
+This file checks in Agda version 2.3.2.1.
+
+
+3.1. Standard preliminary definitions
+-------------------------------------
+
+The option without-K is used to disable the UIP (uniqueness of
+identity proofs) principle, also known as Streicher&#39;s Axiom K, which
+is not part of MLTT:
+
+</a><a id="5735" class="Markup">\begin{code}</a>
+
+<a id="5749" class="Symbol">{-#</a> <a id="5753" class="Keyword">OPTIONS</a> <a id="5761" class="Pragma">--without-K</a> <a id="5773" class="Symbol">#-}</a>
+
+<a id="5778" class="Keyword">module</a> <a id="5785" href="continuity-false.html" class="Module">continuity-false</a> <a id="5802" class="Keyword">where</a>
+
+<a id="5809" class="Markup">\end{code}</a><a id="5819" class="Background">
+
+We don&#39;t use libraries for the sake of self-containedness. A minimal
+amount of definitions are needed to formulate the theorem:
+
+</a><a id="5950" class="Markup">\begin{code}</a>
+
+<a id="5964" class="Keyword">data</a> <a id="Σ"></a><a id="5969" href="continuity-false.html#5969" class="Datatype">Σ</a> <a id="5971" class="Symbol">{</a><a id="5972" href="continuity-false.html#5972" class="Bound">X</a> <a id="5974" class="Symbol">:</a> <a id="5976" class="PrimitiveType">Set</a><a id="5979" class="Symbol">}</a> <a id="5981" class="Symbol">(</a><a id="5982" href="continuity-false.html#5982" class="Bound">Y</a> <a id="5984" class="Symbol">:</a> <a id="5986" href="continuity-false.html#5972" class="Bound">X</a> <a id="5988" class="Symbol">→</a> <a id="5990" class="PrimitiveType">Set</a><a id="5993" class="Symbol">)</a> <a id="5995" class="Symbol">:</a> <a id="5997" class="PrimitiveType">Set</a> <a id="6001" class="Keyword">where</a>
+ <a id="Σ._,_"></a><a id="6008" href="continuity-false.html#6008" class="InductiveConstructor Operator">_,_</a> <a id="6012" class="Symbol">:</a> <a id="6014" class="Symbol">(</a><a id="6015" href="continuity-false.html#6015" class="Bound">x</a> <a id="6017" class="Symbol">:</a> <a id="6019" href="continuity-false.html#5972" class="Bound">X</a><a id="6020" class="Symbol">)(</a><a id="6022" href="continuity-false.html#6022" class="Bound">y</a> <a id="6024" class="Symbol">:</a> <a id="6026" href="continuity-false.html#5982" class="Bound">Y</a> <a id="6028" href="continuity-false.html#6015" class="Bound">x</a><a id="6029" class="Symbol">)</a> <a id="6031" class="Symbol">→</a> <a id="6033" href="continuity-false.html#5969" class="Datatype">Σ</a> <a id="6035" class="Symbol">{</a><a id="6036" href="continuity-false.html#5972" class="Bound">X</a><a id="6037" class="Symbol">}</a> <a id="6039" href="continuity-false.html#5982" class="Bound">Y</a>
+
+<a id="6042" class="Keyword">data</a> <a id="ℕ"></a><a id="6047" href="continuity-false.html#6047" class="Datatype">ℕ</a> <a id="6049" class="Symbol">:</a> <a id="6051" class="PrimitiveType">Set</a> <a id="6055" class="Keyword">where</a>
+ <a id="ℕ.zero"></a><a id="6062" href="continuity-false.html#6062" class="InductiveConstructor">zero</a> <a id="6067" class="Symbol">:</a> <a id="6069" href="continuity-false.html#6047" class="Datatype">ℕ</a>
+ <a id="ℕ.succ"></a><a id="6072" href="continuity-false.html#6072" class="InductiveConstructor">succ</a> <a id="6077" class="Symbol">:</a> <a id="6079" href="continuity-false.html#6047" class="Datatype">ℕ</a> <a id="6081" class="Symbol">→</a> <a id="6083" href="continuity-false.html#6047" class="Datatype">ℕ</a>
+
+<a id="6086" class="Symbol">{-#</a> <a id="6090" class="Keyword">BUILTIN</a> <a id="6098" class="Pragma">NATURAL</a> <a id="6106" href="continuity-false.html#6047" class="Datatype">ℕ</a> <a id="6108" class="Symbol">#-}</a>
+
+<a id="Baire"></a><a id="6113" href="continuity-false.html#6113" class="Function">Baire</a> <a id="6119" class="Symbol">:</a> <a id="6121" class="PrimitiveType">Set</a>
+<a id="6125" href="continuity-false.html#6113" class="Function">Baire</a> <a id="6131" class="Symbol">=</a> <a id="6133" href="continuity-false.html#6047" class="Datatype">ℕ</a> <a id="6135" class="Symbol">→</a> <a id="6137" href="continuity-false.html#6047" class="Datatype">ℕ</a>
+
+<a id="6140" class="Keyword">data</a> <a id="_≡_"></a><a id="6145" href="continuity-false.html#6145" class="Datatype Operator">_≡_</a> <a id="6149" class="Symbol">{</a><a id="6150" href="continuity-false.html#6150" class="Bound">X</a> <a id="6152" class="Symbol">:</a> <a id="6154" class="PrimitiveType">Set</a><a id="6157" class="Symbol">}</a> <a id="6159" class="Symbol">:</a> <a id="6161" href="continuity-false.html#6150" class="Bound">X</a> <a id="6163" class="Symbol">→</a> <a id="6165" href="continuity-false.html#6150" class="Bound">X</a> <a id="6167" class="Symbol">→</a> <a id="6169" class="PrimitiveType">Set</a> <a id="6173" class="Keyword">where</a>
+ <a id="_≡_.refl"></a><a id="6180" href="continuity-false.html#6180" class="InductiveConstructor">refl</a> <a id="6185" class="Symbol">:</a> <a id="6187" class="Symbol">{</a><a id="6188" href="continuity-false.html#6188" class="Bound">x</a> <a id="6190" class="Symbol">:</a> <a id="6192" href="continuity-false.html#6150" class="Bound">X</a><a id="6193" class="Symbol">}</a> <a id="6195" class="Symbol">→</a> <a id="6197" href="continuity-false.html#6188" class="Bound">x</a> <a id="6199" href="continuity-false.html#6145" class="Datatype Operator">≡</a> <a id="6201" href="continuity-false.html#6188" class="Bound">x</a>
+
+<a id="6204" class="Keyword">data</a> <a id="Vec"></a><a id="6209" href="continuity-false.html#6209" class="Datatype">Vec</a> <a id="6213" class="Symbol">(</a><a id="6214" href="continuity-false.html#6214" class="Bound">X</a> <a id="6216" class="Symbol">:</a> <a id="6218" class="PrimitiveType">Set</a><a id="6221" class="Symbol">)</a> <a id="6223" class="Symbol">:</a> <a id="6225" href="continuity-false.html#6047" class="Datatype">ℕ</a> <a id="6227" class="Symbol">→</a> <a id="6229" class="PrimitiveType">Set</a> <a id="6233" class="Keyword">where</a>
+ <a id="Vec.[]"></a><a id="6240" href="continuity-false.html#6240" class="InductiveConstructor">[]</a>  <a id="6244" class="Symbol">:</a> <a id="6246" href="continuity-false.html#6209" class="Datatype">Vec</a> <a id="6250" href="continuity-false.html#6214" class="Bound">X</a> <a id="6252" class="Number">0</a>
+ <a id="Vec._∷_"></a><a id="6255" href="continuity-false.html#6255" class="InductiveConstructor Operator">_∷_</a> <a id="6259" class="Symbol">:</a> <a id="6261" class="Symbol">{</a><a id="6262" href="continuity-false.html#6262" class="Bound">n</a> <a id="6264" class="Symbol">:</a> <a id="6266" href="continuity-false.html#6047" class="Datatype">ℕ</a><a id="6267" class="Symbol">}</a> <a id="6269" class="Symbol">→</a> <a id="6271" href="continuity-false.html#6214" class="Bound">X</a> <a id="6273" class="Symbol">→</a> <a id="6275" href="continuity-false.html#6209" class="Datatype">Vec</a> <a id="6279" href="continuity-false.html#6214" class="Bound">X</a> <a id="6281" href="continuity-false.html#6262" class="Bound">n</a> <a id="6283" class="Symbol">→</a> <a id="6285" href="continuity-false.html#6209" class="Datatype">Vec</a> <a id="6289" href="continuity-false.html#6214" class="Bound">X</a> <a id="6291" class="Symbol">(</a><a id="6292" href="continuity-false.html#6072" class="InductiveConstructor">succ</a> <a id="6297" href="continuity-false.html#6262" class="Bound">n</a><a id="6298" class="Symbol">)</a>
+
+<a id="_[_]"></a><a id="6301" href="continuity-false.html#6301" class="Function Operator">_[_]</a> <a id="6306" class="Symbol">:</a> <a id="6308" class="Symbol">{</a><a id="6309" href="continuity-false.html#6309" class="Bound">X</a> <a id="6311" class="Symbol">:</a> <a id="6313" class="PrimitiveType">Set</a><a id="6316" class="Symbol">}</a> <a id="6318" class="Symbol">→</a> <a id="6320" class="Symbol">(</a><a id="6321" href="continuity-false.html#6047" class="Datatype">ℕ</a> <a id="6323" class="Symbol">→</a> <a id="6325" href="continuity-false.html#6309" class="Bound">X</a><a id="6326" class="Symbol">)</a> <a id="6328" class="Symbol">→</a> <a id="6330" class="Symbol">(</a><a id="6331" href="continuity-false.html#6331" class="Bound">n</a> <a id="6333" class="Symbol">:</a> <a id="6335" href="continuity-false.html#6047" class="Datatype">ℕ</a><a id="6336" class="Symbol">)</a> <a id="6338" class="Symbol">→</a> <a id="6340" href="continuity-false.html#6209" class="Datatype">Vec</a> <a id="6344" href="continuity-false.html#6309" class="Bound">X</a> <a id="6346" href="continuity-false.html#6331" class="Bound">n</a>
+<a id="6348" href="continuity-false.html#6348" class="Bound">α</a> <a id="6350" href="continuity-false.html#6301" class="Function Operator">[</a> <a id="6352" class="Number">0</a>      <a id="6359" href="continuity-false.html#6301" class="Function Operator">]</a> <a id="6361" class="Symbol">=</a> <a id="6363" href="continuity-false.html#6240" class="InductiveConstructor">[]</a>
+<a id="6366" href="continuity-false.html#6366" class="Bound">α</a> <a id="6368" href="continuity-false.html#6301" class="Function Operator">[</a> <a id="6370" href="continuity-false.html#6072" class="InductiveConstructor">succ</a> <a id="6375" href="continuity-false.html#6375" class="Bound">n</a> <a id="6377" href="continuity-false.html#6301" class="Function Operator">]</a> <a id="6379" class="Symbol">=</a> <a id="6381" href="continuity-false.html#6366" class="Bound">α</a> <a id="6383" class="Number">0</a> <a id="6385" href="continuity-false.html#6255" class="InductiveConstructor Operator">∷</a> <a id="6387" class="Symbol">(λ</a> <a id="6390" href="continuity-false.html#6390" class="Bound">i</a> <a id="6392" class="Symbol">→</a> <a id="6394" href="continuity-false.html#6366" class="Bound">α</a><a id="6395" class="Symbol">(</a><a id="6396" href="continuity-false.html#6072" class="InductiveConstructor">succ</a> <a id="6401" href="continuity-false.html#6390" class="Bound">i</a><a id="6402" class="Symbol">))</a> <a id="6405" href="continuity-false.html#6301" class="Function Operator">[</a> <a id="6407" href="continuity-false.html#6375" class="Bound">n</a> <a id="6409" href="continuity-false.html#6301" class="Function Operator">]</a>
+
+<a id="_≡[_]_"></a><a id="6412" href="continuity-false.html#6412" class="Function Operator">_≡[_]_</a> <a id="6419" class="Symbol">:</a> <a id="6421" class="Symbol">{</a><a id="6422" href="continuity-false.html#6422" class="Bound">X</a> <a id="6424" class="Symbol">:</a> <a id="6426" class="PrimitiveType">Set</a><a id="6429" class="Symbol">}</a> <a id="6431" class="Symbol">→</a> <a id="6433" class="Symbol">(</a><a id="6434" href="continuity-false.html#6047" class="Datatype">ℕ</a> <a id="6436" class="Symbol">→</a> <a id="6438" href="continuity-false.html#6422" class="Bound">X</a><a id="6439" class="Symbol">)</a> <a id="6441" class="Symbol">→</a> <a id="6443" href="continuity-false.html#6047" class="Datatype">ℕ</a> <a id="6445" class="Symbol">→</a> <a id="6447" class="Symbol">(</a><a id="6448" href="continuity-false.html#6047" class="Datatype">ℕ</a> <a id="6450" class="Symbol">→</a> <a id="6452" href="continuity-false.html#6422" class="Bound">X</a><a id="6453" class="Symbol">)</a> <a id="6455" class="Symbol">→</a> <a id="6457" class="PrimitiveType">Set</a>
+<a id="6461" href="continuity-false.html#6461" class="Bound">α</a> <a id="6463" href="continuity-false.html#6412" class="Function Operator">≡[</a> <a id="6466" href="continuity-false.html#6466" class="Bound">n</a> <a id="6468" href="continuity-false.html#6412" class="Function Operator">]</a> <a id="6470" href="continuity-false.html#6470" class="Bound">β</a> <a id="6472" class="Symbol">=</a> <a id="6474" href="continuity-false.html#6461" class="Bound">α</a> <a id="6476" href="continuity-false.html#6301" class="Function Operator">[</a> <a id="6478" href="continuity-false.html#6466" class="Bound">n</a> <a id="6480" href="continuity-false.html#6301" class="Function Operator">]</a> <a id="6482" href="continuity-false.html#6145" class="Datatype Operator">≡</a> <a id="6484" href="continuity-false.html#6470" class="Bound">β</a> <a id="6486" href="continuity-false.html#6301" class="Function Operator">[</a> <a id="6488" href="continuity-false.html#6466" class="Bound">n</a> <a id="6490" href="continuity-false.html#6301" class="Function Operator">]</a>
+
+<a id="6493" class="Markup">\end{code}</a><a id="6503" class="Background">
+
+The above definitions are standard in type theory/constructive
+mathematics. The second last one takes a finite prefix of a given
+length of a given infinite sequence, and hence the last one defines
+when two given sequences agree at the first n positions.
+
+
+3.2 Formulation of the theorem
+------------------------------
+
+The following is Brouwer&#39;s definition of continuity, formulated with Σ
+rather than ∃:
+
+</a><a id="6911" class="Markup">\begin{code}</a>
+
+<a id="continuous"></a><a id="6925" href="continuity-false.html#6925" class="Function">continuous</a> <a id="6936" class="Symbol">:</a> <a id="6938" class="Symbol">(</a><a id="6939" href="continuity-false.html#6113" class="Function">Baire</a> <a id="6945" class="Symbol">→</a> <a id="6947" href="continuity-false.html#6047" class="Datatype">ℕ</a><a id="6948" class="Symbol">)</a> <a id="6950" class="Symbol">→</a> <a id="6952" class="PrimitiveType">Set</a>
+<a id="6956" href="continuity-false.html#6925" class="Function">continuous</a> <a id="6967" href="continuity-false.html#6967" class="Bound">f</a> <a id="6969" class="Symbol">=</a> <a id="6971" class="Symbol">(</a><a id="6972" href="continuity-false.html#6972" class="Bound">α</a> <a id="6974" class="Symbol">:</a> <a id="6976" href="continuity-false.html#6113" class="Function">Baire</a><a id="6981" class="Symbol">)</a> <a id="6983" class="Symbol">→</a> <a id="6985" href="continuity-false.html#5969" class="Datatype">Σ</a> <a id="6987" class="Symbol">\(</a><a id="6989" href="continuity-false.html#6989" class="Bound">n</a> <a id="6991" class="Symbol">:</a> <a id="6993" href="continuity-false.html#6047" class="Datatype">ℕ</a><a id="6994" class="Symbol">)</a> <a id="6996" class="Symbol">→</a> <a id="6998" class="Symbol">(</a><a id="6999" href="continuity-false.html#6999" class="Bound">β</a> <a id="7001" class="Symbol">:</a> <a id="7003" href="continuity-false.html#6113" class="Function">Baire</a><a id="7008" class="Symbol">)</a> <a id="7010" class="Symbol">→</a> <a id="7012" href="continuity-false.html#6972" class="Bound">α</a> <a id="7014" href="continuity-false.html#6412" class="Function Operator">≡[</a> <a id="7017" href="continuity-false.html#6989" class="Bound">n</a> <a id="7019" href="continuity-false.html#6412" class="Function Operator">]</a> <a id="7021" href="continuity-false.html#6999" class="Bound">β</a> <a id="7023" class="Symbol">→</a> <a id="7025" href="continuity-false.html#6967" class="Bound">f</a> <a id="7027" href="continuity-false.html#6972" class="Bound">α</a> <a id="7029" href="continuity-false.html#6145" class="Datatype Operator">≡</a> <a id="7031" href="continuity-false.html#6967" class="Bound">f</a> <a id="7033" href="continuity-false.html#6999" class="Bound">β</a>
+
+<a id="7036" class="Markup">\end{code}</a><a id="7046" class="Background">
+
+In Brouwer&#39;s mathematics, all functions are continuous, but this can&#39;t
+be true if continuity is (incorrectly) formulated with Σ as above:
+
+</a><a id="7187" class="Markup">\begin{code}</a>
+
+<a id="theorem"></a><a id="7201" href="continuity-false.html#7201" class="Function">theorem</a> <a id="7209" class="Symbol">:</a> <a id="7211" class="Symbol">((</a><a id="7213" href="continuity-false.html#7213" class="Bound">f</a> <a id="7215" class="Symbol">:</a> <a id="7217" href="continuity-false.html#6113" class="Function">Baire</a> <a id="7223" class="Symbol">→</a> <a id="7225" href="continuity-false.html#6047" class="Datatype">ℕ</a><a id="7226" class="Symbol">)</a> <a id="7228" class="Symbol">→</a> <a id="7230" href="continuity-false.html#6925" class="Function">continuous</a> <a id="7241" href="continuity-false.html#7213" class="Bound">f</a><a id="7242" class="Symbol">)</a> <a id="7244" class="Symbol">→</a> <a id="7246" class="Number">0</a> <a id="7248" href="continuity-false.html#6145" class="Datatype Operator">≡</a> <a id="7250" class="Number">1</a>
+
+<a id="7253" class="Markup">\end{code}</a><a id="7263" class="Background">
+
+We need some preparation to prove that.
+
+
+3.3 Preliminary proofs and constructions
+----------------------------------------
+
+The following is standard in MLTT:
+
+</a><a id="7426" class="Markup">\begin{code}</a>
+
+<a id="π₀"></a><a id="7440" href="continuity-false.html#7440" class="Function">π₀</a> <a id="7443" class="Symbol">:</a> <a id="7445" class="Symbol">{</a><a id="7446" href="continuity-false.html#7446" class="Bound">X</a> <a id="7448" class="Symbol">:</a> <a id="7450" class="PrimitiveType">Set</a><a id="7453" class="Symbol">}</a> <a id="7455" class="Symbol">{</a><a id="7456" href="continuity-false.html#7456" class="Bound">Y</a> <a id="7458" class="Symbol">:</a> <a id="7460" href="continuity-false.html#7446" class="Bound">X</a> <a id="7462" class="Symbol">→</a> <a id="7464" class="PrimitiveType">Set</a><a id="7467" class="Symbol">}</a> <a id="7469" class="Symbol">→</a> <a id="7471" class="Symbol">(</a><a id="7472" href="continuity-false.html#5969" class="Datatype">Σ</a> <a id="7474" class="Symbol">\(</a><a id="7476" href="continuity-false.html#7476" class="Bound">x</a> <a id="7478" class="Symbol">:</a> <a id="7480" href="continuity-false.html#7446" class="Bound">X</a><a id="7481" class="Symbol">)</a> <a id="7483" class="Symbol">→</a> <a id="7485" href="continuity-false.html#7456" class="Bound">Y</a> <a id="7487" href="continuity-false.html#7476" class="Bound">x</a><a id="7488" class="Symbol">)</a> <a id="7490" class="Symbol">→</a> <a id="7492" href="continuity-false.html#7446" class="Bound">X</a>
+<a id="7494" href="continuity-false.html#7440" class="Function">π₀</a><a id="7496" class="Symbol">(</a><a id="7497" href="continuity-false.html#7497" class="Bound">x</a> <a id="7499" href="continuity-false.html#6008" class="InductiveConstructor Operator">,</a> <a id="7501" href="continuity-false.html#7501" class="Bound">y</a><a id="7502" class="Symbol">)</a> <a id="7504" class="Symbol">=</a> <a id="7506" href="continuity-false.html#7497" class="Bound">x</a>
+
+<a id="π₁"></a><a id="7509" href="continuity-false.html#7509" class="Function">π₁</a> <a id="7512" class="Symbol">:</a> <a id="7514" class="Symbol">{</a><a id="7515" href="continuity-false.html#7515" class="Bound">X</a> <a id="7517" class="Symbol">:</a> <a id="7519" class="PrimitiveType">Set</a><a id="7522" class="Symbol">}</a> <a id="7524" class="Symbol">{</a><a id="7525" href="continuity-false.html#7525" class="Bound">Y</a> <a id="7527" class="Symbol">:</a> <a id="7529" href="continuity-false.html#7515" class="Bound">X</a> <a id="7531" class="Symbol">→</a> <a id="7533" class="PrimitiveType">Set</a><a id="7536" class="Symbol">}</a> <a id="7538" class="Symbol">(</a><a id="7539" href="continuity-false.html#7539" class="Bound">t</a> <a id="7541" class="Symbol">:</a> <a id="7543" href="continuity-false.html#5969" class="Datatype">Σ</a> <a id="7545" class="Symbol">\(</a><a id="7547" href="continuity-false.html#7547" class="Bound">x</a> <a id="7549" class="Symbol">:</a> <a id="7551" href="continuity-false.html#7515" class="Bound">X</a><a id="7552" class="Symbol">)</a> <a id="7554" class="Symbol">→</a> <a id="7556" href="continuity-false.html#7525" class="Bound">Y</a> <a id="7558" href="continuity-false.html#7547" class="Bound">x</a><a id="7559" class="Symbol">)</a> <a id="7561" class="Symbol">→</a> <a id="7563" href="continuity-false.html#7525" class="Bound">Y</a><a id="7564" class="Symbol">(</a><a id="7565" href="continuity-false.html#7440" class="Function">π₀</a> <a id="7568" href="continuity-false.html#7539" class="Bound">t</a><a id="7569" class="Symbol">)</a>
+<a id="7571" href="continuity-false.html#7509" class="Function">π₁</a><a id="7573" class="Symbol">(</a><a id="7574" href="continuity-false.html#7574" class="Bound">x</a> <a id="7576" href="continuity-false.html#6008" class="InductiveConstructor Operator">,</a> <a id="7578" href="continuity-false.html#7578" class="Bound">y</a><a id="7579" class="Symbol">)</a> <a id="7581" class="Symbol">=</a> <a id="7583" href="continuity-false.html#7578" class="Bound">y</a>
+
+<a id="sym"></a><a id="7586" href="continuity-false.html#7586" class="Function">sym</a> <a id="7590" class="Symbol">:</a> <a id="7592" class="Symbol">{</a><a id="7593" href="continuity-false.html#7593" class="Bound">X</a> <a id="7595" class="Symbol">:</a> <a id="7597" class="PrimitiveType">Set</a><a id="7600" class="Symbol">}</a> <a id="7602" class="Symbol">→</a> <a id="7604" class="Symbol">{</a><a id="7605" href="continuity-false.html#7605" class="Bound">x</a> <a id="7607" href="continuity-false.html#7607" class="Bound">y</a> <a id="7609" class="Symbol">:</a> <a id="7611" href="continuity-false.html#7593" class="Bound">X</a><a id="7612" class="Symbol">}</a> <a id="7614" class="Symbol">→</a> <a id="7616" href="continuity-false.html#7605" class="Bound">x</a> <a id="7618" href="continuity-false.html#6145" class="Datatype Operator">≡</a> <a id="7620" href="continuity-false.html#7607" class="Bound">y</a> <a id="7622" class="Symbol">→</a> <a id="7624" href="continuity-false.html#7607" class="Bound">y</a> <a id="7626" href="continuity-false.html#6145" class="Datatype Operator">≡</a> <a id="7628" href="continuity-false.html#7605" class="Bound">x</a>
+<a id="7630" href="continuity-false.html#7586" class="Function">sym</a> <a id="7634" href="continuity-false.html#6180" class="InductiveConstructor">refl</a> <a id="7639" class="Symbol">=</a> <a id="7641" href="continuity-false.html#6180" class="InductiveConstructor">refl</a>
+
+<a id="trans"></a><a id="7647" href="continuity-false.html#7647" class="Function">trans</a> <a id="7653" class="Symbol">:</a> <a id="7655" class="Symbol">{</a><a id="7656" href="continuity-false.html#7656" class="Bound">X</a> <a id="7658" class="Symbol">:</a> <a id="7660" class="PrimitiveType">Set</a><a id="7663" class="Symbol">}</a> <a id="7665" class="Symbol">{</a><a id="7666" href="continuity-false.html#7666" class="Bound">x</a> <a id="7668" href="continuity-false.html#7668" class="Bound">y</a> <a id="7670" href="continuity-false.html#7670" class="Bound">z</a> <a id="7672" class="Symbol">:</a> <a id="7674" href="continuity-false.html#7656" class="Bound">X</a><a id="7675" class="Symbol">}</a> <a id="7677" class="Symbol">→</a> <a id="7679" href="continuity-false.html#7666" class="Bound">x</a> <a id="7681" href="continuity-false.html#6145" class="Datatype Operator">≡</a> <a id="7683" href="continuity-false.html#7668" class="Bound">y</a> <a id="7685" class="Symbol">→</a> <a id="7687" href="continuity-false.html#7668" class="Bound">y</a> <a id="7689" href="continuity-false.html#6145" class="Datatype Operator">≡</a> <a id="7691" href="continuity-false.html#7670" class="Bound">z</a> <a id="7693" class="Symbol">→</a> <a id="7695" href="continuity-false.html#7666" class="Bound">x</a> <a id="7697" href="continuity-false.html#6145" class="Datatype Operator">≡</a> <a id="7699" href="continuity-false.html#7670" class="Bound">z</a>
+<a id="7701" href="continuity-false.html#7647" class="Function">trans</a> <a id="7707" href="continuity-false.html#6180" class="InductiveConstructor">refl</a> <a id="7712" href="continuity-false.html#6180" class="InductiveConstructor">refl</a> <a id="7717" class="Symbol">=</a> <a id="7719" href="continuity-false.html#6180" class="InductiveConstructor">refl</a>
+
+<a id="ap"></a><a id="7725" href="continuity-false.html#7725" class="Function">ap</a> <a id="7728" class="Symbol">:</a> <a id="7730" class="Symbol">(</a><a id="7731" href="continuity-false.html#7731" class="Bound">X</a> <a id="7733" href="continuity-false.html#7733" class="Bound">Y</a> <a id="7735" class="Symbol">:</a> <a id="7737" class="PrimitiveType">Set</a><a id="7740" class="Symbol">)</a> <a id="7742" class="Symbol">(</a><a id="7743" href="continuity-false.html#7743" class="Bound">f</a> <a id="7745" class="Symbol">:</a> <a id="7747" href="continuity-false.html#7731" class="Bound">X</a> <a id="7749" class="Symbol">→</a> <a id="7751" href="continuity-false.html#7733" class="Bound">Y</a><a id="7752" class="Symbol">)</a> <a id="7754" class="Symbol">{</a><a id="7755" href="continuity-false.html#7755" class="Bound">x₀</a> <a id="7758" href="continuity-false.html#7758" class="Bound">x₁</a> <a id="7761" class="Symbol">:</a> <a id="7763" href="continuity-false.html#7731" class="Bound">X</a><a id="7764" class="Symbol">}</a> <a id="7766" class="Symbol">→</a> <a id="7768" href="continuity-false.html#7755" class="Bound">x₀</a> <a id="7771" href="continuity-false.html#6145" class="Datatype Operator">≡</a> <a id="7773" href="continuity-false.html#7758" class="Bound">x₁</a> <a id="7776" class="Symbol">→</a> <a id="7778" href="continuity-false.html#7743" class="Bound">f</a> <a id="7780" href="continuity-false.html#7755" class="Bound">x₀</a> <a id="7783" href="continuity-false.html#6145" class="Datatype Operator">≡</a> <a id="7785" href="continuity-false.html#7743" class="Bound">f</a> <a id="7787" href="continuity-false.html#7758" class="Bound">x₁</a>
+<a id="7790" href="continuity-false.html#7725" class="Function">ap</a> <a id="7793" href="continuity-false.html#7793" class="Bound">X</a> <a id="7795" href="continuity-false.html#7795" class="Bound">Y</a> <a id="7797" href="continuity-false.html#7797" class="Bound">f</a> <a id="7799" href="continuity-false.html#6180" class="InductiveConstructor">refl</a> <a id="7804" class="Symbol">=</a> <a id="7806" href="continuity-false.html#6180" class="InductiveConstructor">refl</a>
+
+<a id="transport"></a><a id="7812" href="continuity-false.html#7812" class="Function">transport</a> <a id="7822" class="Symbol">:</a> <a id="7824" class="Symbol">(</a><a id="7825" href="continuity-false.html#7825" class="Bound">X</a> <a id="7827" class="Symbol">:</a> <a id="7829" class="PrimitiveType">Set</a><a id="7832" class="Symbol">)</a> <a id="7834" class="Symbol">(</a><a id="7835" href="continuity-false.html#7835" class="Bound">A</a> <a id="7837" class="Symbol">:</a> <a id="7839" href="continuity-false.html#7825" class="Bound">X</a> <a id="7841" class="Symbol">→</a> <a id="7843" class="PrimitiveType">Set</a><a id="7846" class="Symbol">)</a> <a id="7848" class="Symbol">{</a><a id="7849" href="continuity-false.html#7849" class="Bound">x</a> <a id="7851" href="continuity-false.html#7851" class="Bound">y</a> <a id="7853" class="Symbol">:</a> <a id="7855" href="continuity-false.html#7825" class="Bound">X</a><a id="7856" class="Symbol">}</a> <a id="7858" class="Symbol">→</a> <a id="7860" href="continuity-false.html#7849" class="Bound">x</a> <a id="7862" href="continuity-false.html#6145" class="Datatype Operator">≡</a> <a id="7864" href="continuity-false.html#7851" class="Bound">y</a> <a id="7866" class="Symbol">→</a> <a id="7868" href="continuity-false.html#7835" class="Bound">A</a> <a id="7870" href="continuity-false.html#7849" class="Bound">x</a> <a id="7872" class="Symbol">→</a> <a id="7874" href="continuity-false.html#7835" class="Bound">A</a> <a id="7876" href="continuity-false.html#7851" class="Bound">y</a>
+<a id="7878" href="continuity-false.html#7812" class="Function">transport</a> <a id="7888" href="continuity-false.html#7888" class="Bound">X</a> <a id="7890" href="continuity-false.html#7890" class="Bound">A</a> <a id="7892" href="continuity-false.html#6180" class="InductiveConstructor">refl</a> <a id="7897" href="continuity-false.html#7897" class="Bound">a</a> <a id="7899" class="Symbol">=</a> <a id="7901" href="continuity-false.html#7897" class="Bound">a</a>
+
+<a id="head"></a><a id="7904" href="continuity-false.html#7904" class="Function">head</a> <a id="7909" class="Symbol">:</a> <a id="7911" class="Symbol">{</a><a id="7912" href="continuity-false.html#7912" class="Bound">X</a> <a id="7914" class="Symbol">:</a> <a id="7916" class="PrimitiveType">Set</a><a id="7919" class="Symbol">}</a> <a id="7921" class="Symbol">{</a><a id="7922" href="continuity-false.html#7922" class="Bound">n</a> <a id="7924" class="Symbol">:</a> <a id="7926" href="continuity-false.html#6047" class="Datatype">ℕ</a><a id="7927" class="Symbol">}</a> <a id="7929" class="Symbol">→</a> <a id="7931" href="continuity-false.html#6209" class="Datatype">Vec</a> <a id="7935" href="continuity-false.html#7912" class="Bound">X</a> <a id="7937" class="Symbol">(</a><a id="7938" href="continuity-false.html#6072" class="InductiveConstructor">succ</a> <a id="7943" href="continuity-false.html#7922" class="Bound">n</a><a id="7944" class="Symbol">)</a> <a id="7946" class="Symbol">→</a> <a id="7948" href="continuity-false.html#7912" class="Bound">X</a>
+<a id="7950" href="continuity-false.html#7904" class="Function">head</a> <a id="7955" class="Symbol">(</a><a id="7956" href="continuity-false.html#7956" class="Bound">x</a> <a id="7958" href="continuity-false.html#6255" class="InductiveConstructor Operator">∷</a> <a id="7960" href="continuity-false.html#7960" class="Bound">xs</a><a id="7962" class="Symbol">)</a> <a id="7964" class="Symbol">=</a> <a id="7966" href="continuity-false.html#7956" class="Bound">x</a>
+
+<a id="7969" class="Markup">\end{code}</a><a id="7979" class="Background">
+
+For future reference, notice that all uses of ap below are for
+(first-order) functions of types
+
+  ℕ → ℕ
+  Vec ℕ (succ n) → ℕ
+  Vec ℕ n → Vec ℕ (succ n)
+
+only.
+
+The following definition of (n zeros-and-then k) gives a sequence of n
+many zeros followed by k and then by something irrelevant (infinitely
+many k&#39;s, in fact, but we don&#39;t need to know that):
+
+</a><a id="8336" class="Markup">\begin{code}</a>
+
+<a id="_zeros-and-then_"></a><a id="8350" href="continuity-false.html#8350" class="Function Operator">_zeros-and-then_</a> <a id="8367" class="Symbol">:</a> <a id="8369" href="continuity-false.html#6047" class="Datatype">ℕ</a> <a id="8371" class="Symbol">→</a> <a id="8373" href="continuity-false.html#6047" class="Datatype">ℕ</a> <a id="8375" class="Symbol">→</a> <a id="8377" href="continuity-false.html#6113" class="Function">Baire</a>
+<a id="8383" class="Symbol">(</a> <a id="8385" class="Number">0</a>       <a id="8393" href="continuity-false.html#8350" class="Function Operator">zeros-and-then</a> <a id="8408" href="continuity-false.html#8408" class="Bound">k</a><a id="8409" class="Symbol">)</a>  <a id="8412" href="continuity-false.html#8412" class="Bound">i</a>       <a id="8420" class="Symbol">=</a> <a id="8422" href="continuity-false.html#8408" class="Bound">k</a>
+<a id="8424" class="Symbol">((</a><a id="8426" href="continuity-false.html#6072" class="InductiveConstructor">succ</a> <a id="8431" href="continuity-false.html#8431" class="Bound">n</a><a id="8432" class="Symbol">)</a> <a id="8434" href="continuity-false.html#8350" class="Function Operator">zeros-and-then</a> <a id="8449" href="continuity-false.html#8449" class="Bound">k</a><a id="8450" class="Symbol">)</a>  <a id="8453" class="Number">0</a>       <a id="8461" class="Symbol">=</a> <a id="8463" class="Number">0</a>
+<a id="8465" class="Symbol">((</a><a id="8467" href="continuity-false.html#6072" class="InductiveConstructor">succ</a> <a id="8472" href="continuity-false.html#8472" class="Bound">n</a><a id="8473" class="Symbol">)</a> <a id="8475" href="continuity-false.html#8350" class="Function Operator">zeros-and-then</a> <a id="8490" href="continuity-false.html#8490" class="Bound">k</a><a id="8491" class="Symbol">)</a> <a id="8493" class="Symbol">(</a><a id="8494" href="continuity-false.html#6072" class="InductiveConstructor">succ</a> <a id="8499" href="continuity-false.html#8499" class="Bound">i</a><a id="8500" class="Symbol">)</a> <a id="8502" class="Symbol">=</a> <a id="8504" class="Symbol">(</a><a id="8505" href="continuity-false.html#8472" class="Bound">n</a> <a id="8507" href="continuity-false.html#8350" class="Function Operator">zeros-and-then</a> <a id="8522" href="continuity-false.html#8490" class="Bound">k</a><a id="8523" class="Symbol">)</a> <a id="8525" href="continuity-false.html#8499" class="Bound">i</a>
+
+<a id="o"></a><a id="8528" href="continuity-false.html#8528" class="Function">o</a> <a id="8530" class="Symbol">:</a> <a id="8532" href="continuity-false.html#6113" class="Function">Baire</a>
+<a id="8538" href="continuity-false.html#8528" class="Function">o</a> <a id="8540" class="Symbol">=</a> <a id="8542" class="Symbol">λ</a> <a id="8544" href="continuity-false.html#8544" class="Bound">i</a> <a id="8546" class="Symbol">→</a> <a id="8548" class="Number">0</a>
+
+<a id="zeros-and-then-spec₀"></a><a id="8551" href="continuity-false.html#8551" class="Function">zeros-and-then-spec₀</a> <a id="8572" class="Symbol">:</a> <a id="8574" class="Symbol">(</a><a id="8575" href="continuity-false.html#8575" class="Bound">n</a> <a id="8577" href="continuity-false.html#8577" class="Bound">k</a> <a id="8579" class="Symbol">:</a> <a id="8581" href="continuity-false.html#6047" class="Datatype">ℕ</a><a id="8582" class="Symbol">)</a> <a id="8584" class="Symbol">→</a> <a id="8586" class="Symbol">(</a><a id="8587" href="continuity-false.html#8575" class="Bound">n</a> <a id="8589" href="continuity-false.html#8350" class="Function Operator">zeros-and-then</a> <a id="8604" href="continuity-false.html#8577" class="Bound">k</a><a id="8605" class="Symbol">)</a> <a id="8607" href="continuity-false.html#8575" class="Bound">n</a> <a id="8609" href="continuity-false.html#6145" class="Datatype Operator">≡</a> <a id="8611" href="continuity-false.html#8577" class="Bound">k</a>
+<a id="8613" href="continuity-false.html#8551" class="Function">zeros-and-then-spec₀</a>  <a id="8635" class="Number">0</a>       <a id="8643" href="continuity-false.html#8643" class="Bound">k</a> <a id="8645" class="Symbol">=</a> <a id="8647" href="continuity-false.html#6180" class="InductiveConstructor">refl</a>
+<a id="8652" href="continuity-false.html#8551" class="Function">zeros-and-then-spec₀</a> <a id="8673" class="Symbol">(</a><a id="8674" href="continuity-false.html#6072" class="InductiveConstructor">succ</a> <a id="8679" href="continuity-false.html#8679" class="Bound">n</a><a id="8680" class="Symbol">)</a> <a id="8682" href="continuity-false.html#8682" class="Bound">k</a> <a id="8684" class="Symbol">=</a> <a id="8686" href="continuity-false.html#8551" class="Function">zeros-and-then-spec₀</a> <a id="8707" href="continuity-false.html#8679" class="Bound">n</a> <a id="8709" href="continuity-false.html#8682" class="Bound">k</a>
+
+<a id="zeros-and-then-spec₁"></a><a id="8712" href="continuity-false.html#8712" class="Function">zeros-and-then-spec₁</a> <a id="8733" class="Symbol">:</a> <a id="8735" class="Symbol">(</a><a id="8736" href="continuity-false.html#8736" class="Bound">n</a> <a id="8738" href="continuity-false.html#8738" class="Bound">k</a> <a id="8740" class="Symbol">:</a> <a id="8742" href="continuity-false.html#6047" class="Datatype">ℕ</a><a id="8743" class="Symbol">)</a> <a id="8745" class="Symbol">→</a> <a id="8747" href="continuity-false.html#8528" class="Function">o</a> <a id="8749" href="continuity-false.html#6412" class="Function Operator">≡[</a> <a id="8752" href="continuity-false.html#8736" class="Bound">n</a> <a id="8754" href="continuity-false.html#6412" class="Function Operator">]</a> <a id="8756" class="Symbol">(</a><a id="8757" href="continuity-false.html#8736" class="Bound">n</a> <a id="8759" href="continuity-false.html#8350" class="Function Operator">zeros-and-then</a> <a id="8774" href="continuity-false.html#8738" class="Bound">k</a><a id="8775" class="Symbol">)</a>
+<a id="8777" href="continuity-false.html#8712" class="Function">zeros-and-then-spec₁</a> <a id="8798" href="continuity-false.html#8798" class="Bound">n</a> <a id="8800" href="continuity-false.html#8800" class="Bound">k</a> <a id="8802" class="Symbol">=</a> <a id="8804" href="continuity-false.html#7647" class="Function">trans</a> <a id="8810" class="Symbol">(</a><a id="8811" href="continuity-false.html#8925" class="Function">zeros₀</a> <a id="8818" href="continuity-false.html#8798" class="Bound">n</a><a id="8819" class="Symbol">)</a> <a id="8821" class="Symbol">(</a><a id="8822" href="continuity-false.html#9067" class="Function">zeros₁</a> <a id="8829" href="continuity-false.html#8798" class="Bound">n</a> <a id="8831" href="continuity-false.html#8800" class="Bound">k</a><a id="8832" class="Symbol">)</a>
+ <a id="8835" class="Keyword">where</a>
+  <a id="8843" href="continuity-false.html#8843" class="Function">zeros</a> <a id="8849" class="Symbol">:</a> <a id="8851" class="Symbol">(</a><a id="8852" href="continuity-false.html#8852" class="Bound">n</a> <a id="8854" class="Symbol">:</a> <a id="8856" href="continuity-false.html#6047" class="Datatype">ℕ</a><a id="8857" class="Symbol">)</a> <a id="8859" class="Symbol">→</a> <a id="8861" href="continuity-false.html#6209" class="Datatype">Vec</a> <a id="8865" href="continuity-false.html#6047" class="Datatype">ℕ</a> <a id="8867" href="continuity-false.html#8852" class="Bound">n</a>
+  <a id="8871" href="continuity-false.html#8843" class="Function">zeros</a>  <a id="8878" class="Number">0</a>       <a id="8886" class="Symbol">=</a> <a id="8888" href="continuity-false.html#6240" class="InductiveConstructor">[]</a>
+  <a id="8893" href="continuity-false.html#8843" class="Function">zeros</a> <a id="8899" class="Symbol">(</a><a id="8900" href="continuity-false.html#6072" class="InductiveConstructor">succ</a> <a id="8905" href="continuity-false.html#8905" class="Bound">n</a><a id="8906" class="Symbol">)</a> <a id="8908" class="Symbol">=</a> <a id="8910" class="Number">0</a> <a id="8912" href="continuity-false.html#6255" class="InductiveConstructor Operator">∷</a> <a id="8914" href="continuity-false.html#8843" class="Function">zeros</a> <a id="8920" href="continuity-false.html#8905" class="Bound">n</a>
+
+  <a id="8925" href="continuity-false.html#8925" class="Function">zeros₀</a> <a id="8932" class="Symbol">:</a> <a id="8934" class="Symbol">(</a><a id="8935" href="continuity-false.html#8935" class="Bound">n</a> <a id="8937" class="Symbol">:</a> <a id="8939" href="continuity-false.html#6047" class="Datatype">ℕ</a><a id="8940" class="Symbol">)</a> <a id="8942" class="Symbol">→</a> <a id="8944" href="continuity-false.html#8528" class="Function">o</a> <a id="8946" href="continuity-false.html#6301" class="Function Operator">[</a> <a id="8948" href="continuity-false.html#8935" class="Bound">n</a> <a id="8950" href="continuity-false.html#6301" class="Function Operator">]</a> <a id="8952" href="continuity-false.html#6145" class="Datatype Operator">≡</a> <a id="8954" href="continuity-false.html#8843" class="Function">zeros</a> <a id="8960" href="continuity-false.html#8935" class="Bound">n</a>
+  <a id="8964" href="continuity-false.html#8925" class="Function">zeros₀</a>  <a id="8972" class="Number">0</a>       <a id="8980" class="Symbol">=</a> <a id="8982" href="continuity-false.html#6180" class="InductiveConstructor">refl</a>
+  <a id="8989" href="continuity-false.html#8925" class="Function">zeros₀</a> <a id="8996" class="Symbol">(</a><a id="8997" href="continuity-false.html#6072" class="InductiveConstructor">succ</a> <a id="9002" href="continuity-false.html#9002" class="Bound">n</a><a id="9003" class="Symbol">)</a> <a id="9005" class="Symbol">=</a> <a id="9007" href="continuity-false.html#7725" class="Function">ap</a> <a id="9010" class="Symbol">(</a><a id="9011" href="continuity-false.html#6209" class="Datatype">Vec</a> <a id="9015" href="continuity-false.html#6047" class="Datatype">ℕ</a> <a id="9017" href="continuity-false.html#9002" class="Bound">n</a><a id="9018" class="Symbol">)</a> <a id="9020" class="Symbol">(</a><a id="9021" href="continuity-false.html#6209" class="Datatype">Vec</a> <a id="9025" href="continuity-false.html#6047" class="Datatype">ℕ</a> <a id="9027" class="Symbol">(</a><a id="9028" href="continuity-false.html#6072" class="InductiveConstructor">succ</a> <a id="9033" href="continuity-false.html#9002" class="Bound">n</a><a id="9034" class="Symbol">))</a> <a id="9037" class="Symbol">(λ</a> <a id="9040" href="continuity-false.html#9040" class="Bound">ns</a> <a id="9043" class="Symbol">→</a> <a id="9045" class="Number">0</a> <a id="9047" href="continuity-false.html#6255" class="InductiveConstructor Operator">∷</a> <a id="9049" href="continuity-false.html#9040" class="Bound">ns</a><a id="9051" class="Symbol">)</a> <a id="9053" class="Symbol">(</a><a id="9054" href="continuity-false.html#8925" class="Function">zeros₀</a> <a id="9061" href="continuity-false.html#9002" class="Bound">n</a><a id="9062" class="Symbol">)</a>
+
+  <a id="9067" href="continuity-false.html#9067" class="Function">zeros₁</a> <a id="9074" class="Symbol">:</a> <a id="9076" class="Symbol">(</a><a id="9077" href="continuity-false.html#9077" class="Bound">n</a> <a id="9079" href="continuity-false.html#9079" class="Bound">k</a> <a id="9081" class="Symbol">:</a> <a id="9083" href="continuity-false.html#6047" class="Datatype">ℕ</a><a id="9084" class="Symbol">)</a> <a id="9086" class="Symbol">→</a> <a id="9088" href="continuity-false.html#8843" class="Function">zeros</a> <a id="9094" href="continuity-false.html#9077" class="Bound">n</a> <a id="9096" href="continuity-false.html#6145" class="Datatype Operator">≡</a> <a id="9098" class="Symbol">(</a><a id="9099" href="continuity-false.html#9077" class="Bound">n</a> <a id="9101" href="continuity-false.html#8350" class="Function Operator">zeros-and-then</a> <a id="9116" href="continuity-false.html#9079" class="Bound">k</a><a id="9117" class="Symbol">)</a> <a id="9119" href="continuity-false.html#6301" class="Function Operator">[</a> <a id="9121" href="continuity-false.html#9077" class="Bound">n</a> <a id="9123" href="continuity-false.html#6301" class="Function Operator">]</a>
+  <a id="9127" href="continuity-false.html#9067" class="Function">zeros₁</a>  <a id="9135" class="Number">0</a>       <a id="9143" href="continuity-false.html#9143" class="Bound">k</a> <a id="9145" class="Symbol">=</a> <a id="9147" href="continuity-false.html#6180" class="InductiveConstructor">refl</a>
+  <a id="9154" href="continuity-false.html#9067" class="Function">zeros₁</a> <a id="9161" class="Symbol">(</a><a id="9162" href="continuity-false.html#6072" class="InductiveConstructor">succ</a> <a id="9167" href="continuity-false.html#9167" class="Bound">n</a><a id="9168" class="Symbol">)</a> <a id="9170" href="continuity-false.html#9170" class="Bound">k</a> <a id="9172" class="Symbol">=</a> <a id="9174" href="continuity-false.html#7725" class="Function">ap</a> <a id="9177" class="Symbol">(</a><a id="9178" href="continuity-false.html#6209" class="Datatype">Vec</a> <a id="9182" href="continuity-false.html#6047" class="Datatype">ℕ</a> <a id="9184" href="continuity-false.html#9167" class="Bound">n</a><a id="9185" class="Symbol">)</a> <a id="9187" class="Symbol">(</a><a id="9188" href="continuity-false.html#6209" class="Datatype">Vec</a> <a id="9192" href="continuity-false.html#6047" class="Datatype">ℕ</a> <a id="9194" class="Symbol">(</a><a id="9195" href="continuity-false.html#6072" class="InductiveConstructor">succ</a> <a id="9200" href="continuity-false.html#9167" class="Bound">n</a><a id="9201" class="Symbol">))</a> <a id="9204" class="Symbol">(λ</a> <a id="9207" href="continuity-false.html#9207" class="Bound">ns</a> <a id="9210" class="Symbol">→</a> <a id="9212" class="Number">0</a> <a id="9214" href="continuity-false.html#6255" class="InductiveConstructor Operator">∷</a> <a id="9216" href="continuity-false.html#9207" class="Bound">ns</a><a id="9218" class="Symbol">)</a> <a id="9220" class="Symbol">(</a><a id="9221" href="continuity-false.html#9067" class="Function">zeros₁</a> <a id="9228" href="continuity-false.html#9167" class="Bound">n</a> <a id="9230" href="continuity-false.html#9170" class="Bound">k</a><a id="9231" class="Symbol">)</a>
+
+<a id="9234" class="Markup">\end{code}</a><a id="9244" class="Background">
+
+
+3.4 Proof of the theorem
+------------------------
+
+Finally, here is the proof of the claim. It uses the modulus of
+continuity functional M such that M f is a modulus of continuity at
+the constant zero sequence o (defined above), which exists because we
+are using the existential quantifier Σ rather than ∃ in our
+(unsatisfactory) definition of continuity, in order to define a
+non-continuous function f and hence get a contradiction.
+
+Recall that our goal is to prove
+
+  theorem : ((f : Baire → ℕ) → continuous f) → 0 ≡ 1
+
+formulated above in Agda.
+
+</a><a id="9797" class="Markup">\begin{code}</a>
+
+<a id="9811" href="continuity-false.html#7201" class="Function">theorem</a> <a id="9819" href="continuity-false.html#9819" class="Bound">continuity</a> <a id="9830" class="Symbol">=</a> <a id="9832" href="continuity-false.html#12033" class="Function">contradiction</a>
+ <a id="9847" class="Keyword">where</a>
+  <a id="9855" href="continuity-false.html#9855" class="Function">M</a> <a id="9857" class="Symbol">:</a> <a id="9859" class="Symbol">(</a><a id="9860" href="continuity-false.html#6113" class="Function">Baire</a> <a id="9866" class="Symbol">→</a> <a id="9868" href="continuity-false.html#6047" class="Datatype">ℕ</a><a id="9869" class="Symbol">)</a> <a id="9871" class="Symbol">→</a> <a id="9873" href="continuity-false.html#6047" class="Datatype">ℕ</a>
+  <a id="9877" href="continuity-false.html#9855" class="Function">M</a> <a id="9879" href="continuity-false.html#9879" class="Bound">f</a> <a id="9881" class="Symbol">=</a> <a id="9883" href="continuity-false.html#7440" class="Function">π₀</a><a id="9885" class="Symbol">(</a><a id="9886" href="continuity-false.html#9819" class="Bound">continuity</a> <a id="9897" href="continuity-false.html#9879" class="Bound">f</a> <a id="9899" href="continuity-false.html#8528" class="Function">o</a><a id="9900" class="Symbol">)</a>
+
+  <a id="9905" href="continuity-false.html#9905" class="Function">continuity₀</a> <a id="9917" class="Symbol">:</a> <a id="9919" class="Symbol">(</a><a id="9920" href="continuity-false.html#9920" class="Bound">f</a> <a id="9922" class="Symbol">:</a> <a id="9924" href="continuity-false.html#6113" class="Function">Baire</a> <a id="9930" class="Symbol">→</a> <a id="9932" href="continuity-false.html#6047" class="Datatype">ℕ</a><a id="9933" class="Symbol">)</a> <a id="9935" class="Symbol">(</a><a id="9936" href="continuity-false.html#9936" class="Bound">β</a> <a id="9938" class="Symbol">:</a> <a id="9940" href="continuity-false.html#6113" class="Function">Baire</a><a id="9945" class="Symbol">)</a> <a id="9947" class="Symbol">→</a> <a id="9949" href="continuity-false.html#8528" class="Function">o</a> <a id="9951" href="continuity-false.html#6412" class="Function Operator">≡[</a> <a id="9954" href="continuity-false.html#9855" class="Function">M</a> <a id="9956" href="continuity-false.html#9920" class="Bound">f</a> <a id="9958" href="continuity-false.html#6412" class="Function Operator">]</a> <a id="9960" href="continuity-false.html#9936" class="Bound">β</a> <a id="9962" class="Symbol">→</a> <a id="9964" href="continuity-false.html#9920" class="Bound">f</a> <a id="9966" href="continuity-false.html#8528" class="Function">o</a> <a id="9968" href="continuity-false.html#6145" class="Datatype Operator">≡</a> <a id="9970" href="continuity-false.html#9920" class="Bound">f</a> <a id="9972" href="continuity-false.html#9936" class="Bound">β</a>
+  <a id="9976" href="continuity-false.html#9905" class="Function">continuity₀</a> <a id="9988" href="continuity-false.html#9988" class="Bound">f</a> <a id="9990" class="Symbol">=</a> <a id="9992" href="continuity-false.html#7509" class="Function">π₁</a><a id="9994" class="Symbol">(</a><a id="9995" href="continuity-false.html#9819" class="Bound">continuity</a> <a id="10006" href="continuity-false.html#9988" class="Bound">f</a> <a id="10008" href="continuity-false.html#8528" class="Function">o</a><a id="10009" class="Symbol">)</a>
+
+  <a id="10014" href="continuity-false.html#10014" class="Function">m</a> <a id="10016" class="Symbol">:</a> <a id="10018" href="continuity-false.html#6047" class="Datatype">ℕ</a>
+  <a id="10022" href="continuity-false.html#10014" class="Function">m</a> <a id="10024" class="Symbol">=</a> <a id="10026" href="continuity-false.html#9855" class="Function">M</a><a id="10027" class="Symbol">(λ</a> <a id="10030" href="continuity-false.html#10030" class="Bound">α</a> <a id="10032" class="Symbol">→</a> <a id="10034" class="Number">0</a><a id="10035" class="Symbol">)</a>
+
+  <a id="10040" href="continuity-false.html#10040" class="Function">f</a> <a id="10042" class="Symbol">:</a> <a id="10044" href="continuity-false.html#6113" class="Function">Baire</a> <a id="10050" class="Symbol">→</a> <a id="10052" href="continuity-false.html#6047" class="Datatype">ℕ</a>
+  <a id="10056" href="continuity-false.html#10040" class="Function">f</a> <a id="10058" href="continuity-false.html#10058" class="Bound">β</a> <a id="10060" class="Symbol">=</a> <a id="10062" href="continuity-false.html#9855" class="Function">M</a><a id="10063" class="Symbol">(λ</a> <a id="10066" href="continuity-false.html#10066" class="Bound">α</a> <a id="10068" class="Symbol">→</a> <a id="10070" href="continuity-false.html#10058" class="Bound">β</a><a id="10071" class="Symbol">(</a><a id="10072" href="continuity-false.html#10066" class="Bound">α</a> <a id="10074" href="continuity-false.html#10014" class="Function">m</a><a id="10075" class="Symbol">))</a>
+
+  <a id="10081" href="continuity-false.html#10081" class="Function">observation</a> <a id="10093" class="Symbol">:</a> <a id="10095" href="continuity-false.html#10040" class="Function">f</a> <a id="10097" href="continuity-false.html#8528" class="Function">o</a> <a id="10099" href="continuity-false.html#6145" class="Datatype Operator">≡</a> <a id="10101" href="continuity-false.html#10014" class="Function">m</a>
+  <a id="10105" href="continuity-false.html#10081" class="Function">observation</a> <a id="10117" class="Symbol">=</a> <a id="10119" href="continuity-false.html#6180" class="InductiveConstructor">refl</a>
+
+  <a id="10127" href="continuity-false.html#10127" class="Function">fact₀</a> <a id="10133" class="Symbol">:</a> <a id="10135" class="Symbol">(</a><a id="10136" href="continuity-false.html#10136" class="Bound">β</a> <a id="10138" class="Symbol">:</a> <a id="10140" href="continuity-false.html#6113" class="Function">Baire</a><a id="10145" class="Symbol">)</a> <a id="10147" class="Symbol">→</a> <a id="10149" href="continuity-false.html#8528" class="Function">o</a> <a id="10151" href="continuity-false.html#6412" class="Function Operator">≡[</a> <a id="10154" href="continuity-false.html#9855" class="Function">M</a> <a id="10156" href="continuity-false.html#10040" class="Function">f</a> <a id="10158" href="continuity-false.html#6412" class="Function Operator">]</a> <a id="10160" href="continuity-false.html#10136" class="Bound">β</a> <a id="10162" class="Symbol">→</a> <a id="10164" href="continuity-false.html#10014" class="Function">m</a> <a id="10166" href="continuity-false.html#6145" class="Datatype Operator">≡</a> <a id="10168" href="continuity-false.html#10040" class="Function">f</a> <a id="10170" href="continuity-false.html#10136" class="Bound">β</a>
+  <a id="10174" href="continuity-false.html#10127" class="Function">fact₀</a> <a id="10180" class="Symbol">=</a> <a id="10182" href="continuity-false.html#9905" class="Function">continuity₀</a> <a id="10194" href="continuity-false.html#10040" class="Function">f</a>
+
+  <a id="10199" href="continuity-false.html#10199" class="Function">lemma₀</a> <a id="10206" class="Symbol">:</a> <a id="10208" href="continuity-false.html#9855" class="Function">M</a> <a id="10210" href="continuity-false.html#10040" class="Function">f</a> <a id="10212" href="continuity-false.html#6145" class="Datatype Operator">≡</a> <a id="10214" class="Number">0</a> <a id="10216" class="Symbol">→</a> <a id="10218" class="Number">0</a> <a id="10220" href="continuity-false.html#6145" class="Datatype Operator">≡</a> <a id="10222" class="Number">1</a>
+  <a id="10226" href="continuity-false.html#10199" class="Function">lemma₀</a> <a id="10233" href="continuity-false.html#10233" class="Bound">r</a> <a id="10235" class="Symbol">=</a> <a id="10237" href="continuity-false.html#7647" class="Function">trans</a> <a id="10243" class="Symbol">(</a><a id="10244" href="continuity-false.html#10626" class="Function">claim₄</a> <a id="10251" href="continuity-false.html#10762" class="Function">α</a> <a id="10253" class="Symbol">(</a><a id="10254" href="continuity-false.html#8712" class="Function">zeros-and-then-spec₁</a> <a id="10275" href="continuity-false.html#10014" class="Function">m</a> <a id="10277" class="Number">1</a><a id="10278" class="Symbol">))</a> <a id="10281" href="continuity-false.html#10803" class="Function">α-fact₀</a>
+   <a id="10292" class="Keyword">where</a>
+    <a id="10302" href="continuity-false.html#10302" class="Function">claim₀</a> <a id="10309" class="Symbol">:</a> <a id="10311" class="Symbol">(</a><a id="10312" href="continuity-false.html#10312" class="Bound">β</a> <a id="10314" class="Symbol">:</a> <a id="10316" href="continuity-false.html#6113" class="Function">Baire</a><a id="10321" class="Symbol">)</a> <a id="10323" class="Symbol">→</a> <a id="10325" href="continuity-false.html#10014" class="Function">m</a> <a id="10327" href="continuity-false.html#6145" class="Datatype Operator">≡</a> <a id="10329" href="continuity-false.html#10040" class="Function">f</a> <a id="10331" href="continuity-false.html#10312" class="Bound">β</a>
+    <a id="10337" href="continuity-false.html#10302" class="Function">claim₀</a> <a id="10344" href="continuity-false.html#10344" class="Bound">β</a> <a id="10346" class="Symbol">=</a> <a id="10348" href="continuity-false.html#10127" class="Function">fact₀</a> <a id="10354" href="continuity-false.html#10344" class="Bound">β</a> <a id="10356" href="continuity-false.html#10382" class="Function">claim₁</a>
+      <a id="10369" class="Keyword">where</a>
+       <a id="10382" href="continuity-false.html#10382" class="Function">claim₁</a> <a id="10389" class="Symbol">:</a> <a id="10391" href="continuity-false.html#8528" class="Function">o</a> <a id="10393" href="continuity-false.html#6412" class="Function Operator">≡[</a> <a id="10396" href="continuity-false.html#9855" class="Function">M</a> <a id="10398" href="continuity-false.html#10040" class="Function">f</a> <a id="10400" href="continuity-false.html#6412" class="Function Operator">]</a> <a id="10402" href="continuity-false.html#10344" class="Bound">β</a>
+       <a id="10411" href="continuity-false.html#10382" class="Function">claim₁</a> <a id="10418" class="Symbol">=</a> <a id="10420" href="continuity-false.html#7812" class="Function">transport</a> <a id="10430" href="continuity-false.html#6047" class="Datatype">ℕ</a> <a id="10432" class="Symbol">(λ</a> <a id="10435" href="continuity-false.html#10435" class="Bound">n</a> <a id="10437" class="Symbol">→</a> <a id="10439" href="continuity-false.html#8528" class="Function">o</a> <a id="10441" href="continuity-false.html#6412" class="Function Operator">≡[</a> <a id="10444" href="continuity-false.html#10435" class="Bound">n</a> <a id="10446" href="continuity-false.html#6412" class="Function Operator">]</a> <a id="10448" href="continuity-false.html#10344" class="Bound">β</a><a id="10449" class="Symbol">)</a> <a id="10451" class="Symbol">(</a><a id="10452" href="continuity-false.html#7586" class="Function">sym</a> <a id="10456" href="continuity-false.html#10233" class="Bound">r</a><a id="10457" class="Symbol">)</a> <a id="10459" href="continuity-false.html#6180" class="InductiveConstructor">refl</a>
+    <a id="10468" href="continuity-false.html#10468" class="Function">claim₂</a> <a id="10475" class="Symbol">:</a> <a id="10477" href="continuity-false.html#10014" class="Function">m</a> <a id="10479" href="continuity-false.html#6145" class="Datatype Operator">≡</a> <a id="10481" href="continuity-false.html#9855" class="Function">M</a><a id="10482" class="Symbol">(λ</a> <a id="10485" href="continuity-false.html#10485" class="Bound">α</a> <a id="10487" class="Symbol">→</a> <a id="10489" href="continuity-false.html#10485" class="Bound">α</a> <a id="10491" href="continuity-false.html#10014" class="Function">m</a><a id="10492" class="Symbol">)</a>
+    <a id="10498" href="continuity-false.html#10468" class="Function">claim₂</a> <a id="10505" class="Symbol">=</a> <a id="10507" href="continuity-false.html#10302" class="Function">claim₀</a> <a id="10514" class="Symbol">((λ</a> <a id="10518" href="continuity-false.html#10518" class="Bound">i</a> <a id="10520" class="Symbol">→</a> <a id="10522" href="continuity-false.html#10518" class="Bound">i</a><a id="10523" class="Symbol">))</a>
+    <a id="10530" href="continuity-false.html#10530" class="Function">claim₃</a> <a id="10537" class="Symbol">:</a> <a id="10539" class="Symbol">(</a><a id="10540" href="continuity-false.html#10540" class="Bound">α</a> <a id="10542" class="Symbol">:</a> <a id="10544" href="continuity-false.html#6113" class="Function">Baire</a><a id="10549" class="Symbol">)</a> <a id="10551" class="Symbol">→</a> <a id="10553" href="continuity-false.html#8528" class="Function">o</a> <a id="10555" href="continuity-false.html#6412" class="Function Operator">≡[</a> <a id="10558" href="continuity-false.html#9855" class="Function">M</a><a id="10559" class="Symbol">(λ</a> <a id="10562" href="continuity-false.html#10562" class="Bound">α</a> <a id="10564" class="Symbol">→</a> <a id="10566" href="continuity-false.html#10562" class="Bound">α</a> <a id="10568" href="continuity-false.html#10014" class="Function">m</a><a id="10569" class="Symbol">)</a> <a id="10571" href="continuity-false.html#6412" class="Function Operator">]</a> <a id="10573" href="continuity-false.html#10540" class="Bound">α</a> <a id="10575" class="Symbol">→</a> <a id="10577" class="Number">0</a> <a id="10579" href="continuity-false.html#6145" class="Datatype Operator">≡</a> <a id="10581" href="continuity-false.html#10540" class="Bound">α</a> <a id="10583" href="continuity-false.html#10014" class="Function">m</a>
+    <a id="10589" href="continuity-false.html#10530" class="Function">claim₃</a> <a id="10596" class="Symbol">=</a> <a id="10598" href="continuity-false.html#9905" class="Function">continuity₀</a> <a id="10610" class="Symbol">(λ</a> <a id="10613" href="continuity-false.html#10613" class="Bound">α</a> <a id="10615" class="Symbol">→</a> <a id="10617" href="continuity-false.html#10613" class="Bound">α</a> <a id="10619" href="continuity-false.html#10014" class="Function">m</a><a id="10620" class="Symbol">)</a>
+    <a id="10626" href="continuity-false.html#10626" class="Function">claim₄</a> <a id="10633" class="Symbol">:</a> <a id="10635" class="Symbol">(</a><a id="10636" href="continuity-false.html#10636" class="Bound">α</a> <a id="10638" class="Symbol">:</a> <a id="10640" href="continuity-false.html#6113" class="Function">Baire</a><a id="10645" class="Symbol">)</a> <a id="10647" class="Symbol">→</a> <a id="10649" href="continuity-false.html#8528" class="Function">o</a> <a id="10651" href="continuity-false.html#6412" class="Function Operator">≡[</a> <a id="10654" href="continuity-false.html#10014" class="Function">m</a> <a id="10656" href="continuity-false.html#6412" class="Function Operator">]</a> <a id="10658" href="continuity-false.html#10636" class="Bound">α</a> <a id="10660" class="Symbol">→</a> <a id="10662" class="Number">0</a> <a id="10664" href="continuity-false.html#6145" class="Datatype Operator">≡</a> <a id="10666" href="continuity-false.html#10636" class="Bound">α</a> <a id="10668" href="continuity-false.html#10014" class="Function">m</a>
+    <a id="10674" href="continuity-false.html#10626" class="Function">claim₄</a> <a id="10681" class="Symbol">=</a> <a id="10683" href="continuity-false.html#7812" class="Function">transport</a> <a id="10693" href="continuity-false.html#6047" class="Datatype">ℕ</a> <a id="10695" class="Symbol">(λ</a> <a id="10698" href="continuity-false.html#10698" class="Bound">n</a> <a id="10700" class="Symbol">→</a> <a id="10702" class="Symbol">(</a><a id="10703" href="continuity-false.html#10703" class="Bound">α</a> <a id="10705" class="Symbol">:</a> <a id="10707" href="continuity-false.html#6113" class="Function">Baire</a><a id="10712" class="Symbol">)</a> <a id="10714" class="Symbol">→</a> <a id="10716" href="continuity-false.html#8528" class="Function">o</a> <a id="10718" href="continuity-false.html#6412" class="Function Operator">≡[</a> <a id="10721" href="continuity-false.html#10698" class="Bound">n</a> <a id="10723" href="continuity-false.html#6412" class="Function Operator">]</a> <a id="10725" href="continuity-false.html#10703" class="Bound">α</a> <a id="10727" class="Symbol">→</a> <a id="10729" class="Number">0</a> <a id="10731" href="continuity-false.html#6145" class="Datatype Operator">≡</a> <a id="10733" href="continuity-false.html#10703" class="Bound">α</a> <a id="10735" href="continuity-false.html#10014" class="Function">m</a><a id="10736" class="Symbol">)</a> <a id="10738" class="Symbol">(</a><a id="10739" href="continuity-false.html#7586" class="Function">sym</a> <a id="10743" href="continuity-false.html#10468" class="Function">claim₂</a><a id="10749" class="Symbol">)</a> <a id="10751" href="continuity-false.html#10530" class="Function">claim₃</a>
+    <a id="10762" href="continuity-false.html#10762" class="Function">α</a> <a id="10764" class="Symbol">:</a> <a id="10766" href="continuity-false.html#6113" class="Function">Baire</a>
+    <a id="10776" href="continuity-false.html#10762" class="Function">α</a> <a id="10778" class="Symbol">=</a> <a id="10780" href="continuity-false.html#10014" class="Function">m</a> <a id="10782" href="continuity-false.html#8350" class="Function Operator">zeros-and-then</a> <a id="10797" class="Number">1</a>
+    <a id="10803" href="continuity-false.html#10803" class="Function">α-fact₀</a> <a id="10811" class="Symbol">:</a> <a id="10813" href="continuity-false.html#10762" class="Function">α</a> <a id="10815" href="continuity-false.html#10014" class="Function">m</a> <a id="10817" href="continuity-false.html#6145" class="Datatype Operator">≡</a> <a id="10819" class="Number">1</a>
+    <a id="10825" href="continuity-false.html#10803" class="Function">α-fact₀</a> <a id="10833" class="Symbol">=</a> <a id="10835" href="continuity-false.html#8551" class="Function">zeros-and-then-spec₀</a> <a id="10856" href="continuity-false.html#10014" class="Function">m</a> <a id="10858" class="Number">1</a>
+
+  <a id="10863" href="continuity-false.html#10863" class="Function">lemma₁</a> <a id="10870" class="Symbol">:</a> <a id="10872" class="Symbol">(</a><a id="10873" href="continuity-false.html#5969" class="Datatype">Σ</a> <a id="10875" class="Symbol">\(</a><a id="10877" href="continuity-false.html#10877" class="Bound">n</a> <a id="10879" class="Symbol">:</a> <a id="10881" href="continuity-false.html#6047" class="Datatype">ℕ</a><a id="10882" class="Symbol">)</a> <a id="10884" class="Symbol">→</a> <a id="10886" href="continuity-false.html#9855" class="Function">M</a> <a id="10888" href="continuity-false.html#10040" class="Function">f</a> <a id="10890" href="continuity-false.html#6145" class="Datatype Operator">≡</a> <a id="10892" href="continuity-false.html#6072" class="InductiveConstructor">succ</a> <a id="10897" href="continuity-false.html#10877" class="Bound">n</a><a id="10898" class="Symbol">)</a> <a id="10900" class="Symbol">→</a> <a id="10902" class="Number">0</a> <a id="10904" href="continuity-false.html#6145" class="Datatype Operator">≡</a> <a id="10906" class="Number">1</a>
+  <a id="10910" href="continuity-false.html#10863" class="Function">lemma₁</a> <a id="10917" class="Symbol">(</a><a id="10918" href="continuity-false.html#10918" class="Bound">n</a> <a id="10920" href="continuity-false.html#6008" class="InductiveConstructor Operator">,</a> <a id="10922" href="continuity-false.html#10922" class="Bound">r</a><a id="10923" class="Symbol">)</a> <a id="10925" class="Symbol">=</a> <a id="10927" href="continuity-false.html#7647" class="Function">trans</a> <a id="10933" class="Symbol">(</a><a id="10934" href="continuity-false.html#11846" class="Function">claim</a> <a id="10940" class="Symbol">(</a><a id="10941" href="continuity-false.html#7812" class="Function">transport</a> <a id="10951" href="continuity-false.html#6047" class="Datatype">ℕ</a> <a id="10953" class="Symbol">(λ</a> <a id="10956" href="continuity-false.html#10956" class="Bound">n</a> <a id="10958" class="Symbol">→</a> <a id="10960" href="continuity-false.html#8528" class="Function">o</a> <a id="10962" href="continuity-false.html#6412" class="Function Operator">≡[</a> <a id="10965" href="continuity-false.html#10956" class="Bound">n</a> <a id="10967" href="continuity-false.html#6412" class="Function Operator">]</a> <a id="10969" href="continuity-false.html#11003" class="Function">β</a><a id="10970" class="Symbol">)</a> <a id="10972" href="continuity-false.html#10922" class="Bound">r</a> <a id="10974" href="continuity-false.html#11116" class="Function">β-fact₁</a><a id="10981" class="Symbol">))</a> <a id="10984" href="continuity-false.html#11708" class="Function">fact₄</a>
+   <a id="10993" class="Keyword">where</a>
+    <a id="11003" href="continuity-false.html#11003" class="Function">β</a> <a id="11005" class="Symbol">:</a> <a id="11007" href="continuity-false.html#6113" class="Function">Baire</a>
+    <a id="11017" href="continuity-false.html#11003" class="Function">β</a> <a id="11019" class="Symbol">=</a> <a id="11021" class="Symbol">(</a><a id="11022" href="continuity-false.html#9855" class="Function">M</a> <a id="11024" href="continuity-false.html#10040" class="Function">f</a><a id="11025" class="Symbol">)</a> <a id="11027" href="continuity-false.html#8350" class="Function Operator">zeros-and-then</a> <a id="11042" class="Number">1</a>
+    <a id="11048" href="continuity-false.html#11048" class="Function">β-fact₀</a> <a id="11056" class="Symbol">:</a> <a id="11058" href="continuity-false.html#11003" class="Function">β</a><a id="11059" class="Symbol">(</a><a id="11060" href="continuity-false.html#9855" class="Function">M</a> <a id="11062" href="continuity-false.html#10040" class="Function">f</a><a id="11063" class="Symbol">)</a> <a id="11065" href="continuity-false.html#6145" class="Datatype Operator">≡</a> <a id="11067" class="Number">1</a>
+    <a id="11073" href="continuity-false.html#11048" class="Function">β-fact₀</a> <a id="11081" class="Symbol">=</a> <a id="11083" href="continuity-false.html#8551" class="Function">zeros-and-then-spec₀</a> <a id="11104" class="Symbol">(</a><a id="11105" href="continuity-false.html#9855" class="Function">M</a> <a id="11107" href="continuity-false.html#10040" class="Function">f</a><a id="11108" class="Symbol">)</a> <a id="11110" class="Number">1</a>
+    <a id="11116" href="continuity-false.html#11116" class="Function">β-fact₁</a> <a id="11124" class="Symbol">:</a> <a id="11126" href="continuity-false.html#8528" class="Function">o</a> <a id="11128" href="continuity-false.html#6412" class="Function Operator">≡[</a> <a id="11131" href="continuity-false.html#9855" class="Function">M</a> <a id="11133" href="continuity-false.html#10040" class="Function">f</a> <a id="11135" href="continuity-false.html#6412" class="Function Operator">]</a> <a id="11137" href="continuity-false.html#11003" class="Function">β</a>
+    <a id="11143" href="continuity-false.html#11116" class="Function">β-fact₁</a> <a id="11151" class="Symbol">=</a> <a id="11153" href="continuity-false.html#8712" class="Function">zeros-and-then-spec₁</a> <a id="11174" class="Symbol">(</a><a id="11175" href="continuity-false.html#9855" class="Function">M</a> <a id="11177" href="continuity-false.html#10040" class="Function">f</a><a id="11178" class="Symbol">)</a> <a id="11180" class="Number">1</a>
+    <a id="11186" href="continuity-false.html#11186" class="Function">fact₀&#39;</a> <a id="11193" class="Symbol">:</a> <a id="11195" href="continuity-false.html#10040" class="Function">f</a> <a id="11197" href="continuity-false.html#11003" class="Function">β</a> <a id="11199" href="continuity-false.html#6145" class="Datatype Operator">≡</a> <a id="11201" href="continuity-false.html#10014" class="Function">m</a>
+    <a id="11207" href="continuity-false.html#11186" class="Function">fact₀&#39;</a> <a id="11214" class="Symbol">=</a> <a id="11216" href="continuity-false.html#7586" class="Function">sym</a><a id="11219" class="Symbol">(</a><a id="11220" href="continuity-false.html#10127" class="Function">fact₀</a> <a id="11226" href="continuity-false.html#11003" class="Function">β</a> <a id="11228" href="continuity-false.html#11116" class="Function">β-fact₁</a><a id="11235" class="Symbol">)</a>
+    <a id="11241" href="continuity-false.html#11241" class="Function">fact₁</a> <a id="11247" class="Symbol">:</a> <a id="11249" class="Symbol">(</a><a id="11250" href="continuity-false.html#11250" class="Bound">α</a> <a id="11252" class="Symbol">:</a> <a id="11254" href="continuity-false.html#6113" class="Function">Baire</a><a id="11259" class="Symbol">)</a> <a id="11261" class="Symbol">→</a> <a id="11263" href="continuity-false.html#8528" class="Function">o</a> <a id="11265" href="continuity-false.html#6412" class="Function Operator">≡[</a> <a id="11268" href="continuity-false.html#10040" class="Function">f</a> <a id="11270" href="continuity-false.html#11003" class="Function">β</a> <a id="11272" href="continuity-false.html#6412" class="Function Operator">]</a> <a id="11274" href="continuity-false.html#11250" class="Bound">α</a> <a id="11276" class="Symbol">→</a> <a id="11278" href="continuity-false.html#11003" class="Function">β</a> <a id="11280" class="Number">0</a> <a id="11282" href="continuity-false.html#6145" class="Datatype Operator">≡</a> <a id="11284" href="continuity-false.html#11003" class="Function">β</a><a id="11285" class="Symbol">(</a><a id="11286" href="continuity-false.html#11250" class="Bound">α</a> <a id="11288" href="continuity-false.html#10014" class="Function">m</a><a id="11289" class="Symbol">)</a>
+    <a id="11295" href="continuity-false.html#11241" class="Function">fact₁</a> <a id="11301" href="continuity-false.html#11301" class="Bound">α</a> <a id="11303" class="Symbol">=</a> <a id="11305" href="continuity-false.html#9905" class="Function">continuity₀</a> <a id="11317" class="Symbol">(λ</a> <a id="11320" href="continuity-false.html#11320" class="Bound">α</a> <a id="11322" class="Symbol">→</a> <a id="11324" href="continuity-false.html#11003" class="Function">β</a><a id="11325" class="Symbol">(</a><a id="11326" href="continuity-false.html#11320" class="Bound">α</a> <a id="11328" href="continuity-false.html#10014" class="Function">m</a><a id="11329" class="Symbol">))</a> <a id="11332" href="continuity-false.html#11301" class="Bound">α</a>
+    <a id="11338" href="continuity-false.html#11338" class="Function">fact₂</a> <a id="11344" class="Symbol">:</a> <a id="11346" class="Symbol">(</a><a id="11347" href="continuity-false.html#11347" class="Bound">α</a> <a id="11349" class="Symbol">:</a> <a id="11351" href="continuity-false.html#6113" class="Function">Baire</a><a id="11356" class="Symbol">)</a> <a id="11358" class="Symbol">→</a> <a id="11360" href="continuity-false.html#8528" class="Function">o</a> <a id="11362" href="continuity-false.html#6412" class="Function Operator">≡[</a> <a id="11365" href="continuity-false.html#10014" class="Function">m</a> <a id="11367" href="continuity-false.html#6412" class="Function Operator">]</a> <a id="11369" href="continuity-false.html#11347" class="Bound">α</a> <a id="11371" class="Symbol">→</a> <a id="11373" href="continuity-false.html#11003" class="Function">β</a> <a id="11375" class="Number">0</a> <a id="11377" href="continuity-false.html#6145" class="Datatype Operator">≡</a> <a id="11379" href="continuity-false.html#11003" class="Function">β</a><a id="11380" class="Symbol">(</a><a id="11381" href="continuity-false.html#11347" class="Bound">α</a> <a id="11383" href="continuity-false.html#10014" class="Function">m</a><a id="11384" class="Symbol">)</a>
+    <a id="11390" href="continuity-false.html#11338" class="Function">fact₂</a> <a id="11396" class="Symbol">=</a> <a id="11398" href="continuity-false.html#7812" class="Function">transport</a> <a id="11408" href="continuity-false.html#6047" class="Datatype">ℕ</a> <a id="11410" class="Symbol">(λ</a> <a id="11413" href="continuity-false.html#11413" class="Bound">n</a> <a id="11415" class="Symbol">→</a> <a id="11417" class="Symbol">(</a><a id="11418" href="continuity-false.html#11418" class="Bound">α</a> <a id="11420" class="Symbol">:</a> <a id="11422" href="continuity-false.html#6113" class="Function">Baire</a><a id="11427" class="Symbol">)</a> <a id="11429" class="Symbol">→</a> <a id="11431" href="continuity-false.html#8528" class="Function">o</a> <a id="11433" href="continuity-false.html#6412" class="Function Operator">≡[</a> <a id="11436" href="continuity-false.html#11413" class="Bound">n</a> <a id="11438" href="continuity-false.html#6412" class="Function Operator">]</a> <a id="11440" href="continuity-false.html#11418" class="Bound">α</a> <a id="11442" class="Symbol">→</a> <a id="11444" href="continuity-false.html#11003" class="Function">β</a> <a id="11446" class="Number">0</a> <a id="11448" href="continuity-false.html#6145" class="Datatype Operator">≡</a> <a id="11450" href="continuity-false.html#11003" class="Function">β</a><a id="11451" class="Symbol">(</a><a id="11452" href="continuity-false.html#11418" class="Bound">α</a> <a id="11454" href="continuity-false.html#10014" class="Function">m</a><a id="11455" class="Symbol">))</a> <a id="11458" href="continuity-false.html#11186" class="Function">fact₀&#39;</a> <a id="11465" href="continuity-false.html#11241" class="Function">fact₁</a>
+    <a id="11475" href="continuity-false.html#11475" class="Function">α</a> <a id="11477" class="Symbol">:</a> <a id="11479" href="continuity-false.html#6113" class="Function">Baire</a>
+    <a id="11489" href="continuity-false.html#11475" class="Function">α</a> <a id="11491" class="Symbol">=</a> <a id="11493" href="continuity-false.html#10014" class="Function">m</a> <a id="11495" href="continuity-false.html#8350" class="Function Operator">zeros-and-then</a> <a id="11510" class="Symbol">(</a><a id="11511" href="continuity-false.html#9855" class="Function">M</a> <a id="11513" href="continuity-false.html#10040" class="Function">f</a><a id="11514" class="Symbol">)</a>
+    <a id="11520" href="continuity-false.html#11520" class="Function">α-fact₀</a> <a id="11528" class="Symbol">:</a> <a id="11530" href="continuity-false.html#11475" class="Function">α</a> <a id="11532" href="continuity-false.html#10014" class="Function">m</a> <a id="11534" href="continuity-false.html#6145" class="Datatype Operator">≡</a> <a id="11536" href="continuity-false.html#9855" class="Function">M</a> <a id="11538" href="continuity-false.html#10040" class="Function">f</a>
+    <a id="11544" href="continuity-false.html#11520" class="Function">α-fact₀</a> <a id="11552" class="Symbol">=</a> <a id="11554" href="continuity-false.html#8551" class="Function">zeros-and-then-spec₀</a> <a id="11575" href="continuity-false.html#10014" class="Function">m</a> <a id="11577" class="Symbol">(</a><a id="11578" href="continuity-false.html#9855" class="Function">M</a> <a id="11580" href="continuity-false.html#10040" class="Function">f</a><a id="11581" class="Symbol">)</a>
+    <a id="11587" href="continuity-false.html#11587" class="Function">α-fact₁</a> <a id="11595" class="Symbol">:</a> <a id="11597" href="continuity-false.html#8528" class="Function">o</a> <a id="11599" href="continuity-false.html#6412" class="Function Operator">≡[</a> <a id="11602" href="continuity-false.html#10014" class="Function">m</a> <a id="11604" href="continuity-false.html#6412" class="Function Operator">]</a> <a id="11606" href="continuity-false.html#11475" class="Function">α</a>
+    <a id="11612" href="continuity-false.html#11587" class="Function">α-fact₁</a> <a id="11620" class="Symbol">=</a> <a id="11622" href="continuity-false.html#8712" class="Function">zeros-and-then-spec₁</a> <a id="11643" href="continuity-false.html#10014" class="Function">m</a> <a id="11645" class="Symbol">(</a><a id="11646" href="continuity-false.html#9855" class="Function">M</a> <a id="11648" href="continuity-false.html#10040" class="Function">f</a><a id="11649" class="Symbol">)</a>
+    <a id="11655" href="continuity-false.html#11655" class="Function">fact₃</a> <a id="11661" class="Symbol">:</a> <a id="11663" href="continuity-false.html#11003" class="Function">β</a> <a id="11665" class="Number">0</a> <a id="11667" href="continuity-false.html#6145" class="Datatype Operator">≡</a> <a id="11669" href="continuity-false.html#11003" class="Function">β</a><a id="11670" class="Symbol">(</a><a id="11671" href="continuity-false.html#11475" class="Function">α</a> <a id="11673" href="continuity-false.html#10014" class="Function">m</a><a id="11674" class="Symbol">)</a>
+    <a id="11680" href="continuity-false.html#11655" class="Function">fact₃</a> <a id="11686" class="Symbol">=</a> <a id="11688" href="continuity-false.html#11338" class="Function">fact₂</a> <a id="11694" href="continuity-false.html#11475" class="Function">α</a> <a id="11696" href="continuity-false.html#11587" class="Function">α-fact₁</a>
+    <a id="11708" href="continuity-false.html#11708" class="Function">fact₄</a> <a id="11714" class="Symbol">:</a> <a id="11716" href="continuity-false.html#11003" class="Function">β</a> <a id="11718" class="Number">0</a> <a id="11720" href="continuity-false.html#6145" class="Datatype Operator">≡</a> <a id="11722" class="Number">1</a>
+    <a id="11728" href="continuity-false.html#11708" class="Function">fact₄</a> <a id="11734" class="Symbol">=</a> <a id="11736" href="continuity-false.html#7647" class="Function">trans</a> <a id="11742" href="continuity-false.html#11655" class="Function">fact₃</a> <a id="11748" class="Symbol">(</a><a id="11749" href="continuity-false.html#7647" class="Function">trans</a> <a id="11755" href="continuity-false.html#11787" class="Function">fact₅</a> <a id="11761" href="continuity-false.html#11048" class="Function">β-fact₀</a><a id="11768" class="Symbol">)</a>
+     <a id="11775" class="Keyword">where</a>
+      <a id="11787" href="continuity-false.html#11787" class="Function">fact₅</a> <a id="11793" class="Symbol">:</a> <a id="11795" href="continuity-false.html#11003" class="Function">β</a><a id="11796" class="Symbol">(</a><a id="11797" href="continuity-false.html#11475" class="Function">α</a> <a id="11799" href="continuity-false.html#10014" class="Function">m</a><a id="11800" class="Symbol">)</a> <a id="11802" href="continuity-false.html#6145" class="Datatype Operator">≡</a> <a id="11804" href="continuity-false.html#11003" class="Function">β</a><a id="11805" class="Symbol">(</a><a id="11806" href="continuity-false.html#9855" class="Function">M</a> <a id="11808" href="continuity-false.html#10040" class="Function">f</a><a id="11809" class="Symbol">)</a>
+      <a id="11817" href="continuity-false.html#11787" class="Function">fact₅</a> <a id="11823" class="Symbol">=</a> <a id="11825" href="continuity-false.html#7725" class="Function">ap</a> <a id="11828" href="continuity-false.html#6047" class="Datatype">ℕ</a> <a id="11830" href="continuity-false.html#6047" class="Datatype">ℕ</a> <a id="11832" href="continuity-false.html#11003" class="Function">β</a> <a id="11834" href="continuity-false.html#11520" class="Function">α-fact₀</a>
+    <a id="11846" href="continuity-false.html#11846" class="Function">claim</a> <a id="11852" class="Symbol">:</a> <a id="11854" href="continuity-false.html#8528" class="Function">o</a> <a id="11856" href="continuity-false.html#6412" class="Function Operator">≡[</a> <a id="11859" href="continuity-false.html#6072" class="InductiveConstructor">succ</a> <a id="11864" href="continuity-false.html#10918" class="Bound">n</a> <a id="11866" href="continuity-false.html#6412" class="Function Operator">]</a> <a id="11868" href="continuity-false.html#11003" class="Function">β</a> <a id="11870" class="Symbol">→</a> <a id="11872" class="Number">0</a> <a id="11874" href="continuity-false.html#6145" class="Datatype Operator">≡</a> <a id="11876" href="continuity-false.html#11003" class="Function">β</a> <a id="11878" class="Number">0</a>
+    <a id="11884" href="continuity-false.html#11846" class="Function">claim</a> <a id="11890" class="Symbol">=</a> <a id="11892" href="continuity-false.html#7725" class="Function">ap</a> <a id="11895" class="Symbol">(</a><a id="11896" href="continuity-false.html#6209" class="Datatype">Vec</a> <a id="11900" href="continuity-false.html#6047" class="Datatype">ℕ</a> <a id="11902" class="Symbol">(</a><a id="11903" href="continuity-false.html#6072" class="InductiveConstructor">succ</a> <a id="11908" href="continuity-false.html#10918" class="Bound">n</a><a id="11909" class="Symbol">))</a> <a id="11912" href="continuity-false.html#6047" class="Datatype">ℕ</a> <a id="11914" href="continuity-false.html#7904" class="Function">head</a>
+
+  <a id="11922" href="continuity-false.html#11922" class="Function">lemma</a> <a id="11928" class="Symbol">:</a> <a id="11930" class="Symbol">(</a><a id="11931" href="continuity-false.html#5969" class="Datatype">Σ</a> <a id="11933" class="Symbol">\(</a><a id="11935" href="continuity-false.html#11935" class="Bound">n</a> <a id="11937" class="Symbol">:</a> <a id="11939" href="continuity-false.html#6047" class="Datatype">ℕ</a><a id="11940" class="Symbol">)</a> <a id="11942" class="Symbol">→</a> <a id="11944" href="continuity-false.html#9855" class="Function">M</a> <a id="11946" href="continuity-false.html#10040" class="Function">f</a> <a id="11948" href="continuity-false.html#6145" class="Datatype Operator">≡</a> <a id="11950" href="continuity-false.html#11935" class="Bound">n</a><a id="11951" class="Symbol">)</a> <a id="11953" class="Symbol">→</a> <a id="11955" class="Number">0</a> <a id="11957" href="continuity-false.html#6145" class="Datatype Operator">≡</a> <a id="11959" class="Number">1</a>
+  <a id="11963" href="continuity-false.html#11922" class="Function">lemma</a> <a id="11969" class="Symbol">(</a><a id="11970" class="Number">0</a>      <a id="11977" href="continuity-false.html#6008" class="InductiveConstructor Operator">,</a> <a id="11979" href="continuity-false.html#11979" class="Bound">r</a><a id="11980" class="Symbol">)</a> <a id="11982" class="Symbol">=</a> <a id="11984" href="continuity-false.html#10199" class="Function">lemma₀</a> <a id="11991" href="continuity-false.html#11979" class="Bound">r</a>
+  <a id="11995" href="continuity-false.html#11922" class="Function">lemma</a> <a id="12001" class="Symbol">(</a><a id="12002" href="continuity-false.html#6072" class="InductiveConstructor">succ</a> <a id="12007" href="continuity-false.html#12007" class="Bound">n</a> <a id="12009" href="continuity-false.html#6008" class="InductiveConstructor Operator">,</a> <a id="12011" href="continuity-false.html#12011" class="Bound">r</a><a id="12012" class="Symbol">)</a> <a id="12014" class="Symbol">=</a> <a id="12016" href="continuity-false.html#10863" class="Function">lemma₁</a><a id="12022" class="Symbol">(</a><a id="12023" href="continuity-false.html#12007" class="Bound">n</a> <a id="12025" href="continuity-false.html#6008" class="InductiveConstructor Operator">,</a> <a id="12027" href="continuity-false.html#12011" class="Bound">r</a><a id="12028" class="Symbol">)</a>
+
+  <a id="12033" href="continuity-false.html#12033" class="Function">contradiction</a> <a id="12047" class="Symbol">:</a> <a id="12049" class="Number">0</a> <a id="12051" href="continuity-false.html#6145" class="Datatype Operator">≡</a> <a id="12053" class="Number">1</a>
+  <a id="12057" href="continuity-false.html#12033" class="Function">contradiction</a> <a id="12071" class="Symbol">=</a> <a id="12073" href="continuity-false.html#11922" class="Function">lemma</a><a id="12078" class="Symbol">(</a><a id="12079" href="continuity-false.html#9855" class="Function">M</a> <a id="12081" href="continuity-false.html#10040" class="Function">f</a> <a id="12083" href="continuity-false.html#6008" class="InductiveConstructor Operator">,</a> <a id="12085" href="continuity-false.html#6180" class="InductiveConstructor">refl</a><a id="12089" class="Symbol">)</a>
+
+
+
+<a id="12094" class="Keyword">infix</a> <a id="12100" class="Number">10</a> <a id="12103" href="continuity-false.html#6255" class="InductiveConstructor Operator">_∷_</a>
+<a id="12107" class="Keyword">infix</a>  <a id="12114" class="Number">1</a> <a id="12116" href="continuity-false.html#6145" class="Datatype Operator">_≡_</a>
+
+<a id="12121" class="Markup">\end{code}</a><a id="12131" class="Background">
+
+
+4. Discussion
+-------------
+
+For a large research community, the terminology &quot;extensionality&quot;
+usually refers to the rule
+
+    x ≡ y implies f x ≡ f y,
+
+which here is called &quot;ap&quot; and defined above. This form of
+extensionality is a feature of intensional type theory, and can be
+regarded as a property of identity types.
+
+A red herring in connection with Andrej Bauer&#39;s post [1] is that the
+&quot;extensionality&quot; of M, that is, the availability of the function
+ap _ _ M of type f ≡ g → M f ≡ M g, is not used in the above proof. We
+only use the &quot;extensionality&quot; of first-order functions.  However, one
+of these functions, namely β, is defined indirectly from M, and so its
+&quot;extensionality&quot; relies on that of M, at least loosely speaking.
+
+What is important is that we don&#39;t use the so-called axiom of function
+extensionality (any two pointwise equal functions are equal), which is
+not available in intensional type theory.
+
+The fundamental reason for the contradiction is a topological
+phenomenon: there can&#39;t be any continuous modulus-of-continuity
+functional M. No finite part of a continuous function f : (ℕ → ℕ) → ℕ
+is enough to tell which finite part of α : ℕ → ℕ is sufficient to
+determine f(α).  In fact, what the above proof does is to use the
+hypothetical M to construct a non-continuous function f.
+
+In the topological topos all functions Baire → ℕ are continuous, both
+externally and internally, but there is no continuous M.
+
+The right notion of continuity, which is validated in some models, is
+
+ ∀(f : Baire → ℕ).∀(α : Baire).∥ Σ(n : ℕ).∀(β : Baire). α ≡[ n ] β → f α ≡ f β ∥,
+
+where we use hpropositional truncation (or bracket types), which can
+be written, using HoTT notation [2], as
+
+ ∀(f : Baire → ℕ).∀(α : Baire).∃(n : ℕ).∀(β : Baire). α ≡[ n ] β → f α ≡ f β.
+
+This implies the weaker statement
+
+ ∀(f : Baire → ℕ).∀(α : Baire).¬¬Σ(n : ℕ).∀(β : Baire). α ≡[ n ] β → f α ≡ f β,
+
+which can be expressed without hpropositional truncation and hence in
+MLTT. It is an interesting problem whether the ∃-formulation of
+continuity can be formulated in pure MLTT (with or without universes).
+
+Both the ∃-version and the ¬¬Σ version are validated in the
+topological topos interpretation and hence are consistent.
+
+Notice that a topos has both ∃ (via the subobject classifier) and Σ
+(via its local cartesian closed structure). What the above says is
+that continuity formulated with Σ is false in any topos, but
+continuity formulated with ∃ holds in some toposes.
+
+This is similar to the fact that the axiom of choice formulated with Σ
+holds in any topos, but often fails when formulated with ∃.
+
+Other continuity axioms that hold in Browerian mathematics do admit a
+consistent Σ formulation in MLTT, such as uniform continuity
+
+ ∀(f : Cantor → ℕ).Σ(n : ℕ).∀(α β : Cantor). α ≡[ n ] β → f α ≡ f β,
+
+where Cantor is the type of infinite binary sequences [4].
+
+
+References
+----------
+
+[0] This file is available in two forms:
+    http://www.cs.bham.ac.uk/~mhe/continuity-false/continuity-false.lagda
+    http://www.cs.bham.ac.uk/~mhe/continuity-false/continuity-false.html
+
+[1] Andrej Bauer.
+    http://math.andrej.com/2011/07/27/definability-and-extensionality-of-the-modulus-of-continuity-functional/
+
+[2] The HoTT Book. http://homotopytypetheory.org/book/
+
+    Chapter 1 introduces intensional MLTT without its homotopical extensions.
+    The appendix gives a formal treatment of MLTT with and without the extensions.
+
+[3] The Agda Wiki. http://wiki.portal.chalmers.se/agda/pmwiki.php
+
+[4] Chuangjie Xu and M.H. Escardó.
+    A constructive model of uniform continuity.
+    M. Hasegawa (Ed.): TLCA 2013, LNCS 7941, pp. 236-249. Springer, Heidelberg 2013.
+
+[4&#39;] M.H. Escardó and Chuangjie Xu.
+    A constructive manifestation of the Kleene-Kreisel continuous functionals. Submitted.
+    http://www.cs.bham.ac.uk/~mhe/papers/kleene-kreisel.pdf
+
+[5] M. Beeson. Foundations of Constructive Mathematics:
+    Metamathematical Studies, Springer, Berlin/Heidelberg/New York, 1985.
+
+[6] T. Coquand. Type Theory and Univalent Foundation.
+    Royal Society meeting, 26 Nov 2013.
+    http://www.cse.chalmers.se/~coquand/rs.pdf
+</a></pre></body></html>

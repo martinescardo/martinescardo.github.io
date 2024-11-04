@@ -1,0 +1,286 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+><head
+  ><title
+    >index</title
+    ><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"
+     /><meta http-equiv="Content-Style-Type" content="text/css"
+     /><link href="Agda.css" rel="stylesheet" type="text/css"
+     /></head
+  ><body
+  ><pre
+    ><a name="1" class="Comment"
+      >{-
+   A small type of propositions &#224; la Voevodsky in Agda
+   ---------------------------------------------------
+
+   Martin Escardo
+   3rd August 2015, last updated 5th August 2015, 9 May 2016.
+
+   Based on Vladimir Voevodsky's Plenary Talk &quot;Resizing rules&quot; at the
+   Types meeting in 11th September 2011 in Bergen.
+   https://www.math.ias.edu/vladimir/sites/math.ias.edu.vladimir/files/2011_Bergen.pdf
+
+   Abstract
+   --------
+
+   We apply Jesper Cockx and Andreas Abel's rewriting feature for Agda,
+   &quot;Sprinkles of extensionality for your vanilla type theory&quot;
+   Types 2016, Novi Sad, Serbia, 23-26 May 2016.
+   http://www.types2016.uns.ac.rs/index.php/programme-2/conf-prog
+
+   (A previous version uses the option --type-in-type confined to one
+   module only instead: http://www.cs.bham.ac.uk/~mhe/impredicativity/)
+
+   Here only the module prop.agda needs to define rewriting rules for
+   resizing. However, in the current version of Agda, 2.5.2, modules
+   that use that module have to use the option --rewriting.
+
+   A difference of this kind of impredicativity with CoC's
+   impredicativity is that unique choice and description hold. Our
+   truth values are types with at most one element, and yet they are
+   proof relevant in some sense.
+
+   zip file with agda source available at
+   http://www.cs.bham.ac.uk/~mhe/impredicativity-via-rewriting/impredicativity.zip
+
+   This type checks in Agda 2.5.2.
+
+   Click at a module name to navigate to it.
+-}</a
+      ><a name="1465"
+      >
+
+</a
+      ><a name="1467" class="Keyword"
+      >module</a
+      ><a name="1473"
+      > </a
+      ><a name="1474" href="index.html#1" class="Module"
+      >index</a
+      ><a name="1479"
+      > </a
+      ><a name="1480" class="Keyword"
+      >where</a
+      ><a name="1485"
+      >
+
+</a
+      ><a name="1487" class="Comment"
+      >-- The following module defines the type Prop:U&#8320; of propositions</a
+      ><a name="1551"
+      >
+</a
+      ><a name="1552" class="Comment"
+      >-- in the first universe U&#8320;, which amounts to impredicativity. </a
+      ><a name="1615"
+      >
+</a
+      ><a name="1616" class="Comment"
+      >-- It is the only rogue module that uses --rewriting to define</a
+      ><a name="1678"
+      >
+</a
+      ><a name="1679" class="Comment"
+      >--</a
+      ><a name="1681"
+      >
+</a
+      ><a name="1682" class="Comment"
+      >--        Prop = &#931;(P:U&#8320;).isProp P</a
+      ><a name="1715"
+      >
+</a
+      ><a name="1716" class="Comment"
+      >--</a
+      ><a name="1718"
+      >
+</a
+      ><a name="1719" class="Comment"
+      >-- so that Prop:U&#8320; rather than U&#8321;.</a
+      ><a name="1753"
+      >
+
+</a
+      ><a name="1755" class="Keyword"
+      >open</a
+      ><a name="1759"
+      > </a
+      ><a name="1760" class="Keyword"
+      >import</a
+      ><a name="1766"
+      > </a
+      ><a name="1767" href="prop.html#1" class="Module"
+      >prop</a
+      ><a name="1771"
+      >
+
+</a
+      ><a name="1773" class="Comment"
+      >-- The type of propositions is a set, assuming functional and</a
+      ><a name="1834"
+      >
+</a
+      ><a name="1835" class="Comment"
+      >-- propositional extensionality:</a
+      ><a name="1867"
+      >
+
+</a
+      ><a name="1869" class="Keyword"
+      >open</a
+      ><a name="1873"
+      > </a
+      ><a name="1874" class="Keyword"
+      >import</a
+      ><a name="1880"
+      > </a
+      ><a name="1881" href="propisset.html#1" class="Module"
+      >propisset</a
+      ><a name="1890"
+      >
+
+</a
+      ><a name="1892" class="Comment"
+      >-- Using impredicativity, we can define propositional truncation by</a
+      ><a name="1959"
+      >
+</a
+      ><a name="1960" class="Comment"
+      >-- universal quantification over truth values (as Voevodsky does):</a
+      ><a name="2026"
+      >
+
+</a
+      ><a name="2028" class="Keyword"
+      >open</a
+      ><a name="2032"
+      > </a
+      ><a name="2033" class="Keyword"
+      >import</a
+      ><a name="2039"
+      > </a
+      ><a name="2040" href="proptrunc.html#1" class="Module"
+      >proptrunc</a
+      ><a name="2049"
+      >
+
+</a
+      ><a name="2051" class="Comment"
+      >-- We then develop some amount of logic in the type Prop of</a
+      ><a name="2110"
+      >
+</a
+      ><a name="2111" class="Comment"
+      >-- propositions, where we define the logical connectives and their</a
+      ><a name="2177"
+      >
+</a
+      ><a name="2178" class="Comment"
+      >-- introduction and elimination rules following the ideas of the HoTT</a
+      ><a name="2247"
+      >
+</a
+      ><a name="2248" class="Comment"
+      >-- book. We then prove that</a
+      ><a name="2275"
+      >
+</a
+      ><a name="2276" class="Comment"
+      >--</a
+      ><a name="2278"
+      >
+</a
+      ><a name="2279" class="Comment"
+      >--      false = &#8704; r. r</a
+      ><a name="2301"
+      >
+</a
+      ><a name="2302" class="Comment"
+      >--      p &#8743; q = &#8704; r. (p &#8658; q &#8658; r) &#8658; r</a
+      ><a name="2338"
+      >
+</a
+      ><a name="2339" class="Comment"
+      >--      p &#8744; q = &#8704; r. (p &#8658; r) &#8658; (q &#8658; r) &#8658; r</a
+      ><a name="2381"
+      >
+</a
+      ><a name="2382" class="Comment"
+      >--      &#8707; p   = &#8704; r. (&#8704; x. p(x) &#8658; r) &#8658; r </a
+      ><a name="2423"
+      >
+
+</a
+      ><a name="2425" class="Keyword"
+      >open</a
+      ><a name="2429"
+      > </a
+      ><a name="2430" class="Keyword"
+      >import</a
+      ><a name="2436"
+      > </a
+      ><a name="2437" href="logic.html#1" class="Module"
+      >logic</a
+      ><a name="2442"
+      >
+
+</a
+      ><a name="2444" class="Comment"
+      >-- We then prove the axiom of description: for any set X and any</a
+      ><a name="2508"
+      >
+</a
+      ><a name="2509" class="Comment"
+      >-- p:X&#8594;Prop,</a
+      ><a name="2521"
+      >
+</a
+      ><a name="2522" class="Comment"
+      >--    </a
+      ><a name="2528"
+      >
+</a
+      ><a name="2529" class="Comment"
+      >--     (&#8707;!(x:X).p(x))=true &#8594; &#931;(x:X).p(x)=true.</a
+      ><a name="2575"
+      >
+
+</a
+      ><a name="2577" class="Keyword"
+      >open</a
+      ><a name="2581"
+      > </a
+      ><a name="2582" class="Keyword"
+      >import</a
+      ><a name="2588"
+      > </a
+      ><a name="2589" href="description.html#1" class="Module"
+      >description</a
+      ><a name="2600"
+      >
+
+</a
+      ><a name="2602" class="Comment"
+      >-- We then get quotients (incomplete for the moment):</a
+      ><a name="2655"
+      >
+
+</a
+      ><a name="2657" class="Keyword"
+      >open</a
+      ><a name="2661"
+      > </a
+      ><a name="2662" class="Keyword"
+      >import</a
+      ><a name="2668"
+      > </a
+      ><a name="2669" href="quotient.html#1" class="Module"
+      >quotient</a
+      ><a name="2677"
+      >
+</a
+      ></pre
+    ></body
+  ></html
+>

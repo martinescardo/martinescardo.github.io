@@ -1,0 +1,1721 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+><head
+  ><title
+    >prop</title
+    ><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"
+     /><meta http-equiv="Content-Style-Type" content="text/css"
+     /><link href="Agda.css" rel="stylesheet" type="text/css"
+     /></head
+  ><body
+  ><pre
+    ><a name="1" class="Comment"
+      >-- Martin Escardo, 3rd August 2015, originally using type-in-type.</a
+      ><a name="67"
+      >
+</a
+      ><a name="68" class="Comment"
+      >-- 9 May 2016, now using rewriting rather than type-in-type.</a
+      ><a name="128"
+      >
+
+</a
+      ><a name="130" class="Comment"
+      >{-
+
+ Users of this module need to use the option &quot;rewriting&quot; like this:
+ {-# OPTIONS --rewriting #-}
+
+ We use Abel and Cockx's rewriting feature for Agda to get
+ impredicativity &#224; la Voevodsky (propositional resizing) in Agda.
+
+ See the module resize.agda.
+
+-}</a
+      ><a name="390"
+      >
+
+</a
+      ><a name="392" class="Symbol"
+      >{-#</a
+      ><a name="395"
+      > </a
+      ><a name="396" class="Keyword"
+      >OPTIONS</a
+      ><a name="403"
+      > --without-K </a
+      ><a name="416" class="Symbol"
+      >#-}</a
+      ><a name="419"
+      >
+</a
+      ><a name="421" class="Symbol"
+      >{-#</a
+      ><a name="424"
+      > </a
+      ><a name="425" class="Keyword"
+      >OPTIONS</a
+      ><a name="432"
+      > --rewriting </a
+      ><a name="445" class="Symbol"
+      >#-}</a
+      ><a name="448"
+      > </a
+      ><a name="449" class="Comment"
+      >-- Needed for the import resize.agda to work.</a
+      ><a name="494"
+      >
+
+</a
+      ><a name="496" class="Keyword"
+      >module</a
+      ><a name="502"
+      > </a
+      ><a name="503" href="prop.html#1" class="Module"
+      >prop</a
+      ><a name="507"
+      > </a
+      ><a name="508" class="Keyword"
+      >where</a
+      ><a name="513"
+      >
+
+</a
+      ><a name="515" class="Keyword"
+      >open</a
+      ><a name="519"
+      > </a
+      ><a name="520" class="Keyword"
+      >import</a
+      ><a name="526"
+      > </a
+      ><a name="527" href="preliminaries.html#1" class="Module"
+      >preliminaries</a
+      ><a name="540"
+      >
+</a
+      ><a name="541" class="Keyword"
+      >open</a
+      ><a name="545"
+      > </a
+      ><a name="546" class="Keyword"
+      >import</a
+      ><a name="552"
+      > </a
+      ><a name="553" href="isprop.html#1" class="Module"
+      >isprop</a
+      ><a name="559"
+      > </a
+      ><a name="560" class="Keyword"
+      >public</a
+      ><a name="566"
+      >
+</a
+      ><a name="567" class="Keyword"
+      >open</a
+      ><a name="571"
+      > </a
+      ><a name="572" class="Keyword"
+      >import</a
+      ><a name="578"
+      > </a
+      ><a name="579" href="resize.html#1" class="Module"
+      >resize</a
+      ><a name="585"
+      > </a
+      ><a name="586" class="Comment"
+      >-- Don't make public, as it is inconsistent in general.</a
+      ><a name="641"
+      >
+
+</a
+      ><a name="643" class="Comment"
+      >-- The type of small propositions is large:</a
+      ><a name="686"
+      >
+</a
+      ><a name="687" href="prop.html#687" class="Function"
+      >PropLarge</a
+      ><a name="696"
+      > </a
+      ><a name="697" class="Symbol"
+      >:</a
+      ><a name="698"
+      > </a
+      ><a name="699" href="preliminaries.html#398" class="Function"
+      >U&#8321;</a
+      ><a name="701"
+      >
+</a
+      ><a name="702" href="prop.html#687" class="Function"
+      >PropLarge</a
+      ><a name="711"
+      > </a
+      ><a name="712" class="Symbol"
+      >=</a
+      ><a name="713"
+      > </a
+      ><a name="714" href="preliminaries.html#594" class="Record"
+      >&#931;</a
+      ><a name="715"
+      > </a
+      ><a name="716" class="Symbol"
+      >\(</a
+      ><a name="718" href="prop.html#718" class="Bound"
+      >P</a
+      ><a name="719"
+      > </a
+      ><a name="720" class="Symbol"
+      >:</a
+      ><a name="721"
+      > </a
+      ><a name="722" href="preliminaries.html#385" class="Function"
+      >U&#8320;</a
+      ><a name="724" class="Symbol"
+      >)</a
+      ><a name="725"
+      > </a
+      ><a name="726" class="Symbol"
+      >&#8594;</a
+      ><a name="727"
+      > </a
+      ><a name="728" href="isprop.html#168" class="Function"
+      >isProp</a
+      ><a name="734"
+      > </a
+      ><a name="735" href="prop.html#718" class="Bound"
+      >P</a
+      ><a name="736"
+      >
+
+</a
+      ><a name="738" class="Comment"
+      >-- We make it small:</a
+      ><a name="758"
+      >
+</a
+      ><a name="759" href="prop.html#759" class="Function"
+      >Prop</a
+      ><a name="763"
+      > </a
+      ><a name="764" class="Symbol"
+      >:</a
+      ><a name="765"
+      > </a
+      ><a name="766" href="preliminaries.html#385" class="Function"
+      >U&#8320;</a
+      ><a name="768"
+      >
+</a
+      ><a name="769" href="prop.html#759" class="Function"
+      >Prop</a
+      ><a name="773"
+      > </a
+      ><a name="774" class="Symbol"
+      >=</a
+      ><a name="775"
+      > </a
+      ><a name="776" href="resize.html#1146" class="Postulate"
+      >resize</a
+      ><a name="782"
+      > </a
+      ><a name="783" href="prop.html#687" class="Function"
+      >PropLarge</a
+      ><a name="792"
+      >
+
+</a
+      ><a name="794" class="Comment"
+      >-- The above corresponds to Voevodsky's resizing rule RR2.  </a
+      ><a name="854"
+      >
+</a
+      ><a name="855" class="Comment"
+      >-- Notational convention:</a
+      ><a name="880"
+      >
+</a
+      ><a name="881" class="Comment"
+      >--</a
+      ><a name="883"
+      >
+</a
+      ><a name="884" class="Comment"
+      >--   Upper case P, Q, R : U&#8320;,  when we have isProp P, isProp Q, isProp R.</a
+      ><a name="957"
+      >
+</a
+      ><a name="958" class="Comment"
+      >--   Lower case p, q, r : Prop.</a
+      ><a name="989"
+      >
+
+</a
+      ><a name="991" class="Comment"
+      >-- Constructor:</a
+      ><a name="1006"
+      >
+
+</a
+      ><a name="1008" href="prop.html#1008" class="Function Operator"
+      >&#8333;_,_&#8334;</a
+      ><a name="1013"
+      > </a
+      ><a name="1014" class="Symbol"
+      >:</a
+      ><a name="1015"
+      > </a
+      ><a name="1016" class="Symbol"
+      >(</a
+      ><a name="1017" href="prop.html#1017" class="Bound"
+      >P</a
+      ><a name="1018"
+      > </a
+      ><a name="1019" class="Symbol"
+      >:</a
+      ><a name="1020"
+      > </a
+      ><a name="1021" href="preliminaries.html#385" class="Function"
+      >U&#8320;</a
+      ><a name="1023" class="Symbol"
+      >)</a
+      ><a name="1024"
+      > </a
+      ><a name="1025" class="Symbol"
+      >&#8594;</a
+      ><a name="1026"
+      > </a
+      ><a name="1027" href="isprop.html#168" class="Function"
+      >isProp</a
+      ><a name="1033"
+      > </a
+      ><a name="1034" href="prop.html#1017" class="Bound"
+      >P</a
+      ><a name="1035"
+      > </a
+      ><a name="1036" class="Symbol"
+      >&#8594;</a
+      ><a name="1037"
+      > </a
+      ><a name="1038" href="prop.html#759" class="Function"
+      >Prop</a
+      ><a name="1042"
+      >
+</a
+      ><a name="1043" href="prop.html#1008" class="Function Operator"
+      >&#8333;</a
+      ><a name="1044"
+      > </a
+      ><a name="1045" href="prop.html#1045" class="Bound"
+      >P</a
+      ><a name="1046"
+      > </a
+      ><a name="1047" href="prop.html#1008" class="Function Operator"
+      >,</a
+      ><a name="1048"
+      > </a
+      ><a name="1049" href="prop.html#1049" class="Bound"
+      >isp</a
+      ><a name="1052"
+      > </a
+      ><a name="1053" href="prop.html#1008" class="Function Operator"
+      >&#8334;</a
+      ><a name="1054"
+      > </a
+      ><a name="1055" class="Symbol"
+      >=</a
+      ><a name="1056"
+      > </a
+      ><a name="1057" href="resize.html#1261" class="Postulate"
+      >resize-in</a
+      ><a name="1066" class="Symbol"
+      >(</a
+      ><a name="1067" href="prop.html#1045" class="Bound"
+      >P</a
+      ><a name="1068"
+      > </a
+      ><a name="1069" href="preliminaries.html#662" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="1070"
+      > </a
+      ><a name="1071" href="prop.html#1049" class="Bound"
+      >isp</a
+      ><a name="1074" class="Symbol"
+      >)</a
+      ><a name="1075"
+      >
+
+</a
+      ><a name="1077" class="Comment"
+      >-- Destructors:</a
+      ><a name="1092"
+      >
+
+</a
+      ><a name="1094" href="prop.html#1094" class="Function Operator"
+      >_holds</a
+      ><a name="1100"
+      > </a
+      ><a name="1101" class="Symbol"
+      >:</a
+      ><a name="1102"
+      > </a
+      ><a name="1103" href="prop.html#759" class="Function"
+      >Prop</a
+      ><a name="1107"
+      > </a
+      ><a name="1108" class="Symbol"
+      >&#8594;</a
+      ><a name="1109"
+      > </a
+      ><a name="1110" href="preliminaries.html#385" class="Function"
+      >U&#8320;</a
+      ><a name="1112"
+      >
+</a
+      ><a name="1113" href="prop.html#1113" class="Bound"
+      >p</a
+      ><a name="1114"
+      > </a
+      ><a name="1115" href="prop.html#1094" class="Function Operator"
+      >holds</a
+      ><a name="1120"
+      > </a
+      ><a name="1121" class="Symbol"
+      >=</a
+      ><a name="1122"
+      > </a
+      ><a name="1123" href="preliminaries.html#675" class="Field"
+      >pr&#8321;</a
+      ><a name="1126" class="Symbol"
+      >(</a
+      ><a name="1127" href="resize.html#1410" class="Postulate"
+      >resize-out</a
+      ><a name="1137"
+      > </a
+      ><a name="1138" href="prop.html#1113" class="Bound"
+      >p</a
+      ><a name="1139" class="Symbol"
+      >)</a
+      ><a name="1140"
+      >
+
+</a
+      ><a name="1143" href="prop.html#1143" class="Function"
+      >holdsIsProp</a
+      ><a name="1154"
+      > </a
+      ><a name="1155" class="Symbol"
+      >:</a
+      ><a name="1156"
+      > </a
+      ><a name="1157" class="Symbol"
+      >(</a
+      ><a name="1158" href="prop.html#1158" class="Bound"
+      >p</a
+      ><a name="1159"
+      > </a
+      ><a name="1160" class="Symbol"
+      >:</a
+      ><a name="1161"
+      > </a
+      ><a name="1162" href="prop.html#759" class="Function"
+      >Prop</a
+      ><a name="1166" class="Symbol"
+      >)</a
+      ><a name="1167"
+      > </a
+      ><a name="1168" class="Symbol"
+      >&#8594;</a
+      ><a name="1169"
+      > </a
+      ><a name="1170" href="isprop.html#168" class="Function"
+      >isProp</a
+      ><a name="1176" class="Symbol"
+      >(</a
+      ><a name="1177" href="prop.html#1158" class="Bound"
+      >p</a
+      ><a name="1178"
+      > </a
+      ><a name="1179" href="prop.html#1094" class="Function Operator"
+      >holds</a
+      ><a name="1184" class="Symbol"
+      >)</a
+      ><a name="1185"
+      >
+</a
+      ><a name="1186" href="prop.html#1143" class="Function"
+      >holdsIsProp</a
+      ><a name="1197"
+      > </a
+      ><a name="1198" href="prop.html#1198" class="Bound"
+      >p</a
+      ><a name="1199"
+      > </a
+      ><a name="1200" class="Symbol"
+      >=</a
+      ><a name="1201"
+      > </a
+      ><a name="1202" href="preliminaries.html#685" class="Field"
+      >pr&#8322;</a
+      ><a name="1205" class="Symbol"
+      >(</a
+      ><a name="1206" href="resize.html#1410" class="Postulate"
+      >resize-out</a
+      ><a name="1216"
+      > </a
+      ><a name="1217" href="prop.html#1198" class="Bound"
+      >p</a
+      ><a name="1218" class="Symbol"
+      >)</a
+      ><a name="1219"
+      >
+
+</a
+      ><a name="1221" class="Comment"
+      >-- The idea of the terminology is that we cannot assert a point of the</a
+      ><a name="1291"
+      >
+</a
+      ><a name="1292" class="Comment"
+      >-- type Prop, as it is a pair, but we can assert that it holds, meaning</a
+      ><a name="1363"
+      >
+</a
+      ><a name="1364" class="Comment"
+      >-- that we assert that its first component has an inhabitant, as it is</a
+      ><a name="1434"
+      >
+</a
+      ><a name="1435" class="Comment"
+      >-- a truth-value (a type P with the asserted side-condition isProp P).</a
+      ><a name="1505"
+      >
+
+</a
+      ><a name="1507" class="Comment"
+      >-- We have the following judgemental equalities:</a
+      ><a name="1555"
+      >
+</a
+      ><a name="1556" class="Comment"
+      >-- </a
+      ><a name="1559"
+      >
+</a
+      ><a name="1560" class="Comment"
+      >--    (&#946;&#8321;)   &#8333; P , isp &#8334; holds = P,</a
+      ><a name="1595"
+      >
+</a
+      ><a name="1596" class="Comment"
+      >--    (&#946;&#8322;)   holdsIsProp &#8333; P , isp &#8334; = isp,</a
+      ><a name="1639"
+      >
+</a
+      ><a name="1640" class="Comment"
+      >--    (&#951;)    p = &#8333; p holds , holdsIsProp p &#8334;.</a
+      ><a name="1685"
+      >
+
+</a
+      ><a name="1687" class="Comment"
+      >-- NB. holdsIsProp shows that _holds is an embedding in the sense of</a
+      ><a name="1755"
+      >
+</a
+      ><a name="1756" class="Comment"
+      >-- the HoTT book https://homotopytypetheory.org/book/.</a
+      ><a name="1810"
+      >
+
+</a
+      ><a name="1812" class="Comment"
+      >-- The following corresponds the Voevodky's resizing rule RR1:</a
+      ><a name="1874"
+      >
+
+</a
+      ><a name="1876" href="prop.html#1876" class="Function"
+      >resize&#8321;</a
+      ><a name="1883"
+      > </a
+      ><a name="1884" class="Symbol"
+      >:</a
+      ><a name="1885"
+      > </a
+      ><a name="1886" class="Symbol"
+      >{</a
+      ><a name="1887" href="prop.html#1887" class="Bound"
+      >i</a
+      ><a name="1888"
+      > </a
+      ><a name="1889" class="Symbol"
+      >:</a
+      ><a name="1890"
+      > </a
+      ><a name="1891" href="Agda.Primitive.html#408" class="Postulate"
+      >Level</a
+      ><a name="1896" class="Symbol"
+      >}</a
+      ><a name="1897"
+      > </a
+      ><a name="1898" class="Symbol"
+      >(</a
+      ><a name="1899" href="prop.html#1899" class="Bound"
+      >P</a
+      ><a name="1900"
+      > </a
+      ><a name="1901" class="Symbol"
+      >:</a
+      ><a name="1902"
+      > </a
+      ><a name="1903" href="preliminaries.html#342" class="Function"
+      >U</a
+      ><a name="1904"
+      > </a
+      ><a name="1905" href="prop.html#1887" class="Bound"
+      >i</a
+      ><a name="1906" class="Symbol"
+      >)</a
+      ><a name="1907"
+      > </a
+      ><a name="1908" class="Symbol"
+      >&#8594;</a
+      ><a name="1909"
+      > </a
+      ><a name="1910" href="isprop.html#168" class="Function"
+      >isProp</a
+      ><a name="1916"
+      > </a
+      ><a name="1917" class="Symbol"
+      >{</a
+      ><a name="1918" href="prop.html#1887" class="Bound"
+      >i</a
+      ><a name="1919" class="Symbol"
+      >}</a
+      ><a name="1920"
+      > </a
+      ><a name="1921" href="prop.html#1899" class="Bound"
+      >P</a
+      ><a name="1922"
+      > </a
+      ><a name="1923" class="Symbol"
+      >&#8594;</a
+      ><a name="1924"
+      > </a
+      ><a name="1925" href="preliminaries.html#385" class="Function"
+      >U&#8320;</a
+      ><a name="1927"
+      >
+</a
+      ><a name="1928" href="prop.html#1876" class="Function"
+      >resize&#8321;</a
+      ><a name="1935"
+      > </a
+      ><a name="1936" href="prop.html#1936" class="Bound"
+      >P</a
+      ><a name="1937"
+      > </a
+      ><a name="1938" href="prop.html#1938" class="Bound"
+      >isp</a
+      ><a name="1941"
+      > </a
+      ><a name="1942" class="Symbol"
+      >=</a
+      ><a name="1943"
+      > </a
+      ><a name="1944" href="resize.html#1146" class="Postulate"
+      >resize</a
+      ><a name="1950"
+      > </a
+      ><a name="1951" href="prop.html#1936" class="Bound"
+      >P</a
+      ><a name="1952"
+      >
+
+</a
+      ><a name="1954" class="Comment"
+      >-- We also need the following to make the above work:</a
+      ><a name="2007"
+      >
+
+</a
+      ><a name="2009" href="prop.html#2009" class="Function"
+      >resize&#8321;-in</a
+      ><a name="2019"
+      > </a
+      ><a name="2020" class="Symbol"
+      >:</a
+      ><a name="2021"
+      > </a
+      ><a name="2022" class="Symbol"
+      >{</a
+      ><a name="2023" href="prop.html#2023" class="Bound"
+      >i</a
+      ><a name="2024"
+      > </a
+      ><a name="2025" class="Symbol"
+      >:</a
+      ><a name="2026"
+      > </a
+      ><a name="2027" href="Agda.Primitive.html#408" class="Postulate"
+      >Level</a
+      ><a name="2032" class="Symbol"
+      >}</a
+      ><a name="2033"
+      > </a
+      ><a name="2034" class="Symbol"
+      >{</a
+      ><a name="2035" href="prop.html#2035" class="Bound"
+      >P</a
+      ><a name="2036"
+      > </a
+      ><a name="2037" class="Symbol"
+      >:</a
+      ><a name="2038"
+      > </a
+      ><a name="2039" href="preliminaries.html#342" class="Function"
+      >U</a
+      ><a name="2040"
+      > </a
+      ><a name="2041" href="prop.html#2023" class="Bound"
+      >i</a
+      ><a name="2042" class="Symbol"
+      >}</a
+      ><a name="2043"
+      > </a
+      ><a name="2044" class="Symbol"
+      >(</a
+      ><a name="2045" href="prop.html#2045" class="Bound"
+      >isp</a
+      ><a name="2048"
+      > </a
+      ><a name="2049" class="Symbol"
+      >:</a
+      ><a name="2050"
+      > </a
+      ><a name="2051" href="isprop.html#168" class="Function"
+      >isProp</a
+      ><a name="2057"
+      > </a
+      ><a name="2058" class="Symbol"
+      >{</a
+      ><a name="2059" href="prop.html#2023" class="Bound"
+      >i</a
+      ><a name="2060" class="Symbol"
+      >}</a
+      ><a name="2061"
+      > </a
+      ><a name="2062" href="prop.html#2035" class="Bound"
+      >P</a
+      ><a name="2063" class="Symbol"
+      >)</a
+      ><a name="2064"
+      > </a
+      ><a name="2065" class="Symbol"
+      >&#8594;</a
+      ><a name="2066"
+      > </a
+      ><a name="2067" href="prop.html#2035" class="Bound"
+      >P</a
+      ><a name="2068"
+      > </a
+      ><a name="2069" class="Symbol"
+      >&#8594;</a
+      ><a name="2070"
+      > </a
+      ><a name="2071" href="prop.html#1876" class="Function"
+      >resize&#8321;</a
+      ><a name="2078"
+      > </a
+      ><a name="2079" href="prop.html#2035" class="Bound"
+      >P</a
+      ><a name="2080"
+      > </a
+      ><a name="2081" href="prop.html#2045" class="Bound"
+      >isp</a
+      ><a name="2084"
+      >
+</a
+      ><a name="2085" href="prop.html#2009" class="Function"
+      >resize&#8321;-in</a
+      ><a name="2095"
+      > </a
+      ><a name="2096" href="prop.html#2096" class="Bound"
+      >isp</a
+      ><a name="2099"
+      > </a
+      ><a name="2100" class="Symbol"
+      >=</a
+      ><a name="2101"
+      > </a
+      ><a name="2102" href="resize.html#1261" class="Postulate"
+      >resize-in</a
+      ><a name="2111"
+      >
+
+</a
+      ><a name="2113" href="prop.html#2113" class="Function"
+      >resize&#8321;-out</a
+      ><a name="2124"
+      > </a
+      ><a name="2125" class="Symbol"
+      >:</a
+      ><a name="2126"
+      > </a
+      ><a name="2127" class="Symbol"
+      >{</a
+      ><a name="2128" href="prop.html#2128" class="Bound"
+      >i</a
+      ><a name="2129"
+      > </a
+      ><a name="2130" class="Symbol"
+      >:</a
+      ><a name="2131"
+      > </a
+      ><a name="2132" href="Agda.Primitive.html#408" class="Postulate"
+      >Level</a
+      ><a name="2137" class="Symbol"
+      >}</a
+      ><a name="2138"
+      > </a
+      ><a name="2139" class="Symbol"
+      >{</a
+      ><a name="2140" href="prop.html#2140" class="Bound"
+      >P</a
+      ><a name="2141"
+      > </a
+      ><a name="2142" class="Symbol"
+      >:</a
+      ><a name="2143"
+      > </a
+      ><a name="2144" href="preliminaries.html#342" class="Function"
+      >U</a
+      ><a name="2145"
+      > </a
+      ><a name="2146" href="prop.html#2128" class="Bound"
+      >i</a
+      ><a name="2147" class="Symbol"
+      >}</a
+      ><a name="2148"
+      > </a
+      ><a name="2149" class="Symbol"
+      >(</a
+      ><a name="2150" href="prop.html#2150" class="Bound"
+      >isp</a
+      ><a name="2153"
+      > </a
+      ><a name="2154" class="Symbol"
+      >:</a
+      ><a name="2155"
+      > </a
+      ><a name="2156" href="isprop.html#168" class="Function"
+      >isProp</a
+      ><a name="2162"
+      > </a
+      ><a name="2163" class="Symbol"
+      >{</a
+      ><a name="2164" href="prop.html#2128" class="Bound"
+      >i</a
+      ><a name="2165" class="Symbol"
+      >}</a
+      ><a name="2166"
+      > </a
+      ><a name="2167" href="prop.html#2140" class="Bound"
+      >P</a
+      ><a name="2168" class="Symbol"
+      >)</a
+      ><a name="2169"
+      > </a
+      ><a name="2170" class="Symbol"
+      >&#8594;</a
+      ><a name="2171"
+      > </a
+      ><a name="2172" href="prop.html#1876" class="Function"
+      >resize&#8321;</a
+      ><a name="2179"
+      > </a
+      ><a name="2180" href="prop.html#2140" class="Bound"
+      >P</a
+      ><a name="2181"
+      > </a
+      ><a name="2182" href="prop.html#2150" class="Bound"
+      >isp</a
+      ><a name="2185"
+      > </a
+      ><a name="2186" class="Symbol"
+      >&#8594;</a
+      ><a name="2187"
+      > </a
+      ><a name="2188" href="prop.html#2140" class="Bound"
+      >P</a
+      ><a name="2189"
+      >
+</a
+      ><a name="2190" href="prop.html#2113" class="Function"
+      >resize&#8321;-out</a
+      ><a name="2201"
+      > </a
+      ><a name="2202" href="prop.html#2202" class="Bound"
+      >isp</a
+      ><a name="2205"
+      > </a
+      ><a name="2206" class="Symbol"
+      >=</a
+      ><a name="2207"
+      > </a
+      ><a name="2208" href="resize.html#1410" class="Postulate"
+      >resize-out</a
+      ><a name="2218"
+      >
+
+</a
+      ><a name="2220" class="Comment"
+      >-- The functions (resize&#8321;-in isp) and (resize&#8321;-out isp) form a judgemental</a
+      ><a name="2294"
+      >
+</a
+      ><a name="2295" class="Comment"
+      >-- isomorphism.  Here is a typical example where the above two</a
+      ><a name="2357"
+      >
+</a
+      ><a name="2358" class="Comment"
+      >-- functions are needed:</a
+      ><a name="2382"
+      >
+
+</a
+      ><a name="2384" href="prop.html#2384" class="Function"
+      >resize&#8321;-isProp</a
+      ><a name="2398"
+      > </a
+      ><a name="2399" class="Symbol"
+      >:</a
+      ><a name="2400"
+      > </a
+      ><a name="2401" class="Symbol"
+      >{</a
+      ><a name="2402" href="prop.html#2402" class="Bound"
+      >i</a
+      ><a name="2403"
+      > </a
+      ><a name="2404" class="Symbol"
+      >:</a
+      ><a name="2405"
+      > </a
+      ><a name="2406" href="Agda.Primitive.html#408" class="Postulate"
+      >Level</a
+      ><a name="2411" class="Symbol"
+      >}</a
+      ><a name="2412"
+      > </a
+      ><a name="2413" class="Symbol"
+      >{</a
+      ><a name="2414" href="prop.html#2414" class="Bound"
+      >P</a
+      ><a name="2415"
+      > </a
+      ><a name="2416" class="Symbol"
+      >:</a
+      ><a name="2417"
+      > </a
+      ><a name="2418" href="preliminaries.html#342" class="Function"
+      >U</a
+      ><a name="2419"
+      > </a
+      ><a name="2420" href="prop.html#2402" class="Bound"
+      >i</a
+      ><a name="2421" class="Symbol"
+      >}</a
+      ><a name="2422"
+      > </a
+      ><a name="2423" class="Symbol"
+      >&#8594;</a
+      ><a name="2424"
+      > </a
+      ><a name="2425" class="Symbol"
+      >(</a
+      ><a name="2426" href="prop.html#2426" class="Bound"
+      >isp</a
+      ><a name="2429"
+      > </a
+      ><a name="2430" class="Symbol"
+      >:</a
+      ><a name="2431"
+      > </a
+      ><a name="2432" href="isprop.html#168" class="Function"
+      >isProp</a
+      ><a name="2438"
+      > </a
+      ><a name="2439" class="Symbol"
+      >{</a
+      ><a name="2440" href="prop.html#2402" class="Bound"
+      >i</a
+      ><a name="2441" class="Symbol"
+      >}</a
+      ><a name="2442"
+      > </a
+      ><a name="2443" href="prop.html#2414" class="Bound"
+      >P</a
+      ><a name="2444" class="Symbol"
+      >)</a
+      ><a name="2445"
+      > </a
+      ><a name="2446" class="Symbol"
+      >&#8594;</a
+      ><a name="2447"
+      > </a
+      ><a name="2448" href="isprop.html#168" class="Function"
+      >isProp</a
+      ><a name="2454"
+      > </a
+      ><a name="2455" class="Symbol"
+      >(</a
+      ><a name="2456" href="prop.html#1876" class="Function"
+      >resize&#8321;</a
+      ><a name="2463"
+      > </a
+      ><a name="2464" class="Symbol"
+      >{</a
+      ><a name="2465" href="prop.html#2402" class="Bound"
+      >i</a
+      ><a name="2466" class="Symbol"
+      >}</a
+      ><a name="2467"
+      > </a
+      ><a name="2468" href="prop.html#2414" class="Bound"
+      >P</a
+      ><a name="2469"
+      > </a
+      ><a name="2470" href="prop.html#2426" class="Bound"
+      >isp</a
+      ><a name="2473" class="Symbol"
+      >)</a
+      ><a name="2474"
+      >
+</a
+      ><a name="2476" href="prop.html#2384" class="Function"
+      >resize&#8321;-isProp</a
+      ><a name="2490"
+      > </a
+      ><a name="2491" class="Symbol"
+      >{</a
+      ><a name="2492" href="prop.html#2492" class="Bound"
+      >i</a
+      ><a name="2493" class="Symbol"
+      >}</a
+      ><a name="2494"
+      > </a
+      ><a name="2495" class="Symbol"
+      >{</a
+      ><a name="2496" href="prop.html#2496" class="Bound"
+      >P</a
+      ><a name="2497" class="Symbol"
+      >}</a
+      ><a name="2498"
+      > </a
+      ><a name="2499" href="prop.html#2499" class="Bound"
+      >isp</a
+      ><a name="2502"
+      > </a
+      ><a name="2503" href="prop.html#2503" class="Bound"
+      >p</a
+      ><a name="2504"
+      > </a
+      ><a name="2505" href="prop.html#2505" class="Bound"
+      >q</a
+      ><a name="2506"
+      > </a
+      ><a name="2507" class="Symbol"
+      >=</a
+      ><a name="2508"
+      > </a
+      ><a name="2509" href="preliminaries.html#1779" class="Function"
+      >ap</a
+      ><a name="2511"
+      > </a
+      ><a name="2512" class="Symbol"
+      >(</a
+      ><a name="2513" href="prop.html#2009" class="Function"
+      >resize&#8321;-in</a
+      ><a name="2523"
+      > </a
+      ><a name="2524" href="prop.html#2499" class="Bound"
+      >isp</a
+      ><a name="2527" class="Symbol"
+      >)</a
+      ><a name="2528"
+      > </a
+      ><a name="2529" class="Symbol"
+      >(</a
+      ><a name="2530" href="prop.html#2499" class="Bound"
+      >isp</a
+      ><a name="2533"
+      > </a
+      ><a name="2534" class="Symbol"
+      >(</a
+      ><a name="2535" href="prop.html#2113" class="Function"
+      >resize&#8321;-out</a
+      ><a name="2546"
+      > </a
+      ><a name="2547" href="prop.html#2499" class="Bound"
+      >isp</a
+      ><a name="2550"
+      > </a
+      ><a name="2551" href="prop.html#2503" class="Bound"
+      >p</a
+      ><a name="2552" class="Symbol"
+      >)</a
+      ><a name="2553"
+      > </a
+      ><a name="2554" class="Symbol"
+      >(</a
+      ><a name="2555" href="prop.html#2113" class="Function"
+      >resize&#8321;-out</a
+      ><a name="2566"
+      > </a
+      ><a name="2567" href="prop.html#2499" class="Bound"
+      >isp</a
+      ><a name="2570"
+      > </a
+      ><a name="2571" href="prop.html#2505" class="Bound"
+      >q</a
+      ><a name="2572" class="Symbol"
+      >))</a
+      ><a name="2574"
+      >
+
+</a
+      ><a name="2576" class="Comment"
+      >-- We also need the following judgemental isomorphism:</a
+      ><a name="2630"
+      >
+
+</a
+      ><a name="2632" href="prop.html#2632" class="Function"
+      >Prop-out</a
+      ><a name="2640"
+      > </a
+      ><a name="2641" class="Symbol"
+      >:</a
+      ><a name="2642"
+      > </a
+      ><a name="2643" href="prop.html#759" class="Function"
+      >Prop</a
+      ><a name="2647"
+      > </a
+      ><a name="2648" class="Symbol"
+      >&#8594;</a
+      ><a name="2649"
+      > </a
+      ><a name="2650" href="prop.html#687" class="Function"
+      >PropLarge</a
+      ><a name="2659"
+      >
+</a
+      ><a name="2660" href="prop.html#2632" class="Function"
+      >Prop-out</a
+      ><a name="2668"
+      > </a
+      ><a name="2669" class="Symbol"
+      >=</a
+      ><a name="2670"
+      > </a
+      ><a name="2671" href="resize.html#1410" class="Postulate"
+      >resize-out</a
+      ><a name="2681"
+      >
+
+</a
+      ><a name="2683" href="prop.html#2683" class="Function"
+      >Prop-in</a
+      ><a name="2690"
+      > </a
+      ><a name="2691" class="Symbol"
+      >:</a
+      ><a name="2692"
+      > </a
+      ><a name="2693" href="prop.html#687" class="Function"
+      >PropLarge</a
+      ><a name="2702"
+      > </a
+      ><a name="2703" class="Symbol"
+      >&#8594;</a
+      ><a name="2704"
+      > </a
+      ><a name="2705" href="prop.html#759" class="Function"
+      >Prop</a
+      ><a name="2709"
+      >
+</a
+      ><a name="2710" href="prop.html#2683" class="Function"
+      >Prop-in</a
+      ><a name="2717"
+      > </a
+      ><a name="2718" class="Symbol"
+      >=</a
+      ><a name="2719"
+      > </a
+      ><a name="2720" href="resize.html#1261" class="Postulate"
+      >resize-in</a
+      ><a name="2729"
+      >
+
+</a
+      ><a name="2731" class="Comment"
+      >-- Here is a typical example where these functions are needed (because</a
+      ><a name="2801"
+      >
+</a
+      ><a name="2802" class="Comment"
+      >-- the equality in the premise, being of two types in U&#8320;, is in U&#8321;,</a
+      ><a name="2869"
+      >
+</a
+      ><a name="2870" class="Comment"
+      >-- whereas that of the conclusion, being of the type Prop, is in U&#8320;) :</a
+      ><a name="2940"
+      >
+
+</a
+      ><a name="2942" href="prop.html#2942" class="Function"
+      >Prop-&#8801;</a
+      ><a name="2948"
+      > </a
+      ><a name="2949" class="Symbol"
+      >:</a
+      ><a name="2950"
+      > </a
+      ><a name="2951" class="Symbol"
+      >{</a
+      ><a name="2952" href="prop.html#2952" class="Bound"
+      >p</a
+      ><a name="2953"
+      > </a
+      ><a name="2954" href="prop.html#2954" class="Bound"
+      >q</a
+      ><a name="2955"
+      > </a
+      ><a name="2956" class="Symbol"
+      >:</a
+      ><a name="2957"
+      > </a
+      ><a name="2958" href="prop.html#759" class="Function"
+      >Prop</a
+      ><a name="2962" class="Symbol"
+      >}</a
+      ><a name="2963"
+      > </a
+      ><a name="2964" class="Symbol"
+      >&#8594;</a
+      ><a name="2965"
+      > </a
+      ><a name="2966" href="prop.html#2952" class="Bound"
+      >p</a
+      ><a name="2967"
+      > </a
+      ><a name="2968" href="prop.html#1094" class="Function Operator"
+      >holds</a
+      ><a name="2973"
+      > </a
+      ><a name="2974" href="preliminaries.html#1396" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="2975"
+      > </a
+      ><a name="2976" href="prop.html#2954" class="Bound"
+      >q</a
+      ><a name="2977"
+      > </a
+      ><a name="2978" href="prop.html#1094" class="Function Operator"
+      >holds</a
+      ><a name="2983"
+      > </a
+      ><a name="2984" class="Symbol"
+      >&#8594;</a
+      ><a name="2985"
+      > </a
+      ><a name="2986" href="prop.html#2952" class="Bound"
+      >p</a
+      ><a name="2987"
+      > </a
+      ><a name="2988" href="preliminaries.html#1396" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="2989"
+      > </a
+      ><a name="2990" href="prop.html#2954" class="Bound"
+      >q</a
+      ><a name="2991"
+      >
+</a
+      ><a name="2992" href="prop.html#2942" class="Function"
+      >Prop-&#8801;</a
+      ><a name="2998"
+      > </a
+      ><a name="2999" class="Symbol"
+      >{</a
+      ><a name="3000" href="prop.html#3000" class="Bound"
+      >p</a
+      ><a name="3001" class="Symbol"
+      >}</a
+      ><a name="3002"
+      > </a
+      ><a name="3003" class="Symbol"
+      >{</a
+      ><a name="3004" href="prop.html#3004" class="Bound"
+      >q</a
+      ><a name="3005" class="Symbol"
+      >}</a
+      ><a name="3006"
+      > </a
+      ><a name="3007" href="prop.html#3007" class="Bound"
+      >e</a
+      ><a name="3008"
+      > </a
+      ><a name="3009" class="Symbol"
+      >=</a
+      ><a name="3010"
+      > </a
+      ><a name="3011" href="preliminaries.html#1779" class="Function"
+      >ap</a
+      ><a name="3013"
+      > </a
+      ><a name="3014" href="prop.html#2683" class="Function"
+      >Prop-in</a
+      ><a name="3021"
+      > </a
+      ><a name="3022" href="prop.html#3036" class="Function"
+      >e'</a
+      ><a name="3024"
+      >
+ </a
+      ><a name="3026" class="Keyword"
+      >where</a
+      ><a name="3031"
+      >
+   </a
+      ><a name="3036" href="prop.html#3036" class="Function"
+      >e'</a
+      ><a name="3038"
+      > </a
+      ><a name="3039" class="Symbol"
+      >:</a
+      ><a name="3040"
+      > </a
+      ><a name="3041" href="prop.html#2632" class="Function"
+      >Prop-out</a
+      ><a name="3049"
+      > </a
+      ><a name="3050" href="prop.html#3000" class="Bound"
+      >p</a
+      ><a name="3051"
+      > </a
+      ><a name="3052" href="preliminaries.html#1396" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="3053"
+      > </a
+      ><a name="3054" href="prop.html#2632" class="Function"
+      >Prop-out</a
+      ><a name="3062"
+      > </a
+      ><a name="3063" href="prop.html#3004" class="Bound"
+      >q</a
+      ><a name="3064"
+      >
+   </a
+      ><a name="3068" href="prop.html#3036" class="Function"
+      >e'</a
+      ><a name="3070"
+      > </a
+      ><a name="3071" class="Symbol"
+      >=</a
+      ><a name="3072"
+      > </a
+      ><a name="3073" href="preliminaries.html#2300" class="Function"
+      >&#931;-&#8801;</a
+      ><a name="3076"
+      > </a
+      ><a name="3077" href="prop.html#3007" class="Bound"
+      >e</a
+      ><a name="3078"
+      > </a
+      ><a name="3079" class="Symbol"
+      >(</a
+      ><a name="3080" href="isprop.html#1708" class="Function"
+      >isProp-isProp</a
+      ><a name="3093"
+      > </a
+      ><a name="3094" class="Symbol"
+      >(</a
+      ><a name="3095" href="preliminaries.html#1891" class="Function"
+      >transport</a
+      ><a name="3104"
+      > </a
+      ><a name="3105" href="isprop.html#168" class="Function"
+      >isProp</a
+      ><a name="3111"
+      > </a
+      ><a name="3112" href="prop.html#3007" class="Bound"
+      >e</a
+      ><a name="3113"
+      > </a
+      ><a name="3114" class="Symbol"
+      >(</a
+      ><a name="3115" href="prop.html#1143" class="Function"
+      >holdsIsProp</a
+      ><a name="3126"
+      > </a
+      ><a name="3127" href="prop.html#3000" class="Bound"
+      >p</a
+      ><a name="3128" class="Symbol"
+      >))</a
+      ><a name="3130"
+      > </a
+      ><a name="3131" class="Symbol"
+      >(</a
+      ><a name="3132" href="prop.html#1143" class="Function"
+      >holdsIsProp</a
+      ><a name="3143"
+      > </a
+      ><a name="3144" href="prop.html#3004" class="Bound"
+      >q</a
+      ><a name="3145" class="Symbol"
+      >))</a
+      ><a name="3147"
+      >
+
+</a
+      ><a name="3149" class="Comment"
+      >-- Propositional univalence says that any two (logically) equivalent</a
+      ><a name="3217"
+      >
+</a
+      ><a name="3218" class="Comment"
+      >-- propositions are equal:</a
+      ><a name="3244"
+      >
+
+</a
+      ><a name="3246" class="Keyword"
+      >postulate</a
+      ><a name="3255"
+      > </a
+      ><a name="3256" href="prop.html#3256" class="Postulate"
+      >propua</a
+      ><a name="3262"
+      > </a
+      ><a name="3263" class="Symbol"
+      >:</a
+      ><a name="3264"
+      > </a
+      ><a name="3265" class="Symbol"
+      >{</a
+      ><a name="3266" href="prop.html#3266" class="Bound"
+      >i</a
+      ><a name="3267"
+      > </a
+      ><a name="3268" class="Symbol"
+      >:</a
+      ><a name="3269"
+      > </a
+      ><a name="3270" href="Agda.Primitive.html#408" class="Postulate"
+      >Level</a
+      ><a name="3275" class="Symbol"
+      >}</a
+      ><a name="3276"
+      > </a
+      ><a name="3277" class="Symbol"
+      >{</a
+      ><a name="3278" href="prop.html#3278" class="Bound"
+      >P</a
+      ><a name="3279"
+      > </a
+      ><a name="3280" href="prop.html#3280" class="Bound"
+      >Q</a
+      ><a name="3281"
+      > </a
+      ><a name="3282" class="Symbol"
+      >:</a
+      ><a name="3283"
+      > </a
+      ><a name="3284" href="preliminaries.html#342" class="Function"
+      >U</a
+      ><a name="3285"
+      > </a
+      ><a name="3286" href="prop.html#3266" class="Bound"
+      >i</a
+      ><a name="3287" class="Symbol"
+      >}</a
+      ><a name="3288"
+      > </a
+      ><a name="3289" class="Symbol"
+      >&#8594;</a
+      ><a name="3290"
+      > </a
+      ><a name="3291" href="isprop.html#168" class="Function"
+      >isProp</a
+      ><a name="3297"
+      > </a
+      ><a name="3298" href="prop.html#3278" class="Bound"
+      >P</a
+      ><a name="3299"
+      > </a
+      ><a name="3300" class="Symbol"
+      >&#8594;</a
+      ><a name="3301"
+      > </a
+      ><a name="3302" href="isprop.html#168" class="Function"
+      >isProp</a
+      ><a name="3308"
+      > </a
+      ><a name="3309" href="prop.html#3280" class="Bound"
+      >Q</a
+      ><a name="3310"
+      > </a
+      ><a name="3311" class="Symbol"
+      >&#8594;</a
+      ><a name="3312"
+      > </a
+      ><a name="3313" class="Symbol"
+      >(</a
+      ><a name="3314" href="prop.html#3278" class="Bound"
+      >P</a
+      ><a name="3315"
+      > </a
+      ><a name="3316" class="Symbol"
+      >&#8594;</a
+      ><a name="3317"
+      > </a
+      ><a name="3318" href="prop.html#3280" class="Bound"
+      >Q</a
+      ><a name="3319" class="Symbol"
+      >)</a
+      ><a name="3320"
+      > </a
+      ><a name="3321" class="Symbol"
+      >&#8594;</a
+      ><a name="3322"
+      > </a
+      ><a name="3323" class="Symbol"
+      >(</a
+      ><a name="3324" href="prop.html#3280" class="Bound"
+      >Q</a
+      ><a name="3325"
+      > </a
+      ><a name="3326" class="Symbol"
+      >&#8594;</a
+      ><a name="3327"
+      > </a
+      ><a name="3328" href="prop.html#3278" class="Bound"
+      >P</a
+      ><a name="3329" class="Symbol"
+      >)</a
+      ><a name="3330"
+      > </a
+      ><a name="3331" class="Symbol"
+      >&#8594;</a
+      ><a name="3332"
+      > </a
+      ><a name="3333" href="prop.html#3278" class="Bound"
+      >P</a
+      ><a name="3334"
+      > </a
+      ><a name="3335" href="preliminaries.html#1396" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="3336"
+      > </a
+      ><a name="3337" href="prop.html#3280" class="Bound"
+      >Q</a
+      ><a name="3338"
+      >
+
+</a
+      ><a name="3340" class="Comment"
+      >-- It can be formulated as follows:</a
+      ><a name="3375"
+      >
+
+</a
+      ><a name="3377" href="prop.html#3377" class="Function"
+      >propext</a
+      ><a name="3384"
+      > </a
+      ><a name="3385" class="Symbol"
+      >:</a
+      ><a name="3386"
+      > </a
+      ><a name="3387" class="Symbol"
+      >{</a
+      ><a name="3388" href="prop.html#3388" class="Bound"
+      >p</a
+      ><a name="3389"
+      > </a
+      ><a name="3390" href="prop.html#3390" class="Bound"
+      >q</a
+      ><a name="3391"
+      > </a
+      ><a name="3392" class="Symbol"
+      >:</a
+      ><a name="3393"
+      > </a
+      ><a name="3394" href="prop.html#759" class="Function"
+      >Prop</a
+      ><a name="3398" class="Symbol"
+      >}</a
+      ><a name="3399"
+      > </a
+      ><a name="3400" class="Symbol"
+      >&#8594;</a
+      ><a name="3401"
+      > </a
+      ><a name="3402" class="Symbol"
+      >(</a
+      ><a name="3403" href="prop.html#3388" class="Bound"
+      >p</a
+      ><a name="3404"
+      > </a
+      ><a name="3405" href="prop.html#1094" class="Function Operator"
+      >holds</a
+      ><a name="3410"
+      > </a
+      ><a name="3411" class="Symbol"
+      >&#8594;</a
+      ><a name="3412"
+      > </a
+      ><a name="3413" href="prop.html#3390" class="Bound"
+      >q</a
+      ><a name="3414"
+      > </a
+      ><a name="3415" href="prop.html#1094" class="Function Operator"
+      >holds</a
+      ><a name="3420" class="Symbol"
+      >)</a
+      ><a name="3421"
+      > </a
+      ><a name="3422" class="Symbol"
+      >&#8594;</a
+      ><a name="3423"
+      > </a
+      ><a name="3424" class="Symbol"
+      >(</a
+      ><a name="3425" href="prop.html#3390" class="Bound"
+      >q</a
+      ><a name="3426"
+      > </a
+      ><a name="3427" href="prop.html#1094" class="Function Operator"
+      >holds</a
+      ><a name="3432"
+      > </a
+      ><a name="3433" class="Symbol"
+      >&#8594;</a
+      ><a name="3434"
+      > </a
+      ><a name="3435" href="prop.html#3388" class="Bound"
+      >p</a
+      ><a name="3436"
+      > </a
+      ><a name="3437" href="prop.html#1094" class="Function Operator"
+      >holds</a
+      ><a name="3442" class="Symbol"
+      >)</a
+      ><a name="3443"
+      > </a
+      ><a name="3444" class="Symbol"
+      >&#8594;</a
+      ><a name="3445"
+      > </a
+      ><a name="3446" href="prop.html#3388" class="Bound"
+      >p</a
+      ><a name="3447"
+      > </a
+      ><a name="3448" href="preliminaries.html#1396" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="3449"
+      > </a
+      ><a name="3450" href="prop.html#3390" class="Bound"
+      >q</a
+      ><a name="3451"
+      >
+</a
+      ><a name="3452" href="prop.html#3377" class="Function"
+      >propext</a
+      ><a name="3459"
+      > </a
+      ><a name="3460" class="Symbol"
+      >{</a
+      ><a name="3461" href="prop.html#3461" class="Bound"
+      >p</a
+      ><a name="3462" class="Symbol"
+      >}</a
+      ><a name="3463"
+      > </a
+      ><a name="3464" class="Symbol"
+      >{</a
+      ><a name="3465" href="prop.html#3465" class="Bound"
+      >q</a
+      ><a name="3466" class="Symbol"
+      >}</a
+      ><a name="3467"
+      > </a
+      ><a name="3468" href="prop.html#3468" class="Bound"
+      >f</a
+      ><a name="3469"
+      > </a
+      ><a name="3470" href="prop.html#3470" class="Bound"
+      >g</a
+      ><a name="3471"
+      > </a
+      ><a name="3472" class="Symbol"
+      >=</a
+      ><a name="3473"
+      > </a
+      ><a name="3474" href="prop.html#2942" class="Function"
+      >Prop-&#8801;</a
+      ><a name="3480"
+      > </a
+      ><a name="3481" class="Symbol"
+      >(</a
+      ><a name="3482" href="prop.html#3256" class="Postulate"
+      >propua</a
+      ><a name="3488"
+      > </a
+      ><a name="3489" class="Symbol"
+      >(</a
+      ><a name="3490" href="prop.html#1143" class="Function"
+      >holdsIsProp</a
+      ><a name="3501"
+      > </a
+      ><a name="3502" href="prop.html#3461" class="Bound"
+      >p</a
+      ><a name="3503" class="Symbol"
+      >)</a
+      ><a name="3504"
+      > </a
+      ><a name="3505" class="Symbol"
+      >(</a
+      ><a name="3506" href="prop.html#1143" class="Function"
+      >holdsIsProp</a
+      ><a name="3517"
+      > </a
+      ><a name="3518" href="prop.html#3465" class="Bound"
+      >q</a
+      ><a name="3519" class="Symbol"
+      >)</a
+      ><a name="3520"
+      > </a
+      ><a name="3521" href="prop.html#3468" class="Bound"
+      >f</a
+      ><a name="3522"
+      > </a
+      ><a name="3523" href="prop.html#3470" class="Bound"
+      >g</a
+      ><a name="3524" class="Symbol"
+      >)</a
+      ><a name="3525"
+      >
+</a
+      ></pre
+    ></body
+  ></html
+>

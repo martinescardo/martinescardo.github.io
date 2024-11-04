@@ -1,0 +1,2570 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+><head
+  ><title
+    >GlobalChoice</title
+    ><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"
+     /><meta http-equiv="Content-Style-Type" content="text/css"
+     /><link href="Agda.css" rel="stylesheet" type="text/css"
+     /></head
+  ><body
+  ><pre
+    ><a name="1" class="Comment"
+      >30 Mar 2013. MHE.</a
+      ><a name="18"
+      >
+
+</a
+      ><a name="20" class="Comment"
+      >If every type has a constant endomap (the principle of global choice</a
+      ><a name="88"
+      >
+</a
+      ><a name="89" class="Comment"
+      >holds), then every type has decidable equality.</a
+      ><a name="136"
+      >
+
+</a
+      ><a name="138" class="Comment"
+      >We don't use any feature of Agda that goes beyond intensional</a
+      ><a name="199"
+      >
+</a
+      ><a name="200" class="Comment"
+      >MLTT. Although we use HoTT notions, we don't use any HoTT axiom. In</a
+      ><a name="267"
+      >
+</a
+      ><a name="268" class="Comment"
+      >particular, hpropositional reflection is defined from the assumption</a
+      ><a name="336"
+      >
+</a
+      ><a name="337" class="Comment"
+      >of global choice.</a
+      ><a name="354"
+      >
+
+\begin{code}
+
+</a
+      ><a name="371" class="Symbol"
+      >{-#</a
+      ><a name="374"
+      > </a
+      ><a name="375" class="Keyword"
+      >OPTIONS</a
+      ><a name="382"
+      > --without-K </a
+      ><a name="395" class="Symbol"
+      >#-}</a
+      ><a name="398"
+      >
+
+</a
+      ><a name="400" class="Keyword"
+      >module</a
+      ><a name="406"
+      > </a
+      ><a name="407" href="GlobalChoice.html#1" class="Module"
+      >GlobalChoice</a
+      ><a name="419"
+      > </a
+      ><a name="420" class="Keyword"
+      >where</a
+      ><a name="425"
+      >
+
+</a
+      ><a name="427" class="Keyword"
+      >open</a
+      ><a name="431"
+      > </a
+      ><a name="432" class="Keyword"
+      >import</a
+      ><a name="438"
+      > </a
+      ><a name="439" href="mini-library.html#1" class="Module"
+      >mini-library</a
+      ><a name="451"
+      >
+</a
+      ><a name="452" class="Keyword"
+      >open</a
+      ><a name="456"
+      > </a
+      ><a name="457" class="Keyword"
+      >import</a
+      ><a name="463"
+      > </a
+      ><a name="464" href="KrausLemma.html#1" class="Module"
+      >KrausLemma</a
+      ><a name="474"
+      >
+</a
+      ><a name="475" class="Keyword"
+      >open</a
+      ><a name="479"
+      > </a
+      ><a name="480" class="Keyword"
+      >import</a
+      ><a name="486"
+      > </a
+      ><a name="487" href="decidable-and-discrete.html#1" class="Module"
+      >decidable-and-discrete</a
+      ><a name="509"
+      >
+
+</a
+      ><a name="511" class="Keyword"
+      >postulate</a
+      ><a name="520"
+      > </a
+      ><a name="521" href="GlobalChoice.html#521" class="Postulate"
+      >Global-Choice</a
+      ><a name="534"
+      > </a
+      ><a name="535" class="Symbol"
+      >:</a
+      ><a name="536"
+      > </a
+      ><a name="537" class="Symbol"
+      >(</a
+      ><a name="538" href="GlobalChoice.html#538" class="Bound"
+      >X</a
+      ><a name="539"
+      > </a
+      ><a name="540" class="Symbol"
+      >:</a
+      ><a name="541"
+      > </a
+      ><a name="542" href="KrausLemma.html#78" class="Function"
+      >Type</a
+      ><a name="546" class="Symbol"
+      >)</a
+      ><a name="547"
+      > </a
+      ><a name="548" class="Symbol"
+      >&#8594;</a
+      ><a name="549"
+      > </a
+      ><a name="550" href="mini-library.html#200" class="Record"
+      >&#931;</a
+      ><a name="551"
+      > </a
+      ><a name="552" class="Symbol"
+      >\(</a
+      ><a name="554" href="GlobalChoice.html#554" class="Bound"
+      >&#954;</a
+      ><a name="555"
+      > </a
+      ><a name="556" class="Symbol"
+      >:</a
+      ><a name="557"
+      > </a
+      ><a name="558" href="GlobalChoice.html#538" class="Bound"
+      >X</a
+      ><a name="559"
+      > </a
+      ><a name="560" class="Symbol"
+      >&#8594;</a
+      ><a name="561"
+      > </a
+      ><a name="562" href="GlobalChoice.html#538" class="Bound"
+      >X</a
+      ><a name="563" class="Symbol"
+      >)</a
+      ><a name="564"
+      > </a
+      ><a name="565" class="Symbol"
+      >&#8594;</a
+      ><a name="566"
+      > </a
+      ><a name="567" href="KrausLemma.html#139" class="Function"
+      >constant</a
+      ><a name="575"
+      > </a
+      ><a name="576" href="GlobalChoice.html#554" class="Bound"
+      >&#954;</a
+      ><a name="577"
+      >
+
+</a
+      ><a name="579" href="GlobalChoice.html#579" class="Function"
+      >&#954;</a
+      ><a name="580"
+      > </a
+      ><a name="581" class="Symbol"
+      >:</a
+      ><a name="582"
+      > </a
+      ><a name="583" class="Symbol"
+      >(</a
+      ><a name="584" href="GlobalChoice.html#584" class="Bound"
+      >X</a
+      ><a name="585"
+      > </a
+      ><a name="586" class="Symbol"
+      >:</a
+      ><a name="587"
+      > </a
+      ><a name="588" href="KrausLemma.html#78" class="Function"
+      >Type</a
+      ><a name="592" class="Symbol"
+      >)</a
+      ><a name="593"
+      > </a
+      ><a name="594" class="Symbol"
+      >&#8594;</a
+      ><a name="595"
+      > </a
+      ><a name="596" href="GlobalChoice.html#584" class="Bound"
+      >X</a
+      ><a name="597"
+      > </a
+      ><a name="598" class="Symbol"
+      >&#8594;</a
+      ><a name="599"
+      > </a
+      ><a name="600" href="GlobalChoice.html#584" class="Bound"
+      >X</a
+      ><a name="601"
+      >
+</a
+      ><a name="602" href="GlobalChoice.html#579" class="Function"
+      >&#954;</a
+      ><a name="603"
+      > </a
+      ><a name="604" href="GlobalChoice.html#604" class="Bound"
+      >X</a
+      ><a name="605"
+      > </a
+      ><a name="606" class="Symbol"
+      >=</a
+      ><a name="607"
+      > </a
+      ><a name="608" href="mini-library.html#285" class="Function"
+      >&#960;&#8320;</a
+      ><a name="610" class="Symbol"
+      >(</a
+      ><a name="611" href="GlobalChoice.html#521" class="Postulate"
+      >Global-Choice</a
+      ><a name="624"
+      > </a
+      ><a name="625" href="GlobalChoice.html#604" class="Bound"
+      >X</a
+      ><a name="626" class="Symbol"
+      >)</a
+      ><a name="627"
+      >
+</a
+      ><a name="628" href="GlobalChoice.html#628" class="Function"
+      >&#954;-constant</a
+      ><a name="638"
+      > </a
+      ><a name="639" class="Symbol"
+      >:</a
+      ><a name="640"
+      > </a
+      ><a name="641" class="Symbol"
+      >(</a
+      ><a name="642" href="GlobalChoice.html#642" class="Bound"
+      >X</a
+      ><a name="643"
+      > </a
+      ><a name="644" class="Symbol"
+      >:</a
+      ><a name="645"
+      > </a
+      ><a name="646" href="KrausLemma.html#78" class="Function"
+      >Type</a
+      ><a name="650" class="Symbol"
+      >)</a
+      ><a name="651"
+      > </a
+      ><a name="652" class="Symbol"
+      >&#8594;</a
+      ><a name="653"
+      > </a
+      ><a name="654" href="KrausLemma.html#139" class="Function"
+      >constant</a
+      ><a name="662" class="Symbol"
+      >(</a
+      ><a name="663" href="GlobalChoice.html#579" class="Function"
+      >&#954;</a
+      ><a name="664"
+      > </a
+      ><a name="665" href="GlobalChoice.html#642" class="Bound"
+      >X</a
+      ><a name="666" class="Symbol"
+      >)</a
+      ><a name="667"
+      >
+</a
+      ><a name="668" href="GlobalChoice.html#628" class="Function"
+      >&#954;-constant</a
+      ><a name="678"
+      > </a
+      ><a name="679" href="GlobalChoice.html#679" class="Bound"
+      >X</a
+      ><a name="680"
+      > </a
+      ><a name="681" class="Symbol"
+      >=</a
+      ><a name="682"
+      > </a
+      ><a name="683" href="mini-library.html#354" class="Function"
+      >&#960;&#8321;</a
+      ><a name="685" class="Symbol"
+      >(</a
+      ><a name="686" href="GlobalChoice.html#521" class="Postulate"
+      >Global-Choice</a
+      ><a name="699"
+      > </a
+      ><a name="700" href="GlobalChoice.html#679" class="Bound"
+      >X</a
+      ><a name="701" class="Symbol"
+      >)</a
+      ><a name="702"
+      >
+
+</a
+      ><a name="704" href="GlobalChoice.html#704" class="Function"
+      >hinhabited</a
+      ><a name="714"
+      > </a
+      ><a name="715" class="Symbol"
+      >:</a
+      ><a name="716"
+      > </a
+      ><a name="717" href="KrausLemma.html#78" class="Function"
+      >Type</a
+      ><a name="721"
+      > </a
+      ><a name="722" class="Symbol"
+      >&#8594;</a
+      ><a name="723"
+      > </a
+      ><a name="724" href="KrausLemma.html#78" class="Function"
+      >Type</a
+      ><a name="728"
+      >
+</a
+      ><a name="729" href="GlobalChoice.html#704" class="Function"
+      >hinhabited</a
+      ><a name="739"
+      > </a
+      ><a name="740" href="GlobalChoice.html#740" class="Bound"
+      >X</a
+      ><a name="741"
+      > </a
+      ><a name="742" class="Symbol"
+      >=</a
+      ><a name="743"
+      > </a
+      ><a name="744" href="KrausLemma.html#299" class="Function"
+      >fix</a
+      ><a name="747" class="Symbol"
+      >(</a
+      ><a name="748" href="GlobalChoice.html#579" class="Function"
+      >&#954;</a
+      ><a name="749"
+      > </a
+      ><a name="750" href="GlobalChoice.html#740" class="Bound"
+      >X</a
+      ><a name="751" class="Symbol"
+      >)</a
+      ><a name="752"
+      >
+
+</a
+      ><a name="754" href="GlobalChoice.html#754" class="Function"
+      >hprop-hinhabited</a
+      ><a name="770"
+      > </a
+      ><a name="771" class="Symbol"
+      >:</a
+      ><a name="772"
+      > </a
+      ><a name="773" class="Symbol"
+      >{</a
+      ><a name="774" href="GlobalChoice.html#774" class="Bound"
+      >X</a
+      ><a name="775"
+      > </a
+      ><a name="776" class="Symbol"
+      >:</a
+      ><a name="777"
+      > </a
+      ><a name="778" href="KrausLemma.html#78" class="Function"
+      >Type</a
+      ><a name="782" class="Symbol"
+      >}</a
+      ><a name="783"
+      > </a
+      ><a name="784" class="Symbol"
+      >&#8594;</a
+      ><a name="785"
+      > </a
+      ><a name="786" href="KrausLemma.html#90" class="Function"
+      >hprop</a
+      ><a name="791" class="Symbol"
+      >(</a
+      ><a name="792" href="GlobalChoice.html#704" class="Function"
+      >hinhabited</a
+      ><a name="802"
+      > </a
+      ><a name="803" href="GlobalChoice.html#774" class="Bound"
+      >X</a
+      ><a name="804" class="Symbol"
+      >)</a
+      ><a name="805"
+      >
+</a
+      ><a name="806" href="GlobalChoice.html#754" class="Function"
+      >hprop-hinhabited</a
+      ><a name="822"
+      > </a
+      ><a name="823" class="Symbol"
+      >{</a
+      ><a name="824" href="GlobalChoice.html#824" class="Bound"
+      >X</a
+      ><a name="825" class="Symbol"
+      >}</a
+      ><a name="826"
+      > </a
+      ><a name="827" class="Symbol"
+      >=</a
+      ><a name="828"
+      > </a
+      ><a name="829" href="KrausLemma.html#1438" class="Function"
+      >Kraus-Lemma</a
+      ><a name="840"
+      > </a
+      ><a name="841" class="Symbol"
+      >(</a
+      ><a name="842" href="GlobalChoice.html#579" class="Function"
+      >&#954;</a
+      ><a name="843"
+      > </a
+      ><a name="844" href="GlobalChoice.html#824" class="Bound"
+      >X</a
+      ><a name="845" class="Symbol"
+      >)</a
+      ><a name="846"
+      > </a
+      ><a name="847" class="Symbol"
+      >(</a
+      ><a name="848" href="GlobalChoice.html#628" class="Function"
+      >&#954;-constant</a
+      ><a name="858"
+      > </a
+      ><a name="859" href="GlobalChoice.html#824" class="Bound"
+      >X</a
+      ><a name="860" class="Symbol"
+      >)</a
+      ><a name="861"
+      >
+
+</a
+      ><a name="863" href="GlobalChoice.html#863" class="Function"
+      >&#951;</a
+      ><a name="864"
+      > </a
+      ><a name="865" class="Symbol"
+      >:</a
+      ><a name="866"
+      > </a
+      ><a name="867" class="Symbol"
+      >{</a
+      ><a name="868" href="GlobalChoice.html#868" class="Bound"
+      >X</a
+      ><a name="869"
+      > </a
+      ><a name="870" class="Symbol"
+      >:</a
+      ><a name="871"
+      > </a
+      ><a name="872" href="KrausLemma.html#78" class="Function"
+      >Type</a
+      ><a name="876" class="Symbol"
+      >}</a
+      ><a name="877"
+      > </a
+      ><a name="878" class="Symbol"
+      >&#8594;</a
+      ><a name="879"
+      > </a
+      ><a name="880" href="GlobalChoice.html#868" class="Bound"
+      >X</a
+      ><a name="881"
+      > </a
+      ><a name="882" class="Symbol"
+      >&#8594;</a
+      ><a name="883"
+      > </a
+      ><a name="884" href="GlobalChoice.html#704" class="Function"
+      >hinhabited</a
+      ><a name="894"
+      > </a
+      ><a name="895" href="GlobalChoice.html#868" class="Bound"
+      >X</a
+      ><a name="896"
+      >
+</a
+      ><a name="897" href="GlobalChoice.html#863" class="Function"
+      >&#951;</a
+      ><a name="898"
+      > </a
+      ><a name="899" class="Symbol"
+      >{</a
+      ><a name="900" href="GlobalChoice.html#900" class="Bound"
+      >X</a
+      ><a name="901" class="Symbol"
+      >}</a
+      ><a name="902"
+      > </a
+      ><a name="903" href="GlobalChoice.html#903" class="Bound"
+      >x</a
+      ><a name="904"
+      > </a
+      ><a name="905" class="Symbol"
+      >=</a
+      ><a name="906"
+      > </a
+      ><a name="907" href="GlobalChoice.html#579" class="Function"
+      >&#954;</a
+      ><a name="908"
+      > </a
+      ><a name="909" href="GlobalChoice.html#900" class="Bound"
+      >X</a
+      ><a name="910"
+      > </a
+      ><a name="911" href="GlobalChoice.html#903" class="Bound"
+      >x</a
+      ><a name="912"
+      > </a
+      ><a name="913" href="mini-library.html#252" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="914"
+      > </a
+      ><a name="915" href="GlobalChoice.html#628" class="Function"
+      >&#954;-constant</a
+      ><a name="925"
+      > </a
+      ><a name="926" href="GlobalChoice.html#900" class="Bound"
+      >X</a
+      ><a name="927"
+      > </a
+      ><a name="928" href="GlobalChoice.html#903" class="Bound"
+      >x</a
+      ><a name="929"
+      > </a
+      ><a name="930" class="Symbol"
+      >(</a
+      ><a name="931" href="GlobalChoice.html#579" class="Function"
+      >&#954;</a
+      ><a name="932"
+      > </a
+      ><a name="933" href="GlobalChoice.html#900" class="Bound"
+      >X</a
+      ><a name="934"
+      > </a
+      ><a name="935" href="GlobalChoice.html#903" class="Bound"
+      >x</a
+      ><a name="936" class="Symbol"
+      >)</a
+      ><a name="937"
+      >
+
+</a
+      ><a name="939" href="GlobalChoice.html#939" class="Function"
+      >hinhabited-elim</a
+      ><a name="954"
+      > </a
+      ><a name="955" class="Symbol"
+      >:</a
+      ><a name="956"
+      > </a
+      ><a name="957" class="Symbol"
+      >{</a
+      ><a name="958" href="GlobalChoice.html#958" class="Bound"
+      >X</a
+      ><a name="959"
+      > </a
+      ><a name="960" href="GlobalChoice.html#960" class="Bound"
+      >P</a
+      ><a name="961"
+      > </a
+      ><a name="962" class="Symbol"
+      >:</a
+      ><a name="963"
+      > </a
+      ><a name="964" href="KrausLemma.html#78" class="Function"
+      >Type</a
+      ><a name="968" class="Symbol"
+      >}</a
+      ><a name="969"
+      > </a
+      ><a name="970" class="Symbol"
+      >&#8594;</a
+      ><a name="971"
+      > </a
+      ><a name="972" href="KrausLemma.html#90" class="Function"
+      >hprop</a
+      ><a name="977"
+      > </a
+      ><a name="978" href="GlobalChoice.html#960" class="Bound"
+      >P</a
+      ><a name="979"
+      > </a
+      ><a name="980" class="Symbol"
+      >&#8594;</a
+      ><a name="981"
+      > </a
+      ><a name="982" class="Symbol"
+      >(</a
+      ><a name="983" href="GlobalChoice.html#958" class="Bound"
+      >X</a
+      ><a name="984"
+      > </a
+      ><a name="985" class="Symbol"
+      >&#8594;</a
+      ><a name="986"
+      > </a
+      ><a name="987" href="GlobalChoice.html#960" class="Bound"
+      >P</a
+      ><a name="988" class="Symbol"
+      >)</a
+      ><a name="989"
+      > </a
+      ><a name="990" class="Symbol"
+      >&#8594;</a
+      ><a name="991"
+      > </a
+      ><a name="992" class="Symbol"
+      >(</a
+      ><a name="993" href="GlobalChoice.html#704" class="Function"
+      >hinhabited</a
+      ><a name="1003"
+      > </a
+      ><a name="1004" href="GlobalChoice.html#958" class="Bound"
+      >X</a
+      ><a name="1005"
+      > </a
+      ><a name="1006" class="Symbol"
+      >&#8594;</a
+      ><a name="1007"
+      > </a
+      ><a name="1008" href="GlobalChoice.html#960" class="Bound"
+      >P</a
+      ><a name="1009" class="Symbol"
+      >)</a
+      ><a name="1010"
+      >
+</a
+      ><a name="1011" href="GlobalChoice.html#939" class="Function"
+      >hinhabited-elim</a
+      ><a name="1026"
+      > </a
+      ><a name="1027" class="Symbol"
+      >_</a
+      ><a name="1028"
+      > </a
+      ><a name="1029" href="GlobalChoice.html#1029" class="Bound"
+      >f</a
+      ><a name="1030"
+      > </a
+      ><a name="1031" class="Symbol"
+      >=</a
+      ><a name="1032"
+      > </a
+      ><a name="1033" href="GlobalChoice.html#1029" class="Bound"
+      >f</a
+      ><a name="1034"
+      > </a
+      ><a name="1035" href="mini-library.html#105" class="Function Operator"
+      >&#8728;</a
+      ><a name="1036"
+      > </a
+      ><a name="1037" href="mini-library.html#285" class="Function"
+      >&#960;&#8320;</a
+      ><a name="1039"
+      >
+
+</a
+      ><a name="1041" href="GlobalChoice.html#1041" class="Function"
+      >global-choice</a
+      ><a name="1054"
+      > </a
+      ><a name="1055" class="Symbol"
+      >:</a
+      ><a name="1056"
+      > </a
+      ><a name="1057" class="Symbol"
+      >{</a
+      ><a name="1058" href="GlobalChoice.html#1058" class="Bound"
+      >X</a
+      ><a name="1059"
+      > </a
+      ><a name="1060" class="Symbol"
+      >:</a
+      ><a name="1061"
+      > </a
+      ><a name="1062" href="KrausLemma.html#78" class="Function"
+      >Type</a
+      ><a name="1066" class="Symbol"
+      >}</a
+      ><a name="1067"
+      > </a
+      ><a name="1068" class="Symbol"
+      >&#8594;</a
+      ><a name="1069"
+      > </a
+      ><a name="1070" href="GlobalChoice.html#704" class="Function"
+      >hinhabited</a
+      ><a name="1080"
+      > </a
+      ><a name="1081" href="GlobalChoice.html#1058" class="Bound"
+      >X</a
+      ><a name="1082"
+      > </a
+      ><a name="1083" class="Symbol"
+      >&#8594;</a
+      ><a name="1084"
+      > </a
+      ><a name="1085" href="GlobalChoice.html#1058" class="Bound"
+      >X</a
+      ><a name="1086"
+      >
+</a
+      ><a name="1087" href="GlobalChoice.html#1041" class="Function"
+      >global-choice</a
+      ><a name="1100"
+      > </a
+      ><a name="1101" class="Symbol"
+      >=</a
+      ><a name="1102"
+      > </a
+      ><a name="1103" href="mini-library.html#285" class="Function"
+      >&#960;&#8320;</a
+      ><a name="1105"
+      >
+
+\end{code}
+
+</a
+      ><a name="1119" class="Comment"
+      >We apply global choice to</a
+      ><a name="1144"
+      >
+
+</a
+      ><a name="1146" class="Comment"
+      >    (a&#8320; &#8801; x) + (a&#8321; &#8801; x)</a
+      ><a name="1169"
+      >
+
+</a
+      ><a name="1171" class="Comment"
+      >to conclude that a&#8320; &#8801; a&#8321; is decidable. We represent the displayed type</a
+      ><a name="1241"
+      >
+</a
+      ><a name="1242" class="Comment"
+      >as &#931; \(i : &#8322;) &#8594; a i &#8801; x for convenience.</a
+      ><a name="1282"
+      >
+
+\begin{code}
+
+</a
+      ><a name="1299" href="GlobalChoice.html#1299" class="Function"
+      >taboo</a
+      ><a name="1304"
+      > </a
+      ><a name="1305" class="Symbol"
+      >:</a
+      ><a name="1306"
+      > </a
+      ><a name="1307" class="Symbol"
+      >(</a
+      ><a name="1308" href="GlobalChoice.html#1308" class="Bound"
+      >X</a
+      ><a name="1309"
+      > </a
+      ><a name="1310" class="Symbol"
+      >:</a
+      ><a name="1311"
+      > </a
+      ><a name="1312" href="KrausLemma.html#78" class="Function"
+      >Type</a
+      ><a name="1316" class="Symbol"
+      >)</a
+      ><a name="1317"
+      > </a
+      ><a name="1318" class="Symbol"
+      >&#8594;</a
+      ><a name="1319"
+      >  </a
+      ><a name="1321" class="Symbol"
+      >(</a
+      ><a name="1322" href="GlobalChoice.html#1322" class="Bound"
+      >a</a
+      ><a name="1323"
+      > </a
+      ><a name="1324" class="Symbol"
+      >:</a
+      ><a name="1325"
+      > </a
+      ><a name="1326" href="mini-library.html#4149" class="Datatype"
+      >&#8322;</a
+      ><a name="1327"
+      > </a
+      ><a name="1328" class="Symbol"
+      >&#8594;</a
+      ><a name="1329"
+      > </a
+      ><a name="1330" href="GlobalChoice.html#1308" class="Bound"
+      >X</a
+      ><a name="1331" class="Symbol"
+      >)</a
+      ><a name="1332"
+      > </a
+      ><a name="1333" class="Symbol"
+      >&#8594;</a
+      ><a name="1334"
+      > </a
+      ><a name="1335" href="decidable-and-discrete.html#79" class="Function"
+      >decidable</a
+      ><a name="1344" class="Symbol"
+      >(</a
+      ><a name="1345" href="GlobalChoice.html#1322" class="Bound"
+      >a</a
+      ><a name="1346"
+      > </a
+      ><a name="1347" href="mini-library.html#4164" class="InductiveConstructor"
+      >&#8320;</a
+      ><a name="1348"
+      > </a
+      ><a name="1349" href="mini-library.html#716" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="1350"
+      > </a
+      ><a name="1351" href="GlobalChoice.html#1322" class="Bound"
+      >a</a
+      ><a name="1352"
+      > </a
+      ><a name="1353" href="mini-library.html#4171" class="InductiveConstructor"
+      >&#8321;</a
+      ><a name="1354" class="Symbol"
+      >)</a
+      ><a name="1355"
+      >
+</a
+      ><a name="1356" href="GlobalChoice.html#1299" class="Function"
+      >taboo</a
+      ><a name="1361"
+      > </a
+      ><a name="1362" href="GlobalChoice.html#1362" class="Bound"
+      >X</a
+      ><a name="1363"
+      > </a
+      ><a name="1364" href="GlobalChoice.html#1364" class="Bound"
+      >a</a
+      ><a name="1365"
+      >  </a
+      ><a name="1367" class="Symbol"
+      >=</a
+      ><a name="1368"
+      > </a
+      ><a name="1369" href="GlobalChoice.html#2316" class="Function"
+      >equal-or-different</a
+      ><a name="1387"
+      >
+ </a
+      ><a name="1389" class="Keyword"
+      >where</a
+      ><a name="1394"
+      >
+  </a
+      ><a name="1397" href="GlobalChoice.html#1397" class="Function"
+      >E</a
+      ><a name="1398"
+      > </a
+      ><a name="1399" class="Symbol"
+      >:</a
+      ><a name="1400"
+      > </a
+      ><a name="1401" href="KrausLemma.html#78" class="Function"
+      >Type</a
+      ><a name="1405"
+      >
+  </a
+      ><a name="1408" href="GlobalChoice.html#1397" class="Function"
+      >E</a
+      ><a name="1409"
+      > </a
+      ><a name="1410" class="Symbol"
+      >=</a
+      ><a name="1411"
+      > </a
+      ><a name="1412" href="mini-library.html#200" class="Record"
+      >&#931;</a
+      ><a name="1413"
+      > </a
+      ><a name="1414" class="Symbol"
+      >\(</a
+      ><a name="1416" href="GlobalChoice.html#1416" class="Bound"
+      >x</a
+      ><a name="1417"
+      > </a
+      ><a name="1418" class="Symbol"
+      >:</a
+      ><a name="1419"
+      > </a
+      ><a name="1420" href="GlobalChoice.html#1362" class="Bound"
+      >X</a
+      ><a name="1421" class="Symbol"
+      >)</a
+      ><a name="1422"
+      > </a
+      ><a name="1423" class="Symbol"
+      >&#8594;</a
+      ><a name="1424"
+      > </a
+      ><a name="1425" href="GlobalChoice.html#704" class="Function"
+      >hinhabited</a
+      ><a name="1435" class="Symbol"
+      >(</a
+      ><a name="1436" href="mini-library.html#200" class="Record"
+      >&#931;</a
+      ><a name="1437"
+      > </a
+      ><a name="1438" class="Symbol"
+      >\(</a
+      ><a name="1440" href="GlobalChoice.html#1440" class="Bound"
+      >i</a
+      ><a name="1441"
+      > </a
+      ><a name="1442" class="Symbol"
+      >:</a
+      ><a name="1443"
+      > </a
+      ><a name="1444" href="mini-library.html#4149" class="Datatype"
+      >&#8322;</a
+      ><a name="1445" class="Symbol"
+      >)</a
+      ><a name="1446"
+      > </a
+      ><a name="1447" class="Symbol"
+      >&#8594;</a
+      ><a name="1448"
+      > </a
+      ><a name="1449" href="GlobalChoice.html#1364" class="Bound"
+      >a</a
+      ><a name="1450"
+      > </a
+      ><a name="1451" href="GlobalChoice.html#1440" class="Bound"
+      >i</a
+      ><a name="1452"
+      > </a
+      ><a name="1453" href="mini-library.html#716" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="1454"
+      > </a
+      ><a name="1455" href="GlobalChoice.html#1416" class="Bound"
+      >x</a
+      ><a name="1456" class="Symbol"
+      >)</a
+      ><a name="1457"
+      >
+
+  </a
+      ><a name="1461" href="GlobalChoice.html#1461" class="Function"
+      >r</a
+      ><a name="1462"
+      > </a
+      ><a name="1463" class="Symbol"
+      >:</a
+      ><a name="1464"
+      > </a
+      ><a name="1465" href="mini-library.html#4149" class="Datatype"
+      >&#8322;</a
+      ><a name="1466"
+      > </a
+      ><a name="1467" class="Symbol"
+      >&#8594;</a
+      ><a name="1468"
+      > </a
+      ><a name="1469" href="GlobalChoice.html#1397" class="Function"
+      >E</a
+      ><a name="1470"
+      >
+  </a
+      ><a name="1473" href="GlobalChoice.html#1461" class="Function"
+      >r</a
+      ><a name="1474"
+      > </a
+      ><a name="1475" href="GlobalChoice.html#1475" class="Bound"
+      >i</a
+      ><a name="1476"
+      > </a
+      ><a name="1477" class="Symbol"
+      >=</a
+      ><a name="1478"
+      > </a
+      ><a name="1479" href="GlobalChoice.html#1364" class="Bound"
+      >a</a
+      ><a name="1480"
+      > </a
+      ><a name="1481" href="GlobalChoice.html#1475" class="Bound"
+      >i</a
+      ><a name="1482"
+      > </a
+      ><a name="1483" href="mini-library.html#252" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="1484"
+      > </a
+      ><a name="1485" href="GlobalChoice.html#863" class="Function"
+      >&#951;</a
+      ><a name="1486" class="Symbol"
+      >(</a
+      ><a name="1487" href="GlobalChoice.html#1475" class="Bound"
+      >i</a
+      ><a name="1488"
+      > </a
+      ><a name="1489" href="mini-library.html#252" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="1490"
+      > </a
+      ><a name="1491" href="mini-library.html#752" class="InductiveConstructor"
+      >refl</a
+      ><a name="1495" class="Symbol"
+      >)</a
+      ><a name="1496"
+      >
+
+  </a
+      ><a name="1500" href="GlobalChoice.html#1500" class="Function"
+      >r-splits</a
+      ><a name="1508"
+      > </a
+      ><a name="1509" class="Symbol"
+      >:</a
+      ><a name="1510"
+      > </a
+      ><a name="1511" class="Symbol"
+      >(</a
+      ><a name="1512" href="GlobalChoice.html#1512" class="Bound"
+      >e</a
+      ><a name="1513"
+      > </a
+      ><a name="1514" class="Symbol"
+      >:</a
+      ><a name="1515"
+      > </a
+      ><a name="1516" href="GlobalChoice.html#1397" class="Function"
+      >E</a
+      ><a name="1517" class="Symbol"
+      >)</a
+      ><a name="1518"
+      > </a
+      ><a name="1519" class="Symbol"
+      >&#8594;</a
+      ><a name="1520"
+      > </a
+      ><a name="1521" href="mini-library.html#200" class="Record"
+      >&#931;</a
+      ><a name="1522"
+      > </a
+      ><a name="1523" class="Symbol"
+      >\(</a
+      ><a name="1525" href="GlobalChoice.html#1525" class="Bound"
+      >i</a
+      ><a name="1526"
+      > </a
+      ><a name="1527" class="Symbol"
+      >:</a
+      ><a name="1528"
+      > </a
+      ><a name="1529" href="mini-library.html#4149" class="Datatype"
+      >&#8322;</a
+      ><a name="1530" class="Symbol"
+      >)</a
+      ><a name="1531"
+      > </a
+      ><a name="1532" class="Symbol"
+      >&#8594;</a
+      ><a name="1533"
+      > </a
+      ><a name="1534" href="GlobalChoice.html#1461" class="Function"
+      >r</a
+      ><a name="1535"
+      > </a
+      ><a name="1536" href="GlobalChoice.html#1525" class="Bound"
+      >i</a
+      ><a name="1537"
+      > </a
+      ><a name="1538" href="mini-library.html#716" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="1539"
+      > </a
+      ><a name="1540" href="GlobalChoice.html#1512" class="Bound"
+      >e</a
+      ><a name="1541"
+      >
+  </a
+      ><a name="1544" href="GlobalChoice.html#1500" class="Function"
+      >r-splits</a
+      ><a name="1552"
+      > </a
+      ><a name="1553" class="Symbol"
+      >(</a
+      ><a name="1554" href="GlobalChoice.html#1554" class="Bound"
+      >x</a
+      ><a name="1555"
+      > </a
+      ><a name="1556" href="mini-library.html#252" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="1557"
+      > </a
+      ><a name="1558" href="GlobalChoice.html#1558" class="Bound"
+      >p</a
+      ><a name="1559" class="Symbol"
+      >)</a
+      ><a name="1560"
+      > </a
+      ><a name="1561" class="Symbol"
+      >=</a
+      ><a name="1562"
+      > </a
+      ><a name="1563" href="mini-library.html#285" class="Function"
+      >&#960;&#8320;</a
+      ><a name="1565"
+      > </a
+      ><a name="1566" href="GlobalChoice.html#1656" class="Function"
+      >p'</a
+      ><a name="1568"
+      > </a
+      ><a name="1569" href="mini-library.html#252" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="1570"
+      > </a
+      ><a name="1571" href="mini-library.html#2841" class="Function"
+      >split</a
+      ><a name="1576"
+      > </a
+      ><a name="1577" class="Symbol"
+      >(</a
+      ><a name="1578" href="GlobalChoice.html#1364" class="Bound"
+      >a</a
+      ><a name="1579" class="Symbol"
+      >(</a
+      ><a name="1580" href="mini-library.html#285" class="Function"
+      >&#960;&#8320;</a
+      ><a name="1582"
+      > </a
+      ><a name="1583" href="GlobalChoice.html#1656" class="Function"
+      >p'</a
+      ><a name="1585" class="Symbol"
+      >))</a
+      ><a name="1587"
+      > </a
+      ><a name="1588" href="GlobalChoice.html#1554" class="Bound"
+      >x</a
+      ><a name="1589"
+      > </a
+      ><a name="1590" class="Symbol"
+      >(</a
+      ><a name="1591" href="GlobalChoice.html#863" class="Function"
+      >&#951;</a
+      ><a name="1592" class="Symbol"
+      >((</a
+      ><a name="1594" href="mini-library.html#285" class="Function"
+      >&#960;&#8320;</a
+      ><a name="1596"
+      > </a
+      ><a name="1597" href="GlobalChoice.html#1656" class="Function"
+      >p'</a
+      ><a name="1599" class="Symbol"
+      >)</a
+      ><a name="1600"
+      > </a
+      ><a name="1601" href="mini-library.html#252" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="1602"
+      > </a
+      ><a name="1603" href="mini-library.html#752" class="InductiveConstructor"
+      >refl</a
+      ><a name="1607" class="Symbol"
+      >))</a
+      ><a name="1609"
+      > </a
+      ><a name="1610" href="GlobalChoice.html#1558" class="Bound"
+      >p</a
+      ><a name="1611"
+      > </a
+      ><a name="1612" class="Symbol"
+      >(</a
+      ><a name="1613" href="mini-library.html#354" class="Function"
+      >&#960;&#8321;</a
+      ><a name="1615"
+      > </a
+      ><a name="1616" href="GlobalChoice.html#1656" class="Function"
+      >p'</a
+      ><a name="1618" class="Symbol"
+      >)</a
+      ><a name="1619"
+      > </a
+      ><a name="1620" class="Symbol"
+      >(</a
+      ><a name="1621" href="GlobalChoice.html#754" class="Function"
+      >hprop-hinhabited</a
+      ><a name="1637"
+      > </a
+      ><a name="1638" class="Symbol"
+      >_</a
+      ><a name="1639"
+      > </a
+      ><a name="1640" href="GlobalChoice.html#1558" class="Bound"
+      >p</a
+      ><a name="1641" class="Symbol"
+      >)</a
+      ><a name="1642"
+      >
+   </a
+      ><a name="1646" class="Keyword"
+      >where</a
+      ><a name="1651"
+      >
+    </a
+      ><a name="1656" href="GlobalChoice.html#1656" class="Function"
+      >p'</a
+      ><a name="1658"
+      > </a
+      ><a name="1659" class="Symbol"
+      >:</a
+      ><a name="1660"
+      > </a
+      ><a name="1661" href="mini-library.html#200" class="Record"
+      >&#931;</a
+      ><a name="1662"
+      > </a
+      ><a name="1663" class="Symbol"
+      >\(</a
+      ><a name="1665" href="GlobalChoice.html#1665" class="Bound"
+      >i</a
+      ><a name="1666"
+      > </a
+      ><a name="1667" class="Symbol"
+      >:</a
+      ><a name="1668"
+      > </a
+      ><a name="1669" href="mini-library.html#4149" class="Datatype"
+      >&#8322;</a
+      ><a name="1670" class="Symbol"
+      >)</a
+      ><a name="1671"
+      > </a
+      ><a name="1672" class="Symbol"
+      >&#8594;</a
+      ><a name="1673"
+      > </a
+      ><a name="1674" href="GlobalChoice.html#1364" class="Bound"
+      >a</a
+      ><a name="1675"
+      > </a
+      ><a name="1676" href="GlobalChoice.html#1665" class="Bound"
+      >i</a
+      ><a name="1677"
+      > </a
+      ><a name="1678" href="mini-library.html#716" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="1679"
+      > </a
+      ><a name="1680" href="GlobalChoice.html#1554" class="Bound"
+      >x</a
+      ><a name="1681"
+      >
+    </a
+      ><a name="1686" href="GlobalChoice.html#1656" class="Function"
+      >p'</a
+      ><a name="1688"
+      > </a
+      ><a name="1689" class="Symbol"
+      >=</a
+      ><a name="1690"
+      > </a
+      ><a name="1691" href="GlobalChoice.html#1041" class="Function"
+      >global-choice</a
+      ><a name="1704"
+      > </a
+      ><a name="1705" href="GlobalChoice.html#1558" class="Bound"
+      >p</a
+      ><a name="1706"
+      >
+
+  </a
+      ><a name="1710" href="GlobalChoice.html#1710" class="Function"
+      >s</a
+      ><a name="1711"
+      > </a
+      ><a name="1712" class="Symbol"
+      >:</a
+      ><a name="1713"
+      > </a
+      ><a name="1714" href="GlobalChoice.html#1397" class="Function"
+      >E</a
+      ><a name="1715"
+      > </a
+      ><a name="1716" class="Symbol"
+      >&#8594;</a
+      ><a name="1717"
+      > </a
+      ><a name="1718" href="mini-library.html#4149" class="Datatype"
+      >&#8322;</a
+      ><a name="1719"
+      >
+  </a
+      ><a name="1722" href="GlobalChoice.html#1710" class="Function"
+      >s</a
+      ><a name="1723"
+      > </a
+      ><a name="1724" href="GlobalChoice.html#1724" class="Bound"
+      >e</a
+      ><a name="1725"
+      > </a
+      ><a name="1726" class="Symbol"
+      >=</a
+      ><a name="1727"
+      > </a
+      ><a name="1728" href="mini-library.html#285" class="Function"
+      >&#960;&#8320;</a
+      ><a name="1730" class="Symbol"
+      >(</a
+      ><a name="1731" href="GlobalChoice.html#1500" class="Function"
+      >r-splits</a
+      ><a name="1739"
+      > </a
+      ><a name="1740" href="GlobalChoice.html#1724" class="Bound"
+      >e</a
+      ><a name="1741" class="Symbol"
+      >)</a
+      ><a name="1742"
+      >
+
+  </a
+      ><a name="1746" href="GlobalChoice.html#1746" class="Function"
+      >r-retract</a
+      ><a name="1755"
+      > </a
+      ><a name="1756" class="Symbol"
+      >:</a
+      ><a name="1757"
+      > </a
+      ><a name="1758" class="Symbol"
+      >(</a
+      ><a name="1759" href="GlobalChoice.html#1759" class="Bound"
+      >e</a
+      ><a name="1760"
+      > </a
+      ><a name="1761" class="Symbol"
+      >:</a
+      ><a name="1762"
+      > </a
+      ><a name="1763" href="GlobalChoice.html#1397" class="Function"
+      >E</a
+      ><a name="1764" class="Symbol"
+      >)</a
+      ><a name="1765"
+      > </a
+      ><a name="1766" class="Symbol"
+      >&#8594;</a
+      ><a name="1767"
+      > </a
+      ><a name="1768" href="GlobalChoice.html#1461" class="Function"
+      >r</a
+      ><a name="1769" class="Symbol"
+      >(</a
+      ><a name="1770" href="GlobalChoice.html#1710" class="Function"
+      >s</a
+      ><a name="1771"
+      > </a
+      ><a name="1772" href="GlobalChoice.html#1759" class="Bound"
+      >e</a
+      ><a name="1773" class="Symbol"
+      >)</a
+      ><a name="1774"
+      > </a
+      ><a name="1775" href="mini-library.html#716" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="1776"
+      > </a
+      ><a name="1777" href="GlobalChoice.html#1759" class="Bound"
+      >e</a
+      ><a name="1778"
+      >
+  </a
+      ><a name="1781" href="GlobalChoice.html#1746" class="Function"
+      >r-retract</a
+      ><a name="1790"
+      > </a
+      ><a name="1791" href="GlobalChoice.html#1791" class="Bound"
+      >e</a
+      ><a name="1792"
+      > </a
+      ><a name="1793" class="Symbol"
+      >=</a
+      ><a name="1794"
+      > </a
+      ><a name="1795" href="mini-library.html#354" class="Function"
+      >&#960;&#8321;</a
+      ><a name="1797" class="Symbol"
+      >(</a
+      ><a name="1798" href="GlobalChoice.html#1500" class="Function"
+      >r-splits</a
+      ><a name="1806"
+      > </a
+      ><a name="1807" href="GlobalChoice.html#1791" class="Bound"
+      >e</a
+      ><a name="1808" class="Symbol"
+      >)</a
+      ><a name="1809"
+      >
+
+  </a
+      ><a name="1813" href="GlobalChoice.html#1813" class="Function"
+      >s-injective</a
+      ><a name="1824"
+      > </a
+      ><a name="1825" class="Symbol"
+      >:</a
+      ><a name="1826"
+      > </a
+      ><a name="1827" class="Symbol"
+      >(</a
+      ><a name="1828" href="GlobalChoice.html#1828" class="Bound"
+      >e</a
+      ><a name="1829"
+      > </a
+      ><a name="1830" href="GlobalChoice.html#1830" class="Bound"
+      >e'</a
+      ><a name="1832"
+      > </a
+      ><a name="1833" class="Symbol"
+      >:</a
+      ><a name="1834"
+      > </a
+      ><a name="1835" href="GlobalChoice.html#1397" class="Function"
+      >E</a
+      ><a name="1836" class="Symbol"
+      >)</a
+      ><a name="1837"
+      > </a
+      ><a name="1838" class="Symbol"
+      >&#8594;</a
+      ><a name="1839"
+      > </a
+      ><a name="1840" href="GlobalChoice.html#1710" class="Function"
+      >s</a
+      ><a name="1841"
+      > </a
+      ><a name="1842" href="GlobalChoice.html#1828" class="Bound"
+      >e</a
+      ><a name="1843"
+      > </a
+      ><a name="1844" href="mini-library.html#716" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="1845"
+      > </a
+      ><a name="1846" href="GlobalChoice.html#1710" class="Function"
+      >s</a
+      ><a name="1847"
+      > </a
+      ><a name="1848" href="GlobalChoice.html#1830" class="Bound"
+      >e'</a
+      ><a name="1850"
+      > </a
+      ><a name="1851" class="Symbol"
+      >&#8594;</a
+      ><a name="1852"
+      > </a
+      ><a name="1853" href="GlobalChoice.html#1828" class="Bound"
+      >e</a
+      ><a name="1854"
+      > </a
+      ><a name="1855" href="mini-library.html#716" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="1856"
+      > </a
+      ><a name="1857" href="GlobalChoice.html#1830" class="Bound"
+      >e'</a
+      ><a name="1859"
+      >
+  </a
+      ><a name="1862" href="GlobalChoice.html#1813" class="Function"
+      >s-injective</a
+      ><a name="1873"
+      > </a
+      ><a name="1874" href="GlobalChoice.html#1874" class="Bound"
+      >e</a
+      ><a name="1875"
+      > </a
+      ><a name="1876" href="GlobalChoice.html#1876" class="Bound"
+      >e'</a
+      ><a name="1878"
+      > </a
+      ><a name="1879" href="GlobalChoice.html#1879" class="Bound"
+      >p</a
+      ><a name="1880"
+      > </a
+      ><a name="1881" class="Symbol"
+      >=</a
+      ><a name="1882"
+      > </a
+      ><a name="1883" class="Symbol"
+      >(</a
+      ><a name="1884" href="GlobalChoice.html#1746" class="Function"
+      >r-retract</a
+      ><a name="1893"
+      > </a
+      ><a name="1894" href="GlobalChoice.html#1874" class="Bound"
+      >e</a
+      ><a name="1895" class="Symbol"
+      >)</a
+      ><a name="1896" href="mini-library.html#2008" class="Function Operator"
+      >&#8315;&#185;</a
+      ><a name="1898"
+      > </a
+      ><a name="1899" href="mini-library.html#1935" class="Function Operator"
+      >&#8226;</a
+      ><a name="1900"
+      > </a
+      ><a name="1901" href="mini-library.html#1593" class="Function"
+      >cong</a
+      ><a name="1905"
+      > </a
+      ><a name="1906" href="GlobalChoice.html#1461" class="Function"
+      >r</a
+      ><a name="1907"
+      > </a
+      ><a name="1908" href="GlobalChoice.html#1879" class="Bound"
+      >p</a
+      ><a name="1909"
+      > </a
+      ><a name="1910" href="mini-library.html#1935" class="Function Operator"
+      >&#8226;</a
+      ><a name="1911"
+      > </a
+      ><a name="1912" href="GlobalChoice.html#1746" class="Function"
+      >r-retract</a
+      ><a name="1921"
+      > </a
+      ><a name="1922" href="GlobalChoice.html#1876" class="Bound"
+      >e'</a
+      ><a name="1924"
+      >
+
+  </a
+      ><a name="1928" href="GlobalChoice.html#1928" class="Function"
+      >a-r</a
+      ><a name="1931"
+      > </a
+      ><a name="1932" class="Symbol"
+      >:</a
+      ><a name="1933"
+      > </a
+      ><a name="1934" class="Symbol"
+      >(</a
+      ><a name="1935" href="GlobalChoice.html#1935" class="Bound"
+      >i</a
+      ><a name="1936"
+      > </a
+      ><a name="1937" href="GlobalChoice.html#1937" class="Bound"
+      >j</a
+      ><a name="1938"
+      > </a
+      ><a name="1939" class="Symbol"
+      >:</a
+      ><a name="1940"
+      > </a
+      ><a name="1941" href="mini-library.html#4149" class="Datatype"
+      >&#8322;</a
+      ><a name="1942" class="Symbol"
+      >)</a
+      ><a name="1943"
+      > </a
+      ><a name="1944" class="Symbol"
+      >&#8594;</a
+      ><a name="1945"
+      > </a
+      ><a name="1946" href="GlobalChoice.html#1364" class="Bound"
+      >a</a
+      ><a name="1947"
+      > </a
+      ><a name="1948" href="GlobalChoice.html#1935" class="Bound"
+      >i</a
+      ><a name="1949"
+      > </a
+      ><a name="1950" href="mini-library.html#716" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="1951"
+      > </a
+      ><a name="1952" href="GlobalChoice.html#1364" class="Bound"
+      >a</a
+      ><a name="1953"
+      > </a
+      ><a name="1954" href="GlobalChoice.html#1937" class="Bound"
+      >j</a
+      ><a name="1955"
+      > </a
+      ><a name="1956" class="Symbol"
+      >&#8594;</a
+      ><a name="1957"
+      > </a
+      ><a name="1958" href="GlobalChoice.html#1461" class="Function"
+      >r</a
+      ><a name="1959"
+      > </a
+      ><a name="1960" href="GlobalChoice.html#1935" class="Bound"
+      >i</a
+      ><a name="1961"
+      > </a
+      ><a name="1962" href="mini-library.html#716" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="1963"
+      > </a
+      ><a name="1964" href="GlobalChoice.html#1461" class="Function"
+      >r</a
+      ><a name="1965"
+      > </a
+      ><a name="1966" href="GlobalChoice.html#1937" class="Bound"
+      >j</a
+      ><a name="1967"
+      >
+  </a
+      ><a name="1970" href="GlobalChoice.html#1928" class="Function"
+      >a-r</a
+      ><a name="1973"
+      > </a
+      ><a name="1974" href="GlobalChoice.html#1974" class="Bound"
+      >i</a
+      ><a name="1975"
+      > </a
+      ><a name="1976" href="GlobalChoice.html#1976" class="Bound"
+      >j</a
+      ><a name="1977"
+      > </a
+      ><a name="1978" href="GlobalChoice.html#1978" class="Bound"
+      >p</a
+      ><a name="1979"
+      > </a
+      ><a name="1980" class="Symbol"
+      >=</a
+      ><a name="1981"
+      > </a
+      ><a name="1982" href="mini-library.html#2841" class="Function"
+      >split</a
+      ><a name="1987"
+      > </a
+      ><a name="1988" class="Symbol"
+      >(</a
+      ><a name="1989" href="GlobalChoice.html#1364" class="Bound"
+      >a</a
+      ><a name="1990"
+      > </a
+      ><a name="1991" href="GlobalChoice.html#1974" class="Bound"
+      >i</a
+      ><a name="1992" class="Symbol"
+      >)</a
+      ><a name="1993"
+      > </a
+      ><a name="1994" class="Symbol"
+      >(</a
+      ><a name="1995" href="GlobalChoice.html#1364" class="Bound"
+      >a</a
+      ><a name="1996"
+      > </a
+      ><a name="1997" href="GlobalChoice.html#1976" class="Bound"
+      >j</a
+      ><a name="1998" class="Symbol"
+      >)</a
+      ><a name="1999"
+      > </a
+      ><a name="2000" class="Symbol"
+      >(</a
+      ><a name="2001" href="GlobalChoice.html#863" class="Function"
+      >&#951;</a
+      ><a name="2002" class="Symbol"
+      >(</a
+      ><a name="2003" href="GlobalChoice.html#1974" class="Bound"
+      >i</a
+      ><a name="2004"
+      > </a
+      ><a name="2005" href="mini-library.html#252" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="2006"
+      > </a
+      ><a name="2007" href="mini-library.html#752" class="InductiveConstructor"
+      >refl</a
+      ><a name="2011" class="Symbol"
+      >))</a
+      ><a name="2013"
+      > </a
+      ><a name="2014" class="Symbol"
+      >(</a
+      ><a name="2015" href="GlobalChoice.html#863" class="Function"
+      >&#951;</a
+      ><a name="2016" class="Symbol"
+      >(</a
+      ><a name="2017" href="GlobalChoice.html#1976" class="Bound"
+      >j</a
+      ><a name="2018"
+      > </a
+      ><a name="2019" href="mini-library.html#252" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="2020"
+      > </a
+      ><a name="2021" href="mini-library.html#752" class="InductiveConstructor"
+      >refl</a
+      ><a name="2025" class="Symbol"
+      >))</a
+      ><a name="2027"
+      > </a
+      ><a name="2028" href="GlobalChoice.html#1978" class="Bound"
+      >p</a
+      ><a name="2029"
+      > </a
+      ><a name="2030" class="Symbol"
+      >(</a
+      ><a name="2031" href="GlobalChoice.html#754" class="Function"
+      >hprop-hinhabited</a
+      ><a name="2047"
+      > </a
+      ><a name="2048" class="Symbol"
+      >_</a
+      ><a name="2049"
+      > </a
+      ><a name="2050" class="Symbol"
+      >(</a
+      ><a name="2051" href="GlobalChoice.html#863" class="Function"
+      >&#951;</a
+      ><a name="2052" class="Symbol"
+      >(</a
+      ><a name="2053" href="GlobalChoice.html#1976" class="Bound"
+      >j</a
+      ><a name="2054"
+      > </a
+      ><a name="2055" href="mini-library.html#252" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="2056"
+      > </a
+      ><a name="2057" href="mini-library.html#752" class="InductiveConstructor"
+      >refl</a
+      ><a name="2061" class="Symbol"
+      >)))</a
+      ><a name="2064"
+      >
+
+  </a
+      ><a name="2068" href="GlobalChoice.html#2068" class="Function"
+      >r-a</a
+      ><a name="2071"
+      > </a
+      ><a name="2072" class="Symbol"
+      >:</a
+      ><a name="2073"
+      > </a
+      ><a name="2074" class="Symbol"
+      >(</a
+      ><a name="2075" href="GlobalChoice.html#2075" class="Bound"
+      >i</a
+      ><a name="2076"
+      > </a
+      ><a name="2077" href="GlobalChoice.html#2077" class="Bound"
+      >j</a
+      ><a name="2078"
+      > </a
+      ><a name="2079" class="Symbol"
+      >:</a
+      ><a name="2080"
+      > </a
+      ><a name="2081" href="mini-library.html#4149" class="Datatype"
+      >&#8322;</a
+      ><a name="2082" class="Symbol"
+      >)</a
+      ><a name="2083"
+      > </a
+      ><a name="2084" class="Symbol"
+      >&#8594;</a
+      ><a name="2085"
+      > </a
+      ><a name="2086" href="GlobalChoice.html#1461" class="Function"
+      >r</a
+      ><a name="2087"
+      > </a
+      ><a name="2088" href="GlobalChoice.html#2075" class="Bound"
+      >i</a
+      ><a name="2089"
+      > </a
+      ><a name="2090" href="mini-library.html#716" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="2091"
+      > </a
+      ><a name="2092" href="GlobalChoice.html#1461" class="Function"
+      >r</a
+      ><a name="2093"
+      > </a
+      ><a name="2094" href="GlobalChoice.html#2077" class="Bound"
+      >j</a
+      ><a name="2095"
+      > </a
+      ><a name="2096" class="Symbol"
+      >&#8594;</a
+      ><a name="2097"
+      > </a
+      ><a name="2098" href="GlobalChoice.html#1364" class="Bound"
+      >a</a
+      ><a name="2099"
+      > </a
+      ><a name="2100" href="GlobalChoice.html#2075" class="Bound"
+      >i</a
+      ><a name="2101"
+      > </a
+      ><a name="2102" href="mini-library.html#716" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="2103"
+      > </a
+      ><a name="2104" href="GlobalChoice.html#1364" class="Bound"
+      >a</a
+      ><a name="2105"
+      > </a
+      ><a name="2106" href="GlobalChoice.html#2077" class="Bound"
+      >j</a
+      ><a name="2107"
+      >
+  </a
+      ><a name="2110" href="GlobalChoice.html#2068" class="Function"
+      >r-a</a
+      ><a name="2113"
+      > </a
+      ><a name="2114" href="GlobalChoice.html#2114" class="Bound"
+      >i</a
+      ><a name="2115"
+      > </a
+      ><a name="2116" href="GlobalChoice.html#2116" class="Bound"
+      >j</a
+      ><a name="2117"
+      > </a
+      ><a name="2118" href="GlobalChoice.html#2118" class="Bound"
+      >q</a
+      ><a name="2119"
+      > </a
+      ><a name="2120" class="Symbol"
+      >=</a
+      ><a name="2121"
+      > </a
+      ><a name="2122" href="mini-library.html#1593" class="Function"
+      >cong</a
+      ><a name="2126"
+      > </a
+      ><a name="2127" href="mini-library.html#285" class="Function"
+      >&#960;&#8320;</a
+      ><a name="2129"
+      > </a
+      ><a name="2130" href="GlobalChoice.html#2118" class="Bound"
+      >q</a
+      ><a name="2131"
+      >
+
+  </a
+      ><a name="2135" href="GlobalChoice.html#2135" class="Function"
+      >a-s</a
+      ><a name="2138"
+      > </a
+      ><a name="2139" class="Symbol"
+      >:</a
+      ><a name="2140"
+      > </a
+      ><a name="2141" class="Symbol"
+      >(</a
+      ><a name="2142" href="GlobalChoice.html#2142" class="Bound"
+      >i</a
+      ><a name="2143"
+      > </a
+      ><a name="2144" href="GlobalChoice.html#2144" class="Bound"
+      >j</a
+      ><a name="2145"
+      > </a
+      ><a name="2146" class="Symbol"
+      >:</a
+      ><a name="2147"
+      > </a
+      ><a name="2148" href="mini-library.html#4149" class="Datatype"
+      >&#8322;</a
+      ><a name="2149" class="Symbol"
+      >)</a
+      ><a name="2150"
+      > </a
+      ><a name="2151" class="Symbol"
+      >&#8594;</a
+      ><a name="2152"
+      > </a
+      ><a name="2153" href="GlobalChoice.html#1364" class="Bound"
+      >a</a
+      ><a name="2154"
+      > </a
+      ><a name="2155" href="GlobalChoice.html#2142" class="Bound"
+      >i</a
+      ><a name="2156"
+      > </a
+      ><a name="2157" href="mini-library.html#716" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="2158"
+      > </a
+      ><a name="2159" href="GlobalChoice.html#1364" class="Bound"
+      >a</a
+      ><a name="2160"
+      > </a
+      ><a name="2161" href="GlobalChoice.html#2144" class="Bound"
+      >j</a
+      ><a name="2162"
+      > </a
+      ><a name="2163" class="Symbol"
+      >&#8594;</a
+      ><a name="2164"
+      > </a
+      ><a name="2165" href="GlobalChoice.html#1710" class="Function"
+      >s</a
+      ><a name="2166" class="Symbol"
+      >(</a
+      ><a name="2167" href="GlobalChoice.html#1461" class="Function"
+      >r</a
+      ><a name="2168"
+      > </a
+      ><a name="2169" href="GlobalChoice.html#2142" class="Bound"
+      >i</a
+      ><a name="2170" class="Symbol"
+      >)</a
+      ><a name="2171"
+      > </a
+      ><a name="2172" href="mini-library.html#716" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="2173"
+      > </a
+      ><a name="2174" href="GlobalChoice.html#1710" class="Function"
+      >s</a
+      ><a name="2175" class="Symbol"
+      >(</a
+      ><a name="2176" href="GlobalChoice.html#1461" class="Function"
+      >r</a
+      ><a name="2177"
+      > </a
+      ><a name="2178" href="GlobalChoice.html#2144" class="Bound"
+      >j</a
+      ><a name="2179" class="Symbol"
+      >)</a
+      ><a name="2180"
+      >
+  </a
+      ><a name="2183" href="GlobalChoice.html#2135" class="Function"
+      >a-s</a
+      ><a name="2186"
+      > </a
+      ><a name="2187" href="GlobalChoice.html#2187" class="Bound"
+      >i</a
+      ><a name="2188"
+      > </a
+      ><a name="2189" href="GlobalChoice.html#2189" class="Bound"
+      >j</a
+      ><a name="2190"
+      > </a
+      ><a name="2191" href="GlobalChoice.html#2191" class="Bound"
+      >p</a
+      ><a name="2192"
+      > </a
+      ><a name="2193" class="Symbol"
+      >=</a
+      ><a name="2194"
+      > </a
+      ><a name="2195" href="mini-library.html#1593" class="Function"
+      >cong</a
+      ><a name="2199"
+      > </a
+      ><a name="2200" href="GlobalChoice.html#1710" class="Function"
+      >s</a
+      ><a name="2201"
+      > </a
+      ><a name="2202" class="Symbol"
+      >(</a
+      ><a name="2203" href="GlobalChoice.html#1928" class="Function"
+      >a-r</a
+      ><a name="2206"
+      > </a
+      ><a name="2207" href="GlobalChoice.html#2187" class="Bound"
+      >i</a
+      ><a name="2208"
+      > </a
+      ><a name="2209" href="GlobalChoice.html#2189" class="Bound"
+      >j</a
+      ><a name="2210"
+      > </a
+      ><a name="2211" href="GlobalChoice.html#2191" class="Bound"
+      >p</a
+      ><a name="2212" class="Symbol"
+      >)</a
+      ><a name="2213"
+      >
+
+  </a
+      ><a name="2217" href="GlobalChoice.html#2217" class="Function"
+      >s-a</a
+      ><a name="2220"
+      > </a
+      ><a name="2221" class="Symbol"
+      >:</a
+      ><a name="2222"
+      > </a
+      ><a name="2223" class="Symbol"
+      >(</a
+      ><a name="2224" href="GlobalChoice.html#2224" class="Bound"
+      >i</a
+      ><a name="2225"
+      > </a
+      ><a name="2226" href="GlobalChoice.html#2226" class="Bound"
+      >j</a
+      ><a name="2227"
+      > </a
+      ><a name="2228" class="Symbol"
+      >:</a
+      ><a name="2229"
+      > </a
+      ><a name="2230" href="mini-library.html#4149" class="Datatype"
+      >&#8322;</a
+      ><a name="2231" class="Symbol"
+      >)</a
+      ><a name="2232"
+      > </a
+      ><a name="2233" class="Symbol"
+      >&#8594;</a
+      ><a name="2234"
+      > </a
+      ><a name="2235" href="GlobalChoice.html#1710" class="Function"
+      >s</a
+      ><a name="2236" class="Symbol"
+      >(</a
+      ><a name="2237" href="GlobalChoice.html#1461" class="Function"
+      >r</a
+      ><a name="2238"
+      > </a
+      ><a name="2239" href="GlobalChoice.html#2224" class="Bound"
+      >i</a
+      ><a name="2240" class="Symbol"
+      >)</a
+      ><a name="2241"
+      > </a
+      ><a name="2242" href="mini-library.html#716" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="2243"
+      > </a
+      ><a name="2244" href="GlobalChoice.html#1710" class="Function"
+      >s</a
+      ><a name="2245" class="Symbol"
+      >(</a
+      ><a name="2246" href="GlobalChoice.html#1461" class="Function"
+      >r</a
+      ><a name="2247"
+      > </a
+      ><a name="2248" href="GlobalChoice.html#2226" class="Bound"
+      >j</a
+      ><a name="2249" class="Symbol"
+      >)</a
+      ><a name="2250"
+      > </a
+      ><a name="2251" class="Symbol"
+      >&#8594;</a
+      ><a name="2252"
+      > </a
+      ><a name="2253" href="GlobalChoice.html#1364" class="Bound"
+      >a</a
+      ><a name="2254"
+      > </a
+      ><a name="2255" href="GlobalChoice.html#2224" class="Bound"
+      >i</a
+      ><a name="2256"
+      > </a
+      ><a name="2257" href="mini-library.html#716" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="2258"
+      > </a
+      ><a name="2259" href="GlobalChoice.html#1364" class="Bound"
+      >a</a
+      ><a name="2260"
+      > </a
+      ><a name="2261" href="GlobalChoice.html#2226" class="Bound"
+      >j</a
+      ><a name="2262"
+      >
+  </a
+      ><a name="2265" href="GlobalChoice.html#2217" class="Function"
+      >s-a</a
+      ><a name="2268"
+      > </a
+      ><a name="2269" href="GlobalChoice.html#2269" class="Bound"
+      >i</a
+      ><a name="2270"
+      > </a
+      ><a name="2271" href="GlobalChoice.html#2271" class="Bound"
+      >j</a
+      ><a name="2272"
+      > </a
+      ><a name="2273" href="GlobalChoice.html#2273" class="Bound"
+      >p</a
+      ><a name="2274"
+      > </a
+      ><a name="2275" class="Symbol"
+      >=</a
+      ><a name="2276"
+      > </a
+      ><a name="2277" href="GlobalChoice.html#2068" class="Function"
+      >r-a</a
+      ><a name="2280"
+      > </a
+      ><a name="2281" href="GlobalChoice.html#2269" class="Bound"
+      >i</a
+      ><a name="2282"
+      > </a
+      ><a name="2283" href="GlobalChoice.html#2271" class="Bound"
+      >j</a
+      ><a name="2284"
+      > </a
+      ><a name="2285" class="Symbol"
+      >(</a
+      ><a name="2286" href="GlobalChoice.html#1813" class="Function"
+      >s-injective</a
+      ><a name="2297"
+      > </a
+      ><a name="2298" class="Symbol"
+      >(</a
+      ><a name="2299" href="GlobalChoice.html#1461" class="Function"
+      >r</a
+      ><a name="2300"
+      > </a
+      ><a name="2301" href="GlobalChoice.html#2269" class="Bound"
+      >i</a
+      ><a name="2302" class="Symbol"
+      >)</a
+      ><a name="2303"
+      > </a
+      ><a name="2304" class="Symbol"
+      >(</a
+      ><a name="2305" href="GlobalChoice.html#1461" class="Function"
+      >r</a
+      ><a name="2306"
+      > </a
+      ><a name="2307" href="GlobalChoice.html#2271" class="Bound"
+      >j</a
+      ><a name="2308" class="Symbol"
+      >)</a
+      ><a name="2309"
+      > </a
+      ><a name="2310" href="GlobalChoice.html#2273" class="Bound"
+      >p</a
+      ><a name="2311" class="Symbol"
+      >)</a
+      ><a name="2312"
+      >
+
+  </a
+      ><a name="2316" href="GlobalChoice.html#2316" class="Function"
+      >equal-or-different</a
+      ><a name="2334"
+      > </a
+      ><a name="2335" class="Symbol"
+      >:</a
+      ><a name="2336"
+      > </a
+      ><a name="2337" class="Symbol"
+      >(</a
+      ><a name="2338" href="GlobalChoice.html#1364" class="Bound"
+      >a</a
+      ><a name="2339"
+      > </a
+      ><a name="2340" href="mini-library.html#4164" class="InductiveConstructor"
+      >&#8320;</a
+      ><a name="2341"
+      > </a
+      ><a name="2342" href="mini-library.html#716" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="2343"
+      > </a
+      ><a name="2344" href="GlobalChoice.html#1364" class="Bound"
+      >a</a
+      ><a name="2345"
+      > </a
+      ><a name="2346" href="mini-library.html#4171" class="InductiveConstructor"
+      >&#8321;</a
+      ><a name="2347" class="Symbol"
+      >)</a
+      ><a name="2348"
+      > </a
+      ><a name="2349" href="mini-library.html#640" class="Datatype Operator"
+      >+</a
+      ><a name="2350"
+      > </a
+      ><a name="2351" class="Symbol"
+      >(</a
+      ><a name="2352" href="GlobalChoice.html#1364" class="Bound"
+      >a</a
+      ><a name="2353"
+      > </a
+      ><a name="2354" href="mini-library.html#4164" class="InductiveConstructor"
+      >&#8320;</a
+      ><a name="2355"
+      > </a
+      ><a name="2356" href="mini-library.html#716" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="2357"
+      > </a
+      ><a name="2358" href="GlobalChoice.html#1364" class="Bound"
+      >a</a
+      ><a name="2359"
+      > </a
+      ><a name="2360" href="mini-library.html#4171" class="InductiveConstructor"
+      >&#8321;</a
+      ><a name="2361"
+      > </a
+      ><a name="2362" class="Symbol"
+      >&#8594;</a
+      ><a name="2363"
+      > </a
+      ><a name="2364" href="mini-library.html#581" class="Datatype"
+      >&#8709;</a
+      ><a name="2365" class="Symbol"
+      >)</a
+      ><a name="2366"
+      >
+  </a
+      ><a name="2370" href="GlobalChoice.html#2316" class="Function"
+      >equal-or-different</a
+      ><a name="2388"
+      > </a
+      ><a name="2389" class="Symbol"
+      >=</a
+      ><a name="2390"
+      > </a
+      ><a name="2391" href="GlobalChoice.html#2441" class="Function"
+      >claim</a
+      ><a name="2396" class="Symbol"
+      >(</a
+      ><a name="2397" href="decidable-and-discrete.html#192" class="Function"
+      >&#8322;-discrete</a
+      ><a name="2407"
+      > </a
+      ><a name="2408" class="Symbol"
+      >{</a
+      ><a name="2409" href="GlobalChoice.html#1710" class="Function"
+      >s</a
+      ><a name="2410" class="Symbol"
+      >(</a
+      ><a name="2411" href="GlobalChoice.html#1461" class="Function"
+      >r</a
+      ><a name="2412"
+      > </a
+      ><a name="2413" href="mini-library.html#4164" class="InductiveConstructor"
+      >&#8320;</a
+      ><a name="2414" class="Symbol"
+      >)}</a
+      ><a name="2416"
+      > </a
+      ><a name="2417" class="Symbol"
+      >{</a
+      ><a name="2418" href="GlobalChoice.html#1710" class="Function"
+      >s</a
+      ><a name="2419" class="Symbol"
+      >(</a
+      ><a name="2420" href="GlobalChoice.html#1461" class="Function"
+      >r</a
+      ><a name="2421"
+      > </a
+      ><a name="2422" href="mini-library.html#4171" class="InductiveConstructor"
+      >&#8321;</a
+      ><a name="2423" class="Symbol"
+      >)})</a
+      ><a name="2426"
+      >
+   </a
+      ><a name="2430" class="Keyword"
+      >where</a
+      ><a name="2435"
+      >
+    </a
+      ><a name="2441" href="GlobalChoice.html#2441" class="Function"
+      >claim</a
+      ><a name="2446"
+      > </a
+      ><a name="2447" class="Symbol"
+      >:</a
+      ><a name="2448"
+      > </a
+      ><a name="2449" class="Symbol"
+      >(</a
+      ><a name="2450" href="GlobalChoice.html#1710" class="Function"
+      >s</a
+      ><a name="2451" class="Symbol"
+      >(</a
+      ><a name="2452" href="GlobalChoice.html#1461" class="Function"
+      >r</a
+      ><a name="2453"
+      > </a
+      ><a name="2454" href="mini-library.html#4164" class="InductiveConstructor"
+      >&#8320;</a
+      ><a name="2455" class="Symbol"
+      >)</a
+      ><a name="2456"
+      > </a
+      ><a name="2457" href="mini-library.html#716" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="2458"
+      > </a
+      ><a name="2459" href="GlobalChoice.html#1710" class="Function"
+      >s</a
+      ><a name="2460" class="Symbol"
+      >(</a
+      ><a name="2461" href="GlobalChoice.html#1461" class="Function"
+      >r</a
+      ><a name="2462"
+      > </a
+      ><a name="2463" href="mini-library.html#4171" class="InductiveConstructor"
+      >&#8321;</a
+      ><a name="2464" class="Symbol"
+      >))</a
+      ><a name="2466"
+      > </a
+      ><a name="2467" href="mini-library.html#640" class="Datatype Operator"
+      >+</a
+      ><a name="2468"
+      > </a
+      ><a name="2469" class="Symbol"
+      >(</a
+      ><a name="2470" href="GlobalChoice.html#1710" class="Function"
+      >s</a
+      ><a name="2471" class="Symbol"
+      >(</a
+      ><a name="2472" href="GlobalChoice.html#1461" class="Function"
+      >r</a
+      ><a name="2473"
+      > </a
+      ><a name="2474" href="mini-library.html#4164" class="InductiveConstructor"
+      >&#8320;</a
+      ><a name="2475" class="Symbol"
+      >)</a
+      ><a name="2476"
+      > </a
+      ><a name="2477" href="mini-library.html#716" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="2478"
+      > </a
+      ><a name="2479" href="GlobalChoice.html#1710" class="Function"
+      >s</a
+      ><a name="2480" class="Symbol"
+      >(</a
+      ><a name="2481" href="GlobalChoice.html#1461" class="Function"
+      >r</a
+      ><a name="2482"
+      > </a
+      ><a name="2483" href="mini-library.html#4171" class="InductiveConstructor"
+      >&#8321;</a
+      ><a name="2484" class="Symbol"
+      >)</a
+      ><a name="2485"
+      > </a
+      ><a name="2486" class="Symbol"
+      >&#8594;</a
+      ><a name="2487"
+      > </a
+      ><a name="2488" href="mini-library.html#581" class="Datatype"
+      >&#8709;</a
+      ><a name="2489" class="Symbol"
+      >)</a
+      ><a name="2490"
+      > </a
+      ><a name="2491" class="Symbol"
+      >&#8594;</a
+      ><a name="2492"
+      > </a
+      ><a name="2493" class="Symbol"
+      >(</a
+      ><a name="2494" href="GlobalChoice.html#1364" class="Bound"
+      >a</a
+      ><a name="2495"
+      > </a
+      ><a name="2496" href="mini-library.html#4164" class="InductiveConstructor"
+      >&#8320;</a
+      ><a name="2497"
+      > </a
+      ><a name="2498" href="mini-library.html#716" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="2499"
+      > </a
+      ><a name="2500" href="GlobalChoice.html#1364" class="Bound"
+      >a</a
+      ><a name="2501"
+      > </a
+      ><a name="2502" href="mini-library.html#4171" class="InductiveConstructor"
+      >&#8321;</a
+      ><a name="2503" class="Symbol"
+      >)</a
+      ><a name="2504"
+      > </a
+      ><a name="2505" href="mini-library.html#640" class="Datatype Operator"
+      >+</a
+      ><a name="2506"
+      > </a
+      ><a name="2507" class="Symbol"
+      >(</a
+      ><a name="2508" href="GlobalChoice.html#1364" class="Bound"
+      >a</a
+      ><a name="2509"
+      > </a
+      ><a name="2510" href="mini-library.html#4164" class="InductiveConstructor"
+      >&#8320;</a
+      ><a name="2511"
+      > </a
+      ><a name="2512" href="mini-library.html#716" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="2513"
+      > </a
+      ><a name="2514" href="GlobalChoice.html#1364" class="Bound"
+      >a</a
+      ><a name="2515"
+      > </a
+      ><a name="2516" href="mini-library.html#4171" class="InductiveConstructor"
+      >&#8321;</a
+      ><a name="2517"
+      > </a
+      ><a name="2518" class="Symbol"
+      >&#8594;</a
+      ><a name="2519"
+      > </a
+      ><a name="2520" href="mini-library.html#581" class="Datatype"
+      >&#8709;</a
+      ><a name="2521" class="Symbol"
+      >)</a
+      ><a name="2522"
+      >
+    </a
+      ><a name="2528" href="GlobalChoice.html#2441" class="Function"
+      >claim</a
+      ><a name="2533"
+      > </a
+      ><a name="2534" class="Symbol"
+      >(</a
+      ><a name="2535" href="mini-library.html#671" class="InductiveConstructor"
+      >in&#8320;</a
+      ><a name="2538"
+      > </a
+      ><a name="2539" href="GlobalChoice.html#2539" class="Bound"
+      >p</a
+      ><a name="2540" class="Symbol"
+      >)</a
+      ><a name="2541"
+      > </a
+      ><a name="2542" class="Symbol"
+      >=</a
+      ><a name="2543"
+      > </a
+      ><a name="2544" href="mini-library.html#671" class="InductiveConstructor"
+      >in&#8320;</a
+      ><a name="2547"
+      > </a
+      ><a name="2548" class="Symbol"
+      >(</a
+      ><a name="2549" href="GlobalChoice.html#2217" class="Function"
+      >s-a</a
+      ><a name="2552"
+      > </a
+      ><a name="2553" href="mini-library.html#4164" class="InductiveConstructor"
+      >&#8320;</a
+      ><a name="2554"
+      > </a
+      ><a name="2555" href="mini-library.html#4171" class="InductiveConstructor"
+      >&#8321;</a
+      ><a name="2556"
+      > </a
+      ><a name="2557" href="GlobalChoice.html#2539" class="Bound"
+      >p</a
+      ><a name="2558" class="Symbol"
+      >)</a
+      ><a name="2559"
+      >
+    </a
+      ><a name="2564" href="GlobalChoice.html#2441" class="Function"
+      >claim</a
+      ><a name="2569"
+      > </a
+      ><a name="2570" class="Symbol"
+      >(</a
+      ><a name="2571" href="mini-library.html#691" class="InductiveConstructor"
+      >in&#8321;</a
+      ><a name="2574"
+      > </a
+      ><a name="2575" href="GlobalChoice.html#2575" class="Bound"
+      >u</a
+      ><a name="2576" class="Symbol"
+      >)</a
+      ><a name="2577"
+      > </a
+      ><a name="2578" class="Symbol"
+      >=</a
+      ><a name="2579"
+      > </a
+      ><a name="2580" href="mini-library.html#691" class="InductiveConstructor"
+      >in&#8321;</a
+      ><a name="2583"
+      > </a
+      ><a name="2584" class="Symbol"
+      >(&#955;</a
+      ><a name="2586"
+      > </a
+      ><a name="2587" href="GlobalChoice.html#2587" class="Bound"
+      >p</a
+      ><a name="2588"
+      > </a
+      ><a name="2589" class="Symbol"
+      >&#8594;</a
+      ><a name="2590"
+      > </a
+      ><a name="2591" href="GlobalChoice.html#2575" class="Bound"
+      >u</a
+      ><a name="2592"
+      > </a
+      ><a name="2593" class="Symbol"
+      >(</a
+      ><a name="2594" href="GlobalChoice.html#2135" class="Function"
+      >a-s</a
+      ><a name="2597"
+      > </a
+      ><a name="2598" href="mini-library.html#4164" class="InductiveConstructor"
+      >&#8320;</a
+      ><a name="2599"
+      > </a
+      ><a name="2600" href="mini-library.html#4171" class="InductiveConstructor"
+      >&#8321;</a
+      ><a name="2601"
+      > </a
+      ><a name="2602" href="GlobalChoice.html#2587" class="Bound"
+      >p</a
+      ><a name="2603" class="Symbol"
+      >))</a
+      ><a name="2605"
+      >
+
+\end{code}
+</a
+      ></pre
+    ></body
+  ></html
+>

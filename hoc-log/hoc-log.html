@@ -1,0 +1,2644 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+><head
+  ><title
+    >hoc-log</title
+    ><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"
+     /><meta http-equiv="Content-Style-Type" content="text/css"
+     /><link href="Agda.css" rel="stylesheet" type="text/css"
+     /></head
+  ><body
+  ><pre
+    ><a name="1" class="Comment"
+      >
+H i g h e r -  o r d e r   c o m p u t a t i o n
+
+l e c t u r e   l o g
+
+
+Mart&#237;n H&#246;tzel Escard&#243;
+Nordic Logic School (NLS), Stockholm, 2017
+
+
+The original plan and (rather incomplete) bibliographic references:
+http://www.cs.bham.ac.uk/~mhe/papers/introduction-to-higher-order-computation-NLS-2017.pdf
+
+
+The lectures are blackboard based, and here is a summary of what we've
+actually covered.
+
+
+Monday's lecture
+----------------
+
+Computation/computability:
+
+(1) What is computable? (Computability.)
+(2) But, in the first place, how do we compute it? (Computation.)
+
+* 1st-order computation is about computation with finite objects
+  (strings, trees, graphs, etc.), usually coded as natural
+  numbers. Most of you know about that, but we revised the fundamental
+  concepts.
+
+* Higher-order computation is about computation with infinite objects
+  (infinite sequences, infinite trees, infinite graphs, real numbers
+  (such as &#960;), functions &#8477; &#8594; &#8477; (such as e^x), functionals (&#8477; &#8594; &#8477;) &#8640; &#8477;
+  (such as Riemann integration &#8747; from 0 to 1 of continuous functions),
+  etc.).
+
+I mentioned G&#246;del's system T and Platek-Scott-Plotkin PCF as languages
+for higher-order computation, but this will be developed in future
+lectures (also discussing Martin-L&#246;f type theory if there is enough
+time).
+
+
+* Turing machines, informally.
+
+Definition. A partial function f:&#8469;^k &#8640; &#8469; is called Turing computable
+(or computable for short) if there is a Turing machine t such that
+with an initial tape encoding the input x = (x_0,...x_{k-1}), the
+machine terminates if and only if x is in the domain of definition of
+f, and final tape encodes the number f(x).
+
+To make sure we are on the same page:
+
+Definition. A partial function X &#8640; Y is a function X' &#8594; Y, where X'&#8838;X
+is called the domain of definition of the function.
+
+Our notion of function includes the specification of its source X and
+its target Y. Our notion of partial function additionally includes its
+domain of definition X'&#8838;X. Such a partial function is called total if
+X' is the whole of X.
+
+* Primitive recursive, and &#956;-recursive functions, more
+  rigorously. Their Wikipedia pages can be used as a safe reference.
+
+Theorem. A partial function &#8469;^k &#8640; &#8469; is &#956;-recursive if and only if it
+is Turing computable.
+
+This gives a more natural mathematical description of the notion of
+Turing computable function.
+
+* Examples of non-computable functions.
+
+We enumerate Turing machines t_n, or &#956;-recursive functions &#966;_n.
+
+Theorem (Turing 1936). There is no computable (total) function h:&#8469;^2 &#8594; &#8469;
+such that
+
+  h(x,y) = 1 iff the Turing machine t_x terminates when given input y.
+
+&quot;There is no computer program that decides whether a given program
+terminates with a given input or not&quot;.
+
+Hints for a proof: If we had such a program, there would be some
+&#956;-recursive function &#966;_n with h(x,y) = &#966;_n&#10216;x,y&#10217;, where
+
+  &#10216;-,-&#10217; : &#8469;^2 &#8594; &#8469;
+
+is a (primitive) recursive bijection. Then using this number n we can
+&quot;trick&quot; our hypothetical function h, by constructing &#956;-recursive
+function with code k which decides to terminate iff h says that it
+doesn't, by a diagonalization argument (giving input n to the function
+&#966;_n). This contradiction then shows that our hypothetical computable
+total function h is impossible.
+
+Sample Corollary. There is no computable total function e:&#8469;^2 &#8594; &#8469; such
+that
+
+   e(x,y) = 1 iff the functions &#966;_x and &#966;_y are equal.
+
+(Why? Or, better, how do we reduce this to the theorem?)
+
+* Moving on to computation with infinite objects.
+
+Our first example are sequences of natural numbers. The set of them is
+written &#8469;^&#969;. We want to compute functions &#8469;^&#969; &#8594; &#8469;^&#969;.
+
+Modified Turing machines.
+
+
+    input tape                    output tape
+    (read only)   +------------+  (write only)
+   -------------&gt; |  machine   | -------------&gt;
+                  +------------+
+                     |      |
+         ----------- + head + ----------- working tape (read and write)
+                     |      |             (scratch space)
+
+
+The machine is like the usual Turing machine, but it can additionally
+read from the input and write to the output.
+
+It alternates between reading finitely many input terms, calculating
+in the usual way a TM does, outputting finitely many output terms, in
+an infinite loop. We don't want such machines to terminate. We want
+them not to terminate.
+
+* This defines a notion of computable function &#8469;^&#969; &#8594; &#8469;^&#969;.
+
+(But what happens when the machine fails to produce the required
+output? We didn't discuss this, but we will.)
+
+* One approach to computation with infinite objects is to reduce to
+  the above situation (this approach is called TTE (type two theory
+  of effectivity, and can be traced back to &quot;Kleene associates&quot;)).
+
+This works like this:
+
+- We consider a set X of infinite objects we want to compute
+  with. (E.g. X=&#8477; or X the real interval [0,1].)
+
+- We consider a set A&#8838;&#8469;^&#969; of &quot;codes&quot; for elements of X.
+
+- We consider a &quot;decoding function&quot;, namely a surjection q:A &#8608; X.
+
+Definition. This is called a representation of X.
+
+An example is decimal representation of real numbers (we will discuss
+this in more detail).
+
+Then x&#8712;X is called computable if there is a computable a&#8712;A (we already
+know what this means, namely that the element a&#8712;A considered as a
+function &#8469; &#8594; &#8469; is computable or &#956;-recursive).
+
+* These are &#8469;^&#969;-based representations. We also mentioned briefly
+  &#8469;-based representations, which I will mention again for the sake of
+  comparison. But our focus will be on the former.
+
+Tuesday's lecture
+-----------------
+
+Computation with infinite objects.
+
+
+           f              f is the function we want to compute.
+    X ----------&#8594; Y
+    &#8593;             &#8593;
+    |             |       The up arrows q and r are the decoding functions,
+  q |             | r     required to be surjections.
+    |             |
+    A &#183;&#183;&#183;&#183;&#183;&#183;&#183;&#183;&#183;&#183;&#8594; B       A and B are sets of codes for elements of X and Y.
+    |      &#966;      |       The function &#966; realizes f by acting on codes.
+    |             |
+    |             |       The down arrows are nameless inclusion maps.
+    &#8595;             &#8595;
+    &#8469;^&#969; -------&#8640; &#8469;^&#969;      This is the nameless partial function induced by &#966;.
+        machine
+
+The idea is that we reduce computation with infinite objects to
+computation with particular infinite objects, namely sequences of
+natural numbers.
+
+Definition. f:X&#8594;Y is computable (with respect to this coding) if there
+is &#966;:A&#8594;B that can be implemented by a machine of the kind discussed on
+Monday's lecture.
+
+* We start with &quot;abstract&quot; mathematical sets X and Y.
+
+* We come up with codes for the elements of X and Y, collected in the
+  sets A and B.
+
+* Our codes are particular sequences of natural numbers.
+
+* We compute f by computing on codes for the inputs and outpus of f.
+
+Example. Multiply by three using decimal representation.
+
+   - X = Y = [0,1].
+
+   - f(x) = 3x/10.
+
+   - A = B = (infinite sequences of the numbers 0,1,&#8943;,8,9).
+
+   - q(&#945;) = r(&#945;) = &#945;&#8320;/10 + &#945;&#8321;/100 + &#945;&#8322;/1000 + &#8943; + &#945;&#8345;/10&#8319;&#8314;&#185; + &#8943;
+
+                 =  &#931;   &#945;&#8345; 10&#8315;&#8319;&#8315;&#185;.
+                   n&#8805;0
+
+   - Are there such a realizing function &#966; and computing machine?
+
+       f(x)=3x/10
+  [0,1] ------&#8594; [0,1]
+    &#8593;             &#8593;
+    |             |
+  q |             | r
+    |             |
+  (10)^&#969; &#183;&#183;&#183;&#183;&#183;&#183;&#8594; (10)^&#969;
+    |      &#966;      |         Is there such a &#966;
+    |             |
+    |             |
+    &#8595;             &#8595;
+    &#8469;^&#969; -------&#8640; &#8469;^&#969;
+        machine             computable by such a machine?
+
+
+Our next task is to answer this question.
+
+* In order to do this, we discuss the notion of continuity.
+
+Intuitively, and this can be proved rigorously, a function g:&#8469;^&#969; &#8594; &#8469;^&#969;
+that can be computed by a such a machine satisfies the following property:
+
+  - An initial finite segment of the output of g can depend only on an
+    initial finite segment of the input of g.
+
+* How do we say this precisely? By saying that g is continuous.
+
+(In the lecture we did this slowly in four stages, in particular
+understanding the difference between continuity and uniform
+continuity, but in this summary I do it in one stage only.)
+
+Definition. A function g:&#8469;^&#969; &#8594; &#8469;^&#969; is continuous iff
+
+   &#8704;&#945;&#8712;&#8469;^&#969; &#8704;m&#8712;&#8469; &#8707;k&#8712;&#8469; &#8704;&#946;&#8712;&#8469;^&#969;  &#945; =&#8342; &#946; &#8594; g(&#945;) =&#8344; g(&#946;).
+
+Here the relation (=&#8342;) expresses equality of two sequences in the
+first k terms: &#945; =&#8342; &#946; means &#8704;i&lt;k, &#945;&#7522; = &#946;&#7522;.
+
+Of course, we use the same definition when g is a partial function,
+but with &#945; and &#946; ranging over the domain of definition of g, rather
+than the whole of &#8469;^&#969;.
+
+This is a precise way of saying that finite portions of the output of
+g depend only on finite portions of its input.
+
+Why is this called continuity? Compare it to the notion of
+continuity of functions g:&#8477; &#8594; &#8477;:
+
+   &#8704;x&#8712;&#8477; &#8704;&#949;&gt;0 &#8707;&#948;&gt;0 &#8704;y&#8712;&#8477;  |x-y|&lt;&#948; &#8594; |g(x)-g(y)|&lt;&#949;.
+
+Define a distance function d(x,y)=|x-y|. This makes &#8477; into a metric
+space (I won't repeat the definition given in the lecture), and the
+definition of continuity of g:&#8477; &#8594; &#8477; can be rewritten as
+
+   &#8704;x&#8712;&#8477; &#8704;&#949;&gt;0 &#8707;&#948;&gt;0 &#8704;y&#8712;&#8477;  d(x,y)&lt;&#948; &#8594; d(g(x),g(y))&lt;&#949;.
+
+Now for &#8469;^&#969;, define a distance
+
+   d(&#945;,&#946;) = 0,       if &#945; = &#946;,
+          = 1/(k+1), otherwise, where k is the largest number with &#945; =&#8342; &#946;.
+
+Or d(&#945;,&#946;) = infimum { 1/(k+1) | &#945; =&#8342; &#946; }.
+
+This makes &#8469;^&#969; into a metric space (in fact even into an ultrametric
+space, and again I won't record the definition given in the lecture,
+in this summary), called the Baire space.
+
+And we have that a function g:&#8469;^&#969; &#8594; &#8469;^&#969; is continuous iff
+
+   &#8704;&#945;&#8712;&#8469;^&#969; &#8704;&#949;&gt;0 &#8707;&#948;&gt;0 &#8704;&#946;&#8712;&#8469;^&#969;  d(&#945;,&#946;)&lt;&#948; &#8594; d(g(&#945;),g(&#946;))&lt;&#949;.
+
+* Now let's come back to the example and its question. Can we multiply
+  by three in decimal notation?
+
+       f(x)=3x/10
+  [0,1] ------&#8594; [0,1]
+    &#8593;             &#8593;
+    |             |
+  q |             | r
+    |             |
+  (10)^&#969; &#183;&#183;&#183;&#183;&#183;&#183;&#8594; (10)^&#969;
+    |      &#966;      |         Is there such a &#966;
+    |             |
+    |             |
+    &#8595;             &#8595;
+    &#8469;^&#969; -------&#8640; &#8469;^&#969;
+        machine g           computable by such a machine?
+
+
+    - Suppose the machine reads 3 to begin with (with an implicit &quot;0.&quot;
+      prefix).
+
+    - Is this enough to produce the first digit of the output?
+
+    - No, because if the next digit of the input is &gt;=4, then the
+      first digit of the output must be 1, whereas if the next digit
+      of the input is &lt;=2, the first digits of the output must be 09.
+
+    - So we ask for the next input digit, and if it is &gt;=4 or &lt;=2, we
+      know what the first digit of the output must be.
+
+    - The problem is that if the next input digit is =3, it is again
+      possible that the first digit of the output is 1 or 0, and so we
+      can't output anything yet.
+
+    - And as long as we keep reading digits 3 from the input, it is
+      still possible that the first digit of output is either 1 or 0.
+
+    - If the input happens to the the infinite sequence of 3's, we
+      will never be able, by looking at a finite prefix of this
+      sequence, to produce the first digit of output.
+
+What this means is that there is no continuous &#966; (or g) making the
+above diagram commute.
+
+Theorem (Attributable to Brouwer 1920's, even though computability as
+a mathematical subject didn't yet exist at that time).
+
+    Multiplication by three is not computable in decimal notation.
+
+In the next lecture, we will discuss what Brouwer proposed to do to
+solve this problem, and some equivalent variations, and discuss in
+which way they do solve the problem, by invoking the notion of
+admissible quotient representation.
+
+Wednesday's lecture
+-------------------
+
+We discussed admissible quotient representations, and in particular
+discussed that binary and decimal notations are not admissible, but
+that binary with signed digits is admissible. We also showed that
+there is a unique representation of [-1,1], up to (computable)
+equivalence, making certain basic functions computable. I may add more
+material discussed in the lecture here.
+
+Thursday's lecture
+------------------
+
+We are going to exhaustively search an infinite set in finite time in
+G&#246;del's T.  The fragments below within code environments are in the
+language Agda, but we only use its T fragment.  I am first going to
+write G&#246;del's T programs, and then explain what G&#246;del's T is.
+
+For the natural numbers, we have two &quot;constructors&quot;, zero and
+succ(essor):
+
+</a
+      >\begin{code}
+
+<a name="12238" class="Keyword"
+      >data</a
+      > <a name="&#8469;" href="hoc-log.html#&#8469;" class="Datatype"
+      >&#8469;</a
+      > <a name="12245" class="Symbol"
+      >:</a
+      > <a name="12247" class="PrimitiveType"
+      >Set</a
+      > <a name="12251" class="Keyword"
+      >where</a
+      >
+ <a name="&#8469;.zero" href="hoc-log.html#&#8469;.zero" class="InductiveConstructor"
+      >zero</a
+      > <a name="12263" class="Symbol"
+      >:</a
+      > <a name="12265" href="hoc-log.html#&#8469;" class="Datatype"
+      >&#8469;</a
+      >
+ <a name="&#8469;.succ" href="hoc-log.html#&#8469;.succ" class="InductiveConstructor"
+      >succ</a
+      > <a name="12273" class="Symbol"
+      >:</a
+      > <a name="12275" href="hoc-log.html#&#8469;" class="Datatype"
+      >&#8469;</a
+      > <a name="12277" class="Symbol"
+      >&#8594;</a
+      > <a name="12279" href="hoc-log.html#&#8469;" class="Datatype"
+      >&#8469;</a
+      >
+
+\end{code}<a name="12292" class="Comment"
+      >
+
+G&#246;del's T doesn't include booleans, but it is harmless to include
+them, and this will make our programs much clearer (but below I write
+a version using the type &#8469; only, to show how this works):
+
+</a
+      >\begin{code}
+
+<a name="12503" class="Keyword"
+      >data</a
+      > <a name="&#120794;" href="hoc-log.html#&#120794;" class="Datatype"
+      >&#120794;</a
+      > <a name="12510" class="Symbol"
+      >:</a
+      > <a name="12512" class="PrimitiveType"
+      >Set</a
+      > <a name="12516" class="Keyword"
+      >where</a
+      >
+ <a name="&#120794;.&#8320;" href="hoc-log.html#&#120794;.&#8320;" class="InductiveConstructor"
+      >&#8320;</a
+      > <a name="&#120794;.&#8321;" href="hoc-log.html#&#120794;.&#8321;" class="InductiveConstructor"
+      >&#8321;</a
+      > <a name="12527" class="Symbol"
+      >:</a
+      > <a name="12529" href="hoc-log.html#&#120794;" class="Datatype"
+      >&#120794;</a
+      >
+
+\end{code}<a name="12542" class="Comment"
+      >
+
+Some abbreviations:
+
+</a
+      >\begin{code}
+
+<a name="Baire" href="hoc-log.html#Baire" class="Function"
+      >Baire</a
+      > <a name="Cantor" href="hoc-log.html#Cantor" class="Function"
+      >Cantor</a
+      > <a name="12593" class="Symbol"
+      >:</a
+      > <a name="12595" class="PrimitiveType"
+      >Set</a
+      >
+<a name="12599" href="hoc-log.html#Baire" class="Function"
+      >Baire</a
+      >  <a name="12606" class="Symbol"
+      >=</a
+      > <a name="12608" href="hoc-log.html#&#8469;" class="Datatype"
+      >&#8469;</a
+      > <a name="12610" class="Symbol"
+      >&#8594;</a
+      > <a name="12612" href="hoc-log.html#&#8469;" class="Datatype"
+      >&#8469;</a
+      >
+<a name="12614" href="hoc-log.html#Cantor" class="Function"
+      >Cantor</a
+      > <a name="12621" class="Symbol"
+      >=</a
+      > <a name="12623" href="hoc-log.html#&#8469;" class="Datatype"
+      >&#8469;</a
+      > <a name="12625" class="Symbol"
+      >&#8594;</a
+      > <a name="12627" href="hoc-log.html#&#120794;" class="Datatype"
+      >&#120794;</a
+      >
+
+\end{code}<a name="12640" class="Comment"
+      >
+
+We are going to write several versions of the same program, and we use
+&quot;modules&quot; to keep names local so that we can use them again in
+equivalent definitions:
+
+</a
+      >\begin{code}
+
+<a name="12815" class="Keyword"
+      >module</a
+      > <a name="version&#8321;" href="hoc-log.html#version&#8321;" class="Module"
+      >version&#8321;</a
+      > <a name="12831" class="Keyword"
+      >where</a
+      >
+
+ \end{code}<a name="12849" class="Comment"
+      >
+
+Functions on &#120794; have to be defined by the two cases &#8320; and &#8321;, and this
+is an example:
+
+</a
+      >\begin{code}
+
+ <a name="version&#8321;.min" href="hoc-log.html#version&#8321;.min" class="Function"
+      >min</a
+      > <a name="12955" class="Symbol"
+      >:</a
+      > <a name="12957" href="hoc-log.html#&#120794;" class="Datatype"
+      >&#120794;</a
+      > <a name="12959" class="Symbol"
+      >&#8594;</a
+      > <a name="12961" href="hoc-log.html#&#120794;" class="Datatype"
+      >&#120794;</a
+      > <a name="12963" class="Symbol"
+      >&#8594;</a
+      > <a name="12965" href="hoc-log.html#&#120794;" class="Datatype"
+      >&#120794;</a
+      >
+ <a name="12968" href="hoc-log.html#version&#8321;.min" class="Function"
+      >min</a
+      > <a name="12972" href="hoc-log.html#&#120794;.&#8320;" class="InductiveConstructor"
+      >&#8320;</a
+      > <a name="12974" href="hoc-log.html#12974" class="Bound"
+      >n</a
+      > <a name="12976" class="Symbol"
+      >=</a
+      > <a name="12978" href="hoc-log.html#&#120794;.&#8320;" class="InductiveConstructor"
+      >&#8320;</a
+      >
+ <a name="12981" href="hoc-log.html#version&#8321;.min" class="Function"
+      >min</a
+      > <a name="12985" href="hoc-log.html#&#120794;.&#8321;" class="InductiveConstructor"
+      >&#8321;</a
+      > <a name="12987" href="hoc-log.html#12987" class="Bound"
+      >n</a
+      > <a name="12989" class="Symbol"
+      >=</a
+      > <a name="12991" href="hoc-log.html#12987" class="Bound"
+      >n</a
+      >
+
+\end{code}<a name="13004" class="Comment"
+      >
+
+The natural number n is coded as the sequence 11111&#8943;10^&#969;, where we
+have n-many 1's and infinitely many 0's. This is done by primitive
+recursion on n, using a further, nested, primitive recursion:
+
+</a
+      >\begin{code}
+
+ <a name="version&#8321;.embed" href="hoc-log.html#version&#8321;.embed" class="Function"
+      >embed</a
+      > <a name="13225" class="Symbol"
+      >:</a
+      > <a name="13227" href="hoc-log.html#&#8469;" class="Datatype"
+      >&#8469;</a
+      > <a name="13229" class="Symbol"
+      >&#8594;</a
+      > <a name="13231" href="hoc-log.html#Cantor" class="Function"
+      >Cantor</a
+      >
+ <a name="13239" href="hoc-log.html#version&#8321;.embed" class="Function"
+      >embed</a
+      > <a name="13245" href="hoc-log.html#&#8469;.zero" class="InductiveConstructor"
+      >zero</a
+      > <a name="13250" href="hoc-log.html#13250" class="Bound"
+      >i</a
+      > <a name="13252" class="Symbol"
+      >=</a
+      > <a name="13254" href="hoc-log.html#&#120794;.&#8320;" class="InductiveConstructor"
+      >&#8320;</a
+      >
+ <a name="13257" href="hoc-log.html#version&#8321;.embed" class="Function"
+      >embed</a
+      > <a name="13263" class="Symbol"
+      >(</a
+      ><a name="13264" href="hoc-log.html#&#8469;.succ" class="InductiveConstructor"
+      >succ</a
+      > <a name="13269" href="hoc-log.html#13269" class="Bound"
+      >n</a
+      ><a name="13270" class="Symbol"
+      >)</a
+      > <a name="13272" href="hoc-log.html#&#8469;.zero" class="InductiveConstructor"
+      >zero</a
+      > <a name="13277" class="Symbol"
+      >=</a
+      > <a name="13279" href="hoc-log.html#&#120794;.&#8321;" class="InductiveConstructor"
+      >&#8321;</a
+      >
+ <a name="13282" href="hoc-log.html#version&#8321;.embed" class="Function"
+      >embed</a
+      > <a name="13288" class="Symbol"
+      >(</a
+      ><a name="13289" href="hoc-log.html#&#8469;.succ" class="InductiveConstructor"
+      >succ</a
+      > <a name="13294" href="hoc-log.html#13294" class="Bound"
+      >n</a
+      ><a name="13295" class="Symbol"
+      >)</a
+      > <a name="13297" class="Symbol"
+      >(</a
+      ><a name="13298" href="hoc-log.html#&#8469;.succ" class="InductiveConstructor"
+      >succ</a
+      > <a name="13303" href="hoc-log.html#13303" class="Bound"
+      >i</a
+      ><a name="13304" class="Symbol"
+      >)</a
+      > <a name="13306" class="Symbol"
+      >=</a
+      > <a name="13308" href="hoc-log.html#version&#8321;.embed" class="Function"
+      >embed</a
+      > <a name="13314" href="hoc-log.html#13294" class="Bound"
+      >n</a
+      > <a name="13316" href="hoc-log.html#13303" class="Bound"
+      >i</a
+      >
+
+\end{code}<a name="13329" class="Comment"
+      >
+
+I will explain this later, but it is also defined by primitive
+recursion:
+
+</a
+      >\begin{code}
+
+ <a name="version&#8321;.&#949;" href="hoc-log.html#version&#8321;.&#949;" class="Function"
+      >&#949;</a
+      > <a name="13423" class="Symbol"
+      >:</a
+      > <a name="13425" class="Symbol"
+      >(</a
+      ><a name="13426" href="hoc-log.html#Cantor" class="Function"
+      >Cantor</a
+      > <a name="13433" class="Symbol"
+      >&#8594;</a
+      > <a name="13435" href="hoc-log.html#&#120794;" class="Datatype"
+      >&#120794;</a
+      ><a name="13436" class="Symbol"
+      >)</a
+      > <a name="13438" class="Symbol"
+      >&#8594;</a
+      > <a name="13440" href="hoc-log.html#Cantor" class="Function"
+      >Cantor</a
+      >
+ <a name="13449" href="hoc-log.html#version&#8321;.&#949;" class="Function"
+      >&#949;</a
+      > <a name="13451" href="hoc-log.html#13451" class="Bound"
+      >p</a
+      > <a name="13453" href="hoc-log.html#&#8469;.zero" class="InductiveConstructor"
+      >zero</a
+      >     <a name="13462" class="Symbol"
+      >=</a
+      > <a name="13464" href="hoc-log.html#13451" class="Bound"
+      >p</a
+      > <a name="13466" class="Symbol"
+      >(</a
+      ><a name="13467" href="hoc-log.html#version&#8321;.embed" class="Function"
+      >embed</a
+      > <a name="13473" href="hoc-log.html#&#8469;.zero" class="InductiveConstructor"
+      >zero</a
+      ><a name="13477" class="Symbol"
+      >)</a
+      >
+ <a name="13481" href="hoc-log.html#version&#8321;.&#949;" class="Function"
+      >&#949;</a
+      > <a name="13483" href="hoc-log.html#13483" class="Bound"
+      >p</a
+      > <a name="13485" class="Symbol"
+      >(</a
+      ><a name="13486" href="hoc-log.html#&#8469;.succ" class="InductiveConstructor"
+      >succ</a
+      > <a name="13491" href="hoc-log.html#13491" class="Bound"
+      >n</a
+      ><a name="13492" class="Symbol"
+      >)</a
+      > <a name="13494" class="Symbol"
+      >=</a
+      > <a name="13496" href="hoc-log.html#version&#8321;.min" class="Function"
+      >min</a
+      > <a name="13500" class="Symbol"
+      >(</a
+      ><a name="13501" href="hoc-log.html#version&#8321;.&#949;" class="Function"
+      >&#949;</a
+      > <a name="13503" href="hoc-log.html#13483" class="Bound"
+      >p</a
+      > <a name="13505" href="hoc-log.html#13491" class="Bound"
+      >n</a
+      ><a name="13506" class="Symbol"
+      >)</a
+      > <a name="13508" class="Symbol"
+      >(</a
+      ><a name="13509" href="hoc-log.html#13483" class="Bound"
+      >p</a
+      > <a name="13511" class="Symbol"
+      >(</a
+      ><a name="13512" href="hoc-log.html#version&#8321;.embed" class="Function"
+      >embed</a
+      ><a name="13517" class="Symbol"
+      >(</a
+      ><a name="13518" href="hoc-log.html#&#8469;.succ" class="InductiveConstructor"
+      >succ</a
+      > <a name="13523" href="hoc-log.html#13491" class="Bound"
+      >n</a
+      ><a name="13524" class="Symbol"
+      >)))</a
+      >
+
+\end{code}<a name="13540" class="Comment"
+      >
+
+We can write
+
+ &#949; p n = minimum {p(embed 0), p(embed 1), &#8943; , p(embed n)}
+
+This is supposed to satisfy the following specification, but this
+remains to be proved: A(p)=1 &#8660; p(&#945;)=1 for all *decreasing* sequences
+&#945;:Cantor. These sequences include 11111&#8943;10^&#969; and 1^&#969;, the sequence of
+infinitely many 1's. Using classical logic, these are the only two
+possible kinds of decreasing sequences.
+
+</a
+      >\begin{code}
+
+ <a name="version&#8321;.A" href="hoc-log.html#version&#8321;.A" class="Function"
+      >A</a
+      > <a name="13945" class="Symbol"
+      >:</a
+      > <a name="13947" class="Symbol"
+      >(</a
+      ><a name="13948" href="hoc-log.html#Cantor" class="Function"
+      >Cantor</a
+      > <a name="13955" class="Symbol"
+      >&#8594;</a
+      > <a name="13957" href="hoc-log.html#&#120794;" class="Datatype"
+      >&#120794;</a
+      ><a name="13958" class="Symbol"
+      >)</a
+      > <a name="13960" class="Symbol"
+      >&#8594;</a
+      > <a name="13962" href="hoc-log.html#&#120794;" class="Datatype"
+      >&#120794;</a
+      >
+ <a name="13965" href="hoc-log.html#version&#8321;.A" class="Function"
+      >A</a
+      > <a name="13967" href="hoc-log.html#13967" class="Bound"
+      >p</a
+      > <a name="13969" class="Symbol"
+      >=</a
+      > <a name="13971" href="hoc-log.html#13967" class="Bound"
+      >p</a
+      ><a name="13972" class="Symbol"
+      >(</a
+      ><a name="13973" href="hoc-log.html#version&#8321;.&#949;" class="Function"
+      >&#949;</a
+      > <a name="13975" href="hoc-log.html#13967" class="Bound"
+      >p</a
+      ><a name="13976" class="Symbol"
+      >)</a
+      >
+
+\end{code}<a name="13989" class="Comment"
+      >
+
+The specification of &#949; is that p(&#949; p)=1 &#8594; p(&#945;)=1 for all decreasing
+sequences &#945;:Cantor, and that &#949; p is itself a decreasing sequence. But
+we still have to prove this.
+
+In summary, without the comments:
+
+</a
+      >\begin{code}
+
+<a name="14209" class="Keyword"
+      >module</a
+      > <a name="version&#8322;" href="hoc-log.html#version&#8322;" class="Module"
+      >version&#8322;</a
+      > <a name="14225" class="Keyword"
+      >where</a
+      >
+
+ <a name="version&#8322;.min" href="hoc-log.html#version&#8322;.min" class="Function"
+      >min</a
+      > <a name="14237" class="Symbol"
+      >:</a
+      > <a name="14239" href="hoc-log.html#&#120794;" class="Datatype"
+      >&#120794;</a
+      > <a name="14241" class="Symbol"
+      >&#8594;</a
+      > <a name="14243" href="hoc-log.html#&#120794;" class="Datatype"
+      >&#120794;</a
+      > <a name="14245" class="Symbol"
+      >&#8594;</a
+      > <a name="14247" href="hoc-log.html#&#120794;" class="Datatype"
+      >&#120794;</a
+      >
+ <a name="14250" href="hoc-log.html#version&#8322;.min" class="Function"
+      >min</a
+      > <a name="14254" href="hoc-log.html#&#120794;.&#8320;" class="InductiveConstructor"
+      >&#8320;</a
+      > <a name="14256" href="hoc-log.html#14256" class="Bound"
+      >n</a
+      > <a name="14258" class="Symbol"
+      >=</a
+      > <a name="14260" href="hoc-log.html#&#120794;.&#8320;" class="InductiveConstructor"
+      >&#8320;</a
+      >
+ <a name="14263" href="hoc-log.html#version&#8322;.min" class="Function"
+      >min</a
+      > <a name="14267" href="hoc-log.html#&#120794;.&#8321;" class="InductiveConstructor"
+      >&#8321;</a
+      > <a name="14269" href="hoc-log.html#14269" class="Bound"
+      >n</a
+      > <a name="14271" class="Symbol"
+      >=</a
+      > <a name="14273" href="hoc-log.html#14269" class="Bound"
+      >n</a
+      >
+
+ <a name="version&#8322;.embed" href="hoc-log.html#version&#8322;.embed" class="Function"
+      >embed</a
+      > <a name="14283" class="Symbol"
+      >:</a
+      > <a name="14285" href="hoc-log.html#&#8469;" class="Datatype"
+      >&#8469;</a
+      > <a name="14287" class="Symbol"
+      >&#8594;</a
+      > <a name="14289" href="hoc-log.html#Cantor" class="Function"
+      >Cantor</a
+      >
+ <a name="14297" href="hoc-log.html#version&#8322;.embed" class="Function"
+      >embed</a
+      > <a name="14303" href="hoc-log.html#&#8469;.zero" class="InductiveConstructor"
+      >zero</a
+      > <a name="14308" href="hoc-log.html#14308" class="Bound"
+      >i</a
+      > <a name="14310" class="Symbol"
+      >=</a
+      > <a name="14312" href="hoc-log.html#&#120794;.&#8320;" class="InductiveConstructor"
+      >&#8320;</a
+      >
+ <a name="14315" href="hoc-log.html#version&#8322;.embed" class="Function"
+      >embed</a
+      > <a name="14321" class="Symbol"
+      >(</a
+      ><a name="14322" href="hoc-log.html#&#8469;.succ" class="InductiveConstructor"
+      >succ</a
+      > <a name="14327" href="hoc-log.html#14327" class="Bound"
+      >n</a
+      ><a name="14328" class="Symbol"
+      >)</a
+      > <a name="14330" href="hoc-log.html#&#8469;.zero" class="InductiveConstructor"
+      >zero</a
+      > <a name="14335" class="Symbol"
+      >=</a
+      > <a name="14337" href="hoc-log.html#&#120794;.&#8321;" class="InductiveConstructor"
+      >&#8321;</a
+      >
+ <a name="14340" href="hoc-log.html#version&#8322;.embed" class="Function"
+      >embed</a
+      > <a name="14346" class="Symbol"
+      >(</a
+      ><a name="14347" href="hoc-log.html#&#8469;.succ" class="InductiveConstructor"
+      >succ</a
+      > <a name="14352" href="hoc-log.html#14352" class="Bound"
+      >n</a
+      ><a name="14353" class="Symbol"
+      >)</a
+      > <a name="14355" class="Symbol"
+      >(</a
+      ><a name="14356" href="hoc-log.html#&#8469;.succ" class="InductiveConstructor"
+      >succ</a
+      > <a name="14361" href="hoc-log.html#14361" class="Bound"
+      >i</a
+      ><a name="14362" class="Symbol"
+      >)</a
+      > <a name="14364" class="Symbol"
+      >=</a
+      > <a name="14366" href="hoc-log.html#version&#8322;.embed" class="Function"
+      >embed</a
+      > <a name="14372" href="hoc-log.html#14352" class="Bound"
+      >n</a
+      > <a name="14374" href="hoc-log.html#14361" class="Bound"
+      >i</a
+      >
+
+ <a name="version&#8322;.&#949;" href="hoc-log.html#version&#8322;.&#949;" class="Function"
+      >&#949;</a
+      > <a name="14380" class="Symbol"
+      >:</a
+      > <a name="14382" class="Symbol"
+      >(</a
+      ><a name="14383" href="hoc-log.html#Cantor" class="Function"
+      >Cantor</a
+      > <a name="14390" class="Symbol"
+      >&#8594;</a
+      > <a name="14392" href="hoc-log.html#&#120794;" class="Datatype"
+      >&#120794;</a
+      ><a name="14393" class="Symbol"
+      >)</a
+      > <a name="14395" class="Symbol"
+      >&#8594;</a
+      > <a name="14397" href="hoc-log.html#Cantor" class="Function"
+      >Cantor</a
+      >
+ <a name="14406" href="hoc-log.html#version&#8322;.&#949;" class="Function"
+      >&#949;</a
+      > <a name="14408" href="hoc-log.html#14408" class="Bound"
+      >p</a
+      > <a name="14410" href="hoc-log.html#&#8469;.zero" class="InductiveConstructor"
+      >zero</a
+      >     <a name="14419" class="Symbol"
+      >=</a
+      > <a name="14421" href="hoc-log.html#14408" class="Bound"
+      >p</a
+      > <a name="14423" class="Symbol"
+      >(</a
+      ><a name="14424" href="hoc-log.html#version&#8322;.embed" class="Function"
+      >embed</a
+      > <a name="14430" href="hoc-log.html#&#8469;.zero" class="InductiveConstructor"
+      >zero</a
+      ><a name="14434" class="Symbol"
+      >)</a
+      >
+ <a name="14438" href="hoc-log.html#version&#8322;.&#949;" class="Function"
+      >&#949;</a
+      > <a name="14440" href="hoc-log.html#14440" class="Bound"
+      >p</a
+      > <a name="14442" class="Symbol"
+      >(</a
+      ><a name="14443" href="hoc-log.html#&#8469;.succ" class="InductiveConstructor"
+      >succ</a
+      > <a name="14448" href="hoc-log.html#14448" class="Bound"
+      >n</a
+      ><a name="14449" class="Symbol"
+      >)</a
+      > <a name="14451" class="Symbol"
+      >=</a
+      > <a name="14453" href="hoc-log.html#version&#8322;.min" class="Function"
+      >min</a
+      > <a name="14457" class="Symbol"
+      >(</a
+      ><a name="14458" href="hoc-log.html#14440" class="Bound"
+      >p</a
+      > <a name="14460" class="Symbol"
+      >(</a
+      ><a name="14461" href="hoc-log.html#version&#8322;.embed" class="Function"
+      >embed</a
+      ><a name="14466" class="Symbol"
+      >(</a
+      ><a name="14467" href="hoc-log.html#&#8469;.succ" class="InductiveConstructor"
+      >succ</a
+      > <a name="14472" href="hoc-log.html#14448" class="Bound"
+      >n</a
+      ><a name="14473" class="Symbol"
+      >)))</a
+      > <a name="14477" class="Symbol"
+      >(</a
+      ><a name="14478" href="hoc-log.html#version&#8322;.&#949;" class="Function"
+      >&#949;</a
+      > <a name="14480" href="hoc-log.html#14440" class="Bound"
+      >p</a
+      > <a name="14482" href="hoc-log.html#14448" class="Bound"
+      >n</a
+      ><a name="14483" class="Symbol"
+      >)</a
+      >
+
+ <a name="version&#8322;.A" href="hoc-log.html#version&#8322;.A" class="Function"
+      >A</a
+      > <a name="14490" class="Symbol"
+      >:</a
+      > <a name="14492" class="Symbol"
+      >(</a
+      ><a name="14493" href="hoc-log.html#Cantor" class="Function"
+      >Cantor</a
+      > <a name="14500" class="Symbol"
+      >&#8594;</a
+      > <a name="14502" href="hoc-log.html#&#120794;" class="Datatype"
+      >&#120794;</a
+      ><a name="14503" class="Symbol"
+      >)</a
+      > <a name="14505" class="Symbol"
+      >&#8594;</a
+      > <a name="14507" href="hoc-log.html#&#120794;" class="Datatype"
+      >&#120794;</a
+      >
+ <a name="14510" href="hoc-log.html#version&#8322;.A" class="Function"
+      >A</a
+      > <a name="14512" href="hoc-log.html#14512" class="Bound"
+      >p</a
+      > <a name="14514" class="Symbol"
+      >=</a
+      > <a name="14516" href="hoc-log.html#14512" class="Bound"
+      >p</a
+      ><a name="14517" class="Symbol"
+      >(</a
+      ><a name="14518" href="hoc-log.html#version&#8322;.&#949;" class="Function"
+      >&#949;</a
+      > <a name="14520" href="hoc-log.html#14512" class="Bound"
+      >p</a
+      ><a name="14521" class="Symbol"
+      >)</a
+      >
+
+\end{code}<a name="14534" class="Comment"
+      >
+
+We now rewrite the above definitions in a number of stages, until we
+eventually use G&#246;del's T notation only. First we use &#955;:
+
+</a
+      >\begin{code}
+
+<a name="14676" class="Keyword"
+      >module</a
+      > <a name="version&#8323;" href="hoc-log.html#version&#8323;" class="Module"
+      >version&#8323;</a
+      > <a name="14692" class="Keyword"
+      >where</a
+      >
+
+ <a name="version&#8323;.min" href="hoc-log.html#version&#8323;.min" class="Function"
+      >min</a
+      > <a name="14704" class="Symbol"
+      >:</a
+      > <a name="14706" href="hoc-log.html#&#120794;" class="Datatype"
+      >&#120794;</a
+      > <a name="14708" class="Symbol"
+      >&#8594;</a
+      > <a name="14710" href="hoc-log.html#&#120794;" class="Datatype"
+      >&#120794;</a
+      > <a name="14712" class="Symbol"
+      >&#8594;</a
+      > <a name="14714" href="hoc-log.html#&#120794;" class="Datatype"
+      >&#120794;</a
+      >
+ <a name="14717" href="hoc-log.html#version&#8323;.min" class="Function"
+      >min</a
+      > <a name="14721" href="hoc-log.html#&#120794;.&#8320;" class="InductiveConstructor"
+      >&#8320;</a
+      > <a name="14723" class="Symbol"
+      >=</a
+      > <a name="14725" class="Symbol"
+      >&#955;</a
+      > <a name="14727" href="hoc-log.html#14727" class="Bound"
+      >n</a
+      > <a name="14729" class="Symbol"
+      >&#8594;</a
+      > <a name="14731" href="hoc-log.html#&#120794;.&#8320;" class="InductiveConstructor"
+      >&#8320;</a
+      >
+ <a name="14734" href="hoc-log.html#version&#8323;.min" class="Function"
+      >min</a
+      > <a name="14738" href="hoc-log.html#&#120794;.&#8321;" class="InductiveConstructor"
+      >&#8321;</a
+      > <a name="14740" class="Symbol"
+      >=</a
+      > <a name="14742" class="Symbol"
+      >&#955;</a
+      > <a name="14744" href="hoc-log.html#14744" class="Bound"
+      >n</a
+      > <a name="14746" class="Symbol"
+      >&#8594;</a
+      > <a name="14748" href="hoc-log.html#14744" class="Bound"
+      >n</a
+      >
+
+ <a name="version&#8323;.embed" href="hoc-log.html#version&#8323;.embed" class="Function"
+      >embed</a
+      > <a name="14758" class="Symbol"
+      >:</a
+      > <a name="14760" href="hoc-log.html#&#8469;" class="Datatype"
+      >&#8469;</a
+      > <a name="14762" class="Symbol"
+      >&#8594;</a
+      > <a name="14764" href="hoc-log.html#Cantor" class="Function"
+      >Cantor</a
+      >
+ <a name="14772" href="hoc-log.html#version&#8323;.embed" class="Function"
+      >embed</a
+      > <a name="14778" href="hoc-log.html#&#8469;.zero" class="InductiveConstructor"
+      >zero</a
+      > <a name="14783" class="Symbol"
+      >=</a
+      > <a name="14785" class="Symbol"
+      >&#955;</a
+      > <a name="14787" href="hoc-log.html#14787" class="Bound"
+      >i</a
+      > <a name="14789" class="Symbol"
+      >&#8594;</a
+      > <a name="14791" href="hoc-log.html#&#120794;.&#8320;" class="InductiveConstructor"
+      >&#8320;</a
+      >
+ <a name="14794" href="hoc-log.html#version&#8323;.embed" class="Function"
+      >embed</a
+      > <a name="14800" class="Symbol"
+      >(</a
+      ><a name="14801" href="hoc-log.html#&#8469;.succ" class="InductiveConstructor"
+      >succ</a
+      > <a name="14806" href="hoc-log.html#14806" class="Bound"
+      >n</a
+      ><a name="14807" class="Symbol"
+      >)</a
+      > <a name="14809" href="hoc-log.html#&#8469;.zero" class="InductiveConstructor"
+      >zero</a
+      > <a name="14814" class="Symbol"
+      >=</a
+      > <a name="14816" href="hoc-log.html#&#120794;.&#8321;" class="InductiveConstructor"
+      >&#8321;</a
+      >
+ <a name="14819" href="hoc-log.html#version&#8323;.embed" class="Function"
+      >embed</a
+      > <a name="14825" class="Symbol"
+      >(</a
+      ><a name="14826" href="hoc-log.html#&#8469;.succ" class="InductiveConstructor"
+      >succ</a
+      > <a name="14831" href="hoc-log.html#14831" class="Bound"
+      >n</a
+      ><a name="14832" class="Symbol"
+      >)</a
+      > <a name="14834" class="Symbol"
+      >(</a
+      ><a name="14835" href="hoc-log.html#&#8469;.succ" class="InductiveConstructor"
+      >succ</a
+      > <a name="14840" href="hoc-log.html#14840" class="Bound"
+      >i</a
+      ><a name="14841" class="Symbol"
+      >)</a
+      > <a name="14843" class="Symbol"
+      >=</a
+      > <a name="14845" href="hoc-log.html#version&#8323;.embed" class="Function"
+      >embed</a
+      > <a name="14851" href="hoc-log.html#14831" class="Bound"
+      >n</a
+      > <a name="14853" href="hoc-log.html#14840" class="Bound"
+      >i</a
+      >
+
+ <a name="version&#8323;.&#949;" href="hoc-log.html#version&#8323;.&#949;" class="Function"
+      >&#949;</a
+      > <a name="14859" class="Symbol"
+      >:</a
+      > <a name="14861" class="Symbol"
+      >(</a
+      ><a name="14862" href="hoc-log.html#Cantor" class="Function"
+      >Cantor</a
+      > <a name="14869" class="Symbol"
+      >&#8594;</a
+      > <a name="14871" href="hoc-log.html#&#120794;" class="Datatype"
+      >&#120794;</a
+      ><a name="14872" class="Symbol"
+      >)</a
+      > <a name="14874" class="Symbol"
+      >&#8594;</a
+      > <a name="14876" href="hoc-log.html#Cantor" class="Function"
+      >Cantor</a
+      >
+ <a name="14885" href="hoc-log.html#version&#8323;.&#949;" class="Function"
+      >&#949;</a
+      > <a name="14887" href="hoc-log.html#14887" class="Bound"
+      >p</a
+      > <a name="14889" href="hoc-log.html#&#8469;.zero" class="InductiveConstructor"
+      >zero</a
+      >     <a name="14898" class="Symbol"
+      >=</a
+      > <a name="14900" href="hoc-log.html#14887" class="Bound"
+      >p</a
+      > <a name="14902" class="Symbol"
+      >(</a
+      ><a name="14903" href="hoc-log.html#version&#8323;.embed" class="Function"
+      >embed</a
+      > <a name="14909" href="hoc-log.html#&#8469;.zero" class="InductiveConstructor"
+      >zero</a
+      ><a name="14913" class="Symbol"
+      >)</a
+      >
+ <a name="14917" href="hoc-log.html#version&#8323;.&#949;" class="Function"
+      >&#949;</a
+      > <a name="14919" href="hoc-log.html#14919" class="Bound"
+      >p</a
+      > <a name="14921" class="Symbol"
+      >(</a
+      ><a name="14922" href="hoc-log.html#&#8469;.succ" class="InductiveConstructor"
+      >succ</a
+      > <a name="14927" href="hoc-log.html#14927" class="Bound"
+      >n</a
+      ><a name="14928" class="Symbol"
+      >)</a
+      > <a name="14930" class="Symbol"
+      >=</a
+      > <a name="14932" href="hoc-log.html#version&#8323;.min" class="Function"
+      >min</a
+      > <a name="14936" class="Symbol"
+      >(</a
+      ><a name="14937" href="hoc-log.html#14919" class="Bound"
+      >p</a
+      > <a name="14939" class="Symbol"
+      >(</a
+      ><a name="14940" href="hoc-log.html#version&#8323;.embed" class="Function"
+      >embed</a
+      ><a name="14945" class="Symbol"
+      >(</a
+      ><a name="14946" href="hoc-log.html#&#8469;.succ" class="InductiveConstructor"
+      >succ</a
+      > <a name="14951" href="hoc-log.html#14927" class="Bound"
+      >n</a
+      ><a name="14952" class="Symbol"
+      >)))</a
+      > <a name="14956" class="Symbol"
+      >(</a
+      ><a name="14957" href="hoc-log.html#version&#8323;.&#949;" class="Function"
+      >&#949;</a
+      > <a name="14959" href="hoc-log.html#14919" class="Bound"
+      >p</a
+      > <a name="14961" href="hoc-log.html#14927" class="Bound"
+      >n</a
+      ><a name="14962" class="Symbol"
+      >)</a
+      >
+
+ <a name="version&#8323;.A" href="hoc-log.html#version&#8323;.A" class="Function"
+      >A</a
+      > <a name="14969" class="Symbol"
+      >:</a
+      > <a name="14971" class="Symbol"
+      >(</a
+      ><a name="14972" href="hoc-log.html#Cantor" class="Function"
+      >Cantor</a
+      > <a name="14979" class="Symbol"
+      >&#8594;</a
+      > <a name="14981" href="hoc-log.html#&#120794;" class="Datatype"
+      >&#120794;</a
+      ><a name="14982" class="Symbol"
+      >)</a
+      > <a name="14984" class="Symbol"
+      >&#8594;</a
+      > <a name="14986" href="hoc-log.html#&#120794;" class="Datatype"
+      >&#120794;</a
+      >
+ <a name="14989" href="hoc-log.html#version&#8323;.A" class="Function"
+      >A</a
+      > <a name="14991" class="Symbol"
+      >=</a
+      > <a name="14993" class="Symbol"
+      >&#955;</a
+      > <a name="14995" href="hoc-log.html#14995" class="Bound"
+      >p</a
+      > <a name="14997" class="Symbol"
+      >&#8594;</a
+      > <a name="14999" href="hoc-log.html#14995" class="Bound"
+      >p</a
+      ><a name="15000" class="Symbol"
+      >(</a
+      ><a name="15001" href="hoc-log.html#version&#8323;.&#949;" class="Function"
+      >&#949;</a
+      > <a name="15003" href="hoc-log.html#14995" class="Bound"
+      >p</a
+      ><a name="15004" class="Symbol"
+      >)</a
+      >
+
+\end{code}<a name="15017" class="Comment"
+      >
+
+Not much has changed. Now we introduce the G&#246;del's T primitive
+&quot;combinators&quot;, primitive recursion on the natural numbers (and
+definition by cases on the booleans, in our extended version of
+G&#246;del's system T). This is &quot;global&quot;, outside any module.
+
+</a
+      >\begin{code}
+
+<a name="rec" href="hoc-log.html#rec" class="Function"
+      >rec</a
+      > <a name="15285" class="Symbol"
+      >:</a
+      > <a name="15287" class="Symbol"
+      >{</a
+      ><a name="15288" href="hoc-log.html#15288" class="Bound"
+      >X</a
+      > <a name="15290" class="Symbol"
+      >:</a
+      > <a name="15292" class="PrimitiveType"
+      >Set</a
+      ><a name="15295" class="Symbol"
+      >}</a
+      > <a name="15297" class="Symbol"
+      >&#8594;</a
+      > <a name="15299" href="hoc-log.html#15288" class="Bound"
+      >X</a
+      > <a name="15301" class="Symbol"
+      >&#8594;</a
+      > <a name="15303" class="Symbol"
+      >(</a
+      ><a name="15304" href="hoc-log.html#&#8469;" class="Datatype"
+      >&#8469;</a
+      > <a name="15306" class="Symbol"
+      >&#8594;</a
+      > <a name="15308" href="hoc-log.html#15288" class="Bound"
+      >X</a
+      > <a name="15310" class="Symbol"
+      >&#8594;</a
+      > <a name="15312" href="hoc-log.html#15288" class="Bound"
+      >X</a
+      ><a name="15313" class="Symbol"
+      >)</a
+      > <a name="15315" class="Symbol"
+      >&#8594;</a
+      > <a name="15317" href="hoc-log.html#&#8469;" class="Datatype"
+      >&#8469;</a
+      > <a name="15319" class="Symbol"
+      >&#8594;</a
+      > <a name="15321" href="hoc-log.html#15288" class="Bound"
+      >X</a
+      >
+<a name="15323" href="hoc-log.html#rec" class="Function"
+      >rec</a
+      > <a name="15327" href="hoc-log.html#15327" class="Bound"
+      >x</a
+      > <a name="15329" href="hoc-log.html#15329" class="Bound"
+      >f</a
+      > <a name="15331" href="hoc-log.html#&#8469;.zero" class="InductiveConstructor"
+      >zero</a
+      >     <a name="15340" class="Symbol"
+      >=</a
+      > <a name="15342" href="hoc-log.html#15327" class="Bound"
+      >x</a
+      >
+<a name="15344" href="hoc-log.html#rec" class="Function"
+      >rec</a
+      > <a name="15348" href="hoc-log.html#15348" class="Bound"
+      >x</a
+      > <a name="15350" href="hoc-log.html#15350" class="Bound"
+      >f</a
+      > <a name="15352" class="Symbol"
+      >(</a
+      ><a name="15353" href="hoc-log.html#&#8469;.succ" class="InductiveConstructor"
+      >succ</a
+      > <a name="15358" href="hoc-log.html#15358" class="Bound"
+      >n</a
+      ><a name="15359" class="Symbol"
+      >)</a
+      > <a name="15361" class="Symbol"
+      >=</a
+      > <a name="15363" href="hoc-log.html#15350" class="Bound"
+      >f</a
+      > <a name="15365" href="hoc-log.html#15358" class="Bound"
+      >n</a
+      > <a name="15367" class="Symbol"
+      >(</a
+      ><a name="15368" href="hoc-log.html#rec" class="Function"
+      >rec</a
+      > <a name="15372" href="hoc-log.html#15348" class="Bound"
+      >x</a
+      > <a name="15374" href="hoc-log.html#15350" class="Bound"
+      >f</a
+      > <a name="15376" href="hoc-log.html#15358" class="Bound"
+      >n</a
+      ><a name="15377" class="Symbol"
+      >)</a
+      >
+
+<a name="cases" href="hoc-log.html#cases" class="Function"
+      >cases</a
+      > <a name="15386" class="Symbol"
+      >:</a
+      > <a name="15388" class="Symbol"
+      >{</a
+      ><a name="15389" href="hoc-log.html#15389" class="Bound"
+      >X</a
+      > <a name="15391" class="Symbol"
+      >:</a
+      > <a name="15393" class="PrimitiveType"
+      >Set</a
+      ><a name="15396" class="Symbol"
+      >}</a
+      > <a name="15398" class="Symbol"
+      >&#8594;</a
+      > <a name="15400" href="hoc-log.html#15389" class="Bound"
+      >X</a
+      > <a name="15402" class="Symbol"
+      >&#8594;</a
+      > <a name="15404" href="hoc-log.html#15389" class="Bound"
+      >X</a
+      > <a name="15406" class="Symbol"
+      >&#8594;</a
+      > <a name="15408" href="hoc-log.html#&#120794;" class="Datatype"
+      >&#120794;</a
+      > <a name="15410" class="Symbol"
+      >&#8594;</a
+      > <a name="15412" href="hoc-log.html#15389" class="Bound"
+      >X</a
+      >
+<a name="15414" href="hoc-log.html#cases" class="Function"
+      >cases</a
+      > <a name="15420" href="hoc-log.html#15420" class="Bound"
+      >x</a
+      > <a name="15422" href="hoc-log.html#15422" class="Bound"
+      >y</a
+      > <a name="15424" href="hoc-log.html#&#120794;.&#8320;" class="InductiveConstructor"
+      >&#8320;</a
+      > <a name="15426" class="Symbol"
+      >=</a
+      > <a name="15428" href="hoc-log.html#15420" class="Bound"
+      >x</a
+      >
+<a name="15430" href="hoc-log.html#cases" class="Function"
+      >cases</a
+      > <a name="15436" href="hoc-log.html#15436" class="Bound"
+      >x</a
+      > <a name="15438" href="hoc-log.html#15438" class="Bound"
+      >y</a
+      > <a name="15440" href="hoc-log.html#&#120794;.&#8321;" class="InductiveConstructor"
+      >&#8321;</a
+      > <a name="15442" class="Symbol"
+      >=</a
+      > <a name="15444" href="hoc-log.html#15438" class="Bound"
+      >y</a
+      >
+
+ \end{code}<a name="15458" class="Comment"
+      >
+
+Using this we can get closer to T notation.
+
+There are two nested recursions in the definition of embed. Before
+using rec, we split them, for use in version&#8325;:
+
+</a
+      >\begin{code}
+
+<a name="15634" class="Keyword"
+      >module</a
+      > <a name="version&#8324;" href="hoc-log.html#version&#8324;" class="Module"
+      >version&#8324;</a
+      > <a name="15650" class="Keyword"
+      >where</a
+      >
+
+ <a name="version&#8324;.min" href="hoc-log.html#version&#8324;.min" class="Function"
+      >min</a
+      > <a name="15662" class="Symbol"
+      >:</a
+      > <a name="15664" href="hoc-log.html#&#120794;" class="Datatype"
+      >&#120794;</a
+      > <a name="15666" class="Symbol"
+      >&#8594;</a
+      > <a name="15668" href="hoc-log.html#&#120794;" class="Datatype"
+      >&#120794;</a
+      > <a name="15670" class="Symbol"
+      >&#8594;</a
+      > <a name="15672" href="hoc-log.html#&#120794;" class="Datatype"
+      >&#120794;</a
+      >
+ <a name="15675" href="hoc-log.html#version&#8324;.min" class="Function"
+      >min</a
+      > <a name="15679" class="Symbol"
+      >=</a
+      > <a name="15681" class="Symbol"
+      >&#955;</a
+      > <a name="15683" href="hoc-log.html#15683" class="Bound"
+      >m</a
+      > <a name="15685" href="hoc-log.html#15685" class="Bound"
+      >n</a
+      > <a name="15687" class="Symbol"
+      >&#8594;</a
+      > <a name="15689" href="hoc-log.html#cases" class="Function"
+      >cases</a
+      > <a name="15695" href="hoc-log.html#&#120794;.&#8320;" class="InductiveConstructor"
+      >&#8320;</a
+      > <a name="15697" href="hoc-log.html#15685" class="Bound"
+      >n</a
+      > <a name="15699" href="hoc-log.html#15683" class="Bound"
+      >m</a
+      >
+
+ <a name="version&#8324;.embed" href="hoc-log.html#version&#8324;.embed" class="Function"
+      >embed</a
+      > <a name="15709" class="Symbol"
+      >:</a
+      > <a name="15711" href="hoc-log.html#&#8469;" class="Datatype"
+      >&#8469;</a
+      > <a name="15713" class="Symbol"
+      >&#8594;</a
+      > <a name="15715" href="hoc-log.html#Cantor" class="Function"
+      >Cantor</a
+      >
+ <a name="15723" href="hoc-log.html#version&#8324;.embed" class="Function"
+      >embed</a
+      > <a name="15729" href="hoc-log.html#&#8469;.zero" class="InductiveConstructor"
+      >zero</a
+      > <a name="15734" class="Symbol"
+      >=</a
+      > <a name="15736" class="Symbol"
+      >&#955;</a
+      > <a name="15738" href="hoc-log.html#15738" class="Bound"
+      >i</a
+      > <a name="15740" class="Symbol"
+      >&#8594;</a
+      > <a name="15742" href="hoc-log.html#&#120794;.&#8320;" class="InductiveConstructor"
+      >&#8320;</a
+      >
+ <a name="15745" href="hoc-log.html#version&#8324;.embed" class="Function"
+      >embed</a
+      > <a name="15751" class="Symbol"
+      >(</a
+      ><a name="15752" href="hoc-log.html#&#8469;.succ" class="InductiveConstructor"
+      >succ</a
+      > <a name="15757" href="hoc-log.html#15757" class="Bound"
+      >n</a
+      ><a name="15758" class="Symbol"
+      >)</a
+      > <a name="15760" class="Symbol"
+      >=</a
+      > <a name="15762" href="hoc-log.html#15787" class="Function"
+      >g</a
+      > <a name="15764" href="hoc-log.html#15757" class="Bound"
+      >n</a
+      > <a name="15766" class="Symbol"
+      >(</a
+      ><a name="15767" href="hoc-log.html#version&#8324;.embed" class="Function"
+      >embed</a
+      > <a name="15773" href="hoc-log.html#15757" class="Bound"
+      >n</a
+      ><a name="15774" class="Symbol"
+      >)</a
+      >
+  <a name="15778" class="Keyword"
+      >where</a
+      >
+   <a name="15787" href="hoc-log.html#15787" class="Function"
+      >g</a
+      > <a name="15789" class="Symbol"
+      >:</a
+      > <a name="15791" href="hoc-log.html#&#8469;" class="Datatype"
+      >&#8469;</a
+      > <a name="15793" class="Symbol"
+      >&#8594;</a
+      > <a name="15795" href="hoc-log.html#Cantor" class="Function"
+      >Cantor</a
+      > <a name="15802" class="Symbol"
+      >&#8594;</a
+      > <a name="15804" href="hoc-log.html#Cantor" class="Function"
+      >Cantor</a
+      >
+   <a name="15814" href="hoc-log.html#15787" class="Function"
+      >g</a
+      > <a name="15816" class="Symbol"
+      >_</a
+      > <a name="15818" href="hoc-log.html#15818" class="Bound"
+      >&#945;</a
+      > <a name="15820" class="Symbol"
+      >=</a
+      > <a name="15822" href="hoc-log.html#rec" class="Function"
+      >rec</a
+      > <a name="15826" href="hoc-log.html#&#120794;.&#8321;" class="InductiveConstructor"
+      >&#8321;</a
+      > <a name="15828" class="Symbol"
+      >(&#955;</a
+      > <a name="15831" href="hoc-log.html#15831" class="Bound"
+      >i</a
+      > <a name="15833" href="hoc-log.html#15833" class="Bound"
+      >_</a
+      > <a name="15835" class="Symbol"
+      >&#8594;</a
+      > <a name="15837" href="hoc-log.html#15818" class="Bound"
+      >&#945;</a
+      > <a name="15839" href="hoc-log.html#15831" class="Bound"
+      >i</a
+      ><a name="15840" class="Symbol"
+      >)</a
+      >
+
+ <a name="version&#8324;.&#949;" href="hoc-log.html#version&#8324;.&#949;" class="Function"
+      >&#949;</a
+      > <a name="15846" class="Symbol"
+      >:</a
+      > <a name="15848" class="Symbol"
+      >(</a
+      ><a name="15849" href="hoc-log.html#Cantor" class="Function"
+      >Cantor</a
+      > <a name="15856" class="Symbol"
+      >&#8594;</a
+      > <a name="15858" href="hoc-log.html#&#120794;" class="Datatype"
+      >&#120794;</a
+      ><a name="15859" class="Symbol"
+      >)</a
+      > <a name="15861" class="Symbol"
+      >&#8594;</a
+      > <a name="15863" href="hoc-log.html#Cantor" class="Function"
+      >Cantor</a
+      >
+ <a name="15872" href="hoc-log.html#version&#8324;.&#949;" class="Function"
+      >&#949;</a
+      > <a name="15874" class="Symbol"
+      >=</a
+      > <a name="15876" class="Symbol"
+      >&#955;</a
+      > <a name="15878" href="hoc-log.html#15878" class="Bound"
+      >p</a
+      > <a name="15880" class="Symbol"
+      >&#8594;</a
+      > <a name="15882" href="hoc-log.html#rec" class="Function"
+      >rec</a
+      > <a name="15886" class="Symbol"
+      >(</a
+      ><a name="15887" href="hoc-log.html#15878" class="Bound"
+      >p</a
+      > <a name="15889" class="Symbol"
+      >(</a
+      ><a name="15890" href="hoc-log.html#version&#8324;.embed" class="Function"
+      >embed</a
+      > <a name="15896" href="hoc-log.html#&#8469;.zero" class="InductiveConstructor"
+      >zero</a
+      ><a name="15900" class="Symbol"
+      >))</a
+      > <a name="15903" class="Symbol"
+      >(&#955;</a
+      > <a name="15906" href="hoc-log.html#15906" class="Bound"
+      >n</a
+      > <a name="15908" class="Symbol"
+      >&#8594;</a
+      > <a name="15910" href="hoc-log.html#version&#8324;.min" class="Function"
+      >min</a
+      > <a name="15914" class="Symbol"
+      >(</a
+      ><a name="15915" href="hoc-log.html#15878" class="Bound"
+      >p</a
+      > <a name="15917" class="Symbol"
+      >(</a
+      ><a name="15918" href="hoc-log.html#version&#8324;.embed" class="Function"
+      >embed</a
+      ><a name="15923" class="Symbol"
+      >(</a
+      ><a name="15924" href="hoc-log.html#&#8469;.succ" class="InductiveConstructor"
+      >succ</a
+      > <a name="15929" href="hoc-log.html#15906" class="Bound"
+      >n</a
+      ><a name="15930" class="Symbol"
+      >))))</a
+      >
+
+ <a name="version&#8324;.A" href="hoc-log.html#version&#8324;.A" class="Function"
+      >A</a
+      > <a name="15940" class="Symbol"
+      >:</a
+      > <a name="15942" class="Symbol"
+      >(</a
+      ><a name="15943" href="hoc-log.html#Cantor" class="Function"
+      >Cantor</a
+      > <a name="15950" class="Symbol"
+      >&#8594;</a
+      > <a name="15952" href="hoc-log.html#&#120794;" class="Datatype"
+      >&#120794;</a
+      ><a name="15953" class="Symbol"
+      >)</a
+      > <a name="15955" class="Symbol"
+      >&#8594;</a
+      > <a name="15957" href="hoc-log.html#&#120794;" class="Datatype"
+      >&#120794;</a
+      >
+ <a name="15960" href="hoc-log.html#version&#8324;.A" class="Function"
+      >A</a
+      > <a name="15962" class="Symbol"
+      >=</a
+      > <a name="15964" class="Symbol"
+      >&#955;</a
+      > <a name="15966" href="hoc-log.html#15966" class="Bound"
+      >p</a
+      > <a name="15968" class="Symbol"
+      >&#8594;</a
+      > <a name="15970" href="hoc-log.html#15966" class="Bound"
+      >p</a
+      ><a name="15971" class="Symbol"
+      >(</a
+      ><a name="15972" href="hoc-log.html#version&#8324;.&#949;" class="Function"
+      >&#949;</a
+      > <a name="15974" href="hoc-log.html#15966" class="Bound"
+      >p</a
+      ><a name="15975" class="Symbol"
+      >)</a
+      >
+
+\end{code}<a name="15988" class="Comment"
+      >
+
+Now this is almost a system T term:
+
+</a
+      >\begin{code}
+
+<a name="16041" class="Keyword"
+      >module</a
+      > <a name="version&#8325;" href="hoc-log.html#version&#8325;" class="Module"
+      >version&#8325;</a
+      > <a name="16057" class="Keyword"
+      >where</a
+      >
+
+ <a name="version&#8325;.min" href="hoc-log.html#version&#8325;.min" class="Function"
+      >min</a
+      > <a name="16069" class="Symbol"
+      >:</a
+      > <a name="16071" href="hoc-log.html#&#120794;" class="Datatype"
+      >&#120794;</a
+      > <a name="16073" class="Symbol"
+      >&#8594;</a
+      > <a name="16075" href="hoc-log.html#&#120794;" class="Datatype"
+      >&#120794;</a
+      > <a name="16077" class="Symbol"
+      >&#8594;</a
+      > <a name="16079" href="hoc-log.html#&#120794;" class="Datatype"
+      >&#120794;</a
+      >
+ <a name="16082" href="hoc-log.html#version&#8325;.min" class="Function"
+      >min</a
+      > <a name="16086" class="Symbol"
+      >=</a
+      > <a name="16088" class="Symbol"
+      >&#955;</a
+      > <a name="16090" href="hoc-log.html#16090" class="Bound"
+      >m</a
+      > <a name="16092" href="hoc-log.html#16092" class="Bound"
+      >n</a
+      > <a name="16094" class="Symbol"
+      >&#8594;</a
+      > <a name="16096" href="hoc-log.html#cases" class="Function"
+      >cases</a
+      > <a name="16102" href="hoc-log.html#&#120794;.&#8320;" class="InductiveConstructor"
+      >&#8320;</a
+      > <a name="16104" href="hoc-log.html#16092" class="Bound"
+      >n</a
+      > <a name="16106" href="hoc-log.html#16090" class="Bound"
+      >m</a
+      >
+
+ <a name="version&#8325;.embed" href="hoc-log.html#version&#8325;.embed" class="Function"
+      >embed</a
+      > <a name="16116" class="Symbol"
+      >:</a
+      > <a name="16118" href="hoc-log.html#&#8469;" class="Datatype"
+      >&#8469;</a
+      > <a name="16120" class="Symbol"
+      >&#8594;</a
+      > <a name="16122" href="hoc-log.html#Cantor" class="Function"
+      >Cantor</a
+      >
+ <a name="16130" href="hoc-log.html#version&#8325;.embed" class="Function"
+      >embed</a
+      > <a name="16136" class="Symbol"
+      >=</a
+      > <a name="16138" href="hoc-log.html#rec" class="Function"
+      >rec</a
+      > <a name="16142" class="Symbol"
+      >(&#955;</a
+      > <a name="16145" href="hoc-log.html#16145" class="Bound"
+      >i</a
+      > <a name="16147" class="Symbol"
+      >&#8594;</a
+      > <a name="16149" href="hoc-log.html#&#120794;.&#8320;" class="InductiveConstructor"
+      >&#8320;</a
+      ><a name="16150" class="Symbol"
+      >)</a
+      > <a name="16152" class="Symbol"
+      >(&#955;</a
+      > <a name="16155" href="hoc-log.html#16155" class="Bound"
+      >_</a
+      > <a name="16157" href="hoc-log.html#16157" class="Bound"
+      >&#945;</a
+      > <a name="16159" class="Symbol"
+      >&#8594;</a
+      > <a name="16161" href="hoc-log.html#rec" class="Function"
+      >rec</a
+      > <a name="16165" href="hoc-log.html#&#120794;.&#8321;" class="InductiveConstructor"
+      >&#8321;</a
+      > <a name="16167" class="Symbol"
+      >(&#955;</a
+      > <a name="16170" href="hoc-log.html#16170" class="Bound"
+      >i</a
+      > <a name="16172" href="hoc-log.html#16172" class="Bound"
+      >_</a
+      > <a name="16174" class="Symbol"
+      >&#8594;</a
+      > <a name="16176" href="hoc-log.html#16157" class="Bound"
+      >&#945;</a
+      > <a name="16178" href="hoc-log.html#16170" class="Bound"
+      >i</a
+      ><a name="16179" class="Symbol"
+      >))</a
+      >
+
+ <a name="version&#8325;.&#949;" href="hoc-log.html#version&#8325;.&#949;" class="Function"
+      >&#949;</a
+      > <a name="16186" class="Symbol"
+      >:</a
+      > <a name="16188" class="Symbol"
+      >(</a
+      ><a name="16189" href="hoc-log.html#Cantor" class="Function"
+      >Cantor</a
+      > <a name="16196" class="Symbol"
+      >&#8594;</a
+      > <a name="16198" href="hoc-log.html#&#120794;" class="Datatype"
+      >&#120794;</a
+      ><a name="16199" class="Symbol"
+      >)</a
+      > <a name="16201" class="Symbol"
+      >&#8594;</a
+      > <a name="16203" href="hoc-log.html#Cantor" class="Function"
+      >Cantor</a
+      >
+ <a name="16212" href="hoc-log.html#version&#8325;.&#949;" class="Function"
+      >&#949;</a
+      > <a name="16214" class="Symbol"
+      >=</a
+      > <a name="16216" class="Symbol"
+      >&#955;</a
+      > <a name="16218" href="hoc-log.html#16218" class="Bound"
+      >p</a
+      > <a name="16220" class="Symbol"
+      >&#8594;</a
+      > <a name="16222" href="hoc-log.html#rec" class="Function"
+      >rec</a
+      > <a name="16226" class="Symbol"
+      >(</a
+      ><a name="16227" href="hoc-log.html#16218" class="Bound"
+      >p</a
+      > <a name="16229" class="Symbol"
+      >(</a
+      ><a name="16230" href="hoc-log.html#version&#8325;.embed" class="Function"
+      >embed</a
+      > <a name="16236" href="hoc-log.html#&#8469;.zero" class="InductiveConstructor"
+      >zero</a
+      ><a name="16240" class="Symbol"
+      >))</a
+      > <a name="16243" class="Symbol"
+      >(&#955;</a
+      > <a name="16246" href="hoc-log.html#16246" class="Bound"
+      >n</a
+      > <a name="16248" class="Symbol"
+      >&#8594;</a
+      > <a name="16250" href="hoc-log.html#version&#8325;.min" class="Function"
+      >min</a
+      > <a name="16254" class="Symbol"
+      >(</a
+      ><a name="16255" href="hoc-log.html#16218" class="Bound"
+      >p</a
+      > <a name="16257" class="Symbol"
+      >(</a
+      ><a name="16258" href="hoc-log.html#version&#8325;.embed" class="Function"
+      >embed</a
+      ><a name="16263" class="Symbol"
+      >(</a
+      ><a name="16264" href="hoc-log.html#&#8469;.succ" class="InductiveConstructor"
+      >succ</a
+      > <a name="16269" href="hoc-log.html#16246" class="Bound"
+      >n</a
+      ><a name="16270" class="Symbol"
+      >))))</a
+      >
+
+ <a name="version&#8325;.A" href="hoc-log.html#version&#8325;.A" class="Function"
+      >A</a
+      > <a name="16280" class="Symbol"
+      >:</a
+      > <a name="16282" class="Symbol"
+      >(</a
+      ><a name="16283" href="hoc-log.html#Cantor" class="Function"
+      >Cantor</a
+      > <a name="16290" class="Symbol"
+      >&#8594;</a
+      > <a name="16292" href="hoc-log.html#&#120794;" class="Datatype"
+      >&#120794;</a
+      ><a name="16293" class="Symbol"
+      >)</a
+      > <a name="16295" class="Symbol"
+      >&#8594;</a
+      > <a name="16297" href="hoc-log.html#&#120794;" class="Datatype"
+      >&#120794;</a
+      >
+ <a name="16300" href="hoc-log.html#version&#8325;.A" class="Function"
+      >A</a
+      > <a name="16302" class="Symbol"
+      >=</a
+      > <a name="16304" class="Symbol"
+      >&#955;</a
+      > <a name="16306" href="hoc-log.html#16306" class="Bound"
+      >p</a
+      > <a name="16308" class="Symbol"
+      >&#8594;</a
+      > <a name="16310" href="hoc-log.html#16306" class="Bound"
+      >p</a
+      ><a name="16311" class="Symbol"
+      >(</a
+      ><a name="16312" href="hoc-log.html#version&#8325;.&#949;" class="Function"
+      >&#949;</a
+      > <a name="16314" href="hoc-log.html#16306" class="Bound"
+      >p</a
+      ><a name="16315" class="Symbol"
+      >)</a
+      >
+
+\end{code}<a name="16328" class="Comment"
+      >
+
+What remains to be done, to be strictly formal, is to get a single
+term, by expanding the definitions.
+
+</a
+      >\begin{code}
+
+<a name="16448" class="Keyword"
+      >module</a
+      > <a name="version&#8326;" href="hoc-log.html#version&#8326;" class="Module"
+      >version&#8326;</a
+      > <a name="16464" class="Keyword"
+      >where</a
+      >
+
+ <a name="version&#8326;.A" href="hoc-log.html#version&#8326;.A" class="Function"
+      >A</a
+      > <a name="16474" class="Symbol"
+      >:</a
+      > <a name="16476" class="Symbol"
+      >((</a
+      ><a name="16478" href="hoc-log.html#&#8469;" class="Datatype"
+      >&#8469;</a
+      > <a name="16480" class="Symbol"
+      >&#8594;</a
+      > <a name="16482" href="hoc-log.html#&#120794;" class="Datatype"
+      >&#120794;</a
+      ><a name="16483" class="Symbol"
+      >)</a
+      > <a name="16485" class="Symbol"
+      >&#8594;</a
+      > <a name="16487" href="hoc-log.html#&#120794;" class="Datatype"
+      >&#120794;</a
+      ><a name="16488" class="Symbol"
+      >)</a
+      > <a name="16490" class="Symbol"
+      >&#8594;</a
+      > <a name="16492" href="hoc-log.html#&#120794;" class="Datatype"
+      >&#120794;</a
+      >
+ <a name="16495" href="hoc-log.html#version&#8326;.A" class="Function"
+      >A</a
+      > <a name="16497" class="Symbol"
+      >=</a
+      > <a name="16499" class="Symbol"
+      >&#955;</a
+      > <a name="16501" href="hoc-log.html#16501" class="Bound"
+      >p</a
+      > <a name="16503" class="Symbol"
+      >&#8594;</a
+      > <a name="16505" href="hoc-log.html#16501" class="Bound"
+      >p</a
+      ><a name="16506" class="Symbol"
+      >((&#955;</a
+      > <a name="16510" href="hoc-log.html#16510" class="Bound"
+      >p</a
+      > <a name="16512" class="Symbol"
+      >&#8594;</a
+      > <a name="16514" href="hoc-log.html#rec" class="Function"
+      >rec</a
+      > <a name="16518" class="Symbol"
+      >(</a
+      ><a name="16519" href="hoc-log.html#16510" class="Bound"
+      >p</a
+      > <a name="16521" class="Symbol"
+      >(</a
+      ><a name="16522" href="hoc-log.html#rec" class="Function"
+      >rec</a
+      > <a name="16526" class="Symbol"
+      >(&#955;</a
+      > <a name="16529" href="hoc-log.html#16529" class="Bound"
+      >i</a
+      > <a name="16531" class="Symbol"
+      >&#8594;</a
+      > <a name="16533" href="hoc-log.html#&#120794;.&#8320;" class="InductiveConstructor"
+      >&#8320;</a
+      ><a name="16534" class="Symbol"
+      >)</a
+      > <a name="16536" class="Symbol"
+      >(&#955;</a
+      > <a name="16539" href="hoc-log.html#16539" class="Bound"
+      >_</a
+      > <a name="16541" href="hoc-log.html#16541" class="Bound"
+      >&#945;</a
+      > <a name="16543" class="Symbol"
+      >&#8594;</a
+      > <a name="16545" href="hoc-log.html#rec" class="Function"
+      >rec</a
+      > <a name="16549" href="hoc-log.html#&#120794;.&#8321;" class="InductiveConstructor"
+      >&#8321;</a
+      > <a name="16551" class="Symbol"
+      >(&#955;</a
+      > <a name="16554" href="hoc-log.html#16554" class="Bound"
+      >i</a
+      > <a name="16556" href="hoc-log.html#16556" class="Bound"
+      >_</a
+      > <a name="16558" class="Symbol"
+      >&#8594;</a
+      > <a name="16560" href="hoc-log.html#16541" class="Bound"
+      >&#945;</a
+      > <a name="16562" href="hoc-log.html#16554" class="Bound"
+      >i</a
+      ><a name="16563" class="Symbol"
+      >))</a
+      > <a name="16566" href="hoc-log.html#&#8469;.zero" class="InductiveConstructor"
+      >zero</a
+      ><a name="16570" class="Symbol"
+      >))</a
+      >
+    <a name="16577" class="Symbol"
+      >(&#955;</a
+      > <a name="16580" href="hoc-log.html#16580" class="Bound"
+      >n</a
+      > <a name="16582" class="Symbol"
+      >&#8594;</a
+      > <a name="16584" class="Symbol"
+      >(&#955;</a
+      > <a name="16587" href="hoc-log.html#16587" class="Bound"
+      >m</a
+      > <a name="16589" href="hoc-log.html#16589" class="Bound"
+      >n</a
+      > <a name="16591" class="Symbol"
+      >&#8594;</a
+      > <a name="16593" href="hoc-log.html#cases" class="Function"
+      >cases</a
+      > <a name="16599" href="hoc-log.html#&#120794;.&#8320;" class="InductiveConstructor"
+      >&#8320;</a
+      > <a name="16601" href="hoc-log.html#16589" class="Bound"
+      >n</a
+      > <a name="16603" href="hoc-log.html#16587" class="Bound"
+      >m</a
+      ><a name="16604" class="Symbol"
+      >)</a
+      > <a name="16606" class="Symbol"
+      >(</a
+      ><a name="16607" href="hoc-log.html#16510" class="Bound"
+      >p</a
+      > <a name="16609" class="Symbol"
+      >(</a
+      ><a name="16610" href="hoc-log.html#rec" class="Function"
+      >rec</a
+      > <a name="16614" class="Symbol"
+      >(&#955;</a
+      > <a name="16617" href="hoc-log.html#16617" class="Bound"
+      >i</a
+      > <a name="16619" class="Symbol"
+      >&#8594;</a
+      > <a name="16621" href="hoc-log.html#&#120794;.&#8320;" class="InductiveConstructor"
+      >&#8320;</a
+      ><a name="16622" class="Symbol"
+      >)</a
+      > <a name="16624" class="Symbol"
+      >(&#955;</a
+      > <a name="16627" href="hoc-log.html#16627" class="Bound"
+      >_</a
+      > <a name="16629" href="hoc-log.html#16629" class="Bound"
+      >&#945;</a
+      > <a name="16631" class="Symbol"
+      >&#8594;</a
+      > <a name="16633" href="hoc-log.html#rec" class="Function"
+      >rec</a
+      > <a name="16637" href="hoc-log.html#&#120794;.&#8321;" class="InductiveConstructor"
+      >&#8321;</a
+      >
+    <a name="16643" class="Symbol"
+      >(&#955;</a
+      > <a name="16646" href="hoc-log.html#16646" class="Bound"
+      >i</a
+      > <a name="16648" href="hoc-log.html#16648" class="Bound"
+      >_</a
+      > <a name="16650" class="Symbol"
+      >&#8594;</a
+      > <a name="16652" href="hoc-log.html#16629" class="Bound"
+      >&#945;</a
+      > <a name="16654" href="hoc-log.html#16646" class="Bound"
+      >i</a
+      ><a name="16655" class="Symbol"
+      >))(</a
+      ><a name="16658" href="hoc-log.html#&#8469;.succ" class="InductiveConstructor"
+      >succ</a
+      > <a name="16663" href="hoc-log.html#16580" class="Bound"
+      >n</a
+      ><a name="16664" class="Symbol"
+      >)))))</a
+      > <a name="16670" href="hoc-log.html#16501" class="Bound"
+      >p</a
+      ><a name="16671" class="Symbol"
+      >)</a
+      >
+
+\end{code}<a name="16684" class="Comment"
+      >
+
+We can normalize this term by hand, to simplify it, using system T's
+equations. Or we can ask Agda to do it, and this is what I have done
+to get:
+
+</a
+      >\begin{code}
+
+<a name="16847" class="Keyword"
+      >module</a
+      > <a name="version&#8327;" href="hoc-log.html#version&#8327;" class="Module"
+      >version&#8327;</a
+      > <a name="16863" class="Keyword"
+      >where</a
+      >
+
+ <a name="version&#8327;.A" href="hoc-log.html#version&#8327;.A" class="Function"
+      >A</a
+      > <a name="16873" class="Symbol"
+      >:</a
+      > <a name="16875" class="Symbol"
+      >((</a
+      ><a name="16877" href="hoc-log.html#&#8469;" class="Datatype"
+      >&#8469;</a
+      > <a name="16879" class="Symbol"
+      >&#8594;</a
+      > <a name="16881" href="hoc-log.html#&#120794;" class="Datatype"
+      >&#120794;</a
+      ><a name="16882" class="Symbol"
+      >)</a
+      > <a name="16884" class="Symbol"
+      >&#8594;</a
+      > <a name="16886" href="hoc-log.html#&#120794;" class="Datatype"
+      >&#120794;</a
+      ><a name="16887" class="Symbol"
+      >)</a
+      > <a name="16889" class="Symbol"
+      >&#8594;</a
+      > <a name="16891" href="hoc-log.html#&#120794;" class="Datatype"
+      >&#120794;</a
+      >
+ <a name="16894" href="hoc-log.html#version&#8327;.A" class="Function"
+      >A</a
+      > <a name="16896" class="Symbol"
+      >=</a
+      > <a name="16898" class="Symbol"
+      >&#955;</a
+      > <a name="16900" href="hoc-log.html#16900" class="Bound"
+      >p</a
+      > <a name="16902" class="Symbol"
+      >&#8594;</a
+      > <a name="16904" href="hoc-log.html#16900" class="Bound"
+      >p</a
+      ><a name="16905" class="Symbol"
+      >(</a
+      ><a name="16906" href="hoc-log.html#rec" class="Function"
+      >rec</a
+      ><a name="16909" class="Symbol"
+      >(</a
+      ><a name="16910" href="hoc-log.html#16900" class="Bound"
+      >p</a
+      > <a name="16912" class="Symbol"
+      >(&#955;</a
+      > <a name="16915" href="hoc-log.html#16915" class="Bound"
+      >i</a
+      > <a name="16917" class="Symbol"
+      >&#8594;</a
+      > <a name="16919" href="hoc-log.html#&#120794;.&#8320;" class="InductiveConstructor"
+      >&#8320;</a
+      ><a name="16920" class="Symbol"
+      >))(&#955;</a
+      > <a name="16925" href="hoc-log.html#16925" class="Bound"
+      >n</a
+      > <a name="16927" href="hoc-log.html#16927" class="Bound"
+      >m</a
+      > <a name="16929" class="Symbol"
+      >&#8594;</a
+      > <a name="16931" href="hoc-log.html#cases" class="Function"
+      >cases</a
+      > <a name="16937" href="hoc-log.html#&#120794;.&#8320;" class="InductiveConstructor"
+      >&#8320;</a
+      > <a name="16939" href="hoc-log.html#16927" class="Bound"
+      >m</a
+      > <a name="16941" class="Symbol"
+      >(</a
+      ><a name="16942" href="hoc-log.html#16900" class="Bound"
+      >p</a
+      ><a name="16943" class="Symbol"
+      >(</a
+      ><a name="16944" href="hoc-log.html#rec" class="Function"
+      >rec</a
+      > <a name="16948" href="hoc-log.html#&#120794;.&#8321;" class="InductiveConstructor"
+      >&#8321;</a
+      > <a name="16950" class="Symbol"
+      >(&#955;</a
+      > <a name="16953" href="hoc-log.html#16953" class="Bound"
+      >i</a
+      > <a name="16955" href="hoc-log.html#16955" class="Bound"
+      >_</a
+      > <a name="16957" class="Symbol"
+      >&#8594;</a
+      > <a name="16959" href="hoc-log.html#rec" class="Function"
+      >rec</a
+      ><a name="16962" class="Symbol"
+      >(&#955;</a
+      > <a name="16965" href="hoc-log.html#16965" class="Bound"
+      >j</a
+      > <a name="16967" class="Symbol"
+      >&#8594;</a
+      > <a name="16969" href="hoc-log.html#&#120794;.&#8320;" class="InductiveConstructor"
+      >&#8320;</a
+      ><a name="16970" class="Symbol"
+      >)</a
+      >
+     <a name="16977" class="Symbol"
+      >(&#955;</a
+      > <a name="16980" href="hoc-log.html#16980" class="Bound"
+      >_</a
+      > <a name="16982" href="hoc-log.html#16982" class="Bound"
+      >&#945;</a
+      > <a name="16984" class="Symbol"
+      >&#8594;</a
+      > <a name="16986" href="hoc-log.html#rec" class="Function"
+      >rec</a
+      > <a name="16990" href="hoc-log.html#&#120794;.&#8321;" class="InductiveConstructor"
+      >&#8321;</a
+      > <a name="16992" class="Symbol"
+      >(&#955;</a
+      > <a name="16995" href="hoc-log.html#16995" class="Bound"
+      >j</a
+      > <a name="16997" href="hoc-log.html#16997" class="Bound"
+      >_</a
+      > <a name="16999" class="Symbol"
+      >&#8594;</a
+      > <a name="17001" href="hoc-log.html#16982" class="Bound"
+      >&#945;</a
+      > <a name="17003" href="hoc-log.html#16995" class="Bound"
+      >j</a
+      ><a name="17004" class="Symbol"
+      >))</a
+      > <a name="17007" href="hoc-log.html#16925" class="Bound"
+      >n</a
+      > <a name="17009" href="hoc-log.html#16953" class="Bound"
+      >i</a
+      ><a name="17010" class="Symbol"
+      >)))))</a
+      >
+
+\end{code}<a name="17027" class="Comment"
+      >
+
+Of course, this is unreadable, and one usually writes the term as in
+version&#8321;, knowing that the definition can be mechanically translated
+to this last form. Also, for proving the correctness of the program,
+it is more convenient to work with version&#8321;.
+
+The last thing we do is to go back to version&#8321;, and rewrite it without
+using the type &#120794;, as it is not usually included in the definition of
+system T.
+
+</a
+      >\begin{code}
+
+<a name="17447" class="Keyword"
+      >module</a
+      > <a name="version&#8328;" href="hoc-log.html#version&#8328;" class="Module"
+      >version&#8328;</a
+      > <a name="17463" class="Keyword"
+      >where</a
+      >
+
+ <a name="version&#8328;.min" href="hoc-log.html#version&#8328;.min" class="Function"
+      >min</a
+      > <a name="17475" class="Symbol"
+      >:</a
+      > <a name="17477" href="hoc-log.html#&#8469;" class="Datatype"
+      >&#8469;</a
+      > <a name="17479" class="Symbol"
+      >&#8594;</a
+      > <a name="17481" href="hoc-log.html#&#8469;" class="Datatype"
+      >&#8469;</a
+      > <a name="17483" class="Symbol"
+      >&#8594;</a
+      > <a name="17485" href="hoc-log.html#&#8469;" class="Datatype"
+      >&#8469;</a
+      >
+ <a name="17488" href="hoc-log.html#version&#8328;.min" class="Function"
+      >min</a
+      > <a name="17492" href="hoc-log.html#&#8469;.zero" class="InductiveConstructor"
+      >zero</a
+      > <a name="17497" href="hoc-log.html#17497" class="Bound"
+      >n</a
+      > <a name="17499" class="Symbol"
+      >=</a
+      > <a name="17501" href="hoc-log.html#&#8469;.zero" class="InductiveConstructor"
+      >zero</a
+      >
+ <a name="17507" href="hoc-log.html#version&#8328;.min" class="Function"
+      >min</a
+      > <a name="17511" class="Symbol"
+      >(</a
+      ><a name="17512" href="hoc-log.html#&#8469;.succ" class="InductiveConstructor"
+      >succ</a
+      > <a name="17517" href="hoc-log.html#17517" class="Bound"
+      >m</a
+      ><a name="17518" class="Symbol"
+      >)</a
+      > <a name="17520" href="hoc-log.html#&#8469;.zero" class="InductiveConstructor"
+      >zero</a
+      > <a name="17525" class="Symbol"
+      >=</a
+      > <a name="17527" href="hoc-log.html#&#8469;.zero" class="InductiveConstructor"
+      >zero</a
+      >
+ <a name="17533" href="hoc-log.html#version&#8328;.min" class="Function"
+      >min</a
+      > <a name="17537" class="Symbol"
+      >(</a
+      ><a name="17538" href="hoc-log.html#&#8469;.succ" class="InductiveConstructor"
+      >succ</a
+      > <a name="17543" href="hoc-log.html#17543" class="Bound"
+      >m</a
+      ><a name="17544" class="Symbol"
+      >)</a
+      > <a name="17546" class="Symbol"
+      >(</a
+      ><a name="17547" href="hoc-log.html#&#8469;.succ" class="InductiveConstructor"
+      >succ</a
+      > <a name="17552" href="hoc-log.html#17552" class="Bound"
+      >n</a
+      ><a name="17553" class="Symbol"
+      >)</a
+      > <a name="17555" class="Symbol"
+      >=</a
+      > <a name="17557" href="hoc-log.html#&#8469;.succ" class="InductiveConstructor"
+      >succ</a
+      ><a name="17561" class="Symbol"
+      >(</a
+      ><a name="17562" href="hoc-log.html#version&#8328;.min" class="Function"
+      >min</a
+      > <a name="17566" href="hoc-log.html#17543" class="Bound"
+      >m</a
+      > <a name="17568" href="hoc-log.html#17552" class="Bound"
+      >n</a
+      ><a name="17569" class="Symbol"
+      >)</a
+      >
+
+ <a name="version&#8328;.embed" href="hoc-log.html#version&#8328;.embed" class="Function"
+      >embed</a
+      > <a name="17579" class="Symbol"
+      >:</a
+      > <a name="17581" href="hoc-log.html#&#8469;" class="Datatype"
+      >&#8469;</a
+      > <a name="17583" class="Symbol"
+      >&#8594;</a
+      > <a name="17585" href="hoc-log.html#Baire" class="Function"
+      >Baire</a
+      >
+ <a name="17592" href="hoc-log.html#version&#8328;.embed" class="Function"
+      >embed</a
+      > <a name="17598" href="hoc-log.html#&#8469;.zero" class="InductiveConstructor"
+      >zero</a
+      > <a name="17603" href="hoc-log.html#17603" class="Bound"
+      >i</a
+      > <a name="17605" class="Symbol"
+      >=</a
+      > <a name="17607" href="hoc-log.html#&#8469;.zero" class="InductiveConstructor"
+      >zero</a
+      >
+ <a name="17613" href="hoc-log.html#version&#8328;.embed" class="Function"
+      >embed</a
+      > <a name="17619" class="Symbol"
+      >(</a
+      ><a name="17620" href="hoc-log.html#&#8469;.succ" class="InductiveConstructor"
+      >succ</a
+      > <a name="17625" href="hoc-log.html#17625" class="Bound"
+      >n</a
+      ><a name="17626" class="Symbol"
+      >)</a
+      > <a name="17628" href="hoc-log.html#&#8469;.zero" class="InductiveConstructor"
+      >zero</a
+      > <a name="17633" class="Symbol"
+      >=</a
+      > <a name="17635" href="hoc-log.html#&#8469;.succ" class="InductiveConstructor"
+      >succ</a
+      > <a name="17640" href="hoc-log.html#&#8469;.zero" class="InductiveConstructor"
+      >zero</a
+      >
+ <a name="17646" href="hoc-log.html#version&#8328;.embed" class="Function"
+      >embed</a
+      > <a name="17652" class="Symbol"
+      >(</a
+      ><a name="17653" href="hoc-log.html#&#8469;.succ" class="InductiveConstructor"
+      >succ</a
+      > <a name="17658" href="hoc-log.html#17658" class="Bound"
+      >n</a
+      ><a name="17659" class="Symbol"
+      >)</a
+      > <a name="17661" class="Symbol"
+      >(</a
+      ><a name="17662" href="hoc-log.html#&#8469;.succ" class="InductiveConstructor"
+      >succ</a
+      > <a name="17667" href="hoc-log.html#17667" class="Bound"
+      >i</a
+      ><a name="17668" class="Symbol"
+      >)</a
+      > <a name="17670" class="Symbol"
+      >=</a
+      > <a name="17672" href="hoc-log.html#version&#8328;.embed" class="Function"
+      >embed</a
+      > <a name="17678" href="hoc-log.html#17658" class="Bound"
+      >n</a
+      > <a name="17680" href="hoc-log.html#17667" class="Bound"
+      >i</a
+      >
+
+ <a name="version&#8328;.&#949;" href="hoc-log.html#version&#8328;.&#949;" class="Function"
+      >&#949;</a
+      > <a name="17686" class="Symbol"
+      >:</a
+      > <a name="17688" class="Symbol"
+      >(</a
+      ><a name="17689" href="hoc-log.html#Baire" class="Function"
+      >Baire</a
+      > <a name="17695" class="Symbol"
+      >&#8594;</a
+      > <a name="17697" href="hoc-log.html#&#8469;" class="Datatype"
+      >&#8469;</a
+      ><a name="17698" class="Symbol"
+      >)</a
+      > <a name="17700" class="Symbol"
+      >&#8594;</a
+      > <a name="17702" href="hoc-log.html#Baire" class="Function"
+      >Baire</a
+      >
+ <a name="17710" href="hoc-log.html#version&#8328;.&#949;" class="Function"
+      >&#949;</a
+      > <a name="17712" href="hoc-log.html#17712" class="Bound"
+      >p</a
+      > <a name="17714" href="hoc-log.html#&#8469;.zero" class="InductiveConstructor"
+      >zero</a
+      >     <a name="17723" class="Symbol"
+      >=</a
+      > <a name="17725" href="hoc-log.html#17712" class="Bound"
+      >p</a
+      > <a name="17727" class="Symbol"
+      >(</a
+      ><a name="17728" href="hoc-log.html#version&#8328;.embed" class="Function"
+      >embed</a
+      > <a name="17734" href="hoc-log.html#&#8469;.zero" class="InductiveConstructor"
+      >zero</a
+      ><a name="17738" class="Symbol"
+      >)</a
+      >
+ <a name="17742" href="hoc-log.html#version&#8328;.&#949;" class="Function"
+      >&#949;</a
+      > <a name="17744" href="hoc-log.html#17744" class="Bound"
+      >p</a
+      > <a name="17746" class="Symbol"
+      >(</a
+      ><a name="17747" href="hoc-log.html#&#8469;.succ" class="InductiveConstructor"
+      >succ</a
+      > <a name="17752" href="hoc-log.html#17752" class="Bound"
+      >n</a
+      ><a name="17753" class="Symbol"
+      >)</a
+      > <a name="17755" class="Symbol"
+      >=</a
+      > <a name="17757" href="hoc-log.html#version&#8328;.min" class="Function"
+      >min</a
+      > <a name="17761" class="Symbol"
+      >(</a
+      ><a name="17762" href="hoc-log.html#version&#8328;.&#949;" class="Function"
+      >&#949;</a
+      > <a name="17764" href="hoc-log.html#17744" class="Bound"
+      >p</a
+      > <a name="17766" href="hoc-log.html#17752" class="Bound"
+      >n</a
+      ><a name="17767" class="Symbol"
+      >)</a
+      > <a name="17769" class="Symbol"
+      >(</a
+      ><a name="17770" href="hoc-log.html#17744" class="Bound"
+      >p</a
+      > <a name="17772" class="Symbol"
+      >(</a
+      ><a name="17773" href="hoc-log.html#version&#8328;.embed" class="Function"
+      >embed</a
+      ><a name="17778" class="Symbol"
+      >(</a
+      ><a name="17779" href="hoc-log.html#&#8469;.succ" class="InductiveConstructor"
+      >succ</a
+      > <a name="17784" href="hoc-log.html#17752" class="Bound"
+      >n</a
+      ><a name="17785" class="Symbol"
+      >)))</a
+      >
+
+ <a name="version&#8328;.A" href="hoc-log.html#version&#8328;.A" class="Function"
+      >A</a
+      > <a name="17794" class="Symbol"
+      >:</a
+      > <a name="17796" class="Symbol"
+      >(</a
+      ><a name="17797" href="hoc-log.html#Baire" class="Function"
+      >Baire</a
+      > <a name="17803" class="Symbol"
+      >&#8594;</a
+      > <a name="17805" href="hoc-log.html#&#8469;" class="Datatype"
+      >&#8469;</a
+      ><a name="17806" class="Symbol"
+      >)</a
+      > <a name="17808" class="Symbol"
+      >&#8594;</a
+      > <a name="17810" href="hoc-log.html#&#8469;" class="Datatype"
+      >&#8469;</a
+      >
+ <a name="17813" href="hoc-log.html#version&#8328;.A" class="Function"
+      >A</a
+      > <a name="17815" href="hoc-log.html#17815" class="Bound"
+      >p</a
+      > <a name="17817" class="Symbol"
+      >=</a
+      > <a name="17819" href="hoc-log.html#17815" class="Bound"
+      >p</a
+      ><a name="17820" class="Symbol"
+      >(</a
+      ><a name="17821" href="hoc-log.html#version&#8328;.&#949;" class="Function"
+      >&#949;</a
+      > <a name="17823" href="hoc-log.html#17815" class="Bound"
+      >p</a
+      ><a name="17824" class="Symbol"
+      >)</a
+      >
+
+\end{code}<a name="17837" class="Comment"
+      >
+
+Theorem. For all p:Baire &#8594; &#8469;,
+
+  (1) &#949; p is a decreasing binary sequence.
+  (2) If p(&#949; p)=1 then p(&#945;)=1 for all decreasing binary sequences &#945;:Baire.
+
+Corollary. For all p:Baire &#8594; &#8469;,
+
+  A(p) = 1 &#8660; p(&#945;)=1 for all decreasing binary sequences &#945;:Baire.
+  A(p) = 0 &#8660; p(&#945;)=0 for some decreasing binary sequence &#945;:Baire.
+
+
+So, what is G&#246;del's system T?
+
+   (1) Simply typed lambda calculus with a base type &#8469; and closed
+       under function types X &#8594; Y.
+
+   (2) Constants zero:&#8469;, succ:&#8469;&#8594;&#8469;, and rec_X : X &#8594; (&#8469; &#8594; X &#8594; X) &#8594; &#8469; &#8594; X
+       for each type X, subject to the equations:
+
+            rec x f zero     = x
+            rec x f (succ n) = f n (rec x f n)
+
+   (3) Regarding the &#955;-calculus, all we have is &#955;-abstraction and
+       application, and the obvious equation (&#955; x &#8594; t) s = t[x&#8592;s]
+       using substitution of the free occurrences of x in t by the
+       term s (avoiding unintended captures of the free variables of s).
+
+       (The original version of T was based on combinatory logic with
+       combinators S and K rather than the &#955;-calculus.)
+
+   (4) We compute in system T applying these equations.
+
+We can extend system T to get MLTT (Martin-L&#246;f type theory), so that
+it becomes possible to formulate and prove the theorem in the same
+language we write the program. Moreover, we can define the type of
+decreasing binary systems in MLTT, rather than work with them in Baire
+as the host space.
+
+In another direction, we can extend system T to a logic called HA^&#969;,
+and the above theorem and corollary can be proved there. In both cases
+(MLTT and HA^omega), we have to assume function extensionality, or
+else restrict the statement of the theorem to extensional functions p.
+I have proofs for both cases in MLTT, written in Agda notation.
+
+I sketched the proof of the above in the lecture. You can find the
+proof in the references given in the pdf document.
+
+http://www.cs.bham.ac.uk/~mhe/papers/introduction-to-higher-order-computation-NLS-2017.pdf
+
+And also in an Agda file linked from my publications page.
+
+Friday's lecture
+----------------
+
+* We will discuss PCF rather quickly (G&#246;del's T with fixed-point
+  recursion), and formulate two Turing universality results (due to
+  Plotkin 1977 and Normann 2000) without proving them.
+
+* Then I will discuss a dictionary relating topology and computation,
+  and will transfer some theorems from topology to computation.
+
+  The dictionary starts like this:
+
+     continuous map ~ computable function
+     open set       ~ semi-decidable set
+     compact set    ~ exhaustibly searchable set
+                    &#8942;
+
+  One of the theorems in topology is the countable case of Tychonoff
+  theorem, which says that a product of countably many compact spaces
+  is compact. It translates to: a countable product of searchable sets
+  is searchable.  Using the fact that &#120794; is (trivially) searchable, we
+  get that the Cantor space is searchable.
+
+  Another theorem in topology is that among a certain class of nice
+  spaces (e.g. metrizable spaces), the compact ones are precisely the
+  continuous images of the Cantor space. It translates to: a non-empty
+  set is searchable iff it is a computable image of the Cantor space.
+
+Topological &quot;moral&quot;
+-------------------
+
+I would like to draw your attention to two points:
+
+(1) Intuitively, it should be possible to compute with decimal (or
+    binary) notation of real numbers. But it isn't.
+
+(2) Intuitively, it shouldn't be the case that we can exhaustibly
+    search an infinite set. But it is, for many infinite sets.
+
+Intuition doesn't quite work here! Unless you base it on topological
+ideas. Which explain (1) and (2), in terms of continuity and
+compactness respectively. Debug your intuition using topological
+ideas!  Learn topology if you want to perform seemingly impossible
+computations.
+
+Further directions
+------------------
+
+I hope you have learned something new in these five days.
+
+The above is the tip of the iceberg. Read the book &quot;higher-order
+computability&quot; by Longley and Normann if you want to learn more.
+
+An important omission in this crash-course at NLS is the definition of
+topological models (of G&#246;del's T) and domain models (of PCF). I
+planned to cover this, but simply there wasn't enough time
+(unsurprisingly).
+</a
+      ></pre
+    ></body
+  ></html
+>

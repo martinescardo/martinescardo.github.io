@@ -1,0 +1,2689 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+><head
+  ><title
+    >non-collapsible-type</title
+    ><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"
+     /><meta http-equiv="Content-Style-Type" content="text/css"
+     /><link href="Agda.css" rel="stylesheet" type="text/css"
+     /></head
+  ><body
+  ><pre
+    ><a name="1" class="Comment"
+      >30 Mar 2013. MHE.</a
+      ><a name="18"
+      >
+
+</a
+      ><a name="20" class="Comment"
+      >A type is called collapsible if it has a constant endomap, where a map</a
+      ><a name="90"
+      >
+</a
+      ><a name="91" class="Comment"
+      >is called constant if any two of its values are equal. Hence any empty</a
+      ><a name="161"
+      >
+</a
+      ><a name="162" class="Comment"
+      >or inhabited type is collapsible, and all types are collapsible under</a
+      ><a name="231"
+      >
+</a
+      ><a name="232" class="Comment"
+      >excluded middle.</a
+      ><a name="248"
+      >
+
+</a
+      ><a name="250" class="Comment"
+      >We give an explicit counter-example to collapsibility. From any two</a
+      ><a name="317"
+      >
+</a
+      ><a name="318" class="Comment"
+      >given elements of any type, we construct a family of types such that</a
+      ><a name="386"
+      >
+</a
+      ><a name="387" class="Comment"
+      >if each of them has a constant endomap, then the equality of the two</a
+      ><a name="455"
+      >
+</a
+      ><a name="456" class="Comment"
+      >elements is decidable. Because there are types that don't provably</a
+      ><a name="522"
+      >
+</a
+      ><a name="523" class="Comment"
+      >have decidable equality, this gives an example of a family of types</a
+      ><a name="590"
+      >
+</a
+      ><a name="591" class="Comment"
+      >that can't be provably collapsible in general. This is developed in</a
+      ><a name="658"
+      >
+</a
+      ><a name="659" class="Comment"
+      >pure intensional MLTT.</a
+      ><a name="681"
+      >
+
+</a
+      ><a name="683" class="Comment"
+      >This module should probably be called non-collapsible-family-of-types</a
+      ><a name="752"
+      >
+</a
+      ><a name="753" class="Comment"
+      >instead. It is an open problem to produce a single type (in a context)</a
+      ><a name="823"
+      >
+</a
+      ><a name="824" class="Comment"
+      >that cannot be proved to be collapsible.</a
+      ><a name="864"
+      >
+
+\begin{code}
+
+</a
+      ><a name="881" class="Symbol"
+      >{-#</a
+      ><a name="884"
+      > </a
+      ><a name="885" class="Keyword"
+      >OPTIONS</a
+      ><a name="892"
+      > --without-K </a
+      ><a name="905" class="Symbol"
+      >#-}</a
+      ><a name="908"
+      >
+
+</a
+      ><a name="910" class="Keyword"
+      >module</a
+      ><a name="916"
+      > </a
+      ><a name="917" href="non-collapsible-type.html#1" class="Module"
+      >non-collapsible-type</a
+      ><a name="937"
+      > </a
+      ><a name="938" class="Keyword"
+      >where</a
+      ><a name="943"
+      >
+
+</a
+      ><a name="945" class="Keyword"
+      >open</a
+      ><a name="949"
+      > </a
+      ><a name="950" class="Keyword"
+      >import</a
+      ><a name="956"
+      > </a
+      ><a name="957" href="mini-library.html#1" class="Module"
+      >mini-library</a
+      ><a name="969"
+      >
+</a
+      ><a name="970" class="Keyword"
+      >open</a
+      ><a name="974"
+      > </a
+      ><a name="975" class="Keyword"
+      >import</a
+      ><a name="981"
+      > </a
+      ><a name="982" href="KrausLemma.html#1" class="Module"
+      >KrausLemma</a
+      ><a name="992"
+      >
+</a
+      ><a name="993" class="Keyword"
+      >open</a
+      ><a name="997"
+      > </a
+      ><a name="998" class="Keyword"
+      >import</a
+      ><a name="1004"
+      > </a
+      ><a name="1005" href="decidable-and-discrete.html#1" class="Module"
+      >decidable-and-discrete</a
+      ><a name="1027"
+      >
+
+\end{code}
+
+</a
+      ><a name="1041" class="Comment"
+      >The type</a
+      ><a name="1049"
+      >
+
+</a
+      ><a name="1051" class="Comment"
+      >    (a&#8320; &#8801; x) + (a&#8321; &#8801; x)</a
+      ><a name="1074"
+      >
+
+</a
+      ><a name="1076" class="Comment"
+      >cannot be collapsible for all x unless a&#8320; &#8801; a&#8321; is decidable. We</a
+      ><a name="1139"
+      >
+</a
+      ><a name="1140" class="Comment"
+      >represent the displayed type as &#931; \(i : &#8322;) &#8594; a i &#8801; x for convenience.</a
+      ><a name="1209"
+      >
+
+</a
+      ><a name="1211" class="Comment"
+      >A positive way of formulating this is as follows, as a technique for</a
+      ><a name="1279"
+      >
+</a
+      ><a name="1280" class="Comment"
+      >proving the decidable equality of two given elements. But at present</a
+      ><a name="1348"
+      >
+</a
+      ><a name="1349" class="Comment"
+      >it is difficult to imagine a situation where this technique would be</a
+      ><a name="1417"
+      >
+</a
+      ><a name="1418" class="Comment"
+      >profitably applicable.</a
+      ><a name="1440"
+      >
+
+
+\begin{code}
+
+</a
+      ><a name="1458" href="non-collapsible-type.html#1458" class="Function"
+      >bold-proof-technique</a
+      ><a name="1478"
+      > </a
+      ><a name="1479" class="Symbol"
+      >:</a
+      ><a name="1480"
+      > </a
+      ><a name="1481" class="Symbol"
+      >(</a
+      ><a name="1482" href="non-collapsible-type.html#1482" class="Bound"
+      >X</a
+      ><a name="1483"
+      > </a
+      ><a name="1484" class="Symbol"
+      >:</a
+      ><a name="1485"
+      > </a
+      ><a name="1486" href="KrausLemma.html#78" class="Function"
+      >Type</a
+      ><a name="1490" class="Symbol"
+      >)</a
+      ><a name="1491"
+      > </a
+      ><a name="1492" class="Symbol"
+      >&#8594;</a
+      ><a name="1493"
+      > </a
+      ><a name="1494" class="Symbol"
+      >(</a
+      ><a name="1495" href="non-collapsible-type.html#1495" class="Bound"
+      >a</a
+      ><a name="1496"
+      > </a
+      ><a name="1497" class="Symbol"
+      >:</a
+      ><a name="1498"
+      > </a
+      ><a name="1499" href="mini-library.html#4149" class="Datatype"
+      >&#8322;</a
+      ><a name="1500"
+      > </a
+      ><a name="1501" class="Symbol"
+      >&#8594;</a
+      ><a name="1502"
+      > </a
+      ><a name="1503" href="non-collapsible-type.html#1482" class="Bound"
+      >X</a
+      ><a name="1504" class="Symbol"
+      >)</a
+      ><a name="1505"
+      > </a
+      ><a name="1506" class="Symbol"
+      >&#8594;</a
+      ><a name="1507"
+      > </a
+      ><a name="1508" class="Symbol"
+      >((</a
+      ><a name="1510" href="non-collapsible-type.html#1510" class="Bound"
+      >x</a
+      ><a name="1511"
+      > </a
+      ><a name="1512" class="Symbol"
+      >:</a
+      ><a name="1513"
+      > </a
+      ><a name="1514" href="non-collapsible-type.html#1482" class="Bound"
+      >X</a
+      ><a name="1515" class="Symbol"
+      >)</a
+      ><a name="1516"
+      > </a
+      ><a name="1517" class="Symbol"
+      >&#8594;</a
+      ><a name="1518"
+      > </a
+      ><a name="1519" href="KrausLemma.html#228" class="Function"
+      >collapsible</a
+      ><a name="1530" class="Symbol"
+      >(</a
+      ><a name="1531" href="mini-library.html#200" class="Record"
+      >&#931;</a
+      ><a name="1532"
+      > </a
+      ><a name="1533" class="Symbol"
+      >\(</a
+      ><a name="1535" href="non-collapsible-type.html#1535" class="Bound"
+      >i</a
+      ><a name="1536"
+      > </a
+      ><a name="1537" class="Symbol"
+      >:</a
+      ><a name="1538"
+      > </a
+      ><a name="1539" href="mini-library.html#4149" class="Datatype"
+      >&#8322;</a
+      ><a name="1540" class="Symbol"
+      >)</a
+      ><a name="1541"
+      > </a
+      ><a name="1542" class="Symbol"
+      >&#8594;</a
+      ><a name="1543"
+      > </a
+      ><a name="1544" href="non-collapsible-type.html#1495" class="Bound"
+      >a</a
+      ><a name="1545"
+      > </a
+      ><a name="1546" href="non-collapsible-type.html#1535" class="Bound"
+      >i</a
+      ><a name="1547"
+      > </a
+      ><a name="1548" href="mini-library.html#716" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="1549"
+      > </a
+      ><a name="1550" href="non-collapsible-type.html#1510" class="Bound"
+      >x</a
+      ><a name="1551" class="Symbol"
+      >))</a
+      ><a name="1553"
+      > </a
+      ><a name="1554" class="Symbol"
+      >&#8594;</a
+      ><a name="1555"
+      > </a
+      ><a name="1556" href="decidable-and-discrete.html#79" class="Function"
+      >decidable</a
+      ><a name="1565" class="Symbol"
+      >(</a
+      ><a name="1566" href="non-collapsible-type.html#1495" class="Bound"
+      >a</a
+      ><a name="1567"
+      > </a
+      ><a name="1568" href="mini-library.html#4164" class="InductiveConstructor"
+      >&#8320;</a
+      ><a name="1569"
+      > </a
+      ><a name="1570" href="mini-library.html#716" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="1571"
+      > </a
+      ><a name="1572" href="non-collapsible-type.html#1495" class="Bound"
+      >a</a
+      ><a name="1573"
+      > </a
+      ><a name="1574" href="mini-library.html#4171" class="InductiveConstructor"
+      >&#8321;</a
+      ><a name="1575" class="Symbol"
+      >)</a
+      ><a name="1576"
+      >
+</a
+      ><a name="1577" href="non-collapsible-type.html#1458" class="Function"
+      >bold-proof-technique</a
+      ><a name="1597"
+      > </a
+      ><a name="1598" href="non-collapsible-type.html#1598" class="Bound"
+      >X</a
+      ><a name="1599"
+      > </a
+      ><a name="1600" href="non-collapsible-type.html#1600" class="Bound"
+      >a</a
+      ><a name="1601"
+      > </a
+      ><a name="1602" href="non-collapsible-type.html#1602" class="Bound"
+      >c</a
+      ><a name="1603"
+      > </a
+      ><a name="1604" class="Symbol"
+      >=</a
+      ><a name="1605"
+      > </a
+      ><a name="1606" href="non-collapsible-type.html#2950" class="Function"
+      >equal-or-different</a
+      ><a name="1624"
+      >
+ </a
+      ><a name="1626" class="Keyword"
+      >where</a
+      ><a name="1631"
+      >
+  </a
+      ><a name="1634" href="non-collapsible-type.html#1634" class="Function"
+      >&#954;</a
+      ><a name="1635"
+      > </a
+      ><a name="1636" class="Symbol"
+      >:</a
+      ><a name="1637"
+      > </a
+      ><a name="1638" class="Symbol"
+      >(</a
+      ><a name="1639" href="non-collapsible-type.html#1639" class="Bound"
+      >x</a
+      ><a name="1640"
+      > </a
+      ><a name="1641" class="Symbol"
+      >:</a
+      ><a name="1642"
+      > </a
+      ><a name="1643" href="non-collapsible-type.html#1598" class="Bound"
+      >X</a
+      ><a name="1644" class="Symbol"
+      >)</a
+      ><a name="1645"
+      > </a
+      ><a name="1646" class="Symbol"
+      >&#8594;</a
+      ><a name="1647"
+      > </a
+      ><a name="1648" class="Symbol"
+      >(</a
+      ><a name="1649" href="mini-library.html#200" class="Record"
+      >&#931;</a
+      ><a name="1650"
+      > </a
+      ><a name="1651" class="Symbol"
+      >\(</a
+      ><a name="1653" href="non-collapsible-type.html#1653" class="Bound"
+      >i</a
+      ><a name="1654"
+      > </a
+      ><a name="1655" class="Symbol"
+      >:</a
+      ><a name="1656"
+      > </a
+      ><a name="1657" href="mini-library.html#4149" class="Datatype"
+      >&#8322;</a
+      ><a name="1658" class="Symbol"
+      >)</a
+      ><a name="1659"
+      > </a
+      ><a name="1660" class="Symbol"
+      >&#8594;</a
+      ><a name="1661"
+      > </a
+      ><a name="1662" href="non-collapsible-type.html#1600" class="Bound"
+      >a</a
+      ><a name="1663"
+      > </a
+      ><a name="1664" href="non-collapsible-type.html#1653" class="Bound"
+      >i</a
+      ><a name="1665"
+      > </a
+      ><a name="1666" href="mini-library.html#716" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="1667"
+      > </a
+      ><a name="1668" href="non-collapsible-type.html#1639" class="Bound"
+      >x</a
+      ><a name="1669" class="Symbol"
+      >)</a
+      ><a name="1670"
+      > </a
+      ><a name="1671" class="Symbol"
+      >&#8594;</a
+      ><a name="1672"
+      > </a
+      ><a name="1673" href="mini-library.html#200" class="Record"
+      >&#931;</a
+      ><a name="1674"
+      > </a
+      ><a name="1675" class="Symbol"
+      >\(</a
+      ><a name="1677" href="non-collapsible-type.html#1677" class="Bound"
+      >i</a
+      ><a name="1678"
+      > </a
+      ><a name="1679" class="Symbol"
+      >:</a
+      ><a name="1680"
+      > </a
+      ><a name="1681" href="mini-library.html#4149" class="Datatype"
+      >&#8322;</a
+      ><a name="1682" class="Symbol"
+      >)</a
+      ><a name="1683"
+      > </a
+      ><a name="1684" class="Symbol"
+      >&#8594;</a
+      ><a name="1685"
+      > </a
+      ><a name="1686" href="non-collapsible-type.html#1600" class="Bound"
+      >a</a
+      ><a name="1687"
+      > </a
+      ><a name="1688" href="non-collapsible-type.html#1677" class="Bound"
+      >i</a
+      ><a name="1689"
+      > </a
+      ><a name="1690" href="mini-library.html#716" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="1691"
+      > </a
+      ><a name="1692" href="non-collapsible-type.html#1639" class="Bound"
+      >x</a
+      ><a name="1693"
+      >
+  </a
+      ><a name="1696" href="non-collapsible-type.html#1634" class="Function"
+      >&#954;</a
+      ><a name="1697"
+      > </a
+      ><a name="1698" href="non-collapsible-type.html#1698" class="Bound"
+      >x</a
+      ><a name="1699"
+      > </a
+      ><a name="1700" class="Symbol"
+      >=</a
+      ><a name="1701"
+      > </a
+      ><a name="1702" href="mini-library.html#285" class="Function"
+      >&#960;&#8320;</a
+      ><a name="1704" class="Symbol"
+      >(</a
+      ><a name="1705" href="non-collapsible-type.html#1602" class="Bound"
+      >c</a
+      ><a name="1706"
+      > </a
+      ><a name="1707" href="non-collapsible-type.html#1698" class="Bound"
+      >x</a
+      ><a name="1708" class="Symbol"
+      >)</a
+      ><a name="1709"
+      >
+  </a
+      ><a name="1712" href="non-collapsible-type.html#1712" class="Function"
+      >&#954;-constant</a
+      ><a name="1722"
+      > </a
+      ><a name="1723" class="Symbol"
+      >:</a
+      ><a name="1724"
+      > </a
+      ><a name="1725" class="Symbol"
+      >(</a
+      ><a name="1726" href="non-collapsible-type.html#1726" class="Bound"
+      >x</a
+      ><a name="1727"
+      > </a
+      ><a name="1728" class="Symbol"
+      >:</a
+      ><a name="1729"
+      > </a
+      ><a name="1730" href="non-collapsible-type.html#1598" class="Bound"
+      >X</a
+      ><a name="1731" class="Symbol"
+      >)</a
+      ><a name="1732"
+      > </a
+      ><a name="1733" class="Symbol"
+      >&#8594;</a
+      ><a name="1734"
+      > </a
+      ><a name="1735" href="KrausLemma.html#139" class="Function"
+      >constant</a
+      ><a name="1743" class="Symbol"
+      >(</a
+      ><a name="1744" href="non-collapsible-type.html#1634" class="Function"
+      >&#954;</a
+      ><a name="1745"
+      > </a
+      ><a name="1746" href="non-collapsible-type.html#1726" class="Bound"
+      >x</a
+      ><a name="1747" class="Symbol"
+      >)</a
+      ><a name="1748"
+      >
+  </a
+      ><a name="1751" href="non-collapsible-type.html#1712" class="Function"
+      >&#954;-constant</a
+      ><a name="1761"
+      > </a
+      ><a name="1762" href="non-collapsible-type.html#1762" class="Bound"
+      >x</a
+      ><a name="1763"
+      > </a
+      ><a name="1764" class="Symbol"
+      >=</a
+      ><a name="1765"
+      > </a
+      ><a name="1766" href="mini-library.html#354" class="Function"
+      >&#960;&#8321;</a
+      ><a name="1768" class="Symbol"
+      >(</a
+      ><a name="1769" href="non-collapsible-type.html#1602" class="Bound"
+      >c</a
+      ><a name="1770"
+      > </a
+      ><a name="1771" href="non-collapsible-type.html#1762" class="Bound"
+      >x</a
+      ><a name="1772" class="Symbol"
+      >)</a
+      ><a name="1773"
+      >
+
+  </a
+      ><a name="1777" href="non-collapsible-type.html#1777" class="Function"
+      >hprop-fix</a
+      ><a name="1786"
+      > </a
+      ><a name="1787" class="Symbol"
+      >:</a
+      ><a name="1788"
+      > </a
+      ><a name="1789" class="Symbol"
+      >(</a
+      ><a name="1790" href="non-collapsible-type.html#1790" class="Bound"
+      >x</a
+      ><a name="1791"
+      > </a
+      ><a name="1792" class="Symbol"
+      >:</a
+      ><a name="1793"
+      > </a
+      ><a name="1794" href="non-collapsible-type.html#1598" class="Bound"
+      >X</a
+      ><a name="1795" class="Symbol"
+      >)</a
+      ><a name="1796"
+      > </a
+      ><a name="1797" class="Symbol"
+      >&#8594;</a
+      ><a name="1798"
+      > </a
+      ><a name="1799" href="KrausLemma.html#90" class="Function"
+      >hprop</a
+      ><a name="1804" class="Symbol"
+      >(</a
+      ><a name="1805" href="KrausLemma.html#299" class="Function"
+      >fix</a
+      ><a name="1808" class="Symbol"
+      >(</a
+      ><a name="1809" href="non-collapsible-type.html#1634" class="Function"
+      >&#954;</a
+      ><a name="1810"
+      > </a
+      ><a name="1811" href="non-collapsible-type.html#1790" class="Bound"
+      >x</a
+      ><a name="1812" class="Symbol"
+      >))</a
+      ><a name="1814"
+      >
+  </a
+      ><a name="1817" href="non-collapsible-type.html#1777" class="Function"
+      >hprop-fix</a
+      ><a name="1826"
+      > </a
+      ><a name="1827" href="non-collapsible-type.html#1827" class="Bound"
+      >x</a
+      ><a name="1828"
+      > </a
+      ><a name="1829" class="Symbol"
+      >=</a
+      ><a name="1830"
+      > </a
+      ><a name="1831" href="KrausLemma.html#1438" class="Function"
+      >Kraus-Lemma</a
+      ><a name="1842"
+      > </a
+      ><a name="1843" class="Symbol"
+      >(</a
+      ><a name="1844" href="non-collapsible-type.html#1634" class="Function"
+      >&#954;</a
+      ><a name="1845"
+      > </a
+      ><a name="1846" href="non-collapsible-type.html#1827" class="Bound"
+      >x</a
+      ><a name="1847" class="Symbol"
+      >)</a
+      ><a name="1848"
+      > </a
+      ><a name="1849" class="Symbol"
+      >(</a
+      ><a name="1850" href="non-collapsible-type.html#1712" class="Function"
+      >&#954;-constant</a
+      ><a name="1860"
+      > </a
+      ><a name="1861" href="non-collapsible-type.html#1827" class="Bound"
+      >x</a
+      ><a name="1862" class="Symbol"
+      >)</a
+      ><a name="1863"
+      >
+
+  </a
+      ><a name="1867" href="non-collapsible-type.html#1867" class="Function"
+      >choice</a
+      ><a name="1873"
+      > </a
+      ><a name="1874" class="Symbol"
+      >:</a
+      ><a name="1875"
+      > </a
+      ><a name="1876" class="Symbol"
+      >(</a
+      ><a name="1877" href="non-collapsible-type.html#1877" class="Bound"
+      >x</a
+      ><a name="1878"
+      > </a
+      ><a name="1879" class="Symbol"
+      >:</a
+      ><a name="1880"
+      > </a
+      ><a name="1881" href="non-collapsible-type.html#1598" class="Bound"
+      >X</a
+      ><a name="1882" class="Symbol"
+      >)</a
+      ><a name="1883"
+      > </a
+      ><a name="1884" class="Symbol"
+      >&#8594;</a
+      ><a name="1885"
+      > </a
+      ><a name="1886" href="KrausLemma.html#299" class="Function"
+      >fix</a
+      ><a name="1889" class="Symbol"
+      >(</a
+      ><a name="1890" href="non-collapsible-type.html#1634" class="Function"
+      >&#954;</a
+      ><a name="1891"
+      > </a
+      ><a name="1892" href="non-collapsible-type.html#1877" class="Bound"
+      >x</a
+      ><a name="1893" class="Symbol"
+      >)</a
+      ><a name="1894"
+      > </a
+      ><a name="1895" class="Symbol"
+      >&#8594;</a
+      ><a name="1896"
+      > </a
+      ><a name="1897" href="mini-library.html#200" class="Record"
+      >&#931;</a
+      ><a name="1898"
+      > </a
+      ><a name="1899" class="Symbol"
+      >\(</a
+      ><a name="1901" href="non-collapsible-type.html#1901" class="Bound"
+      >i</a
+      ><a name="1902"
+      > </a
+      ><a name="1903" class="Symbol"
+      >:</a
+      ><a name="1904"
+      > </a
+      ><a name="1905" href="mini-library.html#4149" class="Datatype"
+      >&#8322;</a
+      ><a name="1906" class="Symbol"
+      >)</a
+      ><a name="1907"
+      > </a
+      ><a name="1908" class="Symbol"
+      >&#8594;</a
+      ><a name="1909"
+      > </a
+      ><a name="1910" href="non-collapsible-type.html#1600" class="Bound"
+      >a</a
+      ><a name="1911"
+      > </a
+      ><a name="1912" href="non-collapsible-type.html#1901" class="Bound"
+      >i</a
+      ><a name="1913"
+      > </a
+      ><a name="1914" href="mini-library.html#716" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="1915"
+      > </a
+      ><a name="1916" href="non-collapsible-type.html#1877" class="Bound"
+      >x</a
+      ><a name="1917"
+      >
+  </a
+      ><a name="1920" href="non-collapsible-type.html#1867" class="Function"
+      >choice</a
+      ><a name="1926"
+      > </a
+      ><a name="1927" href="non-collapsible-type.html#1927" class="Bound"
+      >x</a
+      ><a name="1928"
+      > </a
+      ><a name="1929" class="Symbol"
+      >=</a
+      ><a name="1930"
+      > </a
+      ><a name="1931" href="mini-library.html#285" class="Function"
+      >&#960;&#8320;</a
+      ><a name="1933"
+      >
+
+  </a
+      ><a name="1937" href="non-collapsible-type.html#1937" class="Function"
+      >&#951;</a
+      ><a name="1938"
+      > </a
+      ><a name="1939" class="Symbol"
+      >:</a
+      ><a name="1940"
+      > </a
+      ><a name="1941" class="Symbol"
+      >(</a
+      ><a name="1942" href="non-collapsible-type.html#1942" class="Bound"
+      >x</a
+      ><a name="1943"
+      > </a
+      ><a name="1944" class="Symbol"
+      >:</a
+      ><a name="1945"
+      > </a
+      ><a name="1946" href="non-collapsible-type.html#1598" class="Bound"
+      >X</a
+      ><a name="1947" class="Symbol"
+      >)</a
+      ><a name="1948"
+      > </a
+      ><a name="1949" class="Symbol"
+      >&#8594;</a
+      ><a name="1950"
+      > </a
+      ><a name="1951" class="Symbol"
+      >(</a
+      ><a name="1952" href="mini-library.html#200" class="Record"
+      >&#931;</a
+      ><a name="1953"
+      > </a
+      ><a name="1954" class="Symbol"
+      >\(</a
+      ><a name="1956" href="non-collapsible-type.html#1956" class="Bound"
+      >i</a
+      ><a name="1957"
+      > </a
+      ><a name="1958" class="Symbol"
+      >:</a
+      ><a name="1959"
+      > </a
+      ><a name="1960" href="mini-library.html#4149" class="Datatype"
+      >&#8322;</a
+      ><a name="1961" class="Symbol"
+      >)</a
+      ><a name="1962"
+      > </a
+      ><a name="1963" class="Symbol"
+      >&#8594;</a
+      ><a name="1964"
+      > </a
+      ><a name="1965" href="non-collapsible-type.html#1600" class="Bound"
+      >a</a
+      ><a name="1966"
+      > </a
+      ><a name="1967" href="non-collapsible-type.html#1956" class="Bound"
+      >i</a
+      ><a name="1968"
+      > </a
+      ><a name="1969" href="mini-library.html#716" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="1970"
+      > </a
+      ><a name="1971" href="non-collapsible-type.html#1942" class="Bound"
+      >x</a
+      ><a name="1972" class="Symbol"
+      >)</a
+      ><a name="1973"
+      > </a
+      ><a name="1974" class="Symbol"
+      >&#8594;</a
+      ><a name="1975"
+      > </a
+      ><a name="1976" href="KrausLemma.html#299" class="Function"
+      >fix</a
+      ><a name="1979" class="Symbol"
+      >(</a
+      ><a name="1980" href="non-collapsible-type.html#1634" class="Function"
+      >&#954;</a
+      ><a name="1981"
+      > </a
+      ><a name="1982" href="non-collapsible-type.html#1942" class="Bound"
+      >x</a
+      ><a name="1983" class="Symbol"
+      >)</a
+      ><a name="1984"
+      >
+  </a
+      ><a name="1987" href="non-collapsible-type.html#1937" class="Function"
+      >&#951;</a
+      ><a name="1988"
+      > </a
+      ><a name="1989" href="non-collapsible-type.html#1989" class="Bound"
+      >x</a
+      ><a name="1990"
+      > </a
+      ><a name="1991" href="non-collapsible-type.html#1991" class="Bound"
+      >&#963;</a
+      ><a name="1992"
+      > </a
+      ><a name="1993" class="Symbol"
+      >=</a
+      ><a name="1994"
+      > </a
+      ><a name="1995" href="non-collapsible-type.html#1634" class="Function"
+      >&#954;</a
+      ><a name="1996"
+      > </a
+      ><a name="1997" href="non-collapsible-type.html#1989" class="Bound"
+      >x</a
+      ><a name="1998"
+      > </a
+      ><a name="1999" href="non-collapsible-type.html#1991" class="Bound"
+      >&#963;</a
+      ><a name="2000"
+      > </a
+      ><a name="2001" href="mini-library.html#252" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="2002"
+      > </a
+      ><a name="2003" href="non-collapsible-type.html#1712" class="Function"
+      >&#954;-constant</a
+      ><a name="2013"
+      > </a
+      ><a name="2014" href="non-collapsible-type.html#1989" class="Bound"
+      >x</a
+      ><a name="2015"
+      > </a
+      ><a name="2016" href="non-collapsible-type.html#1991" class="Bound"
+      >&#963;</a
+      ><a name="2017"
+      > </a
+      ><a name="2018" class="Symbol"
+      >(</a
+      ><a name="2019" href="non-collapsible-type.html#1634" class="Function"
+      >&#954;</a
+      ><a name="2020"
+      > </a
+      ><a name="2021" href="non-collapsible-type.html#1989" class="Bound"
+      >x</a
+      ><a name="2022"
+      > </a
+      ><a name="2023" href="non-collapsible-type.html#1991" class="Bound"
+      >&#963;</a
+      ><a name="2024" class="Symbol"
+      >)</a
+      ><a name="2025"
+      >
+
+  </a
+      ><a name="2029" href="non-collapsible-type.html#2029" class="Function"
+      >E</a
+      ><a name="2030"
+      > </a
+      ><a name="2031" class="Symbol"
+      >:</a
+      ><a name="2032"
+      > </a
+      ><a name="2033" href="KrausLemma.html#78" class="Function"
+      >Type</a
+      ><a name="2037"
+      >
+  </a
+      ><a name="2040" href="non-collapsible-type.html#2029" class="Function"
+      >E</a
+      ><a name="2041"
+      > </a
+      ><a name="2042" class="Symbol"
+      >=</a
+      ><a name="2043"
+      > </a
+      ><a name="2044" href="mini-library.html#200" class="Record"
+      >&#931;</a
+      ><a name="2045"
+      > </a
+      ><a name="2046" class="Symbol"
+      >\(</a
+      ><a name="2048" href="non-collapsible-type.html#2048" class="Bound"
+      >x</a
+      ><a name="2049"
+      > </a
+      ><a name="2050" class="Symbol"
+      >:</a
+      ><a name="2051"
+      > </a
+      ><a name="2052" href="non-collapsible-type.html#1598" class="Bound"
+      >X</a
+      ><a name="2053" class="Symbol"
+      >)</a
+      ><a name="2054"
+      > </a
+      ><a name="2055" class="Symbol"
+      >&#8594;</a
+      ><a name="2056"
+      > </a
+      ><a name="2057" href="KrausLemma.html#299" class="Function"
+      >fix</a
+      ><a name="2060" class="Symbol"
+      >(</a
+      ><a name="2061" href="non-collapsible-type.html#1634" class="Function"
+      >&#954;</a
+      ><a name="2062"
+      > </a
+      ><a name="2063" href="non-collapsible-type.html#2048" class="Bound"
+      >x</a
+      ><a name="2064" class="Symbol"
+      >)</a
+      ><a name="2065"
+      >
+
+  </a
+      ><a name="2069" href="non-collapsible-type.html#2069" class="Function"
+      >r</a
+      ><a name="2070"
+      > </a
+      ><a name="2071" class="Symbol"
+      >:</a
+      ><a name="2072"
+      > </a
+      ><a name="2073" href="mini-library.html#4149" class="Datatype"
+      >&#8322;</a
+      ><a name="2074"
+      > </a
+      ><a name="2075" class="Symbol"
+      >&#8594;</a
+      ><a name="2076"
+      > </a
+      ><a name="2077" href="non-collapsible-type.html#2029" class="Function"
+      >E</a
+      ><a name="2078"
+      >
+  </a
+      ><a name="2081" href="non-collapsible-type.html#2069" class="Function"
+      >r</a
+      ><a name="2082"
+      > </a
+      ><a name="2083" href="non-collapsible-type.html#2083" class="Bound"
+      >i</a
+      ><a name="2084"
+      > </a
+      ><a name="2085" class="Symbol"
+      >=</a
+      ><a name="2086"
+      > </a
+      ><a name="2087" href="non-collapsible-type.html#1600" class="Bound"
+      >a</a
+      ><a name="2088"
+      > </a
+      ><a name="2089" href="non-collapsible-type.html#2083" class="Bound"
+      >i</a
+      ><a name="2090"
+      > </a
+      ><a name="2091" href="mini-library.html#252" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="2092"
+      > </a
+      ><a name="2093" href="non-collapsible-type.html#1937" class="Function"
+      >&#951;</a
+      ><a name="2094"
+      > </a
+      ><a name="2095" class="Symbol"
+      >(</a
+      ><a name="2096" href="non-collapsible-type.html#1600" class="Bound"
+      >a</a
+      ><a name="2097"
+      > </a
+      ><a name="2098" href="non-collapsible-type.html#2083" class="Bound"
+      >i</a
+      ><a name="2099" class="Symbol"
+      >)</a
+      ><a name="2100"
+      > </a
+      ><a name="2101" class="Symbol"
+      >(</a
+      ><a name="2102" href="non-collapsible-type.html#2083" class="Bound"
+      >i</a
+      ><a name="2103"
+      > </a
+      ><a name="2104" href="mini-library.html#252" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="2105"
+      > </a
+      ><a name="2106" href="mini-library.html#752" class="InductiveConstructor"
+      >refl</a
+      ><a name="2110" class="Symbol"
+      >)</a
+      ><a name="2111"
+      >
+
+  </a
+      ><a name="2115" href="non-collapsible-type.html#2115" class="Function"
+      >r-splits</a
+      ><a name="2123"
+      > </a
+      ><a name="2124" class="Symbol"
+      >:</a
+      ><a name="2125"
+      > </a
+      ><a name="2126" class="Symbol"
+      >(</a
+      ><a name="2127" href="non-collapsible-type.html#2127" class="Bound"
+      >e</a
+      ><a name="2128"
+      > </a
+      ><a name="2129" class="Symbol"
+      >:</a
+      ><a name="2130"
+      > </a
+      ><a name="2131" href="non-collapsible-type.html#2029" class="Function"
+      >E</a
+      ><a name="2132" class="Symbol"
+      >)</a
+      ><a name="2133"
+      > </a
+      ><a name="2134" class="Symbol"
+      >&#8594;</a
+      ><a name="2135"
+      > </a
+      ><a name="2136" href="mini-library.html#200" class="Record"
+      >&#931;</a
+      ><a name="2137"
+      > </a
+      ><a name="2138" class="Symbol"
+      >\(</a
+      ><a name="2140" href="non-collapsible-type.html#2140" class="Bound"
+      >i</a
+      ><a name="2141"
+      > </a
+      ><a name="2142" class="Symbol"
+      >:</a
+      ><a name="2143"
+      > </a
+      ><a name="2144" href="mini-library.html#4149" class="Datatype"
+      >&#8322;</a
+      ><a name="2145" class="Symbol"
+      >)</a
+      ><a name="2146"
+      > </a
+      ><a name="2147" class="Symbol"
+      >&#8594;</a
+      ><a name="2148"
+      > </a
+      ><a name="2149" href="non-collapsible-type.html#2069" class="Function"
+      >r</a
+      ><a name="2150"
+      > </a
+      ><a name="2151" href="non-collapsible-type.html#2140" class="Bound"
+      >i</a
+      ><a name="2152"
+      > </a
+      ><a name="2153" href="mini-library.html#716" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="2154"
+      > </a
+      ><a name="2155" href="non-collapsible-type.html#2127" class="Bound"
+      >e</a
+      ><a name="2156"
+      >
+  </a
+      ><a name="2159" href="non-collapsible-type.html#2115" class="Function"
+      >r-splits</a
+      ><a name="2167"
+      > </a
+      ><a name="2168" class="Symbol"
+      >(</a
+      ><a name="2169" href="non-collapsible-type.html#2169" class="Bound"
+      >x</a
+      ><a name="2170"
+      > </a
+      ><a name="2171" href="mini-library.html#252" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="2172"
+      > </a
+      ><a name="2173" href="non-collapsible-type.html#2173" class="Bound"
+      >p</a
+      ><a name="2174" class="Symbol"
+      >)</a
+      ><a name="2175"
+      > </a
+      ><a name="2176" class="Symbol"
+      >=</a
+      ><a name="2177"
+      > </a
+      ><a name="2178" href="mini-library.html#285" class="Function"
+      >&#960;&#8320;</a
+      ><a name="2180"
+      > </a
+      ><a name="2181" href="non-collapsible-type.html#2279" class="Function"
+      >p'</a
+      ><a name="2183"
+      > </a
+      ><a name="2184" href="mini-library.html#252" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="2185"
+      > </a
+      ><a name="2186" href="mini-library.html#2841" class="Function"
+      >split</a
+      ><a name="2191"
+      > </a
+      ><a name="2192" class="Symbol"
+      >(</a
+      ><a name="2193" href="non-collapsible-type.html#1600" class="Bound"
+      >a</a
+      ><a name="2194" class="Symbol"
+      >(</a
+      ><a name="2195" href="mini-library.html#285" class="Function"
+      >&#960;&#8320;</a
+      ><a name="2197"
+      > </a
+      ><a name="2198" href="non-collapsible-type.html#2279" class="Function"
+      >p'</a
+      ><a name="2200" class="Symbol"
+      >))</a
+      ><a name="2202"
+      > </a
+      ><a name="2203" href="non-collapsible-type.html#2169" class="Bound"
+      >x</a
+      ><a name="2204"
+      > </a
+      ><a name="2205" class="Symbol"
+      >(</a
+      ><a name="2206" href="non-collapsible-type.html#1937" class="Function"
+      >&#951;</a
+      ><a name="2207"
+      > </a
+      ><a name="2208" class="Symbol"
+      >(</a
+      ><a name="2209" href="non-collapsible-type.html#1600" class="Bound"
+      >a</a
+      ><a name="2210"
+      > </a
+      ><a name="2211" class="Symbol"
+      >(</a
+      ><a name="2212" href="mini-library.html#285" class="Function"
+      >&#960;&#8320;</a
+      ><a name="2214"
+      > </a
+      ><a name="2215" href="non-collapsible-type.html#2279" class="Function"
+      >p'</a
+      ><a name="2217" class="Symbol"
+      >))</a
+      ><a name="2219"
+      > </a
+      ><a name="2220" class="Symbol"
+      >((</a
+      ><a name="2222" href="mini-library.html#285" class="Function"
+      >&#960;&#8320;</a
+      ><a name="2224"
+      > </a
+      ><a name="2225" href="non-collapsible-type.html#2279" class="Function"
+      >p'</a
+      ><a name="2227" class="Symbol"
+      >)</a
+      ><a name="2228"
+      > </a
+      ><a name="2229" href="mini-library.html#252" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="2230"
+      > </a
+      ><a name="2231" href="mini-library.html#752" class="InductiveConstructor"
+      >refl</a
+      ><a name="2235" class="Symbol"
+      >))</a
+      ><a name="2237"
+      > </a
+      ><a name="2238" href="non-collapsible-type.html#2173" class="Bound"
+      >p</a
+      ><a name="2239"
+      > </a
+      ><a name="2240" class="Symbol"
+      >(</a
+      ><a name="2241" href="mini-library.html#354" class="Function"
+      >&#960;&#8321;</a
+      ><a name="2243"
+      > </a
+      ><a name="2244" href="non-collapsible-type.html#2279" class="Function"
+      >p'</a
+      ><a name="2246" class="Symbol"
+      >)</a
+      ><a name="2247"
+      > </a
+      ><a name="2248" class="Symbol"
+      >(</a
+      ><a name="2249" href="non-collapsible-type.html#1777" class="Function"
+      >hprop-fix</a
+      ><a name="2258"
+      > </a
+      ><a name="2259" href="non-collapsible-type.html#2169" class="Bound"
+      >x</a
+      ><a name="2260"
+      > </a
+      ><a name="2261" class="Symbol"
+      >_</a
+      ><a name="2262"
+      > </a
+      ><a name="2263" href="non-collapsible-type.html#2173" class="Bound"
+      >p</a
+      ><a name="2264" class="Symbol"
+      >)</a
+      ><a name="2265"
+      >
+   </a
+      ><a name="2269" class="Keyword"
+      >where</a
+      ><a name="2274"
+      >
+    </a
+      ><a name="2279" href="non-collapsible-type.html#2279" class="Function"
+      >p'</a
+      ><a name="2281"
+      > </a
+      ><a name="2282" class="Symbol"
+      >:</a
+      ><a name="2283"
+      > </a
+      ><a name="2284" href="mini-library.html#200" class="Record"
+      >&#931;</a
+      ><a name="2285"
+      > </a
+      ><a name="2286" class="Symbol"
+      >\(</a
+      ><a name="2288" href="non-collapsible-type.html#2288" class="Bound"
+      >i</a
+      ><a name="2289"
+      > </a
+      ><a name="2290" class="Symbol"
+      >:</a
+      ><a name="2291"
+      > </a
+      ><a name="2292" href="mini-library.html#4149" class="Datatype"
+      >&#8322;</a
+      ><a name="2293" class="Symbol"
+      >)</a
+      ><a name="2294"
+      > </a
+      ><a name="2295" class="Symbol"
+      >&#8594;</a
+      ><a name="2296"
+      > </a
+      ><a name="2297" href="non-collapsible-type.html#1600" class="Bound"
+      >a</a
+      ><a name="2298"
+      > </a
+      ><a name="2299" href="non-collapsible-type.html#2288" class="Bound"
+      >i</a
+      ><a name="2300"
+      > </a
+      ><a name="2301" href="mini-library.html#716" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="2302"
+      > </a
+      ><a name="2303" href="non-collapsible-type.html#2169" class="Bound"
+      >x</a
+      ><a name="2304"
+      >
+    </a
+      ><a name="2309" href="non-collapsible-type.html#2279" class="Function"
+      >p'</a
+      ><a name="2311"
+      > </a
+      ><a name="2312" class="Symbol"
+      >=</a
+      ><a name="2313"
+      > </a
+      ><a name="2314" href="non-collapsible-type.html#1867" class="Function"
+      >choice</a
+      ><a name="2320"
+      > </a
+      ><a name="2321" href="non-collapsible-type.html#2169" class="Bound"
+      >x</a
+      ><a name="2322"
+      > </a
+      ><a name="2323" href="non-collapsible-type.html#2173" class="Bound"
+      >p</a
+      ><a name="2324"
+      >
+
+  </a
+      ><a name="2328" href="non-collapsible-type.html#2328" class="Function"
+      >s</a
+      ><a name="2329"
+      > </a
+      ><a name="2330" class="Symbol"
+      >:</a
+      ><a name="2331"
+      > </a
+      ><a name="2332" href="non-collapsible-type.html#2029" class="Function"
+      >E</a
+      ><a name="2333"
+      > </a
+      ><a name="2334" class="Symbol"
+      >&#8594;</a
+      ><a name="2335"
+      > </a
+      ><a name="2336" href="mini-library.html#4149" class="Datatype"
+      >&#8322;</a
+      ><a name="2337"
+      >
+  </a
+      ><a name="2340" href="non-collapsible-type.html#2328" class="Function"
+      >s</a
+      ><a name="2341"
+      > </a
+      ><a name="2342" href="non-collapsible-type.html#2342" class="Bound"
+      >e</a
+      ><a name="2343"
+      > </a
+      ><a name="2344" class="Symbol"
+      >=</a
+      ><a name="2345"
+      > </a
+      ><a name="2346" href="mini-library.html#285" class="Function"
+      >&#960;&#8320;</a
+      ><a name="2348" class="Symbol"
+      >(</a
+      ><a name="2349" href="non-collapsible-type.html#2115" class="Function"
+      >r-splits</a
+      ><a name="2357"
+      > </a
+      ><a name="2358" href="non-collapsible-type.html#2342" class="Bound"
+      >e</a
+      ><a name="2359" class="Symbol"
+      >)</a
+      ><a name="2360"
+      >
+
+  </a
+      ><a name="2364" href="non-collapsible-type.html#2364" class="Function"
+      >r-retract</a
+      ><a name="2373"
+      > </a
+      ><a name="2374" class="Symbol"
+      >:</a
+      ><a name="2375"
+      > </a
+      ><a name="2376" class="Symbol"
+      >(</a
+      ><a name="2377" href="non-collapsible-type.html#2377" class="Bound"
+      >e</a
+      ><a name="2378"
+      > </a
+      ><a name="2379" class="Symbol"
+      >:</a
+      ><a name="2380"
+      > </a
+      ><a name="2381" href="non-collapsible-type.html#2029" class="Function"
+      >E</a
+      ><a name="2382" class="Symbol"
+      >)</a
+      ><a name="2383"
+      > </a
+      ><a name="2384" class="Symbol"
+      >&#8594;</a
+      ><a name="2385"
+      > </a
+      ><a name="2386" href="non-collapsible-type.html#2069" class="Function"
+      >r</a
+      ><a name="2387" class="Symbol"
+      >(</a
+      ><a name="2388" href="non-collapsible-type.html#2328" class="Function"
+      >s</a
+      ><a name="2389"
+      > </a
+      ><a name="2390" href="non-collapsible-type.html#2377" class="Bound"
+      >e</a
+      ><a name="2391" class="Symbol"
+      >)</a
+      ><a name="2392"
+      > </a
+      ><a name="2393" href="mini-library.html#716" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="2394"
+      > </a
+      ><a name="2395" href="non-collapsible-type.html#2377" class="Bound"
+      >e</a
+      ><a name="2396"
+      >
+  </a
+      ><a name="2399" href="non-collapsible-type.html#2364" class="Function"
+      >r-retract</a
+      ><a name="2408"
+      > </a
+      ><a name="2409" href="non-collapsible-type.html#2409" class="Bound"
+      >e</a
+      ><a name="2410"
+      > </a
+      ><a name="2411" class="Symbol"
+      >=</a
+      ><a name="2412"
+      > </a
+      ><a name="2413" href="mini-library.html#354" class="Function"
+      >&#960;&#8321;</a
+      ><a name="2415" class="Symbol"
+      >(</a
+      ><a name="2416" href="non-collapsible-type.html#2115" class="Function"
+      >r-splits</a
+      ><a name="2424"
+      > </a
+      ><a name="2425" href="non-collapsible-type.html#2409" class="Bound"
+      >e</a
+      ><a name="2426" class="Symbol"
+      >)</a
+      ><a name="2427"
+      >
+
+  </a
+      ><a name="2431" href="non-collapsible-type.html#2431" class="Function"
+      >s-injective</a
+      ><a name="2442"
+      > </a
+      ><a name="2443" class="Symbol"
+      >:</a
+      ><a name="2444"
+      > </a
+      ><a name="2445" class="Symbol"
+      >(</a
+      ><a name="2446" href="non-collapsible-type.html#2446" class="Bound"
+      >e</a
+      ><a name="2447"
+      > </a
+      ><a name="2448" href="non-collapsible-type.html#2448" class="Bound"
+      >e'</a
+      ><a name="2450"
+      > </a
+      ><a name="2451" class="Symbol"
+      >:</a
+      ><a name="2452"
+      > </a
+      ><a name="2453" href="non-collapsible-type.html#2029" class="Function"
+      >E</a
+      ><a name="2454" class="Symbol"
+      >)</a
+      ><a name="2455"
+      > </a
+      ><a name="2456" class="Symbol"
+      >&#8594;</a
+      ><a name="2457"
+      > </a
+      ><a name="2458" href="non-collapsible-type.html#2328" class="Function"
+      >s</a
+      ><a name="2459"
+      > </a
+      ><a name="2460" href="non-collapsible-type.html#2446" class="Bound"
+      >e</a
+      ><a name="2461"
+      > </a
+      ><a name="2462" href="mini-library.html#716" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="2463"
+      > </a
+      ><a name="2464" href="non-collapsible-type.html#2328" class="Function"
+      >s</a
+      ><a name="2465"
+      > </a
+      ><a name="2466" href="non-collapsible-type.html#2448" class="Bound"
+      >e'</a
+      ><a name="2468"
+      > </a
+      ><a name="2469" class="Symbol"
+      >&#8594;</a
+      ><a name="2470"
+      > </a
+      ><a name="2471" href="non-collapsible-type.html#2446" class="Bound"
+      >e</a
+      ><a name="2472"
+      > </a
+      ><a name="2473" href="mini-library.html#716" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="2474"
+      > </a
+      ><a name="2475" href="non-collapsible-type.html#2448" class="Bound"
+      >e'</a
+      ><a name="2477"
+      >
+  </a
+      ><a name="2480" href="non-collapsible-type.html#2431" class="Function"
+      >s-injective</a
+      ><a name="2491"
+      > </a
+      ><a name="2492" href="non-collapsible-type.html#2492" class="Bound"
+      >e</a
+      ><a name="2493"
+      > </a
+      ><a name="2494" href="non-collapsible-type.html#2494" class="Bound"
+      >e'</a
+      ><a name="2496"
+      > </a
+      ><a name="2497" href="non-collapsible-type.html#2497" class="Bound"
+      >p</a
+      ><a name="2498"
+      > </a
+      ><a name="2499" class="Symbol"
+      >=</a
+      ><a name="2500"
+      > </a
+      ><a name="2501" class="Symbol"
+      >(</a
+      ><a name="2502" href="non-collapsible-type.html#2364" class="Function"
+      >r-retract</a
+      ><a name="2511"
+      > </a
+      ><a name="2512" href="non-collapsible-type.html#2492" class="Bound"
+      >e</a
+      ><a name="2513" class="Symbol"
+      >)</a
+      ><a name="2514" href="mini-library.html#2008" class="Function Operator"
+      >&#8315;&#185;</a
+      ><a name="2516"
+      > </a
+      ><a name="2517" href="mini-library.html#1935" class="Function Operator"
+      >&#8226;</a
+      ><a name="2518"
+      > </a
+      ><a name="2519" href="mini-library.html#1593" class="Function"
+      >cong</a
+      ><a name="2523"
+      > </a
+      ><a name="2524" href="non-collapsible-type.html#2069" class="Function"
+      >r</a
+      ><a name="2525"
+      > </a
+      ><a name="2526" href="non-collapsible-type.html#2497" class="Bound"
+      >p</a
+      ><a name="2527"
+      > </a
+      ><a name="2528" href="mini-library.html#1935" class="Function Operator"
+      >&#8226;</a
+      ><a name="2529"
+      > </a
+      ><a name="2530" href="non-collapsible-type.html#2364" class="Function"
+      >r-retract</a
+      ><a name="2539"
+      > </a
+      ><a name="2540" href="non-collapsible-type.html#2494" class="Bound"
+      >e'</a
+      ><a name="2542"
+      >
+
+  </a
+      ><a name="2546" href="non-collapsible-type.html#2546" class="Function"
+      >a-r</a
+      ><a name="2549"
+      > </a
+      ><a name="2550" class="Symbol"
+      >:</a
+      ><a name="2551"
+      > </a
+      ><a name="2552" class="Symbol"
+      >(</a
+      ><a name="2553" href="non-collapsible-type.html#2553" class="Bound"
+      >i</a
+      ><a name="2554"
+      > </a
+      ><a name="2555" href="non-collapsible-type.html#2555" class="Bound"
+      >j</a
+      ><a name="2556"
+      > </a
+      ><a name="2557" class="Symbol"
+      >:</a
+      ><a name="2558"
+      > </a
+      ><a name="2559" href="mini-library.html#4149" class="Datatype"
+      >&#8322;</a
+      ><a name="2560" class="Symbol"
+      >)</a
+      ><a name="2561"
+      > </a
+      ><a name="2562" class="Symbol"
+      >&#8594;</a
+      ><a name="2563"
+      > </a
+      ><a name="2564" href="non-collapsible-type.html#1600" class="Bound"
+      >a</a
+      ><a name="2565"
+      > </a
+      ><a name="2566" href="non-collapsible-type.html#2553" class="Bound"
+      >i</a
+      ><a name="2567"
+      > </a
+      ><a name="2568" href="mini-library.html#716" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="2569"
+      > </a
+      ><a name="2570" href="non-collapsible-type.html#1600" class="Bound"
+      >a</a
+      ><a name="2571"
+      > </a
+      ><a name="2572" href="non-collapsible-type.html#2555" class="Bound"
+      >j</a
+      ><a name="2573"
+      > </a
+      ><a name="2574" class="Symbol"
+      >&#8594;</a
+      ><a name="2575"
+      > </a
+      ><a name="2576" href="non-collapsible-type.html#2069" class="Function"
+      >r</a
+      ><a name="2577"
+      > </a
+      ><a name="2578" href="non-collapsible-type.html#2553" class="Bound"
+      >i</a
+      ><a name="2579"
+      > </a
+      ><a name="2580" href="mini-library.html#716" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="2581"
+      > </a
+      ><a name="2582" href="non-collapsible-type.html#2069" class="Function"
+      >r</a
+      ><a name="2583"
+      > </a
+      ><a name="2584" href="non-collapsible-type.html#2555" class="Bound"
+      >j</a
+      ><a name="2585"
+      >
+  </a
+      ><a name="2588" href="non-collapsible-type.html#2546" class="Function"
+      >a-r</a
+      ><a name="2591"
+      > </a
+      ><a name="2592" href="non-collapsible-type.html#2592" class="Bound"
+      >i</a
+      ><a name="2593"
+      > </a
+      ><a name="2594" href="non-collapsible-type.html#2594" class="Bound"
+      >j</a
+      ><a name="2595"
+      > </a
+      ><a name="2596" href="non-collapsible-type.html#2596" class="Bound"
+      >p</a
+      ><a name="2597"
+      > </a
+      ><a name="2598" class="Symbol"
+      >=</a
+      ><a name="2599"
+      > </a
+      ><a name="2600" href="mini-library.html#2841" class="Function"
+      >split</a
+      ><a name="2605"
+      > </a
+      ><a name="2606" class="Symbol"
+      >(</a
+      ><a name="2607" href="non-collapsible-type.html#1600" class="Bound"
+      >a</a
+      ><a name="2608"
+      > </a
+      ><a name="2609" href="non-collapsible-type.html#2592" class="Bound"
+      >i</a
+      ><a name="2610" class="Symbol"
+      >)</a
+      ><a name="2611"
+      > </a
+      ><a name="2612" class="Symbol"
+      >(</a
+      ><a name="2613" href="non-collapsible-type.html#1600" class="Bound"
+      >a</a
+      ><a name="2614"
+      > </a
+      ><a name="2615" href="non-collapsible-type.html#2594" class="Bound"
+      >j</a
+      ><a name="2616" class="Symbol"
+      >)</a
+      ><a name="2617"
+      > </a
+      ><a name="2618" class="Symbol"
+      >(</a
+      ><a name="2619" href="non-collapsible-type.html#1937" class="Function"
+      >&#951;</a
+      ><a name="2620"
+      > </a
+      ><a name="2621" class="Symbol"
+      >(</a
+      ><a name="2622" href="non-collapsible-type.html#1600" class="Bound"
+      >a</a
+      ><a name="2623"
+      > </a
+      ><a name="2624" href="non-collapsible-type.html#2592" class="Bound"
+      >i</a
+      ><a name="2625" class="Symbol"
+      >)</a
+      ><a name="2626"
+      > </a
+      ><a name="2627" class="Symbol"
+      >(</a
+      ><a name="2628" href="non-collapsible-type.html#2592" class="Bound"
+      >i</a
+      ><a name="2629"
+      > </a
+      ><a name="2630" href="mini-library.html#252" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="2631"
+      > </a
+      ><a name="2632" href="mini-library.html#752" class="InductiveConstructor"
+      >refl</a
+      ><a name="2636" class="Symbol"
+      >))</a
+      ><a name="2638"
+      > </a
+      ><a name="2639" class="Symbol"
+      >(</a
+      ><a name="2640" href="non-collapsible-type.html#1937" class="Function"
+      >&#951;</a
+      ><a name="2641"
+      > </a
+      ><a name="2642" class="Symbol"
+      >(</a
+      ><a name="2643" href="non-collapsible-type.html#1600" class="Bound"
+      >a</a
+      ><a name="2644"
+      > </a
+      ><a name="2645" href="non-collapsible-type.html#2594" class="Bound"
+      >j</a
+      ><a name="2646" class="Symbol"
+      >)</a
+      ><a name="2647"
+      > </a
+      ><a name="2648" class="Symbol"
+      >(</a
+      ><a name="2649" href="non-collapsible-type.html#2594" class="Bound"
+      >j</a
+      ><a name="2650"
+      > </a
+      ><a name="2651" href="mini-library.html#252" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="2652"
+      > </a
+      ><a name="2653" href="mini-library.html#752" class="InductiveConstructor"
+      >refl</a
+      ><a name="2657" class="Symbol"
+      >))</a
+      ><a name="2659"
+      > </a
+      ><a name="2660" href="non-collapsible-type.html#2596" class="Bound"
+      >p</a
+      ><a name="2661"
+      > </a
+      ><a name="2662" class="Symbol"
+      >(</a
+      ><a name="2663" href="non-collapsible-type.html#1777" class="Function"
+      >hprop-fix</a
+      ><a name="2672"
+      > </a
+      ><a name="2673" class="Symbol"
+      >(</a
+      ><a name="2674" href="non-collapsible-type.html#1600" class="Bound"
+      >a</a
+      ><a name="2675"
+      > </a
+      ><a name="2676" href="non-collapsible-type.html#2594" class="Bound"
+      >j</a
+      ><a name="2677" class="Symbol"
+      >)</a
+      ><a name="2678"
+      > </a
+      ><a name="2679" class="Symbol"
+      >_</a
+      ><a name="2680"
+      > </a
+      ><a name="2681" class="Symbol"
+      >(</a
+      ><a name="2682" href="non-collapsible-type.html#1937" class="Function"
+      >&#951;</a
+      ><a name="2683"
+      > </a
+      ><a name="2684" class="Symbol"
+      >(</a
+      ><a name="2685" href="non-collapsible-type.html#1600" class="Bound"
+      >a</a
+      ><a name="2686"
+      > </a
+      ><a name="2687" href="non-collapsible-type.html#2594" class="Bound"
+      >j</a
+      ><a name="2688" class="Symbol"
+      >)</a
+      ><a name="2689"
+      > </a
+      ><a name="2690" class="Symbol"
+      >(</a
+      ><a name="2691" href="non-collapsible-type.html#2594" class="Bound"
+      >j</a
+      ><a name="2692"
+      > </a
+      ><a name="2693" href="mini-library.html#252" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="2694"
+      > </a
+      ><a name="2695" href="mini-library.html#752" class="InductiveConstructor"
+      >refl</a
+      ><a name="2699" class="Symbol"
+      >)))</a
+      ><a name="2702"
+      >
+
+  </a
+      ><a name="2706" href="non-collapsible-type.html#2706" class="Function"
+      >r-a</a
+      ><a name="2709"
+      > </a
+      ><a name="2710" class="Symbol"
+      >:</a
+      ><a name="2711"
+      > </a
+      ><a name="2712" class="Symbol"
+      >(</a
+      ><a name="2713" href="non-collapsible-type.html#2713" class="Bound"
+      >i</a
+      ><a name="2714"
+      > </a
+      ><a name="2715" href="non-collapsible-type.html#2715" class="Bound"
+      >j</a
+      ><a name="2716"
+      > </a
+      ><a name="2717" class="Symbol"
+      >:</a
+      ><a name="2718"
+      > </a
+      ><a name="2719" href="mini-library.html#4149" class="Datatype"
+      >&#8322;</a
+      ><a name="2720" class="Symbol"
+      >)</a
+      ><a name="2721"
+      > </a
+      ><a name="2722" class="Symbol"
+      >&#8594;</a
+      ><a name="2723"
+      > </a
+      ><a name="2724" href="non-collapsible-type.html#2069" class="Function"
+      >r</a
+      ><a name="2725"
+      > </a
+      ><a name="2726" href="non-collapsible-type.html#2713" class="Bound"
+      >i</a
+      ><a name="2727"
+      > </a
+      ><a name="2728" href="mini-library.html#716" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="2729"
+      > </a
+      ><a name="2730" href="non-collapsible-type.html#2069" class="Function"
+      >r</a
+      ><a name="2731"
+      > </a
+      ><a name="2732" href="non-collapsible-type.html#2715" class="Bound"
+      >j</a
+      ><a name="2733"
+      > </a
+      ><a name="2734" class="Symbol"
+      >&#8594;</a
+      ><a name="2735"
+      > </a
+      ><a name="2736" href="non-collapsible-type.html#1600" class="Bound"
+      >a</a
+      ><a name="2737"
+      > </a
+      ><a name="2738" href="non-collapsible-type.html#2713" class="Bound"
+      >i</a
+      ><a name="2739"
+      > </a
+      ><a name="2740" href="mini-library.html#716" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="2741"
+      > </a
+      ><a name="2742" href="non-collapsible-type.html#1600" class="Bound"
+      >a</a
+      ><a name="2743"
+      > </a
+      ><a name="2744" href="non-collapsible-type.html#2715" class="Bound"
+      >j</a
+      ><a name="2745"
+      >
+  </a
+      ><a name="2748" href="non-collapsible-type.html#2706" class="Function"
+      >r-a</a
+      ><a name="2751"
+      > </a
+      ><a name="2752" href="non-collapsible-type.html#2752" class="Bound"
+      >i</a
+      ><a name="2753"
+      > </a
+      ><a name="2754" href="non-collapsible-type.html#2754" class="Bound"
+      >j</a
+      ><a name="2755"
+      > </a
+      ><a name="2756" class="Symbol"
+      >=</a
+      ><a name="2757"
+      > </a
+      ><a name="2758" href="mini-library.html#1593" class="Function"
+      >cong</a
+      ><a name="2762"
+      > </a
+      ><a name="2763" href="mini-library.html#285" class="Function"
+      >&#960;&#8320;</a
+      ><a name="2765"
+      >
+
+  </a
+      ><a name="2769" href="non-collapsible-type.html#2769" class="Function"
+      >a-s</a
+      ><a name="2772"
+      > </a
+      ><a name="2773" class="Symbol"
+      >:</a
+      ><a name="2774"
+      > </a
+      ><a name="2775" class="Symbol"
+      >(</a
+      ><a name="2776" href="non-collapsible-type.html#2776" class="Bound"
+      >i</a
+      ><a name="2777"
+      > </a
+      ><a name="2778" href="non-collapsible-type.html#2778" class="Bound"
+      >j</a
+      ><a name="2779"
+      > </a
+      ><a name="2780" class="Symbol"
+      >:</a
+      ><a name="2781"
+      > </a
+      ><a name="2782" href="mini-library.html#4149" class="Datatype"
+      >&#8322;</a
+      ><a name="2783" class="Symbol"
+      >)</a
+      ><a name="2784"
+      > </a
+      ><a name="2785" class="Symbol"
+      >&#8594;</a
+      ><a name="2786"
+      > </a
+      ><a name="2787" href="non-collapsible-type.html#1600" class="Bound"
+      >a</a
+      ><a name="2788"
+      > </a
+      ><a name="2789" href="non-collapsible-type.html#2776" class="Bound"
+      >i</a
+      ><a name="2790"
+      > </a
+      ><a name="2791" href="mini-library.html#716" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="2792"
+      > </a
+      ><a name="2793" href="non-collapsible-type.html#1600" class="Bound"
+      >a</a
+      ><a name="2794"
+      > </a
+      ><a name="2795" href="non-collapsible-type.html#2778" class="Bound"
+      >j</a
+      ><a name="2796"
+      > </a
+      ><a name="2797" class="Symbol"
+      >&#8594;</a
+      ><a name="2798"
+      > </a
+      ><a name="2799" href="non-collapsible-type.html#2328" class="Function"
+      >s</a
+      ><a name="2800" class="Symbol"
+      >(</a
+      ><a name="2801" href="non-collapsible-type.html#2069" class="Function"
+      >r</a
+      ><a name="2802"
+      > </a
+      ><a name="2803" href="non-collapsible-type.html#2776" class="Bound"
+      >i</a
+      ><a name="2804" class="Symbol"
+      >)</a
+      ><a name="2805"
+      > </a
+      ><a name="2806" href="mini-library.html#716" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="2807"
+      > </a
+      ><a name="2808" href="non-collapsible-type.html#2328" class="Function"
+      >s</a
+      ><a name="2809" class="Symbol"
+      >(</a
+      ><a name="2810" href="non-collapsible-type.html#2069" class="Function"
+      >r</a
+      ><a name="2811"
+      > </a
+      ><a name="2812" href="non-collapsible-type.html#2778" class="Bound"
+      >j</a
+      ><a name="2813" class="Symbol"
+      >)</a
+      ><a name="2814"
+      >
+  </a
+      ><a name="2817" href="non-collapsible-type.html#2769" class="Function"
+      >a-s</a
+      ><a name="2820"
+      > </a
+      ><a name="2821" href="non-collapsible-type.html#2821" class="Bound"
+      >i</a
+      ><a name="2822"
+      > </a
+      ><a name="2823" href="non-collapsible-type.html#2823" class="Bound"
+      >j</a
+      ><a name="2824"
+      > </a
+      ><a name="2825" href="non-collapsible-type.html#2825" class="Bound"
+      >p</a
+      ><a name="2826"
+      > </a
+      ><a name="2827" class="Symbol"
+      >=</a
+      ><a name="2828"
+      > </a
+      ><a name="2829" href="mini-library.html#1593" class="Function"
+      >cong</a
+      ><a name="2833"
+      > </a
+      ><a name="2834" href="non-collapsible-type.html#2328" class="Function"
+      >s</a
+      ><a name="2835"
+      > </a
+      ><a name="2836" class="Symbol"
+      >(</a
+      ><a name="2837" href="non-collapsible-type.html#2546" class="Function"
+      >a-r</a
+      ><a name="2840"
+      > </a
+      ><a name="2841" href="non-collapsible-type.html#2821" class="Bound"
+      >i</a
+      ><a name="2842"
+      > </a
+      ><a name="2843" href="non-collapsible-type.html#2823" class="Bound"
+      >j</a
+      ><a name="2844"
+      > </a
+      ><a name="2845" href="non-collapsible-type.html#2825" class="Bound"
+      >p</a
+      ><a name="2846" class="Symbol"
+      >)</a
+      ><a name="2847"
+      >
+
+  </a
+      ><a name="2851" href="non-collapsible-type.html#2851" class="Function"
+      >s-a</a
+      ><a name="2854"
+      > </a
+      ><a name="2855" class="Symbol"
+      >:</a
+      ><a name="2856"
+      > </a
+      ><a name="2857" class="Symbol"
+      >(</a
+      ><a name="2858" href="non-collapsible-type.html#2858" class="Bound"
+      >i</a
+      ><a name="2859"
+      > </a
+      ><a name="2860" href="non-collapsible-type.html#2860" class="Bound"
+      >j</a
+      ><a name="2861"
+      > </a
+      ><a name="2862" class="Symbol"
+      >:</a
+      ><a name="2863"
+      > </a
+      ><a name="2864" href="mini-library.html#4149" class="Datatype"
+      >&#8322;</a
+      ><a name="2865" class="Symbol"
+      >)</a
+      ><a name="2866"
+      > </a
+      ><a name="2867" class="Symbol"
+      >&#8594;</a
+      ><a name="2868"
+      > </a
+      ><a name="2869" href="non-collapsible-type.html#2328" class="Function"
+      >s</a
+      ><a name="2870" class="Symbol"
+      >(</a
+      ><a name="2871" href="non-collapsible-type.html#2069" class="Function"
+      >r</a
+      ><a name="2872"
+      > </a
+      ><a name="2873" href="non-collapsible-type.html#2858" class="Bound"
+      >i</a
+      ><a name="2874" class="Symbol"
+      >)</a
+      ><a name="2875"
+      > </a
+      ><a name="2876" href="mini-library.html#716" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="2877"
+      > </a
+      ><a name="2878" href="non-collapsible-type.html#2328" class="Function"
+      >s</a
+      ><a name="2879" class="Symbol"
+      >(</a
+      ><a name="2880" href="non-collapsible-type.html#2069" class="Function"
+      >r</a
+      ><a name="2881"
+      > </a
+      ><a name="2882" href="non-collapsible-type.html#2860" class="Bound"
+      >j</a
+      ><a name="2883" class="Symbol"
+      >)</a
+      ><a name="2884"
+      > </a
+      ><a name="2885" class="Symbol"
+      >&#8594;</a
+      ><a name="2886"
+      > </a
+      ><a name="2887" href="non-collapsible-type.html#1600" class="Bound"
+      >a</a
+      ><a name="2888"
+      > </a
+      ><a name="2889" href="non-collapsible-type.html#2858" class="Bound"
+      >i</a
+      ><a name="2890"
+      > </a
+      ><a name="2891" href="mini-library.html#716" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="2892"
+      > </a
+      ><a name="2893" href="non-collapsible-type.html#1600" class="Bound"
+      >a</a
+      ><a name="2894"
+      > </a
+      ><a name="2895" href="non-collapsible-type.html#2860" class="Bound"
+      >j</a
+      ><a name="2896"
+      >
+  </a
+      ><a name="2899" href="non-collapsible-type.html#2851" class="Function"
+      >s-a</a
+      ><a name="2902"
+      > </a
+      ><a name="2903" href="non-collapsible-type.html#2903" class="Bound"
+      >i</a
+      ><a name="2904"
+      > </a
+      ><a name="2905" href="non-collapsible-type.html#2905" class="Bound"
+      >j</a
+      ><a name="2906"
+      > </a
+      ><a name="2907" href="non-collapsible-type.html#2907" class="Bound"
+      >p</a
+      ><a name="2908"
+      > </a
+      ><a name="2909" class="Symbol"
+      >=</a
+      ><a name="2910"
+      > </a
+      ><a name="2911" href="non-collapsible-type.html#2706" class="Function"
+      >r-a</a
+      ><a name="2914"
+      > </a
+      ><a name="2915" href="non-collapsible-type.html#2903" class="Bound"
+      >i</a
+      ><a name="2916"
+      > </a
+      ><a name="2917" href="non-collapsible-type.html#2905" class="Bound"
+      >j</a
+      ><a name="2918"
+      > </a
+      ><a name="2919" class="Symbol"
+      >(</a
+      ><a name="2920" href="non-collapsible-type.html#2431" class="Function"
+      >s-injective</a
+      ><a name="2931"
+      > </a
+      ><a name="2932" class="Symbol"
+      >(</a
+      ><a name="2933" href="non-collapsible-type.html#2069" class="Function"
+      >r</a
+      ><a name="2934"
+      > </a
+      ><a name="2935" href="non-collapsible-type.html#2903" class="Bound"
+      >i</a
+      ><a name="2936" class="Symbol"
+      >)</a
+      ><a name="2937"
+      > </a
+      ><a name="2938" class="Symbol"
+      >(</a
+      ><a name="2939" href="non-collapsible-type.html#2069" class="Function"
+      >r</a
+      ><a name="2940"
+      > </a
+      ><a name="2941" href="non-collapsible-type.html#2905" class="Bound"
+      >j</a
+      ><a name="2942" class="Symbol"
+      >)</a
+      ><a name="2943"
+      > </a
+      ><a name="2944" href="non-collapsible-type.html#2907" class="Bound"
+      >p</a
+      ><a name="2945" class="Symbol"
+      >)</a
+      ><a name="2946"
+      >
+
+  </a
+      ><a name="2950" href="non-collapsible-type.html#2950" class="Function"
+      >equal-or-different</a
+      ><a name="2968"
+      > </a
+      ><a name="2969" class="Symbol"
+      >:</a
+      ><a name="2970"
+      > </a
+      ><a name="2971" class="Symbol"
+      >(</a
+      ><a name="2972" href="non-collapsible-type.html#1600" class="Bound"
+      >a</a
+      ><a name="2973"
+      > </a
+      ><a name="2974" href="mini-library.html#4164" class="InductiveConstructor"
+      >&#8320;</a
+      ><a name="2975"
+      > </a
+      ><a name="2976" href="mini-library.html#716" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="2977"
+      > </a
+      ><a name="2978" href="non-collapsible-type.html#1600" class="Bound"
+      >a</a
+      ><a name="2979"
+      > </a
+      ><a name="2980" href="mini-library.html#4171" class="InductiveConstructor"
+      >&#8321;</a
+      ><a name="2981" class="Symbol"
+      >)</a
+      ><a name="2982"
+      > </a
+      ><a name="2983" href="mini-library.html#640" class="Datatype Operator"
+      >+</a
+      ><a name="2984"
+      > </a
+      ><a name="2985" class="Symbol"
+      >(</a
+      ><a name="2986" href="non-collapsible-type.html#1600" class="Bound"
+      >a</a
+      ><a name="2987"
+      > </a
+      ><a name="2988" href="mini-library.html#4164" class="InductiveConstructor"
+      >&#8320;</a
+      ><a name="2989"
+      > </a
+      ><a name="2990" href="mini-library.html#716" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="2991"
+      > </a
+      ><a name="2992" href="non-collapsible-type.html#1600" class="Bound"
+      >a</a
+      ><a name="2993"
+      > </a
+      ><a name="2994" href="mini-library.html#4171" class="InductiveConstructor"
+      >&#8321;</a
+      ><a name="2995"
+      > </a
+      ><a name="2996" class="Symbol"
+      >&#8594;</a
+      ><a name="2997"
+      > </a
+      ><a name="2998" href="mini-library.html#581" class="Datatype"
+      >&#8709;</a
+      ><a name="2999" class="Symbol"
+      >)</a
+      ><a name="3000"
+      >
+  </a
+      ><a name="3004" href="non-collapsible-type.html#2950" class="Function"
+      >equal-or-different</a
+      ><a name="3022"
+      > </a
+      ><a name="3023" class="Symbol"
+      >=</a
+      ><a name="3024"
+      > </a
+      ><a name="3025" href="non-collapsible-type.html#3075" class="Function"
+      >claim</a
+      ><a name="3030" class="Symbol"
+      >(</a
+      ><a name="3031" href="decidable-and-discrete.html#192" class="Function"
+      >&#8322;-discrete</a
+      ><a name="3041"
+      > </a
+      ><a name="3042" class="Symbol"
+      >{</a
+      ><a name="3043" href="non-collapsible-type.html#2328" class="Function"
+      >s</a
+      ><a name="3044" class="Symbol"
+      >(</a
+      ><a name="3045" href="non-collapsible-type.html#2069" class="Function"
+      >r</a
+      ><a name="3046"
+      > </a
+      ><a name="3047" href="mini-library.html#4164" class="InductiveConstructor"
+      >&#8320;</a
+      ><a name="3048" class="Symbol"
+      >)}</a
+      ><a name="3050"
+      > </a
+      ><a name="3051" class="Symbol"
+      >{</a
+      ><a name="3052" href="non-collapsible-type.html#2328" class="Function"
+      >s</a
+      ><a name="3053" class="Symbol"
+      >(</a
+      ><a name="3054" href="non-collapsible-type.html#2069" class="Function"
+      >r</a
+      ><a name="3055"
+      > </a
+      ><a name="3056" href="mini-library.html#4171" class="InductiveConstructor"
+      >&#8321;</a
+      ><a name="3057" class="Symbol"
+      >)})</a
+      ><a name="3060"
+      >
+   </a
+      ><a name="3064" class="Keyword"
+      >where</a
+      ><a name="3069"
+      >
+    </a
+      ><a name="3075" href="non-collapsible-type.html#3075" class="Function"
+      >claim</a
+      ><a name="3080"
+      > </a
+      ><a name="3081" class="Symbol"
+      >:</a
+      ><a name="3082"
+      > </a
+      ><a name="3083" class="Symbol"
+      >(</a
+      ><a name="3084" href="non-collapsible-type.html#2328" class="Function"
+      >s</a
+      ><a name="3085" class="Symbol"
+      >(</a
+      ><a name="3086" href="non-collapsible-type.html#2069" class="Function"
+      >r</a
+      ><a name="3087"
+      > </a
+      ><a name="3088" href="mini-library.html#4164" class="InductiveConstructor"
+      >&#8320;</a
+      ><a name="3089" class="Symbol"
+      >)</a
+      ><a name="3090"
+      > </a
+      ><a name="3091" href="mini-library.html#716" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="3092"
+      > </a
+      ><a name="3093" href="non-collapsible-type.html#2328" class="Function"
+      >s</a
+      ><a name="3094" class="Symbol"
+      >(</a
+      ><a name="3095" href="non-collapsible-type.html#2069" class="Function"
+      >r</a
+      ><a name="3096"
+      > </a
+      ><a name="3097" href="mini-library.html#4171" class="InductiveConstructor"
+      >&#8321;</a
+      ><a name="3098" class="Symbol"
+      >))</a
+      ><a name="3100"
+      > </a
+      ><a name="3101" href="mini-library.html#640" class="Datatype Operator"
+      >+</a
+      ><a name="3102"
+      > </a
+      ><a name="3103" class="Symbol"
+      >(</a
+      ><a name="3104" href="non-collapsible-type.html#2328" class="Function"
+      >s</a
+      ><a name="3105" class="Symbol"
+      >(</a
+      ><a name="3106" href="non-collapsible-type.html#2069" class="Function"
+      >r</a
+      ><a name="3107"
+      > </a
+      ><a name="3108" href="mini-library.html#4164" class="InductiveConstructor"
+      >&#8320;</a
+      ><a name="3109" class="Symbol"
+      >)</a
+      ><a name="3110"
+      > </a
+      ><a name="3111" href="mini-library.html#716" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="3112"
+      > </a
+      ><a name="3113" href="non-collapsible-type.html#2328" class="Function"
+      >s</a
+      ><a name="3114" class="Symbol"
+      >(</a
+      ><a name="3115" href="non-collapsible-type.html#2069" class="Function"
+      >r</a
+      ><a name="3116"
+      > </a
+      ><a name="3117" href="mini-library.html#4171" class="InductiveConstructor"
+      >&#8321;</a
+      ><a name="3118" class="Symbol"
+      >)</a
+      ><a name="3119"
+      > </a
+      ><a name="3120" class="Symbol"
+      >&#8594;</a
+      ><a name="3121"
+      > </a
+      ><a name="3122" href="mini-library.html#581" class="Datatype"
+      >&#8709;</a
+      ><a name="3123" class="Symbol"
+      >)</a
+      ><a name="3124"
+      > </a
+      ><a name="3125" class="Symbol"
+      >&#8594;</a
+      ><a name="3126"
+      > </a
+      ><a name="3127" class="Symbol"
+      >(</a
+      ><a name="3128" href="non-collapsible-type.html#1600" class="Bound"
+      >a</a
+      ><a name="3129"
+      > </a
+      ><a name="3130" href="mini-library.html#4164" class="InductiveConstructor"
+      >&#8320;</a
+      ><a name="3131"
+      > </a
+      ><a name="3132" href="mini-library.html#716" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="3133"
+      > </a
+      ><a name="3134" href="non-collapsible-type.html#1600" class="Bound"
+      >a</a
+      ><a name="3135"
+      > </a
+      ><a name="3136" href="mini-library.html#4171" class="InductiveConstructor"
+      >&#8321;</a
+      ><a name="3137" class="Symbol"
+      >)</a
+      ><a name="3138"
+      > </a
+      ><a name="3139" href="mini-library.html#640" class="Datatype Operator"
+      >+</a
+      ><a name="3140"
+      > </a
+      ><a name="3141" class="Symbol"
+      >(</a
+      ><a name="3142" href="non-collapsible-type.html#1600" class="Bound"
+      >a</a
+      ><a name="3143"
+      > </a
+      ><a name="3144" href="mini-library.html#4164" class="InductiveConstructor"
+      >&#8320;</a
+      ><a name="3145"
+      > </a
+      ><a name="3146" href="mini-library.html#716" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="3147"
+      > </a
+      ><a name="3148" href="non-collapsible-type.html#1600" class="Bound"
+      >a</a
+      ><a name="3149"
+      > </a
+      ><a name="3150" href="mini-library.html#4171" class="InductiveConstructor"
+      >&#8321;</a
+      ><a name="3151"
+      > </a
+      ><a name="3152" class="Symbol"
+      >&#8594;</a
+      ><a name="3153"
+      > </a
+      ><a name="3154" href="mini-library.html#581" class="Datatype"
+      >&#8709;</a
+      ><a name="3155" class="Symbol"
+      >)</a
+      ><a name="3156"
+      >
+    </a
+      ><a name="3162" href="non-collapsible-type.html#3075" class="Function"
+      >claim</a
+      ><a name="3167"
+      > </a
+      ><a name="3168" class="Symbol"
+      >(</a
+      ><a name="3169" href="mini-library.html#671" class="InductiveConstructor"
+      >in&#8320;</a
+      ><a name="3172"
+      > </a
+      ><a name="3173" href="non-collapsible-type.html#3173" class="Bound"
+      >p</a
+      ><a name="3174" class="Symbol"
+      >)</a
+      ><a name="3175"
+      > </a
+      ><a name="3176" class="Symbol"
+      >=</a
+      ><a name="3177"
+      > </a
+      ><a name="3178" href="mini-library.html#671" class="InductiveConstructor"
+      >in&#8320;</a
+      ><a name="3181"
+      > </a
+      ><a name="3182" class="Symbol"
+      >(</a
+      ><a name="3183" href="non-collapsible-type.html#2851" class="Function"
+      >s-a</a
+      ><a name="3186"
+      > </a
+      ><a name="3187" href="mini-library.html#4164" class="InductiveConstructor"
+      >&#8320;</a
+      ><a name="3188"
+      > </a
+      ><a name="3189" href="mini-library.html#4171" class="InductiveConstructor"
+      >&#8321;</a
+      ><a name="3190"
+      > </a
+      ><a name="3191" href="non-collapsible-type.html#3173" class="Bound"
+      >p</a
+      ><a name="3192" class="Symbol"
+      >)</a
+      ><a name="3193"
+      >
+    </a
+      ><a name="3198" href="non-collapsible-type.html#3075" class="Function"
+      >claim</a
+      ><a name="3203"
+      > </a
+      ><a name="3204" class="Symbol"
+      >(</a
+      ><a name="3205" href="mini-library.html#691" class="InductiveConstructor"
+      >in&#8321;</a
+      ><a name="3208"
+      > </a
+      ><a name="3209" href="non-collapsible-type.html#3209" class="Bound"
+      >u</a
+      ><a name="3210" class="Symbol"
+      >)</a
+      ><a name="3211"
+      > </a
+      ><a name="3212" class="Symbol"
+      >=</a
+      ><a name="3213"
+      > </a
+      ><a name="3214" href="mini-library.html#691" class="InductiveConstructor"
+      >in&#8321;</a
+      ><a name="3217"
+      > </a
+      ><a name="3218" class="Symbol"
+      >(&#955;</a
+      ><a name="3220"
+      > </a
+      ><a name="3221" href="non-collapsible-type.html#3221" class="Bound"
+      >p</a
+      ><a name="3222"
+      > </a
+      ><a name="3223" class="Symbol"
+      >&#8594;</a
+      ><a name="3224"
+      > </a
+      ><a name="3225" href="non-collapsible-type.html#3209" class="Bound"
+      >u</a
+      ><a name="3226"
+      > </a
+      ><a name="3227" class="Symbol"
+      >(</a
+      ><a name="3228" href="non-collapsible-type.html#2769" class="Function"
+      >a-s</a
+      ><a name="3231"
+      > </a
+      ><a name="3232" href="mini-library.html#4164" class="InductiveConstructor"
+      >&#8320;</a
+      ><a name="3233"
+      > </a
+      ><a name="3234" href="mini-library.html#4171" class="InductiveConstructor"
+      >&#8321;</a
+      ><a name="3235"
+      > </a
+      ><a name="3236" href="non-collapsible-type.html#3221" class="Bound"
+      >p</a
+      ><a name="3237" class="Symbol"
+      >))</a
+      ><a name="3239"
+      >
+
+\end{code}
+</a
+      ></pre
+    ></body
+  ></html
+>

@@ -1,0 +1,79 @@
+<!DOCTYPE HTML>
+<html><head><meta charset="utf-8"><title>prop</title><link rel="stylesheet" href="Agda.css"></head><body><pre class="Agda"><a id="1" class="Comment">-- Martin Escardo, 3rd August 2015</a>
+
+<a id="37" class="Comment">{-
+
+ We use type-in-type to get impredicativity à la Voevodsky
+ (propositional resizing) in Agda.
+
+ No other module in this development uses type-in-type.
+
+ Because of limitations of Agda, or perhaps of our ability to exploit
+ Agda, we can only resize from the second universe to the first.
+
+ Curiously, if we write &quot;U&quot; rather than &quot;Set&quot; below, then other
+ modules don&#39;t type check, even though U=Set by definition. I am not
+ sure why this is the case. But it is possible to still use U in other
+ modules, and we do.
+
+-}</a>
+
+<a id="559" class="Symbol">{-#</a> <a id="563" class="Keyword">OPTIONS</a> <a id="571" class="Pragma">--type-in-type</a> <a id="586" class="Symbol">#-}</a>
+<a id="590" class="Symbol">{-#</a> <a id="594" class="Keyword">OPTIONS</a> <a id="602" class="Pragma">--without-K</a> <a id="614" class="Symbol">#-}</a>
+
+<a id="619" class="Keyword">module</a> <a id="626" href="prop.html" class="Module">prop</a> <a id="631" class="Keyword">where</a>
+
+<a id="638" class="Keyword">open</a> <a id="643" class="Keyword">import</a> <a id="650" href="preliminaries.html" class="Module">preliminaries</a>
+
+<a id="665" class="Comment">-- A proposition is a type with at most one element:</a>
+
+<a id="719" class="Keyword">open</a> <a id="724" class="Keyword">import</a> <a id="731" href="isprop.html" class="Module">isprop</a> <a id="738" class="Keyword">public</a>
+
+<a id="746" class="Comment">-- A truth value is a type together with a witness that it is a</a>
+<a id="810" class="Comment">-- proposition. &quot;Prop&quot; is an Agda reserved, but unused,</a>
+<a id="866" class="Comment">-- keyword, and Agda won&#39;t let us use it as an identifier:</a>
+
+<a id="Prp"></a><a id="926" href="prop.html#926" class="Function">Prp</a> <a id="930" class="Symbol">:</a> <a id="932" class="PrimitiveType">Set</a>
+<a id="936" href="prop.html#926" class="Function">Prp</a> <a id="940" class="Symbol">=</a> <a id="942" href="preliminaries.html#624" class="Record">Σ</a> <a id="944" class="Symbol">\(</a><a id="946" href="prop.html#946" class="Bound">P</a> <a id="948" class="Symbol">:</a> <a id="950" class="PrimitiveType">Set</a><a id="953" class="Symbol">)</a> <a id="955" class="Symbol">→</a> <a id="957" href="isprop.html#168" class="Function">isProp</a> <a id="964" href="prop.html#946" class="Bound">P</a>
+
+<a id="967" class="Comment">-- We could use the pair constructor _,_ from Σ, but this doesn&#39;t type</a>
+<a id="1038" class="Comment">-- check when used in a module without the option type-in-type. The</a>
+<a id="1106" class="Comment">-- reason is that the types of Σ and _,_ are different with(out)</a>
+<a id="1171" class="Comment">-- type-in-type. To circumvent this, we define another another binary</a>
+<a id="1241" class="Comment">-- operator ₍_,_₎, which does type check when used without</a>
+<a id="1300" class="Comment">-- type-in-type. The reason this works is that the type of this new</a>
+<a id="1368" class="Comment">-- operator is the same with or without type-in-type:</a>
+
+<a id="₍_,_₎"></a><a id="1423" href="prop.html#1423" class="Function Operator">₍_,_₎</a> <a id="1429" class="Symbol">:</a> <a id="1431" class="Symbol">(</a><a id="1432" href="prop.html#1432" class="Bound">P</a> <a id="1434" class="Symbol">:</a> <a id="1436" class="PrimitiveType">Set</a><a id="1439" class="Symbol">)</a> <a id="1441" class="Symbol">→</a> <a id="1443" href="isprop.html#168" class="Function">isProp</a> <a id="1450" href="prop.html#1432" class="Bound">P</a> <a id="1452" class="Symbol">→</a> <a id="1454" href="prop.html#926" class="Function">Prp</a>
+<a id="1458" href="prop.html#1423" class="Function Operator">₍_,_₎</a> <a id="1464" class="Symbol">=</a> <a id="1466" href="preliminaries.html#701" class="InductiveConstructor Operator">_,_</a>
+
+<a id="1471" class="Comment">-- It is also necessary, for the same reason, to specialize the</a>
+<a id="1535" class="Comment">-- types of the projections:</a>
+
+<a id="_holds"></a><a id="1565" href="prop.html#1565" class="Function Operator">_holds</a> <a id="1572" class="Symbol">:</a> <a id="1574" href="prop.html#926" class="Function">Prp</a> <a id="1578" class="Symbol">→</a> <a id="1580" class="PrimitiveType">Set</a>
+<a id="1584" href="prop.html#1565" class="Function Operator">_holds</a> <a id="1591" class="Symbol">=</a> <a id="1593" href="preliminaries.html#714" class="Field">pr₁</a>
+
+<a id="1598" class="Keyword">infix</a> <a id="1604" class="Number">20</a> <a id="1607" href="prop.html#1565" class="Function Operator">_holds</a>
+
+<a id="holdsIsProp"></a><a id="1615" href="prop.html#1615" class="Function">holdsIsProp</a> <a id="1627" class="Symbol">:</a> <a id="1629" class="Symbol">(</a><a id="1630" href="prop.html#1630" class="Bound">p</a> <a id="1632" class="Symbol">:</a> <a id="1634" href="prop.html#926" class="Function">Prp</a><a id="1637" class="Symbol">)</a> <a id="1639" class="Symbol">→</a> <a id="1641" href="isprop.html#168" class="Function">isProp</a><a id="1647" class="Symbol">(</a><a id="1648" href="prop.html#1630" class="Bound">p</a> <a id="1650" href="prop.html#1565" class="Function Operator">holds</a><a id="1655" class="Symbol">)</a>
+<a id="1657" href="prop.html#1615" class="Function">holdsIsProp</a> <a id="1669" class="Symbol">=</a> <a id="1671" href="preliminaries.html#724" class="Field">pr₂</a>
+
+<a id="1676" class="Comment">-- NB. holdsIsProp shows that _holds is an embedding in the sense of</a>
+<a id="1745" class="Comment">-- the HoTT book.</a>
+
+<a id="Prp-≡"></a><a id="1764" href="prop.html#1764" class="Function">Prp-≡</a> <a id="1770" class="Symbol">:</a> <a id="1772" class="Symbol">{</a><a id="1773" href="prop.html#1773" class="Bound">p</a> <a id="1775" href="prop.html#1775" class="Bound">q</a> <a id="1777" class="Symbol">:</a> <a id="1779" href="prop.html#926" class="Function">Prp</a><a id="1782" class="Symbol">}</a> <a id="1784" class="Symbol">→</a> <a id="1786" href="prop.html#1773" class="Bound">p</a> <a id="1788" href="prop.html#1565" class="Function Operator">holds</a> <a id="1794" href="preliminaries.html#1472" class="Datatype Operator">≡</a> <a id="1796" href="prop.html#1775" class="Bound">q</a> <a id="1798" href="prop.html#1565" class="Function Operator">holds</a> <a id="1804" class="Symbol">→</a> <a id="1806" href="prop.html#1773" class="Bound">p</a> <a id="1808" href="preliminaries.html#1472" class="Datatype Operator">≡</a> <a id="1810" href="prop.html#1775" class="Bound">q</a>
+<a id="1812" href="prop.html#1764" class="Function">Prp-≡</a> <a id="1818" class="Symbol">{</a><a id="1819" href="prop.html#1819" class="Bound">p</a><a id="1820" class="Symbol">}</a> <a id="1822" class="Symbol">{</a><a id="1823" href="prop.html#1823" class="Bound">q</a><a id="1824" class="Symbol">}</a> <a id="1826" href="prop.html#1826" class="Bound">e</a> <a id="1828" class="Symbol">=</a> <a id="1830" href="preliminaries.html#2432" class="Function">Σ-≡</a> <a id="1834" href="prop.html#1826" class="Bound">e</a> <a id="1836" class="Symbol">(</a><a id="1837" href="isprop.html#1724" class="Function">isProp-isProp</a> <a id="1851" class="Symbol">(</a><a id="1852" href="preliminaries.html#2002" class="Function">transport</a> <a id="1862" href="isprop.html#168" class="Function">isProp</a> <a id="1869" href="prop.html#1826" class="Bound">e</a> <a id="1871" class="Symbol">(</a><a id="1872" href="prop.html#1615" class="Function">holdsIsProp</a> <a id="1884" href="prop.html#1819" class="Bound">p</a><a id="1885" class="Symbol">))</a> <a id="1888" class="Symbol">(</a><a id="1889" href="prop.html#1615" class="Function">holdsIsProp</a> <a id="1901" href="prop.html#1823" class="Bound">q</a><a id="1902" class="Symbol">))</a>
+
+<a id="1906" class="Comment">-- open import propua -- &lt;-- Doesn&#39;t work. We have to repeat the postulate literally:</a>
+
+<a id="1993" class="Keyword">postulate</a> <a id="prop-ua&#39;"></a><a id="2003" href="prop.html#2003" class="Postulate">prop-ua&#39;</a> <a id="2012" class="Symbol">:</a> <a id="2014" class="Symbol">{</a><a id="2015" href="prop.html#2015" class="Bound">P</a> <a id="2017" href="prop.html#2017" class="Bound">Q</a> <a id="2019" class="Symbol">:</a> <a id="2021" class="PrimitiveType">Set</a><a id="2024" class="Symbol">}</a> <a id="2026" class="Symbol">→</a> <a id="2028" href="isprop.html#168" class="Function">isProp</a> <a id="2035" href="prop.html#2015" class="Bound">P</a> <a id="2037" class="Symbol">→</a> <a id="2039" href="isprop.html#168" class="Function">isProp</a> <a id="2046" href="prop.html#2017" class="Bound">Q</a> <a id="2048" class="Symbol">→</a> <a id="2050" class="Symbol">(</a><a id="2051" href="prop.html#2015" class="Bound">P</a> <a id="2053" class="Symbol">→</a> <a id="2055" href="prop.html#2017" class="Bound">Q</a><a id="2056" class="Symbol">)</a> <a id="2058" class="Symbol">→</a> <a id="2060" class="Symbol">(</a><a id="2061" href="prop.html#2017" class="Bound">Q</a> <a id="2063" class="Symbol">→</a> <a id="2065" href="prop.html#2015" class="Bound">P</a><a id="2066" class="Symbol">)</a> <a id="2068" class="Symbol">→</a> <a id="2070" href="prop.html#2015" class="Bound">P</a> <a id="2072" href="preliminaries.html#1472" class="Datatype Operator">≡</a> <a id="2074" href="prop.html#2017" class="Bound">Q</a>
+
+<a id="2077" class="Comment">-- (Why? Moreover, there is an example in which we need to use both</a>
+<a id="2145" class="Comment">-- prop-ua and prop-ua&#39;.)</a>
+
+<a id="propext"></a><a id="2172" href="prop.html#2172" class="Function">propext</a> <a id="2180" class="Symbol">:</a> <a id="2182" class="Symbol">{</a><a id="2183" href="prop.html#2183" class="Bound">p</a> <a id="2185" href="prop.html#2185" class="Bound">q</a> <a id="2187" class="Symbol">:</a> <a id="2189" href="prop.html#926" class="Function">Prp</a><a id="2192" class="Symbol">}</a> <a id="2194" class="Symbol">→</a> <a id="2196" class="Symbol">(</a><a id="2197" href="prop.html#2183" class="Bound">p</a> <a id="2199" href="prop.html#1565" class="Function Operator">holds</a> <a id="2205" class="Symbol">→</a> <a id="2207" href="prop.html#2185" class="Bound">q</a> <a id="2209" href="prop.html#1565" class="Function Operator">holds</a><a id="2214" class="Symbol">)</a> <a id="2216" class="Symbol">→</a> <a id="2218" class="Symbol">(</a><a id="2219" href="prop.html#2185" class="Bound">q</a> <a id="2221" href="prop.html#1565" class="Function Operator">holds</a> <a id="2227" class="Symbol">→</a> <a id="2229" href="prop.html#2183" class="Bound">p</a> <a id="2231" href="prop.html#1565" class="Function Operator">holds</a><a id="2236" class="Symbol">)</a> <a id="2238" class="Symbol">→</a> <a id="2240" href="prop.html#2183" class="Bound">p</a> <a id="2242" href="preliminaries.html#1472" class="Datatype Operator">≡</a> <a id="2244" href="prop.html#2185" class="Bound">q</a>
+<a id="2246" href="prop.html#2172" class="Function">propext</a> <a id="2254" class="Symbol">{</a><a id="2255" href="prop.html#2255" class="Bound">p</a><a id="2256" class="Symbol">}</a> <a id="2258" class="Symbol">{</a><a id="2259" href="prop.html#2259" class="Bound">q</a><a id="2260" class="Symbol">}</a> <a id="2262" href="prop.html#2262" class="Bound">f</a> <a id="2264" href="prop.html#2264" class="Bound">g</a> <a id="2266" class="Symbol">=</a> <a id="2268" href="prop.html#1764" class="Function">Prp-≡</a> <a id="2274" href="prop.html#2285" class="Function">e</a>
+ <a id="2277" class="Keyword">where</a>
+  <a id="2285" href="prop.html#2285" class="Function">e</a> <a id="2287" class="Symbol">:</a> <a id="2289" href="prop.html#2255" class="Bound">p</a> <a id="2291" href="prop.html#1565" class="Function Operator">holds</a> <a id="2297" href="preliminaries.html#1472" class="Datatype Operator">≡</a> <a id="2299" href="prop.html#2259" class="Bound">q</a> <a id="2301" href="prop.html#1565" class="Function Operator">holds</a>
+  <a id="2309" href="prop.html#2285" class="Function">e</a> <a id="2311" class="Symbol">=</a> <a id="2313" href="prop.html#2003" class="Postulate">prop-ua&#39;</a> <a id="2322" class="Symbol">(</a><a id="2323" href="prop.html#1615" class="Function">holdsIsProp</a> <a id="2335" href="prop.html#2255" class="Bound">p</a><a id="2336" class="Symbol">)</a> <a id="2338" class="Symbol">(</a><a id="2339" href="prop.html#1615" class="Function">holdsIsProp</a> <a id="2351" href="prop.html#2259" class="Bound">q</a><a id="2352" class="Symbol">)</a> <a id="2354" href="prop.html#2262" class="Bound">f</a> <a id="2356" href="prop.html#2264" class="Bound">g</a>
+</pre></body></html>

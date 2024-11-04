@@ -1,0 +1,330 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+><head
+  ><title
+    >decidable-and-discrete</title
+    ><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"
+     /><meta http-equiv="Content-Style-Type" content="text/css"
+     /><link href="Agda.css" rel="stylesheet" type="text/css"
+     /></head
+  ><body
+  ><pre
+    ><a name="1"
+      >\begin{code}
+
+</a
+      ><a name="16" class="Keyword"
+      >module</a
+      ><a name="22"
+      > </a
+      ><a name="23" href="decidable-and-discrete.html#1" class="Module"
+      >decidable-and-discrete</a
+      ><a name="45"
+      > </a
+      ><a name="46" class="Keyword"
+      >where</a
+      ><a name="51"
+      >
+
+</a
+      ><a name="53" class="Keyword"
+      >open</a
+      ><a name="57"
+      > </a
+      ><a name="58" class="Keyword"
+      >import</a
+      ><a name="64"
+      > </a
+      ><a name="65" href="mini-library.html#1" class="Module"
+      >mini-library</a
+      ><a name="77"
+      >
+
+</a
+      ><a name="79" href="decidable-and-discrete.html#79" class="Function"
+      >decidable</a
+      ><a name="88"
+      > </a
+      ><a name="89" class="Symbol"
+      >:</a
+      ><a name="90"
+      > </a
+      ><a name="91" class="PrimitiveType"
+      >Set</a
+      ><a name="94"
+      > </a
+      ><a name="95" class="Symbol"
+      >&#8594;</a
+      ><a name="96"
+      > </a
+      ><a name="97" class="PrimitiveType"
+      >Set</a
+      ><a name="100"
+      >
+</a
+      ><a name="101" href="decidable-and-discrete.html#79" class="Function"
+      >decidable</a
+      ><a name="110"
+      > </a
+      ><a name="111" href="decidable-and-discrete.html#111" class="Bound"
+      >X</a
+      ><a name="112"
+      > </a
+      ><a name="113" class="Symbol"
+      >=</a
+      ><a name="114"
+      > </a
+      ><a name="115" href="decidable-and-discrete.html#111" class="Bound"
+      >X</a
+      ><a name="116"
+      > </a
+      ><a name="117" href="mini-library.html#640" class="Datatype Operator"
+      >+</a
+      ><a name="118"
+      > </a
+      ><a name="119" class="Symbol"
+      >(</a
+      ><a name="120" href="decidable-and-discrete.html#111" class="Bound"
+      >X</a
+      ><a name="121"
+      > </a
+      ><a name="122" class="Symbol"
+      >&#8594;</a
+      ><a name="123"
+      > </a
+      ><a name="124" href="mini-library.html#581" class="Datatype"
+      >&#8709;</a
+      ><a name="125" class="Symbol"
+      >)</a
+      ><a name="126"
+      >
+
+</a
+      ><a name="128" href="decidable-and-discrete.html#128" class="Function"
+      >discrete</a
+      ><a name="136"
+      > </a
+      ><a name="137" class="Symbol"
+      >:</a
+      ><a name="138"
+      > </a
+      ><a name="139" class="PrimitiveType"
+      >Set</a
+      ><a name="142"
+      > </a
+      ><a name="143" class="Symbol"
+      >&#8594;</a
+      ><a name="144"
+      > </a
+      ><a name="145" class="PrimitiveType"
+      >Set</a
+      ><a name="148"
+      >
+</a
+      ><a name="149" href="decidable-and-discrete.html#128" class="Function"
+      >discrete</a
+      ><a name="157"
+      > </a
+      ><a name="158" href="decidable-and-discrete.html#158" class="Bound"
+      >X</a
+      ><a name="159"
+      > </a
+      ><a name="160" class="Symbol"
+      >=</a
+      ><a name="161"
+      > </a
+      ><a name="162" class="Symbol"
+      >{</a
+      ><a name="163" href="decidable-and-discrete.html#163" class="Bound"
+      >x</a
+      ><a name="164"
+      > </a
+      ><a name="165" href="decidable-and-discrete.html#165" class="Bound"
+      >y</a
+      ><a name="166"
+      > </a
+      ><a name="167" class="Symbol"
+      >:</a
+      ><a name="168"
+      > </a
+      ><a name="169" href="decidable-and-discrete.html#158" class="Bound"
+      >X</a
+      ><a name="170" class="Symbol"
+      >}</a
+      ><a name="171"
+      > </a
+      ><a name="172" class="Symbol"
+      >&#8594;</a
+      ><a name="173"
+      > </a
+      ><a name="174" href="decidable-and-discrete.html#79" class="Function"
+      >decidable</a
+      ><a name="183" class="Symbol"
+      >(</a
+      ><a name="184" href="decidable-and-discrete.html#163" class="Bound"
+      >x</a
+      ><a name="185"
+      > </a
+      ><a name="186" href="mini-library.html#716" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="187"
+      > </a
+      ><a name="188" href="decidable-and-discrete.html#165" class="Bound"
+      >y</a
+      ><a name="189" class="Symbol"
+      >)</a
+      ><a name="190"
+      >
+
+</a
+      ><a name="192" href="decidable-and-discrete.html#192" class="Function"
+      >&#8322;-discrete</a
+      ><a name="202"
+      > </a
+      ><a name="203" class="Symbol"
+      >:</a
+      ><a name="204"
+      > </a
+      ><a name="205" href="decidable-and-discrete.html#128" class="Function"
+      >discrete</a
+      ><a name="213"
+      > </a
+      ><a name="214" href="mini-library.html#4149" class="Datatype"
+      >&#8322;</a
+      ><a name="215"
+      >
+</a
+      ><a name="216" href="decidable-and-discrete.html#192" class="Function"
+      >&#8322;-discrete</a
+      ><a name="226"
+      > </a
+      ><a name="227" class="Symbol"
+      >{</a
+      ><a name="228" href="mini-library.html#4164" class="InductiveConstructor"
+      >&#8320;</a
+      ><a name="229" class="Symbol"
+      >}</a
+      ><a name="230"
+      > </a
+      ><a name="231" class="Symbol"
+      >{</a
+      ><a name="232" href="mini-library.html#4164" class="InductiveConstructor"
+      >&#8320;</a
+      ><a name="233" class="Symbol"
+      >}</a
+      ><a name="234"
+      > </a
+      ><a name="235" class="Symbol"
+      >=</a
+      ><a name="236"
+      > </a
+      ><a name="237" href="mini-library.html#671" class="InductiveConstructor"
+      >in&#8320;</a
+      ><a name="240"
+      > </a
+      ><a name="241" href="mini-library.html#752" class="InductiveConstructor"
+      >refl</a
+      ><a name="245"
+      >
+</a
+      ><a name="246" href="decidable-and-discrete.html#192" class="Function"
+      >&#8322;-discrete</a
+      ><a name="256"
+      > </a
+      ><a name="257" class="Symbol"
+      >{</a
+      ><a name="258" href="mini-library.html#4164" class="InductiveConstructor"
+      >&#8320;</a
+      ><a name="259" class="Symbol"
+      >}</a
+      ><a name="260"
+      > </a
+      ><a name="261" class="Symbol"
+      >{</a
+      ><a name="262" href="mini-library.html#4171" class="InductiveConstructor"
+      >&#8321;</a
+      ><a name="263" class="Symbol"
+      >}</a
+      ><a name="264"
+      > </a
+      ><a name="265" class="Symbol"
+      >=</a
+      ><a name="266"
+      > </a
+      ><a name="267" href="mini-library.html#691" class="InductiveConstructor"
+      >in&#8321;</a
+      ><a name="270" class="Symbol"
+      >(&#955;())</a
+      ><a name="275"
+      >
+</a
+      ><a name="276" href="decidable-and-discrete.html#192" class="Function"
+      >&#8322;-discrete</a
+      ><a name="286"
+      > </a
+      ><a name="287" class="Symbol"
+      >{</a
+      ><a name="288" href="mini-library.html#4171" class="InductiveConstructor"
+      >&#8321;</a
+      ><a name="289" class="Symbol"
+      >}</a
+      ><a name="290"
+      > </a
+      ><a name="291" class="Symbol"
+      >{</a
+      ><a name="292" href="mini-library.html#4164" class="InductiveConstructor"
+      >&#8320;</a
+      ><a name="293" class="Symbol"
+      >}</a
+      ><a name="294"
+      > </a
+      ><a name="295" class="Symbol"
+      >=</a
+      ><a name="296"
+      > </a
+      ><a name="297" href="mini-library.html#691" class="InductiveConstructor"
+      >in&#8321;</a
+      ><a name="300" class="Symbol"
+      >(&#955;())</a
+      ><a name="305"
+      >
+</a
+      ><a name="306" href="decidable-and-discrete.html#192" class="Function"
+      >&#8322;-discrete</a
+      ><a name="316"
+      > </a
+      ><a name="317" class="Symbol"
+      >{</a
+      ><a name="318" href="mini-library.html#4171" class="InductiveConstructor"
+      >&#8321;</a
+      ><a name="319" class="Symbol"
+      >}</a
+      ><a name="320"
+      > </a
+      ><a name="321" class="Symbol"
+      >{</a
+      ><a name="322" href="mini-library.html#4171" class="InductiveConstructor"
+      >&#8321;</a
+      ><a name="323" class="Symbol"
+      >}</a
+      ><a name="324"
+      > </a
+      ><a name="325" class="Symbol"
+      >=</a
+      ><a name="326"
+      > </a
+      ><a name="327" href="mini-library.html#671" class="InductiveConstructor"
+      >in&#8320;</a
+      ><a name="330"
+      > </a
+      ><a name="331" href="mini-library.html#752" class="InductiveConstructor"
+      >refl</a
+      ><a name="335"
+      >
+
+\end{code}
+</a
+      ></pre
+    ></body
+  ></html
+>

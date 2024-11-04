@@ -1,0 +1,52 @@
+<!DOCTYPE HTML>
+<html><head><meta charset="utf-8"><title>NonStandardUniverseNotation</title><link rel="stylesheet" href="Agda.css"></head><body><pre class="Agda"><a id="1" class="Background">Martín Escardó, 7th December 2017
+
+We introduce a notation for type universes which is currently
+non-standard from the point of view of the common Agda practice, but
+which is closer to the standard notation in univalent mathematics and
+homotopy type theory.
+
+We have a sequence of non-cumulative universes à la Russell, with
+&quot;Universe&quot; the type of universe codes, and with a postfix (almost
+invisible, superscript, dot) _̇ decodification function.
+
+In Agda the universes are called Set ℓ, but this terminology/notation
+has its origin before HoTT and univalent foundations.
+
+</a><a id="575" class="Markup">\begin{code}</a>
+
+<a id="589" class="Symbol">{-#</a> <a id="593" class="Keyword">OPTIONS</a> <a id="601" class="Pragma">--without-K</a> <a id="613" class="Pragma">--safe</a> <a id="620" class="Symbol">#-}</a>
+
+<a id="625" class="Keyword">module</a> <a id="632" href="NonStandardUniverseNotation.html" class="Module">NonStandardUniverseNotation</a> <a id="660" class="Keyword">where</a>
+
+<a id="667" class="Keyword">open</a> <a id="672" class="Keyword">import</a> <a id="679" href="Agda.Primitive.html" class="Module">Agda.Primitive</a> <a id="694" class="Keyword">using</a> <a id="700" class="Symbol">(</a><a id="701" href="Agda.Primitive.html#621" class="Primitive Operator">_⊔_</a><a id="704" class="Symbol">)</a> <a id="706" class="Keyword">renaming</a> <a id="715" class="Symbol">(</a><a id="716" href="Agda.Primitive.html#575" class="Primitive">lzero</a> <a id="722" class="Symbol">to</a> <a id="725" href="Agda.Primitive.html#575" class="Primitive">U₀</a> <a id="728" class="Symbol">;</a> <a id="730" href="Agda.Primitive.html#591" class="Primitive">lsuc</a> <a id="735" class="Symbol">to</a> <a id="738" href="Agda.Primitive.html#591" class="Primitive">usuc</a> <a id="743" class="Symbol">;</a> <a id="745" href="Agda.Primitive.html#408" class="Postulate">Level</a> <a id="751" class="Symbol">to</a> <a id="754" href="Agda.Primitive.html#408" class="Postulate">Universe</a><a id="762" class="Symbol">)</a> <a id="764" class="Keyword">public</a>
+
+<a id="_̇"></a><a id="772" href="NonStandardUniverseNotation.html#772" class="Function Operator">_̇</a> <a id="775" class="Symbol">:</a> <a id="777" class="Symbol">(</a><a id="778" href="NonStandardUniverseNotation.html#778" class="Bound">U</a> <a id="780" class="Symbol">:</a> <a id="782" href="Agda.Primitive.html#408" class="Postulate">Universe</a><a id="790" class="Symbol">)</a> <a id="792" class="Symbol">→</a> <a id="794" class="Symbol">_</a>
+<a id="796" href="NonStandardUniverseNotation.html#796" class="Bound">U</a> <a id="798" href="NonStandardUniverseNotation.html#772" class="Function Operator">̇</a> <a id="800" class="Symbol">=</a> <a id="802" class="PrimitiveType">Set</a> <a id="806" href="NonStandardUniverseNotation.html#796" class="Bound">U</a> <a id="808" class="Comment">-- This should be the only use of the Agda keyword &#39;Set&#39; in any HoTT/UF development.</a>
+
+<a id="_′"></a><a id="894" href="NonStandardUniverseNotation.html#894" class="Function Operator">_′</a> <a id="897" class="Symbol">:</a> <a id="899" href="Agda.Primitive.html#408" class="Postulate">Universe</a> <a id="908" class="Symbol">→</a> <a id="910" href="Agda.Primitive.html#408" class="Postulate">Universe</a>
+<a id="919" href="NonStandardUniverseNotation.html#894" class="Function Operator">_′</a> <a id="922" class="Symbol">=</a> <a id="924" href="Agda.Primitive.html#591" class="Primitive">usuc</a>
+
+<a id="930" class="Keyword">infix</a> <a id="936" class="Number">0</a> <a id="938" href="NonStandardUniverseNotation.html#772" class="Function Operator">_̇</a>
+<a id="941" class="Keyword">infix</a> <a id="947" class="Number">99</a> <a id="950" href="NonStandardUniverseNotation.html#894" class="Function Operator">_′</a>
+
+<a id="954" class="Markup">\end{code}</a><a id="964" class="Background">
+
+For example, we write
+
+  fiber : {U V : Universe} {X : U ̇} {Y : V ̇} → (X → Y) → Y → U ⊔ V ̇
+  fiber f y = Σ \x → f x ≡ y
+
+rather than the usual
+
+  fiber : {ℓ ℓ&#39; : Level} {X : Set ℓ} {Y : Set ℓ&#39;} → (X → Y) → Y → Set(ℓ ⊔ ℓ&#39;)
+  fiber f y = Σ \x → f x ≡ y
+
+Ideally, we would like to elide the coersions _̇ h and write
+
+  fiber : {U V : Universe} {X : U} {Y : V} → (X → Y) → Y → U ⊔ V
+  fiber f y = Σ \x → f x ≡ y
+
+but this would require a change in the Agda type checker to insert the
+coersions at the appropriate places.
+</a></pre></body></html>

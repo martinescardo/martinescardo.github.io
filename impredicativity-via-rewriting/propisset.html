@@ -1,0 +1,1236 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+><head
+  ><title
+    >propisset</title
+    ><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"
+     /><meta http-equiv="Content-Style-Type" content="text/css"
+     /><link href="Agda.css" rel="stylesheet" type="text/css"
+     /></head
+  ><body
+  ><pre
+    ><a name="1" class="Comment"
+      >-- Martin Escardo, 5th August 2015. Modified 9 May to add rewriting to conform with prop.agda.</a
+      ><a name="95"
+      >
+
+</a
+      ><a name="97" class="Symbol"
+      >{-#</a
+      ><a name="100"
+      > </a
+      ><a name="101" class="Keyword"
+      >OPTIONS</a
+      ><a name="108"
+      > --without-K </a
+      ><a name="121" class="Symbol"
+      >#-}</a
+      ><a name="124"
+      >
+</a
+      ><a name="125" class="Symbol"
+      >{-#</a
+      ><a name="128"
+      > </a
+      ><a name="129" class="Keyword"
+      >OPTIONS</a
+      ><a name="136"
+      > --rewriting </a
+      ><a name="149" class="Symbol"
+      >#-}</a
+      ><a name="152"
+      > </a
+      ><a name="153" class="Comment"
+      >-- Needed because we import prop which now relies on that.</a
+      ><a name="211"
+      >
+
+</a
+      ><a name="213" class="Keyword"
+      >module</a
+      ><a name="219"
+      > </a
+      ><a name="220" href="propisset.html#1" class="Module"
+      >propisset</a
+      ><a name="229"
+      > </a
+      ><a name="230" class="Keyword"
+      >where</a
+      ><a name="235"
+      >
+
+</a
+      ><a name="237" class="Keyword"
+      >open</a
+      ><a name="241"
+      > </a
+      ><a name="242" class="Keyword"
+      >import</a
+      ><a name="248"
+      > </a
+      ><a name="249" href="preliminaries.html#1" class="Module"
+      >preliminaries</a
+      ><a name="262"
+      >
+</a
+      ><a name="263" class="Keyword"
+      >open</a
+      ><a name="267"
+      > </a
+      ><a name="268" class="Keyword"
+      >import</a
+      ><a name="274"
+      > </a
+      ><a name="275" href="prop.html#1" class="Module"
+      >prop</a
+      ><a name="279"
+      >
+
+</a
+      ><a name="281" href="propisset.html#281" class="Function"
+      >Prop-isSet</a
+      ><a name="291"
+      > </a
+      ><a name="292" class="Symbol"
+      >:</a
+      ><a name="293"
+      > </a
+      ><a name="294" href="isprop.html#355" class="Function"
+      >isSet</a
+      ><a name="299"
+      > </a
+      ><a name="300" href="prop.html#759" class="Function"
+      >Prop</a
+      ><a name="304"
+      >
+</a
+      ><a name="305" href="propisset.html#281" class="Function"
+      >Prop-isSet</a
+      ><a name="315"
+      > </a
+      ><a name="316" class="Symbol"
+      >=</a
+      ><a name="317"
+      > </a
+      ><a name="318" href="isprop.html#852" class="Function"
+      >path-collapsible-isSet</a
+      ><a name="340"
+      > </a
+      ><a name="341" href="propisset.html#1150" class="Function"
+      >pc</a
+      ><a name="343"
+      >
+ </a
+      ><a name="345" class="Keyword"
+      >where</a
+      ><a name="350"
+      >
+  </a
+      ><a name="353" href="propisset.html#353" class="Function"
+      >A</a
+      ><a name="354"
+      > </a
+      ><a name="355" class="Symbol"
+      >:</a
+      ><a name="356"
+      > </a
+      ><a name="357" class="Symbol"
+      >(</a
+      ><a name="358" href="propisset.html#358" class="Bound"
+      >p</a
+      ><a name="359"
+      > </a
+      ><a name="360" href="propisset.html#360" class="Bound"
+      >q</a
+      ><a name="361"
+      > </a
+      ><a name="362" class="Symbol"
+      >:</a
+      ><a name="363"
+      > </a
+      ><a name="364" href="prop.html#759" class="Function"
+      >Prop</a
+      ><a name="368" class="Symbol"
+      >)</a
+      ><a name="369"
+      > </a
+      ><a name="370" class="Symbol"
+      >&#8594;</a
+      ><a name="371"
+      > </a
+      ><a name="372" href="preliminaries.html#385" class="Function"
+      >U&#8320;</a
+      ><a name="374"
+      >
+  </a
+      ><a name="377" href="propisset.html#353" class="Function"
+      >A</a
+      ><a name="378"
+      > </a
+      ><a name="379" href="propisset.html#379" class="Bound"
+      >p</a
+      ><a name="380"
+      > </a
+      ><a name="381" href="propisset.html#381" class="Bound"
+      >q</a
+      ><a name="382"
+      > </a
+      ><a name="383" class="Symbol"
+      >=</a
+      ><a name="384"
+      > </a
+      ><a name="385" class="Symbol"
+      >(</a
+      ><a name="386" href="propisset.html#379" class="Bound"
+      >p</a
+      ><a name="387"
+      > </a
+      ><a name="388" href="prop.html#1094" class="Function Operator"
+      >holds</a
+      ><a name="393"
+      > </a
+      ><a name="394" class="Symbol"
+      >&#8594;</a
+      ><a name="395"
+      > </a
+      ><a name="396" href="propisset.html#381" class="Bound"
+      >q</a
+      ><a name="397"
+      > </a
+      ><a name="398" href="prop.html#1094" class="Function Operator"
+      >holds</a
+      ><a name="403" class="Symbol"
+      >)</a
+      ><a name="404"
+      > </a
+      ><a name="405" href="preliminaries.html#698" class="Function Operator"
+      >&#215;</a
+      ><a name="406"
+      > </a
+      ><a name="407" class="Symbol"
+      >(</a
+      ><a name="408" href="propisset.html#381" class="Bound"
+      >q</a
+      ><a name="409"
+      > </a
+      ><a name="410" href="prop.html#1094" class="Function Operator"
+      >holds</a
+      ><a name="415"
+      > </a
+      ><a name="416" class="Symbol"
+      >&#8594;</a
+      ><a name="417"
+      > </a
+      ><a name="418" href="propisset.html#379" class="Bound"
+      >p</a
+      ><a name="419"
+      > </a
+      ><a name="420" href="prop.html#1094" class="Function Operator"
+      >holds</a
+      ><a name="425" class="Symbol"
+      >)</a
+      ><a name="426"
+      >
+  </a
+      ><a name="430" href="propisset.html#430" class="Function"
+      >A-isProp</a
+      ><a name="438"
+      > </a
+      ><a name="439" class="Symbol"
+      >:</a
+      ><a name="440"
+      > </a
+      ><a name="441" class="Symbol"
+      >(</a
+      ><a name="442" href="propisset.html#442" class="Bound"
+      >p</a
+      ><a name="443"
+      > </a
+      ><a name="444" href="propisset.html#444" class="Bound"
+      >q</a
+      ><a name="445"
+      > </a
+      ><a name="446" class="Symbol"
+      >:</a
+      ><a name="447"
+      > </a
+      ><a name="448" href="prop.html#759" class="Function"
+      >Prop</a
+      ><a name="452" class="Symbol"
+      >)</a
+      ><a name="453"
+      > </a
+      ><a name="454" class="Symbol"
+      >&#8594;</a
+      ><a name="455"
+      > </a
+      ><a name="456" href="isprop.html#168" class="Function"
+      >isProp</a
+      ><a name="462" class="Symbol"
+      >(</a
+      ><a name="463" href="propisset.html#353" class="Function"
+      >A</a
+      ><a name="464"
+      > </a
+      ><a name="465" href="propisset.html#442" class="Bound"
+      >p</a
+      ><a name="466"
+      > </a
+      ><a name="467" href="propisset.html#444" class="Bound"
+      >q</a
+      ><a name="468" class="Symbol"
+      >)</a
+      ><a name="469"
+      >
+  </a
+      ><a name="472" href="propisset.html#430" class="Function"
+      >A-isProp</a
+      ><a name="480"
+      > </a
+      ><a name="481" href="propisset.html#481" class="Bound"
+      >p</a
+      ><a name="482"
+      > </a
+      ><a name="483" href="propisset.html#483" class="Bound"
+      >q</a
+      ><a name="484"
+      > </a
+      ><a name="485" class="Symbol"
+      >=</a
+      ><a name="486"
+      > </a
+      ><a name="487" href="isprop.html#2050" class="Function"
+      >isProp-closed-under-&#931;</a
+      ><a name="508"
+      > </a
+      ><a name="509" class="Symbol"
+      >(</a
+      ><a name="510" href="isprop.html#2305" class="Function"
+      >isProp-exponential-ideal</a
+      ><a name="534"
+      > </a
+      ><a name="535" class="Symbol"
+      >(&#955;</a
+      ><a name="537"
+      > </a
+      ><a name="538" href="propisset.html#538" class="Bound"
+      >_</a
+      ><a name="539"
+      > </a
+      ><a name="540" class="Symbol"
+      >&#8594;</a
+      ><a name="541"
+      > </a
+      ><a name="542" href="prop.html#1143" class="Function"
+      >holdsIsProp</a
+      ><a name="553"
+      > </a
+      ><a name="554" href="propisset.html#483" class="Bound"
+      >q</a
+      ><a name="555" class="Symbol"
+      >))</a
+      ><a name="557"
+      >
+                                       </a
+      ><a name="597" class="Symbol"
+      >(&#955;</a
+      ><a name="599"
+      > </a
+      ><a name="600" href="propisset.html#600" class="Bound"
+      >_</a
+      ><a name="601"
+      > </a
+      ><a name="602" class="Symbol"
+      >&#8594;</a
+      ><a name="603"
+      > </a
+      ><a name="604" href="isprop.html#2305" class="Function"
+      >isProp-exponential-ideal</a
+      ><a name="628"
+      > </a
+      ><a name="629" class="Symbol"
+      >(&#955;</a
+      ><a name="631"
+      > </a
+      ><a name="632" href="propisset.html#632" class="Bound"
+      >_</a
+      ><a name="633"
+      > </a
+      ><a name="634" class="Symbol"
+      >&#8594;</a
+      ><a name="635"
+      > </a
+      ><a name="636" href="prop.html#1143" class="Function"
+      >holdsIsProp</a
+      ><a name="647"
+      > </a
+      ><a name="648" href="propisset.html#481" class="Bound"
+      >p</a
+      ><a name="649" class="Symbol"
+      >))</a
+      ><a name="651"
+      >
+  </a
+      ><a name="654" href="propisset.html#654" class="Function"
+      >g</a
+      ><a name="655"
+      > </a
+      ><a name="656" class="Symbol"
+      >:</a
+      ><a name="657"
+      > </a
+      ><a name="658" class="Symbol"
+      >(</a
+      ><a name="659" href="propisset.html#659" class="Bound"
+      >p</a
+      ><a name="660"
+      > </a
+      ><a name="661" href="propisset.html#661" class="Bound"
+      >q</a
+      ><a name="662"
+      > </a
+      ><a name="663" class="Symbol"
+      >:</a
+      ><a name="664"
+      > </a
+      ><a name="665" href="prop.html#759" class="Function"
+      >Prop</a
+      ><a name="669" class="Symbol"
+      >)</a
+      ><a name="670"
+      > </a
+      ><a name="671" class="Symbol"
+      >&#8594;</a
+      ><a name="672"
+      > </a
+      ><a name="673" href="propisset.html#659" class="Bound"
+      >p</a
+      ><a name="674"
+      > </a
+      ><a name="675" href="preliminaries.html#1396" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="676"
+      > </a
+      ><a name="677" href="propisset.html#661" class="Bound"
+      >q</a
+      ><a name="678"
+      > </a
+      ><a name="679" class="Symbol"
+      >&#8594;</a
+      ><a name="680"
+      > </a
+      ><a name="681" href="propisset.html#353" class="Function"
+      >A</a
+      ><a name="682"
+      > </a
+      ><a name="683" href="propisset.html#659" class="Bound"
+      >p</a
+      ><a name="684"
+      > </a
+      ><a name="685" href="propisset.html#661" class="Bound"
+      >q</a
+      ><a name="686"
+      >
+  </a
+      ><a name="689" href="propisset.html#654" class="Function"
+      >g</a
+      ><a name="690"
+      > </a
+      ><a name="691" href="propisset.html#691" class="Bound"
+      >p</a
+      ><a name="692"
+      > </a
+      ><a name="693" href="propisset.html#693" class="Bound"
+      >q</a
+      ><a name="694"
+      > </a
+      ><a name="695" href="propisset.html#695" class="Bound"
+      >e</a
+      ><a name="696"
+      > </a
+      ><a name="697" class="Symbol"
+      >=</a
+      ><a name="698"
+      > </a
+      ><a name="699" class="Symbol"
+      >(</a
+      ><a name="700" href="propisset.html#770" class="Function"
+      >b</a
+      ><a name="701"
+      > </a
+      ><a name="702" href="preliminaries.html#662" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="703"
+      > </a
+      ><a name="704" href="propisset.html#826" class="Function"
+      >c</a
+      ><a name="705" class="Symbol"
+      >)</a
+      ><a name="706"
+      >
+   </a
+      ><a name="710" class="Keyword"
+      >where</a
+      ><a name="715"
+      >
+    </a
+      ><a name="720" href="propisset.html#720" class="Function"
+      >a</a
+      ><a name="721"
+      > </a
+      ><a name="722" class="Symbol"
+      >:</a
+      ><a name="723"
+      > </a
+      ><a name="724" class="Symbol"
+      >(</a
+      ><a name="725" href="propisset.html#691" class="Bound"
+      >p</a
+      ><a name="726"
+      > </a
+      ><a name="727" href="prop.html#1094" class="Function Operator"
+      >holds</a
+      ><a name="732" class="Symbol"
+      >)</a
+      ><a name="733"
+      > </a
+      ><a name="734" href="preliminaries.html#1396" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="735"
+      > </a
+      ><a name="736" class="Symbol"
+      >(</a
+      ><a name="737" href="propisset.html#693" class="Bound"
+      >q</a
+      ><a name="738"
+      > </a
+      ><a name="739" href="prop.html#1094" class="Function Operator"
+      >holds</a
+      ><a name="744" class="Symbol"
+      >)</a
+      ><a name="745"
+      >
+    </a
+      ><a name="750" href="propisset.html#720" class="Function"
+      >a</a
+      ><a name="751"
+      > </a
+      ><a name="752" class="Symbol"
+      >=</a
+      ><a name="753"
+      > </a
+      ><a name="754" href="preliminaries.html#1779" class="Function"
+      >ap</a
+      ><a name="756"
+      > </a
+      ><a name="757" href="prop.html#1094" class="Function Operator"
+      >_holds</a
+      ><a name="763"
+      > </a
+      ><a name="764" href="propisset.html#695" class="Bound"
+      >e</a
+      ><a name="765"
+      >
+    </a
+      ><a name="770" href="propisset.html#770" class="Function"
+      >b</a
+      ><a name="771"
+      > </a
+      ><a name="772" class="Symbol"
+      >:</a
+      ><a name="773"
+      > </a
+      ><a name="774" href="propisset.html#691" class="Bound"
+      >p</a
+      ><a name="775"
+      > </a
+      ><a name="776" href="prop.html#1094" class="Function Operator"
+      >holds</a
+      ><a name="781"
+      > </a
+      ><a name="782" class="Symbol"
+      >&#8594;</a
+      ><a name="783"
+      > </a
+      ><a name="784" href="propisset.html#693" class="Bound"
+      >q</a
+      ><a name="785"
+      > </a
+      ><a name="786" href="prop.html#1094" class="Function Operator"
+      >holds</a
+      ><a name="791"
+      >
+    </a
+      ><a name="796" href="propisset.html#770" class="Function"
+      >b</a
+      ><a name="797"
+      > </a
+      ><a name="798" class="Symbol"
+      >=</a
+      ><a name="799"
+      > </a
+      ><a name="800" href="preliminaries.html#1891" class="Function"
+      >transport</a
+      ><a name="809"
+      > </a
+      ><a name="810" class="Symbol"
+      >(&#955;</a
+      ><a name="812"
+      > </a
+      ><a name="813" href="propisset.html#813" class="Bound"
+      >X</a
+      ><a name="814"
+      > </a
+      ><a name="815" class="Symbol"
+      >&#8594;</a
+      ><a name="816"
+      > </a
+      ><a name="817" href="propisset.html#813" class="Bound"
+      >X</a
+      ><a name="818" class="Symbol"
+      >)</a
+      ><a name="819"
+      > </a
+      ><a name="820" href="propisset.html#720" class="Function"
+      >a</a
+      ><a name="821"
+      >
+    </a
+      ><a name="826" href="propisset.html#826" class="Function"
+      >c</a
+      ><a name="827"
+      > </a
+      ><a name="828" class="Symbol"
+      >:</a
+      ><a name="829"
+      > </a
+      ><a name="830" href="propisset.html#693" class="Bound"
+      >q</a
+      ><a name="831"
+      > </a
+      ><a name="832" href="prop.html#1094" class="Function Operator"
+      >holds</a
+      ><a name="837"
+      > </a
+      ><a name="838" class="Symbol"
+      >&#8594;</a
+      ><a name="839"
+      > </a
+      ><a name="840" href="propisset.html#691" class="Bound"
+      >p</a
+      ><a name="841"
+      > </a
+      ><a name="842" href="prop.html#1094" class="Function Operator"
+      >holds</a
+      ><a name="847"
+      >
+    </a
+      ><a name="852" href="propisset.html#826" class="Function"
+      >c</a
+      ><a name="853"
+      > </a
+      ><a name="854" class="Symbol"
+      >=</a
+      ><a name="855"
+      > </a
+      ><a name="856" href="preliminaries.html#1891" class="Function"
+      >transport</a
+      ><a name="865"
+      > </a
+      ><a name="866" class="Symbol"
+      >(&#955;</a
+      ><a name="868"
+      > </a
+      ><a name="869" href="propisset.html#869" class="Bound"
+      >X</a
+      ><a name="870"
+      > </a
+      ><a name="871" class="Symbol"
+      >&#8594;</a
+      ><a name="872"
+      > </a
+      ><a name="873" href="propisset.html#869" class="Bound"
+      >X</a
+      ><a name="874" class="Symbol"
+      >)</a
+      ><a name="875"
+      > </a
+      ><a name="876" class="Symbol"
+      >(</a
+      ><a name="877" href="preliminaries.html#1572" class="Function"
+      >sym</a
+      ><a name="880"
+      > </a
+      ><a name="881" href="propisset.html#720" class="Function"
+      >a</a
+      ><a name="882" class="Symbol"
+      >)</a
+      ><a name="883"
+      >
+  </a
+      ><a name="886" href="propisset.html#886" class="Function"
+      >h</a
+      ><a name="887"
+      >  </a
+      ><a name="889" class="Symbol"
+      >:</a
+      ><a name="890"
+      > </a
+      ><a name="891" class="Symbol"
+      >(</a
+      ><a name="892" href="propisset.html#892" class="Bound"
+      >p</a
+      ><a name="893"
+      > </a
+      ><a name="894" href="propisset.html#894" class="Bound"
+      >q</a
+      ><a name="895"
+      > </a
+      ><a name="896" class="Symbol"
+      >:</a
+      ><a name="897"
+      > </a
+      ><a name="898" href="prop.html#759" class="Function"
+      >Prop</a
+      ><a name="902" class="Symbol"
+      >)</a
+      ><a name="903"
+      > </a
+      ><a name="904" class="Symbol"
+      >&#8594;</a
+      ><a name="905"
+      > </a
+      ><a name="906" href="propisset.html#353" class="Function"
+      >A</a
+      ><a name="907"
+      > </a
+      ><a name="908" href="propisset.html#892" class="Bound"
+      >p</a
+      ><a name="909"
+      > </a
+      ><a name="910" href="propisset.html#894" class="Bound"
+      >q</a
+      ><a name="911"
+      > </a
+      ><a name="912" class="Symbol"
+      >&#8594;</a
+      ><a name="913"
+      > </a
+      ><a name="914" href="propisset.html#892" class="Bound"
+      >p</a
+      ><a name="915"
+      > </a
+      ><a name="916" href="preliminaries.html#1396" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="917"
+      > </a
+      ><a name="918" href="propisset.html#894" class="Bound"
+      >q</a
+      ><a name="919"
+      >
+  </a
+      ><a name="923" href="propisset.html#886" class="Function"
+      >h</a
+      ><a name="924"
+      > </a
+      ><a name="925" href="propisset.html#925" class="Bound"
+      >p</a
+      ><a name="926"
+      > </a
+      ><a name="927" href="propisset.html#927" class="Bound"
+      >q</a
+      ><a name="928"
+      > </a
+      ><a name="929" class="Symbol"
+      >(</a
+      ><a name="930" href="propisset.html#930" class="Bound"
+      >u</a
+      ><a name="931"
+      > </a
+      ><a name="932" href="preliminaries.html#662" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="933"
+      > </a
+      ><a name="934" href="propisset.html#934" class="Bound"
+      >v</a
+      ><a name="935" class="Symbol"
+      >)</a
+      ><a name="936"
+      > </a
+      ><a name="937" class="Symbol"
+      >=</a
+      ><a name="938"
+      > </a
+      ><a name="939" href="prop.html#3377" class="Function"
+      >propext</a
+      ><a name="946"
+      > </a
+      ><a name="947" href="propisset.html#930" class="Bound"
+      >u</a
+      ><a name="948"
+      > </a
+      ><a name="949" href="propisset.html#934" class="Bound"
+      >v</a
+      ><a name="950"
+      >
+  </a
+      ><a name="954" href="propisset.html#954" class="Function"
+      >f</a
+      ><a name="955"
+      >  </a
+      ><a name="957" class="Symbol"
+      >:</a
+      ><a name="958"
+      > </a
+      ><a name="959" class="Symbol"
+      >(</a
+      ><a name="960" href="propisset.html#960" class="Bound"
+      >p</a
+      ><a name="961"
+      > </a
+      ><a name="962" href="propisset.html#962" class="Bound"
+      >q</a
+      ><a name="963"
+      > </a
+      ><a name="964" class="Symbol"
+      >:</a
+      ><a name="965"
+      > </a
+      ><a name="966" href="prop.html#759" class="Function"
+      >Prop</a
+      ><a name="970" class="Symbol"
+      >)</a
+      ><a name="971"
+      > </a
+      ><a name="972" class="Symbol"
+      >&#8594;</a
+      ><a name="973"
+      > </a
+      ><a name="974" href="propisset.html#960" class="Bound"
+      >p</a
+      ><a name="975"
+      > </a
+      ><a name="976" href="preliminaries.html#1396" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="977"
+      > </a
+      ><a name="978" href="propisset.html#962" class="Bound"
+      >q</a
+      ><a name="979"
+      > </a
+      ><a name="980" class="Symbol"
+      >&#8594;</a
+      ><a name="981"
+      > </a
+      ><a name="982" href="propisset.html#960" class="Bound"
+      >p</a
+      ><a name="983"
+      > </a
+      ><a name="984" href="preliminaries.html#1396" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="985"
+      > </a
+      ><a name="986" href="propisset.html#962" class="Bound"
+      >q</a
+      ><a name="987"
+      >
+  </a
+      ><a name="990" href="propisset.html#954" class="Function"
+      >f</a
+      ><a name="991"
+      > </a
+      ><a name="992" href="propisset.html#992" class="Bound"
+      >p</a
+      ><a name="993"
+      > </a
+      ><a name="994" href="propisset.html#994" class="Bound"
+      >q</a
+      ><a name="995"
+      > </a
+      ><a name="996" href="propisset.html#996" class="Bound"
+      >e</a
+      ><a name="997"
+      > </a
+      ><a name="998" class="Symbol"
+      >=</a
+      ><a name="999"
+      > </a
+      ><a name="1000" href="propisset.html#886" class="Function"
+      >h</a
+      ><a name="1001"
+      > </a
+      ><a name="1002" href="propisset.html#992" class="Bound"
+      >p</a
+      ><a name="1003"
+      > </a
+      ><a name="1004" href="propisset.html#994" class="Bound"
+      >q</a
+      ><a name="1005"
+      > </a
+      ><a name="1006" class="Symbol"
+      >(</a
+      ><a name="1007" href="propisset.html#654" class="Function"
+      >g</a
+      ><a name="1008"
+      > </a
+      ><a name="1009" href="propisset.html#992" class="Bound"
+      >p</a
+      ><a name="1010"
+      > </a
+      ><a name="1011" href="propisset.html#994" class="Bound"
+      >q</a
+      ><a name="1012"
+      > </a
+      ><a name="1013" href="propisset.html#996" class="Bound"
+      >e</a
+      ><a name="1014" class="Symbol"
+      >)</a
+      ><a name="1015"
+      >
+  </a
+      ><a name="1018" href="propisset.html#1018" class="Function"
+      >constant-f</a
+      ><a name="1028"
+      > </a
+      ><a name="1029" class="Symbol"
+      >:</a
+      ><a name="1030"
+      > </a
+      ><a name="1031" class="Symbol"
+      >(</a
+      ><a name="1032" href="propisset.html#1032" class="Bound"
+      >p</a
+      ><a name="1033"
+      > </a
+      ><a name="1034" href="propisset.html#1034" class="Bound"
+      >q</a
+      ><a name="1035"
+      > </a
+      ><a name="1036" class="Symbol"
+      >:</a
+      ><a name="1037"
+      > </a
+      ><a name="1038" href="prop.html#759" class="Function"
+      >Prop</a
+      ><a name="1042" class="Symbol"
+      >)</a
+      ><a name="1043"
+      > </a
+      ><a name="1044" class="Symbol"
+      >(</a
+      ><a name="1045" href="propisset.html#1045" class="Bound"
+      >d</a
+      ><a name="1046"
+      > </a
+      ><a name="1047" href="propisset.html#1047" class="Bound"
+      >e</a
+      ><a name="1048"
+      > </a
+      ><a name="1049" class="Symbol"
+      >:</a
+      ><a name="1050"
+      > </a
+      ><a name="1051" href="propisset.html#1032" class="Bound"
+      >p</a
+      ><a name="1052"
+      > </a
+      ><a name="1053" href="preliminaries.html#1396" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="1054"
+      > </a
+      ><a name="1055" href="propisset.html#1034" class="Bound"
+      >q</a
+      ><a name="1056" class="Symbol"
+      >)</a
+      ><a name="1057"
+      > </a
+      ><a name="1058" class="Symbol"
+      >&#8594;</a
+      ><a name="1059"
+      > </a
+      ><a name="1060" href="propisset.html#954" class="Function"
+      >f</a
+      ><a name="1061"
+      > </a
+      ><a name="1062" href="propisset.html#1032" class="Bound"
+      >p</a
+      ><a name="1063"
+      > </a
+      ><a name="1064" href="propisset.html#1034" class="Bound"
+      >q</a
+      ><a name="1065"
+      > </a
+      ><a name="1066" href="propisset.html#1045" class="Bound"
+      >d</a
+      ><a name="1067"
+      > </a
+      ><a name="1068" href="preliminaries.html#1396" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="1069"
+      > </a
+      ><a name="1070" href="propisset.html#954" class="Function"
+      >f</a
+      ><a name="1071"
+      > </a
+      ><a name="1072" href="propisset.html#1032" class="Bound"
+      >p</a
+      ><a name="1073"
+      > </a
+      ><a name="1074" href="propisset.html#1034" class="Bound"
+      >q</a
+      ><a name="1075"
+      > </a
+      ><a name="1076" href="propisset.html#1047" class="Bound"
+      >e</a
+      ><a name="1077"
+      >
+  </a
+      ><a name="1081" href="propisset.html#1018" class="Function"
+      >constant-f</a
+      ><a name="1091"
+      > </a
+      ><a name="1092" href="propisset.html#1092" class="Bound"
+      >p</a
+      ><a name="1093"
+      > </a
+      ><a name="1094" href="propisset.html#1094" class="Bound"
+      >q</a
+      ><a name="1095"
+      > </a
+      ><a name="1096" href="propisset.html#1096" class="Bound"
+      >d</a
+      ><a name="1097"
+      > </a
+      ><a name="1098" href="propisset.html#1098" class="Bound"
+      >e</a
+      ><a name="1099"
+      > </a
+      ><a name="1100" class="Symbol"
+      >=</a
+      ><a name="1101"
+      > </a
+      ><a name="1102" href="preliminaries.html#1779" class="Function"
+      >ap</a
+      ><a name="1104"
+      > </a
+      ><a name="1105" class="Symbol"
+      >(</a
+      ><a name="1106" href="propisset.html#886" class="Function"
+      >h</a
+      ><a name="1107"
+      > </a
+      ><a name="1108" href="propisset.html#1092" class="Bound"
+      >p</a
+      ><a name="1109"
+      > </a
+      ><a name="1110" href="propisset.html#1094" class="Bound"
+      >q</a
+      ><a name="1111" class="Symbol"
+      >)</a
+      ><a name="1112"
+      > </a
+      ><a name="1113" class="Symbol"
+      >(</a
+      ><a name="1114" href="propisset.html#430" class="Function"
+      >A-isProp</a
+      ><a name="1122"
+      > </a
+      ><a name="1123" href="propisset.html#1092" class="Bound"
+      >p</a
+      ><a name="1124"
+      > </a
+      ><a name="1125" href="propisset.html#1094" class="Bound"
+      >q</a
+      ><a name="1126"
+      > </a
+      ><a name="1127" class="Symbol"
+      >(</a
+      ><a name="1128" href="propisset.html#654" class="Function"
+      >g</a
+      ><a name="1129"
+      > </a
+      ><a name="1130" href="propisset.html#1092" class="Bound"
+      >p</a
+      ><a name="1131"
+      > </a
+      ><a name="1132" href="propisset.html#1094" class="Bound"
+      >q</a
+      ><a name="1133"
+      > </a
+      ><a name="1134" href="propisset.html#1096" class="Bound"
+      >d</a
+      ><a name="1135" class="Symbol"
+      >)</a
+      ><a name="1136"
+      > </a
+      ><a name="1137" class="Symbol"
+      >(</a
+      ><a name="1138" href="propisset.html#654" class="Function"
+      >g</a
+      ><a name="1139"
+      > </a
+      ><a name="1140" href="propisset.html#1092" class="Bound"
+      >p</a
+      ><a name="1141"
+      > </a
+      ><a name="1142" href="propisset.html#1094" class="Bound"
+      >q</a
+      ><a name="1143"
+      > </a
+      ><a name="1144" href="propisset.html#1098" class="Bound"
+      >e</a
+      ><a name="1145" class="Symbol"
+      >))</a
+      ><a name="1147"
+      >
+  </a
+      ><a name="1150" href="propisset.html#1150" class="Function"
+      >pc</a
+      ><a name="1152"
+      > </a
+      ><a name="1153" class="Symbol"
+      >:</a
+      ><a name="1154"
+      > </a
+      ><a name="1155" class="Symbol"
+      >{</a
+      ><a name="1156" href="propisset.html#1156" class="Bound"
+      >p</a
+      ><a name="1157"
+      > </a
+      ><a name="1158" href="propisset.html#1158" class="Bound"
+      >q</a
+      ><a name="1159"
+      > </a
+      ><a name="1160" class="Symbol"
+      >:</a
+      ><a name="1161"
+      > </a
+      ><a name="1162" href="prop.html#759" class="Function"
+      >Prop</a
+      ><a name="1166" class="Symbol"
+      >}</a
+      ><a name="1167"
+      > </a
+      ><a name="1168" class="Symbol"
+      >&#8594;</a
+      ><a name="1169"
+      > </a
+      ><a name="1170" href="preliminaries.html#594" class="Record"
+      >&#931;</a
+      ><a name="1171"
+      > </a
+      ><a name="1172" class="Symbol"
+      >\(</a
+      ><a name="1174" href="propisset.html#1174" class="Bound"
+      >f</a
+      ><a name="1175"
+      > </a
+      ><a name="1176" class="Symbol"
+      >:</a
+      ><a name="1177"
+      > </a
+      ><a name="1178" href="propisset.html#1156" class="Bound"
+      >p</a
+      ><a name="1179"
+      > </a
+      ><a name="1180" href="preliminaries.html#1396" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="1181"
+      > </a
+      ><a name="1182" href="propisset.html#1158" class="Bound"
+      >q</a
+      ><a name="1183"
+      > </a
+      ><a name="1184" class="Symbol"
+      >&#8594;</a
+      ><a name="1185"
+      > </a
+      ><a name="1186" href="propisset.html#1156" class="Bound"
+      >p</a
+      ><a name="1187"
+      > </a
+      ><a name="1188" href="preliminaries.html#1396" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="1189"
+      > </a
+      ><a name="1190" href="propisset.html#1158" class="Bound"
+      >q</a
+      ><a name="1191" class="Symbol"
+      >)</a
+      ><a name="1192"
+      > </a
+      ><a name="1193" class="Symbol"
+      >&#8594;</a
+      ><a name="1194"
+      > </a
+      ><a name="1195" href="isprop.html#428" class="Function"
+      >constant</a
+      ><a name="1203"
+      > </a
+      ><a name="1204" href="propisset.html#1174" class="Bound"
+      >f</a
+      ><a name="1205"
+      >
+  </a
+      ><a name="1208" href="propisset.html#1150" class="Function"
+      >pc</a
+      ><a name="1210"
+      > </a
+      ><a name="1211" class="Symbol"
+      >{</a
+      ><a name="1212" href="propisset.html#1212" class="Bound"
+      >p</a
+      ><a name="1213" class="Symbol"
+      >}</a
+      ><a name="1214"
+      > </a
+      ><a name="1215" class="Symbol"
+      >{</a
+      ><a name="1216" href="propisset.html#1216" class="Bound"
+      >q</a
+      ><a name="1217" class="Symbol"
+      >}</a
+      ><a name="1218"
+      > </a
+      ><a name="1219" class="Symbol"
+      >=</a
+      ><a name="1220"
+      > </a
+      ><a name="1221" class="Symbol"
+      >(</a
+      ><a name="1222" href="propisset.html#954" class="Function"
+      >f</a
+      ><a name="1223"
+      > </a
+      ><a name="1224" href="propisset.html#1212" class="Bound"
+      >p</a
+      ><a name="1225"
+      > </a
+      ><a name="1226" href="propisset.html#1216" class="Bound"
+      >q</a
+      ><a name="1227"
+      > </a
+      ><a name="1228" href="preliminaries.html#662" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="1229"
+      > </a
+      ><a name="1230" href="propisset.html#1018" class="Function"
+      >constant-f</a
+      ><a name="1240"
+      > </a
+      ><a name="1241" href="propisset.html#1212" class="Bound"
+      >p</a
+      ><a name="1242"
+      > </a
+      ><a name="1243" href="propisset.html#1216" class="Bound"
+      >q</a
+      ><a name="1244" class="Symbol"
+      >)</a
+      ><a name="1245"
+      >
+</a
+      ></pre
+    ></body
+  ></html
+>

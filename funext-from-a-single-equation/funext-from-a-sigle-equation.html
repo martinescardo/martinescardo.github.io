@@ -1,0 +1,4086 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+><head
+  ><title
+    >funext-from-a-sigle-equation</title
+    ><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"
+     /><meta http-equiv="Content-Style-Type" content="text/css"
+     /><link href="Agda.css" rel="stylesheet" type="text/css"
+     /></head
+  ><body
+  ><pre
+    ><a name="1" class="Comment"
+      >Martin Escardo 14 May 2014</a
+      ><a name="27"
+      >
+
+</a
+      ><a name="29" class="Comment"
+      >Function extensionality follows from a single equation.</a
+      ><a name="84"
+      >
+
+</a
+      ><a name="86" class="Comment"
+      >Fix a universe U, say Set&#8320; in Agda, but this informal discussion</a
+      ><a name="150"
+      >
+</a
+      ><a name="151" class="Comment"
+      >preceding the Agda code is in MLTT.</a
+      ><a name="186"
+      >
+
+</a
+      ><a name="188" class="Comment"
+      >For X : U and Y : X &#8594; U, define</a
+      ><a name="219"
+      >
+
+</a
+      ><a name="221" class="Comment"
+      >  funext X Y  = &#928;(f g : &#928; X Y). (&#928;(x : X). f x = g x) &#8594; f = g,</a
+      ><a name="283"
+      >
+
+</a
+      ><a name="285" class="Comment"
+      >       Funext = &#928;(X : U)(Y : X &#8594; U). funext X Y. </a
+      ><a name="334"
+      >
+
+</a
+      ><a name="336" class="Comment"
+      >The following is proved in Martin-L&#246;f type theory without K and without</a
+      ><a name="407"
+      >
+</a
+      ><a name="408" class="Comment"
+      >any homotopical extension. </a
+      ><a name="435"
+      >
+
+</a
+      ><a name="437" class="Comment"
+      >   Theorem</a
+      ><a name="447"
+      >
+</a
+      ><a name="448" class="Comment"
+      >   -------</a
+      ><a name="458"
+      >
+</a
+      ><a name="459" class="Comment"
+      >      For any given type X : U and family Y : X &#8594; U, we can build a</a
+      ><a name="526"
+      >
+</a
+      ><a name="527" class="Comment"
+      >      type I : U with two points i&#8320;, i&#8321; : I such that </a
+      ><a name="581"
+      >
+
+</a
+      ><a name="583" class="Comment"
+      >           i&#8320; = i&#8321; &#8594; funext(X,Y).</a
+      ><a name="616"
+      >
+
+</a
+      ><a name="618" class="Comment"
+      >      Conversely, from Funext one gets that the constructed type I is</a
+      ><a name="687"
+      >
+</a
+      ><a name="688" class="Comment"
+      >      an hproposition and hence that i&#8320; = i&#8321; holds.</a
+      ><a name="739"
+      >
+
+</a
+      ><a name="741" class="Comment"
+      >The idea of the proof is that, for any x : X, the type Y x believes</a
+      ><a name="808"
+      >
+</a
+      ><a name="809" class="Comment"
+      >that the type I constructed in the theorem is an interval, even</a
+      ><a name="872"
+      >
+</a
+      ><a name="873" class="Comment"
+      >judgementally, which is important to prove the theorem. (We also</a
+      ><a name="937"
+      >
+</a
+      ><a name="938" class="Comment"
+      >require the eta-law. Without it, as usual, we conclude that the</a
+      ><a name="1001"
+      >
+</a
+      ><a name="1002" class="Comment"
+      >eta-expansions of two pointwise equal functions are equal.)</a
+      ><a name="1061"
+      >
+
+</a
+      ><a name="1063" class="Comment"
+      >The point is that we construct this relative-interval without assuming</a
+      ><a name="1133"
+      >
+</a
+      ><a name="1134" class="Comment"
+      >higher-inductive types, not even hpropositional truncations. But this</a
+      ><a name="1203"
+      >
+</a
+      ><a name="1204" class="Comment"
+      >is inspired by the proof that the hpropositional truncation of the</a
+      ><a name="1270"
+      >
+</a
+      ><a name="1271" class="Comment"
+      >two-point type, if available, is the interval, and Mike Shulman's</a
+      ><a name="1336"
+      >
+</a
+      ><a name="1337" class="Comment"
+      >proof that an interval implies funext.</a
+      ><a name="1375"
+      >
+
+</a
+      ><a name="1377" class="Comment"
+      >A more explicit way of formulating the above is:</a
+      ><a name="1425"
+      >
+
+</a
+      ><a name="1427" class="Comment"
+      >   Theorem'</a
+      ><a name="1438"
+      >
+</a
+      ><a name="1439" class="Comment"
+      >   -------</a
+      ><a name="1449"
+      >
+</a
+      ><a name="1450" class="Comment"
+      >     The type Funext is logically equivalent to (the hproposition)</a
+      ><a name="1516"
+      >
+
+</a
+      ><a name="1518" class="Comment"
+      >       &#928;(X : U)(Y : X &#8594; U). (&#955; x y u. u 0) = (&#955; x y u. u 1),</a
+      ><a name="1578"
+      >
+
+</a
+      ><a name="1580" class="Comment"
+      >     where the identity is in the type</a
+      ><a name="1618"
+      >
+
+</a
+      ><a name="1620" class="Comment"
+      >       &#928;(x : X)(y : Y x). (2 &#8594; &#931;(y': Y). y = y') &#8594; &#931;(y': Y). y = y' </a
+      ><a name="1688"
+      >
+
+</a
+      ><a name="1690" class="Comment"
+      >     and 2 is the two-point type with elements 0,1.</a
+      ><a name="1741"
+      >
+
+\begin{code}
+
+</a
+      ><a name="1757" class="Symbol"
+      >{-#</a
+      ><a name="1760"
+      > </a
+      ><a name="1761" class="Keyword"
+      >OPTIONS</a
+      ><a name="1768"
+      > --without-K </a
+      ><a name="1781" class="Symbol"
+      >#-}</a
+      ><a name="1784"
+      >
+
+</a
+      ><a name="1786" class="Keyword"
+      >open</a
+      ><a name="1790"
+      > </a
+      ><a name="1791" class="Keyword"
+      >import</a
+      ><a name="1797"
+      > </a
+      ><a name="1798" href="tiny-library.html#1" class="Module"
+      >tiny-library</a
+      ><a name="1810"
+      > 
+
+</a
+      ><a name="1813" href="funext-from-a-sigle-equation.html#1813" class="Function"
+      >U</a
+      ><a name="1814"
+      > </a
+      ><a name="1815" class="Symbol"
+      >=</a
+      ><a name="1816"
+      > </a
+      ><a name="1817" class="PrimitiveType"
+      >Set</a
+      ><a name="1820"
+      >
+
+</a
+      ><a name="1822" class="Keyword"
+      >module</a
+      ><a name="1828"
+      > </a
+      ><a name="1829" href="funext-from-a-sigle-equation.html#1829" class="Module"
+      >funext-from-a-sigle-equation</a
+      ><a name="1857"
+      > </a
+      ><a name="1858" class="Symbol"
+      >(</a
+      ><a name="1859" href="funext-from-a-sigle-equation.html#1859" class="Bound"
+      >X</a
+      ><a name="1860"
+      > </a
+      ><a name="1861" class="Symbol"
+      >:</a
+      ><a name="1862"
+      > </a
+      ><a name="1863" href="funext-from-a-sigle-equation.html#1813" class="Function"
+      >U</a
+      ><a name="1864" class="Symbol"
+      >)</a
+      ><a name="1865"
+      > </a
+      ><a name="1866" class="Symbol"
+      >(</a
+      ><a name="1867" href="funext-from-a-sigle-equation.html#1867" class="Bound"
+      >Y</a
+      ><a name="1868"
+      > </a
+      ><a name="1869" class="Symbol"
+      >:</a
+      ><a name="1870"
+      > </a
+      ><a name="1871" href="funext-from-a-sigle-equation.html#1859" class="Bound"
+      >X</a
+      ><a name="1872"
+      > </a
+      ><a name="1873" class="Symbol"
+      >&#8594;</a
+      ><a name="1874"
+      > </a
+      ><a name="1875" href="funext-from-a-sigle-equation.html#1813" class="Function"
+      >U</a
+      ><a name="1876" class="Symbol"
+      >)</a
+      ><a name="1877"
+      > </a
+      ><a name="1878" class="Keyword"
+      >where</a
+      ><a name="1883"
+      >
+
+ </a
+      ><a name="1886" href="funext-from-a-sigle-equation.html#1886" class="Function"
+      >I</a
+      ><a name="1887"
+      > </a
+      ><a name="1888" class="Symbol"
+      >:</a
+      ><a name="1889"
+      > </a
+      ><a name="1890" href="funext-from-a-sigle-equation.html#1813" class="Function"
+      >U</a
+      ><a name="1891"
+      >
+ </a
+      ><a name="1893" href="funext-from-a-sigle-equation.html#1886" class="Function"
+      >I</a
+      ><a name="1894"
+      > </a
+      ><a name="1895" class="Symbol"
+      >=</a
+      ><a name="1896"
+      > </a
+      ><a name="1897" class="Symbol"
+      >&#8704;(</a
+      ><a name="1899" href="funext-from-a-sigle-equation.html#1899" class="Bound"
+      >x</a
+      ><a name="1900"
+      > </a
+      ><a name="1901" class="Symbol"
+      >:</a
+      ><a name="1902"
+      > </a
+      ><a name="1903" href="funext-from-a-sigle-equation.html#1859" class="Bound"
+      >X</a
+      ><a name="1904" class="Symbol"
+      >)</a
+      ><a name="1905"
+      > </a
+      ><a name="1906" class="Symbol"
+      >(</a
+      ><a name="1907" href="funext-from-a-sigle-equation.html#1907" class="Bound"
+      >y</a
+      ><a name="1908"
+      > </a
+      ><a name="1909" class="Symbol"
+      >:</a
+      ><a name="1910"
+      > </a
+      ><a name="1911" href="funext-from-a-sigle-equation.html#1867" class="Bound"
+      >Y</a
+      ><a name="1912"
+      > </a
+      ><a name="1913" href="funext-from-a-sigle-equation.html#1899" class="Bound"
+      >x</a
+      ><a name="1914" class="Symbol"
+      >)</a
+      ><a name="1915"
+      > </a
+      ><a name="1916" class="Symbol"
+      >&#8594;</a
+      ><a name="1917"
+      > </a
+      ><a name="1918" class="Symbol"
+      >(</a
+      ><a name="1919" href="tiny-library.html#387" class="Datatype"
+      >&#8322;</a
+      ><a name="1920"
+      > </a
+      ><a name="1921" class="Symbol"
+      >&#8594;</a
+      ><a name="1922"
+      > </a
+      ><a name="1923" href="tiny-library.html#2322" class="Function"
+      >paths-from</a
+      ><a name="1933"
+      > </a
+      ><a name="1934" href="funext-from-a-sigle-equation.html#1907" class="Bound"
+      >y</a
+      ><a name="1935" class="Symbol"
+      >)</a
+      ><a name="1936"
+      > </a
+      ><a name="1937" class="Symbol"
+      >&#8594;</a
+      ><a name="1938"
+      > </a
+      ><a name="1939" href="tiny-library.html#2322" class="Function"
+      >paths-from</a
+      ><a name="1949"
+      > </a
+      ><a name="1950" href="funext-from-a-sigle-equation.html#1907" class="Bound"
+      >y</a
+      ><a name="1951"
+      >
+
+ </a
+      ><a name="1954" href="funext-from-a-sigle-equation.html#1954" class="Function"
+      >i&#8320;</a
+      ><a name="1956"
+      > </a
+      ><a name="1957" href="funext-from-a-sigle-equation.html#1957" class="Function"
+      >i&#8321;</a
+      ><a name="1959"
+      > </a
+      ><a name="1960" class="Symbol"
+      >:</a
+      ><a name="1961"
+      > </a
+      ><a name="1962" href="funext-from-a-sigle-equation.html#1886" class="Function"
+      >I</a
+      ><a name="1963"
+      >
+ </a
+      ><a name="1965" href="funext-from-a-sigle-equation.html#1954" class="Function"
+      >i&#8320;</a
+      ><a name="1967"
+      > </a
+      ><a name="1968" href="funext-from-a-sigle-equation.html#1968" class="Bound"
+      >x</a
+      ><a name="1969"
+      > </a
+      ><a name="1970" href="funext-from-a-sigle-equation.html#1970" class="Bound"
+      >y</a
+      ><a name="1971"
+      > </a
+      ><a name="1972" href="funext-from-a-sigle-equation.html#1972" class="Bound"
+      >u</a
+      ><a name="1973"
+      > </a
+      ><a name="1974" class="Symbol"
+      >=</a
+      ><a name="1975"
+      > </a
+      ><a name="1976" href="funext-from-a-sigle-equation.html#1972" class="Bound"
+      >u</a
+      ><a name="1977"
+      > </a
+      ><a name="1978" href="tiny-library.html#403" class="InductiveConstructor"
+      >&#8320;</a
+      ><a name="1979"
+      >
+ </a
+      ><a name="1981" href="funext-from-a-sigle-equation.html#1957" class="Function"
+      >i&#8321;</a
+      ><a name="1983"
+      > </a
+      ><a name="1984" href="funext-from-a-sigle-equation.html#1984" class="Bound"
+      >x</a
+      ><a name="1985"
+      > </a
+      ><a name="1986" href="funext-from-a-sigle-equation.html#1986" class="Bound"
+      >y</a
+      ><a name="1987"
+      > </a
+      ><a name="1988" href="funext-from-a-sigle-equation.html#1988" class="Bound"
+      >u</a
+      ><a name="1989"
+      > </a
+      ><a name="1990" class="Symbol"
+      >=</a
+      ><a name="1991"
+      > </a
+      ><a name="1992" href="funext-from-a-sigle-equation.html#1988" class="Bound"
+      >u</a
+      ><a name="1993"
+      > </a
+      ><a name="1994" href="tiny-library.html#410" class="InductiveConstructor"
+      >&#8321;</a
+      ><a name="1995"
+      >
+
+ </a
+      ><a name="1998" href="funext-from-a-sigle-equation.html#1998" class="Function"
+      >I-rec'</a
+      ><a name="2004"
+      > </a
+      ><a name="2005" class="Symbol"
+      >:</a
+      ><a name="2006"
+      > </a
+      ><a name="2007" class="Symbol"
+      >{</a
+      ><a name="2008" href="funext-from-a-sigle-equation.html#2008" class="Bound"
+      >x</a
+      ><a name="2009"
+      > </a
+      ><a name="2010" class="Symbol"
+      >:</a
+      ><a name="2011"
+      > </a
+      ><a name="2012" href="funext-from-a-sigle-equation.html#1859" class="Bound"
+      >X</a
+      ><a name="2013" class="Symbol"
+      >}</a
+      ><a name="2014"
+      > </a
+      ><a name="2015" class="Symbol"
+      >{</a
+      ><a name="2016" href="funext-from-a-sigle-equation.html#2016" class="Bound"
+      >y&#8320;</a
+      ><a name="2018"
+      > </a
+      ><a name="2019" href="funext-from-a-sigle-equation.html#2019" class="Bound"
+      >y&#8321;</a
+      ><a name="2021"
+      > </a
+      ><a name="2022" class="Symbol"
+      >:</a
+      ><a name="2023"
+      > </a
+      ><a name="2024" href="funext-from-a-sigle-equation.html#1867" class="Bound"
+      >Y</a
+      ><a name="2025"
+      > </a
+      ><a name="2026" href="funext-from-a-sigle-equation.html#2008" class="Bound"
+      >x</a
+      ><a name="2027" class="Symbol"
+      >}</a
+      ><a name="2028"
+      > </a
+      ><a name="2029" class="Symbol"
+      >&#8594;</a
+      ><a name="2030"
+      > </a
+      ><a name="2031" href="funext-from-a-sigle-equation.html#2016" class="Bound"
+      >y&#8320;</a
+      ><a name="2033"
+      > </a
+      ><a name="2034" href="tiny-library.html#422" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="2035"
+      > </a
+      ><a name="2036" href="funext-from-a-sigle-equation.html#2019" class="Bound"
+      >y&#8321;</a
+      ><a name="2038"
+      > </a
+      ><a name="2039" class="Symbol"
+      >&#8594;</a
+      ><a name="2040"
+      > </a
+      ><a name="2041" href="funext-from-a-sigle-equation.html#1886" class="Function"
+      >I</a
+      ><a name="2042"
+      > </a
+      ><a name="2043" class="Symbol"
+      >&#8594;</a
+      ><a name="2044"
+      > </a
+      ><a name="2045" href="tiny-library.html#2322" class="Function"
+      >paths-from</a
+      ><a name="2055"
+      > </a
+      ><a name="2056" href="funext-from-a-sigle-equation.html#2016" class="Bound"
+      >y&#8320;</a
+      ><a name="2058"
+      >
+ </a
+      ><a name="2060" href="funext-from-a-sigle-equation.html#1998" class="Function"
+      >I-rec'</a
+      ><a name="2066"
+      > </a
+      ><a name="2067" class="Symbol"
+      >{</a
+      ><a name="2068" href="funext-from-a-sigle-equation.html#2068" class="Bound"
+      >x</a
+      ><a name="2069" class="Symbol"
+      >}</a
+      ><a name="2070"
+      > </a
+      ><a name="2071" class="Symbol"
+      >{</a
+      ><a name="2072" href="funext-from-a-sigle-equation.html#2072" class="Bound"
+      >y&#8320;</a
+      ><a name="2074" class="Symbol"
+      >}</a
+      ><a name="2075"
+      > </a
+      ><a name="2076" class="Symbol"
+      >{</a
+      ><a name="2077" href="funext-from-a-sigle-equation.html#2077" class="Bound"
+      >y&#8321;</a
+      ><a name="2079" class="Symbol"
+      >}</a
+      ><a name="2080"
+      > </a
+      ><a name="2081" href="funext-from-a-sigle-equation.html#2081" class="Bound"
+      >p</a
+      ><a name="2082"
+      > </a
+      ><a name="2083" href="funext-from-a-sigle-equation.html#2083" class="Bound"
+      >i</a
+      ><a name="2084"
+      > </a
+      ><a name="2085" class="Symbol"
+      >=</a
+      ><a name="2086"
+      > </a
+      ><a name="2087" href="funext-from-a-sigle-equation.html#2083" class="Bound"
+      >i</a
+      ><a name="2088"
+      > </a
+      ><a name="2089" href="funext-from-a-sigle-equation.html#2068" class="Bound"
+      >x</a
+      ><a name="2090"
+      > </a
+      ><a name="2091" href="funext-from-a-sigle-equation.html#2072" class="Bound"
+      >y&#8320;</a
+      ><a name="2093"
+      > </a
+      ><a name="2094" href="funext-from-a-sigle-equation.html#2107" class="Function"
+      >u</a
+      ><a name="2095"
+      >
+  </a
+      ><a name="2098" class="Keyword"
+      >where</a
+      ><a name="2103"
+      >
+   </a
+      ><a name="2107" href="funext-from-a-sigle-equation.html#2107" class="Function"
+      >u</a
+      ><a name="2108"
+      > </a
+      ><a name="2109" class="Symbol"
+      >:</a
+      ><a name="2110"
+      > </a
+      ><a name="2111" href="tiny-library.html#387" class="Datatype"
+      >&#8322;</a
+      ><a name="2112"
+      > </a
+      ><a name="2113" class="Symbol"
+      >&#8594;</a
+      ><a name="2114"
+      > </a
+      ><a name="2115" href="tiny-library.html#2322" class="Function"
+      >paths-from</a
+      ><a name="2125"
+      > </a
+      ><a name="2126" href="funext-from-a-sigle-equation.html#2072" class="Bound"
+      >y&#8320;</a
+      ><a name="2128"
+      >
+   </a
+      ><a name="2132" href="funext-from-a-sigle-equation.html#2107" class="Function"
+      >u</a
+      ><a name="2133"
+      > </a
+      ><a name="2134" href="tiny-library.html#403" class="InductiveConstructor"
+      >&#8320;</a
+      ><a name="2135"
+      > </a
+      ><a name="2136" class="Symbol"
+      >=</a
+      ><a name="2137"
+      > </a
+      ><a name="2138" href="funext-from-a-sigle-equation.html#2072" class="Bound"
+      >y&#8320;</a
+      ><a name="2140"
+      > </a
+      ><a name="2141" href="tiny-library.html#331" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="2142"
+      > </a
+      ><a name="2143" href="tiny-library.html#463" class="InductiveConstructor"
+      >refl</a
+      ><a name="2147"
+      > </a
+      ><a name="2148" class="Comment"
+      >-- = trivial-loop y&#8320;</a
+      ><a name="2168"
+      >
+   </a
+      ><a name="2172" href="funext-from-a-sigle-equation.html#2107" class="Function"
+      >u</a
+      ><a name="2173"
+      > </a
+      ><a name="2174" href="tiny-library.html#410" class="InductiveConstructor"
+      >&#8321;</a
+      ><a name="2175"
+      > </a
+      ><a name="2176" class="Symbol"
+      >=</a
+      ><a name="2177"
+      > </a
+      ><a name="2178" href="funext-from-a-sigle-equation.html#2077" class="Bound"
+      >y&#8321;</a
+      ><a name="2180"
+      > </a
+      ><a name="2181" href="tiny-library.html#331" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="2182"
+      > </a
+      ><a name="2183" href="funext-from-a-sigle-equation.html#2081" class="Bound"
+      >p</a
+      ><a name="2184"
+      >
+
+ </a
+      ><a name="2187" href="funext-from-a-sigle-equation.html#2187" class="Function"
+      >I-rec</a
+      ><a name="2192"
+      > </a
+      ><a name="2193" class="Symbol"
+      >:</a
+      ><a name="2194"
+      > </a
+      ><a name="2195" class="Symbol"
+      >{</a
+      ><a name="2196" href="funext-from-a-sigle-equation.html#2196" class="Bound"
+      >x</a
+      ><a name="2197"
+      > </a
+      ><a name="2198" class="Symbol"
+      >:</a
+      ><a name="2199"
+      > </a
+      ><a name="2200" href="funext-from-a-sigle-equation.html#1859" class="Bound"
+      >X</a
+      ><a name="2201" class="Symbol"
+      >}</a
+      ><a name="2202"
+      > </a
+      ><a name="2203" class="Symbol"
+      >{</a
+      ><a name="2204" href="funext-from-a-sigle-equation.html#2204" class="Bound"
+      >y&#8320;</a
+      ><a name="2206"
+      > </a
+      ><a name="2207" href="funext-from-a-sigle-equation.html#2207" class="Bound"
+      >y&#8321;</a
+      ><a name="2209"
+      > </a
+      ><a name="2210" class="Symbol"
+      >:</a
+      ><a name="2211"
+      > </a
+      ><a name="2212" href="funext-from-a-sigle-equation.html#1867" class="Bound"
+      >Y</a
+      ><a name="2213"
+      > </a
+      ><a name="2214" href="funext-from-a-sigle-equation.html#2196" class="Bound"
+      >x</a
+      ><a name="2215" class="Symbol"
+      >}</a
+      ><a name="2216"
+      > </a
+      ><a name="2217" class="Symbol"
+      >&#8594;</a
+      ><a name="2218"
+      > </a
+      ><a name="2219" href="funext-from-a-sigle-equation.html#2204" class="Bound"
+      >y&#8320;</a
+      ><a name="2221"
+      > </a
+      ><a name="2222" href="tiny-library.html#422" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="2223"
+      > </a
+      ><a name="2224" href="funext-from-a-sigle-equation.html#2207" class="Bound"
+      >y&#8321;</a
+      ><a name="2226"
+      > </a
+      ><a name="2227" class="Symbol"
+      >&#8594;</a
+      ><a name="2228"
+      > </a
+      ><a name="2229" href="funext-from-a-sigle-equation.html#1886" class="Function"
+      >I</a
+      ><a name="2230"
+      > </a
+      ><a name="2231" class="Symbol"
+      >&#8594;</a
+      ><a name="2232"
+      > </a
+      ><a name="2233" href="funext-from-a-sigle-equation.html#1867" class="Bound"
+      >Y</a
+      ><a name="2234"
+      > </a
+      ><a name="2235" href="funext-from-a-sigle-equation.html#2196" class="Bound"
+      >x</a
+      ><a name="2236"
+      >
+ </a
+      ><a name="2238" href="funext-from-a-sigle-equation.html#2187" class="Function"
+      >I-rec</a
+      ><a name="2243"
+      > </a
+      ><a name="2244" href="funext-from-a-sigle-equation.html#2244" class="Bound"
+      >p</a
+      ><a name="2245"
+      > </a
+      ><a name="2246" href="funext-from-a-sigle-equation.html#2246" class="Bound"
+      >i</a
+      ><a name="2247"
+      > </a
+      ><a name="2248" class="Symbol"
+      >=</a
+      ><a name="2249"
+      > </a
+      ><a name="2250" href="tiny-library.html#2400" class="Function"
+      >end-point</a
+      ><a name="2259" class="Symbol"
+      >(</a
+      ><a name="2260" href="funext-from-a-sigle-equation.html#1998" class="Function"
+      >I-rec'</a
+      ><a name="2266"
+      > </a
+      ><a name="2267" href="funext-from-a-sigle-equation.html#2244" class="Bound"
+      >p</a
+      ><a name="2268"
+      > </a
+      ><a name="2269" href="funext-from-a-sigle-equation.html#2246" class="Bound"
+      >i</a
+      ><a name="2270" class="Symbol"
+      >)</a
+      ><a name="2271"
+      >
+
+ </a
+      ><a name="2274" href="funext-from-a-sigle-equation.html#2274" class="Function"
+      >theorem</a
+      ><a name="2281"
+      > </a
+      ><a name="2282" class="Symbol"
+      >:</a
+      ><a name="2283"
+      > </a
+      ><a name="2284" href="funext-from-a-sigle-equation.html#1954" class="Function"
+      >i&#8320;</a
+      ><a name="2286"
+      > </a
+      ><a name="2287" href="tiny-library.html#422" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="2288"
+      > </a
+      ><a name="2289" href="funext-from-a-sigle-equation.html#1957" class="Function"
+      >i&#8321;</a
+      ><a name="2291"
+      > </a
+      ><a name="2292" class="Symbol"
+      >&#8594;</a
+      ><a name="2293"
+      > </a
+      ><a name="2294" class="Symbol"
+      >&#8704;(</a
+      ><a name="2296" href="funext-from-a-sigle-equation.html#2296" class="Bound"
+      >f</a
+      ><a name="2297"
+      > </a
+      ><a name="2298" href="funext-from-a-sigle-equation.html#2298" class="Bound"
+      >g</a
+      ><a name="2299"
+      > </a
+      ><a name="2300" class="Symbol"
+      >:</a
+      ><a name="2301"
+      > </a
+      ><a name="2302" class="Symbol"
+      >(</a
+      ><a name="2303" href="funext-from-a-sigle-equation.html#2303" class="Bound"
+      >x</a
+      ><a name="2304"
+      > </a
+      ><a name="2305" class="Symbol"
+      >:</a
+      ><a name="2306"
+      > </a
+      ><a name="2307" href="funext-from-a-sigle-equation.html#1859" class="Bound"
+      >X</a
+      ><a name="2308" class="Symbol"
+      >)</a
+      ><a name="2309"
+      > </a
+      ><a name="2310" class="Symbol"
+      >&#8594;</a
+      ><a name="2311"
+      > </a
+      ><a name="2312" href="funext-from-a-sigle-equation.html#1867" class="Bound"
+      >Y</a
+      ><a name="2313"
+      > </a
+      ><a name="2314" href="funext-from-a-sigle-equation.html#2303" class="Bound"
+      >x</a
+      ><a name="2315" class="Symbol"
+      >)</a
+      ><a name="2316"
+      > </a
+      ><a name="2317" class="Symbol"
+      >&#8594;</a
+      ><a name="2318"
+      > </a
+      ><a name="2319" class="Symbol"
+      >(&#8704;(</a
+      ><a name="2322" href="funext-from-a-sigle-equation.html#2322" class="Bound"
+      >x</a
+      ><a name="2323"
+      > </a
+      ><a name="2324" class="Symbol"
+      >:</a
+      ><a name="2325"
+      > </a
+      ><a name="2326" href="funext-from-a-sigle-equation.html#1859" class="Bound"
+      >X</a
+      ><a name="2327" class="Symbol"
+      >)</a
+      ><a name="2328"
+      > </a
+      ><a name="2329" class="Symbol"
+      >-&gt;</a
+      ><a name="2331"
+      > </a
+      ><a name="2332" href="funext-from-a-sigle-equation.html#2296" class="Bound"
+      >f</a
+      ><a name="2333"
+      > </a
+      ><a name="2334" href="funext-from-a-sigle-equation.html#2322" class="Bound"
+      >x</a
+      ><a name="2335"
+      > </a
+      ><a name="2336" href="tiny-library.html#422" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="2337"
+      > </a
+      ><a name="2338" href="funext-from-a-sigle-equation.html#2298" class="Bound"
+      >g</a
+      ><a name="2339"
+      > </a
+      ><a name="2340" href="funext-from-a-sigle-equation.html#2322" class="Bound"
+      >x</a
+      ><a name="2341" class="Symbol"
+      >)</a
+      ><a name="2342"
+      > </a
+      ><a name="2343" class="Symbol"
+      >&#8594;</a
+      ><a name="2344"
+      > </a
+      ><a name="2345" href="funext-from-a-sigle-equation.html#2296" class="Bound"
+      >f</a
+      ><a name="2346"
+      > </a
+      ><a name="2347" href="tiny-library.html#422" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="2348"
+      > </a
+      ><a name="2349" href="funext-from-a-sigle-equation.html#2298" class="Bound"
+      >g</a
+      ><a name="2350"
+      >
+ </a
+      ><a name="2352" href="funext-from-a-sigle-equation.html#2274" class="Function"
+      >theorem</a
+      ><a name="2359"
+      > </a
+      ><a name="2360" href="funext-from-a-sigle-equation.html#2360" class="Bound"
+      >seg</a
+      ><a name="2363"
+      > </a
+      ><a name="2364" href="funext-from-a-sigle-equation.html#2364" class="Bound"
+      >f</a
+      ><a name="2365"
+      > </a
+      ><a name="2366" href="funext-from-a-sigle-equation.html#2366" class="Bound"
+      >g</a
+      ><a name="2367"
+      > </a
+      ><a name="2368" href="funext-from-a-sigle-equation.html#2368" class="Bound"
+      >h</a
+      ><a name="2369"
+      > </a
+      ><a name="2370" class="Symbol"
+      >=</a
+      ><a name="2371"
+      > </a
+      ><a name="2372" href="tiny-library.html#887" class="Function"
+      >ap</a
+      ><a name="2374"
+      > </a
+      ><a name="2375" href="funext-from-a-sigle-equation.html#2440" class="Function"
+      >&#968;</a
+      ><a name="2376"
+      > </a
+      ><a name="2377" href="funext-from-a-sigle-equation.html#2360" class="Bound"
+      >seg</a
+      ><a name="2380"
+      > 
+  </a
+      ><a name="2384" class="Keyword"
+      >where</a
+      ><a name="2389"
+      >
+   </a
+      ><a name="2393" href="funext-from-a-sigle-equation.html#2393" class="Function"
+      >&#966;</a
+      ><a name="2394"
+      > </a
+      ><a name="2395" class="Symbol"
+      >:</a
+      ><a name="2396"
+      > </a
+      ><a name="2397" class="Symbol"
+      >(</a
+      ><a name="2398" href="funext-from-a-sigle-equation.html#2398" class="Bound"
+      >x</a
+      ><a name="2399"
+      > </a
+      ><a name="2400" class="Symbol"
+      >:</a
+      ><a name="2401"
+      > </a
+      ><a name="2402" href="funext-from-a-sigle-equation.html#1859" class="Bound"
+      >X</a
+      ><a name="2403" class="Symbol"
+      >)</a
+      ><a name="2404"
+      > </a
+      ><a name="2405" class="Symbol"
+      >&#8594;</a
+      ><a name="2406"
+      > </a
+      ><a name="2407" href="funext-from-a-sigle-equation.html#1886" class="Function"
+      >I</a
+      ><a name="2408"
+      > </a
+      ><a name="2409" class="Symbol"
+      >&#8594;</a
+      ><a name="2410"
+      > </a
+      ><a name="2411" href="funext-from-a-sigle-equation.html#1867" class="Bound"
+      >Y</a
+      ><a name="2412"
+      > </a
+      ><a name="2413" href="funext-from-a-sigle-equation.html#2398" class="Bound"
+      >x</a
+      ><a name="2414"
+      >
+   </a
+      ><a name="2418" href="funext-from-a-sigle-equation.html#2393" class="Function"
+      >&#966;</a
+      ><a name="2419"
+      > </a
+      ><a name="2420" href="funext-from-a-sigle-equation.html#2420" class="Bound"
+      >x</a
+      ><a name="2421"
+      > </a
+      ><a name="2422" class="Symbol"
+      >=</a
+      ><a name="2423"
+      > </a
+      ><a name="2424" href="funext-from-a-sigle-equation.html#2187" class="Function"
+      >I-rec</a
+      ><a name="2429"
+      > </a
+      ><a name="2430" class="Symbol"
+      >(</a
+      ><a name="2431" href="funext-from-a-sigle-equation.html#2368" class="Bound"
+      >h</a
+      ><a name="2432"
+      > </a
+      ><a name="2433" href="funext-from-a-sigle-equation.html#2420" class="Bound"
+      >x</a
+      ><a name="2434" class="Symbol"
+      >)</a
+      ><a name="2435"
+      > 
+   </a
+      ><a name="2440" href="funext-from-a-sigle-equation.html#2440" class="Function"
+      >&#968;</a
+      ><a name="2441"
+      > </a
+      ><a name="2442" class="Symbol"
+      >:</a
+      ><a name="2443"
+      > </a
+      ><a name="2444" href="funext-from-a-sigle-equation.html#1886" class="Function"
+      >I</a
+      ><a name="2445"
+      > </a
+      ><a name="2446" class="Symbol"
+      >&#8594;</a
+      ><a name="2447"
+      > </a
+      ><a name="2448" class="Symbol"
+      >(</a
+      ><a name="2449" href="funext-from-a-sigle-equation.html#2449" class="Bound"
+      >x</a
+      ><a name="2450"
+      > </a
+      ><a name="2451" class="Symbol"
+      >:</a
+      ><a name="2452"
+      > </a
+      ><a name="2453" href="funext-from-a-sigle-equation.html#1859" class="Bound"
+      >X</a
+      ><a name="2454" class="Symbol"
+      >)</a
+      ><a name="2455"
+      > </a
+      ><a name="2456" class="Symbol"
+      >&#8594;</a
+      ><a name="2457"
+      > </a
+      ><a name="2458" href="funext-from-a-sigle-equation.html#1867" class="Bound"
+      >Y</a
+      ><a name="2459"
+      > </a
+      ><a name="2460" href="funext-from-a-sigle-equation.html#2449" class="Bound"
+      >x</a
+      ><a name="2461"
+      >
+   </a
+      ><a name="2465" href="funext-from-a-sigle-equation.html#2440" class="Function"
+      >&#968;</a
+      ><a name="2466"
+      > </a
+      ><a name="2467" href="funext-from-a-sigle-equation.html#2467" class="Bound"
+      >i</a
+      ><a name="2468"
+      > </a
+      ><a name="2469" href="funext-from-a-sigle-equation.html#2469" class="Bound"
+      >x</a
+      ><a name="2470"
+      > </a
+      ><a name="2471" class="Symbol"
+      >=</a
+      ><a name="2472"
+      > </a
+      ><a name="2473" href="funext-from-a-sigle-equation.html#2393" class="Function"
+      >&#966;</a
+      ><a name="2474"
+      > </a
+      ><a name="2475" href="funext-from-a-sigle-equation.html#2469" class="Bound"
+      >x</a
+      ><a name="2476"
+      > </a
+      ><a name="2477" href="funext-from-a-sigle-equation.html#2467" class="Bound"
+      >i</a
+      ><a name="2478"
+      >
+
+\end{code}
+
+</a
+      ><a name="2492" class="Comment"
+      >This proof relies on the following judgemental equalities:</a
+      ><a name="2550"
+      >
+
+\begin{code} 
+
+ </a
+      ><a name="2568" href="funext-from-a-sigle-equation.html#2568" class="Function"
+      >equation&#8320;</a
+      ><a name="2577"
+      > </a
+      ><a name="2578" class="Symbol"
+      >:</a
+      ><a name="2579"
+      > </a
+      ><a name="2580" class="Symbol"
+      >&#8704;</a
+      ><a name="2581"
+      > </a
+      ><a name="2582" class="Symbol"
+      >{</a
+      ><a name="2583" href="funext-from-a-sigle-equation.html#2583" class="Bound"
+      >x</a
+      ><a name="2584"
+      > </a
+      ><a name="2585" class="Symbol"
+      >:</a
+      ><a name="2586"
+      > </a
+      ><a name="2587" href="funext-from-a-sigle-equation.html#1859" class="Bound"
+      >X</a
+      ><a name="2588" class="Symbol"
+      >}</a
+      ><a name="2589"
+      > </a
+      ><a name="2590" class="Symbol"
+      >{</a
+      ><a name="2591" href="funext-from-a-sigle-equation.html#2591" class="Bound"
+      >y&#8320;</a
+      ><a name="2593"
+      > </a
+      ><a name="2594" href="funext-from-a-sigle-equation.html#2594" class="Bound"
+      >y&#8321;</a
+      ><a name="2596"
+      > </a
+      ><a name="2597" class="Symbol"
+      >:</a
+      ><a name="2598"
+      > </a
+      ><a name="2599" href="funext-from-a-sigle-equation.html#1867" class="Bound"
+      >Y</a
+      ><a name="2600"
+      > </a
+      ><a name="2601" href="funext-from-a-sigle-equation.html#2583" class="Bound"
+      >x</a
+      ><a name="2602" class="Symbol"
+      >}</a
+      ><a name="2603"
+      > </a
+      ><a name="2604" class="Symbol"
+      >(</a
+      ><a name="2605" href="funext-from-a-sigle-equation.html#2605" class="Bound"
+      >p</a
+      ><a name="2606"
+      > </a
+      ><a name="2607" class="Symbol"
+      >:</a
+      ><a name="2608"
+      > </a
+      ><a name="2609" href="funext-from-a-sigle-equation.html#2591" class="Bound"
+      >y&#8320;</a
+      ><a name="2611"
+      > </a
+      ><a name="2612" href="tiny-library.html#422" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="2613"
+      > </a
+      ><a name="2614" href="funext-from-a-sigle-equation.html#2594" class="Bound"
+      >y&#8321;</a
+      ><a name="2616" class="Symbol"
+      >)</a
+      ><a name="2617"
+      > </a
+      ><a name="2618" class="Symbol"
+      >&#8594;</a
+      ><a name="2619"
+      > </a
+      ><a name="2620" href="funext-from-a-sigle-equation.html#2187" class="Function"
+      >I-rec</a
+      ><a name="2625"
+      > </a
+      ><a name="2626" href="funext-from-a-sigle-equation.html#2605" class="Bound"
+      >p</a
+      ><a name="2627"
+      > </a
+      ><a name="2628" href="funext-from-a-sigle-equation.html#1954" class="Function"
+      >i&#8320;</a
+      ><a name="2630"
+      > </a
+      ><a name="2631" href="tiny-library.html#422" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="2632"
+      > </a
+      ><a name="2633" href="funext-from-a-sigle-equation.html#2591" class="Bound"
+      >y&#8320;</a
+      ><a name="2635"
+      >
+ </a
+      ><a name="2637" href="funext-from-a-sigle-equation.html#2568" class="Function"
+      >equation&#8320;</a
+      ><a name="2646"
+      > </a
+      ><a name="2647" href="funext-from-a-sigle-equation.html#2647" class="Bound"
+      >p</a
+      ><a name="2648"
+      > </a
+      ><a name="2649" class="Symbol"
+      >=</a
+      ><a name="2650"
+      > </a
+      ><a name="2651" href="tiny-library.html#463" class="InductiveConstructor"
+      >refl</a
+      ><a name="2655"
+      > 
+
+ </a
+      ><a name="2659" href="funext-from-a-sigle-equation.html#2659" class="Function"
+      >equation&#8321;</a
+      ><a name="2668"
+      > </a
+      ><a name="2669" class="Symbol"
+      >:</a
+      ><a name="2670"
+      > </a
+      ><a name="2671" class="Symbol"
+      >&#8704;</a
+      ><a name="2672"
+      > </a
+      ><a name="2673" class="Symbol"
+      >{</a
+      ><a name="2674" href="funext-from-a-sigle-equation.html#2674" class="Bound"
+      >x</a
+      ><a name="2675"
+      > </a
+      ><a name="2676" class="Symbol"
+      >:</a
+      ><a name="2677"
+      > </a
+      ><a name="2678" href="funext-from-a-sigle-equation.html#1859" class="Bound"
+      >X</a
+      ><a name="2679" class="Symbol"
+      >}</a
+      ><a name="2680"
+      > </a
+      ><a name="2681" class="Symbol"
+      >{</a
+      ><a name="2682" href="funext-from-a-sigle-equation.html#2682" class="Bound"
+      >y&#8320;</a
+      ><a name="2684"
+      > </a
+      ><a name="2685" href="funext-from-a-sigle-equation.html#2685" class="Bound"
+      >y&#8321;</a
+      ><a name="2687"
+      > </a
+      ><a name="2688" class="Symbol"
+      >:</a
+      ><a name="2689"
+      > </a
+      ><a name="2690" href="funext-from-a-sigle-equation.html#1867" class="Bound"
+      >Y</a
+      ><a name="2691"
+      > </a
+      ><a name="2692" href="funext-from-a-sigle-equation.html#2674" class="Bound"
+      >x</a
+      ><a name="2693" class="Symbol"
+      >}</a
+      ><a name="2694"
+      > </a
+      ><a name="2695" class="Symbol"
+      >(</a
+      ><a name="2696" href="funext-from-a-sigle-equation.html#2696" class="Bound"
+      >p</a
+      ><a name="2697"
+      > </a
+      ><a name="2698" class="Symbol"
+      >:</a
+      ><a name="2699"
+      > </a
+      ><a name="2700" href="funext-from-a-sigle-equation.html#2682" class="Bound"
+      >y&#8320;</a
+      ><a name="2702"
+      > </a
+      ><a name="2703" href="tiny-library.html#422" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="2704"
+      > </a
+      ><a name="2705" href="funext-from-a-sigle-equation.html#2685" class="Bound"
+      >y&#8321;</a
+      ><a name="2707" class="Symbol"
+      >)</a
+      ><a name="2708"
+      > </a
+      ><a name="2709" class="Symbol"
+      >&#8594;</a
+      ><a name="2710"
+      > </a
+      ><a name="2711" href="funext-from-a-sigle-equation.html#2187" class="Function"
+      >I-rec</a
+      ><a name="2716"
+      > </a
+      ><a name="2717" href="funext-from-a-sigle-equation.html#2696" class="Bound"
+      >p</a
+      ><a name="2718"
+      > </a
+      ><a name="2719" href="funext-from-a-sigle-equation.html#1957" class="Function"
+      >i&#8321;</a
+      ><a name="2721"
+      > </a
+      ><a name="2722" href="tiny-library.html#422" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="2723"
+      > </a
+      ><a name="2724" href="funext-from-a-sigle-equation.html#2685" class="Bound"
+      >y&#8321;</a
+      ><a name="2726"
+      >
+ </a
+      ><a name="2728" href="funext-from-a-sigle-equation.html#2659" class="Function"
+      >equation&#8321;</a
+      ><a name="2737"
+      > </a
+      ><a name="2738" href="funext-from-a-sigle-equation.html#2738" class="Bound"
+      >p</a
+      ><a name="2739"
+      > </a
+      ><a name="2740" class="Symbol"
+      >=</a
+      ><a name="2741"
+      > </a
+      ><a name="2742" href="tiny-library.html#463" class="InductiveConstructor"
+      >refl</a
+      ><a name="2746"
+      >
+
+\end{code}
+
+</a
+      ><a name="2760" class="Comment"
+      >If we replace the definition of I-rec by a postulate, the proof of the</a
+      ><a name="2830"
+      >
+</a
+      ><a name="2831" class="Comment"
+      >theorem doesn't type-check, and the last two equations don't hold</a
+      ><a name="2896"
+      >
+</a
+      ><a name="2897" class="Comment"
+      >judgementally.</a
+      ><a name="2911"
+      >
+
+\begin{code} 
+
+ </a
+      ><a name="2929" href="funext-from-a-sigle-equation.html#2929" class="Function"
+      >equation&#8322;</a
+      ><a name="2938"
+      > </a
+      ><a name="2939" class="Symbol"
+      >:</a
+      ><a name="2940"
+      > </a
+      ><a name="2941" class="Symbol"
+      >&#8704;</a
+      ><a name="2942"
+      > </a
+      ><a name="2943" class="Symbol"
+      >(</a
+      ><a name="2944" href="funext-from-a-sigle-equation.html#2944" class="Bound"
+      >seg</a
+      ><a name="2947"
+      > </a
+      ><a name="2948" class="Symbol"
+      >:</a
+      ><a name="2949"
+      > </a
+      ><a name="2950" href="funext-from-a-sigle-equation.html#1954" class="Function"
+      >i&#8320;</a
+      ><a name="2952"
+      > </a
+      ><a name="2953" href="tiny-library.html#422" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="2954"
+      > </a
+      ><a name="2955" href="funext-from-a-sigle-equation.html#1957" class="Function"
+      >i&#8321;</a
+      ><a name="2957" class="Symbol"
+      >)</a
+      ><a name="2958"
+      > </a
+      ><a name="2959" class="Symbol"
+      >{</a
+      ><a name="2960" href="funext-from-a-sigle-equation.html#2960" class="Bound"
+      >x</a
+      ><a name="2961"
+      > </a
+      ><a name="2962" class="Symbol"
+      >:</a
+      ><a name="2963"
+      > </a
+      ><a name="2964" href="funext-from-a-sigle-equation.html#1859" class="Bound"
+      >X</a
+      ><a name="2965" class="Symbol"
+      >}</a
+      ><a name="2966"
+      > </a
+      ><a name="2967" class="Symbol"
+      >{</a
+      ><a name="2968" href="funext-from-a-sigle-equation.html#2968" class="Bound"
+      >y&#8320;</a
+      ><a name="2970"
+      > </a
+      ><a name="2971" href="funext-from-a-sigle-equation.html#2971" class="Bound"
+      >y&#8321;</a
+      ><a name="2973"
+      > </a
+      ><a name="2974" class="Symbol"
+      >:</a
+      ><a name="2975"
+      > </a
+      ><a name="2976" href="funext-from-a-sigle-equation.html#1867" class="Bound"
+      >Y</a
+      ><a name="2977"
+      > </a
+      ><a name="2978" href="funext-from-a-sigle-equation.html#2960" class="Bound"
+      >x</a
+      ><a name="2979" class="Symbol"
+      >}</a
+      ><a name="2980"
+      > </a
+      ><a name="2981" class="Symbol"
+      >(</a
+      ><a name="2982" href="funext-from-a-sigle-equation.html#2982" class="Bound"
+      >p</a
+      ><a name="2983"
+      > </a
+      ><a name="2984" class="Symbol"
+      >:</a
+      ><a name="2985"
+      > </a
+      ><a name="2986" href="funext-from-a-sigle-equation.html#2968" class="Bound"
+      >y&#8320;</a
+      ><a name="2988"
+      > </a
+      ><a name="2989" href="tiny-library.html#422" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="2990"
+      > </a
+      ><a name="2991" href="funext-from-a-sigle-equation.html#2971" class="Bound"
+      >y&#8321;</a
+      ><a name="2993" class="Symbol"
+      >)</a
+      ><a name="2994"
+      > </a
+      ><a name="2995" class="Symbol"
+      >&#8594;</a
+      ><a name="2996"
+      > </a
+      ><a name="2997" href="tiny-library.html#887" class="Function"
+      >ap</a
+      ><a name="2999"
+      > </a
+      ><a name="3000" class="Symbol"
+      >(</a
+      ><a name="3001" href="funext-from-a-sigle-equation.html#2187" class="Function"
+      >I-rec</a
+      ><a name="3006"
+      > </a
+      ><a name="3007" href="funext-from-a-sigle-equation.html#2982" class="Bound"
+      >p</a
+      ><a name="3008" class="Symbol"
+      >)</a
+      ><a name="3009"
+      > </a
+      ><a name="3010" href="funext-from-a-sigle-equation.html#2944" class="Bound"
+      >seg</a
+      ><a name="3013"
+      > </a
+      ><a name="3014" href="tiny-library.html#422" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="3015"
+      > </a
+      ><a name="3016" href="funext-from-a-sigle-equation.html#2982" class="Bound"
+      >p</a
+      ><a name="3017"
+      >
+ </a
+      ><a name="3019" href="funext-from-a-sigle-equation.html#2929" class="Function"
+      >equation&#8322;</a
+      ><a name="3028"
+      > </a
+      ><a name="3029" href="funext-from-a-sigle-equation.html#3029" class="Bound"
+      >seg</a
+      ><a name="3032"
+      > </a
+      ><a name="3033" class="Symbol"
+      >{</a
+      ><a name="3034" href="funext-from-a-sigle-equation.html#3034" class="Bound"
+      >x</a
+      ><a name="3035" class="Symbol"
+      >}</a
+      ><a name="3036"
+      > </a
+      ><a name="3037" class="Symbol"
+      >{</a
+      ><a name="3038" href="funext-from-a-sigle-equation.html#3038" class="Bound"
+      >y</a
+      ><a name="3039" class="Symbol"
+      >}</a
+      ><a name="3040"
+      > </a
+      ><a name="3041" href="tiny-library.html#463" class="InductiveConstructor"
+      >refl</a
+      ><a name="3045"
+      > </a
+      ><a name="3046" class="Symbol"
+      >=</a
+      ><a name="3047"
+      > </a
+      ><a name="3048" href="funext-from-a-sigle-equation.html#3271" class="Function"
+      >r</a
+      ><a name="3049"
+      > </a
+      ><a name="3050" href="tiny-library.html#1890" class="Function Operator"
+      >&#8315;&#185;</a
+      ><a name="3052"
+      > </a
+      ><a name="3053" href="tiny-library.html#1816" class="Function Operator"
+      >&#8226;</a
+      ><a name="3054"
+      > </a
+      ><a name="3055" href="funext-from-a-sigle-equation.html#3194" class="Function"
+      >q</a
+      ><a name="3056"
+      >
+  </a
+      ><a name="3059" class="Keyword"
+      >where</a
+      ><a name="3064"
+      >
+   </a
+      ><a name="3068" href="funext-from-a-sigle-equation.html#3068" class="Function"
+      >p</a
+      ><a name="3069"
+      > </a
+      ><a name="3070" class="Symbol"
+      >:</a
+      ><a name="3071"
+      > </a
+      ><a name="3072" href="tiny-library.html#887" class="Function"
+      >ap</a
+      ><a name="3074"
+      > </a
+      ><a name="3075" class="Symbol"
+      >(</a
+      ><a name="3076" href="funext-from-a-sigle-equation.html#1998" class="Function"
+      >I-rec'</a
+      ><a name="3082"
+      > </a
+      ><a name="3083" href="tiny-library.html#463" class="InductiveConstructor"
+      >refl</a
+      ><a name="3087" class="Symbol"
+      >)</a
+      ><a name="3088"
+      > </a
+      ><a name="3089" href="funext-from-a-sigle-equation.html#3029" class="Bound"
+      >seg</a
+      ><a name="3092"
+      > </a
+      ><a name="3093" href="tiny-library.html#422" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="3094"
+      > </a
+      ><a name="3095" href="tiny-library.html#463" class="InductiveConstructor"
+      >refl</a
+      ><a name="3099"
+      > 
+   </a
+      ><a name="3104" href="funext-from-a-sigle-equation.html#3068" class="Function"
+      >p</a
+      ><a name="3105"
+      > </a
+      ><a name="3106" class="Symbol"
+      >=</a
+      ><a name="3107"
+      > </a
+      ><a name="3108" href="tiny-library.html#4215" class="Function"
+      >paths-from-is-hset</a
+      ><a name="3126"
+      > </a
+      ><a name="3127" href="funext-from-a-sigle-equation.html#3038" class="Bound"
+      >y</a
+      ><a name="3128"
+      > </a
+      ><a name="3129" class="Symbol"
+      >(</a
+      ><a name="3130" href="funext-from-a-sigle-equation.html#1998" class="Function"
+      >I-rec'</a
+      ><a name="3136"
+      > </a
+      ><a name="3137" href="tiny-library.html#463" class="InductiveConstructor"
+      >refl</a
+      ><a name="3141"
+      > </a
+      ><a name="3142" href="funext-from-a-sigle-equation.html#1954" class="Function"
+      >i&#8320;</a
+      ><a name="3144" class="Symbol"
+      >)</a
+      ><a name="3145"
+      > </a
+      ><a name="3146" class="Symbol"
+      >(</a
+      ><a name="3147" href="tiny-library.html#2467" class="Function"
+      >trivial-loop</a
+      ><a name="3159"
+      > </a
+      ><a name="3160" href="funext-from-a-sigle-equation.html#3038" class="Bound"
+      >y</a
+      ><a name="3161" class="Symbol"
+      >)</a
+      ><a name="3162"
+      > </a
+      ><a name="3163" class="Symbol"
+      >(</a
+      ><a name="3164" href="tiny-library.html#887" class="Function"
+      >ap</a
+      ><a name="3166"
+      > </a
+      ><a name="3167" class="Symbol"
+      >(</a
+      ><a name="3168" href="funext-from-a-sigle-equation.html#1998" class="Function"
+      >I-rec'</a
+      ><a name="3174"
+      > </a
+      ><a name="3175" href="tiny-library.html#463" class="InductiveConstructor"
+      >refl</a
+      ><a name="3179" class="Symbol"
+      >)</a
+      ><a name="3180"
+      > </a
+      ><a name="3181" href="funext-from-a-sigle-equation.html#3029" class="Bound"
+      >seg</a
+      ><a name="3184" class="Symbol"
+      >)</a
+      ><a name="3185"
+      > </a
+      ><a name="3186" href="tiny-library.html#463" class="InductiveConstructor"
+      >refl</a
+      ><a name="3190"
+      >
+   </a
+      ><a name="3194" href="funext-from-a-sigle-equation.html#3194" class="Function"
+      >q</a
+      ><a name="3195"
+      > </a
+      ><a name="3196" class="Symbol"
+      >:</a
+      ><a name="3197"
+      > </a
+      ><a name="3198" href="tiny-library.html#887" class="Function"
+      >ap</a
+      ><a name="3200"
+      > </a
+      ><a name="3201" href="tiny-library.html#2400" class="Function"
+      >end-point</a
+      ><a name="3210"
+      > </a
+      ><a name="3211" class="Symbol"
+      >(</a
+      ><a name="3212" href="tiny-library.html#887" class="Function"
+      >ap</a
+      ><a name="3214"
+      > </a
+      ><a name="3215" class="Symbol"
+      >(</a
+      ><a name="3216" href="funext-from-a-sigle-equation.html#1998" class="Function"
+      >I-rec'</a
+      ><a name="3222"
+      > </a
+      ><a name="3223" href="tiny-library.html#463" class="InductiveConstructor"
+      >refl</a
+      ><a name="3227" class="Symbol"
+      >)</a
+      ><a name="3228"
+      > </a
+      ><a name="3229" href="funext-from-a-sigle-equation.html#3029" class="Bound"
+      >seg</a
+      ><a name="3232" class="Symbol"
+      >)</a
+      ><a name="3233"
+      > </a
+      ><a name="3234" href="tiny-library.html#422" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="3235"
+      > </a
+      ><a name="3236" href="tiny-library.html#463" class="InductiveConstructor"
+      >refl</a
+      ><a name="3240"
+      >
+   </a
+      ><a name="3244" href="funext-from-a-sigle-equation.html#3194" class="Function"
+      >q</a
+      ><a name="3245"
+      > </a
+      ><a name="3246" class="Symbol"
+      >=</a
+      ><a name="3247"
+      > </a
+      ><a name="3248" href="tiny-library.html#887" class="Function"
+      >ap</a
+      ><a name="3250"
+      > </a
+      ><a name="3251" class="Symbol"
+      >(</a
+      ><a name="3252" href="tiny-library.html#887" class="Function"
+      >ap</a
+      ><a name="3254"
+      > </a
+      ><a name="3255" href="tiny-library.html#2400" class="Function"
+      >end-point</a
+      ><a name="3264" class="Symbol"
+      >)</a
+      ><a name="3265"
+      > </a
+      ><a name="3266" href="funext-from-a-sigle-equation.html#3068" class="Function"
+      >p</a
+      ><a name="3267"
+      >
+   </a
+      ><a name="3271" href="funext-from-a-sigle-equation.html#3271" class="Function"
+      >r</a
+      ><a name="3272"
+      > </a
+      ><a name="3273" class="Symbol"
+      >:</a
+      ><a name="3274"
+      > </a
+      ><a name="3275" href="tiny-library.html#887" class="Function"
+      >ap</a
+      ><a name="3277"
+      > </a
+      ><a name="3278" href="tiny-library.html#2400" class="Function"
+      >end-point</a
+      ><a name="3287"
+      > </a
+      ><a name="3288" class="Symbol"
+      >(</a
+      ><a name="3289" href="tiny-library.html#887" class="Function"
+      >ap</a
+      ><a name="3291"
+      > </a
+      ><a name="3292" class="Symbol"
+      >(</a
+      ><a name="3293" href="funext-from-a-sigle-equation.html#1998" class="Function"
+      >I-rec'</a
+      ><a name="3299"
+      > </a
+      ><a name="3300" href="tiny-library.html#463" class="InductiveConstructor"
+      >refl</a
+      ><a name="3304" class="Symbol"
+      >)</a
+      ><a name="3305"
+      > </a
+      ><a name="3306" href="funext-from-a-sigle-equation.html#3029" class="Bound"
+      >seg</a
+      ><a name="3309" class="Symbol"
+      >)</a
+      ><a name="3310"
+      > </a
+      ><a name="3311" href="tiny-library.html#422" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="3312"
+      > </a
+      ><a name="3313" href="tiny-library.html#887" class="Function"
+      >ap</a
+      ><a name="3315"
+      > </a
+      ><a name="3316" class="Symbol"
+      >(</a
+      ><a name="3317" href="funext-from-a-sigle-equation.html#2187" class="Function"
+      >I-rec</a
+      ><a name="3322"
+      > </a
+      ><a name="3323" href="tiny-library.html#463" class="InductiveConstructor"
+      >refl</a
+      ><a name="3327" class="Symbol"
+      >)</a
+      ><a name="3328"
+      > </a
+      ><a name="3329" href="funext-from-a-sigle-equation.html#3029" class="Bound"
+      >seg</a
+      ><a name="3332"
+      >
+   </a
+      ><a name="3336" href="funext-from-a-sigle-equation.html#3271" class="Function"
+      >r</a
+      ><a name="3337"
+      > </a
+      ><a name="3338" class="Symbol"
+      >=</a
+      ><a name="3339"
+      > </a
+      ><a name="3340" href="tiny-library.html#971" class="Function"
+      >ap-functorial</a
+      ><a name="3353"
+      > </a
+      ><a name="3354" class="Symbol"
+      >(</a
+      ><a name="3355" href="funext-from-a-sigle-equation.html#1998" class="Function"
+      >I-rec'</a
+      ><a name="3361"
+      > </a
+      ><a name="3362" href="tiny-library.html#463" class="InductiveConstructor"
+      >refl</a
+      ><a name="3366" class="Symbol"
+      >)</a
+      ><a name="3367"
+      > </a
+      ><a name="3368" href="tiny-library.html#2400" class="Function"
+      >end-point</a
+      ><a name="3377"
+      > </a
+      ><a name="3378" href="funext-from-a-sigle-equation.html#3029" class="Bound"
+      >seg</a
+      ><a name="3381"
+      >
+
+\end{code}
+
+</a
+      ><a name="3395" class="Comment"
+      >(We can do something similar with the judgemental factorization of</a
+      ><a name="3461"
+      >
+</a
+      ><a name="3462" class="Comment"
+      >hsetfunext.lagda.)</a
+      ><a name="3480"
+      >
+
+</a
+      ><a name="3482" class="Comment"
+      >Here is a concise and cryptic version that avoids the type &#8322;:</a
+      ><a name="3543"
+      >
+
+\begin{code} 
+
+</a
+      ><a name="3560" class="Keyword"
+      >module</a
+      ><a name="3566"
+      > </a
+      ><a name="3567" href="funext-from-a-sigle-equation.html#3567" class="Module"
+      >concise</a
+      ><a name="3574"
+      > </a
+      ><a name="3575" class="Symbol"
+      >(</a
+      ><a name="3576" href="funext-from-a-sigle-equation.html#3576" class="Bound"
+      >X</a
+      ><a name="3577"
+      > </a
+      ><a name="3578" class="Symbol"
+      >:</a
+      ><a name="3579"
+      > </a
+      ><a name="3580" href="funext-from-a-sigle-equation.html#1813" class="Function"
+      >U</a
+      ><a name="3581" class="Symbol"
+      >)</a
+      ><a name="3582"
+      > </a
+      ><a name="3583" class="Symbol"
+      >(</a
+      ><a name="3584" href="funext-from-a-sigle-equation.html#3584" class="Bound"
+      >Y</a
+      ><a name="3585"
+      > </a
+      ><a name="3586" class="Symbol"
+      >:</a
+      ><a name="3587"
+      > </a
+      ><a name="3588" href="funext-from-a-sigle-equation.html#3576" class="Bound"
+      >X</a
+      ><a name="3589"
+      > </a
+      ><a name="3590" class="Symbol"
+      >&#8594;</a
+      ><a name="3591"
+      > </a
+      ><a name="3592" href="funext-from-a-sigle-equation.html#1813" class="Function"
+      >U</a
+      ><a name="3593" class="Symbol"
+      >)</a
+      ><a name="3594"
+      > </a
+      ><a name="3595" class="Keyword"
+      >where</a
+      ><a name="3600"
+      >
+
+ </a
+      ><a name="3603" href="funext-from-a-sigle-equation.html#3603" class="Function"
+      >I</a
+      ><a name="3604"
+      > </a
+      ><a name="3605" class="Symbol"
+      >:</a
+      ><a name="3606"
+      > </a
+      ><a name="3607" href="funext-from-a-sigle-equation.html#1813" class="Function"
+      >U</a
+      ><a name="3608"
+      >
+ </a
+      ><a name="3610" href="funext-from-a-sigle-equation.html#3603" class="Function"
+      >I</a
+      ><a name="3611"
+      > </a
+      ><a name="3612" class="Symbol"
+      >=</a
+      ><a name="3613"
+      > </a
+      ><a name="3614" class="Symbol"
+      >(</a
+      ><a name="3615" href="funext-from-a-sigle-equation.html#3615" class="Bound"
+      >x</a
+      ><a name="3616"
+      > </a
+      ><a name="3617" class="Symbol"
+      >:</a
+      ><a name="3618"
+      > </a
+      ><a name="3619" href="funext-from-a-sigle-equation.html#3576" class="Bound"
+      >X</a
+      ><a name="3620" class="Symbol"
+      >)</a
+      ><a name="3621"
+      > </a
+      ><a name="3622" class="Symbol"
+      >(</a
+      ><a name="3623" href="funext-from-a-sigle-equation.html#3623" class="Bound"
+      >y</a
+      ><a name="3624"
+      > </a
+      ><a name="3625" class="Symbol"
+      >:</a
+      ><a name="3626"
+      > </a
+      ><a name="3627" href="funext-from-a-sigle-equation.html#3584" class="Bound"
+      >Y</a
+      ><a name="3628"
+      > </a
+      ><a name="3629" href="funext-from-a-sigle-equation.html#3615" class="Bound"
+      >x</a
+      ><a name="3630" class="Symbol"
+      >)</a
+      ><a name="3631"
+      > </a
+      ><a name="3632" class="Symbol"
+      >&#8594;</a
+      ><a name="3633"
+      > </a
+      ><a name="3634" href="tiny-library.html#2322" class="Function"
+      >paths-from</a
+      ><a name="3644"
+      > </a
+      ><a name="3645" href="funext-from-a-sigle-equation.html#3623" class="Bound"
+      >y</a
+      ><a name="3646"
+      > </a
+      ><a name="3647" class="Symbol"
+      >&#8594;</a
+      ><a name="3648"
+      > </a
+      ><a name="3649" href="tiny-library.html#2322" class="Function"
+      >paths-from</a
+      ><a name="3659"
+      > </a
+      ><a name="3660" href="funext-from-a-sigle-equation.html#3623" class="Bound"
+      >y</a
+      ><a name="3661"
+      > </a
+      ><a name="3662" class="Symbol"
+      >&#8594;</a
+      ><a name="3663"
+      > </a
+      ><a name="3664" href="tiny-library.html#2322" class="Function"
+      >paths-from</a
+      ><a name="3674"
+      > </a
+      ><a name="3675" href="funext-from-a-sigle-equation.html#3623" class="Bound"
+      >y</a
+      ><a name="3676"
+      >
+
+ </a
+      ><a name="3679" href="funext-from-a-sigle-equation.html#3679" class="Function"
+      >i&#8320;</a
+      ><a name="3681"
+      > </a
+      ><a name="3682" href="funext-from-a-sigle-equation.html#3682" class="Function"
+      >i&#8321;</a
+      ><a name="3684"
+      > </a
+      ><a name="3685" class="Symbol"
+      >:</a
+      ><a name="3686"
+      > </a
+      ><a name="3687" href="funext-from-a-sigle-equation.html#3603" class="Function"
+      >I</a
+      ><a name="3688"
+      >
+ </a
+      ><a name="3690" href="funext-from-a-sigle-equation.html#3679" class="Function"
+      >i&#8320;</a
+      ><a name="3692"
+      > </a
+      ><a name="3693" href="funext-from-a-sigle-equation.html#3693" class="Bound"
+      >x</a
+      ><a name="3694"
+      > </a
+      ><a name="3695" href="funext-from-a-sigle-equation.html#3695" class="Bound"
+      >y</a
+      ><a name="3696"
+      > </a
+      ><a name="3697" href="funext-from-a-sigle-equation.html#3697" class="Bound"
+      >u&#8320;</a
+      ><a name="3699"
+      > </a
+      ><a name="3700" href="funext-from-a-sigle-equation.html#3700" class="Bound"
+      >u&#8321;</a
+      ><a name="3702"
+      > </a
+      ><a name="3703" class="Symbol"
+      >=</a
+      ><a name="3704"
+      > </a
+      ><a name="3705" href="funext-from-a-sigle-equation.html#3697" class="Bound"
+      >u&#8320;</a
+      ><a name="3707"
+      >
+ </a
+      ><a name="3709" href="funext-from-a-sigle-equation.html#3682" class="Function"
+      >i&#8321;</a
+      ><a name="3711"
+      > </a
+      ><a name="3712" href="funext-from-a-sigle-equation.html#3712" class="Bound"
+      >x</a
+      ><a name="3713"
+      > </a
+      ><a name="3714" href="funext-from-a-sigle-equation.html#3714" class="Bound"
+      >y</a
+      ><a name="3715"
+      > </a
+      ><a name="3716" href="funext-from-a-sigle-equation.html#3716" class="Bound"
+      >u&#8320;</a
+      ><a name="3718"
+      > </a
+      ><a name="3719" href="funext-from-a-sigle-equation.html#3719" class="Bound"
+      >u&#8321;</a
+      ><a name="3721"
+      > </a
+      ><a name="3722" class="Symbol"
+      >=</a
+      ><a name="3723"
+      > </a
+      ><a name="3724" href="funext-from-a-sigle-equation.html#3719" class="Bound"
+      >u&#8321;</a
+      ><a name="3726"
+      >
+
+ </a
+      ><a name="3729" href="funext-from-a-sigle-equation.html#3729" class="Function"
+      >I-rec</a
+      ><a name="3734"
+      > </a
+      ><a name="3735" class="Symbol"
+      >:</a
+      ><a name="3736"
+      > </a
+      ><a name="3737" class="Symbol"
+      >(</a
+      ><a name="3738" href="funext-from-a-sigle-equation.html#3738" class="Bound"
+      >x</a
+      ><a name="3739"
+      > </a
+      ><a name="3740" class="Symbol"
+      >:</a
+      ><a name="3741"
+      > </a
+      ><a name="3742" href="funext-from-a-sigle-equation.html#3576" class="Bound"
+      >X</a
+      ><a name="3743" class="Symbol"
+      >)</a
+      ><a name="3744"
+      > </a
+      ><a name="3745" class="Symbol"
+      >(</a
+      ><a name="3746" href="funext-from-a-sigle-equation.html#3746" class="Bound"
+      >y&#8320;</a
+      ><a name="3748"
+      > </a
+      ><a name="3749" href="funext-from-a-sigle-equation.html#3749" class="Bound"
+      >y&#8321;</a
+      ><a name="3751"
+      > </a
+      ><a name="3752" class="Symbol"
+      >:</a
+      ><a name="3753"
+      > </a
+      ><a name="3754" href="funext-from-a-sigle-equation.html#3584" class="Bound"
+      >Y</a
+      ><a name="3755"
+      > </a
+      ><a name="3756" href="funext-from-a-sigle-equation.html#3738" class="Bound"
+      >x</a
+      ><a name="3757" class="Symbol"
+      >)</a
+      ><a name="3758"
+      > </a
+      ><a name="3759" class="Symbol"
+      >&#8594;</a
+      ><a name="3760"
+      > </a
+      ><a name="3761" href="funext-from-a-sigle-equation.html#3746" class="Bound"
+      >y&#8320;</a
+      ><a name="3763"
+      > </a
+      ><a name="3764" href="tiny-library.html#422" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="3765"
+      > </a
+      ><a name="3766" href="funext-from-a-sigle-equation.html#3749" class="Bound"
+      >y&#8321;</a
+      ><a name="3768"
+      > </a
+      ><a name="3769" class="Symbol"
+      >&#8594;</a
+      ><a name="3770"
+      > </a
+      ><a name="3771" href="funext-from-a-sigle-equation.html#3603" class="Function"
+      >I</a
+      ><a name="3772"
+      > </a
+      ><a name="3773" class="Symbol"
+      >&#8594;</a
+      ><a name="3774"
+      > </a
+      ><a name="3775" href="funext-from-a-sigle-equation.html#3584" class="Bound"
+      >Y</a
+      ><a name="3776"
+      > </a
+      ><a name="3777" href="funext-from-a-sigle-equation.html#3738" class="Bound"
+      >x</a
+      ><a name="3778"
+      >
+ </a
+      ><a name="3780" href="funext-from-a-sigle-equation.html#3729" class="Function"
+      >I-rec</a
+      ><a name="3785"
+      > </a
+      ><a name="3786" href="funext-from-a-sigle-equation.html#3786" class="Bound"
+      >x</a
+      ><a name="3787"
+      > </a
+      ><a name="3788" href="funext-from-a-sigle-equation.html#3788" class="Bound"
+      >y&#8320;</a
+      ><a name="3790"
+      > </a
+      ><a name="3791" href="funext-from-a-sigle-equation.html#3791" class="Bound"
+      >y&#8321;</a
+      ><a name="3793"
+      > </a
+      ><a name="3794" href="funext-from-a-sigle-equation.html#3794" class="Bound"
+      >p</a
+      ><a name="3795"
+      > </a
+      ><a name="3796" href="funext-from-a-sigle-equation.html#3796" class="Bound"
+      >i</a
+      ><a name="3797"
+      > </a
+      ><a name="3798" class="Symbol"
+      >=</a
+      ><a name="3799"
+      > </a
+      ><a name="3800" href="tiny-library.html#346" class="Field"
+      >&#960;&#8320;</a
+      ><a name="3802" class="Symbol"
+      >(</a
+      ><a name="3803" href="funext-from-a-sigle-equation.html#3796" class="Bound"
+      >i</a
+      ><a name="3804"
+      > </a
+      ><a name="3805" href="funext-from-a-sigle-equation.html#3786" class="Bound"
+      >x</a
+      ><a name="3806"
+      > </a
+      ><a name="3807" href="funext-from-a-sigle-equation.html#3788" class="Bound"
+      >y&#8320;</a
+      ><a name="3809"
+      > </a
+      ><a name="3810" class="Symbol"
+      >(</a
+      ><a name="3811" href="funext-from-a-sigle-equation.html#3788" class="Bound"
+      >y&#8320;</a
+      ><a name="3813"
+      > </a
+      ><a name="3814" href="tiny-library.html#331" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="3815"
+      > </a
+      ><a name="3816" href="tiny-library.html#463" class="InductiveConstructor"
+      >refl</a
+      ><a name="3820" class="Symbol"
+      >)</a
+      ><a name="3821"
+      > </a
+      ><a name="3822" class="Symbol"
+      >(</a
+      ><a name="3823" href="funext-from-a-sigle-equation.html#3791" class="Bound"
+      >y&#8321;</a
+      ><a name="3825"
+      > </a
+      ><a name="3826" href="tiny-library.html#331" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="3827"
+      > </a
+      ><a name="3828" href="funext-from-a-sigle-equation.html#3794" class="Bound"
+      >p</a
+      ><a name="3829" class="Symbol"
+      >))</a
+      ><a name="3831"
+      >
+
+ </a
+      ><a name="3834" href="funext-from-a-sigle-equation.html#3834" class="Function"
+      >theorem</a
+      ><a name="3841"
+      > </a
+      ><a name="3842" class="Symbol"
+      >:</a
+      ><a name="3843"
+      > </a
+      ><a name="3844" href="funext-from-a-sigle-equation.html#3679" class="Function"
+      >i&#8320;</a
+      ><a name="3846"
+      > </a
+      ><a name="3847" href="tiny-library.html#422" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="3848"
+      > </a
+      ><a name="3849" href="funext-from-a-sigle-equation.html#3682" class="Function"
+      >i&#8321;</a
+      ><a name="3851"
+      > </a
+      ><a name="3852" class="Symbol"
+      >&#8594;</a
+      ><a name="3853"
+      > </a
+      ><a name="3854" class="Symbol"
+      >&#8704;(</a
+      ><a name="3856" href="funext-from-a-sigle-equation.html#3856" class="Bound"
+      >f</a
+      ><a name="3857"
+      > </a
+      ><a name="3858" href="funext-from-a-sigle-equation.html#3858" class="Bound"
+      >g</a
+      ><a name="3859"
+      > </a
+      ><a name="3860" class="Symbol"
+      >:</a
+      ><a name="3861"
+      > </a
+      ><a name="3862" class="Symbol"
+      >(</a
+      ><a name="3863" href="funext-from-a-sigle-equation.html#3863" class="Bound"
+      >x</a
+      ><a name="3864"
+      > </a
+      ><a name="3865" class="Symbol"
+      >:</a
+      ><a name="3866"
+      > </a
+      ><a name="3867" href="funext-from-a-sigle-equation.html#3576" class="Bound"
+      >X</a
+      ><a name="3868" class="Symbol"
+      >)</a
+      ><a name="3869"
+      > </a
+      ><a name="3870" class="Symbol"
+      >&#8594;</a
+      ><a name="3871"
+      > </a
+      ><a name="3872" href="funext-from-a-sigle-equation.html#3584" class="Bound"
+      >Y</a
+      ><a name="3873"
+      > </a
+      ><a name="3874" href="funext-from-a-sigle-equation.html#3863" class="Bound"
+      >x</a
+      ><a name="3875" class="Symbol"
+      >)</a
+      ><a name="3876"
+      > </a
+      ><a name="3877" class="Symbol"
+      >&#8594;</a
+      ><a name="3878"
+      > </a
+      ><a name="3879" class="Symbol"
+      >(&#8704;(</a
+      ><a name="3882" href="funext-from-a-sigle-equation.html#3882" class="Bound"
+      >x</a
+      ><a name="3883"
+      > </a
+      ><a name="3884" class="Symbol"
+      >:</a
+      ><a name="3885"
+      > </a
+      ><a name="3886" href="funext-from-a-sigle-equation.html#3576" class="Bound"
+      >X</a
+      ><a name="3887" class="Symbol"
+      >)</a
+      ><a name="3888"
+      > </a
+      ><a name="3889" class="Symbol"
+      >-&gt;</a
+      ><a name="3891"
+      > </a
+      ><a name="3892" href="funext-from-a-sigle-equation.html#3856" class="Bound"
+      >f</a
+      ><a name="3893"
+      > </a
+      ><a name="3894" href="funext-from-a-sigle-equation.html#3882" class="Bound"
+      >x</a
+      ><a name="3895"
+      > </a
+      ><a name="3896" href="tiny-library.html#422" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="3897"
+      > </a
+      ><a name="3898" href="funext-from-a-sigle-equation.html#3858" class="Bound"
+      >g</a
+      ><a name="3899"
+      > </a
+      ><a name="3900" href="funext-from-a-sigle-equation.html#3882" class="Bound"
+      >x</a
+      ><a name="3901" class="Symbol"
+      >)</a
+      ><a name="3902"
+      > </a
+      ><a name="3903" class="Symbol"
+      >&#8594;</a
+      ><a name="3904"
+      > </a
+      ><a name="3905" href="funext-from-a-sigle-equation.html#3856" class="Bound"
+      >f</a
+      ><a name="3906"
+      > </a
+      ><a name="3907" href="tiny-library.html#422" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="3908"
+      > </a
+      ><a name="3909" href="funext-from-a-sigle-equation.html#3858" class="Bound"
+      >g</a
+      ><a name="3910"
+      >
+ </a
+      ><a name="3912" href="funext-from-a-sigle-equation.html#3834" class="Function"
+      >theorem</a
+      ><a name="3919"
+      > </a
+      ><a name="3920" href="funext-from-a-sigle-equation.html#3920" class="Bound"
+      >seg</a
+      ><a name="3923"
+      > </a
+      ><a name="3924" href="funext-from-a-sigle-equation.html#3924" class="Bound"
+      >f</a
+      ><a name="3925"
+      > </a
+      ><a name="3926" href="funext-from-a-sigle-equation.html#3926" class="Bound"
+      >g</a
+      ><a name="3927"
+      > </a
+      ><a name="3928" href="funext-from-a-sigle-equation.html#3928" class="Bound"
+      >h</a
+      ><a name="3929"
+      > </a
+      ><a name="3930" class="Symbol"
+      >=</a
+      ><a name="3931"
+      > </a
+      ><a name="3932" href="tiny-library.html#887" class="Function"
+      >ap</a
+      ><a name="3934"
+      > </a
+      ><a name="3935" class="Symbol"
+      >(&#955;</a
+      ><a name="3937"
+      > </a
+      ><a name="3938" href="funext-from-a-sigle-equation.html#3938" class="Bound"
+      >i</a
+      ><a name="3939"
+      > </a
+      ><a name="3940" href="funext-from-a-sigle-equation.html#3940" class="Bound"
+      >x</a
+      ><a name="3941"
+      > </a
+      ><a name="3942" class="Symbol"
+      >&#8594;</a
+      ><a name="3943"
+      > </a
+      ><a name="3944" href="funext-from-a-sigle-equation.html#3729" class="Function"
+      >I-rec</a
+      ><a name="3949"
+      > </a
+      ><a name="3950" href="funext-from-a-sigle-equation.html#3940" class="Bound"
+      >x</a
+      ><a name="3951"
+      > </a
+      ><a name="3952" class="Symbol"
+      >(</a
+      ><a name="3953" href="funext-from-a-sigle-equation.html#3924" class="Bound"
+      >f</a
+      ><a name="3954"
+      > </a
+      ><a name="3955" href="funext-from-a-sigle-equation.html#3940" class="Bound"
+      >x</a
+      ><a name="3956" class="Symbol"
+      >)</a
+      ><a name="3957"
+      > </a
+      ><a name="3958" class="Symbol"
+      >(</a
+      ><a name="3959" href="funext-from-a-sigle-equation.html#3926" class="Bound"
+      >g</a
+      ><a name="3960"
+      > </a
+      ><a name="3961" href="funext-from-a-sigle-equation.html#3940" class="Bound"
+      >x</a
+      ><a name="3962" class="Symbol"
+      >)</a
+      ><a name="3963"
+      > </a
+      ><a name="3964" class="Symbol"
+      >(</a
+      ><a name="3965" href="funext-from-a-sigle-equation.html#3928" class="Bound"
+      >h</a
+      ><a name="3966"
+      > </a
+      ><a name="3967" href="funext-from-a-sigle-equation.html#3940" class="Bound"
+      >x</a
+      ><a name="3968" class="Symbol"
+      >)</a
+      ><a name="3969"
+      > </a
+      ><a name="3970" href="funext-from-a-sigle-equation.html#3938" class="Bound"
+      >i</a
+      ><a name="3971" class="Symbol"
+      >)</a
+      ><a name="3972"
+      > </a
+      ><a name="3973" href="funext-from-a-sigle-equation.html#3920" class="Bound"
+      >seg</a
+      ><a name="3976"
+      > 
+
+\end{code}
+
+</a
+      ><a name="3991" class="Comment"
+      >Or, &#946;-expanding:</a
+      ><a name="4007"
+      >
+
+\begin{code} 
+
+</a
+      ><a name="4024" class="Keyword"
+      >module</a
+      ><a name="4030"
+      > </a
+      ><a name="4031" href="funext-from-a-sigle-equation.html#4031" class="Module"
+      >too-concise</a
+      ><a name="4042"
+      > </a
+      ><a name="4043" class="Symbol"
+      >(</a
+      ><a name="4044" href="funext-from-a-sigle-equation.html#4044" class="Bound"
+      >X</a
+      ><a name="4045"
+      > </a
+      ><a name="4046" class="Symbol"
+      >:</a
+      ><a name="4047"
+      > </a
+      ><a name="4048" href="funext-from-a-sigle-equation.html#1813" class="Function"
+      >U</a
+      ><a name="4049" class="Symbol"
+      >)</a
+      ><a name="4050"
+      > </a
+      ><a name="4051" class="Symbol"
+      >(</a
+      ><a name="4052" href="funext-from-a-sigle-equation.html#4052" class="Bound"
+      >Y</a
+      ><a name="4053"
+      > </a
+      ><a name="4054" class="Symbol"
+      >:</a
+      ><a name="4055"
+      > </a
+      ><a name="4056" href="funext-from-a-sigle-equation.html#4044" class="Bound"
+      >X</a
+      ><a name="4057"
+      > </a
+      ><a name="4058" class="Symbol"
+      >&#8594;</a
+      ><a name="4059"
+      > </a
+      ><a name="4060" href="funext-from-a-sigle-equation.html#1813" class="Function"
+      >U</a
+      ><a name="4061" class="Symbol"
+      >)</a
+      ><a name="4062"
+      > </a
+      ><a name="4063" class="Keyword"
+      >where</a
+      ><a name="4068"
+      >
+
+ </a
+      ><a name="4071" href="funext-from-a-sigle-equation.html#4071" class="Function"
+      >I</a
+      ><a name="4072"
+      > </a
+      ><a name="4073" class="Symbol"
+      >:</a
+      ><a name="4074"
+      > </a
+      ><a name="4075" href="funext-from-a-sigle-equation.html#1813" class="Function"
+      >U</a
+      ><a name="4076"
+      >
+ </a
+      ><a name="4078" href="funext-from-a-sigle-equation.html#4071" class="Function"
+      >I</a
+      ><a name="4079"
+      > </a
+      ><a name="4080" class="Symbol"
+      >=</a
+      ><a name="4081"
+      > </a
+      ><a name="4082" class="Symbol"
+      >(</a
+      ><a name="4083" href="funext-from-a-sigle-equation.html#4083" class="Bound"
+      >x</a
+      ><a name="4084"
+      > </a
+      ><a name="4085" class="Symbol"
+      >:</a
+      ><a name="4086"
+      > </a
+      ><a name="4087" href="funext-from-a-sigle-equation.html#4044" class="Bound"
+      >X</a
+      ><a name="4088" class="Symbol"
+      >)</a
+      ><a name="4089"
+      > </a
+      ><a name="4090" class="Symbol"
+      >(</a
+      ><a name="4091" href="funext-from-a-sigle-equation.html#4091" class="Bound"
+      >y</a
+      ><a name="4092"
+      > </a
+      ><a name="4093" class="Symbol"
+      >:</a
+      ><a name="4094"
+      > </a
+      ><a name="4095" href="funext-from-a-sigle-equation.html#4052" class="Bound"
+      >Y</a
+      ><a name="4096"
+      > </a
+      ><a name="4097" href="funext-from-a-sigle-equation.html#4083" class="Bound"
+      >x</a
+      ><a name="4098" class="Symbol"
+      >)</a
+      ><a name="4099"
+      > </a
+      ><a name="4100" class="Symbol"
+      >&#8594;</a
+      ><a name="4101"
+      > </a
+      ><a name="4102" href="tiny-library.html#2322" class="Function"
+      >paths-from</a
+      ><a name="4112"
+      > </a
+      ><a name="4113" href="funext-from-a-sigle-equation.html#4091" class="Bound"
+      >y</a
+      ><a name="4114"
+      > </a
+      ><a name="4115" class="Symbol"
+      >&#8594;</a
+      ><a name="4116"
+      > </a
+      ><a name="4117" href="tiny-library.html#2322" class="Function"
+      >paths-from</a
+      ><a name="4127"
+      > </a
+      ><a name="4128" href="funext-from-a-sigle-equation.html#4091" class="Bound"
+      >y</a
+      ><a name="4129"
+      > </a
+      ><a name="4130" class="Symbol"
+      >&#8594;</a
+      ><a name="4131"
+      > </a
+      ><a name="4132" href="tiny-library.html#2322" class="Function"
+      >paths-from</a
+      ><a name="4142"
+      > </a
+      ><a name="4143" href="funext-from-a-sigle-equation.html#4091" class="Bound"
+      >y</a
+      ><a name="4144"
+      >
+
+ </a
+      ><a name="4147" href="funext-from-a-sigle-equation.html#4147" class="Function"
+      >i&#8320;</a
+      ><a name="4149"
+      > </a
+      ><a name="4150" href="funext-from-a-sigle-equation.html#4150" class="Function"
+      >i&#8321;</a
+      ><a name="4152"
+      > </a
+      ><a name="4153" class="Symbol"
+      >:</a
+      ><a name="4154"
+      > </a
+      ><a name="4155" href="funext-from-a-sigle-equation.html#4071" class="Function"
+      >I</a
+      ><a name="4156"
+      >
+ </a
+      ><a name="4158" href="funext-from-a-sigle-equation.html#4147" class="Function"
+      >i&#8320;</a
+      ><a name="4160"
+      > </a
+      ><a name="4161" href="funext-from-a-sigle-equation.html#4161" class="Bound"
+      >x</a
+      ><a name="4162"
+      > </a
+      ><a name="4163" href="funext-from-a-sigle-equation.html#4163" class="Bound"
+      >y</a
+      ><a name="4164"
+      > </a
+      ><a name="4165" href="funext-from-a-sigle-equation.html#4165" class="Bound"
+      >u&#8320;</a
+      ><a name="4167"
+      > </a
+      ><a name="4168" href="funext-from-a-sigle-equation.html#4168" class="Bound"
+      >u&#8321;</a
+      ><a name="4170"
+      > </a
+      ><a name="4171" class="Symbol"
+      >=</a
+      ><a name="4172"
+      > </a
+      ><a name="4173" href="funext-from-a-sigle-equation.html#4165" class="Bound"
+      >u&#8320;</a
+      ><a name="4175"
+      >
+ </a
+      ><a name="4177" href="funext-from-a-sigle-equation.html#4150" class="Function"
+      >i&#8321;</a
+      ><a name="4179"
+      > </a
+      ><a name="4180" href="funext-from-a-sigle-equation.html#4180" class="Bound"
+      >x</a
+      ><a name="4181"
+      > </a
+      ><a name="4182" href="funext-from-a-sigle-equation.html#4182" class="Bound"
+      >y</a
+      ><a name="4183"
+      > </a
+      ><a name="4184" href="funext-from-a-sigle-equation.html#4184" class="Bound"
+      >u&#8320;</a
+      ><a name="4186"
+      > </a
+      ><a name="4187" href="funext-from-a-sigle-equation.html#4187" class="Bound"
+      >u&#8321;</a
+      ><a name="4189"
+      > </a
+      ><a name="4190" class="Symbol"
+      >=</a
+      ><a name="4191"
+      > </a
+      ><a name="4192" href="funext-from-a-sigle-equation.html#4187" class="Bound"
+      >u&#8321;</a
+      ><a name="4194"
+      >
+
+ </a
+      ><a name="4197" href="funext-from-a-sigle-equation.html#4197" class="Function"
+      >theorem</a
+      ><a name="4204"
+      > </a
+      ><a name="4205" class="Symbol"
+      >:</a
+      ><a name="4206"
+      > </a
+      ><a name="4207" href="funext-from-a-sigle-equation.html#4147" class="Function"
+      >i&#8320;</a
+      ><a name="4209"
+      > </a
+      ><a name="4210" href="tiny-library.html#422" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="4211"
+      > </a
+      ><a name="4212" href="funext-from-a-sigle-equation.html#4150" class="Function"
+      >i&#8321;</a
+      ><a name="4214"
+      > </a
+      ><a name="4215" class="Symbol"
+      >&#8594;</a
+      ><a name="4216"
+      > </a
+      ><a name="4217" class="Symbol"
+      >&#8704;(</a
+      ><a name="4219" href="funext-from-a-sigle-equation.html#4219" class="Bound"
+      >f</a
+      ><a name="4220"
+      > </a
+      ><a name="4221" href="funext-from-a-sigle-equation.html#4221" class="Bound"
+      >g</a
+      ><a name="4222"
+      > </a
+      ><a name="4223" class="Symbol"
+      >:</a
+      ><a name="4224"
+      > </a
+      ><a name="4225" class="Symbol"
+      >(</a
+      ><a name="4226" href="funext-from-a-sigle-equation.html#4226" class="Bound"
+      >x</a
+      ><a name="4227"
+      > </a
+      ><a name="4228" class="Symbol"
+      >:</a
+      ><a name="4229"
+      > </a
+      ><a name="4230" href="funext-from-a-sigle-equation.html#4044" class="Bound"
+      >X</a
+      ><a name="4231" class="Symbol"
+      >)</a
+      ><a name="4232"
+      > </a
+      ><a name="4233" class="Symbol"
+      >&#8594;</a
+      ><a name="4234"
+      > </a
+      ><a name="4235" href="funext-from-a-sigle-equation.html#4052" class="Bound"
+      >Y</a
+      ><a name="4236"
+      > </a
+      ><a name="4237" href="funext-from-a-sigle-equation.html#4226" class="Bound"
+      >x</a
+      ><a name="4238" class="Symbol"
+      >)</a
+      ><a name="4239"
+      > </a
+      ><a name="4240" class="Symbol"
+      >&#8594;</a
+      ><a name="4241"
+      > </a
+      ><a name="4242" class="Symbol"
+      >(&#8704;(</a
+      ><a name="4245" href="funext-from-a-sigle-equation.html#4245" class="Bound"
+      >x</a
+      ><a name="4246"
+      > </a
+      ><a name="4247" class="Symbol"
+      >:</a
+      ><a name="4248"
+      > </a
+      ><a name="4249" href="funext-from-a-sigle-equation.html#4044" class="Bound"
+      >X</a
+      ><a name="4250" class="Symbol"
+      >)</a
+      ><a name="4251"
+      > </a
+      ><a name="4252" class="Symbol"
+      >-&gt;</a
+      ><a name="4254"
+      > </a
+      ><a name="4255" href="funext-from-a-sigle-equation.html#4219" class="Bound"
+      >f</a
+      ><a name="4256"
+      > </a
+      ><a name="4257" href="funext-from-a-sigle-equation.html#4245" class="Bound"
+      >x</a
+      ><a name="4258"
+      > </a
+      ><a name="4259" href="tiny-library.html#422" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="4260"
+      > </a
+      ><a name="4261" href="funext-from-a-sigle-equation.html#4221" class="Bound"
+      >g</a
+      ><a name="4262"
+      > </a
+      ><a name="4263" href="funext-from-a-sigle-equation.html#4245" class="Bound"
+      >x</a
+      ><a name="4264" class="Symbol"
+      >)</a
+      ><a name="4265"
+      > </a
+      ><a name="4266" class="Symbol"
+      >&#8594;</a
+      ><a name="4267"
+      > </a
+      ><a name="4268" href="funext-from-a-sigle-equation.html#4219" class="Bound"
+      >f</a
+      ><a name="4269"
+      > </a
+      ><a name="4270" href="tiny-library.html#422" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="4271"
+      > </a
+      ><a name="4272" href="funext-from-a-sigle-equation.html#4221" class="Bound"
+      >g</a
+      ><a name="4273"
+      >
+ </a
+      ><a name="4275" href="funext-from-a-sigle-equation.html#4197" class="Function"
+      >theorem</a
+      ><a name="4282"
+      > </a
+      ><a name="4283" href="funext-from-a-sigle-equation.html#4283" class="Bound"
+      >seg</a
+      ><a name="4286"
+      > </a
+      ><a name="4287" href="funext-from-a-sigle-equation.html#4287" class="Bound"
+      >f</a
+      ><a name="4288"
+      > </a
+      ><a name="4289" href="funext-from-a-sigle-equation.html#4289" class="Bound"
+      >g</a
+      ><a name="4290"
+      > </a
+      ><a name="4291" href="funext-from-a-sigle-equation.html#4291" class="Bound"
+      >h</a
+      ><a name="4292"
+      > </a
+      ><a name="4293" class="Symbol"
+      >=</a
+      ><a name="4294"
+      > </a
+      ><a name="4295" href="tiny-library.html#887" class="Function"
+      >ap</a
+      ><a name="4297"
+      > </a
+      ><a name="4298" class="Symbol"
+      >(&#955;</a
+      ><a name="4300"
+      > </a
+      ><a name="4301" href="funext-from-a-sigle-equation.html#4301" class="Bound"
+      >i</a
+      ><a name="4302"
+      > </a
+      ><a name="4303" href="funext-from-a-sigle-equation.html#4303" class="Bound"
+      >x</a
+      ><a name="4304"
+      > </a
+      ><a name="4305" class="Symbol"
+      >&#8594;</a
+      ><a name="4306"
+      > </a
+      ><a name="4307" href="tiny-library.html#346" class="Field"
+      >&#960;&#8320;</a
+      ><a name="4309" class="Symbol"
+      >(</a
+      ><a name="4310" href="funext-from-a-sigle-equation.html#4301" class="Bound"
+      >i</a
+      ><a name="4311"
+      > </a
+      ><a name="4312" href="funext-from-a-sigle-equation.html#4303" class="Bound"
+      >x</a
+      ><a name="4313"
+      > </a
+      ><a name="4314" class="Symbol"
+      >(</a
+      ><a name="4315" href="funext-from-a-sigle-equation.html#4287" class="Bound"
+      >f</a
+      ><a name="4316"
+      > </a
+      ><a name="4317" href="funext-from-a-sigle-equation.html#4303" class="Bound"
+      >x</a
+      ><a name="4318" class="Symbol"
+      >)</a
+      ><a name="4319"
+      > </a
+      ><a name="4320" class="Symbol"
+      >(</a
+      ><a name="4321" href="funext-from-a-sigle-equation.html#4287" class="Bound"
+      >f</a
+      ><a name="4322"
+      > </a
+      ><a name="4323" href="funext-from-a-sigle-equation.html#4303" class="Bound"
+      >x</a
+      ><a name="4324"
+      > </a
+      ><a name="4325" href="tiny-library.html#331" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="4326"
+      > </a
+      ><a name="4327" href="tiny-library.html#463" class="InductiveConstructor"
+      >refl</a
+      ><a name="4331" class="Symbol"
+      >)</a
+      ><a name="4332"
+      > </a
+      ><a name="4333" class="Symbol"
+      >(</a
+      ><a name="4334" href="funext-from-a-sigle-equation.html#4289" class="Bound"
+      >g</a
+      ><a name="4335"
+      > </a
+      ><a name="4336" href="funext-from-a-sigle-equation.html#4303" class="Bound"
+      >x</a
+      ><a name="4337"
+      > </a
+      ><a name="4338" href="tiny-library.html#331" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="4339"
+      > </a
+      ><a name="4340" href="funext-from-a-sigle-equation.html#4291" class="Bound"
+      >h</a
+      ><a name="4341"
+      > </a
+      ><a name="4342" href="funext-from-a-sigle-equation.html#4303" class="Bound"
+      >x</a
+      ><a name="4343" class="Symbol"
+      >)))</a
+      ><a name="4346"
+      > </a
+      ><a name="4347" href="funext-from-a-sigle-equation.html#4283" class="Bound"
+      >seg</a
+      ><a name="4350"
+      >
+
+\end{code}
+
+</a
+      ><a name="4364" class="Comment"
+      >Now we can see clearly why what one actually gets directly is the</a
+      ><a name="4429"
+      >
+</a
+      ><a name="4430" class="Comment"
+      >equation (&#955; x &#8594; f x) &#8801; (&#955; x &#8594; g x). But Agda silently &#951;-contracts each</a
+      ><a name="4500"
+      >
+</a
+      ><a name="4501" class="Comment"
+      >side to accept f &#8801; g.</a
+      ><a name="4522"
+      >
+
+</a
+      ><a name="4524" class="Comment"
+      >It is not worth further &#946;-expanding i&#8320; and i&#8321;, because then we (and</a
+      ><a name="4591"
+      >
+</a
+      ><a name="4592" class="Comment"
+      >Agda) won't know their types without giving them in their</a
+      ><a name="4649"
+      >
+</a
+      ><a name="4650" class="Comment"
+      >&#955;-expressions. Nevertheless, here it goes. It suffices to give the</a
+      ><a name="4716"
+      >
+</a
+      ><a name="4717" class="Comment"
+      >type of one variable. We don't need to define the type I either, but</a
+      ><a name="4785"
+      >
+</a
+      ><a name="4786" class="Comment"
+      >of course it occurs, as an inferred type. </a
+      ><a name="4828"
+      >
+
+\begin{code}
+
+</a
+      ><a name="4844" class="Keyword"
+      >module</a
+      ><a name="4850"
+      > </a
+      ><a name="4851" href="funext-from-a-sigle-equation.html#4851" class="Module"
+      >ultimately-concise</a
+      ><a name="4869"
+      > </a
+      ><a name="4870" class="Symbol"
+      >(</a
+      ><a name="4871" href="funext-from-a-sigle-equation.html#4871" class="Bound"
+      >X</a
+      ><a name="4872"
+      > </a
+      ><a name="4873" class="Symbol"
+      >:</a
+      ><a name="4874"
+      > </a
+      ><a name="4875" href="funext-from-a-sigle-equation.html#1813" class="Function"
+      >U</a
+      ><a name="4876" class="Symbol"
+      >)</a
+      ><a name="4877"
+      > </a
+      ><a name="4878" class="Symbol"
+      >(</a
+      ><a name="4879" href="funext-from-a-sigle-equation.html#4879" class="Bound"
+      >Y</a
+      ><a name="4880"
+      > </a
+      ><a name="4881" class="Symbol"
+      >:</a
+      ><a name="4882"
+      > </a
+      ><a name="4883" href="funext-from-a-sigle-equation.html#4871" class="Bound"
+      >X</a
+      ><a name="4884"
+      > </a
+      ><a name="4885" class="Symbol"
+      >&#8594;</a
+      ><a name="4886"
+      > </a
+      ><a name="4887" href="funext-from-a-sigle-equation.html#1813" class="Function"
+      >U</a
+      ><a name="4888" class="Symbol"
+      >)</a
+      ><a name="4889"
+      > </a
+      ><a name="4890" class="Keyword"
+      >where</a
+      ><a name="4895"
+      >
+
+ </a
+      ><a name="4898" href="funext-from-a-sigle-equation.html#4898" class="Function"
+      >theorem</a
+      ><a name="4905"
+      > </a
+      ><a name="4906" class="Symbol"
+      >:</a
+      ><a name="4907"
+      > </a
+      ><a name="4908" class="Symbol"
+      >(&#955;</a
+      ><a name="4910"
+      > </a
+      ><a name="4911" href="funext-from-a-sigle-equation.html#4911" class="Bound"
+      >x</a
+      ><a name="4912"
+      > </a
+      ><a name="4913" href="funext-from-a-sigle-equation.html#4913" class="Bound"
+      >y</a
+      ><a name="4914"
+      > </a
+      ><a name="4915" class="Symbol"
+      >(</a
+      ><a name="4916" href="funext-from-a-sigle-equation.html#4916" class="Bound"
+      >u&#8320;</a
+      ><a name="4918"
+      > </a
+      ><a name="4919" class="Symbol"
+      >:</a
+      ><a name="4920"
+      > </a
+      ><a name="4921" href="tiny-library.html#2322" class="Function"
+      >paths-from</a
+      ><a name="4931"
+      > </a
+      ><a name="4932" href="funext-from-a-sigle-equation.html#4913" class="Bound"
+      >y</a
+      ><a name="4933" class="Symbol"
+      >)</a
+      ><a name="4934"
+      > </a
+      ><a name="4935" href="funext-from-a-sigle-equation.html#4935" class="Bound"
+      >u&#8321;</a
+      ><a name="4937"
+      > </a
+      ><a name="4938" class="Symbol"
+      >&#8594;</a
+      ><a name="4939"
+      > </a
+      ><a name="4940" href="funext-from-a-sigle-equation.html#4916" class="Bound"
+      >u&#8320;</a
+      ><a name="4942" class="Symbol"
+      >)</a
+      ><a name="4943"
+      >  </a
+      ><a name="4945" href="tiny-library.html#422" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="4946"
+      >  </a
+      ><a name="4948" class="Symbol"
+      >(&#955;</a
+      ><a name="4950"
+      > </a
+      ><a name="4951" href="funext-from-a-sigle-equation.html#4951" class="Bound"
+      >x</a
+      ><a name="4952"
+      > </a
+      ><a name="4953" href="funext-from-a-sigle-equation.html#4953" class="Bound"
+      >y</a
+      ><a name="4954"
+      > </a
+      ><a name="4955" href="funext-from-a-sigle-equation.html#4955" class="Bound"
+      >u&#8320;</a
+      ><a name="4957"
+      > </a
+      ><a name="4958" href="funext-from-a-sigle-equation.html#4958" class="Bound"
+      >u&#8321;</a
+      ><a name="4960"
+      > </a
+      ><a name="4961" class="Symbol"
+      >&#8594;</a
+      ><a name="4962"
+      > </a
+      ><a name="4963" href="funext-from-a-sigle-equation.html#4958" class="Bound"
+      >u&#8321;</a
+      ><a name="4965" class="Symbol"
+      >)</a
+      ><a name="4966"
+      > 
+         </a
+      ><a name="4977" class="Symbol"
+      >&#8594;</a
+      ><a name="4978"
+      > </a
+      ><a name="4979" class="Symbol"
+      >&#8704;(</a
+      ><a name="4981" href="funext-from-a-sigle-equation.html#4981" class="Bound"
+      >f</a
+      ><a name="4982"
+      > </a
+      ><a name="4983" href="funext-from-a-sigle-equation.html#4983" class="Bound"
+      >g</a
+      ><a name="4984"
+      > </a
+      ><a name="4985" class="Symbol"
+      >:</a
+      ><a name="4986"
+      > </a
+      ><a name="4987" class="Symbol"
+      >(</a
+      ><a name="4988" href="funext-from-a-sigle-equation.html#4988" class="Bound"
+      >x</a
+      ><a name="4989"
+      > </a
+      ><a name="4990" class="Symbol"
+      >:</a
+      ><a name="4991"
+      > </a
+      ><a name="4992" href="funext-from-a-sigle-equation.html#4871" class="Bound"
+      >X</a
+      ><a name="4993" class="Symbol"
+      >)</a
+      ><a name="4994"
+      > </a
+      ><a name="4995" class="Symbol"
+      >&#8594;</a
+      ><a name="4996"
+      > </a
+      ><a name="4997" href="funext-from-a-sigle-equation.html#4879" class="Bound"
+      >Y</a
+      ><a name="4998"
+      > </a
+      ><a name="4999" href="funext-from-a-sigle-equation.html#4988" class="Bound"
+      >x</a
+      ><a name="5000" class="Symbol"
+      >)</a
+      ><a name="5001"
+      > </a
+      ><a name="5002" class="Symbol"
+      >&#8594;</a
+      ><a name="5003"
+      > </a
+      ><a name="5004" class="Symbol"
+      >(&#8704;(</a
+      ><a name="5007" href="funext-from-a-sigle-equation.html#5007" class="Bound"
+      >x</a
+      ><a name="5008"
+      > </a
+      ><a name="5009" class="Symbol"
+      >:</a
+      ><a name="5010"
+      > </a
+      ><a name="5011" href="funext-from-a-sigle-equation.html#4871" class="Bound"
+      >X</a
+      ><a name="5012" class="Symbol"
+      >)</a
+      ><a name="5013"
+      > </a
+      ><a name="5014" class="Symbol"
+      >-&gt;</a
+      ><a name="5016"
+      > </a
+      ><a name="5017" href="funext-from-a-sigle-equation.html#4981" class="Bound"
+      >f</a
+      ><a name="5018"
+      > </a
+      ><a name="5019" href="funext-from-a-sigle-equation.html#5007" class="Bound"
+      >x</a
+      ><a name="5020"
+      > </a
+      ><a name="5021" href="tiny-library.html#422" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="5022"
+      > </a
+      ><a name="5023" href="funext-from-a-sigle-equation.html#4983" class="Bound"
+      >g</a
+      ><a name="5024"
+      > </a
+      ><a name="5025" href="funext-from-a-sigle-equation.html#5007" class="Bound"
+      >x</a
+      ><a name="5026" class="Symbol"
+      >)</a
+      ><a name="5027"
+      > </a
+      ><a name="5028" class="Symbol"
+      >&#8594;</a
+      ><a name="5029"
+      > </a
+      ><a name="5030" href="funext-from-a-sigle-equation.html#4981" class="Bound"
+      >f</a
+      ><a name="5031"
+      > </a
+      ><a name="5032" href="tiny-library.html#422" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="5033"
+      > </a
+      ><a name="5034" href="funext-from-a-sigle-equation.html#4983" class="Bound"
+      >g</a
+      ><a name="5035"
+      >
+ </a
+      ><a name="5037" href="funext-from-a-sigle-equation.html#4898" class="Function"
+      >theorem</a
+      ><a name="5044"
+      > </a
+      ><a name="5045" href="funext-from-a-sigle-equation.html#5045" class="Bound"
+      >seg</a
+      ><a name="5048"
+      > </a
+      ><a name="5049" href="funext-from-a-sigle-equation.html#5049" class="Bound"
+      >f</a
+      ><a name="5050"
+      > </a
+      ><a name="5051" href="funext-from-a-sigle-equation.html#5051" class="Bound"
+      >g</a
+      ><a name="5052"
+      > </a
+      ><a name="5053" href="funext-from-a-sigle-equation.html#5053" class="Bound"
+      >h</a
+      ><a name="5054"
+      > </a
+      ><a name="5055" class="Symbol"
+      >=</a
+      ><a name="5056"
+      > </a
+      ><a name="5057" href="tiny-library.html#887" class="Function"
+      >ap</a
+      ><a name="5059"
+      > </a
+      ><a name="5060" class="Symbol"
+      >(&#955;</a
+      ><a name="5062"
+      > </a
+      ><a name="5063" href="funext-from-a-sigle-equation.html#5063" class="Bound"
+      >i</a
+      ><a name="5064"
+      > </a
+      ><a name="5065" href="funext-from-a-sigle-equation.html#5065" class="Bound"
+      >x</a
+      ><a name="5066"
+      > </a
+      ><a name="5067" class="Symbol"
+      >&#8594;</a
+      ><a name="5068"
+      > </a
+      ><a name="5069" href="tiny-library.html#346" class="Field"
+      >&#960;&#8320;</a
+      ><a name="5071" class="Symbol"
+      >(</a
+      ><a name="5072" href="funext-from-a-sigle-equation.html#5063" class="Bound"
+      >i</a
+      ><a name="5073"
+      > </a
+      ><a name="5074" href="funext-from-a-sigle-equation.html#5065" class="Bound"
+      >x</a
+      ><a name="5075"
+      > </a
+      ><a name="5076" class="Symbol"
+      >(</a
+      ><a name="5077" href="funext-from-a-sigle-equation.html#5049" class="Bound"
+      >f</a
+      ><a name="5078"
+      > </a
+      ><a name="5079" href="funext-from-a-sigle-equation.html#5065" class="Bound"
+      >x</a
+      ><a name="5080" class="Symbol"
+      >)</a
+      ><a name="5081"
+      > </a
+      ><a name="5082" class="Symbol"
+      >(</a
+      ><a name="5083" href="funext-from-a-sigle-equation.html#5049" class="Bound"
+      >f</a
+      ><a name="5084"
+      > </a
+      ><a name="5085" href="funext-from-a-sigle-equation.html#5065" class="Bound"
+      >x</a
+      ><a name="5086"
+      > </a
+      ><a name="5087" href="tiny-library.html#331" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="5088"
+      > </a
+      ><a name="5089" href="tiny-library.html#463" class="InductiveConstructor"
+      >refl</a
+      ><a name="5093" class="Symbol"
+      >)</a
+      ><a name="5094"
+      > </a
+      ><a name="5095" class="Symbol"
+      >(</a
+      ><a name="5096" href="funext-from-a-sigle-equation.html#5051" class="Bound"
+      >g</a
+      ><a name="5097"
+      > </a
+      ><a name="5098" href="funext-from-a-sigle-equation.html#5065" class="Bound"
+      >x</a
+      ><a name="5099"
+      > </a
+      ><a name="5100" href="tiny-library.html#331" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="5101"
+      > </a
+      ><a name="5102" href="funext-from-a-sigle-equation.html#5053" class="Bound"
+      >h</a
+      ><a name="5103"
+      > </a
+      ><a name="5104" href="funext-from-a-sigle-equation.html#5065" class="Bound"
+      >x</a
+      ><a name="5105" class="Symbol"
+      >)))</a
+      ><a name="5108"
+      > </a
+      ><a name="5109" href="funext-from-a-sigle-equation.html#5045" class="Bound"
+      >seg</a
+      ><a name="5112"
+      >
+
+\end{code}
+
+</a
+      ><a name="5126" class="Comment"
+      >This illustrates how not to formulate and prove a theorem.</a
+      ><a name="5184"
+      >
+
+</a
+      ><a name="5186" class="Comment"
+      >But we did get a small theorem with a proof shorter than its formulation.</a
+      ><a name="5259"
+      >
+
+</a
+      ><a name="5261" class="Comment"
+      >I would settle for this if I wanted to be really concise but not</a
+      ><a name="5325"
+      >
+</a
+      ><a name="5326" class="Comment"
+      >completely obscure:</a
+      ><a name="5345"
+      >
+
+\begin{code} 
+
+</a
+      ><a name="5362" class="Keyword"
+      >module</a
+      ><a name="5368"
+      > </a
+      ><a name="5369" href="funext-from-a-sigle-equation.html#5369" class="Module"
+      >parsimoniously-concise</a
+      ><a name="5391"
+      > </a
+      ><a name="5392" class="Symbol"
+      >(</a
+      ><a name="5393" href="funext-from-a-sigle-equation.html#5393" class="Bound"
+      >X</a
+      ><a name="5394"
+      > </a
+      ><a name="5395" class="Symbol"
+      >:</a
+      ><a name="5396"
+      > </a
+      ><a name="5397" href="funext-from-a-sigle-equation.html#1813" class="Function"
+      >U</a
+      ><a name="5398" class="Symbol"
+      >)</a
+      ><a name="5399"
+      > </a
+      ><a name="5400" class="Symbol"
+      >(</a
+      ><a name="5401" href="funext-from-a-sigle-equation.html#5401" class="Bound"
+      >Y</a
+      ><a name="5402"
+      > </a
+      ><a name="5403" class="Symbol"
+      >:</a
+      ><a name="5404"
+      > </a
+      ><a name="5405" href="funext-from-a-sigle-equation.html#5393" class="Bound"
+      >X</a
+      ><a name="5406"
+      > </a
+      ><a name="5407" class="Symbol"
+      >&#8594;</a
+      ><a name="5408"
+      > </a
+      ><a name="5409" href="funext-from-a-sigle-equation.html#1813" class="Function"
+      >U</a
+      ><a name="5410" class="Symbol"
+      >)</a
+      ><a name="5411"
+      > </a
+      ><a name="5412" class="Keyword"
+      >where</a
+      ><a name="5417"
+      >
+
+ </a
+      ><a name="5420" href="funext-from-a-sigle-equation.html#5420" class="Function"
+      >I</a
+      ><a name="5421"
+      > </a
+      ><a name="5422" class="Symbol"
+      >:</a
+      ><a name="5423"
+      > </a
+      ><a name="5424" href="funext-from-a-sigle-equation.html#1813" class="Function"
+      >U</a
+      ><a name="5425"
+      >
+ </a
+      ><a name="5427" href="funext-from-a-sigle-equation.html#5420" class="Function"
+      >I</a
+      ><a name="5428"
+      > </a
+      ><a name="5429" class="Symbol"
+      >=</a
+      ><a name="5430"
+      > </a
+      ><a name="5431" class="Symbol"
+      >(</a
+      ><a name="5432" href="funext-from-a-sigle-equation.html#5432" class="Bound"
+      >x</a
+      ><a name="5433"
+      > </a
+      ><a name="5434" class="Symbol"
+      >:</a
+      ><a name="5435"
+      > </a
+      ><a name="5436" href="funext-from-a-sigle-equation.html#5393" class="Bound"
+      >X</a
+      ><a name="5437" class="Symbol"
+      >)</a
+      ><a name="5438"
+      > </a
+      ><a name="5439" class="Symbol"
+      >(</a
+      ><a name="5440" href="funext-from-a-sigle-equation.html#5440" class="Bound"
+      >y</a
+      ><a name="5441"
+      > </a
+      ><a name="5442" class="Symbol"
+      >:</a
+      ><a name="5443"
+      > </a
+      ><a name="5444" href="funext-from-a-sigle-equation.html#5401" class="Bound"
+      >Y</a
+      ><a name="5445"
+      > </a
+      ><a name="5446" href="funext-from-a-sigle-equation.html#5432" class="Bound"
+      >x</a
+      ><a name="5447" class="Symbol"
+      >)</a
+      ><a name="5448"
+      > </a
+      ><a name="5449" class="Symbol"
+      >&#8594;</a
+      ><a name="5450"
+      > </a
+      ><a name="5451" href="tiny-library.html#2322" class="Function"
+      >paths-from</a
+      ><a name="5461"
+      > </a
+      ><a name="5462" href="funext-from-a-sigle-equation.html#5440" class="Bound"
+      >y</a
+      ><a name="5463"
+      > </a
+      ><a name="5464" class="Symbol"
+      >&#8594;</a
+      ><a name="5465"
+      > </a
+      ><a name="5466" href="tiny-library.html#2322" class="Function"
+      >paths-from</a
+      ><a name="5476"
+      > </a
+      ><a name="5477" href="funext-from-a-sigle-equation.html#5440" class="Bound"
+      >y</a
+      ><a name="5478"
+      > </a
+      ><a name="5479" class="Symbol"
+      >&#8594;</a
+      ><a name="5480"
+      > </a
+      ><a name="5481" href="tiny-library.html#2322" class="Function"
+      >paths-from</a
+      ><a name="5491"
+      > </a
+      ><a name="5492" href="funext-from-a-sigle-equation.html#5440" class="Bound"
+      >y</a
+      ><a name="5493"
+      >
+
+ </a
+      ><a name="5496" href="funext-from-a-sigle-equation.html#5496" class="Function"
+      >theorem</a
+      ><a name="5503"
+      > </a
+      ><a name="5504" class="Symbol"
+      >:</a
+      ><a name="5505"
+      > </a
+      ><a name="5506" class="Symbol"
+      >(&#955;</a
+      ><a name="5508"
+      > </a
+      ><a name="5509" href="funext-from-a-sigle-equation.html#5509" class="Bound"
+      >x</a
+      ><a name="5510"
+      > </a
+      ><a name="5511" href="funext-from-a-sigle-equation.html#5511" class="Bound"
+      >y</a
+      ><a name="5512"
+      > </a
+      ><a name="5513" href="funext-from-a-sigle-equation.html#5513" class="Bound"
+      >u</a
+      ><a name="5514"
+      > </a
+      ><a name="5515" href="funext-from-a-sigle-equation.html#5515" class="Bound"
+      >v</a
+      ><a name="5516"
+      > </a
+      ><a name="5517" class="Symbol"
+      >&#8594;</a
+      ><a name="5518"
+      > </a
+      ><a name="5519" href="funext-from-a-sigle-equation.html#5513" class="Bound"
+      >u</a
+      ><a name="5520" class="Symbol"
+      >)</a
+      ><a name="5521"
+      > </a
+      ><a name="5522" href="tiny-library.html#422" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="5523"
+      > </a
+      ><a name="5524" class="Symbol"
+      >(&#955;</a
+      ><a name="5526"
+      > </a
+      ><a name="5527" href="funext-from-a-sigle-equation.html#5527" class="Bound"
+      >x</a
+      ><a name="5528"
+      > </a
+      ><a name="5529" href="funext-from-a-sigle-equation.html#5529" class="Bound"
+      >y</a
+      ><a name="5530"
+      > </a
+      ><a name="5531" href="funext-from-a-sigle-equation.html#5531" class="Bound"
+      >u</a
+      ><a name="5532"
+      > </a
+      ><a name="5533" href="funext-from-a-sigle-equation.html#5533" class="Bound"
+      >v</a
+      ><a name="5534"
+      > </a
+      ><a name="5535" class="Symbol"
+      >&#8594;</a
+      ><a name="5536"
+      > </a
+      ><a name="5537" href="funext-from-a-sigle-equation.html#5533" class="Bound"
+      >v</a
+      ><a name="5538" class="Symbol"
+      >)</a
+      ><a name="5539"
+      > 
+         </a
+      ><a name="5550" class="Symbol"
+      >&#8594;</a
+      ><a name="5551"
+      > </a
+      ><a name="5552" class="Symbol"
+      >&#8704;(</a
+      ><a name="5554" href="funext-from-a-sigle-equation.html#5554" class="Bound"
+      >f</a
+      ><a name="5555"
+      > </a
+      ><a name="5556" href="funext-from-a-sigle-equation.html#5556" class="Bound"
+      >g</a
+      ><a name="5557"
+      > </a
+      ><a name="5558" class="Symbol"
+      >:</a
+      ><a name="5559"
+      > </a
+      ><a name="5560" class="Symbol"
+      >(</a
+      ><a name="5561" href="funext-from-a-sigle-equation.html#5561" class="Bound"
+      >x</a
+      ><a name="5562"
+      > </a
+      ><a name="5563" class="Symbol"
+      >:</a
+      ><a name="5564"
+      > </a
+      ><a name="5565" href="funext-from-a-sigle-equation.html#5393" class="Bound"
+      >X</a
+      ><a name="5566" class="Symbol"
+      >)</a
+      ><a name="5567"
+      > </a
+      ><a name="5568" class="Symbol"
+      >&#8594;</a
+      ><a name="5569"
+      > </a
+      ><a name="5570" href="funext-from-a-sigle-equation.html#5401" class="Bound"
+      >Y</a
+      ><a name="5571"
+      > </a
+      ><a name="5572" href="funext-from-a-sigle-equation.html#5561" class="Bound"
+      >x</a
+      ><a name="5573" class="Symbol"
+      >)</a
+      ><a name="5574"
+      > </a
+      ><a name="5575" class="Symbol"
+      >&#8594;</a
+      ><a name="5576"
+      > </a
+      ><a name="5577" class="Symbol"
+      >(&#8704;(</a
+      ><a name="5580" href="funext-from-a-sigle-equation.html#5580" class="Bound"
+      >x</a
+      ><a name="5581"
+      > </a
+      ><a name="5582" class="Symbol"
+      >:</a
+      ><a name="5583"
+      > </a
+      ><a name="5584" href="funext-from-a-sigle-equation.html#5393" class="Bound"
+      >X</a
+      ><a name="5585" class="Symbol"
+      >)</a
+      ><a name="5586"
+      > </a
+      ><a name="5587" class="Symbol"
+      >-&gt;</a
+      ><a name="5589"
+      > </a
+      ><a name="5590" href="funext-from-a-sigle-equation.html#5554" class="Bound"
+      >f</a
+      ><a name="5591"
+      > </a
+      ><a name="5592" href="funext-from-a-sigle-equation.html#5580" class="Bound"
+      >x</a
+      ><a name="5593"
+      > </a
+      ><a name="5594" href="tiny-library.html#422" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="5595"
+      > </a
+      ><a name="5596" href="funext-from-a-sigle-equation.html#5556" class="Bound"
+      >g</a
+      ><a name="5597"
+      > </a
+      ><a name="5598" href="funext-from-a-sigle-equation.html#5580" class="Bound"
+      >x</a
+      ><a name="5599" class="Symbol"
+      >)</a
+      ><a name="5600"
+      > </a
+      ><a name="5601" class="Symbol"
+      >&#8594;</a
+      ><a name="5602"
+      > </a
+      ><a name="5603" href="funext-from-a-sigle-equation.html#5554" class="Bound"
+      >f</a
+      ><a name="5604"
+      > </a
+      ><a name="5605" href="tiny-library.html#422" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="5606"
+      > </a
+      ><a name="5607" href="funext-from-a-sigle-equation.html#5556" class="Bound"
+      >g</a
+      ><a name="5608"
+      >
+ </a
+      ><a name="5610" href="funext-from-a-sigle-equation.html#5496" class="Function"
+      >theorem</a
+      ><a name="5617"
+      > </a
+      ><a name="5618" href="funext-from-a-sigle-equation.html#5618" class="Bound"
+      >seg</a
+      ><a name="5621"
+      > </a
+      ><a name="5622" href="funext-from-a-sigle-equation.html#5622" class="Bound"
+      >f</a
+      ><a name="5623"
+      > </a
+      ><a name="5624" href="funext-from-a-sigle-equation.html#5624" class="Bound"
+      >g</a
+      ><a name="5625"
+      > </a
+      ><a name="5626" href="funext-from-a-sigle-equation.html#5626" class="Bound"
+      >h</a
+      ><a name="5627"
+      > </a
+      ><a name="5628" class="Symbol"
+      >=</a
+      ><a name="5629"
+      > </a
+      ><a name="5630" href="tiny-library.html#887" class="Function"
+      >ap</a
+      ><a name="5632"
+      > </a
+      ><a name="5633" href="funext-from-a-sigle-equation.html#5650" class="Function"
+      >&#966;</a
+      ><a name="5634"
+      > </a
+      ><a name="5635" href="funext-from-a-sigle-equation.html#5618" class="Bound"
+      >seg</a
+      ><a name="5638"
+      >
+  </a
+      ><a name="5641" class="Keyword"
+      >where</a
+      ><a name="5646"
+      >
+   </a
+      ><a name="5650" href="funext-from-a-sigle-equation.html#5650" class="Function"
+      >&#966;</a
+      ><a name="5651"
+      > </a
+      ><a name="5652" class="Symbol"
+      >:</a
+      ><a name="5653"
+      > </a
+      ><a name="5654" href="funext-from-a-sigle-equation.html#5420" class="Function"
+      >I</a
+      ><a name="5655"
+      > </a
+      ><a name="5656" class="Symbol"
+      >&#8594;</a
+      ><a name="5657"
+      > </a
+      ><a name="5658" class="Symbol"
+      >(</a
+      ><a name="5659" href="funext-from-a-sigle-equation.html#5659" class="Bound"
+      >x</a
+      ><a name="5660"
+      > </a
+      ><a name="5661" class="Symbol"
+      >:</a
+      ><a name="5662"
+      > </a
+      ><a name="5663" href="funext-from-a-sigle-equation.html#5393" class="Bound"
+      >X</a
+      ><a name="5664" class="Symbol"
+      >)</a
+      ><a name="5665"
+      > </a
+      ><a name="5666" class="Symbol"
+      >&#8594;</a
+      ><a name="5667"
+      > </a
+      ><a name="5668" href="funext-from-a-sigle-equation.html#5401" class="Bound"
+      >Y</a
+      ><a name="5669"
+      > </a
+      ><a name="5670" href="funext-from-a-sigle-equation.html#5659" class="Bound"
+      >x</a
+      ><a name="5671"
+      >
+   </a
+      ><a name="5675" href="funext-from-a-sigle-equation.html#5650" class="Function"
+      >&#966;</a
+      ><a name="5676"
+      > </a
+      ><a name="5677" href="funext-from-a-sigle-equation.html#5677" class="Bound"
+      >i</a
+      ><a name="5678"
+      > </a
+      ><a name="5679" href="funext-from-a-sigle-equation.html#5679" class="Bound"
+      >x</a
+      ><a name="5680"
+      > </a
+      ><a name="5681" class="Symbol"
+      >=</a
+      ><a name="5682"
+      > </a
+      ><a name="5683" href="tiny-library.html#346" class="Field"
+      >&#960;&#8320;</a
+      ><a name="5685" class="Symbol"
+      >(</a
+      ><a name="5686" href="funext-from-a-sigle-equation.html#5677" class="Bound"
+      >i</a
+      ><a name="5687"
+      > </a
+      ><a name="5688" href="funext-from-a-sigle-equation.html#5679" class="Bound"
+      >x</a
+      ><a name="5689"
+      > </a
+      ><a name="5690" class="Symbol"
+      >(</a
+      ><a name="5691" href="funext-from-a-sigle-equation.html#5622" class="Bound"
+      >f</a
+      ><a name="5692"
+      > </a
+      ><a name="5693" href="funext-from-a-sigle-equation.html#5679" class="Bound"
+      >x</a
+      ><a name="5694" class="Symbol"
+      >)</a
+      ><a name="5695"
+      > </a
+      ><a name="5696" class="Symbol"
+      >(</a
+      ><a name="5697" href="funext-from-a-sigle-equation.html#5622" class="Bound"
+      >f</a
+      ><a name="5698"
+      > </a
+      ><a name="5699" href="funext-from-a-sigle-equation.html#5679" class="Bound"
+      >x</a
+      ><a name="5700"
+      > </a
+      ><a name="5701" href="tiny-library.html#331" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="5702"
+      > </a
+      ><a name="5703" href="tiny-library.html#463" class="InductiveConstructor"
+      >refl</a
+      ><a name="5707" class="Symbol"
+      >)</a
+      ><a name="5708"
+      > </a
+      ><a name="5709" class="Symbol"
+      >(</a
+      ><a name="5710" href="funext-from-a-sigle-equation.html#5624" class="Bound"
+      >g</a
+      ><a name="5711"
+      > </a
+      ><a name="5712" href="funext-from-a-sigle-equation.html#5679" class="Bound"
+      >x</a
+      ><a name="5713"
+      > </a
+      ><a name="5714" href="tiny-library.html#331" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="5715"
+      > </a
+      ><a name="5716" href="funext-from-a-sigle-equation.html#5626" class="Bound"
+      >h</a
+      ><a name="5717"
+      > </a
+      ><a name="5718" href="funext-from-a-sigle-equation.html#5679" class="Bound"
+      >x</a
+      ><a name="5719" class="Symbol"
+      >))</a
+      ><a name="5721"
+      >
+
+   </a
+      ><a name="5726" href="funext-from-a-sigle-equation.html#5726" class="Function"
+      >observation&#8320;</a
+      ><a name="5738"
+      > </a
+      ><a name="5739" class="Symbol"
+      >:</a
+      ><a name="5740"
+      > </a
+      ><a name="5741" href="funext-from-a-sigle-equation.html#5650" class="Function"
+      >&#966;</a
+      ><a name="5742" class="Symbol"
+      >(&#955;</a
+      ><a name="5744"
+      > </a
+      ><a name="5745" href="funext-from-a-sigle-equation.html#5745" class="Bound"
+      >x</a
+      ><a name="5746"
+      > </a
+      ><a name="5747" href="funext-from-a-sigle-equation.html#5747" class="Bound"
+      >y</a
+      ><a name="5748"
+      > </a
+      ><a name="5749" href="funext-from-a-sigle-equation.html#5749" class="Bound"
+      >u</a
+      ><a name="5750"
+      > </a
+      ><a name="5751" href="funext-from-a-sigle-equation.html#5751" class="Bound"
+      >v</a
+      ><a name="5752"
+      > </a
+      ><a name="5753" class="Symbol"
+      >&#8594;</a
+      ><a name="5754"
+      > </a
+      ><a name="5755" href="funext-from-a-sigle-equation.html#5749" class="Bound"
+      >u</a
+      ><a name="5756" class="Symbol"
+      >)</a
+      ><a name="5757"
+      > </a
+      ><a name="5758" href="tiny-library.html#422" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="5759"
+      > </a
+      ><a name="5760" href="funext-from-a-sigle-equation.html#5622" class="Bound"
+      >f</a
+      ><a name="5761"
+      >
+   </a
+      ><a name="5765" href="funext-from-a-sigle-equation.html#5726" class="Function"
+      >observation&#8320;</a
+      ><a name="5777"
+      > </a
+      ><a name="5778" class="Symbol"
+      >=</a
+      ><a name="5779"
+      > </a
+      ><a name="5780" href="tiny-library.html#463" class="InductiveConstructor"
+      >refl</a
+      ><a name="5784"
+      >
+
+   </a
+      ><a name="5789" href="funext-from-a-sigle-equation.html#5789" class="Function"
+      >observation&#8321;</a
+      ><a name="5801"
+      > </a
+      ><a name="5802" class="Symbol"
+      >:</a
+      ><a name="5803"
+      > </a
+      ><a name="5804" href="funext-from-a-sigle-equation.html#5650" class="Function"
+      >&#966;</a
+      ><a name="5805" class="Symbol"
+      >(&#955;</a
+      ><a name="5807"
+      > </a
+      ><a name="5808" href="funext-from-a-sigle-equation.html#5808" class="Bound"
+      >x</a
+      ><a name="5809"
+      > </a
+      ><a name="5810" href="funext-from-a-sigle-equation.html#5810" class="Bound"
+      >y</a
+      ><a name="5811"
+      > </a
+      ><a name="5812" href="funext-from-a-sigle-equation.html#5812" class="Bound"
+      >u</a
+      ><a name="5813"
+      > </a
+      ><a name="5814" href="funext-from-a-sigle-equation.html#5814" class="Bound"
+      >v</a
+      ><a name="5815"
+      > </a
+      ><a name="5816" class="Symbol"
+      >&#8594;</a
+      ><a name="5817"
+      > </a
+      ><a name="5818" href="funext-from-a-sigle-equation.html#5814" class="Bound"
+      >v</a
+      ><a name="5819" class="Symbol"
+      >)</a
+      ><a name="5820"
+      > </a
+      ><a name="5821" href="tiny-library.html#422" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="5822"
+      > </a
+      ><a name="5823" href="funext-from-a-sigle-equation.html#5624" class="Bound"
+      >g</a
+      ><a name="5824"
+      >
+   </a
+      ><a name="5828" href="funext-from-a-sigle-equation.html#5789" class="Function"
+      >observation&#8321;</a
+      ><a name="5840"
+      > </a
+      ><a name="5841" class="Symbol"
+      >=</a
+      ><a name="5842"
+      > </a
+      ><a name="5843" href="tiny-library.html#463" class="InductiveConstructor"
+      >refl</a
+      ><a name="5847"
+      >
+
+\end{code}
+</a
+      ></pre
+    ><script type="text/javascript"> var sc_project=4273194; var sc_invisible=1; var sc_partition=48; var sc_click_stat=1; var sc_security="47eab21e"; </script> <script type="text/javascript" src="http://www.statcounter.com/counter/counter.js"></script><noscript><div class="statcounter"><a title="site stats" href="http://www.statcounter.com/" target="_blank"><img class="statcounter" src="http://c.statcounter.com/4273194/0/47eab21e/1/" alt="site stats" ></a></div></noscript></body
+  ></html
+>

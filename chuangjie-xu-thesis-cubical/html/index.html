@@ -1,0 +1,143 @@
+<!DOCTYPE HTML>
+<html><head><meta charset="utf-8"><title>index</title><link rel="stylesheet" href="Agda.css"></head><body><pre>\begin{code}
+
+<a id="15" class="Symbol">{-#</a> <a id="19" class="Keyword">OPTIONS</a> <a id="27" class="Option">--cubical</a> <a id="37" class="Symbol">#-}</a>
+
+<a id="42" class="Keyword">module</a> <a id="49" href="index.html" class="Module">index</a> <a id="55" class="Keyword">where</a>
+
+\end{code}<a id="72" class="Comment">
+
+This is the cubical Agda implementation of the PhD thesis
+
+  A CONTINUOUS COMPUTATIONAL INTERPRETATION OF TYPE THEORIES
+
+defended 1st May 2015, School of Computer Science, University of
+Birmingham, UK, by
+
+  Chuangjie XU
+
+supervised by Martín Escardó.
+
+The original version was developed in Agda 2.4.2.2 and is available
+for downloading at
+
+  http://cj-xu.github.io/ContinuityType/xu-thesis-agda.zip
+
+This version, 9th November 2017, is ported to cubical Agda, and only
+includes one of the five original branches, the one postulating
+function extensionality. 
+
+In the original, non-cubical, version of this branch, we had a closed
+term of type ℕ (a modulus of uniform continuity of a simple function)
+whose normal form was not a numeral but instead a 367-lines long
+term. The term is (modu F₂) and its original normal form is named
+(old-modu-F₂-normal-form) in the following file.
+
+</a>\begin{code}
+
+<a id="970" class="Keyword">import</a> <a id="977" href="UsingFunext.ModellingUC.ComputationExperiments.html" class="Module">UsingFunext.ModellingUC.ComputationExperiments</a>
+
+\end{code}<a id="1035" class="Comment">
+
+This was because function extensionality was postulated as a term
+funext. However, in this cubical version, funext is proved, and hence
+the original term normalizes to zero (modu-F₂-normal-form).
+
+Porting this to cubical Agda involved:
+
+  1. Using Andrea Vezzosi&#39;s cubical library with a new definition of
+  the identity type Id, which we rename to ≡ to conform with our
+  original development. (Because our original development didn&#39;t use
+  the standard library, but Vezzozi&#39;s one does, we had to slighly
+  adapt his development for our needs.)
+
+</a>\begin{code}
+
+<a id="1598" class="Keyword">open</a> <a id="1603" class="Keyword">import</a> <a id="1610" href="Id.html" class="Module">Id</a>
+<a id="1613" class="Keyword">open</a> <a id="1618" class="Keyword">import</a> <a id="1625" href="PathPrelude.html" class="Module">PathPrelude</a>
+<a id="1637" class="Keyword">open</a> <a id="1642" class="Keyword">import</a> <a id="1649" href="Primitives.html" class="Module">Primitives</a>
+<a id="1660" class="Keyword">open</a> <a id="1665" class="Keyword">import</a> <a id="1672" href="Sub.html" class="Module">Sub</a>
+
+\end{code}<a id="1687" class="Comment">
+
+  2. Removing all uses of pattern matching on refl, and instead using
+  the J induction principle for Id. 
+
+  3. Giving up using built-in NATURALS.
+
+In this version of the development, we only include the chapters of
+the thesis that are needed to compute moduli of uniform continuity.
+
+To navigate this set of files, click at module names, keywords or symbols.
+
+Chapter 2 investigates the Curry-Howard formulations of the two
+fundamental continuity principles, (Cont) and (UC).  The latter, which
+is the one that we are working with in this thesis, is logically
+equivalent to the logical formulation.  For this, we need to extend
+the type theory with propositional truncation and the axiom of
+function extensionality. This is removed from this branch of the
+development.
+
+Chapter 3 develops a variation of the topological topos, consisting of sheaves
+on a certain uniform-continuity site.  In particular, C-spaces, corresponding to
+concrete sheaves, form a (locally) cartesian closed category with a natural
+numbers object.  Moreover, there is a fan functional, in the category of
+C-spaces, that continuously calculates least moduli of uniform continuity of
+maps ₂ℕ → ℕ. Not all of this is included in this version of the development.
+
+</a>\begin{code}
+
+<a id="2935" class="Comment">-- § 3.2.1  The uniform-continuity site</a>
+<a id="2975" class="Keyword">import</a> <a id="2982" href="UsingFunext.Space.Coverage.html" class="Module">UsingFunext.Space.Coverage</a>
+
+<a id="3010" class="Comment">-- § 3.3.1  Concrete sheaves as a variation of quasi-topological spaces</a>
+<a id="3082" class="Keyword">import</a> <a id="3089" href="UsingFunext.Space.Space.html" class="Module">UsingFunext.Space.Space</a>
+
+<a id="3114" class="Comment">-- § 3.3.2  The (local) cartesian closed structure of C-Space</a>
+<a id="3176" class="Keyword">import</a> <a id="3183" href="UsingFunext.Space.CartesianClosedness.html" class="Module">UsingFunext.Space.CartesianClosedness</a>
+
+<a id="3222" class="Comment">-- § 3.3.3  Discrete C-spaces and natural numbers object</a>
+<a id="3279" class="Keyword">import</a> <a id="3286" href="UsingFunext.Space.DiscreteSpace.html" class="Module">UsingFunext.Space.DiscreteSpace</a>
+
+<a id="3319" class="Comment">-- § 3.4  The representable sheaf is the Cantor space</a>
+<a id="3373" class="Keyword">import</a> <a id="3380" href="UsingFunext.Space.YonedaLemma.html" class="Module">UsingFunext.Space.YonedaLemma</a>
+
+<a id="3411" class="Comment">-- § 3.5  The fan functional in the category of C-spaces</a>
+<a id="3468" class="Keyword">import</a> <a id="3475" href="UsingFunext.Space.Fan.html" class="Module">UsingFunext.Space.Fan</a>
+
+\end{code}<a id="3508" class="Comment">
+
+Chapter 4 shows how the Kleene-Kreisel continuous functionals can be
+calculated within C-spaces.  When assuming the Brouwerian axiom that
+all set-theoretic functions ₂ℕ → ℕ are uniformly continuous, the full
+type hierarchy is equivalent to the Kleene--Kreisel continuous
+hierarchy within C-spaces. This is not included in this version of the
+development.
+
+Chapter 5 employs C-spaces to model Gödel&#39;s system T with a
+skolemization of (UC), and to realizes (UC) in the intuitionistic
+arithmetic HAω of finite types, with the aid of the fan
+functional. Not all of this is included in this version of the
+development.
+
+</a>\begin{code}
+
+<a id="4139" class="Comment">-- § 5.1  A continuous model of Gödel&#39;s System T</a>
+<a id="4188" class="Keyword">import</a> <a id="4195" href="UsingFunext.ModellingUC.UCinT.html" class="Module">UsingFunext.ModellingUC.UCinT</a>
+
+\end{code}<a id="4236" class="Comment">
+
+Chapter 6 validates the Curry-Howard interpretation of (UC) in the
+locally cartesian closed category of C-spaces using the fan
+functional, and demonstrates how C-spaces and sheaves form models of
+dependent types, without the coherence problem, via the notion of
+category with families (CwF). This is not included in this version of
+the development.
+
+Chapter 7 discusses other versions of implementation, in which the
+computational content of the development is not destroyed (using
+setoids, using computationally irrelevant fields, and other
+methods). This is not included in this version of the development.
+
+
+</a></pre><script type="text/javascript"> var sc_project=4273194; var sc_invisible=1; var sc_partition=48; var sc_click_stat=1; var sc_security="47eab21e"; </script> <script type="text/javascript" src="http://www.statcounter.com/counter/counter.js"></script><noscript><div class="statcounter"><a title="site stats" href="http://www.statcounter.com/" target="_blank"><img class="statcounter" src="http://c.statcounter.com/4273194/0/47eab21e/1/" alt="site stats" ></a></div></noscript></body></html>

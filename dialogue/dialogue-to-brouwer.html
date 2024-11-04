@@ -1,0 +1,2832 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+><head
+  ><title
+    >dialogue-to-brouwer</title
+    ><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"
+     /><meta http-equiv="Content-Style-Type" content="text/css"
+     /><link href="Agda.css" rel="stylesheet" type="text/css"
+     /></head
+  ><body
+  ><pre
+    ><a name="1" class="Comment"
+      >-- Martin Escardo &amp; Paulo Oliva, Fri 24-25 Feb 2017</a
+      ><a name="52"
+      >
+</a
+      ><a name="53" class="Comment"
+      >-- </a
+      ><a name="56"
+      >
+</a
+      ><a name="57" class="Comment"
+      >-- Conversion of dialogue trees to Brouwer trees.</a
+      ><a name="106"
+      >
+
+</a
+      ><a name="108" class="Symbol"
+      >{-#</a
+      ><a name="111"
+      > </a
+      ><a name="112" class="Keyword"
+      >OPTIONS</a
+      ><a name="119"
+      > --without-K </a
+      ><a name="132" class="Symbol"
+      >#-}</a
+      ><a name="135"
+      >
+
+</a
+      ><a name="137" class="Keyword"
+      >data</a
+      ><a name="141"
+      > </a
+      ><a name="142" href="dialogue-to-brouwer.html#142" class="Datatype"
+      >&#8469;</a
+      ><a name="143"
+      > </a
+      ><a name="144" class="Symbol"
+      >:</a
+      ><a name="145"
+      > </a
+      ><a name="146" class="PrimitiveType"
+      >Set</a
+      ><a name="149"
+      > </a
+      ><a name="150" class="Keyword"
+      >where</a
+      ><a name="155"
+      >
+ </a
+      ><a name="158" href="dialogue-to-brouwer.html#158" class="InductiveConstructor"
+      >zero</a
+      ><a name="162"
+      > </a
+      ><a name="163" class="Symbol"
+      >:</a
+      ><a name="164"
+      > </a
+      ><a name="165" href="dialogue-to-brouwer.html#142" class="Datatype"
+      >&#8469;</a
+      ><a name="166"
+      >
+ </a
+      ><a name="182" href="dialogue-to-brouwer.html#182" class="InductiveConstructor"
+      >succ</a
+      ><a name="186"
+      > </a
+      ><a name="187" class="Symbol"
+      >:</a
+      ><a name="188"
+      > </a
+      ><a name="189" href="dialogue-to-brouwer.html#142" class="Datatype"
+      >&#8469;</a
+      ><a name="190"
+      > </a
+      ><a name="191" class="Symbol"
+      >&#8594;</a
+      ><a name="192"
+      > </a
+      ><a name="193" href="dialogue-to-brouwer.html#142" class="Datatype"
+      >&#8469;</a
+      ><a name="194"
+      >
+
+</a
+      ><a name="203" class="Keyword"
+      >data</a
+      ><a name="207"
+      > </a
+      ><a name="208" href="dialogue-to-brouwer.html#208" class="Datatype Operator"
+      >_&#8801;_</a
+      ><a name="211"
+      > </a
+      ><a name="212" class="Symbol"
+      >{</a
+      ><a name="213" href="dialogue-to-brouwer.html#213" class="Bound"
+      >X</a
+      ><a name="214"
+      > </a
+      ><a name="215" class="Symbol"
+      >:</a
+      ><a name="216"
+      > </a
+      ><a name="217" class="PrimitiveType"
+      >Set</a
+      ><a name="220" class="Symbol"
+      >}</a
+      ><a name="221"
+      > </a
+      ><a name="222" class="Symbol"
+      >:</a
+      ><a name="223"
+      > </a
+      ><a name="224" href="dialogue-to-brouwer.html#213" class="Bound"
+      >X</a
+      ><a name="225"
+      > </a
+      ><a name="226" class="Symbol"
+      >&#8594;</a
+      ><a name="227"
+      > </a
+      ><a name="228" href="dialogue-to-brouwer.html#213" class="Bound"
+      >X</a
+      ><a name="229"
+      > </a
+      ><a name="230" class="Symbol"
+      >&#8594;</a
+      ><a name="231"
+      > </a
+      ><a name="232" class="PrimitiveType"
+      >Set</a
+      ><a name="235"
+      > </a
+      ><a name="236" class="Keyword"
+      >where</a
+      ><a name="241"
+      >
+ </a
+      ><a name="243" href="dialogue-to-brouwer.html#243" class="InductiveConstructor"
+      >refl</a
+      ><a name="247"
+      > </a
+      ><a name="248" class="Symbol"
+      >:</a
+      ><a name="249"
+      > </a
+      ><a name="250" class="Symbol"
+      >{</a
+      ><a name="251" href="dialogue-to-brouwer.html#251" class="Bound"
+      >x</a
+      ><a name="252"
+      > </a
+      ><a name="253" class="Symbol"
+      >:</a
+      ><a name="254"
+      > </a
+      ><a name="255" href="dialogue-to-brouwer.html#213" class="Bound"
+      >X</a
+      ><a name="256" class="Symbol"
+      >}</a
+      ><a name="257"
+      > </a
+      ><a name="258" class="Symbol"
+      >&#8594;</a
+      ><a name="259"
+      > </a
+      ><a name="260" href="dialogue-to-brouwer.html#251" class="Bound"
+      >x</a
+      ><a name="261"
+      > </a
+      ><a name="262" href="dialogue-to-brouwer.html#208" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="263"
+      > </a
+      ><a name="264" href="dialogue-to-brouwer.html#251" class="Bound"
+      >x</a
+      ><a name="265"
+      >
+
+</a
+      ><a name="267" href="dialogue-to-brouwer.html#267" class="Function"
+      >trans</a
+      ><a name="272"
+      > </a
+      ><a name="273" class="Symbol"
+      >:</a
+      ><a name="274"
+      > </a
+      ><a name="275" class="Symbol"
+      >{</a
+      ><a name="276" href="dialogue-to-brouwer.html#276" class="Bound"
+      >X</a
+      ><a name="277"
+      > </a
+      ><a name="278" class="Symbol"
+      >:</a
+      ><a name="279"
+      > </a
+      ><a name="280" class="PrimitiveType"
+      >Set</a
+      ><a name="283" class="Symbol"
+      >}</a
+      ><a name="284"
+      > </a
+      ><a name="285" class="Symbol"
+      >{</a
+      ><a name="286" href="dialogue-to-brouwer.html#286" class="Bound"
+      >x</a
+      ><a name="287"
+      > </a
+      ><a name="288" href="dialogue-to-brouwer.html#288" class="Bound"
+      >y</a
+      ><a name="289"
+      > </a
+      ><a name="290" href="dialogue-to-brouwer.html#290" class="Bound"
+      >z</a
+      ><a name="291"
+      > </a
+      ><a name="292" class="Symbol"
+      >:</a
+      ><a name="293"
+      > </a
+      ><a name="294" href="dialogue-to-brouwer.html#276" class="Bound"
+      >X</a
+      ><a name="295" class="Symbol"
+      >}</a
+      ><a name="296"
+      > </a
+      ><a name="297" class="Symbol"
+      >&#8594;</a
+      ><a name="298"
+      > </a
+      ><a name="299" href="dialogue-to-brouwer.html#286" class="Bound"
+      >x</a
+      ><a name="300"
+      > </a
+      ><a name="301" href="dialogue-to-brouwer.html#208" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="302"
+      > </a
+      ><a name="303" href="dialogue-to-brouwer.html#288" class="Bound"
+      >y</a
+      ><a name="304"
+      > </a
+      ><a name="305" class="Symbol"
+      >&#8594;</a
+      ><a name="306"
+      > </a
+      ><a name="307" href="dialogue-to-brouwer.html#288" class="Bound"
+      >y</a
+      ><a name="308"
+      > </a
+      ><a name="309" href="dialogue-to-brouwer.html#208" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="310"
+      > </a
+      ><a name="311" href="dialogue-to-brouwer.html#290" class="Bound"
+      >z</a
+      ><a name="312"
+      > </a
+      ><a name="313" class="Symbol"
+      >&#8594;</a
+      ><a name="314"
+      > </a
+      ><a name="315" href="dialogue-to-brouwer.html#286" class="Bound"
+      >x</a
+      ><a name="316"
+      > </a
+      ><a name="317" href="dialogue-to-brouwer.html#208" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="318"
+      > </a
+      ><a name="319" href="dialogue-to-brouwer.html#290" class="Bound"
+      >z</a
+      ><a name="320"
+      >
+</a
+      ><a name="321" href="dialogue-to-brouwer.html#267" class="Function"
+      >trans</a
+      ><a name="326"
+      > </a
+      ><a name="327" href="dialogue-to-brouwer.html#243" class="InductiveConstructor"
+      >refl</a
+      ><a name="331"
+      > </a
+      ><a name="332" href="dialogue-to-brouwer.html#243" class="InductiveConstructor"
+      >refl</a
+      ><a name="336"
+      > </a
+      ><a name="337" class="Symbol"
+      >=</a
+      ><a name="338"
+      > </a
+      ><a name="339" href="dialogue-to-brouwer.html#243" class="InductiveConstructor"
+      >refl</a
+      ><a name="343"
+      >
+
+</a
+      ><a name="345" class="Keyword"
+      >infix</a
+      ><a name="350"
+      >  </a
+      ><a name="352" class="Number"
+      >1</a
+      ><a name="353"
+      > </a
+      ><a name="354" href="dialogue-to-brouwer.html#208" class="Datatype Operator"
+      >_&#8801;_</a
+      ><a name="357"
+      >
+</a
+      ><a name="358" class="Keyword"
+      >infixr</a
+      ><a name="364"
+      > </a
+      ><a name="365" class="Number"
+      >0</a
+      ><a name="366"
+      > </a
+      ><a name="367" href="dialogue-to-brouwer.html#375" class="Function Operator"
+      >_&#8801;&#10216;_&#10217;_</a
+      ><a name="373"
+      >
+
+</a
+      ><a name="375" href="dialogue-to-brouwer.html#375" class="Function Operator"
+      >_&#8801;&#10216;_&#10217;_</a
+      ><a name="381"
+      > </a
+      ><a name="382" class="Symbol"
+      >:</a
+      ><a name="383"
+      > </a
+      ><a name="384" class="Symbol"
+      >{</a
+      ><a name="385" href="dialogue-to-brouwer.html#385" class="Bound"
+      >X</a
+      ><a name="386"
+      > </a
+      ><a name="387" class="Symbol"
+      >:</a
+      ><a name="388"
+      > </a
+      ><a name="389" class="PrimitiveType"
+      >Set</a
+      ><a name="392" class="Symbol"
+      >}</a
+      ><a name="393"
+      > </a
+      ><a name="394" class="Symbol"
+      >(</a
+      ><a name="395" href="dialogue-to-brouwer.html#395" class="Bound"
+      >x</a
+      ><a name="396"
+      > </a
+      ><a name="397" class="Symbol"
+      >:</a
+      ><a name="398"
+      > </a
+      ><a name="399" href="dialogue-to-brouwer.html#385" class="Bound"
+      >X</a
+      ><a name="400" class="Symbol"
+      >)</a
+      ><a name="401"
+      > </a
+      ><a name="402" class="Symbol"
+      >{</a
+      ><a name="403" href="dialogue-to-brouwer.html#403" class="Bound"
+      >y</a
+      ><a name="404"
+      > </a
+      ><a name="405" href="dialogue-to-brouwer.html#405" class="Bound"
+      >z</a
+      ><a name="406"
+      > </a
+      ><a name="407" class="Symbol"
+      >:</a
+      ><a name="408"
+      > </a
+      ><a name="409" href="dialogue-to-brouwer.html#385" class="Bound"
+      >X</a
+      ><a name="410" class="Symbol"
+      >}</a
+      ><a name="411"
+      > </a
+      ><a name="412" class="Symbol"
+      >&#8594;</a
+      ><a name="413"
+      > </a
+      ><a name="414" href="dialogue-to-brouwer.html#395" class="Bound"
+      >x</a
+      ><a name="415"
+      > </a
+      ><a name="416" href="dialogue-to-brouwer.html#208" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="417"
+      > </a
+      ><a name="418" href="dialogue-to-brouwer.html#403" class="Bound"
+      >y</a
+      ><a name="419"
+      > </a
+      ><a name="420" class="Symbol"
+      >&#8594;</a
+      ><a name="421"
+      > </a
+      ><a name="422" href="dialogue-to-brouwer.html#403" class="Bound"
+      >y</a
+      ><a name="423"
+      > </a
+      ><a name="424" href="dialogue-to-brouwer.html#208" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="425"
+      > </a
+      ><a name="426" href="dialogue-to-brouwer.html#405" class="Bound"
+      >z</a
+      ><a name="427"
+      > </a
+      ><a name="428" class="Symbol"
+      >&#8594;</a
+      ><a name="429"
+      > </a
+      ><a name="430" href="dialogue-to-brouwer.html#395" class="Bound"
+      >x</a
+      ><a name="431"
+      > </a
+      ><a name="432" href="dialogue-to-brouwer.html#208" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="433"
+      > </a
+      ><a name="434" href="dialogue-to-brouwer.html#405" class="Bound"
+      >z</a
+      ><a name="435"
+      >
+</a
+      ><a name="436" class="Symbol"
+      >_</a
+      ><a name="437"
+      > </a
+      ><a name="438" href="dialogue-to-brouwer.html#375" class="Function Operator"
+      >&#8801;&#10216;</a
+      ><a name="440"
+      > </a
+      ><a name="441" href="dialogue-to-brouwer.html#441" class="Bound"
+      >p</a
+      ><a name="442"
+      > </a
+      ><a name="443" href="dialogue-to-brouwer.html#375" class="Function Operator"
+      >&#10217;</a
+      ><a name="444"
+      > </a
+      ><a name="445" href="dialogue-to-brouwer.html#445" class="Bound"
+      >q</a
+      ><a name="446"
+      > </a
+      ><a name="447" class="Symbol"
+      >=</a
+      ><a name="448"
+      > </a
+      ><a name="449" href="dialogue-to-brouwer.html#267" class="Function"
+      >trans</a
+      ><a name="454"
+      > </a
+      ><a name="455" href="dialogue-to-brouwer.html#441" class="Bound"
+      >p</a
+      ><a name="456"
+      > </a
+      ><a name="457" href="dialogue-to-brouwer.html#445" class="Bound"
+      >q</a
+      ><a name="458"
+      >
+
+</a
+      ><a name="460" href="dialogue-to-brouwer.html#460" class="Function Operator"
+      >_&#8718;</a
+      ><a name="462"
+      > </a
+      ><a name="463" class="Symbol"
+      >:</a
+      ><a name="464"
+      > </a
+      ><a name="465" class="Symbol"
+      >{</a
+      ><a name="466" href="dialogue-to-brouwer.html#466" class="Bound"
+      >X</a
+      ><a name="467"
+      > </a
+      ><a name="468" class="Symbol"
+      >:</a
+      ><a name="469"
+      > </a
+      ><a name="470" class="PrimitiveType"
+      >Set</a
+      ><a name="473"
+      > </a
+      ><a name="474" class="Symbol"
+      >}</a
+      ><a name="475"
+      > </a
+      ><a name="476" class="Symbol"
+      >(</a
+      ><a name="477" href="dialogue-to-brouwer.html#477" class="Bound"
+      >x</a
+      ><a name="478"
+      > </a
+      ><a name="479" class="Symbol"
+      >:</a
+      ><a name="480"
+      > </a
+      ><a name="481" href="dialogue-to-brouwer.html#466" class="Bound"
+      >X</a
+      ><a name="482" class="Symbol"
+      >)</a
+      ><a name="483"
+      > </a
+      ><a name="484" class="Symbol"
+      >&#8594;</a
+      ><a name="485"
+      > </a
+      ><a name="486" href="dialogue-to-brouwer.html#477" class="Bound"
+      >x</a
+      ><a name="487"
+      > </a
+      ><a name="488" href="dialogue-to-brouwer.html#208" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="489"
+      > </a
+      ><a name="490" href="dialogue-to-brouwer.html#477" class="Bound"
+      >x</a
+      ><a name="491"
+      >
+</a
+      ><a name="492" href="dialogue-to-brouwer.html#460" class="Function Operator"
+      >_&#8718;</a
+      ><a name="494"
+      > </a
+      ><a name="495" class="Symbol"
+      >_</a
+      ><a name="496"
+      > </a
+      ><a name="497" class="Symbol"
+      >=</a
+      ><a name="498"
+      > </a
+      ><a name="499" href="dialogue-to-brouwer.html#243" class="InductiveConstructor"
+      >refl</a
+      ><a name="503"
+      >
+
+</a
+      ><a name="505" class="Comment"
+      >-- Dialogue trees:</a
+      ><a name="523"
+      >
+
+</a
+      ><a name="525" class="Keyword"
+      >data</a
+      ><a name="529"
+      > </a
+      ><a name="530" href="dialogue-to-brouwer.html#530" class="Datatype"
+      >D</a
+      ><a name="531"
+      > </a
+      ><a name="532" class="Symbol"
+      >:</a
+      ><a name="533"
+      > </a
+      ><a name="534" class="PrimitiveType"
+      >Set</a
+      ><a name="537"
+      > </a
+      ><a name="538" class="Keyword"
+      >where</a
+      ><a name="543"
+      >
+ </a
+      ><a name="546" href="dialogue-to-brouwer.html#546" class="InductiveConstructor"
+      >&#951;</a
+      ><a name="547"
+      > </a
+      ><a name="548" class="Symbol"
+      >:</a
+      ><a name="549"
+      > </a
+      ><a name="550" href="dialogue-to-brouwer.html#142" class="Datatype"
+      >&#8469;</a
+      ><a name="551"
+      > </a
+      ><a name="552" class="Symbol"
+      >&#8594;</a
+      ><a name="553"
+      > </a
+      ><a name="554" href="dialogue-to-brouwer.html#530" class="Datatype"
+      >D</a
+      ><a name="555"
+      >
+ </a
+      ><a name="557" href="dialogue-to-brouwer.html#557" class="InductiveConstructor"
+      >&#946;</a
+      ><a name="558"
+      > </a
+      ><a name="559" class="Symbol"
+      >:</a
+      ><a name="560"
+      > </a
+      ><a name="561" class="Symbol"
+      >(</a
+      ><a name="562" href="dialogue-to-brouwer.html#142" class="Datatype"
+      >&#8469;</a
+      ><a name="563"
+      > </a
+      ><a name="564" class="Symbol"
+      >&#8594;</a
+      ><a name="565"
+      > </a
+      ><a name="566" href="dialogue-to-brouwer.html#530" class="Datatype"
+      >D</a
+      ><a name="567" class="Symbol"
+      >)</a
+      ><a name="568"
+      > </a
+      ><a name="569" class="Symbol"
+      >&#8594;</a
+      ><a name="570"
+      > </a
+      ><a name="571" href="dialogue-to-brouwer.html#142" class="Datatype"
+      >&#8469;</a
+      ><a name="572"
+      > </a
+      ><a name="573" class="Symbol"
+      >&#8594;</a
+      ><a name="574"
+      > </a
+      ><a name="575" href="dialogue-to-brouwer.html#530" class="Datatype"
+      >D</a
+      ><a name="576"
+      >
+
+</a
+      ><a name="578" class="Comment"
+      >-- We use &#966; to range over forests of dialogue trees, that is,</a
+      ><a name="639"
+      >
+</a
+      ><a name="640" class="Comment"
+      >-- functions &#8469; &#8594; D.</a
+      ><a name="659"
+      >
+
+</a
+      ><a name="661" class="Comment"
+      >-- Dialogue trees represent functions (&#8469; &#8594; &#8469;) &#8594; &#8469;:</a
+      ><a name="711"
+      >
+
+</a
+      ><a name="713" href="dialogue-to-brouwer.html#713" class="Function"
+      >deval</a
+      ><a name="718"
+      > </a
+      ><a name="719" class="Symbol"
+      >:</a
+      ><a name="720"
+      > </a
+      ><a name="721" href="dialogue-to-brouwer.html#530" class="Datatype"
+      >D</a
+      ><a name="722"
+      > </a
+      ><a name="723" class="Symbol"
+      >&#8594;</a
+      ><a name="724"
+      > </a
+      ><a name="725" class="Symbol"
+      >(</a
+      ><a name="726" href="dialogue-to-brouwer.html#142" class="Datatype"
+      >&#8469;</a
+      ><a name="727"
+      > </a
+      ><a name="728" class="Symbol"
+      >&#8594;</a
+      ><a name="729"
+      > </a
+      ><a name="730" href="dialogue-to-brouwer.html#142" class="Datatype"
+      >&#8469;</a
+      ><a name="731" class="Symbol"
+      >)</a
+      ><a name="732"
+      > </a
+      ><a name="733" class="Symbol"
+      >&#8594;</a
+      ><a name="734"
+      > </a
+      ><a name="735" href="dialogue-to-brouwer.html#142" class="Datatype"
+      >&#8469;</a
+      ><a name="736"
+      >
+</a
+      ><a name="737" href="dialogue-to-brouwer.html#713" class="Function"
+      >deval</a
+      ><a name="742"
+      > </a
+      ><a name="743" class="Symbol"
+      >(</a
+      ><a name="744" href="dialogue-to-brouwer.html#546" class="InductiveConstructor"
+      >&#951;</a
+      ><a name="745"
+      > </a
+      ><a name="746" href="dialogue-to-brouwer.html#746" class="Bound"
+      >k</a
+      ><a name="747" class="Symbol"
+      >)</a
+      ><a name="748"
+      >   </a
+      ><a name="751" href="dialogue-to-brouwer.html#751" class="Bound"
+      >&#945;</a
+      ><a name="752"
+      > </a
+      ><a name="753" class="Symbol"
+      >=</a
+      ><a name="754"
+      > </a
+      ><a name="755" href="dialogue-to-brouwer.html#746" class="Bound"
+      >k</a
+      ><a name="756"
+      >
+</a
+      ><a name="757" href="dialogue-to-brouwer.html#713" class="Function"
+      >deval</a
+      ><a name="762"
+      > </a
+      ><a name="763" class="Symbol"
+      >(</a
+      ><a name="764" href="dialogue-to-brouwer.html#557" class="InductiveConstructor"
+      >&#946;</a
+      ><a name="765"
+      > </a
+      ><a name="766" href="dialogue-to-brouwer.html#766" class="Bound"
+      >&#966;</a
+      ><a name="767"
+      > </a
+      ><a name="768" href="dialogue-to-brouwer.html#768" class="Bound"
+      >n</a
+      ><a name="769" class="Symbol"
+      >)</a
+      ><a name="770"
+      > </a
+      ><a name="771" href="dialogue-to-brouwer.html#771" class="Bound"
+      >&#945;</a
+      ><a name="772"
+      > </a
+      ><a name="773" class="Symbol"
+      >=</a
+      ><a name="774"
+      > </a
+      ><a name="775" href="dialogue-to-brouwer.html#713" class="Function"
+      >deval</a
+      ><a name="780"
+      > </a
+      ><a name="781" class="Symbol"
+      >(</a
+      ><a name="782" href="dialogue-to-brouwer.html#766" class="Bound"
+      >&#966;</a
+      ><a name="783" class="Symbol"
+      >(</a
+      ><a name="784" href="dialogue-to-brouwer.html#771" class="Bound"
+      >&#945;</a
+      ><a name="785"
+      > </a
+      ><a name="786" href="dialogue-to-brouwer.html#768" class="Bound"
+      >n</a
+      ><a name="787" class="Symbol"
+      >))</a
+      ><a name="789"
+      > </a
+      ><a name="790" href="dialogue-to-brouwer.html#771" class="Bound"
+      >&#945;</a
+      ><a name="791"
+      >
+
+</a
+      ><a name="793" class="Comment"
+      >-- Brouwer trees:</a
+      ><a name="810"
+      >
+
+</a
+      ><a name="812" class="Keyword"
+      >data</a
+      ><a name="816"
+      > </a
+      ><a name="817" href="dialogue-to-brouwer.html#817" class="Datatype"
+      >B</a
+      ><a name="818"
+      > </a
+      ><a name="819" class="Symbol"
+      >:</a
+      ><a name="820"
+      > </a
+      ><a name="821" class="PrimitiveType"
+      >Set</a
+      ><a name="824"
+      > </a
+      ><a name="825" class="Keyword"
+      >where</a
+      ><a name="830"
+      >
+ </a
+      ><a name="832" href="dialogue-to-brouwer.html#832" class="InductiveConstructor"
+      >&#951;</a
+      ><a name="833"
+      > </a
+      ><a name="834" class="Symbol"
+      >:</a
+      ><a name="835"
+      > </a
+      ><a name="836" href="dialogue-to-brouwer.html#142" class="Datatype"
+      >&#8469;</a
+      ><a name="837"
+      > </a
+      ><a name="838" class="Symbol"
+      >&#8594;</a
+      ><a name="839"
+      > </a
+      ><a name="840" href="dialogue-to-brouwer.html#817" class="Datatype"
+      >B</a
+      ><a name="841"
+      >
+ </a
+      ><a name="843" href="dialogue-to-brouwer.html#843" class="InductiveConstructor"
+      >&#948;</a
+      ><a name="844"
+      > </a
+      ><a name="845" class="Symbol"
+      >:</a
+      ><a name="846"
+      > </a
+      ><a name="847" class="Symbol"
+      >(</a
+      ><a name="848" href="dialogue-to-brouwer.html#142" class="Datatype"
+      >&#8469;</a
+      ><a name="849"
+      > </a
+      ><a name="850" class="Symbol"
+      >&#8594;</a
+      ><a name="851"
+      > </a
+      ><a name="852" href="dialogue-to-brouwer.html#817" class="Datatype"
+      >B</a
+      ><a name="853" class="Symbol"
+      >)</a
+      ><a name="854"
+      > </a
+      ><a name="855" class="Symbol"
+      >&#8594;</a
+      ><a name="856"
+      > </a
+      ><a name="857" href="dialogue-to-brouwer.html#817" class="Datatype"
+      >B</a
+      ><a name="858"
+      >
+
+</a
+      ><a name="860" class="Comment"
+      >-- We use &#947; to range over forests of Brower trees.</a
+      ><a name="910"
+      >
+
+</a
+      ><a name="912" class="Comment"
+      >-- Brouwer trees represent functions (&#8469; &#8594; &#8469;) &#8594; &#8469; too:</a
+      ><a name="965"
+      >
+
+</a
+      ><a name="967" href="dialogue-to-brouwer.html#967" class="Function"
+      >beval</a
+      ><a name="972"
+      > </a
+      ><a name="973" class="Symbol"
+      >:</a
+      ><a name="974"
+      > </a
+      ><a name="975" href="dialogue-to-brouwer.html#817" class="Datatype"
+      >B</a
+      ><a name="976"
+      > </a
+      ><a name="977" class="Symbol"
+      >&#8594;</a
+      ><a name="978"
+      > </a
+      ><a name="979" class="Symbol"
+      >(</a
+      ><a name="980" href="dialogue-to-brouwer.html#142" class="Datatype"
+      >&#8469;</a
+      ><a name="981"
+      > </a
+      ><a name="982" class="Symbol"
+      >&#8594;</a
+      ><a name="983"
+      > </a
+      ><a name="984" href="dialogue-to-brouwer.html#142" class="Datatype"
+      >&#8469;</a
+      ><a name="985" class="Symbol"
+      >)</a
+      ><a name="986"
+      > </a
+      ><a name="987" class="Symbol"
+      >&#8594;</a
+      ><a name="988"
+      > </a
+      ><a name="989" href="dialogue-to-brouwer.html#142" class="Datatype"
+      >&#8469;</a
+      ><a name="990"
+      >
+</a
+      ><a name="991" href="dialogue-to-brouwer.html#967" class="Function"
+      >beval</a
+      ><a name="996"
+      > </a
+      ><a name="997" class="Symbol"
+      >(</a
+      ><a name="998" href="dialogue-to-brouwer.html#832" class="InductiveConstructor"
+      >&#951;</a
+      ><a name="999"
+      > </a
+      ><a name="1000" href="dialogue-to-brouwer.html#1000" class="Bound"
+      >k</a
+      ><a name="1001" class="Symbol"
+      >)</a
+      ><a name="1002"
+      > </a
+      ><a name="1003" href="dialogue-to-brouwer.html#1003" class="Bound"
+      >&#945;</a
+      ><a name="1004"
+      > </a
+      ><a name="1005" class="Symbol"
+      >=</a
+      ><a name="1006"
+      > </a
+      ><a name="1007" href="dialogue-to-brouwer.html#1000" class="Bound"
+      >k</a
+      ><a name="1008"
+      >
+</a
+      ><a name="1009" href="dialogue-to-brouwer.html#967" class="Function"
+      >beval</a
+      ><a name="1014"
+      > </a
+      ><a name="1015" class="Symbol"
+      >(</a
+      ><a name="1016" href="dialogue-to-brouwer.html#843" class="InductiveConstructor"
+      >&#948;</a
+      ><a name="1017"
+      > </a
+      ><a name="1018" href="dialogue-to-brouwer.html#1018" class="Bound"
+      >&#947;</a
+      ><a name="1019" class="Symbol"
+      >)</a
+      ><a name="1020"
+      > </a
+      ><a name="1021" href="dialogue-to-brouwer.html#1021" class="Bound"
+      >&#945;</a
+      ><a name="1022"
+      > </a
+      ><a name="1023" class="Symbol"
+      >=</a
+      ><a name="1024"
+      > </a
+      ><a name="1025" href="dialogue-to-brouwer.html#967" class="Function"
+      >beval</a
+      ><a name="1030"
+      > </a
+      ><a name="1031" class="Symbol"
+      >(</a
+      ><a name="1032" href="dialogue-to-brouwer.html#1018" class="Bound"
+      >&#947;</a
+      ><a name="1033" class="Symbol"
+      >(</a
+      ><a name="1034" href="dialogue-to-brouwer.html#1021" class="Bound"
+      >&#945;</a
+      ><a name="1035"
+      > </a
+      ><a name="1036" href="dialogue-to-brouwer.html#158" class="InductiveConstructor"
+      >zero</a
+      ><a name="1040" class="Symbol"
+      >))</a
+      ><a name="1042"
+      > </a
+      ><a name="1043" class="Symbol"
+      >(&#955;</a
+      ><a name="1045"
+      > </a
+      ><a name="1046" href="dialogue-to-brouwer.html#1046" class="Bound"
+      >i</a
+      ><a name="1047"
+      > </a
+      ><a name="1048" class="Symbol"
+      >&#8594;</a
+      ><a name="1049"
+      > </a
+      ><a name="1050" href="dialogue-to-brouwer.html#1021" class="Bound"
+      >&#945;</a
+      ><a name="1051" class="Symbol"
+      >(</a
+      ><a name="1052" href="dialogue-to-brouwer.html#182" class="InductiveConstructor"
+      >succ</a
+      ><a name="1056"
+      > </a
+      ><a name="1057" href="dialogue-to-brouwer.html#1046" class="Bound"
+      >i</a
+      ><a name="1058" class="Symbol"
+      >))</a
+      ><a name="1060"
+      >
+
+</a
+      ><a name="1062" class="Comment"
+      >-- Conversion from dialogue to Brouwer trees, with two auxiliary</a
+      ><a name="1126"
+      >
+</a
+      ><a name="1127" class="Comment"
+      >-- functions follow and &#946;':</a
+      ><a name="1154"
+      >
+
+</a
+      ><a name="1156" href="dialogue-to-brouwer.html#1156" class="Function"
+      >follow</a
+      ><a name="1162"
+      > </a
+      ><a name="1163" class="Symbol"
+      >:</a
+      ><a name="1164"
+      > </a
+      ><a name="1165" href="dialogue-to-brouwer.html#142" class="Datatype"
+      >&#8469;</a
+      ><a name="1166"
+      > </a
+      ><a name="1167" class="Symbol"
+      >&#8594;</a
+      ><a name="1168"
+      > </a
+      ><a name="1169" href="dialogue-to-brouwer.html#817" class="Datatype"
+      >B</a
+      ><a name="1170"
+      > </a
+      ><a name="1171" class="Symbol"
+      >&#8594;</a
+      ><a name="1172"
+      > </a
+      ><a name="1173" href="dialogue-to-brouwer.html#817" class="Datatype"
+      >B</a
+      ><a name="1174"
+      >
+</a
+      ><a name="1175" href="dialogue-to-brouwer.html#1156" class="Function"
+      >follow</a
+      ><a name="1181"
+      > </a
+      ><a name="1182" href="dialogue-to-brouwer.html#1182" class="Bound"
+      >n</a
+      ><a name="1183"
+      > </a
+      ><a name="1184" class="Symbol"
+      >(</a
+      ><a name="1185" href="dialogue-to-brouwer.html#832" class="InductiveConstructor"
+      >&#951;</a
+      ><a name="1186"
+      > </a
+      ><a name="1187" href="dialogue-to-brouwer.html#1187" class="Bound"
+      >k</a
+      ><a name="1188" class="Symbol"
+      >)</a
+      ><a name="1189"
+      > </a
+      ><a name="1190" class="Symbol"
+      >=</a
+      ><a name="1191"
+      > </a
+      ><a name="1192" href="dialogue-to-brouwer.html#832" class="InductiveConstructor"
+      >&#951;</a
+      ><a name="1193"
+      > </a
+      ><a name="1194" href="dialogue-to-brouwer.html#1187" class="Bound"
+      >k</a
+      ><a name="1195"
+      >
+</a
+      ><a name="1196" href="dialogue-to-brouwer.html#1156" class="Function"
+      >follow</a
+      ><a name="1202"
+      > </a
+      ><a name="1203" href="dialogue-to-brouwer.html#1203" class="Bound"
+      >n</a
+      ><a name="1204"
+      > </a
+      ><a name="1205" class="Symbol"
+      >(</a
+      ><a name="1206" href="dialogue-to-brouwer.html#843" class="InductiveConstructor"
+      >&#948;</a
+      ><a name="1207"
+      > </a
+      ><a name="1208" href="dialogue-to-brouwer.html#1208" class="Bound"
+      >&#947;</a
+      ><a name="1209" class="Symbol"
+      >)</a
+      ><a name="1210"
+      > </a
+      ><a name="1211" class="Symbol"
+      >=</a
+      ><a name="1212"
+      > </a
+      ><a name="1213" href="dialogue-to-brouwer.html#1208" class="Bound"
+      >&#947;</a
+      ><a name="1214"
+      > </a
+      ><a name="1215" href="dialogue-to-brouwer.html#1203" class="Bound"
+      >n</a
+      ><a name="1216"
+      >
+
+</a
+      ><a name="1218" class="Comment"
+      >-- The function &#946;' simulates D's constructor &#946; in B:</a
+      ><a name="1270"
+      >
+
+</a
+      ><a name="1272" href="dialogue-to-brouwer.html#1272" class="Function"
+      >&#946;'</a
+      ><a name="1274"
+      > </a
+      ><a name="1275" class="Symbol"
+      >:</a
+      ><a name="1276"
+      > </a
+      ><a name="1277" class="Symbol"
+      >(</a
+      ><a name="1278" href="dialogue-to-brouwer.html#142" class="Datatype"
+      >&#8469;</a
+      ><a name="1279"
+      > </a
+      ><a name="1280" class="Symbol"
+      >&#8594;</a
+      ><a name="1281"
+      > </a
+      ><a name="1282" href="dialogue-to-brouwer.html#817" class="Datatype"
+      >B</a
+      ><a name="1283" class="Symbol"
+      >)</a
+      ><a name="1284"
+      > </a
+      ><a name="1285" class="Symbol"
+      >&#8594;</a
+      ><a name="1286"
+      > </a
+      ><a name="1287" href="dialogue-to-brouwer.html#142" class="Datatype"
+      >&#8469;</a
+      ><a name="1288"
+      > </a
+      ><a name="1289" class="Symbol"
+      >&#8594;</a
+      ><a name="1290"
+      > </a
+      ><a name="1291" href="dialogue-to-brouwer.html#817" class="Datatype"
+      >B</a
+      ><a name="1292"
+      >
+</a
+      ><a name="1293" href="dialogue-to-brouwer.html#1272" class="Function"
+      >&#946;'</a
+      ><a name="1295"
+      > </a
+      ><a name="1296" href="dialogue-to-brouwer.html#1296" class="Bound"
+      >&#947;</a
+      ><a name="1297"
+      > </a
+      ><a name="1298" href="dialogue-to-brouwer.html#158" class="InductiveConstructor"
+      >zero</a
+      ><a name="1302"
+      >     </a
+      ><a name="1307" class="Symbol"
+      >=</a
+      ><a name="1308"
+      > </a
+      ><a name="1309" href="dialogue-to-brouwer.html#843" class="InductiveConstructor"
+      >&#948;</a
+      ><a name="1310"
+      > </a
+      ><a name="1311" class="Symbol"
+      >(&#955;</a
+      ><a name="1313"
+      > </a
+      ><a name="1314" href="dialogue-to-brouwer.html#1314" class="Bound"
+      >i</a
+      ><a name="1315"
+      > </a
+      ><a name="1316" class="Symbol"
+      >&#8594;</a
+      ><a name="1317"
+      > </a
+      ><a name="1318" href="dialogue-to-brouwer.html#1156" class="Function"
+      >follow</a
+      ><a name="1324"
+      > </a
+      ><a name="1325" href="dialogue-to-brouwer.html#1314" class="Bound"
+      >i</a
+      ><a name="1326"
+      > </a
+      ><a name="1327" class="Symbol"
+      >(</a
+      ><a name="1328" href="dialogue-to-brouwer.html#1296" class="Bound"
+      >&#947;</a
+      ><a name="1329"
+      > </a
+      ><a name="1330" href="dialogue-to-brouwer.html#1314" class="Bound"
+      >i</a
+      ><a name="1331" class="Symbol"
+      >))</a
+      ><a name="1333"
+      >
+</a
+      ><a name="1334" href="dialogue-to-brouwer.html#1272" class="Function"
+      >&#946;'</a
+      ><a name="1336"
+      > </a
+      ><a name="1337" href="dialogue-to-brouwer.html#1337" class="Bound"
+      >&#947;</a
+      ><a name="1338"
+      > </a
+      ><a name="1339" class="Symbol"
+      >(</a
+      ><a name="1340" href="dialogue-to-brouwer.html#182" class="InductiveConstructor"
+      >succ</a
+      ><a name="1344"
+      > </a
+      ><a name="1345" href="dialogue-to-brouwer.html#1345" class="Bound"
+      >n</a
+      ><a name="1346" class="Symbol"
+      >)</a
+      ><a name="1347"
+      > </a
+      ><a name="1348" class="Symbol"
+      >=</a
+      ><a name="1349"
+      > </a
+      ><a name="1350" href="dialogue-to-brouwer.html#843" class="InductiveConstructor"
+      >&#948;</a
+      ><a name="1351"
+      > </a
+      ><a name="1352" class="Symbol"
+      >(&#955;</a
+      ><a name="1354"
+      > </a
+      ><a name="1355" href="dialogue-to-brouwer.html#1355" class="Bound"
+      >i</a
+      ><a name="1356"
+      > </a
+      ><a name="1357" class="Symbol"
+      >&#8594;</a
+      ><a name="1358"
+      > </a
+      ><a name="1359" href="dialogue-to-brouwer.html#1272" class="Function"
+      >&#946;'</a
+      ><a name="1361"
+      > </a
+      ><a name="1362" class="Symbol"
+      >(&#955;</a
+      ><a name="1364"
+      > </a
+      ><a name="1365" href="dialogue-to-brouwer.html#1365" class="Bound"
+      >j</a
+      ><a name="1366"
+      > </a
+      ><a name="1367" class="Symbol"
+      >&#8594;</a
+      ><a name="1368"
+      > </a
+      ><a name="1369" href="dialogue-to-brouwer.html#1156" class="Function"
+      >follow</a
+      ><a name="1375"
+      > </a
+      ><a name="1376" href="dialogue-to-brouwer.html#1355" class="Bound"
+      >i</a
+      ><a name="1377"
+      > </a
+      ><a name="1378" class="Symbol"
+      >(</a
+      ><a name="1379" href="dialogue-to-brouwer.html#1337" class="Bound"
+      >&#947;</a
+      ><a name="1380"
+      > </a
+      ><a name="1381" href="dialogue-to-brouwer.html#1365" class="Bound"
+      >j</a
+      ><a name="1382" class="Symbol"
+      >))</a
+      ><a name="1384"
+      > </a
+      ><a name="1385" href="dialogue-to-brouwer.html#1345" class="Bound"
+      >n</a
+      ><a name="1386" class="Symbol"
+      >)</a
+      ><a name="1387"
+      >
+
+</a
+      ><a name="1390" class="Comment"
+      >-- Conversion is the unique homomorphism w.r.t. D-structure:</a
+      ><a name="1450"
+      >
+
+</a
+      ><a name="1452" href="dialogue-to-brouwer.html#1452" class="Function"
+      >convert</a
+      ><a name="1459"
+      > </a
+      ><a name="1460" class="Symbol"
+      >:</a
+      ><a name="1461"
+      > </a
+      ><a name="1462" href="dialogue-to-brouwer.html#530" class="Datatype"
+      >D</a
+      ><a name="1463"
+      > </a
+      ><a name="1464" class="Symbol"
+      >&#8594;</a
+      ><a name="1465"
+      > </a
+      ><a name="1466" href="dialogue-to-brouwer.html#817" class="Datatype"
+      >B</a
+      ><a name="1467"
+      >
+</a
+      ><a name="1468" href="dialogue-to-brouwer.html#1452" class="Function"
+      >convert</a
+      ><a name="1475"
+      > </a
+      ><a name="1476" class="Symbol"
+      >(</a
+      ><a name="1477" href="dialogue-to-brouwer.html#546" class="InductiveConstructor"
+      >&#951;</a
+      ><a name="1478"
+      > </a
+      ><a name="1479" href="dialogue-to-brouwer.html#1479" class="Bound"
+      >k</a
+      ><a name="1480" class="Symbol"
+      >)</a
+      ><a name="1481"
+      >   </a
+      ><a name="1484" class="Symbol"
+      >=</a
+      ><a name="1485"
+      > </a
+      ><a name="1486" href="dialogue-to-brouwer.html#832" class="InductiveConstructor"
+      >&#951;</a
+      ><a name="1487"
+      > </a
+      ><a name="1488" href="dialogue-to-brouwer.html#1479" class="Bound"
+      >k</a
+      ><a name="1489"
+      >
+</a
+      ><a name="1490" href="dialogue-to-brouwer.html#1452" class="Function"
+      >convert</a
+      ><a name="1497"
+      > </a
+      ><a name="1498" class="Symbol"
+      >(</a
+      ><a name="1499" href="dialogue-to-brouwer.html#557" class="InductiveConstructor"
+      >&#946;</a
+      ><a name="1500"
+      > </a
+      ><a name="1501" href="dialogue-to-brouwer.html#1501" class="Bound"
+      >&#966;</a
+      ><a name="1502"
+      > </a
+      ><a name="1503" href="dialogue-to-brouwer.html#1503" class="Bound"
+      >n</a
+      ><a name="1504" class="Symbol"
+      >)</a
+      ><a name="1505"
+      > </a
+      ><a name="1506" class="Symbol"
+      >=</a
+      ><a name="1507"
+      > </a
+      ><a name="1508" href="dialogue-to-brouwer.html#1272" class="Function"
+      >&#946;'</a
+      ><a name="1510"
+      > </a
+      ><a name="1511" class="Symbol"
+      >(&#955;</a
+      ><a name="1513"
+      > </a
+      ><a name="1514" href="dialogue-to-brouwer.html#1514" class="Bound"
+      >i</a
+      ><a name="1515"
+      > </a
+      ><a name="1516" class="Symbol"
+      >&#8594;</a
+      ><a name="1517"
+      > </a
+      ><a name="1518" href="dialogue-to-brouwer.html#1452" class="Function"
+      >convert</a
+      ><a name="1525"
+      > </a
+      ><a name="1526" class="Symbol"
+      >(</a
+      ><a name="1527" href="dialogue-to-brouwer.html#1501" class="Bound"
+      >&#966;</a
+      ><a name="1528"
+      > </a
+      ><a name="1529" href="dialogue-to-brouwer.html#1514" class="Bound"
+      >i</a
+      ><a name="1530" class="Symbol"
+      >))</a
+      ><a name="1532"
+      > </a
+      ><a name="1533" href="dialogue-to-brouwer.html#1503" class="Bound"
+      >n</a
+      ><a name="1534"
+      >
+
+</a
+      ><a name="1536" class="Comment"
+      >-- The correctness proof of the function convert uses two lemmas, one</a
+      ><a name="1605"
+      >
+</a
+      ><a name="1606" class="Comment"
+      >-- for the function follow and the other for the function &#946;':</a
+      ><a name="1667"
+      >
+
+</a
+      ><a name="1669" class="Comment"
+      >-- By cases on b:</a
+      ><a name="1686"
+      >
+
+</a
+      ><a name="1688" href="dialogue-to-brouwer.html#1688" class="Function"
+      >follow-lemma</a
+      ><a name="1700"
+      > </a
+      ><a name="1701" class="Symbol"
+      >:</a
+      ><a name="1702"
+      > </a
+      ><a name="1703" class="Symbol"
+      >(</a
+      ><a name="1704" href="dialogue-to-brouwer.html#1704" class="Bound"
+      >b</a
+      ><a name="1705"
+      > </a
+      ><a name="1706" class="Symbol"
+      >:</a
+      ><a name="1707"
+      > </a
+      ><a name="1708" href="dialogue-to-brouwer.html#817" class="Datatype"
+      >B</a
+      ><a name="1709" class="Symbol"
+      >)</a
+      ><a name="1710"
+      > </a
+      ><a name="1711" class="Symbol"
+      >(</a
+      ><a name="1712" href="dialogue-to-brouwer.html#1712" class="Bound"
+      >&#945;</a
+      ><a name="1713"
+      > </a
+      ><a name="1714" class="Symbol"
+      >:</a
+      ><a name="1715"
+      > </a
+      ><a name="1716" href="dialogue-to-brouwer.html#142" class="Datatype"
+      >&#8469;</a
+      ><a name="1717"
+      > </a
+      ><a name="1718" class="Symbol"
+      >&#8594;</a
+      ><a name="1719"
+      > </a
+      ><a name="1720" href="dialogue-to-brouwer.html#142" class="Datatype"
+      >&#8469;</a
+      ><a name="1721" class="Symbol"
+      >)</a
+      ><a name="1722"
+      >
+             </a
+      ><a name="1736" class="Symbol"
+      >&#8594;</a
+      ><a name="1737"
+      > </a
+      ><a name="1738" href="dialogue-to-brouwer.html#967" class="Function"
+      >beval</a
+      ><a name="1743"
+      > </a
+      ><a name="1744" href="dialogue-to-brouwer.html#1704" class="Bound"
+      >b</a
+      ><a name="1745"
+      > </a
+      ><a name="1746" href="dialogue-to-brouwer.html#1712" class="Bound"
+      >&#945;</a
+      ><a name="1747"
+      > </a
+      ><a name="1748" href="dialogue-to-brouwer.html#208" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="1749"
+      > </a
+      ><a name="1750" href="dialogue-to-brouwer.html#967" class="Function"
+      >beval</a
+      ><a name="1755"
+      > </a
+      ><a name="1756" class="Symbol"
+      >(</a
+      ><a name="1757" href="dialogue-to-brouwer.html#1156" class="Function"
+      >follow</a
+      ><a name="1763"
+      > </a
+      ><a name="1764" class="Symbol"
+      >(</a
+      ><a name="1765" href="dialogue-to-brouwer.html#1712" class="Bound"
+      >&#945;</a
+      ><a name="1766"
+      > </a
+      ><a name="1767" href="dialogue-to-brouwer.html#158" class="InductiveConstructor"
+      >zero</a
+      ><a name="1771" class="Symbol"
+      >)</a
+      ><a name="1772"
+      > </a
+      ><a name="1773" href="dialogue-to-brouwer.html#1704" class="Bound"
+      >b</a
+      ><a name="1774" class="Symbol"
+      >)</a
+      ><a name="1775"
+      > </a
+      ><a name="1776" class="Symbol"
+      >(&#955;</a
+      ><a name="1778"
+      > </a
+      ><a name="1779" href="dialogue-to-brouwer.html#1779" class="Bound"
+      >i</a
+      ><a name="1780"
+      > </a
+      ><a name="1781" class="Symbol"
+      >&#8594;</a
+      ><a name="1782"
+      > </a
+      ><a name="1783" href="dialogue-to-brouwer.html#1712" class="Bound"
+      >&#945;</a
+      ><a name="1784"
+      > </a
+      ><a name="1785" class="Symbol"
+      >(</a
+      ><a name="1786" href="dialogue-to-brouwer.html#182" class="InductiveConstructor"
+      >succ</a
+      ><a name="1790"
+      > </a
+      ><a name="1791" href="dialogue-to-brouwer.html#1779" class="Bound"
+      >i</a
+      ><a name="1792" class="Symbol"
+      >))</a
+      ><a name="1794"
+      >
+</a
+      ><a name="1796" href="dialogue-to-brouwer.html#1688" class="Function"
+      >follow-lemma</a
+      ><a name="1808"
+      > </a
+      ><a name="1809" class="Symbol"
+      >(</a
+      ><a name="1810" href="dialogue-to-brouwer.html#832" class="InductiveConstructor"
+      >&#951;</a
+      ><a name="1811"
+      > </a
+      ><a name="1812" href="dialogue-to-brouwer.html#1812" class="Bound"
+      >k</a
+      ><a name="1813" class="Symbol"
+      >)</a
+      ><a name="1814"
+      > </a
+      ><a name="1815" href="dialogue-to-brouwer.html#1815" class="Bound"
+      >&#945;</a
+      ><a name="1816"
+      > </a
+      ><a name="1817" class="Symbol"
+      >=</a
+      ><a name="1818"
+      > </a
+      ><a name="1819" href="dialogue-to-brouwer.html#243" class="InductiveConstructor"
+      >refl</a
+      ><a name="1823"
+      >
+</a
+      ><a name="1824" href="dialogue-to-brouwer.html#1688" class="Function"
+      >follow-lemma</a
+      ><a name="1836"
+      > </a
+      ><a name="1837" class="Symbol"
+      >(</a
+      ><a name="1838" href="dialogue-to-brouwer.html#843" class="InductiveConstructor"
+      >&#948;</a
+      ><a name="1839"
+      > </a
+      ><a name="1840" href="dialogue-to-brouwer.html#1840" class="Bound"
+      >&#966;</a
+      ><a name="1841" class="Symbol"
+      >)</a
+      ><a name="1842"
+      > </a
+      ><a name="1843" href="dialogue-to-brouwer.html#1843" class="Bound"
+      >&#945;</a
+      ><a name="1844"
+      > </a
+      ><a name="1845" class="Symbol"
+      >=</a
+      ><a name="1846"
+      > </a
+      ><a name="1847" href="dialogue-to-brouwer.html#243" class="InductiveConstructor"
+      >refl</a
+      ><a name="1851"
+      >
+
+</a
+      ><a name="1853" class="Comment"
+      >-- By induction on n, using follow-lemma both in the base case and the</a
+      ><a name="1923"
+      >
+</a
+      ><a name="1924" class="Comment"
+      >-- induction step:</a
+      ><a name="1942"
+      >
+
+</a
+      ><a name="1944" href="dialogue-to-brouwer.html#1944" class="Function"
+      >&#946;'-lemma</a
+      ><a name="1952"
+      > </a
+      ><a name="1953" class="Symbol"
+      >:</a
+      ><a name="1954"
+      > </a
+      ><a name="1955" class="Symbol"
+      >(</a
+      ><a name="1956" href="dialogue-to-brouwer.html#1956" class="Bound"
+      >n</a
+      ><a name="1957"
+      > </a
+      ><a name="1958" class="Symbol"
+      >:</a
+      ><a name="1959"
+      > </a
+      ><a name="1960" href="dialogue-to-brouwer.html#142" class="Datatype"
+      >&#8469;</a
+      ><a name="1961" class="Symbol"
+      >)</a
+      ><a name="1962"
+      > </a
+      ><a name="1963" class="Symbol"
+      >(</a
+      ><a name="1964" href="dialogue-to-brouwer.html#1964" class="Bound"
+      >&#966;</a
+      ><a name="1965"
+      > </a
+      ><a name="1966" class="Symbol"
+      >:</a
+      ><a name="1967"
+      > </a
+      ><a name="1968" href="dialogue-to-brouwer.html#142" class="Datatype"
+      >&#8469;</a
+      ><a name="1969"
+      > </a
+      ><a name="1970" class="Symbol"
+      >&#8594;</a
+      ><a name="1971"
+      > </a
+      ><a name="1972" href="dialogue-to-brouwer.html#817" class="Datatype"
+      >B</a
+      ><a name="1973" class="Symbol"
+      >)</a
+      ><a name="1974"
+      > </a
+      ><a name="1975" class="Symbol"
+      >(</a
+      ><a name="1976" href="dialogue-to-brouwer.html#1976" class="Bound"
+      >&#945;</a
+      ><a name="1977"
+      > </a
+      ><a name="1978" class="Symbol"
+      >:</a
+      ><a name="1979"
+      > </a
+      ><a name="1980" href="dialogue-to-brouwer.html#142" class="Datatype"
+      >&#8469;</a
+      ><a name="1981"
+      > </a
+      ><a name="1982" class="Symbol"
+      >&#8594;</a
+      ><a name="1983"
+      > </a
+      ><a name="1984" href="dialogue-to-brouwer.html#142" class="Datatype"
+      >&#8469;</a
+      ><a name="1985" class="Symbol"
+      >)</a
+      ><a name="1986"
+      >
+         </a
+      ><a name="1996" class="Symbol"
+      >&#8594;</a
+      ><a name="1997"
+      > </a
+      ><a name="1998" href="dialogue-to-brouwer.html#967" class="Function"
+      >beval</a
+      ><a name="2003"
+      > </a
+      ><a name="2004" class="Symbol"
+      >(</a
+      ><a name="2005" href="dialogue-to-brouwer.html#1964" class="Bound"
+      >&#966;</a
+      ><a name="2006" class="Symbol"
+      >(</a
+      ><a name="2007" href="dialogue-to-brouwer.html#1976" class="Bound"
+      >&#945;</a
+      ><a name="2008"
+      > </a
+      ><a name="2009" href="dialogue-to-brouwer.html#1956" class="Bound"
+      >n</a
+      ><a name="2010" class="Symbol"
+      >))</a
+      ><a name="2012"
+      > </a
+      ><a name="2013" href="dialogue-to-brouwer.html#1976" class="Bound"
+      >&#945;</a
+      ><a name="2014"
+      > </a
+      ><a name="2015" href="dialogue-to-brouwer.html#208" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="2016"
+      > </a
+      ><a name="2017" href="dialogue-to-brouwer.html#967" class="Function"
+      >beval</a
+      ><a name="2022"
+      > </a
+      ><a name="2023" class="Symbol"
+      >(</a
+      ><a name="2024" href="dialogue-to-brouwer.html#1272" class="Function"
+      >&#946;'</a
+      ><a name="2026"
+      > </a
+      ><a name="2027" href="dialogue-to-brouwer.html#1964" class="Bound"
+      >&#966;</a
+      ><a name="2028"
+      > </a
+      ><a name="2029" href="dialogue-to-brouwer.html#1956" class="Bound"
+      >n</a
+      ><a name="2030" class="Symbol"
+      >)</a
+      ><a name="2031"
+      > </a
+      ><a name="2032" href="dialogue-to-brouwer.html#1976" class="Bound"
+      >&#945;</a
+      ><a name="2033"
+      >
+
+</a
+      ><a name="2035" href="dialogue-to-brouwer.html#1944" class="Function"
+      >&#946;'-lemma</a
+      ><a name="2043"
+      > </a
+      ><a name="2044" href="dialogue-to-brouwer.html#158" class="InductiveConstructor"
+      >zero</a
+      ><a name="2048"
+      > </a
+      ><a name="2049" href="dialogue-to-brouwer.html#2049" class="Bound"
+      >&#966;</a
+      ><a name="2050"
+      > </a
+      ><a name="2051" href="dialogue-to-brouwer.html#2051" class="Bound"
+      >&#945;</a
+      ><a name="2052"
+      > </a
+      ><a name="2053" class="Symbol"
+      >=</a
+      ><a name="2054"
+      >
+  </a
+      ><a name="2057" href="dialogue-to-brouwer.html#967" class="Function"
+      >beval</a
+      ><a name="2062"
+      > </a
+      ><a name="2063" class="Symbol"
+      >(</a
+      ><a name="2064" href="dialogue-to-brouwer.html#2049" class="Bound"
+      >&#966;</a
+      ><a name="2065" class="Symbol"
+      >(</a
+      ><a name="2066" href="dialogue-to-brouwer.html#2051" class="Bound"
+      >&#945;</a
+      ><a name="2067"
+      > </a
+      ><a name="2068" href="dialogue-to-brouwer.html#158" class="InductiveConstructor"
+      >zero</a
+      ><a name="2072" class="Symbol"
+      >))</a
+      ><a name="2074"
+      > </a
+      ><a name="2075" href="dialogue-to-brouwer.html#2051" class="Bound"
+      >&#945;</a
+      ><a name="2076"
+      >                                    </a
+      ><a name="2112" href="dialogue-to-brouwer.html#375" class="Function Operator"
+      >&#8801;&#10216;</a
+      ><a name="2114"
+      > </a
+      ><a name="2115" href="dialogue-to-brouwer.html#1688" class="Function"
+      >follow-lemma</a
+      ><a name="2127"
+      > </a
+      ><a name="2128" class="Symbol"
+      >((</a
+      ><a name="2130" href="dialogue-to-brouwer.html#2049" class="Bound"
+      >&#966;</a
+      ><a name="2131" class="Symbol"
+      >(</a
+      ><a name="2132" href="dialogue-to-brouwer.html#2051" class="Bound"
+      >&#945;</a
+      ><a name="2133"
+      > </a
+      ><a name="2134" href="dialogue-to-brouwer.html#158" class="InductiveConstructor"
+      >zero</a
+      ><a name="2138" class="Symbol"
+      >)))</a
+      ><a name="2141"
+      > </a
+      ><a name="2142" href="dialogue-to-brouwer.html#2051" class="Bound"
+      >&#945;</a
+      ><a name="2143"
+      > </a
+      ><a name="2144" href="dialogue-to-brouwer.html#375" class="Function Operator"
+      >&#10217;</a
+      ><a name="2145"
+      >
+  </a
+      ><a name="2148" href="dialogue-to-brouwer.html#967" class="Function"
+      >beval</a
+      ><a name="2153"
+      > </a
+      ><a name="2154" class="Symbol"
+      >(</a
+      ><a name="2155" href="dialogue-to-brouwer.html#1156" class="Function"
+      >follow</a
+      ><a name="2161"
+      > </a
+      ><a name="2162" class="Symbol"
+      >(</a
+      ><a name="2163" href="dialogue-to-brouwer.html#2051" class="Bound"
+      >&#945;</a
+      ><a name="2164"
+      > </a
+      ><a name="2165" href="dialogue-to-brouwer.html#158" class="InductiveConstructor"
+      >zero</a
+      ><a name="2169" class="Symbol"
+      >)</a
+      ><a name="2170"
+      > </a
+      ><a name="2171" class="Symbol"
+      >(</a
+      ><a name="2172" href="dialogue-to-brouwer.html#2049" class="Bound"
+      >&#966;</a
+      ><a name="2173" class="Symbol"
+      >(</a
+      ><a name="2174" href="dialogue-to-brouwer.html#2051" class="Bound"
+      >&#945;</a
+      ><a name="2175"
+      > </a
+      ><a name="2176" href="dialogue-to-brouwer.html#158" class="InductiveConstructor"
+      >zero</a
+      ><a name="2180" class="Symbol"
+      >)))</a
+      ><a name="2183"
+      > </a
+      ><a name="2184" class="Symbol"
+      >(&#955;</a
+      ><a name="2186"
+      > </a
+      ><a name="2187" href="dialogue-to-brouwer.html#2187" class="Bound"
+      >i</a
+      ><a name="2188"
+      > </a
+      ><a name="2189" class="Symbol"
+      >&#8594;</a
+      ><a name="2190"
+      > </a
+      ><a name="2191" href="dialogue-to-brouwer.html#2051" class="Bound"
+      >&#945;</a
+      ><a name="2192"
+      > </a
+      ><a name="2193" class="Symbol"
+      >(</a
+      ><a name="2194" href="dialogue-to-brouwer.html#182" class="InductiveConstructor"
+      >succ</a
+      ><a name="2198"
+      > </a
+      ><a name="2199" href="dialogue-to-brouwer.html#2187" class="Bound"
+      >i</a
+      ><a name="2200" class="Symbol"
+      >))</a
+      ><a name="2202"
+      > </a
+      ><a name="2203" href="dialogue-to-brouwer.html#375" class="Function Operator"
+      >&#8801;&#10216;</a
+      ><a name="2205"
+      > </a
+      ><a name="2206" href="dialogue-to-brouwer.html#243" class="InductiveConstructor"
+      >refl</a
+      ><a name="2210"
+      > </a
+      ><a name="2211" href="dialogue-to-brouwer.html#375" class="Function Operator"
+      >&#10217;</a
+      ><a name="2212"
+      >
+  </a
+      ><a name="2215" href="dialogue-to-brouwer.html#967" class="Function"
+      >beval</a
+      ><a name="2220"
+      > </a
+      ><a name="2221" class="Symbol"
+      >(</a
+      ><a name="2222" href="dialogue-to-brouwer.html#843" class="InductiveConstructor"
+      >&#948;</a
+      ><a name="2223"
+      > </a
+      ><a name="2224" class="Symbol"
+      >(&#955;</a
+      ><a name="2226"
+      > </a
+      ><a name="2227" href="dialogue-to-brouwer.html#2227" class="Bound"
+      >i</a
+      ><a name="2228"
+      > </a
+      ><a name="2229" class="Symbol"
+      >&#8594;</a
+      ><a name="2230"
+      > </a
+      ><a name="2231" href="dialogue-to-brouwer.html#1156" class="Function"
+      >follow</a
+      ><a name="2237"
+      > </a
+      ><a name="2238" href="dialogue-to-brouwer.html#2227" class="Bound"
+      >i</a
+      ><a name="2239"
+      > </a
+      ><a name="2240" class="Symbol"
+      >(</a
+      ><a name="2241" href="dialogue-to-brouwer.html#2049" class="Bound"
+      >&#966;</a
+      ><a name="2242"
+      > </a
+      ><a name="2243" href="dialogue-to-brouwer.html#2227" class="Bound"
+      >i</a
+      ><a name="2244" class="Symbol"
+      >)))</a
+      ><a name="2247"
+      > </a
+      ><a name="2248" href="dialogue-to-brouwer.html#2051" class="Bound"
+      >&#945;</a
+      ><a name="2249"
+      >                     </a
+      ><a name="2270" href="dialogue-to-brouwer.html#375" class="Function Operator"
+      >&#8801;&#10216;</a
+      ><a name="2272"
+      > </a
+      ><a name="2273" href="dialogue-to-brouwer.html#243" class="InductiveConstructor"
+      >refl</a
+      ><a name="2277"
+      > </a
+      ><a name="2278" href="dialogue-to-brouwer.html#375" class="Function Operator"
+      >&#10217;</a
+      ><a name="2279"
+      >
+  </a
+      ><a name="2282" href="dialogue-to-brouwer.html#967" class="Function"
+      >beval</a
+      ><a name="2287"
+      > </a
+      ><a name="2288" class="Symbol"
+      >(</a
+      ><a name="2289" href="dialogue-to-brouwer.html#1272" class="Function"
+      >&#946;'</a
+      ><a name="2291"
+      > </a
+      ><a name="2292" href="dialogue-to-brouwer.html#2049" class="Bound"
+      >&#966;</a
+      ><a name="2293"
+      > </a
+      ><a name="2294" href="dialogue-to-brouwer.html#158" class="InductiveConstructor"
+      >zero</a
+      ><a name="2298" class="Symbol"
+      >)</a
+      ><a name="2299"
+      > </a
+      ><a name="2300" href="dialogue-to-brouwer.html#2051" class="Bound"
+      >&#945;</a
+      ><a name="2301"
+      > </a
+      ><a name="2302" href="dialogue-to-brouwer.html#460" class="Function Operator"
+      >&#8718;</a
+      ><a name="2303"
+      >
+
+</a
+      ><a name="2305" href="dialogue-to-brouwer.html#1944" class="Function"
+      >&#946;'-lemma</a
+      ><a name="2313"
+      > </a
+      ><a name="2314" class="Symbol"
+      >(</a
+      ><a name="2315" href="dialogue-to-brouwer.html#182" class="InductiveConstructor"
+      >succ</a
+      ><a name="2319"
+      > </a
+      ><a name="2320" href="dialogue-to-brouwer.html#2320" class="Bound"
+      >n</a
+      ><a name="2321" class="Symbol"
+      >)</a
+      ><a name="2322"
+      > </a
+      ><a name="2323" href="dialogue-to-brouwer.html#2323" class="Bound"
+      >&#966;</a
+      ><a name="2324"
+      > </a
+      ><a name="2325" href="dialogue-to-brouwer.html#2325" class="Bound"
+      >&#945;</a
+      ><a name="2326"
+      > </a
+      ><a name="2327" class="Symbol"
+      >=</a
+      ><a name="2328"
+      >
+  </a
+      ><a name="2332" href="dialogue-to-brouwer.html#967" class="Function"
+      >beval</a
+      ><a name="2337"
+      > </a
+      ><a name="2338" class="Symbol"
+      >(</a
+      ><a name="2339" href="dialogue-to-brouwer.html#2323" class="Bound"
+      >&#966;</a
+      ><a name="2340" class="Symbol"
+      >(</a
+      ><a name="2341" href="dialogue-to-brouwer.html#2325" class="Bound"
+      >&#945;</a
+      ><a name="2342" class="Symbol"
+      >(</a
+      ><a name="2343" href="dialogue-to-brouwer.html#182" class="InductiveConstructor"
+      >succ</a
+      ><a name="2347"
+      > </a
+      ><a name="2348" href="dialogue-to-brouwer.html#2320" class="Bound"
+      >n</a
+      ><a name="2349" class="Symbol"
+      >)))</a
+      ><a name="2352"
+      > </a
+      ><a name="2353" href="dialogue-to-brouwer.html#2325" class="Bound"
+      >&#945;</a
+      ><a name="2354"
+      >                                       </a
+      ><a name="2393" href="dialogue-to-brouwer.html#375" class="Function Operator"
+      >&#8801;&#10216;</a
+      ><a name="2395"
+      > </a
+      ><a name="2396" href="dialogue-to-brouwer.html#1688" class="Function"
+      >follow-lemma</a
+      ><a name="2408"
+      > </a
+      ><a name="2409" class="Symbol"
+      >(</a
+      ><a name="2410" href="dialogue-to-brouwer.html#2323" class="Bound"
+      >&#966;</a
+      ><a name="2411" class="Symbol"
+      >(</a
+      ><a name="2412" href="dialogue-to-brouwer.html#2325" class="Bound"
+      >&#945;</a
+      ><a name="2413" class="Symbol"
+      >(</a
+      ><a name="2414" href="dialogue-to-brouwer.html#182" class="InductiveConstructor"
+      >succ</a
+      ><a name="2418"
+      > </a
+      ><a name="2419" href="dialogue-to-brouwer.html#2320" class="Bound"
+      >n</a
+      ><a name="2420" class="Symbol"
+      >)))</a
+      ><a name="2423"
+      > </a
+      ><a name="2424" href="dialogue-to-brouwer.html#2325" class="Bound"
+      >&#945;</a
+      ><a name="2425"
+      > </a
+      ><a name="2426" href="dialogue-to-brouwer.html#375" class="Function Operator"
+      >&#10217;</a
+      ><a name="2427"
+      >
+  </a
+      ><a name="2430" href="dialogue-to-brouwer.html#967" class="Function"
+      >beval</a
+      ><a name="2435"
+      > </a
+      ><a name="2436" class="Symbol"
+      >(</a
+      ><a name="2437" href="dialogue-to-brouwer.html#1156" class="Function"
+      >follow</a
+      ><a name="2443"
+      > </a
+      ><a name="2444" class="Symbol"
+      >(</a
+      ><a name="2445" href="dialogue-to-brouwer.html#2325" class="Bound"
+      >&#945;</a
+      ><a name="2446"
+      > </a
+      ><a name="2447" href="dialogue-to-brouwer.html#158" class="InductiveConstructor"
+      >zero</a
+      ><a name="2451" class="Symbol"
+      >)</a
+      ><a name="2452"
+      > </a
+      ><a name="2453" class="Symbol"
+      >(</a
+      ><a name="2454" href="dialogue-to-brouwer.html#2323" class="Bound"
+      >&#966;</a
+      ><a name="2455" class="Symbol"
+      >(</a
+      ><a name="2456" href="dialogue-to-brouwer.html#2325" class="Bound"
+      >&#945;</a
+      ><a name="2457" class="Symbol"
+      >(</a
+      ><a name="2458" href="dialogue-to-brouwer.html#182" class="InductiveConstructor"
+      >succ</a
+      ><a name="2462"
+      > </a
+      ><a name="2463" href="dialogue-to-brouwer.html#2320" class="Bound"
+      >n</a
+      ><a name="2464" class="Symbol"
+      >))))</a
+      ><a name="2468"
+      > </a
+      ><a name="2469" class="Symbol"
+      >(&#955;</a
+      ><a name="2471"
+      > </a
+      ><a name="2472" href="dialogue-to-brouwer.html#2472" class="Bound"
+      >i</a
+      ><a name="2473"
+      > </a
+      ><a name="2474" class="Symbol"
+      >&#8594;</a
+      ><a name="2475"
+      > </a
+      ><a name="2476" href="dialogue-to-brouwer.html#2325" class="Bound"
+      >&#945;</a
+      ><a name="2477" class="Symbol"
+      >(</a
+      ><a name="2478" href="dialogue-to-brouwer.html#182" class="InductiveConstructor"
+      >succ</a
+      ><a name="2482"
+      > </a
+      ><a name="2483" href="dialogue-to-brouwer.html#2472" class="Bound"
+      >i</a
+      ><a name="2484" class="Symbol"
+      >))</a
+      ><a name="2486"
+      >     </a
+      ><a name="2491" href="dialogue-to-brouwer.html#375" class="Function Operator"
+      >&#8801;&#10216;</a
+      ><a name="2493"
+      > </a
+      ><a name="2494" href="dialogue-to-brouwer.html#1944" class="Function"
+      >&#946;'-lemma</a
+      ><a name="2502"
+      > </a
+      ><a name="2503" href="dialogue-to-brouwer.html#2320" class="Bound"
+      >n</a
+      ><a name="2504"
+      > </a
+      ><a name="2505" class="Symbol"
+      >(&#955;</a
+      ><a name="2507"
+      > </a
+      ><a name="2508" href="dialogue-to-brouwer.html#2508" class="Bound"
+      >j</a
+      ><a name="2509"
+      > </a
+      ><a name="2510" class="Symbol"
+      >&#8594;</a
+      ><a name="2511"
+      > </a
+      ><a name="2512" href="dialogue-to-brouwer.html#1156" class="Function"
+      >follow</a
+      ><a name="2518"
+      > </a
+      ><a name="2519" class="Symbol"
+      >(</a
+      ><a name="2520" href="dialogue-to-brouwer.html#2325" class="Bound"
+      >&#945;</a
+      ><a name="2521"
+      > </a
+      ><a name="2522" href="dialogue-to-brouwer.html#158" class="InductiveConstructor"
+      >zero</a
+      ><a name="2526" class="Symbol"
+      >)</a
+      ><a name="2527"
+      > </a
+      ><a name="2528" class="Symbol"
+      >(</a
+      ><a name="2529" href="dialogue-to-brouwer.html#2323" class="Bound"
+      >&#966;</a
+      ><a name="2530"
+      > </a
+      ><a name="2531" href="dialogue-to-brouwer.html#2508" class="Bound"
+      >j</a
+      ><a name="2532" class="Symbol"
+      >))</a
+      ><a name="2534"
+      > </a
+      ><a name="2535" class="Symbol"
+      >(&#955;</a
+      ><a name="2537"
+      > </a
+      ><a name="2538" href="dialogue-to-brouwer.html#2538" class="Bound"
+      >i</a
+      ><a name="2539"
+      > </a
+      ><a name="2540" class="Symbol"
+      >&#8594;</a
+      ><a name="2541"
+      > </a
+      ><a name="2542" href="dialogue-to-brouwer.html#2325" class="Bound"
+      >&#945;</a
+      ><a name="2543"
+      > </a
+      ><a name="2544" class="Symbol"
+      >(</a
+      ><a name="2545" href="dialogue-to-brouwer.html#182" class="InductiveConstructor"
+      >succ</a
+      ><a name="2549"
+      > </a
+      ><a name="2550" href="dialogue-to-brouwer.html#2538" class="Bound"
+      >i</a
+      ><a name="2551" class="Symbol"
+      >))</a
+      ><a name="2553"
+      > </a
+      ><a name="2554" href="dialogue-to-brouwer.html#375" class="Function Operator"
+      >&#10217;</a
+      ><a name="2555"
+      >
+  </a
+      ><a name="2558" href="dialogue-to-brouwer.html#967" class="Function"
+      >beval</a
+      ><a name="2563"
+      > </a
+      ><a name="2564" class="Symbol"
+      >(</a
+      ><a name="2565" href="dialogue-to-brouwer.html#1272" class="Function"
+      >&#946;'</a
+      ><a name="2567"
+      > </a
+      ><a name="2568" class="Symbol"
+      >(&#955;</a
+      ><a name="2570"
+      > </a
+      ><a name="2571" href="dialogue-to-brouwer.html#2571" class="Bound"
+      >j</a
+      ><a name="2572"
+      > </a
+      ><a name="2573" class="Symbol"
+      >&#8594;</a
+      ><a name="2574"
+      > </a
+      ><a name="2575" href="dialogue-to-brouwer.html#1156" class="Function"
+      >follow</a
+      ><a name="2581"
+      > </a
+      ><a name="2582" class="Symbol"
+      >(</a
+      ><a name="2583" href="dialogue-to-brouwer.html#2325" class="Bound"
+      >&#945;</a
+      ><a name="2584"
+      > </a
+      ><a name="2585" href="dialogue-to-brouwer.html#158" class="InductiveConstructor"
+      >zero</a
+      ><a name="2589" class="Symbol"
+      >)</a
+      ><a name="2590"
+      > </a
+      ><a name="2591" class="Symbol"
+      >(</a
+      ><a name="2592" href="dialogue-to-brouwer.html#2323" class="Bound"
+      >&#966;</a
+      ><a name="2593"
+      > </a
+      ><a name="2594" href="dialogue-to-brouwer.html#2571" class="Bound"
+      >j</a
+      ><a name="2595" class="Symbol"
+      >))</a
+      ><a name="2597"
+      > </a
+      ><a name="2598" href="dialogue-to-brouwer.html#2320" class="Bound"
+      >n</a
+      ><a name="2599" class="Symbol"
+      >)</a
+      ><a name="2600"
+      > </a
+      ><a name="2601" class="Symbol"
+      >(&#955;</a
+      ><a name="2603"
+      > </a
+      ><a name="2604" href="dialogue-to-brouwer.html#2604" class="Bound"
+      >i</a
+      ><a name="2605"
+      > </a
+      ><a name="2606" class="Symbol"
+      >&#8594;</a
+      ><a name="2607"
+      > </a
+      ><a name="2608" href="dialogue-to-brouwer.html#2325" class="Bound"
+      >&#945;</a
+      ><a name="2609" class="Symbol"
+      >(</a
+      ><a name="2610" href="dialogue-to-brouwer.html#182" class="InductiveConstructor"
+      >succ</a
+      ><a name="2614"
+      > </a
+      ><a name="2615" href="dialogue-to-brouwer.html#2604" class="Bound"
+      >i</a
+      ><a name="2616" class="Symbol"
+      >))</a
+      ><a name="2618"
+      > </a
+      ><a name="2619" href="dialogue-to-brouwer.html#375" class="Function Operator"
+      >&#8801;&#10216;</a
+      ><a name="2621"
+      > </a
+      ><a name="2622" href="dialogue-to-brouwer.html#243" class="InductiveConstructor"
+      >refl</a
+      ><a name="2626"
+      > </a
+      ><a name="2627" href="dialogue-to-brouwer.html#375" class="Function Operator"
+      >&#10217;</a
+      ><a name="2628"
+      >
+  </a
+      ><a name="2631" href="dialogue-to-brouwer.html#967" class="Function"
+      >beval</a
+      ><a name="2636"
+      > </a
+      ><a name="2637" class="Symbol"
+      >(</a
+      ><a name="2638" href="dialogue-to-brouwer.html#843" class="InductiveConstructor"
+      >&#948;</a
+      ><a name="2639"
+      > </a
+      ><a name="2640" class="Symbol"
+      >(&#955;</a
+      ><a name="2642"
+      > </a
+      ><a name="2643" href="dialogue-to-brouwer.html#2643" class="Bound"
+      >i</a
+      ><a name="2644"
+      > </a
+      ><a name="2645" class="Symbol"
+      >&#8594;</a
+      ><a name="2646"
+      > </a
+      ><a name="2647" href="dialogue-to-brouwer.html#1272" class="Function"
+      >&#946;'</a
+      ><a name="2649"
+      > </a
+      ><a name="2650" class="Symbol"
+      >(&#955;</a
+      ><a name="2652"
+      > </a
+      ><a name="2653" href="dialogue-to-brouwer.html#2653" class="Bound"
+      >j</a
+      ><a name="2654"
+      > </a
+      ><a name="2655" class="Symbol"
+      >&#8594;</a
+      ><a name="2656"
+      > </a
+      ><a name="2657" href="dialogue-to-brouwer.html#1156" class="Function"
+      >follow</a
+      ><a name="2663"
+      > </a
+      ><a name="2664" href="dialogue-to-brouwer.html#2643" class="Bound"
+      >i</a
+      ><a name="2665"
+      > </a
+      ><a name="2666" class="Symbol"
+      >(</a
+      ><a name="2667" href="dialogue-to-brouwer.html#2323" class="Bound"
+      >&#966;</a
+      ><a name="2668"
+      > </a
+      ><a name="2669" href="dialogue-to-brouwer.html#2653" class="Bound"
+      >j</a
+      ><a name="2670" class="Symbol"
+      >))</a
+      ><a name="2672"
+      > </a
+      ><a name="2673" href="dialogue-to-brouwer.html#2320" class="Bound"
+      >n</a
+      ><a name="2674" class="Symbol"
+      >))</a
+      ><a name="2676"
+      > </a
+      ><a name="2677" href="dialogue-to-brouwer.html#2325" class="Bound"
+      >&#945;</a
+      ><a name="2678"
+      >              </a
+      ><a name="2692" href="dialogue-to-brouwer.html#375" class="Function Operator"
+      >&#8801;&#10216;</a
+      ><a name="2694"
+      > </a
+      ><a name="2695" href="dialogue-to-brouwer.html#243" class="InductiveConstructor"
+      >refl</a
+      ><a name="2699"
+      > </a
+      ><a name="2700" href="dialogue-to-brouwer.html#375" class="Function Operator"
+      >&#10217;</a
+      ><a name="2701"
+      >
+  </a
+      ><a name="2704" href="dialogue-to-brouwer.html#967" class="Function"
+      >beval</a
+      ><a name="2709"
+      > </a
+      ><a name="2710" class="Symbol"
+      >(</a
+      ><a name="2711" href="dialogue-to-brouwer.html#1272" class="Function"
+      >&#946;'</a
+      ><a name="2713"
+      > </a
+      ><a name="2714" href="dialogue-to-brouwer.html#2323" class="Bound"
+      >&#966;</a
+      ><a name="2715" class="Symbol"
+      >(</a
+      ><a name="2716" href="dialogue-to-brouwer.html#182" class="InductiveConstructor"
+      >succ</a
+      ><a name="2720"
+      > </a
+      ><a name="2721" href="dialogue-to-brouwer.html#2320" class="Bound"
+      >n</a
+      ><a name="2722" class="Symbol"
+      >))</a
+      ><a name="2724"
+      > </a
+      ><a name="2725" href="dialogue-to-brouwer.html#2325" class="Bound"
+      >&#945;</a
+      ><a name="2726"
+      > </a
+      ><a name="2727" href="dialogue-to-brouwer.html#460" class="Function Operator"
+      >&#8718;</a
+      ><a name="2728"
+      >
+
+</a
+      ><a name="2730" class="Comment"
+      >-- By induction on d, using &#946;'-lemma in the induction step:</a
+      ><a name="2789"
+      >
+
+</a
+      ><a name="2791" href="dialogue-to-brouwer.html#2791" class="Function"
+      >convert-correctness</a
+      ><a name="2810"
+      > </a
+      ><a name="2811" class="Symbol"
+      >:</a
+      ><a name="2812"
+      > </a
+      ><a name="2813" class="Symbol"
+      >(</a
+      ><a name="2814" href="dialogue-to-brouwer.html#2814" class="Bound"
+      >d</a
+      ><a name="2815"
+      > </a
+      ><a name="2816" class="Symbol"
+      >:</a
+      ><a name="2817"
+      > </a
+      ><a name="2818" href="dialogue-to-brouwer.html#530" class="Datatype"
+      >D</a
+      ><a name="2819" class="Symbol"
+      >)</a
+      ><a name="2820"
+      > </a
+      ><a name="2821" class="Symbol"
+      >(</a
+      ><a name="2822" href="dialogue-to-brouwer.html#2822" class="Bound"
+      >&#945;</a
+      ><a name="2823"
+      > </a
+      ><a name="2824" class="Symbol"
+      >:</a
+      ><a name="2825"
+      > </a
+      ><a name="2826" href="dialogue-to-brouwer.html#142" class="Datatype"
+      >&#8469;</a
+      ><a name="2827"
+      > </a
+      ><a name="2828" class="Symbol"
+      >&#8594;</a
+      ><a name="2829"
+      > </a
+      ><a name="2830" href="dialogue-to-brouwer.html#142" class="Datatype"
+      >&#8469;</a
+      ><a name="2831" class="Symbol"
+      >)</a
+      ><a name="2832"
+      > </a
+      ><a name="2833" class="Symbol"
+      >&#8594;</a
+      ><a name="2834"
+      > </a
+      ><a name="2835" href="dialogue-to-brouwer.html#713" class="Function"
+      >deval</a
+      ><a name="2840"
+      > </a
+      ><a name="2841" href="dialogue-to-brouwer.html#2814" class="Bound"
+      >d</a
+      ><a name="2842"
+      > </a
+      ><a name="2843" href="dialogue-to-brouwer.html#2822" class="Bound"
+      >&#945;</a
+      ><a name="2844"
+      > </a
+      ><a name="2845" href="dialogue-to-brouwer.html#208" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="2846"
+      > </a
+      ><a name="2847" href="dialogue-to-brouwer.html#967" class="Function"
+      >beval</a
+      ><a name="2852"
+      > </a
+      ><a name="2853" class="Symbol"
+      >(</a
+      ><a name="2854" href="dialogue-to-brouwer.html#1452" class="Function"
+      >convert</a
+      ><a name="2861"
+      > </a
+      ><a name="2862" href="dialogue-to-brouwer.html#2814" class="Bound"
+      >d</a
+      ><a name="2863" class="Symbol"
+      >)</a
+      ><a name="2864"
+      > </a
+      ><a name="2865" href="dialogue-to-brouwer.html#2822" class="Bound"
+      >&#945;</a
+      ><a name="2866"
+      >
+</a
+      ><a name="2867" href="dialogue-to-brouwer.html#2791" class="Function"
+      >convert-correctness</a
+      ><a name="2886"
+      > </a
+      ><a name="2887" class="Symbol"
+      >(</a
+      ><a name="2888" href="dialogue-to-brouwer.html#546" class="InductiveConstructor"
+      >&#951;</a
+      ><a name="2889"
+      > </a
+      ><a name="2890" href="dialogue-to-brouwer.html#2890" class="Bound"
+      >k</a
+      ><a name="2891" class="Symbol"
+      >)</a
+      ><a name="2892"
+      >   </a
+      ><a name="2895" href="dialogue-to-brouwer.html#2895" class="Bound"
+      >&#945;</a
+      ><a name="2896"
+      > </a
+      ><a name="2897" class="Symbol"
+      >=</a
+      ><a name="2898"
+      > </a
+      ><a name="2899" href="dialogue-to-brouwer.html#243" class="InductiveConstructor"
+      >refl</a
+      ><a name="2903"
+      >
+</a
+      ><a name="2904" href="dialogue-to-brouwer.html#2791" class="Function"
+      >convert-correctness</a
+      ><a name="2923"
+      > </a
+      ><a name="2924" class="Symbol"
+      >(</a
+      ><a name="2925" href="dialogue-to-brouwer.html#557" class="InductiveConstructor"
+      >&#946;</a
+      ><a name="2926"
+      > </a
+      ><a name="2927" href="dialogue-to-brouwer.html#2927" class="Bound"
+      >&#966;</a
+      ><a name="2928"
+      > </a
+      ><a name="2929" href="dialogue-to-brouwer.html#2929" class="Bound"
+      >n</a
+      ><a name="2930" class="Symbol"
+      >)</a
+      ><a name="2931"
+      > </a
+      ><a name="2932" href="dialogue-to-brouwer.html#2932" class="Bound"
+      >&#945;</a
+      ><a name="2933"
+      > </a
+      ><a name="2934" class="Symbol"
+      >=</a
+      ><a name="2935"
+      >
+  </a
+      ><a name="2939" href="dialogue-to-brouwer.html#713" class="Function"
+      >deval</a
+      ><a name="2944"
+      > </a
+      ><a name="2945" class="Symbol"
+      >(</a
+      ><a name="2946" href="dialogue-to-brouwer.html#2927" class="Bound"
+      >&#966;</a
+      ><a name="2947" class="Symbol"
+      >(</a
+      ><a name="2948" href="dialogue-to-brouwer.html#2932" class="Bound"
+      >&#945;</a
+      ><a name="2949"
+      > </a
+      ><a name="2950" href="dialogue-to-brouwer.html#2929" class="Bound"
+      >n</a
+      ><a name="2951" class="Symbol"
+      >))</a
+      ><a name="2953"
+      > </a
+      ><a name="2954" href="dialogue-to-brouwer.html#2932" class="Bound"
+      >&#945;</a
+      ><a name="2955"
+      >                       </a
+      ><a name="2978" href="dialogue-to-brouwer.html#375" class="Function Operator"
+      >&#8801;&#10216;</a
+      ><a name="2980"
+      > </a
+      ><a name="2981" href="dialogue-to-brouwer.html#2791" class="Function"
+      >convert-correctness</a
+      ><a name="3000"
+      > </a
+      ><a name="3001" class="Symbol"
+      >(</a
+      ><a name="3002" href="dialogue-to-brouwer.html#2927" class="Bound"
+      >&#966;</a
+      ><a name="3003" class="Symbol"
+      >(</a
+      ><a name="3004" href="dialogue-to-brouwer.html#2932" class="Bound"
+      >&#945;</a
+      ><a name="3005"
+      > </a
+      ><a name="3006" href="dialogue-to-brouwer.html#2929" class="Bound"
+      >n</a
+      ><a name="3007" class="Symbol"
+      >))</a
+      ><a name="3009"
+      > </a
+      ><a name="3010" href="dialogue-to-brouwer.html#2932" class="Bound"
+      >&#945;</a
+      ><a name="3011"
+      > </a
+      ><a name="3012" href="dialogue-to-brouwer.html#375" class="Function Operator"
+      >&#10217;</a
+      ><a name="3013"
+      >
+  </a
+      ><a name="3016" href="dialogue-to-brouwer.html#967" class="Function"
+      >beval</a
+      ><a name="3021"
+      > </a
+      ><a name="3022" class="Symbol"
+      >(</a
+      ><a name="3023" href="dialogue-to-brouwer.html#1452" class="Function"
+      >convert</a
+      ><a name="3030"
+      > </a
+      ><a name="3031" class="Symbol"
+      >(</a
+      ><a name="3032" href="dialogue-to-brouwer.html#2927" class="Bound"
+      >&#966;</a
+      ><a name="3033" class="Symbol"
+      >(</a
+      ><a name="3034" href="dialogue-to-brouwer.html#2932" class="Bound"
+      >&#945;</a
+      ><a name="3035"
+      > </a
+      ><a name="3036" href="dialogue-to-brouwer.html#2929" class="Bound"
+      >n</a
+      ><a name="3037" class="Symbol"
+      >)))</a
+      ><a name="3040"
+      > </a
+      ><a name="3041" href="dialogue-to-brouwer.html#2932" class="Bound"
+      >&#945;</a
+      ><a name="3042"
+      >             </a
+      ><a name="3055" href="dialogue-to-brouwer.html#375" class="Function Operator"
+      >&#8801;&#10216;</a
+      ><a name="3057"
+      > </a
+      ><a name="3058" href="dialogue-to-brouwer.html#1944" class="Function"
+      >&#946;'-lemma</a
+      ><a name="3066"
+      > </a
+      ><a name="3067" href="dialogue-to-brouwer.html#2929" class="Bound"
+      >n</a
+      ><a name="3068"
+      > </a
+      ><a name="3069" class="Symbol"
+      >(&#955;</a
+      ><a name="3071"
+      > </a
+      ><a name="3072" href="dialogue-to-brouwer.html#3072" class="Bound"
+      >i</a
+      ><a name="3073"
+      > </a
+      ><a name="3074" class="Symbol"
+      >&#8594;</a
+      ><a name="3075"
+      > </a
+      ><a name="3076" href="dialogue-to-brouwer.html#1452" class="Function"
+      >convert</a
+      ><a name="3083"
+      > </a
+      ><a name="3084" class="Symbol"
+      >(</a
+      ><a name="3085" href="dialogue-to-brouwer.html#2927" class="Bound"
+      >&#966;</a
+      ><a name="3086"
+      > </a
+      ><a name="3087" href="dialogue-to-brouwer.html#3072" class="Bound"
+      >i</a
+      ><a name="3088" class="Symbol"
+      >))</a
+      ><a name="3090"
+      > </a
+      ><a name="3091" href="dialogue-to-brouwer.html#2932" class="Bound"
+      >&#945;</a
+      ><a name="3092"
+      > </a
+      ><a name="3093" href="dialogue-to-brouwer.html#375" class="Function Operator"
+      >&#10217;</a
+      ><a name="3094"
+      >
+  </a
+      ><a name="3097" href="dialogue-to-brouwer.html#967" class="Function"
+      >beval</a
+      ><a name="3102"
+      > </a
+      ><a name="3103" class="Symbol"
+      >(</a
+      ><a name="3104" href="dialogue-to-brouwer.html#1272" class="Function"
+      >&#946;'</a
+      ><a name="3106"
+      > </a
+      ><a name="3107" class="Symbol"
+      >(&#955;</a
+      ><a name="3109"
+      > </a
+      ><a name="3110" href="dialogue-to-brouwer.html#3110" class="Bound"
+      >i</a
+      ><a name="3111"
+      > </a
+      ><a name="3112" class="Symbol"
+      >&#8594;</a
+      ><a name="3113"
+      > </a
+      ><a name="3114" href="dialogue-to-brouwer.html#1452" class="Function"
+      >convert</a
+      ><a name="3121"
+      > </a
+      ><a name="3122" class="Symbol"
+      >(</a
+      ><a name="3123" href="dialogue-to-brouwer.html#2927" class="Bound"
+      >&#966;</a
+      ><a name="3124"
+      > </a
+      ><a name="3125" href="dialogue-to-brouwer.html#3110" class="Bound"
+      >i</a
+      ><a name="3126" class="Symbol"
+      >))</a
+      ><a name="3128"
+      > </a
+      ><a name="3129" href="dialogue-to-brouwer.html#2929" class="Bound"
+      >n</a
+      ><a name="3130" class="Symbol"
+      >)</a
+      ><a name="3131"
+      > </a
+      ><a name="3132" href="dialogue-to-brouwer.html#2932" class="Bound"
+      >&#945;</a
+      ><a name="3133"
+      > </a
+      ><a name="3134" href="dialogue-to-brouwer.html#460" class="Function Operator"
+      >&#8718;</a
+      ><a name="3135"
+      >
+
+</a
+      ></pre
+    ></body
+  ></html
+>

@@ -1,0 +1,1659 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+><head
+  ><title
+    >proptrunc</title
+    ><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"
+     /><meta http-equiv="Content-Style-Type" content="text/css"
+     /><link href="Agda.css" rel="stylesheet" type="text/css"
+     /></head
+  ><body
+  ><pre
+    ><a name="1" class="Comment"
+      >-- Martin Escardo, 3rd August 2015, modified 9 May to add the rewriting option only.</a
+      ><a name="85"
+      >
+
+</a
+      ><a name="87" class="Comment"
+      >-- Propositional truncation.</a
+      ><a name="115"
+      >
+
+</a
+      ><a name="117" class="Symbol"
+      >{-#</a
+      ><a name="120"
+      > </a
+      ><a name="121" class="Keyword"
+      >OPTIONS</a
+      ><a name="128"
+      > --without-K </a
+      ><a name="141" class="Symbol"
+      >#-}</a
+      ><a name="144"
+      >
+</a
+      ><a name="145" class="Symbol"
+      >{-#</a
+      ><a name="148"
+      > </a
+      ><a name="149" class="Keyword"
+      >OPTIONS</a
+      ><a name="156"
+      > --rewriting </a
+      ><a name="169" class="Symbol"
+      >#-}</a
+      ><a name="172"
+      > </a
+      ><a name="173" class="Comment"
+      >-- Needed because we import prop which now relies on that.</a
+      ><a name="231"
+      >
+
+</a
+      ><a name="233" class="Keyword"
+      >module</a
+      ><a name="239"
+      > </a
+      ><a name="240" href="proptrunc.html#1" class="Module"
+      >proptrunc</a
+      ><a name="249"
+      > </a
+      ><a name="250" class="Keyword"
+      >where</a
+      ><a name="255"
+      >
+
+</a
+      ><a name="257" class="Keyword"
+      >open</a
+      ><a name="261"
+      > </a
+      ><a name="262" class="Keyword"
+      >import</a
+      ><a name="268"
+      > </a
+      ><a name="269" href="preliminaries.html#1" class="Module"
+      >preliminaries</a
+      ><a name="282"
+      >
+</a
+      ><a name="283" class="Keyword"
+      >open</a
+      ><a name="287"
+      > </a
+      ><a name="288" class="Keyword"
+      >import</a
+      ><a name="294"
+      > </a
+      ><a name="295" href="prop.html#1" class="Module"
+      >prop</a
+      ><a name="299"
+      >
+
+</a
+      ><a name="301" class="Comment"
+      >-- Propositional truncation first:</a
+      ><a name="335"
+      >
+
+</a
+      ><a name="337" href="proptrunc.html#337" class="Function Operator"
+      >&#8741;_&#8741;</a
+      ><a name="340"
+      > </a
+      ><a name="341" class="Symbol"
+      >:</a
+      ><a name="342"
+      > </a
+      ><a name="343" class="Symbol"
+      >{</a
+      ><a name="344" href="proptrunc.html#344" class="Bound"
+      >i</a
+      ><a name="345"
+      > </a
+      ><a name="346" class="Symbol"
+      >:</a
+      ><a name="347"
+      > </a
+      ><a name="348" href="Agda.Primitive.html#408" class="Postulate"
+      >Level</a
+      ><a name="353" class="Symbol"
+      >}</a
+      ><a name="354"
+      > </a
+      ><a name="355" class="Symbol"
+      >&#8594;</a
+      ><a name="356"
+      > </a
+      ><a name="357" href="preliminaries.html#342" class="Function"
+      >U</a
+      ><a name="358"
+      > </a
+      ><a name="359" href="proptrunc.html#344" class="Bound"
+      >i</a
+      ><a name="360"
+      > </a
+      ><a name="361" class="Symbol"
+      >&#8594;</a
+      ><a name="362"
+      > </a
+      ><a name="363" href="preliminaries.html#342" class="Function"
+      >U</a
+      ><a name="364"
+      > </a
+      ><a name="365" href="proptrunc.html#344" class="Bound"
+      >i</a
+      ><a name="366"
+      >
+</a
+      ><a name="367" href="proptrunc.html#337" class="Function Operator"
+      >&#8741;</a
+      ><a name="368"
+      > </a
+      ><a name="369" href="proptrunc.html#369" class="Bound"
+      >X</a
+      ><a name="370"
+      > </a
+      ><a name="371" href="proptrunc.html#337" class="Function Operator"
+      >&#8741;</a
+      ><a name="372"
+      > </a
+      ><a name="373" class="Symbol"
+      >=</a
+      ><a name="374"
+      > </a
+      ><a name="375" class="Symbol"
+      >(</a
+      ><a name="376" href="proptrunc.html#376" class="Bound"
+      >p</a
+      ><a name="377"
+      > </a
+      ><a name="378" class="Symbol"
+      >:</a
+      ><a name="379"
+      > </a
+      ><a name="380" href="prop.html#759" class="Function"
+      >Prop</a
+      ><a name="384" class="Symbol"
+      >)</a
+      ><a name="385"
+      > </a
+      ><a name="386" class="Symbol"
+      >&#8594;</a
+      ><a name="387"
+      > </a
+      ><a name="388" class="Symbol"
+      >(</a
+      ><a name="389" href="proptrunc.html#369" class="Bound"
+      >X</a
+      ><a name="390"
+      > </a
+      ><a name="391" class="Symbol"
+      >&#8594;</a
+      ><a name="392"
+      > </a
+      ><a name="393" href="proptrunc.html#376" class="Bound"
+      >p</a
+      ><a name="394"
+      > </a
+      ><a name="395" href="prop.html#1094" class="Function Operator"
+      >holds</a
+      ><a name="400" class="Symbol"
+      >)</a
+      ><a name="401"
+      > </a
+      ><a name="402" class="Symbol"
+      >&#8594;</a
+      ><a name="403"
+      > </a
+      ><a name="404" href="proptrunc.html#376" class="Bound"
+      >p</a
+      ><a name="405"
+      > </a
+      ><a name="406" href="prop.html#1094" class="Function Operator"
+      >holds</a
+      ><a name="411"
+      >
+
+</a
+      ><a name="413" class="Comment"
+      >-- Here &#8741; X &#8741; is ranged over by s and t.</a
+      ><a name="453"
+      >
+
+</a
+      ><a name="455" href="proptrunc.html#455" class="Function Operator"
+      >&#8739;_&#8739;</a
+      ><a name="458"
+      > </a
+      ><a name="459" class="Symbol"
+      >:</a
+      ><a name="460"
+      > </a
+      ><a name="461" class="Symbol"
+      >{</a
+      ><a name="462" href="proptrunc.html#462" class="Bound"
+      >i</a
+      ><a name="463"
+      > </a
+      ><a name="464" class="Symbol"
+      >:</a
+      ><a name="465"
+      > </a
+      ><a name="466" href="Agda.Primitive.html#408" class="Postulate"
+      >Level</a
+      ><a name="471" class="Symbol"
+      >}</a
+      ><a name="472"
+      > </a
+      ><a name="473" class="Symbol"
+      >{</a
+      ><a name="474" href="proptrunc.html#474" class="Bound"
+      >X</a
+      ><a name="475"
+      > </a
+      ><a name="476" class="Symbol"
+      >:</a
+      ><a name="477"
+      > </a
+      ><a name="478" href="preliminaries.html#342" class="Function"
+      >U</a
+      ><a name="479"
+      > </a
+      ><a name="480" href="proptrunc.html#462" class="Bound"
+      >i</a
+      ><a name="481" class="Symbol"
+      >}</a
+      ><a name="482"
+      > </a
+      ><a name="483" class="Symbol"
+      >&#8594;</a
+      ><a name="484"
+      > </a
+      ><a name="485" href="proptrunc.html#474" class="Bound"
+      >X</a
+      ><a name="486"
+      > </a
+      ><a name="487" class="Symbol"
+      >&#8594;</a
+      ><a name="488"
+      > </a
+      ><a name="489" href="proptrunc.html#337" class="Function Operator"
+      >&#8741;</a
+      ><a name="490"
+      > </a
+      ><a name="491" href="proptrunc.html#474" class="Bound"
+      >X</a
+      ><a name="492"
+      > </a
+      ><a name="493" href="proptrunc.html#337" class="Function Operator"
+      >&#8741;</a
+      ><a name="494"
+      >
+</a
+      ><a name="495" href="proptrunc.html#455" class="Function Operator"
+      >&#8739;</a
+      ><a name="496"
+      > </a
+      ><a name="497" href="proptrunc.html#497" class="Bound"
+      >x</a
+      ><a name="498"
+      > </a
+      ><a name="499" href="proptrunc.html#455" class="Function Operator"
+      >&#8739;</a
+      ><a name="500"
+      > </a
+      ><a name="501" class="Symbol"
+      >=</a
+      ><a name="502"
+      > </a
+      ><a name="503" class="Symbol"
+      >&#955;</a
+      ><a name="504"
+      > </a
+      ><a name="505" href="proptrunc.html#505" class="Bound"
+      >_</a
+      ><a name="506"
+      > </a
+      ><a name="507" href="proptrunc.html#507" class="Bound"
+      >f</a
+      ><a name="508"
+      > </a
+      ><a name="509" class="Symbol"
+      >&#8594;</a
+      ><a name="510"
+      > </a
+      ><a name="511" href="proptrunc.html#507" class="Bound"
+      >f</a
+      ><a name="512"
+      > </a
+      ><a name="513" href="proptrunc.html#497" class="Bound"
+      >x</a
+      ><a name="514"
+      >
+
+</a
+      ><a name="516" href="proptrunc.html#516" class="Function"
+      >&#8741;&#8741;-rec</a
+      ><a name="522"
+      > </a
+      ><a name="523" class="Symbol"
+      >:</a
+      ><a name="524"
+      > </a
+      ><a name="525" class="Symbol"
+      >{</a
+      ><a name="526" href="proptrunc.html#526" class="Bound"
+      >i</a
+      ><a name="527"
+      > </a
+      ><a name="528" class="Symbol"
+      >:</a
+      ><a name="529"
+      > </a
+      ><a name="530" href="Agda.Primitive.html#408" class="Postulate"
+      >Level</a
+      ><a name="535" class="Symbol"
+      >}</a
+      ><a name="536"
+      > </a
+      ><a name="537" class="Symbol"
+      >{</a
+      ><a name="538" href="proptrunc.html#538" class="Bound"
+      >X</a
+      ><a name="539"
+      > </a
+      ><a name="540" class="Symbol"
+      >:</a
+      ><a name="541"
+      > </a
+      ><a name="542" href="preliminaries.html#342" class="Function"
+      >U</a
+      ><a name="543"
+      > </a
+      ><a name="544" href="proptrunc.html#526" class="Bound"
+      >i</a
+      ><a name="545" class="Symbol"
+      >}</a
+      ><a name="546"
+      > </a
+      ><a name="547" class="Symbol"
+      >{</a
+      ><a name="548" href="proptrunc.html#548" class="Bound"
+      >P</a
+      ><a name="549"
+      > </a
+      ><a name="550" class="Symbol"
+      >:</a
+      ><a name="551"
+      > </a
+      ><a name="552" href="preliminaries.html#385" class="Function"
+      >U&#8320;</a
+      ><a name="554" class="Symbol"
+      >}</a
+      ><a name="555"
+      > </a
+      ><a name="556" class="Symbol"
+      >&#8594;</a
+      ><a name="557"
+      > </a
+      ><a name="558" href="isprop.html#168" class="Function"
+      >isProp</a
+      ><a name="564"
+      > </a
+      ><a name="565" href="proptrunc.html#548" class="Bound"
+      >P</a
+      ><a name="566"
+      > </a
+      ><a name="567" class="Symbol"
+      >&#8594;</a
+      ><a name="568"
+      > </a
+      ><a name="569" class="Symbol"
+      >(</a
+      ><a name="570" href="proptrunc.html#538" class="Bound"
+      >X</a
+      ><a name="571"
+      > </a
+      ><a name="572" class="Symbol"
+      >&#8594;</a
+      ><a name="573"
+      > </a
+      ><a name="574" href="proptrunc.html#548" class="Bound"
+      >P</a
+      ><a name="575" class="Symbol"
+      >)</a
+      ><a name="576"
+      > </a
+      ><a name="577" class="Symbol"
+      >&#8594;</a
+      ><a name="578"
+      > </a
+      ><a name="579" href="proptrunc.html#337" class="Function Operator"
+      >&#8741;</a
+      ><a name="580"
+      > </a
+      ><a name="581" href="proptrunc.html#538" class="Bound"
+      >X</a
+      ><a name="582"
+      > </a
+      ><a name="583" href="proptrunc.html#337" class="Function Operator"
+      >&#8741;</a
+      ><a name="584"
+      > </a
+      ><a name="585" class="Symbol"
+      >&#8594;</a
+      ><a name="586"
+      > </a
+      ><a name="587" href="proptrunc.html#548" class="Bound"
+      >P</a
+      ><a name="588"
+      >
+</a
+      ><a name="589" href="proptrunc.html#516" class="Function"
+      >&#8741;&#8741;-rec</a
+      ><a name="595"
+      > </a
+      ><a name="596" class="Symbol"
+      >{</a
+      ><a name="597" href="proptrunc.html#597" class="Bound"
+      >i</a
+      ><a name="598" class="Symbol"
+      >}</a
+      ><a name="599"
+      > </a
+      ><a name="600" class="Symbol"
+      >{</a
+      ><a name="601" href="proptrunc.html#601" class="Bound"
+      >X</a
+      ><a name="602" class="Symbol"
+      >}</a
+      ><a name="603"
+      > </a
+      ><a name="604" class="Symbol"
+      >{</a
+      ><a name="605" href="proptrunc.html#605" class="Bound"
+      >P</a
+      ><a name="606" class="Symbol"
+      >}</a
+      ><a name="607"
+      > </a
+      ><a name="608" href="proptrunc.html#608" class="Bound"
+      >isp</a
+      ><a name="611"
+      > </a
+      ><a name="612" href="proptrunc.html#612" class="Bound"
+      >&#966;</a
+      ><a name="613"
+      > </a
+      ><a name="614" href="proptrunc.html#614" class="Bound"
+      >s</a
+      ><a name="615"
+      > </a
+      ><a name="616" class="Symbol"
+      >=</a
+      ><a name="617"
+      > </a
+      ><a name="618" href="proptrunc.html#614" class="Bound"
+      >s</a
+      ><a name="619"
+      > </a
+      ><a name="620" href="prop.html#1008" class="Function Operator"
+      >&#8333;</a
+      ><a name="621"
+      > </a
+      ><a name="622" href="proptrunc.html#605" class="Bound"
+      >P</a
+      ><a name="623"
+      > </a
+      ><a name="624" href="prop.html#1008" class="Function Operator"
+      >,</a
+      ><a name="625"
+      > </a
+      ><a name="626" href="proptrunc.html#608" class="Bound"
+      >isp</a
+      ><a name="629"
+      > </a
+      ><a name="630" href="prop.html#1008" class="Function Operator"
+      >&#8334;</a
+      ><a name="631"
+      > </a
+      ><a name="632" href="proptrunc.html#612" class="Bound"
+      >&#966;</a
+      ><a name="633"
+      >
+
+</a
+      ><a name="635" href="proptrunc.html#635" class="Function"
+      >&#8741;&#8741;-rec-comp</a
+      ><a name="646"
+      > </a
+      ><a name="647" class="Symbol"
+      >:</a
+      ><a name="648"
+      > </a
+      ><a name="649" class="Symbol"
+      >{</a
+      ><a name="650" href="proptrunc.html#650" class="Bound"
+      >i</a
+      ><a name="651"
+      > </a
+      ><a name="652" class="Symbol"
+      >:</a
+      ><a name="653"
+      > </a
+      ><a name="654" href="Agda.Primitive.html#408" class="Postulate"
+      >Level</a
+      ><a name="659" class="Symbol"
+      >}</a
+      ><a name="660"
+      > </a
+      ><a name="661" class="Symbol"
+      >{</a
+      ><a name="662" href="proptrunc.html#662" class="Bound"
+      >X</a
+      ><a name="663"
+      > </a
+      ><a name="664" class="Symbol"
+      >:</a
+      ><a name="665"
+      > </a
+      ><a name="666" href="preliminaries.html#342" class="Function"
+      >U</a
+      ><a name="667"
+      > </a
+      ><a name="668" href="proptrunc.html#650" class="Bound"
+      >i</a
+      ><a name="669" class="Symbol"
+      >}</a
+      ><a name="670"
+      > </a
+      ><a name="671" class="Symbol"
+      >{</a
+      ><a name="672" href="proptrunc.html#672" class="Bound"
+      >P</a
+      ><a name="673"
+      > </a
+      ><a name="674" class="Symbol"
+      >:</a
+      ><a name="675"
+      > </a
+      ><a name="676" href="preliminaries.html#385" class="Function"
+      >U&#8320;</a
+      ><a name="678" class="Symbol"
+      >}</a
+      ><a name="679"
+      >
+            </a
+      ><a name="693" class="Symbol"
+      >&#8594;</a
+      ><a name="694"
+      > </a
+      ><a name="695" class="Symbol"
+      >{</a
+      ><a name="696" href="proptrunc.html#696" class="Bound"
+      >isp</a
+      ><a name="699"
+      > </a
+      ><a name="700" class="Symbol"
+      >:</a
+      ><a name="701"
+      > </a
+      ><a name="702" href="isprop.html#168" class="Function"
+      >isProp</a
+      ><a name="708"
+      > </a
+      ><a name="709" href="proptrunc.html#672" class="Bound"
+      >P</a
+      ><a name="710" class="Symbol"
+      >}</a
+      ><a name="711"
+      > </a
+      ><a name="712" class="Symbol"
+      >(</a
+      ><a name="713" href="proptrunc.html#713" class="Bound"
+      >&#966;</a
+      ><a name="714"
+      > </a
+      ><a name="715" class="Symbol"
+      >:</a
+      ><a name="716"
+      > </a
+      ><a name="717" href="proptrunc.html#662" class="Bound"
+      >X</a
+      ><a name="718"
+      > </a
+      ><a name="719" class="Symbol"
+      >&#8594;</a
+      ><a name="720"
+      > </a
+      ><a name="721" href="proptrunc.html#672" class="Bound"
+      >P</a
+      ><a name="722" class="Symbol"
+      >)</a
+      ><a name="723"
+      > </a
+      ><a name="724" class="Symbol"
+      >(</a
+      ><a name="725" href="proptrunc.html#725" class="Bound"
+      >x</a
+      ><a name="726"
+      > </a
+      ><a name="727" class="Symbol"
+      >:</a
+      ><a name="728"
+      > </a
+      ><a name="729" href="proptrunc.html#662" class="Bound"
+      >X</a
+      ><a name="730" class="Symbol"
+      >)</a
+      ><a name="731"
+      > </a
+      ><a name="732" class="Symbol"
+      >&#8594;</a
+      ><a name="733"
+      >  </a
+      ><a name="735" href="proptrunc.html#516" class="Function"
+      >&#8741;&#8741;-rec</a
+      ><a name="741"
+      > </a
+      ><a name="742" href="proptrunc.html#696" class="Bound"
+      >isp</a
+      ><a name="745"
+      > </a
+      ><a name="746" href="proptrunc.html#713" class="Bound"
+      >&#966;</a
+      ><a name="747"
+      > </a
+      ><a name="748" href="proptrunc.html#455" class="Function Operator"
+      >&#8739;</a
+      ><a name="749"
+      > </a
+      ><a name="750" href="proptrunc.html#725" class="Bound"
+      >x</a
+      ><a name="751"
+      > </a
+      ><a name="752" href="proptrunc.html#455" class="Function Operator"
+      >&#8739;</a
+      ><a name="753"
+      > </a
+      ><a name="754" href="preliminaries.html#1396" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="755"
+      > </a
+      ><a name="756" href="proptrunc.html#713" class="Bound"
+      >&#966;</a
+      ><a name="757"
+      > </a
+      ><a name="758" href="proptrunc.html#725" class="Bound"
+      >x</a
+      ><a name="759"
+      >
+</a
+      ><a name="760" href="proptrunc.html#635" class="Function"
+      >&#8741;&#8741;-rec-comp</a
+      ><a name="771"
+      > </a
+      ><a name="772" href="proptrunc.html#772" class="Bound"
+      >&#966;</a
+      ><a name="773"
+      > </a
+      ><a name="774" href="proptrunc.html#774" class="Bound"
+      >x</a
+      ><a name="775"
+      > </a
+      ><a name="776" class="Symbol"
+      >=</a
+      ><a name="777"
+      > </a
+      ><a name="778" href="preliminaries.html#1442" class="InductiveConstructor"
+      >refl</a
+      ><a name="782" class="Symbol"
+      >(</a
+      ><a name="783" href="proptrunc.html#772" class="Bound"
+      >&#966;</a
+      ><a name="784"
+      > </a
+      ><a name="785" href="proptrunc.html#774" class="Bound"
+      >x</a
+      ><a name="786" class="Symbol"
+      >)</a
+      ><a name="787"
+      >
+
+</a
+      ><a name="789" class="Comment"
+      >-- To have that &#8741; X &#8741; is a proposition we need function extensionality. </a
+      ><a name="861"
+      >
+</a
+      ><a name="862" class="Comment"
+      >-- In fact, assuming that &#8741; X &#8741; is a proposition gives function extensionality </a
+      ><a name="941"
+      >
+</a
+      ><a name="942" class="Comment"
+      >-- (proof omitted here).</a
+      ><a name="966"
+      >
+
+</a
+      ><a name="968" href="proptrunc.html#968" class="Function"
+      >&#8741;&#8741;-isProp</a
+      ><a name="977"
+      > </a
+      ><a name="978" class="Symbol"
+      >:</a
+      ><a name="979"
+      > </a
+      ><a name="980" class="Symbol"
+      >{</a
+      ><a name="981" href="proptrunc.html#981" class="Bound"
+      >i</a
+      ><a name="982"
+      > </a
+      ><a name="983" class="Symbol"
+      >:</a
+      ><a name="984"
+      > </a
+      ><a name="985" href="Agda.Primitive.html#408" class="Postulate"
+      >Level</a
+      ><a name="990" class="Symbol"
+      >}</a
+      ><a name="991"
+      > </a
+      ><a name="992" class="Symbol"
+      >{</a
+      ><a name="993" href="proptrunc.html#993" class="Bound"
+      >X</a
+      ><a name="994"
+      > </a
+      ><a name="995" class="Symbol"
+      >:</a
+      ><a name="996"
+      > </a
+      ><a name="997" href="preliminaries.html#342" class="Function"
+      >U</a
+      ><a name="998"
+      > </a
+      ><a name="999" href="proptrunc.html#981" class="Bound"
+      >i</a
+      ><a name="1000" class="Symbol"
+      >}</a
+      ><a name="1001"
+      > </a
+      ><a name="1002" class="Symbol"
+      >&#8594;</a
+      ><a name="1003"
+      > </a
+      ><a name="1004" href="isprop.html#168" class="Function"
+      >isProp</a
+      ><a name="1010"
+      > </a
+      ><a name="1011" href="proptrunc.html#337" class="Function Operator"
+      >&#8741;</a
+      ><a name="1012"
+      > </a
+      ><a name="1013" href="proptrunc.html#993" class="Bound"
+      >X</a
+      ><a name="1014"
+      > </a
+      ><a name="1015" href="proptrunc.html#337" class="Function Operator"
+      >&#8741;</a
+      ><a name="1016"
+      >
+</a
+      ><a name="1017" href="proptrunc.html#968" class="Function"
+      >&#8741;&#8741;-isProp</a
+      ><a name="1026"
+      > </a
+      ><a name="1027" href="proptrunc.html#1027" class="Bound"
+      >s</a
+      ><a name="1028"
+      > </a
+      ><a name="1029" href="proptrunc.html#1029" class="Bound"
+      >t</a
+      ><a name="1030"
+      > </a
+      ><a name="1031" class="Symbol"
+      >=</a
+      ><a name="1032"
+      > </a
+      ><a name="1033" href="proptrunc.html#1069" class="Function"
+      >lemma</a
+      ><a name="1038"
+      >
+ </a
+      ><a name="1040" class="Keyword"
+      >where</a
+      ><a name="1045"
+      >
+  </a
+      ><a name="1048" class="Keyword"
+      >open</a
+      ><a name="1052"
+      > </a
+      ><a name="1053" class="Keyword"
+      >import</a
+      ><a name="1059"
+      > </a
+      ><a name="1060" href="funext.html#1" class="Module"
+      >funext</a
+      ><a name="1066"
+      >
+  </a
+      ><a name="1069" href="proptrunc.html#1069" class="Function"
+      >lemma</a
+      ><a name="1074"
+      > </a
+      ><a name="1075" class="Symbol"
+      >:</a
+      ><a name="1076"
+      > </a
+      ><a name="1077" href="proptrunc.html#1027" class="Bound"
+      >s</a
+      ><a name="1078"
+      > </a
+      ><a name="1079" href="preliminaries.html#1396" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="1080"
+      > </a
+      ><a name="1081" href="proptrunc.html#1029" class="Bound"
+      >t</a
+      ><a name="1082"
+      >
+  </a
+      ><a name="1085" href="proptrunc.html#1069" class="Function"
+      >lemma</a
+      ><a name="1090"
+      > </a
+      ><a name="1091" class="Symbol"
+      >=</a
+      ><a name="1092"
+      > </a
+      ><a name="1093" href="funext.html#59" class="Postulate"
+      >funext</a
+      ><a name="1099"
+      > </a
+      ><a name="1100" class="Symbol"
+      >(&#955;</a
+      ><a name="1102"
+      > </a
+      ><a name="1103" href="proptrunc.html#1103" class="Bound"
+      >p</a
+      ><a name="1104"
+      > </a
+      ><a name="1105" class="Symbol"
+      >&#8594;</a
+      ><a name="1106"
+      > </a
+      ><a name="1107" href="funext.html#59" class="Postulate"
+      >funext</a
+      ><a name="1113"
+      > </a
+      ><a name="1114" class="Symbol"
+      >(&#955;</a
+      ><a name="1116"
+      > </a
+      ><a name="1117" href="proptrunc.html#1117" class="Bound"
+      >f</a
+      ><a name="1118"
+      > </a
+      ><a name="1119" class="Symbol"
+      >&#8594;</a
+      ><a name="1120"
+      > </a
+      ><a name="1121" href="prop.html#1143" class="Function"
+      >holdsIsProp</a
+      ><a name="1132"
+      > </a
+      ><a name="1133" href="proptrunc.html#1103" class="Bound"
+      >p</a
+      ><a name="1134"
+      > </a
+      ><a name="1135" class="Symbol"
+      >(</a
+      ><a name="1136" href="proptrunc.html#1027" class="Bound"
+      >s</a
+      ><a name="1137"
+      > </a
+      ><a name="1138" href="proptrunc.html#1103" class="Bound"
+      >p</a
+      ><a name="1139"
+      > </a
+      ><a name="1140" href="proptrunc.html#1117" class="Bound"
+      >f</a
+      ><a name="1141" class="Symbol"
+      >)</a
+      ><a name="1142"
+      > </a
+      ><a name="1143" class="Symbol"
+      >(</a
+      ><a name="1144" href="proptrunc.html#1029" class="Bound"
+      >t</a
+      ><a name="1145"
+      > </a
+      ><a name="1146" href="proptrunc.html#1103" class="Bound"
+      >p</a
+      ><a name="1147"
+      > </a
+      ><a name="1148" href="proptrunc.html#1117" class="Bound"
+      >f</a
+      ><a name="1149" class="Symbol"
+      >)))</a
+      ><a name="1152"
+      >
+
+</a
+      ><a name="1154" class="Comment"
+      >-- Induction on &#8741; X &#8741; follows from recursion:</a
+      ><a name="1199"
+      >
+
+</a
+      ><a name="1201" href="proptrunc.html#1201" class="Function"
+      >&#8741;&#8741;-ind</a
+      ><a name="1207"
+      > </a
+      ><a name="1208" class="Symbol"
+      >:</a
+      ><a name="1209"
+      > </a
+      ><a name="1210" class="Symbol"
+      >{</a
+      ><a name="1211" href="proptrunc.html#1211" class="Bound"
+      >i</a
+      ><a name="1212"
+      > </a
+      ><a name="1213" class="Symbol"
+      >:</a
+      ><a name="1214"
+      > </a
+      ><a name="1215" href="Agda.Primitive.html#408" class="Postulate"
+      >Level</a
+      ><a name="1220" class="Symbol"
+      >}</a
+      ><a name="1221"
+      > </a
+      ><a name="1222" class="Symbol"
+      >{</a
+      ><a name="1223" href="proptrunc.html#1223" class="Bound"
+      >X</a
+      ><a name="1224"
+      > </a
+      ><a name="1225" class="Symbol"
+      >:</a
+      ><a name="1226"
+      > </a
+      ><a name="1227" href="preliminaries.html#342" class="Function"
+      >U</a
+      ><a name="1228"
+      > </a
+      ><a name="1229" href="proptrunc.html#1211" class="Bound"
+      >i</a
+      ><a name="1230" class="Symbol"
+      >}</a
+      ><a name="1231"
+      > </a
+      ><a name="1232" class="Symbol"
+      >{</a
+      ><a name="1233" href="proptrunc.html#1233" class="Bound"
+      >P</a
+      ><a name="1234"
+      > </a
+      ><a name="1235" class="Symbol"
+      >:</a
+      ><a name="1236"
+      > </a
+      ><a name="1237" href="proptrunc.html#337" class="Function Operator"
+      >&#8741;</a
+      ><a name="1238"
+      > </a
+      ><a name="1239" href="proptrunc.html#1223" class="Bound"
+      >X</a
+      ><a name="1240"
+      > </a
+      ><a name="1241" href="proptrunc.html#337" class="Function Operator"
+      >&#8741;</a
+      ><a name="1242"
+      > </a
+      ><a name="1243" class="Symbol"
+      >&#8594;</a
+      ><a name="1244"
+      > </a
+      ><a name="1245" href="preliminaries.html#385" class="Function"
+      >U&#8320;</a
+      ><a name="1247" class="Symbol"
+      >}</a
+      ><a name="1248"
+      > </a
+      ><a name="1249" class="Symbol"
+      >&#8594;</a
+      ><a name="1250"
+      > </a
+      ><a name="1251" class="Symbol"
+      >((</a
+      ><a name="1253" href="proptrunc.html#1253" class="Bound"
+      >s</a
+      ><a name="1254"
+      > </a
+      ><a name="1255" class="Symbol"
+      >:</a
+      ><a name="1256"
+      > </a
+      ><a name="1257" href="proptrunc.html#337" class="Function Operator"
+      >&#8741;</a
+      ><a name="1258"
+      > </a
+      ><a name="1259" href="proptrunc.html#1223" class="Bound"
+      >X</a
+      ><a name="1260"
+      > </a
+      ><a name="1261" href="proptrunc.html#337" class="Function Operator"
+      >&#8741;</a
+      ><a name="1262" class="Symbol"
+      >)</a
+      ><a name="1263"
+      > </a
+      ><a name="1264" class="Symbol"
+      >&#8594;</a
+      ><a name="1265"
+      > </a
+      ><a name="1266" href="isprop.html#168" class="Function"
+      >isProp</a
+      ><a name="1272" class="Symbol"
+      >(</a
+      ><a name="1273" href="proptrunc.html#1233" class="Bound"
+      >P</a
+      ><a name="1274"
+      > </a
+      ><a name="1275" href="proptrunc.html#1253" class="Bound"
+      >s</a
+      ><a name="1276" class="Symbol"
+      >))</a
+      ><a name="1278"
+      >
+       </a
+      ><a name="1287" class="Symbol"
+      >&#8594;</a
+      ><a name="1288"
+      > </a
+      ><a name="1289" class="Symbol"
+      >((</a
+      ><a name="1291" href="proptrunc.html#1291" class="Bound"
+      >x</a
+      ><a name="1292"
+      > </a
+      ><a name="1293" class="Symbol"
+      >:</a
+      ><a name="1294"
+      > </a
+      ><a name="1295" href="proptrunc.html#1223" class="Bound"
+      >X</a
+      ><a name="1296" class="Symbol"
+      >)</a
+      ><a name="1297"
+      > </a
+      ><a name="1298" class="Symbol"
+      >&#8594;</a
+      ><a name="1299"
+      > </a
+      ><a name="1300" href="proptrunc.html#1233" class="Bound"
+      >P</a
+      ><a name="1301"
+      > </a
+      ><a name="1302" href="proptrunc.html#455" class="Function Operator"
+      >&#8739;</a
+      ><a name="1303"
+      > </a
+      ><a name="1304" href="proptrunc.html#1291" class="Bound"
+      >x</a
+      ><a name="1305"
+      > </a
+      ><a name="1306" href="proptrunc.html#455" class="Function Operator"
+      >&#8739;</a
+      ><a name="1307" class="Symbol"
+      >)</a
+      ><a name="1308"
+      > </a
+      ><a name="1309" class="Symbol"
+      >&#8594;</a
+      ><a name="1310"
+      >  </a
+      ><a name="1312" class="Symbol"
+      >(</a
+      ><a name="1313" href="proptrunc.html#1313" class="Bound"
+      >s</a
+      ><a name="1314"
+      > </a
+      ><a name="1315" class="Symbol"
+      >:</a
+      ><a name="1316"
+      > </a
+      ><a name="1317" href="proptrunc.html#337" class="Function Operator"
+      >&#8741;</a
+      ><a name="1318"
+      > </a
+      ><a name="1319" href="proptrunc.html#1223" class="Bound"
+      >X</a
+      ><a name="1320"
+      > </a
+      ><a name="1321" href="proptrunc.html#337" class="Function Operator"
+      >&#8741;</a
+      ><a name="1322" class="Symbol"
+      >)</a
+      ><a name="1323"
+      > </a
+      ><a name="1324" class="Symbol"
+      >&#8594;</a
+      ><a name="1325"
+      > </a
+      ><a name="1326" href="proptrunc.html#1233" class="Bound"
+      >P</a
+      ><a name="1327"
+      > </a
+      ><a name="1328" href="proptrunc.html#1313" class="Bound"
+      >s</a
+      ><a name="1329"
+      >
+</a
+      ><a name="1330" href="proptrunc.html#1201" class="Function"
+      >&#8741;&#8741;-ind</a
+      ><a name="1336"
+      > </a
+      ><a name="1337" class="Symbol"
+      >{</a
+      ><a name="1338" href="proptrunc.html#1338" class="Bound"
+      >i</a
+      ><a name="1339" class="Symbol"
+      >}</a
+      ><a name="1340"
+      > </a
+      ><a name="1341" class="Symbol"
+      >{</a
+      ><a name="1342" href="proptrunc.html#1342" class="Bound"
+      >X</a
+      ><a name="1343" class="Symbol"
+      >}</a
+      ><a name="1344"
+      > </a
+      ><a name="1345" class="Symbol"
+      >{</a
+      ><a name="1346" href="proptrunc.html#1346" class="Bound"
+      >P</a
+      ><a name="1347" class="Symbol"
+      >}</a
+      ><a name="1348"
+      > </a
+      ><a name="1349" href="proptrunc.html#1349" class="Bound"
+      >isp</a
+      ><a name="1352"
+      > </a
+      ><a name="1353" href="proptrunc.html#1353" class="Bound"
+      >&#966;</a
+      ><a name="1354"
+      > </a
+      ><a name="1355" href="proptrunc.html#1355" class="Bound"
+      >s</a
+      ><a name="1356"
+      > </a
+      ><a name="1357" class="Symbol"
+      >=</a
+      ><a name="1358"
+      > </a
+      ><a name="1359" href="proptrunc.html#516" class="Function"
+      >&#8741;&#8741;-rec</a
+      ><a name="1365"
+      > </a
+      ><a name="1366" class="Symbol"
+      >(</a
+      ><a name="1367" href="proptrunc.html#1349" class="Bound"
+      >isp</a
+      ><a name="1370"
+      > </a
+      ><a name="1371" href="proptrunc.html#1355" class="Bound"
+      >s</a
+      ><a name="1372" class="Symbol"
+      >)</a
+      ><a name="1373"
+      > </a
+      ><a name="1374" href="proptrunc.html#1387" class="Function"
+      >&#968;</a
+      ><a name="1375"
+      > </a
+      ><a name="1376" href="proptrunc.html#1355" class="Bound"
+      >s</a
+      ><a name="1377"
+      >
+ </a
+      ><a name="1379" class="Keyword"
+      >where</a
+      ><a name="1384"
+      >
+  </a
+      ><a name="1387" href="proptrunc.html#1387" class="Function"
+      >&#968;</a
+      ><a name="1388"
+      > </a
+      ><a name="1389" class="Symbol"
+      >:</a
+      ><a name="1390"
+      > </a
+      ><a name="1391" href="proptrunc.html#1342" class="Bound"
+      >X</a
+      ><a name="1392"
+      > </a
+      ><a name="1393" class="Symbol"
+      >&#8594;</a
+      ><a name="1394"
+      > </a
+      ><a name="1395" href="proptrunc.html#1346" class="Bound"
+      >P</a
+      ><a name="1396"
+      > </a
+      ><a name="1397" href="proptrunc.html#1355" class="Bound"
+      >s</a
+      ><a name="1398"
+      >
+  </a
+      ><a name="1401" href="proptrunc.html#1387" class="Function"
+      >&#968;</a
+      ><a name="1402"
+      > </a
+      ><a name="1403" href="proptrunc.html#1403" class="Bound"
+      >x</a
+      ><a name="1404"
+      > </a
+      ><a name="1405" class="Symbol"
+      >=</a
+      ><a name="1406"
+      > </a
+      ><a name="1407" href="preliminaries.html#1891" class="Function"
+      >transport</a
+      ><a name="1416"
+      > </a
+      ><a name="1417" href="proptrunc.html#1346" class="Bound"
+      >P</a
+      ><a name="1418"
+      > </a
+      ><a name="1419" class="Symbol"
+      >(</a
+      ><a name="1420" href="proptrunc.html#968" class="Function"
+      >&#8741;&#8741;-isProp</a
+      ><a name="1429"
+      > </a
+      ><a name="1430" href="proptrunc.html#455" class="Function Operator"
+      >&#8739;</a
+      ><a name="1431"
+      > </a
+      ><a name="1432" href="proptrunc.html#1403" class="Bound"
+      >x</a
+      ><a name="1433"
+      > </a
+      ><a name="1434" href="proptrunc.html#455" class="Function Operator"
+      >&#8739;</a
+      ><a name="1435"
+      > </a
+      ><a name="1436" href="proptrunc.html#1355" class="Bound"
+      >s</a
+      ><a name="1437" class="Symbol"
+      >)</a
+      ><a name="1438"
+      > </a
+      ><a name="1439" class="Symbol"
+      >(</a
+      ><a name="1440" href="proptrunc.html#1353" class="Bound"
+      >&#966;</a
+      ><a name="1441"
+      > </a
+      ><a name="1442" href="proptrunc.html#1403" class="Bound"
+      >x</a
+      ><a name="1443" class="Symbol"
+      >)</a
+      ><a name="1444"
+      >
+
+</a
+      ><a name="1446" class="Comment"
+      >-- There should be a way of defining &#8741;&#8741;-ind so that its computation</a
+      ><a name="1513"
+      >
+</a
+      ><a name="1514" class="Comment"
+      >-- rule holds definitionally (using the ideas of the file hsetfunext</a
+      ><a name="1582"
+      >
+</a
+      ><a name="1583" class="Comment"
+      >-- elsewhere). For the above definition, it only holds</a
+      ><a name="1637"
+      >
+</a
+      ><a name="1638" class="Comment"
+      >-- propositionally:</a
+      ><a name="1657"
+      >
+
+</a
+      ><a name="1659" href="proptrunc.html#1659" class="Function"
+      >&#8741;&#8741;-ind-comp</a
+      ><a name="1670"
+      > </a
+      ><a name="1671" class="Symbol"
+      >:</a
+      ><a name="1672"
+      > </a
+      ><a name="1673" class="Symbol"
+      >{</a
+      ><a name="1674" href="proptrunc.html#1674" class="Bound"
+      >i</a
+      ><a name="1675"
+      > </a
+      ><a name="1676" class="Symbol"
+      >:</a
+      ><a name="1677"
+      > </a
+      ><a name="1678" href="Agda.Primitive.html#408" class="Postulate"
+      >Level</a
+      ><a name="1683" class="Symbol"
+      >}</a
+      ><a name="1684"
+      > </a
+      ><a name="1685" class="Symbol"
+      >{</a
+      ><a name="1686" href="proptrunc.html#1686" class="Bound"
+      >X</a
+      ><a name="1687"
+      > </a
+      ><a name="1688" class="Symbol"
+      >:</a
+      ><a name="1689"
+      > </a
+      ><a name="1690" href="preliminaries.html#342" class="Function"
+      >U</a
+      ><a name="1691"
+      > </a
+      ><a name="1692" href="proptrunc.html#1674" class="Bound"
+      >i</a
+      ><a name="1693" class="Symbol"
+      >}</a
+      ><a name="1694"
+      > </a
+      ><a name="1695" class="Symbol"
+      >{</a
+      ><a name="1696" href="proptrunc.html#1696" class="Bound"
+      >P</a
+      ><a name="1697"
+      > </a
+      ><a name="1698" class="Symbol"
+      >:</a
+      ><a name="1699"
+      > </a
+      ><a name="1700" href="proptrunc.html#337" class="Function Operator"
+      >&#8741;</a
+      ><a name="1701"
+      > </a
+      ><a name="1702" href="proptrunc.html#1686" class="Bound"
+      >X</a
+      ><a name="1703"
+      > </a
+      ><a name="1704" href="proptrunc.html#337" class="Function Operator"
+      >&#8741;</a
+      ><a name="1705"
+      > </a
+      ><a name="1706" class="Symbol"
+      >&#8594;</a
+      ><a name="1707"
+      > </a
+      ><a name="1708" href="preliminaries.html#385" class="Function"
+      >U&#8320;</a
+      ><a name="1710" class="Symbol"
+      >}</a
+      ><a name="1711"
+      >
+              </a
+      ><a name="1727" class="Symbol"
+      >(</a
+      ><a name="1728" href="proptrunc.html#1728" class="Bound"
+      >isp</a
+      ><a name="1731"
+      > </a
+      ><a name="1732" class="Symbol"
+      >:</a
+      ><a name="1733"
+      > </a
+      ><a name="1734" class="Symbol"
+      >(</a
+      ><a name="1735" href="proptrunc.html#1735" class="Bound"
+      >s</a
+      ><a name="1736"
+      > </a
+      ><a name="1737" class="Symbol"
+      >:</a
+      ><a name="1738"
+      > </a
+      ><a name="1739" href="proptrunc.html#337" class="Function Operator"
+      >&#8741;</a
+      ><a name="1740"
+      > </a
+      ><a name="1741" href="proptrunc.html#1686" class="Bound"
+      >X</a
+      ><a name="1742"
+      > </a
+      ><a name="1743" href="proptrunc.html#337" class="Function Operator"
+      >&#8741;</a
+      ><a name="1744" class="Symbol"
+      >)</a
+      ><a name="1745"
+      > </a
+      ><a name="1746" class="Symbol"
+      >&#8594;</a
+      ><a name="1747"
+      > </a
+      ><a name="1748" href="isprop.html#168" class="Function"
+      >isProp</a
+      ><a name="1754" class="Symbol"
+      >(</a
+      ><a name="1755" href="proptrunc.html#1696" class="Bound"
+      >P</a
+      ><a name="1756"
+      > </a
+      ><a name="1757" href="proptrunc.html#1735" class="Bound"
+      >s</a
+      ><a name="1758" class="Symbol"
+      >))</a
+      ><a name="1760"
+      > </a
+      ><a name="1761" class="Symbol"
+      >(</a
+      ><a name="1762" href="proptrunc.html#1762" class="Bound"
+      >&#966;</a
+      ><a name="1763"
+      > </a
+      ><a name="1764" class="Symbol"
+      >:</a
+      ><a name="1765"
+      > </a
+      ><a name="1766" class="Symbol"
+      >(</a
+      ><a name="1767" href="proptrunc.html#1767" class="Bound"
+      >x</a
+      ><a name="1768"
+      > </a
+      ><a name="1769" class="Symbol"
+      >:</a
+      ><a name="1770"
+      > </a
+      ><a name="1771" href="proptrunc.html#1686" class="Bound"
+      >X</a
+      ><a name="1772" class="Symbol"
+      >)</a
+      ><a name="1773"
+      > </a
+      ><a name="1774" class="Symbol"
+      >&#8594;</a
+      ><a name="1775"
+      > </a
+      ><a name="1776" href="proptrunc.html#1696" class="Bound"
+      >P</a
+      ><a name="1777"
+      > </a
+      ><a name="1778" href="proptrunc.html#455" class="Function Operator"
+      >&#8739;</a
+      ><a name="1779"
+      > </a
+      ><a name="1780" href="proptrunc.html#1767" class="Bound"
+      >x</a
+      ><a name="1781"
+      > </a
+      ><a name="1782" href="proptrunc.html#455" class="Function Operator"
+      >&#8739;</a
+      ><a name="1783" class="Symbol"
+      >)</a
+      ><a name="1784"
+      >
+            </a
+      ><a name="1798" class="Symbol"
+      >&#8594;</a
+      ><a name="1799"
+      > </a
+      ><a name="1800" class="Symbol"
+      >(</a
+      ><a name="1801" href="proptrunc.html#1801" class="Bound"
+      >x</a
+      ><a name="1802"
+      > </a
+      ><a name="1803" class="Symbol"
+      >:</a
+      ><a name="1804"
+      > </a
+      ><a name="1805" href="proptrunc.html#1686" class="Bound"
+      >X</a
+      ><a name="1806" class="Symbol"
+      >)</a
+      ><a name="1807"
+      > </a
+      ><a name="1808" class="Symbol"
+      >&#8594;</a
+      ><a name="1809"
+      > </a
+      ><a name="1810" href="proptrunc.html#1201" class="Function"
+      >&#8741;&#8741;-ind</a
+      ><a name="1816"
+      > </a
+      ><a name="1817" href="proptrunc.html#1728" class="Bound"
+      >isp</a
+      ><a name="1820"
+      > </a
+      ><a name="1821" href="proptrunc.html#1762" class="Bound"
+      >&#966;</a
+      ><a name="1822"
+      > </a
+      ><a name="1823" href="proptrunc.html#455" class="Function Operator"
+      >&#8739;</a
+      ><a name="1824"
+      > </a
+      ><a name="1825" href="proptrunc.html#1801" class="Bound"
+      >x</a
+      ><a name="1826"
+      > </a
+      ><a name="1827" href="proptrunc.html#455" class="Function Operator"
+      >&#8739;</a
+      ><a name="1828"
+      > </a
+      ><a name="1829" href="preliminaries.html#1396" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="1830"
+      > </a
+      ><a name="1831" href="proptrunc.html#1762" class="Bound"
+      >&#966;</a
+      ><a name="1832"
+      > </a
+      ><a name="1833" href="proptrunc.html#1801" class="Bound"
+      >x</a
+      ><a name="1834"
+      >
+</a
+      ><a name="1835" href="proptrunc.html#1659" class="Function"
+      >&#8741;&#8741;-ind-comp</a
+      ><a name="1846"
+      > </a
+      ><a name="1847" href="proptrunc.html#1847" class="Bound"
+      >isp</a
+      ><a name="1850"
+      > </a
+      ><a name="1851" href="proptrunc.html#1851" class="Bound"
+      >&#966;</a
+      ><a name="1852"
+      > </a
+      ><a name="1853" href="proptrunc.html#1853" class="Bound"
+      >x</a
+      ><a name="1854"
+      > </a
+      ><a name="1855" class="Symbol"
+      >=</a
+      ><a name="1856"
+      > </a
+      ><a name="1857" href="proptrunc.html#1847" class="Bound"
+      >isp</a
+      ><a name="1860"
+      > </a
+      ><a name="1861" href="proptrunc.html#455" class="Function Operator"
+      >&#8739;</a
+      ><a name="1862"
+      > </a
+      ><a name="1863" href="proptrunc.html#1853" class="Bound"
+      >x</a
+      ><a name="1864"
+      > </a
+      ><a name="1865" href="proptrunc.html#455" class="Function Operator"
+      >&#8739;</a
+      ><a name="1866"
+      > </a
+      ><a name="1867" class="Symbol"
+      >(</a
+      ><a name="1868" href="proptrunc.html#1201" class="Function"
+      >&#8741;&#8741;-ind</a
+      ><a name="1874"
+      > </a
+      ><a name="1875" href="proptrunc.html#1847" class="Bound"
+      >isp</a
+      ><a name="1878"
+      > </a
+      ><a name="1879" href="proptrunc.html#1851" class="Bound"
+      >&#966;</a
+      ><a name="1880"
+      > </a
+      ><a name="1881" href="proptrunc.html#455" class="Function Operator"
+      >&#8739;</a
+      ><a name="1882"
+      > </a
+      ><a name="1883" href="proptrunc.html#1853" class="Bound"
+      >x</a
+      ><a name="1884"
+      > </a
+      ><a name="1885" href="proptrunc.html#455" class="Function Operator"
+      >&#8739;</a
+      ><a name="1886" class="Symbol"
+      >)</a
+      ><a name="1887"
+      > </a
+      ><a name="1888" class="Symbol"
+      >(</a
+      ><a name="1889" href="proptrunc.html#1851" class="Bound"
+      >&#966;</a
+      ><a name="1890"
+      > </a
+      ><a name="1891" href="proptrunc.html#1853" class="Bound"
+      >x</a
+      ><a name="1892" class="Symbol"
+      >)</a
+      ><a name="1893"
+      >
+</a
+      ></pre
+    ></body
+  ></html
+>

@@ -1,0 +1,2254 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+><head
+  ><title
+    >preliminaries</title
+    ><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"
+     /><meta http-equiv="Content-Style-Type" content="text/css"
+     /><link href="Agda.css" rel="stylesheet" type="text/css"
+     /></head
+  ><body
+  ><pre
+    ><a name="1" class="Comment"
+      >{-# OPTIONS --without-K #-}</a
+      ><a name="28"
+      >
+
+\begin{code}
+
+</a
+      ><a name="45" class="Keyword"
+      >module</a
+      ><a name="51"
+      > </a
+      ><a name="52" href="preliminaries.html#1" class="Module"
+      >preliminaries</a
+      ><a name="65"
+      > </a
+      ><a name="66" class="Keyword"
+      >where</a
+      ><a name="71"
+      >
+
+</a
+      ><a name="73" class="Keyword"
+      >data</a
+      ><a name="77"
+      > </a
+      ><a name="78" href="preliminaries.html#78" class="Datatype Operator"
+      >_&#8801;_</a
+      ><a name="81"
+      > </a
+      ><a name="82" class="Symbol"
+      >{</a
+      ><a name="83" href="preliminaries.html#83" class="Bound"
+      >X</a
+      ><a name="84"
+      > </a
+      ><a name="85" class="Symbol"
+      >:</a
+      ><a name="86"
+      > </a
+      ><a name="87" class="PrimitiveType"
+      >Set</a
+      ><a name="90" class="Symbol"
+      >}</a
+      ><a name="91"
+      > </a
+      ><a name="92" class="Symbol"
+      >:</a
+      ><a name="93"
+      > </a
+      ><a name="94" href="preliminaries.html#83" class="Bound"
+      >X</a
+      ><a name="95"
+      > </a
+      ><a name="96" class="Symbol"
+      >&#8594;</a
+      ><a name="97"
+      > </a
+      ><a name="98" href="preliminaries.html#83" class="Bound"
+      >X</a
+      ><a name="99"
+      > </a
+      ><a name="100" class="Symbol"
+      >&#8594;</a
+      ><a name="101"
+      > </a
+      ><a name="102" class="PrimitiveType"
+      >Set</a
+      ><a name="105"
+      > </a
+      ><a name="106" class="Keyword"
+      >where</a
+      ><a name="111"
+      >
+  </a
+      ><a name="114" href="preliminaries.html#114" class="InductiveConstructor"
+      >refl</a
+      ><a name="118"
+      > </a
+      ><a name="119" class="Symbol"
+      >:</a
+      ><a name="120"
+      > </a
+      ><a name="121" class="Symbol"
+      >{</a
+      ><a name="122" href="preliminaries.html#122" class="Bound"
+      >x</a
+      ><a name="123"
+      > </a
+      ><a name="124" class="Symbol"
+      >:</a
+      ><a name="125"
+      > </a
+      ><a name="126" href="preliminaries.html#83" class="Bound"
+      >X</a
+      ><a name="127" class="Symbol"
+      >}</a
+      ><a name="128"
+      > </a
+      ><a name="129" class="Symbol"
+      >&#8594;</a
+      ><a name="130"
+      > </a
+      ><a name="131" href="preliminaries.html#122" class="Bound"
+      >x</a
+      ><a name="132"
+      > </a
+      ><a name="133" href="preliminaries.html#78" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="134"
+      > </a
+      ><a name="135" href="preliminaries.html#122" class="Bound"
+      >x</a
+      ><a name="136"
+      >
+
+</a
+      ><a name="138" href="preliminaries.html#138" class="Function"
+      >J</a
+      ><a name="139"
+      > </a
+      ><a name="140" class="Symbol"
+      >:</a
+      ><a name="141"
+      > </a
+      ><a name="142" class="Symbol"
+      >{</a
+      ><a name="143" href="preliminaries.html#143" class="Bound"
+      >X</a
+      ><a name="144"
+      > </a
+      ><a name="145" class="Symbol"
+      >:</a
+      ><a name="146"
+      > </a
+      ><a name="147" class="PrimitiveType"
+      >Set</a
+      ><a name="150" class="Symbol"
+      >}</a
+      ><a name="151"
+      > </a
+      ><a name="152" class="Symbol"
+      >&#8594;</a
+      ><a name="153"
+      > </a
+      ><a name="154" class="Symbol"
+      >(</a
+      ><a name="155" href="preliminaries.html#155" class="Bound"
+      >A</a
+      ><a name="156"
+      > </a
+      ><a name="157" class="Symbol"
+      >:</a
+      ><a name="158"
+      > </a
+      ><a name="159" class="Symbol"
+      >{</a
+      ><a name="160" href="preliminaries.html#160" class="Bound"
+      >x</a
+      ><a name="161"
+      > </a
+      ><a name="162" href="preliminaries.html#162" class="Bound"
+      >y</a
+      ><a name="163"
+      > </a
+      ><a name="164" class="Symbol"
+      >:</a
+      ><a name="165"
+      > </a
+      ><a name="166" href="preliminaries.html#143" class="Bound"
+      >X</a
+      ><a name="167" class="Symbol"
+      >}</a
+      ><a name="168"
+      > </a
+      ><a name="169" class="Symbol"
+      >&#8594;</a
+      ><a name="170"
+      > </a
+      ><a name="171" href="preliminaries.html#160" class="Bound"
+      >x</a
+      ><a name="172"
+      > </a
+      ><a name="173" href="preliminaries.html#78" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="174"
+      > </a
+      ><a name="175" href="preliminaries.html#162" class="Bound"
+      >y</a
+      ><a name="176"
+      > </a
+      ><a name="177" class="Symbol"
+      >&#8594;</a
+      ><a name="178"
+      > </a
+      ><a name="179" class="PrimitiveType"
+      >Set</a
+      ><a name="182" class="Symbol"
+      >)</a
+      ><a name="183"
+      >
+   </a
+      ><a name="187" class="Symbol"
+      >&#8594;</a
+      ><a name="188"
+      > </a
+      ><a name="189" class="Symbol"
+      >({</a
+      ><a name="191" href="preliminaries.html#191" class="Bound"
+      >x</a
+      ><a name="192"
+      > </a
+      ><a name="193" class="Symbol"
+      >:</a
+      ><a name="194"
+      > </a
+      ><a name="195" href="preliminaries.html#143" class="Bound"
+      >X</a
+      ><a name="196" class="Symbol"
+      >}</a
+      ><a name="197"
+      > </a
+      ><a name="198" class="Symbol"
+      >&#8594;</a
+      ><a name="199"
+      > </a
+      ><a name="200" href="preliminaries.html#155" class="Bound"
+      >A</a
+      ><a name="201"
+      > </a
+      ><a name="202" class="Symbol"
+      >(</a
+      ><a name="203" href="preliminaries.html#114" class="InductiveConstructor"
+      >refl</a
+      ><a name="207"
+      > </a
+      ><a name="208" class="Symbol"
+      >{</a
+      ><a name="209" href="preliminaries.html#143" class="Bound"
+      >X</a
+      ><a name="210" class="Symbol"
+      >}</a
+      ><a name="211"
+      > </a
+      ><a name="212" class="Symbol"
+      >{</a
+      ><a name="213" href="preliminaries.html#191" class="Bound"
+      >x</a
+      ><a name="214" class="Symbol"
+      >}))</a
+      ><a name="217"
+      > </a
+      ><a name="218" class="Symbol"
+      >&#8594;</a
+      ><a name="219"
+      >  </a
+      ><a name="221" class="Symbol"
+      >{</a
+      ><a name="222" href="preliminaries.html#222" class="Bound"
+      >x</a
+      ><a name="223"
+      > </a
+      ><a name="224" href="preliminaries.html#224" class="Bound"
+      >y</a
+      ><a name="225"
+      > </a
+      ><a name="226" class="Symbol"
+      >:</a
+      ><a name="227"
+      > </a
+      ><a name="228" href="preliminaries.html#143" class="Bound"
+      >X</a
+      ><a name="229" class="Symbol"
+      >}</a
+      ><a name="230"
+      > </a
+      ><a name="231" class="Symbol"
+      >(</a
+      ><a name="232" href="preliminaries.html#232" class="Bound"
+      >p</a
+      ><a name="233"
+      > </a
+      ><a name="234" class="Symbol"
+      >:</a
+      ><a name="235"
+      > </a
+      ><a name="236" href="preliminaries.html#222" class="Bound"
+      >x</a
+      ><a name="237"
+      > </a
+      ><a name="238" href="preliminaries.html#78" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="239"
+      > </a
+      ><a name="240" href="preliminaries.html#224" class="Bound"
+      >y</a
+      ><a name="241" class="Symbol"
+      >)</a
+      ><a name="242"
+      > </a
+      ><a name="243" class="Symbol"
+      >&#8594;</a
+      ><a name="244"
+      > </a
+      ><a name="245" href="preliminaries.html#155" class="Bound"
+      >A</a
+      ><a name="246"
+      > </a
+      ><a name="247" href="preliminaries.html#232" class="Bound"
+      >p</a
+      ><a name="248"
+      >
+</a
+      ><a name="249" href="preliminaries.html#138" class="Function"
+      >J</a
+      ><a name="250"
+      > </a
+      ><a name="251" href="preliminaries.html#251" class="Bound"
+      >A</a
+      ><a name="252"
+      > </a
+      ><a name="253" href="preliminaries.html#253" class="Bound"
+      >&#966;</a
+      ><a name="254"
+      > </a
+      ><a name="255" href="preliminaries.html#114" class="InductiveConstructor"
+      >refl</a
+      ><a name="259"
+      > </a
+      ><a name="260" class="Symbol"
+      >=</a
+      ><a name="261"
+      > </a
+      ><a name="262" href="preliminaries.html#253" class="Bound"
+      >&#966;</a
+      ><a name="263"
+      >
+
+</a
+      ><a name="265" href="preliminaries.html#265" class="Function"
+      >weak-J</a
+      ><a name="271"
+      > </a
+      ><a name="272" class="Symbol"
+      >:</a
+      ><a name="273"
+      > </a
+      ><a name="274" class="Symbol"
+      >{</a
+      ><a name="275" href="preliminaries.html#275" class="Bound"
+      >X</a
+      ><a name="276"
+      > </a
+      ><a name="277" class="Symbol"
+      >:</a
+      ><a name="278"
+      > </a
+      ><a name="279" class="PrimitiveType"
+      >Set</a
+      ><a name="282" class="Symbol"
+      >}</a
+      ><a name="283"
+      > </a
+      ><a name="284" class="Symbol"
+      >(</a
+      ><a name="285" href="preliminaries.html#285" class="Bound"
+      >B</a
+      ><a name="286"
+      > </a
+      ><a name="287" class="Symbol"
+      >:</a
+      ><a name="288"
+      > </a
+      ><a name="289" class="Symbol"
+      >(</a
+      ><a name="290" href="preliminaries.html#290" class="Bound"
+      >x</a
+      ><a name="291"
+      > </a
+      ><a name="292" href="preliminaries.html#292" class="Bound"
+      >y</a
+      ><a name="293"
+      > </a
+      ><a name="294" class="Symbol"
+      >:</a
+      ><a name="295"
+      > </a
+      ><a name="296" href="preliminaries.html#275" class="Bound"
+      >X</a
+      ><a name="297" class="Symbol"
+      >)</a
+      ><a name="298"
+      > </a
+      ><a name="299" class="Symbol"
+      >&#8594;</a
+      ><a name="300"
+      > </a
+      ><a name="301" class="PrimitiveType"
+      >Set</a
+      ><a name="304" class="Symbol"
+      >)</a
+      ><a name="305"
+      >
+ </a
+      ><a name="308" class="Symbol"
+      >&#8594;</a
+      ><a name="309"
+      > </a
+      ><a name="310" class="Symbol"
+      >({</a
+      ><a name="312" href="preliminaries.html#312" class="Bound"
+      >x</a
+      ><a name="313"
+      > </a
+      ><a name="314" class="Symbol"
+      >:</a
+      ><a name="315"
+      > </a
+      ><a name="316" href="preliminaries.html#275" class="Bound"
+      >X</a
+      ><a name="317" class="Symbol"
+      >}</a
+      ><a name="318"
+      > </a
+      ><a name="319" class="Symbol"
+      >&#8594;</a
+      ><a name="320"
+      > </a
+      ><a name="321" href="preliminaries.html#285" class="Bound"
+      >B</a
+      ><a name="322"
+      > </a
+      ><a name="323" href="preliminaries.html#312" class="Bound"
+      >x</a
+      ><a name="324"
+      > </a
+      ><a name="325" href="preliminaries.html#312" class="Bound"
+      >x</a
+      ><a name="326" class="Symbol"
+      >)</a
+      ><a name="327"
+      > </a
+      ><a name="328" class="Symbol"
+      >&#8594;</a
+      ><a name="329"
+      > </a
+      ><a name="330" class="Symbol"
+      >{</a
+      ><a name="331" href="preliminaries.html#331" class="Bound"
+      >x</a
+      ><a name="332"
+      > </a
+      ><a name="333" href="preliminaries.html#333" class="Bound"
+      >y</a
+      ><a name="334"
+      > </a
+      ><a name="335" class="Symbol"
+      >:</a
+      ><a name="336"
+      > </a
+      ><a name="337" href="preliminaries.html#275" class="Bound"
+      >X</a
+      ><a name="338" class="Symbol"
+      >}</a
+      ><a name="339"
+      > </a
+      ><a name="340" class="Symbol"
+      >&#8594;</a
+      ><a name="341"
+      > </a
+      ><a name="342" href="preliminaries.html#331" class="Bound"
+      >x</a
+      ><a name="343"
+      > </a
+      ><a name="344" href="preliminaries.html#78" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="345"
+      > </a
+      ><a name="346" href="preliminaries.html#333" class="Bound"
+      >y</a
+      ><a name="347"
+      > </a
+      ><a name="348" class="Symbol"
+      >&#8594;</a
+      ><a name="349"
+      > </a
+      ><a name="350" href="preliminaries.html#285" class="Bound"
+      >B</a
+      ><a name="351"
+      > </a
+      ><a name="352" href="preliminaries.html#331" class="Bound"
+      >x</a
+      ><a name="353"
+      > </a
+      ><a name="354" href="preliminaries.html#333" class="Bound"
+      >y</a
+      ><a name="355"
+      >
+</a
+      ><a name="356" href="preliminaries.html#265" class="Function"
+      >weak-J</a
+      ><a name="362"
+      > </a
+      ><a name="363" class="Symbol"
+      >{</a
+      ><a name="364" href="preliminaries.html#364" class="Bound"
+      >X</a
+      ><a name="365" class="Symbol"
+      >}</a
+      ><a name="366"
+      > </a
+      ><a name="367" href="preliminaries.html#367" class="Bound"
+      >B</a
+      ><a name="368"
+      > </a
+      ><a name="369" class="Symbol"
+      >=</a
+      ><a name="370"
+      > </a
+      ><a name="371" href="preliminaries.html#138" class="Function"
+      >J</a
+      ><a name="372"
+      > </a
+      ><a name="373" href="preliminaries.html#384" class="Function"
+      >A</a
+      ><a name="374"
+      >
+ </a
+      ><a name="376" class="Keyword"
+      >where</a
+      ><a name="381"
+      >
+  </a
+      ><a name="384" href="preliminaries.html#384" class="Function"
+      >A</a
+      ><a name="385"
+      > </a
+      ><a name="386" class="Symbol"
+      >:</a
+      ><a name="387"
+      > </a
+      ><a name="388" class="Symbol"
+      >{</a
+      ><a name="389" href="preliminaries.html#389" class="Bound"
+      >x</a
+      ><a name="390"
+      > </a
+      ><a name="391" href="preliminaries.html#391" class="Bound"
+      >y</a
+      ><a name="392"
+      > </a
+      ><a name="393" class="Symbol"
+      >:</a
+      ><a name="394"
+      > </a
+      ><a name="395" href="preliminaries.html#364" class="Bound"
+      >X</a
+      ><a name="396" class="Symbol"
+      >}</a
+      ><a name="397"
+      > </a
+      ><a name="398" class="Symbol"
+      >&#8594;</a
+      ><a name="399"
+      > </a
+      ><a name="400" href="preliminaries.html#389" class="Bound"
+      >x</a
+      ><a name="401"
+      > </a
+      ><a name="402" href="preliminaries.html#78" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="403"
+      > </a
+      ><a name="404" href="preliminaries.html#391" class="Bound"
+      >y</a
+      ><a name="405"
+      > </a
+      ><a name="406" class="Symbol"
+      >&#8594;</a
+      ><a name="407"
+      > </a
+      ><a name="408" class="PrimitiveType"
+      >Set</a
+      ><a name="411"
+      >
+  </a
+      ><a name="414" href="preliminaries.html#384" class="Function"
+      >A</a
+      ><a name="415"
+      > </a
+      ><a name="416" class="Symbol"
+      >{</a
+      ><a name="417" href="preliminaries.html#417" class="Bound"
+      >x</a
+      ><a name="418" class="Symbol"
+      >}</a
+      ><a name="419"
+      > </a
+      ><a name="420" class="Symbol"
+      >{</a
+      ><a name="421" href="preliminaries.html#421" class="Bound"
+      >y</a
+      ><a name="422" class="Symbol"
+      >}</a
+      ><a name="423"
+      > </a
+      ><a name="424" href="preliminaries.html#424" class="Bound"
+      >p</a
+      ><a name="425"
+      > </a
+      ><a name="426" class="Symbol"
+      >=</a
+      ><a name="427"
+      > </a
+      ><a name="428" href="preliminaries.html#367" class="Bound"
+      >B</a
+      ><a name="429"
+      > </a
+      ><a name="430" href="preliminaries.html#417" class="Bound"
+      >x</a
+      ><a name="431"
+      > </a
+      ><a name="432" href="preliminaries.html#421" class="Bound"
+      >y</a
+      ><a name="433"
+      >
+
+</a
+      ><a name="435" href="preliminaries.html#435" class="Function"
+      >trans</a
+      ><a name="440"
+      > </a
+      ><a name="441" class="Symbol"
+      >:</a
+      ><a name="442"
+      > </a
+      ><a name="443" class="Symbol"
+      >{</a
+      ><a name="444" href="preliminaries.html#444" class="Bound"
+      >X</a
+      ><a name="445"
+      > </a
+      ><a name="446" class="Symbol"
+      >:</a
+      ><a name="447"
+      > </a
+      ><a name="448" class="PrimitiveType"
+      >Set</a
+      ><a name="451" class="Symbol"
+      >}</a
+      ><a name="452"
+      > </a
+      ><a name="453" class="Symbol"
+      >&#8594;</a
+      ><a name="454"
+      > </a
+      ><a name="455" class="Symbol"
+      >{</a
+      ><a name="456" href="preliminaries.html#456" class="Bound"
+      >x</a
+      ><a name="457"
+      > </a
+      ><a name="458" href="preliminaries.html#458" class="Bound"
+      >y</a
+      ><a name="459"
+      > </a
+      ><a name="460" href="preliminaries.html#460" class="Bound"
+      >z</a
+      ><a name="461"
+      > </a
+      ><a name="462" class="Symbol"
+      >:</a
+      ><a name="463"
+      > </a
+      ><a name="464" href="preliminaries.html#444" class="Bound"
+      >X</a
+      ><a name="465" class="Symbol"
+      >}</a
+      ><a name="466"
+      > </a
+      ><a name="467" class="Symbol"
+      >&#8594;</a
+      ><a name="468"
+      > </a
+      ><a name="469" href="preliminaries.html#456" class="Bound"
+      >x</a
+      ><a name="470"
+      > </a
+      ><a name="471" href="preliminaries.html#78" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="472"
+      > </a
+      ><a name="473" href="preliminaries.html#458" class="Bound"
+      >y</a
+      ><a name="474"
+      > </a
+      ><a name="475" class="Symbol"
+      >&#8594;</a
+      ><a name="476"
+      > </a
+      ><a name="477" href="preliminaries.html#458" class="Bound"
+      >y</a
+      ><a name="478"
+      > </a
+      ><a name="479" href="preliminaries.html#78" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="480"
+      > </a
+      ><a name="481" href="preliminaries.html#460" class="Bound"
+      >z</a
+      ><a name="482"
+      > </a
+      ><a name="483" class="Symbol"
+      >&#8594;</a
+      ><a name="484"
+      > </a
+      ><a name="485" href="preliminaries.html#456" class="Bound"
+      >x</a
+      ><a name="486"
+      > </a
+      ><a name="487" href="preliminaries.html#78" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="488"
+      > </a
+      ><a name="489" href="preliminaries.html#460" class="Bound"
+      >z</a
+      ><a name="490"
+      >
+</a
+      ><a name="491" href="preliminaries.html#435" class="Function"
+      >trans</a
+      ><a name="496"
+      > </a
+      ><a name="497" class="Symbol"
+      >{</a
+      ><a name="498" href="preliminaries.html#498" class="Bound"
+      >X</a
+      ><a name="499" class="Symbol"
+      >}</a
+      ><a name="500"
+      > </a
+      ><a name="501" class="Symbol"
+      >{</a
+      ><a name="502" href="preliminaries.html#502" class="Bound"
+      >x</a
+      ><a name="503" class="Symbol"
+      >}</a
+      ><a name="504"
+      > </a
+      ><a name="505" class="Symbol"
+      >{</a
+      ><a name="506" href="preliminaries.html#506" class="Bound"
+      >y</a
+      ><a name="507" class="Symbol"
+      >}</a
+      ><a name="508"
+      > </a
+      ><a name="509" class="Symbol"
+      >{</a
+      ><a name="510" href="preliminaries.html#510" class="Bound"
+      >z</a
+      ><a name="511" class="Symbol"
+      >}</a
+      ><a name="512"
+      > </a
+      ><a name="513" href="preliminaries.html#513" class="Bound"
+      >r</a
+      ><a name="514"
+      > </a
+      ><a name="515" class="Symbol"
+      >=</a
+      ><a name="516"
+      > </a
+      ><a name="517" href="preliminaries.html#265" class="Function"
+      >weak-J</a
+      ><a name="523"
+      > </a
+      ><a name="524" class="Symbol"
+      >(&#955;</a
+      ><a name="526"
+      > </a
+      ><a name="527" href="preliminaries.html#527" class="Bound"
+      >x</a
+      ><a name="528"
+      > </a
+      ><a name="529" href="preliminaries.html#529" class="Bound"
+      >y</a
+      ><a name="530"
+      > </a
+      ><a name="531" class="Symbol"
+      >&#8594;</a
+      ><a name="532"
+      > </a
+      ><a name="533" class="Symbol"
+      >(</a
+      ><a name="534" href="preliminaries.html#534" class="Bound"
+      >z</a
+      ><a name="535"
+      > </a
+      ><a name="536" class="Symbol"
+      >:</a
+      ><a name="537"
+      > </a
+      ><a name="538" href="preliminaries.html#498" class="Bound"
+      >X</a
+      ><a name="539" class="Symbol"
+      >)</a
+      ><a name="540"
+      > </a
+      ><a name="541" class="Symbol"
+      >&#8594;</a
+      ><a name="542"
+      > </a
+      ><a name="543" href="preliminaries.html#529" class="Bound"
+      >y</a
+      ><a name="544"
+      > </a
+      ><a name="545" href="preliminaries.html#78" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="546"
+      > </a
+      ><a name="547" href="preliminaries.html#534" class="Bound"
+      >z</a
+      ><a name="548"
+      > </a
+      ><a name="549" class="Symbol"
+      >&#8594;</a
+      ><a name="550"
+      > </a
+      ><a name="551" href="preliminaries.html#527" class="Bound"
+      >x</a
+      ><a name="552"
+      > </a
+      ><a name="553" href="preliminaries.html#78" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="554"
+      > </a
+      ><a name="555" href="preliminaries.html#534" class="Bound"
+      >z</a
+      ><a name="556" class="Symbol"
+      >)</a
+      ><a name="557"
+      > </a
+      ><a name="558" class="Symbol"
+      >(&#955;</a
+      ><a name="560"
+      > </a
+      ><a name="561" href="preliminaries.html#561" class="Bound"
+      >z</a
+      ><a name="562"
+      > </a
+      ><a name="563" href="preliminaries.html#563" class="Bound"
+      >s</a
+      ><a name="564"
+      > </a
+      ><a name="565" class="Symbol"
+      >&#8594;</a
+      ><a name="566"
+      > </a
+      ><a name="567" href="preliminaries.html#563" class="Bound"
+      >s</a
+      ><a name="568" class="Symbol"
+      >)</a
+      ><a name="569"
+      > </a
+      ><a name="570" href="preliminaries.html#513" class="Bound"
+      >r</a
+      ><a name="571"
+      > </a
+      ><a name="572" href="preliminaries.html#510" class="Bound"
+      >z</a
+      ><a name="573"
+      >
+
+</a
+      ><a name="575" href="preliminaries.html#575" class="Function"
+      >sym</a
+      ><a name="578"
+      > </a
+      ><a name="579" class="Symbol"
+      >:</a
+      ><a name="580"
+      > </a
+      ><a name="581" class="Symbol"
+      >{</a
+      ><a name="582" href="preliminaries.html#582" class="Bound"
+      >X</a
+      ><a name="583"
+      > </a
+      ><a name="584" class="Symbol"
+      >:</a
+      ><a name="585"
+      > </a
+      ><a name="586" class="PrimitiveType"
+      >Set</a
+      ><a name="589" class="Symbol"
+      >}</a
+      ><a name="590"
+      > </a
+      ><a name="591" class="Symbol"
+      >&#8594;</a
+      ><a name="592"
+      > </a
+      ><a name="593" class="Symbol"
+      >{</a
+      ><a name="594" href="preliminaries.html#594" class="Bound"
+      >x</a
+      ><a name="595"
+      > </a
+      ><a name="596" href="preliminaries.html#596" class="Bound"
+      >y</a
+      ><a name="597"
+      > </a
+      ><a name="598" class="Symbol"
+      >:</a
+      ><a name="599"
+      > </a
+      ><a name="600" href="preliminaries.html#582" class="Bound"
+      >X</a
+      ><a name="601" class="Symbol"
+      >}</a
+      ><a name="602"
+      > </a
+      ><a name="603" class="Symbol"
+      >&#8594;</a
+      ><a name="604"
+      > </a
+      ><a name="605" href="preliminaries.html#594" class="Bound"
+      >x</a
+      ><a name="606"
+      > </a
+      ><a name="607" href="preliminaries.html#78" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="608"
+      > </a
+      ><a name="609" href="preliminaries.html#596" class="Bound"
+      >y</a
+      ><a name="610"
+      > </a
+      ><a name="611" class="Symbol"
+      >&#8594;</a
+      ><a name="612"
+      > </a
+      ><a name="613" href="preliminaries.html#596" class="Bound"
+      >y</a
+      ><a name="614"
+      > </a
+      ><a name="615" href="preliminaries.html#78" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="616"
+      > </a
+      ><a name="617" href="preliminaries.html#594" class="Bound"
+      >x</a
+      ><a name="618"
+      >
+</a
+      ><a name="619" href="preliminaries.html#575" class="Function"
+      >sym</a
+      ><a name="622"
+      > </a
+      ><a name="623" class="Symbol"
+      >{</a
+      ><a name="624" href="preliminaries.html#624" class="Bound"
+      >X</a
+      ><a name="625" class="Symbol"
+      >}</a
+      ><a name="626"
+      > </a
+      ><a name="627" class="Symbol"
+      >{</a
+      ><a name="628" href="preliminaries.html#628" class="Bound"
+      >x</a
+      ><a name="629" class="Symbol"
+      >}</a
+      ><a name="630"
+      > </a
+      ><a name="631" class="Symbol"
+      >{</a
+      ><a name="632" href="preliminaries.html#632" class="Bound"
+      >y</a
+      ><a name="633" class="Symbol"
+      >}</a
+      ><a name="634"
+      > </a
+      ><a name="635" class="Symbol"
+      >=</a
+      ><a name="636"
+      > </a
+      ><a name="637" href="preliminaries.html#265" class="Function"
+      >weak-J</a
+      ><a name="643"
+      > </a
+      ><a name="644" class="Symbol"
+      >(&#955;</a
+      ><a name="646"
+      > </a
+      ><a name="647" href="preliminaries.html#647" class="Bound"
+      >x</a
+      ><a name="648"
+      > </a
+      ><a name="649" href="preliminaries.html#649" class="Bound"
+      >y</a
+      ><a name="650"
+      > </a
+      ><a name="651" class="Symbol"
+      >&#8594;</a
+      ><a name="652"
+      > </a
+      ><a name="653" href="preliminaries.html#649" class="Bound"
+      >y</a
+      ><a name="654"
+      > </a
+      ><a name="655" href="preliminaries.html#78" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="656"
+      > </a
+      ><a name="657" href="preliminaries.html#647" class="Bound"
+      >x</a
+      ><a name="658" class="Symbol"
+      >)</a
+      ><a name="659"
+      > </a
+      ><a name="660" href="preliminaries.html#114" class="InductiveConstructor"
+      >refl</a
+      ><a name="664"
+      >
+
+</a
+      ><a name="667" href="preliminaries.html#667" class="Function"
+      >cong</a
+      ><a name="671"
+      > </a
+      ><a name="672" class="Symbol"
+      >:</a
+      ><a name="673"
+      > </a
+      ><a name="674" class="Symbol"
+      >{</a
+      ><a name="675" href="preliminaries.html#675" class="Bound"
+      >X</a
+      ><a name="676"
+      > </a
+      ><a name="677" href="preliminaries.html#677" class="Bound"
+      >Y</a
+      ><a name="678"
+      > </a
+      ><a name="679" class="Symbol"
+      >:</a
+      ><a name="680"
+      > </a
+      ><a name="681" class="PrimitiveType"
+      >Set</a
+      ><a name="684" class="Symbol"
+      >}</a
+      ><a name="685"
+      > </a
+      ><a name="686" class="Symbol"
+      >&#8594;</a
+      ><a name="687"
+      > </a
+      ><a name="688" class="Symbol"
+      >(</a
+      ><a name="689" href="preliminaries.html#689" class="Bound"
+      >f</a
+      ><a name="690"
+      > </a
+      ><a name="691" class="Symbol"
+      >:</a
+      ><a name="692"
+      > </a
+      ><a name="693" href="preliminaries.html#675" class="Bound"
+      >X</a
+      ><a name="694"
+      > </a
+      ><a name="695" class="Symbol"
+      >&#8594;</a
+      ><a name="696"
+      > </a
+      ><a name="697" href="preliminaries.html#677" class="Bound"
+      >Y</a
+      ><a name="698" class="Symbol"
+      >)</a
+      ><a name="699"
+      > </a
+      ><a name="700" class="Symbol"
+      >&#8594;</a
+      ><a name="701"
+      > </a
+      ><a name="702" class="Symbol"
+      >{</a
+      ><a name="703" href="preliminaries.html#703" class="Bound"
+      >x</a
+      ><a name="704"
+      > </a
+      ><a name="705" href="preliminaries.html#705" class="Bound"
+      >x'</a
+      ><a name="707"
+      > </a
+      ><a name="708" class="Symbol"
+      >:</a
+      ><a name="709"
+      > </a
+      ><a name="710" href="preliminaries.html#675" class="Bound"
+      >X</a
+      ><a name="711" class="Symbol"
+      >}</a
+      ><a name="712"
+      > </a
+      ><a name="713" class="Symbol"
+      >&#8594;</a
+      ><a name="714"
+      > </a
+      ><a name="715" href="preliminaries.html#703" class="Bound"
+      >x</a
+      ><a name="716"
+      > </a
+      ><a name="717" href="preliminaries.html#78" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="718"
+      > </a
+      ><a name="719" href="preliminaries.html#705" class="Bound"
+      >x'</a
+      ><a name="721"
+      > </a
+      ><a name="722" class="Symbol"
+      >&#8594;</a
+      ><a name="723"
+      > </a
+      ><a name="724" href="preliminaries.html#689" class="Bound"
+      >f</a
+      ><a name="725"
+      > </a
+      ><a name="726" href="preliminaries.html#703" class="Bound"
+      >x</a
+      ><a name="727"
+      > </a
+      ><a name="728" href="preliminaries.html#78" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="729"
+      > </a
+      ><a name="730" href="preliminaries.html#689" class="Bound"
+      >f</a
+      ><a name="731"
+      > </a
+      ><a name="732" href="preliminaries.html#705" class="Bound"
+      >x'</a
+      ><a name="734"
+      >
+</a
+      ><a name="735" href="preliminaries.html#667" class="Function"
+      >cong</a
+      ><a name="739"
+      > </a
+      ><a name="740" class="Symbol"
+      >{</a
+      ><a name="741" href="preliminaries.html#741" class="Bound"
+      >X</a
+      ><a name="742" class="Symbol"
+      >}</a
+      ><a name="743"
+      > </a
+      ><a name="744" class="Symbol"
+      >{</a
+      ><a name="745" href="preliminaries.html#745" class="Bound"
+      >Y</a
+      ><a name="746" class="Symbol"
+      >}</a
+      ><a name="747"
+      > </a
+      ><a name="748" href="preliminaries.html#748" class="Bound"
+      >f</a
+      ><a name="749"
+      > </a
+      ><a name="750" class="Symbol"
+      >=</a
+      ><a name="751"
+      > </a
+      ><a name="752" href="preliminaries.html#265" class="Function"
+      >weak-J</a
+      ><a name="758" class="Symbol"
+      >(&#955;</a
+      ><a name="760"
+      > </a
+      ><a name="761" href="preliminaries.html#761" class="Bound"
+      >x</a
+      ><a name="762"
+      > </a
+      ><a name="763" href="preliminaries.html#763" class="Bound"
+      >x'</a
+      ><a name="765"
+      > </a
+      ><a name="766" class="Symbol"
+      >&#8594;</a
+      ><a name="767"
+      > </a
+      ><a name="768" href="preliminaries.html#748" class="Bound"
+      >f</a
+      ><a name="769"
+      > </a
+      ><a name="770" href="preliminaries.html#761" class="Bound"
+      >x</a
+      ><a name="771"
+      > </a
+      ><a name="772" href="preliminaries.html#78" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="773"
+      > </a
+      ><a name="774" href="preliminaries.html#748" class="Bound"
+      >f</a
+      ><a name="775"
+      > </a
+      ><a name="776" href="preliminaries.html#763" class="Bound"
+      >x'</a
+      ><a name="778" class="Symbol"
+      >)</a
+      ><a name="779"
+      > </a
+      ><a name="780" href="preliminaries.html#114" class="InductiveConstructor"
+      >refl</a
+      ><a name="784"
+      >
+
+</a
+      ><a name="786" href="preliminaries.html#786" class="Function"
+      >sym-is-inverse</a
+      ><a name="800"
+      > </a
+      ><a name="801" class="Symbol"
+      >:</a
+      ><a name="802"
+      > </a
+      ><a name="803" class="Symbol"
+      >{</a
+      ><a name="804" href="preliminaries.html#804" class="Bound"
+      >X</a
+      ><a name="805"
+      > </a
+      ><a name="806" class="Symbol"
+      >:</a
+      ><a name="807"
+      > </a
+      ><a name="808" class="PrimitiveType"
+      >Set</a
+      ><a name="811" class="Symbol"
+      >}</a
+      ><a name="812"
+      > </a
+      ><a name="813" class="Symbol"
+      >&#8594;</a
+      ><a name="814"
+      > </a
+      ><a name="815" class="Symbol"
+      >{</a
+      ><a name="816" href="preliminaries.html#816" class="Bound"
+      >x</a
+      ><a name="817"
+      > </a
+      ><a name="818" href="preliminaries.html#818" class="Bound"
+      >y</a
+      ><a name="819"
+      > </a
+      ><a name="820" class="Symbol"
+      >:</a
+      ><a name="821"
+      > </a
+      ><a name="822" href="preliminaries.html#804" class="Bound"
+      >X</a
+      ><a name="823" class="Symbol"
+      >}</a
+      ><a name="824"
+      > </a
+      ><a name="825" class="Symbol"
+      >&#8594;</a
+      ><a name="826"
+      > </a
+      ><a name="827" class="Symbol"
+      >(</a
+      ><a name="828" href="preliminaries.html#828" class="Bound"
+      >p</a
+      ><a name="829"
+      > </a
+      ><a name="830" class="Symbol"
+      >:</a
+      ><a name="831"
+      > </a
+      ><a name="832" href="preliminaries.html#816" class="Bound"
+      >x</a
+      ><a name="833"
+      > </a
+      ><a name="834" href="preliminaries.html#78" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="835"
+      > </a
+      ><a name="836" href="preliminaries.html#818" class="Bound"
+      >y</a
+      ><a name="837" class="Symbol"
+      >)</a
+      ><a name="838"
+      > </a
+      ><a name="839" class="Symbol"
+      >&#8594;</a
+      ><a name="840"
+      > </a
+      ><a name="841" href="preliminaries.html#114" class="InductiveConstructor"
+      >refl</a
+      ><a name="845"
+      > </a
+      ><a name="846" href="preliminaries.html#78" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="847"
+      > </a
+      ><a name="848" href="preliminaries.html#435" class="Function"
+      >trans</a
+      ><a name="853"
+      > </a
+      ><a name="854" class="Symbol"
+      >(</a
+      ><a name="855" href="preliminaries.html#575" class="Function"
+      >sym</a
+      ><a name="858"
+      > </a
+      ><a name="859" href="preliminaries.html#828" class="Bound"
+      >p</a
+      ><a name="860" class="Symbol"
+      >)</a
+      ><a name="861"
+      > </a
+      ><a name="862" href="preliminaries.html#828" class="Bound"
+      >p</a
+      ><a name="863"
+      >
+</a
+      ><a name="864" href="preliminaries.html#786" class="Function"
+      >sym-is-inverse</a
+      ><a name="878"
+      > </a
+      ><a name="879" class="Symbol"
+      >=</a
+      ><a name="880"
+      > </a
+      ><a name="881" href="preliminaries.html#138" class="Function"
+      >J</a
+      ><a name="882"
+      > </a
+      ><a name="883" class="Symbol"
+      >(&#955;</a
+      ><a name="885"
+      > </a
+      ><a name="886" href="preliminaries.html#886" class="Bound"
+      >p</a
+      ><a name="887"
+      > </a
+      ><a name="888" class="Symbol"
+      >&#8594;</a
+      ><a name="889"
+      > </a
+      ><a name="890" href="preliminaries.html#114" class="InductiveConstructor"
+      >refl</a
+      ><a name="894"
+      > </a
+      ><a name="895" href="preliminaries.html#78" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="896"
+      > </a
+      ><a name="897" href="preliminaries.html#435" class="Function"
+      >trans</a
+      ><a name="902"
+      > </a
+      ><a name="903" class="Symbol"
+      >(</a
+      ><a name="904" href="preliminaries.html#575" class="Function"
+      >sym</a
+      ><a name="907"
+      > </a
+      ><a name="908" href="preliminaries.html#886" class="Bound"
+      >p</a
+      ><a name="909" class="Symbol"
+      >)</a
+      ><a name="910"
+      > </a
+      ><a name="911" href="preliminaries.html#886" class="Bound"
+      >p</a
+      ><a name="912" class="Symbol"
+      >)</a
+      ><a name="913"
+      > </a
+      ><a name="914" href="preliminaries.html#114" class="InductiveConstructor"
+      >refl</a
+      ><a name="918"
+      >
+
+</a
+      ><a name="920" class="Keyword"
+      >data</a
+      ><a name="924"
+      > </a
+      ><a name="925" href="preliminaries.html#925" class="Datatype"
+      >&#931;</a
+      ><a name="926"
+      > </a
+      ><a name="927" class="Symbol"
+      >{</a
+      ><a name="928" href="preliminaries.html#928" class="Bound"
+      >X</a
+      ><a name="929"
+      > </a
+      ><a name="930" class="Symbol"
+      >:</a
+      ><a name="931"
+      > </a
+      ><a name="932" class="PrimitiveType"
+      >Set</a
+      ><a name="935" class="Symbol"
+      >}</a
+      ><a name="936"
+      > </a
+      ><a name="937" class="Symbol"
+      >(</a
+      ><a name="938" href="preliminaries.html#938" class="Bound"
+      >Y</a
+      ><a name="939"
+      > </a
+      ><a name="940" class="Symbol"
+      >:</a
+      ><a name="941"
+      > </a
+      ><a name="942" href="preliminaries.html#928" class="Bound"
+      >X</a
+      ><a name="943"
+      > </a
+      ><a name="944" class="Symbol"
+      >&#8594;</a
+      ><a name="945"
+      > </a
+      ><a name="946" class="PrimitiveType"
+      >Set</a
+      ><a name="949" class="Symbol"
+      >)</a
+      ><a name="950"
+      > </a
+      ><a name="951" class="Symbol"
+      >:</a
+      ><a name="952"
+      > </a
+      ><a name="953" class="PrimitiveType"
+      >Set</a
+      ><a name="956"
+      > </a
+      ><a name="957" class="Keyword"
+      >where</a
+      ><a name="962"
+      >
+     </a
+      ><a name="968" href="preliminaries.html#968" class="InductiveConstructor Operator"
+      >_,_</a
+      ><a name="971"
+      > </a
+      ><a name="972" class="Symbol"
+      >:</a
+      ><a name="973"
+      > </a
+      ><a name="974" class="Symbol"
+      >(</a
+      ><a name="975" href="preliminaries.html#975" class="Bound"
+      >x&#8320;</a
+      ><a name="977"
+      > </a
+      ><a name="978" class="Symbol"
+      >:</a
+      ><a name="979"
+      > </a
+      ><a name="980" href="preliminaries.html#928" class="Bound"
+      >X</a
+      ><a name="981" class="Symbol"
+      >)</a
+      ><a name="982"
+      > </a
+      ><a name="983" class="Symbol"
+      >&#8594;</a
+      ><a name="984"
+      > </a
+      ><a name="985" href="preliminaries.html#938" class="Bound"
+      >Y</a
+      ><a name="986"
+      > </a
+      ><a name="987" href="preliminaries.html#975" class="Bound"
+      >x&#8320;</a
+      ><a name="989"
+      > </a
+      ><a name="990" class="Symbol"
+      >&#8594;</a
+      ><a name="991"
+      > </a
+      ><a name="992" href="preliminaries.html#925" class="Datatype"
+      >&#931;</a
+      ><a name="993"
+      > </a
+      ><a name="994" class="Symbol"
+      >\(</a
+      ><a name="996" href="preliminaries.html#996" class="Bound"
+      >x</a
+      ><a name="997"
+      > </a
+      ><a name="998" class="Symbol"
+      >:</a
+      ><a name="999"
+      > </a
+      ><a name="1000" href="preliminaries.html#928" class="Bound"
+      >X</a
+      ><a name="1001" class="Symbol"
+      >)</a
+      ><a name="1002"
+      > </a
+      ><a name="1003" class="Symbol"
+      >&#8594;</a
+      ><a name="1004"
+      > </a
+      ><a name="1005" href="preliminaries.html#938" class="Bound"
+      >Y</a
+      ><a name="1006"
+      > </a
+      ><a name="1007" href="preliminaries.html#996" class="Bound"
+      >x</a
+      ><a name="1008"
+      >
+
+
+</a
+      ><a name="1011" href="preliminaries.html#1011" class="Function"
+      >&#960;&#8320;</a
+      ><a name="1013"
+      > </a
+      ><a name="1014" class="Symbol"
+      >:</a
+      ><a name="1015"
+      > </a
+      ><a name="1016" class="Symbol"
+      >{</a
+      ><a name="1017" href="preliminaries.html#1017" class="Bound"
+      >X</a
+      ><a name="1018"
+      > </a
+      ><a name="1019" class="Symbol"
+      >:</a
+      ><a name="1020"
+      > </a
+      ><a name="1021" class="PrimitiveType"
+      >Set</a
+      ><a name="1024" class="Symbol"
+      >}</a
+      ><a name="1025"
+      > </a
+      ><a name="1026" class="Symbol"
+      >{</a
+      ><a name="1027" href="preliminaries.html#1027" class="Bound"
+      >Y</a
+      ><a name="1028"
+      > </a
+      ><a name="1029" class="Symbol"
+      >:</a
+      ><a name="1030"
+      > </a
+      ><a name="1031" href="preliminaries.html#1017" class="Bound"
+      >X</a
+      ><a name="1032"
+      > </a
+      ><a name="1033" class="Symbol"
+      >&#8594;</a
+      ><a name="1034"
+      > </a
+      ><a name="1035" class="PrimitiveType"
+      >Set</a
+      ><a name="1038" class="Symbol"
+      >}</a
+      ><a name="1039"
+      > </a
+      ><a name="1040" class="Symbol"
+      >&#8594;</a
+      ><a name="1041"
+      > </a
+      ><a name="1042" class="Symbol"
+      >(</a
+      ><a name="1043" href="preliminaries.html#925" class="Datatype"
+      >&#931;</a
+      ><a name="1044"
+      > </a
+      ><a name="1045" class="Symbol"
+      >\(</a
+      ><a name="1047" href="preliminaries.html#1047" class="Bound"
+      >x</a
+      ><a name="1048"
+      > </a
+      ><a name="1049" class="Symbol"
+      >:</a
+      ><a name="1050"
+      > </a
+      ><a name="1051" href="preliminaries.html#1017" class="Bound"
+      >X</a
+      ><a name="1052" class="Symbol"
+      >)</a
+      ><a name="1053"
+      > </a
+      ><a name="1054" class="Symbol"
+      >&#8594;</a
+      ><a name="1055"
+      > </a
+      ><a name="1056" href="preliminaries.html#1027" class="Bound"
+      >Y</a
+      ><a name="1057"
+      > </a
+      ><a name="1058" href="preliminaries.html#1047" class="Bound"
+      >x</a
+      ><a name="1059" class="Symbol"
+      >)</a
+      ><a name="1060"
+      > </a
+      ><a name="1061" class="Symbol"
+      >&#8594;</a
+      ><a name="1062"
+      > </a
+      ><a name="1063" href="preliminaries.html#1017" class="Bound"
+      >X</a
+      ><a name="1064"
+      >
+</a
+      ><a name="1065" href="preliminaries.html#1011" class="Function"
+      >&#960;&#8320;</a
+      ><a name="1067" class="Symbol"
+      >(</a
+      ><a name="1068" href="preliminaries.html#1068" class="Bound"
+      >x</a
+      ><a name="1069"
+      > </a
+      ><a name="1070" href="preliminaries.html#968" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="1071"
+      > </a
+      ><a name="1072" href="preliminaries.html#1072" class="Bound"
+      >y</a
+      ><a name="1073" class="Symbol"
+      >)</a
+      ><a name="1074"
+      > </a
+      ><a name="1075" class="Symbol"
+      >=</a
+      ><a name="1076"
+      > </a
+      ><a name="1077" href="preliminaries.html#1068" class="Bound"
+      >x</a
+      ><a name="1078"
+      >
+
+</a
+      ><a name="1080" href="preliminaries.html#1080" class="Function"
+      >&#960;&#8321;</a
+      ><a name="1082"
+      > </a
+      ><a name="1083" class="Symbol"
+      >:</a
+      ><a name="1084"
+      > </a
+      ><a name="1085" class="Symbol"
+      >{</a
+      ><a name="1086" href="preliminaries.html#1086" class="Bound"
+      >X</a
+      ><a name="1087"
+      > </a
+      ><a name="1088" class="Symbol"
+      >:</a
+      ><a name="1089"
+      > </a
+      ><a name="1090" class="PrimitiveType"
+      >Set</a
+      ><a name="1093" class="Symbol"
+      >}</a
+      ><a name="1094"
+      > </a
+      ><a name="1095" class="Symbol"
+      >{</a
+      ><a name="1096" href="preliminaries.html#1096" class="Bound"
+      >Y</a
+      ><a name="1097"
+      > </a
+      ><a name="1098" class="Symbol"
+      >:</a
+      ><a name="1099"
+      > </a
+      ><a name="1100" href="preliminaries.html#1086" class="Bound"
+      >X</a
+      ><a name="1101"
+      > </a
+      ><a name="1102" class="Symbol"
+      >&#8594;</a
+      ><a name="1103"
+      > </a
+      ><a name="1104" class="PrimitiveType"
+      >Set</a
+      ><a name="1107" class="Symbol"
+      >}</a
+      ><a name="1108"
+      > </a
+      ><a name="1109" class="Symbol"
+      >&#8594;</a
+      ><a name="1110"
+      > </a
+      ><a name="1111" class="Symbol"
+      >(</a
+      ><a name="1112" href="preliminaries.html#1112" class="Bound"
+      >z</a
+      ><a name="1113"
+      > </a
+      ><a name="1114" class="Symbol"
+      >:</a
+      ><a name="1115"
+      > </a
+      ><a name="1116" href="preliminaries.html#925" class="Datatype"
+      >&#931;</a
+      ><a name="1117"
+      > </a
+      ><a name="1118" class="Symbol"
+      >\(</a
+      ><a name="1120" href="preliminaries.html#1120" class="Bound"
+      >x</a
+      ><a name="1121"
+      > </a
+      ><a name="1122" class="Symbol"
+      >:</a
+      ><a name="1123"
+      > </a
+      ><a name="1124" href="preliminaries.html#1086" class="Bound"
+      >X</a
+      ><a name="1125" class="Symbol"
+      >)</a
+      ><a name="1126"
+      > </a
+      ><a name="1127" class="Symbol"
+      >&#8594;</a
+      ><a name="1128"
+      > </a
+      ><a name="1129" href="preliminaries.html#1096" class="Bound"
+      >Y</a
+      ><a name="1130"
+      > </a
+      ><a name="1131" href="preliminaries.html#1120" class="Bound"
+      >x</a
+      ><a name="1132" class="Symbol"
+      >)</a
+      ><a name="1133"
+      > </a
+      ><a name="1134" class="Symbol"
+      >&#8594;</a
+      ><a name="1135"
+      > </a
+      ><a name="1136" href="preliminaries.html#1096" class="Bound"
+      >Y</a
+      ><a name="1137" class="Symbol"
+      >(</a
+      ><a name="1138" href="preliminaries.html#1011" class="Function"
+      >&#960;&#8320;</a
+      ><a name="1140"
+      > </a
+      ><a name="1141" href="preliminaries.html#1112" class="Bound"
+      >z</a
+      ><a name="1142" class="Symbol"
+      >)</a
+      ><a name="1143"
+      >
+</a
+      ><a name="1144" href="preliminaries.html#1080" class="Function"
+      >&#960;&#8321;</a
+      ><a name="1146" class="Symbol"
+      >(</a
+      ><a name="1147" href="preliminaries.html#1147" class="Bound"
+      >x</a
+      ><a name="1148"
+      > </a
+      ><a name="1149" href="preliminaries.html#968" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="1150"
+      > </a
+      ><a name="1151" href="preliminaries.html#1151" class="Bound"
+      >y</a
+      ><a name="1152" class="Symbol"
+      >)</a
+      ><a name="1153"
+      > </a
+      ><a name="1154" class="Symbol"
+      >=</a
+      ><a name="1155"
+      > </a
+      ><a name="1156" href="preliminaries.html#1151" class="Bound"
+      >y</a
+      ><a name="1157"
+      >
+
+</a
+      ><a name="1159" class="Keyword"
+      >data</a
+      ><a name="1163"
+      > </a
+      ><a name="1164" href="preliminaries.html#1164" class="Datatype"
+      >&#8709;</a
+      ><a name="1165"
+      > </a
+      ><a name="1166" class="Symbol"
+      >:</a
+      ><a name="1167"
+      > </a
+      ><a name="1168" class="PrimitiveType"
+      >Set</a
+      ><a name="1171"
+      > </a
+      ><a name="1172" class="Keyword"
+      >where</a
+      ><a name="1177"
+      >
+
+</a
+      ><a name="1179" href="preliminaries.html#1179" class="Function"
+      >&#8709;-elim</a
+      ><a name="1185"
+      > </a
+      ><a name="1186" class="Symbol"
+      >:</a
+      ><a name="1187"
+      > </a
+      ><a name="1188" class="Symbol"
+      >{</a
+      ><a name="1189" href="preliminaries.html#1189" class="Bound"
+      >X</a
+      ><a name="1190"
+      > </a
+      ><a name="1191" class="Symbol"
+      >:</a
+      ><a name="1192"
+      > </a
+      ><a name="1193" class="PrimitiveType"
+      >Set</a
+      ><a name="1196" class="Symbol"
+      >}</a
+      ><a name="1197"
+      > </a
+      ><a name="1198" class="Symbol"
+      >&#8594;</a
+      ><a name="1199"
+      > </a
+      ><a name="1200" href="preliminaries.html#1164" class="Datatype"
+      >&#8709;</a
+      ><a name="1201"
+      > </a
+      ><a name="1202" class="Symbol"
+      >&#8594;</a
+      ><a name="1203"
+      > </a
+      ><a name="1204" href="preliminaries.html#1189" class="Bound"
+      >X</a
+      ><a name="1205"
+      >
+</a
+      ><a name="1206" href="preliminaries.html#1179" class="Function"
+      >&#8709;-elim</a
+      ><a name="1212"
+      > </a
+      ><a name="1213" class="Symbol"
+      >()</a
+      ><a name="1215"
+      >
+
+</a
+      ><a name="1218" class="Keyword"
+      >data</a
+      ><a name="1222"
+      > </a
+      ><a name="1223" href="preliminaries.html#1223" class="Datatype Operator"
+      >_+_</a
+      ><a name="1226"
+      > </a
+      ><a name="1227" class="Symbol"
+      >(</a
+      ><a name="1228" href="preliminaries.html#1228" class="Bound"
+      >X&#8320;</a
+      ><a name="1230"
+      > </a
+      ><a name="1231" href="preliminaries.html#1231" class="Bound"
+      >X&#8321;</a
+      ><a name="1233"
+      > </a
+      ><a name="1234" class="Symbol"
+      >:</a
+      ><a name="1235"
+      > </a
+      ><a name="1236" class="PrimitiveType"
+      >Set</a
+      ><a name="1239" class="Symbol"
+      >)</a
+      ><a name="1240"
+      > </a
+      ><a name="1241" class="Symbol"
+      >:</a
+      ><a name="1242"
+      > </a
+      ><a name="1243" class="PrimitiveType"
+      >Set</a
+      ><a name="1246"
+      > </a
+      ><a name="1247" class="Keyword"
+      >where</a
+      ><a name="1252"
+      >
+ </a
+      ><a name="1254" href="preliminaries.html#1254" class="InductiveConstructor"
+      >in&#8320;</a
+      ><a name="1257"
+      > </a
+      ><a name="1258" class="Symbol"
+      >:</a
+      ><a name="1259"
+      > </a
+      ><a name="1260" href="preliminaries.html#1228" class="Bound"
+      >X&#8320;</a
+      ><a name="1262"
+      > </a
+      ><a name="1263" class="Symbol"
+      >&#8594;</a
+      ><a name="1264"
+      > </a
+      ><a name="1265" href="preliminaries.html#1228" class="Bound"
+      >X&#8320;</a
+      ><a name="1267"
+      > </a
+      ><a name="1268" href="preliminaries.html#1223" class="Datatype Operator"
+      >+</a
+      ><a name="1269"
+      > </a
+      ><a name="1270" href="preliminaries.html#1231" class="Bound"
+      >X&#8321;</a
+      ><a name="1272"
+      >
+ </a
+      ><a name="1274" href="preliminaries.html#1274" class="InductiveConstructor"
+      >in&#8321;</a
+      ><a name="1277"
+      > </a
+      ><a name="1278" class="Symbol"
+      >:</a
+      ><a name="1279"
+      > </a
+      ><a name="1280" href="preliminaries.html#1231" class="Bound"
+      >X&#8321;</a
+      ><a name="1282"
+      > </a
+      ><a name="1283" class="Symbol"
+      >&#8594;</a
+      ><a name="1284"
+      > </a
+      ><a name="1285" href="preliminaries.html#1228" class="Bound"
+      >X&#8320;</a
+      ><a name="1287"
+      > </a
+      ><a name="1288" href="preliminaries.html#1223" class="Datatype Operator"
+      >+</a
+      ><a name="1289"
+      > </a
+      ><a name="1290" href="preliminaries.html#1231" class="Bound"
+      >X&#8321;</a
+      ><a name="1292"
+      >
+
+</a
+      ><a name="1294" href="preliminaries.html#1294" class="Function"
+      >equality-cases</a
+      ><a name="1308"
+      > </a
+      ><a name="1309" class="Symbol"
+      >:</a
+      ><a name="1310"
+      > </a
+      ><a name="1311" class="Symbol"
+      >{</a
+      ><a name="1312" href="preliminaries.html#1312" class="Bound"
+      >X&#8320;</a
+      ><a name="1314"
+      > </a
+      ><a name="1315" href="preliminaries.html#1315" class="Bound"
+      >X&#8321;</a
+      ><a name="1317"
+      > </a
+      ><a name="1318" class="Symbol"
+      >:</a
+      ><a name="1319"
+      > </a
+      ><a name="1320" class="PrimitiveType"
+      >Set</a
+      ><a name="1323" class="Symbol"
+      >}</a
+      ><a name="1324"
+      > </a
+      ><a name="1325" class="Symbol"
+      >&#8594;</a
+      ><a name="1326"
+      > </a
+      ><a name="1327" class="Symbol"
+      >{</a
+      ><a name="1328" href="preliminaries.html#1328" class="Bound"
+      >A</a
+      ><a name="1329"
+      > </a
+      ><a name="1330" class="Symbol"
+      >:</a
+      ><a name="1331"
+      > </a
+      ><a name="1332" class="PrimitiveType"
+      >Set</a
+      ><a name="1335" class="Symbol"
+      >}</a
+      ><a name="1336"
+      > </a
+      ><a name="1337" class="Symbol"
+      >&#8594;</a
+      ><a name="1338"
+      >
+ </a
+      ><a name="1341" class="Symbol"
+      >(</a
+      ><a name="1342" href="preliminaries.html#1342" class="Bound"
+      >y</a
+      ><a name="1343"
+      > </a
+      ><a name="1344" class="Symbol"
+      >:</a
+      ><a name="1345"
+      > </a
+      ><a name="1346" href="preliminaries.html#1312" class="Bound"
+      >X&#8320;</a
+      ><a name="1348"
+      > </a
+      ><a name="1349" href="preliminaries.html#1223" class="Datatype Operator"
+      >+</a
+      ><a name="1350"
+      > </a
+      ><a name="1351" href="preliminaries.html#1315" class="Bound"
+      >X&#8321;</a
+      ><a name="1353" class="Symbol"
+      >)</a
+      ><a name="1354"
+      > </a
+      ><a name="1355" class="Symbol"
+      >&#8594;</a
+      ><a name="1356"
+      > </a
+      ><a name="1357" class="Symbol"
+      >((</a
+      ><a name="1359" href="preliminaries.html#1359" class="Bound"
+      >x&#8320;</a
+      ><a name="1361"
+      > </a
+      ><a name="1362" class="Symbol"
+      >:</a
+      ><a name="1363"
+      > </a
+      ><a name="1364" href="preliminaries.html#1312" class="Bound"
+      >X&#8320;</a
+      ><a name="1366" class="Symbol"
+      >)</a
+      ><a name="1367"
+      > </a
+      ><a name="1368" class="Symbol"
+      >&#8594;</a
+      ><a name="1369"
+      > </a
+      ><a name="1370" href="preliminaries.html#1342" class="Bound"
+      >y</a
+      ><a name="1371"
+      > </a
+      ><a name="1372" href="preliminaries.html#78" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="1373"
+      > </a
+      ><a name="1374" href="preliminaries.html#1254" class="InductiveConstructor"
+      >in&#8320;</a
+      ><a name="1377"
+      > </a
+      ><a name="1378" href="preliminaries.html#1359" class="Bound"
+      >x&#8320;</a
+      ><a name="1380"
+      > </a
+      ><a name="1381" class="Symbol"
+      >&#8594;</a
+      ><a name="1382"
+      > </a
+      ><a name="1383" href="preliminaries.html#1328" class="Bound"
+      >A</a
+      ><a name="1384" class="Symbol"
+      >)</a
+      ><a name="1385"
+      > </a
+      ><a name="1386" class="Symbol"
+      >&#8594;</a
+      ><a name="1387"
+      > </a
+      ><a name="1388" class="Symbol"
+      >((</a
+      ><a name="1390" href="preliminaries.html#1390" class="Bound"
+      >x&#8321;</a
+      ><a name="1392"
+      > </a
+      ><a name="1393" class="Symbol"
+      >:</a
+      ><a name="1394"
+      > </a
+      ><a name="1395" href="preliminaries.html#1315" class="Bound"
+      >X&#8321;</a
+      ><a name="1397" class="Symbol"
+      >)</a
+      ><a name="1398"
+      > </a
+      ><a name="1399" class="Symbol"
+      >&#8594;</a
+      ><a name="1400"
+      > </a
+      ><a name="1401" href="preliminaries.html#1342" class="Bound"
+      >y</a
+      ><a name="1402"
+      > </a
+      ><a name="1403" href="preliminaries.html#78" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="1404"
+      > </a
+      ><a name="1405" href="preliminaries.html#1274" class="InductiveConstructor"
+      >in&#8321;</a
+      ><a name="1408"
+      > </a
+      ><a name="1409" href="preliminaries.html#1390" class="Bound"
+      >x&#8321;</a
+      ><a name="1411"
+      > </a
+      ><a name="1412" class="Symbol"
+      >&#8594;</a
+      ><a name="1413"
+      > </a
+      ><a name="1414" href="preliminaries.html#1328" class="Bound"
+      >A</a
+      ><a name="1415" class="Symbol"
+      >)</a
+      ><a name="1416"
+      > </a
+      ><a name="1417" class="Symbol"
+      >&#8594;</a
+      ><a name="1418"
+      > </a
+      ><a name="1419" href="preliminaries.html#1328" class="Bound"
+      >A</a
+      ><a name="1420"
+      >
+</a
+      ><a name="1421" href="preliminaries.html#1294" class="Function"
+      >equality-cases</a
+      ><a name="1435"
+      > </a
+      ><a name="1436" class="Symbol"
+      >(</a
+      ><a name="1437" href="preliminaries.html#1254" class="InductiveConstructor"
+      >in&#8320;</a
+      ><a name="1440"
+      > </a
+      ><a name="1441" href="preliminaries.html#1441" class="Bound"
+      >x&#8320;</a
+      ><a name="1443" class="Symbol"
+      >)</a
+      ><a name="1444"
+      > </a
+      ><a name="1445" href="preliminaries.html#1445" class="Bound"
+      >f&#8320;</a
+      ><a name="1447"
+      > </a
+      ><a name="1448" href="preliminaries.html#1448" class="Bound"
+      >f&#8321;</a
+      ><a name="1450"
+      > </a
+      ><a name="1451" class="Symbol"
+      >=</a
+      ><a name="1452"
+      > </a
+      ><a name="1453" href="preliminaries.html#1445" class="Bound"
+      >f&#8320;</a
+      ><a name="1455"
+      > </a
+      ><a name="1456" href="preliminaries.html#1441" class="Bound"
+      >x&#8320;</a
+      ><a name="1458"
+      > </a
+      ><a name="1459" href="preliminaries.html#114" class="InductiveConstructor"
+      >refl</a
+      ><a name="1463"
+      >
+</a
+      ><a name="1464" href="preliminaries.html#1294" class="Function"
+      >equality-cases</a
+      ><a name="1478"
+      > </a
+      ><a name="1479" class="Symbol"
+      >(</a
+      ><a name="1480" href="preliminaries.html#1274" class="InductiveConstructor"
+      >in&#8321;</a
+      ><a name="1483"
+      > </a
+      ><a name="1484" href="preliminaries.html#1484" class="Bound"
+      >x&#8321;</a
+      ><a name="1486" class="Symbol"
+      >)</a
+      ><a name="1487"
+      > </a
+      ><a name="1488" href="preliminaries.html#1488" class="Bound"
+      >f&#8320;</a
+      ><a name="1490"
+      > </a
+      ><a name="1491" href="preliminaries.html#1491" class="Bound"
+      >f&#8321;</a
+      ><a name="1493"
+      > </a
+      ><a name="1494" class="Symbol"
+      >=</a
+      ><a name="1495"
+      > </a
+      ><a name="1496" href="preliminaries.html#1491" class="Bound"
+      >f&#8321;</a
+      ><a name="1498"
+      > </a
+      ><a name="1499" href="preliminaries.html#1484" class="Bound"
+      >x&#8321;</a
+      ><a name="1501"
+      > </a
+      ><a name="1502" href="preliminaries.html#114" class="InductiveConstructor"
+      >refl</a
+      ><a name="1506"
+      >
+
+\end{code}
+</a
+      ></pre
+    ></body
+  ></html
+>

@@ -1,0 +1,681 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+><head
+  ><title
+    >hprop-truncation</title
+    ><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"
+     /><meta http-equiv="Content-Style-Type" content="text/css"
+     /><link href="Agda.css" rel="stylesheet" type="text/css"
+     /></head
+  ><body
+  ><pre
+    ><a name="1" class="Comment"
+      >Martin Escardo, Jun 7 2013.</a
+      ><a name="28"
+      >
+
+</a
+      ><a name="30" class="Comment"
+      >We use Dan Licata's trick </a
+      ><a name="56"
+      >
+</a
+      ><a name="57" class="Comment"
+      >http://homotopytypetheory.org/2011/04/23/running-circles-around-in-your-proof-assistant/</a
+      ><a name="145"
+      >
+</a
+      ><a name="146" class="Comment"
+      >to implement hpropositional truncation so that the elimination-rule equations hold definitionally.</a
+      ><a name="244"
+      >
+
+\begin{code}
+
+</a
+      ><a name="260" class="Symbol"
+      >{-#</a
+      ><a name="263"
+      > </a
+      ><a name="264" class="Keyword"
+      >OPTIONS</a
+      ><a name="271"
+      > --without-K </a
+      ><a name="284" class="Symbol"
+      >#-}</a
+      ><a name="287"
+      >
+
+</a
+      ><a name="289" class="Keyword"
+      >module</a
+      ><a name="295"
+      > </a
+      ><a name="296" href="hprop-truncation.html#1" class="Module"
+      >hprop-truncation</a
+      ><a name="312"
+      > </a
+      ><a name="313" class="Keyword"
+      >where</a
+      ><a name="318"
+      >
+
+</a
+      ><a name="320" class="Keyword"
+      >open</a
+      ><a name="324"
+      > </a
+      ><a name="325" class="Keyword"
+      >import</a
+      ><a name="331"
+      > </a
+      ><a name="332" href="tiny-library.html#1" class="Module"
+      >tiny-library</a
+      ><a name="344"
+      >
+
+\end{code}
+
+</a
+      ><a name="358" class="Comment"
+      >We implement the hpropositional truncation of &#8741; X &#8741; as X itself, or</a
+      ><a name="425"
+      >
+</a
+      ><a name="426" class="Comment"
+      >rather its isomorphic copy &#8741; X &#8741;', which is kept private to the</a
+      ><a name="489"
+      >
+</a
+      ><a name="490" class="Comment"
+      >module:</a
+      ><a name="497"
+      >
+
+\begin{code}
+
+</a
+      ><a name="513" class="Keyword"
+      >private</a
+      ><a name="520"
+      >
+ </a
+      ><a name="523" class="Keyword"
+      >data</a
+      ><a name="527"
+      > </a
+      ><a name="528" href="hprop-truncation.html#528" class="Datatype Operator"
+      >&#8741;_&#8741;'</a
+      ><a name="532"
+      > </a
+      ><a name="533" class="Symbol"
+      >(</a
+      ><a name="534" href="hprop-truncation.html#534" class="Bound"
+      >X</a
+      ><a name="535"
+      > </a
+      ><a name="536" class="Symbol"
+      >:</a
+      ><a name="537"
+      > </a
+      ><a name="538" class="PrimitiveType"
+      >Set</a
+      ><a name="541" class="Symbol"
+      >)</a
+      ><a name="542"
+      > </a
+      ><a name="543" class="Symbol"
+      >:</a
+      ><a name="544"
+      > </a
+      ><a name="545" class="PrimitiveType"
+      >Set</a
+      ><a name="548"
+      > </a
+      ><a name="549" class="Keyword"
+      >where</a
+      ><a name="554"
+      >
+   </a
+      ><a name="558" href="hprop-truncation.html#558" class="InductiveConstructor Operator"
+      >&#8739;_&#8739;'</a
+      ><a name="562"
+      > </a
+      ><a name="563" class="Symbol"
+      >:</a
+      ><a name="564"
+      > </a
+      ><a name="565" href="hprop-truncation.html#534" class="Bound"
+      >X</a
+      ><a name="566"
+      > </a
+      ><a name="567" class="Symbol"
+      >&#8594;</a
+      ><a name="568"
+      > </a
+      ><a name="569" href="hprop-truncation.html#528" class="Datatype Operator"
+      >&#8741;</a
+      ><a name="570"
+      > </a
+      ><a name="571" href="hprop-truncation.html#534" class="Bound"
+      >X</a
+      ><a name="572"
+      > </a
+      ><a name="573" href="hprop-truncation.html#528" class="Datatype Operator"
+      >&#8741;'</a
+      ><a name="575"
+      >
+
+</a
+      ><a name="577" href="hprop-truncation.html#577" class="Function Operator"
+      >&#8741;_&#8741;</a
+      ><a name="580"
+      > </a
+      ><a name="581" class="Symbol"
+      >:</a
+      ><a name="582"
+      > </a
+      ><a name="583" class="PrimitiveType"
+      >Set</a
+      ><a name="586"
+      > </a
+      ><a name="587" class="Symbol"
+      >&#8594;</a
+      ><a name="588"
+      > </a
+      ><a name="589" class="PrimitiveType"
+      >Set</a
+      ><a name="592"
+      >
+</a
+      ><a name="593" href="hprop-truncation.html#577" class="Function Operator"
+      >&#8741;_&#8741;</a
+      ><a name="596"
+      > </a
+      ><a name="597" class="Symbol"
+      >=</a
+      ><a name="598"
+      > </a
+      ><a name="599" href="hprop-truncation.html#528" class="Datatype Operator"
+      >&#8741;_&#8741;'</a
+      ><a name="603"
+      >
+
+</a
+      ><a name="605" class="Keyword"
+      >postulate</a
+      ><a name="614"
+      > </a
+      ><a name="615" href="hprop-truncation.html#615" class="Postulate"
+      >truncation-path</a
+      ><a name="630"
+      > </a
+      ><a name="631" class="Symbol"
+      >:</a
+      ><a name="632"
+      > </a
+      ><a name="633" class="Symbol"
+      >{</a
+      ><a name="634" href="hprop-truncation.html#634" class="Bound"
+      >X</a
+      ><a name="635"
+      > </a
+      ><a name="636" class="Symbol"
+      >:</a
+      ><a name="637"
+      > </a
+      ><a name="638" class="PrimitiveType"
+      >Set</a
+      ><a name="641" class="Symbol"
+      >}</a
+      ><a name="642"
+      > </a
+      ><a name="643" class="Symbol"
+      >&#8594;</a
+      ><a name="644"
+      > </a
+      ><a name="645" href="tiny-library.html#2140" class="Function"
+      >hprop</a
+      ><a name="650"
+      > </a
+      ><a name="651" href="hprop-truncation.html#577" class="Function Operator"
+      >&#8741;</a
+      ><a name="652"
+      > </a
+      ><a name="653" href="hprop-truncation.html#634" class="Bound"
+      >X</a
+      ><a name="654"
+      > </a
+      ><a name="655" href="hprop-truncation.html#577" class="Function Operator"
+      >&#8741;</a
+      ><a name="656"
+      >
+
+</a
+      ><a name="658" href="hprop-truncation.html#658" class="Function Operator"
+      >&#8739;_&#8739;</a
+      ><a name="661"
+      > </a
+      ><a name="662" class="Symbol"
+      >:</a
+      ><a name="663"
+      > </a
+      ><a name="664" class="Symbol"
+      >{</a
+      ><a name="665" href="hprop-truncation.html#665" class="Bound"
+      >X</a
+      ><a name="666"
+      > </a
+      ><a name="667" class="Symbol"
+      >:</a
+      ><a name="668"
+      > </a
+      ><a name="669" class="PrimitiveType"
+      >Set</a
+      ><a name="672" class="Symbol"
+      >}</a
+      ><a name="673"
+      > </a
+      ><a name="674" class="Symbol"
+      >&#8594;</a
+      ><a name="675"
+      > </a
+      ><a name="676" href="hprop-truncation.html#665" class="Bound"
+      >X</a
+      ><a name="677"
+      > </a
+      ><a name="678" class="Symbol"
+      >&#8594;</a
+      ><a name="679"
+      > </a
+      ><a name="680" href="hprop-truncation.html#577" class="Function Operator"
+      >&#8741;</a
+      ><a name="681"
+      > </a
+      ><a name="682" href="hprop-truncation.html#665" class="Bound"
+      >X</a
+      ><a name="683"
+      > </a
+      ><a name="684" href="hprop-truncation.html#577" class="Function Operator"
+      >&#8741;</a
+      ><a name="685"
+      >
+</a
+      ><a name="686" href="hprop-truncation.html#658" class="Function Operator"
+      >&#8739;_&#8739;</a
+      ><a name="689"
+      > </a
+      ><a name="690" class="Symbol"
+      >=</a
+      ><a name="691"
+      > </a
+      ><a name="692" href="hprop-truncation.html#558" class="InductiveConstructor Operator"
+      >&#8739;_&#8739;'</a
+      ><a name="696"
+      >
+
+</a
+      ><a name="698" href="hprop-truncation.html#698" class="Function"
+      >truncation-ind</a
+      ><a name="712"
+      > </a
+      ><a name="713" class="Symbol"
+      >:</a
+      ><a name="714"
+      > </a
+      ><a name="715" class="Symbol"
+      >{</a
+      ><a name="716" href="hprop-truncation.html#716" class="Bound"
+      >X</a
+      ><a name="717"
+      > </a
+      ><a name="718" class="Symbol"
+      >:</a
+      ><a name="719"
+      > </a
+      ><a name="720" class="PrimitiveType"
+      >Set</a
+      ><a name="723" class="Symbol"
+      >}</a
+      ><a name="724"
+      > </a
+      ><a name="725" class="Symbol"
+      >{</a
+      ><a name="726" href="hprop-truncation.html#726" class="Bound"
+      >P</a
+      ><a name="727"
+      > </a
+      ><a name="728" class="Symbol"
+      >:</a
+      ><a name="729"
+      > </a
+      ><a name="730" href="hprop-truncation.html#577" class="Function Operator"
+      >&#8741;</a
+      ><a name="731"
+      > </a
+      ><a name="732" href="hprop-truncation.html#716" class="Bound"
+      >X</a
+      ><a name="733"
+      > </a
+      ><a name="734" href="hprop-truncation.html#577" class="Function Operator"
+      >&#8741;</a
+      ><a name="735"
+      > </a
+      ><a name="736" class="Symbol"
+      >&#8594;</a
+      ><a name="737"
+      > </a
+      ><a name="738" class="PrimitiveType"
+      >Set</a
+      ><a name="741" class="Symbol"
+      >}</a
+      ><a name="742"
+      > </a
+      ><a name="743" class="Symbol"
+      >&#8594;</a
+      ><a name="744"
+      > </a
+      ><a name="745" class="Symbol"
+      >((</a
+      ><a name="747" href="hprop-truncation.html#747" class="Bound"
+      >s</a
+      ><a name="748"
+      > </a
+      ><a name="749" class="Symbol"
+      >:</a
+      ><a name="750"
+      > </a
+      ><a name="751" href="hprop-truncation.html#577" class="Function Operator"
+      >&#8741;</a
+      ><a name="752"
+      > </a
+      ><a name="753" href="hprop-truncation.html#716" class="Bound"
+      >X</a
+      ><a name="754"
+      > </a
+      ><a name="755" href="hprop-truncation.html#577" class="Function Operator"
+      >&#8741;</a
+      ><a name="756" class="Symbol"
+      >)</a
+      ><a name="757"
+      > </a
+      ><a name="758" class="Symbol"
+      >&#8594;</a
+      ><a name="759"
+      > </a
+      ><a name="760" href="tiny-library.html#2140" class="Function"
+      >hprop</a
+      ><a name="765" class="Symbol"
+      >(</a
+      ><a name="766" href="hprop-truncation.html#726" class="Bound"
+      >P</a
+      ><a name="767"
+      > </a
+      ><a name="768" href="hprop-truncation.html#747" class="Bound"
+      >s</a
+      ><a name="769" class="Symbol"
+      >))</a
+      ><a name="771"
+      > </a
+      ><a name="772" class="Symbol"
+      >&#8594;</a
+      ><a name="773"
+      > </a
+      ><a name="774" class="Symbol"
+      >((</a
+      ><a name="776" href="hprop-truncation.html#776" class="Bound"
+      >x</a
+      ><a name="777"
+      > </a
+      ><a name="778" class="Symbol"
+      >:</a
+      ><a name="779"
+      > </a
+      ><a name="780" href="hprop-truncation.html#716" class="Bound"
+      >X</a
+      ><a name="781" class="Symbol"
+      >)</a
+      ><a name="782"
+      > </a
+      ><a name="783" class="Symbol"
+      >&#8594;</a
+      ><a name="784"
+      > </a
+      ><a name="785" href="hprop-truncation.html#726" class="Bound"
+      >P</a
+      ><a name="786"
+      > </a
+      ><a name="787" href="hprop-truncation.html#658" class="Function Operator"
+      >&#8739;</a
+      ><a name="788"
+      > </a
+      ><a name="789" href="hprop-truncation.html#776" class="Bound"
+      >x</a
+      ><a name="790"
+      > </a
+      ><a name="791" href="hprop-truncation.html#658" class="Function Operator"
+      >&#8739;</a
+      ><a name="792" class="Symbol"
+      >)</a
+      ><a name="793"
+      >
+               </a
+      ><a name="810" class="Symbol"
+      >&#8594;</a
+      ><a name="811"
+      > </a
+      ><a name="812" class="Symbol"
+      >(</a
+      ><a name="813" href="hprop-truncation.html#813" class="Bound"
+      >s</a
+      ><a name="814"
+      > </a
+      ><a name="815" class="Symbol"
+      >:</a
+      ><a name="816"
+      > </a
+      ><a name="817" href="hprop-truncation.html#577" class="Function Operator"
+      >&#8741;</a
+      ><a name="818"
+      > </a
+      ><a name="819" href="hprop-truncation.html#716" class="Bound"
+      >X</a
+      ><a name="820"
+      > </a
+      ><a name="821" href="hprop-truncation.html#577" class="Function Operator"
+      >&#8741;</a
+      ><a name="822" class="Symbol"
+      >)</a
+      ><a name="823"
+      > </a
+      ><a name="824" class="Symbol"
+      >&#8594;</a
+      ><a name="825"
+      > </a
+      ><a name="826" href="hprop-truncation.html#726" class="Bound"
+      >P</a
+      ><a name="827"
+      > </a
+      ><a name="828" href="hprop-truncation.html#813" class="Bound"
+      >s</a
+      ><a name="829"
+      >
+</a
+      ><a name="830" href="hprop-truncation.html#698" class="Function"
+      >truncation-ind</a
+      ><a name="844"
+      > </a
+      ><a name="845" class="Symbol"
+      >_</a
+      ><a name="846"
+      > </a
+      ><a name="847" href="hprop-truncation.html#847" class="Bound"
+      >f</a
+      ><a name="848"
+      > </a
+      ><a name="849" href="hprop-truncation.html#558" class="InductiveConstructor Operator"
+      >&#8739;</a
+      ><a name="850"
+      > </a
+      ><a name="851" href="hprop-truncation.html#851" class="Bound"
+      >x</a
+      ><a name="852"
+      > </a
+      ><a name="853" href="hprop-truncation.html#558" class="InductiveConstructor Operator"
+      >&#8739;'</a
+      ><a name="855"
+      > </a
+      ><a name="856" class="Symbol"
+      >=</a
+      ><a name="857"
+      > </a
+      ><a name="858" href="hprop-truncation.html#847" class="Bound"
+      >f</a
+      ><a name="859"
+      > </a
+      ><a name="860" href="hprop-truncation.html#851" class="Bound"
+      >x</a
+      ><a name="861"
+      >
+
+</a
+      ><a name="863" href="hprop-truncation.html#863" class="Function"
+      >truncation-rec</a
+      ><a name="877"
+      > </a
+      ><a name="878" class="Symbol"
+      >:</a
+      ><a name="879"
+      > </a
+      ><a name="880" class="Symbol"
+      >{</a
+      ><a name="881" href="hprop-truncation.html#881" class="Bound"
+      >X</a
+      ><a name="882"
+      > </a
+      ><a name="883" href="hprop-truncation.html#883" class="Bound"
+      >P</a
+      ><a name="884"
+      > </a
+      ><a name="885" class="Symbol"
+      >:</a
+      ><a name="886"
+      > </a
+      ><a name="887" class="PrimitiveType"
+      >Set</a
+      ><a name="890" class="Symbol"
+      >}</a
+      ><a name="891"
+      > </a
+      ><a name="892" class="Symbol"
+      >&#8594;</a
+      ><a name="893"
+      > </a
+      ><a name="894" href="tiny-library.html#2140" class="Function"
+      >hprop</a
+      ><a name="899"
+      > </a
+      ><a name="900" href="hprop-truncation.html#883" class="Bound"
+      >P</a
+      ><a name="901"
+      > </a
+      ><a name="902" class="Symbol"
+      >&#8594;</a
+      ><a name="903"
+      > </a
+      ><a name="904" class="Symbol"
+      >(</a
+      ><a name="905" href="hprop-truncation.html#881" class="Bound"
+      >X</a
+      ><a name="906"
+      > </a
+      ><a name="907" class="Symbol"
+      >&#8594;</a
+      ><a name="908"
+      > </a
+      ><a name="909" href="hprop-truncation.html#883" class="Bound"
+      >P</a
+      ><a name="910" class="Symbol"
+      >)</a
+      ><a name="911"
+      > </a
+      ><a name="912" class="Symbol"
+      >&#8594;</a
+      ><a name="913"
+      > </a
+      ><a name="914" href="hprop-truncation.html#577" class="Function Operator"
+      >&#8741;</a
+      ><a name="915"
+      > </a
+      ><a name="916" href="hprop-truncation.html#881" class="Bound"
+      >X</a
+      ><a name="917"
+      > </a
+      ><a name="918" href="hprop-truncation.html#577" class="Function Operator"
+      >&#8741;</a
+      ><a name="919"
+      > </a
+      ><a name="920" class="Symbol"
+      >&#8594;</a
+      ><a name="921"
+      > </a
+      ><a name="922" href="hprop-truncation.html#883" class="Bound"
+      >P</a
+      ><a name="923"
+      >
+</a
+      ><a name="924" href="hprop-truncation.html#863" class="Function"
+      >truncation-rec</a
+      ><a name="938"
+      > </a
+      ><a name="939" class="Symbol"
+      >_</a
+      ><a name="940"
+      > </a
+      ><a name="941" href="hprop-truncation.html#941" class="Bound"
+      >f</a
+      ><a name="942"
+      > </a
+      ><a name="943" href="hprop-truncation.html#558" class="InductiveConstructor Operator"
+      >&#8739;</a
+      ><a name="944"
+      > </a
+      ><a name="945" href="hprop-truncation.html#945" class="Bound"
+      >x</a
+      ><a name="946"
+      > </a
+      ><a name="947" href="hprop-truncation.html#558" class="InductiveConstructor Operator"
+      >&#8739;'</a
+      ><a name="949"
+      > </a
+      ><a name="950" class="Symbol"
+      >=</a
+      ><a name="951"
+      > </a
+      ><a name="952" href="hprop-truncation.html#941" class="Bound"
+      >f</a
+      ><a name="953"
+      > </a
+      ><a name="954" href="hprop-truncation.html#945" class="Bound"
+      >x</a
+      ><a name="955"
+      >
+
+\end{code}
+
+</a
+      ><a name="969" class="Comment"
+      >The crucial point is that the above two elimination rules hold</a
+      ><a name="1031"
+      >
+</a
+      ><a name="1032" class="Comment"
+      >definitionally. Because of the postulate, we lose canonicity.</a
+      ><a name="1093"
+      >
+
+</a
+      ></pre
+    ></body
+  ></html
+>

@@ -1,0 +1,5186 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+><head
+  ><title
+    >mini-library</title
+    ><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"
+     /><meta http-equiv="Content-Style-Type" content="text/css"
+     /><link href="Agda.css" rel="stylesheet" type="text/css"
+     /></head
+  ><body
+  ><pre
+    ><a name="1"
+      >\begin{code}
+
+</a
+      ><a name="16" class="Symbol"
+      >{-#</a
+      ><a name="19"
+      > </a
+      ><a name="20" class="Keyword"
+      >OPTIONS</a
+      ><a name="27"
+      > --without-K </a
+      ><a name="40" class="Symbol"
+      >#-}</a
+      ><a name="43"
+      >
+
+</a
+      ><a name="45" class="Keyword"
+      >module</a
+      ><a name="51"
+      > </a
+      ><a name="52" href="mini-library.html#1" class="Module"
+      >mini-library</a
+      ><a name="64"
+      > </a
+      ><a name="65" class="Keyword"
+      >where</a
+      ><a name="70"
+      >
+
+</a
+      ><a name="72" href="mini-library.html#72" class="Function"
+      >id</a
+      ><a name="74"
+      > </a
+      ><a name="75" class="Symbol"
+      >:</a
+      ><a name="76"
+      > </a
+      ><a name="77" class="Symbol"
+      >{</a
+      ><a name="78" href="mini-library.html#78" class="Bound"
+      >X</a
+      ><a name="79"
+      > </a
+      ><a name="80" class="Symbol"
+      >:</a
+      ><a name="81"
+      > </a
+      ><a name="82" class="PrimitiveType"
+      >Set</a
+      ><a name="85" class="Symbol"
+      >}</a
+      ><a name="86"
+      > </a
+      ><a name="87" class="Symbol"
+      >&#8594;</a
+      ><a name="88"
+      > </a
+      ><a name="89" href="mini-library.html#78" class="Bound"
+      >X</a
+      ><a name="90"
+      > </a
+      ><a name="91" class="Symbol"
+      >&#8594;</a
+      ><a name="92"
+      > </a
+      ><a name="93" href="mini-library.html#78" class="Bound"
+      >X</a
+      ><a name="94"
+      >
+</a
+      ><a name="95" href="mini-library.html#72" class="Function"
+      >id</a
+      ><a name="97"
+      > </a
+      ><a name="98" href="mini-library.html#98" class="Bound"
+      >x</a
+      ><a name="99"
+      > </a
+      ><a name="100" class="Symbol"
+      >=</a
+      ><a name="101"
+      > </a
+      ><a name="102" href="mini-library.html#98" class="Bound"
+      >x</a
+      ><a name="103"
+      >
+
+</a
+      ><a name="105" href="mini-library.html#105" class="Function Operator"
+      >_&#8728;_</a
+      ><a name="108"
+      > </a
+      ><a name="109" class="Symbol"
+      >:</a
+      ><a name="110"
+      > </a
+      ><a name="111" class="Symbol"
+      >{</a
+      ><a name="112" href="mini-library.html#112" class="Bound"
+      >X</a
+      ><a name="113"
+      > </a
+      ><a name="114" href="mini-library.html#114" class="Bound"
+      >Y</a
+      ><a name="115"
+      > </a
+      ><a name="116" href="mini-library.html#116" class="Bound"
+      >Z</a
+      ><a name="117"
+      > </a
+      ><a name="118" class="Symbol"
+      >:</a
+      ><a name="119"
+      > </a
+      ><a name="120" class="PrimitiveType"
+      >Set</a
+      ><a name="123" class="Symbol"
+      >}</a
+      ><a name="124"
+      > </a
+      ><a name="125" class="Symbol"
+      >&#8594;</a
+      ><a name="126"
+      > </a
+      ><a name="127" class="Symbol"
+      >(</a
+      ><a name="128" href="mini-library.html#114" class="Bound"
+      >Y</a
+      ><a name="129"
+      > </a
+      ><a name="130" class="Symbol"
+      >&#8594;</a
+      ><a name="131"
+      > </a
+      ><a name="132" href="mini-library.html#116" class="Bound"
+      >Z</a
+      ><a name="133" class="Symbol"
+      >)</a
+      ><a name="134"
+      > </a
+      ><a name="135" class="Symbol"
+      >&#8594;</a
+      ><a name="136"
+      > </a
+      ><a name="137" class="Symbol"
+      >(</a
+      ><a name="138" href="mini-library.html#112" class="Bound"
+      >X</a
+      ><a name="139"
+      > </a
+      ><a name="140" class="Symbol"
+      >&#8594;</a
+      ><a name="141"
+      > </a
+      ><a name="142" href="mini-library.html#114" class="Bound"
+      >Y</a
+      ><a name="143" class="Symbol"
+      >)</a
+      ><a name="144"
+      > </a
+      ><a name="145" class="Symbol"
+      >&#8594;</a
+      ><a name="146"
+      > </a
+      ><a name="147" class="Symbol"
+      >(</a
+      ><a name="148" href="mini-library.html#112" class="Bound"
+      >X</a
+      ><a name="149"
+      > </a
+      ><a name="150" class="Symbol"
+      >&#8594;</a
+      ><a name="151"
+      > </a
+      ><a name="152" href="mini-library.html#116" class="Bound"
+      >Z</a
+      ><a name="153" class="Symbol"
+      >)</a
+      ><a name="154"
+      >
+</a
+      ><a name="155" href="mini-library.html#155" class="Bound"
+      >g</a
+      ><a name="156"
+      > </a
+      ><a name="157" href="mini-library.html#105" class="Function Operator"
+      >&#8728;</a
+      ><a name="158"
+      > </a
+      ><a name="159" href="mini-library.html#159" class="Bound"
+      >f</a
+      ><a name="160"
+      > </a
+      ><a name="161" class="Symbol"
+      >=</a
+      ><a name="162"
+      > </a
+      ><a name="163" class="Symbol"
+      >&#955;</a
+      ><a name="164"
+      > </a
+      ><a name="165" href="mini-library.html#165" class="Bound"
+      >x</a
+      ><a name="166"
+      > </a
+      ><a name="167" class="Symbol"
+      >&#8594;</a
+      ><a name="168"
+      > </a
+      ><a name="169" href="mini-library.html#155" class="Bound"
+      >g</a
+      ><a name="170" class="Symbol"
+      >(</a
+      ><a name="171" href="mini-library.html#159" class="Bound"
+      >f</a
+      ><a name="172"
+      > </a
+      ><a name="173" href="mini-library.html#165" class="Bound"
+      >x</a
+      ><a name="174" class="Symbol"
+      >)</a
+      ><a name="175"
+      >
+
+</a
+      ><a name="177" class="Keyword"
+      >infixl</a
+      ><a name="183"
+      > </a
+      ><a name="184" class="Number"
+      >30</a
+      ><a name="186"
+      > _&#8728;_
+
+</a
+      ><a name="193" class="Keyword"
+      >record</a
+      ><a name="199"
+      > </a
+      ><a name="200" href="mini-library.html#200" class="Record"
+      >&#931;</a
+      ><a name="201"
+      > </a
+      ><a name="202" class="Symbol"
+      >{</a
+      ><a name="203" href="mini-library.html#203" class="Bound"
+      >I</a
+      ><a name="204"
+      > </a
+      ><a name="205" class="Symbol"
+      >:</a
+      ><a name="206"
+      > </a
+      ><a name="207" class="PrimitiveType"
+      >Set</a
+      ><a name="210" class="Symbol"
+      >}</a
+      ><a name="211"
+      > </a
+      ><a name="212" class="Symbol"
+      >(</a
+      ><a name="213" href="mini-library.html#213" class="Bound"
+      >X</a
+      ><a name="214"
+      > </a
+      ><a name="215" class="Symbol"
+      >:</a
+      ><a name="216"
+      > </a
+      ><a name="217" href="mini-library.html#203" class="Bound"
+      >I</a
+      ><a name="218"
+      > </a
+      ><a name="219" class="Symbol"
+      >&#8594;</a
+      ><a name="220"
+      > </a
+      ><a name="221" class="PrimitiveType"
+      >Set</a
+      ><a name="224" class="Symbol"
+      >)</a
+      ><a name="225"
+      > </a
+      ><a name="226" class="Symbol"
+      >:</a
+      ><a name="227"
+      > </a
+      ><a name="228" class="PrimitiveType"
+      >Set</a
+      ><a name="231"
+      > </a
+      ><a name="232" class="Keyword"
+      >where</a
+      ><a name="237"
+      >
+  </a
+      ><a name="240" class="Keyword"
+      >constructor</a
+      ><a name="251"
+      > </a
+      ><a name="252" href="mini-library.html#252" class="InductiveConstructor Operator"
+      >_,_</a
+      ><a name="255"
+      >
+  </a
+      ><a name="258" class="Keyword"
+      >field</a
+      ><a name="263"
+      >
+   </a
+      ><a name="267" href="mini-library.html#267" class="Field"
+      >i</a
+      ><a name="268"
+      > </a
+      ><a name="269" class="Symbol"
+      >:</a
+      ><a name="270"
+      > </a
+      ><a name="271" href="mini-library.html#203" class="Bound"
+      >I</a
+      ><a name="272"
+      >
+   </a
+      ><a name="276" href="mini-library.html#276" class="Field"
+      >x</a
+      ><a name="277"
+      > </a
+      ><a name="278" class="Symbol"
+      >:</a
+      ><a name="279"
+      > </a
+      ><a name="280" href="mini-library.html#213" class="Bound"
+      >X</a
+      ><a name="281"
+      > </a
+      ><a name="282" href="mini-library.html#267" class="Bound"
+      >i</a
+      ><a name="283"
+      >
+
+</a
+      ><a name="285" href="mini-library.html#285" class="Function"
+      >&#960;&#8320;</a
+      ><a name="287"
+      > </a
+      ><a name="288" class="Symbol"
+      >:</a
+      ><a name="289"
+      > </a
+      ><a name="290" class="Symbol"
+      >{</a
+      ><a name="291" href="mini-library.html#291" class="Bound"
+      >I</a
+      ><a name="292"
+      > </a
+      ><a name="293" class="Symbol"
+      >:</a
+      ><a name="294"
+      > </a
+      ><a name="295" class="PrimitiveType"
+      >Set</a
+      ><a name="298" class="Symbol"
+      >}</a
+      ><a name="299"
+      > </a
+      ><a name="300" class="Symbol"
+      >{</a
+      ><a name="301" href="mini-library.html#301" class="Bound"
+      >X</a
+      ><a name="302"
+      > </a
+      ><a name="303" class="Symbol"
+      >:</a
+      ><a name="304"
+      > </a
+      ><a name="305" href="mini-library.html#291" class="Bound"
+      >I</a
+      ><a name="306"
+      > </a
+      ><a name="307" class="Symbol"
+      >&#8594;</a
+      ><a name="308"
+      > </a
+      ><a name="309" class="PrimitiveType"
+      >Set</a
+      ><a name="312" class="Symbol"
+      >}</a
+      ><a name="313"
+      > </a
+      ><a name="314" class="Symbol"
+      >&#8594;</a
+      ><a name="315"
+      > </a
+      ><a name="316" class="Symbol"
+      >(</a
+      ><a name="317" href="mini-library.html#200" class="Record"
+      >&#931;</a
+      ><a name="318"
+      > </a
+      ><a name="319" class="Symbol"
+      >\(</a
+      ><a name="321" href="mini-library.html#321" class="Bound"
+      >i</a
+      ><a name="322"
+      > </a
+      ><a name="323" class="Symbol"
+      >:</a
+      ><a name="324"
+      > </a
+      ><a name="325" href="mini-library.html#291" class="Bound"
+      >I</a
+      ><a name="326" class="Symbol"
+      >)</a
+      ><a name="327"
+      > </a
+      ><a name="328" class="Symbol"
+      >&#8594;</a
+      ><a name="329"
+      > </a
+      ><a name="330" href="mini-library.html#301" class="Bound"
+      >X</a
+      ><a name="331"
+      > </a
+      ><a name="332" href="mini-library.html#321" class="Bound"
+      >i</a
+      ><a name="333" class="Symbol"
+      >)</a
+      ><a name="334"
+      > </a
+      ><a name="335" class="Symbol"
+      >&#8594;</a
+      ><a name="336"
+      > </a
+      ><a name="337" href="mini-library.html#291" class="Bound"
+      >I</a
+      ><a name="338"
+      >
+</a
+      ><a name="339" href="mini-library.html#285" class="Function"
+      >&#960;&#8320;</a
+      ><a name="341" class="Symbol"
+      >(</a
+      ><a name="342" href="mini-library.html#342" class="Bound"
+      >i</a
+      ><a name="343"
+      > </a
+      ><a name="344" href="mini-library.html#252" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="345"
+      > </a
+      ><a name="346" href="mini-library.html#346" class="Bound"
+      >x</a
+      ><a name="347" class="Symbol"
+      >)</a
+      ><a name="348"
+      > </a
+      ><a name="349" class="Symbol"
+      >=</a
+      ><a name="350"
+      > </a
+      ><a name="351" href="mini-library.html#342" class="Bound"
+      >i</a
+      ><a name="352"
+      >
+
+</a
+      ><a name="354" href="mini-library.html#354" class="Function"
+      >&#960;&#8321;</a
+      ><a name="356"
+      > </a
+      ><a name="357" class="Symbol"
+      >:</a
+      ><a name="358"
+      > </a
+      ><a name="359" class="Symbol"
+      >{</a
+      ><a name="360" href="mini-library.html#360" class="Bound"
+      >I</a
+      ><a name="361"
+      > </a
+      ><a name="362" class="Symbol"
+      >:</a
+      ><a name="363"
+      > </a
+      ><a name="364" class="PrimitiveType"
+      >Set</a
+      ><a name="367" class="Symbol"
+      >}</a
+      ><a name="368"
+      > </a
+      ><a name="369" class="Symbol"
+      >{</a
+      ><a name="370" href="mini-library.html#370" class="Bound"
+      >X</a
+      ><a name="371"
+      > </a
+      ><a name="372" class="Symbol"
+      >:</a
+      ><a name="373"
+      > </a
+      ><a name="374" href="mini-library.html#360" class="Bound"
+      >I</a
+      ><a name="375"
+      > </a
+      ><a name="376" class="Symbol"
+      >&#8594;</a
+      ><a name="377"
+      > </a
+      ><a name="378" class="PrimitiveType"
+      >Set</a
+      ><a name="381" class="Symbol"
+      >}</a
+      ><a name="382"
+      > </a
+      ><a name="383" class="Symbol"
+      >&#8594;</a
+      ><a name="384"
+      > </a
+      ><a name="385" class="Symbol"
+      >(</a
+      ><a name="386" href="mini-library.html#386" class="Bound"
+      >pair</a
+      ><a name="390"
+      > </a
+      ><a name="391" class="Symbol"
+      >:</a
+      ><a name="392"
+      > </a
+      ><a name="393" href="mini-library.html#200" class="Record"
+      >&#931;</a
+      ><a name="394"
+      > </a
+      ><a name="395" class="Symbol"
+      >\(</a
+      ><a name="397" href="mini-library.html#397" class="Bound"
+      >i</a
+      ><a name="398"
+      > </a
+      ><a name="399" class="Symbol"
+      >:</a
+      ><a name="400"
+      > </a
+      ><a name="401" href="mini-library.html#360" class="Bound"
+      >I</a
+      ><a name="402" class="Symbol"
+      >)</a
+      ><a name="403"
+      > </a
+      ><a name="404" class="Symbol"
+      >&#8594;</a
+      ><a name="405"
+      > </a
+      ><a name="406" href="mini-library.html#370" class="Bound"
+      >X</a
+      ><a name="407"
+      > </a
+      ><a name="408" href="mini-library.html#397" class="Bound"
+      >i</a
+      ><a name="409" class="Symbol"
+      >)</a
+      ><a name="410"
+      > </a
+      ><a name="411" class="Symbol"
+      >&#8594;</a
+      ><a name="412"
+      > </a
+      ><a name="413" href="mini-library.html#370" class="Bound"
+      >X</a
+      ><a name="414" class="Symbol"
+      >(</a
+      ><a name="415" href="mini-library.html#285" class="Function"
+      >&#960;&#8320;</a
+      ><a name="417"
+      > </a
+      ><a name="418" href="mini-library.html#386" class="Bound"
+      >pair</a
+      ><a name="422" class="Symbol"
+      >)</a
+      ><a name="423"
+      >
+</a
+      ><a name="424" href="mini-library.html#354" class="Function"
+      >&#960;&#8321;</a
+      ><a name="426" class="Symbol"
+      >(</a
+      ><a name="427" href="mini-library.html#427" class="Bound"
+      >i</a
+      ><a name="428"
+      > </a
+      ><a name="429" href="mini-library.html#252" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="430"
+      > </a
+      ><a name="431" href="mini-library.html#431" class="Bound"
+      >x</a
+      ><a name="432" class="Symbol"
+      >)</a
+      ><a name="433"
+      > </a
+      ><a name="434" class="Symbol"
+      >=</a
+      ><a name="435"
+      > </a
+      ><a name="436" href="mini-library.html#431" class="Bound"
+      >x</a
+      ><a name="437"
+      >
+
+</a
+      ><a name="439" href="mini-library.html#439" class="Function Operator"
+      >_&#215;_</a
+      ><a name="442"
+      > </a
+      ><a name="443" class="Symbol"
+      >:</a
+      ><a name="444"
+      > </a
+      ><a name="445" class="PrimitiveType"
+      >Set</a
+      ><a name="448"
+      > </a
+      ><a name="449" class="Symbol"
+      >&#8594;</a
+      ><a name="450"
+      > </a
+      ><a name="451" class="PrimitiveType"
+      >Set</a
+      ><a name="454"
+      > </a
+      ><a name="455" class="Symbol"
+      >&#8594;</a
+      ><a name="456"
+      > </a
+      ><a name="457" class="PrimitiveType"
+      >Set</a
+      ><a name="460"
+      >
+</a
+      ><a name="461" href="mini-library.html#461" class="Bound"
+      >X</a
+      ><a name="462"
+      > </a
+      ><a name="463" href="mini-library.html#439" class="Function Operator"
+      >&#215;</a
+      ><a name="464"
+      > </a
+      ><a name="465" href="mini-library.html#465" class="Bound"
+      >Y</a
+      ><a name="466"
+      > </a
+      ><a name="467" class="Symbol"
+      >=</a
+      ><a name="468"
+      > </a
+      ><a name="469" href="mini-library.html#200" class="Record"
+      >&#931;</a
+      ><a name="470"
+      > </a
+      ><a name="471" class="Symbol"
+      >\(</a
+      ><a name="473" href="mini-library.html#473" class="Bound"
+      >x</a
+      ><a name="474"
+      > </a
+      ><a name="475" class="Symbol"
+      >:</a
+      ><a name="476"
+      > </a
+      ><a name="477" href="mini-library.html#461" class="Bound"
+      >X</a
+      ><a name="478" class="Symbol"
+      >)</a
+      ><a name="479"
+      > </a
+      ><a name="480" class="Symbol"
+      >&#8594;</a
+      ><a name="481"
+      > </a
+      ><a name="482" href="mini-library.html#465" class="Bound"
+      >Y</a
+      ><a name="483"
+      >
+
+</a
+      ><a name="485" class="Keyword"
+      >infixl</a
+      ><a name="491"
+      > </a
+      ><a name="492" class="Number"
+      >5</a
+      ><a name="493"
+      > _,_
+</a
+      ><a name="499" class="Keyword"
+      >infixl</a
+      ><a name="505"
+      > </a
+      ><a name="506" class="Number"
+      >5</a
+      ><a name="507"
+      > _&#215;_
+</a
+      ><a name="513" class="Keyword"
+      >infixl</a
+      ><a name="519"
+      > </a
+      ><a name="520" class="Number"
+      >5</a
+      ><a name="521"
+      > _&#8660;_
+
+</a
+      ><a name="527" href="mini-library.html#527" class="Function Operator"
+      >_&#8660;_</a
+      ><a name="530"
+      > </a
+      ><a name="531" class="Symbol"
+      >:</a
+      ><a name="532"
+      > </a
+      ><a name="533" class="PrimitiveType"
+      >Set</a
+      ><a name="536"
+      > </a
+      ><a name="537" class="Symbol"
+      >&#8594;</a
+      ><a name="538"
+      > </a
+      ><a name="539" class="PrimitiveType"
+      >Set</a
+      ><a name="542"
+      > </a
+      ><a name="543" class="Symbol"
+      >&#8594;</a
+      ><a name="544"
+      > </a
+      ><a name="545" class="PrimitiveType"
+      >Set</a
+      ><a name="548"
+      >
+</a
+      ><a name="549" href="mini-library.html#549" class="Bound"
+      >X</a
+      ><a name="550"
+      > </a
+      ><a name="551" href="mini-library.html#527" class="Function Operator"
+      >&#8660;</a
+      ><a name="552"
+      > </a
+      ><a name="553" href="mini-library.html#553" class="Bound"
+      >Y</a
+      ><a name="554"
+      > </a
+      ><a name="555" class="Symbol"
+      >=</a
+      ><a name="556"
+      > </a
+      ><a name="557" class="Symbol"
+      >(</a
+      ><a name="558" href="mini-library.html#549" class="Bound"
+      >X</a
+      ><a name="559"
+      > </a
+      ><a name="560" class="Symbol"
+      >&#8594;</a
+      ><a name="561"
+      > </a
+      ><a name="562" href="mini-library.html#553" class="Bound"
+      >Y</a
+      ><a name="563" class="Symbol"
+      >)</a
+      ><a name="564"
+      > </a
+      ><a name="565" href="mini-library.html#439" class="Function Operator"
+      >&#215;</a
+      ><a name="566"
+      > </a
+      ><a name="567" class="Symbol"
+      >(</a
+      ><a name="568" href="mini-library.html#553" class="Bound"
+      >Y</a
+      ><a name="569"
+      > </a
+      ><a name="570" class="Symbol"
+      >&#8594;</a
+      ><a name="571"
+      > </a
+      ><a name="572" href="mini-library.html#549" class="Bound"
+      >X</a
+      ><a name="573" class="Symbol"
+      >)</a
+      ><a name="574"
+      >
+
+</a
+      ><a name="576" class="Keyword"
+      >data</a
+      ><a name="580"
+      > </a
+      ><a name="581" href="mini-library.html#581" class="Datatype"
+      >&#8709;</a
+      ><a name="582"
+      > </a
+      ><a name="583" class="Symbol"
+      >:</a
+      ><a name="584"
+      > </a
+      ><a name="585" class="PrimitiveType"
+      >Set</a
+      ><a name="588"
+      > </a
+      ><a name="589" class="Keyword"
+      >where</a
+      ><a name="594"
+      >
+
+</a
+      ><a name="596" href="mini-library.html#596" class="Function"
+      >&#8709;-elim</a
+      ><a name="602"
+      > </a
+      ><a name="603" class="Symbol"
+      >:</a
+      ><a name="604"
+      > </a
+      ><a name="605" class="Symbol"
+      >{</a
+      ><a name="606" href="mini-library.html#606" class="Bound"
+      >X</a
+      ><a name="607"
+      > </a
+      ><a name="608" class="Symbol"
+      >:</a
+      ><a name="609"
+      > </a
+      ><a name="610" class="PrimitiveType"
+      >Set</a
+      ><a name="613" class="Symbol"
+      >}</a
+      ><a name="614"
+      > </a
+      ><a name="615" class="Symbol"
+      >&#8594;</a
+      ><a name="616"
+      > </a
+      ><a name="617" href="mini-library.html#581" class="Datatype"
+      >&#8709;</a
+      ><a name="618"
+      > </a
+      ><a name="619" class="Symbol"
+      >&#8594;</a
+      ><a name="620"
+      > </a
+      ><a name="621" href="mini-library.html#606" class="Bound"
+      >X</a
+      ><a name="622"
+      >
+</a
+      ><a name="623" href="mini-library.html#596" class="Function"
+      >&#8709;-elim</a
+      ><a name="629"
+      > </a
+      ><a name="630" class="Symbol"
+      >()</a
+      ><a name="632"
+      >
+
+</a
+      ><a name="635" class="Keyword"
+      >data</a
+      ><a name="639"
+      > </a
+      ><a name="640" href="mini-library.html#640" class="Datatype Operator"
+      >_+_</a
+      ><a name="643"
+      > </a
+      ><a name="644" class="Symbol"
+      >(</a
+      ><a name="645" href="mini-library.html#645" class="Bound"
+      >X&#8320;</a
+      ><a name="647"
+      > </a
+      ><a name="648" href="mini-library.html#648" class="Bound"
+      >X&#8321;</a
+      ><a name="650"
+      > </a
+      ><a name="651" class="Symbol"
+      >:</a
+      ><a name="652"
+      > </a
+      ><a name="653" class="PrimitiveType"
+      >Set</a
+      ><a name="656" class="Symbol"
+      >)</a
+      ><a name="657"
+      > </a
+      ><a name="658" class="Symbol"
+      >:</a
+      ><a name="659"
+      > </a
+      ><a name="660" class="PrimitiveType"
+      >Set</a
+      ><a name="663"
+      > </a
+      ><a name="664" class="Keyword"
+      >where</a
+      ><a name="669"
+      >
+ </a
+      ><a name="671" href="mini-library.html#671" class="InductiveConstructor"
+      >in&#8320;</a
+      ><a name="674"
+      > </a
+      ><a name="675" class="Symbol"
+      >:</a
+      ><a name="676"
+      > </a
+      ><a name="677" href="mini-library.html#645" class="Bound"
+      >X&#8320;</a
+      ><a name="679"
+      > </a
+      ><a name="680" class="Symbol"
+      >&#8594;</a
+      ><a name="681"
+      > </a
+      ><a name="682" href="mini-library.html#645" class="Bound"
+      >X&#8320;</a
+      ><a name="684"
+      > </a
+      ><a name="685" href="mini-library.html#640" class="Datatype Operator"
+      >+</a
+      ><a name="686"
+      > </a
+      ><a name="687" href="mini-library.html#648" class="Bound"
+      >X&#8321;</a
+      ><a name="689"
+      >
+ </a
+      ><a name="691" href="mini-library.html#691" class="InductiveConstructor"
+      >in&#8321;</a
+      ><a name="694"
+      > </a
+      ><a name="695" class="Symbol"
+      >:</a
+      ><a name="696"
+      > </a
+      ><a name="697" href="mini-library.html#648" class="Bound"
+      >X&#8321;</a
+      ><a name="699"
+      > </a
+      ><a name="700" class="Symbol"
+      >&#8594;</a
+      ><a name="701"
+      > </a
+      ><a name="702" href="mini-library.html#645" class="Bound"
+      >X&#8320;</a
+      ><a name="704"
+      > </a
+      ><a name="705" href="mini-library.html#640" class="Datatype Operator"
+      >+</a
+      ><a name="706"
+      > </a
+      ><a name="707" href="mini-library.html#648" class="Bound"
+      >X&#8321;</a
+      ><a name="709"
+      >
+
+</a
+      ><a name="711" class="Keyword"
+      >data</a
+      ><a name="715"
+      > </a
+      ><a name="716" href="mini-library.html#716" class="Datatype Operator"
+      >_&#8801;_</a
+      ><a name="719"
+      > </a
+      ><a name="720" class="Symbol"
+      >{</a
+      ><a name="721" href="mini-library.html#721" class="Bound"
+      >X</a
+      ><a name="722"
+      > </a
+      ><a name="723" class="Symbol"
+      >:</a
+      ><a name="724"
+      > </a
+      ><a name="725" class="PrimitiveType"
+      >Set</a
+      ><a name="728" class="Symbol"
+      >}</a
+      ><a name="729"
+      > </a
+      ><a name="730" class="Symbol"
+      >:</a
+      ><a name="731"
+      > </a
+      ><a name="732" href="mini-library.html#721" class="Bound"
+      >X</a
+      ><a name="733"
+      > </a
+      ><a name="734" class="Symbol"
+      >&#8594;</a
+      ><a name="735"
+      > </a
+      ><a name="736" href="mini-library.html#721" class="Bound"
+      >X</a
+      ><a name="737"
+      > </a
+      ><a name="738" class="Symbol"
+      >&#8594;</a
+      ><a name="739"
+      > </a
+      ><a name="740" class="PrimitiveType"
+      >Set</a
+      ><a name="743"
+      > </a
+      ><a name="744" class="Keyword"
+      >where</a
+      ><a name="749"
+      >
+  </a
+      ><a name="752" href="mini-library.html#752" class="InductiveConstructor"
+      >refl</a
+      ><a name="756"
+      > </a
+      ><a name="757" class="Symbol"
+      >:</a
+      ><a name="758"
+      > </a
+      ><a name="759" class="Symbol"
+      >{</a
+      ><a name="760" href="mini-library.html#760" class="Bound"
+      >x</a
+      ><a name="761"
+      > </a
+      ><a name="762" class="Symbol"
+      >:</a
+      ><a name="763"
+      > </a
+      ><a name="764" href="mini-library.html#721" class="Bound"
+      >X</a
+      ><a name="765" class="Symbol"
+      >}</a
+      ><a name="766"
+      > </a
+      ><a name="767" class="Symbol"
+      >&#8594;</a
+      ><a name="768"
+      > </a
+      ><a name="769" href="mini-library.html#760" class="Bound"
+      >x</a
+      ><a name="770"
+      > </a
+      ><a name="771" href="mini-library.html#716" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="772"
+      > </a
+      ><a name="773" href="mini-library.html#760" class="Bound"
+      >x</a
+      ><a name="774"
+      >
+
+</a
+      ><a name="776" href="mini-library.html#776" class="Function"
+      >J</a
+      ><a name="777"
+      > </a
+      ><a name="778" class="Symbol"
+      >:</a
+      ><a name="779"
+      > </a
+      ><a name="780" class="Symbol"
+      >{</a
+      ><a name="781" href="mini-library.html#781" class="Bound"
+      >X</a
+      ><a name="782"
+      > </a
+      ><a name="783" class="Symbol"
+      >:</a
+      ><a name="784"
+      > </a
+      ><a name="785" class="PrimitiveType"
+      >Set</a
+      ><a name="788" class="Symbol"
+      >}</a
+      ><a name="789"
+      > </a
+      ><a name="790" class="Symbol"
+      >(</a
+      ><a name="791" href="mini-library.html#791" class="Bound"
+      >A</a
+      ><a name="792"
+      > </a
+      ><a name="793" class="Symbol"
+      >:</a
+      ><a name="794"
+      > </a
+      ><a name="795" class="Symbol"
+      >{</a
+      ><a name="796" href="mini-library.html#796" class="Bound"
+      >x</a
+      ><a name="797"
+      > </a
+      ><a name="798" href="mini-library.html#798" class="Bound"
+      >y</a
+      ><a name="799"
+      > </a
+      ><a name="800" class="Symbol"
+      >:</a
+      ><a name="801"
+      > </a
+      ><a name="802" href="mini-library.html#781" class="Bound"
+      >X</a
+      ><a name="803" class="Symbol"
+      >}</a
+      ><a name="804"
+      > </a
+      ><a name="805" class="Symbol"
+      >&#8594;</a
+      ><a name="806"
+      > </a
+      ><a name="807" href="mini-library.html#796" class="Bound"
+      >x</a
+      ><a name="808"
+      > </a
+      ><a name="809" href="mini-library.html#716" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="810"
+      > </a
+      ><a name="811" href="mini-library.html#798" class="Bound"
+      >y</a
+      ><a name="812"
+      > </a
+      ><a name="813" class="Symbol"
+      >&#8594;</a
+      ><a name="814"
+      > </a
+      ><a name="815" class="PrimitiveType"
+      >Set</a
+      ><a name="818" class="Symbol"
+      >)</a
+      ><a name="819"
+      >
+   </a
+      ><a name="823" class="Symbol"
+      >&#8594;</a
+      ><a name="824"
+      > </a
+      ><a name="825" class="Symbol"
+      >({</a
+      ><a name="827" href="mini-library.html#827" class="Bound"
+      >x</a
+      ><a name="828"
+      > </a
+      ><a name="829" class="Symbol"
+      >:</a
+      ><a name="830"
+      > </a
+      ><a name="831" href="mini-library.html#781" class="Bound"
+      >X</a
+      ><a name="832" class="Symbol"
+      >}</a
+      ><a name="833"
+      > </a
+      ><a name="834" class="Symbol"
+      >&#8594;</a
+      ><a name="835"
+      > </a
+      ><a name="836" href="mini-library.html#791" class="Bound"
+      >A</a
+      ><a name="837"
+      > </a
+      ><a name="838" class="Symbol"
+      >(</a
+      ><a name="839" href="mini-library.html#752" class="InductiveConstructor"
+      >refl</a
+      ><a name="843"
+      > </a
+      ><a name="844" class="Symbol"
+      >{</a
+      ><a name="845" href="mini-library.html#781" class="Bound"
+      >X</a
+      ><a name="846" class="Symbol"
+      >}</a
+      ><a name="847"
+      > </a
+      ><a name="848" class="Symbol"
+      >{</a
+      ><a name="849" href="mini-library.html#827" class="Bound"
+      >x</a
+      ><a name="850" class="Symbol"
+      >}))</a
+      ><a name="853"
+      > </a
+      ><a name="854" class="Symbol"
+      >&#8594;</a
+      ><a name="855"
+      > </a
+      ><a name="856" class="Symbol"
+      >{</a
+      ><a name="857" href="mini-library.html#857" class="Bound"
+      >x</a
+      ><a name="858"
+      > </a
+      ><a name="859" href="mini-library.html#859" class="Bound"
+      >y</a
+      ><a name="860"
+      > </a
+      ><a name="861" class="Symbol"
+      >:</a
+      ><a name="862"
+      > </a
+      ><a name="863" href="mini-library.html#781" class="Bound"
+      >X</a
+      ><a name="864" class="Symbol"
+      >}</a
+      ><a name="865"
+      > </a
+      ><a name="866" class="Symbol"
+      >(</a
+      ><a name="867" href="mini-library.html#867" class="Bound"
+      >p</a
+      ><a name="868"
+      > </a
+      ><a name="869" class="Symbol"
+      >:</a
+      ><a name="870"
+      > </a
+      ><a name="871" href="mini-library.html#857" class="Bound"
+      >x</a
+      ><a name="872"
+      > </a
+      ><a name="873" href="mini-library.html#716" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="874"
+      > </a
+      ><a name="875" href="mini-library.html#859" class="Bound"
+      >y</a
+      ><a name="876" class="Symbol"
+      >)</a
+      ><a name="877"
+      > </a
+      ><a name="878" class="Symbol"
+      >&#8594;</a
+      ><a name="879"
+      > </a
+      ><a name="880" href="mini-library.html#791" class="Bound"
+      >A</a
+      ><a name="881"
+      > </a
+      ><a name="882" href="mini-library.html#867" class="Bound"
+      >p</a
+      ><a name="883"
+      >
+</a
+      ><a name="884" href="mini-library.html#776" class="Function"
+      >J</a
+      ><a name="885"
+      > </a
+      ><a name="886" href="mini-library.html#886" class="Bound"
+      >A</a
+      ><a name="887"
+      > </a
+      ><a name="888" href="mini-library.html#888" class="Bound"
+      >&#966;</a
+      ><a name="889"
+      > </a
+      ><a name="890" href="mini-library.html#752" class="InductiveConstructor"
+      >refl</a
+      ><a name="894"
+      > </a
+      ><a name="895" class="Symbol"
+      >=</a
+      ><a name="896"
+      > </a
+      ><a name="897" href="mini-library.html#888" class="Bound"
+      >&#966;</a
+      ><a name="898"
+      >
+
+\end{code}
+
+</a
+      ><a name="912" class="Comment"
+      >The version of J introduced by Paulin-Mohring can be defined using J,</a
+      ><a name="981"
+      >
+</a
+      ><a name="982" class="Comment"
+      >as is well known, but we define using pattern matching for simplicity:</a
+      ><a name="1052"
+      >
+
+\begin{code}
+
+</a
+      ><a name="1069" href="mini-library.html#1069" class="Function"
+      >J'</a
+      ><a name="1071"
+      > </a
+      ><a name="1072" class="Symbol"
+      >:</a
+      ><a name="1073"
+      > </a
+      ><a name="1074" class="Symbol"
+      >{</a
+      ><a name="1075" href="mini-library.html#1075" class="Bound"
+      >X</a
+      ><a name="1076"
+      > </a
+      ><a name="1077" class="Symbol"
+      >:</a
+      ><a name="1078"
+      > </a
+      ><a name="1079" class="PrimitiveType"
+      >Set</a
+      ><a name="1082" class="Symbol"
+      >}</a
+      ><a name="1083"
+      > </a
+      ><a name="1084" class="Symbol"
+      >(</a
+      ><a name="1085" href="mini-library.html#1085" class="Bound"
+      >x</a
+      ><a name="1086"
+      > </a
+      ><a name="1087" class="Symbol"
+      >:</a
+      ><a name="1088"
+      > </a
+      ><a name="1089" href="mini-library.html#1075" class="Bound"
+      >X</a
+      ><a name="1090" class="Symbol"
+      >)</a
+      ><a name="1091"
+      > </a
+      ><a name="1092" class="Symbol"
+      >&#8594;</a
+      ><a name="1093"
+      > </a
+      ><a name="1094" class="Symbol"
+      >(</a
+      ><a name="1095" href="mini-library.html#1095" class="Bound"
+      >A</a
+      ><a name="1096"
+      > </a
+      ><a name="1097" class="Symbol"
+      >:</a
+      ><a name="1098"
+      > </a
+      ><a name="1099" class="Symbol"
+      >{</a
+      ><a name="1100" href="mini-library.html#1100" class="Bound"
+      >y</a
+      ><a name="1101"
+      > </a
+      ><a name="1102" class="Symbol"
+      >:</a
+      ><a name="1103"
+      > </a
+      ><a name="1104" href="mini-library.html#1075" class="Bound"
+      >X</a
+      ><a name="1105" class="Symbol"
+      >}</a
+      ><a name="1106"
+      > </a
+      ><a name="1107" class="Symbol"
+      >&#8594;</a
+      ><a name="1108"
+      > </a
+      ><a name="1109" href="mini-library.html#1085" class="Bound"
+      >x</a
+      ><a name="1110"
+      > </a
+      ><a name="1111" href="mini-library.html#716" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="1112"
+      > </a
+      ><a name="1113" href="mini-library.html#1100" class="Bound"
+      >y</a
+      ><a name="1114"
+      > </a
+      ><a name="1115" class="Symbol"
+      >&#8594;</a
+      ><a name="1116"
+      > </a
+      ><a name="1117" class="PrimitiveType"
+      >Set</a
+      ><a name="1120" class="Symbol"
+      >)</a
+      ><a name="1121"
+      >
+   </a
+      ><a name="1125" class="Symbol"
+      >&#8594;</a
+      ><a name="1126"
+      > </a
+      ><a name="1127" href="mini-library.html#1095" class="Bound"
+      >A</a
+      ><a name="1128"
+      > </a
+      ><a name="1129" class="Symbol"
+      >(</a
+      ><a name="1130" href="mini-library.html#752" class="InductiveConstructor"
+      >refl</a
+      ><a name="1134"
+      > </a
+      ><a name="1135" class="Symbol"
+      >{</a
+      ><a name="1136" href="mini-library.html#1075" class="Bound"
+      >X</a
+      ><a name="1137" class="Symbol"
+      >}</a
+      ><a name="1138"
+      > </a
+      ><a name="1139" class="Symbol"
+      >{</a
+      ><a name="1140" href="mini-library.html#1085" class="Bound"
+      >x</a
+      ><a name="1141" class="Symbol"
+      >})</a
+      ><a name="1143"
+      > </a
+      ><a name="1144" class="Symbol"
+      >&#8594;</a
+      ><a name="1145"
+      > </a
+      ><a name="1146" class="Symbol"
+      >{</a
+      ><a name="1147" href="mini-library.html#1147" class="Bound"
+      >y</a
+      ><a name="1148"
+      > </a
+      ><a name="1149" class="Symbol"
+      >:</a
+      ><a name="1150"
+      > </a
+      ><a name="1151" href="mini-library.html#1075" class="Bound"
+      >X</a
+      ><a name="1152" class="Symbol"
+      >}</a
+      ><a name="1153"
+      > </a
+      ><a name="1154" class="Symbol"
+      >(</a
+      ><a name="1155" href="mini-library.html#1155" class="Bound"
+      >p</a
+      ><a name="1156"
+      > </a
+      ><a name="1157" class="Symbol"
+      >:</a
+      ><a name="1158"
+      > </a
+      ><a name="1159" href="mini-library.html#1085" class="Bound"
+      >x</a
+      ><a name="1160"
+      > </a
+      ><a name="1161" href="mini-library.html#716" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="1162"
+      > </a
+      ><a name="1163" href="mini-library.html#1147" class="Bound"
+      >y</a
+      ><a name="1164" class="Symbol"
+      >)</a
+      ><a name="1165"
+      > </a
+      ><a name="1166" class="Symbol"
+      >&#8594;</a
+      ><a name="1167"
+      > </a
+      ><a name="1168" href="mini-library.html#1095" class="Bound"
+      >A</a
+      ><a name="1169"
+      > </a
+      ><a name="1170" href="mini-library.html#1155" class="Bound"
+      >p</a
+      ><a name="1171"
+      >
+</a
+      ><a name="1172" href="mini-library.html#1069" class="Function"
+      >J'</a
+      ><a name="1174"
+      > </a
+      ><a name="1175" href="mini-library.html#1175" class="Bound"
+      >x</a
+      ><a name="1176"
+      > </a
+      ><a name="1177" href="mini-library.html#1177" class="Bound"
+      >A</a
+      ><a name="1178"
+      > </a
+      ><a name="1179" href="mini-library.html#1179" class="Bound"
+      >&#966;</a
+      ><a name="1180"
+      > </a
+      ><a name="1181" href="mini-library.html#752" class="InductiveConstructor"
+      >refl</a
+      ><a name="1185"
+      > </a
+      ><a name="1186" class="Symbol"
+      >=</a
+      ><a name="1187"
+      > </a
+      ><a name="1188" href="mini-library.html#1179" class="Bound"
+      >&#966;</a
+      ><a name="1189"
+      >
+
+</a
+      ><a name="1191" href="mini-library.html#1191" class="Function"
+      >weak-J</a
+      ><a name="1197"
+      > </a
+      ><a name="1198" class="Symbol"
+      >:</a
+      ><a name="1199"
+      > </a
+      ><a name="1200" class="Symbol"
+      >{</a
+      ><a name="1201" href="mini-library.html#1201" class="Bound"
+      >X</a
+      ><a name="1202"
+      > </a
+      ><a name="1203" class="Symbol"
+      >:</a
+      ><a name="1204"
+      > </a
+      ><a name="1205" class="PrimitiveType"
+      >Set</a
+      ><a name="1208" class="Symbol"
+      >}</a
+      ><a name="1209"
+      > </a
+      ><a name="1210" class="Symbol"
+      >(</a
+      ><a name="1211" href="mini-library.html#1211" class="Bound"
+      >B</a
+      ><a name="1212"
+      > </a
+      ><a name="1213" class="Symbol"
+      >:</a
+      ><a name="1214"
+      > </a
+      ><a name="1215" class="Symbol"
+      >(</a
+      ><a name="1216" href="mini-library.html#1216" class="Bound"
+      >x</a
+      ><a name="1217"
+      > </a
+      ><a name="1218" href="mini-library.html#1218" class="Bound"
+      >y</a
+      ><a name="1219"
+      > </a
+      ><a name="1220" class="Symbol"
+      >:</a
+      ><a name="1221"
+      > </a
+      ><a name="1222" href="mini-library.html#1201" class="Bound"
+      >X</a
+      ><a name="1223" class="Symbol"
+      >)</a
+      ><a name="1224"
+      > </a
+      ><a name="1225" class="Symbol"
+      >&#8594;</a
+      ><a name="1226"
+      > </a
+      ><a name="1227" class="PrimitiveType"
+      >Set</a
+      ><a name="1230" class="Symbol"
+      >)</a
+      ><a name="1231"
+      >
+ </a
+      ><a name="1234" class="Symbol"
+      >&#8594;</a
+      ><a name="1235"
+      > </a
+      ><a name="1236" class="Symbol"
+      >({</a
+      ><a name="1238" href="mini-library.html#1238" class="Bound"
+      >x</a
+      ><a name="1239"
+      > </a
+      ><a name="1240" class="Symbol"
+      >:</a
+      ><a name="1241"
+      > </a
+      ><a name="1242" href="mini-library.html#1201" class="Bound"
+      >X</a
+      ><a name="1243" class="Symbol"
+      >}</a
+      ><a name="1244"
+      > </a
+      ><a name="1245" class="Symbol"
+      >&#8594;</a
+      ><a name="1246"
+      > </a
+      ><a name="1247" href="mini-library.html#1211" class="Bound"
+      >B</a
+      ><a name="1248"
+      > </a
+      ><a name="1249" href="mini-library.html#1238" class="Bound"
+      >x</a
+      ><a name="1250"
+      > </a
+      ><a name="1251" href="mini-library.html#1238" class="Bound"
+      >x</a
+      ><a name="1252" class="Symbol"
+      >)</a
+      ><a name="1253"
+      > </a
+      ><a name="1254" class="Symbol"
+      >&#8594;</a
+      ><a name="1255"
+      > </a
+      ><a name="1256" class="Symbol"
+      >{</a
+      ><a name="1257" href="mini-library.html#1257" class="Bound"
+      >x</a
+      ><a name="1258"
+      > </a
+      ><a name="1259" href="mini-library.html#1259" class="Bound"
+      >y</a
+      ><a name="1260"
+      > </a
+      ><a name="1261" class="Symbol"
+      >:</a
+      ><a name="1262"
+      > </a
+      ><a name="1263" href="mini-library.html#1201" class="Bound"
+      >X</a
+      ><a name="1264" class="Symbol"
+      >}</a
+      ><a name="1265"
+      > </a
+      ><a name="1266" class="Symbol"
+      >&#8594;</a
+      ><a name="1267"
+      > </a
+      ><a name="1268" href="mini-library.html#1257" class="Bound"
+      >x</a
+      ><a name="1269"
+      > </a
+      ><a name="1270" href="mini-library.html#716" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="1271"
+      > </a
+      ><a name="1272" href="mini-library.html#1259" class="Bound"
+      >y</a
+      ><a name="1273"
+      > </a
+      ><a name="1274" class="Symbol"
+      >&#8594;</a
+      ><a name="1275"
+      > </a
+      ><a name="1276" href="mini-library.html#1211" class="Bound"
+      >B</a
+      ><a name="1277"
+      > </a
+      ><a name="1278" href="mini-library.html#1257" class="Bound"
+      >x</a
+      ><a name="1279"
+      > </a
+      ><a name="1280" href="mini-library.html#1259" class="Bound"
+      >y</a
+      ><a name="1281"
+      >
+</a
+      ><a name="1282" href="mini-library.html#1191" class="Function"
+      >weak-J</a
+      ><a name="1288"
+      > </a
+      ><a name="1289" class="Symbol"
+      >{</a
+      ><a name="1290" href="mini-library.html#1290" class="Bound"
+      >X</a
+      ><a name="1291" class="Symbol"
+      >}</a
+      ><a name="1292"
+      > </a
+      ><a name="1293" href="mini-library.html#1293" class="Bound"
+      >B</a
+      ><a name="1294"
+      > </a
+      ><a name="1295" class="Symbol"
+      >=</a
+      ><a name="1296"
+      > </a
+      ><a name="1297" href="mini-library.html#776" class="Function"
+      >J</a
+      ><a name="1298"
+      > </a
+      ><a name="1299" href="mini-library.html#1310" class="Function"
+      >A</a
+      ><a name="1300"
+      >
+ </a
+      ><a name="1302" class="Keyword"
+      >where</a
+      ><a name="1307"
+      >
+  </a
+      ><a name="1310" href="mini-library.html#1310" class="Function"
+      >A</a
+      ><a name="1311"
+      > </a
+      ><a name="1312" class="Symbol"
+      >:</a
+      ><a name="1313"
+      > </a
+      ><a name="1314" class="Symbol"
+      >{</a
+      ><a name="1315" href="mini-library.html#1315" class="Bound"
+      >x</a
+      ><a name="1316"
+      > </a
+      ><a name="1317" href="mini-library.html#1317" class="Bound"
+      >y</a
+      ><a name="1318"
+      > </a
+      ><a name="1319" class="Symbol"
+      >:</a
+      ><a name="1320"
+      > </a
+      ><a name="1321" href="mini-library.html#1290" class="Bound"
+      >X</a
+      ><a name="1322" class="Symbol"
+      >}</a
+      ><a name="1323"
+      > </a
+      ><a name="1324" class="Symbol"
+      >&#8594;</a
+      ><a name="1325"
+      > </a
+      ><a name="1326" href="mini-library.html#1315" class="Bound"
+      >x</a
+      ><a name="1327"
+      > </a
+      ><a name="1328" href="mini-library.html#716" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="1329"
+      > </a
+      ><a name="1330" href="mini-library.html#1317" class="Bound"
+      >y</a
+      ><a name="1331"
+      > </a
+      ><a name="1332" class="Symbol"
+      >&#8594;</a
+      ><a name="1333"
+      > </a
+      ><a name="1334" class="PrimitiveType"
+      >Set</a
+      ><a name="1337"
+      >
+  </a
+      ><a name="1340" href="mini-library.html#1310" class="Function"
+      >A</a
+      ><a name="1341"
+      > </a
+      ><a name="1342" class="Symbol"
+      >{</a
+      ><a name="1343" href="mini-library.html#1343" class="Bound"
+      >x</a
+      ><a name="1344" class="Symbol"
+      >}</a
+      ><a name="1345"
+      > </a
+      ><a name="1346" class="Symbol"
+      >{</a
+      ><a name="1347" href="mini-library.html#1347" class="Bound"
+      >y</a
+      ><a name="1348" class="Symbol"
+      >}</a
+      ><a name="1349"
+      > </a
+      ><a name="1350" href="mini-library.html#1350" class="Bound"
+      >p</a
+      ><a name="1351"
+      > </a
+      ><a name="1352" class="Symbol"
+      >=</a
+      ><a name="1353"
+      > </a
+      ><a name="1354" href="mini-library.html#1293" class="Bound"
+      >B</a
+      ><a name="1355"
+      > </a
+      ><a name="1356" href="mini-library.html#1343" class="Bound"
+      >x</a
+      ><a name="1357"
+      > </a
+      ><a name="1358" href="mini-library.html#1347" class="Bound"
+      >y</a
+      ><a name="1359"
+      >
+
+</a
+      ><a name="1361" href="mini-library.html#1361" class="Function"
+      >trans</a
+      ><a name="1366"
+      > </a
+      ><a name="1367" class="Symbol"
+      >:</a
+      ><a name="1368"
+      > </a
+      ><a name="1369" class="Symbol"
+      >{</a
+      ><a name="1370" href="mini-library.html#1370" class="Bound"
+      >X</a
+      ><a name="1371"
+      > </a
+      ><a name="1372" class="Symbol"
+      >:</a
+      ><a name="1373"
+      > </a
+      ><a name="1374" class="PrimitiveType"
+      >Set</a
+      ><a name="1377" class="Symbol"
+      >}</a
+      ><a name="1378"
+      > </a
+      ><a name="1379" class="Symbol"
+      >&#8594;</a
+      ><a name="1380"
+      > </a
+      ><a name="1381" class="Symbol"
+      >{</a
+      ><a name="1382" href="mini-library.html#1382" class="Bound"
+      >x</a
+      ><a name="1383"
+      > </a
+      ><a name="1384" href="mini-library.html#1384" class="Bound"
+      >y</a
+      ><a name="1385"
+      > </a
+      ><a name="1386" href="mini-library.html#1386" class="Bound"
+      >z</a
+      ><a name="1387"
+      > </a
+      ><a name="1388" class="Symbol"
+      >:</a
+      ><a name="1389"
+      > </a
+      ><a name="1390" href="mini-library.html#1370" class="Bound"
+      >X</a
+      ><a name="1391" class="Symbol"
+      >}</a
+      ><a name="1392"
+      > </a
+      ><a name="1393" class="Symbol"
+      >&#8594;</a
+      ><a name="1394"
+      > </a
+      ><a name="1395" href="mini-library.html#1382" class="Bound"
+      >x</a
+      ><a name="1396"
+      > </a
+      ><a name="1397" href="mini-library.html#716" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="1398"
+      > </a
+      ><a name="1399" href="mini-library.html#1384" class="Bound"
+      >y</a
+      ><a name="1400"
+      > </a
+      ><a name="1401" class="Symbol"
+      >&#8594;</a
+      ><a name="1402"
+      > </a
+      ><a name="1403" href="mini-library.html#1384" class="Bound"
+      >y</a
+      ><a name="1404"
+      > </a
+      ><a name="1405" href="mini-library.html#716" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="1406"
+      > </a
+      ><a name="1407" href="mini-library.html#1386" class="Bound"
+      >z</a
+      ><a name="1408"
+      > </a
+      ><a name="1409" class="Symbol"
+      >&#8594;</a
+      ><a name="1410"
+      > </a
+      ><a name="1411" href="mini-library.html#1382" class="Bound"
+      >x</a
+      ><a name="1412"
+      > </a
+      ><a name="1413" href="mini-library.html#716" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="1414"
+      > </a
+      ><a name="1415" href="mini-library.html#1386" class="Bound"
+      >z</a
+      ><a name="1416"
+      >
+</a
+      ><a name="1417" href="mini-library.html#1361" class="Function"
+      >trans</a
+      ><a name="1422"
+      > </a
+      ><a name="1423" class="Symbol"
+      >{</a
+      ><a name="1424" href="mini-library.html#1424" class="Bound"
+      >X</a
+      ><a name="1425" class="Symbol"
+      >}</a
+      ><a name="1426"
+      > </a
+      ><a name="1427" class="Symbol"
+      >{</a
+      ><a name="1428" href="mini-library.html#1428" class="Bound"
+      >x</a
+      ><a name="1429" class="Symbol"
+      >}</a
+      ><a name="1430"
+      > </a
+      ><a name="1431" class="Symbol"
+      >{</a
+      ><a name="1432" href="mini-library.html#1432" class="Bound"
+      >y</a
+      ><a name="1433" class="Symbol"
+      >}</a
+      ><a name="1434"
+      > </a
+      ><a name="1435" class="Symbol"
+      >{</a
+      ><a name="1436" href="mini-library.html#1436" class="Bound"
+      >z</a
+      ><a name="1437" class="Symbol"
+      >}</a
+      ><a name="1438"
+      > </a
+      ><a name="1439" href="mini-library.html#1439" class="Bound"
+      >r</a
+      ><a name="1440"
+      > </a
+      ><a name="1441" class="Symbol"
+      >=</a
+      ><a name="1442"
+      > </a
+      ><a name="1443" href="mini-library.html#1191" class="Function"
+      >weak-J</a
+      ><a name="1449"
+      > </a
+      ><a name="1450" class="Symbol"
+      >(&#955;</a
+      ><a name="1452"
+      > </a
+      ><a name="1453" href="mini-library.html#1453" class="Bound"
+      >x</a
+      ><a name="1454"
+      > </a
+      ><a name="1455" href="mini-library.html#1455" class="Bound"
+      >y</a
+      ><a name="1456"
+      > </a
+      ><a name="1457" class="Symbol"
+      >&#8594;</a
+      ><a name="1458"
+      > </a
+      ><a name="1459" class="Symbol"
+      >(</a
+      ><a name="1460" href="mini-library.html#1460" class="Bound"
+      >z</a
+      ><a name="1461"
+      > </a
+      ><a name="1462" class="Symbol"
+      >:</a
+      ><a name="1463"
+      > </a
+      ><a name="1464" href="mini-library.html#1424" class="Bound"
+      >X</a
+      ><a name="1465" class="Symbol"
+      >)</a
+      ><a name="1466"
+      > </a
+      ><a name="1467" class="Symbol"
+      >&#8594;</a
+      ><a name="1468"
+      > </a
+      ><a name="1469" href="mini-library.html#1455" class="Bound"
+      >y</a
+      ><a name="1470"
+      > </a
+      ><a name="1471" href="mini-library.html#716" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="1472"
+      > </a
+      ><a name="1473" href="mini-library.html#1460" class="Bound"
+      >z</a
+      ><a name="1474"
+      > </a
+      ><a name="1475" class="Symbol"
+      >&#8594;</a
+      ><a name="1476"
+      > </a
+      ><a name="1477" href="mini-library.html#1453" class="Bound"
+      >x</a
+      ><a name="1478"
+      > </a
+      ><a name="1479" href="mini-library.html#716" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="1480"
+      > </a
+      ><a name="1481" href="mini-library.html#1460" class="Bound"
+      >z</a
+      ><a name="1482" class="Symbol"
+      >)</a
+      ><a name="1483"
+      > </a
+      ><a name="1484" class="Symbol"
+      >(&#955;</a
+      ><a name="1486"
+      > </a
+      ><a name="1487" href="mini-library.html#1487" class="Bound"
+      >z</a
+      ><a name="1488"
+      > </a
+      ><a name="1489" href="mini-library.html#1489" class="Bound"
+      >s</a
+      ><a name="1490"
+      > </a
+      ><a name="1491" class="Symbol"
+      >&#8594;</a
+      ><a name="1492"
+      > </a
+      ><a name="1493" href="mini-library.html#1489" class="Bound"
+      >s</a
+      ><a name="1494" class="Symbol"
+      >)</a
+      ><a name="1495"
+      > </a
+      ><a name="1496" href="mini-library.html#1439" class="Bound"
+      >r</a
+      ><a name="1497"
+      > </a
+      ><a name="1498" href="mini-library.html#1436" class="Bound"
+      >z</a
+      ><a name="1499"
+      >
+
+</a
+      ><a name="1501" href="mini-library.html#1501" class="Function"
+      >sym</a
+      ><a name="1504"
+      > </a
+      ><a name="1505" class="Symbol"
+      >:</a
+      ><a name="1506"
+      > </a
+      ><a name="1507" class="Symbol"
+      >{</a
+      ><a name="1508" href="mini-library.html#1508" class="Bound"
+      >X</a
+      ><a name="1509"
+      > </a
+      ><a name="1510" class="Symbol"
+      >:</a
+      ><a name="1511"
+      > </a
+      ><a name="1512" class="PrimitiveType"
+      >Set</a
+      ><a name="1515" class="Symbol"
+      >}</a
+      ><a name="1516"
+      > </a
+      ><a name="1517" class="Symbol"
+      >&#8594;</a
+      ><a name="1518"
+      > </a
+      ><a name="1519" class="Symbol"
+      >{</a
+      ><a name="1520" href="mini-library.html#1520" class="Bound"
+      >x</a
+      ><a name="1521"
+      > </a
+      ><a name="1522" href="mini-library.html#1522" class="Bound"
+      >y</a
+      ><a name="1523"
+      > </a
+      ><a name="1524" class="Symbol"
+      >:</a
+      ><a name="1525"
+      > </a
+      ><a name="1526" href="mini-library.html#1508" class="Bound"
+      >X</a
+      ><a name="1527" class="Symbol"
+      >}</a
+      ><a name="1528"
+      > </a
+      ><a name="1529" class="Symbol"
+      >&#8594;</a
+      ><a name="1530"
+      > </a
+      ><a name="1531" href="mini-library.html#1520" class="Bound"
+      >x</a
+      ><a name="1532"
+      > </a
+      ><a name="1533" href="mini-library.html#716" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="1534"
+      > </a
+      ><a name="1535" href="mini-library.html#1522" class="Bound"
+      >y</a
+      ><a name="1536"
+      > </a
+      ><a name="1537" class="Symbol"
+      >&#8594;</a
+      ><a name="1538"
+      > </a
+      ><a name="1539" href="mini-library.html#1522" class="Bound"
+      >y</a
+      ><a name="1540"
+      > </a
+      ><a name="1541" href="mini-library.html#716" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="1542"
+      > </a
+      ><a name="1543" href="mini-library.html#1520" class="Bound"
+      >x</a
+      ><a name="1544"
+      >
+</a
+      ><a name="1545" href="mini-library.html#1501" class="Function"
+      >sym</a
+      ><a name="1548"
+      > </a
+      ><a name="1549" class="Symbol"
+      >{</a
+      ><a name="1550" href="mini-library.html#1550" class="Bound"
+      >X</a
+      ><a name="1551" class="Symbol"
+      >}</a
+      ><a name="1552"
+      > </a
+      ><a name="1553" class="Symbol"
+      >{</a
+      ><a name="1554" href="mini-library.html#1554" class="Bound"
+      >x</a
+      ><a name="1555" class="Symbol"
+      >}</a
+      ><a name="1556"
+      > </a
+      ><a name="1557" class="Symbol"
+      >{</a
+      ><a name="1558" href="mini-library.html#1558" class="Bound"
+      >y</a
+      ><a name="1559" class="Symbol"
+      >}</a
+      ><a name="1560"
+      > </a
+      ><a name="1561" class="Symbol"
+      >=</a
+      ><a name="1562"
+      > </a
+      ><a name="1563" href="mini-library.html#1191" class="Function"
+      >weak-J</a
+      ><a name="1569"
+      > </a
+      ><a name="1570" class="Symbol"
+      >(&#955;</a
+      ><a name="1572"
+      > </a
+      ><a name="1573" href="mini-library.html#1573" class="Bound"
+      >x</a
+      ><a name="1574"
+      > </a
+      ><a name="1575" href="mini-library.html#1575" class="Bound"
+      >y</a
+      ><a name="1576"
+      > </a
+      ><a name="1577" class="Symbol"
+      >&#8594;</a
+      ><a name="1578"
+      > </a
+      ><a name="1579" href="mini-library.html#1575" class="Bound"
+      >y</a
+      ><a name="1580"
+      > </a
+      ><a name="1581" href="mini-library.html#716" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="1582"
+      > </a
+      ><a name="1583" href="mini-library.html#1573" class="Bound"
+      >x</a
+      ><a name="1584" class="Symbol"
+      >)</a
+      ><a name="1585"
+      > </a
+      ><a name="1586" href="mini-library.html#752" class="InductiveConstructor"
+      >refl</a
+      ><a name="1590"
+      >
+
+</a
+      ><a name="1593" href="mini-library.html#1593" class="Function"
+      >ap</a
+      ><a name="1595"
+      > </a
+      ><a name="1596" class="Symbol"
+      >:</a
+      ><a name="1597"
+      > </a
+      ><a name="1598" class="Symbol"
+      >{</a
+      ><a name="1599" href="mini-library.html#1599" class="Bound"
+      >X</a
+      ><a name="1600"
+      > </a
+      ><a name="1601" href="mini-library.html#1601" class="Bound"
+      >Y</a
+      ><a name="1602"
+      > </a
+      ><a name="1603" class="Symbol"
+      >:</a
+      ><a name="1604"
+      > </a
+      ><a name="1605" class="PrimitiveType"
+      >Set</a
+      ><a name="1608" class="Symbol"
+      >}</a
+      ><a name="1609"
+      > </a
+      ><a name="1610" class="Symbol"
+      >&#8594;</a
+      ><a name="1611"
+      > </a
+      ><a name="1612" class="Symbol"
+      >(</a
+      ><a name="1613" href="mini-library.html#1613" class="Bound"
+      >f</a
+      ><a name="1614"
+      > </a
+      ><a name="1615" class="Symbol"
+      >:</a
+      ><a name="1616"
+      > </a
+      ><a name="1617" href="mini-library.html#1599" class="Bound"
+      >X</a
+      ><a name="1618"
+      > </a
+      ><a name="1619" class="Symbol"
+      >&#8594;</a
+      ><a name="1620"
+      > </a
+      ><a name="1621" href="mini-library.html#1601" class="Bound"
+      >Y</a
+      ><a name="1622" class="Symbol"
+      >)</a
+      ><a name="1623"
+      > </a
+      ><a name="1624" class="Symbol"
+      >&#8594;</a
+      ><a name="1625"
+      > </a
+      ><a name="1626" class="Symbol"
+      >{</a
+      ><a name="1627" href="mini-library.html#1627" class="Bound"
+      >x</a
+      ><a name="1628"
+      > </a
+      ><a name="1629" href="mini-library.html#1629" class="Bound"
+      >x'</a
+      ><a name="1631"
+      > </a
+      ><a name="1632" class="Symbol"
+      >:</a
+      ><a name="1633"
+      > </a
+      ><a name="1634" href="mini-library.html#1599" class="Bound"
+      >X</a
+      ><a name="1635" class="Symbol"
+      >}</a
+      ><a name="1636"
+      > </a
+      ><a name="1637" class="Symbol"
+      >&#8594;</a
+      ><a name="1638"
+      > </a
+      ><a name="1639" href="mini-library.html#1627" class="Bound"
+      >x</a
+      ><a name="1640"
+      > </a
+      ><a name="1641" href="mini-library.html#716" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="1642"
+      > </a
+      ><a name="1643" href="mini-library.html#1629" class="Bound"
+      >x'</a
+      ><a name="1645"
+      > </a
+      ><a name="1646" class="Symbol"
+      >&#8594;</a
+      ><a name="1647"
+      > </a
+      ><a name="1648" href="mini-library.html#1613" class="Bound"
+      >f</a
+      ><a name="1649"
+      > </a
+      ><a name="1650" href="mini-library.html#1627" class="Bound"
+      >x</a
+      ><a name="1651"
+      > </a
+      ><a name="1652" href="mini-library.html#716" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="1653"
+      > </a
+      ><a name="1654" href="mini-library.html#1613" class="Bound"
+      >f</a
+      ><a name="1655"
+      > </a
+      ><a name="1656" href="mini-library.html#1629" class="Bound"
+      >x'</a
+      ><a name="1658"
+      >
+</a
+      ><a name="1659" href="mini-library.html#1593" class="Function"
+      >ap</a
+      ><a name="1661"
+      > </a
+      ><a name="1662" class="Symbol"
+      >{</a
+      ><a name="1663" href="mini-library.html#1663" class="Bound"
+      >X</a
+      ><a name="1664" class="Symbol"
+      >}</a
+      ><a name="1665"
+      > </a
+      ><a name="1666" class="Symbol"
+      >{</a
+      ><a name="1667" href="mini-library.html#1667" class="Bound"
+      >Y</a
+      ><a name="1668" class="Symbol"
+      >}</a
+      ><a name="1669"
+      > </a
+      ><a name="1670" href="mini-library.html#1670" class="Bound"
+      >f</a
+      ><a name="1671"
+      > </a
+      ><a name="1672" class="Symbol"
+      >=</a
+      ><a name="1673"
+      > </a
+      ><a name="1674" href="mini-library.html#1191" class="Function"
+      >weak-J</a
+      ><a name="1680" class="Symbol"
+      >(&#955;</a
+      ><a name="1682"
+      > </a
+      ><a name="1683" href="mini-library.html#1683" class="Bound"
+      >x</a
+      ><a name="1684"
+      > </a
+      ><a name="1685" href="mini-library.html#1685" class="Bound"
+      >x'</a
+      ><a name="1687"
+      > </a
+      ><a name="1688" class="Symbol"
+      >&#8594;</a
+      ><a name="1689"
+      > </a
+      ><a name="1690" href="mini-library.html#1670" class="Bound"
+      >f</a
+      ><a name="1691"
+      > </a
+      ><a name="1692" href="mini-library.html#1683" class="Bound"
+      >x</a
+      ><a name="1693"
+      > </a
+      ><a name="1694" href="mini-library.html#716" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="1695"
+      > </a
+      ><a name="1696" href="mini-library.html#1670" class="Bound"
+      >f</a
+      ><a name="1697"
+      > </a
+      ><a name="1698" href="mini-library.html#1685" class="Bound"
+      >x'</a
+      ><a name="1700" class="Symbol"
+      >)</a
+      ><a name="1701"
+      > </a
+      ><a name="1702" href="mini-library.html#752" class="InductiveConstructor"
+      >refl</a
+      ><a name="1706"
+      >
+
+</a
+      ><a name="1708" href="mini-library.html#1708" class="Function"
+      >transport</a
+      ><a name="1717"
+      > </a
+      ><a name="1718" class="Symbol"
+      >:</a
+      ><a name="1719"
+      > </a
+      ><a name="1720" class="Symbol"
+      >{</a
+      ><a name="1721" href="mini-library.html#1721" class="Bound"
+      >X</a
+      ><a name="1722"
+      > </a
+      ><a name="1723" class="Symbol"
+      >:</a
+      ><a name="1724"
+      > </a
+      ><a name="1725" class="PrimitiveType"
+      >Set</a
+      ><a name="1728" class="Symbol"
+      >}</a
+      ><a name="1729"
+      > </a
+      ><a name="1730" class="Symbol"
+      >{</a
+      ><a name="1731" href="mini-library.html#1731" class="Bound"
+      >P</a
+      ><a name="1732"
+      > </a
+      ><a name="1733" class="Symbol"
+      >:</a
+      ><a name="1734"
+      > </a
+      ><a name="1735" href="mini-library.html#1721" class="Bound"
+      >X</a
+      ><a name="1736"
+      > </a
+      ><a name="1737" class="Symbol"
+      >&#8594;</a
+      ><a name="1738"
+      > </a
+      ><a name="1739" class="PrimitiveType"
+      >Set</a
+      ><a name="1742" class="Symbol"
+      >}</a
+      ><a name="1743"
+      > </a
+      ><a name="1744" class="Symbol"
+      >&#8594;</a
+      ><a name="1745"
+      > </a
+      ><a name="1746" class="Symbol"
+      >{</a
+      ><a name="1747" href="mini-library.html#1747" class="Bound"
+      >x</a
+      ><a name="1748"
+      > </a
+      ><a name="1749" href="mini-library.html#1749" class="Bound"
+      >y</a
+      ><a name="1750"
+      > </a
+      ><a name="1751" class="Symbol"
+      >:</a
+      ><a name="1752"
+      > </a
+      ><a name="1753" href="mini-library.html#1721" class="Bound"
+      >X</a
+      ><a name="1754" class="Symbol"
+      >}</a
+      ><a name="1755"
+      > </a
+      ><a name="1756" class="Symbol"
+      >&#8594;</a
+      ><a name="1757"
+      > </a
+      ><a name="1758" href="mini-library.html#1747" class="Bound"
+      >x</a
+      ><a name="1759"
+      > </a
+      ><a name="1760" href="mini-library.html#716" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="1761"
+      > </a
+      ><a name="1762" href="mini-library.html#1749" class="Bound"
+      >y</a
+      ><a name="1763"
+      > </a
+      ><a name="1764" class="Symbol"
+      >&#8594;</a
+      ><a name="1765"
+      > </a
+      ><a name="1766" href="mini-library.html#1731" class="Bound"
+      >P</a
+      ><a name="1767"
+      > </a
+      ><a name="1768" href="mini-library.html#1747" class="Bound"
+      >x</a
+      ><a name="1769"
+      > </a
+      ><a name="1770" class="Symbol"
+      >&#8594;</a
+      ><a name="1771"
+      > </a
+      ><a name="1772" href="mini-library.html#1731" class="Bound"
+      >P</a
+      ><a name="1773"
+      > </a
+      ><a name="1774" href="mini-library.html#1749" class="Bound"
+      >y</a
+      ><a name="1775"
+      >
+</a
+      ><a name="1776" href="mini-library.html#1708" class="Function"
+      >transport</a
+      ><a name="1785"
+      > </a
+      ><a name="1786" class="Symbol"
+      >{</a
+      ><a name="1787" href="mini-library.html#1787" class="Bound"
+      >X</a
+      ><a name="1788" class="Symbol"
+      >}</a
+      ><a name="1789"
+      > </a
+      ><a name="1790" class="Symbol"
+      >{</a
+      ><a name="1791" href="mini-library.html#1791" class="Bound"
+      >P</a
+      ><a name="1792" class="Symbol"
+      >}</a
+      ><a name="1793"
+      > </a
+      ><a name="1794" class="Symbol"
+      >=</a
+      ><a name="1795"
+      > </a
+      ><a name="1796" href="mini-library.html#1191" class="Function"
+      >weak-J</a
+      ><a name="1802"
+      > </a
+      ><a name="1803" class="Symbol"
+      >(&#955;</a
+      ><a name="1805"
+      > </a
+      ><a name="1806" href="mini-library.html#1806" class="Bound"
+      >x</a
+      ><a name="1807"
+      > </a
+      ><a name="1808" href="mini-library.html#1808" class="Bound"
+      >y</a
+      ><a name="1809"
+      > </a
+      ><a name="1810" class="Symbol"
+      >&#8594;</a
+      ><a name="1811"
+      > </a
+      ><a name="1812" href="mini-library.html#1791" class="Bound"
+      >P</a
+      ><a name="1813"
+      > </a
+      ><a name="1814" href="mini-library.html#1806" class="Bound"
+      >x</a
+      ><a name="1815"
+      > </a
+      ><a name="1816" class="Symbol"
+      >&#8594;</a
+      ><a name="1817"
+      > </a
+      ><a name="1818" href="mini-library.html#1791" class="Bound"
+      >P</a
+      ><a name="1819"
+      > </a
+      ><a name="1820" href="mini-library.html#1808" class="Bound"
+      >y</a
+      ><a name="1821" class="Symbol"
+      >)</a
+      ><a name="1822"
+      > </a
+      ><a name="1823" class="Symbol"
+      >(&#955;</a
+      ><a name="1825"
+      > </a
+      ><a name="1826" href="mini-library.html#1826" class="Bound"
+      >p</a
+      ><a name="1827"
+      > </a
+      ><a name="1828" class="Symbol"
+      >&#8594;</a
+      ><a name="1829"
+      > </a
+      ><a name="1830" href="mini-library.html#1826" class="Bound"
+      >p</a
+      ><a name="1831" class="Symbol"
+      >)</a
+      ><a name="1832"
+      >
+
+\end{code}
+
+</a
+      ><a name="1846" class="Comment"
+      >The above is the traditional notation. The homotopy theory notation is</a
+      ><a name="1916"
+      >
+</a
+      ><a name="1917" class="Comment"
+      >this:</a
+      ><a name="1922"
+      >
+
+\begin{code}
+
+</a
+      ><a name="1939" href="mini-library.html#1939" class="Function Operator"
+      >_&#8226;_</a
+      ><a name="1942"
+      > </a
+      ><a name="1943" class="Symbol"
+      >:</a
+      ><a name="1944"
+      > </a
+      ><a name="1945" class="Symbol"
+      >{</a
+      ><a name="1946" href="mini-library.html#1946" class="Bound"
+      >X</a
+      ><a name="1947"
+      > </a
+      ><a name="1948" class="Symbol"
+      >:</a
+      ><a name="1949"
+      > </a
+      ><a name="1950" class="PrimitiveType"
+      >Set</a
+      ><a name="1953" class="Symbol"
+      >}</a
+      ><a name="1954"
+      > </a
+      ><a name="1955" class="Symbol"
+      >&#8594;</a
+      ><a name="1956"
+      > </a
+      ><a name="1957" class="Symbol"
+      >{</a
+      ><a name="1958" href="mini-library.html#1958" class="Bound"
+      >x</a
+      ><a name="1959"
+      > </a
+      ><a name="1960" href="mini-library.html#1960" class="Bound"
+      >y</a
+      ><a name="1961"
+      > </a
+      ><a name="1962" href="mini-library.html#1962" class="Bound"
+      >z</a
+      ><a name="1963"
+      > </a
+      ><a name="1964" class="Symbol"
+      >:</a
+      ><a name="1965"
+      > </a
+      ><a name="1966" href="mini-library.html#1946" class="Bound"
+      >X</a
+      ><a name="1967" class="Symbol"
+      >}</a
+      ><a name="1968"
+      > </a
+      ><a name="1969" class="Symbol"
+      >&#8594;</a
+      ><a name="1970"
+      > </a
+      ><a name="1971" href="mini-library.html#1958" class="Bound"
+      >x</a
+      ><a name="1972"
+      > </a
+      ><a name="1973" href="mini-library.html#716" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="1974"
+      > </a
+      ><a name="1975" href="mini-library.html#1960" class="Bound"
+      >y</a
+      ><a name="1976"
+      > </a
+      ><a name="1977" class="Symbol"
+      >&#8594;</a
+      ><a name="1978"
+      > </a
+      ><a name="1979" href="mini-library.html#1960" class="Bound"
+      >y</a
+      ><a name="1980"
+      > </a
+      ><a name="1981" href="mini-library.html#716" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="1982"
+      > </a
+      ><a name="1983" href="mini-library.html#1962" class="Bound"
+      >z</a
+      ><a name="1984"
+      > </a
+      ><a name="1985" class="Symbol"
+      >&#8594;</a
+      ><a name="1986"
+      > </a
+      ><a name="1987" href="mini-library.html#1958" class="Bound"
+      >x</a
+      ><a name="1988"
+      > </a
+      ><a name="1989" href="mini-library.html#716" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="1990"
+      > </a
+      ><a name="1991" href="mini-library.html#1962" class="Bound"
+      >z</a
+      ><a name="1992"
+      >
+</a
+      ><a name="1993" href="mini-library.html#1993" class="Bound"
+      >p</a
+      ><a name="1994"
+      > </a
+      ><a name="1995" href="mini-library.html#1939" class="Function Operator"
+      >&#8226;</a
+      ><a name="1996"
+      > </a
+      ><a name="1997" href="mini-library.html#1997" class="Bound"
+      >q</a
+      ><a name="1998"
+      > </a
+      ><a name="1999" class="Symbol"
+      >=</a
+      ><a name="2000"
+      > </a
+      ><a name="2001" href="mini-library.html#1361" class="Function"
+      >trans</a
+      ><a name="2006"
+      > </a
+      ><a name="2007" href="mini-library.html#1993" class="Bound"
+      >p</a
+      ><a name="2008"
+      > </a
+      ><a name="2009" href="mini-library.html#1997" class="Bound"
+      >q</a
+      ><a name="2010"
+      >
+
+</a
+      ><a name="2012" href="mini-library.html#2012" class="Function Operator"
+      >_&#8315;&#185;</a
+      ><a name="2015"
+      > </a
+      ><a name="2016" class="Symbol"
+      >:</a
+      ><a name="2017"
+      > </a
+      ><a name="2018" class="Symbol"
+      >{</a
+      ><a name="2019" href="mini-library.html#2019" class="Bound"
+      >X</a
+      ><a name="2020"
+      > </a
+      ><a name="2021" class="Symbol"
+      >:</a
+      ><a name="2022"
+      > </a
+      ><a name="2023" class="PrimitiveType"
+      >Set</a
+      ><a name="2026" class="Symbol"
+      >}</a
+      ><a name="2027"
+      > </a
+      ><a name="2028" class="Symbol"
+      >&#8594;</a
+      ><a name="2029"
+      > </a
+      ><a name="2030" class="Symbol"
+      >{</a
+      ><a name="2031" href="mini-library.html#2031" class="Bound"
+      >x</a
+      ><a name="2032"
+      > </a
+      ><a name="2033" href="mini-library.html#2033" class="Bound"
+      >y</a
+      ><a name="2034"
+      > </a
+      ><a name="2035" class="Symbol"
+      >:</a
+      ><a name="2036"
+      > </a
+      ><a name="2037" href="mini-library.html#2019" class="Bound"
+      >X</a
+      ><a name="2038" class="Symbol"
+      >}</a
+      ><a name="2039"
+      > </a
+      ><a name="2040" class="Symbol"
+      >&#8594;</a
+      ><a name="2041"
+      > </a
+      ><a name="2042" href="mini-library.html#2031" class="Bound"
+      >x</a
+      ><a name="2043"
+      > </a
+      ><a name="2044" href="mini-library.html#716" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="2045"
+      > </a
+      ><a name="2046" href="mini-library.html#2033" class="Bound"
+      >y</a
+      ><a name="2047"
+      > </a
+      ><a name="2048" class="Symbol"
+      >&#8594;</a
+      ><a name="2049"
+      > </a
+      ><a name="2050" href="mini-library.html#2033" class="Bound"
+      >y</a
+      ><a name="2051"
+      > </a
+      ><a name="2052" href="mini-library.html#716" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="2053"
+      > </a
+      ><a name="2054" href="mini-library.html#2031" class="Bound"
+      >x</a
+      ><a name="2055"
+      >
+</a
+      ><a name="2056" href="mini-library.html#2056" class="Bound"
+      >p</a
+      ><a name="2057"
+      > </a
+      ><a name="2058" href="mini-library.html#2012" class="Function Operator"
+      >&#8315;&#185;</a
+      ><a name="2060"
+      > </a
+      ><a name="2061" class="Symbol"
+      >=</a
+      ><a name="2062"
+      > </a
+      ><a name="2063" href="mini-library.html#1501" class="Function"
+      >sym</a
+      ><a name="2066"
+      > </a
+      ><a name="2067" href="mini-library.html#2056" class="Bound"
+      >p</a
+      ><a name="2068"
+      >
+
+</a
+      ><a name="2070" class="Keyword"
+      >infixr</a
+      ><a name="2076"
+      > </a
+      ><a name="2077" class="Number"
+      >6</a
+      ><a name="2078"
+      > _&#8801;_
+</a
+      ><a name="2083" class="Keyword"
+      >infixr</a
+      ><a name="2089"
+      > </a
+      ><a name="2090" class="Number"
+      >7</a
+      ><a name="2091"
+      > _&#8226;_
+
+\end{code}
+
+</a
+      ><a name="2109" class="Comment"
+      >Some very simple lemmas:</a
+      ><a name="2133"
+      >
+
+\begin{code}
+
+</a
+      ><a name="2150" href="mini-library.html#2150" class="Function"
+      >sym-is-inverse</a
+      ><a name="2164"
+      > </a
+      ><a name="2165" class="Symbol"
+      >:</a
+      ><a name="2166"
+      > </a
+      ><a name="2167" class="Symbol"
+      >{</a
+      ><a name="2168" href="mini-library.html#2168" class="Bound"
+      >X</a
+      ><a name="2169"
+      > </a
+      ><a name="2170" class="Symbol"
+      >:</a
+      ><a name="2171"
+      > </a
+      ><a name="2172" class="PrimitiveType"
+      >Set</a
+      ><a name="2175" class="Symbol"
+      >}</a
+      ><a name="2176"
+      > </a
+      ><a name="2177" class="Symbol"
+      >{</a
+      ><a name="2178" href="mini-library.html#2178" class="Bound"
+      >x</a
+      ><a name="2179"
+      > </a
+      ><a name="2180" href="mini-library.html#2180" class="Bound"
+      >y</a
+      ><a name="2181"
+      > </a
+      ><a name="2182" class="Symbol"
+      >:</a
+      ><a name="2183"
+      > </a
+      ><a name="2184" href="mini-library.html#2168" class="Bound"
+      >X</a
+      ><a name="2185" class="Symbol"
+      >}</a
+      ><a name="2186"
+      > </a
+      ><a name="2187" class="Symbol"
+      >(</a
+      ><a name="2188" href="mini-library.html#2188" class="Bound"
+      >p</a
+      ><a name="2189"
+      > </a
+      ><a name="2190" class="Symbol"
+      >:</a
+      ><a name="2191"
+      > </a
+      ><a name="2192" href="mini-library.html#2178" class="Bound"
+      >x</a
+      ><a name="2193"
+      > </a
+      ><a name="2194" href="mini-library.html#716" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="2195"
+      > </a
+      ><a name="2196" href="mini-library.html#2180" class="Bound"
+      >y</a
+      ><a name="2197" class="Symbol"
+      >)</a
+      ><a name="2198"
+      > </a
+      ><a name="2199" class="Symbol"
+      >&#8594;</a
+      ><a name="2200"
+      > </a
+      ><a name="2201" href="mini-library.html#752" class="InductiveConstructor"
+      >refl</a
+      ><a name="2205"
+      > </a
+      ><a name="2206" href="mini-library.html#716" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="2207"
+      > </a
+      ><a name="2208" href="mini-library.html#2188" class="Bound"
+      >p</a
+      ><a name="2209"
+      > </a
+      ><a name="2210" href="mini-library.html#2012" class="Function Operator"
+      >&#8315;&#185;</a
+      ><a name="2212"
+      > </a
+      ><a name="2213" href="mini-library.html#1939" class="Function Operator"
+      >&#8226;</a
+      ><a name="2214"
+      > </a
+      ><a name="2215" href="mini-library.html#2188" class="Bound"
+      >p</a
+      ><a name="2216"
+      >
+</a
+      ><a name="2217" href="mini-library.html#2150" class="Function"
+      >sym-is-inverse</a
+      ><a name="2231"
+      > </a
+      ><a name="2232" class="Symbol"
+      >=</a
+      ><a name="2233"
+      > </a
+      ><a name="2234" href="mini-library.html#776" class="Function"
+      >J</a
+      ><a name="2235"
+      > </a
+      ><a name="2236" class="Symbol"
+      >(&#955;</a
+      ><a name="2238"
+      > </a
+      ><a name="2239" href="mini-library.html#2239" class="Bound"
+      >p</a
+      ><a name="2240"
+      > </a
+      ><a name="2241" class="Symbol"
+      >&#8594;</a
+      ><a name="2242"
+      > </a
+      ><a name="2243" href="mini-library.html#752" class="InductiveConstructor"
+      >refl</a
+      ><a name="2247"
+      > </a
+      ><a name="2248" href="mini-library.html#716" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="2249"
+      > </a
+      ><a name="2250" class="Symbol"
+      >(</a
+      ><a name="2251" href="mini-library.html#2239" class="Bound"
+      >p</a
+      ><a name="2252"
+      > </a
+      ><a name="2253" href="mini-library.html#2012" class="Function Operator"
+      >&#8315;&#185;</a
+      ><a name="2255" class="Symbol"
+      >)</a
+      ><a name="2256"
+      > </a
+      ><a name="2257" href="mini-library.html#1939" class="Function Operator"
+      >&#8226;</a
+      ><a name="2258"
+      > </a
+      ><a name="2259" href="mini-library.html#2239" class="Bound"
+      >p</a
+      ><a name="2260" class="Symbol"
+      >)</a
+      ><a name="2261"
+      > </a
+      ><a name="2262" href="mini-library.html#752" class="InductiveConstructor"
+      >refl</a
+      ><a name="2266"
+      >
+
+</a
+      ><a name="2268" href="mini-library.html#2268" class="Function"
+      >sym-sym-trivial</a
+      ><a name="2283"
+      > </a
+      ><a name="2284" class="Symbol"
+      >:</a
+      ><a name="2285"
+      > </a
+      ><a name="2286" class="Symbol"
+      >{</a
+      ><a name="2287" href="mini-library.html#2287" class="Bound"
+      >X</a
+      ><a name="2288"
+      > </a
+      ><a name="2289" class="Symbol"
+      >:</a
+      ><a name="2290"
+      > </a
+      ><a name="2291" class="PrimitiveType"
+      >Set</a
+      ><a name="2294" class="Symbol"
+      >}</a
+      ><a name="2295"
+      > </a
+      ><a name="2296" class="Symbol"
+      >{</a
+      ><a name="2297" href="mini-library.html#2297" class="Bound"
+      >x</a
+      ><a name="2298"
+      > </a
+      ><a name="2299" href="mini-library.html#2299" class="Bound"
+      >y</a
+      ><a name="2300"
+      > </a
+      ><a name="2301" class="Symbol"
+      >:</a
+      ><a name="2302"
+      > </a
+      ><a name="2303" href="mini-library.html#2287" class="Bound"
+      >X</a
+      ><a name="2304" class="Symbol"
+      >}</a
+      ><a name="2305"
+      > </a
+      ><a name="2306" class="Symbol"
+      >(</a
+      ><a name="2307" href="mini-library.html#2307" class="Bound"
+      >p</a
+      ><a name="2308"
+      > </a
+      ><a name="2309" class="Symbol"
+      >:</a
+      ><a name="2310"
+      > </a
+      ><a name="2311" href="mini-library.html#2297" class="Bound"
+      >x</a
+      ><a name="2312"
+      > </a
+      ><a name="2313" href="mini-library.html#716" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="2314"
+      > </a
+      ><a name="2315" href="mini-library.html#2299" class="Bound"
+      >y</a
+      ><a name="2316" class="Symbol"
+      >)</a
+      ><a name="2317"
+      > </a
+      ><a name="2318" class="Symbol"
+      >&#8594;</a
+      ><a name="2319"
+      > </a
+      ><a name="2320" href="mini-library.html#2307" class="Bound"
+      >p</a
+      ><a name="2321"
+      > </a
+      ><a name="2322" href="mini-library.html#716" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="2323"
+      > </a
+      ><a name="2324" class="Symbol"
+      >(</a
+      ><a name="2325" href="mini-library.html#2307" class="Bound"
+      >p</a
+      ><a name="2326"
+      > </a
+      ><a name="2327" href="mini-library.html#2012" class="Function Operator"
+      >&#8315;&#185;</a
+      ><a name="2329" class="Symbol"
+      >)</a
+      ><a name="2330" href="mini-library.html#2012" class="Function Operator"
+      >&#8315;&#185;</a
+      ><a name="2332"
+      >
+</a
+      ><a name="2333" href="mini-library.html#2268" class="Function"
+      >sym-sym-trivial</a
+      ><a name="2348"
+      > </a
+      ><a name="2349" class="Symbol"
+      >=</a
+      ><a name="2350"
+      > </a
+      ><a name="2351" href="mini-library.html#776" class="Function"
+      >J</a
+      ><a name="2352"
+      > </a
+      ><a name="2353" class="Symbol"
+      >(&#955;</a
+      ><a name="2355"
+      > </a
+      ><a name="2356" href="mini-library.html#2356" class="Bound"
+      >p</a
+      ><a name="2357"
+      > </a
+      ><a name="2358" class="Symbol"
+      >&#8594;</a
+      ><a name="2359"
+      > </a
+      ><a name="2360" href="mini-library.html#2356" class="Bound"
+      >p</a
+      ><a name="2361"
+      > </a
+      ><a name="2362" href="mini-library.html#716" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="2363"
+      > </a
+      ><a name="2364" class="Symbol"
+      >(</a
+      ><a name="2365" href="mini-library.html#2356" class="Bound"
+      >p</a
+      ><a name="2366"
+      > </a
+      ><a name="2367" href="mini-library.html#2012" class="Function Operator"
+      >&#8315;&#185;</a
+      ><a name="2369" class="Symbol"
+      >)</a
+      ><a name="2370" href="mini-library.html#2012" class="Function Operator"
+      >&#8315;&#185;</a
+      ><a name="2372" class="Symbol"
+      >)</a
+      ><a name="2373"
+      > </a
+      ><a name="2374" href="mini-library.html#752" class="InductiveConstructor"
+      >refl</a
+      ><a name="2378"
+      >
+
+</a
+      ><a name="2380" href="mini-library.html#2380" class="Function"
+      >refl-is-right-id</a
+      ><a name="2396"
+      > </a
+      ><a name="2397" class="Symbol"
+      >:</a
+      ><a name="2398"
+      > </a
+      ><a name="2399" class="Symbol"
+      >{</a
+      ><a name="2400" href="mini-library.html#2400" class="Bound"
+      >X</a
+      ><a name="2401"
+      > </a
+      ><a name="2402" class="Symbol"
+      >:</a
+      ><a name="2403"
+      > </a
+      ><a name="2404" class="PrimitiveType"
+      >Set</a
+      ><a name="2407" class="Symbol"
+      >}</a
+      ><a name="2408"
+      > </a
+      ><a name="2409" class="Symbol"
+      >{</a
+      ><a name="2410" href="mini-library.html#2410" class="Bound"
+      >x</a
+      ><a name="2411"
+      > </a
+      ><a name="2412" href="mini-library.html#2412" class="Bound"
+      >y</a
+      ><a name="2413"
+      > </a
+      ><a name="2414" class="Symbol"
+      >:</a
+      ><a name="2415"
+      > </a
+      ><a name="2416" href="mini-library.html#2400" class="Bound"
+      >X</a
+      ><a name="2417" class="Symbol"
+      >}</a
+      ><a name="2418"
+      > </a
+      ><a name="2419" class="Symbol"
+      >(</a
+      ><a name="2420" href="mini-library.html#2420" class="Bound"
+      >p</a
+      ><a name="2421"
+      > </a
+      ><a name="2422" class="Symbol"
+      >:</a
+      ><a name="2423"
+      > </a
+      ><a name="2424" href="mini-library.html#2410" class="Bound"
+      >x</a
+      ><a name="2425"
+      > </a
+      ><a name="2426" href="mini-library.html#716" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="2427"
+      > </a
+      ><a name="2428" href="mini-library.html#2412" class="Bound"
+      >y</a
+      ><a name="2429" class="Symbol"
+      >)</a
+      ><a name="2430"
+      > </a
+      ><a name="2431" class="Symbol"
+      >&#8594;</a
+      ><a name="2432"
+      > </a
+      ><a name="2433" href="mini-library.html#2420" class="Bound"
+      >p</a
+      ><a name="2434"
+      > </a
+      ><a name="2435" href="mini-library.html#716" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="2436"
+      > </a
+      ><a name="2437" href="mini-library.html#2420" class="Bound"
+      >p</a
+      ><a name="2438"
+      > </a
+      ><a name="2439" href="mini-library.html#1939" class="Function Operator"
+      >&#8226;</a
+      ><a name="2440"
+      > </a
+      ><a name="2441" href="mini-library.html#752" class="InductiveConstructor"
+      >refl</a
+      ><a name="2445"
+      >
+</a
+      ><a name="2446" href="mini-library.html#2380" class="Function"
+      >refl-is-right-id</a
+      ><a name="2462"
+      > </a
+      ><a name="2463" class="Symbol"
+      >=</a
+      ><a name="2464"
+      > </a
+      ><a name="2465" href="mini-library.html#776" class="Function"
+      >J</a
+      ><a name="2466"
+      > </a
+      ><a name="2467" class="Symbol"
+      >(&#955;</a
+      ><a name="2469"
+      > </a
+      ><a name="2470" href="mini-library.html#2470" class="Bound"
+      >q</a
+      ><a name="2471"
+      > </a
+      ><a name="2472" class="Symbol"
+      >&#8594;</a
+      ><a name="2473"
+      > </a
+      ><a name="2474" href="mini-library.html#2470" class="Bound"
+      >q</a
+      ><a name="2475"
+      > </a
+      ><a name="2476" href="mini-library.html#716" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="2477"
+      > </a
+      ><a name="2478" href="mini-library.html#2470" class="Bound"
+      >q</a
+      ><a name="2479"
+      > </a
+      ><a name="2480" href="mini-library.html#1939" class="Function Operator"
+      >&#8226;</a
+      ><a name="2481"
+      > </a
+      ><a name="2482" href="mini-library.html#752" class="InductiveConstructor"
+      >refl</a
+      ><a name="2486" class="Symbol"
+      >)</a
+      ><a name="2487"
+      > </a
+      ><a name="2488" href="mini-library.html#752" class="InductiveConstructor"
+      >refl</a
+      ><a name="2492"
+      >
+
+</a
+      ><a name="2494" href="mini-library.html#2494" class="Function"
+      >refl-is-left-id</a
+      ><a name="2509"
+      > </a
+      ><a name="2510" class="Symbol"
+      >:</a
+      ><a name="2511"
+      > </a
+      ><a name="2512" class="Symbol"
+      >{</a
+      ><a name="2513" href="mini-library.html#2513" class="Bound"
+      >X</a
+      ><a name="2514"
+      > </a
+      ><a name="2515" class="Symbol"
+      >:</a
+      ><a name="2516"
+      > </a
+      ><a name="2517" class="PrimitiveType"
+      >Set</a
+      ><a name="2520" class="Symbol"
+      >}</a
+      ><a name="2521"
+      > </a
+      ><a name="2522" class="Symbol"
+      >{</a
+      ><a name="2523" href="mini-library.html#2523" class="Bound"
+      >x</a
+      ><a name="2524"
+      > </a
+      ><a name="2525" href="mini-library.html#2525" class="Bound"
+      >y</a
+      ><a name="2526"
+      > </a
+      ><a name="2527" class="Symbol"
+      >:</a
+      ><a name="2528"
+      > </a
+      ><a name="2529" href="mini-library.html#2513" class="Bound"
+      >X</a
+      ><a name="2530" class="Symbol"
+      >}</a
+      ><a name="2531"
+      > </a
+      ><a name="2532" class="Symbol"
+      >(</a
+      ><a name="2533" href="mini-library.html#2533" class="Bound"
+      >p</a
+      ><a name="2534"
+      > </a
+      ><a name="2535" class="Symbol"
+      >:</a
+      ><a name="2536"
+      > </a
+      ><a name="2537" href="mini-library.html#2523" class="Bound"
+      >x</a
+      ><a name="2538"
+      > </a
+      ><a name="2539" href="mini-library.html#716" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="2540"
+      > </a
+      ><a name="2541" href="mini-library.html#2525" class="Bound"
+      >y</a
+      ><a name="2542" class="Symbol"
+      >)</a
+      ><a name="2543"
+      > </a
+      ><a name="2544" class="Symbol"
+      >&#8594;</a
+      ><a name="2545"
+      > </a
+      ><a name="2546" href="mini-library.html#2533" class="Bound"
+      >p</a
+      ><a name="2547"
+      > </a
+      ><a name="2548" href="mini-library.html#716" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="2549"
+      > </a
+      ><a name="2550" href="mini-library.html#752" class="InductiveConstructor"
+      >refl</a
+      ><a name="2554"
+      > </a
+      ><a name="2555" href="mini-library.html#1939" class="Function Operator"
+      >&#8226;</a
+      ><a name="2556"
+      > </a
+      ><a name="2557" href="mini-library.html#2533" class="Bound"
+      >p</a
+      ><a name="2558"
+      >
+</a
+      ><a name="2559" href="mini-library.html#2494" class="Function"
+      >refl-is-left-id</a
+      ><a name="2574"
+      > </a
+      ><a name="2575" class="Symbol"
+      >=</a
+      ><a name="2576"
+      > </a
+      ><a name="2577" href="mini-library.html#776" class="Function"
+      >J</a
+      ><a name="2578"
+      > </a
+      ><a name="2579" class="Symbol"
+      >(&#955;</a
+      ><a name="2581"
+      > </a
+      ><a name="2582" href="mini-library.html#2582" class="Bound"
+      >q</a
+      ><a name="2583"
+      > </a
+      ><a name="2584" class="Symbol"
+      >&#8594;</a
+      ><a name="2585"
+      > </a
+      ><a name="2586" href="mini-library.html#2582" class="Bound"
+      >q</a
+      ><a name="2587"
+      > </a
+      ><a name="2588" href="mini-library.html#716" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="2589"
+      > </a
+      ><a name="2590" href="mini-library.html#752" class="InductiveConstructor"
+      >refl</a
+      ><a name="2594"
+      > </a
+      ><a name="2595" href="mini-library.html#1939" class="Function Operator"
+      >&#8226;</a
+      ><a name="2596"
+      > </a
+      ><a name="2597" href="mini-library.html#2582" class="Bound"
+      >q</a
+      ><a name="2598" class="Symbol"
+      >)</a
+      ><a name="2599"
+      > </a
+      ><a name="2600" href="mini-library.html#752" class="InductiveConstructor"
+      >refl</a
+      ><a name="2604"
+      >
+
+</a
+      ><a name="2606" href="mini-library.html#2606" class="Function"
+      >ap-id-is-id</a
+      ><a name="2617"
+      > </a
+      ><a name="2618" class="Symbol"
+      >:</a
+      ><a name="2619"
+      > </a
+      ><a name="2620" class="Symbol"
+      >{</a
+      ><a name="2621" href="mini-library.html#2621" class="Bound"
+      >X</a
+      ><a name="2622"
+      > </a
+      ><a name="2623" class="Symbol"
+      >:</a
+      ><a name="2624"
+      > </a
+      ><a name="2625" class="PrimitiveType"
+      >Set</a
+      ><a name="2628" class="Symbol"
+      >}</a
+      ><a name="2629"
+      > </a
+      ><a name="2630" class="Symbol"
+      >{</a
+      ><a name="2631" href="mini-library.html#2631" class="Bound"
+      >x</a
+      ><a name="2632"
+      > </a
+      ><a name="2633" href="mini-library.html#2633" class="Bound"
+      >y</a
+      ><a name="2634"
+      > </a
+      ><a name="2635" class="Symbol"
+      >:</a
+      ><a name="2636"
+      > </a
+      ><a name="2637" href="mini-library.html#2621" class="Bound"
+      >X</a
+      ><a name="2638" class="Symbol"
+      >}</a
+      ><a name="2639"
+      > </a
+      ><a name="2640" class="Symbol"
+      >(</a
+      ><a name="2641" href="mini-library.html#2641" class="Bound"
+      >p</a
+      ><a name="2642"
+      > </a
+      ><a name="2643" class="Symbol"
+      >:</a
+      ><a name="2644"
+      > </a
+      ><a name="2645" href="mini-library.html#2631" class="Bound"
+      >x</a
+      ><a name="2646"
+      > </a
+      ><a name="2647" href="mini-library.html#716" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="2648"
+      > </a
+      ><a name="2649" href="mini-library.html#2633" class="Bound"
+      >y</a
+      ><a name="2650" class="Symbol"
+      >)</a
+      ><a name="2651"
+      > </a
+      ><a name="2652" class="Symbol"
+      >&#8594;</a
+      ><a name="2653"
+      > </a
+      ><a name="2654" href="mini-library.html#2641" class="Bound"
+      >p</a
+      ><a name="2655"
+      > </a
+      ><a name="2656" href="mini-library.html#716" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="2657"
+      > </a
+      ><a name="2658" href="mini-library.html#1593" class="Function"
+      >ap</a
+      ><a name="2660"
+      > </a
+      ><a name="2661" href="mini-library.html#72" class="Function"
+      >id</a
+      ><a name="2663"
+      > </a
+      ><a name="2664" href="mini-library.html#2641" class="Bound"
+      >p</a
+      ><a name="2665"
+      >
+</a
+      ><a name="2666" href="mini-library.html#2606" class="Function"
+      >ap-id-is-id</a
+      ><a name="2677"
+      > </a
+      ><a name="2678" class="Symbol"
+      >=</a
+      ><a name="2679"
+      > </a
+      ><a name="2680" href="mini-library.html#776" class="Function"
+      >J</a
+      ><a name="2681"
+      > </a
+      ><a name="2682" class="Symbol"
+      >(&#955;</a
+      ><a name="2684"
+      > </a
+      ><a name="2685" href="mini-library.html#2685" class="Bound"
+      >p</a
+      ><a name="2686"
+      > </a
+      ><a name="2687" class="Symbol"
+      >&#8594;</a
+      ><a name="2688"
+      > </a
+      ><a name="2689" href="mini-library.html#2685" class="Bound"
+      >p</a
+      ><a name="2690"
+      > </a
+      ><a name="2691" href="mini-library.html#716" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="2692"
+      > </a
+      ><a name="2693" href="mini-library.html#1593" class="Function"
+      >ap</a
+      ><a name="2695"
+      > </a
+      ><a name="2696" href="mini-library.html#72" class="Function"
+      >id</a
+      ><a name="2698"
+      > </a
+      ><a name="2699" href="mini-library.html#2685" class="Bound"
+      >p</a
+      ><a name="2700" class="Symbol"
+      >)</a
+      ><a name="2701"
+      > </a
+      ><a name="2702" href="mini-library.html#752" class="InductiveConstructor"
+      >refl</a
+      ><a name="2706"
+      >
+
+\end{code}
+
+</a
+      ><a name="2720" class="Comment"
+      >The following is quite involved without pattern matching; see</a
+      ><a name="2781"
+      >
+</a
+      ><a name="2782" class="Comment"
+      >Nils Anders Danielsson's Agda library.</a
+      ><a name="2820"
+      >
+
+\begin{code}
+
+</a
+      ><a name="2837" href="mini-library.html#2837" class="Function"
+      >&#931;-&#8801;</a
+      ><a name="2840"
+      > </a
+      ><a name="2841" class="Symbol"
+      >:</a
+      ><a name="2842"
+      > </a
+      ><a name="2843" class="Symbol"
+      >{</a
+      ><a name="2844" href="mini-library.html#2844" class="Bound"
+      >X</a
+      ><a name="2845"
+      > </a
+      ><a name="2846" class="Symbol"
+      >:</a
+      ><a name="2847"
+      > </a
+      ><a name="2848" class="PrimitiveType"
+      >Set</a
+      ><a name="2851" class="Symbol"
+      >}</a
+      ><a name="2852"
+      > </a
+      ><a name="2853" class="Symbol"
+      >{</a
+      ><a name="2854" href="mini-library.html#2854" class="Bound"
+      >Y</a
+      ><a name="2855"
+      > </a
+      ><a name="2856" class="Symbol"
+      >:</a
+      ><a name="2857"
+      > </a
+      ><a name="2858" href="mini-library.html#2844" class="Bound"
+      >X</a
+      ><a name="2859"
+      > </a
+      ><a name="2860" class="Symbol"
+      >&#8594;</a
+      ><a name="2861"
+      > </a
+      ><a name="2862" class="PrimitiveType"
+      >Set</a
+      ><a name="2865" class="Symbol"
+      >}</a
+      ><a name="2866"
+      > </a
+      ><a name="2867" class="Symbol"
+      >(</a
+      ><a name="2868" href="mini-library.html#2868" class="Bound"
+      >x</a
+      ><a name="2869"
+      > </a
+      ><a name="2870" href="mini-library.html#2870" class="Bound"
+      >x'</a
+      ><a name="2872"
+      > </a
+      ><a name="2873" class="Symbol"
+      >:</a
+      ><a name="2874"
+      > </a
+      ><a name="2875" href="mini-library.html#2844" class="Bound"
+      >X</a
+      ><a name="2876" class="Symbol"
+      >)</a
+      ><a name="2877"
+      > </a
+      ><a name="2878" class="Symbol"
+      >(</a
+      ><a name="2879" href="mini-library.html#2879" class="Bound"
+      >y</a
+      ><a name="2880"
+      > </a
+      ><a name="2881" class="Symbol"
+      >:</a
+      ><a name="2882"
+      > </a
+      ><a name="2883" href="mini-library.html#2854" class="Bound"
+      >Y</a
+      ><a name="2884"
+      > </a
+      ><a name="2885" href="mini-library.html#2868" class="Bound"
+      >x</a
+      ><a name="2886" class="Symbol"
+      >)</a
+      ><a name="2887"
+      > </a
+      ><a name="2888" class="Symbol"
+      >(</a
+      ><a name="2889" href="mini-library.html#2889" class="Bound"
+      >y'</a
+      ><a name="2891"
+      > </a
+      ><a name="2892" class="Symbol"
+      >:</a
+      ><a name="2893"
+      > </a
+      ><a name="2894" href="mini-library.html#2854" class="Bound"
+      >Y</a
+      ><a name="2895"
+      > </a
+      ><a name="2896" href="mini-library.html#2870" class="Bound"
+      >x'</a
+      ><a name="2898" class="Symbol"
+      >)</a
+      ><a name="2899"
+      >
+     </a
+      ><a name="2905" class="Symbol"
+      >&#8594;</a
+      ><a name="2906"
+      > </a
+      ><a name="2907" class="Symbol"
+      >(</a
+      ><a name="2908" href="mini-library.html#2908" class="Bound"
+      >p</a
+      ><a name="2909"
+      > </a
+      ><a name="2910" class="Symbol"
+      >:</a
+      ><a name="2911"
+      > </a
+      ><a name="2912" href="mini-library.html#2868" class="Bound"
+      >x</a
+      ><a name="2913"
+      > </a
+      ><a name="2914" href="mini-library.html#716" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="2915"
+      > </a
+      ><a name="2916" href="mini-library.html#2870" class="Bound"
+      >x'</a
+      ><a name="2918" class="Symbol"
+      >)</a
+      ><a name="2919"
+      > </a
+      ><a name="2920" class="Symbol"
+      >&#8594;</a
+      ><a name="2921"
+      > </a
+      ><a name="2922" href="mini-library.html#1708" class="Function"
+      >transport</a
+      ><a name="2931"
+      > </a
+      ><a name="2932" href="mini-library.html#2908" class="Bound"
+      >p</a
+      ><a name="2933"
+      > </a
+      ><a name="2934" href="mini-library.html#2879" class="Bound"
+      >y</a
+      ><a name="2935"
+      > </a
+      ><a name="2936" href="mini-library.html#716" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="2937"
+      > </a
+      ><a name="2938" href="mini-library.html#2889" class="Bound"
+      >y'</a
+      ><a name="2940"
+      > </a
+      ><a name="2941" class="Symbol"
+      >&#8594;</a
+      ><a name="2942"
+      > </a
+      ><a name="2943" href="mini-library.html#716" class="Datatype Operator"
+      >_&#8801;_</a
+      ><a name="2946"
+      > </a
+      ><a name="2947" class="Symbol"
+      >{</a
+      ><a name="2948" href="mini-library.html#200" class="Record"
+      >&#931;</a
+      ><a name="2949"
+      > </a
+      ><a name="2950" class="Symbol"
+      >\</a
+      ><a name="2951" href="mini-library.html#2951" class="Bound"
+      >x</a
+      ><a name="2952"
+      > </a
+      ><a name="2953" class="Symbol"
+      >&#8594;</a
+      ><a name="2954"
+      > </a
+      ><a name="2955" href="mini-library.html#2854" class="Bound"
+      >Y</a
+      ><a name="2956"
+      > </a
+      ><a name="2957" href="mini-library.html#2951" class="Bound"
+      >x</a
+      ><a name="2958" class="Symbol"
+      >}</a
+      ><a name="2959"
+      > </a
+      ><a name="2960" class="Symbol"
+      >(</a
+      ><a name="2961" href="mini-library.html#2868" class="Bound"
+      >x</a
+      ><a name="2962"
+      > </a
+      ><a name="2963" href="mini-library.html#252" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="2964"
+      > </a
+      ><a name="2965" href="mini-library.html#2879" class="Bound"
+      >y</a
+      ><a name="2966" class="Symbol"
+      >)</a
+      ><a name="2967"
+      > </a
+      ><a name="2968" class="Symbol"
+      >(</a
+      ><a name="2969" href="mini-library.html#2870" class="Bound"
+      >x'</a
+      ><a name="2971"
+      > </a
+      ><a name="2972" href="mini-library.html#252" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="2973"
+      > </a
+      ><a name="2974" href="mini-library.html#2889" class="Bound"
+      >y'</a
+      ><a name="2976" class="Symbol"
+      >)</a
+      ><a name="2977"
+      >
+</a
+      ><a name="2979" href="mini-library.html#2837" class="Function"
+      >&#931;-&#8801;</a
+      ><a name="2982"
+      > </a
+      ><a name="2983" class="DottedPattern Symbol"
+      >.</a
+      ><a name="2984" href="mini-library.html#2987" class="DottedPattern Bound"
+      >x'</a
+      ><a name="2986"
+      > </a
+      ><a name="2987" href="mini-library.html#2987" class="Bound"
+      >x'</a
+      ><a name="2989"
+      > </a
+      ><a name="2990" class="DottedPattern Symbol"
+      >.</a
+      ><a name="2991" href="mini-library.html#2993" class="DottedPattern Bound"
+      >y</a
+      ><a name="2992"
+      > </a
+      ><a name="2993" href="mini-library.html#2993" class="Bound"
+      >y</a
+      ><a name="2994"
+      > </a
+      ><a name="2995" href="mini-library.html#752" class="InductiveConstructor"
+      >refl</a
+      ><a name="2999"
+      > </a
+      ><a name="3000" href="mini-library.html#752" class="InductiveConstructor"
+      >refl</a
+      ><a name="3004"
+      > </a
+      ><a name="3005" class="Symbol"
+      >=</a
+      ><a name="3006"
+      > </a
+      ><a name="3007" href="mini-library.html#752" class="InductiveConstructor"
+      >refl</a
+      ><a name="3011"
+      >
+
+\end{code}
+
+</a
+      ><a name="3025" class="Comment"
+      >This notational trick is also from Nils Anders Danielsson. </a
+      ><a name="3084"
+      >
+
+\begin{code}
+
+</a
+      ><a name="3101" class="Keyword"
+      >infix</a
+      ><a name="3106"
+      >  </a
+      ><a name="3108" class="Number"
+      >0</a
+      ><a name="3109"
+      > finally
+</a
+      ><a name="3118" class="Keyword"
+      >infixr</a
+      ><a name="3124"
+      > </a
+      ><a name="3125" class="Number"
+      >0</a
+      ><a name="3126"
+      > _&#8801;&#10216;_&#10217;_
+
+</a
+      ><a name="3135" href="mini-library.html#3135" class="Function Operator"
+      >_&#8801;&#10216;_&#10217;_</a
+      ><a name="3141"
+      > </a
+      ><a name="3142" class="Symbol"
+      >:</a
+      ><a name="3143"
+      > </a
+      ><a name="3144" class="Symbol"
+      >{</a
+      ><a name="3145" href="mini-library.html#3145" class="Bound"
+      >A</a
+      ><a name="3146"
+      > </a
+      ><a name="3147" class="Symbol"
+      >:</a
+      ><a name="3148"
+      > </a
+      ><a name="3149" class="PrimitiveType"
+      >Set</a
+      ><a name="3152" class="Symbol"
+      >}</a
+      ><a name="3153"
+      > </a
+      ><a name="3154" class="Symbol"
+      >(</a
+      ><a name="3155" href="mini-library.html#3155" class="Bound"
+      >x</a
+      ><a name="3156"
+      > </a
+      ><a name="3157" class="Symbol"
+      >:</a
+      ><a name="3158"
+      > </a
+      ><a name="3159" href="mini-library.html#3145" class="Bound"
+      >A</a
+      ><a name="3160" class="Symbol"
+      >)</a
+      ><a name="3161"
+      > </a
+      ><a name="3162" class="Symbol"
+      >{</a
+      ><a name="3163" href="mini-library.html#3163" class="Bound"
+      >y</a
+      ><a name="3164"
+      > </a
+      ><a name="3165" href="mini-library.html#3165" class="Bound"
+      >z</a
+      ><a name="3166"
+      > </a
+      ><a name="3167" class="Symbol"
+      >:</a
+      ><a name="3168"
+      > </a
+      ><a name="3169" href="mini-library.html#3145" class="Bound"
+      >A</a
+      ><a name="3170" class="Symbol"
+      >}</a
+      ><a name="3171"
+      > </a
+      ><a name="3172" class="Symbol"
+      >&#8594;</a
+      ><a name="3173"
+      > </a
+      ><a name="3174" href="mini-library.html#3155" class="Bound"
+      >x</a
+      ><a name="3175"
+      > </a
+      ><a name="3176" href="mini-library.html#716" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="3177"
+      > </a
+      ><a name="3178" href="mini-library.html#3163" class="Bound"
+      >y</a
+      ><a name="3179"
+      > </a
+      ><a name="3180" class="Symbol"
+      >&#8594;</a
+      ><a name="3181"
+      > </a
+      ><a name="3182" href="mini-library.html#3163" class="Bound"
+      >y</a
+      ><a name="3183"
+      > </a
+      ><a name="3184" href="mini-library.html#716" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="3185"
+      > </a
+      ><a name="3186" href="mini-library.html#3165" class="Bound"
+      >z</a
+      ><a name="3187"
+      > </a
+      ><a name="3188" class="Symbol"
+      >&#8594;</a
+      ><a name="3189"
+      > </a
+      ><a name="3190" href="mini-library.html#3155" class="Bound"
+      >x</a
+      ><a name="3191"
+      > </a
+      ><a name="3192" href="mini-library.html#716" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="3193"
+      > </a
+      ><a name="3194" href="mini-library.html#3165" class="Bound"
+      >z</a
+      ><a name="3195"
+      >
+</a
+      ><a name="3196" class="Symbol"
+      >_</a
+      ><a name="3197"
+      > </a
+      ><a name="3198" href="mini-library.html#3135" class="Function Operator"
+      >&#8801;&#10216;</a
+      ><a name="3200"
+      > </a
+      ><a name="3201" href="mini-library.html#3201" class="Bound"
+      >p</a
+      ><a name="3202"
+      > </a
+      ><a name="3203" href="mini-library.html#3135" class="Function Operator"
+      >&#10217;</a
+      ><a name="3204"
+      > </a
+      ><a name="3205" href="mini-library.html#3205" class="Bound"
+      >q</a
+      ><a name="3206"
+      > </a
+      ><a name="3207" class="Symbol"
+      >=</a
+      ><a name="3208"
+      > </a
+      ><a name="3209" href="mini-library.html#3201" class="Bound"
+      >p</a
+      ><a name="3210"
+      > </a
+      ><a name="3211" href="mini-library.html#1939" class="Function Operator"
+      >&#8226;</a
+      ><a name="3212"
+      > </a
+      ><a name="3213" href="mini-library.html#3205" class="Bound"
+      >q</a
+      ><a name="3214"
+      >
+
+</a
+      ><a name="3216" href="mini-library.html#3216" class="Function"
+      >finally</a
+      ><a name="3223"
+      > </a
+      ><a name="3224" class="Symbol"
+      >:</a
+      ><a name="3225"
+      > </a
+      ><a name="3226" class="Symbol"
+      >{</a
+      ><a name="3227" href="mini-library.html#3227" class="Bound"
+      >A</a
+      ><a name="3228"
+      > </a
+      ><a name="3229" class="Symbol"
+      >:</a
+      ><a name="3230"
+      > </a
+      ><a name="3231" class="PrimitiveType"
+      >Set</a
+      ><a name="3234" class="Symbol"
+      >}</a
+      ><a name="3235"
+      > </a
+      ><a name="3236" class="Symbol"
+      >(</a
+      ><a name="3237" href="mini-library.html#3237" class="Bound"
+      >x</a
+      ><a name="3238"
+      > </a
+      ><a name="3239" href="mini-library.html#3239" class="Bound"
+      >y</a
+      ><a name="3240"
+      > </a
+      ><a name="3241" class="Symbol"
+      >:</a
+      ><a name="3242"
+      > </a
+      ><a name="3243" href="mini-library.html#3227" class="Bound"
+      >A</a
+      ><a name="3244" class="Symbol"
+      >)</a
+      ><a name="3245"
+      > </a
+      ><a name="3246" class="Symbol"
+      >&#8594;</a
+      ><a name="3247"
+      > </a
+      ><a name="3248" href="mini-library.html#3237" class="Bound"
+      >x</a
+      ><a name="3249"
+      > </a
+      ><a name="3250" href="mini-library.html#716" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="3251"
+      > </a
+      ><a name="3252" href="mini-library.html#3239" class="Bound"
+      >y</a
+      ><a name="3253"
+      > </a
+      ><a name="3254" class="Symbol"
+      >&#8594;</a
+      ><a name="3255"
+      > </a
+      ><a name="3256" href="mini-library.html#3237" class="Bound"
+      >x</a
+      ><a name="3257"
+      > </a
+      ><a name="3258" href="mini-library.html#716" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="3259"
+      > </a
+      ><a name="3260" href="mini-library.html#3239" class="Bound"
+      >y</a
+      ><a name="3261"
+      >
+</a
+      ><a name="3262" href="mini-library.html#3216" class="Function"
+      >finally</a
+      ><a name="3269"
+      > </a
+      ><a name="3270" class="Symbol"
+      >_</a
+      ><a name="3271"
+      > </a
+      ><a name="3272" class="Symbol"
+      >_</a
+      ><a name="3273"
+      > </a
+      ><a name="3274" href="mini-library.html#3274" class="Bound"
+      >p</a
+      ><a name="3275"
+      > </a
+      ><a name="3276" class="Symbol"
+      >=</a
+      ><a name="3277"
+      > </a
+      ><a name="3278" href="mini-library.html#3274" class="Bound"
+      >p</a
+      ><a name="3279"
+      >
+
+</a
+      ><a name="3281" class="Keyword"
+      >syntax</a
+      ><a name="3287"
+      > finally x y p </a
+      ><a name="3302" class="Symbol"
+      >=</a
+      ><a name="3303"
+      > x &#8801;&#10216; p &#10217;&#8718; y &#8718;
+
+\end{code}
+
+</a
+      ><a name="3331" class="Comment"
+      >Two more simple lemmas:</a
+      ><a name="3354"
+      >
+
+\begin{code}
+
+</a
+      ><a name="3371" href="mini-library.html#3371" class="Function"
+      >sym-trans</a
+      ><a name="3380"
+      > </a
+      ><a name="3381" class="Symbol"
+      >:</a
+      ><a name="3382"
+      > </a
+      ><a name="3383" class="Symbol"
+      >{</a
+      ><a name="3384" href="mini-library.html#3384" class="Bound"
+      >X</a
+      ><a name="3385"
+      > </a
+      ><a name="3386" class="Symbol"
+      >:</a
+      ><a name="3387"
+      > </a
+      ><a name="3388" class="PrimitiveType"
+      >Set</a
+      ><a name="3391" class="Symbol"
+      >}</a
+      ><a name="3392"
+      > </a
+      ><a name="3393" class="Symbol"
+      >{</a
+      ><a name="3394" href="mini-library.html#3394" class="Bound"
+      >x</a
+      ><a name="3395"
+      > </a
+      ><a name="3396" href="mini-library.html#3396" class="Bound"
+      >y</a
+      ><a name="3397"
+      > </a
+      ><a name="3398" href="mini-library.html#3398" class="Bound"
+      >z</a
+      ><a name="3399"
+      > </a
+      ><a name="3400" class="Symbol"
+      >:</a
+      ><a name="3401"
+      > </a
+      ><a name="3402" href="mini-library.html#3384" class="Bound"
+      >X</a
+      ><a name="3403" class="Symbol"
+      >}</a
+      ><a name="3404"
+      > </a
+      ><a name="3405" class="Symbol"
+      >(</a
+      ><a name="3406" href="mini-library.html#3406" class="Bound"
+      >p</a
+      ><a name="3407"
+      > </a
+      ><a name="3408" class="Symbol"
+      >:</a
+      ><a name="3409"
+      > </a
+      ><a name="3410" href="mini-library.html#3394" class="Bound"
+      >x</a
+      ><a name="3411"
+      > </a
+      ><a name="3412" href="mini-library.html#716" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="3413"
+      > </a
+      ><a name="3414" href="mini-library.html#3396" class="Bound"
+      >y</a
+      ><a name="3415" class="Symbol"
+      >)</a
+      ><a name="3416"
+      > </a
+      ><a name="3417" class="Symbol"
+      >(</a
+      ><a name="3418" href="mini-library.html#3418" class="Bound"
+      >q</a
+      ><a name="3419"
+      > </a
+      ><a name="3420" class="Symbol"
+      >:</a
+      ><a name="3421"
+      > </a
+      ><a name="3422" href="mini-library.html#3396" class="Bound"
+      >y</a
+      ><a name="3423"
+      > </a
+      ><a name="3424" href="mini-library.html#716" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="3425"
+      > </a
+      ><a name="3426" href="mini-library.html#3398" class="Bound"
+      >z</a
+      ><a name="3427" class="Symbol"
+      >)</a
+      ><a name="3428"
+      > </a
+      ><a name="3429" class="Symbol"
+      >&#8594;</a
+      ><a name="3430"
+      > </a
+      ><a name="3431" class="Symbol"
+      >(</a
+      ><a name="3432" href="mini-library.html#3418" class="Bound"
+      >q</a
+      ><a name="3433"
+      > </a
+      ><a name="3434" href="mini-library.html#2012" class="Function Operator"
+      >&#8315;&#185;</a
+      ><a name="3436" class="Symbol"
+      >)</a
+      ><a name="3437"
+      > </a
+      ><a name="3438" href="mini-library.html#1939" class="Function Operator"
+      >&#8226;</a
+      ><a name="3439"
+      > </a
+      ><a name="3440" class="Symbol"
+      >(</a
+      ><a name="3441" href="mini-library.html#3406" class="Bound"
+      >p</a
+      ><a name="3442"
+      > </a
+      ><a name="3443" href="mini-library.html#2012" class="Function Operator"
+      >&#8315;&#185;</a
+      ><a name="3445" class="Symbol"
+      >)</a
+      ><a name="3446"
+      > </a
+      ><a name="3447" href="mini-library.html#716" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="3448"
+      > </a
+      ><a name="3449" class="Symbol"
+      >(</a
+      ><a name="3450" href="mini-library.html#3406" class="Bound"
+      >p</a
+      ><a name="3451"
+      > </a
+      ><a name="3452" href="mini-library.html#1939" class="Function Operator"
+      >&#8226;</a
+      ><a name="3453"
+      > </a
+      ><a name="3454" href="mini-library.html#3418" class="Bound"
+      >q</a
+      ><a name="3455" class="Symbol"
+      >)</a
+      ><a name="3456" href="mini-library.html#2012" class="Function Operator"
+      >&#8315;&#185;</a
+      ><a name="3458"
+      >
+</a
+      ><a name="3459" href="mini-library.html#3371" class="Function"
+      >sym-trans</a
+      ><a name="3468"
+      > </a
+      ><a name="3469" class="Symbol"
+      >{</a
+      ><a name="3470" href="mini-library.html#3470" class="Bound"
+      >X</a
+      ><a name="3471" class="Symbol"
+      >}</a
+      ><a name="3472"
+      > </a
+      ><a name="3473" class="Symbol"
+      >{</a
+      ><a name="3474" href="mini-library.html#3474" class="Bound"
+      >x</a
+      ><a name="3475" class="Symbol"
+      >}</a
+      ><a name="3476"
+      > </a
+      ><a name="3477" class="Symbol"
+      >{</a
+      ><a name="3478" href="mini-library.html#3478" class="Bound"
+      >y</a
+      ><a name="3479" class="Symbol"
+      >}</a
+      ><a name="3480"
+      > </a
+      ><a name="3481" class="Symbol"
+      >{</a
+      ><a name="3482" href="mini-library.html#3482" class="Bound"
+      >z</a
+      ><a name="3483" class="Symbol"
+      >}</a
+      ><a name="3484"
+      > </a
+      ><a name="3485" href="mini-library.html#3485" class="Bound"
+      >p</a
+      ><a name="3486"
+      > </a
+      ><a name="3487" class="Symbol"
+      >=</a
+      ><a name="3488"
+      > </a
+      ><a name="3489" href="mini-library.html#1069" class="Function"
+      >J'</a
+      ><a name="3491"
+      > </a
+      ><a name="3492" href="mini-library.html#3478" class="Bound"
+      >y</a
+      ><a name="3493"
+      >  </a
+      ><a name="3495" class="Symbol"
+      >(&#955;</a
+      ><a name="3497"
+      > </a
+      ><a name="3498" href="mini-library.html#3498" class="Bound"
+      >q</a
+      ><a name="3499"
+      > </a
+      ><a name="3500" class="Symbol"
+      >&#8594;</a
+      ><a name="3501"
+      > </a
+      ><a name="3502" class="Symbol"
+      >(</a
+      ><a name="3503" href="mini-library.html#3498" class="Bound"
+      >q</a
+      ><a name="3504"
+      > </a
+      ><a name="3505" href="mini-library.html#2012" class="Function Operator"
+      >&#8315;&#185;</a
+      ><a name="3507" class="Symbol"
+      >)</a
+      ><a name="3508"
+      > </a
+      ><a name="3509" href="mini-library.html#1939" class="Function Operator"
+      >&#8226;</a
+      ><a name="3510"
+      > </a
+      ><a name="3511" class="Symbol"
+      >(</a
+      ><a name="3512" href="mini-library.html#3485" class="Bound"
+      >p</a
+      ><a name="3513"
+      > </a
+      ><a name="3514" href="mini-library.html#2012" class="Function Operator"
+      >&#8315;&#185;</a
+      ><a name="3516" class="Symbol"
+      >)</a
+      ><a name="3517"
+      > </a
+      ><a name="3518" href="mini-library.html#716" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="3519"
+      > </a
+      ><a name="3520" class="Symbol"
+      >(</a
+      ><a name="3521" href="mini-library.html#3485" class="Bound"
+      >p</a
+      ><a name="3522"
+      > </a
+      ><a name="3523" href="mini-library.html#1939" class="Function Operator"
+      >&#8226;</a
+      ><a name="3524"
+      > </a
+      ><a name="3525" href="mini-library.html#3498" class="Bound"
+      >q</a
+      ><a name="3526" class="Symbol"
+      >)</a
+      ><a name="3527" href="mini-library.html#2012" class="Function Operator"
+      >&#8315;&#185;</a
+      ><a name="3529" class="Symbol"
+      >)</a
+      ><a name="3530"
+      > </a
+      ><a name="3531" href="mini-library.html#3553" class="Function"
+      >trivial</a
+      ><a name="3538"
+      >
+   </a
+      ><a name="3542" class="Keyword"
+      >where</a
+      ><a name="3547"
+      >
+    </a
+      ><a name="3553" href="mini-library.html#3553" class="Function"
+      >trivial</a
+      ><a name="3560"
+      > </a
+      ><a name="3561" class="Symbol"
+      >:</a
+      ><a name="3562"
+      > </a
+      ><a name="3563" href="mini-library.html#752" class="InductiveConstructor"
+      >refl</a
+      ><a name="3567"
+      > </a
+      ><a name="3568" href="mini-library.html#1939" class="Function Operator"
+      >&#8226;</a
+      ><a name="3569"
+      > </a
+      ><a name="3570" class="Symbol"
+      >(</a
+      ><a name="3571" href="mini-library.html#3485" class="Bound"
+      >p</a
+      ><a name="3572"
+      > </a
+      ><a name="3573" href="mini-library.html#2012" class="Function Operator"
+      >&#8315;&#185;</a
+      ><a name="3575" class="Symbol"
+      >)</a
+      ><a name="3576"
+      > </a
+      ><a name="3577" href="mini-library.html#716" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="3578"
+      > </a
+      ><a name="3579" class="Symbol"
+      >(</a
+      ><a name="3580" href="mini-library.html#3485" class="Bound"
+      >p</a
+      ><a name="3581"
+      > </a
+      ><a name="3582" href="mini-library.html#1939" class="Function Operator"
+      >&#8226;</a
+      ><a name="3583"
+      > </a
+      ><a name="3584" href="mini-library.html#752" class="InductiveConstructor"
+      >refl</a
+      ><a name="3588" class="Symbol"
+      >)</a
+      ><a name="3589" href="mini-library.html#2012" class="Function Operator"
+      >&#8315;&#185;</a
+      ><a name="3591"
+      >
+    </a
+      ><a name="3596" href="mini-library.html#3553" class="Function"
+      >trivial</a
+      ><a name="3603"
+      > </a
+      ><a name="3604" class="Symbol"
+      >=</a
+      ><a name="3605"
+      > </a
+      ><a name="3606" href="mini-library.html#752" class="InductiveConstructor"
+      >refl</a
+      ><a name="3610"
+      > </a
+      ><a name="3611" href="mini-library.html#1939" class="Function Operator"
+      >&#8226;</a
+      ><a name="3612"
+      > </a
+      ><a name="3613" class="Symbol"
+      >(</a
+      ><a name="3614" href="mini-library.html#3485" class="Bound"
+      >p</a
+      ><a name="3615"
+      > </a
+      ><a name="3616" href="mini-library.html#2012" class="Function Operator"
+      >&#8315;&#185;</a
+      ><a name="3618" class="Symbol"
+      >)</a
+      ><a name="3619"
+      > </a
+      ><a name="3620" href="mini-library.html#3135" class="Function Operator"
+      >&#8801;&#10216;</a
+      ><a name="3622"
+      > </a
+      ><a name="3623" class="Symbol"
+      >(</a
+      ><a name="3624" href="mini-library.html#2494" class="Function"
+      >refl-is-left-id</a
+      ><a name="3639"
+      > </a
+      ><a name="3640" class="Symbol"
+      >(</a
+      ><a name="3641" href="mini-library.html#3485" class="Bound"
+      >p</a
+      ><a name="3642"
+      > </a
+      ><a name="3643" href="mini-library.html#2012" class="Function Operator"
+      >&#8315;&#185;</a
+      ><a name="3645" class="Symbol"
+      >))</a
+      ><a name="3647" href="mini-library.html#2012" class="Function Operator"
+      >&#8315;&#185;</a
+      ><a name="3649"
+      > </a
+      ><a name="3650" href="mini-library.html#3135" class="Function Operator"
+      >&#10217;</a
+      ><a name="3651"
+      >
+              </a
+      ><a name="3666" href="mini-library.html#3485" class="Bound"
+      >p</a
+      ><a name="3667"
+      > </a
+      ><a name="3668" href="mini-library.html#2012" class="Function Operator"
+      >&#8315;&#185;</a
+      ><a name="3670"
+      >          </a
+      ><a name="3680" href="mini-library.html#3216" class="Function"
+      >&#8801;&#10216;</a
+      ><a name="3682"
+      > </a
+      ><a name="3683" href="mini-library.html#1593" class="Function"
+      >ap</a
+      ><a name="3685"
+      > </a
+      ><a name="3686" href="mini-library.html#1501" class="Function"
+      >sym</a
+      ><a name="3689"
+      > </a
+      ><a name="3690" class="Symbol"
+      >(</a
+      ><a name="3691" href="mini-library.html#2380" class="Function"
+      >refl-is-right-id</a
+      ><a name="3707"
+      > </a
+      ><a name="3708" href="mini-library.html#3485" class="Bound"
+      >p</a
+      ><a name="3709" class="Symbol"
+      >)</a
+      ><a name="3710"
+      > </a
+      ><a name="3711" href="mini-library.html#3216" class="Function"
+      >&#10217;&#8718;</a
+      ><a name="3713"
+      >
+              </a
+      ><a name="3728" class="Symbol"
+      >(</a
+      ><a name="3729" href="mini-library.html#3485" class="Bound"
+      >p</a
+      ><a name="3730"
+      > </a
+      ><a name="3731" href="mini-library.html#1939" class="Function Operator"
+      >&#8226;</a
+      ><a name="3732"
+      > </a
+      ><a name="3733" href="mini-library.html#752" class="InductiveConstructor"
+      >refl</a
+      ><a name="3737" class="Symbol"
+      >)</a
+      ><a name="3738" href="mini-library.html#2012" class="Function Operator"
+      >&#8315;&#185;</a
+      ><a name="3740"
+      >  </a
+      ><a name="3742" href="mini-library.html#3216" class="Function"
+      >&#8718;</a
+      ><a name="3743"
+      >
+
+</a
+      ><a name="3745" href="mini-library.html#3745" class="Function"
+      >trans-assoc</a
+      ><a name="3756"
+      > </a
+      ><a name="3757" class="Symbol"
+      >:</a
+      ><a name="3758"
+      > </a
+      ><a name="3759" class="Symbol"
+      >{</a
+      ><a name="3760" href="mini-library.html#3760" class="Bound"
+      >X</a
+      ><a name="3761"
+      > </a
+      ><a name="3762" class="Symbol"
+      >:</a
+      ><a name="3763"
+      > </a
+      ><a name="3764" class="PrimitiveType"
+      >Set</a
+      ><a name="3767" class="Symbol"
+      >}</a
+      ><a name="3768"
+      > </a
+      ><a name="3769" class="Symbol"
+      >{</a
+      ><a name="3770" href="mini-library.html#3770" class="Bound"
+      >x</a
+      ><a name="3771"
+      > </a
+      ><a name="3772" href="mini-library.html#3772" class="Bound"
+      >y</a
+      ><a name="3773"
+      > </a
+      ><a name="3774" href="mini-library.html#3774" class="Bound"
+      >z</a
+      ><a name="3775"
+      > </a
+      ><a name="3776" href="mini-library.html#3776" class="Bound"
+      >w</a
+      ><a name="3777"
+      > </a
+      ><a name="3778" class="Symbol"
+      >:</a
+      ><a name="3779"
+      > </a
+      ><a name="3780" href="mini-library.html#3760" class="Bound"
+      >X</a
+      ><a name="3781" class="Symbol"
+      >}</a
+      ><a name="3782"
+      > </a
+      ><a name="3783" class="Symbol"
+      >(</a
+      ><a name="3784" href="mini-library.html#3784" class="Bound"
+      >p</a
+      ><a name="3785"
+      > </a
+      ><a name="3786" class="Symbol"
+      >:</a
+      ><a name="3787"
+      > </a
+      ><a name="3788" href="mini-library.html#3770" class="Bound"
+      >x</a
+      ><a name="3789"
+      > </a
+      ><a name="3790" href="mini-library.html#716" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="3791"
+      > </a
+      ><a name="3792" href="mini-library.html#3772" class="Bound"
+      >y</a
+      ><a name="3793" class="Symbol"
+      >)</a
+      ><a name="3794"
+      > </a
+      ><a name="3795" class="Symbol"
+      >(</a
+      ><a name="3796" href="mini-library.html#3796" class="Bound"
+      >q</a
+      ><a name="3797"
+      > </a
+      ><a name="3798" class="Symbol"
+      >:</a
+      ><a name="3799"
+      > </a
+      ><a name="3800" href="mini-library.html#3772" class="Bound"
+      >y</a
+      ><a name="3801"
+      > </a
+      ><a name="3802" href="mini-library.html#716" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="3803"
+      > </a
+      ><a name="3804" href="mini-library.html#3774" class="Bound"
+      >z</a
+      ><a name="3805" class="Symbol"
+      >)</a
+      ><a name="3806"
+      > </a
+      ><a name="3807" class="Symbol"
+      >(</a
+      ><a name="3808" href="mini-library.html#3808" class="Bound"
+      >r</a
+      ><a name="3809"
+      > </a
+      ><a name="3810" class="Symbol"
+      >:</a
+      ><a name="3811"
+      > </a
+      ><a name="3812" href="mini-library.html#3774" class="Bound"
+      >z</a
+      ><a name="3813"
+      > </a
+      ><a name="3814" href="mini-library.html#716" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="3815"
+      > </a
+      ><a name="3816" href="mini-library.html#3776" class="Bound"
+      >w</a
+      ><a name="3817" class="Symbol"
+      >)</a
+      ><a name="3818"
+      > </a
+      ><a name="3819" class="Symbol"
+      >&#8594;</a
+      ><a name="3820"
+      > </a
+      ><a name="3821" class="Symbol"
+      >(</a
+      ><a name="3822" href="mini-library.html#3784" class="Bound"
+      >p</a
+      ><a name="3823"
+      > </a
+      ><a name="3824" href="mini-library.html#1939" class="Function Operator"
+      >&#8226;</a
+      ><a name="3825"
+      > </a
+      ><a name="3826" href="mini-library.html#3796" class="Bound"
+      >q</a
+      ><a name="3827" class="Symbol"
+      >)</a
+      ><a name="3828"
+      > </a
+      ><a name="3829" href="mini-library.html#1939" class="Function Operator"
+      >&#8226;</a
+      ><a name="3830"
+      > </a
+      ><a name="3831" href="mini-library.html#3808" class="Bound"
+      >r</a
+      ><a name="3832"
+      > </a
+      ><a name="3833" href="mini-library.html#716" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="3834"
+      > </a
+      ><a name="3835" href="mini-library.html#3784" class="Bound"
+      >p</a
+      ><a name="3836"
+      > </a
+      ><a name="3837" href="mini-library.html#1939" class="Function Operator"
+      >&#8226;</a
+      ><a name="3838"
+      > </a
+      ><a name="3839" class="Symbol"
+      >(</a
+      ><a name="3840" href="mini-library.html#3796" class="Bound"
+      >q</a
+      ><a name="3841"
+      > </a
+      ><a name="3842" href="mini-library.html#1939" class="Function Operator"
+      >&#8226;</a
+      ><a name="3843"
+      > </a
+      ><a name="3844" href="mini-library.html#3808" class="Bound"
+      >r</a
+      ><a name="3845" class="Symbol"
+      >)</a
+      ><a name="3846"
+      >
+</a
+      ><a name="3847" href="mini-library.html#3745" class="Function"
+      >trans-assoc</a
+      ><a name="3858"
+      > </a
+      ><a name="3859" class="Symbol"
+      >{</a
+      ><a name="3860" href="mini-library.html#3860" class="Bound"
+      >X</a
+      ><a name="3861" class="Symbol"
+      >}</a
+      ><a name="3862"
+      > </a
+      ><a name="3863" class="Symbol"
+      >{</a
+      ><a name="3864" href="mini-library.html#3864" class="Bound"
+      >x</a
+      ><a name="3865" class="Symbol"
+      >}</a
+      ><a name="3866"
+      > </a
+      ><a name="3867" class="Symbol"
+      >{</a
+      ><a name="3868" href="mini-library.html#3868" class="Bound"
+      >y</a
+      ><a name="3869" class="Symbol"
+      >}</a
+      ><a name="3870"
+      > </a
+      ><a name="3871" class="Symbol"
+      >{</a
+      ><a name="3872" href="mini-library.html#3872" class="Bound"
+      >z</a
+      ><a name="3873" class="Symbol"
+      >}</a
+      ><a name="3874"
+      > </a
+      ><a name="3875" class="Symbol"
+      >{</a
+      ><a name="3876" href="mini-library.html#3876" class="Bound"
+      >w</a
+      ><a name="3877" class="Symbol"
+      >}</a
+      ><a name="3878"
+      > </a
+      ><a name="3879" href="mini-library.html#3879" class="Bound"
+      >p</a
+      ><a name="3880"
+      > </a
+      ><a name="3881" href="mini-library.html#3881" class="Bound"
+      >q</a
+      ><a name="3882"
+      > </a
+      ><a name="3883" class="Symbol"
+      >=</a
+      ><a name="3884"
+      > </a
+      ><a name="3885" href="mini-library.html#1069" class="Function"
+      >J'</a
+      ><a name="3887"
+      > </a
+      ><a name="3888" href="mini-library.html#3872" class="Bound"
+      >z</a
+      ><a name="3889"
+      > </a
+      ><a name="3890" class="Symbol"
+      >(&#955;</a
+      ><a name="3892"
+      > </a
+      ><a name="3893" href="mini-library.html#3893" class="Bound"
+      >r</a
+      ><a name="3894"
+      > </a
+      ><a name="3895" class="Symbol"
+      >&#8594;</a
+      ><a name="3896"
+      > </a
+      ><a name="3897" class="Symbol"
+      >(</a
+      ><a name="3898" href="mini-library.html#3879" class="Bound"
+      >p</a
+      ><a name="3899"
+      > </a
+      ><a name="3900" href="mini-library.html#1939" class="Function Operator"
+      >&#8226;</a
+      ><a name="3901"
+      > </a
+      ><a name="3902" href="mini-library.html#3881" class="Bound"
+      >q</a
+      ><a name="3903" class="Symbol"
+      >)</a
+      ><a name="3904"
+      > </a
+      ><a name="3905" href="mini-library.html#1939" class="Function Operator"
+      >&#8226;</a
+      ><a name="3906"
+      > </a
+      ><a name="3907" href="mini-library.html#3893" class="Bound"
+      >r</a
+      ><a name="3908"
+      > </a
+      ><a name="3909" href="mini-library.html#716" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="3910"
+      > </a
+      ><a name="3911" href="mini-library.html#3879" class="Bound"
+      >p</a
+      ><a name="3912"
+      > </a
+      ><a name="3913" href="mini-library.html#1939" class="Function Operator"
+      >&#8226;</a
+      ><a name="3914"
+      > </a
+      ><a name="3915" class="Symbol"
+      >(</a
+      ><a name="3916" href="mini-library.html#3881" class="Bound"
+      >q</a
+      ><a name="3917"
+      > </a
+      ><a name="3918" href="mini-library.html#1939" class="Function Operator"
+      >&#8226;</a
+      ><a name="3919"
+      > </a
+      ><a name="3920" href="mini-library.html#3893" class="Bound"
+      >r</a
+      ><a name="3921" class="Symbol"
+      >))</a
+      ><a name="3923"
+      > </a
+      ><a name="3924" class="Symbol"
+      >(</a
+      ><a name="3925" href="mini-library.html#3951" class="Function"
+      >trivial</a
+      ><a name="3932"
+      > </a
+      ><a name="3933" href="mini-library.html#2012" class="Function Operator"
+      >&#8315;&#185;</a
+      ><a name="3935" class="Symbol"
+      >)</a
+      ><a name="3936"
+      >
+   </a
+      ><a name="3940" class="Keyword"
+      >where</a
+      ><a name="3945"
+      >
+    </a
+      ><a name="3951" href="mini-library.html#3951" class="Function"
+      >trivial</a
+      ><a name="3958"
+      > </a
+      ><a name="3959" class="Symbol"
+      >=</a
+      ><a name="3960"
+      > </a
+      ><a name="3961" href="mini-library.html#3879" class="Bound"
+      >p</a
+      ><a name="3962"
+      > </a
+      ><a name="3963" href="mini-library.html#1939" class="Function Operator"
+      >&#8226;</a
+      ><a name="3964"
+      > </a
+      ><a name="3965" class="Symbol"
+      >(</a
+      ><a name="3966" href="mini-library.html#3881" class="Bound"
+      >q</a
+      ><a name="3967"
+      > </a
+      ><a name="3968" href="mini-library.html#1939" class="Function Operator"
+      >&#8226;</a
+      ><a name="3969"
+      > </a
+      ><a name="3970" href="mini-library.html#752" class="InductiveConstructor"
+      >refl</a
+      ><a name="3974" class="Symbol"
+      >)</a
+      ><a name="3975"
+      > </a
+      ><a name="3976" href="mini-library.html#3135" class="Function Operator"
+      >&#8801;&#10216;</a
+      ><a name="3978"
+      > </a
+      ><a name="3979" href="mini-library.html#1593" class="Function"
+      >ap</a
+      ><a name="3981"
+      > </a
+      ><a name="3982" class="Symbol"
+      >(&#955;</a
+      ><a name="3984"
+      > </a
+      ><a name="3985" href="mini-library.html#3985" class="Bound"
+      >q</a
+      ><a name="3986"
+      > </a
+      ><a name="3987" class="Symbol"
+      >&#8594;</a
+      ><a name="3988"
+      > </a
+      ><a name="3989" href="mini-library.html#3879" class="Bound"
+      >p</a
+      ><a name="3990"
+      > </a
+      ><a name="3991" href="mini-library.html#1939" class="Function Operator"
+      >&#8226;</a
+      ><a name="3992"
+      > </a
+      ><a name="3993" href="mini-library.html#3985" class="Bound"
+      >q</a
+      ><a name="3994" class="Symbol"
+      >)</a
+      ><a name="3995"
+      > </a
+      ><a name="3996" class="Symbol"
+      >((</a
+      ><a name="3998" href="mini-library.html#2380" class="Function"
+      >refl-is-right-id</a
+      ><a name="4014"
+      > </a
+      ><a name="4015" href="mini-library.html#3881" class="Bound"
+      >q</a
+      ><a name="4016" class="Symbol"
+      >)</a
+      ><a name="4017" href="mini-library.html#2012" class="Function Operator"
+      >&#8315;&#185;</a
+      ><a name="4019" class="Symbol"
+      >)</a
+      ><a name="4020"
+      > </a
+      ><a name="4021" href="mini-library.html#3135" class="Function Operator"
+      >&#10217;</a
+      ><a name="4022"
+      >
+              </a
+      ><a name="4037" href="mini-library.html#3879" class="Bound"
+      >p</a
+      ><a name="4038"
+      > </a
+      ><a name="4039" href="mini-library.html#1939" class="Function Operator"
+      >&#8226;</a
+      ><a name="4040"
+      > </a
+      ><a name="4041" href="mini-library.html#3881" class="Bound"
+      >q</a
+      ><a name="4042"
+      >          </a
+      ><a name="4052" href="mini-library.html#3216" class="Function"
+      >&#8801;&#10216;</a
+      ><a name="4054"
+      > </a
+      ><a name="4055" href="mini-library.html#2380" class="Function"
+      >refl-is-right-id</a
+      ><a name="4071"
+      > </a
+      ><a name="4072" class="Symbol"
+      >_</a
+      ><a name="4073"
+      > </a
+      ><a name="4074" href="mini-library.html#3216" class="Function"
+      >&#10217;&#8718;</a
+      ><a name="4076"
+      >
+              </a
+      ><a name="4091" class="Symbol"
+      >(</a
+      ><a name="4092" href="mini-library.html#3879" class="Bound"
+      >p</a
+      ><a name="4093"
+      > </a
+      ><a name="4094" href="mini-library.html#1939" class="Function Operator"
+      >&#8226;</a
+      ><a name="4095"
+      > </a
+      ><a name="4096" href="mini-library.html#3881" class="Bound"
+      >q</a
+      ><a name="4097" class="Symbol"
+      >)</a
+      ><a name="4098"
+      > </a
+      ><a name="4099" href="mini-library.html#1939" class="Function Operator"
+      >&#8226;</a
+      ><a name="4100"
+      > </a
+      ><a name="4101" href="mini-library.html#752" class="InductiveConstructor"
+      >refl</a
+      ><a name="4105"
+      > </a
+      ><a name="4106" href="mini-library.html#3216" class="Function"
+      >&#8718;</a
+      ><a name="4107"
+      >
+
+\end{code}
+
+\begin{code}
+
+</a
+      ><a name="4136" class="Keyword"
+      >data</a
+      ><a name="4140"
+      > </a
+      ><a name="4141" href="mini-library.html#4141" class="Datatype"
+      >&#8322;</a
+      ><a name="4142"
+      > </a
+      ><a name="4143" class="Symbol"
+      >:</a
+      ><a name="4144"
+      > </a
+      ><a name="4145" class="PrimitiveType"
+      >Set</a
+      ><a name="4148"
+      > </a
+      ><a name="4149" class="Keyword"
+      >where</a
+      ><a name="4154"
+      >
+ </a
+      ><a name="4156" href="mini-library.html#4156" class="InductiveConstructor"
+      >&#8320;</a
+      ><a name="4157"
+      > </a
+      ><a name="4158" class="Symbol"
+      >:</a
+      ><a name="4159"
+      > </a
+      ><a name="4160" href="mini-library.html#4141" class="Datatype"
+      >&#8322;</a
+      ><a name="4161"
+      >
+ </a
+      ><a name="4163" href="mini-library.html#4163" class="InductiveConstructor"
+      >&#8321;</a
+      ><a name="4164"
+      > </a
+      ><a name="4165" class="Symbol"
+      >:</a
+      ><a name="4166"
+      > </a
+      ><a name="4167" href="mini-library.html#4141" class="Datatype"
+      >&#8322;</a
+      ><a name="4168"
+      >
+
+\end{code}
+</a
+      ></pre
+    ></body
+  ></html
+>

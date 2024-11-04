@@ -1,0 +1,119 @@
+<!DOCTYPE HTML>
+<html><head><meta charset="utf-8"><title>periodic</title><link rel="stylesheet" href="Agda.css"></head><body><pre class="Agda"><a id="1" class="Background">Formal definitions of &quot;periodic&quot; and &quot;eventually periodic&quot; in Agda.
+
+We will not use any library and instead define everything we need from
+scratch:
+
+Definition of the type of natural numbers:
+
+</a><a id="195" class="Markup">\begin{code}</a>
+
+<a id="Type"></a><a id="209" href="periodic.html#209" class="Function">Type</a> <a id="214" class="Symbol">=</a> <a id="216" class="PrimitiveType">Set</a>
+
+<a id="221" class="Keyword">data</a> <a id="ℕ"></a><a id="226" href="periodic.html#226" class="Datatype">ℕ</a> <a id="228" class="Symbol">:</a> <a id="230" href="periodic.html#209" class="Function">Type</a> <a id="235" class="Keyword">where</a>
+  <a id="ℕ.zero"></a><a id="243" href="periodic.html#243" class="InductiveConstructor">zero</a> <a id="248" class="Symbol">:</a> <a id="250" href="periodic.html#226" class="Datatype">ℕ</a>
+  <a id="ℕ.succ"></a><a id="254" href="periodic.html#254" class="InductiveConstructor">succ</a> <a id="259" class="Symbol">:</a> <a id="261" href="periodic.html#226" class="Datatype">ℕ</a> <a id="263" class="Symbol">→</a> <a id="265" href="periodic.html#226" class="Datatype">ℕ</a>
+
+<a id="268" class="Symbol">{-#</a> <a id="272" class="Keyword">BUILTIN</a> <a id="280" class="Keyword">NATURAL</a> <a id="288" href="periodic.html#226" class="Datatype">ℕ</a> <a id="290" class="Symbol">#-}</a>
+
+<a id="_+_"></a><a id="295" href="periodic.html#295" class="Function Operator">_+_</a> <a id="299" class="Symbol">:</a> <a id="301" href="periodic.html#226" class="Datatype">ℕ</a> <a id="303" class="Symbol">→</a> <a id="305" href="periodic.html#226" class="Datatype">ℕ</a> <a id="307" class="Symbol">→</a> <a id="309" href="periodic.html#226" class="Datatype">ℕ</a>
+<a id="311" class="Number">0</a>      <a id="318" href="periodic.html#295" class="Function Operator">+</a> <a id="320" href="periodic.html#320" class="Bound">y</a> <a id="322" class="Symbol">=</a> <a id="324" href="periodic.html#320" class="Bound">y</a>
+<a id="326" href="periodic.html#254" class="InductiveConstructor">succ</a> <a id="331" href="periodic.html#331" class="Bound">x</a> <a id="333" href="periodic.html#295" class="Function Operator">+</a> <a id="335" href="periodic.html#335" class="Bound">y</a> <a id="337" class="Symbol">=</a> <a id="339" href="periodic.html#254" class="InductiveConstructor">succ</a> <a id="344" class="Symbol">(</a><a id="345" href="periodic.html#331" class="Bound">x</a> <a id="347" href="periodic.html#295" class="Function Operator">+</a> <a id="349" href="periodic.html#335" class="Bound">y</a><a id="350" class="Symbol">)</a>
+
+<a id="353" class="Markup">\end{code}</a><a id="363" class="Background">
+
+We define &quot;f to the power n&quot; by
+
+(f ^ n) (x) = f(f(f(...f(x))))
+
+where we apply n times the function f.
+
+Formally,
+
+</a><a id="481" class="Markup">\begin{code}</a>
+
+<a id="_^_"></a><a id="495" href="periodic.html#495" class="Function Operator">_^_</a> <a id="499" class="Symbol">:</a> <a id="501" class="Symbol">{</a><a id="502" href="periodic.html#502" class="Bound">X</a> <a id="504" class="Symbol">:</a> <a id="506" href="periodic.html#209" class="Function">Type</a><a id="510" class="Symbol">}</a> <a id="512" class="Symbol">→</a> <a id="514" class="Symbol">(</a><a id="515" href="periodic.html#502" class="Bound">X</a> <a id="517" class="Symbol">→</a> <a id="519" href="periodic.html#502" class="Bound">X</a><a id="520" class="Symbol">)</a> <a id="522" class="Symbol">→</a> <a id="524" href="periodic.html#226" class="Datatype">ℕ</a> <a id="526" class="Symbol">→</a> <a id="528" href="periodic.html#502" class="Bound">X</a> <a id="530" class="Symbol">→</a> <a id="532" href="periodic.html#502" class="Bound">X</a>
+<a id="534" class="Symbol">(</a><a id="535" href="periodic.html#535" class="Bound">f</a> <a id="537" href="periodic.html#495" class="Function Operator">^</a> <a id="539" class="Number">0</a><a id="540" class="Symbol">)</a>        <a id="549" href="periodic.html#549" class="Bound">x</a> <a id="551" class="Symbol">=</a> <a id="553" href="periodic.html#549" class="Bound">x</a>
+<a id="555" class="Symbol">(</a><a id="556" href="periodic.html#556" class="Bound">f</a> <a id="558" href="periodic.html#495" class="Function Operator">^</a> <a id="560" class="Symbol">(</a><a id="561" href="periodic.html#254" class="InductiveConstructor">succ</a> <a id="566" href="periodic.html#566" class="Bound">n</a><a id="567" class="Symbol">))</a> <a id="570" href="periodic.html#570" class="Bound">x</a> <a id="572" class="Symbol">=</a> <a id="574" href="periodic.html#556" class="Bound">f</a><a id="575" class="Symbol">((</a><a id="577" href="periodic.html#556" class="Bound">f</a> <a id="579" href="periodic.html#495" class="Function Operator">^</a> <a id="581" href="periodic.html#566" class="Bound">n</a><a id="582" class="Symbol">)</a> <a id="584" href="periodic.html#570" class="Bound">x</a><a id="585" class="Symbol">)</a>
+
+<a id="588" class="Markup">\end{code}</a><a id="598" class="Background">
+
+Definition of the constructive existential quantifier &quot;Σ&quot; (some people
+write &quot;∃&quot;, but we won&#39;t do this here):
+
+</a><a id="711" class="Markup">\begin{code}</a>
+
+<a id="725" class="Keyword">data</a> <a id="Σ"></a><a id="730" href="periodic.html#730" class="Datatype">Σ</a> <a id="732" class="Symbol">{</a><a id="733" href="periodic.html#733" class="Bound">X</a> <a id="735" class="Symbol">:</a> <a id="737" href="periodic.html#209" class="Function">Type</a><a id="741" class="Symbol">}</a> <a id="743" class="Symbol">(</a><a id="744" href="periodic.html#744" class="Bound">A</a> <a id="746" class="Symbol">:</a> <a id="748" href="periodic.html#733" class="Bound">X</a> <a id="750" class="Symbol">→</a> <a id="752" href="periodic.html#209" class="Function">Type</a><a id="756" class="Symbol">)</a> <a id="758" class="Symbol">:</a> <a id="760" href="periodic.html#209" class="Function">Type</a> <a id="765" class="Keyword">where</a>
+  <a id="Σ._,_"></a><a id="773" href="periodic.html#773" class="InductiveConstructor Operator">_,_</a> <a id="777" class="Symbol">:</a> <a id="779" class="Symbol">(</a><a id="780" href="periodic.html#780" class="Bound">x</a> <a id="782" class="Symbol">:</a> <a id="784" href="periodic.html#733" class="Bound">X</a><a id="785" class="Symbol">)</a> <a id="787" class="Symbol">→</a> <a id="789" href="periodic.html#744" class="Bound">A</a> <a id="791" href="periodic.html#780" class="Bound">x</a> <a id="793" class="Symbol">→</a> <a id="795" href="periodic.html#730" class="Datatype">Σ</a> <a id="797" class="Symbol">{</a><a id="798" href="periodic.html#733" class="Bound">X</a><a id="799" class="Symbol">}</a> <a id="801" href="periodic.html#744" class="Bound">A</a>
+
+<a id="804" class="Markup">\end{code}</a><a id="814" class="Background">
+
+To make things easier (and more general as a side-effect), we work
+with an arbitrary set of grids, and an arbitrary evolution function
+step, which are given as parameters for the following module.
+
+Moreover, instead of equality, we consider a relation between two
+grids. In the exercise, the relation is that the two grids become
+equal when they are sorted, but here we work with an arbitrary
+relation &quot;∼&quot;, for the sake of generality.
+
+We use a module with parameters for that:
+
+</a><a id="1295" class="Markup">\begin{code}</a>
+
+<a id="1309" class="Keyword">module</a> <a id="definitions-of-periodicity"></a><a id="1316" href="periodic.html#1316" class="Module">definitions-of-periodicity</a>
+         <a id="1352" class="Symbol">(</a><a id="1353" href="periodic.html#1353" class="Bound">Grid</a> <a id="1358" class="Symbol">:</a> <a id="1360" href="periodic.html#209" class="Function">Type</a><a id="1364" class="Symbol">)</a>
+         <a id="1375" class="Symbol">(</a><a id="1376" href="periodic.html#1376" class="Bound Operator">_∼_</a>  <a id="1381" class="Symbol">:</a> <a id="1383" href="periodic.html#1353" class="Bound">Grid</a> <a id="1388" class="Symbol">→</a> <a id="1390" href="periodic.html#1353" class="Bound">Grid</a> <a id="1395" class="Symbol">→</a> <a id="1397" href="periodic.html#209" class="Function">Type</a><a id="1401" class="Symbol">)</a>
+         <a id="1412" class="Symbol">(</a><a id="1413" href="periodic.html#1413" class="Bound">step</a> <a id="1418" class="Symbol">:</a> <a id="1420" href="periodic.html#1353" class="Bound">Grid</a> <a id="1425" class="Symbol">→</a> <a id="1427" href="periodic.html#1353" class="Bound">Grid</a><a id="1431" class="Symbol">)</a>
+       <a id="1440" class="Keyword">where</a>
+
+<a id="1447" class="Markup">\end{code}</a><a id="1457" class="Background">
+
+A grid g is periodic if there is k such that applying (k+1) times the
+function step to the grid g we get g back:
+
+</a><a id="1573" class="Markup">\begin{code}</a>
+
+ <a id="definitions-of-periodicity.is-periodic"></a><a id="1588" href="periodic.html#1588" class="Function">is-periodic</a> <a id="1600" class="Symbol">:</a> <a id="1602" href="periodic.html#1353" class="Bound">Grid</a> <a id="1607" class="Symbol">→</a> <a id="1609" href="periodic.html#209" class="Function">Type</a>
+ <a id="1615" href="periodic.html#1588" class="Function">is-periodic</a> <a id="1627" href="periodic.html#1627" class="Bound">g</a> <a id="1629" class="Symbol">=</a> <a id="1631" href="periodic.html#730" class="Datatype">Σ</a> <a id="1633" class="Symbol">\(</a><a id="1635" href="periodic.html#1635" class="Bound">k</a> <a id="1637" class="Symbol">:</a> <a id="1639" href="periodic.html#226" class="Datatype">ℕ</a><a id="1640" class="Symbol">)</a> <a id="1642" class="Symbol">→</a> <a id="1644" class="Symbol">(</a><a id="1645" href="periodic.html#1413" class="Bound">step</a> <a id="1650" href="periodic.html#495" class="Function Operator">^</a> <a id="1652" class="Symbol">(</a><a id="1653" href="periodic.html#1635" class="Bound">k</a> <a id="1655" href="periodic.html#295" class="Function Operator">+</a> <a id="1657" class="Number">1</a><a id="1658" class="Symbol">))</a> <a id="1661" href="periodic.html#1627" class="Bound">g</a> <a id="1663" href="periodic.html#1376" class="Bound Operator">∼</a> <a id="1665" href="periodic.html#1627" class="Bound">g</a>
+
+<a id="1668" class="Markup">\end{code}</a><a id="1678" class="Background">
+
+A grid g is eventually periodic if there is n such that the grid
+(step ^ n) g is periodic:
+
+</a><a id="1772" class="Markup">\begin{code}</a>
+
+ <a id="definitions-of-periodicity.is-eventually-periodic"></a><a id="1787" href="periodic.html#1787" class="Function">is-eventually-periodic</a> <a id="1810" class="Symbol">:</a> <a id="1812" href="periodic.html#1353" class="Bound">Grid</a> <a id="1817" class="Symbol">→</a> <a id="1819" href="periodic.html#209" class="Function">Type</a>
+ <a id="1825" href="periodic.html#1787" class="Function">is-eventually-periodic</a> <a id="1848" href="periodic.html#1848" class="Bound">g</a> <a id="1850" class="Symbol">=</a> <a id="1852" href="periodic.html#730" class="Datatype">Σ</a> <a id="1854" class="Symbol">\(</a><a id="1856" href="periodic.html#1856" class="Bound">n</a> <a id="1858" class="Symbol">:</a> <a id="1860" href="periodic.html#226" class="Datatype">ℕ</a><a id="1861" class="Symbol">)</a> <a id="1863" class="Symbol">→</a> <a id="1865" href="periodic.html#1588" class="Function">is-periodic</a> <a id="1877" class="Symbol">((</a><a id="1879" href="periodic.html#1413" class="Bound">step</a> <a id="1884" href="periodic.html#495" class="Function Operator">^</a> <a id="1886" href="periodic.html#1856" class="Bound">n</a><a id="1887" class="Symbol">)</a> <a id="1889" href="periodic.html#1848" class="Bound">g</a><a id="1890" class="Symbol">)</a>
+
+<a id="1893" class="Markup">\end{code}</a><a id="1903" class="Background">
+
+Notice that we allow n and k to be zero, but we are adding 1 to k to
+make sure we work with a positive number.
+
+Recall from the 1st year that in Agda&#39;s &quot;constructive logic&quot;, truth
+values are represented by sets. That&#39;s why we have &quot;Type&quot; as the return
+type for existential quantification, for the relation ∼, and the
+definitions of periodicity and eventual periodicity.
+
+Notice also that what Agda calls sets are often called types.
+
+Although we have kept the relation arbitrary, and this is enough for
+the definitions of periodicity, it is normally required that such a
+relation is reflexive, transitive and symmetric, or, in other words,
+that it is an equivalence relation.
+https://en.wikipedia.org/wiki/Equivalence_relation
+
+</a><a id="2633" class="Markup">\begin{code}</a>
+
+ <a id="definitions-of-periodicity.reflexivity"></a><a id="2648" href="periodic.html#2648" class="Function">reflexivity</a> <a id="definitions-of-periodicity.symmetry"></a><a id="2660" href="periodic.html#2660" class="Function">symmetry</a> <a id="definitions-of-periodicity.transitivity"></a><a id="2669" href="periodic.html#2669" class="Function">transitivity</a> <a id="2682" class="Symbol">:</a> <a id="2684" href="periodic.html#209" class="Function">Type</a>
+
+ <a id="2691" href="periodic.html#2648" class="Function">reflexivity</a>  <a id="2704" class="Symbol">=</a> <a id="2706" class="Symbol">(</a><a id="2707" href="periodic.html#2707" class="Bound">g</a> <a id="2709" class="Symbol">:</a> <a id="2711" href="periodic.html#1353" class="Bound">Grid</a><a id="2715" class="Symbol">)</a>     <a id="2721" class="Symbol">→</a> <a id="2723" href="periodic.html#2707" class="Bound">g</a> <a id="2725" href="periodic.html#1376" class="Bound Operator">∼</a> <a id="2727" href="periodic.html#2707" class="Bound">g</a>
+
+ <a id="2731" href="periodic.html#2660" class="Function">symmetry</a>     <a id="2744" class="Symbol">=</a> <a id="2746" class="Symbol">(</a><a id="2747" href="periodic.html#2747" class="Bound">g</a> <a id="2749" href="periodic.html#2749" class="Bound">h</a> <a id="2751" class="Symbol">:</a> <a id="2753" href="periodic.html#1353" class="Bound">Grid</a><a id="2757" class="Symbol">)</a>   <a id="2761" class="Symbol">→</a> <a id="2763" href="periodic.html#2747" class="Bound">g</a> <a id="2765" href="periodic.html#1376" class="Bound Operator">∼</a> <a id="2767" href="periodic.html#2749" class="Bound">h</a> <a id="2769" class="Symbol">→</a> <a id="2771" href="periodic.html#2749" class="Bound">h</a> <a id="2773" href="periodic.html#1376" class="Bound Operator">∼</a> <a id="2775" href="periodic.html#2747" class="Bound">g</a>
+
+ <a id="2779" href="periodic.html#2669" class="Function">transitivity</a> <a id="2792" class="Symbol">=</a> <a id="2794" class="Symbol">(</a><a id="2795" href="periodic.html#2795" class="Bound">g</a> <a id="2797" href="periodic.html#2797" class="Bound">h</a> <a id="2799" href="periodic.html#2799" class="Bound">i</a> <a id="2801" class="Symbol">:</a> <a id="2803" href="periodic.html#1353" class="Bound">Grid</a><a id="2807" class="Symbol">)</a> <a id="2809" class="Symbol">→</a> <a id="2811" href="periodic.html#2795" class="Bound">g</a> <a id="2813" href="periodic.html#1376" class="Bound Operator">∼</a> <a id="2815" href="periodic.html#2797" class="Bound">h</a> <a id="2817" class="Symbol">→</a> <a id="2819" href="periodic.html#2797" class="Bound">h</a> <a id="2821" href="periodic.html#1376" class="Bound Operator">∼</a> <a id="2823" href="periodic.html#2799" class="Bound">i</a> <a id="2825" class="Symbol">→</a> <a id="2827" href="periodic.html#2795" class="Bound">g</a> <a id="2829" href="periodic.html#1376" class="Bound Operator">∼</a> <a id="2831" href="periodic.html#2799" class="Bound">i</a>
+
+<a id="2834" class="Markup">\end{code}</a><a id="2844" class="Background">
+</a></pre></body></html>

@@ -1,0 +1,6387 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+><head
+  ><title
+    >tiny-library</title
+    ><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"
+     /><meta http-equiv="Content-Style-Type" content="text/css"
+     /><link href="Agda.css" rel="stylesheet" type="text/css"
+     /></head
+  ><body
+  ><pre
+    ><a name="1"
+      >\begin{code}
+
+</a
+      ><a name="15" class="Symbol"
+      >{-#</a
+      ><a name="18"
+      > </a
+      ><a name="19" class="Keyword"
+      >OPTIONS</a
+      ><a name="26"
+      > --without-K </a
+      ><a name="39" class="Symbol"
+      >#-}</a
+      ><a name="42"
+      >
+
+</a
+      ><a name="44" class="Keyword"
+      >module</a
+      ><a name="50"
+      > </a
+      ><a name="51" href="tiny-library.html#1" class="Module"
+      >tiny-library</a
+      ><a name="63"
+      > </a
+      ><a name="64" class="Keyword"
+      >where</a
+      ><a name="69"
+      >
+
+</a
+      ><a name="71" href="tiny-library.html#71" class="Function"
+      >Type</a
+      ><a name="75"
+      > </a
+      ><a name="76" class="Symbol"
+      >=</a
+      ><a name="77"
+      > </a
+      ><a name="78" class="PrimitiveType"
+      >Set</a
+      ><a name="81"
+      > 
+
+</a
+      ><a name="84" href="tiny-library.html#84" class="Function Operator"
+      >_&#8728;_</a
+      ><a name="87"
+      > </a
+      ><a name="88" class="Symbol"
+      >:</a
+      ><a name="89"
+      > </a
+      ><a name="90" class="Symbol"
+      >{</a
+      ><a name="91" href="tiny-library.html#91" class="Bound"
+      >X</a
+      ><a name="92"
+      > </a
+      ><a name="93" href="tiny-library.html#93" class="Bound"
+      >Y</a
+      ><a name="94"
+      > </a
+      ><a name="95" class="Symbol"
+      >:</a
+      ><a name="96"
+      > </a
+      ><a name="97" href="tiny-library.html#71" class="Function"
+      >Type</a
+      ><a name="101" class="Symbol"
+      >}</a
+      ><a name="102"
+      > </a
+      ><a name="103" class="Symbol"
+      >{</a
+      ><a name="104" href="tiny-library.html#104" class="Bound"
+      >Z</a
+      ><a name="105"
+      > </a
+      ><a name="106" class="Symbol"
+      >:</a
+      ><a name="107"
+      > </a
+      ><a name="108" href="tiny-library.html#93" class="Bound"
+      >Y</a
+      ><a name="109"
+      > </a
+      ><a name="110" class="Symbol"
+      >&#8594;</a
+      ><a name="111"
+      > </a
+      ><a name="112" href="tiny-library.html#71" class="Function"
+      >Type</a
+      ><a name="116" class="Symbol"
+      >}</a
+      ><a name="117"
+      > </a
+      ><a name="118" class="Symbol"
+      >&#8594;</a
+      ><a name="119"
+      > </a
+      ><a name="120" class="Symbol"
+      >((</a
+      ><a name="122" href="tiny-library.html#122" class="Bound"
+      >y</a
+      ><a name="123"
+      > </a
+      ><a name="124" class="Symbol"
+      >:</a
+      ><a name="125"
+      > </a
+      ><a name="126" href="tiny-library.html#93" class="Bound"
+      >Y</a
+      ><a name="127" class="Symbol"
+      >)</a
+      ><a name="128"
+      > </a
+      ><a name="129" class="Symbol"
+      >&#8594;</a
+      ><a name="130"
+      > </a
+      ><a name="131" href="tiny-library.html#104" class="Bound"
+      >Z</a
+      ><a name="132"
+      > </a
+      ><a name="133" href="tiny-library.html#122" class="Bound"
+      >y</a
+      ><a name="134" class="Symbol"
+      >)</a
+      ><a name="135"
+      > </a
+      ><a name="136" class="Symbol"
+      >&#8594;</a
+      ><a name="137"
+      > </a
+      ><a name="138" class="Symbol"
+      >(</a
+      ><a name="139" href="tiny-library.html#139" class="Bound"
+      >f</a
+      ><a name="140"
+      > </a
+      ><a name="141" class="Symbol"
+      >:</a
+      ><a name="142"
+      > </a
+      ><a name="143" href="tiny-library.html#91" class="Bound"
+      >X</a
+      ><a name="144"
+      > </a
+      ><a name="145" class="Symbol"
+      >&#8594;</a
+      ><a name="146"
+      > </a
+      ><a name="147" href="tiny-library.html#93" class="Bound"
+      >Y</a
+      ><a name="148" class="Symbol"
+      >)</a
+      ><a name="149"
+      > </a
+      ><a name="150" class="Symbol"
+      >&#8594;</a
+      ><a name="151"
+      > </a
+      ><a name="152" class="Symbol"
+      >(</a
+      ><a name="153" href="tiny-library.html#153" class="Bound"
+      >x</a
+      ><a name="154"
+      > </a
+      ><a name="155" class="Symbol"
+      >:</a
+      ><a name="156"
+      > </a
+      ><a name="157" href="tiny-library.html#91" class="Bound"
+      >X</a
+      ><a name="158" class="Symbol"
+      >)</a
+      ><a name="159"
+      > </a
+      ><a name="160" class="Symbol"
+      >&#8594;</a
+      ><a name="161"
+      > </a
+      ><a name="162" href="tiny-library.html#104" class="Bound"
+      >Z</a
+      ><a name="163" class="Symbol"
+      >(</a
+      ><a name="164" href="tiny-library.html#139" class="Bound"
+      >f</a
+      ><a name="165"
+      > </a
+      ><a name="166" href="tiny-library.html#153" class="Bound"
+      >x</a
+      ><a name="167" class="Symbol"
+      >)</a
+      ><a name="168"
+      >
+</a
+      ><a name="169" href="tiny-library.html#169" class="Bound"
+      >g</a
+      ><a name="170"
+      > </a
+      ><a name="171" href="tiny-library.html#84" class="Function Operator"
+      >&#8728;</a
+      ><a name="172"
+      > </a
+      ><a name="173" href="tiny-library.html#173" class="Bound"
+      >f</a
+      ><a name="174"
+      > </a
+      ><a name="175" class="Symbol"
+      >=</a
+      ><a name="176"
+      > </a
+      ><a name="177" class="Symbol"
+      >&#955;</a
+      ><a name="178"
+      > </a
+      ><a name="179" href="tiny-library.html#179" class="Bound"
+      >x</a
+      ><a name="180"
+      > </a
+      ><a name="181" class="Symbol"
+      >&#8594;</a
+      ><a name="182"
+      > </a
+      ><a name="183" href="tiny-library.html#169" class="Bound"
+      >g</a
+      ><a name="184" class="Symbol"
+      >(</a
+      ><a name="185" href="tiny-library.html#173" class="Bound"
+      >f</a
+      ><a name="186"
+      > </a
+      ><a name="187" href="tiny-library.html#179" class="Bound"
+      >x</a
+      ><a name="188" class="Symbol"
+      >)</a
+      ><a name="189"
+      >
+
+</a
+      ><a name="191" class="Keyword"
+      >data</a
+      ><a name="195"
+      > </a
+      ><a name="196" href="tiny-library.html#196" class="Datatype Operator"
+      >_+_</a
+      ><a name="199"
+      > </a
+      ><a name="200" class="Symbol"
+      >(</a
+      ><a name="201" href="tiny-library.html#201" class="Bound"
+      >X&#8320;</a
+      ><a name="203"
+      > </a
+      ><a name="204" href="tiny-library.html#204" class="Bound"
+      >X&#8321;</a
+      ><a name="206"
+      > </a
+      ><a name="207" class="Symbol"
+      >:</a
+      ><a name="208"
+      > </a
+      ><a name="209" href="tiny-library.html#71" class="Function"
+      >Type</a
+      ><a name="213" class="Symbol"
+      >)</a
+      ><a name="214"
+      > </a
+      ><a name="215" class="Symbol"
+      >:</a
+      ><a name="216"
+      > </a
+      ><a name="217" href="tiny-library.html#71" class="Function"
+      >Type</a
+      ><a name="221"
+      > </a
+      ><a name="222" class="Keyword"
+      >where</a
+      ><a name="227"
+      >
+ </a
+      ><a name="229" href="tiny-library.html#229" class="InductiveConstructor"
+      >in&#8320;</a
+      ><a name="232"
+      > </a
+      ><a name="233" class="Symbol"
+      >:</a
+      ><a name="234"
+      > </a
+      ><a name="235" href="tiny-library.html#201" class="Bound"
+      >X&#8320;</a
+      ><a name="237"
+      > </a
+      ><a name="238" class="Symbol"
+      >&#8594;</a
+      ><a name="239"
+      > </a
+      ><a name="240" href="tiny-library.html#201" class="Bound"
+      >X&#8320;</a
+      ><a name="242"
+      > </a
+      ><a name="243" href="tiny-library.html#196" class="Datatype Operator"
+      >+</a
+      ><a name="244"
+      > </a
+      ><a name="245" href="tiny-library.html#204" class="Bound"
+      >X&#8321;</a
+      ><a name="247"
+      >
+ </a
+      ><a name="249" href="tiny-library.html#249" class="InductiveConstructor"
+      >in&#8321;</a
+      ><a name="252"
+      > </a
+      ><a name="253" class="Symbol"
+      >:</a
+      ><a name="254"
+      > </a
+      ><a name="255" href="tiny-library.html#204" class="Bound"
+      >X&#8321;</a
+      ><a name="257"
+      > </a
+      ><a name="258" class="Symbol"
+      >&#8594;</a
+      ><a name="259"
+      > </a
+      ><a name="260" href="tiny-library.html#201" class="Bound"
+      >X&#8320;</a
+      ><a name="262"
+      > </a
+      ><a name="263" href="tiny-library.html#196" class="Datatype Operator"
+      >+</a
+      ><a name="264"
+      > </a
+      ><a name="265" href="tiny-library.html#204" class="Bound"
+      >X&#8321;</a
+      ><a name="267"
+      >
+
+</a
+      ><a name="269" class="Keyword"
+      >record</a
+      ><a name="275"
+      > </a
+      ><a name="276" href="tiny-library.html#276" class="Record"
+      >&#931;</a
+      ><a name="277"
+      > </a
+      ><a name="278" class="Symbol"
+      >{</a
+      ><a name="279" href="tiny-library.html#279" class="Bound"
+      >I</a
+      ><a name="280"
+      > </a
+      ><a name="281" class="Symbol"
+      >:</a
+      ><a name="282"
+      > </a
+      ><a name="283" href="tiny-library.html#71" class="Function"
+      >Type</a
+      ><a name="287" class="Symbol"
+      >}</a
+      ><a name="288"
+      > </a
+      ><a name="289" class="Symbol"
+      >(</a
+      ><a name="290" href="tiny-library.html#290" class="Bound"
+      >X</a
+      ><a name="291"
+      > </a
+      ><a name="292" class="Symbol"
+      >:</a
+      ><a name="293"
+      > </a
+      ><a name="294" href="tiny-library.html#279" class="Bound"
+      >I</a
+      ><a name="295"
+      > </a
+      ><a name="296" class="Symbol"
+      >&#8594;</a
+      ><a name="297"
+      > </a
+      ><a name="298" href="tiny-library.html#71" class="Function"
+      >Type</a
+      ><a name="302" class="Symbol"
+      >)</a
+      ><a name="303"
+      > </a
+      ><a name="304" class="Symbol"
+      >:</a
+      ><a name="305"
+      > </a
+      ><a name="306" href="tiny-library.html#71" class="Function"
+      >Type</a
+      ><a name="310"
+      > </a
+      ><a name="311" class="Keyword"
+      >where</a
+      ><a name="316"
+      >
+  </a
+      ><a name="319" class="Keyword"
+      >constructor</a
+      ><a name="330"
+      > </a
+      ><a name="331" href="tiny-library.html#331" class="InductiveConstructor Operator"
+      >_,_</a
+      ><a name="334"
+      >
+  </a
+      ><a name="337" class="Keyword"
+      >field</a
+      ><a name="342"
+      >
+   </a
+      ><a name="346" href="tiny-library.html#346" class="Field"
+      >&#960;&#8320;</a
+      ><a name="348"
+      > </a
+      ><a name="349" class="Symbol"
+      >:</a
+      ><a name="350"
+      > </a
+      ><a name="351" href="tiny-library.html#279" class="Bound"
+      >I</a
+      ><a name="352"
+      >
+   </a
+      ><a name="356" href="tiny-library.html#356" class="Field"
+      >&#960;&#8321;</a
+      ><a name="358"
+      > </a
+      ><a name="359" class="Symbol"
+      >:</a
+      ><a name="360"
+      > </a
+      ><a name="361" href="tiny-library.html#290" class="Bound"
+      >X</a
+      ><a name="362"
+      > </a
+      ><a name="363" href="tiny-library.html#346" class="Bound"
+      >&#960;&#8320;</a
+      ><a name="365"
+      >
+
+</a
+      ><a name="367" class="Keyword"
+      >open</a
+      ><a name="371"
+      > </a
+      ><a name="372" href="tiny-library.html#276" class="Module"
+      >&#931;</a
+      ><a name="373"
+      > </a
+      ><a name="374" class="Keyword"
+      >public</a
+      ><a name="380"
+      >
+
+</a
+      ><a name="382" class="Keyword"
+      >data</a
+      ><a name="386"
+      > </a
+      ><a name="387" href="tiny-library.html#387" class="Datatype"
+      >&#8322;</a
+      ><a name="388"
+      > </a
+      ><a name="389" class="Symbol"
+      >:</a
+      ><a name="390"
+      > </a
+      ><a name="391" href="tiny-library.html#71" class="Function"
+      >Type</a
+      ><a name="395"
+      > </a
+      ><a name="396" class="Keyword"
+      >where</a
+      ><a name="401"
+      >
+ </a
+      ><a name="403" href="tiny-library.html#403" class="InductiveConstructor"
+      >&#8320;</a
+      ><a name="404"
+      > </a
+      ><a name="405" class="Symbol"
+      >:</a
+      ><a name="406"
+      > </a
+      ><a name="407" href="tiny-library.html#387" class="Datatype"
+      >&#8322;</a
+      ><a name="408"
+      >
+ </a
+      ><a name="410" href="tiny-library.html#410" class="InductiveConstructor"
+      >&#8321;</a
+      ><a name="411"
+      > </a
+      ><a name="412" class="Symbol"
+      >:</a
+      ><a name="413"
+      > </a
+      ><a name="414" href="tiny-library.html#387" class="Datatype"
+      >&#8322;</a
+      ><a name="415"
+      >
+
+</a
+      ><a name="417" class="Keyword"
+      >data</a
+      ><a name="421"
+      > </a
+      ><a name="422" href="tiny-library.html#422" class="Datatype Operator"
+      >_&#8801;_</a
+      ><a name="425"
+      > </a
+      ><a name="426" class="Symbol"
+      >{</a
+      ><a name="427" href="tiny-library.html#427" class="Bound"
+      >X</a
+      ><a name="428"
+      > </a
+      ><a name="429" class="Symbol"
+      >:</a
+      ><a name="430"
+      > </a
+      ><a name="431" href="tiny-library.html#71" class="Function"
+      >Type</a
+      ><a name="435" class="Symbol"
+      >}</a
+      ><a name="436"
+      > </a
+      ><a name="437" class="Symbol"
+      >(</a
+      ><a name="438" href="tiny-library.html#438" class="Bound"
+      >x</a
+      ><a name="439"
+      > </a
+      ><a name="440" class="Symbol"
+      >:</a
+      ><a name="441"
+      > </a
+      ><a name="442" href="tiny-library.html#427" class="Bound"
+      >X</a
+      ><a name="443" class="Symbol"
+      >)</a
+      ><a name="444"
+      > </a
+      ><a name="445" class="Symbol"
+      >:</a
+      ><a name="446"
+      > </a
+      ><a name="447" href="tiny-library.html#427" class="Bound"
+      >X</a
+      ><a name="448"
+      > </a
+      ><a name="449" class="Symbol"
+      >&#8594;</a
+      ><a name="450"
+      > </a
+      ><a name="451" href="tiny-library.html#71" class="Function"
+      >Type</a
+      ><a name="455"
+      > </a
+      ><a name="456" class="Keyword"
+      >where</a
+      ><a name="461"
+      >
+ </a
+      ><a name="463" href="tiny-library.html#463" class="InductiveConstructor"
+      >refl</a
+      ><a name="467"
+      > </a
+      ><a name="468" class="Symbol"
+      >:</a
+      ><a name="469"
+      > </a
+      ><a name="470" href="tiny-library.html#438" class="Bound"
+      >x</a
+      ><a name="471"
+      > </a
+      ><a name="472" href="tiny-library.html#422" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="473"
+      > </a
+      ><a name="474" href="tiny-library.html#438" class="Bound"
+      >x</a
+      ><a name="475"
+      >
+
+
+
+</a
+      ><a name="479" href="tiny-library.html#479" class="Function"
+      >J</a
+      ><a name="480"
+      > </a
+      ><a name="481" class="Symbol"
+      >:</a
+      ><a name="482"
+      > </a
+      ><a name="483" class="Symbol"
+      >{</a
+      ><a name="484" href="tiny-library.html#484" class="Bound"
+      >X</a
+      ><a name="485"
+      > </a
+      ><a name="486" class="Symbol"
+      >:</a
+      ><a name="487"
+      > </a
+      ><a name="488" href="tiny-library.html#71" class="Function"
+      >Type</a
+      ><a name="492" class="Symbol"
+      >}</a
+      ><a name="493"
+      > </a
+      ><a name="494" class="Symbol"
+      >&#8594;</a
+      ><a name="495"
+      > </a
+      ><a name="496" class="Symbol"
+      >(</a
+      ><a name="497" href="tiny-library.html#497" class="Bound"
+      >A</a
+      ><a name="498"
+      > </a
+      ><a name="499" class="Symbol"
+      >:</a
+      ><a name="500"
+      > </a
+      ><a name="501" class="Symbol"
+      >(</a
+      ><a name="502" href="tiny-library.html#502" class="Bound"
+      >x</a
+      ><a name="503"
+      > </a
+      ><a name="504" href="tiny-library.html#504" class="Bound"
+      >x'</a
+      ><a name="506"
+      > </a
+      ><a name="507" class="Symbol"
+      >:</a
+      ><a name="508"
+      > </a
+      ><a name="509" href="tiny-library.html#484" class="Bound"
+      >X</a
+      ><a name="510" class="Symbol"
+      >)</a
+      ><a name="511"
+      > </a
+      ><a name="512" class="Symbol"
+      >&#8594;</a
+      ><a name="513"
+      > </a
+      ><a name="514" href="tiny-library.html#502" class="Bound"
+      >x</a
+      ><a name="515"
+      > </a
+      ><a name="516" href="tiny-library.html#422" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="517"
+      > </a
+      ><a name="518" href="tiny-library.html#504" class="Bound"
+      >x'</a
+      ><a name="520"
+      > </a
+      ><a name="521" class="Symbol"
+      >&#8594;</a
+      ><a name="522"
+      > </a
+      ><a name="523" href="tiny-library.html#71" class="Function"
+      >Type</a
+      ><a name="527" class="Symbol"
+      >)</a
+      ><a name="528"
+      >
+   </a
+      ><a name="532" class="Symbol"
+      >&#8594;</a
+      ><a name="533"
+      > </a
+      ><a name="534" class="Symbol"
+      >((</a
+      ><a name="536" href="tiny-library.html#536" class="Bound"
+      >x</a
+      ><a name="537"
+      > </a
+      ><a name="538" class="Symbol"
+      >:</a
+      ><a name="539"
+      > </a
+      ><a name="540" href="tiny-library.html#484" class="Bound"
+      >X</a
+      ><a name="541" class="Symbol"
+      >)</a
+      ><a name="542"
+      > </a
+      ><a name="543" class="Symbol"
+      >&#8594;</a
+      ><a name="544"
+      > </a
+      ><a name="545" href="tiny-library.html#497" class="Bound"
+      >A</a
+      ><a name="546"
+      > </a
+      ><a name="547" href="tiny-library.html#536" class="Bound"
+      >x</a
+      ><a name="548"
+      > </a
+      ><a name="549" href="tiny-library.html#536" class="Bound"
+      >x</a
+      ><a name="550"
+      > </a
+      ><a name="551" href="tiny-library.html#463" class="InductiveConstructor"
+      >refl</a
+      ><a name="555" class="Symbol"
+      >)</a
+      ><a name="556"
+      >
+   </a
+      ><a name="560" class="Symbol"
+      >&#8594;</a
+      ><a name="561"
+      >  </a
+      ><a name="563" class="Symbol"
+      >{</a
+      ><a name="564" href="tiny-library.html#564" class="Bound"
+      >x</a
+      ><a name="565"
+      > </a
+      ><a name="566" href="tiny-library.html#566" class="Bound"
+      >x'</a
+      ><a name="568"
+      > </a
+      ><a name="569" class="Symbol"
+      >:</a
+      ><a name="570"
+      > </a
+      ><a name="571" href="tiny-library.html#484" class="Bound"
+      >X</a
+      ><a name="572" class="Symbol"
+      >}</a
+      ><a name="573"
+      > </a
+      ><a name="574" class="Symbol"
+      >(</a
+      ><a name="575" href="tiny-library.html#575" class="Bound"
+      >r</a
+      ><a name="576"
+      > </a
+      ><a name="577" class="Symbol"
+      >:</a
+      ><a name="578"
+      > </a
+      ><a name="579" href="tiny-library.html#564" class="Bound"
+      >x</a
+      ><a name="580"
+      > </a
+      ><a name="581" href="tiny-library.html#422" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="582"
+      > </a
+      ><a name="583" href="tiny-library.html#566" class="Bound"
+      >x'</a
+      ><a name="585" class="Symbol"
+      >)</a
+      ><a name="586"
+      > </a
+      ><a name="587" class="Symbol"
+      >&#8594;</a
+      ><a name="588"
+      > </a
+      ><a name="589" href="tiny-library.html#497" class="Bound"
+      >A</a
+      ><a name="590"
+      > </a
+      ><a name="591" href="tiny-library.html#564" class="Bound"
+      >x</a
+      ><a name="592"
+      > </a
+      ><a name="593" href="tiny-library.html#566" class="Bound"
+      >x'</a
+      ><a name="595"
+      > </a
+      ><a name="596" href="tiny-library.html#575" class="Bound"
+      >r</a
+      ><a name="597"
+      >
+</a
+      ><a name="598" href="tiny-library.html#479" class="Function"
+      >J</a
+      ><a name="599"
+      > </a
+      ><a name="600" href="tiny-library.html#600" class="Bound"
+      >A</a
+      ><a name="601"
+      > </a
+      ><a name="602" href="tiny-library.html#602" class="Bound"
+      >f</a
+      ><a name="603"
+      > </a
+      ><a name="604" class="Symbol"
+      >{</a
+      ><a name="605" href="tiny-library.html#605" class="Bound"
+      >x</a
+      ><a name="606" class="Symbol"
+      >}</a
+      ><a name="607"
+      > </a
+      ><a name="608" href="tiny-library.html#463" class="InductiveConstructor"
+      >refl</a
+      ><a name="612"
+      > </a
+      ><a name="613" class="Symbol"
+      >=</a
+      ><a name="614"
+      > </a
+      ><a name="615" href="tiny-library.html#602" class="Bound"
+      >f</a
+      ><a name="616"
+      > </a
+      ><a name="617" href="tiny-library.html#605" class="Bound"
+      >x</a
+      ><a name="618"
+      >
+
+</a
+      ><a name="620" href="tiny-library.html#620" class="Function"
+      >J'</a
+      ><a name="622"
+      > </a
+      ><a name="623" class="Symbol"
+      >:</a
+      ><a name="624"
+      > </a
+      ><a name="625" class="Symbol"
+      >{</a
+      ><a name="626" href="tiny-library.html#626" class="Bound"
+      >X</a
+      ><a name="627"
+      > </a
+      ><a name="628" class="Symbol"
+      >:</a
+      ><a name="629"
+      > </a
+      ><a name="630" href="tiny-library.html#71" class="Function"
+      >Type</a
+      ><a name="634" class="Symbol"
+      >}</a
+      ><a name="635"
+      > </a
+      ><a name="636" class="Symbol"
+      >(</a
+      ><a name="637" href="tiny-library.html#637" class="Bound"
+      >A</a
+      ><a name="638"
+      > </a
+      ><a name="639" class="Symbol"
+      >:</a
+      ><a name="640"
+      > </a
+      ><a name="641" class="Symbol"
+      >{</a
+      ><a name="642" href="tiny-library.html#642" class="Bound"
+      >x</a
+      ><a name="643"
+      > </a
+      ><a name="644" href="tiny-library.html#644" class="Bound"
+      >y</a
+      ><a name="645"
+      > </a
+      ><a name="646" class="Symbol"
+      >:</a
+      ><a name="647"
+      > </a
+      ><a name="648" href="tiny-library.html#626" class="Bound"
+      >X</a
+      ><a name="649" class="Symbol"
+      >}</a
+      ><a name="650"
+      > </a
+      ><a name="651" class="Symbol"
+      >&#8594;</a
+      ><a name="652"
+      > </a
+      ><a name="653" href="tiny-library.html#642" class="Bound"
+      >x</a
+      ><a name="654"
+      > </a
+      ><a name="655" href="tiny-library.html#422" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="656"
+      > </a
+      ><a name="657" href="tiny-library.html#644" class="Bound"
+      >y</a
+      ><a name="658"
+      > </a
+      ><a name="659" class="Symbol"
+      >&#8594;</a
+      ><a name="660"
+      > </a
+      ><a name="661" href="tiny-library.html#71" class="Function"
+      >Type</a
+      ><a name="665" class="Symbol"
+      >)</a
+      ><a name="666"
+      >
+   </a
+      ><a name="670" class="Symbol"
+      >&#8594;</a
+      ><a name="671"
+      > </a
+      ><a name="672" class="Symbol"
+      >({</a
+      ><a name="674" href="tiny-library.html#674" class="Bound"
+      >x</a
+      ><a name="675"
+      > </a
+      ><a name="676" class="Symbol"
+      >:</a
+      ><a name="677"
+      > </a
+      ><a name="678" href="tiny-library.html#626" class="Bound"
+      >X</a
+      ><a name="679" class="Symbol"
+      >}</a
+      ><a name="680"
+      > </a
+      ><a name="681" class="Symbol"
+      >&#8594;</a
+      ><a name="682"
+      > </a
+      ><a name="683" href="tiny-library.html#637" class="Bound"
+      >A</a
+      ><a name="684"
+      > </a
+      ><a name="685" class="Symbol"
+      >(</a
+      ><a name="686" href="tiny-library.html#463" class="InductiveConstructor"
+      >refl</a
+      ><a name="690"
+      > </a
+      ><a name="691" class="Symbol"
+      >{</a
+      ><a name="692" href="tiny-library.html#626" class="Bound"
+      >X</a
+      ><a name="693" class="Symbol"
+      >}</a
+      ><a name="694"
+      > </a
+      ><a name="695" class="Symbol"
+      >{</a
+      ><a name="696" href="tiny-library.html#674" class="Bound"
+      >x</a
+      ><a name="697" class="Symbol"
+      >}))</a
+      ><a name="700"
+      > </a
+      ><a name="701" class="Symbol"
+      >&#8594;</a
+      ><a name="702"
+      > </a
+      ><a name="703" class="Symbol"
+      >{</a
+      ><a name="704" href="tiny-library.html#704" class="Bound"
+      >x</a
+      ><a name="705"
+      > </a
+      ><a name="706" href="tiny-library.html#706" class="Bound"
+      >y</a
+      ><a name="707"
+      > </a
+      ><a name="708" class="Symbol"
+      >:</a
+      ><a name="709"
+      > </a
+      ><a name="710" href="tiny-library.html#626" class="Bound"
+      >X</a
+      ><a name="711" class="Symbol"
+      >}</a
+      ><a name="712"
+      > </a
+      ><a name="713" class="Symbol"
+      >(</a
+      ><a name="714" href="tiny-library.html#714" class="Bound"
+      >p</a
+      ><a name="715"
+      > </a
+      ><a name="716" class="Symbol"
+      >:</a
+      ><a name="717"
+      > </a
+      ><a name="718" href="tiny-library.html#704" class="Bound"
+      >x</a
+      ><a name="719"
+      > </a
+      ><a name="720" href="tiny-library.html#422" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="721"
+      > </a
+      ><a name="722" href="tiny-library.html#706" class="Bound"
+      >y</a
+      ><a name="723" class="Symbol"
+      >)</a
+      ><a name="724"
+      > </a
+      ><a name="725" class="Symbol"
+      >&#8594;</a
+      ><a name="726"
+      > </a
+      ><a name="727" href="tiny-library.html#637" class="Bound"
+      >A</a
+      ><a name="728"
+      > </a
+      ><a name="729" href="tiny-library.html#714" class="Bound"
+      >p</a
+      ><a name="730"
+      >
+</a
+      ><a name="731" href="tiny-library.html#620" class="Function"
+      >J'</a
+      ><a name="733"
+      > </a
+      ><a name="734" class="Symbol"
+      >{</a
+      ><a name="735" href="tiny-library.html#735" class="Bound"
+      >X</a
+      ><a name="736" class="Symbol"
+      >}</a
+      ><a name="737"
+      > </a
+      ><a name="738" href="tiny-library.html#738" class="Bound"
+      >A</a
+      ><a name="739"
+      > </a
+      ><a name="740" href="tiny-library.html#740" class="Bound"
+      >&#966;</a
+      ><a name="741"
+      > </a
+      ><a name="742" class="Symbol"
+      >=</a
+      ><a name="743"
+      > </a
+      ><a name="744" href="tiny-library.html#479" class="Function"
+      >J</a
+      ><a name="745"
+      > </a
+      ><a name="746" class="Symbol"
+      >{</a
+      ><a name="747" href="tiny-library.html#735" class="Bound"
+      >X</a
+      ><a name="748" class="Symbol"
+      >}</a
+      ><a name="749"
+      > </a
+      ><a name="750" class="Symbol"
+      >(&#955;</a
+      ><a name="752"
+      > </a
+      ><a name="753" href="tiny-library.html#753" class="Bound"
+      >x</a
+      ><a name="754"
+      > </a
+      ><a name="755" href="tiny-library.html#755" class="Bound"
+      >y</a
+      ><a name="756"
+      > </a
+      ><a name="757" href="tiny-library.html#757" class="Bound"
+      >p</a
+      ><a name="758"
+      > </a
+      ><a name="759" class="Symbol"
+      >&#8594;</a
+      ><a name="760"
+      > </a
+      ><a name="761" href="tiny-library.html#738" class="Bound"
+      >A</a
+      ><a name="762"
+      > </a
+      ><a name="763" class="Symbol"
+      >{</a
+      ><a name="764" href="tiny-library.html#753" class="Bound"
+      >x</a
+      ><a name="765" class="Symbol"
+      >}</a
+      ><a name="766"
+      > </a
+      ><a name="767" class="Symbol"
+      >{</a
+      ><a name="768" href="tiny-library.html#755" class="Bound"
+      >y</a
+      ><a name="769" class="Symbol"
+      >}</a
+      ><a name="770"
+      > </a
+      ><a name="771" href="tiny-library.html#757" class="Bound"
+      >p</a
+      ><a name="772" class="Symbol"
+      >)</a
+      ><a name="773"
+      > </a
+      ><a name="774" class="Symbol"
+      >(&#955;</a
+      ><a name="776"
+      > </a
+      ><a name="777" href="tiny-library.html#777" class="Bound"
+      >x</a
+      ><a name="778"
+      > </a
+      ><a name="779" class="Symbol"
+      >&#8594;</a
+      ><a name="780"
+      > </a
+      ><a name="781" href="tiny-library.html#740" class="Bound"
+      >&#966;</a
+      ><a name="782"
+      > </a
+      ><a name="783" class="Symbol"
+      >{</a
+      ><a name="784" href="tiny-library.html#777" class="Bound"
+      >x</a
+      ><a name="785" class="Symbol"
+      >})</a
+      ><a name="787"
+      >
+
+</a
+      ><a name="789" href="tiny-library.html#789" class="Function"
+      >transport</a
+      ><a name="798"
+      > </a
+      ><a name="799" class="Symbol"
+      >:</a
+      ><a name="800"
+      > </a
+      ><a name="801" class="Symbol"
+      >{</a
+      ><a name="802" href="tiny-library.html#802" class="Bound"
+      >X</a
+      ><a name="803"
+      > </a
+      ><a name="804" class="Symbol"
+      >:</a
+      ><a name="805"
+      > </a
+      ><a name="806" href="tiny-library.html#71" class="Function"
+      >Type</a
+      ><a name="810" class="Symbol"
+      >}</a
+      ><a name="811"
+      > </a
+      ><a name="812" class="Symbol"
+      >{</a
+      ><a name="813" href="tiny-library.html#813" class="Bound"
+      >P</a
+      ><a name="814"
+      > </a
+      ><a name="815" class="Symbol"
+      >:</a
+      ><a name="816"
+      > </a
+      ><a name="817" href="tiny-library.html#802" class="Bound"
+      >X</a
+      ><a name="818"
+      > </a
+      ><a name="819" class="Symbol"
+      >&#8594;</a
+      ><a name="820"
+      > </a
+      ><a name="821" href="tiny-library.html#71" class="Function"
+      >Type</a
+      ><a name="825" class="Symbol"
+      >}</a
+      ><a name="826"
+      > </a
+      ><a name="827" class="Symbol"
+      >{</a
+      ><a name="828" href="tiny-library.html#828" class="Bound"
+      >x</a
+      ><a name="829"
+      > </a
+      ><a name="830" href="tiny-library.html#830" class="Bound"
+      >y</a
+      ><a name="831"
+      > </a
+      ><a name="832" class="Symbol"
+      >:</a
+      ><a name="833"
+      > </a
+      ><a name="834" href="tiny-library.html#802" class="Bound"
+      >X</a
+      ><a name="835" class="Symbol"
+      >}</a
+      ><a name="836"
+      > </a
+      ><a name="837" class="Symbol"
+      >&#8594;</a
+      ><a name="838"
+      > </a
+      ><a name="839" href="tiny-library.html#828" class="Bound"
+      >x</a
+      ><a name="840"
+      > </a
+      ><a name="841" href="tiny-library.html#422" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="842"
+      > </a
+      ><a name="843" href="tiny-library.html#830" class="Bound"
+      >y</a
+      ><a name="844"
+      > </a
+      ><a name="845" class="Symbol"
+      >&#8594;</a
+      ><a name="846"
+      > </a
+      ><a name="847" href="tiny-library.html#813" class="Bound"
+      >P</a
+      ><a name="848"
+      > </a
+      ><a name="849" href="tiny-library.html#828" class="Bound"
+      >x</a
+      ><a name="850"
+      > </a
+      ><a name="851" class="Symbol"
+      >&#8594;</a
+      ><a name="852"
+      > </a
+      ><a name="853" href="tiny-library.html#813" class="Bound"
+      >P</a
+      ><a name="854"
+      > </a
+      ><a name="855" href="tiny-library.html#830" class="Bound"
+      >y</a
+      ><a name="856"
+      >
+</a
+      ><a name="857" href="tiny-library.html#789" class="Function"
+      >transport</a
+      ><a name="866"
+      > </a
+      ><a name="867" class="Symbol"
+      >{</a
+      ><a name="868" href="tiny-library.html#868" class="Bound"
+      >X</a
+      ><a name="869" class="Symbol"
+      >}</a
+      ><a name="870"
+      > </a
+      ><a name="871" class="Symbol"
+      >{</a
+      ><a name="872" href="tiny-library.html#872" class="Bound"
+      >P</a
+      ><a name="873" class="Symbol"
+      >}</a
+      ><a name="874"
+      > </a
+      ><a name="875" href="tiny-library.html#463" class="InductiveConstructor"
+      >refl</a
+      ><a name="879"
+      > </a
+      ><a name="880" href="tiny-library.html#880" class="Bound"
+      >p</a
+      ><a name="881"
+      > </a
+      ><a name="882" class="Symbol"
+      >=</a
+      ><a name="883"
+      > </a
+      ><a name="884" href="tiny-library.html#880" class="Bound"
+      >p</a
+      ><a name="885"
+      >
+
+</a
+      ><a name="887" href="tiny-library.html#887" class="Function"
+      >ap</a
+      ><a name="889"
+      > </a
+      ><a name="890" class="Symbol"
+      >:</a
+      ><a name="891"
+      > </a
+      ><a name="892" class="Symbol"
+      >{</a
+      ><a name="893" href="tiny-library.html#893" class="Bound"
+      >X</a
+      ><a name="894"
+      > </a
+      ><a name="895" href="tiny-library.html#895" class="Bound"
+      >Y</a
+      ><a name="896"
+      > </a
+      ><a name="897" class="Symbol"
+      >:</a
+      ><a name="898"
+      > </a
+      ><a name="899" href="tiny-library.html#71" class="Function"
+      >Type</a
+      ><a name="903" class="Symbol"
+      >}</a
+      ><a name="904"
+      > </a
+      ><a name="905" class="Symbol"
+      >(</a
+      ><a name="906" href="tiny-library.html#906" class="Bound"
+      >f</a
+      ><a name="907"
+      > </a
+      ><a name="908" class="Symbol"
+      >:</a
+      ><a name="909"
+      > </a
+      ><a name="910" href="tiny-library.html#893" class="Bound"
+      >X</a
+      ><a name="911"
+      > </a
+      ><a name="912" class="Symbol"
+      >&#8594;</a
+      ><a name="913"
+      > </a
+      ><a name="914" href="tiny-library.html#895" class="Bound"
+      >Y</a
+      ><a name="915" class="Symbol"
+      >)</a
+      ><a name="916"
+      > </a
+      ><a name="917" class="Symbol"
+      >{</a
+      ><a name="918" href="tiny-library.html#918" class="Bound"
+      >x&#8320;</a
+      ><a name="920"
+      > </a
+      ><a name="921" href="tiny-library.html#921" class="Bound"
+      >x&#8321;</a
+      ><a name="923"
+      > </a
+      ><a name="924" class="Symbol"
+      >:</a
+      ><a name="925"
+      > </a
+      ><a name="926" href="tiny-library.html#893" class="Bound"
+      >X</a
+      ><a name="927" class="Symbol"
+      >}</a
+      ><a name="928"
+      > </a
+      ><a name="929" class="Symbol"
+      >&#8594;</a
+      ><a name="930"
+      > </a
+      ><a name="931" href="tiny-library.html#918" class="Bound"
+      >x&#8320;</a
+      ><a name="933"
+      > </a
+      ><a name="934" href="tiny-library.html#422" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="935"
+      > </a
+      ><a name="936" href="tiny-library.html#921" class="Bound"
+      >x&#8321;</a
+      ><a name="938"
+      > </a
+      ><a name="939" class="Symbol"
+      >&#8594;</a
+      ><a name="940"
+      > </a
+      ><a name="941" href="tiny-library.html#906" class="Bound"
+      >f</a
+      ><a name="942"
+      > </a
+      ><a name="943" href="tiny-library.html#918" class="Bound"
+      >x&#8320;</a
+      ><a name="945"
+      > </a
+      ><a name="946" href="tiny-library.html#422" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="947"
+      > </a
+      ><a name="948" href="tiny-library.html#906" class="Bound"
+      >f</a
+      ><a name="949"
+      > </a
+      ><a name="950" href="tiny-library.html#921" class="Bound"
+      >x&#8321;</a
+      ><a name="952"
+      >
+</a
+      ><a name="953" href="tiny-library.html#887" class="Function"
+      >ap</a
+      ><a name="955"
+      > </a
+      ><a name="956" href="tiny-library.html#956" class="Bound"
+      >f</a
+      ><a name="957"
+      > </a
+      ><a name="958" href="tiny-library.html#463" class="InductiveConstructor"
+      >refl</a
+      ><a name="962"
+      > </a
+      ><a name="963" class="Symbol"
+      >=</a
+      ><a name="964"
+      > </a
+      ><a name="965" href="tiny-library.html#463" class="InductiveConstructor"
+      >refl</a
+      ><a name="969"
+      >
+
+</a
+      ><a name="971" href="tiny-library.html#971" class="Function"
+      >ap-functorial</a
+      ><a name="984"
+      > </a
+      ><a name="985" class="Symbol"
+      >:</a
+      ><a name="986"
+      > </a
+      ><a name="987" class="Symbol"
+      >{</a
+      ><a name="988" href="tiny-library.html#988" class="Bound"
+      >X</a
+      ><a name="989"
+      > </a
+      ><a name="990" href="tiny-library.html#990" class="Bound"
+      >Y</a
+      ><a name="991"
+      > </a
+      ><a name="992" href="tiny-library.html#992" class="Bound"
+      >Z</a
+      ><a name="993"
+      > </a
+      ><a name="994" class="Symbol"
+      >:</a
+      ><a name="995"
+      > </a
+      ><a name="996" href="tiny-library.html#71" class="Function"
+      >Type</a
+      ><a name="1000" class="Symbol"
+      >}</a
+      ><a name="1001"
+      > </a
+      ><a name="1002" class="Symbol"
+      >(</a
+      ><a name="1003" href="tiny-library.html#1003" class="Bound"
+      >f</a
+      ><a name="1004"
+      > </a
+      ><a name="1005" class="Symbol"
+      >:</a
+      ><a name="1006"
+      > </a
+      ><a name="1007" href="tiny-library.html#988" class="Bound"
+      >X</a
+      ><a name="1008"
+      > </a
+      ><a name="1009" class="Symbol"
+      >&#8594;</a
+      ><a name="1010"
+      > </a
+      ><a name="1011" href="tiny-library.html#990" class="Bound"
+      >Y</a
+      ><a name="1012" class="Symbol"
+      >)</a
+      ><a name="1013"
+      > </a
+      ><a name="1014" class="Symbol"
+      >(</a
+      ><a name="1015" href="tiny-library.html#1015" class="Bound"
+      >g</a
+      ><a name="1016"
+      > </a
+      ><a name="1017" class="Symbol"
+      >:</a
+      ><a name="1018"
+      > </a
+      ><a name="1019" href="tiny-library.html#990" class="Bound"
+      >Y</a
+      ><a name="1020"
+      > </a
+      ><a name="1021" class="Symbol"
+      >&#8594;</a
+      ><a name="1022"
+      > </a
+      ><a name="1023" href="tiny-library.html#992" class="Bound"
+      >Z</a
+      ><a name="1024" class="Symbol"
+      >)</a
+      ><a name="1025"
+      > </a
+      ><a name="1026" class="Symbol"
+      >{</a
+      ><a name="1027" href="tiny-library.html#1027" class="Bound"
+      >x&#8320;</a
+      ><a name="1029"
+      > </a
+      ><a name="1030" href="tiny-library.html#1030" class="Bound"
+      >x&#8321;</a
+      ><a name="1032"
+      > </a
+      ><a name="1033" class="Symbol"
+      >:</a
+      ><a name="1034"
+      > </a
+      ><a name="1035" href="tiny-library.html#988" class="Bound"
+      >X</a
+      ><a name="1036" class="Symbol"
+      >}</a
+      ><a name="1037"
+      > </a
+      ><a name="1038" class="Symbol"
+      >&#8594;</a
+      ><a name="1039"
+      > </a
+      ><a name="1040" class="Symbol"
+      >(</a
+      ><a name="1041" href="tiny-library.html#1041" class="Bound"
+      >p</a
+      ><a name="1042"
+      > </a
+      ><a name="1043" class="Symbol"
+      >:</a
+      ><a name="1044"
+      > </a
+      ><a name="1045" href="tiny-library.html#1027" class="Bound"
+      >x&#8320;</a
+      ><a name="1047"
+      > </a
+      ><a name="1048" href="tiny-library.html#422" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="1049"
+      > </a
+      ><a name="1050" href="tiny-library.html#1030" class="Bound"
+      >x&#8321;</a
+      ><a name="1052" class="Symbol"
+      >)</a
+      ><a name="1053"
+      > 
+                </a
+      ><a name="1071" class="Symbol"
+      >&#8594;</a
+      ><a name="1072"
+      > </a
+      ><a name="1073" href="tiny-library.html#887" class="Function"
+      >ap</a
+      ><a name="1075"
+      > </a
+      ><a name="1076" href="tiny-library.html#1015" class="Bound"
+      >g</a
+      ><a name="1077"
+      > </a
+      ><a name="1078" class="Symbol"
+      >(</a
+      ><a name="1079" href="tiny-library.html#887" class="Function"
+      >ap</a
+      ><a name="1081"
+      > </a
+      ><a name="1082" href="tiny-library.html#1003" class="Bound"
+      >f</a
+      ><a name="1083"
+      > </a
+      ><a name="1084" href="tiny-library.html#1041" class="Bound"
+      >p</a
+      ><a name="1085" class="Symbol"
+      >)</a
+      ><a name="1086"
+      > </a
+      ><a name="1087" href="tiny-library.html#422" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="1088"
+      > </a
+      ><a name="1089" href="tiny-library.html#887" class="Function"
+      >ap</a
+      ><a name="1091"
+      > </a
+      ><a name="1092" class="Symbol"
+      >(</a
+      ><a name="1093" href="tiny-library.html#1015" class="Bound"
+      >g</a
+      ><a name="1094"
+      > </a
+      ><a name="1095" href="tiny-library.html#84" class="Function Operator"
+      >&#8728;</a
+      ><a name="1096"
+      > </a
+      ><a name="1097" href="tiny-library.html#1003" class="Bound"
+      >f</a
+      ><a name="1098" class="Symbol"
+      >)</a
+      ><a name="1099"
+      > </a
+      ><a name="1100" href="tiny-library.html#1041" class="Bound"
+      >p</a
+      ><a name="1101"
+      >
+</a
+      ><a name="1102" href="tiny-library.html#971" class="Function"
+      >ap-functorial</a
+      ><a name="1115"
+      > </a
+      ><a name="1116" href="tiny-library.html#1116" class="Bound"
+      >f</a
+      ><a name="1117"
+      > </a
+      ><a name="1118" href="tiny-library.html#1118" class="Bound"
+      >g</a
+      ><a name="1119"
+      > </a
+      ><a name="1120" href="tiny-library.html#463" class="InductiveConstructor"
+      >refl</a
+      ><a name="1124"
+      > </a
+      ><a name="1125" class="Symbol"
+      >=</a
+      ><a name="1126"
+      > </a
+      ><a name="1127" href="tiny-library.html#463" class="InductiveConstructor"
+      >refl</a
+      ><a name="1131"
+      >
+
+</a
+      ><a name="1133" href="tiny-library.html#1133" class="Function"
+      >apd</a
+      ><a name="1136"
+      > </a
+      ><a name="1137" class="Symbol"
+      >:</a
+      ><a name="1138"
+      > </a
+      ><a name="1139" class="Symbol"
+      >{</a
+      ><a name="1140" href="tiny-library.html#1140" class="Bound"
+      >X</a
+      ><a name="1141"
+      > </a
+      ><a name="1142" class="Symbol"
+      >:</a
+      ><a name="1143"
+      > </a
+      ><a name="1144" href="tiny-library.html#71" class="Function"
+      >Type</a
+      ><a name="1148" class="Symbol"
+      >}</a
+      ><a name="1149"
+      > </a
+      ><a name="1150" class="Symbol"
+      >{</a
+      ><a name="1151" href="tiny-library.html#1151" class="Bound"
+      >Y</a
+      ><a name="1152"
+      > </a
+      ><a name="1153" class="Symbol"
+      >:</a
+      ><a name="1154"
+      > </a
+      ><a name="1155" href="tiny-library.html#1140" class="Bound"
+      >X</a
+      ><a name="1156"
+      > </a
+      ><a name="1157" class="Symbol"
+      >&#8594;</a
+      ><a name="1158"
+      > </a
+      ><a name="1159" href="tiny-library.html#71" class="Function"
+      >Type</a
+      ><a name="1163" class="Symbol"
+      >}</a
+      ><a name="1164"
+      > </a
+      ><a name="1165" class="Symbol"
+      >(</a
+      ><a name="1166" href="tiny-library.html#1166" class="Bound"
+      >f</a
+      ><a name="1167"
+      > </a
+      ><a name="1168" class="Symbol"
+      >:</a
+      ><a name="1169"
+      > </a
+      ><a name="1170" class="Symbol"
+      >(</a
+      ><a name="1171" href="tiny-library.html#1171" class="Bound"
+      >x</a
+      ><a name="1172"
+      > </a
+      ><a name="1173" class="Symbol"
+      >:</a
+      ><a name="1174"
+      > </a
+      ><a name="1175" href="tiny-library.html#1140" class="Bound"
+      >X</a
+      ><a name="1176" class="Symbol"
+      >)</a
+      ><a name="1177"
+      > </a
+      ><a name="1178" class="Symbol"
+      >&#8594;</a
+      ><a name="1179"
+      > </a
+      ><a name="1180" href="tiny-library.html#1151" class="Bound"
+      >Y</a
+      ><a name="1181"
+      > </a
+      ><a name="1182" href="tiny-library.html#1171" class="Bound"
+      >x</a
+      ><a name="1183" class="Symbol"
+      >)</a
+      ><a name="1184"
+      > </a
+      ><a name="1185" class="Symbol"
+      >{</a
+      ><a name="1186" href="tiny-library.html#1186" class="Bound"
+      >x</a
+      ><a name="1187"
+      > </a
+      ><a name="1188" href="tiny-library.html#1188" class="Bound"
+      >x'</a
+      ><a name="1190"
+      > </a
+      ><a name="1191" class="Symbol"
+      >:</a
+      ><a name="1192"
+      > </a
+      ><a name="1193" href="tiny-library.html#1140" class="Bound"
+      >X</a
+      ><a name="1194" class="Symbol"
+      >}</a
+      ><a name="1195"
+      > </a
+      ><a name="1196" class="Symbol"
+      >(</a
+      ><a name="1197" href="tiny-library.html#1197" class="Bound"
+      >p</a
+      ><a name="1198"
+      > </a
+      ><a name="1199" class="Symbol"
+      >:</a
+      ><a name="1200"
+      > </a
+      ><a name="1201" href="tiny-library.html#1186" class="Bound"
+      >x</a
+      ><a name="1202"
+      > </a
+      ><a name="1203" href="tiny-library.html#422" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="1204"
+      > </a
+      ><a name="1205" href="tiny-library.html#1188" class="Bound"
+      >x'</a
+      ><a name="1207" class="Symbol"
+      >)</a
+      ><a name="1208"
+      > </a
+      ><a name="1209" class="Symbol"
+      >&#8594;</a
+      ><a name="1210"
+      > </a
+      ><a name="1211" href="tiny-library.html#789" class="Function"
+      >transport</a
+      ><a name="1220"
+      > </a
+      ><a name="1221" href="tiny-library.html#1197" class="Bound"
+      >p</a
+      ><a name="1222"
+      > </a
+      ><a name="1223" class="Symbol"
+      >(</a
+      ><a name="1224" href="tiny-library.html#1166" class="Bound"
+      >f</a
+      ><a name="1225"
+      > </a
+      ><a name="1226" href="tiny-library.html#1186" class="Bound"
+      >x</a
+      ><a name="1227" class="Symbol"
+      >)</a
+      ><a name="1228"
+      > </a
+      ><a name="1229" href="tiny-library.html#422" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="1230"
+      > </a
+      ><a name="1231" href="tiny-library.html#1166" class="Bound"
+      >f</a
+      ><a name="1232"
+      > </a
+      ><a name="1233" href="tiny-library.html#1188" class="Bound"
+      >x'</a
+      ><a name="1235"
+      >
+</a
+      ><a name="1236" href="tiny-library.html#1133" class="Function"
+      >apd</a
+      ><a name="1239"
+      > </a
+      ><a name="1240" href="tiny-library.html#1240" class="Bound"
+      >f</a
+      ><a name="1241"
+      > </a
+      ><a name="1242" href="tiny-library.html#463" class="InductiveConstructor"
+      >refl</a
+      ><a name="1246"
+      > </a
+      ><a name="1247" class="Symbol"
+      >=</a
+      ><a name="1248"
+      > </a
+      ><a name="1249" href="tiny-library.html#463" class="InductiveConstructor"
+      >refl</a
+      ><a name="1253"
+      > 
+
+</a
+      ><a name="1256" href="tiny-library.html#1256" class="Function"
+      >undo'-&#931;-&#8801;</a
+      ><a name="1265"
+      > </a
+      ><a name="1266" class="Symbol"
+      >:</a
+      ><a name="1267"
+      > </a
+      ><a name="1268" class="Symbol"
+      >{</a
+      ><a name="1269" href="tiny-library.html#1269" class="Bound"
+      >X</a
+      ><a name="1270"
+      > </a
+      ><a name="1271" class="Symbol"
+      >:</a
+      ><a name="1272"
+      > </a
+      ><a name="1273" href="tiny-library.html#71" class="Function"
+      >Type</a
+      ><a name="1277" class="Symbol"
+      >}</a
+      ><a name="1278"
+      > </a
+      ><a name="1279" class="Symbol"
+      >{</a
+      ><a name="1280" href="tiny-library.html#1280" class="Bound"
+      >Y</a
+      ><a name="1281"
+      > </a
+      ><a name="1282" class="Symbol"
+      >:</a
+      ><a name="1283"
+      > </a
+      ><a name="1284" href="tiny-library.html#1269" class="Bound"
+      >X</a
+      ><a name="1285"
+      > </a
+      ><a name="1286" class="Symbol"
+      >&#8594;</a
+      ><a name="1287"
+      > </a
+      ><a name="1288" href="tiny-library.html#71" class="Function"
+      >Type</a
+      ><a name="1292" class="Symbol"
+      >}</a
+      ><a name="1293"
+      > </a
+      ><a name="1294" class="Symbol"
+      >(</a
+      ><a name="1295" href="tiny-library.html#1295" class="Bound"
+      >w</a
+      ><a name="1296"
+      > </a
+      ><a name="1297" href="tiny-library.html#1297" class="Bound"
+      >w'</a
+      ><a name="1299"
+      > </a
+      ><a name="1300" class="Symbol"
+      >:</a
+      ><a name="1301"
+      > </a
+      ><a name="1302" href="tiny-library.html#276" class="Record"
+      >&#931;</a
+      ><a name="1303"
+      > </a
+      ><a name="1304" class="Symbol"
+      >\(</a
+      ><a name="1306" href="tiny-library.html#1306" class="Bound"
+      >x</a
+      ><a name="1307"
+      > </a
+      ><a name="1308" class="Symbol"
+      >:</a
+      ><a name="1309"
+      > </a
+      ><a name="1310" href="tiny-library.html#1269" class="Bound"
+      >X</a
+      ><a name="1311" class="Symbol"
+      >)</a
+      ><a name="1312"
+      > </a
+      ><a name="1313" class="Symbol"
+      >&#8594;</a
+      ><a name="1314"
+      > </a
+      ><a name="1315" href="tiny-library.html#1280" class="Bound"
+      >Y</a
+      ><a name="1316"
+      > </a
+      ><a name="1317" href="tiny-library.html#1306" class="Bound"
+      >x</a
+      ><a name="1318" class="Symbol"
+      >)</a
+      ><a name="1319"
+      > 
+     </a
+      ><a name="1326" class="Symbol"
+      >&#8594;</a
+      ><a name="1327"
+      > </a
+      ><a name="1328" href="tiny-library.html#1295" class="Bound"
+      >w</a
+      ><a name="1329"
+      > </a
+      ><a name="1330" href="tiny-library.html#422" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="1331"
+      > </a
+      ><a name="1332" href="tiny-library.html#1297" class="Bound"
+      >w'</a
+      ><a name="1334"
+      > </a
+      ><a name="1335" class="Symbol"
+      >&#8594;</a
+      ><a name="1336"
+      > </a
+      ><a name="1337" href="tiny-library.html#276" class="Record"
+      >&#931;</a
+      ><a name="1338"
+      > </a
+      ><a name="1339" class="Symbol"
+      >\(</a
+      ><a name="1341" href="tiny-library.html#1341" class="Bound"
+      >p</a
+      ><a name="1342"
+      > </a
+      ><a name="1343" class="Symbol"
+      >:</a
+      ><a name="1344"
+      > </a
+      ><a name="1345" href="tiny-library.html#346" class="Field"
+      >&#960;&#8320;</a
+      ><a name="1347"
+      > </a
+      ><a name="1348" href="tiny-library.html#1295" class="Bound"
+      >w</a
+      ><a name="1349"
+      > </a
+      ><a name="1350" href="tiny-library.html#422" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="1351"
+      > </a
+      ><a name="1352" href="tiny-library.html#346" class="Field"
+      >&#960;&#8320;</a
+      ><a name="1354"
+      > </a
+      ><a name="1355" href="tiny-library.html#1297" class="Bound"
+      >w'</a
+      ><a name="1357" class="Symbol"
+      >)</a
+      ><a name="1358"
+      > </a
+      ><a name="1359" class="Symbol"
+      >&#8594;</a
+      ><a name="1360"
+      > </a
+      ><a name="1361" href="tiny-library.html#789" class="Function"
+      >transport</a
+      ><a name="1370"
+      > </a
+      ><a name="1371" class="Symbol"
+      >{</a
+      ><a name="1372" href="tiny-library.html#1269" class="Bound"
+      >X</a
+      ><a name="1373" class="Symbol"
+      >}</a
+      ><a name="1374"
+      > </a
+      ><a name="1375" class="Symbol"
+      >{</a
+      ><a name="1376" href="tiny-library.html#1280" class="Bound"
+      >Y</a
+      ><a name="1377" class="Symbol"
+      >}</a
+      ><a name="1378"
+      > </a
+      ><a name="1379" href="tiny-library.html#1341" class="Bound"
+      >p</a
+      ><a name="1380"
+      > </a
+      ><a name="1381" class="Symbol"
+      >(</a
+      ><a name="1382" href="tiny-library.html#356" class="Field"
+      >&#960;&#8321;</a
+      ><a name="1384"
+      > </a
+      ><a name="1385" href="tiny-library.html#1295" class="Bound"
+      >w</a
+      ><a name="1386" class="Symbol"
+      >)</a
+      ><a name="1387"
+      > </a
+      ><a name="1388" href="tiny-library.html#422" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="1389"
+      > </a
+      ><a name="1390" href="tiny-library.html#356" class="Field"
+      >&#960;&#8321;</a
+      ><a name="1392"
+      > </a
+      ><a name="1393" href="tiny-library.html#1297" class="Bound"
+      >w'</a
+      ><a name="1395"
+      >
+</a
+      ><a name="1396" href="tiny-library.html#1256" class="Function"
+      >undo'-&#931;-&#8801;</a
+      ><a name="1405"
+      >  </a
+      ><a name="1407" href="tiny-library.html#1407" class="Bound"
+      >w</a
+      ><a name="1408"
+      > </a
+      ><a name="1409" class="DottedPattern Symbol"
+      >.</a
+      ><a name="1410" href="tiny-library.html#1407" class="DottedPattern Bound"
+      >w</a
+      ><a name="1411"
+      > </a
+      ><a name="1412" href="tiny-library.html#463" class="InductiveConstructor"
+      >refl</a
+      ><a name="1416"
+      > </a
+      ><a name="1417" class="Symbol"
+      >=</a
+      ><a name="1418"
+      > </a
+      ><a name="1419" href="tiny-library.html#463" class="InductiveConstructor"
+      >refl</a
+      ><a name="1423"
+      > </a
+      ><a name="1424" href="tiny-library.html#331" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="1425"
+      > </a
+      ><a name="1426" href="tiny-library.html#463" class="InductiveConstructor"
+      >refl</a
+      ><a name="1430"
+      >
+
+</a
+      ><a name="1432" href="tiny-library.html#1432" class="Function"
+      >undo-&#931;-&#8801;</a
+      ><a name="1440"
+      > </a
+      ><a name="1441" class="Symbol"
+      >:</a
+      ><a name="1442"
+      > </a
+      ><a name="1443" class="Symbol"
+      >{</a
+      ><a name="1444" href="tiny-library.html#1444" class="Bound"
+      >X</a
+      ><a name="1445"
+      > </a
+      ><a name="1446" class="Symbol"
+      >:</a
+      ><a name="1447"
+      > </a
+      ><a name="1448" href="tiny-library.html#71" class="Function"
+      >Type</a
+      ><a name="1452" class="Symbol"
+      >}</a
+      ><a name="1453"
+      > </a
+      ><a name="1454" class="Symbol"
+      >{</a
+      ><a name="1455" href="tiny-library.html#1455" class="Bound"
+      >Y</a
+      ><a name="1456"
+      > </a
+      ><a name="1457" class="Symbol"
+      >:</a
+      ><a name="1458"
+      > </a
+      ><a name="1459" href="tiny-library.html#1444" class="Bound"
+      >X</a
+      ><a name="1460"
+      > </a
+      ><a name="1461" class="Symbol"
+      >&#8594;</a
+      ><a name="1462"
+      > </a
+      ><a name="1463" href="tiny-library.html#71" class="Function"
+      >Type</a
+      ><a name="1467" class="Symbol"
+      >}</a
+      ><a name="1468"
+      > </a
+      ><a name="1469" class="Symbol"
+      >(</a
+      ><a name="1470" href="tiny-library.html#1470" class="Bound"
+      >x</a
+      ><a name="1471"
+      > </a
+      ><a name="1472" href="tiny-library.html#1472" class="Bound"
+      >x'</a
+      ><a name="1474"
+      > </a
+      ><a name="1475" class="Symbol"
+      >:</a
+      ><a name="1476"
+      > </a
+      ><a name="1477" href="tiny-library.html#1444" class="Bound"
+      >X</a
+      ><a name="1478" class="Symbol"
+      >)</a
+      ><a name="1479"
+      > </a
+      ><a name="1480" class="Symbol"
+      >(</a
+      ><a name="1481" href="tiny-library.html#1481" class="Bound"
+      >y</a
+      ><a name="1482"
+      > </a
+      ><a name="1483" class="Symbol"
+      >:</a
+      ><a name="1484"
+      > </a
+      ><a name="1485" href="tiny-library.html#1455" class="Bound"
+      >Y</a
+      ><a name="1486"
+      > </a
+      ><a name="1487" href="tiny-library.html#1470" class="Bound"
+      >x</a
+      ><a name="1488" class="Symbol"
+      >)</a
+      ><a name="1489"
+      > </a
+      ><a name="1490" class="Symbol"
+      >(</a
+      ><a name="1491" href="tiny-library.html#1491" class="Bound"
+      >y'</a
+      ><a name="1493"
+      > </a
+      ><a name="1494" class="Symbol"
+      >:</a
+      ><a name="1495"
+      > </a
+      ><a name="1496" href="tiny-library.html#1455" class="Bound"
+      >Y</a
+      ><a name="1497"
+      > </a
+      ><a name="1498" href="tiny-library.html#1472" class="Bound"
+      >x'</a
+      ><a name="1500" class="Symbol"
+      >)</a
+      ><a name="1501"
+      >
+     </a
+      ><a name="1507" class="Symbol"
+      >&#8594;</a
+      ><a name="1508"
+      > </a
+      ><a name="1509" class="Symbol"
+      >(</a
+      ><a name="1510" href="tiny-library.html#422" class="Datatype Operator"
+      >_&#8801;_</a
+      ><a name="1513"
+      > </a
+      ><a name="1514" class="Symbol"
+      >{</a
+      ><a name="1515" href="tiny-library.html#276" class="Record"
+      >&#931;</a
+      ><a name="1516"
+      > </a
+      ><a name="1517" class="Symbol"
+      >\</a
+      ><a name="1518" href="tiny-library.html#1518" class="Bound"
+      >x</a
+      ><a name="1519"
+      > </a
+      ><a name="1520" class="Symbol"
+      >&#8594;</a
+      ><a name="1521"
+      > </a
+      ><a name="1522" href="tiny-library.html#1455" class="Bound"
+      >Y</a
+      ><a name="1523"
+      > </a
+      ><a name="1524" href="tiny-library.html#1518" class="Bound"
+      >x</a
+      ><a name="1525" class="Symbol"
+      >}</a
+      ><a name="1526"
+      > </a
+      ><a name="1527" class="Symbol"
+      >(</a
+      ><a name="1528" href="tiny-library.html#1470" class="Bound"
+      >x</a
+      ><a name="1529"
+      > </a
+      ><a name="1530" href="tiny-library.html#331" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="1531"
+      > </a
+      ><a name="1532" href="tiny-library.html#1481" class="Bound"
+      >y</a
+      ><a name="1533" class="Symbol"
+      >)</a
+      ><a name="1534"
+      > </a
+      ><a name="1535" class="Symbol"
+      >(</a
+      ><a name="1536" href="tiny-library.html#1472" class="Bound"
+      >x'</a
+      ><a name="1538"
+      > </a
+      ><a name="1539" href="tiny-library.html#331" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="1540"
+      > </a
+      ><a name="1541" href="tiny-library.html#1491" class="Bound"
+      >y'</a
+      ><a name="1543" class="Symbol"
+      >))</a
+      ><a name="1545"
+      > </a
+      ><a name="1546" class="Symbol"
+      >&#8594;</a
+      ><a name="1547"
+      > </a
+      ><a name="1548" href="tiny-library.html#276" class="Record"
+      >&#931;</a
+      ><a name="1549"
+      > </a
+      ><a name="1550" class="Symbol"
+      >\(</a
+      ><a name="1552" href="tiny-library.html#1552" class="Bound"
+      >p</a
+      ><a name="1553"
+      > </a
+      ><a name="1554" class="Symbol"
+      >:</a
+      ><a name="1555"
+      > </a
+      ><a name="1556" href="tiny-library.html#1470" class="Bound"
+      >x</a
+      ><a name="1557"
+      > </a
+      ><a name="1558" href="tiny-library.html#422" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="1559"
+      > </a
+      ><a name="1560" href="tiny-library.html#1472" class="Bound"
+      >x'</a
+      ><a name="1562" class="Symbol"
+      >)</a
+      ><a name="1563"
+      > </a
+      ><a name="1564" class="Symbol"
+      >&#8594;</a
+      ><a name="1565"
+      > </a
+      ><a name="1566" href="tiny-library.html#789" class="Function"
+      >transport</a
+      ><a name="1575"
+      > </a
+      ><a name="1576" href="tiny-library.html#1552" class="Bound"
+      >p</a
+      ><a name="1577"
+      > </a
+      ><a name="1578" href="tiny-library.html#1481" class="Bound"
+      >y</a
+      ><a name="1579"
+      > </a
+      ><a name="1580" href="tiny-library.html#422" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="1581"
+      > </a
+      ><a name="1582" href="tiny-library.html#1491" class="Bound"
+      >y'</a
+      ><a name="1584"
+      >
+</a
+      ><a name="1585" href="tiny-library.html#1432" class="Function"
+      >undo-&#931;-&#8801;</a
+      ><a name="1593"
+      >  </a
+      ><a name="1595" href="tiny-library.html#1595" class="Bound"
+      >x</a
+      ><a name="1596"
+      > </a
+      ><a name="1597" href="tiny-library.html#1597" class="Bound"
+      >x'</a
+      ><a name="1599"
+      > </a
+      ><a name="1600" href="tiny-library.html#1600" class="Bound"
+      >y</a
+      ><a name="1601"
+      > </a
+      ><a name="1602" href="tiny-library.html#1602" class="Bound"
+      >y'</a
+      ><a name="1604"
+      > </a
+      ><a name="1605" class="Symbol"
+      >=</a
+      ><a name="1606"
+      > </a
+      ><a name="1607" href="tiny-library.html#1256" class="Function"
+      >undo'-&#931;-&#8801;</a
+      ><a name="1616"
+      > </a
+      ><a name="1617" class="Symbol"
+      >((</a
+      ><a name="1619" href="tiny-library.html#1595" class="Bound"
+      >x</a
+      ><a name="1620"
+      > </a
+      ><a name="1621" href="tiny-library.html#331" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="1622"
+      > </a
+      ><a name="1623" href="tiny-library.html#1600" class="Bound"
+      >y</a
+      ><a name="1624" class="Symbol"
+      >))</a
+      ><a name="1626"
+      > </a
+      ><a name="1627" class="Symbol"
+      >(</a
+      ><a name="1628" href="tiny-library.html#1597" class="Bound"
+      >x'</a
+      ><a name="1630"
+      > </a
+      ><a name="1631" href="tiny-library.html#331" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="1632"
+      > </a
+      ><a name="1633" href="tiny-library.html#1602" class="Bound"
+      >y'</a
+      ><a name="1635" class="Symbol"
+      >)</a
+      ><a name="1636"
+      >
+
+</a
+      ><a name="1638" href="tiny-library.html#1638" class="Function"
+      >&#931;-&#8801;</a
+      ><a name="1641"
+      > </a
+      ><a name="1642" class="Symbol"
+      >:</a
+      ><a name="1643"
+      > </a
+      ><a name="1644" class="Symbol"
+      >{</a
+      ><a name="1645" href="tiny-library.html#1645" class="Bound"
+      >X</a
+      ><a name="1646"
+      > </a
+      ><a name="1647" class="Symbol"
+      >:</a
+      ><a name="1648"
+      > </a
+      ><a name="1649" href="tiny-library.html#71" class="Function"
+      >Type</a
+      ><a name="1653" class="Symbol"
+      >}</a
+      ><a name="1654"
+      > </a
+      ><a name="1655" class="Symbol"
+      >{</a
+      ><a name="1656" href="tiny-library.html#1656" class="Bound"
+      >Y</a
+      ><a name="1657"
+      > </a
+      ><a name="1658" class="Symbol"
+      >:</a
+      ><a name="1659"
+      > </a
+      ><a name="1660" href="tiny-library.html#1645" class="Bound"
+      >X</a
+      ><a name="1661"
+      > </a
+      ><a name="1662" class="Symbol"
+      >&#8594;</a
+      ><a name="1663"
+      > </a
+      ><a name="1664" href="tiny-library.html#71" class="Function"
+      >Type</a
+      ><a name="1668" class="Symbol"
+      >}</a
+      ><a name="1669"
+      > </a
+      ><a name="1670" class="Symbol"
+      >(</a
+      ><a name="1671" href="tiny-library.html#1671" class="Bound"
+      >x</a
+      ><a name="1672"
+      > </a
+      ><a name="1673" href="tiny-library.html#1673" class="Bound"
+      >x'</a
+      ><a name="1675"
+      > </a
+      ><a name="1676" class="Symbol"
+      >:</a
+      ><a name="1677"
+      > </a
+      ><a name="1678" href="tiny-library.html#1645" class="Bound"
+      >X</a
+      ><a name="1679" class="Symbol"
+      >)</a
+      ><a name="1680"
+      > </a
+      ><a name="1681" class="Symbol"
+      >(</a
+      ><a name="1682" href="tiny-library.html#1682" class="Bound"
+      >y</a
+      ><a name="1683"
+      > </a
+      ><a name="1684" class="Symbol"
+      >:</a
+      ><a name="1685"
+      > </a
+      ><a name="1686" href="tiny-library.html#1656" class="Bound"
+      >Y</a
+      ><a name="1687"
+      > </a
+      ><a name="1688" href="tiny-library.html#1671" class="Bound"
+      >x</a
+      ><a name="1689" class="Symbol"
+      >)</a
+      ><a name="1690"
+      > </a
+      ><a name="1691" class="Symbol"
+      >(</a
+      ><a name="1692" href="tiny-library.html#1692" class="Bound"
+      >y'</a
+      ><a name="1694"
+      > </a
+      ><a name="1695" class="Symbol"
+      >:</a
+      ><a name="1696"
+      > </a
+      ><a name="1697" href="tiny-library.html#1656" class="Bound"
+      >Y</a
+      ><a name="1698"
+      > </a
+      ><a name="1699" href="tiny-library.html#1673" class="Bound"
+      >x'</a
+      ><a name="1701" class="Symbol"
+      >)</a
+      ><a name="1702"
+      >
+     </a
+      ><a name="1708" class="Symbol"
+      >&#8594;</a
+      ><a name="1709"
+      > </a
+      ><a name="1710" class="Symbol"
+      >(</a
+      ><a name="1711" href="tiny-library.html#1711" class="Bound"
+      >p</a
+      ><a name="1712"
+      > </a
+      ><a name="1713" class="Symbol"
+      >:</a
+      ><a name="1714"
+      > </a
+      ><a name="1715" href="tiny-library.html#1671" class="Bound"
+      >x</a
+      ><a name="1716"
+      > </a
+      ><a name="1717" href="tiny-library.html#422" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="1718"
+      > </a
+      ><a name="1719" href="tiny-library.html#1673" class="Bound"
+      >x'</a
+      ><a name="1721" class="Symbol"
+      >)</a
+      ><a name="1722"
+      > </a
+      ><a name="1723" class="Symbol"
+      >&#8594;</a
+      ><a name="1724"
+      > </a
+      ><a name="1725" href="tiny-library.html#789" class="Function"
+      >transport</a
+      ><a name="1734"
+      > </a
+      ><a name="1735" href="tiny-library.html#1711" class="Bound"
+      >p</a
+      ><a name="1736"
+      > </a
+      ><a name="1737" href="tiny-library.html#1682" class="Bound"
+      >y</a
+      ><a name="1738"
+      > </a
+      ><a name="1739" href="tiny-library.html#422" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="1740"
+      > </a
+      ><a name="1741" href="tiny-library.html#1692" class="Bound"
+      >y'</a
+      ><a name="1743"
+      > </a
+      ><a name="1744" class="Symbol"
+      >&#8594;</a
+      ><a name="1745"
+      > </a
+      ><a name="1746" href="tiny-library.html#422" class="Datatype Operator"
+      >_&#8801;_</a
+      ><a name="1749"
+      > </a
+      ><a name="1750" class="Symbol"
+      >{</a
+      ><a name="1751" href="tiny-library.html#276" class="Record"
+      >&#931;</a
+      ><a name="1752"
+      > </a
+      ><a name="1753" class="Symbol"
+      >\</a
+      ><a name="1754" href="tiny-library.html#1754" class="Bound"
+      >x</a
+      ><a name="1755"
+      > </a
+      ><a name="1756" class="Symbol"
+      >&#8594;</a
+      ><a name="1757"
+      > </a
+      ><a name="1758" href="tiny-library.html#1656" class="Bound"
+      >Y</a
+      ><a name="1759"
+      > </a
+      ><a name="1760" href="tiny-library.html#1754" class="Bound"
+      >x</a
+      ><a name="1761" class="Symbol"
+      >}</a
+      ><a name="1762"
+      > </a
+      ><a name="1763" class="Symbol"
+      >(</a
+      ><a name="1764" href="tiny-library.html#1671" class="Bound"
+      >x</a
+      ><a name="1765"
+      > </a
+      ><a name="1766" href="tiny-library.html#331" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="1767"
+      > </a
+      ><a name="1768" href="tiny-library.html#1682" class="Bound"
+      >y</a
+      ><a name="1769" class="Symbol"
+      >)</a
+      ><a name="1770"
+      > </a
+      ><a name="1771" class="Symbol"
+      >(</a
+      ><a name="1772" href="tiny-library.html#1673" class="Bound"
+      >x'</a
+      ><a name="1774"
+      > </a
+      ><a name="1775" href="tiny-library.html#331" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="1776"
+      > </a
+      ><a name="1777" href="tiny-library.html#1692" class="Bound"
+      >y'</a
+      ><a name="1779" class="Symbol"
+      >)</a
+      ><a name="1780"
+      > 
+</a
+      ><a name="1782" href="tiny-library.html#1638" class="Function"
+      >&#931;-&#8801;</a
+      ><a name="1785"
+      > </a
+      ><a name="1786" class="DottedPattern Symbol"
+      >.</a
+      ><a name="1787" href="tiny-library.html#1790" class="DottedPattern Bound"
+      >x'</a
+      ><a name="1789"
+      > </a
+      ><a name="1790" href="tiny-library.html#1790" class="Bound"
+      >x'</a
+      ><a name="1792"
+      > </a
+      ><a name="1793" class="DottedPattern Symbol"
+      >.</a
+      ><a name="1794" href="tiny-library.html#1796" class="DottedPattern Bound"
+      >y</a
+      ><a name="1795"
+      > </a
+      ><a name="1796" href="tiny-library.html#1796" class="Bound"
+      >y</a
+      ><a name="1797"
+      > </a
+      ><a name="1798" href="tiny-library.html#463" class="InductiveConstructor"
+      >refl</a
+      ><a name="1802"
+      > </a
+      ><a name="1803" href="tiny-library.html#463" class="InductiveConstructor"
+      >refl</a
+      ><a name="1807"
+      > </a
+      ><a name="1808" class="Symbol"
+      >=</a
+      ><a name="1809"
+      > </a
+      ><a name="1810" href="tiny-library.html#463" class="InductiveConstructor"
+      >refl</a
+      ><a name="1814"
+      >
+
+</a
+      ><a name="1816" href="tiny-library.html#1816" class="Function Operator"
+      >_&#8226;_</a
+      ><a name="1819"
+      > </a
+      ><a name="1820" class="Symbol"
+      >:</a
+      ><a name="1821"
+      > </a
+      ><a name="1822" class="Symbol"
+      >{</a
+      ><a name="1823" href="tiny-library.html#1823" class="Bound"
+      >X</a
+      ><a name="1824"
+      > </a
+      ><a name="1825" class="Symbol"
+      >:</a
+      ><a name="1826"
+      > </a
+      ><a name="1827" href="tiny-library.html#71" class="Function"
+      >Type</a
+      ><a name="1831" class="Symbol"
+      >}</a
+      ><a name="1832"
+      > </a
+      ><a name="1833" class="Symbol"
+      >&#8594;</a
+      ><a name="1834"
+      > </a
+      ><a name="1835" class="Symbol"
+      >{</a
+      ><a name="1836" href="tiny-library.html#1836" class="Bound"
+      >x</a
+      ><a name="1837"
+      > </a
+      ><a name="1838" href="tiny-library.html#1838" class="Bound"
+      >y</a
+      ><a name="1839"
+      > </a
+      ><a name="1840" href="tiny-library.html#1840" class="Bound"
+      >z</a
+      ><a name="1841"
+      > </a
+      ><a name="1842" class="Symbol"
+      >:</a
+      ><a name="1843"
+      > </a
+      ><a name="1844" href="tiny-library.html#1823" class="Bound"
+      >X</a
+      ><a name="1845" class="Symbol"
+      >}</a
+      ><a name="1846"
+      > </a
+      ><a name="1847" class="Symbol"
+      >&#8594;</a
+      ><a name="1848"
+      >  </a
+      ><a name="1850" href="tiny-library.html#1836" class="Bound"
+      >x</a
+      ><a name="1851"
+      > </a
+      ><a name="1852" href="tiny-library.html#422" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="1853"
+      > </a
+      ><a name="1854" href="tiny-library.html#1838" class="Bound"
+      >y</a
+      ><a name="1855"
+      >  </a
+      ><a name="1857" class="Symbol"
+      >&#8594;</a
+      ><a name="1858"
+      >  </a
+      ><a name="1860" href="tiny-library.html#1838" class="Bound"
+      >y</a
+      ><a name="1861"
+      > </a
+      ><a name="1862" href="tiny-library.html#422" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="1863"
+      > </a
+      ><a name="1864" href="tiny-library.html#1840" class="Bound"
+      >z</a
+      ><a name="1865"
+      >  </a
+      ><a name="1867" class="Symbol"
+      >&#8594;</a
+      ><a name="1868"
+      >  </a
+      ><a name="1870" href="tiny-library.html#1836" class="Bound"
+      >x</a
+      ><a name="1871"
+      > </a
+      ><a name="1872" href="tiny-library.html#422" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="1873"
+      > </a
+      ><a name="1874" href="tiny-library.html#1840" class="Bound"
+      >z</a
+      ><a name="1875"
+      >
+</a
+      ><a name="1876" href="tiny-library.html#463" class="InductiveConstructor"
+      >refl</a
+      ><a name="1880"
+      > </a
+      ><a name="1881" href="tiny-library.html#1816" class="Function Operator"
+      >&#8226;</a
+      ><a name="1882"
+      > </a
+      ><a name="1883" href="tiny-library.html#1883" class="Bound"
+      >p</a
+      ><a name="1884"
+      > </a
+      ><a name="1885" class="Symbol"
+      >=</a
+      ><a name="1886"
+      > </a
+      ><a name="1887" href="tiny-library.html#1883" class="Bound"
+      >p</a
+      ><a name="1888"
+      >
+
+</a
+      ><a name="1890" href="tiny-library.html#1890" class="Function Operator"
+      >_&#8315;&#185;</a
+      ><a name="1893"
+      > </a
+      ><a name="1894" class="Symbol"
+      >:</a
+      ><a name="1895"
+      > </a
+      ><a name="1896" class="Symbol"
+      >{</a
+      ><a name="1897" href="tiny-library.html#1897" class="Bound"
+      >X</a
+      ><a name="1898"
+      > </a
+      ><a name="1899" class="Symbol"
+      >:</a
+      ><a name="1900"
+      > </a
+      ><a name="1901" href="tiny-library.html#71" class="Function"
+      >Type</a
+      ><a name="1905" class="Symbol"
+      >}</a
+      ><a name="1906"
+      > </a
+      ><a name="1907" class="Symbol"
+      >&#8594;</a
+      ><a name="1908"
+      > </a
+      ><a name="1909" class="Symbol"
+      >{</a
+      ><a name="1910" href="tiny-library.html#1910" class="Bound"
+      >x</a
+      ><a name="1911"
+      > </a
+      ><a name="1912" href="tiny-library.html#1912" class="Bound"
+      >y</a
+      ><a name="1913"
+      > </a
+      ><a name="1914" class="Symbol"
+      >:</a
+      ><a name="1915"
+      > </a
+      ><a name="1916" href="tiny-library.html#1897" class="Bound"
+      >X</a
+      ><a name="1917" class="Symbol"
+      >}</a
+      ><a name="1918"
+      > </a
+      ><a name="1919" class="Symbol"
+      >&#8594;</a
+      ><a name="1920"
+      > </a
+      ><a name="1921" href="tiny-library.html#1910" class="Bound"
+      >x</a
+      ><a name="1922"
+      > </a
+      ><a name="1923" href="tiny-library.html#422" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="1924"
+      > </a
+      ><a name="1925" href="tiny-library.html#1912" class="Bound"
+      >y</a
+      ><a name="1926"
+      > </a
+      ><a name="1927" class="Symbol"
+      >&#8594;</a
+      ><a name="1928"
+      > </a
+      ><a name="1929" href="tiny-library.html#1912" class="Bound"
+      >y</a
+      ><a name="1930"
+      > </a
+      ><a name="1931" href="tiny-library.html#422" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="1932"
+      > </a
+      ><a name="1933" href="tiny-library.html#1910" class="Bound"
+      >x</a
+      ><a name="1934"
+      >
+</a
+      ><a name="1935" href="tiny-library.html#1890" class="Function Operator"
+      >_&#8315;&#185;</a
+      ><a name="1938"
+      > </a
+      ><a name="1939" href="tiny-library.html#463" class="InductiveConstructor"
+      >refl</a
+      ><a name="1943"
+      > </a
+      ><a name="1944" class="Symbol"
+      >=</a
+      ><a name="1945"
+      > </a
+      ><a name="1946" href="tiny-library.html#463" class="InductiveConstructor"
+      >refl</a
+      ><a name="1950"
+      >
+
+</a
+      ><a name="1952" href="tiny-library.html#1952" class="Function"
+      >sym-is-inverse</a
+      ><a name="1966"
+      > </a
+      ><a name="1967" class="Symbol"
+      >:</a
+      ><a name="1968"
+      > </a
+      ><a name="1969" class="Symbol"
+      >{</a
+      ><a name="1970" href="tiny-library.html#1970" class="Bound"
+      >X</a
+      ><a name="1971"
+      > </a
+      ><a name="1972" class="Symbol"
+      >:</a
+      ><a name="1973"
+      > </a
+      ><a name="1974" href="tiny-library.html#71" class="Function"
+      >Type</a
+      ><a name="1978" class="Symbol"
+      >}</a
+      ><a name="1979"
+      > </a
+      ><a name="1980" class="Symbol"
+      >{</a
+      ><a name="1981" href="tiny-library.html#1981" class="Bound"
+      >x</a
+      ><a name="1982"
+      > </a
+      ><a name="1983" href="tiny-library.html#1983" class="Bound"
+      >y</a
+      ><a name="1984"
+      > </a
+      ><a name="1985" class="Symbol"
+      >:</a
+      ><a name="1986"
+      > </a
+      ><a name="1987" href="tiny-library.html#1970" class="Bound"
+      >X</a
+      ><a name="1988" class="Symbol"
+      >}</a
+      ><a name="1989"
+      > </a
+      ><a name="1990" class="Symbol"
+      >(</a
+      ><a name="1991" href="tiny-library.html#1991" class="Bound"
+      >p</a
+      ><a name="1992"
+      > </a
+      ><a name="1993" class="Symbol"
+      >:</a
+      ><a name="1994"
+      > </a
+      ><a name="1995" href="tiny-library.html#1981" class="Bound"
+      >x</a
+      ><a name="1996"
+      > </a
+      ><a name="1997" href="tiny-library.html#422" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="1998"
+      > </a
+      ><a name="1999" href="tiny-library.html#1983" class="Bound"
+      >y</a
+      ><a name="2000" class="Symbol"
+      >)</a
+      ><a name="2001"
+      > </a
+      ><a name="2002" class="Symbol"
+      >&#8594;</a
+      ><a name="2003"
+      > </a
+      ><a name="2004" href="tiny-library.html#463" class="InductiveConstructor"
+      >refl</a
+      ><a name="2008"
+      > </a
+      ><a name="2009" href="tiny-library.html#422" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="2010"
+      > </a
+      ><a name="2011" href="tiny-library.html#1991" class="Bound"
+      >p</a
+      ><a name="2012"
+      > </a
+      ><a name="2013" href="tiny-library.html#1890" class="Function Operator"
+      >&#8315;&#185;</a
+      ><a name="2015"
+      > </a
+      ><a name="2016" href="tiny-library.html#1816" class="Function Operator"
+      >&#8226;</a
+      ><a name="2017"
+      > </a
+      ><a name="2018" href="tiny-library.html#1991" class="Bound"
+      >p</a
+      ><a name="2019"
+      >
+</a
+      ><a name="2020" href="tiny-library.html#1952" class="Function"
+      >sym-is-inverse</a
+      ><a name="2034"
+      > </a
+      ><a name="2035" href="tiny-library.html#463" class="InductiveConstructor"
+      >refl</a
+      ><a name="2039"
+      > </a
+      ><a name="2040" class="Symbol"
+      >=</a
+      ><a name="2041"
+      > </a
+      ><a name="2042" href="tiny-library.html#463" class="InductiveConstructor"
+      >refl</a
+      ><a name="2046"
+      >
+
+</a
+      ><a name="2048" href="tiny-library.html#2048" class="Function"
+      >refl-is-right-id</a
+      ><a name="2064"
+      > </a
+      ><a name="2065" class="Symbol"
+      >:</a
+      ><a name="2066"
+      > </a
+      ><a name="2067" class="Symbol"
+      >{</a
+      ><a name="2068" href="tiny-library.html#2068" class="Bound"
+      >X</a
+      ><a name="2069"
+      > </a
+      ><a name="2070" class="Symbol"
+      >:</a
+      ><a name="2071"
+      > </a
+      ><a name="2072" href="tiny-library.html#71" class="Function"
+      >Type</a
+      ><a name="2076" class="Symbol"
+      >}</a
+      ><a name="2077"
+      > </a
+      ><a name="2078" class="Symbol"
+      >{</a
+      ><a name="2079" href="tiny-library.html#2079" class="Bound"
+      >x</a
+      ><a name="2080"
+      > </a
+      ><a name="2081" href="tiny-library.html#2081" class="Bound"
+      >y</a
+      ><a name="2082"
+      > </a
+      ><a name="2083" class="Symbol"
+      >:</a
+      ><a name="2084"
+      > </a
+      ><a name="2085" href="tiny-library.html#2068" class="Bound"
+      >X</a
+      ><a name="2086" class="Symbol"
+      >}</a
+      ><a name="2087"
+      > </a
+      ><a name="2088" class="Symbol"
+      >(</a
+      ><a name="2089" href="tiny-library.html#2089" class="Bound"
+      >p</a
+      ><a name="2090"
+      > </a
+      ><a name="2091" class="Symbol"
+      >:</a
+      ><a name="2092"
+      > </a
+      ><a name="2093" href="tiny-library.html#2079" class="Bound"
+      >x</a
+      ><a name="2094"
+      > </a
+      ><a name="2095" href="tiny-library.html#422" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="2096"
+      > </a
+      ><a name="2097" href="tiny-library.html#2081" class="Bound"
+      >y</a
+      ><a name="2098" class="Symbol"
+      >)</a
+      ><a name="2099"
+      > </a
+      ><a name="2100" class="Symbol"
+      >&#8594;</a
+      ><a name="2101"
+      > </a
+      ><a name="2102" href="tiny-library.html#2089" class="Bound"
+      >p</a
+      ><a name="2103"
+      > </a
+      ><a name="2104" href="tiny-library.html#422" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="2105"
+      > </a
+      ><a name="2106" href="tiny-library.html#2089" class="Bound"
+      >p</a
+      ><a name="2107"
+      > </a
+      ><a name="2108" href="tiny-library.html#1816" class="Function Operator"
+      >&#8226;</a
+      ><a name="2109"
+      > </a
+      ><a name="2110" href="tiny-library.html#463" class="InductiveConstructor"
+      >refl</a
+      ><a name="2114"
+      >
+</a
+      ><a name="2115" href="tiny-library.html#2048" class="Function"
+      >refl-is-right-id</a
+      ><a name="2131"
+      > </a
+      ><a name="2132" href="tiny-library.html#463" class="InductiveConstructor"
+      >refl</a
+      ><a name="2136"
+      > </a
+      ><a name="2137" class="Symbol"
+      >=</a
+      ><a name="2138"
+      > </a
+      ><a name="2139" href="tiny-library.html#463" class="InductiveConstructor"
+      >refl</a
+      ><a name="2143"
+      >
+
+</a
+      ><a name="2145" href="tiny-library.html#2145" class="Function"
+      >hprop</a
+      ><a name="2150"
+      > </a
+      ><a name="2151" class="Symbol"
+      >:</a
+      ><a name="2152"
+      > </a
+      ><a name="2153" href="tiny-library.html#71" class="Function"
+      >Type</a
+      ><a name="2157"
+      > </a
+      ><a name="2158" class="Symbol"
+      >&#8594;</a
+      ><a name="2159"
+      > </a
+      ><a name="2160" href="tiny-library.html#71" class="Function"
+      >Type</a
+      ><a name="2164"
+      >
+</a
+      ><a name="2165" href="tiny-library.html#2145" class="Function"
+      >hprop</a
+      ><a name="2170"
+      > </a
+      ><a name="2171" href="tiny-library.html#2171" class="Bound"
+      >X</a
+      ><a name="2172"
+      > </a
+      ><a name="2173" class="Symbol"
+      >=</a
+      ><a name="2174"
+      > </a
+      ><a name="2175" class="Symbol"
+      >(</a
+      ><a name="2176" href="tiny-library.html#2176" class="Bound"
+      >x</a
+      ><a name="2177"
+      > </a
+      ><a name="2178" href="tiny-library.html#2178" class="Bound"
+      >y</a
+      ><a name="2179"
+      > </a
+      ><a name="2180" class="Symbol"
+      >:</a
+      ><a name="2181"
+      > </a
+      ><a name="2182" href="tiny-library.html#2171" class="Bound"
+      >X</a
+      ><a name="2183" class="Symbol"
+      >)</a
+      ><a name="2184"
+      > </a
+      ><a name="2185" class="Symbol"
+      >&#8594;</a
+      ><a name="2186"
+      > </a
+      ><a name="2187" href="tiny-library.html#2176" class="Bound"
+      >x</a
+      ><a name="2188"
+      > </a
+      ><a name="2189" href="tiny-library.html#422" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="2190"
+      > </a
+      ><a name="2191" href="tiny-library.html#2178" class="Bound"
+      >y</a
+      ><a name="2192"
+      >
+
+</a
+      ><a name="2194" href="tiny-library.html#2194" class="Function"
+      >hset</a
+      ><a name="2198"
+      > </a
+      ><a name="2199" class="Symbol"
+      >:</a
+      ><a name="2200"
+      > </a
+      ><a name="2201" href="tiny-library.html#71" class="Function"
+      >Type</a
+      ><a name="2205"
+      > </a
+      ><a name="2206" class="Symbol"
+      >&#8594;</a
+      ><a name="2207"
+      > </a
+      ><a name="2208" href="tiny-library.html#71" class="Function"
+      >Type</a
+      ><a name="2212"
+      >
+</a
+      ><a name="2213" href="tiny-library.html#2194" class="Function"
+      >hset</a
+      ><a name="2217"
+      > </a
+      ><a name="2218" href="tiny-library.html#2218" class="Bound"
+      >X</a
+      ><a name="2219"
+      > </a
+      ><a name="2220" class="Symbol"
+      >=</a
+      ><a name="2221"
+      > </a
+      ><a name="2222" class="Symbol"
+      >(</a
+      ><a name="2223" href="tiny-library.html#2223" class="Bound"
+      >x</a
+      ><a name="2224"
+      > </a
+      ><a name="2225" href="tiny-library.html#2225" class="Bound"
+      >y</a
+      ><a name="2226"
+      > </a
+      ><a name="2227" class="Symbol"
+      >:</a
+      ><a name="2228"
+      > </a
+      ><a name="2229" href="tiny-library.html#2218" class="Bound"
+      >X</a
+      ><a name="2230" class="Symbol"
+      >)</a
+      ><a name="2231"
+      > </a
+      ><a name="2232" class="Symbol"
+      >&#8594;</a
+      ><a name="2233"
+      > </a
+      ><a name="2234" href="tiny-library.html#2145" class="Function"
+      >hprop</a
+      ><a name="2239" class="Symbol"
+      >(</a
+      ><a name="2240" href="tiny-library.html#2223" class="Bound"
+      >x</a
+      ><a name="2241"
+      > </a
+      ><a name="2242" href="tiny-library.html#422" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="2243"
+      > </a
+      ><a name="2244" href="tiny-library.html#2225" class="Bound"
+      >y</a
+      ><a name="2245" class="Symbol"
+      >)</a
+      ><a name="2246"
+      >
+
+</a
+      ><a name="2248" href="tiny-library.html#2248" class="Function"
+      >contractible</a
+      ><a name="2260"
+      > </a
+      ><a name="2261" class="Symbol"
+      >:</a
+      ><a name="2262"
+      > </a
+      ><a name="2263" href="tiny-library.html#71" class="Function"
+      >Type</a
+      ><a name="2267"
+      > </a
+      ><a name="2268" class="Symbol"
+      >&#8594;</a
+      ><a name="2269"
+      > </a
+      ><a name="2270" href="tiny-library.html#71" class="Function"
+      >Type</a
+      ><a name="2274"
+      >
+</a
+      ><a name="2275" href="tiny-library.html#2248" class="Function"
+      >contractible</a
+      ><a name="2287"
+      > </a
+      ><a name="2288" href="tiny-library.html#2288" class="Bound"
+      >X</a
+      ><a name="2289"
+      > </a
+      ><a name="2290" class="Symbol"
+      >=</a
+      ><a name="2291"
+      > </a
+      ><a name="2292" href="tiny-library.html#276" class="Record"
+      >&#931;</a
+      ><a name="2293"
+      > </a
+      ><a name="2294" class="Symbol"
+      >\(</a
+      ><a name="2296" href="tiny-library.html#2296" class="Bound"
+      >x</a
+      ><a name="2297"
+      > </a
+      ><a name="2298" class="Symbol"
+      >:</a
+      ><a name="2299"
+      > </a
+      ><a name="2300" href="tiny-library.html#2288" class="Bound"
+      >X</a
+      ><a name="2301" class="Symbol"
+      >)</a
+      ><a name="2302"
+      > </a
+      ><a name="2303" class="Symbol"
+      >&#8594;</a
+      ><a name="2304"
+      > </a
+      ><a name="2305" class="Symbol"
+      >(</a
+      ><a name="2306" href="tiny-library.html#2306" class="Bound"
+      >y</a
+      ><a name="2307"
+      > </a
+      ><a name="2308" class="Symbol"
+      >:</a
+      ><a name="2309"
+      > </a
+      ><a name="2310" href="tiny-library.html#2288" class="Bound"
+      >X</a
+      ><a name="2311" class="Symbol"
+      >)</a
+      ><a name="2312"
+      > </a
+      ><a name="2313" class="Symbol"
+      >&#8594;</a
+      ><a name="2314"
+      > </a
+      ><a name="2315" href="tiny-library.html#2296" class="Bound"
+      >x</a
+      ><a name="2316"
+      > </a
+      ><a name="2317" href="tiny-library.html#422" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="2318"
+      > </a
+      ><a name="2319" href="tiny-library.html#2306" class="Bound"
+      >y</a
+      ><a name="2320"
+      >
+
+</a
+      ><a name="2322" href="tiny-library.html#2322" class="Function"
+      >paths-from</a
+      ><a name="2332"
+      > </a
+      ><a name="2333" class="Symbol"
+      >:</a
+      ><a name="2334"
+      > </a
+      ><a name="2335" class="Symbol"
+      >{</a
+      ><a name="2336" href="tiny-library.html#2336" class="Bound"
+      >X</a
+      ><a name="2337"
+      > </a
+      ><a name="2338" class="Symbol"
+      >:</a
+      ><a name="2339"
+      > </a
+      ><a name="2340" href="tiny-library.html#71" class="Function"
+      >Type</a
+      ><a name="2344" class="Symbol"
+      >}</a
+      ><a name="2345"
+      > </a
+      ><a name="2346" class="Symbol"
+      >(</a
+      ><a name="2347" href="tiny-library.html#2347" class="Bound"
+      >x</a
+      ><a name="2348"
+      > </a
+      ><a name="2349" class="Symbol"
+      >:</a
+      ><a name="2350"
+      > </a
+      ><a name="2351" href="tiny-library.html#2336" class="Bound"
+      >X</a
+      ><a name="2352" class="Symbol"
+      >)</a
+      ><a name="2353"
+      > </a
+      ><a name="2354" class="Symbol"
+      >&#8594;</a
+      ><a name="2355"
+      > </a
+      ><a name="2356" href="tiny-library.html#71" class="Function"
+      >Type</a
+      ><a name="2360"
+      >
+</a
+      ><a name="2361" href="tiny-library.html#2322" class="Function"
+      >paths-from</a
+      ><a name="2371"
+      > </a
+      ><a name="2372" class="Symbol"
+      >{</a
+      ><a name="2373" href="tiny-library.html#2373" class="Bound"
+      >X</a
+      ><a name="2374" class="Symbol"
+      >}</a
+      ><a name="2375"
+      > </a
+      ><a name="2376" href="tiny-library.html#2376" class="Bound"
+      >x</a
+      ><a name="2377"
+      > </a
+      ><a name="2378" class="Symbol"
+      >=</a
+      ><a name="2379"
+      > </a
+      ><a name="2380" href="tiny-library.html#276" class="Record"
+      >&#931;</a
+      ><a name="2381"
+      > </a
+      ><a name="2382" class="Symbol"
+      >\(</a
+      ><a name="2384" href="tiny-library.html#2384" class="Bound"
+      >y</a
+      ><a name="2385"
+      > </a
+      ><a name="2386" class="Symbol"
+      >:</a
+      ><a name="2387"
+      > </a
+      ><a name="2388" href="tiny-library.html#2373" class="Bound"
+      >X</a
+      ><a name="2389" class="Symbol"
+      >)</a
+      ><a name="2390"
+      > </a
+      ><a name="2391" class="Symbol"
+      >&#8594;</a
+      ><a name="2392"
+      > </a
+      ><a name="2393" href="tiny-library.html#2376" class="Bound"
+      >x</a
+      ><a name="2394"
+      > </a
+      ><a name="2395" href="tiny-library.html#422" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="2396"
+      > </a
+      ><a name="2397" href="tiny-library.html#2384" class="Bound"
+      >y</a
+      ><a name="2398"
+      >
+
+</a
+      ><a name="2400" href="tiny-library.html#2400" class="Function"
+      >end-point</a
+      ><a name="2409"
+      > </a
+      ><a name="2410" class="Symbol"
+      >:</a
+      ><a name="2411"
+      > </a
+      ><a name="2412" class="Symbol"
+      >{</a
+      ><a name="2413" href="tiny-library.html#2413" class="Bound"
+      >X</a
+      ><a name="2414"
+      > </a
+      ><a name="2415" class="Symbol"
+      >:</a
+      ><a name="2416"
+      > </a
+      ><a name="2417" href="tiny-library.html#71" class="Function"
+      >Type</a
+      ><a name="2421" class="Symbol"
+      >}</a
+      ><a name="2422"
+      > </a
+      ><a name="2423" class="Symbol"
+      >{</a
+      ><a name="2424" href="tiny-library.html#2424" class="Bound"
+      >x</a
+      ><a name="2425"
+      > </a
+      ><a name="2426" class="Symbol"
+      >:</a
+      ><a name="2427"
+      > </a
+      ><a name="2428" href="tiny-library.html#2413" class="Bound"
+      >X</a
+      ><a name="2429" class="Symbol"
+      >}</a
+      ><a name="2430"
+      > </a
+      ><a name="2431" class="Symbol"
+      >&#8594;</a
+      ><a name="2432"
+      > </a
+      ><a name="2433" href="tiny-library.html#2322" class="Function"
+      >paths-from</a
+      ><a name="2443"
+      > </a
+      ><a name="2444" href="tiny-library.html#2424" class="Bound"
+      >x</a
+      ><a name="2445"
+      > </a
+      ><a name="2446" class="Symbol"
+      >&#8594;</a
+      ><a name="2447"
+      > </a
+      ><a name="2448" href="tiny-library.html#2413" class="Bound"
+      >X</a
+      ><a name="2449"
+      >
+</a
+      ><a name="2450" href="tiny-library.html#2400" class="Function"
+      >end-point</a
+      ><a name="2459"
+      > </a
+      ><a name="2460" class="Symbol"
+      >=</a
+      ><a name="2461"
+      > </a
+      ><a name="2462" href="tiny-library.html#346" class="Field"
+      >&#960;&#8320;</a
+      ><a name="2464"
+      > 
+
+</a
+      ><a name="2467" href="tiny-library.html#2467" class="Function"
+      >trivial-loop</a
+      ><a name="2479"
+      > </a
+      ><a name="2480" class="Symbol"
+      >:</a
+      ><a name="2481"
+      > </a
+      ><a name="2482" class="Symbol"
+      >{</a
+      ><a name="2483" href="tiny-library.html#2483" class="Bound"
+      >X</a
+      ><a name="2484"
+      > </a
+      ><a name="2485" class="Symbol"
+      >:</a
+      ><a name="2486"
+      > </a
+      ><a name="2487" href="tiny-library.html#71" class="Function"
+      >Type</a
+      ><a name="2491" class="Symbol"
+      >}</a
+      ><a name="2492"
+      > </a
+      ><a name="2493" class="Symbol"
+      >(</a
+      ><a name="2494" href="tiny-library.html#2494" class="Bound"
+      >x</a
+      ><a name="2495"
+      > </a
+      ><a name="2496" class="Symbol"
+      >:</a
+      ><a name="2497"
+      > </a
+      ><a name="2498" href="tiny-library.html#2483" class="Bound"
+      >X</a
+      ><a name="2499" class="Symbol"
+      >)</a
+      ><a name="2500"
+      > </a
+      ><a name="2501" class="Symbol"
+      >&#8594;</a
+      ><a name="2502"
+      > </a
+      ><a name="2503" href="tiny-library.html#2322" class="Function"
+      >paths-from</a
+      ><a name="2513"
+      > </a
+      ><a name="2514" href="tiny-library.html#2494" class="Bound"
+      >x</a
+      ><a name="2515"
+      >
+</a
+      ><a name="2516" href="tiny-library.html#2467" class="Function"
+      >trivial-loop</a
+      ><a name="2528"
+      > </a
+      ><a name="2529" href="tiny-library.html#2529" class="Bound"
+      >x</a
+      ><a name="2530"
+      > </a
+      ><a name="2531" class="Symbol"
+      >=</a
+      ><a name="2532"
+      > </a
+      ><a name="2533" class="Symbol"
+      >(</a
+      ><a name="2534" href="tiny-library.html#2529" class="Bound"
+      >x</a
+      ><a name="2535"
+      > </a
+      ><a name="2536" href="tiny-library.html#331" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="2537"
+      > </a
+      ><a name="2538" href="tiny-library.html#463" class="InductiveConstructor"
+      >refl</a
+      ><a name="2542" class="Symbol"
+      >)</a
+      ><a name="2543"
+      >
+
+</a
+      ><a name="2545" href="tiny-library.html#2545" class="Function"
+      >path-from-trivial-loop</a
+      ><a name="2567"
+      > </a
+      ><a name="2568" class="Symbol"
+      >:</a
+      ><a name="2569"
+      > </a
+      ><a name="2570" class="Symbol"
+      >{</a
+      ><a name="2571" href="tiny-library.html#2571" class="Bound"
+      >X</a
+      ><a name="2572"
+      > </a
+      ><a name="2573" class="Symbol"
+      >:</a
+      ><a name="2574"
+      > </a
+      ><a name="2575" href="tiny-library.html#71" class="Function"
+      >Type</a
+      ><a name="2579" class="Symbol"
+      >}</a
+      ><a name="2580"
+      > </a
+      ><a name="2581" class="Symbol"
+      >{</a
+      ><a name="2582" href="tiny-library.html#2582" class="Bound"
+      >x</a
+      ><a name="2583"
+      > </a
+      ><a name="2584" href="tiny-library.html#2584" class="Bound"
+      >x'</a
+      ><a name="2586"
+      > </a
+      ><a name="2587" class="Symbol"
+      >:</a
+      ><a name="2588"
+      > </a
+      ><a name="2589" href="tiny-library.html#2571" class="Bound"
+      >X</a
+      ><a name="2590" class="Symbol"
+      >}</a
+      ><a name="2591"
+      > </a
+      ><a name="2592" class="Symbol"
+      >(</a
+      ><a name="2593" href="tiny-library.html#2593" class="Bound"
+      >r</a
+      ><a name="2594"
+      > </a
+      ><a name="2595" class="Symbol"
+      >:</a
+      ><a name="2596"
+      > </a
+      ><a name="2597" href="tiny-library.html#2582" class="Bound"
+      >x</a
+      ><a name="2598"
+      > </a
+      ><a name="2599" href="tiny-library.html#422" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="2600"
+      > </a
+      ><a name="2601" href="tiny-library.html#2584" class="Bound"
+      >x'</a
+      ><a name="2603" class="Symbol"
+      >)</a
+      ><a name="2604"
+      > </a
+      ><a name="2605" class="Symbol"
+      >&#8594;</a
+      ><a name="2606"
+      > </a
+      ><a name="2607" href="tiny-library.html#2467" class="Function"
+      >trivial-loop</a
+      ><a name="2619"
+      > </a
+      ><a name="2620" href="tiny-library.html#2582" class="Bound"
+      >x</a
+      ><a name="2621"
+      > </a
+      ><a name="2622" href="tiny-library.html#422" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="2623"
+      > </a
+      ><a name="2624" class="Symbol"
+      >(</a
+      ><a name="2625" href="tiny-library.html#2584" class="Bound"
+      >x'</a
+      ><a name="2627"
+      > </a
+      ><a name="2628" href="tiny-library.html#331" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="2629"
+      > </a
+      ><a name="2630" href="tiny-library.html#2593" class="Bound"
+      >r</a
+      ><a name="2631" class="Symbol"
+      >)</a
+      ><a name="2632"
+      >
+</a
+      ><a name="2633" href="tiny-library.html#2545" class="Function"
+      >path-from-trivial-loop</a
+      ><a name="2655"
+      > </a
+      ><a name="2656" class="Symbol"
+      >{</a
+      ><a name="2657" href="tiny-library.html#2657" class="Bound"
+      >X</a
+      ><a name="2658" class="Symbol"
+      >}</a
+      ><a name="2659"
+      > </a
+      ><a name="2660" class="Symbol"
+      >=</a
+      ><a name="2661"
+      > </a
+      ><a name="2662" href="tiny-library.html#479" class="Function"
+      >J</a
+      ><a name="2663"
+      > </a
+      ><a name="2664" class="Symbol"
+      >{</a
+      ><a name="2665" href="tiny-library.html#2657" class="Bound"
+      >X</a
+      ><a name="2666" class="Symbol"
+      >}</a
+      ><a name="2667"
+      > </a
+      ><a name="2668" href="tiny-library.html#2693" class="Function"
+      >A</a
+      ><a name="2669"
+      > </a
+      ><a name="2670" class="Symbol"
+      >(&#955;</a
+      ><a name="2672"
+      > </a
+      ><a name="2673" href="tiny-library.html#2673" class="Bound"
+      >x</a
+      ><a name="2674"
+      > </a
+      ><a name="2675" class="Symbol"
+      >&#8594;</a
+      ><a name="2676"
+      > </a
+      ><a name="2677" href="tiny-library.html#463" class="InductiveConstructor"
+      >refl</a
+      ><a name="2681" class="Symbol"
+      >)</a
+      ><a name="2682"
+      >
+ </a
+      ><a name="2684" class="Keyword"
+      >where</a
+      ><a name="2689"
+      > 
+  </a
+      ><a name="2693" href="tiny-library.html#2693" class="Function"
+      >A</a
+      ><a name="2694"
+      > </a
+      ><a name="2695" class="Symbol"
+      >:</a
+      ><a name="2696"
+      > </a
+      ><a name="2697" class="Symbol"
+      >(</a
+      ><a name="2698" href="tiny-library.html#2698" class="Bound"
+      >x</a
+      ><a name="2699"
+      > </a
+      ><a name="2700" href="tiny-library.html#2700" class="Bound"
+      >x'</a
+      ><a name="2702"
+      > </a
+      ><a name="2703" class="Symbol"
+      >:</a
+      ><a name="2704"
+      > </a
+      ><a name="2705" href="tiny-library.html#2657" class="Bound"
+      >X</a
+      ><a name="2706" class="Symbol"
+      >)</a
+      ><a name="2707"
+      > </a
+      ><a name="2708" class="Symbol"
+      >&#8594;</a
+      ><a name="2709"
+      > </a
+      ><a name="2710" href="tiny-library.html#2698" class="Bound"
+      >x</a
+      ><a name="2711"
+      > </a
+      ><a name="2712" href="tiny-library.html#422" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="2713"
+      > </a
+      ><a name="2714" href="tiny-library.html#2700" class="Bound"
+      >x'</a
+      ><a name="2716"
+      > </a
+      ><a name="2717" class="Symbol"
+      >&#8594;</a
+      ><a name="2718"
+      > </a
+      ><a name="2719" href="tiny-library.html#71" class="Function"
+      >Type</a
+      ><a name="2723"
+      >
+  </a
+      ><a name="2726" href="tiny-library.html#2693" class="Function"
+      >A</a
+      ><a name="2727"
+      > </a
+      ><a name="2728" href="tiny-library.html#2728" class="Bound"
+      >x</a
+      ><a name="2729"
+      > </a
+      ><a name="2730" href="tiny-library.html#2730" class="Bound"
+      >x'</a
+      ><a name="2732"
+      > </a
+      ><a name="2733" href="tiny-library.html#2733" class="Bound"
+      >r</a
+      ><a name="2734"
+      > </a
+      ><a name="2735" class="Symbol"
+      >=</a
+      ><a name="2736"
+      > </a
+      ><a name="2737" href="tiny-library.html#422" class="Datatype Operator"
+      >_&#8801;_</a
+      ><a name="2740"
+      > </a
+      ><a name="2741" class="Symbol"
+      >{</a
+      ><a name="2742" href="tiny-library.html#276" class="Record"
+      >&#931;</a
+      ><a name="2743"
+      > </a
+      ><a name="2744" class="Symbol"
+      >\(</a
+      ><a name="2746" href="tiny-library.html#2746" class="Bound"
+      >x'</a
+      ><a name="2748"
+      > </a
+      ><a name="2749" class="Symbol"
+      >:</a
+      ><a name="2750"
+      > </a
+      ><a name="2751" href="tiny-library.html#2657" class="Bound"
+      >X</a
+      ><a name="2752" class="Symbol"
+      >)</a
+      ><a name="2753"
+      > </a
+      ><a name="2754" class="Symbol"
+      >&#8594;</a
+      ><a name="2755"
+      > </a
+      ><a name="2756" href="tiny-library.html#2728" class="Bound"
+      >x</a
+      ><a name="2757"
+      > </a
+      ><a name="2758" href="tiny-library.html#422" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="2759"
+      > </a
+      ><a name="2760" href="tiny-library.html#2746" class="Bound"
+      >x'</a
+      ><a name="2762" class="Symbol"
+      >}</a
+      ><a name="2763"
+      > </a
+      ><a name="2764" class="Symbol"
+      >(</a
+      ><a name="2765" href="tiny-library.html#2467" class="Function"
+      >trivial-loop</a
+      ><a name="2777"
+      > </a
+      ><a name="2778" href="tiny-library.html#2728" class="Bound"
+      >x</a
+      ><a name="2779" class="Symbol"
+      >)</a
+      ><a name="2780"
+      > </a
+      ><a name="2781" class="Symbol"
+      >(</a
+      ><a name="2782" href="tiny-library.html#2730" class="Bound"
+      >x'</a
+      ><a name="2784"
+      > </a
+      ><a name="2785" href="tiny-library.html#331" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="2786"
+      > </a
+      ><a name="2787" href="tiny-library.html#2733" class="Bound"
+      >r</a
+      ><a name="2788" class="Symbol"
+      >)</a
+      ><a name="2789"
+      > 
+
+</a
+      ><a name="2792" href="tiny-library.html#2792" class="Function"
+      >paths-from-is-contractible</a
+      ><a name="2818"
+      > </a
+      ><a name="2819" class="Symbol"
+      >:</a
+      ><a name="2820"
+      > </a
+      ><a name="2821" class="Symbol"
+      >{</a
+      ><a name="2822" href="tiny-library.html#2822" class="Bound"
+      >X</a
+      ><a name="2823"
+      > </a
+      ><a name="2824" class="Symbol"
+      >:</a
+      ><a name="2825"
+      > </a
+      ><a name="2826" href="tiny-library.html#71" class="Function"
+      >Type</a
+      ><a name="2830" class="Symbol"
+      >}</a
+      ><a name="2831"
+      > </a
+      ><a name="2832" class="Symbol"
+      >(</a
+      ><a name="2833" href="tiny-library.html#2833" class="Bound"
+      >x&#8320;</a
+      ><a name="2835"
+      > </a
+      ><a name="2836" class="Symbol"
+      >:</a
+      ><a name="2837"
+      > </a
+      ><a name="2838" href="tiny-library.html#2822" class="Bound"
+      >X</a
+      ><a name="2839" class="Symbol"
+      >)</a
+      ><a name="2840"
+      > </a
+      ><a name="2841" class="Symbol"
+      >&#8594;</a
+      ><a name="2842"
+      > </a
+      ><a name="2843" href="tiny-library.html#2248" class="Function"
+      >contractible</a
+      ><a name="2855" class="Symbol"
+      >(</a
+      ><a name="2856" href="tiny-library.html#2322" class="Function"
+      >paths-from</a
+      ><a name="2866"
+      > </a
+      ><a name="2867" href="tiny-library.html#2833" class="Bound"
+      >x&#8320;</a
+      ><a name="2869" class="Symbol"
+      >)</a
+      ><a name="2870"
+      >
+</a
+      ><a name="2871" href="tiny-library.html#2792" class="Function"
+      >paths-from-is-contractible</a
+      ><a name="2897"
+      > </a
+      ><a name="2898" href="tiny-library.html#2898" class="Bound"
+      >x&#8320;</a
+      ><a name="2900"
+      > </a
+      ><a name="2901" class="Symbol"
+      >=</a
+      ><a name="2902"
+      > </a
+      ><a name="2903" href="tiny-library.html#2467" class="Function"
+      >trivial-loop</a
+      ><a name="2915"
+      > </a
+      ><a name="2916" href="tiny-library.html#2898" class="Bound"
+      >x&#8320;</a
+      ><a name="2918"
+      > </a
+      ><a name="2919" href="tiny-library.html#331" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="2920"
+      > </a
+      ><a name="2921" class="Symbol"
+      >(&#955;</a
+      ><a name="2923"
+      > </a
+      ><a name="2924" href="tiny-library.html#2924" class="Bound"
+      >t</a
+      ><a name="2925"
+      > </a
+      ><a name="2926" class="Symbol"
+      >&#8594;</a
+      ><a name="2927"
+      > </a
+      ><a name="2928" href="tiny-library.html#2545" class="Function"
+      >path-from-trivial-loop</a
+      ><a name="2950"
+      > </a
+      ><a name="2951" class="Symbol"
+      >(</a
+      ><a name="2952" href="tiny-library.html#356" class="Field"
+      >&#960;&#8321;</a
+      ><a name="2954"
+      > </a
+      ><a name="2955" href="tiny-library.html#2924" class="Bound"
+      >t</a
+      ><a name="2956" class="Symbol"
+      >))</a
+      ><a name="2958"
+      >
+
+</a
+      ><a name="2960" href="tiny-library.html#2960" class="Function"
+      >contractible-is-hprop</a
+      ><a name="2981"
+      > </a
+      ><a name="2982" class="Symbol"
+      >:</a
+      ><a name="2983"
+      > </a
+      ><a name="2984" class="Symbol"
+      >{</a
+      ><a name="2985" href="tiny-library.html#2985" class="Bound"
+      >X</a
+      ><a name="2986"
+      > </a
+      ><a name="2987" class="Symbol"
+      >:</a
+      ><a name="2988"
+      > </a
+      ><a name="2989" href="tiny-library.html#71" class="Function"
+      >Type</a
+      ><a name="2993" class="Symbol"
+      >}</a
+      ><a name="2994"
+      > </a
+      ><a name="2995" class="Symbol"
+      >&#8594;</a
+      ><a name="2996"
+      > </a
+      ><a name="2997" href="tiny-library.html#2248" class="Function"
+      >contractible</a
+      ><a name="3009"
+      > </a
+      ><a name="3010" href="tiny-library.html#2985" class="Bound"
+      >X</a
+      ><a name="3011"
+      > </a
+      ><a name="3012" class="Symbol"
+      >&#8594;</a
+      ><a name="3013"
+      > </a
+      ><a name="3014" href="tiny-library.html#2145" class="Function"
+      >hprop</a
+      ><a name="3019"
+      > </a
+      ><a name="3020" href="tiny-library.html#2985" class="Bound"
+      >X</a
+      ><a name="3021"
+      >
+</a
+      ><a name="3022" href="tiny-library.html#2960" class="Function"
+      >contractible-is-hprop</a
+      ><a name="3043"
+      > </a
+      ><a name="3044" class="Symbol"
+      >(</a
+      ><a name="3045" href="tiny-library.html#3045" class="Bound"
+      >x</a
+      ><a name="3046"
+      > </a
+      ><a name="3047" href="tiny-library.html#331" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="3048"
+      > </a
+      ><a name="3049" href="tiny-library.html#3049" class="Bound"
+      >f</a
+      ><a name="3050" class="Symbol"
+      >)</a
+      ><a name="3051"
+      > </a
+      ><a name="3052" href="tiny-library.html#3052" class="Bound"
+      >y</a
+      ><a name="3053"
+      > </a
+      ><a name="3054" href="tiny-library.html#3054" class="Bound"
+      >z</a
+      ><a name="3055"
+      > </a
+      ><a name="3056" class="Symbol"
+      >=</a
+      ><a name="3057"
+      > </a
+      ><a name="3058" class="Symbol"
+      >(</a
+      ><a name="3059" href="tiny-library.html#3049" class="Bound"
+      >f</a
+      ><a name="3060"
+      > </a
+      ><a name="3061" href="tiny-library.html#3052" class="Bound"
+      >y</a
+      ><a name="3062" class="Symbol"
+      >)</a
+      ><a name="3063" href="tiny-library.html#1890" class="Function Operator"
+      >&#8315;&#185;</a
+      ><a name="3065"
+      > </a
+      ><a name="3066" href="tiny-library.html#1816" class="Function Operator"
+      >&#8226;</a
+      ><a name="3067"
+      > </a
+      ><a name="3068" href="tiny-library.html#3049" class="Bound"
+      >f</a
+      ><a name="3069"
+      > </a
+      ><a name="3070" href="tiny-library.html#3054" class="Bound"
+      >z</a
+      ><a name="3071"
+      >
+
+</a
+      ><a name="3073" href="tiny-library.html#3073" class="Function"
+      >paths-from-is-hprop</a
+      ><a name="3092"
+      > </a
+      ><a name="3093" class="Symbol"
+      >:</a
+      ><a name="3094"
+      > </a
+      ><a name="3095" class="Symbol"
+      >{</a
+      ><a name="3096" href="tiny-library.html#3096" class="Bound"
+      >X</a
+      ><a name="3097"
+      > </a
+      ><a name="3098" class="Symbol"
+      >:</a
+      ><a name="3099"
+      > </a
+      ><a name="3100" href="tiny-library.html#71" class="Function"
+      >Type</a
+      ><a name="3104" class="Symbol"
+      >}</a
+      ><a name="3105"
+      > </a
+      ><a name="3106" class="Symbol"
+      >(</a
+      ><a name="3107" href="tiny-library.html#3107" class="Bound"
+      >x</a
+      ><a name="3108"
+      > </a
+      ><a name="3109" class="Symbol"
+      >:</a
+      ><a name="3110"
+      > </a
+      ><a name="3111" href="tiny-library.html#3096" class="Bound"
+      >X</a
+      ><a name="3112" class="Symbol"
+      >)</a
+      ><a name="3113"
+      > </a
+      ><a name="3114" class="Symbol"
+      >&#8594;</a
+      ><a name="3115"
+      > </a
+      ><a name="3116" href="tiny-library.html#2145" class="Function"
+      >hprop</a
+      ><a name="3121" class="Symbol"
+      >(</a
+      ><a name="3122" href="tiny-library.html#2322" class="Function"
+      >paths-from</a
+      ><a name="3132"
+      > </a
+      ><a name="3133" href="tiny-library.html#3107" class="Bound"
+      >x</a
+      ><a name="3134" class="Symbol"
+      >)</a
+      ><a name="3135"
+      >
+</a
+      ><a name="3136" href="tiny-library.html#3073" class="Function"
+      >paths-from-is-hprop</a
+      ><a name="3155"
+      > </a
+      ><a name="3156" href="tiny-library.html#3156" class="Bound"
+      >x</a
+      ><a name="3157"
+      > </a
+      ><a name="3158" class="Symbol"
+      >=</a
+      ><a name="3159"
+      > </a
+      ><a name="3160" href="tiny-library.html#2960" class="Function"
+      >contractible-is-hprop</a
+      ><a name="3181"
+      > </a
+      ><a name="3182" class="Symbol"
+      >(</a
+      ><a name="3183" href="tiny-library.html#2792" class="Function"
+      >paths-from-is-contractible</a
+      ><a name="3209"
+      > </a
+      ><a name="3210" href="tiny-library.html#3156" class="Bound"
+      >x</a
+      ><a name="3211" class="Symbol"
+      >)</a
+      ><a name="3212"
+      >
+
+</a
+      ><a name="3214" href="tiny-library.html#3214" class="Function"
+      >constant</a
+      ><a name="3222"
+      > </a
+      ><a name="3223" class="Symbol"
+      >:</a
+      ><a name="3224"
+      > </a
+      ><a name="3225" class="Symbol"
+      >{</a
+      ><a name="3226" href="tiny-library.html#3226" class="Bound"
+      >X</a
+      ><a name="3227"
+      > </a
+      ><a name="3228" href="tiny-library.html#3228" class="Bound"
+      >Y</a
+      ><a name="3229"
+      > </a
+      ><a name="3230" class="Symbol"
+      >:</a
+      ><a name="3231"
+      > </a
+      ><a name="3232" href="tiny-library.html#71" class="Function"
+      >Type</a
+      ><a name="3236" class="Symbol"
+      >}</a
+      ><a name="3237"
+      > </a
+      ><a name="3238" class="Symbol"
+      >&#8594;</a
+      ><a name="3239"
+      > </a
+      ><a name="3240" class="Symbol"
+      >(</a
+      ><a name="3241" href="tiny-library.html#3226" class="Bound"
+      >X</a
+      ><a name="3242"
+      > </a
+      ><a name="3243" class="Symbol"
+      >&#8594;</a
+      ><a name="3244"
+      > </a
+      ><a name="3245" href="tiny-library.html#3228" class="Bound"
+      >Y</a
+      ><a name="3246" class="Symbol"
+      >)</a
+      ><a name="3247"
+      > </a
+      ><a name="3248" class="Symbol"
+      >&#8594;</a
+      ><a name="3249"
+      > </a
+      ><a name="3250" href="tiny-library.html#71" class="Function"
+      >Type</a
+      ><a name="3254"
+      >
+</a
+      ><a name="3255" href="tiny-library.html#3214" class="Function"
+      >constant</a
+      ><a name="3263"
+      > </a
+      ><a name="3264" class="Symbol"
+      >{</a
+      ><a name="3265" href="tiny-library.html#3265" class="Bound"
+      >X</a
+      ><a name="3266" class="Symbol"
+      >}</a
+      ><a name="3267"
+      > </a
+      ><a name="3268" class="Symbol"
+      >{</a
+      ><a name="3269" href="tiny-library.html#3269" class="Bound"
+      >Y</a
+      ><a name="3270" class="Symbol"
+      >}</a
+      ><a name="3271"
+      > </a
+      ><a name="3272" href="tiny-library.html#3272" class="Bound"
+      >f</a
+      ><a name="3273"
+      > </a
+      ><a name="3274" class="Symbol"
+      >=</a
+      ><a name="3275"
+      > </a
+      ><a name="3276" class="Symbol"
+      >(</a
+      ><a name="3277" href="tiny-library.html#3277" class="Bound"
+      >x</a
+      ><a name="3278"
+      > </a
+      ><a name="3279" href="tiny-library.html#3279" class="Bound"
+      >y</a
+      ><a name="3280"
+      > </a
+      ><a name="3281" class="Symbol"
+      >:</a
+      ><a name="3282"
+      > </a
+      ><a name="3283" href="tiny-library.html#3265" class="Bound"
+      >X</a
+      ><a name="3284" class="Symbol"
+      >)</a
+      ><a name="3285"
+      > </a
+      ><a name="3286" class="Symbol"
+      >&#8594;</a
+      ><a name="3287"
+      > </a
+      ><a name="3288" href="tiny-library.html#3272" class="Bound"
+      >f</a
+      ><a name="3289"
+      > </a
+      ><a name="3290" href="tiny-library.html#3277" class="Bound"
+      >x</a
+      ><a name="3291"
+      > </a
+      ><a name="3292" href="tiny-library.html#422" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="3293"
+      > </a
+      ><a name="3294" href="tiny-library.html#3272" class="Bound"
+      >f</a
+      ><a name="3295"
+      > </a
+      ><a name="3296" href="tiny-library.html#3279" class="Bound"
+      >y</a
+      ><a name="3297"
+      >
+
+</a
+      ><a name="3299" href="tiny-library.html#3299" class="Function"
+      >collapsible</a
+      ><a name="3310"
+      > </a
+      ><a name="3311" class="Symbol"
+      >:</a
+      ><a name="3312"
+      > </a
+      ><a name="3313" href="tiny-library.html#71" class="Function"
+      >Type</a
+      ><a name="3317"
+      > </a
+      ><a name="3318" class="Symbol"
+      >&#8594;</a
+      ><a name="3319"
+      > </a
+      ><a name="3320" href="tiny-library.html#71" class="Function"
+      >Type</a
+      ><a name="3324"
+      >
+</a
+      ><a name="3325" href="tiny-library.html#3299" class="Function"
+      >collapsible</a
+      ><a name="3336"
+      > </a
+      ><a name="3337" href="tiny-library.html#3337" class="Bound"
+      >X</a
+      ><a name="3338"
+      > </a
+      ><a name="3339" class="Symbol"
+      >=</a
+      ><a name="3340"
+      > </a
+      ><a name="3341" href="tiny-library.html#276" class="Record"
+      >&#931;</a
+      ><a name="3342"
+      > </a
+      ><a name="3343" class="Symbol"
+      >\(</a
+      ><a name="3345" href="tiny-library.html#3345" class="Bound"
+      >f</a
+      ><a name="3346"
+      > </a
+      ><a name="3347" class="Symbol"
+      >:</a
+      ><a name="3348"
+      > </a
+      ><a name="3349" href="tiny-library.html#3337" class="Bound"
+      >X</a
+      ><a name="3350"
+      > </a
+      ><a name="3351" class="Symbol"
+      >&#8594;</a
+      ><a name="3352"
+      > </a
+      ><a name="3353" href="tiny-library.html#3337" class="Bound"
+      >X</a
+      ><a name="3354" class="Symbol"
+      >)</a
+      ><a name="3355"
+      > </a
+      ><a name="3356" class="Symbol"
+      >&#8594;</a
+      ><a name="3357"
+      > </a
+      ><a name="3358" href="tiny-library.html#3214" class="Function"
+      >constant</a
+      ><a name="3366"
+      > </a
+      ><a name="3367" href="tiny-library.html#3345" class="Bound"
+      >f</a
+      ><a name="3368"
+      >
+
+</a
+      ><a name="3370" href="tiny-library.html#3370" class="Function"
+      >path-collapsible</a
+      ><a name="3386"
+      > </a
+      ><a name="3387" class="Symbol"
+      >:</a
+      ><a name="3388"
+      > </a
+      ><a name="3389" href="tiny-library.html#71" class="Function"
+      >Type</a
+      ><a name="3393"
+      > </a
+      ><a name="3394" class="Symbol"
+      >&#8594;</a
+      ><a name="3395"
+      > </a
+      ><a name="3396" href="tiny-library.html#71" class="Function"
+      >Type</a
+      ><a name="3400"
+      >
+</a
+      ><a name="3401" href="tiny-library.html#3370" class="Function"
+      >path-collapsible</a
+      ><a name="3417"
+      > </a
+      ><a name="3418" href="tiny-library.html#3418" class="Bound"
+      >X</a
+      ><a name="3419"
+      > </a
+      ><a name="3420" class="Symbol"
+      >=</a
+      ><a name="3421"
+      > </a
+      ><a name="3422" class="Symbol"
+      >{</a
+      ><a name="3423" href="tiny-library.html#3423" class="Bound"
+      >x</a
+      ><a name="3424"
+      > </a
+      ><a name="3425" href="tiny-library.html#3425" class="Bound"
+      >y</a
+      ><a name="3426"
+      > </a
+      ><a name="3427" class="Symbol"
+      >:</a
+      ><a name="3428"
+      > </a
+      ><a name="3429" href="tiny-library.html#3418" class="Bound"
+      >X</a
+      ><a name="3430" class="Symbol"
+      >}</a
+      ><a name="3431"
+      > </a
+      ><a name="3432" class="Symbol"
+      >&#8594;</a
+      ><a name="3433"
+      > </a
+      ><a name="3434" href="tiny-library.html#3299" class="Function"
+      >collapsible</a
+      ><a name="3445" class="Symbol"
+      >(</a
+      ><a name="3446" href="tiny-library.html#3423" class="Bound"
+      >x</a
+      ><a name="3447"
+      > </a
+      ><a name="3448" href="tiny-library.html#422" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="3449"
+      > </a
+      ><a name="3450" href="tiny-library.html#3425" class="Bound"
+      >y</a
+      ><a name="3451" class="Symbol"
+      >)</a
+      ><a name="3452"
+      >
+
+</a
+      ><a name="3454" href="tiny-library.html#3454" class="Function"
+      >path-collapsible-is-hset</a
+      ><a name="3478"
+      > </a
+      ><a name="3479" class="Symbol"
+      >:</a
+      ><a name="3480"
+      > </a
+      ><a name="3481" class="Symbol"
+      >{</a
+      ><a name="3482" href="tiny-library.html#3482" class="Bound"
+      >X</a
+      ><a name="3483"
+      > </a
+      ><a name="3484" class="Symbol"
+      >:</a
+      ><a name="3485"
+      > </a
+      ><a name="3486" href="tiny-library.html#71" class="Function"
+      >Type</a
+      ><a name="3490" class="Symbol"
+      >}</a
+      ><a name="3491"
+      > </a
+      ><a name="3492" class="Symbol"
+      >&#8594;</a
+      ><a name="3493"
+      > </a
+      ><a name="3494" href="tiny-library.html#3370" class="Function"
+      >path-collapsible</a
+      ><a name="3510"
+      > </a
+      ><a name="3511" href="tiny-library.html#3482" class="Bound"
+      >X</a
+      ><a name="3512"
+      > </a
+      ><a name="3513" class="Symbol"
+      >&#8594;</a
+      ><a name="3514"
+      > </a
+      ><a name="3515" href="tiny-library.html#2194" class="Function"
+      >hset</a
+      ><a name="3519"
+      > </a
+      ><a name="3520" href="tiny-library.html#3482" class="Bound"
+      >X</a
+      ><a name="3521"
+      >
+</a
+      ><a name="3522" href="tiny-library.html#3454" class="Function"
+      >path-collapsible-is-hset</a
+      ><a name="3546"
+      > </a
+      ><a name="3547" class="Symbol"
+      >{</a
+      ><a name="3548" href="tiny-library.html#3548" class="Bound"
+      >X</a
+      ><a name="3549" class="Symbol"
+      >}</a
+      ><a name="3550"
+      > </a
+      ><a name="3551" href="tiny-library.html#3551" class="Bound"
+      >pc</a
+      ><a name="3553"
+      > </a
+      ><a name="3554" class="Symbol"
+      >_</a
+      ><a name="3555"
+      > </a
+      ><a name="3556" class="Symbol"
+      >_</a
+      ><a name="3557"
+      > </a
+      ><a name="3558" href="tiny-library.html#3558" class="Bound"
+      >p</a
+      ><a name="3559"
+      > </a
+      ><a name="3560" href="tiny-library.html#3560" class="Bound"
+      >q</a
+      ><a name="3561"
+      > </a
+      ><a name="3562" class="Symbol"
+      >=</a
+      ><a name="3563"
+      > </a
+      ><a name="3564" href="tiny-library.html#3894" class="Function"
+      >claim&#8322;</a
+      ><a name="3570"
+      >
+ </a
+      ><a name="3572" class="Keyword"
+      >where</a
+      ><a name="3577"
+      >
+  </a
+      ><a name="3580" href="tiny-library.html#3580" class="Function"
+      >f</a
+      ><a name="3581"
+      > </a
+      ><a name="3582" class="Symbol"
+      >:</a
+      ><a name="3583"
+      > </a
+      ><a name="3584" class="Symbol"
+      >{</a
+      ><a name="3585" href="tiny-library.html#3585" class="Bound"
+      >x</a
+      ><a name="3586"
+      > </a
+      ><a name="3587" href="tiny-library.html#3587" class="Bound"
+      >y</a
+      ><a name="3588"
+      > </a
+      ><a name="3589" class="Symbol"
+      >:</a
+      ><a name="3590"
+      > </a
+      ><a name="3591" href="tiny-library.html#3548" class="Bound"
+      >X</a
+      ><a name="3592" class="Symbol"
+      >}</a
+      ><a name="3593"
+      > </a
+      ><a name="3594" class="Symbol"
+      >&#8594;</a
+      ><a name="3595"
+      > </a
+      ><a name="3596" href="tiny-library.html#3585" class="Bound"
+      >x</a
+      ><a name="3597"
+      > </a
+      ><a name="3598" href="tiny-library.html#422" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="3599"
+      > </a
+      ><a name="3600" href="tiny-library.html#3587" class="Bound"
+      >y</a
+      ><a name="3601"
+      > </a
+      ><a name="3602" class="Symbol"
+      >&#8594;</a
+      ><a name="3603"
+      > </a
+      ><a name="3604" href="tiny-library.html#3585" class="Bound"
+      >x</a
+      ><a name="3605"
+      > </a
+      ><a name="3606" href="tiny-library.html#422" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="3607"
+      > </a
+      ><a name="3608" href="tiny-library.html#3587" class="Bound"
+      >y</a
+      ><a name="3609"
+      >
+  </a
+      ><a name="3612" href="tiny-library.html#3580" class="Function"
+      >f</a
+      ><a name="3613"
+      > </a
+      ><a name="3614" class="Symbol"
+      >=</a
+      ><a name="3615"
+      > </a
+      ><a name="3616" href="tiny-library.html#346" class="Field"
+      >&#960;&#8320;</a
+      ><a name="3618"
+      > </a
+      ><a name="3619" href="tiny-library.html#3551" class="Bound"
+      >pc</a
+      ><a name="3621"
+      >
+  </a
+      ><a name="3624" href="tiny-library.html#3624" class="Function"
+      >g</a
+      ><a name="3625"
+      > </a
+      ><a name="3626" class="Symbol"
+      >:</a
+      ><a name="3627"
+      > </a
+      ><a name="3628" class="Symbol"
+      >{</a
+      ><a name="3629" href="tiny-library.html#3629" class="Bound"
+      >x</a
+      ><a name="3630"
+      > </a
+      ><a name="3631" href="tiny-library.html#3631" class="Bound"
+      >y</a
+      ><a name="3632"
+      > </a
+      ><a name="3633" class="Symbol"
+      >:</a
+      ><a name="3634"
+      > </a
+      ><a name="3635" href="tiny-library.html#3548" class="Bound"
+      >X</a
+      ><a name="3636" class="Symbol"
+      >}</a
+      ><a name="3637"
+      > </a
+      ><a name="3638" class="Symbol"
+      >(</a
+      ><a name="3639" href="tiny-library.html#3639" class="Bound"
+      >p</a
+      ><a name="3640"
+      > </a
+      ><a name="3641" href="tiny-library.html#3641" class="Bound"
+      >q</a
+      ><a name="3642"
+      > </a
+      ><a name="3643" class="Symbol"
+      >:</a
+      ><a name="3644"
+      > </a
+      ><a name="3645" href="tiny-library.html#3629" class="Bound"
+      >x</a
+      ><a name="3646"
+      > </a
+      ><a name="3647" href="tiny-library.html#422" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="3648"
+      > </a
+      ><a name="3649" href="tiny-library.html#3631" class="Bound"
+      >y</a
+      ><a name="3650" class="Symbol"
+      >)</a
+      ><a name="3651"
+      > </a
+      ><a name="3652" class="Symbol"
+      >&#8594;</a
+      ><a name="3653"
+      > </a
+      ><a name="3654" href="tiny-library.html#3580" class="Function"
+      >f</a
+      ><a name="3655"
+      > </a
+      ><a name="3656" href="tiny-library.html#3639" class="Bound"
+      >p</a
+      ><a name="3657"
+      > </a
+      ><a name="3658" href="tiny-library.html#422" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="3659"
+      > </a
+      ><a name="3660" href="tiny-library.html#3580" class="Function"
+      >f</a
+      ><a name="3661"
+      > </a
+      ><a name="3662" href="tiny-library.html#3641" class="Bound"
+      >q</a
+      ><a name="3663"
+      >
+  </a
+      ><a name="3666" href="tiny-library.html#3624" class="Function"
+      >g</a
+      ><a name="3667"
+      > </a
+      ><a name="3668" class="Symbol"
+      >=</a
+      ><a name="3669"
+      > </a
+      ><a name="3670" href="tiny-library.html#356" class="Field"
+      >&#960;&#8321;</a
+      ><a name="3672"
+      > </a
+      ><a name="3673" href="tiny-library.html#3551" class="Bound"
+      >pc</a
+      ><a name="3675"
+      >
+  </a
+      ><a name="3678" href="tiny-library.html#3678" class="Function"
+      >claim&#8320;</a
+      ><a name="3684"
+      > </a
+      ><a name="3685" class="Symbol"
+      >:</a
+      ><a name="3686"
+      > </a
+      ><a name="3687" class="Symbol"
+      >{</a
+      ><a name="3688" href="tiny-library.html#3688" class="Bound"
+      >x</a
+      ><a name="3689"
+      > </a
+      ><a name="3690" href="tiny-library.html#3690" class="Bound"
+      >y</a
+      ><a name="3691"
+      > </a
+      ><a name="3692" class="Symbol"
+      >:</a
+      ><a name="3693"
+      > </a
+      ><a name="3694" href="tiny-library.html#3548" class="Bound"
+      >X</a
+      ><a name="3695" class="Symbol"
+      >}</a
+      ><a name="3696"
+      > </a
+      ><a name="3697" class="Symbol"
+      >(</a
+      ><a name="3698" href="tiny-library.html#3698" class="Bound"
+      >r</a
+      ><a name="3699"
+      > </a
+      ><a name="3700" class="Symbol"
+      >:</a
+      ><a name="3701"
+      > </a
+      ><a name="3702" href="tiny-library.html#3688" class="Bound"
+      >x</a
+      ><a name="3703"
+      > </a
+      ><a name="3704" href="tiny-library.html#422" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="3705"
+      > </a
+      ><a name="3706" href="tiny-library.html#3690" class="Bound"
+      >y</a
+      ><a name="3707" class="Symbol"
+      >)</a
+      ><a name="3708"
+      > </a
+      ><a name="3709" class="Symbol"
+      >&#8594;</a
+      ><a name="3710"
+      > </a
+      ><a name="3711" href="tiny-library.html#3698" class="Bound"
+      >r</a
+      ><a name="3712"
+      > </a
+      ><a name="3713" href="tiny-library.html#422" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="3714"
+      > </a
+      ><a name="3715" class="Symbol"
+      >(</a
+      ><a name="3716" href="tiny-library.html#3580" class="Function"
+      >f</a
+      ><a name="3717"
+      > </a
+      ><a name="3718" href="tiny-library.html#463" class="InductiveConstructor"
+      >refl</a
+      ><a name="3722" class="Symbol"
+      >)</a
+      ><a name="3723" href="tiny-library.html#1890" class="Function Operator"
+      >&#8315;&#185;</a
+      ><a name="3725"
+      > </a
+      ><a name="3726" href="tiny-library.html#1816" class="Function Operator"
+      >&#8226;</a
+      ><a name="3727"
+      > </a
+      ><a name="3728" href="tiny-library.html#3580" class="Function"
+      >f</a
+      ><a name="3729"
+      > </a
+      ><a name="3730" href="tiny-library.html#3698" class="Bound"
+      >r</a
+      ><a name="3731"
+      >
+  </a
+      ><a name="3734" href="tiny-library.html#3678" class="Function"
+      >claim&#8320;</a
+      ><a name="3740"
+      > </a
+      ><a name="3741" class="Symbol"
+      >=</a
+      ><a name="3742"
+      > </a
+      ><a name="3743" href="tiny-library.html#620" class="Function"
+      >J'</a
+      ><a name="3745"
+      > </a
+      ><a name="3746" class="Symbol"
+      >(&#955;</a
+      ><a name="3748"
+      > </a
+      ><a name="3749" href="tiny-library.html#3749" class="Bound"
+      >r</a
+      ><a name="3750"
+      > </a
+      ><a name="3751" class="Symbol"
+      >&#8594;</a
+      ><a name="3752"
+      > </a
+      ><a name="3753" href="tiny-library.html#3749" class="Bound"
+      >r</a
+      ><a name="3754"
+      > </a
+      ><a name="3755" href="tiny-library.html#422" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="3756"
+      > </a
+      ><a name="3757" class="Symbol"
+      >(</a
+      ><a name="3758" href="tiny-library.html#3580" class="Function"
+      >f</a
+      ><a name="3759"
+      > </a
+      ><a name="3760" href="tiny-library.html#463" class="InductiveConstructor"
+      >refl</a
+      ><a name="3764" class="Symbol"
+      >)</a
+      ><a name="3765" href="tiny-library.html#1890" class="Function Operator"
+      >&#8315;&#185;</a
+      ><a name="3767"
+      > </a
+      ><a name="3768" href="tiny-library.html#1816" class="Function Operator"
+      >&#8226;</a
+      ><a name="3769"
+      > </a
+      ><a name="3770" href="tiny-library.html#3580" class="Function"
+      >f</a
+      ><a name="3771"
+      > </a
+      ><a name="3772" href="tiny-library.html#3749" class="Bound"
+      >r</a
+      ><a name="3773" class="Symbol"
+      >)</a
+      ><a name="3774"
+      > </a
+      ><a name="3775" class="Symbol"
+      >(</a
+      ><a name="3776" href="tiny-library.html#1952" class="Function"
+      >sym-is-inverse</a
+      ><a name="3790" class="Symbol"
+      >(</a
+      ><a name="3791" href="tiny-library.html#3580" class="Function"
+      >f</a
+      ><a name="3792"
+      > </a
+      ><a name="3793" href="tiny-library.html#463" class="InductiveConstructor"
+      >refl</a
+      ><a name="3797" class="Symbol"
+      >))</a
+      ><a name="3799"
+      >
+  </a
+      ><a name="3802" href="tiny-library.html#3802" class="Function"
+      >claim&#8321;</a
+      ><a name="3808"
+      > </a
+      ><a name="3809" class="Symbol"
+      >:</a
+      ><a name="3810"
+      > </a
+      ><a name="3811" class="Symbol"
+      >(</a
+      ><a name="3812" href="tiny-library.html#3580" class="Function"
+      >f</a
+      ><a name="3813"
+      > </a
+      ><a name="3814" href="tiny-library.html#463" class="InductiveConstructor"
+      >refl</a
+      ><a name="3818" class="Symbol"
+      >)</a
+      ><a name="3819" href="tiny-library.html#1890" class="Function Operator"
+      >&#8315;&#185;</a
+      ><a name="3821"
+      > </a
+      ><a name="3822" href="tiny-library.html#1816" class="Function Operator"
+      >&#8226;</a
+      ><a name="3823"
+      > </a
+      ><a name="3824" href="tiny-library.html#3580" class="Function"
+      >f</a
+      ><a name="3825"
+      > </a
+      ><a name="3826" href="tiny-library.html#3558" class="Bound"
+      >p</a
+      ><a name="3827"
+      > </a
+      ><a name="3828" href="tiny-library.html#422" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="3829"
+      > </a
+      ><a name="3830" class="Symbol"
+      >(</a
+      ><a name="3831" href="tiny-library.html#3580" class="Function"
+      >f</a
+      ><a name="3832"
+      > </a
+      ><a name="3833" href="tiny-library.html#463" class="InductiveConstructor"
+      >refl</a
+      ><a name="3837" class="Symbol"
+      >)</a
+      ><a name="3838" href="tiny-library.html#1890" class="Function Operator"
+      >&#8315;&#185;</a
+      ><a name="3840"
+      > </a
+      ><a name="3841" href="tiny-library.html#1816" class="Function Operator"
+      >&#8226;</a
+      ><a name="3842"
+      > </a
+      ><a name="3843" href="tiny-library.html#3580" class="Function"
+      >f</a
+      ><a name="3844"
+      > </a
+      ><a name="3845" href="tiny-library.html#3560" class="Bound"
+      >q</a
+      ><a name="3846"
+      >
+  </a
+      ><a name="3849" href="tiny-library.html#3802" class="Function"
+      >claim&#8321;</a
+      ><a name="3855"
+      > </a
+      ><a name="3856" class="Symbol"
+      >=</a
+      ><a name="3857"
+      > </a
+      ><a name="3858" href="tiny-library.html#887" class="Function"
+      >ap</a
+      ><a name="3860"
+      > </a
+      ><a name="3861" class="Symbol"
+      >(&#955;</a
+      ><a name="3863"
+      > </a
+      ><a name="3864" href="tiny-library.html#3864" class="Bound"
+      >h</a
+      ><a name="3865"
+      > </a
+      ><a name="3866" class="Symbol"
+      >&#8594;</a
+      ><a name="3867"
+      > </a
+      ><a name="3868" class="Symbol"
+      >(</a
+      ><a name="3869" href="tiny-library.html#3580" class="Function"
+      >f</a
+      ><a name="3870"
+      > </a
+      ><a name="3871" href="tiny-library.html#463" class="InductiveConstructor"
+      >refl</a
+      ><a name="3875" class="Symbol"
+      >)</a
+      ><a name="3876" href="tiny-library.html#1890" class="Function Operator"
+      >&#8315;&#185;</a
+      ><a name="3878"
+      > </a
+      ><a name="3879" href="tiny-library.html#1816" class="Function Operator"
+      >&#8226;</a
+      ><a name="3880"
+      > </a
+      ><a name="3881" href="tiny-library.html#3864" class="Bound"
+      >h</a
+      ><a name="3882" class="Symbol"
+      >)</a
+      ><a name="3883"
+      > </a
+      ><a name="3884" class="Symbol"
+      >(</a
+      ><a name="3885" href="tiny-library.html#3624" class="Function"
+      >g</a
+      ><a name="3886"
+      > </a
+      ><a name="3887" href="tiny-library.html#3558" class="Bound"
+      >p</a
+      ><a name="3888"
+      > </a
+      ><a name="3889" href="tiny-library.html#3560" class="Bound"
+      >q</a
+      ><a name="3890" class="Symbol"
+      >)</a
+      ><a name="3891"
+      >
+  </a
+      ><a name="3894" href="tiny-library.html#3894" class="Function"
+      >claim&#8322;</a
+      ><a name="3900"
+      > </a
+      ><a name="3901" class="Symbol"
+      >:</a
+      ><a name="3902"
+      > </a
+      ><a name="3903" href="tiny-library.html#3558" class="Bound"
+      >p</a
+      ><a name="3904"
+      > </a
+      ><a name="3905" href="tiny-library.html#422" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="3906"
+      > </a
+      ><a name="3907" href="tiny-library.html#3560" class="Bound"
+      >q</a
+      ><a name="3908"
+      >
+  </a
+      ><a name="3911" href="tiny-library.html#3894" class="Function"
+      >claim&#8322;</a
+      ><a name="3917"
+      > </a
+      ><a name="3918" class="Symbol"
+      >=</a
+      ><a name="3919"
+      > </a
+      ><a name="3920" href="tiny-library.html#3678" class="Function"
+      >claim&#8320;</a
+      ><a name="3926"
+      > </a
+      ><a name="3927" href="tiny-library.html#3558" class="Bound"
+      >p</a
+      ><a name="3928"
+      > </a
+      ><a name="3929" href="tiny-library.html#1816" class="Function Operator"
+      >&#8226;</a
+      ><a name="3930"
+      > </a
+      ><a name="3931" href="tiny-library.html#3802" class="Function"
+      >claim&#8321;</a
+      ><a name="3937"
+      > </a
+      ><a name="3938" href="tiny-library.html#1816" class="Function Operator"
+      >&#8226;</a
+      ><a name="3939"
+      > </a
+      ><a name="3940" class="Symbol"
+      >(</a
+      ><a name="3941" href="tiny-library.html#3678" class="Function"
+      >claim&#8320;</a
+      ><a name="3947"
+      > </a
+      ><a name="3948" href="tiny-library.html#3560" class="Bound"
+      >q</a
+      ><a name="3949" class="Symbol"
+      >)</a
+      ><a name="3950" href="tiny-library.html#1890" class="Function Operator"
+      >&#8315;&#185;</a
+      ><a name="3952"
+      >
+
+</a
+      ><a name="3954" href="tiny-library.html#3954" class="Function"
+      >hprop-is-path-collapsible</a
+      ><a name="3979"
+      > </a
+      ><a name="3980" class="Symbol"
+      >:</a
+      ><a name="3981"
+      > </a
+      ><a name="3982" class="Symbol"
+      >{</a
+      ><a name="3983" href="tiny-library.html#3983" class="Bound"
+      >X</a
+      ><a name="3984"
+      > </a
+      ><a name="3985" class="Symbol"
+      >:</a
+      ><a name="3986"
+      > </a
+      ><a name="3987" href="tiny-library.html#71" class="Function"
+      >Type</a
+      ><a name="3991" class="Symbol"
+      >}</a
+      ><a name="3992"
+      > </a
+      ><a name="3993" class="Symbol"
+      >&#8594;</a
+      ><a name="3994"
+      > </a
+      ><a name="3995" href="tiny-library.html#2145" class="Function"
+      >hprop</a
+      ><a name="4000"
+      > </a
+      ><a name="4001" href="tiny-library.html#3983" class="Bound"
+      >X</a
+      ><a name="4002"
+      > </a
+      ><a name="4003" class="Symbol"
+      >&#8594;</a
+      ><a name="4004"
+      > </a
+      ><a name="4005" href="tiny-library.html#3370" class="Function"
+      >path-collapsible</a
+      ><a name="4021"
+      > </a
+      ><a name="4022" href="tiny-library.html#3983" class="Bound"
+      >X</a
+      ><a name="4023"
+      >
+</a
+      ><a name="4024" href="tiny-library.html#3954" class="Function"
+      >hprop-is-path-collapsible</a
+      ><a name="4049"
+      > </a
+      ><a name="4050" href="tiny-library.html#4050" class="Bound"
+      >h</a
+      ><a name="4051"
+      > </a
+      ><a name="4052" class="Symbol"
+      >{</a
+      ><a name="4053" href="tiny-library.html#4053" class="Bound"
+      >x</a
+      ><a name="4054" class="Symbol"
+      >}</a
+      ><a name="4055"
+      > </a
+      ><a name="4056" class="Symbol"
+      >{</a
+      ><a name="4057" href="tiny-library.html#4057" class="Bound"
+      >y</a
+      ><a name="4058" class="Symbol"
+      >}</a
+      ><a name="4059"
+      > </a
+      ><a name="4060" class="Symbol"
+      >=</a
+      ><a name="4061"
+      > </a
+      ><a name="4062" class="Symbol"
+      >((&#955;</a
+      ><a name="4065"
+      > </a
+      ><a name="4066" href="tiny-library.html#4066" class="Bound"
+      >p</a
+      ><a name="4067"
+      > </a
+      ><a name="4068" class="Symbol"
+      >&#8594;</a
+      ><a name="4069"
+      > </a
+      ><a name="4070" href="tiny-library.html#4050" class="Bound"
+      >h</a
+      ><a name="4071"
+      > </a
+      ><a name="4072" href="tiny-library.html#4053" class="Bound"
+      >x</a
+      ><a name="4073"
+      > </a
+      ><a name="4074" href="tiny-library.html#4057" class="Bound"
+      >y</a
+      ><a name="4075" class="Symbol"
+      >)</a
+      ><a name="4076"
+      > </a
+      ><a name="4077" href="tiny-library.html#331" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="4078"
+      > </a
+      ><a name="4079" class="Symbol"
+      >(&#955;</a
+      ><a name="4081"
+      > </a
+      ><a name="4082" href="tiny-library.html#4082" class="Bound"
+      >p</a
+      ><a name="4083"
+      > </a
+      ><a name="4084" href="tiny-library.html#4084" class="Bound"
+      >q</a
+      ><a name="4085"
+      > </a
+      ><a name="4086" class="Symbol"
+      >&#8594;</a
+      ><a name="4087"
+      > </a
+      ><a name="4088" href="tiny-library.html#463" class="InductiveConstructor"
+      >refl</a
+      ><a name="4092" class="Symbol"
+      >))</a
+      ><a name="4094"
+      >
+
+</a
+      ><a name="4096" href="tiny-library.html#4096" class="Function"
+      >hprop-is-hset</a
+      ><a name="4109"
+      > </a
+      ><a name="4110" class="Symbol"
+      >:</a
+      ><a name="4111"
+      > </a
+      ><a name="4112" class="Symbol"
+      >{</a
+      ><a name="4113" href="tiny-library.html#4113" class="Bound"
+      >X</a
+      ><a name="4114"
+      > </a
+      ><a name="4115" class="Symbol"
+      >:</a
+      ><a name="4116"
+      > </a
+      ><a name="4117" href="tiny-library.html#71" class="Function"
+      >Type</a
+      ><a name="4121" class="Symbol"
+      >}</a
+      ><a name="4122"
+      > </a
+      ><a name="4123" class="Symbol"
+      >&#8594;</a
+      ><a name="4124"
+      > </a
+      ><a name="4125" href="tiny-library.html#2145" class="Function"
+      >hprop</a
+      ><a name="4130"
+      > </a
+      ><a name="4131" href="tiny-library.html#4113" class="Bound"
+      >X</a
+      ><a name="4132"
+      > </a
+      ><a name="4133" class="Symbol"
+      >&#8594;</a
+      ><a name="4134"
+      > </a
+      ><a name="4135" href="tiny-library.html#2194" class="Function"
+      >hset</a
+      ><a name="4139"
+      > </a
+      ><a name="4140" href="tiny-library.html#4113" class="Bound"
+      >X</a
+      ><a name="4141"
+      >
+</a
+      ><a name="4142" href="tiny-library.html#4096" class="Function"
+      >hprop-is-hset</a
+      ><a name="4155"
+      > </a
+      ><a name="4156" href="tiny-library.html#4156" class="Bound"
+      >h</a
+      ><a name="4157"
+      > </a
+      ><a name="4158" class="Symbol"
+      >=</a
+      ><a name="4159"
+      > </a
+      ><a name="4160" href="tiny-library.html#3454" class="Function"
+      >path-collapsible-is-hset</a
+      ><a name="4184" class="Symbol"
+      >(</a
+      ><a name="4185" href="tiny-library.html#3954" class="Function"
+      >hprop-is-path-collapsible</a
+      ><a name="4210"
+      > </a
+      ><a name="4211" href="tiny-library.html#4156" class="Bound"
+      >h</a
+      ><a name="4212" class="Symbol"
+      >)</a
+      ><a name="4213"
+      >
+
+</a
+      ><a name="4215" href="tiny-library.html#4215" class="Function"
+      >paths-from-is-hset</a
+      ><a name="4233"
+      > </a
+      ><a name="4234" class="Symbol"
+      >:</a
+      ><a name="4235"
+      > </a
+      ><a name="4236" class="Symbol"
+      >{</a
+      ><a name="4237" href="tiny-library.html#4237" class="Bound"
+      >X</a
+      ><a name="4238"
+      > </a
+      ><a name="4239" class="Symbol"
+      >:</a
+      ><a name="4240"
+      > </a
+      ><a name="4241" href="tiny-library.html#71" class="Function"
+      >Type</a
+      ><a name="4245" class="Symbol"
+      >}</a
+      ><a name="4246"
+      > </a
+      ><a name="4247" class="Symbol"
+      >(</a
+      ><a name="4248" href="tiny-library.html#4248" class="Bound"
+      >x</a
+      ><a name="4249"
+      > </a
+      ><a name="4250" class="Symbol"
+      >:</a
+      ><a name="4251"
+      > </a
+      ><a name="4252" href="tiny-library.html#4237" class="Bound"
+      >X</a
+      ><a name="4253" class="Symbol"
+      >)</a
+      ><a name="4254"
+      > </a
+      ><a name="4255" class="Symbol"
+      >&#8594;</a
+      ><a name="4256"
+      > </a
+      ><a name="4257" href="tiny-library.html#2194" class="Function"
+      >hset</a
+      ><a name="4261" class="Symbol"
+      >(</a
+      ><a name="4262" href="tiny-library.html#2322" class="Function"
+      >paths-from</a
+      ><a name="4272"
+      > </a
+      ><a name="4273" href="tiny-library.html#4248" class="Bound"
+      >x</a
+      ><a name="4274" class="Symbol"
+      >)</a
+      ><a name="4275"
+      >
+</a
+      ><a name="4276" href="tiny-library.html#4215" class="Function"
+      >paths-from-is-hset</a
+      ><a name="4294"
+      > </a
+      ><a name="4295" href="tiny-library.html#4295" class="Bound"
+      >x</a
+      ><a name="4296"
+      > </a
+      ><a name="4297" class="Symbol"
+      >=</a
+      ><a name="4298"
+      > </a
+      ><a name="4299" href="tiny-library.html#4096" class="Function"
+      >hprop-is-hset</a
+      ><a name="4312"
+      > </a
+      ><a name="4313" class="Symbol"
+      >(</a
+      ><a name="4314" href="tiny-library.html#3073" class="Function"
+      >paths-from-is-hprop</a
+      ><a name="4333"
+      > </a
+      ><a name="4334" href="tiny-library.html#4295" class="Bound"
+      >x</a
+      ><a name="4335" class="Symbol"
+      >)</a
+      ><a name="4336"
+      >
+
+</a
+      ><a name="4338" class="Keyword"
+      >data</a
+      ><a name="4342"
+      > </a
+      ><a name="4343" href="tiny-library.html#4343" class="Datatype"
+      >&#8709;</a
+      ><a name="4344"
+      > </a
+      ><a name="4345" class="Symbol"
+      >:</a
+      ><a name="4346"
+      > </a
+      ><a name="4347" href="tiny-library.html#71" class="Function"
+      >Type</a
+      ><a name="4351"
+      > </a
+      ><a name="4352" class="Keyword"
+      >where</a
+      ><a name="4357"
+      >
+ </a
+      ><a name="4359" class="Comment"
+      >-- no cases</a
+      ><a name="4370"
+      >
+
+</a
+      ><a name="4372" href="tiny-library.html#4372" class="Function"
+      >&#8709;-rec</a
+      ><a name="4377"
+      > </a
+      ><a name="4378" class="Symbol"
+      >:</a
+      ><a name="4379"
+      > </a
+      ><a name="4380" class="Symbol"
+      >{</a
+      ><a name="4381" href="tiny-library.html#4381" class="Bound"
+      >X</a
+      ><a name="4382"
+      > </a
+      ><a name="4383" class="Symbol"
+      >:</a
+      ><a name="4384"
+      > </a
+      ><a name="4385" href="tiny-library.html#71" class="Function"
+      >Type</a
+      ><a name="4389" class="Symbol"
+      >}</a
+      ><a name="4390"
+      > </a
+      ><a name="4391" class="Symbol"
+      >&#8594;</a
+      ><a name="4392"
+      > </a
+      ><a name="4393" href="tiny-library.html#4343" class="Datatype"
+      >&#8709;</a
+      ><a name="4394"
+      > </a
+      ><a name="4395" class="Symbol"
+      >&#8594;</a
+      ><a name="4396"
+      > </a
+      ><a name="4397" href="tiny-library.html#4381" class="Bound"
+      >X</a
+      ><a name="4398"
+      >
+</a
+      ><a name="4399" href="tiny-library.html#4372" class="Function"
+      >&#8709;-rec</a
+      ><a name="4404"
+      > </a
+      ><a name="4405" class="Symbol"
+      >()</a
+      ><a name="4407"
+      >
+
+</a
+      ><a name="4409" href="tiny-library.html#4409" class="Function"
+      >empty</a
+      ><a name="4414"
+      > </a
+      ><a name="4415" class="Symbol"
+      >:</a
+      ><a name="4416"
+      > </a
+      ><a name="4417" href="tiny-library.html#71" class="Function"
+      >Type</a
+      ><a name="4421"
+      > </a
+      ><a name="4422" class="Symbol"
+      >&#8594;</a
+      ><a name="4423"
+      > </a
+      ><a name="4424" href="tiny-library.html#71" class="Function"
+      >Type</a
+      ><a name="4428"
+      >
+</a
+      ><a name="4429" href="tiny-library.html#4409" class="Function"
+      >empty</a
+      ><a name="4434"
+      > </a
+      ><a name="4435" href="tiny-library.html#4435" class="Bound"
+      >X</a
+      ><a name="4436"
+      > </a
+      ><a name="4437" class="Symbol"
+      >=</a
+      ><a name="4438"
+      > </a
+      ><a name="4439" href="tiny-library.html#4435" class="Bound"
+      >X</a
+      ><a name="4440"
+      > </a
+      ><a name="4441" class="Symbol"
+      >&#8594;</a
+      ><a name="4442"
+      > </a
+      ><a name="4443" href="tiny-library.html#4343" class="Datatype"
+      >&#8709;</a
+      ><a name="4444"
+      >
+
+</a
+      ><a name="4446" href="tiny-library.html#4446" class="Function"
+      >decidable</a
+      ><a name="4455"
+      > </a
+      ><a name="4456" class="Symbol"
+      >:</a
+      ><a name="4457"
+      > </a
+      ><a name="4458" href="tiny-library.html#71" class="Function"
+      >Type</a
+      ><a name="4462"
+      > </a
+      ><a name="4463" class="Symbol"
+      >&#8594;</a
+      ><a name="4464"
+      > </a
+      ><a name="4465" href="tiny-library.html#71" class="Function"
+      >Type</a
+      ><a name="4469"
+      >
+</a
+      ><a name="4470" href="tiny-library.html#4446" class="Function"
+      >decidable</a
+      ><a name="4479"
+      > </a
+      ><a name="4480" href="tiny-library.html#4480" class="Bound"
+      >X</a
+      ><a name="4481"
+      > </a
+      ><a name="4482" class="Symbol"
+      >=</a
+      ><a name="4483"
+      > </a
+      ><a name="4484" href="tiny-library.html#4480" class="Bound"
+      >X</a
+      ><a name="4485"
+      > </a
+      ><a name="4486" href="tiny-library.html#196" class="Datatype Operator"
+      >+</a
+      ><a name="4487"
+      > </a
+      ><a name="4488" href="tiny-library.html#4409" class="Function"
+      >empty</a
+      ><a name="4493"
+      > </a
+      ><a name="4494" href="tiny-library.html#4480" class="Bound"
+      >X</a
+      ><a name="4495"
+      >
+
+</a
+      ><a name="4497" href="tiny-library.html#4497" class="Function"
+      >inhabited-is-collapsible</a
+      ><a name="4521"
+      > </a
+      ><a name="4522" class="Symbol"
+      >:</a
+      ><a name="4523"
+      > </a
+      ><a name="4524" class="Symbol"
+      >{</a
+      ><a name="4525" href="tiny-library.html#4525" class="Bound"
+      >X</a
+      ><a name="4526"
+      > </a
+      ><a name="4527" class="Symbol"
+      >:</a
+      ><a name="4528"
+      > </a
+      ><a name="4529" href="tiny-library.html#71" class="Function"
+      >Type</a
+      ><a name="4533" class="Symbol"
+      >}</a
+      ><a name="4534"
+      > </a
+      ><a name="4535" class="Symbol"
+      >&#8594;</a
+      ><a name="4536"
+      > </a
+      ><a name="4537" href="tiny-library.html#4525" class="Bound"
+      >X</a
+      ><a name="4538"
+      > </a
+      ><a name="4539" class="Symbol"
+      >&#8594;</a
+      ><a name="4540"
+      > </a
+      ><a name="4541" href="tiny-library.html#3299" class="Function"
+      >collapsible</a
+      ><a name="4552"
+      > </a
+      ><a name="4553" href="tiny-library.html#4525" class="Bound"
+      >X</a
+      ><a name="4554"
+      >
+</a
+      ><a name="4555" href="tiny-library.html#4497" class="Function"
+      >inhabited-is-collapsible</a
+      ><a name="4579"
+      > </a
+      ><a name="4580" href="tiny-library.html#4580" class="Bound"
+      >x</a
+      ><a name="4581"
+      > </a
+      ><a name="4582" class="Symbol"
+      >=</a
+      ><a name="4583"
+      > </a
+      ><a name="4584" class="Symbol"
+      >((&#955;</a
+      ><a name="4587"
+      > </a
+      ><a name="4588" href="tiny-library.html#4588" class="Bound"
+      >y</a
+      ><a name="4589"
+      > </a
+      ><a name="4590" class="Symbol"
+      >&#8594;</a
+      ><a name="4591"
+      > </a
+      ><a name="4592" href="tiny-library.html#4580" class="Bound"
+      >x</a
+      ><a name="4593" class="Symbol"
+      >)</a
+      ><a name="4594"
+      > </a
+      ><a name="4595" href="tiny-library.html#331" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="4596"
+      > </a
+      ><a name="4597" class="Symbol"
+      >&#955;</a
+      ><a name="4598"
+      > </a
+      ><a name="4599" href="tiny-library.html#4599" class="Bound"
+      >y</a
+      ><a name="4600"
+      > </a
+      ><a name="4601" href="tiny-library.html#4601" class="Bound"
+      >y'</a
+      ><a name="4603"
+      > </a
+      ><a name="4604" class="Symbol"
+      >&#8594;</a
+      ><a name="4605"
+      > </a
+      ><a name="4606" href="tiny-library.html#463" class="InductiveConstructor"
+      >refl</a
+      ><a name="4610" class="Symbol"
+      >)</a
+      ><a name="4611"
+      >
+
+</a
+      ><a name="4613" href="tiny-library.html#4613" class="Function"
+      >empty-is-collapsible</a
+      ><a name="4633"
+      > </a
+      ><a name="4634" class="Symbol"
+      >:</a
+      ><a name="4635"
+      > </a
+      ><a name="4636" class="Symbol"
+      >{</a
+      ><a name="4637" href="tiny-library.html#4637" class="Bound"
+      >X</a
+      ><a name="4638"
+      > </a
+      ><a name="4639" class="Symbol"
+      >:</a
+      ><a name="4640"
+      > </a
+      ><a name="4641" href="tiny-library.html#71" class="Function"
+      >Type</a
+      ><a name="4645" class="Symbol"
+      >}</a
+      ><a name="4646"
+      > </a
+      ><a name="4647" class="Symbol"
+      >&#8594;</a
+      ><a name="4648"
+      > </a
+      ><a name="4649" href="tiny-library.html#4409" class="Function"
+      >empty</a
+      ><a name="4654"
+      > </a
+      ><a name="4655" href="tiny-library.html#4637" class="Bound"
+      >X</a
+      ><a name="4656"
+      > </a
+      ><a name="4657" class="Symbol"
+      >&#8594;</a
+      ><a name="4658"
+      > </a
+      ><a name="4659" href="tiny-library.html#3299" class="Function"
+      >collapsible</a
+      ><a name="4670"
+      > </a
+      ><a name="4671" href="tiny-library.html#4637" class="Bound"
+      >X</a
+      ><a name="4672"
+      >
+</a
+      ><a name="4673" href="tiny-library.html#4613" class="Function"
+      >empty-is-collapsible</a
+      ><a name="4693"
+      > </a
+      ><a name="4694" href="tiny-library.html#4694" class="Bound"
+      >u</a
+      ><a name="4695"
+      > </a
+      ><a name="4696" class="Symbol"
+      >=</a
+      ><a name="4697"
+      > </a
+      ><a name="4698" class="Symbol"
+      >((&#955;</a
+      ><a name="4701"
+      > </a
+      ><a name="4702" href="tiny-library.html#4702" class="Bound"
+      >x</a
+      ><a name="4703"
+      > </a
+      ><a name="4704" class="Symbol"
+      >&#8594;</a
+      ><a name="4705"
+      > </a
+      ><a name="4706" href="tiny-library.html#4702" class="Bound"
+      >x</a
+      ><a name="4707" class="Symbol"
+      >)</a
+      ><a name="4708"
+      > </a
+      ><a name="4709" href="tiny-library.html#331" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="4710"
+      > </a
+      ><a name="4711" class="Symbol"
+      >(&#955;</a
+      ><a name="4713"
+      > </a
+      ><a name="4714" href="tiny-library.html#4714" class="Bound"
+      >x</a
+      ><a name="4715"
+      > </a
+      ><a name="4716" href="tiny-library.html#4716" class="Bound"
+      >x'</a
+      ><a name="4718"
+      > </a
+      ><a name="4719" class="Symbol"
+      >&#8594;</a
+      ><a name="4720"
+      > </a
+      ><a name="4721" href="tiny-library.html#4372" class="Function"
+      >&#8709;-rec</a
+      ><a name="4726" class="Symbol"
+      >(</a
+      ><a name="4727" href="tiny-library.html#4694" class="Bound"
+      >u</a
+      ><a name="4728"
+      > </a
+      ><a name="4729" href="tiny-library.html#4714" class="Bound"
+      >x</a
+      ><a name="4730" class="Symbol"
+      >)))</a
+      ><a name="4733"
+      >
+
+</a
+      ><a name="4735" href="tiny-library.html#4735" class="Function"
+      >decidable-is-collapsible</a
+      ><a name="4759"
+      > </a
+      ><a name="4760" class="Symbol"
+      >:</a
+      ><a name="4761"
+      > </a
+      ><a name="4762" class="Symbol"
+      >{</a
+      ><a name="4763" href="tiny-library.html#4763" class="Bound"
+      >X</a
+      ><a name="4764"
+      > </a
+      ><a name="4765" class="Symbol"
+      >:</a
+      ><a name="4766"
+      > </a
+      ><a name="4767" href="tiny-library.html#71" class="Function"
+      >Type</a
+      ><a name="4771" class="Symbol"
+      >}</a
+      ><a name="4772"
+      > </a
+      ><a name="4773" class="Symbol"
+      >&#8594;</a
+      ><a name="4774"
+      > </a
+      ><a name="4775" href="tiny-library.html#4446" class="Function"
+      >decidable</a
+      ><a name="4784"
+      > </a
+      ><a name="4785" href="tiny-library.html#4763" class="Bound"
+      >X</a
+      ><a name="4786"
+      > </a
+      ><a name="4787" class="Symbol"
+      >&#8594;</a
+      ><a name="4788"
+      > </a
+      ><a name="4789" href="tiny-library.html#3299" class="Function"
+      >collapsible</a
+      ><a name="4800"
+      > </a
+      ><a name="4801" href="tiny-library.html#4763" class="Bound"
+      >X</a
+      ><a name="4802"
+      >
+</a
+      ><a name="4803" href="tiny-library.html#4735" class="Function"
+      >decidable-is-collapsible</a
+      ><a name="4827"
+      > </a
+      ><a name="4828" class="Symbol"
+      >(</a
+      ><a name="4829" href="tiny-library.html#229" class="InductiveConstructor"
+      >in&#8320;</a
+      ><a name="4832"
+      > </a
+      ><a name="4833" href="tiny-library.html#4833" class="Bound"
+      >x</a
+      ><a name="4834" class="Symbol"
+      >)</a
+      ><a name="4835"
+      > </a
+      ><a name="4836" class="Symbol"
+      >=</a
+      ><a name="4837"
+      > </a
+      ><a name="4838" href="tiny-library.html#4497" class="Function"
+      >inhabited-is-collapsible</a
+      ><a name="4862"
+      > </a
+      ><a name="4863" href="tiny-library.html#4833" class="Bound"
+      >x</a
+      ><a name="4864"
+      >
+</a
+      ><a name="4865" href="tiny-library.html#4735" class="Function"
+      >decidable-is-collapsible</a
+      ><a name="4889"
+      > </a
+      ><a name="4890" class="Symbol"
+      >(</a
+      ><a name="4891" href="tiny-library.html#249" class="InductiveConstructor"
+      >in&#8321;</a
+      ><a name="4894"
+      > </a
+      ><a name="4895" href="tiny-library.html#4895" class="Bound"
+      >u</a
+      ><a name="4896" class="Symbol"
+      >)</a
+      ><a name="4897"
+      > </a
+      ><a name="4898" class="Symbol"
+      >=</a
+      ><a name="4899"
+      > </a
+      ><a name="4900" href="tiny-library.html#4613" class="Function"
+      >empty-is-collapsible</a
+      ><a name="4920"
+      > </a
+      ><a name="4921" href="tiny-library.html#4895" class="Bound"
+      >u</a
+      ><a name="4922"
+      >
+
+</a
+      ><a name="4924" href="tiny-library.html#4924" class="Function"
+      >discrete</a
+      ><a name="4932"
+      > </a
+      ><a name="4933" class="Symbol"
+      >:</a
+      ><a name="4934"
+      > </a
+      ><a name="4935" href="tiny-library.html#71" class="Function"
+      >Type</a
+      ><a name="4939"
+      > </a
+      ><a name="4940" class="Symbol"
+      >&#8594;</a
+      ><a name="4941"
+      > </a
+      ><a name="4942" href="tiny-library.html#71" class="Function"
+      >Type</a
+      ><a name="4946"
+      >
+</a
+      ><a name="4947" href="tiny-library.html#4924" class="Function"
+      >discrete</a
+      ><a name="4955"
+      > </a
+      ><a name="4956" href="tiny-library.html#4956" class="Bound"
+      >X</a
+      ><a name="4957"
+      > </a
+      ><a name="4958" class="Symbol"
+      >=</a
+      ><a name="4959"
+      > </a
+      ><a name="4960" class="Symbol"
+      >{</a
+      ><a name="4961" href="tiny-library.html#4961" class="Bound"
+      >x</a
+      ><a name="4962"
+      > </a
+      ><a name="4963" href="tiny-library.html#4963" class="Bound"
+      >y</a
+      ><a name="4964"
+      > </a
+      ><a name="4965" class="Symbol"
+      >:</a
+      ><a name="4966"
+      > </a
+      ><a name="4967" href="tiny-library.html#4956" class="Bound"
+      >X</a
+      ><a name="4968" class="Symbol"
+      >}</a
+      ><a name="4969"
+      > </a
+      ><a name="4970" class="Symbol"
+      >&#8594;</a
+      ><a name="4971"
+      > </a
+      ><a name="4972" href="tiny-library.html#4446" class="Function"
+      >decidable</a
+      ><a name="4981" class="Symbol"
+      >(</a
+      ><a name="4982" href="tiny-library.html#4961" class="Bound"
+      >x</a
+      ><a name="4983"
+      > </a
+      ><a name="4984" href="tiny-library.html#422" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="4985"
+      > </a
+      ><a name="4986" href="tiny-library.html#4963" class="Bound"
+      >y</a
+      ><a name="4987" class="Symbol"
+      >)</a
+      ><a name="4988"
+      >
+
+</a
+      ><a name="4990" href="tiny-library.html#4990" class="Function"
+      >discrete-is-path-collapsible</a
+      ><a name="5018"
+      > </a
+      ><a name="5019" class="Symbol"
+      >:</a
+      ><a name="5020"
+      > </a
+      ><a name="5021" class="Symbol"
+      >{</a
+      ><a name="5022" href="tiny-library.html#5022" class="Bound"
+      >X</a
+      ><a name="5023"
+      > </a
+      ><a name="5024" class="Symbol"
+      >:</a
+      ><a name="5025"
+      > </a
+      ><a name="5026" href="tiny-library.html#71" class="Function"
+      >Type</a
+      ><a name="5030" class="Symbol"
+      >}</a
+      ><a name="5031"
+      > </a
+      ><a name="5032" class="Symbol"
+      >&#8594;</a
+      ><a name="5033"
+      > </a
+      ><a name="5034" href="tiny-library.html#4924" class="Function"
+      >discrete</a
+      ><a name="5042"
+      > </a
+      ><a name="5043" href="tiny-library.html#5022" class="Bound"
+      >X</a
+      ><a name="5044"
+      > </a
+      ><a name="5045" class="Symbol"
+      >&#8594;</a
+      ><a name="5046"
+      > </a
+      ><a name="5047" href="tiny-library.html#3370" class="Function"
+      >path-collapsible</a
+      ><a name="5063"
+      > </a
+      ><a name="5064" href="tiny-library.html#5022" class="Bound"
+      >X</a
+      ><a name="5065"
+      >
+</a
+      ><a name="5066" href="tiny-library.html#4990" class="Function"
+      >discrete-is-path-collapsible</a
+      ><a name="5094"
+      > </a
+      ><a name="5095" href="tiny-library.html#5095" class="Bound"
+      >d</a
+      ><a name="5096"
+      > </a
+      ><a name="5097" class="Symbol"
+      >=</a
+      ><a name="5098"
+      > </a
+      ><a name="5099" href="tiny-library.html#4735" class="Function"
+      >decidable-is-collapsible</a
+      ><a name="5123"
+      > </a
+      ><a name="5124" href="tiny-library.html#5095" class="Bound"
+      >d</a
+      ><a name="5125"
+      >
+
+</a
+      ><a name="5127" href="tiny-library.html#5127" class="Function"
+      >discrete-is-hset</a
+      ><a name="5143"
+      > </a
+      ><a name="5144" class="Symbol"
+      >:</a
+      ><a name="5145"
+      > </a
+      ><a name="5146" class="Symbol"
+      >{</a
+      ><a name="5147" href="tiny-library.html#5147" class="Bound"
+      >X</a
+      ><a name="5148"
+      > </a
+      ><a name="5149" class="Symbol"
+      >:</a
+      ><a name="5150"
+      > </a
+      ><a name="5151" href="tiny-library.html#71" class="Function"
+      >Type</a
+      ><a name="5155" class="Symbol"
+      >}</a
+      ><a name="5156"
+      > </a
+      ><a name="5157" class="Symbol"
+      >&#8594;</a
+      ><a name="5158"
+      > </a
+      ><a name="5159" href="tiny-library.html#4924" class="Function"
+      >discrete</a
+      ><a name="5167"
+      > </a
+      ><a name="5168" href="tiny-library.html#5147" class="Bound"
+      >X</a
+      ><a name="5169"
+      > </a
+      ><a name="5170" class="Symbol"
+      >&#8594;</a
+      ><a name="5171"
+      > </a
+      ><a name="5172" href="tiny-library.html#2194" class="Function"
+      >hset</a
+      ><a name="5176"
+      > </a
+      ><a name="5177" href="tiny-library.html#5147" class="Bound"
+      >X</a
+      ><a name="5178"
+      >
+</a
+      ><a name="5179" href="tiny-library.html#5127" class="Function"
+      >discrete-is-hset</a
+      ><a name="5195"
+      > </a
+      ><a name="5196" href="tiny-library.html#5196" class="Bound"
+      >d</a
+      ><a name="5197"
+      > </a
+      ><a name="5198" class="Symbol"
+      >=</a
+      ><a name="5199"
+      > </a
+      ><a name="5200" href="tiny-library.html#3454" class="Function"
+      >path-collapsible-is-hset</a
+      ><a name="5224" class="Symbol"
+      >(</a
+      ><a name="5225" href="tiny-library.html#4990" class="Function"
+      >discrete-is-path-collapsible</a
+      ><a name="5253"
+      > </a
+      ><a name="5254" href="tiny-library.html#5196" class="Bound"
+      >d</a
+      ><a name="5255" class="Symbol"
+      >)</a
+      ><a name="5256"
+      >
+
+</a
+      ><a name="5258" href="tiny-library.html#5258" class="Function"
+      >&#8322;-discrete</a
+      ><a name="5268"
+      > </a
+      ><a name="5269" class="Symbol"
+      >:</a
+      ><a name="5270"
+      > </a
+      ><a name="5271" href="tiny-library.html#4924" class="Function"
+      >discrete</a
+      ><a name="5279"
+      > </a
+      ><a name="5280" href="tiny-library.html#387" class="Datatype"
+      >&#8322;</a
+      ><a name="5281"
+      >
+</a
+      ><a name="5282" href="tiny-library.html#5258" class="Function"
+      >&#8322;-discrete</a
+      ><a name="5292"
+      > </a
+      ><a name="5293" class="Symbol"
+      >{</a
+      ><a name="5294" href="tiny-library.html#403" class="InductiveConstructor"
+      >&#8320;</a
+      ><a name="5295" class="Symbol"
+      >}</a
+      ><a name="5296"
+      > </a
+      ><a name="5297" class="Symbol"
+      >{</a
+      ><a name="5298" href="tiny-library.html#403" class="InductiveConstructor"
+      >&#8320;</a
+      ><a name="5299" class="Symbol"
+      >}</a
+      ><a name="5300"
+      > </a
+      ><a name="5301" class="Symbol"
+      >=</a
+      ><a name="5302"
+      > </a
+      ><a name="5303" href="tiny-library.html#229" class="InductiveConstructor"
+      >in&#8320;</a
+      ><a name="5306"
+      > </a
+      ><a name="5307" href="tiny-library.html#463" class="InductiveConstructor"
+      >refl</a
+      ><a name="5311"
+      >
+</a
+      ><a name="5312" href="tiny-library.html#5258" class="Function"
+      >&#8322;-discrete</a
+      ><a name="5322"
+      > </a
+      ><a name="5323" class="Symbol"
+      >{</a
+      ><a name="5324" href="tiny-library.html#403" class="InductiveConstructor"
+      >&#8320;</a
+      ><a name="5325" class="Symbol"
+      >}</a
+      ><a name="5326"
+      > </a
+      ><a name="5327" class="Symbol"
+      >{</a
+      ><a name="5328" href="tiny-library.html#410" class="InductiveConstructor"
+      >&#8321;</a
+      ><a name="5329" class="Symbol"
+      >}</a
+      ><a name="5330"
+      > </a
+      ><a name="5331" class="Symbol"
+      >=</a
+      ><a name="5332"
+      > </a
+      ><a name="5333" href="tiny-library.html#249" class="InductiveConstructor"
+      >in&#8321;</a
+      ><a name="5336"
+      > </a
+      ><a name="5337" class="Symbol"
+      >(&#955;</a
+      ><a name="5339"
+      > </a
+      ><a name="5340" class="Symbol"
+      >())</a
+      ><a name="5343"
+      >
+</a
+      ><a name="5344" href="tiny-library.html#5258" class="Function"
+      >&#8322;-discrete</a
+      ><a name="5354"
+      > </a
+      ><a name="5355" class="Symbol"
+      >{</a
+      ><a name="5356" href="tiny-library.html#410" class="InductiveConstructor"
+      >&#8321;</a
+      ><a name="5357" class="Symbol"
+      >}</a
+      ><a name="5358"
+      > </a
+      ><a name="5359" class="Symbol"
+      >{</a
+      ><a name="5360" href="tiny-library.html#403" class="InductiveConstructor"
+      >&#8320;</a
+      ><a name="5361" class="Symbol"
+      >}</a
+      ><a name="5362"
+      > </a
+      ><a name="5363" class="Symbol"
+      >=</a
+      ><a name="5364"
+      > </a
+      ><a name="5365" href="tiny-library.html#249" class="InductiveConstructor"
+      >in&#8321;</a
+      ><a name="5368"
+      > </a
+      ><a name="5369" class="Symbol"
+      >(&#955;</a
+      ><a name="5371"
+      > </a
+      ><a name="5372" class="Symbol"
+      >())</a
+      ><a name="5375"
+      >
+</a
+      ><a name="5376" href="tiny-library.html#5258" class="Function"
+      >&#8322;-discrete</a
+      ><a name="5386"
+      > </a
+      ><a name="5387" class="Symbol"
+      >{</a
+      ><a name="5388" href="tiny-library.html#410" class="InductiveConstructor"
+      >&#8321;</a
+      ><a name="5389" class="Symbol"
+      >}</a
+      ><a name="5390"
+      > </a
+      ><a name="5391" class="Symbol"
+      >{</a
+      ><a name="5392" href="tiny-library.html#410" class="InductiveConstructor"
+      >&#8321;</a
+      ><a name="5393" class="Symbol"
+      >}</a
+      ><a name="5394"
+      > </a
+      ><a name="5395" class="Symbol"
+      >=</a
+      ><a name="5396"
+      > </a
+      ><a name="5397" href="tiny-library.html#229" class="InductiveConstructor"
+      >in&#8320;</a
+      ><a name="5400"
+      > </a
+      ><a name="5401" href="tiny-library.html#463" class="InductiveConstructor"
+      >refl</a
+      ><a name="5405"
+      >
+
+</a
+      ><a name="5407" href="tiny-library.html#5407" class="Function"
+      >&#8322;-hset</a
+      ><a name="5413"
+      > </a
+      ><a name="5414" class="Symbol"
+      >:</a
+      ><a name="5415"
+      > </a
+      ><a name="5416" href="tiny-library.html#2194" class="Function"
+      >hset</a
+      ><a name="5420"
+      > </a
+      ><a name="5421" href="tiny-library.html#387" class="Datatype"
+      >&#8322;</a
+      ><a name="5422"
+      >
+</a
+      ><a name="5423" href="tiny-library.html#5407" class="Function"
+      >&#8322;-hset</a
+      ><a name="5429"
+      > </a
+      ><a name="5430" class="Symbol"
+      >=</a
+      ><a name="5431"
+      > </a
+      ><a name="5432" href="tiny-library.html#5127" class="Function"
+      >discrete-is-hset</a
+      ><a name="5448"
+      > </a
+      ><a name="5449" href="tiny-library.html#5258" class="Function"
+      >&#8322;-discrete</a
+      ><a name="5459"
+      >
+
+</a
+      ><a name="5461" class="Keyword"
+      >infixr</a
+      ><a name="5467"
+      > </a
+      ><a name="5468" class="Number"
+      >2</a
+      ><a name="5469"
+      > _&#8801;_
+</a
+      ><a name="5474" class="Keyword"
+      >infixr</a
+      ><a name="5480"
+      > </a
+      ><a name="5481" class="Number"
+      >1</a
+      ><a name="5482"
+      > _+_
+</a
+      ><a name="5487" class="Keyword"
+      >infixr</a
+      ><a name="5493"
+      > </a
+      ><a name="5494" class="Number"
+      >1</a
+      ><a name="5495"
+      > _,_
+</a
+      ><a name="5500" class="Keyword"
+      >infixl</a
+      ><a name="5506"
+      > </a
+      ><a name="5507" class="Number"
+      >3</a
+      ><a name="5508"
+      > _&#8728;_ 
+</a
+      ><a name="5514" class="Keyword"
+      >infixl</a
+      ><a name="5520"
+      > </a
+      ><a name="5521" class="Number"
+      >3</a
+      ><a name="5522"
+      > _&#8226;_ 
+
+\end{code}
+</a
+      ></pre
+    ><script type="text/javascript"> var sc_project=4273194; var sc_invisible=1; var sc_partition=48; var sc_click_stat=1; var sc_security="47eab21e"; </script> <script type="text/javascript" src="http://www.statcounter.com/counter/counter.js"></script><noscript><div class="statcounter"><a title="site stats" href="http://www.statcounter.com/" target="_blank"><img class="statcounter" src="http://c.statcounter.com/4273194/0/47eab21e/1/" alt="site stats" ></a></div></noscript></body
+  ></html
+>
