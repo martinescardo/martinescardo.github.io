@@ -1,0 +1,808 @@
+
+
+\documentclass{csslides-1.1}
+
+\raggedright
+
+\usepackage{amsmath,amscd,amssymb,stmaryrd}
+
+\newcommand{\Cases}{\operatorname{cases}}
+\newcommand{\sscript}[1]{_{\empty_{#1}}}
+\newcommand{\id}{\operatorname{id}}
+\newcommand{\True}{\operatorname{true}}
+\newcommand{\False}{\operatorname{false}}
+\newcommand{\parrow}{\rightharpoonup}
+\newcommand{\Meaning}[1]{\llbracket #1 \rrbracket}
+\newcommand{\norm}{\operatorname{norm}}
+\newcommand{\three}{\mathbf{3}}
+\newcommand{\thomega}{{\three}^{\omega}}
+\newcommand{\twomega}{\{0,1\}^{\omega}}
+\newcommand{\myemph}[1]{{\it #1}\/}
+\begin{document}
+
+\title[http://www.dcs.ed.ac.uk/home/mhe]{Effective and sequential \\
+definition by cases on the reals \\
+via infinite signed-digit numerals \\[1ex]
+{\small\tt http:/www.elsevier.nl/locate/entcs/volume13.html}\\[5ex]~}
+\author{Mart\' \i n Escard\'o}
+\date[LFCS]{Appsem Workshop, Pisa, 18th September 1998}
+\maketitle
+
+\begin{slide}{}
+
+~
+
+\vfill
+
+In the Appsem specific objectives, one finds
+
+\vfill
+
+``{\bf I: Domain theory and real number computation}
+
+\begin{quote}
+[...] Recently, there has been some definite progress on these
+problems. [...] This language, however, is at this stage of
+theoretical interest only, as even basic arithmetic operations make use
+of parallel facilities. It is clearly desirable and necessary to find
+a sequential version of this language, [...].''
+
+\vfill
+
+This talk deals with such sequentiality issues, particularly regarding
+the problem that the (in)equality relations are undecidable.
+
+\vfill
+
+\end{quote}
+
+\end{slide}
+
+
+%\begin{slide}{Technical summary}
+  
+%  The talk deals with the problem that (in)equality of real numbers is
+%  undecidable.
+
+%\vfill
+  
+%  We access real numbers via \myemph{infinite signed-digit numerals}.
+
+%  This notation system is highly redundant.
+
+%\vfill
+
+%  {\bf Main lemma}
+  
+%  \begin{it}
+%  There is a computable normalization operator on {pairs of
+%  numerals} such that
+
+%  \begin{quote}
+%  for normal pairs, the lexicographical and numerical orders coincide.
+%  \end{quote}
+%  \end{it}
+  
+%  In particular, we can always assume w.l.o.g. that any two numerals
+%  that denote the same number are themselves the same.
+  
+%%  This consequence holds for all notation systems used for effective
+%%  real number computation.
+
+%\vfill
+
+%\end{slide}
+
+\begin{slide}{What I'll tell you}
+
+\begin{enumerate}
+\item Computing on the reals.
+
+\item Undecidability of the (in)equality relations.
+
+\item A parallel solution to this problem.
+
+\item Statement of a sequential solution.
+\item Lexicographical normalization.
+
+\item Construction of the sequential solution.
+\end{enumerate}
+
+\end{slide}
+
+\begin{slide}[Computing on the reals]{Computing on the reals \\ via 
+signed-digit numerals}
+
+\vfill
+
+The introduction of decimal notation, centuries ago, was a
+breakthrough regarding efficient approximate computation by hand.
+
+\vfill
+  
+  {\bf Perhaps surprising fact} (Brouwer 1920):
+
+\begin{quote}
+  Potentially infinite decimal numerals are not suitable for effective
+  (exact) real number computation.
+\end{quote}
+
+For example, addition is not computable in decimal notation.
+
+\vfill
+
+One uses the fact that computable functions have to be of
+\myemph{finite character}:
+\begin{quote}
+Finitely many \myemph{output} digits depend only on finitely many
+\myemph{input} digits.
+\end{quote}
+
+\vfill
+
+\end{slide}
+
+\begin{slide}{Addition is not computable \\ in decimal notation} 
+
+It suffices to show that multiplication by~$3$ is not computable.
+
+\vfill
+
+Suppose that, at some stage, the scanned part of the input is
+``$0 \cdot 3$''.
+
+\vfill
+
+The first output digit can be either~$0$ or~$1$.
+If we eventually see an input digit
+\begin{quote}
+ $<3$, the first output digit has to be~$0$,
+
+ $>3$, the first output digit has to be~$1$.
+\end{quote}
+\vfill
+
+While the next scanned digit is~$3$, we cannot decide the first output
+digit.
+
+\vfill
+
+If the input happens to be $1/3$, we can never decide the first output
+digit. 
+
+Q.E.D.
+
+\vfill
+
+\end{slide}
+
+\begin{slide}{Brouwer's  solution}
+
+Use base $2/3$ with digits $0$ and $1$, e.g.
+\[
+\llbracket 1001 \rrbracket 
+= 1 \times \left(\frac{2}{3}\right)^{3}
++ 0 \times \left(\frac{2}{3}\right)^{2}
++ 0 \times \left(\frac{2}{3}\right)^{1}
++ 1 \times \left(\frac{2}{3}\right)^{0}
+\]
+
+%\[
+%\llbracket \alpha\sscript{k} \alpha\sscript{k-1} \cdots \alpha\sscript{0}\cdot
+%\alpha\sscript{-1} \alpha\sscript{-2} \cdots \alpha\sscript{-n} \cdots 
+\rrbracket
+%=\sum_{i \le k} \alpha\sscript{i} \times \left(\frac{2}{3}\right)^{i}.
+%\]
+
+(Also Turing 1937b)
+
+\vfill
+
+In what sense is this a solution?
+
+\vfill
+
+{\bf Other solutions}
+\vfill
+
+Nested sequences of closed intervals with rational end-points.
+
+\vfill
+
+Cauchy sequences of rationals with fixed rate of convergence.
+
+\vfill
+
+Continued fractions.
+
+\vfill
+
+\dots
+
+\vfill
+
+{\bf All equivalent}
+
+In the sense that we can effectively translate between them.
+
+\vfill
+
+\end{slide}
+
+\begin{slide}{The solution considered in this talk}
+
+Similar to Brouwer's.
+
+\vfill
+
+{\bf Wiedmer 1980}
+
+Use base~$2$ with digits~$\bar{1}$, $0$ and $1$.
+\[
+\llbracket 1\bar{1}01 \rrbracket 
+= 1 \times 2^{3}
+- 1 \times 2^{2}
++ 0 \times 2^{1}
++ 1 \times 2^{0}
+\]
+%\[
+%\llbracket \alpha\sscript{k} \alpha\sscript{k-1} \cdots \alpha\sscript{0} 
+\cdot
+%\alpha\sscript{-1} \alpha\sscript{-2} \cdots \alpha\sscript{-n} \cdots 
+\rrbracket
+%=\sum_{i \le k} \alpha\sscript{i} \times 2^{i}.
+%\]
+
+(Leslie 1817, Cauchy 1840, Avizienis 1964, Di Gianantonio 1993 \dots)
+\vfill
+
+For simplicity and w.l.o.g., we'll only consider \emph{fractional}
+infinite signed-digit binary expansions:
+\[
+\llbracket \alpha \rrbracket
+=\sum_{i \ge 0} \alpha_i \times 2^{-(i+1)} \in [-1,1],
+\]
+
+for every $\alpha=\alpha\sscript{0}
+\alpha\sscript{1} \alpha\sscript{2} \cdots \in \{\bar{1},0,1\}^{\omega}$,
+
+where we omit redundant prefix ``$0.$'' 
+
+\vfill
+
+
+\end{slide}
+
+\begin{slide}{}
+
+~
+
+\vfill
+
+{\bf Definition} $\phi$ \myemph{realizes} $f$ iff
+\[
+\begin{CD}
+\{\bar{1},0,1\}^{\omega}  @>{\phi}>>  \{\bar{1},0,1\}^{\omega} \\
+@V{\llbracket - \rrbracket}VV @VV{\llbracket - \rrbracket}V \\
+[-1,1] @>>{f}> [-1,1].
+\end{CD} 
+\]
+
+\vfill
+
+{\bf Definition} $f$ is \myemph{computable} iff it has a computable
+realizer~$\phi$.
+
+\vfill
+
+{\bf Recall}
+
+A necessary condition for~$\phi$ being computable is that it is of
+finite character.
+
+\vfill
+
+\end{slide}
+
+\begin{slide}{}
+{\bf Topological point of view}
+\[
+\begin{CD}
+\{\bar{1},0,1\}^{\omega}  @>{\phi}>>  \{\bar{1},0,1\}^{\omega} \\
+@V{\llbracket - \rrbracket}VV @VV{\llbracket - \rrbracket}V \\
+[-1,1] @>>{f}> [-1,1].
+\end{CD} 
+\]
+Endow the set $\{\bar{1},0,1\}$ with the discrete topology and
+$\{\bar{1},0,1\}^{\omega}$ with the product topology.
+
+{\bf Facts}
+\begin{enumerate}
+\item $\phi$ is of finite character iff it is continuous.
+
+\item The denotation function $\llbracket - \rrbracket$ is a
+topological quotient map.
+
+
+$\implies$ Every computable~$f$ is continuous.
+
+\item Every continuous $f$ has a continuous
+realizer~$\phi$ (projectivity).
+
+$\implies$ Every continuous $f$ is ``potentially'' computable.
+
+In decimal notation, not even multiplication by~$3$ has a continuous
+realizer.
+\end{enumerate}
+
+\vfill
+
+\end{slide}
+
+\begin{slide}{Undecidability of (in)equality}
+
+Non-constant predicates on real numbers are undecidable.
+
+\[
+\begin{CD}
+\left(\{\bar{1},0,1\}^{\omega}\right)^n @>{\phi}>>  \{\True,\False\} \\
+@V{}VV @VV{}V \\
+[-1,1]^n @>>{p}> \{\True,\False\}.
+\end{CD} 
+\]
+
+Topologically, the set $p^{-1}\{\True\}$ would be clopen, but
+$[-1,1]^n$ is a connected space.
+
+In particular, the (in)equality relations are undecidable.
+(Alternatively, we can see that they are undecidable because otherwise
+there would be discontinuous computable functions, e.g.
+\[
+\operatorname{sgn}(x) = \begin{cases}
+                    -1 & \text{if $x < 0$,} \\
+                    0 & \text{if $x=0$,} \\
+                    1 & \text{otherwise.)} 
+                    \end{cases}
+\]
+\end{slide}
+
+\begin{slide}{}
+
+~
+
+\vfill
+
+{\bf Nevertheless}
+
+Many definitions by cases consisting of inequalities,
+  such as
+\begin{eqnarray*}
+\min(x,y)  & =  & \begin{cases}
+                    x & \text{if $x \leqslant y$,} \\
+                    y & \text{otherwise,}
+                    \end{cases} \\[2ex]
+|x| & =  & \begin{cases}
+                    -x & \text{if $x < 0$,} \\
+                    x & \text{otherwise,}
+                    \end{cases}\end{eqnarray*}  
+\myemph{do} produce computable functions. 
+
+\vfill
+
+{\bf But}
+
+Such functions \myemph{cannot} be computed by 
+
+$\bullet$ first evaluating the condition, 
+
+$\bullet$ then computing the corresponding branch.
+
+\vfill
+
+\end{slide}
+
+\begin{slide}{A parallel solution}
+
+{\bf Boehm and Cartwritght 1990}
+
+The partial function
+\[
+x <_{\bot} y = \begin{cases}
+                    \True & \text{if $x < y$,} \\
+                    \bot & \text{if $x=y$,} \\
+                    \False & \text{if $x > y$} 
+                    \end{cases}
+\]
+is known to be computable.
+
+Consider a computable ``parallel'' conditional such that
+\[
+\operatorname{pif} \bot \operatorname{then} x \operatorname{else} x = x.
+\]
+Then one can implement~$|x|$ by
+\[
+|x| = \operatorname{pif} x <_{\bot} 0 \operatorname{then} -x 
+\operatorname{else} x,
+\]
+because in the boundary case one has that
+\[
+|0| = \operatorname{pif} \bot \operatorname{then} -0 \operatorname{else} 0 = 0.
+\]
+\end{slide}
+
+\begin{slide}{}
+
+{\bf More generally,}
+
+If $f,g$ are computable and agree at a computable number~$x_0$, then
+the function
+\[
+h(x) = \begin{cases}
+                    f(x) & \text{if $x \leqslant x_0$,} \\
+                    g(x) & \text{if $x \geqslant x_0$} 
+                    \end{cases}
+\]
+is computable because
+\[
+h(x) = \operatorname{pif} x <_{\bot} x_0 \operatorname{then} f(x)
+\operatorname{else} g(x).
+\]
+
+{\bf The point is that, in the boundary cases,}
+
+the branches have to agree if a continuous function is to be defined.
+
+So the parallel conditional always overcomes the fact that computable
+partial predicates are undefined at boundary cases.
+
+\vfill
+
+\framebox{But one would like to avoid parallel facilities.}
+This is the topic of this talk. 
+
+\vfill
+
+\end{slide}
+
+\begin{slide}{A sequential solution}
+
+We'll sketch a the proof of
+
+\vfill
+
+{\bf Theorem} 
+
+\begin{it}
+There is a sequentially computable partial function
+\[
+\Cases:[-1,1]^4 \parrow [-1,1]
+\]
+ such that
+\[
+\Cases(x,t,y,z) = \begin{cases}
+                    y & \text{if $x < t$ or $y=z$,} \\
+                    z & \text{if $x > t$ or $y=z$,}
+                    \end{cases}
+\]
+with domain of definition
+\[
+\{ (x,t,y,z) \mid \text{$x = t$ implies $y=z$} \}. 
+\]
+\end{it}
+
+\begin{small}
+{\bf Note} \begin{enumerate}
+\item This partial function is realizable by a finite deterministic
+  automaton (with some silent moves).
+\item Topologically, the above is the largest domain of definition
+that it can have.
+\end{enumerate}
+\end{small}
+\end{slide}
+
+\begin{slide}{Lexicographical normalization}
+
+~ \vfill
+
+We order numerals lexicographically:
+
+\vfill
+
+$\alpha < \beta$ iff 
+\begin{quote}
+  $\alpha$ and $\beta$ are of the form $\gamma d \alpha'$ and $\gamma
+  e \beta'$ where~$\gamma$ is a finite sequence and $d,e$ are digits
+  with $d<e$.
+\end{quote}
+\vfill
+
+{\bf Canonical forms for numerals}
+
+Every number is denoted by a smallest and by a largest numeral.
+
+\vfill
+
+{\bf But}
+
+There are no \myemph{effectively determinable} canonical forms.
+
+\vfill
+
+(These two facts are easily proved by topological methods.)
+
+\vfill
+
+\end{slide}
+
+
+\begin{slide}{}
+
+\vfill
+
+  If $\alpha,\beta \in \twomega$ are standard numerals then
+\begin{quote}
+  $\alpha \leqslant \beta$ implies
+  $\Meaning{\alpha} \leqslant \Meaning{\beta}$.
+\end{quote}
+
+\vfill
+
+{\bf This property fails for signed-digit numerals.}
+
+For example, for
+$\alpha=\bar{1}1^\omega$ and $\beta=0\bar{1}^\omega$ one has
+$\alpha<\beta$ but $\Meaning{\alpha}=0 \not\leqslant -1/2 =
+\Meaning{\beta}$.  
+
+\vfill
+
+{\bf Moreover, its converse fails for both standard and signed-digit
+  numerals.}
+
+For example, for $\alpha=10^{\omega}$ and
+$\beta=01^{\omega}$ one has that
+$\Meaning{\alpha}=\Meaning{\beta}=1/2$ but $\alpha \not\leqslant
+\beta$.  
+
+\vfill
+
+{\bf However} 
+
+Signed-digit numerals admit a very strong order-normalization property
+that standard numerals don't.
+
+\vfill
+
+\end{slide}
+
+\begin{slide}{}
+
+{\bf Definition}
+A pair $(\alpha,\beta)$ of numerals is \myemph{order-normal} iff
+its lexicographical order coincides with its numerical order:
+\begin{enumerate}
+\item $\alpha < \beta$ \,\,and $\Meaning{\alpha} < \Meaning{\beta}$, \,\,\,or
+\item $\alpha = \beta$ (and $\Meaning{\alpha} = \Meaning{\beta}$), or
+\item $\alpha > \beta$ \,\,and $\Meaning{\alpha} > \Meaning{\beta}$. 
+\end{enumerate}
+
+Thus, for order-normal pairs $(\alpha,\beta)$, 
+\begin{quote}
+$\Meaning{\alpha}=\Meaning{\beta}$ implies $\alpha=\beta$.
+\end{quote} 
+{\bf Warning} 
+\begin{enumerate}
+\item Order-normality is a property of \myemph{pairs} of numerals and
+  not of single numerals.
+
+In fact, a pair $(\alpha,\alpha)$ is always order-normal.
+
+\item There are \myemph{distinct} order-normal pairs $(\alpha,\beta)$
+  and $(\alpha',\beta')$ denoting the \myemph{same} pair of numbers.
+\end{enumerate}
+\end{slide}
+
+\begin{slide}{}
+
+Let $\three=\{\bar{1},0,1\}$.
+
+\vfill
+
+  {\bf Theorem} 
+
+  \begin{it}
+  There is a sequentially computable,
+  denotation-preserving, idempotent map
+  \[
+  \norm:\thomega \times \thomega \rightarrow \thomega \times \thomega
+  \]
+  whose fixed-points are order-normal pairs.
+  \end{it}
+
+
+\vfill
+
+That is, if
+$\norm(\alpha,\beta)=(\alpha',\beta')$ then
+\begin{enumerate}
+\item
+  $(\Meaning{\alpha},\Meaning{\beta})=(\Meaning{\alpha'},\Meaning{\beta'})$,
+\item $(\alpha',\beta')$ is order-normal, and
+\item $\norm(\alpha',\beta')=(\alpha',\beta')$.
+\end{enumerate}
+
+{\bf Corollary}
+
+\myemph{One can always assume w.l.o.g. that any two numerals that
+  denote the same number are themselves the same.}
+\end{slide}
+
+\begin{slide}{}
+
+{\bf Proof sketch}
+
+\vfill
+
+We write
+\[
+\alpha  =  \gamma \alpha' \alpha''
+\qquad
+\beta   =  \gamma \beta' \beta'',
+\]
+
+with $\gamma, \alpha',\beta'$ initially empty.
+
+\vfill
+
+{\bf Step 1}
+
+We transfer digits, one at a time, from $\alpha'',\beta''$ to
+$\alpha',\beta'$ respectively.
+
+(The size of $\alpha'$ and $\beta'$ will be at most~$3$ at any stage.)
+
+
+\vfill
+If the situation $\alpha' = \bar{1}\bar{1}0$ and $\beta'=0$ is reached, we
+can stop because
+
+\qquad $ \Meaning{\gamma \bar{1} \bar{1} 0 \alpha''} < \Meaning{\gamma
+  0 \beta''}. $
+
+Similarly, we can stop if $\alpha'=\bar{1}\bar{1}$ and $\beta'=00$.
+
+There are two additional symmetric cases, which we omit.
+
+\vfill
+
+\end{slide}
+
+\begin{slide}{}
+
+~\vfill
+
+{\bf Step 2}
+  
+
+
+If none of the above terminating cases holds, a case analysis shows
+that it is possible to apply the identities
+\[
+\Meaning{0 \bar{1}}  =  \Meaning{\bar{1} 1}
+\qquad 
+\Meaning{0 1}  =  \Meaning{1\bar{1}}
+\]
+to prefixes of $\alpha',\beta'$ so that $\alpha',\beta'$
+end up sharing the first digit.
+
+\vfill
+
+This digit is removed from $\alpha',\beta'$ and transfered to~$\gamma$.
+
+
+\vfill
+
+{\bf Then go back to Step 1}
+
+
+
+
+\vfill
+
+The process doesn't terminate iff $\gamma$ keeps growing for ever.
+
+
+\vfill
+
+In this case $\alpha$ and $\beta$ must denote the same number and
+$\norm(\alpha,\beta)=(\gamma,\gamma)$.
+
+{\bf Q.E.D.}
+
+
+\vfill
+
+We can now prove the sequential case-analysis theorem.
+
+\vfill
+
+\end{slide}
+
+\begin{slide}{}
+  
+Recall that
+\[
+\Cases(x,t,y,z) = \begin{cases}
+                    y & \text{if $x < t$ or $y=z$,} \\
+                    z & \text{if $x > t$ or $y=z$}
+                    \end{cases}
+\]
+and that we assume that $x = t$ implies $y=z$.
+
+\vfill
+
+{\bf Algorithm for a sequential realizer}:
+\begin{enumerate}
+\item Let $\alpha,\beta,\gamma,\delta$ be numerals denoting the numbers
+$x,t,y,z$.
+
+
+\item
+We can assume that $(\alpha,\beta)$ and $(\gamma,\delta)$ are
+order-normal pairs.
+
+\item
+We first output the greatest common prefix of $\gamma,\delta$.
+
+
+\item
+If it is infinite, we'll never reach the next stage.
+
+\item
+Otherwise, we must have that either $\alpha<\beta$ or else $\alpha >
+\beta$.
+
+
+\item
+We output the remainder of $\gamma$ or $\delta$ accordingly, and the
+algorithm ``terminates''.
+\end{enumerate}
+
+\end{slide}
+
+
+\begin{slide}{What I've told you}
+
+\begin{enumerate}
+\item Computing on the reals.
+
+\item Undecidability of the (in)equality relations.
+
+\item A parallel solution to this problem.
+
+\item Statement of a sequential solution.
+
+\item Lexicographical normalization.
+
+\item Construction of the sequential solution.
+\end{enumerate}
+
+\vfill
+
+For more details see
+
+\begin{small}
+{\tt http:/www.elsevier.nl/locate/entcs/volume13.html}
+\end{small}
+
+\vfill
+
+\begin{center}
+\framebox{{\sc The End}}
+\end{center}
+
+\vfill
+
+\end{slide}
+
+\end{document}

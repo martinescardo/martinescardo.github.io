@@ -1,0 +1,3586 @@
+\documentclass{cs4rep}
+\usepackage{stmaryrd,amsfonts}
+%\renewcommand{\baselinestretch}{1.5}
+
+\begin{document}
+
+\title{Exact Arithmetic \\~ Using the Golden Ratio \\ [5ex]}
+
+\author{David McGaw $<$davm@dcs.ed.ac.uk$>$ \\
+  \and Supervisor: Mart\' \i n Escard\'o $<$mhe@dcs.ed.ac.uk$>$ }
+
+\date{1999} 
+
+\abstract{ The usual approach to real arithmetic on computers consists
+  of using floating point approximations. Unfortunately, floating
+  point arithmetic can sometimes produce wildly erroneous results. One
+  alternative approach is to use exact real arithmetic. Exact real
+  arithmetic allows exact real number computation to be performed
+  without the roundoff errors characteristic of other methods.
+  Conventional representations such as decimal and binary notation are
+  inadequate for this purpose. We consider an alternative
+  representation of reals, using the golden ratio. Firstly we look at
+  the golden ratio and its relation to the Fibonacci series, finding
+  some interesting identities. Then we implement algorithms for basic
+  arithmetic operations, trigonometric and logarithmic functions,
+  conversion and integration. These include new algorithms for
+  addition, multiplication, multiplication by 2, division by 2 and
+  manipulating finite and infinite streams.}
+
+\maketitle
+
+{\bf Acknowledgements}
+
+I would especially like to than my supervisor Mart\' \i n Escard\'o
+for his patience, time, advice and support whilst doing this project.
+
+I would like to thank John Longley for taking the time to explain his
+algorithm for integration to me.
+
+I would also like to thank the
+department of Computer Science at the University of Edinburgh for the
+use of their resources, and in particular the support staff for their
+assistance and for maintaining reliable computing services.
+
+\tableofcontents
+
+\newtheorem{myprop}{Proposition}
+
+\chapter{Introduction} \label{ch:I}
+
+The aim of this project is to construct a calculator that implements
+exact arithmetic using Golden Ratio notation. The calculator that we
+have implemented has basic arithmetic functions, for example addition,
+subtraction, multiplication and division; elementary functions, for
+example trigonometric and logarithmic functions; basic operations on
+functions for example definite integration.
+
+We begin by motivating the use of exact arithmetic and, in particular,
+Golden Ratio (GR) notation.
+
+\section{Problems with Floating-Point Representation}
+
+In floating point representation, finitely many digits are kept.  This
+introduces rounding errors, which when combined with other values can
+make the error of the answer grow.  In some cases the rounding errors
+in a calculation can be so large that the result is meaningless.
+
+For example take the following system of equations, this example is
+taken from~\cite{kn:Hall}:
+
+\begin{center}
+\[
+\begin{array}{ccccc}
+-1.41x_{1} & 2x_{2} & & = & 1 \\
+x_{1} & -1.41x_{2} & x_{3} & = & 1 \\
+ & 2x_{2} & -1.41x_{3} & = & 1
+\end{array}
+\]
+\end{center}
+
+Solving using Gaussian elimination (without row operations) and
+rounding at each stage to 3 significant figures gives: \( x_{1}=0.709,
+x_{2}=1, x_{3}=0.7.\) But the correct answer (to 3 significant
+figures) is: \( x_{1}=x_{2}=x_{3}=1.69. \) We can see that these
+rounding errors have resulted in the answer that we get is completely
+meaningless.
+
+Increasing the number of digits of accuracy will not solve this
+problem, it will only delay it, because by doing more operations we
+could get the same magnitude of error.  Similarly allowing row
+operations (swapping rows to make coefficients as large as possible)
+would be useful but would not remove errors, since doing any
+operations on a number containing an error can make the error grow
+uncontrollably.
+
+There are some ways to estimate the error, and therefore how accurate
+the answer is. These are as follows:
+\begin{itemize}
+\item Floating Point Arithmetic with error analysis.
+\item Interval Arithmetic.
+\item Stochastic Rounding.
+\item Symbolic Manipulation.
+\end{itemize}
+
+A discussion of these techniques can be found in~\cite{kn:Plume}.
+
+Of all these methods only symbolic manipulation will actually
+represent a value exactly, the rest will only approximate the value.
+But at some stage using symbolic manipulation we would have to convert
+to decimal using one of the other methods, we would then get the same
+problems associated with the other methods.
+
+\section{A Solution to Rounding Errors} \label{sec:stra}
+
+We can argue that if errors are introduced because we truncate the
+remaining digits of a number, we could get rid of this error by not
+truncating the number, representing a number as an infinite
+stream of digits.
+
+We would ideally like to represent a number as an infinite stream of
+decimal digits, but we cannot. Simple operations such as addition may
+not be possible, for example if we try to add \(4/9\) with \(5/9\) as
+follows we will not be able to produce one digit of output:
+
+\begin{center}
+\begin{math}
+\begin{array}{rll}
+& 0.444\ldots & = 4/9 \\
++ & 0.555 \ldots & = 5/9 \\ \hline
+& ?
+\end{array}
+\end{math}
+\end{center}
+
+To add these numbers together we must start at the most significant
+bit of the input (there is no least significant bit). We will try to
+find the first digit of the output.
+
+Looking at the first digit of the inputs (0 for both inputs) we can
+tell that the sum will start with either a 0 or a 1, but we do not
+know which.  Therefore we need to look at the second digit of each
+input (a 4 and a 5). We still cannot decide the first digit of the
+result. The remaining digits of input will always be a 4 and a 5, so
+no matter how many digits we look at we will not be able to decide the
+first digit of the output. A graphical representation of this is in Figure \ref{fig:dec}.
+
+\begin{figure}
+\unitlength=.2mm
+\begin{center}
+\begin{picture}(400,100)
+\put(125,30){\oval(150,90)[t]}
+\put(275,30){\oval(150,90)[t]}
+\put(200,50){\oval(60,18)[b]}
+\put(200,50){\oval(20,10)[b]}
+\put(50,0){\makebox[0in]{\(0=.00\ldots\)}}
+\put(200,0){\makebox[0in]{\(0.99\ldots=1\)}}
+\put(350,0){\makebox[0in]{\(1.99\ldots=2\)}}
+\put(275,90){\(1\)}
+\put(125,90){\(0\)}
+\put(45,50){\vector(1,0){315}}
+\end{picture}
+\end{center}
+\caption{Ranges in decimal notation} \label{fig:dec}
+\end{figure}
+
+The two large arcs represent the range of the possible values of
+numbers beginning with the digit 0 and 1. We can see from the diagram
+that the ranges of the two arcs intersect at one point $0.99 \ldots =
+1.00 \ldots$. The small arcs represent the ranges of possible values
+of the sum of $4/9 + 5/9$ after we have looked at each successive
+digit, notice that the range of the sum is always in both the range
+for digits beginning with 0 and 1. We can see the range of the answer
+is getting much smaller after looking at each successive digit. But no
+matter how many digits we look at, in this case the value of the
+result will always in both the interval beginning with 0 and 1.
+Therefore we will never be able to determine the first digit of the
+output by looking at a finite number of digits of the input, another
+example of this can be found in~\cite{kn:DiGianantonio}.
+
+In the above example, to decide the first digit of output we would
+have to look at an infinite number of input digits.  We can say that
+addition using infinite streams of decimals is not of finite
+character, where ``finite character'' is defined as --- A finite
+number of output digits depends only on a finite number of input
+digits.  It is important to note that the set of functions that are
+computable is strictly contained in the set of functions of finite
+character. If a function is computable then it must be of finite
+character. However it is possible that a function is of finite
+character but is not computable.
+
+Other approaches to exact computation, which are of finite character
+are as follows:
+\begin{itemize}
+\item Signed Digits \& Variations.
+\item Limits of Effective Cauchy Sequence.
+\item B-approximable.
+\item Dedekind Cuts.
+\item Continued Fractions.
+\item Mobius Transformations.
+\end{itemize}
+
+Papers related to these approaches that we have studied can be found
+in the references at the end of this report.  In~\cite{kn:Plume},
+David Plume does a survey of papers related to these notations.  It is
+useful to know that all these representations are equivalent, meaning
+that if we have a stream in one representation we can write an
+algorithm that will convert it to any other representation.  Golden
+Ratio notation discussed below is also equivalent to the above
+approaches.
+
+The problem with representing a number as an infinite stream of
+decimal digits is that the intersection of two intervals is at most
+one point. Therefore, if a number is at one of these points, we have to
+decide in which interval it is in. Since we can never decide we will
+never get an answer.
+
+The way to solve this problem is to let the intersection of two
+intervals contain more than one point. This means that at no point do
+we need to decide if the value of a stream is greater than some value.
+By looking at enough digits we can determine the value
+of the answer within some $\epsilon$ that we determine. Then we make
+this $\epsilon$ small enough so that it can not contain both end
+points.
+
+It is impossible to explicitly store an infinite number of digits in
+finite space. The main purpose of using an infinite streams is that we
+can look at 'enough' digits of the answer to guarantee the result
+within some error bound, where the number of digits we look at depends
+on the error bound.
+
+Therefore we never consider the whole stream but only a finite
+portion. The reason why this is desirable is that in floating point
+representation we can control the error by varying the number of
+digits of accuracy but this will only bound the value of a number
+before we have carried out an operation. The error of the result of an
+operation is not necessarily bounded to the same error as the input
+because the input's are exactly the input, without an error. Then the
+output is exact. We introduce the error when truncating the
+infinite stream. Therefore in this case an error is only introduced in
+the stage that we convert to decimal, up to this point the answer is
+completely correct. When we convert to decimal we can then control the
+error.
+
+The graphical representation of Golden Ratio notation is in Figure
+\ref{fig:rangegrn}, where $\phi$ is the golden ratio (see Chapter
+\ref{ch:grn}). This is going to be discussed in Section \ref{sec:ygrn}
+Similarly in Signed Binary (SB) notation we have the same properties
+as with the Golden Ratio notation, the graphical representation of SB
+notation can be seen in Figure \ref{fig:rangesb}. David Plume uses
+this SB notation to implement a calculator, using exact arithmetic.
+
+\begin{figure}
+\unitlength=.2mm
+\begin{center}
+\begin{picture}(400,100)
+\put(145,50){\oval(190,70)[t]}
+\put(255,50){\oval(190,70)[b]}
+\put(50,50){\line(1,0){300}}
+\put(145,89){\makebox[0mm]{0}}
+\put(255,1){\makebox[0mm]{1}}
+\put(40,47){\makebox[0mm]{0}}
+\put(160,60){\makebox[0mm]{$\frac{1}{\phi}$}}
+\put(240,30){\makebox[0mm]{1}}
+\put(360,47){\makebox[0mm]{$\phi$}}
+\end{picture}
+\end{center}
+\caption{Ranges in Golden Ratio notation} \label{fig:rangegrn}
+\end{figure}
+
+\begin{figure}
+\unitlength=.2mm
+\begin{center}
+\begin{picture}(400,100)
+\put(115,50){\oval(190,70)[t]}
+\put(305,50){\oval(190,70)[t]}
+\put(210,50){\oval(190,70)[b]}
+\put(20,50){\line(1,0){380}}
+\put(115,89){\makebox[0mm]{$\bar{1}$}}
+\put(210,1){\makebox[0mm]{0}}
+\put(305,89){\makebox[0mm]{1}}
+\put(10,47){\makebox[0mm]{-1}}
+\put(210,30){\makebox[0mm]{0}}
+\put(405,47){\makebox[0mm]{1}}
+\end{picture}
+\end{center}
+\caption{Ranges in Signed Binary notation} \label{fig:rangesb}
+\end{figure}
+
+
+
+\section{Why Golden Ratio notation?} \label{sec:ygrn}
+
+Golden Ratio notation uses infinite streams of digits consisting of
+the digits $\{0,1\}$, the base we use is the golden ratio. This is described fully in Chapter \ref{ch:grn}.
+
+We could have decided to use SB notation instead of Golden Ratio
+notation. For example David Plume~\cite{kn:Plume} has implemented a
+calculator with transcendental functions using SB notation in Haskell.
+
+The main reasons that we chose to represent numbers in GR notation is
+that every digit in a GR notation stream can only have two possible
+values ($0$ or $1$), but a digit in SB notation can have three values
+($\bar{1},0$ or $1$).
+
+If we wanted to implement these algorithms in hardware, we would have
+a problem which is how to implement the three digits from SB notation
+in a system that only uses binary digits. But GR notation uses binary
+digits, so it would be easier to implement in hardware.
+
+All the algorithms we will write or implement are written using case
+analysis, for every digit in GR notation. We thus only have to
+consider two possible values, but in SB notation we have to consider
+three values for each digit.  Therefore we consider fewer cases after
+looking at a number of digits in GR notation than in SB notation.
+
+Finally in SB notation we have two identities $1\bar{1} \equiv 01$ and
+also $\bar{1}1 \equiv 0\bar{1}$. Notice that the second identity is
+the negation of the first.  Ideally we would like to only have to deal
+with one identity, so we would like the identity to be the negation of
+itself.  This suggests a base with 2 digits, one digit being the
+negation of the other, for example binary digits. The simplest
+identities would be $1\equiv0$, $10\equiv01$ or $100\equiv011$.  The
+first two of these we can see are meaningless, but the third identity
+is not. Finding the positive solution of this equation gives us
+$\phi$, the golden ratio, and the GR notation.
+
+We could have also defined representations with the identities
+$1000\equiv0111$ and so on, however if the number of digits we have to
+consider in algorithms increase linearly, the number of cases we would
+have to consider would increase exponentially.
+
+
+\section{Work Performed}
+This project can be split into two parts: the first part is on the
+theory behind the Golden Ratio notation, including why we use it, and
+identities involving the golden ratio, that contains an interesting
+result concerning summing parts of the Fibonacci series, we also prove
+another interesting result showing that every value of the form
+$\frac{1}{2^{k}}$ has a periodic representation in GR notation.  The
+second part of this report concerns the algorithms that we use to
+construct all the functions used by the implemented calculator. These can
+be further subdivided into 4 sections: manipulation of streams,
+conversion between representations, intersection of nested sequences
+of intervals and definite integration.  
+
+Manipulation of streams covers both algorithms that try to compare two
+streams and algorithms rewriting a stream in a different, but equivalent, form.
+It would be useful if we could compare streams in golden ratio
+notation to find if one stream has a greater numerical value than the
+other. There is a simple algorithm to decide this for finite decimal numerals,
+but it has two problems: this may not give the correct answer for
+GR streams, and also we are not able to determine if the
+value of two streams are equal, because infinatley many digits have to
+be compared. Therefore in this case the algorithm would not terminate.
+We can solve the first problem by rewriting the two streams using
+identities in such a way that the simple algorithm will always give
+the correct answer if it terminates. This is called lexicographical
+normalisation (Section \ref{sec:lex}).
+
+We can then use lexicographical normalisation to implement the cases
+function, which is the closest that we can get to an {\bf
+  if \ldots then \ldots else \ldots} function, though we do need an
+extra condition (Section \ref{sec:cases}).
+
+The algorithms that we will implement to do basic operations will be of
+two different forms: The algorithms designed and proved by Pietro Di
+Gianantonio take in streams then combine them in the desired way, and
+then outputs them. The algorithms that we have written
+work by rewriting one stream in a given form to another stream with
+the same value but in a different form. For example if there was a
+function that took an infinite stream of digits containing either
+digits 0 or 1, and then rewrote this stream so that its value was the
+same but now all digits were either 0 or 2, then this can clearly be
+used as an algorithm to divide a stream by 2 (Section \ref{sec:div2}).
+
+In order to print the results, we consider conversion between Golden
+Ratio notation and decimal. When we convert from GR to decimal we have
+to take a finite portion of the GR stream.  Also we convert from GR to
+SB and discuss converting from SB to GR. It is useful to convert
+between SB notation because all algorithms invented and
+implemented by David Plume in~\cite{kn:Plume} can be used in conjunction with our algorithms (Chapter \ref{ch:c}).
+
+Intersection of nested sequences of intervals can be used to find the
+intersection of a series of intervals that are converging at one
+point. We can use the Taylor series expansion of a function and then,
+by finding upper and lower bounds up to a certain step, we can
+construct a converging sequence of intervals. This is how we calculate
+the values of $e^{x}, \sin(x), \cos(x), \ln(x)$ and $x^{y}$ (Chapter \ref{ch:ioi}).
+
+Finally we deal with definite integration. We implement definite
+integration by using Riemann strips. There are two main differences
+between this type of implementation and other implementations. These
+are: This algorithm will only calculate the value of the integral
+within some predetermined error value, therefore the answer we get
+will be within this error value but will not be exact. Secondly this
+algorithm uses a function called Mod that although appears to do
+nothing, it actually counts the number of digits that are examined to
+get a finite portion of the output. This is crucial in calculating the
+strips so that each strip will be within a specified error bound (Chapter \ref{ch:int}).
+
+
+\subsection*{Summary of Contributions}
+
+There are several original algorithms, some of which have been
+implemented in this calculator. They implement, multiplication by 2,
+division by 2, addition, multiplication, conversion to and from
+decimal and signed-binary notation. This is in addition to the
+algorithms for addition, subtraction, multiplication and division
+designed and proved by Di Gianantonio~\cite{kn:DiGianantonio}.
+
+In the course of making this calculator, original technical work was
+done. For example, lexicographical normalisation in Golden Ratio
+notation is new, although this is based on the algorithm in Signed
+Binary notation by Escard\'o~\cite{kn:Escardo}. Since the identity used
+is different, the resulting algorithm is completely new.
+Lexicographical normalisation is not used directly. However it is used
+in the cases function and the intersection of nested intervals
+functions.
+
+The flip function described in Section \ref{sec:flip} is also original
+material. The algorithm and proof are new. This function only works
+with streams of finite length.  Although it may appear that there are
+no applications in a calculator using infinite streams, in the
+algorithms for definite integration and also for conversion from GR
+notation to Decimal and back to GR notation, finite streams are used
+and also in the above algorithms the flip function is used.
+
+Whilst making this calculator, new algorithms and identities were
+encountered that are not implemented directly or indirectly by the
+calculator. This is part of the material covered in Chapter
+\ref{ch:grn} about the Golden Ratio notation. In particular the proof
+of, and the algorithm for calculating the periodic representation of $
+\frac{1}{2^{k}} $ in GR notation. Other new material is the identity
+concerning summing terms of the Fibonacci sequence.  Although these
+identities are not implemented in the calculator, we included them
+because they are of interest.
+
+
+
+\section{Organisation}
+In chapter \ref{ch:grn} we consider the Golden Ratio notation and
+associated identities.  In chapter \ref{ch:dai} we discuss how we
+implemented this calculator.  Chapters \ref{ch:mfi}, \ref{ch:bo},
+\ref{ch:c}, \ref{ch:ioi} and \ref{ch:int} we design or redesign, prove
+and implement all the functions associated with this calculator.
+
+
+
+\chapter{Golden Ratio Notation}\label{ch:grn}
+%GOLDEN RATIO NOTATION
+
+This chapter is more mathematically based. We will look at the
+relationship between Fibonacci numbers and the golden ratio.
+
+The golden ratio $\phi$ is defined as the positive solution of
+$\phi^{2}=\phi+1$.  This definition of $\phi$ is important because it
+gives us an essential identity. In decimal notation the only identity
+that we have is $.999 \ldots = 1.00 \ldots$. This is because, as
+discussed in the introduction, intervals only intersect at one point.
+In SB notation, because we have an overlap of intervals, we have an
+infinite number of identities, however they all follow from the
+identity $\phi^{2}=\phi+1$. This is discussed below.
+
+The number denoted by a decimal in a stream is defined by:
+
+\[ \llbracket d \rrbracket_{d} = \sum_{i=1}^{\infty} d_{i}.10^{-i} = d_{1}.10^{-1} + d_{2}.10^{-2} + \ldots \]
+
+From the diagram of the ranges in Figure \ref{fig:rangegrn} Golden Ratio notation, it is obvious that we can only have streams with values in the range $[0,\phi]$. 
+
+%\begin{figure}
+%\begin{center}
+%\begin{picture}(400,100)
+%\put(145,50){\oval(190,70)[t]}
+%\put(255,50){\oval(190,70)[b]}
+%\put(50,50){\line(1,0){300}}
+%\put(145,89){\makebox[0mm]{0}}
+%\put(255,1){\makebox[0mm]{1}}
+%\put(40,47){\makebox[0mm]{0}}
+%\put(160,60){\makebox[0mm]{$\frac{1}{\phi}$}}
+%\put(240,30){\makebox[0mm]{1}}
+%\put(360,47){\makebox[0mm]{$\phi$}}
+%\end{picture}
+%\end{center}
+%\caption{Ranges in Golden Ratio notation}} \label{fig:rangegrn2}
+%\end{figure}
+
+These streams are made up of an infinite number of 0's and
+1's. This notation is called simplified notation. Simplified notation
+is defined as follows:
+\[ \llbracket \alpha \rrbracket_{s} = \sum_{i=1}^{\infty} \alpha_{i} . \phi^{-i} = \alpha_{1} . \phi^{-1} + \alpha_{2} . \phi^{-2} + \ldots \] \\
+where $ \alpha = 0 \/ \cdot \/ \alpha_{1} \alpha_{2} \alpha_{3}
+\ldots, \alpha_{i} $ is the $i$'th digit of $ \alpha $, also $
+\alpha_{|i} = \alpha_{i} \alpha_{i+1} \dots $ and $ \alpha_{i} \in
+{\bf 2}$, {\bf 2} represents the set \{0,1\} and {\bf 3}
+  represents the set \{0,1,2\}.
+
+To be able to represent all real numbers we associate an exponent to the simplified notation to get the full notation. This is defined as follows:
+
+\[ \llbracket z: \alpha \rrbracket_{f} = (-1+ \llbracket \alpha \rrbracket_{s} ).\phi^{2z} \]
+
+Here $z$ is an integer, that is associated with $\alpha$.
+
+By using our definition of simplified notation and also using the
+definition of the golden ratio we can find the following equivalent identities:
+
+\begin{center}
+\( \phi^{2} = \phi + 1                          \) \\
+\( \phi^{2} = \phi^{1} + \phi^{0}                       \) \\
+\( \phi^{-1} = \phi^{-2} + \phi^{-3}                     \) \\
+\( \llbracket 100(0)^{\omega} \rrbracket_{s} = \llbracket 011(0)^{\omega} \rrbracket_{s} \)
+\end{center}
+
+Here $\alpha^{\omega}$ means that $\alpha$ is repeated infinatly.
+
+We can multiply this identity by any power of $\phi$, to give the
+identity:
+
+\[ \alpha 100 \beta \equiv \alpha 011 \beta  \]
+
+$\alpha \equiv \beta$ means $ \llbracket \alpha \rrbracket_{s} =
+\llbracket \beta \rrbracket_{s} $, where $\alpha = {\bf 2}^{*}$ and
+$\beta = {\bf 2}^{\omega}$.
+$\omega$ means repeated infinitely, $*$ means repeated a finite amount
+of times.  We will exploit this identity in all algorithms written
+using GR notation.
+
+
+\section{Infinite sums}
+When we prove algorithms in the next sections, we will use  the following two identities, that we prove here:
+\begin{eqnarray}
+\sum^{\infty}_{k=0} \frac{1}{\phi^{k}} & = \phi^{2} \label{eq:one one}\\
+\sum^{\infty}_{k=0} \frac{1}{\phi^{2k}} & = \phi \label{eq:zero one}
+\end{eqnarray}
+
+We can prove this using the Geometric series defined as follows:
+
+\begin{equation} \label{eq:geometric}
+\frac{1}{1-t} = \sum_{k=0}^{\infty} t^{k}, |t|<1
+\end{equation}
+
+{\bf Proof of \ref{eq:one one}}
+Using \ref{eq:geometric} with $t=\frac{1}{\phi}$, note $|\frac{1}{\phi}|<1$, gives 
+\[\sum^{\infty}_{k=0} \frac{1}{\phi^{k}} = \phi^{2} \]
+
+since $1-\frac{1}{\phi} = \frac{1}{\phi^{2}}$.
+
+{\bf Proof of \ref{eq:zero one}}
+Using \ref{eq:geometric} with $t=\frac{1}{\phi^{2}}$, note $|\frac{1}{\phi^{2}}|<1$, gives 
+\[\sum^{\infty}_{k=0} \frac{1}{\phi^{2k}} = \phi \]
+
+since $1-\frac{1}{\phi^{2}} = \frac{1}{\phi}$.
+
+
+\section{Basic identities}
+We defined the golden ratio in the previous section, as the positive
+solution to the equation:
+\[ \phi^{2} = \phi +1 \]
+
+However we could also define $\phi$ to be:
+\[ \phi = \mbox{lim}_{i \rightarrow \infty} \frac{\mbox{F}_{i}}{\mbox{F}_{i+1}} \]
+where $\mbox{F}_{i}$ is the $i$th element of the Fibonacci sequence,
+defined as follows:
+\[ \begin{array}{l}
+\mbox{F}_{0} = 0 \\
+\mbox{F}_{1} = 1 \\
+\mbox{F}_{i} = \mbox{F}_{i-1} + \mbox{F}_{i-2}
+\end{array} \]
+
+Using this definition of the Fibonacci numbers we can
+rearrange $\mbox{F}_{i} = \mbox{F}_{i-1} + \mbox{F}_{i-2}$ as
+$\mbox{F}_{i-2} = \mbox{F}_{i} - \mbox{F}_{i-1}$, to give the
+Fibonacci numbers $\mbox{F}_{i}$ when $i<0$.
+
+Therefore the initial sequence of Fibonacci numbers is as follows:
+\[ \begin{array}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
+\hline \ldots & -8 & -7 & -6 & -5 & -4 & -3 & -2 & -1 & 0 & 1 & 2 & 3 & 4  &5 & 6 & 7 & 8 & \ldots \\
+\hline  \ldots & -21 & 13 & -8 & 5 & -3 & 2 & -1 & 1 & 0 & 1 & 1 & 2 & 3 & 5 & 8 & 13 & 21 & \ldots \\
+\hline 
+\end{array} \]
+
+It is possible to see that
+\[ \mbox{If } i<0 \mbox{ then } \mbox{F}_{i} = (-1)^{i+1} \mbox{F}_{-i} \]
+This is proved in~\cite[Section 6.6, page 279]{kn:Graham}.
+
+%A third way to define $\phi$ is as follows:
+%\[ \phi = 2.\cos(\frac{\pi}{5}) \]
+%or
+%\[ \phi = 2.\sin(\frac{3.\pi}{10}) \]
+
+\section{$\phi^{k}$ and the Fibonacci numbers}
+
+We will show that
+\[ \forall k \in \mathbb{Z} \ \phi^{k} = \mbox{F}_{k}.\phi + \mbox{F}_{k-1} \]
+
+{\bf Proof} 
+
+We will prove this by induction on $k$. In this proof we
+will assume that $k \geq 0$, and then that $k \leq 0$.
+
+{\bf Base Case}
+\[ \mbox{If } k=0 \mbox{ then } \phi^{0}=1=0.\phi+1=\mbox{F}_{0} + \mbox{F}_{-1}. \]
+
+{\bf Inductive Step($k \geq 0$)}
+
+Assume $\phi^{k} = \mbox{F}_{k}.\phi + \mbox{F}_{k-1} \mbox{ for }
+k=0,\ldots ,n $
+
+\[ \begin{array}{lll}
+\phi^{n+1} & = \phi.\phi^{n} \\
+& = \phi.(\mbox{F}_{n}.\phi + \mbox{F}_{n-1}) & \mbox{By inductive hypothesis} \\
+& = \mbox{F}_{n}.\phi^{2} + \mbox{F}_{n-1}.\phi  \\
+& = \mbox{F}_{n}.(\phi + 1) + \mbox{F}_{n-1}.\phi \\
+& = (\mbox{F}_{n} + \mbox{F}_{n-1}).\phi + \mbox{F}_{n} \\
+& = \mbox{F}_{n+1}.\phi + \mbox{F}_{n} & \mbox{By definition of } F_{n+1} 
+\end{array} \]
+
+{\bf Inductive Step($k \leq 0$)}
+
+Assume $\phi^{k} = \mbox{F}_{k}.\phi + \mbox{F}_{k-1} \mbox{ for }
+k=0,\ldots ,-n $
+
+\[ \begin{array}{lll}
+\phi^{-n-1} & = \frac{\phi^{-n}}{\phi} \\
+& = \frac{1}{\phi}.(\mbox{F}_{-n}.\phi + \mbox{F}_{-n-1}) & \mbox{By inductive hypothesis} \\
+& = \mbox{F}_{-n} + (\phi-1).\mbox{F}_{n-1} & \mbox{Since } \frac{1}{\phi} = \phi-1 \\
+& = \mbox{F}_{-n} + \mbox{F}_{-n-1}.\phi - \mbox{F}_{-n-1}\\
+& = \mbox{F}_{-n-1}.\phi + (\mbox{F}_{-n} - \mbox{F}_{-n-1}) \\
+& = \mbox{F}_{-n-1}.\phi + \mbox{F}_{-n-2} & \mbox{Since } \mbox{F}_{-n-2}= \mbox{F}_{-n} - \mbox{F}_{-n-1}
+\end{array} \]
+
+\section{Representing $\frac{1}{2^{k}}$ in GR notation}
+In this section we derive a representation of the values of the form
+$\frac{1}{2^{k}}$ in Golden Ratio notation. Obviously this is
+possible, since we can represent any value $[0,\phi]$ in simplified
+notation. We will see that:
+\[ \frac{1}{2^{k}} = \llbracket \alpha(\beta)^{\omega} \rrbracket_{s} \]
+where $\alpha, \beta \in {\bf 2}^{*}$, meaning that we can write any
+value of the form $\frac{1}{2^{k}}$ as a prefix ($\alpha$) and a
+finite part($\beta$) that is repeated infinitely. This is quite a
+surprising result, because we are dealing with values in base $\phi$,
+and there is no reason to think that it is possible to write binary
+fractions in a periodic form.
+
+We start with another surprising result, which we will then prove:
+\begin{myprop} \label{eq:2kbasic}
+\[ \forall k \in \mathbb{N}, \exists l,m \in \mathbb{N} \mbox{, such that }\sum_{i=1}^{2^{k}} \frac{1}{\phi^{3i-2}} = 2^{k}.(l.\phi+m) \]
+\end{myprop}
+
+Before we prove this we will consider the relation between $\phi^{-p}$
+and $\phi^{-p-3}$. Assume $\phi^{-p} = a.\phi+b$ for some $a$ and $b$
+that are integers:
+\[ \begin{array}{rl}
+\phi^{-p} = & a.\phi+b \\
+\phi^{-p-1} = & b.\phi+(a-b) \\
+\phi^{-p-2} = & (a-b).\phi+(2b-a) \\
+\phi^{-p-3} = & (2b-a).\phi+(2a-b)
+\end{array} \]
+
+We use here the the identity that $\phi^{k} = F_{k}\phi + F_{k-1}$.
+Looking at the coefficients of $\phi^{-k}$ and $\phi^{-k-3}$ we can
+say the following:
+\[ \begin{array}{|c|c||c|c|}
+\hline \multicolumn{2}{|c||}{\mbox{If}} & \multicolumn{2}{c|}{\mbox{Then}} \\
+\hline a & b & (2b-a) & (2a-b) \\
+\hline odd & odd & odd & odd \\
+even & odd & even & odd \\
+odd & even & odd & even \\
+even & even & even & even \\
+\hline
+\end{array} \]
+
+Therefore if $\phi^{p} = a.\phi + b$ and $\phi^{p-3} = c.\phi + d$
+then $a$ and $c$ both either odd or even, similarly $b$ and $d$ are
+both either odd or even. In particular since $\phi^{1}=\phi$ then
+$\phi^{3p}=a.\phi+b$ always has the property that $a$ is odd and $b$
+is even, when $p \leq 0$. We can repeat the same argument with
+$\phi^{i}$ and $\phi^{i+3}$, to get a similar result for $i \in \mathbb{Z} $.
+
+{\bf Proof of Proposition \ref{eq:2kbasic}}
+
+We will use a proof by induction on $k \geq 0$ to prove this.
+
+{\bf Base Case}
+
+If $k=0$, then we have:
+\[ \begin{array}{lll}
+\sum_{i=1}^{2^{0}} \frac{1}{\phi^{3i-2}} & = \frac{1}{\phi} \\
+& = \phi - 1 & \mbox{ since } \phi^{2} = \phi + 1 \\
+& = 2^{0}.(l.\phi+m) \mbox{ where } l=1, m=-1.
+\end{array} \]
+
+{\bf Inductive Step}
+
+Inductive Hypothesis --- Assume \[ \exists l,m \in \mathbb{Z} \mbox{ such that } \sum_{i=1}^{2^{k}} \frac{1}{\phi^{3i-2}} = 2^{k}.(l.\phi+m), \mbox{ for } k = 0, \ldots , n. \]
+
+We want to show $\sum_{i=1}^{2^{n+1}} \frac{1}{\phi^{3i-2}} = 2^{k}.(l.\phi+m), \mbox{ for some integers } l \mbox{ and } m.$
+
+We know by our Inductive Hypothesis $\sum_{i=1}^{2^{n}} \frac{1}{\phi^{3i-2}} = 2^{n}.(l.\phi+m), \mbox{ for some integers } l \mbox{ and } m.$
+
+Therefore:
+\[ \begin{array}{ll}
+\sum_{i=1}^{2^{n+1}} \frac{1}{\phi^{3i-2}} & = \sum_{i=1}^{2^{n}} \frac{1}{\phi^{3i-2}} + \sum_{i=2^{n}+1}^{2^{n+1}} \frac{1}{\phi^{3i-2}} \\
+& = \sum_{i=1}^{2^{n}} \frac{1}{\phi^{3i-2}} + \frac{1}{\phi^{3n}}.\sum_{i=1}^{2^{n}} \frac{1}{\phi^{3i-2}} \mbox{ ,Since } \sum_{i=1}^{2^{n}} \frac{1}{\phi^{3(2^{n}+i)-2}} = \frac{1}{\phi^{3.2^{n}}}. \sum_{i=1}^{2^{n}} \frac{1}{\phi^{3i-2}} \\
+& = 2^{n}.(l.\phi+m) + \frac{1}{\phi^{3n}}.(2^{n}.(l.\phi+m)) \mbox{, By inductive hypothesis}\\
+& = 2^{n}.(l.\phi+m).(1+\frac{1}{\phi^{3n}}) \\
+& = 2^{n}.(l.\phi+m).(1+a.\phi+b) \mbox{, where } a \mbox{ is even, and } b \mbox{ is odd.} \\
+& = 2^{n+1}.(l.\phi+m).(c.\phi+d) \mbox{, where } c = a/2 \mbox{ and } d = (b+1)/2. \\
+& = 2^{n+1}.((c.l+c.m+d.l).\phi+(m.d+c.l))
+\end{array} \]
+
+Note that $c$ and $d$ are integers since we know that $a$ was even and
+that $b$ was odd.  \hfill $ \boxempty $
+
+By noticing that $\mbox{F}_{i} = b$ where $\phi^{i} = a.\phi+b$.  We
+can then define the Fibonacci numbers as above by ignoring the
+$\phi$ part of the theorem. We can show that:
+\[ \forall k \in \mathbb{N}, \exists m \in \mathbb{Z} s.t. \sum_{i=1}^{2^{k}} \mbox{F}_{3i-2} = 2^{k}.m \]
+
+Also we can generalise this and say that:
+\[ \forall j \in \mathbb{Z}, k \in \mathbb{N}, \exists m \in \mathbb{Z} s.t. \sum_{i=1}^{2^{k}} \mbox{F}_{3i+j} = 2^{k}.m. \]
+
+This follows from the following identities:
+\[ \begin{array}{ll}
+\sum_{i=1}^{2^{k}} \frac{1}{\phi^{3i+j}} & = \frac{1}{\phi^{j+2}}.\sum_{i=1}^{2^{k}} \frac{1}{\phi^{3i-2}} \\
+& = \frac{1}{\phi^{j+2}}.2^{k}.(l.\phi+m) \\
+& = 2^{k}.(a.\phi+b)(l.\phi+m), \mbox{ where } \phi^{-j-2} = a.\phi+b \\
+& = 2^{k}.((a.l+a.m+b.l).\phi+(m.b+a.l))
+\end{array} \]
+We can then ignore the $\phi$ part and get the desired result.
+
+This result may seem obvious. However at closer examination there is
+no reason for why this should hold. It is not known by the author if
+this has been observed before.
+
+At the beginning of this section we wanted to find an algorithm, that
+would give $\frac{1}{2^{k}}$ in the form $\llbracket
+\alpha(\beta)^{\omega} \rrbracket_{s}$. To give the algorithm of how
+we might be able to calculate $\alpha$ and $\beta$, we consider the
+following Proposition.  Then we will see how this applies to the
+algorithm.
+
+\begin{myprop} \label{con:frac}
+$ \forall k, \exists \alpha_{1},\ldots,\alpha_{3.2^{k}+1} \in {\bf 2}, \mbox{ such that } $
+\[ \frac{1}{2^{k}}.(\frac{1}{\phi} + \frac{1}{\phi^{4}} + \ldots + \frac{1}{\phi^{3.2^{k}+1}}) = \sum_{i=1}^{3.2^{k}+1} \frac{\alpha_{i}}{\phi^{i}} \]
+\end{myprop}
+
+{\bf Proof}
+
+This can be seen as an extension to Proposition \ref{eq:2kbasic}.
+From the way that we defined $\phi^{p} = a\phi + b$ above we can see
+that the difference between $a$ and $b$ are terms in the Fibonacci
+sequence. In particular $ a-b = \mbox{F}_{p-2} $.
+
+We will consider the gaps between the $a$'s and $b$'s to show that if:
+
+$ \forall k, \exists \alpha_{1},\ldots \in {\bf 2}, \mbox{ such that } $
+\[ \frac{1}{2^{k}}.(\frac{1}{\phi} + \frac{1}{\phi^{4}} + \ldots + \frac{1}{\phi^{3.2^{k}}}) = \sum_{p=3.2^{k}+1}^{\infty} \frac{\alpha_{p}}{\phi^{p}} \mbox{ then } \alpha_{i} = 0, \forall i \geq 3.2^{k}+1 \in \mathbb{N} \]
+
+This is an equivalent definition of the proposition. We will prove
+this by contradiction: Assume that $\exists i$ such that $\alpha_{i} =
+1$. In this case $\frac{\alpha_{i}}{\phi^{i}} = a\phi + b $ with $a-b
+= \mbox{F}_{i-2}$. Define property Gap$(k) = a-b$ where $\phi^{k} =
+a.\phi + b$. We will show that:
+
+\begin{equation}
+ | Gap(\frac{1}{2^{k}}(\frac{1}{\phi} + \frac{1}{\phi^{4}} + \ldots + \frac{1}{\phi^{3.2^{k}+1}})) | < | Gap(\frac{1}{\phi^{3.2^{k}}}) | \leq | Gap(\sum_{p=3.2^{k}+2}^{\infty} \frac{\alpha_{p}}{\phi^{p}}) | \label{eq:gap}
+\end{equation}
+
+And therefore all $\alpha_{i} = 0, \forall i \geq 3.2^{k}+1$.
+
+{\bf Proof}
+
+{\bf Proof of first part of \ref{eq:gap}}
+
+We want to show:
+\begin{equation}
+|Gap(\frac{1}{\phi}+\frac{1}{\phi^{4}} + \ldots + \frac{1}{\phi^{3.2^{k}+1}})| < |Gap(\frac{1}{\phi^{3.2^{k}+1}})| \label{eq:gap1}
+\end{equation}
+
+{\bf Proof by induction on $k$}
+
+{\bf Base Case, $k=0$}
+
+\[ |Gap(\frac{1}{\phi}+\frac{1}{\phi^{4}})| = |Gap(-2\phi+4)| = 6 < 8 = |Gap(\frac{1}{\phi^{4}})| \]
+
+{\bf Step Case}
+
+Assume \ref{eq:gap1} holds for $k = 1,\ldots,n$. We will show this
+holds for $n+1$. We use the fact that $
+|Gap(1+\frac{1}{\phi^{3.2^{k}}})| < |Gap(\frac{1}{\phi^{3.2^{k}}})|$
+since $\forall i \in \mathbb{N} \exists a,b \in \mathbb{N}$ such that
+$\frac{1}{\phi^{3.i}} = a\phi-b < a\phi - (b-1)$ so
+$|Gap(1+\frac{1}{\phi^{3.2^{k}}})| = a-b < a-b+1 =
+|Gap(\frac{1}{\phi^{3.2^{k}}})|$
+
+\[ \begin{array}{rll}
+|Gap(\frac{1}{\phi}+\frac{1}{\phi^{4}} + \ldots + \frac{1}{\phi^{3.2^{k}+1}})| & = |Gap(\sum_{i=0}^{2^{n+1}} \frac{1}{\phi^{3.i+1}})| \\
+& = |Gap(\sum_{i=0}^{2^{n}} \frac{1}{\phi^{3.i+1}} + \sum_{i=2^{n}+1}^{2^{n}+2^{n}} \frac{1}{\phi^{3.i+1}})| \\
+& = |Gap(\sum_{i=0}^{2^{n}} \frac{1}{\phi^{3.i+1}} + \frac{1}{3.2^{n}}.(\sum_{i=0}^{2^{n}} \frac{1}{\phi^{3.i+1}}))| \\
+& = |Gap(\frac{1}{3.2^{n}+1} + \frac{1}{3.2^{n}}.\frac{1}{3.2^{n}+1}) & \mbox{ By inductive hypothesis} \\
+& = |Gap(\frac{1}{3.2^{n}+1}(1+\frac{1}{\phi^{3.2^{n}}}))| \\
+& = |Gap(\frac{1}{3.2^{n}+1}).Gap(1+\frac{1}{\phi^{3.2^{n}}})| \\
+& < |Gap(\frac{1}{3.2^{n}+1}).Gap(\frac{1}{\phi^{3.2^{n}}})| & \mbox{ By above} \\
+& = |Gap(\frac{1}{3.2^{n}+1}.\frac{1}{\phi^{3.2^{n}}})| \\
+& = |Gap(\frac{1}{3.2^{n+1}+1})|
+\end{array} \]
+
+{\bf Proof of second part of \ref{eq:gap}}
+
+\begin{equation}
+| Gap(\frac{1}{\phi^{3.2^{k}}}) | \leq | Gap(\sum_{p=3.2^{k}+2}^{\infty} \frac{\alpha_{p}}{\phi^{p}}) | \label{eq:gap2}
+\end{equation}
+
+Here we are trying to minimise the value of $
+|Gap(\sum_{p=3.2^{k}+2}^{\infty} \frac{\alpha_{p}}{\phi^{p}})|$, we
+know that $Gap(\phi^{p}) = F_{p-2}$. Therefore, to minimise this
+(without making all the $\alpha_{i}$'s=0), we need to find the value
+of $p$ that is closest to 0. Clearly from equation \ref{eq:one one} we
+can make this sum = $\frac{1}{\phi^{3.2^{k}}}$ by making all the
+$\alpha_{i} = 1$ for $\forall i \geq 3.2^{k}+2$. Therefore:
+
+\[ \begin{array}{rll}
+|Gap(\frac{1}{2^{k}}.(\frac{1}{\phi}+\frac{1}{\phi^{4}} + \ldots + \frac{1}{\phi^{3.2^{k}+1}}))|  & \leq |Gap(\frac{1}{\phi}+\frac{1}{\phi^{4}} + \ldots + \frac{1}{\phi^{3.2^{k}+1}})| & \mbox{ Obvious} \\
+& < |Gap(\frac{1}{\phi^{3.2^{k}+1}})| & \mbox{ By } \ref{eq:gap1} \\
+& \leq | Gap(\sum_{p=3.2^{k}+2}^{\infty} \frac{\alpha_{p}}{\phi^{p}}) | & \mbox{ By } \ref{eq:gap2}
+\end{array}\]
+
+Hence $ \forall i \geq 3.2^{k}+2, \alpha_{i}=0$ since if this
+was not the case then we can show that the smallest gap on the left
+side is greater than the largest gap of the right side. Therefore we
+have proved Proposition \ref{con:frac}. \hfill $ \boxempty $
+
+Now that we have proved Proposition \ref{con:frac} we need to now show
+that this can be used to construct the algorithm.  To motivate this
+algorithm we will first show that $\frac{1}{2} = \llbracket
+0(100)^{\omega} \rrbracket_{s}$
+
+We have that $2.\llbracket 0(100)^{\omega} \rrbracket_{s} = 1 $, because
+
+\[ \begin{array}{rll}
+2.\llbracket 0(100)^{\omega} \rrbracket_{s} & = \frac{2}{\phi^{2}}(\sum_{i=0}^{\infty} \frac{1}{\phi^{3.i}}) \\
+& = \frac{1}{\phi^{2}}(\sum_{i=0}^{\infty} \frac{2}{\phi^{3.i}}) \\
+& = \frac{1}{\phi^{2}}(\sum_{i=0}^{\infty} \frac{1}{\phi^{i}}) & \mbox{Since } 2 = 1 + \frac{1}{\phi} + \frac{1}{\phi^{2}} \\
+& =  \frac{1}{\phi}(\sum_{i=1}^{\infty} \frac{1}{\phi^{i}}) \\
+& = 1 & \mbox{From } \ref{eq:one one}
+\end{array} \]
+
+Now we can write the periodic part of $\frac{1}{2}$ as
+$\frac{1}{\phi}$(=100 in GR notation). To find the periodic part of
+$\frac{1}{4}$ we cannot directly apply Proposition \ref{con:frac}
+since it is not of the correct form, but $(100)^{\omega} =
+(100100)^{\omega}$, the recursive part of which can be written
+$\frac{1}{\phi}+ \frac{1}{\phi^{4}}$ (=100100 in GR notation). Now we
+can apply Proposition \ref{con:frac} with $k=1$:
+
+\[ \frac{1}{2}.(\frac{1}{\phi}+ \frac{1}{\phi^{4}}) = \frac{\alpha_{1}}{\phi} + \frac{\alpha_{2}}{\phi^{2}} + \frac{\alpha_{3}}{\phi^{3}} + \frac{\alpha_{4}}{\phi^{4}} \]
+
+This means we can write:
+\[\frac{1}{4} = \llbracket 0(\alpha_{1}\alpha_{2}\alpha_{3}\alpha_{4})^{\omega} \rrbracket_{s} \]
+
+We can now use the same Proposition to find the periodic parts of
+$\frac{1}{8},\frac{1}{16}, \ldots $. In fact we can use the function
+that divides by 2, applying this to the finite recursive, part is
+guaranteed to terminate by Proposition \ref{con:frac}.
+
+We have implemented the algorithm described above.
+The main problem with the implementation is that the periodic part of
+the number doubles in size after each step, so for large values of $k$
+it may be impractical to calculate $\frac{1}{2^{k}}$.
+
+However the main point is that it is possible to do. This is an
+interesting result as it is not immediately obvious that all powers of
+$\frac{1}{2^{k}}$ can be written in a periodic form. Unfortunately,
+although this result is interesting, we have not found a practical
+application for this in this project.
+
+
+\chapter{Design and Implementation} \label{ch:dai}
+%DESIGN AND IMPLEMENTATION
+
+The mathematically inclined reader can safely skip the computational
+technical details discussed in this chapter, as in the following
+chapters we write our algorithms and pseudocode that is close to
+mathematical notation.
+
+\section{Lazy Evaluation Programming Languages}
+
+Before we start the implementation we must decide, what programming
+language to use, and also how to represent streams in this language.
+Algorithms using infinite lists as a definition for infinite streams
+have been successfully implemented in Haskell by David
+Plume~\cite{kn:Plume}.
+
+The definition of a lazy evaluation language is that an argument is
+only evaluated when it has to be. Haskell is similar to ML, the only
+major difference being that Haskell is a lazy evaluation language, and
+ML is not. For example take the function from defined as follows:
+
+{\tt fun from n = n :: from (n+1);}
+
+If we ask for {\tt from 0;} in Haskell we get the infinite stream of
+digits {\tt [0,1,2,3,4,5, ...}. To stop we have to type {\tt
+  <ctrl-c>}. In ML we would get no output. It loops forever producing
+no output. The reason for this is that when we ran the program in
+Haskell, the argument {\tt from (n+1)} was not executed until we have
+returned {\tt n}. In this way we will construct an infinite stream
+outputting each digit as we find it. If we run the same code in ML, we
+will not get any output because although we know {\tt n}, we will
+first execute {\tt from (n+1)} and then add {\tt n} onto the result.
+The problem is that {\tt from (n+1)} will not terminate and therefore
+will never output any digits.
+
+The advantages of using Haskell is that we could represent infinite
+streams as infinite lists.  If we did this we could use pattern
+matching to split the input into specific cases. Being able to use
+the list structure to both deconstruct and construct a stream would
+make the code readable and therefore easier to debug.
+
+However using infinite lists in a lazy evaluation language means that
+we are not able to have side effects. Unfortunately the integration
+algorithm that we will implement makes essential use of side effects.
+
+Instead we will use ML because it allows side effects.
+Implementing in ML means that we will not be able to represent
+infinite streams as infinite lists.
+
+We can define a list like structure that delays the evaluation of the
+rest of the stream by introducing an anonymous function. This will
+stop the evaluation of the remaining digits until we force them to be
+evaluated. The stream type and the force function are defined as follows:
+
+{\tt datatype 'a stream = cons of 'a * (unit -$>$ 'a stream);}
+ 
+and also
+
+{\tt fun force s = s();}
+ 
+This defines an 'a stream as a constructor containing the next digit
+in the stream, and also a function. Forcing this function (using
+force) will give the next 'a stream, which contains the next digit of
+the stream, and also a function that returns the next 'a stream, and
+so on. Thus the purpose of the use of the unit type is to delay
+evaluation.
+ 
+Writing a stream using this delayed list method is not the only way
+that we could implement this. However the reason we are implementing
+this method is that we want to keep the algorithms as listlike as
+possible.
+
+This representation causes the following problem. We cannot use
+pattern matching for more than the first digit, since to get the next
+digit we would have to execute a function (we cannot execute functions
+whilst pattern-matching). To solve this we need to deconstruct the
+list in a {\tt let \ldots in \ldots end} statement then have
+individual {\tt if \ldots then \ldots else} statements to separate the
+algorithm into cases. We illustrate this by considering th ML code
+that will applies the identity to the first elements of a stream:
+
+\begin{verbatim}
+fun identity(cons(digit_1, stream)) = 
+    let
+        val cons(digit_2, stream_2) = (force stream) 
+        val cons(digit_3, stream_3) = (force stream_2) 
+    in 
+        if (digit_1=1) andalso (digit_2=0) andalso (digit_3=0) then 
+            cons(0, fn()=> cons(1, fn() => cons(1, stream_3))) 
+        else if (digit_1=0) andalso (digit_2=1) andalso (digit_3=1) then 
+            cons(1, fn()=> cons(0, fn() => cons(0, stream_3))) 
+             else 
+                 cons(digit_1, stream)
+    end;
+\end{verbatim}
+
+In Haskell the code for the same function is:
+
+\begin{verbatim}
+fun identity(1::0::0::list) = 0::1::1::list
+  | identity(0::1::1::list) = 1::0::0::list 
+  | identity(list) = list;
+\end{verbatim}
+We can see that the Haskell code is much easier to understand, and
+would be easier to debug. Also it is clear that Haskell code is much
+shorter. However we need to implement the following algorithms by
+using ML, because the integration algorithm that we will be
+implementing will need to use a language which supports side effects.
+Unfortunately Haskell doesn't. The pseudo code of the algorithms that we
+will use will be in a Haskell form. This is because it is much easier
+to understand compared to if the code was written as it appears in the
+actual calculator. Notice also that it is closer to mathematical notation.
+
+
+\section{Algorithms Developed and Implemented}
+
+I have designed, proved and implemented the following algorithms:
+\begin{itemize}
+\item Flip function on a finite list.
+\item New algorithms for addition and multiplication by 2.
+\item Division by 2.
+\item New algorithm for multiplication.
+\item Conversion from Decimal to GR notation.
+\item Conversion from GR notation to Decimal.
+\item Conversion from GR notation to Signed Binary.
+\item Lexicographical Normalisation.
+\end{itemize}
+
+Also I have re-designed, proved and implemented the following
+algorithms:
+\begin{itemize}
+\item Basic Operations.
+\item Cases function.
+\item Intersection of nested sequences of intervals.
+\item Functions for calculating $e^{x}, \sin(x), \cos(x), \log(x)$ and $x^{y}$
+\item Definite Integration.
+\end{itemize}
+
+An explanation of each of the algorithms together with a proof that
+they work is given in the following chapters.
+
+\chapter{Manipulations of finite and infinite streams} \label{ch:mfi}
+%MANIPULATIONS OF FINITE AND INFINATE STREAMS
+\section{Flip function for finite lists} \label{sec:flip}
+
+Firstly we will motivate the definition of the flip function. If we
+want to construct the natural numbers in simplified GR notation. We
+can do this inductively. We know that $1= \llbracket 1 \rrbracket
+$. By repeatedly applying the identity, we can turn digit
+representing $\phi^{0}=1$ to make it 0, then we can add one (by making
+this digit 1). Repeating this will give us the natural numbers. For
+example:
+
+\[ \begin{array}{rl}
+1 & = \llbracket 1.0 \rrbracket = \llbracket 0.11 \rrbracket \\
+2 & = \llbracket 1.11 \rrbracket = \llbracket 10.01 \rrbracket \\
+3 & = \llbracket 11.01 \rrbracket = \llbracket 100.01 \rrbracket \\
+4 & = \llbracket 101.01 \rrbracket = \llbracket 100.1111 \rrbracket \\
+5 & = \llbracket 101.1111 \rrbracket = \llbracket 110.0111 \rrbracket \\
+\vdots & \vdots
+\end{array} \]
+
+This example suggests that it is possible to make the units digit, of
+a GR number 0 by applying appropriate identities. But it is not clear
+that this is true in general. If it is true then is there a function
+that can change any digit 1 to a digit 0 by applying appropriate identities (and possibly changing other digits, if necessary).
+
+The flip function manipulates a finite stream of digits, in such a way
+as to set a specified digit to 0. In this section we will look at how
+this function works, see why we cannot extend this to infinite streams
+and discuss the possible applications for this.
+
+We can define the flip function as follows, given a digit $d$ and
+$\alpha$, where $\alpha$ has finite length $k$ with $\alpha_{1}=0,
+\alpha_{k-1}=0$ and $\alpha_{k}=0$. Then we require that flip( $
+\alpha, d $) = $ \beta $ where $ \beta $, for $\alpha , \beta$ with
+$ \llbracket \alpha \rrbracket_{s} = \llbracket \beta \rrbracket_{s}
+$, and $\beta_{d}=0$.
+
+\begin{myprop}
+  There exists a computable function $ \mbox{flip} : {\bf 2^{*}
+    \rightarrow 2^{*}} $, that will satisfy the following, $
+  \llbracket \alpha \rrbracket_{s} = \llbracket \beta \rrbracket_{s}
+  $, where $ \beta $ = flip($ \alpha, d $) and $ \beta_{d}=0 $ given
+  that $ \alpha = 0\alpha' 00 $, for some $ \alpha' \in {\bf 2}^{*} $.
+\end{myprop}
+
+{\bf Proof}
+
+To prove the proposition we will first define the function flip and
+then prove that this will give the correct output.
+
+We define flip, as follows:
+
+\begin{eqnarray}
+\mbox{flip}(01^{n}0\alpha', d) \Rightarrow & 01^{n} \mbox{flip}(0\alpha', d-n-1) & \mbox{ if } d > n+1 \label{eq:flip1} \\
+\mbox{flip}(01^{n}\alpha',d) \Rightarrow & (10)^{p}01^{n-d+1}\alpha' & \mbox{ if } d \leq n+1, d-1 = 2p \label{eq:flip2} \\
+\mbox{flip}(01^{n}\alpha',d) \Rightarrow & (10)^{p+1}01^{n-d}\alpha' & \mbox{ if } d<n+1, d-1 = 2p+1 \label{eq:flip3} \\
+\mbox{flip}(01^{n}\alpha',d) \Rightarrow & (10)^{p}\mbox{flip}(010\alpha', 2) & \mbox{ if } d=n+1, d-1=2p+1 \label{eq:flip4} 
+\end{eqnarray}
+
+We will now prove that flip satisfy the above conditions, by induction
+on the size of $k$. At each step of the induction we will assume
+$\alpha$ begins with 0 and ends with 00.
+
+Two facts are used in this proof:
+\begin{itemize}
+\item By induction on $n$, repeatedly using the identity $\phi^{2} = \phi +1
+$, we can show $\llbracket 0(11)^{n} \rrbracket_{s} = \llbracket
+(10)^{n}0 \rrbracket_{s} $.
+\item We can think of a finite stream of digits as a sequence of
+  smaller streams of the form $01^{n}$. Therefore we can write
+  $\alpha$ as $\alpha = 01^{n_1}01^{n_2}\ldots 01^{n_k} 00$.
+\end{itemize}
+
+The base case of this induction is when $k = 1$. In this case $\alpha
+= 01^{n}00$, if $d$ is $1, n+2,n+3$ or $n=0$ then we can return
+$\alpha$. If $d=n+1$ then by applying the identity once we can get $
+\llbracket 01^{n}00 \rrbracket_{s} = \llbracket 01^{n-1}011
+\rrbracket_{s} $, this is now of the correct form. Now we have that
+$\alpha = 0(11)^{l}1^{n-2l}00$ or $\alpha = 0(11)^{l}1^{n-2l-1}00$
+where $l$ is defined so that $d=2l+1$ or $d=2l$ respectively. Note
+that one of the last 2 digits of $01^{2l}$ is the $d$ th digit of
+$\alpha$. Now by applying the above lemma to $0(11)^{l}$ giving
+$(10)^{l}0$. Obviously the last 2 digits of this are 0. Therefore
+$\alpha = (10)^{l}01^{n-2l}00$ or $\alpha = (10)^0{l}1^{n-2l-1}00$.
+This is now of the correct form.
+
+{\bf Proof of flip function}
+
+Inductive hypothesis:
+
+Assume $ \forall i \leq p, \alpha = 01^{n_{1}}01^{n_{2}} \ldots
+01^{n_{i}}00$ can be written using the flip function as $ \beta $
+where $ \beta_{l}=0, \llbracket \alpha \rrbracket_{s} = \llbracket
+\beta \rrbracket_{s} $.
+
+{\bf Proof of \ref{eq:flip1} }
+
+By our inductive hypothesis if
+flip($0\alpha',d-n-1$) returns $\beta'$ with $\beta_{d-n-1}'=0$ then
+flip( $01^{n}0\alpha', d $ ) will return $\beta$ with $\beta_{d}=0$,
+notice that if $\alpha$ ends in 00 then $\alpha'$ will also. It is
+obvious that if $ \llbracket \beta' \rrbracket_{s} = \llbracket
+\alpha' \rrbracket_{s} $ then $ \llbracket 01^{n} \beta'
+\rrbracket_{s} = \llbracket 01^{n} \alpha' \rrbracket_{s} $.
+
+
+{\bf Proof of \ref{eq:flip2} }
+
+If $d \leq n+1$ then we have reached
+the section with the digit that we want to change. If $d-1$ is even
+then we can write $ \llbracket 01^{n}\alpha' \rrbracket_{s} =
+\llbracket 0(11)^{p}1^{n-d+1} \alpha' \rrbracket_{s} = \llbracket
+(10)^{p}01^{n-2p}\alpha' \rrbracket_{s} = \llbracket
+(10)^{p}01^{n-d+1} \alpha' \rrbracket_{s} $ note that $|(10)^p0|=d$
+and therefore the $d$'th digit this is 0.
+
+
+{\bf Proof of \ref{eq:flip3} } 
+If $d-1$ is odd, and $d<n+1$ then we
+can write $ \llbracket 01^{n}\alpha' \rrbracket_{s} = \llbracket
+0(11)^{p}1^{n-d} \rrbracket_{s} = \llbracket (10)^{p+1}01^{n-d}\alpha'
+\rrbracket_{s} $, notice that if $d=n+1$ then this is not true. We can
+see that $|(10)^{p+1}| = 2p+2 = d$ and therefore the d'th digit of the
+above expression is 0.
+
+
+{\bf Proof of \ref{eq:flip4} }
+
+If $d=n+1$ and $d-1$ is odd then we can write $ \llbracket
+01^{d}0\alpha' \rrbracket_{s} = \llbracket 0(11)^{p}10 \alpha'
+\rrbracket_{s} = \llbracket (10)^{p}010\alpha' \rrbracket_{s}$, the
+d'th digit of this is the second digit of this $010\alpha'$, if
+$\alpha'$ ended in 00 then this will end in 00. Trivially this begins
+with 0. Therefore if flip($010\alpha', 2$) = $\beta$, with $\beta_{d}
+=0$. Then $\llbracket \beta' \rrbracket_{s} = \llbracket 010\alpha'
+\rrbracket_{s}$ and $ \llbracket (10)^{p}\beta' \rrbracket_{s} =
+\llbracket 01^{n}\alpha' \rrbracket_{s} $. \hfill $\boxempty$
+
+Here is a useful property that we can exploit using the flip function:
+\[ \begin{array}{lrcl}
+ & \llbracket 0.0(1)^{\omega} \rrbracket_{s} & = & \llbracket 1.00(0)^{\omega} \rrbracket_{s} \\
+ \mbox{Therefore} & \llbracket 0.0(1)^{*}0(1)^{\omega} \rrbracket_{s} & < & \llbracket 1.00(0)^{\omega} \rrbracket_{s}
+ \end{array}\]
+ 
+ This still holds if we replace $\omega$ with *. So if we have a
+ stream of the form $0.0(1)^{*}0(1)^{\omega}$, for example
+ $0.0(1)^{\omega}$ but with at least one of the $1$'s $0$, then we can
+ say that this will be less than one.  We can now apply the flip
+ function on the first digit of the finite stream $\alpha$ as follows.
+\[ \begin{array}{lrllllllll}
+\mbox{convert from} & 0 & \cdot & \alpha_{1} & \alpha_{2} & \alpha_{3} & \ldots & \alpha_{n} & 0 & 0 \\
+\mbox{to} & \alpha_{0}' & \cdot & 0 & \alpha_{2}' & \alpha_{3}' & \ldots & \alpha_{n}' & \alpha_{n+1}' & \alpha_{n+2}'
+\end{array} \]
+Now $\alpha_{0}'$ determines if $\alpha$ is less than or greater than or equal to $1$ by the value $\alpha_{0}'$ (if it is $0$ then $\alpha < 1$, if it is $1$ then $\alpha \geq 1$). 
+
+We can prove that the flip function on a finite part of a stream is
+the best that we can guarantee to do.
+
+\begin{myprop}
+There is no computable function $\mbox{flip}:{\bf 2^{\omega} \rightarrow 2^{\omega}}$.
+\end{myprop}
+
+{\bf Proof}
+
+We show that if this was not the case then we would be able to
+construct a function that converts from GR notation to unsigned binary
+notation. Assuming that we are given a stream $\alpha$, in simplified
+notation the algorithm that we could use is described as follows.
+First we find $2 \times \llbracket \alpha \rrbracket_{s} $. Then we
+can apply the flip function as described above to determine if the
+value of this stream is $\geq 1$ or $< 1$. If the list is $\geq 1$
+then the original value of the list was $\geq 0.5$, therefore the next
+digit of the binary answer is 1. We now have to subtract this from our
+stream, to cancel out the possible effect of taking out the digit 1.
+This is easy because in this case the first digit in our stream would
+be 1. In the case that the list is $< 1$ then we can say that the next
+digit of the output would be a 0. \hfill $\boxempty$
+
+Therefore this algorithm cannot be extended to use infinite streams
+of input, because to make a digit that is 1, into 0 we have to at some
+point apply the identity. But if the stream is of the form
+$(01)^{\omega}$ we will never be able to apply the identity, and
+applying the flip function would result in us looping forever.
+Therefore the flip function is not of finite character. The cases
+where the flip function will loop are relatively small, for example:
+problem cases are of the form $0\alpha(01)^{\omega}$ where $\alpha \in
+{\bf 2^{*}}, |\alpha| = n$ and $d=n+2$.
+
+The following functions all use the flip function:
+conversion to Decimal from GR notation, conversion from any integer to
+a finite GR notation, conversion from decimal to GR notation and
+integration. Also we implemented a function using this flip function
+that can convert any integer into its GR notation.
+
+
+\section{Lexicographical Normalisation} \label{sec:lex}
+%LEXICOGRAPHICAL NORMALISATION
+
+In this section we try to find a way of determining if $ \llbracket
+\alpha \rrbracket_{s} < \llbracket \beta \rrbracket_{s}$. Unfortunately
+if $\alpha \equiv \beta$ we will never terminate, because to verify
+this we would have to check that each of the digits in each stream are
+the same. This is not possible since the steams are infinite.
+Therefore we can only find $\alpha<_{\perp}\beta$ where $<_{\perp}$ is
+defined as follows:
+
+\[ \alpha <_{\perp} \beta = \left\{ \begin{array}{ll}
+  \mbox{true} & \mbox{if} \ \llbracket \alpha \rrbracket_{s} < \llbracket \beta \rrbracket_{s} \\
+  \mbox{false} & \mbox{if} \ \llbracket \alpha \rrbracket_{s} > \llbracket \beta \rrbracket_{s} \\
+  \perp & \mbox{if } \llbracket \alpha \rrbracket_{s} = \llbracket \beta \rrbracket_{s}
+\end{array}
+\right. \]
+
+$\perp$ means non-termination.
+
+A naive algorithm computing $\alpha <_{\perp} \beta$ is as follows:
+
+\[ \alpha <_{\perp} \beta = \left\{ \begin{array}{ll}
+\mbox{true} & \mbox{if} \ \exists k \mbox{ such that } \alpha_{i} = \beta_{i} \forall i = 1 \ldots k \mbox{ and } \alpha_{k+1} < \beta_{k+1} \\
+\mbox{false} & \mbox{if} \ \exists k \mbox{ such that } \alpha_{i} = \beta_{i} \forall i = 1 \ldots k \mbox{ and } \alpha_{k+1} > \beta_{k+1} \\
+\perp & \mbox{if} \ \alpha_{i} = \beta_{i} \forall i \in \mathbb{N}
+\end{array}
+\right. \]
+
+This algorithm works when dealing with notations normally used, for example decimal, or binary, but does not work for GR numbers, for example:
+\[ \begin{array}{l}
+ \alpha = 0.1000000000 \ldots, \llbracket \alpha \rrbracket_{s} = \frac{1}{\phi}  \\
+ \beta = 0.0111111111 \ldots, \llbracket \beta \rrbracket_{s} =1
+\end{array}\]
+
+Here we can see $ \llbracket \alpha \rrbracket_{s} > \llbracket \beta
+\rrbracket_{s} $ but using the $<_{\perp}$ algorithm we would get that
+$\alpha <_{\perp} \beta$.
+
+However Escard\'o~\cite{kn:Escardo} shows that if we lexicographically
+normalise two streams in an appropriate sense, then if the above
+algorithm terminates, it will always return the correct result.
+
+Lexicographical normalisation on SB streams was defined for infinite
+streams of SB digits. Since the identities in SB and GR notation are
+different the same algorithm would not work in GR notation, although
+the method is similar. We have designed, proved and implemented an
+algorithm for lexicographical normalisation in GR notation.
+
+
+\begin{myprop}
+  There exists a computable function lex{\bf : $2^{\omega} \times
+    2^{\omega} \rightarrow 2^{\omega} \times 2^{\omega}$}, such that
+  if lex($\alpha,\beta$)=($\alpha',\beta'$) then $ \llbracket \alpha
+  \rrbracket_{s} = \llbracket \alpha' \rrbracket_{s} $ and $\llbracket
+  \beta \rrbracket_{s} = \llbracket \beta' \rrbracket_{s}$ and if
+  $\llbracket \alpha \rrbracket_{s} < \llbracket \beta \rrbracket_{s}$
+  then $\alpha' <_{\perp} \beta'$, and if $\llbracket \alpha
+  \rrbracket_{s} > \llbracket \beta \rrbracket_{s}$ then $\alpha'
+  >_{\perp} \beta'$
+\end{myprop}
+
+{\bf Proof}
+
+We will define the algorithm for lex as follows:
+\begin{eqnarray}
+\mbox{lex}(a::\alpha,a::\beta) & \Rightarrow & a::\mbox{lex}(\alpha,\beta) \label{eq:lex1}\\
+\mbox{lex}(1::\alpha,0::\beta) & \Rightarrow & \mbox{swap}(\mbox{lex}(0::\beta,1::\alpha)) \label{eq:lex2}\\ 
+\mbox{lex}(0::0::a_{2}::\alpha, 1::1::b_{2}::\beta) & \Rightarrow & (0::0::a_{2}::\alpha, 1::1::b_{2}::\beta) \label{eq:lex3}\\
+\mbox{lex}(0::n::0::\alpha, 1::n::b_{2}::\beta) & \Rightarrow & (0::n::0::\alpha, 1::n::b_{2}::\beta) \label{eq:lex4}\\
+\mbox{lex}(0::n::a_{2}::\alpha, 1::n::1::\beta) & \Rightarrow & (0::n::a_{2}::\alpha, 1::n::1::\beta) \label{eq:lex5}\\
+\mbox{lex}(0::1::1::\alpha, 1::1::0::\beta) & \Rightarrow & 1::\mbox{lex}(0::0::\alpha,1::0::\beta) \label{eq:lex6}\\
+\mbox{lex}(0::0::1::\alpha, 1::0::0::\beta) & \Rightarrow & 0::\mbox{lex}(0::1::\alpha, 1::1::\beta) \label{eq:lex7}\\
+\mbox{lex}(0::1::1::\alpha, 1::0::1::\beta) & \Rightarrow & 1::0::\mbox{lex}(0::\alpha,1::\beta) \label{eq:lex8}\\
+\mbox{lex}(0::1::0::\alpha, 1::0::0::\beta) & \Rightarrow & 0::1::\mbox{lex}(0::\alpha,1::\beta) \label{eq:lex9}\\
+\mbox{lex}(0::1::1::\alpha, 1::0::0::\beta) & \Rightarrow & 1::0::0::\mbox{lex}(\alpha,\beta) \label{eq:lex10}\\
+\mbox{lex}(0::1::0::\alpha, 1::0::1::\beta) & \Rightarrow & (0::1::0::\alpha,1::0::1::\beta) \label{eq:lex11}
+\end{eqnarray}
+
+where swap($\alpha, \beta$) = ($\beta,\alpha$).
+
+In this algorithm when we add digits to the front of a call to lex,
+for example in rules \ref{eq:lex1}, \ref{eq:lex6}, \ref{eq:lex7},
+\ref{eq:lex8}, \ref{eq:lex9} and \ref{eq:lex10}, this means that we
+add a digit to both streams of the result:
+\[ \begin{array}{rl}
+\mbox{If } \mbox{lex}(\alpha,\beta) & = (\alpha',\beta') \mbox{, then } \\
+\mbox{lex}(a::\alpha,a::\beta) & = a::\mbox{lex}(\alpha,\beta) \mbox{ by rule } \ref{eq:lex1} \\
+& = a::(\alpha',\beta') \\
+& = (a::\alpha', a::\beta')
+\end{array} \]
+
+An interesting practical problem that we encountered when implementing this
+particular part of the algorithm was that we could not use the map
+functions since we are using stream notation and not infinite list
+notation. The way that this would normally be done would be to
+evaluate the remaining part of the lex function in a {\bf let \ldots
+  in \ldots end} rule and then pattern match the answer. Doing this
+would cause the lex function to be evaluated, but because this works
+on an infinite stream this will never terminate. Another way of doing
+this would be to evaluate lex twice and each time pick one part of the
+result out. This works but is very inefficient, because at every step
+we will have to evaluate the lex function twice, not only is this
+inefficient because we are evaluating the same function twice, but
+each of these functions will then call the lex function. Therefore after
+$n$ digits of output $2^{n}$ lex functions (all the same) may have to
+be evaluated. This is very inefficient since we should only need to
+evaluate one lex function to get the answer.  We solved this problem
+by instead of using two streams with each part of the stream
+containing one digit. We use one stream, with each part containing a
+list of two digits. In practice we needed a third digit to deal with
+the swap part of the algorithm. After Lexicographical Normalisation we
+can convert this stream back into two separate streams, this now
+eliminates the problem of the number of processes exploding. Although
+to calculate the result this way we need to calculate lex twice, this
+is so that we can convert the result back into two streams of one
+digit.
+
+{\bf Proof of lex algorithm}
+
+This algorithm is convergent since most of the rules produce at least
+one digit of output, some produce all future digits of output (when we
+can say $ \llbracket \alpha \rrbracket_{s} < \llbracket \beta
+\rrbracket_{s} $) the only exception is the second rule, we can see
+that the next step of this algorithm then at least one digit of output
+will be produced.
+
+The rules numbered \ref{eq:lex6}, \ref{eq:lex7}, \ref{eq:lex8},
+\ref{eq:lex9} and \ref{eq:lex10}, all follow from applying the
+identity $\phi^{2} = \phi + 1$ and then outputting digits that are in
+common with $\alpha$ and $\beta$.
+
+In the rule \ref{eq:lex2}, we will not output any digits but it is
+obvious that if lex($0::\beta, 1::\alpha$) returns the correct answer
+then lex($1::\alpha,0::\beta$) will also.
+
+In the remaining rules then we can defiantly say that $\llbracket
+\alpha \rrbracket_{s} < \llbracket \beta \rrbracket_{s}$, without
+looking at any more digits.
+
+{\bf Proof of rule \ref{eq:lex3}}
+In this rule we used the fact that $\llbracket 00a_{2}\alpha \rrbracket_{s} < \llbracket 11b_{2}\beta \rrbracket_{s}$, where $a_{2}, b_{2}$ = 0 or 1.
+\[ \llbracket 00a_{2}\alpha \rrbracket_{s} \leq \llbracket 001(1)^{\omega} \rrbracket_{s} = \frac{1}{\phi^{2}} + \frac{1}{\phi^{3}} < \frac{1}{\phi} + \frac{1}{\phi^{2}} = \llbracket 110(0)^{\omega} \rrbracket_{s} \leq \llbracket 11b_{2}\beta \rrbracket_{s} \]
+
+{\bf Proof of rule \ref{eq:lex4}}
+We use the fact that $ \llbracket 0n0\alpha \rrbracket_{s} < \llbracket 1nb_{2}\beta \rrbracket_{s}$, we will now prove this.
+\[ \llbracket 0n0\alpha \rrbracket_{s} \leq \llbracket 0n0(1)^{\omega} \rrbracket_{s} = \frac{1}{\phi^{2}} + \frac{n}{\phi^{2}} < \frac{1}{\phi} + \frac{n}{\phi^{2}} \leq \llbracket 0n0(0)^{\omega} \rrbracket_{s} \leq \llbracket 0nb_{2}\beta \rrbracket_{s} \]
+
+{\bf Proof of rule \ref{eq:lex5}}
+We use the fact that $ \llbracket 0na_{2}\alpha \rrbracket_{s} < \llbracket 1n1\beta \rrbracket_{s}$, we will now prove this.
+\[ \llbracket 0na_{2}\alpha \rrbracket_{s} \leq \llbracket 0n1(1)^{\omega} \rrbracket_{s} = \frac{1}{\phi^{2}} + \frac{1}{\phi^{3}} + \frac{n}{\phi^{2}} < \frac{1}{\phi}+ \frac{1}{\phi^{3}} + \frac{n}{\phi^{2}} = \llbracket 1n1(0)^{\omega} \rrbracket_{s} \leq \llbracket 1n1\beta \rrbracket_{s} \]
+
+{\bf Proof of rule \ref{eq:lex11}}
+We use the fact that $ \llbracket 010\alpha \rrbracket_{s} < \llbracket 101\beta \rrbracket_{s}$, we will now prove this.
+\[ \llbracket 010\alpha \rrbracket_{s} \leq \llbracket 010(1)^{\omega} \rrbracket_{s} = \frac{1}{\phi^{2}} + \frac{1}{\phi^{2}} = \frac{1}{\phi} + \frac{1}{\phi^{4}} < \frac{1}{\phi} + \frac{1}{\phi^{3}} \leq \llbracket 101(0)^{\omega} \rrbracket_{s} \leq \llbracket 101\beta \rrbracket_{s} \]
+
+
+If the first digit in each stream are the same then we can just output
+this and repeat on the remainder of the stream. Otherwise by
+considering the upper and lower bounds of the remainder of the stream,
+we can either say $\alpha$ is not equal to $\beta$ or $\alpha$ may
+still equal $\beta$. If $\alpha$ is not equal to $\beta$ then we can
+make sure $<_{\perp}$ will terminate with the correct answer.
+Otherwise if $\alpha$ may still equal $\beta$, we use the identity to
+rewrite the digits such that at least the first digits in each stream
+are equal and then we repeat.  \hfill $\boxempty$
+
+
+For the above example, the algorithm would rewrite $\alpha$ as $\alpha = 0.0110000000 \ldots$, and leave $\beta$ unchanged. Now $\alpha <_{\perp} \beta$ will give the correct answer. 
+
+
+\section{Cases function} \label{sec:cases}
+%CASES FUNCTION
+
+\subsection*{Definition of Cases Function}
+As we saw in the above example it is impossible to determine if two
+infinite streams are equal, however it is possible to determine if two
+infinite streams are not equal.
+
+Therefore as we might expect that it is not possible to define the
+following {\bf if \ldots then \ldots else \ldots}, where the condition
+of the if part uses a conditional operator, like $<_{\perp}$. Since we
+cannot determine the case when the streams are equal.
+
+However this is not always true. It was shown in
+Escard\'o~\cite{kn:Escardo}, that it is possible to define the
+following function cases:
+
+We assume that if $\alpha \equiv \delta$ then $\beta \equiv \gamma$.We will
+discuss why this assumption is necessary later.
+
+\[ \mbox{cases}(\alpha,\delta,\beta,\gamma) \equiv \left\{ 
+\begin{array}{ll}
+\beta & \mbox{if } (\alpha <_{\perp} \delta) = true, \mbox{ or } \beta \equiv \gamma \\
+\gamma & \mbox{if } (\alpha <_{\perp} \delta) =  \mbox{{\em false}}, \mbox{ or } \beta \equiv \gamma
+\end{array}
+\right. \]
+
+We will prove that this function is computable.
+
+\begin{myprop}
+  The cases function is computable, assuming that we have $\alpha
+  \equiv \delta \Rightarrow \beta \equiv \gamma$.
+\end{myprop}
+
+{\bf Proof}
+
+To prove this we will give the algorithm for calculating the cases
+function and then show that it satisfies the proposition.
+
+The algorithm for the cases function is as follows:
+
+Let $(\alpha',\delta')=\mbox{lex}(\alpha,\delta)$ and $(\beta',\gamma') = \mbox{lex}(\beta',\gamma').$
+\[ \begin{array}{lll}
+\mbox{cases}(\alpha',\delta',\beta_{1}'::\beta_{|2}',\gamma_{1}'::\gamma_{|2}') & = \beta_{1}'::\mbox{cases}(\alpha',\delta',\beta_{|2}',\gamma_{|2}') & \mbox{if } \beta_{1}' = \gamma_{1}' \\
+&  = \beta_{1}'::\beta_{|2}' & \mbox{if } \beta_{1}' \neq \gamma_{1}' \mbox{ and } \alpha' <_{\perp} \delta' \\
+& = \gamma_{1}'::\gamma_{|2}' & \mbox{if } \beta_{1}' \neq \gamma_{1}' \mbox{ and } \alpha' <_{\perp} \delta' = false
+\end{array} \]
+
+We observe from our assumption that if $\alpha \equiv \delta$ then
+$\beta \equiv \gamma$, and if $\alpha \not\equiv \delta$ then $\beta
+\not\equiv \gamma$ (by negation of our assumption), then $\alpha
+<_{\perp} \delta$ is guaranteed to terminate.
+
+The algorithm is basically as follows:
+Output the greatest common prefix of $\beta$ and $\gamma$.
+
+If this does not terminate, then $\beta \equiv \gamma$, and so
+irrespective of $\alpha$ and $\delta$, the answer would be unchanged.
+
+If this does terminate, then $\beta \not\equiv \gamma$, and so $\alpha
+\not\equiv \delta$, therefore $\alpha <_{\perp} \delta$ will
+terminate. We can then calculate this and depending on the answer we
+can output $\beta$ or $\gamma$.
+
+The proof that the algorithm will always give the correct output is as
+follows:
+
+\begin{myprop}
+The cases algorithm will always give the correct answer.
+\end{myprop}
+
+{\bf Proof}
+
+{\bf Case 1}
+
+Assume $\beta \equiv \gamma$ then the first rule of this algorithm
+will always be true since if $\beta \equiv \gamma$ then in particular
+$\beta_{i} = \gamma_{i}$, this follows from the definition of
+lexicographical normalisation. Therefore if $\beta \equiv \gamma$ then
+the output will be $\beta$ which is exactly the same as $\gamma$.
+
+{\bf Case 2}
+
+Assume $\beta \not\equiv \gamma$, then at some stage the first rule of
+this algorithm will not be satisfied, this follows again from the
+definition of lexicographical normalisation. Then by negation of the
+assumption if $\beta \not\equiv \gamma$ then $\alpha \not\equiv
+\delta$, now finding if $\alpha <_{\perp} \delta$ is guaranteed to
+terminate, by the definition of $<_{\perp}$. Therefore we calculate
+this and then return $\beta$ or $\gamma$ depending on this operation.
+
+
+Therefore this algorithm will calculate the correct answer. \hfill
+$\boxempty$
+
+If the assumption, if $\alpha \equiv \delta$ then $\beta \equiv
+\gamma$ does not hold then it is possible that $\beta \not\equiv
+\gamma$ and $\alpha \equiv \delta$, in this case we have a problem
+since the greatest common prefix of $\beta$ and $\gamma$ can only be
+of finite length, therefore at some point we will try to evaluate $\alpha <_{\perp} \delta$, however this will never terminate.
+
+
+\subsection*{Applications of the Cases function}
+
+The cases function can be used to join together two different
+functions. The only prerequisite that we make is that at the point
+that we join the functions the values of the two functions are equal.
+Meaning that the new function is continuous, however it does not have
+to be continuously differentiable as we will see later.
+
+We will consider four functions that we can implement using the cases
+function, these are: joining together two functions, finding the
+absolute value of a number, finding the maximum of a number and
+finding the minimum of a number.
+
+\subsubsection*{Joining together two functions}
+If we have two functions $f(\alpha)$ and $g(\alpha)$ then assuming
+$f(\beta)=g(\beta)$, for some $\beta$, then we can join the two
+functions $g$ and $f$ at $\beta$, to make $h(\alpha)$ using:
+\[ h(\alpha) = \mbox{cases}(\alpha,\beta,f(\alpha),g(\alpha)) \]
+
+For absolute values we will use a specific case of this function,
+where $f(\alpha)=C'(\alpha), g(\alpha) = \alpha$ and $\llbracket \beta
+\rrbracket_{f} = 0$.
+
+
+\subsubsection*{Absolute values}
+The absolute value of a number can be defined as follows:
+
+Let {\em zero} be the stream defined such that $\llbracket \mbox{{\em zero}} \rrbracket_{f} = 0$.
+\[ \mbox{Abs}(\alpha) = \left\{ 
+\begin{array}{ll}
+C'(\alpha) & \mbox{if } (\alpha <_{\perp} \mbox{{\em zero}}) = true, \mbox{ or } \alpha \equiv \mbox{{\em zero}} \\
+\alpha & \mbox{if } (\alpha <_{\perp} \mbox{{\em zero}}) =  \mbox{{\em false}}, \mbox{ or } \alpha \equiv \mbox{{\em zero}}
+\end{array}
+\right. \]
+
+$C'$ along with other basic operations will be defined in the next
+section. The effect of $C'(\alpha)$ is to negate the
+decimal value of $\alpha$.
+
+This definition of absolute values is analogous to the definition of
+absolute values for reals, it is obvious that this definition is correct.
+This can clearly be written as a particular case of the cases
+function, as follows:
+\[ \mbox{Abs}(\alpha) = \mbox{cases}(\alpha,\mbox{{\em zero}},C'(\alpha),\alpha) \]
+
+\subsubsection*{Maximum of two numbers}
+The maximum of two streams $\alpha$ and $\beta$ can be defined as follows:
+\[ \mbox{Max}(\alpha,\beta) = \left\{ 
+\begin{array}{ll}
+\beta & \mbox{if } (\alpha <_{\perp} \beta) = true, \mbox{ or } \alpha \equiv \beta \\
+\alpha & \mbox{if } (\alpha <_{\perp} \beta)  =  \mbox{{\em false}}, \mbox{ or } \alpha \equiv \beta
+\end{array}
+\right. \]
+
+This definition is analogous to the definition of Max with real
+numbers. It is clear that this defines the maximum of two streams.
+
+We can write this equivalently as:
+\[ \mbox{Max}(\alpha,\beta) = \mbox{cases}(\alpha,\beta,\beta,\alpha) \]
+
+\subsubsection*{Minimum of two numbers}
+The definition of Min is similar to that of Max, the definition of Min is:
+\[ \mbox{Min}(\alpha,\beta) = \left\{ 
+\begin{array}{ll}
+\alpha & \mbox{if } (\alpha <_{\perp} \beta) = true, \mbox{ or } \alpha \equiv \beta \\
+\beta & \mbox{if } (\alpha <_{\perp} \beta)  =  \mbox{{\em false}}, \mbox{ or } \alpha \equiv \beta
+\end{array}
+\right. \]
+
+Therefore:
+\[ \mbox{Min}(\alpha,\beta) = \mbox{cases}(\alpha,\beta,\alpha,\beta) \]
+
+\chapter{Basic Operations} \label{ch:bo}
+%BASIC OPERATIONS
+\section{Implementation of Basic Operations}
+We have implemented the following basic operations: addition,
+negation, subtraction, multiplication and division.
+
+In Pietro Di Gianantonio~\cite{kn:DiGianantonio}, the algorithms for
+calculating the functions addition, complement, subtraction, product
+and division are given the functions are called $A, C, S, P$ and $D$
+respectively. Note a primed function means that it uses full notation:
+
+\( \begin{array}{ll}
+  \llbracket A(\alpha,\beta,a,b) \rrbracket_{s} = (\llbracket \alpha \rrbracket_{s} + \llbracket \beta \rrbracket_{s} + \frac{a}{\phi} + \frac{b}{\phi^{2}})/ \phi^{2}, & \llbracket A'(z:\alpha,t:\beta) \rrbracket_{f} = \llbracket z:\alpha \rrbracket_{f} + \llbracket t:\beta \rrbracket_{f} \\
+  \llbracket C(\alpha) \rrbracket_{s} = \phi - \llbracket \alpha \rrbracket_{s}, & \llbracket C'(z:\alpha) \rrbracket_{f} = - \llbracket z:\alpha \rrbracket_{f} \\
+  \llbracket S'(z:\alpha,t:\beta) \rrbracket_{f} = \llbracket z:\alpha \rrbracket_{f} - \llbracket t:\beta \rrbracket_{f} \\
+  \llbracket P(\alpha,\beta) \rrbracket_{s} = (\llbracket \alpha \rrbracket_{s} \times \llbracket \beta \rrbracket_{s})/ \phi^{2}, & \llbracket P'(z:\alpha, t:\beta) \rrbracket_{f} = \llbracket z:\alpha \rrbracket_{f} \times \llbracket t:\beta \rrbracket_{f} \\
+  \llbracket D(\alpha,\beta)\rrbracket_{s}= \llbracket
+  \alpha\rrbracket_{s}/(\llbracket \beta \rrbracket_{s} \times \phi),
+  & \llbracket D'(z:\alpha,t:\beta)\rrbracket_{f}= \llbracket z:\alpha
+  \rrbracket_{f}/\llbracket t:\beta \rrbracket_{f}
+\end{array} \)
+
+Implementing these algorithms was non-trivial, since they were
+written with streams represented as infinite lists, and so they had to
+be rewrite them so that they used the new stream constructor.
+
+Also we found a mistake in the proof of the function for product using full notation, the original proof of
+\( \begin{array}{l} P'(z:\alpha,t:\beta) \Rightarrow
+  (z+t+2):A(P(\alpha,\beta),C(A(\alpha,\beta,0,0)),1,0)
+\end{array} \)
+
+contained the lines:
+
+\( \begin{array}{l}
+  =(-1+\llbracket \alpha \rrbracket_{s}\times \llbracket \beta \rrbracket_{s} - \llbracket \alpha \rrbracket_{s} - \llbracket \beta \rrbracket_{s}) \times \phi^{2z+2t} \\
+  =(-1+\llbracket \alpha \rrbracket_{s})\times(-1+\llbracket \beta
+  \rrbracket_{s}) \times \phi^{2z+2t}
+\end{array} \)
+
+This is false since $-1 \neq -1 \times -1$.
+
+However we can define $P'$ as follows:
+
+\( \begin{array}{l}
+P'(z:\alpha, t:\beta) \Rightarrow ((z+t+3):A(A(C(A(\alpha,\beta,0,0)),P(\alpha,\beta),0,1),one,1,1))
+\end{array} \)
+
+where $\llbracket one \rrbracket_{s} = 1$. Here is the corrected proof:
+
+\begin{myprop}
+\( \begin{array}{l}
+\llbracket P'(z:\alpha, t:\beta) \rrbracket_{f} = \llbracket z:\alpha \rrbracket_{f} \times \llbracket t:\beta \rrbracket_{f}
+\end{array}\)
+\end{myprop}
+
+{\bf Proof}
+
+\[ \begin{array}{l}
+\llbracket P'(z:\alpha, t:\beta) \rrbracket_{f} \\
+= \llbracket ((z+t+3):A(A(C(A(\alpha,\beta,0,0)),P(\alpha,\beta),0,1),one,1,1)) \rrbracket_{f} \\[1ex]
+= (-1 + \llbracket A(A(C(A(\alpha,\beta,0,0)),P(\alpha,\beta),0,1),one,1,1) \rrbracket_{s})\times \phi^{2(z+t+3)} \\[1ex]
+= (-1 + (\llbracket A(C(A(\alpha,\beta,0,0)),P(\alpha,\beta),0,1) \rrbracket_{s}+\frac{1}{\phi} + \frac{1}{\phi^{2}}+\frac{1}{\phi} + \frac{1}{\phi^{2}})/\phi^{2})\times\phi^{2(z+t+3)} \\[1ex]
+=(-\phi^{2}+\frac{1}{\phi} + \frac{1}{\phi^{2}}+\frac{1}{\phi} + \frac{1}{\phi^{2}} + (\llbracket C(A(\alpha,\beta,0,0)) \rrbracket_{s} + \llbracket P(\alpha,\beta) \rrbracket_{s}+\frac{1}{\phi^{2}})/\phi^{2})\times \phi^{2(z+t+2)} \\[1ex]
+=(-\phi^{4}+\phi+1+\phi+1+\frac{1}{\phi^{2}}+\llbracket C(A(\alpha,\beta,0,0)) \rrbracket_{s}+\llbracket P(\alpha,\beta) \rrbracket_{s})\times \phi^{2(z+t+1)} \\[1ex]
+=(-\phi^{4}+\phi+1+\phi+1+\frac{1}{\phi^{2}}+\phi-\llbracket A(\alpha,\beta,0,0) \rrbracket_{s}+\llbracket P(\alpha,\beta) \rrbracket_{s})\times \phi^{2(z+t+1)} \\[1ex]
+=(-\phi^{4}+\phi+1+\phi+1+\frac{1}{\phi^{2}}+\phi-(\llbracket \alpha \rrbracket_{s}+\llbracket \beta \rrbracket_{s})/\phi^{2}+(\llbracket \alpha \rrbracket_{s}\times\llbracket \beta \rrbracket_{s})/\phi^{2})\times \phi^{2(z+t+1)} \\[1ex]
+=(1-\phi^{6}+\phi^{3}+\phi^{2}+\phi^{3}+\phi^{2}+\phi^{3}-\llbracket \alpha \rrbracket_{s}-\llbracket \beta \rrbracket_{s}+\llbracket \alpha \rrbracket_{s}\times\llbracket \beta \rrbracket_{s})\times \phi^{2(z+t)} \\[1ex]
+=(1-\llbracket \alpha \rrbracket_{s}-\llbracket \beta \rrbracket_{s}+\llbracket \alpha \rrbracket_{s}\times\llbracket \beta \rrbracket_{s})\times \phi^{2z+2t} \\[1ex]
+=(-1+\llbracket \alpha \rrbracket_{s}) \times (-1+\llbracket \beta \rrbracket_{s})\phi^{2t+2z} \\[1ex]
+=\llbracket z:\alpha \rrbracket_{f}\times\llbracket t:\beta \rrbracket_{f}
+\end{array} \]
+
+In the following sections we show new algorithms for calculating
+results, all of these algorithms unless otherwise specified are only
+described in simplified notation. To convert these then into full
+notation is very simple and is described in Di
+Gianantonio~\cite{kn:DiGianantonio}.
+
+\section{New algorithm for addition} \label{sec:addition}
+
+This new implementation of addition works differently to Di
+Gianantonio's algorithm by firstly adding together the two input
+streams, and then rewriting the stream so that the output is of the
+correct type.
+
+The zip function takes in two streams $\alpha$ and $\beta$ and adds
+together $\alpha_{i}$ and $\beta_{i}$, the algorithm is as follows:
+\[ \begin{array}{l}
+\mbox{zip}(a::\alpha,b::\beta) \Rightarrow (a+b)::\mbox{zip}(\alpha,\beta)
+\end{array} \]
+
+Therefore zip takes in two steams of the form ${\bf 2}^{\omega}$ and
+returns one stream of the form ${\bf 3}^{\omega}$. We assume that
+$\alpha$ always begins with either a 00 or a 01.
+
+\begin{myprop} \label{eq:add1}
+  There exists a computable function 3\_to\_2:${\bf 3^{\omega}}
+  \rightarrow {\bf 2^{\omega}}$, such that if 3\_to\_2($ \alpha $) = $
+  \beta $ then $ \llbracket \alpha \rrbracket_{s} = \llbracket \beta
+  \rrbracket_{s} $. Also we assume that $\alpha_{1} = 0$ and
+  $\alpha_{2} = 0$ or $1$
+\end{myprop}
+
+{\bf Proof}
+
+The algorithm for addition is as follows:
+\[ \begin{array}{ll}
+\mbox{3\_to\_2}(0::0::0::\alpha) & \Rightarrow 0::\mbox{3\_to\_2}(0::0::\alpha) \\
+\mbox{3\_to\_2}(0::0::1::\alpha) & \Rightarrow 0::\mbox{3\_to\_2}(0::1::\alpha) \\
+\mbox{3\_to\_2}(0::0::2::0::0::\alpha) & \Rightarrow 0::1::0::\mbox{3\_to\_2}(0::1::\alpha) \\
+\mbox{3\_to\_2}(0::0::2::0::1::\alpha) & \Rightarrow 0::1::\mbox{3\_to\_2}(0::0::2::\alpha) \\
+\mbox{3\_to\_2}(0::0::2::0::2::\alpha) & \Rightarrow 0::1::\mbox{3\_to\_2}(0::0::3::\alpha) \\
+\mbox{3\_to\_2}(0::0::2::1::\alpha) & \Rightarrow 1::0::\mbox{3\_to\_2}(0::0::\alpha) \\
+\mbox{3\_to\_2}(0::0::2::2::\alpha) & \Rightarrow 1::0::\mbox{3\_to\_2}(0::1::\alpha) \\
+\mbox{3\_to\_2}(0::0::3::0::0::\alpha) & \Rightarrow 0::1::1::\mbox{3\_to\_2}(0::1::\alpha) \\
+\mbox{3\_to\_2}(0::0::3::0::1::\alpha) & \Rightarrow 1::0::\mbox{3\_to\_2}(0::0::2::\alpha) \\
+\mbox{3\_to\_2}(0::0::3::0::2::\alpha) & \Rightarrow 1::0::\mbox{3\_to\_2}(0::0::3::\alpha) \\
+\mbox{3\_to\_2}(0::0::3::1::\alpha) & \Rightarrow 1::\mbox{3\_to\_2}(0::1::0::\alpha) \\
+\mbox{3\_to\_2}(0::0::3::2::\alpha) & \Rightarrow 1::1::\mbox{3\_to\_2}(0::0::\alpha) \\
+\mbox{3\_to\_2}(0::1::0::0::\alpha) & \Rightarrow 0::1::\mbox{3\_to\_2}(0::0::\alpha) \\
+\mbox{3\_to\_2}(0::1::0::1::\alpha) & \Rightarrow 0::1::\mbox{3\_to\_2}(0::1::\alpha) \\
+\mbox{3\_to\_2}(0::1::0::2::0::0::\alpha) & \Rightarrow 0::1::1::0::\mbox{3\_to\_2}(0::1::\alpha) \\
+\mbox{3\_to\_2}(0::1::0::2::0::1::\alpha) & \Rightarrow 1::0::0::\mbox{3\_to\_2}(0::0::2::\alpha) \\
+\mbox{3\_to\_2}(0::1::0::2::0::2::\alpha) & \Rightarrow 0::1::1::\mbox{3\_to\_2}(0::0::3::\alpha) \\
+\mbox{3\_to\_2}(0::1::0::2::1::\alpha) & \Rightarrow 1::0::\mbox{3\_to\_2}(0::1::0::\alpha) \\
+\mbox{3\_to\_2}(0::1::0::2::2::\alpha) & \Rightarrow 1::0::1::\mbox{3\_to\_2}(0::0::\alpha) \\
+\mbox{3\_to\_2}(0::1::1::\alpha) & \Rightarrow 1::\mbox{3\_to\_2}(0::0::\alpha) \\
+\mbox{3\_to\_2}(0::1::2::\alpha) & \Rightarrow 1::\mbox{3\_to\_2}(0::1::\alpha)
+\end{array} \]
+
+Notice that although at some points we put a the digit 3 back into the
+stream we only output digits of the form ${\bf 2}^{\omega}$.
+
+\begin{myprop} \label{eq:add2}
+For any stream $\alpha \in {\bf 3}^{\omega}$:
+\begin{enumerate}
+\item $\alpha$ begins with 00 or 01, is kept true in recursive calls               .
+\item $\mbox{3\_to\_2}(\alpha) \in {\bf 2}^{\omega}$
+\item $ \llbracket \alpha \rrbracket_{s} = \llbracket
+  \mbox{3\_to\_2}(\alpha) \rrbracket_{s} $
+\end{enumerate}
+\end{myprop}
+
+{\bf Proof of Proposition \ref{eq:add2}}
+
+We will prove this by induction:
+
+\begin{enumerate}
+\item We can make the $\alpha$ given to 3\_to\_2 begin with 00 at the
+  start then by noticing that all the rules will make the new call to
+  3\_to\_2 begin with either 00 or 01.
+\item By looking at the digits returned by 3\_to\_2 we can see that
+  they are either 0 or 1.
+\item All these rules were constructed by looking at a finite part of
+  the input and then repeatedly applying the identity 100 $\equiv$
+  011. Therefore we are rewriting the first part of the input, without altering the value, so $
+  \llbracket \alpha \rrbracket_{s} = \llbracket
+  \mbox{3\_to\_2}(\alpha) \rrbracket_{s} $.
+\end{enumerate}
+
+\[ \begin{array}{lll}
+\mbox{3\_to\_2}(0::0::0::\alpha) & \Rightarrow 0::\mbox{3\_to\_2}(0::0::\alpha) & \mbox{Obvious}\\
+\mbox{3\_to\_2}(0::0::1::\alpha) & \Rightarrow 0::\mbox{3\_to\_2}(0::1::\alpha) & \mbox{Obvious}\\
+\mbox{3\_to\_2}(0::0::2::0::0::\alpha) & \Rightarrow 0::1::0::\mbox{3\_to\_2}(0::1::\alpha) & \mbox{since } 00200=01001\\
+\mbox{3\_to\_2}(0::0::2::0::1::\alpha) & \Rightarrow 0::1::\mbox{3\_to\_2}(0::0::2::\alpha) & \mbox{since } 00201=01002\\
+\mbox{3\_to\_2}(0::0::2::0::2::\alpha) & \Rightarrow 0::1::\mbox{3\_to\_2}(0::0::3::\alpha) & \mbox{since } 00202=01003\\
+\mbox{3\_to\_2}(0::0::2::1::\alpha) & \Rightarrow 1::0::\mbox{3\_to\_2}(0::0::\alpha) & \mbox{since } 0021=1000\\
+\mbox{3\_to\_2}(0::0::2::2::\alpha) & \Rightarrow 1::0::\mbox{3\_to\_2}(0::1::\alpha) & \mbox{since } 0022=1001\\
+\mbox{3\_to\_2}(0::0::3::0::0::\alpha) & \Rightarrow 0::1::1::\mbox{3\_to\_2}(0::1::\alpha) & \mbox{since } 00300=01101\\
+\mbox{3\_to\_2}(0::0::3::0::1::\alpha) & \Rightarrow 1::0::\mbox{3\_to\_2}(0::0::2::\alpha) & \mbox{since } 00301=10002\\
+\mbox{3\_to\_2}(0::0::3::0::2::\alpha) & \Rightarrow 1::0::\mbox{3\_to\_2}(0::0::3::\alpha) & \mbox{since } 00302=10003\\
+\mbox{3\_to\_2}(0::0::3::1::\alpha) & \Rightarrow 1::\mbox{3\_to\_2}(0::1::0::\alpha) & \mbox{since } 0031=1010\\
+\mbox{3\_to\_2}(0::0::3::2::\alpha) & \Rightarrow 1::1::\mbox{3\_to\_2}(0::0::\alpha) & \mbox{since } 0032=1100\\
+\mbox{3\_to\_2}(0::1::0::0::\alpha) & \Rightarrow 0::1::\mbox{3\_to\_2}(0::0::\alpha) & \mbox{Obvious}\\
+\mbox{3\_to\_2}(0::1::0::1::\alpha) & \Rightarrow 0::1::\mbox{3\_to\_2}(0::1::\alpha) & \mbox{Obvious}\\
+\mbox{3\_to\_2}(0::1::0::2::0::0::\alpha) & \Rightarrow 0::1::1::0::\mbox{3\_to\_2}(0::1::\alpha) & \mbox{since } 010200=011001\\
+\mbox{3\_to\_2}(0::1::0::2::0::1::\alpha) & \Rightarrow 1::0::0::\mbox{3\_to\_2}(0::0::2::\alpha) & \mbox{since } 010201=100002\\
+\mbox{3\_to\_2}(0::1::0::2::0::2::\alpha) & \Rightarrow 0::1::1::\mbox{3\_to\_2}(0::0::3::\alpha) & \mbox{since } 010202=011003\\
+\mbox{3\_to\_2}(0::1::0::2::1::\alpha) & \Rightarrow 1::0::\mbox{3\_to\_2}(0::1::0::\alpha) & \mbox{since } 01021=10010\\
+\mbox{3\_to\_2}(0::1::0::2::2::\alpha) & \Rightarrow 1::0::1::\mbox{3\_to\_2}(0::0::\alpha) & \mbox{since } 01022=10100\\
+\mbox{3\_to\_2}(0::1::1::\alpha) & \Rightarrow 1::\mbox{3\_to\_2}(0::0::\alpha) & \mbox{since } 011=100\\
+\mbox{3\_to\_2}(0::1::2::\alpha) & \Rightarrow 1::\mbox{3\_to\_2}(0::1::\alpha) & \mbox{since } 012 = 101
+\end{array} \]
+
+Therefore we can add using the following definition:
+\[\mbox{3\_to\_2}'(\alpha,\beta) = \mbox{3\_to\_2}(0::0::\mbox{zip}(\alpha,\beta)) = ( \llbracket \alpha \rrbracket_{s} + \llbracket \beta \rrbracket_{s} )/\phi^{2} \]
+
+Adding 00 to the result of the zip function guarantees that this will
+begin with 00.
+
+We have proved proposition \ref{eq:add2} and therefore proposition
+\ref{eq:add1}.
+
+Unfortunately there are three reasons why this algorithm is not as
+good as the algorithm for addition designed by Di Gianantonio:
+
+\begin{itemize}
+\item Di Gianantonio's algorithm needs at most 2 digits of $\alpha$ and
+  $\beta$ to decide the next digit of the output. But this algorithm
+  needs to look at between 3 and 6 digits of the input, meaning 3 to 6
+  digits of both $\alpha$ and $\beta$. Although we may be able to
+  output more than one digit, after looking at several digits.
+\item There are more rules. Di Gianantonio's algorithm for addition used
+  only 10 rules. However this algorithm uses 21 rules, although the
+  rules that we used are easy to check, and it is clear that their
+  work.
+\item It is not as easy to extend to full notation. Since the
+  definition of addition in the full notation requires us to add a
+  carry of $1/\phi^{3}$ onto the result. However this is possible and
+  in fact we implemented this algorithm for the simplified notation
+  and then extended it for the full notation.
+\end{itemize}
+
+\section{Multiplication by 2}
+%MULTIPLY BY 2
+A useful function that we can have is multiplication by 2. This is not
+trivial to implement in GR notation because the base is not 2, but we
+can implement multiplication by 2, by adding the number to itself.
+This will mean that the input streams to the addition function are the
+same. However with a simple modification of the zip function we only
+need to look at the input stream once.
+
+We define zip for multiplication by 2 as follows:
+\[ \begin{array}{l}
+\mbox{double\_zip}(a::\alpha) \Rightarrow (2*a)::\mbox{double\_zip}(\alpha)
+\end{array} \] 
+
+\begin{myprop}
+  There exists a computable function 02\_to\_2:$\{0,2\}^{\omega}
+  \rightarrow {\bf 2^{\omega}}$, such that if 02\_to\_2$(\alpha) =
+  \beta$ then $ \llbracket \alpha \rrbracket_{s} = \llbracket \beta
+  \rrbracket_{s}$.
+\end{myprop}
+
+The algorithm for multiplication by 2 is as follows:
+
+\[ \begin{array}{ll}
+\mbox{02\_to\_2}(0::0::0::\alpha) & \Rightarrow 0::\mbox{02\_to\_2}(0::0::\alpha) \\
+\mbox{02\_to\_2}(0::0::2::0::0::\alpha) & \Rightarrow 0::1::0::\mbox{02\_to\_2}(0::1::\alpha) \\
+\mbox{02\_to\_2}(0::0::2::0::2::\alpha) & \Rightarrow 0::1::\mbox{02\_to\_2}(0::0::3::\alpha) \\
+\mbox{02\_to\_2}(0::0::2::2::\alpha) & \Rightarrow 1::0::\mbox{02\_to\_2}(0::1::\alpha) \\
+\mbox{02\_to\_2}(0::0::3::0::0::\alpha) & \Rightarrow 0::1::1::\mbox{02\_to\_2}(0::1::\alpha) \\
+\mbox{02\_to\_2}(0::0::3::0::2::\alpha) & \Rightarrow 1::0::\mbox{02\_to\_2}(0::0::3::\alpha) \\
+\mbox{02\_to\_2}(0::0::3::2::\alpha) & \Rightarrow 1::1::\mbox{02\_to\_2}(0::0::\alpha) \\
+\mbox{02\_to\_2}(0::1::0::0::\alpha) & \Rightarrow 0::1::\mbox{02\_to\_2}(0::0::\alpha) \\
+\mbox{02\_to\_2}(0::1::0::2::0::0::\alpha) & \Rightarrow 0::1::1::0::\mbox{02\_to\_2}(0::1::\alpha) \\
+\mbox{02\_to\_2}(0::1::0::2::0::2::\alpha) & \Rightarrow 0::1::1::\mbox{02\_to\_2}(0::0::3::\alpha) \\
+\mbox{02\_to\_2}(0::1::0::2::2::\alpha) & \Rightarrow 1::0::1::\mbox{02\_to\_2}(0::0::\alpha) \\
+\mbox{02\_to\_2}(0::1::2::\alpha) & \Rightarrow 1::\mbox{02\_to\_2}(0::1::\alpha)
+\end{array} \]
+
+In fact we can use the same algorithm for addition, but we can remove some of the rules, because the input is now of the form $\{0,2\}^{\omega}$.
+
+These are the subset of rules for addition that expect only the digits 0 or 2, though we may add on a prefix containing a 1 or 3 (as a carry).
+
+Since this algorithm is basically addition we do not need to prove the
+algorithm is correct (we have already done this). We only need to
+show that one of the rules always succeeds, this can be easily
+checked.
+
+The benefits of this algorithm are as follows:
+
+\begin{itemize}
+\item In both the addition and the multiplication by 2 algorithms
+  it is relatively simple to see how the algorithm works, by rewriting
+  a stream of the form ${\bf 3}^{\omega}$ into one of the form ${\bf
+    2}^{\omega}$.
+\item If we use the double\_zip function instead of zip then this
+  algorithm will look deeper into a stream to give the same output but
+  will not calculate the same digits twice, however to multiply by 2
+  using the $A$ algorithm implemented by Di Gianantonio
+ ~\cite{kn:DiGianantonio} would mean that we separately look at digits of
+  the same stream, which is very wasteful.
+\item Also when using finite lists, in the algorithm for integration
+  and conversion from GR to decimal, we need to do addition on finite
+  lists and it is much simpler to implement this form of addition and
+  multiplication.
+\end{itemize}
+
+Therefore this algorithm has some benefits over Di Gianantonio's algorithm for addition.
+
+\section{Division by 2} \label{sec:div2}
+%DIV BY 2
+In the previous section we defined a function 02\_to\_2:$\{0,2\}^{\omega}
+{\bf \rightarrow 2^{\omega}}$ such that if 02\_to\_2($\alpha$) = $\beta$
+then $\llbracket \alpha \rrbracket_{s} = \llbracket \beta
+\rrbracket_{s}$, we used this function to multiply a stream by 2.  We
+can define the inverse of this function, as 2\_to\_02:${\bf 2^{\omega}
+  \rightarrow} \{0,2\}^{\omega}$, such that if 2\_to\_02($\alpha$) =
+$\beta$ then $\llbracket \alpha \rrbracket_{s} = \llbracket \beta
+\rrbracket_{s}$, we can use this to divide a stream by 2.
+
+\begin{myprop}
+  There exists a computable function 2\_to\_02:${\bf 2^{\omega}
+    \rightarrow} \{0,2\}^{\omega}$, such that if
+  $\mbox{2\_to\_02}(\alpha)=\beta$ then $\llbracket \alpha
+  \rrbracket_{f} = \llbracket \beta \rrbracket_{f}$.
+\end{myprop}
+
+The definition of 2\_to\_02 is as follows:
+\[ \begin{array}{ll}
+\mbox{2\_to\_02}(0::\alpha) & \Rightarrow 0::\mbox{2\_to\_02}(\alpha) \\
+\mbox{2\_to\_02}(1::0::0::\alpha) & \Rightarrow 0::\mbox{2\_to\_02}(1::1::\alpha) \\
+\mbox{2\_to\_02}(1::0::1::\alpha) & \Rightarrow 0::\mbox{2\_to\_02}(1::2::\alpha) \\
+\mbox{2\_to\_02}(1::1::0::\alpha) & \Rightarrow 0::2::\mbox{2\_to\_02}(1::\alpha) \\
+\mbox{2\_to\_02}(1::1::1::\alpha) & \Rightarrow 2::0::0::\mbox{2\_to\_02}(\alpha) \\
+\mbox{2\_to\_02}(1::2::0::0::\alpha) & \Rightarrow 2::0::0::\mbox{2\_to\_02}(1::\alpha) \\
+\mbox{2\_to\_02}(1::2::0::1::\alpha) & \Rightarrow 2::0::0::2::\mbox{2\_to\_02}(\alpha) \\
+\mbox{2\_to\_02}(1::2::1::\alpha) & \Rightarrow 2::\mbox{2\_to\_02}(1::0::\alpha)
+\end{array} \] 
+
+We can prove this algorithm using induction. We can show that all the
+rules in the algorithm do not change the overall value of the answer.
+
+We can use the following facts, all provable from the identity
+$\phi^{2}=\phi+1$: $100 \equiv 011,101 \equiv 012,110 \equiv 021,111
+\equiv 200,1200 \equiv 2001,1201 \equiv 2002$ and $121 \equiv 210$.
+
+Also we can see that although we may push the digit 2 onto the input
+stream all the digits that we output are either 0 or 2. Also we can
+see that after each application of this algorithm we will always
+output at least one digit of output, therefore this algorithm is
+convergent.
+
+We can see that this function for dividing by two is much more compact
+than the algorithm for multiplying by two. Also this algorithm has a
+lower maximum lookahead, the algorithm for multiplication by two was
+at most six digits this needs to look at a maximum of only four
+digits.
+
+To construct this algorithm we firstly consider the possible values
+that the stream can have, then we try and rewrite the beginning part
+of the stream so that it contains only 0's or 2's, but that it has the
+same value. If we can rewrite the first part of the stream then we can
+recurse on the remaining part. If we cannot rewrite the first part
+then we consider the possible next digits and then try and rewrite
+these. The simplest way to verify that the algorithm covers all
+possible inputs is to draw a tree-like structure of how the input can
+be de-constructed until it can then be rewritten.
+
+The diagram in Figure \ref{fig:div2tree} shows all the possible ways
+of expanding a stream and then rewriting it so that it only contains
+digits 0 and 2.  When we can rewrite a portion of a stream then we can
+rewrite it as $\beta : \gamma \alpha$ where $\beta \in \{0,2\}^{*}$
+and $\gamma \in {\bf 3}^{*}$, $\beta$ the part to the left of the
+``:'' is outputted and $\gamma$ is put back onto $\alpha$:
+
+\begin{figure} 
+\unitlength = 1.2ex
+\begin{picture}(70,60)
+\put(19,56){$\alpha$}
+
+\put(20,55){\vector(-1,-1){10}} % l
+\put(8,39){\shortstack{$0\alpha_{|2}$\\=\\$0:\alpha_{|2}$}}
+
+\put(20,55){\vector(1,-1){10}} % r
+\put(29,43){$1\alpha_{|2}$}
+
+\put(31,42){\vector(-2,-1){14}} % rl
+\put(15,32){$10\alpha_{|3}$}
+
+\put(17,31){\vector(-1,-1){10}} %rll
+\put(4,15){\shortstack{$100\alpha_{|4}$\\=\\$0:11\alpha_{|4}$}}
+
+\put(17,31){\vector(0,-1){10}} %rlc
+\put(13,15){\shortstack{$101\alpha_{|4}$\\=\\$0:12\alpha_{|4}$}}
+
+\put(31,42){\vector(0,-1){10}} % rc
+\put(29,30){$11\alpha_{|3}$}
+
+\put(31,29){\vector(-2,-3){5}} % rcl
+\put(23,15){\shortstack{$110\alpha_{|4}$\\=\\$02:1\alpha_{|4}$}}
+
+\put(31,29){\vector(2,-3){5}} % rcr
+\put(33,15){\shortstack{$111\alpha_{|4}$\\=\\$200:\alpha_{|4}$}}
+
+\put(31,42){\vector(2,-1){14}} % rr
+\put(43,32){$12\alpha_{|3}$}
+
+\put(45,31){\vector(0,-1){10}} % rrc
+\put(43,18){$120\alpha_{|4}$}
+
+\put(45,31){\vector(1,-1){10}} % rrr
+\put(54,15){\shortstack{$121\alpha_{|4}$\\=\\$2:10\alpha_{|4}$}}
+
+\put(45,17){\vector(-1,-1){10}} % rrcl
+\put(33,1){\shortstack{$1200\alpha_{|5}$\\=\\$200:1\alpha_{|5}$}}
+
+\put(45,17){\vector(1,-1){10}} % rrcr
+\put(53,1){\shortstack{$1201\alpha_{|5}$\\=\\$2002:\alpha_{|5}$}}
+\end{picture}
+\caption{The tree of division by 2}\label{fig:div2tree}
+\end{figure}
+
+For any input, one of the cases will hold and we will be able to
+output a part of the answer.
+
+For the algorithms for addition and multiplication by 2 we can also
+construct a tree to show that one case will always succeed. However
+since these algorithms will have more branches and will be deeper, this has not been included in this report.
+
+\section{New algorithm for multiplication}
+
+Multiplication of two streams $\alpha$ and $\beta$ in simplified
+notation can be thought of as an infinite number of additions as
+follows:
+
+\[ \begin{array}{cccccccc}
+= & \alpha_{1} * & \cdot \beta_{1} & \beta_{2} & \beta_{3} & \beta_{4} & \beta_{5} & \ldots \\
++ & \alpha_{2} * & \cdot 0 & \beta_{1} & \beta_{2} & \beta_{3} & \beta_{4} & \ldots \\
++ & \alpha_{3} * & \cdot 0 & 0 & \beta_{1} & \beta_{2} & \beta_{3} & \ldots \\
++ & \alpha_{4} * & \cdot 0 & 0 & 0 & \beta_{1} & \beta_{2} & \ldots \\
+\vdots & \vdots & \vdots & \ddots & \ddots & \ddots & \ddots & \ddots 
+\end{array} \]
+
+In this case we aligned values to the first digit in simplified notation. However we could
+align values in columns with respect to the same digits of the stream
+$\beta$ as follows:
+
+\[ \begin{array}{cccccc|cccccc}
+= & \alpha_{1} * &&&& \cdot & \beta_{1} & \beta_{2} & \beta_{3} & \beta_{4} & \beta_{5} & \ldots \\
++ & \alpha_{2} * &&& \cdot & 0 & \beta_{1} & \beta_{2} & \beta_{3} & \beta_{4} & \beta_{5} & \ldots \\
++ & \alpha_{3} * && \cdot & 0 & 0 & \beta_{1} & \beta_{2} & \beta_{3} & \beta_{4} & \beta_{5} & \ldots \\
++ & \alpha_{4} * & \cdot & 0 & 0 & 0 &\beta_{1} & \beta_{2} & \beta_{3} & \beta_{4} & \beta_{5} & \ldots \\
+\vdots & \vdots & \vdots & \vdots & \vdots & \vdots & \vdots & \vdots & \vdots & \vdots & \vdots
+\end{array} \]
+
+If we move down one element in this table then the magnitude of the
+$\beta_{i}$ is divided by $ \phi $, moving on the diagonal from SW to
+NE we keep with values of the same magnitude. We can now remove the
+0's to the left of the line to give the initial table that we will use
+to calculate the multiplication. The initial table will be of the form:
+
+\[ \begin{array}{cc|cccccc}
+= & \alpha_{1} * & \beta_{1} & \beta_{2} & \beta_{3} & \beta_{4} & \beta_{5} & \ldots \\
++ & \alpha_{2} * & \beta_{1} & \beta_{2} & \beta_{3} & \beta_{4} & \beta_{5} & \ldots \\
++ & \alpha_{3} * & \beta_{1} & \beta_{2} & \beta_{3} & \beta_{4} & \beta_{5} & \ldots \\
++ & \alpha_{4} * & \beta_{1} & \beta_{2} & \beta_{3} & \beta_{4} & \beta_{5} & \ldots \\
+\vdots & \vdots & \vdots & \vdots & \vdots & \vdots & \vdots
+\end{array} \]
+
+However in general the column values will not all be equal, so we need
+to use a matrix notation for elements. Also when we are doing the
+calculation we will need 2 carries, $a$ and $b$ (which are initially set
+to 0). The beginning of all steps will be of this form:
+
+\[ \begin{array}{ccc|cccccc}
+& & a & b \\
+= \alpha_{1} * & & & \beta_{1,1} & \beta_{2,1} & \beta_{3,1} & \beta_{4,1} & \beta_{5,1} & \ldots \\
++ \alpha_{2} * & & & \beta_{1,2} & \beta_{2,2} & \beta_{3,2} & \beta_{4,2} & \beta_{5,2} & \ldots \\
++ \alpha_{3} * & & & \beta_{1,3} & \beta_{2,3} & \beta_{3,3} & \beta_{4,3} & \beta_{5,3} & \ldots \\
++ \alpha_{4} * & & & \beta_{1,4} & \beta_{2,4} & \beta_{3,4} & \beta_{4,4} & \beta_{5,4} & \ldots \\
+\vdots & & & \vdots & \vdots & \vdots & \vdots & \vdots
+\end{array} \]
+
+
+\begin{myprop}
+  There exists a computable function $\mbox{Prod}:{\bf 2^{\omega} \times
+    2^{\omega}} \rightarrow {\bf 3}^{\omega}$, such that \[ \llbracket
+  \mbox{Prod}(\alpha, \beta ) \rrbracket_{s} = ( \llbracket \alpha
+  \rrbracket_{s} \times \llbracket \beta \rrbracket_{s} ) / \phi \].
+\end{myprop}
+
+{\bf Proof}
+
+Firstly we construct the above table containing $\alpha$ and $\beta$.
+Then we can use the following 3 rules to calculate the next digit of
+output:
+
+\[ \begin{array}{l}
+Prod(0 :: \alpha, \beta_{i,1} :: \beta_{i,|2}, a, b) \Rightarrow a :: Prod(\alpha, \beta_{i,|2}, b, 0), \forall i \in \mathbb{N} \\
+Prod(1 :: 0 :: \alpha, \beta_{i,1} :: \beta_{i,2} :: \beta_{i,|3}, a, b) \Rightarrow a :: Prod(1::\alpha, \beta_{|2,1} :: \beta_{i,|3}, b , \beta_{1,1}), \forall i \in \mathbb{N} \\
+Prod( 1 :: 1 :: \alpha, \beta_{i,1} :: \beta_{i,2} :: \beta_{i,|3}, a, b) \Rightarrow ( a + \gamma_{1} )::Prod(1::\alpha, \gamma_{|4} :: \beta_{i,|3}, \gamma_{2} , \gamma_{3} ), \forall i \in \mathbb{N} \\
+\mbox{where } \gamma = A(\beta_{i,1}, 0 :: \beta_{i,2}, b,b), \forall i \in \mathbb{N}
+\end{array} \]
+
+We will prove this algorithm by using induction on the size of the
+stream, there is no base case since the stream is infinite. We will
+show that all the possible steps that we can apply will not change the
+output.
+
+The first rule works as follows: if $ \alpha = 0 :: \alpha_{|2} $ then
+
+\[ \begin{array}{lcc|ccccc}
+& & a & b \\
+= 0 * & & & \beta_{1,1} & \beta_{2,1} & \beta_{3,1} & \ldots \\
++ \alpha_{2} * & & & \beta_{1,2} & \beta_{2,2} & \beta_{3,2} & \ldots \\
++ \alpha_{3} * & & & \beta_{1,3} & \beta_{2,3} & \beta_{3,3} & \ldots \\
++ \alpha_{4} * & & & \beta_{1,4} & \beta_{2,4} & \beta_{3,4} & \ldots \\
+\vdots & & & \vdots & \vdots & \vdots
+\end{array}
+=
+\begin{array}{lccc|cccc}
+& & & a & b \\
+= & & \swarrow & \swarrow & 0 & 0 & 0 & \ldots \\
++ \alpha_{2} * & & & \swarrow & \beta_{1,2} & \beta_{2,2} & \beta_{3,2} & \ldots \\
++ \alpha_{3} * & & & & \beta_{1,3} & \beta_{2,3} & \beta_{3,3} & \ldots \\
++ \alpha_{4} * & & & & \beta_{1,4} & \beta_{2,4} & \beta_{3,4} & \ldots \\
+\vdots & & & & \vdots & \vdots & \vdots
+\end{array} 
+\]
+=
+\[ \begin{array}{lccc|cccc}
+& & a & b \\
+= \alpha_{2} * & & & 0 & \beta_{1,2} & \beta_{2,2} & \beta_{3,2} & \ldots \\
++ \alpha_{3} * & & & & \beta_{1,3} & \beta_{2,3} & \beta_{3,3} & \ldots \\
++ \alpha_{4} * & & & & \beta_{1,4} & \beta_{2,4} & \beta_{3,4} & \ldots \\
+\vdots & & & & \vdots & \vdots & \vdots
+\end{array} \]
+
+In this case the first row was being multiplied by 0, all elements in
+the first row are 0. We can therefore move the carry and a 0 one row
+down and one row to the left. We have not altered the values of any of
+the digits in a way that will affect the result but we have removed
+one row, and there are now 3 carry, we can output a and relabel the
+remaining carry so that they are of the original form. The second rule
+works as follows: if $ \alpha = 1 :: 0 :: \alpha_{|3} $ then
+
+\[ \begin{array}{lcc|ccccc}
+& & a & b \\
+= 1 * & & & \beta_{1,1} & \beta_{2,1} & \beta_{3,1} & \ldots \\
++ 0 * & & & \beta_{1,2} & \beta_{2,2} & \beta_{3,2} & \ldots \\
++ \alpha_{3} * & & & \beta_{1,3} & \beta_{2,3} & \beta_{3,3} & \ldots \\
++ \alpha_{4} * & & & \beta_{1,4} & \beta_{2,4} & \beta_{3,4} & \ldots \\
+\vdots & & & \vdots & \vdots & \vdots
+\end{array}
+=
+\begin{array}{lccc|cccc}
+& & & a & b \\
+= & & & & \beta_{1,1} & \beta_{2,1} & \beta_{3,1} & \ldots \\
++ & & & & 0 & 0 & 0 & \ldots \\
++ \alpha_{3} * & & & & \beta_{1,3} & \beta_{2,3} & \beta_{3,3} & \ldots \\
++ \alpha_{4} * & & & & \beta_{1,4} & \beta_{2,4} & \beta_{3,4} & \ldots \\
+\vdots & & & & \vdots & \vdots & \vdots
+\end{array} 
+\]
+
+\[ = \begin{array}{lccc|cccc}
+& & & a & b \\
+= & & \swarrow & \swarrow & \beta_{1,1} & \beta_{2,1} & \beta_{3,1} & \ldots \\
++ & & & & \swarrow & \swarrow & \swarrow & \ldots \\
++ \alpha_{3} * & & & & \beta_{1,3} & \beta_{2,3} & \beta_{3,3} & \ldots \\
++ \alpha_{4} * & & & & \beta_{1,4} & \beta_{2,4} & \beta_{3,4} & \ldots \\
+\vdots & & & & \vdots & \vdots & \vdots
+\end{array} 
+=
+\begin{array}{lccc|cccc}
+& & a & b & \beta_{1,1} \\
+= \alpha_{2} * & & & & \beta_{2,1} & \beta_{3,1} & \beta_{4,1} & \ldots \\
++ \alpha_{3} * & & & & \beta_{1,3} & \beta_{2,3} & \beta_{3,3} & \ldots \\
++ \alpha_{4} * & & & & \beta_{1,4} & \beta_{2,4} & \beta_{3,4} & \ldots \\
+\vdots & & & & \vdots & \vdots & \vdots
+\end{array} 
+\]
+
+If the second digit of $\alpha$ is 0 then the second row of digits
+will all be 0, then we can move the whole of the top row(except for
+$\beta_{1,1}$) and the carry down one column and to the left one row.
+This will not change any of the values but will result in an extra
+carry, $\beta_{1,1}$. We can now output a and then relabel the 2
+remaining carry so that it is of the form of the input. The third rule works as follows: if $ \alpha = 1 :: 1 :: \alpha_{|3} $ then
+
+\[ \begin{array}{lcc|ccccc}
+& & a & b \\
+= 1 * & & & \beta_{1,1} & \beta_{2,1} & \beta_{3,1} & \ldots \\
++ 1 * & & & \beta_{1,2} & \beta_{2,2} & \beta_{3,2} & \ldots \\
++ \alpha_{3} * & & & \beta_{1,3} & \beta_{2,3} & \beta_{3,3} & \ldots \\
++ \alpha_{4} * & & & \beta_{1,4} & \beta_{2,4} & \beta_{3,4} & \ldots \\
+\vdots & & & \vdots & \vdots & \vdots
+\end{array}
+=
+\begin{array}{lccc|cccc}
+& & & a & b \\
+= & & & & \beta_{1,1} & \beta_{2,1} & \beta_{3,1} & \ldots \\
++ & & & & \beta_{1,2} & \beta_{2,2} & \beta_{3,2} & \ldots \\
++ \alpha_{3} * & & & & \beta_{1,3} & \beta_{2,3} & \beta_{3,3} & \ldots \\
++ \alpha_{4} * & & & & \beta_{1,4} & \beta_{2,4} & \beta_{3,4} & \ldots \\
+\vdots & & & & \vdots & \vdots & \vdots
+\end{array} 
+\]
+=
+\[ \begin{array}{lccc|cccc}
+& & ( a + \gamma_{1} ) & \gamma_{2} & \gamma_{3} \\
+= \alpha_{2} * & & & & \gamma_{4} & \gamma_{5} & \gamma_{6} & \ldots \\
++ \alpha_{3} * & & & & \beta_{1,3} & \beta_{2,3} & \beta_{3,3} & \ldots \\
++ \alpha_{4} * & & & & \beta_{1,4} & \beta_{2,4} & \beta_{3,4} & \ldots \\
+\vdots & & & & \vdots & \vdots & \vdots
+\end{array} \]
+
+where
+
+\[
+\begin{array}{lcccccc}
+& a & b & \beta_{1,1} & \beta_{2,1} & \beta_{3,1} & \ldots \\
++ & & & 0 & \beta_{2,2} & \beta_{3,2} & \ldots
+\end{array}
+=
+\begin{array}{cc}
+a \\
+& \left. { 
+\begin{array}{lcccc}
+& b & b \\
++ & \beta_{1,1} & \beta_{2,1} & \beta_{3,1} & \ldots \\
++ & 0 & \beta_{2,2} & \beta_{3,2} & \ldots
+\end{array} } \right\} = \gamma
+\end{array}
+\]
+
+In this example then both the first and second digits of $\alpha$ are
+1. In this case then we have to add together the first and the second
+rows (we have to put an extra 0 in the second row so that elements of
+the same order are being added. Then we add these together with b as a
+carry, to give $\gamma$ the next digit of the output is $(a +
+\gamma_{1})$ and the new carries are $\gamma_{2}$ and $\gamma_{3}$
+respectively. Now that the first row is a combination of the first and
+the second row then we have to make the new $\alpha' = 1 ::
+\alpha_{|3}$.
+
+At no stage in any of these steps did we alter the value of the
+result. We only removed the first row by manipulating the table.
+Therefore this algorithm must not alter value. Note that now the
+output is of the form ${\bf 3^{\omega}}$, the first digit can be
+no more than 1. If we add the digit 0 to the front then the stream
+will begin with either 00 or 01. We can now use addition as defined
+in section \ref{sec:addition} to convert this into a stream of the form
+${\bf 2^{\omega}}$.
+
+By applying this to the result of Prod we can define a new
+function $\mbox{Prod'}:{\bf 2^{\omega} \times 2^{\omega} \rightarrow
+  2^{\omega}}$. With $ \llbracket \mbox{Prod'}(\alpha, \beta )
+\rrbracket_{s} = (\llbracket \alpha \rrbracket_{s} \times \llbracket
+\beta \rrbracket_{s}) / \phi^{2} $.
+
+This algorithm for multiplication is less efficient than the method
+used by Di Gianantonio. The main reason that this algorithm is slow
+is that the number of digits that it needs to look at the next
+two digits of input.
+
+Another problem with this algorithm is that the first rule is
+not often used. For example after we have encountered a digit
+1 in $\alpha$, we put the digit 1 back onto $\alpha$ because
+the top row of our table of $\beta$'s are now a combination of
+previous rows depending on different $\alpha_{i}$'s.
+
+Finally the worst possible case is $\alpha = 11\ldots$. This will mean
+that we have to do one addition for every digit of output that we get.
+We could try repeatedly applying the identity 100 = 011 to guarantee
+that at least half of the digits of $\alpha$ will be 0. But the cost of
+looking at at least three digits of $\alpha$ to output one digit would
+remove any advantage gained.
+
+The benefits of the algorithm is that the rules that we have
+constructed are very intuitive, and it uses an interesting property
+that is we can move the elements of a number diagonally. Also this
+algorithm only uses one addition, and in cases where $\alpha$ contains
+a lot of 0's then this could be very efficient.
+
+\chapter{Conversion} \label{ch:c}
+\section{Conversion from Decimal to GR}
+
+For input and output purposes, it is important that we can convert from
+decimal notation to GR notation.
+
+To convert from decimal we first have to separate a number into a list
+of digits e.g. from $0 \cdot d_{1} d_{2} d_{3} \ldots d_{n}$ to $[0,
+d_{1}, d_{2}, d_{3}, \ldots, d_{n}]$, keeping a note of where the
+decimal point was.  A simple way to do this is to multiply by 10 and
+then take the integer part of the result (this is $d_{1}$) then
+subtract $d_{1}$ and repeat to get all the digits.
+
+\[ \begin{array}{rll}
+d = & 0 \cdot d_{1} d_{2} d_{3} \ldots d_{n} & \\
+10 \times d = & d_{1} \cdot d_{2} d_{3} \ldots d_{n} & \mbox{digit}=d_{1}=\mbox{floor}(10 \times d) \\
+(10 \times d)-d_{1} = & 0 \cdot d_{2} d_{3} \ldots d_{n} & \\
+10 \times ((10 \times d)-d_{1}) = & d_{2} \cdot d_{3} \ldots d_{n} & \mbox{digit}=d_{2}=\mbox{floor}(10 \times ((10 \times d)-d_{1})) \\
+\vdots & \vdots & \\
+\end{array}\]
+
+This algorithm should terminate when $n$ digits have been output,
+after the $n$th digit has been found the result should be 0.
+
+To convert from a list of digits to GR we need to know the digits 1 to
+10 in full GR notation. Then we can reconstruct the values by adding a
+value and then dividing by 10 (the opposite to de constructing the
+number) but we do the operations in GR notation with the digits
+converted to GR.
+
+if $ \llbracket z_{d_{i}}:\alpha_{d_{i}} \rrbracket_{f} = d_{i} $ then 
+$\llbracket b \rrbracket_{f} = 10$ in this case, where $b$ represents the base. 
+\[ d = \llbracket z_{d_{1}}:\alpha_{d_{1}} \rrbracket_{f} \times (\llbracket b \rrbracket_{f})^{-1} + \llbracket z_{d_{2}}:\alpha_{d_{2}} \rrbracket_{f} \times (\llbracket b \rrbracket_{f})^{-2} + \ldots + \llbracket z_{d_{n}}:\alpha_{d_{n}} \rrbracket_{f} \times (\llbracket b \rrbracket_{f})^{-n} \]
+
+This algorithm uses $n$ divisions and $(n-1)$ subtractions, where $d$
+has $n$ digits. The time this takes to produce an answer therefore
+depends on the complexity of the number that it is given. We have not included the algorithm explicitly since it is very simple.
+
+
+\section{Conversion from GR to Decimal}
+
+This algorithm uses a similar idea as when we converted from a decimal
+number to a list of decimal digits. It is important to note that we
+cannot convert directly from infinite streams in GR notation to
+infinite streams of decimals, if this were possible we would be able
+to solve the problem of determining the first digit of the sum
+$\frac{4}{9} + \frac{5}{9}$. To convert to decimal we take a finite
+portion of the GR stream and then convert this to decimal.
+
+
+\begin{myprop}
+  In order to convert from GR to decimal, if we want $n$ correct digits of output we need at most $5n$ digits
+  of input.
+\end{myprop}
+
+{\bf Proof}
+
+If we want $n$ correct decimal digits of a number then we must be able
+to find a number within $10^{n}$, the number of digits we have to look
+at in a GR stream will be proportional to $n$ therefore we will take
+$pn$ digits for some integer $p$.
+
+We want 
+\[ \begin{array}{ll}
+10^{-n} \geq \phi^{-pn} \\
+10^{n} \leq \phi^{pn} \\
+\log_{10} 10^{n} \leq \log_{10} \phi^{pn} & \mbox{taking } \log \mbox{ of both sides } \\
+n \leq pn \log_{10} \phi \\
+p \geq \frac{1}{\log_{10} \phi} \\
+5 \geq \frac{1}{\log_{10} \phi} & \mbox{therefore p = 5 satisfy this equation}
+\end{array} \]
+
+We will consider converting from simplified notation to decimal. Then we will consider how to convert from full notation to simplified notation.
+
+The idea of converting from GR notation to simplified notation is
+exactly the same method as when we calculated the digits of an decimal
+in the previous section.  The only differences are that all the
+arithmetic that we are doing is in GR notation, and instead of just
+reading the next digit of the output we have to judge it by converting
+it to decimal and taking the integer part. This will mean that we will
+have to wait until we have calculated the last digit of our intended
+output before we print the first because we will have to allow for a
+carry.
+
+Then we take the floor of this value. The value that we get from this
+may not be the actual digit, because the remaining digits in a stream
+may affect the value of the digit.
+
+This algorithm could be applied to infinite streams, however this
+involves many multiplications and subtractions and so would take a
+long time. We can get exactly the same result by taking a
+sufficient finite number of digits of the input and then applying this
+algorithm, this means that algorithms for addition have to be able to
+work on a finite lists. This can easily be achieved.
+
+The only problem with this algorithm is that to find $n$ digits, we
+need $n$ multiplications and $(n-1)$ subtractions. Multiplications are
+expensive and so this algorithm can be quite slow.
+
+Now we consider converting from full notation to simplified notation.
+The aim of this algorithm is to write $z:\alpha$ as $0:\alpha, k$
+where $\llbracket z:\alpha \rrbracket_{f} = \llbracket 0:\alpha
+\rrbracket_{f} \times 10^{k}$. There are three particular cases that
+we have to deal with, initially k is 0:
+
+\begin{itemize}
+\item The exponent is already 0. In this case we can stop, with $k$
+  unchanged.
+\item The exponent is negative. In this case we can repeatedly use the
+  identity $\llbracket z:\alpha \rrbracket_{f} = \llbracket
+  (z+1):1::0::\alpha \rrbracket_{f}$, to make the exponent 0. Or we
+  could multiply by 10 (and increase $k$ by 1).
+\item The exponent is positive. In this case we have to divide the
+  stream by 10, decreasing $k$ by 1, and then carry on from the
+  remainder of the stream.
+\end{itemize}
+
+
+\section{Conversion from GR notation to Signed Binary}
+% CONVERT GR TO SB
+If we are able to convert from infinite streams in GR notation to
+infinite streams of SB notation than it means that it is possible to
+convert to, and then use all the algorithms implemented for SB
+notation. For example it would be possible to use the algorithms
+described by David Plume~\cite{kn:Plume}. However for us to be able to
+implement these algorithms in ML we would have to re-design them to
+use the new stream constructor. This would be similar to the
+re-designing that was needed when we implemented Pietro Di
+Gianantonio's~\cite{kn:DiGianantonio} algorithms.
+
+In this example we convert from simplified GR notation to SB notation
+with no exponent. Though in practice we will want to convert from full
+GR notation to SB notation with an exponent. To expand the algorithm
+to cover this notation we will use the algorithm for converting to
+simplified notation. This is relatively simple and is described below.
+
+\begin{myprop}
+  There exists a computable function, GR\_to\_SB : ${\bf 2^{\omega}
+    \rightarrow \{-1,0,1\}^{\omega}}$, such that if
+  $\mbox{GR\_to\_SB}(0:\alpha) = \beta$ then $\llbracket 0:\alpha
+  \rrbracket_{f} = \llbracket \beta \rrbracket_{SB}$. Where
+  $\llbracket \beta \rrbracket_{SB} = \sum^{\infty}_{k=1} \beta_{i} .
+  \frac{1}{2^k}$
+\end{myprop}
+{\bf Proof}
+
+If there is a function GR\_to\_SB then it would satisfy the following properties:
+
+\[ \begin{array}{ll}
+\llbracket \mbox{GR\_to\_SB}(0::0::\alpha') \rrbracket_{f} & = \llbracket \bar{1} :: \mbox{GR\_to\_SB}(A(\alpha',\alpha',0,0)) \rrbracket_{SB} \\
+\llbracket \mbox{GR\_to\_SB}(0::1::1::\alpha') \rrbracket_{f} & = \llbracket \mbox{GR\_to\_SB}(1::0::0::\alpha') \rrbracket_{SB} \\
+\llbracket \mbox{GR\_to\_SB}(0::1::0::\alpha') \rrbracket_{f} & = \llbracket \bar{1} :: \mbox{GR\_to\_SB}(1::A(\alpha',\alpha',1,0)) \rrbracket_{SB} \\
+\llbracket \mbox{GR\_to\_SB}(1::0::\alpha') \rrbracket_{f} & = \llbracket 0 :: \mbox{GR\_to\_SB}(A(\alpha',\alpha',1,0)) \rrbracket_{SB} \\
+\llbracket \mbox{GR\_to\_SB}(1::1::\alpha') \rrbracket_{f} & = \llbracket 1 :: \mbox{GR\_to\_SB}(A(\alpha',\alpha',0,0)) \rrbracket_{SB}
+\end{array} \]
+
+The proof uses induction on the size of the input stream we will use
+the following facts about the SB notation:
+
+\[ \begin{array}{ll}
+\llbracket \bar{1} :: \beta \rrbracket_{SB} = (\llbracket \beta \rrbracket_{SB} - 1) / 2, & \llbracket \beta \rrbracket_{SB} = 2 \llbracket \bar{1} :: \beta \rrbracket_{SB} + 1 \\
+\llbracket 0 :: \beta \rrbracket_{SB} = (\llbracket \beta \rrbracket_{SB}) / 2, & \llbracket \beta \rrbracket_{SB} = 2 \llbracket 0 :: \beta \rrbracket_{SB} \\
+\llbracket 1 :: \beta \rrbracket_{SB} = (\llbracket \beta \rrbracket_{SB} + 1) / 2, & \llbracket \beta \rrbracket_{SB} = 2 \llbracket 1 :: \beta \rrbracket_{SB} - 1
+\end{array} \]
+
+Also $\llbracket 0:\alpha \rrbracket_{f} = (-1+\llbracket \alpha \rrbracket_{s}).\phi^{0} = -1+\llbracket \alpha \rrbracket_{s}$.
+
+
+Proof of $\mbox{GR\_to\_SB}(0::0::\alpha') = \bar{1} :: \mbox{GR\_to\_SB}(A(\alpha',\alpha',0,0))$
+
+If $\alpha_{1} = \alpha_{2} = 0$
+
+\[ \begin{array}{l}
+\llbracket \mbox{GR\_to\_SB}(0::0::\alpha') \rrbracket_{f} \\
+= \llbracket 0::0::\alpha' \rrbracket_{s} - 1 \\
+= \frac{\llbracket \alpha' \rrbracket_{s}}{\phi^{2}} - 1 \\
+= (\frac{2 \llbracket \alpha' \rrbracket_{s}}{\phi^{2}} - 2)/2 \\
+= \llbracket \bar{1} :: (\frac{2 \llbracket \alpha' \rrbracket_{s}}{\phi^{2}} -1 ) \rrbracket_{SB} \\
+= \llbracket \bar{1} :: \llbracket \frac{2 \alpha' }{\phi^{2}} \rrbracket_{f} \rrbracket_{SB} \\
+= \llbracket \bar{1} :: \mbox{GR\_to\_SB}(A(\alpha',\alpha',0,0)) \rrbracket_{SB}
+\end{array} \]
+
+Proof of $\mbox{GR\_to\_SB}(0::1::1::\alpha') = \mbox{GR\_to\_SB}(1::0::0::\alpha')$
+
+This is trivial since we are applying the identity to the input.
+
+Proof of $ \mbox{GR\_to\_SB}(0::1::0::\alpha') = \bar{1} :: \mbox{GR\_to\_SB}(A(1::\alpha',1::\alpha',0,1)) $
+
+\[ \begin{array}{ll}
+\llbracket \mbox{GR\_to\_SB}(0::1::0::\alpha') \rrbracket_{f} \\
+= \llbracket 0::1::0::\alpha' \rrbracket_{s} - 1 \\
+= \frac{\llbracket \alpha' \rrbracket_{s}}{\phi^{3}} + \frac{1}{\phi^{2}} - 1 \\
+= (\frac{2 \llbracket \alpha' \rrbracket_{s} +1/\phi}{\phi^{3}} +\frac{1}{\phi}- 1)/2 & \mbox{since } \frac{1}{2\phi^{4}} + \frac{1}{2\phi} = \frac{1}{\phi^{2}}\\
+= \llbracket \bar{1} :: (\frac{\llbracket A(\alpha',\alpha',1,0) \rrbracket_{s}}{\phi} + \frac{1}{\phi} -1 ) \rrbracket_{SB} \\
+= \llbracket \bar{1} :: (\llbracket 1::A(\alpha',\alpha',1,0) \rrbracket_{s} -1 ) \rrbracket_{SB} \\
+= \llbracket \bar{1} :: \mbox{GR\_to\_SB}(1::A(\alpha',\alpha',1,0)) \rrbracket_{SB}
+\end{array} \]
+
+
+Proof of $\mbox{GR\_to\_SB}(1::0::\alpha' ) = 0 :: \mbox{GR\_to\_SB}(A(\alpha',\alpha',1,0))$
+
+\[ \begin{array}{ll}
+\llbracket \mbox{GR\_to\_SB}(1::0::\alpha') \rrbracket_{f} \\
+= \llbracket 1::0::\alpha' \rrbracket_{s} - 1 \\
+= \frac{\llbracket \alpha' \rrbracket_{s}}{\phi^{2}} + \frac{1}{\phi} - 1 \\
+= (\frac{2 \llbracket \alpha' \rrbracket_{s} +1/\phi}{\phi^{2}} - 1)/2 & \mbox{since } \frac{1}{\phi} - 1 = \frac{1}{2\phi^{3}} -\frac{1}{2}\\
+= \llbracket 0 :: (\frac{\llbracket A(\alpha',\alpha',1,0) \rrbracket_{s}}{\phi} - 1) \rrbracket_{SB} \\
+= \llbracket 0 :: ( \llbracket A(\alpha',\alpha',1,0) \rrbracket_{s} -1) \rrbracket_{SB} \\
+= \llbracket 0 :: \mbox{GR\_to\_SB}(A(\alpha',\alpha',1,0)) \rrbracket_{SB}
+\end{array} \]
+
+
+Proof of $\mbox{GR\_to\_SB}(1::1::\alpha' ) = 1 ::
+\mbox{GR\_to\_SB}(A(\alpha',\alpha',0,0))$
+
+\[ \begin{array}{ll}
+\llbracket \mbox{GR\_to\_SB}(1::1::\alpha') \rrbracket_{f} \\
+= \llbracket 1::1::\alpha' \rrbracket_{s} - 1 \\
+= \frac{\llbracket \alpha' \rrbracket_{s}}{\phi^{2}} + \frac{1}{\phi} + \frac{1}{\phi^{2}} - 1 \\
+= \frac{\llbracket \alpha' \rrbracket_{s}}{\phi^{2}} & \mbox{since } \frac{1}{\phi} + \frac{1}{\phi^{2}} - 1 = 0\\
+= (\frac{2 \llbracket \alpha' \rrbracket_{s}}{\phi^{2}} - 1 +1)/2 \\
+= \llbracket 1 :: (\llbracket A(\alpha',\alpha',0,0) \rrbracket_{s} -1 ) \rrbracket_{SB} \\
+= \llbracket 1 :: \mbox{GR\_to\_SB}(A(\alpha',\alpha',0,0)) \rrbracket_{SB}
+\end{array} \]
+
+In fact not only does the function GR\_to\_SB have to satisfy the
+above equations, it is defined by the above equations. We can see that
+this is of finite character as we need to do at most two steps of the
+algorithm until we can output a SB digit. Also we have proved that the
+equations will not alter the value of the result therefore the
+function GR\_to\_SB can be defined as follows:
+
+\[ \begin{array}{lcl}
+\mbox{GR\_to\_SB}(0::0::\alpha') & = & \bar{1} :: \mbox{GR\_to\_SB}(A(\alpha',\alpha',0,0)) \\
+\mbox{GR\_to\_SB}(0::1::1::\alpha') & = & \mbox{GR\_to\_SB}(1::0::0::\alpha') \\
+\mbox{GR\_to\_SB}(0::1::0::\alpha') & = & \bar{1} :: \mbox{GR\_to\_SB}(1::A(\alpha',\alpha',1,0)) \\
+\mbox{GR\_to\_SB}(1::0::\alpha') & = & 0 :: \mbox{GR\_to\_SB}(A(\alpha',\alpha',1,0)) \\
+\mbox{GR\_to\_SB}(1::1::\alpha') & = & 1 :: \mbox{GR\_to\_SB}(A(\alpha',\alpha',0,0))
+\end{array} \]
+
+Conversion from GR notation to SB notation is relatively efficient,
+since we are only using repeated additions. The most expensive part of
+this algorithm is dealing with the exponent, which is nevertheless relatively simple.
+
+The aim of this algorithm is to write $z:\alpha$ as $0:\alpha, k$
+where $\llbracket z:\alpha \rrbracket_{f} = \llbracket 0:\alpha
+\rrbracket_{f} \times 2^{k}$. There are three particular cases that we
+have to deal with, initially $k$ is 0:
+
+\begin{itemize}
+\item The exponent is already 0. In this case we can stop, $k$ is unchanged.
+\item The exponent is negative. In this case we can repeatedly use the
+  identity $\llbracket z:\alpha \rrbracket_{f} = \llbracket
+  (z+1):1::0::\alpha \rrbracket_{f}$, to make the exponent 0. Or we
+  could multiply by 2 (and increase $k$ by 1).
+\item The exponent is positive. In this case we have to divide the
+  stream by 2, decreasing $k$ by 1, and then repeat.
+\end{itemize}
+
+In practice once we have converted to SB we would like to convert back
+to GR notation. Although this is possible we have not designed this
+algorithm since it would require the operators used in SB notation
+which we have not implemented.
+
+We would need the value $\phi$ to implement this in SB notation.  But
+it would be possible to convert from SB notation to GR notation in
+Plume`s calculator. Calculation of the value of $\phi$ in SB notation
+can be achieved by just converting $\phi$ into SB notation as
+described above.
+
+\chapter{Intersection of nested sequences of intervals} \label{ch:ioi}
+%INTERSECTION OF INTERVALS
+To calculate functions like $\log, \sin$ and $\cos$ we have to
+calculate the sum of an infinite series. To find this we can calculate
+the intersection of nested sequences of intervals.
+
+\section{Finding the intersection of a nested sequence of intervals}
+Assume that we have an infinite number of closed intervals of the form
+$[\gamma^{i},\delta^{i}]$, with the following properties:
+\begin{eqnarray}
+\gamma^{i} \leq \gamma^{i+1} \label{eq:cs1} \\
+\delta^{i} \geq \delta^{i+1} \label{eq:cs2} \\
+\gamma^{i} \leq \delta^{i} \label{eq:cs3} \\
+\forall \epsilon > 0 \exists i \mbox{ such that} \mid \gamma^{i} - \delta^{i} \mid < \epsilon   \label{eq:epsilondelta}
+\end{eqnarray}
+
+This is called a contracting sequence of intervals, since, by
+\ref{eq:cs1} and \ref{eq:cs2}
+
+\[ [\gamma^{1},\delta^{1}] \supseteq [\gamma^{2},\delta^{2}] \supseteq \ldots \supseteq [\gamma^{i},\delta^{i}] \supseteq [\gamma^{i+1},\delta^{i+1}] \supseteq \ldots \]
+
+By \ref{eq:epsilondelta}, the intersection is a singleton. The aim of
+this chapter is to compute the unique point in the intersection.
+
+A diagram illustrating the relation between successive intervals, is
+given in Figure \ref{fig:interval}
+
+\begin{figure}
+\begin{center}
+\unitlength=1.8mm
+\begin{picture}(70,30)(0,0)
+\put(0,15){\line(1,0){70}}
+\put(5,5){\line(0,1){20}} \put(5,25){\line(1,0){3}} \put(5,5){\line(1,0){3}} \put(7,3){\makebox(0,0)[c]{$\gamma^1$}}
+\put(10,6){\line(0,1){18}} \put(10,24){\line(1,0){3}} \put(10,6){\line(1,0){3}} \put(12,3){\makebox(0,0)[c]{$\gamma^2$}}
+\put(15,7){\line(0,1){16}} \put(15,23){\line(1,0){3}} \put(15,7){\line(1,0){3}} \put(17,3){\makebox(0,0)[c]{$\gamma^3$}}
+\put(20,8){\line(0,1){14}} \put(20,22){\line(1,0){3}} \put(20,8){\line(1,0){3}} \put(22,3){\makebox(0,0)[c]{$\gamma^4$}}
+\put(25,14){\makebox(0,0)[c]{\ldots}}
+\put(30,10){\line(0,1){10}} \put(30,20){\line(1,0){3}} \put(30,10){\line(1,0){3}} \put(32,3){\makebox(0,0)[c]{$\gamma^{i}$}}
+\put(35,15){\circle*{1}} \put(40,14){\makebox(0,0)[r]{\ldots}} \put(31,14){\makebox(0,0)[l]{\ldots}}
+\put(40,10){\line(0,1){10}} \put(40,20){\line(-1,0){3}} \put(40,10){\line(-1,0){3}} \put(38,3){\makebox(0,0)[c]{$\delta^{i}$}}
+\put(45,14){\makebox(0,0)[c]{\ldots}}
+\put(50,8){\line(0,1){14}} \put(50,22){\line(-1,0){3}} \put(50,8){\line(-1,0){3}} \put(48,3){\makebox(0,0)[c]{$\delta^4$}}
+\put(55,7){\line(0,1){16}} \put(55,23){\line(-1,0){3}} \put(55,7){\line(-1,0){3}} \put(53,3){\makebox(0,0)[c]{$\delta^3$}}
+\put(60,6){\line(0,1){18}} \put(60,24){\line(-1,0){3}} \put(60,6){\line(-1,0){3}}  \put(58,3){\makebox(0,0)[c]{$\delta^2$}}
+\put(65,5){\line(0,1){20}} \put(65,25){\line(-1,0){3}} \put(65,5){\line(-1,0){3}} \put(63,3){\makebox(0,0)[c]{$\delta^1$}}
+\put(35,22){\makebox(0,0)[c]{$\epsilon$}} \put(37,22){\vector(1,0){3}} \put(33,22){\vector(-1,0){3}}
+\end{picture}
+\end{center}
+\caption{Diagram of a contracting sequence of intervals} \label{fig:interval}
+\end{figure}
+
+\begin{myprop}
+  There exists a computable function intersection:${\bf
+    (2^{\omega})^{\omega} \times (2^{\omega})^{\omega} \rightarrow
+    2^{\omega}}$, such that if $intersection(\Gamma,\Delta)=\alpha$ then
+  $\alpha=\bigcap_{i=1}^{\infty} [\Gamma_{i},\Delta_{i}]$, note here
+  that $\Gamma$ and $\Delta$ are infinite streams of numbers, where
+  each $\Gamma_{i}$ and $\Delta_{i}$ are streams of digits.
+\end{myprop}
+
+{\bf Proof}
+
+We want to find the intersection of a sequence of pairs of numbers,
+each of these numbers are an infinite stream of GR digits. We can
+construct two infinite streams of numbers as follows:
+
+\[ \begin{array}{l}
+\Gamma = \gamma^{1}::\gamma^{2}::\ldots \\
+\Delta = \delta^{1}::\delta^{2}::\ldots
+\end{array} \]
+
+The algorithm for calculating intersection is as follows, where lex is the function defined in section \ref{sec:lex}.
+
+Let $(\Gamma',\Delta') = \mbox{lex}(\Gamma_{1},\Delta_{1}):: \mbox{lex}(\Gamma_{2},\Delta_{2})::\ldots\mbox{lex}(\Gamma_{i},\Delta_{i})::\dots $
+\[ \begin{array}{ll}
+\mbox{Intersection}(\gamma',\delta')::(\Gamma_{|2}',\Delta_{|2}') \\
+= \mbox{Intersection}(\Gamma_{|2}', \Delta_{|2}') & \mbox{if } \gamma_{1}' \neq \delta_{1}' \\
+= \gamma_{1}'::\mbox{Intersection}((\gamma_{|2}',\delta_{|2}')::(\mbox{map\_p}(\gamma_{1}', \Gamma_{|2}'), \mbox{map\_p}(\gamma_{1}',\Delta_{|2}'))) & \mbox{if } \gamma_{1}' = \delta_{1}'
+\end{array} \]
+
+Where the function $\mbox{map\_p}(\gamma_{1}', \Gamma_{|2}')$ applies the function $p$ to $\Gamma_{i}'$ for all $i$'s, where $p(\gamma_{1}',\Gamma_{i}')=\Gamma_{i}''$ such that $\gamma_{1}'::\Gamma_{i}'' \equiv \Gamma_{i}'$.
+
+If the function $p$ exists then it satisfies the following equations:
+
+\begin{eqnarray}
+p(0,1::\gamma_{|2}) & = & \mbox{add\_1}(\gamma_{|2}) \label{eq:p1} \\
+p(1,0::\gamma_{|2}) & = & \mbox{sub\_1}(\gamma_{|2}) \label{eq:p2} \\
+p(\gamma_{1},\gamma_{1}::\gamma_{|2}) & = & \gamma_{|2} \label{eq:p3}
+\end{eqnarray}
+
+{\bf Proof of \ref{eq:p1}}
+
+We can rewrite $1::\gamma_{|2}$, as follows:
+
+\[ \begin{array}{lll}
+\llbracket 1::\gamma_{|2} \rrbracket_{s} & = (1+ \llbracket \gamma_{|2} \rrbracket_{s})/ \phi \\
+& = (0+ \llbracket \mbox{add\_1}(\gamma_{|2}) \rrbracket_{s})/\phi & \mbox{since } \llbracket \mbox{add\_1}(\gamma_{|2}) \rrbracket_{s} = \llbracket \gamma_{|2} \rrbracket_{s} + 1 \\
+& = \llbracket 0::\mbox{add\_1}(\gamma_{|2}) \rrbracket_{s}
+\end{array} \]
+
+This begins with the digit 0. If we remove it we get
+$\mbox{add\_1}(\gamma_{|2})$, which is the definition of rule
+\ref{eq:p1}.
+
+{\bf Proof of \ref{eq:p2}}
+
+We can rewrite $0::\gamma_{|2}$, as follows:
+
+\[ \begin{array}{lll}
+\llbracket 0::\gamma_{|2} \rrbracket_{s} & = \llbracket \gamma_{|2} \rrbracket_{s}/ \phi \\
+& = (1+ \llbracket \mbox{sub\_1}(\gamma_{|2}) \rrbracket_{s})/\phi & \mbox{Since } \llbracket \mbox{sub\_1}(\gamma_{|2}) \rrbracket_{s} = \llbracket \gamma_{|2} \rrbracket_{s} - 1 \\
+& = \llbracket 1::\mbox{sub\_1}(\gamma_{|2}) \rrbracket_{s}
+\end{array} \]
+
+This begins with the digit 1, if we remove it we get,
+$\mbox{sub\_1}(\gamma_{|2})$, which is the definition of rule
+\ref{eq:p2}.
+
+{\bf Proof of \ref{eq:p3}}
+
+In this case since the first digit of $\gamma_{1}::\gamma_{|2}$ is $\gamma_{1}$, the result of removing this digit is $\gamma_{|2}$.
+\hfill $\boxempty$
+
+Now we define an operation add\_1 such that $\mbox{add\_1}(\gamma)=\gamma'$ then $\llbracket \gamma' \rrbracket = \mbox{min}\{\llbracket \gamma \rrbracket + 1, \phi \}$:
+
+\begin{eqnarray}
+\mbox{add\_1}(0::0::\gamma_{|3}) & \Rightarrow & 1::1::\gamma_{|3} \label{eq:add11}\\
+\mbox{add\_1}(0::1::\gamma_{|3}) & \Rightarrow & 1::1::\mbox{add\_1}(\gamma_{|3}) \label{eq:add12} \\
+\mbox{add\_1}(1::\gamma_{|2}) & \Rightarrow & 1^{\omega} \label{eq:add13}
+\end{eqnarray}
+
+{\bf Proof of \ref{eq:add11}}
+\[ \llbracket 0::0::\gamma_{|3} \rrbracket_{s} + 1 = \llbracket \gamma_{|3} \rrbracket_{s}/\phi^{3} + \frac{1}{\phi} + \frac{1}{\phi^{2}} = \llbracket 1::1::\gamma_{|3} \rrbracket_{s} \]
+
+{\bf Proof of \ref{eq:add12}}
+\[ \begin{array}{ll}
+\llbracket 0::1::\gamma_{|3} \rrbracket_{s} + 1 & = \llbracket \gamma_{|3} \rrbracket_{s}/\phi^{3} + \frac{1}{\phi} + \frac{2}{\phi^{2}}\\
+& = \frac{1}{\phi} + \frac{1}{\phi^{2}} + (\llbracket \gamma_{|3} \rrbracket_{s} + 1)/\phi^{3} \\
+& = \llbracket 1::1::\mbox{add\_1}(\gamma_{|3}) \rrbracket_{s}
+\end{array} \]
+
+{\bf Proof of \ref{eq:add13}}
+\[ \begin{array}{ll}
+\llbracket 1::\gamma_{|2} \rrbracket_{s} + 1 & = 1 + \frac{1}{\phi} + \llbracket \gamma_{|2} \rrbracket_{s}/\phi \\
+& \leq \phi \\
+& = 1^{\omega}
+\end{array} \]
+\hfill $\boxempty$
+
+Now we define an operation add\_1 such that $\mbox{sub\_1}(\gamma)=\gamma'$ then $\llbracket \gamma' \rrbracket = \mbox{max}\{ \llbracket \gamma \rrbracket - 1, 0 \}$.
+
+\begin{eqnarray}
+\mbox{sub\_1}(0::\gamma_{|2}) & \Rightarrow & 0^{\omega} \label{eq:sub11} \\
+\mbox{sub\_1}(1::0::\gamma_{|3}) & \Rightarrow & 0::0::\mbox{sub\_1}(\gamma_{|3}) \label{eq:sub12} \\
+\mbox{sub\_1}(1::1::\gamma_{|3}) & \Rightarrow & 0::0::\gamma_{|3} \label{eq:sub13}
+\end{eqnarray}
+
+{\bf Proof of \ref{eq:sub11}}
+\[ \begin{array}{lll}
+\llbracket 0::\gamma_{|2} \rrbracket_{s} - 1 & = -1 + \llbracket \gamma_{|2} \rrbracket_{s}/\phi \\
+& \leq  -1 + \phi/\phi & \mbox{Since } \llbracket \gamma_{|2} \rrbracket_{s} \leq \phi \\
+& = 0 \\
+& = 0^{\omega}
+\end{array} \]
+
+{\bf Proof of \ref{eq:sub12}}
+\[ \begin{array}{ll}
+\llbracket 1::0::\gamma_{|3} \rrbracket_{s} - 1 & = \llbracket \gamma_{|3} \rrbracket_{s}/\phi^{3} + \frac{1}{\phi} - \frac{1}{\phi} - \frac{1}{\phi^{2}}\\
+& = - \frac{1}{\phi^{2}} + \llbracket \gamma_{|3} \rrbracket_{s}/\phi^{3} \\
+& = (\llbracket \gamma_{|3} \rrbracket_{s} - 1)/\phi^{3} \\
+& = \llbracket 0::0::\mbox{sub\_1}(\gamma_{|3}) \rrbracket_{s}
+\end{array} \]
+
+{\bf Proof of \ref{eq:sub13}}
+\[ \llbracket 1::1::\gamma_{|3} \rrbracket_{s} - 1 = \llbracket \gamma_{|3} \rrbracket_{s}/\phi^{3} + \frac{1}{\phi} + \frac{1}{\phi^{2}} - 1 = \llbracket 0::0::\gamma_{|3} \rrbracket_{s} \]
+\hfill $\boxempty$
+
+
+
+{\bf Proof of the algorithm}
+
+{\bf Case 1}: $\gamma_{1}' \neq \delta_{1}'$.
+
+In this case then we know that $\gamma' \not\equiv \delta'$, therefore
+we can not say any more about $\alpha$ without looking at the next
+streams. Obviously by induction on the size of $\Gamma$ and $\Delta$
+then this will not change the $\alpha$.
+
+{\bf Case 2}: $\gamma_{1}' = \delta_{1}'$.
+
+If $\gamma$ and $\delta$ begin with the same digit implies that all
+future $\gamma$'s and $\delta$'s will all begin with the same digit.
+Then it is obvious that the second rule of the algorithm will hold.
+
+
+
+
+\section{Applications of the intersection function}
+To calculate the functions $\sin, \cos$ and $\log$ we only have to
+generate a infinite sequence of closed intervals bounding the answer
+above and below and then we can use the intersection function to
+calculate the intersection of this nested sequence of intervals.
+
+To generate these intervals we can use the Taylor series expansion of
+a function.
+
+\subsection*{Calculating $e^{x}$}
+
+By using the Taylor series expansion of a function we can find that:
+
+\begin{equation}
+e^{x} = \sum_{n=0}^{\infty} \frac{x^{n}}{n!} \label{eq:exp}
+\end{equation}
+
+This holds for all real values of $x$. However, to find the the value
+of $e^{x}$ using the intersection of a nested sequence of intervals,
+we need to construct a contracting sequence if intervals. We do this as follows. First we define
+
+\[ \begin{array}{ll}
+s_{0}(x) = 1, & s_{n}(x) = \frac{x}{n}.s_{n-1}(x) \\
+S_{0}(x) = s_{0}, & S_{n}(x) = S_{n-1}(x) + s_{n}(x)
+\end{array} \]
+
+\begin{myprop}
+  The following sequence of intervals forms a contracting sequence,
+  when $ 0 \leq x < 1$:
+\[ [S_{i}(x), S_{i}(x) + \frac{1}{\phi^{i}}], \forall i \in \mathbb{N}, \]
+with intersection $\{ e^{x} \}$.
+\end{myprop}
+
+{\bf Proof}
+
+It is clear that if $x \geq 0$ then the sum \ref{eq:exp} is always $\geq 0$. Therefore this sum is always increasing, this means that:
+\[ S_{i}(x) \leq S_{i+1}(x), \forall i \in \mathbb{N} \]
+
+Each $S_{i}(x)$ is a lower bound on the value of $e^{x}$.
+
+\[ \forall \epsilon > 0, \exists n \in \mathbb{N} \mbox{, such that } \forall j,k \in \mathbb{N}, j \geq k, |s_{j}(x) - s_{k}(x)| < \epsilon \]
+\[ \begin{array}{rll}
+s_{j}(x) \leq s_{j}(1) & = \frac{1}{1} + \ldots + \frac{1}{k!} + \ldots + \frac{1}{j!} \\
+s_{k}(x) \leq s_{k}(1) & = \frac{1}{1} + \ldots + \frac{1}{k!} \\
+s_{j}(x) - s_{k}(x) \leq s_{j}(1) - s_{k}(1) & =  \frac{1}{(k+1)!} + \ldots + \frac{1}{j!} \\
+& < \frac{1}{\phi^{k+1}} + \ldots + \phi^{j} & \mbox{Since } \frac{1}{n!} < \frac{1}{\phi^{n}} \\
+& = \frac{1}{\phi^{k}}.(\frac{1}{\phi} + \ldots + \frac{1}{\phi^{j-k}}) \\
+& < \frac{1}{\phi^{k}}
+\end{array} \]
+
+As $j \rightarrow \infty$ then our estimation of an upper-bound of
+$s_{k}(x)$ will not change therefore \[ S_{k}(x) + \frac{1}{\phi^{k}}
+\] 
+
+is guaranteed to be an upper-bound of the value of $e^{x}$.
+
+\subsection*{Calculating $\sin(x)$}
+\[ \sin(x) = \sum_{n=0}^{\infty} \frac{(-1)^{n}.x^{2n+1}}{(2n+1)!} \]
+
+\[ \begin{array}{ll}
+s_{0}(x) = x, & s_{n}(x) = \frac{(-1).x^{2}.s_{n-1}(x)}{(2n+3).(2n+2)} \\
+S_{0}(x) = s_{0}, & S_{n}(x) = S_{n-1}(x) + s_{n}(x)
+\end{array} \]
+
+\begin{myprop}
+
+$ \forall k \in \mathbb{N} \mbox{ and } 0 \leq x \leq \pi. $
+\begin{eqnarray}
+S_{2(k+1)}(x) & \leq & S_{2k}(x) \label{eq:sin1} \\
+S_{2k+1}(x) & \leq & S_{2(k+1)+1}(x) \label{eq:sin2} \\
+S_{2k+1}(x) & \leq & \sin(x) \leq S_{2k}(x) \label{eq:sin3}
+\end{eqnarray}
+
+\end{myprop}
+
+{\bf Proof}
+
+Proof of \ref{eq:sin1}:
+
+\[ \begin{array}{ll}
+\sin(x) & = \sum_{n=0}^{\infty} \frac{(-1)^{n}.x^{2n+1}}{(2n+1)!} \\
+& = \sum_{n=0}^{2k} \frac{(-1)^{n}.x^{2n+1}}{(2n+1)!} + \sum_{n=2k+1}^{\infty} \frac{(-1)^{n}.x^{2n+1}}{(2n+1)!}
+\end{array} \]
+
+We will take the second part of this equation and show 
+\[ \sum_{n=2k+1}^{\infty} \frac{(-1)^{n}.x^{2n+1}}{(2n+1)!} \leq 0, \forall k. \]
+
+\[ \begin{array}{ll}
+\sum_{n=2k+1}^{\infty} \frac{(-1)^{n}.x^{2n+1}}{(2n+1)!} & = \sum_{n=2k}^{\infty} \frac{(-1)^{n+1}.x^{2n+3}}{(2n+3)!} \\
+& = \sum_{n=k}^{\infty} (\frac{(-1)^{2n+1}.x^{4n+3}}{(4n+3)!} + \frac{(-1)^{2n+2}.x^{4n+5}}{(4n+5)!}) \\
+& = \sum_{n=k}^{\infty} (- \frac{x^{4n+3}}{(4n+3)!} + \frac{x^{4n+5}}{(4n+5)!}) 
+\end{array} \]
+
+But 
+$\forall n \in \mathbb{N}$
+\[ \begin{array}{rll}
+-\frac{x^{4n+3}}{(4n+3)!} + \frac{x^{4n+5}}{(4n+5)!} & \leq 0 \\
+\frac{x^{4n+5}}{(4n+5)!} & \leq \frac{x^{4n+3}}{(4n+3)!} \\
+\frac{x^{4n+5}}{x^{4n+3}} & \leq \frac{(4n+5)!}{(4n+3)!} \\
+x^{2} & \leq (4n+5)(4n+4) & \mbox{If } x = 0 \mbox{ then } 0=0 \\
+x^{2} & \leq 16n^2 + 36n + 20  \\
+x^{2} & \leq 20  & \forall n
+\end{array} \]
+
+This condition is satisfied when $0 \leq x \leq \pi$.
+
+Therefore:
+\[ \begin{array}{rll}
+\sum_{n=k+1}^{\infty} (- \frac{x^{4n+3}}{(4n+3)!} + \frac{x^{4n+5}}{(4n+5)!}) - \frac{x^{4k+3}}{(4k+3)!} + \frac{x^{4k+5}}{(4k+5)!} & \leq \sum_{n=k+1}^{\infty} (- \frac{x^{4n+3}}{(4n+3)!} + \frac{x^{4n+5}}{(4n+5)!}) \\
+\sum_{n=k}^{\infty} (- \frac{x^{4n+3}}{(4n+3)!} + \frac{x^{4n+5}}{(4n+5)!}) - \frac{x^{4(k+1)+3}}{(4(k+1)+3)!} & \leq \sum_{n=k+1}^{\infty} (- \frac{x^{4n+3}}{(4n+3)!} + \frac{x^{4n+5}}{(4n+5)!}) \\
+ - \sum_{n=k}^{\infty} (- \frac{x^{4n+3}}{(4n+3)!} + \frac{x^{4n+5}}{(4n+5)!}) - \frac{x^{4(k+1)+3}}{(4(k+1)+3)!} & \geq - \sum_{n=k+1}^{\infty} (- \frac{x^{4n+3}}{(4n+3)!} + \frac{x^{4n+5}}{(4n+5)!}) \\
+\sin(x) - \sum_{n=k}^{\infty} (- \frac{x^{4n+3}}{(4n+3)!} + \frac{x^{4n+5}}{(4n+5)!}) - \frac{x^{4(k+1)+3}}{(4(k+1)+3)!} & \geq \sin(x) - \sum_{n=k+1}^{\infty} (- \frac{x^{4n+3}}{(4n+3)!} + \frac{x^{4n+5}}{(4n+5)!}) \\
+S_{2k} \geq S_{2(k+1)}
+\end{array} \]
+
+We can also prove the equation \ref{eq:sin2}, in a similar way.
+
+Since $S_{n}(x) \rightarrow \sin(x) \mbox{ as } n \rightarrow \infty$.
+We can prove equation \ref{eq:sin3} using the previous two results.
+
+Therefore
+\[ [ S_{2k+1}, S_{2k} ] \]
+
+is a contracting sequence converging at $\sin(x)$.
+
+In this sequence we are constricting $x$ to be in $[0,\pi]$, if $x
+\not\in [0,\pi]$ then we can apply the following identities to make $x
+\in [0,\pi]$:
+\[ \begin{array}{rl}
+\sin(x+2\pi) & = \sin(x) \\
+\sin(-x) & = -\sin(x)
+\end{array} \]
+
+We can implement these identities by using the cases function (Chapter \ref{ch:mfi}).
+
+In this example we need to know the value of $\pi$.
+Using the facts:
+
+\[ \begin{array}{rl}
+\pi & = \arctan(1) \\
+\arctan(x) & = \sum_{i=0}^{\infty} \frac{(-1)^{i}.x^{2i+1}}{2i+1}
+\end{array} \]
+We can find that
+
+\[ \pi = 1 - \frac{1}{3} + \frac{1}{5} - \frac{1}{7} + \ldots \]
+Obviously this is a converging sequence, if $S_{0}=1, S_{n} = S_{n-1} + \frac{1}{2n+1} $. Then $[S_{2n+1}, S_{2n}]$ is a converging sequence.
+
+This converges slowly and there are more efficient ways of calculating
+this.
+
+If $x$ was very large, it would be inefficient to repeatedly apply the
+identity $\sin(x+2\pi) = \sin(x)$, when we could write $\sin(x+2 \pi n)
+= \sin(x)$ for some $n \in \mathbb{N}$.  We could estimate the value $n$, for
+example by dividing $x$ by $2 \pi$ and then taking the integer part.
+
+\subsection*{Calculating $\cos(x)$}
+\[ \cos(x) = \sum_{n=0}^{\infty} \frac{(-1)^{n}.x^{2n}}{(2n)!} \]
+
+\[ \begin{array}{ll}
+s_{0}(x) = 1, & s_{n}(x) = \frac{(-1).x^{2}.s_{n-1}(x)}{(2n+2).(2n+1)} \\
+S_{0}(x) = s_{0}, & S_{n}(x) = S_{n-1}(x) + s_{n}(x)
+\end{array} \]
+
+\begin{myprop}
+$\forall k \in \mathbb{N} \mbox{ and } 0 \leq x \leq \pi.$
+\begin{eqnarray}
+S_{2(k+1)}(x) & \leq & S_{2k}(x) \label{eq:cos1} \\
+S_{2k+1}(x) & \leq & S_{2(k+1)+1}(x) \label{eq:cos2} \\
+S_{2k+1}(x) & \leq & \sin(x) \leq S_{2k}(x) \label{eq:cos3}
+\end{eqnarray}
+\end{myprop}
+
+{\bf Proof}
+
+Proof of \ref{eq:cos1}
+
+\[ \begin{array}{ll}
+\cos(x) & = \sum_{n=0}^{\infty} \frac{(-1)^{n}.x^{2n}}{(2n)!} \\
+& = \sum_{n=0}^{2k} \frac{(-1)^{n}.x^{2n}}{(2n)!} + \sum_{n=2k+1}^{\infty} \frac{(-1)^{n}.x^{2n}}{(2n)!}
+\end{array} \]
+
+We can in an analogous way as in the proof for $\sin(x)$ we can show that
+\[ \sum_{n=2k+1}^{\infty} \frac{(-1)^{n}.x^{2n}}{(2n)!} \leq 0, \forall k. \]
+
+We can also do this for the case that we take an odd number of terms
+and show that the remaining terms are increasing.
+
+Combining these equations and letting $n \rightarrow \infty$ we can
+prove \ref{eq:cos3}.
+
+Therefore \[ [S_{2k+1}(x), S_{2k}(x)] \] 
+
+is a contracting sequence of $\cos(x)$ as $k \rightarrow \infty$.
+
+\subsection*{Calculating $\ln(x)$}
+\[ \ln(1+x) = \sum_{n=0}^{\infty} \frac{x^{n}}{n} \mbox{ for } 1 < x \leq 1 \]
+
+\[ S_{0}(x) = 1, S_{n}(x) = S_{n-1}(x) + \frac{x^{n}}{n} \]
+
+The closer that $|x|$ is to 1 the less efficiently this algorithm will
+work. But if we can force $ x \in [ - \frac{1}{\phi}, \frac{1}{\phi}]
+$, then this sequence will converge quickly to the answer. In fact,
+
+\begin{equation}
+S_{k}(x) - \frac{1}{\phi^{k-1}} < \ln(1+x) < S_{k}(x) + \frac{1}{\phi^{k-1}} \label{eq:log1}
+\end{equation}
+
+{\bf Proof of \ref{eq:log1}}
+
+Assume $x \in [-\frac{1}{\phi}, \frac{1}{\phi}]$. Simplifying
+\ref{eq:log1} we get:
+
+\[ \begin{array}{rcll}
+S_{k}(x) - \frac{1}{\phi^{k-1}} < & \ln(1+x) & < S_{k}(x) + \frac{1}{\phi^{k-1}} \\
+\sum_{i=0}^{\infty} \frac{x^{i}}{i} - \frac{1}{\phi^{k-1}} < & \sum_{i=0}^{\infty} \frac{x^{i}}{i} & < \sum_{i=0}^{\infty} \frac{x^{i}}{i} + \frac{1}{\phi^{k-1}} & \mbox{ since } S_{k} = \sum_{i=k}^{\infty} \frac{x^{i}}{i} \\
+- \frac{1}{\phi^{k-1}} < & \sum_{i=k+1}^{\infty} \frac{x^{i}}{i} & < \frac{1}{\phi^{k-1}} \\
+& |\sum_{i=k+1}^{\infty} \frac{x^{i}}{i}| & < \frac{1}{\phi^{k-1}} \\
+& \sum_{i=k+1}^{\infty} \frac{|x|^{i}}{i} & < \frac{1}{\phi^{k-1}}
+\end{array} \]
+
+But
+\[ \sum_{i=k+1}^{\infty} \frac{|x|^{i}}{i} \leq \sum_{i=k+1}^{\infty} \frac{1}{\phi^{i}.i} < \sum_{i=k+1}^{\infty} \frac{1}{\phi^{i}} = \frac{1}{\phi^{k-1}} \]
+
+as required. Therefore applying the intersection function on \[
+[S_{k}(x)-\frac{1}{\phi^{k-1}}, S_{k}(x)+\frac{1}{\phi^{k-1}}] \]
+
+will give us the value of $\ln(x)$.
+
+This algorithm assumes that $-\frac{1}{\phi} < x \leq \frac{1}{\phi}$.
+We can use the following identities to get $x$ int the desired form:
+
+\[ \begin{array}{rcl}
+\ln(\frac{x}{e}) & = & \ln(x) - 1 \\
+\ln(x.e) & = & \ln(x) + 1
+\end{array} \]
+
+Again, we can use the cases function in a similar way as in the algorithms
+for $\cos(x)$ and $\sin(x)$, to get $x$ in the desired form.
+
+
+\chapter{Integration} \label{ch:int}
+%DEFINATE INTEGRATION
+In this chapter we will consider definite integration of a function
+defined in one variable.
+
+The algorithm that we use was proposed by John
+Longly~\cite{kn:Longley}. There are other ways to calculate the
+integral of a function. See for example~\cite{kn:Plume} and
+~\cite{kn:Simpson}. However in practice these algorithms are very slow,
+because many intervals have to be examined in order to get a small
+number of digits of the output.
+
+The aim of this algorithm is to calculate the area under a function
+$f(x)$ within some predetermined error $\epsilon = \phi^{k}$. The
+algorithm that we will use works by splitting the graph into Riemann
+strips. The diagram in Figure \ref{fig:riemanstrips} demonstrates
+this. The shaded intervals are the part that we will calculate
+
+\begin{figure}
+\begin{center}
+\unitlength=1.5mm
+\begin{picture}(70,75)(0,0)
+\put(0,5){\vector(1,0){70}} %Initial lines
+\put(3,15){\line(1,0){12}}
+\put(3,25){\line(1,0){22}}
+\put(3,35){\line(1,0){32}}
+\put(3,55){\line(1,0){52}}
+\put(3,65){\line(1,0){62}}
+\put(5,0){\vector(0,1){70}}
+\put(35,25){\line(0,1){10}}
+\put(65,55){\line(0,1){10}}
+\put(0,0){\line(1,1){70}}
+\thicklines
+\put(5,5){\line(1,0){10}}
+\put(15,15){\line(1,0){10}}
+\put(25,25){\line(1,0){10}}
+\put(55,55){\line(1,0){10}}
+\put(15,3){\line(0,1){12}}
+\put(25,3){\line(0,1){22}}
+\put(35,3){\line(0,1){22}}
+\put(55,3){\line(0,1){52}}
+\put(65,3){\line(0,1){52}}
+\thinlines
+\multiput(15,5)(.5,0){20}{\line(0,1){10}}
+\multiput(15,5)(0,.5){20}{\line(1,0){10}}
+\multiput(25,5)(.5,0){20}{\line(0,1){20}}
+\multiput(25,5)(0,.5){40}{\line(1,0){10}}
+\multiput(55,5)(.5,0){20}{\line(0,1){50}}
+\multiput(55,5)(0,.5){100}{\line(1,0){10}}
+
+\put(40,25){\makebox(0,0)[c]{\ldots}}
+\put(2,45){\makebox(0,0)[c]{\vdots}}
+\put(2,10){\makebox(0,0)[c]{$\epsilon$}}
+\put(2,20){\makebox(0,0)[c]{$\epsilon$}}
+\put(2,30){\makebox(0,0)[c]{$\epsilon$}}
+\put(2,60){\makebox(0,0)[c]{$\epsilon$}}
+\put(2,12){\vector(0,1){3}}
+\put(2,8){\vector(0,-1){3}}
+\put(2,22){\vector(0,1){3}}
+\put(2,18){\vector(0,-1){3}}
+\put(2,32){\vector(0,1){3}}
+\put(2,28){\vector(0,-1){3}}
+\put(2,62){\vector(0,1){3}}
+\put(2,58){\vector(0,-1){3}}
+
+\put(71,5){\makebox(0,0)[l]{$x$}}
+\put(5,73){\makebox(0,0)[c]{$f(x)$}}
+\end{picture}
+\end{center}
+\caption{Integration on $[0,1]$ using Riemann strips} \label{fig:riemanstrips}
+\end{figure}
+
+For this section we will assume that the we only want to integrate
+from $[0,1]$. We can then use this implementation and then 'gear-up'
+and 'gear-down' functions that are not in this range, as follows:
+
+\[ \int_{a}^{b} f(x) dx = \int_{0}^{1} f(a+(b-a)x) dx \]
+
+We will discuss this and another way of integrating from
+$[0,\delta]$, for some $\delta$, in the next section.
+
+However we have to ensure that the error of our result is at most
+$\epsilon$ and therefore we need to split the interval into strips
+that are at all points at most $\epsilon$ from the actual value.
+
+If we partitioned the interval $[a,b]$ into $n$ sections all with
+error at most $\epsilon$, then we can find the integral over the whole
+function.
+
+\begin{myprop} \label{pr:sumint}
+If we partition the interval $[a,b]$ into $n$ disjoint intervals 
+\[ [a,b] = [a_{0},a_{1}] \cup [a_{1},a_{2}] \cup ... \cup [a_{n-1},a_{n}] \mbox{ with } a_{0} = a \mbox{ and } a_{n} = b \]
+
+such that \[ \forall i = 1,\ldots,n \mbox{ and } \forall y \in [a_{i-1},a_{i}] \mbox{ then } |f(a_{i-1})-f(y)| \leq \epsilon.(b-a) \]
+
+Then we can find \[| \int^{a}_{b} f(x) dx - (F(b)-F(a)) | \leq \epsilon \] 
+
+where $F(x)$ is the integral of $f$ at $x$. 
+\end{myprop}
+
+{\bf Proof}
+
+By the above diagram we can see that we have constructed the shaded-in strips. We can find the sum of these values, and the area of $F(x)$ within $\epsilon.(b-a)$ as follows:
+\[ \begin{array}{ll}
+\mbox{Estimated area of strip } [a_{i-1},a_{i}] & = f(a_{i-1}).(a_{i} - a_{i-1}) \forall i = 1,\ldots,n \\
+\mbox{Maximum error of strip } [a_{i-1},a_{i}] & = \epsilon . (a_{i} - a_{i-1}) \forall i = 1,\ldots,n \\
+\mbox{Estimated area of strip } [a,b] & = \sum_{i=1}^{n} (\mbox{Estimated area of strip } [a_{i-1},a_{i}]) \\
+\mbox{Maximum error of strip } [a,b] & = \sum_{i=1}^{n} (\mbox{Maximum error of strip } [a_{i-1},a_{i}])  \\
+& = \sum_{i=1}^{n}  \epsilon . (a_{i} - a_{i-1}) \\
+& = \epsilon . [(a_{1} - a_{0}) + (a_{2} - a_{1}) + \dots + (a_{n} - a_{n-1})] \\
+& = \epsilon . (a_{n} - a_{0}) \\
+& = \epsilon . (b-a) \hfill \boxempty
+\end{array} \] 
+
+In this case $a=0$ and $b=1$. Therefore if we can split the interval
+$[0,1]$ into any number of partitions each partition at most
+$\epsilon$ from the actual value then we have found the integral over
+$[0,1]$ within $\epsilon$.
+
+Therefore we will now consider finding one partition that is at most
+$\epsilon$ from the function at any point in the partition.
+
+
+\section{Modulus of convergence}
+
+What we want:
+
+Given $\alpha$ and $\epsilon$ find $\beta$ and $\gamma$ such that:
+\[ \gamma - \epsilon \leq f(x) \leq \gamma + \epsilon, \forall x \in [\alpha,\beta] \]
+
+
+where $\epsilon = \frac{1}{\phi^{p}}$. A diagram of this can be seen
+in Figure \ref{fig:strip}
+
+\begin{figure}
+\begin{center}
+\unitlength=1.5mm
+\begin{picture}(80,80)(0,0)
+\put(0,10){\vector(1,0){70}} %Initial lines
+\put(5,40){\vector(0,1){35}}
+\put(71,10){\makebox(0,0)[l]{$x$}}
+\put(5,78){\makebox(0,0)[c]{$f(x)$}}
+\thicklines
+\put(0,40){\line(1,0){65}}
+\put(65,5){\line(0,1){35}}
+\put(5,5){\line(0,1){35}}
+\thinlines
+\put(2,57){\vector(0,1){13}}
+\put(65,40){\line(0,1){32}}
+\put(3,70){\line(1,0){62}}
+\put(0,37.5){\line(2,1){70}}
+\put(2,55){\makebox(0,0)[c]{$\epsilon$}}
+\put(2,57){\vector(0,1){13}}
+\put(2,53){\vector(0,-1){13}}
+\put(5,2){\makebox(0,0)[c]{$\alpha$}}
+\put(65,2){\makebox(0,0)[c]{$\beta$}}
+\put(0,40){\makebox(0,0)[r]{$\gamma$}}
+
+\multiput(6,10)(1,0){59}{\line(0,1){30}}
+\multiput(5,11)(0,1){29}{\line(1,0){60}}
+\multiput(5.5,10)(1,0){60}{\line(0,1){30}}
+\multiput(5,10.5)(0,1){30}{\line(1,0){60}}
+
+\end{picture}
+\end{center}
+\caption{Riemann strip on one interval, $[ \alpha,\beta ]$} \label{fig:strip}
+\end{figure}
+
+We assume that the function $f(\alpha)$ was of finite character.Recall
+that this means that if we want to know a finite number of output
+digits of the function, we will only have to consider a finite number
+of input digits.
+
+Of the fact that $f$ is of finite character we conclude that $f$ is
+continuous on all $x \in {\bf 2}^{\omega}$. For functions on reals a
+definition of uniform continuity is:
+
+\[ \forall \epsilon \exists \delta \mbox{ such that } |f(x-\delta) - f(x)| < \epsilon \]
+
+We can define $x-\delta \geq \llbracket \alpha_{1} \ldots
+\alpha_{l} (0)^{\omega} \rrbracket_{f}$, where $\phi^{-l+2} \leq \delta $.
+Therefore our definition of continuity is:
+
+\begin{equation} \label{eq:mod}
+\forall \epsilon > 0 \exists l \mbox{ such that } |f(\alpha_{1} \ldots \alpha_{l} (0)^{\omega}) - f(\alpha)| < \epsilon 
+\end{equation}
+
+In particular $\epsilon \leq \phi^{-m+2}$.
+
+If we let $m$ be the number of output digits then we call $l$ the
+number of input digits that we have to look at.
+
+An example of \ref{eq:mod} is as follows:
+\[\begin{array}{c||l|rl}
+  \mbox{input } (x) & 0000 \mid^{l} 00 \ldots & \mbox{but} 
+& 0000 \mid^{l} 11 \ldots \\ \hline
+  \mbox{output } f(x_{1} \ldots x_{l} (0)^{\omega}) & 011 \mid_{m} & & 011 \mid_{m} 
+\end{array}\]
+
+Because the first $l$ digits determined the first $m$ digits of
+$f(\alpha)$, then it does not matter what the remaining digits of $x$
+(after the $l$'th digit) are. So we can set all of these digits to 1.
+
+In the above example we have:
+
+\[ \gamma = f(x_{1}' \ldots x_{l}' (0)^{\omega}), \beta = x' \mbox{ where } m \mbox{ is determined by } \epsilon \]
+
+where $x = \alpha$.
+
+Therefore if we can calculate $l$ then we can calculate $\alpha$ and
+$\beta$.
+
+\section{Mod function}
+This function uses the fact that the language these algorithms were
+encoded in supports side effects in the form.
+
+This is the reason why we used ML instead of a lazily evaluated
+language for example Haskell. This works by keeping track of the
+number of digits from the input that we have looked at.
+
+There are several ways of storing this value for example in a memory
+location stored by a pointer, returned using exceptions or by using
+continuations. In the definition of Mod that we are using, we store
+the number of digits in a location addressed by a pointer.
+
+In the idea proposed by John Longley a stream is defined as a function
+$\alpha: \mathbb{N} \rightarrow {\bf 2}$, where $\alpha_{i} = \alpha(i)$. This
+definition simplify the algorithm however in this section we will use
+the definition of $\alpha$ as a sequence of digits to maintain
+consistency.
+
+The definition of mod is as follows:
+\begin{verbatim}
+fun ModMax_f G f =
+    let val log = ref ~2
+        fun f'' s () = 
+            case s() of cons(y,s') =>
+                (log := (!log)+1 ; cons(y, f'' s'))
+        fun f' () =
+            case f () of cons(y,s) =>
+                (log := (!log)+1 ; cons(y, f'' s))
+    in
+        (G f', !log)
+    end ;
+\end{verbatim}
+
+The ModMax function takes two arguments {\em G} and {\em f} we are
+integrating the function {\em G}, {\em f} is a value written as a GR
+stream. The function {\em G} takes in the value {\em f} (a stream in
+GR notation) and outputs a value (another stream in GR notation). This
+is the normal result of giving the function {\em G} the argument {\em
+  f}.
+
+However as well as doing this the ModMax function counts the number of
+digits of the input that were used of {\em f} when finding {\em G},
+the variable {\em log} keeps track of this.  
+
+Every time the function {\em G} requires the next digit it calls {\em
+  f} with a unit value, to get the next digit of the stream {\em f},
+the ModMax function will calculate this value but as a side effect the
+value {\em log} is increased by 1.  This is the reason that we
+implemented in ML in the first place. When the result of the
+function is given the value {\em log} is also returned.
+
+
+This function works on an infinite stream of digits however it could
+of been defined to work on a function as follows:
+
+\begin{verbatim}
+fun update NONE x = SOME x
+  | update (SOME y) x = SOME (max(x,y));
+
+fun ModMax G f =
+    let val log = ref NONE
+        fun f' x =
+            case f x of y =>
+                (log := update (!log) x ; y)
+    in
+        (G f', !log)
+    end;
+\end{verbatim}
+
+Both versions of the Mod function work in a similar way. In fact these
+definitions of the Mod function are interchangeable since we can write
+functions to convert from infinite streams of digits to functions from
+natural numbers to digits and vice versa using the following
+functions:
+
+\begin{verbatim}
+fun smap f (cons(a,s)) = cons(f(a),fn () => smap f (force s));
+
+fun from n = cons(n, fn()=> from(n+1));
+
+fun fun_to__stream f = smap f (from 0);
+
+fun stream_to_fun (cons(a,s)) 0 = a
+  | stream_to_fun (cons(_,s)) n = stream_to_fun (force s) (n-1);
+\end{verbatim}
+
+\begin{myprop}
+  Assume we know $a_{i}$ and $f(x)$, assume that $f(x)$ is of
+  computable(and specifically of finite character).
+  
+  Then we can find a $a_{i+1}$ such that if $\forall x \in
+  [a_{i},a_{i+1}] \mbox{ then } |f(a_{i})-f(x)| \leq \epsilon$.
+\end{myprop}
+
+{\bf Proof}
+
+Using the Mod function we can see that it is possible to find the
+value of an integral from $[a_{i}, a_{i+1}]$, where $a_{i}$ and
+$\epsilon = \frac{1}{\phi^{k}}$ are specified. We can repeatedly use
+this starting with $\llbracket a_{0} \rrbracket_{s} = 0$, and
+terminate when $\llbracket a_{0} \rrbracket_{s} \geq 1$. The algorithm
+informally is as follows:
+
+\begin{enumerate}
+\item Set $ \llbracket \alpha \rrbracket = 0$, $ \alpha $ is the left
+  hand side of the first interval. Set a value {\em acc} to be the sum
+  of the area's so far, initially $ \llbracket acc \rrbracket = 0$.
+\item Calculate $ \gamma = f(\alpha)_{|k+2} $, doing this will
+  automatically satisfy $ f(\alpha) - \epsilon \leq \gamma \leq
+  f(\alpha) + \epsilon $, since $ \epsilon = \frac{1}{\phi^{k}} $. We
+  want to know $ l $, the maximum number of digits of $ \alpha $ that we
+  need to look at. So we use the Mod function to do this.
+\item Then $ \beta = \alpha_{|l}+ \frac{1}{\phi^{l+2}} $.
+\item The area from $ \alpha $ to $ \beta $ is \[ \begin{array}{rl}
+    (\alpha - \beta).\gamma & = (\alpha - \alpha_{|l} - \frac{1}{\phi^{l+2}}).\gamma \\
+    & = \frac{1}{\phi^{l+2}}.\gamma
+\end{array} \]
+\item Add this area to acc. If $\beta \geq 1$ then stop otherwise goto
+  step 2.
+\end{enumerate}
+
+This algorithm will obviously be correct because we can combine the
+Mod function as described in the previous section, and using
+proposition \ref{pr:sumint} we can combine all of these intervals
+together, to integrate over the integral $[0,1]$.  \hfill $\boxempty$
+
+In this algorithm all the values are not infinite streams. Instead we
+use finite lists of digits, in this algorithm we only need to keep a
+finite number of digits of a number. However using finite lists
+instead of infinite streams, we cannot use the same algorithms for
+multiplication and for addition, both of which are used in the
+algorithm outlined above. In fact we only need to implement addition
+using finite lists because we can multiply a valve $ \gamma $ by $
+\frac{1}{\phi^{k}} $ in simplified notation simply by adding $ k $
+zeros before $ \gamma $. But notice that in full notation this can
+become quite complicated. The addition that we used was the addition
+defined in \ref{sec:addition}. Therefore we can guarantee termination.
+
+The second problem that we have to deal with is to determine when
+$\beta \geq 1$. Since we cannot do this in practice for infinite
+streams. However we can use the flip function as described in chapter
+\ref{ch:mfi}, to enforce this condition.
+
+
+The modifications that we did to the algorithm originally proposed by
+John Longley was to change the algorithm so that it used full
+notation. This is not trivial since if we want the value of the stream
+to within $\phi^{k}$ then in the simple notation we only need to look
+at $k$ digits, however with an exponent we have to take enough digits
+to represent the exponent and then take the next $k$ digits.
+
+\[ \begin{array}{|c|c|c|c|c|c|c|c}
+\hline z & \alpha_{1} & \ldots & \alpha_{2z} & \alpha_{2z+1} & \ldots & \alpha_{2z+n+1} & \ldots \\
+\hline \multicolumn{1}{c}{} & \multicolumn{3}{c}{\leftarrow \hfill 2z \hfill \rightarrow} & \multicolumn{3}{c}{\leftarrow \hfill n \hfill \rightarrow}
+\end{array} \]
+
+
+
+The second change that we made was to use streams to represent digits
+instead of a function. The advantage of this was that we could use all
+the functions that we have developed. But notice that we can use the
+function definition of streams and convert to and then from functions.
+
+This is algorithm is considerably more efficient than the algorithm
+implemented by David Plume. Since we first implemented this function
+for integration, John Longly has, by modifying the definition of a
+stream, has been able to considerably improve the performance of this
+algorithm.
+
+
+
+Another possible extension that we did not have time to implement was
+integration over an interval $[0,\delta]$ for some $\delta$ an
+infinite stream of digits.  A problem that we encounter here is that
+we have to check if the $\beta$ value has reached the end of the
+interval which is at $\delta$.  Normally this would not be possible to
+determine because as discussed previously we cannot guarantee $\beta
+<_{\perp} \delta$ will terminate. But in this case the value $\beta$
+that we are comparing with $\delta$ is a list of digits of finite
+length and there is no problem.  We can compare $\beta$ with $\delta$,
+but we know after a finite number (the length of $\beta$) digits all
+the remaining digits are 0. Therefore if by the time we have looked at
+this many digits we have not terminated we can say that $ \llbracket
+\beta \rrbracket_{s} \leq \llbracket \alpha \rrbracket_{s} $. This
+will terminate and we can apply the algorithm as described above to
+get the desired result.
+
+
+\chapter{Conclusions} \label{ch:conc}
+%CONCLUSIONS
+
+\section{Summary of work}
+Firstly in chapter \ref{ch:I} of this report we examined the problems
+with floating-point arithmetic. Then we considered possible ways of
+solving this, using infinite streams of digits in GR notation. We also
+discussed why we chose Golden Ratio notation.
+
+In chapter \ref{ch:grn} we looked at some of the theory behind the
+golden ratio, in particular its connection with the Fibonacci series.
+We proved facts that we used later in the project. We also proved an
+interesting property of the Fibonacci series. Using this property we
+proved that every number of the form $\frac{1}{2^{k}}$ has a periodic
+representation in GR notation. We then outlined the algorithm to
+calculate this. Though we have not used these properties in the rest
+of the report, they are on their own of interest.
+
+In chapter \ref{ch:dai} we considered the languages and
+representations that the calculator could be implemented in. We want
+to implement an interesting and more efficient method of calculating
+definite integration, there are several ways to solve this, the way
+that we chose was to implement it in a language language that allows
+side effects.
+
+In chapter \ref{ch:mfi} we considered ways of rewriting streams in
+the same representation, whilst still representing the same number. We
+designed, proved and implemented the flip function which rewrites a
+finite portion of a stream making a specified digit 0. We then showed
+that this could not be extended to infinite streams.
+
+Then we proved and implemented a lexicographical normalisation
+property for GR notation. The algorithm for lexicographical
+normalisation in SB notation was designed by
+Escard\'o in~\cite{kn:Escardo}. However since GR notation uses a different
+identity we re-designed, proved and implemented this algorithm for GR
+notation.
+
+In chapter \ref{ch:dai}, we designed and implemented the basic
+arithmetic algorithms designed by Pietro Di Gianantonio. We also
+developed, proved and implemented new algorithms for multiplication,
+addition, multiplication by 2, and division by 2, and compared them to
+Di Gianantonio's algorithms.
+
+A common theme of all the functions that we implemented is that they
+take in a stream in one representation, then they output a stream in a
+different representation without altering the value of the stream. For
+example one algorithm takes in a stream of the form ${\bf 2}^{\omega}$
+and outputs a stream of the form $\{0,2\}^{\omega}$ with the same
+value, this can easily be used to divide the stream by 2.
+
+We discussed conversion between representations in chapter \ref{ch:c}.
+We designed, proved and implemented functions converting from: decimal
+to GR notation, GR notation to decimal and GR notation to SB notation.
+We also considered how to convert from SB notation into GR notation.
+
+In chapter \ref{ch:ioi} we implemented and proved an algorithm for
+calculating the intersection of nested sequences of intervals. This
+function was then used to calculate the values of $\sin(x), \cos(x),
+e^{x}, \ln(x)$ and hence $x^{y}$, using the Taylor series expansion of
+a function and then bounding successive terms. We proved these bounds.
+
+In chapter \ref{ch:int} we considered the Mod function and how this
+can be used to split the region [0,1] into strips, all within a given
+error. Then we considered how this can be used to integrate a function
+within a given accuracy. We looked at why this needed a language that
+supported side-effects. Finally, we considered possible extensions
+that could be made to the algorithms.
+
+
+\section{Original Material}
+The following algorithms are all original meaning they were designed,
+proved and implemented by me:
+
+\begin{itemize}
+\item Flip function on a finite list.
+\item New algorithms for addition and multiplication by 2.
+\item Division by 2.
+\item New algorithm for multiplication.
+\item Conversion from Decimal to GR notation.
+\item Conversion from GR notation to Decimal.
+\item Conversion from GR notation to Signed Binary.
+\item Lexicographical Normalisation, in GR notation.
+\end{itemize}
+
+The following algorithms have been designed, and in some cases
+implemented by other people. However I re-designed them to work on GR
+numbers and also proved that they were correct and implemented them.
+
+\begin{itemize}
+\item Basic Operations, these are described and proved in Di
+  Gianantonio~\cite{kn:DiGianantonio}
+\item Cases function, designed by Escard\'o~\cite{kn:Escardo}.
+\item Intersection of nested sequences of intervals, the algorithm was
+  described by Plume~\cite{kn:Plume}
+\item Functions for calculating $e^{x}, \sin(x), \cos(x), \log(x)$ and
+  $x^{y}$
+\item Definite Integration, designed by John Longley~\cite{kn:Longley}.
+\end{itemize}
+
+\section{Discussion}
+The calculator that was implemented in this report is similar to the
+calculator that was implemented by David Plume~\cite{kn:Plume}. The
+main differences between David Plume's and my calculator is that Plume's
+calculator uses Signed Binary notation with lazy evaluation and my
+calculator uses Golden Ratio notation with a language that supports side effects.
+
+SB and GR notations are equivalent, since in chapter \ref{ch:c} we
+showed that we could convert from GR to SB notation and also from SB
+to GR notation. The main benefits of GR notation over SB is that there
+is only one identity (compared with two in SB notation) and every
+digit can only have two possibilities $\{0,1\}$ (SB has three possible
+values $\{\bar{1},0,1\}$). Also the ability to force a digit of a
+finite portion of a stream to be 0 (by using the flip function in
+chapter \ref{ch:mfi}) is only possible in GR notation.
+
+The main problems associated with a language that supports side
+effects (ML) as opposed to a lazy evaluated language (HASKELL), is
+that, as discussed in chapter \ref{ch:dai}, we need to use a new
+stream constructor. This means that we cannot use pattern matching and
+this results in long code that is difficult to debug and read.
+
+There is another serious problem associated with this definition of
+streams, that results returned by functions like 'add' in lazy
+evaluation are a stream of actual digits. However in ML the result is
+given as one digit and a function that can then be evaluated to give
+the remaining digits. The problem with this is that if we knew
+$\alpha$ and calculated 'add($\alpha,\alpha$)' in lazy evaluation we
+would calculate $\alpha$ first, and then substitute these values for
+each $\alpha$, however 'add($\alpha,\alpha$)' in ML will result in
+each digit of $\alpha$ being evaluated twice, once for the first
+$\alpha$ and then again for the second $\alpha$ in
+'add($\alpha,\alpha$)'. The reason for this is that when we are given
+$\alpha$ it has not been evaluated.  This has the effect of slowing
+down computations, making it take much longer to calculate the basic
+operations in my calculator than in David Plume's calculator.
+
+The advantage, and the reason for implementing this calculator in ML
+was that as well as calculating the answer as usual, we can make it
+possible to do other operations as a side effect. Therefore as
+the answer is calculated we can, for example count the number of
+digits of the input that were examined to get a result. The function
+that does this is called the 'Mod' function.  It is impossible to
+implement the 'Mod' function in a lazily evaluated programming
+language. This is discussed in chapter \ref{ch:dai}.  The advantage of
+having the 'Mod' function is that we can implement definite
+integration, using only finite lists which is significantly faster
+than the method used by David Plume.
+
+The algorithm for definite integration, was proposed by John
+Longley~\cite{kn:Longley}, although this method had been implemented in
+SB notation, without an exponent. It had only been tested on simple
+functions, for example the constant and identity functions. We
+modified this algorithm to work on GR notation with an exponent and
+were therefore able to test it on polynomial functions.
+
+We can also compare the algorithms that were designed, proved and
+implemented in section \ref{ch:bo} with the algorithms designed by
+Pietro Di Gianantonio~\cite{kn:DiGianantonio}.  Discussed in this
+chapter were the algorithms for multiplication by 2 (using the
+algorithm for addition) and division by 2 were more efficient than by
+using Di Gianantonio's algorithms for example 'add($\alpha,\alpha$)'
+would be less efficient than my multiplication algorithms, similarly
+'div($\alpha,two$)' such that $ \llbracket two \rrbracket_{s} = 2$ is
+less efficient then my algorithm for division by 2.
+
+Finally the cases function and lexicographical normalisation cannot be
+compared with other implementations or algorithms since we have not
+found any other instances of these implementations of algorithms, as
+this is original material.
+
+
+\begin{thebibliography}{20}
+  
+\bibitem{kn:Beeler} M.  Beeler, R.  Gosper, R. Schroppel. {\em
+    Hakmem.} Massachusetts Institute of Technology AI Laboratory. MIT
+  AI memo 239 (HAKMEM).  Item 101, p.  39-44. 1972.
+  
+\bibitem{kn:Boehm et al} H. Boehm. R. Cartwright.  {\em Exact Real
+    Arithmetic, Formulating Real Numbers as Functions.} In Turner. D.,
+  editor, Research Topics in Functional Programming, pages 43-64.
+  Addison-Wesley, 1990.
+  
+\bibitem{kn:Boehm} H. Boehm.  {\em Constructive Real Interpretation of
+    Numerical Programs.} SIGPLAN Notices, 22(7):214-221, 1987.
+  
+\bibitem{kn:Edalat} A.  Edalat, P.J. Potts. {\em A New Representation
+    for Exact Real Numbers.} Electronic Notes in Theoretical Computer
+  Science, volume 6.
+  http://www.elsevier.nl/locate/entcs/volume6.html. 1997.
+  
+\bibitem{kn:Escardo} Mart\' \i n Escard\'o. {\em Effective and
+    sequential definition by cases on the reals via infinite
+    signed-digit numerals.} In Electronic Notes in Theoretical
+  Computer Science, volume 13.  Available from
+  http://www.elsevier.nl/locate/entcs/volume13.html.  1998.
+  
+\bibitem{kn:DiGianantonio} Pietro Di Gianantonio. {\em A Golden Ratio
+    Notation for the Real Numbers.} CWI Technical Report.  Available
+  from http://www.dimi.uniud.it/$\sim$pietro/Papers/paper\_arg.html.
+  
+\bibitem{kn:DiGianantonio2} Pietro Di Gianantonio. {\em A Functional
+    Approach to Computability on Real Numbers.} Ph.D. Thesis:
+  Universita di Pisa-Genova-Udine. Available from
+  http://www.dimi.uniud.it/$\sim$pietro/Papers/paper\_arg.html.
+  
+\bibitem{kn:Graham} Graham, Knuth, Patashnik. {\em Concrete
+    Mathematics: A foundation for Computer Science.} Addison Wesley.
+  ISBN 0-201-14236-8.
+  
+\bibitem{kn:Hall} J. Hall. {\em Numerical Analysis and Optimisation.}
+  Course Notes. Department of Mathematics, Edinburgh University.
+  1998.
+  
+\bibitem{kn:Longley} J.R. Longley. {\em When is a functional program
+    not a functional program?: a walk through introduction to the
+    sequentially realizable functions.} Standard ML source file,
+  available from http://www.dcs.ed.ac.uk/home/jrl/, 1998.
+  
+\bibitem{kn:Longley2} J.R.  Longley. {\em When is a functional program
+    not a functional program?}  Paper available from
+  http://www.dcs.ed.ac.uk/home/jrl/, March 1999.
+  
+\bibitem{kn:Menissier-Morian} Val\'erie M\'enissier-Morian. {\em
+    Arbitrary precision real arithmetic: design and algorithms.} J.
+  Symbolic Computation, 11, 1-000. 1996.
+  
+\bibitem{kn:Nielsen} A. Nielsen, P.  Kornerup.  {\em MSB-First Digit
+    Serial Arithmetic.} Journal of Universal Computer Science, Vol 1,
+  no 7, 527-547. 1995.
+  
+\bibitem{kn:Plume} David Plume. {\em A Calculator for Exact Real
+    Number Computation.} BSc Project, School of Computer Science.
+  Edinburgh University. Available from
+  http://www.dcs.ed.ac.uk/$\sim$dbp/. 1998.
+  
+\bibitem{kn:Potts} P.J. Potts. {\em Computable Real Arithmetic Using
+    Linear Fractional Transformations.}  Electronic Notes in
+  Theoretical Computer Science 6, 1997.  Available from
+  http://theory.doc.ic.ac.uk/$\sim$pjp/.
+  
+\bibitem{kn:Potts2} P.J. Potts, A. Edalat. {\em Exact Real Computer
+    Arithmetic.} Department of Computing Technical Report DOC 97/9,
+  Imperial College, 1997. Available from
+  http://theory.doc.ic.ac.uk/$\sim$pjp/.
+  
+\bibitem{kn:Simpson} A. Simpson. {\em Lazy Functional Algorithms for
+    Exact Real Functionals.} Mathematical Foundations of Computer
+  Science 1998, Springer LNCS 1450, pp.  456-464, 1998.
+  
+\bibitem{kn:Sunderhauf} P. S\"{u}nderhauf. {\em Incremental Addition
+    in Exact Real Arithmetic.} In R. Harmer et al., editors, Advances
+  in Theory and Formal Methods of Computing: Proceedings of the fourth
+  Imperial College Workshop, IC Press. Available from
+  http://theory.doc.ic.ac.uk/$\sim$ps15/abstracts/incr.html.  December
+  1997.
+  
+\bibitem{kn:Wiedmer} E. Wiedmer.  {\em Computing with Infinite
+    Objects.} Theoretical Computer Science 10:133-155.  1980.
+  
+\end{thebibliography}
+\end{document}

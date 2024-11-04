@@ -1,0 +1,175 @@
+\documentclass{csslides}\raggedright
+
+\usepackage{amsmath,amscd,amssymb,stmaryrd}
+
+\newcommand{\Cases}{\operatorname{cases}}
+\newcommand{\sscript}[1]{_{\empty_{#1}}}
+\newcommand{\id}{\operatorname{id}}
+\newcommand{\True}{\operatorname{true}}
+\newcommand{\False}{\operatorname{false}}
+\newcommand{\parrow}{\rightharpoonup}
+\newcommand{\Meaning}[1]{\llbracket #1 \rrbracket}
+\newcommand{\norm}{\operatorname{norm}}
+\newcommand{\three}{\mathbf{3}}
+\newcommand{\thomega}{{\three}^{\omega}}
+\newcommand{\twomega}{\{0,1\}^{\omega}}
+\newcommand{\myemph}[1]{{\it #1}\/}
+\begin{document}
+
+\title{Exact Arithmetic \\~ Using the Golden Ratio \\ [5ex]}
+\author{David McGaw}
+\date[CS]{}
+\maketitle
+
+\begin{slide}{}
+\vfill
+
+{\bf Solving}
+
+\begin{center}
+\begin{math}
+\begin{array}{ccccc}
+-1.41x_{1} & 2x_{2} & & = & 1 \\
+x_{1} & -1.41x_{2} & x_{3} & = & 1 \\
+ & 2x_{2} & -1.41x_{3}  & = & 1
+\end{array}
+\end{math}
+\end{center}
+
+\vfill
+
+Rounding to 3 significant figures (without using row operations) gives:
+\[ x_{1}=0.709, x_{2}=1, x_{3}=0.7.\]
+
+The exact answer (to 3 significant figures) is: \[ x_{1}=x_{2}=x_{3}=1.69. \]
+
+\vfill
+\end{slide}
+
+
+\begin{slide}{}
+
+\vfill
+{\bf Other Methods of Solving}
+\begin{itemize}
+\item Floating point with error analysis.
+\item Interval Arithmetic.
+\item Stochastic Rounding.
+\item Symbolic Manipulation.
+\end{itemize}
+\vfill
+\end{slide}
+
+
+\begin{slide}{}
+{\bf A Solution} \\
+Represent numbers as infinite streams of digits.
+
+\vfill
+
+{\bf Problem with infinite streams in decimal}
+
+\begin{center}
+\begin{math}
+\begin{array}{rll}
+& 0.444\ldots & = 4/9 \\
++ & 0.555 \ldots & = 5/9 \\ \hline
+& ?
+\end{array}
+\end{math}
+\end{center}
+
+\vfill
+
+{\bf Definition} \\
+Finite Character --- A finite number of output digits depends only on a finite number of input digits.
+\vfill
+\end{slide}
+
+\begin{slide}{}
+{\bf Why?} \\
+\begin{picture}(400,200)
+\put(125,80){\oval(150,90)[t]}
+\put(275,80){\oval(150,90)[t]}
+\put(200,100){\oval(60,18)[b]}
+\put(200,100){\oval(20,10)[b]}
+\put(50,50){\makebox[0in]{\(0=.00\ldots\)}}
+\put(200,50){\makebox[0in]{\(0.99\ldots=1\)}}
+\put(350,50){\makebox[0in]{\(1.99\ldots=2\)}}
+\put(275,140){\(1\)}
+\put(125,140){\(0\)}
+\put(45,100){\vector(1,0){315}}
+\end{picture}
+\begin{center}
+\begin{math}
+\begin{array}{rll}
+& 0.4 \\
++ & 0.5 \\ \hline
+& ? & \in [0.9,1.1] \\
+& 0.44 \\
++ & 0.55 \\ \hline
+& ? & \in [0.99,1.01]
+\end{array}
+\end{math}
+\end{center}
+{\bf We Want} \\
+\begin{picture}(400,200)
+\put(145,100){\oval(190,70)[t]}
+\put(255,100){\oval(190,70)[b]}
+\put(50,100){\line(1,0){300}}
+\end{picture}
+\end{slide}
+
+\begin{slide}{}
+\vfill
+{\bf Other Approaches to Exact Computation}
+\begin{itemize}
+\item Signed Digits \& Variations.
+\item Limits of Effective Cauchy Sequence.
+\item B-approximable.
+\item Dedekind Cuts.
+\item Continued Fractions.
+\item Mobius Transformations.
+\end{itemize}
+\vfill
+\end{slide}
+
+\begin{slide}{}
+{\bf Golden Ratio} \\
+The Golden Ratio $\phi$ is defined s.t. $\phi^{2}=\phi+1$
+
+In decimal
+\[ \llbracket d \rrbracket = \sum_{i=0}^{\infty} d_{i}.10^{-i} = d_{0}.10^{0} + d_{1}.10^{-1} + \ldots \] \\
+where \(d=d_{0}\/\cdot\/ d_{1} d_{2} d_{3} \ldots\) and \(d_{i} \in \{0, \ldots,9\}.\)
+
+Similarly in Golden Ratio Notation
+\[ \llbracket a \rrbracket =\sum_{i=0}^{\infty} a_{i}.\phi^{-i} = a_{0}.\phi^{0} + a_{1}.\phi^{-1} + \ldots \] \\
+ where \(a=a_{0}\/\cdot\/a_{1} a_{2} a_{3} \ldots\) and \(a_{i} \in \{0, 1\}.\)
+
+So
+\begin{center}
+\( \phi^{2} = \phi + 1                          \) \\
+\( \phi^{2} = \phi^{1} + \phi^{0}                       \) \\
+\( \phi^{0} = \phi^{-1} + \phi^{-2}                     \) \\
+\( \llbracket 1 \cdot 000 \ldots \rrbracket = \llbracket 0 \cdot 110 \ldots \rrbracket \) \\
+\end{center}
+Giving us the identity \\
+\begin{center}
+\framebox{$\llbracket 100 \rrbracket = \llbracket 011 \rrbracket$ }
+\end{center}
+\end{slide}
+
+\begin{slide}{}
+\vfill
+{\bf Aims} \\
+The project should provide a number of useful operations for example:
+\begin{itemize}
+\item Conversion functions for input and output in decimal.
+\item Basic arithmetic functions e.g.  addition, subtraction, multiplication and division.
+\item Elementary functions e.g.  trigonometric and logarithmic functions.
+\item Basic operations on functions e.g.  definite integration, global maxima and roots.
+\end{itemize}
+\vfill
+\end{slide}
+                                                                                                                                                                    
+\end{document}

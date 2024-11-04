@@ -1,0 +1,97 @@
+\documentstyle{article}
+\newcommand{\Meaning}[1]{\llbracket #1 \rrbracket}
+\begin{document}
+
+\title{Exact Arithmetic \\~ Using the Golden Ratio}
+\author{David McGaw}
+\date{}
+\maketitle
+
+To motivate the use of exact arithmetic and in particular Golden Ratio Notation we will consider problems with floating point representations.
+The problem with writing a real number in floating point representation is that only the first few digits are kept, the rest of the number is lost this truncation introduces an error. Combining several values all with errors can make the error of the result grow. In some cases the error of a calculation can be so large that the result is meaningless.
+
+For example take the following system of equations:
+
+\begin{center}
+\[
+\begin{array}{ccccc}
+-1.41x_{1} & 2x_{2} & & = & 1 \\
+x_{1} & -1.41x_{2} & x_{3} & = & 1 \\
+ & 2x_{2} & -1.41x_{3}  & = & 1
+\end{array}
+\]
+\end{center}
+
+Solving using Gaussian Elimination (without row operations) and rounding at each stage to 3 significant figures gives: \( x_{1}=0.709, x_{2}=1, x_{3}=0.7.\)
+But the correct answer (to 3 significant figures) is: \( x_{1}=x_{2}=x_{3}=1.69. \)
+
+This could be improved using more digits of accuracy, but we could construct larger examples which would still have significant errors. Similarly allowing row operations would be useful but would not stop errors.
+
+Their are other methods for solving this problem which are as follows:
+\begin{itemize}
+\item Floating point with error analysis.
+\item Interval Arithmetic.
+\item Stochastic Rounding.
+\item Symbolic Manipulation.
+\end{itemize}
+\vfill
+
+Of all these methods only symbolic representation actually represents values exactly, all the rest only approximate values. However at some stage using symbolic representation we will have to convert to decimal using one of the methods which will introduce an error into the result.
+
+Errors are introduced because we truncate the remaining digits of a number, we could get rid of this error by representing the number as an infinite stream of digits. 
+
+It would be useful if we could represent numbers as infinite streams of decimal digits, but we can not, simple operations such as addition may not be possible. For example if we tried to add \(4/9\) with \(5/9\) as follows:
+
+\begin{center}
+\begin{math}
+\begin{array}{rll}
+& 0.444\ldots & = 4/9 \\
++ & 0.555 \ldots & = 5/9 \\ \hline
+& ?
+\end{array}
+\end{math}
+\end{center}
+
+To add these numbers together we must start at the most significant bit of the input (there is no least significant bit). So we want to find the first digit of the output. 
+
+Looking at the first digit of the inputs (0 for both inputs) we can tell that the sum will start with either a 0 or 1, but we cannot decide which. So we need to look at the second digit of the input (a 4 and a 5), but we still cannot decide the first digit of the result. The next digits of input will always be a 4 and a 5, so no matter how many digits we look at the first digit of the output will not be decidable. 
+
+We can say that addition using infinite streams of decimals is not of finite character. Where finite character is defined as --- A finite number of output digits depends only on a finite number of input digits. In this case to decide one digit of output we may have to look at an infinite number of input digits.
+
+Other approaches to exact computation which are of finite character are as follows:
+\begin{itemize}
+\item Signed Digits \& Variations.
+\item Limits of Effective Cauchy Sequence.
+\item B-approximable.
+\item Dedekind Cuts.
+\item Continued Fractions.
+\item Mobius Transformations.
+\end{itemize}
+It is useful to know that all these representations are ??equivelant??. Meaning that if we are in one representation we can write an algorithm that will convert to another representation, and this algorithm will be of finite character.
+
+Golden Ratio Notation is also equivalent to the above approaches.
+
+{\bf Golden Ratio} \\
+In this project I will be writing and implementing algorithms using the Golden Ratio as the base. The Golden Ratio $\phi$ is defined s.t. $\phi^{2}=\phi+1$. \\
+Note: [[x]] means evaluate the stream x in decimal.
+
+In decimal
+\[ [[ d ]] = \sum_{i=0}^{\infty} d_{i}.10^{-i} = d_{0}.10^{0} + d_{1}.10^{-1} + \ldots \] \\
+where \(d=d_{0}\/\cdot\/ d_{1} d_{2} d_{3} \ldots\) and \(d_{i} \in \{0, \ldots,9\}.\)
+
+Similarly in Golden Ratio Notation
+\[ [[ a ]] =\sum_{i=0}^{\infty} a_{i}.\phi^{-i} = a_{0}.\phi^{0} + a_{1}.\phi^{-1} + \ldots \] \\
+ where \(a=a_{0}\/\cdot\/a_{1} a_{2} a_{3} \ldots\) and \(a_{i} \in \{0, 1\}.\)
+
+Using the definition of $\phi$ and how to convert to decimal we can find that \([[ 100 ]] = [[ 011 ]]\). This will be an important part of algorithms in Golden Ratio Notation.
+
+{\bf Aims} \\
+The project should provide a number of useful operations for example:
+\begin{itemize}
+\item Basic arithmetic functions e.g.  addition, subtraction, multiplication and division.
+\item Elementary functions e.g.  trigonometric and logarithmic functions.
+\item Basic operations on functions e.g.  definite integration, global maxima and roots.
+\item Conversion functions for inputting and outputting in decimal.
+\end{itemize}
+      
+\end{document}

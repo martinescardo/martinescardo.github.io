@@ -1,0 +1,399 @@
+\documentclass{csslides}\raggedright
+
+\usepackage{amsmath,amscd,amssymb,stmaryrd,amsfonts}
+
+\newcommand{\Cases}{\operatorname{cases}}
+\newcommand{\sscript}[1]{_{\empty_{#1}}}
+\newcommand{\id}{\operatorname{id}}
+\newcommand{\True}{\operatorname{true}}
+\newcommand{\False}{\operatorname{false}}
+\newcommand{\parrow}{\rightharpoonup}
+\newcommand{\Meaning}[1]{\llbracket #1 \rrbracket}
+\newcommand{\norm}{\operatorname{norm}}
+\newcommand{\three}{\mathbf{3}}
+\newcommand{\thomega}{{\three}^{\omega}}
+\newcommand{\twomega}{\{0,1\}^{\omega}}
+\newcommand{\myemph}[1]{{\it #1}\/}
+\begin{document}
+
+\title{Exact Arithmetic \\~ Using the Golden Ratio \\ [5ex]}
+\author{David McGaw}
+\date[CS]{}
+\maketitle
+
+\begin{slide}{}
+  \vfill
+  {\bf Aims} \\
+  Produce an exact arithmetic calculator using Golden Ratio notation,
+  with the following operations:
+\begin{itemize}
+\item Conversion functions for input and output in decimal.
+\item Basic arithmetic functions e.g.  addition, subtraction, multiplication and division.
+\item Elementary functions e.g.  trigonometric and logarithmic functions.
+\item Basic operations on functions e.g.  definite integration, global maxima and roots.
+\end{itemize}
+\vfill
+\end{slide}
+
+\begin{slide}{}
+{\bf Problems with floating-point}
+
+\vfill
+
+{\bf Solving}
+
+\begin{center}
+\begin{math}
+\begin{array}{ccccc}
+-1.41x_{1} & 2x_{2} & & = & 1 \\
+x_{1} & -1.41x_{2} & x_{3} & = & 1 \\
+ & 2x_{2} & -1.41x_{3}  & = & 1
+\end{array}
+\end{math}
+\end{center}
+
+\vfill
+
+Rounding to 3 significant figures (without using row operations) gives:
+\[ x_{1}=0.709, x_{2}=1, x_{3}=0.7.\]
+
+The exact answer (to 3 significant figures) is: 
+\[ x_{1}=x_{2}=x_{3}=1.69. \]
+
+\vfill
+\end{slide}
+
+\begin{slide}{}
+{\bf A Solution} \\
+Represent numbers as infinite streams of digits.
+
+\vfill
+
+Problem with infinite streams in {\bf decimal}
+
+\begin{center}
+\begin{math}
+\begin{array}{rl}
+& 3  \\
+\times & 0.333\ldots \\ \hline
+& ?
+\end{array}
+\end{math}
+\end{center}
+
+\vfill
+
+
+{\bf Definition}
+Finite Character --- A finite number of output digits depends only on
+a finite number of input digits.  
+
+In Particular to produce one digit of output we only need to consider
+a finite number of input digits.
+
+\vfill
+\end{slide}
+
+\begin{slide}{}
+{\bf Why?} \\
+\begin{picture}(400,200)
+\put(125,80){\oval(150,90)[t]}
+\put(275,80){\oval(150,90)[t]}
+\put(200,100){\oval(60,18)[b]}
+\put(200,100){\oval(20,10)[b]}
+\put(50,50){\makebox[0in]{\(0=.00\ldots\)}}
+\put(200,50){\makebox[0in]{\(0.99\ldots=1\)}}
+\put(350,50){\makebox[0in]{\(1.99\ldots=2\)}}
+\put(275,140){\(1\)}
+\put(125,140){\(0\)}
+\put(45,100){\vector(1,0){315}}
+\end{picture}
+\begin{center}
+\begin{math}
+\begin{array}{rll}
+& 3 \\
+\times & 0.3 \\ \hline
+& ? & \in [0.9,1.2] \\
+& 3 \\
+\times & 0.33 \\ \hline
+& ? & \in [0.99,1.02]
+\end{array}
+\end{math}
+\end{center}
+{\bf We Want} \\
+\begin{picture}(400,200)
+\put(145,100){\oval(190,70)[t]}
+\put(255,100){\oval(190,70)[b]}
+\put(45,100){\vector(1,0){315}}
+\end{picture}
+\end{slide}
+
+\begin{slide}{}
+{\bf Golden Ratio} \\
+The Golden Ratio $\phi$ is defined s.t. $\phi^{2}=\phi+1$
+
+In Golden Ratio Notation
+
+\[ \llbracket \alpha \rrbracket_s =\sum_{i=1}^{\infty} \frac{\alpha_i}{\phi^{i}} = \frac{\alpha_1}{\phi^{1}} + \frac{\alpha_2}{\phi^{2}} + \ldots + \frac{\alpha_n}{\phi^{n}} +\ldots \]
+where $ \alpha = \alpha_1 \alpha_2 \ldots \alpha_n \ldots$ and
+$ \alpha_i \in \{0, 1\}.$
+
+Gives the identity
+\[ \llbracket \alpha 100 \beta \rrbracket_s = \llbracket \alpha 011 \beta \rrbracket_s \]
+where $\alpha \in \{0,1\}^{*}$ and $\beta \in \{0,1\}^{\omega}$.
+
+Since
+\[ \begin{array}{rcl}
+\phi^2 & = & \phi + 1 \\
+1.\phi^2 + 0.\phi^1 + 0.\phi^0 & = & 0.\phi^2 + 1.\phi^1 + 1.\phi^0
+\end{array} \]
+
+\end{slide}
+
+\begin{slide}{}
+{\bf Choice of language}
+\vfill
+
+\begin{center}
+{\bf ML Vs Haskell}
+\end{center}
+
+{\bf Lazy Evaluation}
+
+Only evaluates an argument when it has to e.g.
+
+fun from n = n :: from (n+1); \\
+
+
+from 0; \\
+Haskell - [0,1,2,3,4,5, ... $<$ctrl-c$>$ \\
+ML  - nothing
+
+{\bf Advantages of Haskell}
+\begin{itemize}
+\item Can implement infinite stream as an infinite list.
+\item Can use pattern matching.
+\item Readable code.
+\end{itemize}
+
+{\bf Advantages of ML}
+\begin{itemize}
+\item Has exceptions.
+\item More efficient?
+\end{itemize}
+\end{slide}
+
+
+\begin{slide}{}
+The basic operations were designed by Pietro Di Gianantonio.
+
+
+
+{\bf I developed  and implemented.}
+\begin{itemize}
+\item Flip function on a finite list.
+\item New algorithms for addition and multiplication by 2.
+\item Division by 2.
+\item New algorithm for multiplication.
+\item Conversion between (finite) Decimal and GR notation.
+\item Conversion from GR notation to Signed Binary.
+\item Lexicographical Normalisation in Golden Ratio notation.
+\end{itemize}
+\hfill (continued \ldots)
+\end{slide}
+
+\begin{slide}{}
+\begin{itemize}
+\item Basic Operations.
+\item Cases function.
+\item Intersection of nested sequences of intervals.
+\item Functions for calculating $e^{x}, \sin(x), \cos(x), \log(x)$ and $x^{y}$
+\item Definite Integration.
+\end{itemize}
+\end{slide}
+
+\begin{slide}{}
+{\bf Division by 2}
+\vfill
+\vfill
+\vfill
+\vfill
+\vfill
+\begin{picture}(70,60)
+\unitlength = .9ex
+\put(15,56){$\alpha$}
+
+\put(16,55){\vector(-1,-1){10}} % l
+\put(4,39){\shortstack{$0\alpha_{|2}$\\=\\$0:\alpha_{|2}$}}
+
+\put(16,55){\vector(1,-1){10}} % r
+\put(25,43){$1\alpha_{|2}$}
+
+\put(27,42){\vector(-2,-1){14}} % rl
+\put(11,32){$10\alpha_{|3}$}
+
+\put(13,31){\vector(-1,-1){10}} %rll
+\put(0,15){\shortstack{$100\alpha_{|4}$\\=\\$0:11\alpha_{|4}$}}
+
+\put(13,31){\vector(0,-1){10}} %rlc
+\put(9,15){\shortstack{$101\alpha_{|4}$\\=\\$0:12\alpha_{|4}$}}
+
+\put(27,42){\vector(0,-1){10}} % rc
+\put(25,30){$11\alpha_{|3}$}
+
+\put(27,29){\vector(-2,-3){5}} % rcl
+\put(19,15){\shortstack{$110\alpha_{|4}$\\=\\$02:1\alpha_{|4}$}}
+
+\put(27,29){\vector(2,-3){5}} % rcr
+\put(29,15){\shortstack{$111\alpha_{|4}$\\=\\$200:\alpha_{|4}$}}
+
+\put(27,42){\vector(2,-1){14}} % rr
+\put(39,32){$12\alpha_{|3}$}
+
+\put(41,31){\vector(0,-1){10}} % rrc
+\put(39,18){$120\alpha_{|4}$}
+
+\put(41,31){\vector(1,-1){10}} % rrr
+\put(50,15){\shortstack{$121\alpha_{|4}$\\=\\$2:10\alpha_{|4}$}}
+
+\put(41,17){\vector(-1,-1){10}} % rrcl
+\put(29,1){\shortstack{$1200\alpha_{|5}$\\=\\$200:1\alpha_{|5}$}}
+
+\put(41,17){\vector(1,-1){10}} % rrcr
+\put(49,1){\shortstack{$1201\alpha_{|5}$\\=\\$2002:\alpha_{|5}$}}
+\end{picture}
+\vfill
+\end{slide}
+
+\begin{slide}{}
+{\bf Integration}
+
+{\bf Modulus of convergence}
+\[ \forall \epsilon > 0 \exists k \mbox{ such that} \mid f(x_{|k}) - f(x) \mid < \epsilon \]
+
+\begin{center}
+\unitlength=1.8mm
+\begin{picture}(70,75)(0,0)
+\put(0,5){\vector(1,0){70}} %Initial lines
+\put(3,15){\line(1,0){12}}
+\put(3,25){\line(1,0){22}}
+\put(3,35){\line(1,0){32}}
+\put(3,55){\line(1,0){52}}
+\put(3,65){\line(1,0){62}}
+\put(5,0){\vector(0,1){70}}
+\put(35,25){\line(0,1){10}}
+\put(65,55){\line(0,1){10}}
+\put(0,0){\line(1,1){70}}
+\thicklines
+\put(5,5){\line(1,0){10}}
+\put(15,15){\line(1,0){10}}
+\put(25,25){\line(1,0){10}}
+\put(55,55){\line(1,0){10}}
+\put(15,3){\line(0,1){12}}
+\put(25,3){\line(0,1){22}}
+\put(35,3){\line(0,1){22}}
+\put(55,3){\line(0,1){52}}
+\put(65,3){\line(0,1){52}}
+\thinlines
+\multiput(15,5)(.5,0){20}{\line(0,1){10}}
+\multiput(15,5)(0,.5){20}{\line(1,0){10}}
+\multiput(25,5)(.5,0){20}{\line(0,1){20}}
+\multiput(25,5)(0,.5){40}{\line(1,0){10}}
+\multiput(55,5)(.5,0){20}{\line(0,1){50}}
+\multiput(55,5)(0,.5){100}{\line(1,0){10}}
+
+\put(40,25){\makebox(0,0)[c]{\ldots}}
+\put(2,45){\makebox(0,0)[c]{\vdots}}
+\put(2,10){\makebox(0,0)[c]{$\epsilon$}}
+\put(2,20){\makebox(0,0)[c]{$\epsilon$}}
+\put(2,30){\makebox(0,0)[c]{$\epsilon$}}
+\put(2,60){\makebox(0,0)[c]{$\epsilon$}}
+\put(2,12){\vector(0,1){3}}
+\put(2,8){\vector(0,-1){3}}
+\put(2,22){\vector(0,1){3}}
+\put(2,18){\vector(0,-1){3}}
+\put(2,32){\vector(0,1){3}}
+\put(2,28){\vector(0,-1){3}}
+\put(2,62){\vector(0,1){3}}
+\put(2,58){\vector(0,-1){3}}
+
+\put(71,5){\makebox(0,0)[l]{$x$}}
+\put(5,73){\makebox(0,0)[c]{$f(x)$}}
+
+\end{picture}
+\end{center}
+\end{slide}
+
+\begin{slide}{}
+\vfill
+\begin{center}
+\unitlength=1.8mm
+\begin{picture}(80,70)(0,0)
+\put(0,10){\vector(1,0){70}} %Initial lines
+\put(5,40){\vector(0,1){35}}
+\put(71,10){\makebox(0,0)[l]{$x$}}
+\put(5,78){\makebox(0,0)[c]{$f(x)$}}
+\thicklines
+\put(0,40){\line(1,0){65}}
+\put(65,5){\line(0,1){35}}
+\put(5,5){\line(0,1){35}}
+\thinlines
+\put(2,57){\vector(0,1){13}}
+\put(65,40){\line(0,1){32}}
+\put(3,70){\line(1,0){62}}
+\put(0,37.5){\line(2,1){70}}
+\put(2,55){\makebox(0,0)[c]{$\epsilon$}}
+\put(2,57){\vector(0,1){13}}
+\put(2,53){\vector(0,-1){13}}
+\put(5,2){\makebox(0,0)[c]{$000000\ldots$}}
+\put(65,2){\makebox(0,0)[c]{$000011\ldots$}}
+\put(0,40){\makebox(0,0)[r]{$011$}}
+
+\multiput(6,10)(1,0){59}{\line(0,1){30}}
+\multiput(5,11)(0,1){29}{\line(1,0){60}}
+\multiput(5.5,10)(1,0){60}{\line(0,1){30}}
+\multiput(5,10.5)(0,1){30}{\line(1,0){60}}
+
+\end{picture}
+\end{center}
+\vfill
+\[\begin{array}{c||l|rl}
+  \mbox{input } (x) & 0000 \mid^{k} 00 \ldots & \mbox{but} 
+& 0000 \mid^{k} 11 \ldots \\ \hline
+  \mbox{output } f(x_{|k}) & 011 \mid_{n} & & 011 \mid_{n} 
+\end{array}\]
+\vfill
+\end{slide}
+
+\begin{slide}{}
+\vfill
+$ F_0 = 0, F_1 = 1 \mbox{ and } F_{i+2} = F_i + F_{i+1} $
+
+\[ \forall k \in \mathbb{N} \ \exists m \in \mathbb{Z} \mbox{ such that } \sum_{i=1}^{2^{k}} F_{3i} = 2^k m \]
+
+\[ \frac{1}{2^k} = \llbracket \alpha (\beta)^{\omega} \rrbracket_s \]
+where $\alpha \in \{0,1\}^{*}$ and $\beta \in \{0,1\}^{\omega}$.
+
+Or $\frac{1}{2^k}$ has a periodic representation in Golden
+Ratio notation.  
+\vfill
+\end{slide}
+
+\begin{slide}{}
+\vfill
+{\bf Summary}
+\begin{itemize}
+\item Worked out properties of the golden ratio to develop new algorithms.
+\item Proved correctness of algorithms.
+\item Implemented algorithms in ML.
+\item Comparison with previous work
+\begin{itemize}
+\item Basic operations were slower than in functions implemented in Haskell.
+\item Integration is more efficient than other implementations.
+\item New algorithms for basic operations in Golden Ratio notation.
+\end{itemize}
+\end{itemize}
+\vfill
+\end{slide}
+
+\end{document}

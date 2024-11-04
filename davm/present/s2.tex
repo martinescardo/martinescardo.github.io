@@ -1,0 +1,217 @@
+\documentclass{csslides}\raggedright
+
+\usepackage{amsmath,amscd,amssymb,stmaryrd}
+
+\newcommand{\Cases}{\operatorname{cases}}
+\newcommand{\sscript}[1]{_{\empty_{#1}}}
+\newcommand{\id}{\operatorname{id}}
+\newcommand{\True}{\operatorname{true}}
+\newcommand{\False}{\operatorname{false}}
+\newcommand{\parrow}{\rightharpoonup}
+\newcommand{\Meaning}[1]{\llbracket #1 \rrbracket}
+\newcommand{\norm}{\operatorname{norm}}
+\newcommand{\three}{\mathbf{3}}
+\newcommand{\thomega}{{\three}^{\omega}}
+\newcommand{\twomega}{\{0,1\}^{\omega}}
+\newcommand{\myemph}[1]{{\it #1}\/}
+\begin{document}
+
+\title{Exact Arithmetic \\~ Using the Golden Ratio \\ [5ex]}
+\author{David McGaw}
+\date[CS]{}
+% \maketitle
+
+
+\begin{slide}{}
+{\bf Summary of Last Talk}
+\begin{itemize}
+\item Floating Point Arithmetic can introduce uncontrollable errors into the result of a computation.
+\item Using an Infinite Stream of digits we can guarantee the answer within a given range.
+\item We cannot use infinite streams of decimals.
+\item In GR (Golden Ratio) Notation 100=011.
+\item Question: Why Golden Ratio?
+\end{itemize}
+\end{slide}
+
+
+\begin{slide}{}
+\vfill
+
+\begin{center}
+{\bf ML Vs Haskell}
+\end{center}
+
+{\bf Lazy Evaluation} \\
+Only evaluates an argument when it has to e.g.
+
+fun from n = n :: from (n+1); \\
+
+
+from 0; \\
+Haskell - [0,1,2,3,4,5, ... $<$ctrl-c$>$ \\
+ML -  nothing
+
+{\bf Advantages of Haskell}
+\begin{itemize}
+\item Can implement infinite stream as an infinite list.
+\item Can use pattern matching.
+\item Readable code.
+\end{itemize}
+
+{\bf Advantages of ML}
+\begin{itemize}
+\item Has exceptions.
+\item Slightly more efficient.
+\end{itemize}
+\end{slide}
+
+
+\begin{slide}{}
+{\bf Definition of Infinite streams in ML}
+
+datatype 'a stream =  \\
+cons of 'a * (unit -$>$ 'a stream);
+
+
+fun force s = s();
+
+
+
+Example: \\
+{\bf Infinite stream of zeros} \\
+Defined in ML as: \\
+fun all\_zero() = cons(\(0\), fn () =$>$ all\_zero()); \\
+
+Defined in Haskell as: \\
+fun all\_zero() = $0$::all\_zero();
+\end{slide}
+
+\begin{slide}{}
+{\bf Algorithms Implemented.} \\
+(designed by Pietro Di Giantonio) \\
+\begin{itemize}
+\item Addition. 
+\item Negation.
+\item Subtraction.
+\item Multiplication.
+\item Division.
+\end{itemize}
+
+
+{\bf Algorithms Developed and Implemented.}
+\begin{itemize}
+\item Lexicographical Normalisation.
+\item Flip function on a finite list.
+\item Conversion from Decimal to GR.
+\item Conversion from GR to Decimal (two versions).
+\end{itemize}
+\end{slide}
+
+\begin{slide}{}
+{\bf Lexicographical Normalisation} \\
+We would like a function to calculate if $x<y$. 
+\[ \mbox{where}\ x<y = \left\{ \begin{array}{ll}
+    \mbox{true} & \mbox{if }\ x<y \\
+    \mbox{false} & \mbox{otherwise} (x \geq y)
+\end{array}
+\right. \]
+
+However in infinite stream notation we can only check if $x <_{\perp} y$.
+\[ x<_{\perp}y = \left\{ \begin{array}{ll}
+    \mbox{true} & \mbox{if} \ x<y \\
+    \mbox{false} & \mbox{if} \ x>y \\
+    \perp & \mbox{otherwise}
+\end{array}
+\right. \]
+$\perp$ = non termination.
+
+
+In decimal notation: 
+\[ \begin{array}{l}
+  x = 0.12345\!\!\overbrace{99999}^{\mbox{Ignored}} \\
+  y = 0.1234600000
+\end{array}\]
+
+In GR Notation:
+\[ \begin{array}{l}
+  x = 0.1000000000 \ldots, \llbracket x \rrbracket_{s}=1 / \phi    \\
+  y = 0.0111111111 \ldots, \llbracket y \rrbracket_{s}=1 \\
+\end{array}\]
+\end{slide}
+
+
+\begin{slide}{}
+{\bf Flip Function on a Finite List} \\
+We can rewrite a list of the form $ [ 0,\alpha,0,0] $ \\
+Where $\alpha = \{ 0,1 \}^{*}$. \\
+s.t. a given digit is set to $0$.
+
+Example: \\
+$ [0,1,0,1,0,1,0,0] = [0,0,1,1,1,1,1,1] $ \\
+\setlength{\unitlength}{1ex}
+\begin{picture}(20,4)
+\thicklines
+\put(3.3,1){\vector(0,1){3}}
+\end{picture} \\
+
+
+{\bf A Use} \\
+In GR Notation
+\[ \begin{array}{ll}
+  & 0 \cdot \alpha_{1} \alpha_{2} \alpha_{3} \ldots \alpha_{n} 0 0 \\
+  & \alpha_{0}' \cdot 0 \alpha_{2}' \alpha_{3}' \ldots \alpha_{n}' \alpha_{n+1}' \alpha_{n+2}'\\
+\mbox{worst case} & \alpha_{0}' \cdot 0\!\overbrace{11 \ldots 111}^{< 1}
+\end{array} \]
+
+We can use this to determine if a finite stream is greater than or equal to 1.
+\end{slide}
+
+
+\begin{slide}{}
+
+{\bf Conversion from Decimal to GR} \\
+In decimal 
+\[ d = 0 \cdot d_{1} d_{2} d_{3} \ldots d_{n}= d_{1}.10^{-1} + d_{2}.10^{-2} + 
+\ldots + d_{n}.10^{-n} \]\\
+For $d_{i} \in \{0, \ldots, 9\}$
+
+if $ \llbracket z_{d_{i}}:\alpha_{d_{i}} \rrbracket_{f} = d_{i} $ then 
+$\llbracket \mbox{Base} \rrbracket_{f} = 10$ in this case
+\[ \begin{array}{lc}
+d = & \llbracket z_{d_{1}}:\alpha_{d_{1}} \rrbracket_{f} * (\llbracket \mbox{Base} \rrbracket_{f})^{-1} \\
+& + \llbracket z_{d_{2}}:\alpha_{d_{2}} \rrbracket_{f} * (\llbracket \mbox{Base} \rrbracket_{f})^{-2} + \\ 
+ &  \ldots + \llbracket z_{d_{n}}:\alpha_{d_{n}} \rrbracket_{f} * (\llbracket \mbox{Base} \rrbracket_{f})^{-n} 
+\end{array}\]
+
+
+{\bf Conversion from GR to Decimal} \\
+Converting from decimal to decimal:
+
+\[ \begin{array}{rll}
+d = & 0 \cdot d_{1} d_{2} d_{3} \ldots d_{n} & \\
+10*d = & d_{1} \cdot d_{2} d_{3} \ldots d_{n} & \mbox{digit}=d_{1} \\
+(10*d)-d_{1} = & 0 \cdot d_{2} d_{3} \ldots d_{n} & \\
+10*((10*d)-d_{1}) = & d_{2} \cdot d_{3} \ldots d_{n} & \mbox{digit}=d_{2} \\
+\vdots & \vdots & \\
+\end{array}\]
+Similar idea for GR Notation.
+\end{slide}
+
+\begin{slide}{}
+{\bf Algorithm to Redesign and Implement}\\
+\begin{itemize}
+\item Definite Integration.
+\end{itemize}
+{\bf Algorithms Still to Design and Implement}
+\begin{itemize}
+\item Conversion from GR Notation to Signed Binary.
+\item Trigonometric and Logarithmic functions.
+\end{itemize}
+{\bf Revised Timetable}
+\begin{itemize}
+\item Now until March - Implementing the above algorithms.
+\item March until June - Write up.
+\end{itemize}
+\end{slide}
+
+\end{document}

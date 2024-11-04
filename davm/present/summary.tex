@@ -1,0 +1,342 @@
+\documentclass[12pt]{article}
+
+\usepackage{a4,stmaryrd,amsfonts}
+
+
+\title{Exact Arithmetic \\~ Using the Golden Ratio}
+
+\author{David McGaw  \\  
+        University of Edinburgh}
+
+\date{June 1999} 
+
+
+\begin{document}
+
+\maketitle
+
+\section{Introduction} \label{ch:I}
+
+The usual approach to real arithmetic on computers consists of using
+floating point approximations. Unfortunately, floating point
+arithmetic can sometimes produce wildly erroneous results. One
+alternative approach is to use exact real arithmetic. Exact real
+arithmetic allows exact real number computation to be performed
+without the roundoff errors characteristic of other methods.
+Conventional representations such as decimal and binary notation are
+inadequate for this purpose. 
+
+In this project we have considered an alternative representation
+of real numbers, using the golden ratio. Firstly we have looked at the golden
+ratio and its relation to the Fibonacci series, finding some
+interesting and useful identities. We have then implemented algorithms for
+basic arithmetic operations, trigonometric and logarithmic functions,
+conversion and integration. 
+
+We begin this summary by motivating the use of exact arithmetic and,
+in particular, golden ratio notation. We then discuss the work
+performed during the project.
+
+\section{Problems with Floating-Point Representation}
+
+In floating point representation, finitely many digits are kept.  This
+introduces rounding errors, which when combined with other values can
+make the error of the answer grow.  In some cases the rounding errors
+in a calculation can be so large that the result is meaningless.
+
+For example take the following system of equations~\cite{kn:Hall}:
+\begin{center}
+\[
+\begin{array}{ccccc}
+-1 \cdot 41x_{1} & 2x_{2} & & = & 1, \\
+x_{1} & -1 \cdot 41x_{2} & x_{3} & = & 1, \\
+ & 2x_{2} & -1 \cdot 41x_{3} & = & 1.
+\end{array}
+\]
+\end{center}
+Solving using Gaussian elimination (without row operations) and
+rounding at each stage to 3 significant figures gives: \( x_{1}=0 \cdot 709,
+x_{2}=1, x_{3}=0 \cdot 7.\) But the correct answer (to 3 significant
+figures) is: \( x_{1}=x_{2}=x_{3}=1 \cdot 69. \) We can see that these
+rounding errors have resulted in the answer that we get is completely
+meaningless.
+
+Increasing the number of digits of accuracy will not solve this
+problem, it will only delay it, because by doing more operations we
+could get the same magnitude of error.  Similarly allowing row
+operations (swapping rows to make coefficients as large as possible)
+would be useful but would not remove errors, since doing any
+operations on a number containing an error can make the error grow
+uncontrollably.
+
+\section{Exact real number computation} \label{sec:stra}
+
+We can argue that if errors are introduced because we truncate the
+remaining digits of a number, we could get rid of this error by not
+truncating the number, representing it as an infinite stream of
+digits. Computation with infinite streams is supported by functional
+programming languages such as Haskell and ML. We have chosen to
+implement the algorithms developed in this project in ML.
+
+We would ideally like to represent a number as an infinite stream of
+decimal digits, but, perhaps surprisingly, this representation is not
+suitable for exact computation. This fact, attributed to
+Brouwer~\cite{kn:Brouwer}, is often discussed in the literature.  We
+illustrate the algorithmic problem of infinite decimal expansions by
+considering a hypothetical algorithm that performs multiplication
+by~3. The key point is that the first digit of output has to be
+produced in finite time and hence cannot depend on infinitely many
+input digits.  More generally, any algorithmic function of streams of
+digits has to have the property that finitely many output digits
+depend only on finitely many input digits.
+
+Suppose that, at some stage, our hypothetical algorithm for
+multiplication by 3 has read ``$0 \cdot 3$'' from the input. If all remaining
+digits are 3, then the input represents the number $\frac{1}{3}$. In
+this case the result of this multiplication has to be 1, which can be
+written as $1 \cdot 000\cdots$ or $0 \cdot 999\cdots$.  On the other hand, if we
+eventually read a digit smaller than 3, then the input represents a
+number smaller than $\frac{1}{3}$, and hence the output has to be
+smaller than 1 and has to start with ``$0 \cdot$''. Similarly, if we
+eventually read a digit greater than 3, then the output has to start
+with ``$1 \cdot$''. Thus, while the next scanned digit is~3 we cannot decide
+the first digit of output, because it is still possible that we will
+eventually read a digit smaller or greater than~3. Hence, if the input
+happens to be ``$0 \cdot 333\cdots$'' then we will not be able to decide the
+first output digit in finite time. Therefore such an algorithm cannot
+exist.
+
+A graphical representation of this is in Figure \ref{fig:dec}.
+\begin{figure}
+\unitlength=.2mm
+\begin{center}
+\begin{picture}(400,100)
+\put(95,30){\oval(150,90)[t]}
+\put(245,30){\oval(150,90)[t]}
+\put(170,50){\oval(60,18)[b]}
+\put(170,50){\oval(20,10)[b]}
+\put(20,0){\makebox[0in]{\(0=.00\cdots\)}}
+\put(170,0){\makebox[0in]{\(0 \cdot 99\cdots=1\)}}
+\put(320,0){\makebox[0in]{\(1 \cdot 99\cdots=2\)}}
+\put(245,90){\(1 \cdot \)}
+\put(95,90){\(0 \cdot \)}
+\put(15,50){\vector(1,0){315}}
+\end{picture}
+\end{center}
+\caption{Ranges in decimal notation} \label{fig:dec}
+\end{figure}
+The two large arcs represent the range of the possible values of
+numbers beginning with the digit 0 and 1. We can see from the diagram
+that the ranges of the two arcs intersect at one point $0 \cdot 99
+\cdots = 1 \cdot 00 \cdots$. The small arcs represent the ranges of possible
+values of the multiplication by 3 algorithm after we have looked at
+each successive digit~3. We can see the range of the answer is getting
+much smaller after looking at each successive digit. But no matter how
+many digits we look at, in this case the value of the result will
+always in both the interval beginning with ``$0 \cdot$'' and ``$1 \cdot$''.  Therefore we will never be able to determine the first digit of
+the output by looking at a finite number of digits of the input.
+
+
+There are many solutions to this problem, a number of which are
+surveyed by Plume~\cite{kn:Plume}. Perhaps the simplest is to allow
+negative digits.  The idea is that one can guess an output digit and
+then, at a later stage, use a negative digit to adjust the answer if
+necessary. In this project we have considered a solution proposed by
+Di~Gianantonio~\cite{kn:DiGianantonio}, based on the golden ratio.
+
+\section{The Golden Ratio Notation}
+
+The golden ratio $\phi$ is the limit of the quotients of successive
+terms of the Fibonacci series. This is approximately $1 \cdot 618$,
+but we seldom use this fact. What is important for the purposes of
+this work is that $\phi$ is the positive solution of the equation
+$\phi^{2}=\phi+1$.  
+
+Golden ratio notation is the same as decimal
+notation, where $\phi$ replaces the base~$10$ and the binary digits
+$0$ and $1$ replace the decimal digits $0,\dots, 9$.  Thus, a stream
+\[
+0 \cdot \alpha_1 \alpha_2 \cdots \alpha_n \cdots
+\]
+of binary digits $0$ and $1$ denotes the number
+\[ \sum_{i=1}^{\infty} \alpha_{i}  \phi^{-i} = \alpha_{1}  \phi^{-1} + \alpha_{2} \phi^{-2} + \cdots + \alpha_{n} \phi^{-n} + \cdots. \] 
+A graphical representation of golden ratio notation is in Figure
+\ref{fig:rangegrn}.
+\begin{figure} 
+\begin{center}\unitlength=.2mm
+\begin{picture}(400,100) 
+\put(145,50){\oval(190,70)[t]}
+\put(255,50){\oval(190,70)[b]}
+\put(50,50){\line(1,0){300}}
+\put(145,89){\makebox[0mm]{$0 \cdot$}}
+\put(255,-2){\makebox[0mm]{$1 \cdot$}}
+\put(40,47){\makebox[0mm]{0}}
+\put(160,60){\makebox[0mm]{$\frac{1}{\phi}$}}
+\put(240,30){\makebox[0mm]{1}}
+\put(360,47){\makebox[0mm]{$\phi$}}
+\end{picture}
+\end{center}
+\caption{Ranges in golden ratio notation} \label{fig:rangegrn}
+\end{figure}
+In golden ratio notation, the sequence of digits $011$ is equivalent
+to the sequence $100$. This follows from the equation $\phi^2=\phi+1$.
+All algorithms developed in this work are based on suitably rewriting
+streams using this fundamental identity.
+
+
+\section{Algorithms for Golden Ratio Notation}
+
+This project can be split into two parts, one on the theory behind the
+golden ratio notation and why we use it, and the other on algorithms
+that we use to construct the exact calculator implemented in this
+project. These can be further subdivided into 4 sections: manipulation
+of streams, conversion between representations, limits of sequences,
+and definite integration, as discussed below.
+
+Manipulation of streams covers both algorithms that rewrite a stream
+in a different, but equivalent, form and algorithms that compare two
+streams. For decimal numerals, we can read off the numerical order
+from the lexicographical order. This is not so for golden ratio
+numerals, as it can be seen from Figure~\ref{fig:rangegrn}. However,
+we have developed an algorithm that rewrites a pair of numerals, by
+applying the identities discussed above, so that the numerical and
+lexicographical orders do coincide.
+
+For input and output purposes, we have developed algorithms to
+convert between \emph{finite} decimal and golden ratio numerals. We
+have also developed algorithms for conversion between \emph{infinite}
+golden ratio and signed-digit binary streams, so that the algorithms
+implemented in our calculator can be used by Plume's
+calculator~\cite{kn:Plume}, and vice-versa.
+
+Limits of sequences are applied to compute functions given by Taylor
+series expansions. In particular, we compute the values of $e^{x},
+\sin(x), \cos(x), \ln(x)$ and~$x^{y}$.
+
+In order to deal with definite integration, we have modified an
+algorithm originally developed by John Longley for signed-digit binary
+notation~\cite{kn:Longley}. The modification is based on the basic
+identities for golden ratio notation discussed above.  The algorithm
+makes crucial use of side effects in combination with functional
+programming. We have therefore decided to implement our algorithms in
+the programming language ML. This integration algorithm is
+considerably more efficient than the algorithm developed by
+Simpson~\cite{kn:Simpson} and implemented by Plume~\cite{kn:Plume}.
+This is confirmed by tests performed with our calculator.  Notice
+that, although Longley has implemented the algorithm, he could only
+test it on constant and identity functions, as he didn't have an
+implementation of an exact calculator available in ML.
+
+Other algorithms developed in this project include multiplication by
+2, division by 2, addition, multiplication and a certain ``flip''
+function. Based on the identities discussed above, the flip function
+rewrites a given finite stream, without changing its numerical value,
+so that a specified digit is set to $0$. This function is used in the
+conversion and integration algorithms.
+
+Finally, in the course of developing our algorithms, we have found a number
+of technical results that are interesting in their own right. One of
+them concerns the Fibonacci series defined by $F_0=0$, $F_1=1$ and
+$F_{i+2}=F_{i}+F_{i+1}$. We have found that for all $j$ and $k$ there
+is an~$m$ with
+\[ \sum_{i=1}^{2^{k}} \mbox{F}_{3i+j} = 2^{k}m. \]
+We have also shown that every number of the form $\frac{1}{2^{k}}$ has
+a periodic representation in golden ratio notation. This is surprising because
+$\phi$ is an irrational number.
+
+%\begin{small}
+\begin{thebibliography}{20}
+  
+\bibitem{kn:Beeler} M.  Beeler, R.  Gosper, R. Schroppel. {\em
+    Hakmem.} Massachusetts Institute of Technology AI Laboratory. MIT
+  AI memo 239 (HAKMEM).  Item 101, p.  39-44. 1972.
+  
+\bibitem{kn:Boehm et al} H. Boehm. R. Cartwright.  {\em Exact Real
+    Arithmetic, Formulating Real Numbers as Functions.} In Turner. D.,
+  editor, Research Topics in Functional Programming, pages 43-64.
+  Addison-Wesley, 1990.
+  
+\bibitem{kn:Boehm} H. Boehm.  {\em Constructive Real Interpretation of
+    Numerical Programs.} SIGPLAN Notices, 22(7):214-221, 1987.
+
+\bibitem{kn:Brouwer} L.E.J. Brouwer
+  {\em Besitzt jede reelle {Z}ahl eine {D}ezimalbruchentwicklung?}
+  Math Ann, 83:201--210, 1920.
+  
+\bibitem{kn:Edalat} A.  Edalat, P.J. Potts. {\em A New Representation
+    for Exact Real Numbers.} Electronic Notes in Theoretical Computer
+  Science, volume 6.
+  http://www.elsevier.nl/locate/entcs/volume6.html. 1997.
+  
+\bibitem{kn:Escardo} Mart\' \i n Escard\'o. {\em Effective and
+    sequential definition by cases on the reals via infinite
+    signed-digit numerals.} In Electronic Notes in Theoretical
+  Computer Science, volume 13.  Available from
+  http://www.elsevier.nl/locate/entcs/volume13.html.  1998.
+  
+\bibitem{kn:DiGianantonio} Pietro Di Gianantonio. {\em A Golden Ratio
+    Notation for the Real Numbers.} CWI Technical Report.  Available
+  from http://www.dimi.uniud.it/$\sim$pietro/Papers/paper\_arg.html.
+  
+\bibitem{kn:DiGianantonio2} Pietro Di Gianantonio. {\em A Functional
+    Approach to Computability on Real Numbers.} Ph.D. Thesis:
+  Universita di Pisa-Genova-Udine. Available from
+  http://www.dimi.uniud.it/$\sim$pietro/Papers/paper\_arg.html.
+  
+\bibitem{kn:Graham} Graham, Knuth, Patashnik. {\em Concrete
+    Mathematics: A foundation for Computer Science.} Addison Wesley.
+  ISBN 0-201-14236-8.
+  
+\bibitem{kn:Hall} J. Hall. {\em Numerical Analysis and Optimisation.}
+  Course Notes. Department of Mathematics, Edinburgh University.
+  1998.
+  
+\bibitem{kn:Longley} J.R. Longley. {\em When is a functional program
+    not a functional program?: a walk through introduction to the
+    sequentially realizable functions.} Standard ML source file,
+  available from http://www.dcs.ed.ac.uk/home/jrl/, 1998.
+  
+\bibitem{kn:Longley2} J.R.  Longley. {\em When is a functional program
+    not a functional program?}  Paper available from
+  http://www.dcs.ed.ac.uk/home/jrl/, March 1999.
+  
+\bibitem{kn:Menissier-Morian} Val\'erie M\'enissier-Morian. {\em
+    Arbitrary precision real arithmetic: design and algorithms.} J.
+  Symbolic Computation, 11, 1-000. 1996.
+  
+\bibitem{kn:Nielsen} A. Nielsen, P.  Kornerup.  {\em MSB-First Digit
+    Serial Arithmetic.} Journal of Universal Computer Science, Vol 1,
+  no 7, 527-547. 1995.
+  
+\bibitem{kn:Plume} David Plume. {\em A Calculator for Exact Real
+    Number Computation.} BSc Project, School of Computer Science.
+  Edinburgh University. Available from
+  http://www.dcs.ed.ac.uk/$\sim$dbp/. 1998.
+  
+\bibitem{kn:Potts} P.J. Potts. {\em Computable Real Arithmetic Using
+    Linear Fractional Transformations.}  Electronic Notes in
+  Theoretical Computer Science 6, 1997.  Available from
+  http://theory.doc.ic.ac.uk/$\sim$pjp/.
+  
+\bibitem{kn:Potts2} P.J. Potts, A. Edalat. {\em Exact Real Computer
+    Arithmetic.} Department of Computing Technical Report DOC 97/9,
+  Imperial College, 1997. Available from
+  http://theory.doc.ic.ac.uk/$\sim$pjp/.
+  
+\bibitem{kn:Simpson} A. Simpson. {\em Lazy Functional Algorithms for
+    Exact Real Functionals.} Mathematical Foundations of Computer
+  Science 1998, Springer LNCS 1450, pp.  456-464, 1998.
+  
+\bibitem{kn:Sunderhauf} P. S\"{u}nderhauf. {\em Incremental Addition
+    in Exact Real Arithmetic.} In R. Harmer et al., editors, Advances
+  in Theory and Formal Methods of Computing: Proceedings of the fourth
+  Imperial College Workshop, IC Press. Available from
+  http://theory.doc.ic.ac.uk/$\sim$ps15/abstracts/incr.html.  December
+  1997.
+  
+\bibitem{kn:Wiedmer} E. Wiedmer.  {\em Computing with Infinite
+    Objects.} Theoretical Computer Science 10:133-155.  1980.
+  
+\end{thebibliography}
+%\end{small}                   
+\end{document}

@@ -1,0 +1,190 @@
+\nonstopmode
+\documentclass{csslides}\raggedright
+
+\usepackage{amsmath,amscd,amssymb,stmaryrd}
+
+\newcommand{\Cases}{\operatorname{cases}}
+\newcommand{\sscript}[1]{_{\empty_{#1}}}
+\newcommand{\id}{\operatorname{id}}
+\newcommand{\True}{\operatorname{true}}
+\newcommand{\False}{\operatorname{false}}
+\newcommand{\parrow}{\rightharpoonup}
+\newcommand{\Meaning}[1]{\llbracket #1 \rrbracket}
+\newcommand{\norm}{\operatorname{norm}}
+\newcommand{\three}{\mathbf{3}}
+\newcommand{\thomega}{{\three}^{\omega}}
+\newcommand{\twomega}{\{0,1\}^{\omega}}
+\newcommand{\myemph}[1]{{\it #1}\/}
+\begin{document}
+
+\title{Exact Arithmetic \\~ Using the Golden Ratio \\ [5ex]}
+\author{David McGaw}
+\date[CS]{}
+% \maketitle
+
+\begin{slide}{}
+\vfill
+{\bf Algorithms developed and implemented}
+\begin{itemize}
+\item Second implementation of Addition.
+\item Conversion from Golden Ratio to Signed Binary Notation.
+\item Intersection of intervals.
+\item Definite Integration.
+\end{itemize}
+\vfill
+\end{slide}
+
+\begin{slide}{}
+{\bf Intervals} \\
+
+$\mbox{Find } \bigcap_{i=1}^{\infty} \mbox{, where } x_{j} \leq x_{j+1}, y_{j} \geq y_{j+1}, 
+x_{j} \leq y_{j} \forall j \geq 0 $
+\[ \forall \epsilon > 0 \exists i \mbox{ such that} \mid x_{i} - y_{i} \mid < \epsilon \]
+
+\begin{center}
+\unitlength=1.8mm
+\begin{picture}(70,30)(0,0)
+\put(0,15){\line(1,0){70}}
+\put(5,5){\line(0,1){20}} \put(5,25){\line(1,0){3}} \put(5,5){\line(1,0){3}} \put(7,3){\makebox(0,0)[c]{$x_1$}}
+\put(10,6){\line(0,1){18}} \put(10,24){\line(1,0){3}} \put(10,6){\line(1,0){3}} \put(12,3){\makebox(0,0)[c]{$x_2$}}
+\put(15,7){\line(0,1){16}} \put(15,23){\line(1,0){3}} \put(15,7){\line(1,0){3}} \put(17,3){\makebox(0,0)[c]{$x_3$}}
+\put(20,8){\line(0,1){14}} \put(20,22){\line(1,0){3}} \put(20,8){\line(1,0){3}} \put(22,3){\makebox(0,0)[c]{$x_4$}}
+\put(22,14){\makebox(0,0)[c]{\ldots}}
+\put(30,10){\line(0,1){10}} \put(30,20){\line(1,0){3}} \put(30,10){\line(1,0){3}} \put(32,3){\makebox(0,0)[c]{$x_{i}$}}
+\put(35,15){\circle*{1}} \put(34,14){\makebox(0,0)[r]{\ldots}} \put(29,14){\makebox(0,0)[l]{\ldots}}
+\put(40,10){\line(0,1){10}} \put(40,20){\line(-1,0){3}} \put(40,10){\line(-1,0){3}} \put(38,3){\makebox(0,0)[c]{$y_{i}$}}
+\put(40,14){\makebox(0,0)[c]{\ldots}}
+\put(50,8){\line(0,1){14}} \put(50,22){\line(-1,0){3}} \put(50,8){\line(-1,0){3}} \put(48,3){\makebox(0,0)[c]{$y_4$}}
+\put(55,7){\line(0,1){16}} \put(55,23){\line(-1,0){3}} \put(55,7){\line(-1,0){3}} \put(53,3){\makebox(0,0)[c]{$y_3$}}
+\put(60,6){\line(0,1){18}} \put(60,24){\line(-1,0){3}} \put(60,6){\line(-1,0){3}}  \put(58,3){\makebox(0,0)[c]{$y_2$}}
+\put(65,5){\line(0,1){20}} \put(65,25){\line(-1,0){3}} \put(65,5){\line(-1,0){3}} \put(63,3){\makebox(0,0)[c]{$y_1$}}
+\put(35,22){\makebox(0,0)[c]{$\epsilon$}} \put(37,22){\vector(1,0){3}} \put(33,22){\vector(-1,0){3}}
+\end{picture}
+\end{center}
+
+{\bf Lexicographical Normalisation} \\
+Rewrites $x$ and $y$ so that $x = y \iff \llbracket x \rrbracket = \llbracket y \rrbracket$.
+
+\[ \begin{array}{r|l}
+  x = 01110 & 0001 \ldots \\
+  y = 01110 & 1110 \ldots
+\end{array}\]
+Then $\bigcap_{i=1}^{\infty}$ begins with $01110$.
+
+Used to find limit of a converging series, for example the Taylor series expansion of $e^{x}, \sin(x)$ and $\cos(x).$
+\end{slide}
+
+\begin{slide}{}
+{\bf Definite Integration} \\
+
+{\bf Finite Character}
+A finite number of output digits depends only on a finite number of input digits.
+
+{\bf Modulus of convergence}
+\[ \forall \epsilon > 0 \exists k \mbox{ such that} \mid f(x_{|k}) - f(x) \mid < \epsilon \]
+
+\begin{center}
+\unitlength=1.8mm
+\begin{picture}(70,75)(0,0)
+\put(0,5){\vector(1,0){70}} %Initial lines
+\put(3,15){\line(1,0){12}}
+\put(3,25){\line(1,0){22}}
+\put(3,35){\line(1,0){32}}
+\put(3,55){\line(1,0){52}}
+\put(3,65){\line(1,0){62}}
+\put(5,0){\vector(0,1){70}}
+\put(35,25){\line(0,1){10}}
+\put(65,55){\line(0,1){10}}
+\put(0,0){\line(1,1){70}}
+\thicklines
+\put(5,5){\line(1,0){10}}
+\put(15,15){\line(1,0){10}}
+\put(25,25){\line(1,0){10}}
+\put(55,55){\line(1,0){10}}
+\put(15,3){\line(0,1){12}}
+\put(25,3){\line(0,1){22}}
+\put(35,3){\line(0,1){22}}
+\put(55,3){\line(0,1){52}}
+\put(65,3){\line(0,1){52}}
+\thinlines
+\multiput(15,5)(.5,0){20}{\line(0,1){10}}
+\multiput(15,5)(0,.5){20}{\line(1,0){10}}
+\multiput(25,5)(.5,0){20}{\line(0,1){20}}
+\multiput(25,5)(0,.5){40}{\line(1,0){10}}
+\multiput(55,5)(.5,0){20}{\line(0,1){50}}
+\multiput(55,5)(0,.5){100}{\line(1,0){10}}
+
+\put(40,25){\makebox(0,0)[c]{\ldots}}
+\put(2,45){\makebox(0,0)[c]{\vdots}}
+\put(2,10){\makebox(0,0)[c]{$\epsilon$}}
+\put(2,20){\makebox(0,0)[c]{$\epsilon$}}
+\put(2,30){\makebox(0,0)[c]{$\epsilon$}}
+\put(2,60){\makebox(0,0)[c]{$\epsilon$}}
+\put(2,12){\vector(0,1){3}}
+\put(2,8){\vector(0,-1){3}}
+\put(2,22){\vector(0,1){3}}
+\put(2,18){\vector(0,-1){3}}
+\put(2,32){\vector(0,1){3}}
+\put(2,28){\vector(0,-1){3}}
+\put(2,62){\vector(0,1){3}}
+\put(2,58){\vector(0,-1){3}}
+
+\put(71,5){\makebox(0,0)[l]{$x$}}
+\put(5,73){\makebox(0,0)[c]{$f(x)$}}
+
+\end{picture}
+\end{center}
+\end{slide}
+
+\begin{slide}{}
+\vfill
+\begin{center}
+\unitlength=1.8mm
+\begin{picture}(80,70)(0,0)
+\put(0,10){\vector(1,0){70}} %Initial lines
+\put(5,40){\vector(0,1){35}}
+\put(71,10){\makebox(0,0)[l]{$x$}}
+\put(5,78){\makebox(0,0)[c]{$f(x)$}}
+\thicklines
+\put(0,40){\line(1,0){65}}
+\put(65,5){\line(0,1){35}}
+\put(5,5){\line(0,1){35}}
+\thinlines
+\put(2,57){\vector(0,1){13}}
+\put(65,40){\line(0,1){32}}
+\put(3,70){\line(1,0){62}}
+\put(0,37.5){\line(2,1){70}}
+\put(2,55){\makebox(0,0)[c]{$\epsilon$}}
+\put(2,57){\vector(0,1){13}}
+\put(2,53){\vector(0,-1){13}}
+\put(5,2){\makebox(0,0)[c]{$000000\ldots$}}
+\put(65,2){\makebox(0,0)[c]{$000011\ldots$}}
+\put(0,40){\makebox(0,0)[r]{$011$}}
+
+\multiput(6,10)(1,0){59}{\line(0,1){30}}
+\multiput(5,11)(0,1){29}{\line(1,0){60}}
+\multiput(5.5,10)(1,0){60}{\line(0,1){30}}
+\multiput(5,10.5)(0,1){30}{\line(1,0){60}}
+
+\end{picture}
+\end{center}
+\vfill
+\[\begin{array}{c||l|rl}
+  \mbox{input } (x) & 0000 \mid^{k} 00 \ldots & \mbox{but} 
+& 0000 \mid^{k} 11 \ldots \\ \hline
+  \mbox{output } f(x_{|k}) & 011 \mid_{n} & & 011 \mid_{n} 
+\end{array}\]
+\vfill
+\end{slide}
+
+
+\begin{slide}{}
+\vfill
+{\bf Revised Timetable}
+\begin{itemize}
+\item Now until March - Use intersection of intervals to calculate $x^{y}$ and $\ln(x)$.
+\item March until June - Write up.
+\end{itemize}
+\vfill
+\end{slide}
+\end{document}
