@@ -1,0 +1,426 @@
+\documentclass[aspectratio=169]{beamer}
+
+\expandafter\def\expandafter\insertshorttitle\expandafter{%
+  \insertshorttitle\hfill%
+  \insertframenumber\,/\,\inserttotalframenumber}
+
+\newcommand{\Pause}{} % {\pause}
+
+\usepackage{bbold,soul}
+\usepackage[nohug]{diagrams}
+\newarrow{Into}{C}{-}{-}{-}{>}
+\newarrow{Onto}{-}{-}{-}{-}{>>}
+\newarrow{Eto}{.}{.}{.}{.}{>}
+\newarrow{Id}{=}{=}{=}{=}{=}
+
+
+% \usefonttheme[onlymath]{serif}
+
+\newcommand{\axioms}{\operatorname{axioms}}
+\newcommand{\Monoid}{\operatorname{Monoid}}
+\newcommand{\Magma}{\operatorname{Magma}}
+\newcommand{\Set}{\operatorname{Set}}
+\newcommand{\Lift}{\operatorname{Lift}}
+\newcommand{\lift}{\operatorname{lift}}
+\newcommand{\low}{\operatorname{lower}}
+\newcommand{\Level}{\operatorname{Level}}
+\newcommand{\Subgroups}{\operatorname{Subgroups}}
+\newcommand{\Space}{\operatorname{Space}}
+\newcommand{\suc}{\operatorname{succ}}
+\newcommand{\comp}{\operatorname{\circ}}
+\newcommand{\vitem}{\vfill\item}
+\newcommand{\mitem}{\vspace{-3ex}\item}
+\newcommand{\greencolon}{\operatorname{~\dg{:}~}}
+\newcommand{\greeneq}{\operatorname{\dg{=}}}
+\newcommand{\gsimeq}{\operatorname{\dg{\simeq}}}
+\newcommand{\Nat}{\operatorname{Nat}}
+\newcommand{\pr}{\operatorname{pr}}
+\newcommand{\Injective}{\operatorname{Injective}}
+\newcommand{\UA}{\operatorname{UA}}
+\newcommand{\isPrime}{\operatorname{isPrime}}
+\newcommand{\isSubsingleton}{\operatorname{is\,\,subsingleton}}
+\newcommand{\Prop}{\operatorname{Prop}}
+\newcommand{\isprop}{\operatorname{is\,\,prop}}
+\newcommand{\issurjection}{\operatorname{is\,\,surjection}}
+\newcommand{\hassection}{\operatorname{has\,\,section}}
+\newcommand{\issingleton}{\operatorname{is\,\,singleton}}
+\newcommand{\issubsingleton}{\operatorname{is\,\,subsingleton}}
+\newcommand{\isset}{\operatorname{is\,\,set}}
+\newcommand{\isiso}{\operatorname{is\,\,isomorphism}}
+\newcommand{\isSurjection}{\operatorname{isSurjection}}
+\newcommand{\isSingleton}{\operatorname{isSingleton}}
+\newcommand{\isContr}{\operatorname{isContr}}
+\newcommand{\Univalence}{\operatorname{Univalence}}
+\newcommand{\isunivalent}{\operatorname{is\,\,univalent}}
+\newcommand{\isequiv}{\operatorname{is\,\,equivalence}}
+\newcommand{\invertible}{\operatorname{invertible}}
+\newcommand{\isIsomorphism}{\operatorname{isIsomorphism}}
+\newcommand{\hasSection}{\operatorname{hasSection}}
+\newcommand{\image}{\operatorname{image}}
+\newcommand{\idtoeq}{\operatorname{idtoeq}}
+\newcommand{\inr}{\operatorname{inr}}
+\newcommand{\inl}{\operatorname{inl}}
+\newcommand{\eqq}{\equiv}
+\newcommand{\da}{\db{-}~}
+\usepackage[all]{xy}
+\usepackage{bbm,stmaryrd}
+
+\newcommand{\wellinside}{\eqslantless}
+\newcommand{\powerset}{\operatorname{\mathcal{P}}}
+\newcommand{\Ob}{\operatorname{Ob}}
+\newcommand{\G}{\operatorname{\mathcal{G}}}
+\newcommand{\F}{\operatorname{\mathcal{F}}}
+\newcommand{\functorial}{\operatorname{functorial}}
+\newcommand{\X}{\operatorname{\mathcal{X}}}
+\newcommand{\Y}{\operatorname{\mathcal{Y}}}
+\newcommand{\A}{\operatorname{\mathcal{A}}}
+\newcommand{\B}{\operatorname{\mathcal{B}}}
+\newcommand{\C}{\operatorname{\mathcal{C}}}
+\newcommand{\U}{\operatorname{\mathcal{U}}}
+\newcommand{\V}{\operatorname{\mathcal{V}}}
+\newcommand{\W}{\operatorname{\mathcal{W}}}
+\newcommand{\K}{\operatorname{\mathcal{K}}}
+\newcommand{\Opens}{\operatorname{\mathcal{O}}}
+\newcommand{\Sierp}{\operatorname{\mathcal{S}}}
+\newcommand{\tgs}[1]{{\scriptstyle \text{\dg{#1}}}}
+\newcommand{\ts}[1]{{\scriptstyle \text{{#1}}}}
+
+\renewcommand{\labelstyle}{\textstyle}
+
+\definecolor{black}{rgb}{0,0,0}
+\newcommand{\black}{\textcolor{black}}
+\definecolor{darkblue}{rgb}{0,0,0.5}
+\newcommand{\db}{\textcolor{darkblue}}
+\definecolor{darkgreen}{rgb}{0,0.5,0}
+\newcommand{\dg}{\textcolor{darkgreen}}
+\definecolor{grey}{rgb}{0.4,0.4,0.4}
+\newcommand{\grey}{\textcolor{grey}}
+\definecolor{darkred}{rgb}{0.5,0,0}
+\newcommand{\dr}{\textcolor{darkred}}
+
+\newcommand{\dual}[1]{{#1^{\wedge}}}
+\newcommand{\doubledual}[1]{{#1^{\wedge\wedge}}}
+\newcommand{\m}[1]{$\db{#1}$}
+\newcommand{\mr}[1]{$\dr{#1}$}
+\newcommand{\mg}[1]{$\dg{#1}$}
+\newcommand{\mm}[1]{${#1}$}
+\newcommand{\M}[1]{\[\db{#1}\]}
+\newcommand{\MM}[1]{\[{#1}\]}
+
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\NI}{\N_\infty}
+\newcommand{\trunc}[1]{\left\lVert #1 \right\rVert} % {{\mathord{\parallel}#1\mathord{\parallel}}}
+\newcommand{\trunci}[1]{{\mathord{\mid}#1\mathord{\mid}}}
+\newcommand{\base}{\operatorname{base}}
+\newcommand{\loo}{\operatorname{loop}}
+\newcommand{\refl}{\operatorname{refl}}
+\newcommand{\idp}{\operatorname{idp}}
+\newcommand{\Id}{\operatorname{Id}}
+\newcommand{\Iso}{\operatorname{Iso}}
+\newcommand{\Path}{\operatorname{Path}}
+\newcommand{\id}{\operatorname{id}}
+\newcommand{\transport}{\operatorname{transport}}
+\newcommand{\one}{1} % {\mathbbm{1}}
+\newcommand{\Z}{\mathbbm{Z}}
+\newcommand{\ap}{\operatorname{ap}}
+\newcommand{\constant}{\operatorname{constant}}
+\newcommand{\eqdef}{\mathrel{\dg{:=}}} % {\stackrel{{\rm def}}{=}}
+\newcommand{\eqe}{\mathrel{\dg{=}}} % {\stackrel{{\rm def}}{=}}
+
+\newcommand{\Kappa}{K}
+\newcommand{\df}[1]{\emph{\db{#1}}}
+\newcommand{\WW}{\operatorname{W}}
+\newcommand{\Zero}{\mathbbm{O}}
+\newcommand{\One}{\mathbbm{1}}
+\newcommand{\Two}{\mathbbm{2}}
+\newcommand{\J}{\operatorname{J}}
+
+\title{{\Large Universe oddities}}
+
+\author{Mart\'in H\"otzel Escard\'o \\[1ex] \dg{Work in progress with} \\[1ex] Marc Bezem, Thierry Coquand and Peter Dybjer}
+\institute{University of Birmingham, UK}
+\date{\small Foundations and Applications of Univalent Mathematics \\ 18‐-20 December 2019, Herrsching, Germany, 2019}
+
+\begin{document}
+
+\maketitle
+
+\begin{frame}
+  \frametitle{I'll begin with an example}
+
+Define the type of magmas to be  \m{\Magma \eqdef \sum_{A : \U}\,\, \isset A \times (A \times A \to A)}.
+
+\vfill
+
+Take the primitive notion of equivalence to be \emph{map with contractible fibers}.
+
+\vfill
+
+  \dg{Theorem.}  Univalence implies that magma identity is in canonical
+  equivalence with magma isomorphism.
+
+\vfill
+
+\end{frame}
+
+\begin{frame}
+  \frametitle{Spot the mistake in the following proof}
+
+ \dg{Proof sketch.}
+  \begin{enumerate}
+  \vfill \item Because identity functions are trivially half-adjoint equivalences, all equivalences are half adjoint equivalences, by univalence.
+  \vfill \item (Change of variable.) If \m{f:X\to Y} is a half adjoint equivalence, and \m{Y:A \to \U} is a type family, then \m{\Sigma (y : Y), A \, y \simeq \Sigma (x : X), A \, (f \, x)}.
+  \vfill \item For magmas \m{\A = (A , i_A, \cdot_A)} and \m{\B = (B, i_B, \cdot_B)}
+    \begin{eqnarray*}
+      \A = \B & \simeq & \Sigma (p : A = B), \transport \, p \, (-\cdot_A-) = (-\cdot_B-) \\
+              & \simeq & \Sigma (p : A = B), \text{the equivalence \m{A \to B} induced by \m{p} is a homomorphism} \\
+    & \simeq & \Sigma (h : A \simeq B), \text{\m{h} is a homomorphism},
+    \end{eqnarray*}
+    where the last equivalence is by change of variable along the canonical equivalence \m{A = B \to A \simeq B.}
+  \end{enumerate}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Each step is individually correct}
+  \begin{enumerate}
+  \vfill \item Because identity functions are half-adjoint equivalences, all equivalences are trivially half adjoint equivalences, by univalence.
+  \vfill \item (Change of variable.) If \m{f:X\to Y} is a half adjoint equivalence, and \m{Y:A \to \U} is a type family, then \m{\Sigma (y : Y), A \, y \simeq \Sigma (x : X), A \, (f \, x)}.
+  \vfill \item For magmas \m{\A = (A , i_A, \cdot_A)} and \m{\B = (B, i_B, \cdot_B)}
+    \begin{eqnarray*}
+      \A = \B & \simeq & \Sigma (p : A = B), \transport \, p \, (-\cdot_A-) = (-\cdot_B-) \\
+              & \simeq & \Sigma (p : A = B), \text{the equivalence \m{A \to B} induced by \m{p} is a homomorphism} \\
+    & \simeq & \Sigma (h : A \simeq B), \text{\m{h} is a homomorphism},
+    \end{eqnarray*}
+    where the last equivalence is by change of variable along the canonical equivalence \m{A = B \to A \simeq B}.
+  \end{enumerate}
+
+\end{frame}
+
+\begin{frame}
+  \frametitle{Agda and Coq reject this proof}
+
+  \begin{itemize}
+  \vfill \item
+  And so does Book HoTT.
+
+  \vfill \item
+  But it would be accepted it with type-in-type.
+
+  \vfill \item
+  (And hence UniMath would accept it.)
+  \end{itemize}
+
+\end{frame}
+
+\begin{frame}
+  \frametitle{The problem with the proof}
+
+  \begin{enumerate}
+  \vfill \item Typical ambiguity.
+  \vfill \item We pretend there is only one universe in our discourse.
+  \vfill \item The universe levels are left implicit.
+  \vfill \item The theorem that
+    \begin{quote}
+      if all identitities satisfy a condition then so do all equivalences
+    \end{quote}
+    applies to equivalences between types of the \emph{same} universe.
+  \vfill \item But the canonical equivalence \m{A = B \to A \simeq B} relates types of \emph{different} universes.
+  \vfill \item Coq gives the error message ``universe inconsistency'' when we try to prove that this canonical equivalence is a half-adjoint equivalence by equivalence induction. \grey{(Kindly checked by Mike Shulman for me.)}
+  \end{enumerate}
+\end{frame}
+
+\begin{frame}
+  \frametitle{There is a problem with \m{(A=B)=(A\simeq B)} too}
+
+  \begin{enumerate}
+  \vfill \item By definition of univalence, we do get \m{(A=B)\simeq(A\simeq B)}.
+  \vfill \item However, the types \m{A=B} and \m{A \simeq B} live in different universes.
+  \vfill \item Without universe cumulativity, \m{(A=B)=(A\simeq B)} doesn't even type check.
+  \vfill \item With universe cumulativity, this can be written down and is true.
+  \vfill \item But \emph{not} by a direct application of the definition of univalence.
+  \vfill \item This requires proof.
+  \vfill \item Moreover, it requires univalence not only of the universe where the types \m{A} and \m{B} live, but also of the next one.
+  \vfill \item This is because a priori the identity type \m{A = B} depends not only on \m{A} and \m{B} but also on their universe.
+  \vfill \item The types \m{A =_{\U_n} B} and \m{A =_{\U_{n+1}} B} are not the same on the nose, even if they both live in \m{\U_{n+2}}.
+  \vfill \item With univalence, we can prove that the inclusion of any universe into a larger universe is an embedding, which makes the equation true.
+  \end{enumerate}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Agda's universe polymorphism}
+
+  \begin{enumerate}
+  \vfill \item Agda's universes are called \m{\Set_i}.
+  \vfill \item This terminology is not very appropriate for univalent mathematics, as their elements need not be sets,
+  \vfill \item I will rename them \m{\U_i} for the purposes of this talk.
+  \vfill \item There is a type \m{\Level}, in the first universe, where the universe indices live.
+  \vfill \item We have a level zero, and successor operation, a binary maximum operation, but no eliminator.
+  \vfill \item Each type lives in a unique universe.
+  \vfill \item We can define the empty type of the first (or any specific) universe.
+  \vfill \item Or we can define version parametrized by a level.
+  \vfill \item If \m{X : \U_i} and \m{Y : U_j} then \m{X \times Y} and \m{X+Y} live in \m{\U_{\max(i,j)}}.
+  \vfill \item If \m{X : \U_j} and \m{A : X \to \U_j} then \m{\Pi\,X\,A} and \m{\Sigma\,X\,A} live in \m{\U_{\max(i,j)}}.
+  \vfill \item There is a ``sort'' \m{\U_{\omega}}, but \m{\omega} is not an element of the type \m{\Level}.
+  \end{enumerate}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Examples}
+  \begin{enumerate}
+  \vfill \item \m{\isunivalent : (i : \Level) \to \U_{i+1}}
+  \vfill \item \m{\Univalence : \U_{\omega}} \\
+               \m{\Univalence  = (i : \Level) \to \isunivalent i}
+             \end{enumerate}
+
+             \begin{itemize}
+             \vfill \item
+So this goes beyond the type theory of the HoTT Book, in which universe levels are meta-linguistic, and in which univalence is an axiom scheme.
+             \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Agda's universe polymorphism continued}
+
+  \begin{enumerate}
+  \vfill \item There is an inclusion function \m{\Lift : \{i \, j : \Level\} \to \U_i \to \U_{\max(i,j)}}.
+
+  \vfill
+    (Almost never needed or used.)
+
+    \vfill \item Together with functions \m{\lift : X \to \Lift X} and \m{\low : \Lift X \to X} which are definitionally mutually inverse.
+
+    \vfill \item With univalence, we can prove that \m{\Lift} is an embedding of \m{\U_i } into \m{\U_{\max(i,j)}}.
+
+  \vfill \item The univalence of the two universes is needed.
+
+
+  \vfill \item This means that there is a (canonical) equivalence between \m{A =_{\U_i} B} and \m{\Lift A =_{\U_{\max(i,j)}} \Lift B}.
+
+\vfill
+
+  The map \m{\Lift} preserves and reflects identity.
+
+  \vfill \item Hence \m{\Lift(A =_{\U_i} B) =_{\U_{\max(i,j)+1}} (\Lift A =_{\U_{\max(i,j)}} \Lift B)}.
+  \end{enumerate}
+
+\end{frame}
+
+\begin{frame}
+  \frametitle{Upwards and downwads equivalence induction}
+
+  Fix three universe levels \m{i,j,k}.
+  \begin{enumerate}
+    \vfill \item \grey{(Upwards induction.)} Assume \m{\U_{\max(i,j)}} is univalent.
+
+    \begin{itemize}
+\vfill \item Let \m{A : (X : \U_i) \, (Y : \U_{\max(i,j)}) \to X \simeq Y \to U_k}.
+
+\vfill \item Denote by \m{L_X} the equivalence \m{X \simeq \Lift X} induced by the maps \m{\lift,\low}.
+
+\vfill \item If \m{A \, X \, (\Lift X) \, L_X} for all \m{X:\U_i}, then \m{A \, X \, Y \, e} for all \m{X : \U_i}, \m{Y : \U_{\max(i,j)}} and \m{e : X \simeq Y}.
+
+\vfill \item Moreover, the evident ``computation rule'' holds up to identity.
+    \end{itemize}
+
+  \vfill \item \grey{(Downwards induction.)} Dual, with \m{X} ranging over \m{\U_{\max(i,j)}} and \m{Y} over \m{U_i}.
+  \end{enumerate}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Odd situation}
+
+  \begin{enumerate}
+  \vfill \item We can prove things about all equivalences going up universes by induction.
+  \vfill \item We can prove things about all equivalences going down
+    universes by induction.
+  \vfill \item Every equivalence goes up or down.
+  \vfill \item But we cannot prove things for arbitrary equivalences between arbitrary universes by induction.
+
+  \end{enumerate}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Global properties}
+
+  Examples of global properties include:
+
+  \begin{enumerate}
+  \vfill \item \m{X} is a proposition.
+  \vfill \item \m{X} is a set.
+  \end{enumerate}
+
+  In Agda's type system:
+    \begin{eqnarray*}
+      \operatorname{global-property} & : & \U_{\omega} \\
+      \operatorname{global-property} & = & \{ i : \Level \} \to \U_i \to \U_i
+    \end{eqnarray*}
+
+  Of course one can think of many useful variations.
+\end{frame}
+
+\begin{frame}
+  \frametitle{Are global properties invariant under equivalence?}
+
+  \begin{enumerate}
+  \vfill \item \grey{Counterexample:} \m{A \,\{i\} X = \Lift (i = 0)}.
+  \vfill \item We could try to blame Agda's ability to compare levels for equality.
+  \vfill \item But Mike Shulman first suggested this counter-example to us in \emph{models}.
+  \end{enumerate}
+
+\vfill
+
+Say that a global property \m{A} is \emph{cumulative} if we have an equivalence \m{A \, X \simeq A \, (\Lift X)} for any type \m{X}.
+
+\vfill
+
+\db{Fact.} A global property is invariant under equivalence if and only if it is cumulative.
+
+\end{frame}
+
+\begin{frame}
+  \frametitle{One more oddity}
+
+  Consider the following type: \vfill
+
+  \m{(A \times B) = (C \times A) \to (B \times A) = (C \times A) }
+
+
+  \vfill There are three incomparable maximally general universe level assignments for the types \m{A,B,C} in a non-cumulative system
+
+  \vfill But in a cumulativity system, there is a unique most general assignment.
+
+
+
+\end{frame}
+
+\begin{frame}
+  \frametitle{Coq's universe polymorphism}
+
+  I am not entirely sure how it works. The main differences are
+  \begin{enumerate}
+    \vfill \item Cumulativity.
+    \vfill \item Typical ambiguity.
+    \vfill \item Use of universe constraints and a constraint solver.
+    \vfill \item Absence of a type of levels.
+  \end{enumerate}
+
+  But I believe it should be possible to reproduce the above facts
+  proved in Agda (I invite you to try if you know enough Coq).
+
+\end{frame}
+
+\begin{frame}
+  \frametitle{Some proposed rules for universe polymorphism}
+
+  \begin{enumerate}
+  \item With external or internal levels.
+  \item With or without cumulativity.
+  \item New algorithm for generating and solving constraints (typical ambiguity with cumulativity).
+  \end{enumerate}
+
+Related work: Harper, Pollack, Chan, Huet, Assaf, Voevodsky.
+
+\end{frame}
+
+\end{document}
