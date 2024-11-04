@@ -1,0 +1,36 @@
+<!DOCTYPE HTML>
+<html><head><meta charset="utf-8"><title>Games.index</title><link rel="stylesheet" href="Agda.css"><script type="text/javascript" src="highlight-hover.js"></script></head><body><pre class="Agda"><a id="1" class="Background">Martin Escardo and Paulo Oliva, 2-27 July 2021,
+
+Refactored and slightly improved October 2022, and then again in April
+2023 with many additions.
+
+</a><a id="148" class="Markup">\begin{code}</a>
+
+<a id="162" class="Symbol">{-#</a> <a id="166" class="Keyword">OPTIONS</a> <a id="174" class="Pragma">--safe</a> <a id="181" class="Pragma">--without-K</a> <a id="193" class="Symbol">#-}</a>
+
+<a id="198" class="Keyword">module</a> <a id="205" href="Games.index.html" class="Module">Games.index</a> <a id="217" class="Keyword">where</a>
+
+<a id="224" class="Keyword">import</a> <a id="231" href="Games.Constructor.html" class="Module">Games.Constructor</a>             <a id="261" class="Comment">-- For simplifying the construction of games.</a>
+<a id="307" class="Keyword">import</a> <a id="314" href="Games.Examples.html" class="Module">Games.Examples</a>                <a id="344" class="Comment">-- Miscelaneous small examples.</a>
+<a id="376" class="Keyword">import</a> <a id="383" href="Games.FiniteHistoryDependent.html" class="Module">Games.FiniteHistoryDependent</a>  <a id="413" class="Comment">-- Theory of finite history dependent games.</a>
+<a id="458" class="Keyword">import</a> <a id="465" href="Games.Transformer.html" class="Module">Games.Transformer</a>             <a id="495" class="Comment">-- With additional monad for irrational players.</a>
+<a id="544" class="Keyword">import</a> <a id="551" href="Games.J.html" class="Module">Games.J</a>                       <a id="581" class="Comment">-- Selection monad.</a>
+<a id="601" class="Keyword">import</a> <a id="608" href="Games.K.html" class="Module">Games.K</a>                       <a id="638" class="Comment">-- Continuation (or quantifier) monad.</a>
+<a id="677" class="Keyword">import</a> <a id="684" href="Games.JK.html" class="Module">Games.JK</a>                      <a id="714" class="Comment">-- Relationship between the two mondas.</a>
+<a id="754" class="Keyword">import</a> <a id="761" href="Games.Monad.html" class="Module">Games.Monad</a>                   <a id="791" class="Comment">-- (Automatically strong, wild) monads on types.</a>
+<a id="840" class="Keyword">import</a> <a id="847" href="Games.Reader.html" class="Module">Games.Reader</a>
+<a id="860" class="Keyword">import</a> <a id="867" href="Games.NonEmptyList.html" class="Module">Games.NonEmptyList</a>
+<a id="886" class="Keyword">import</a> <a id="893" href="Games.TicTacToe0.html" class="Module">Games.TicTacToe0</a>
+<a id="910" class="Keyword">import</a> <a id="917" href="Games.TicTacToe1.html" class="Module">Games.TicTacToe1</a>              <a id="947" class="Comment">-- Like TicTacToe0 but using Games.Constructor.</a>
+<a id="995" class="Keyword">import</a> <a id="1002" href="Games.TicTacToe2.html" class="Module">Games.TicTacToe2</a>              <a id="1032" class="Comment">-- More efficient and less elegant version.</a>
+<a id="1076" class="Keyword">import</a> <a id="1083" href="Games.TypeTrees.html" class="Module">Games.TypeTrees</a>               <a id="1113" class="Comment">-- Dependent type trees.</a>
+<a id="1138" class="Keyword">import</a> <a id="1145" href="Games.alpha-beta.html" class="Module">Games.alpha-beta</a>              <a id="1175" class="Comment">-- Many new things for efficiency.</a>
+<a id="1210" class="Keyword">import</a> <a id="1217" href="Games.Discussion.html" class="Module">Games.Discussion</a>
+
+<a id="1235" class="Comment">-- import Games.Main                 -- To be able to compile for efficieny.</a>
+                                     <a id="1349" class="Comment">-- Can&#39;t be imported here as it&#39;s not --safe.</a>
+                                     <a id="1432" class="Comment">-- This is for Agda compilation to Haskell of</a>
+                                     <a id="1515" class="Comment">-- examples to be able to run them more efficiently.</a>
+
+<a id="1569" class="Markup">\end{code}</a><a id="1579" class="Background">
+</a></pre></body></html>
