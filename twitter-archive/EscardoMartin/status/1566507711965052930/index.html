@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <meta property="og:url" content="https://www.cs.bham.ac.uk/~mhe/twitter-archive/EscardoMartin/status/1566507711965052930" />
+  <meta property="og:title" content="Martin Escardo on Twitter (archived)" />
+  <meta property="og:description" content="And an equality test for zero in the helper function h.<br>8/" />
+  
+  
+
+  <title>And an equality test for zero in the helper function h.<br>8/</title>
+  <link rel="stylesheet" href="../../../styles.css">
+</head>
+<body>
+  <div class="wrapper">
+  	<div class="flex-wrap">
+      <a href="../../../">
+        <p>&larr; @EscardoMartin Twitter archive</p>
+      </a>
+      
+  	  <article class="tweet parent " >
+  	    <p class="display_name">
+  	      Martin Escardo
+  	    </p>
+  	    <p class="user_name">
+  	      @EscardoMartin
+  	    </p>
+  	    <p class="full_text">
+  	      So here is a completely different thing. Haskell programmers usually advertise a would-be implementation of the Sieve of Eratosthenes.<br>1/
+  	    </p>
+  	    <p class="created_at">
+  	      04/09/2022, 20:21:14
+  	    </p>
+  	    <p class="favorite_count">Favs: 30</p>
+  	    <p class="retweet_count">Retweets: 3</p>
+  	    <a class="permalink" href="../1566506692958978049">link</a>
+  	  </article>
+
+
+  	  <article class="tweet parent " >
+  	    <p class="display_name">
+  	      Martin Escardo
+  	    </p>
+  	    <p class="user_name">
+  	      @EscardoMartin
+  	    </p>
+  	    <p class="full_text">
+  	      But it is completely wrong, because it uses the remainder of division, which clearly the original algorithm doesn't: <a href="https://en.wikipedia.org/wiki/Sieve_of_Eratosthenes">https://en.wikipedia.org/wiki/Sieve_of_Eratosthenes</a><br>2/
+  	    </p>
+  	    <p class="created_at">
+  	      04/09/2022, 20:21:15
+  	    </p>
+  	    <p class="favorite_count">Favs: 5</p>
+  	    <p class="retweet_count">Retweets: 0</p>
+  	    <a class="permalink" href="../1566506695815270400">link</a>
+  	  </article>
+
+
+  	  <article class="tweet parent " >
+  	    <p class="display_name">
+  	      Martin Escardo
+  	    </p>
+  	    <p class="user_name">
+  	      @EscardoMartin
+  	    </p>
+  	    <p class="full_text">
+  	      Here is the faithful rendering of the original algorithm using infinite lists in Haskell, in three steps:<br>3/
+  	    </p>
+  	    <p class="created_at">
+  	      04/09/2022, 20:21:15
+  	    </p>
+  	    <p class="favorite_count">Favs: 6</p>
+  	    <p class="retweet_count">Retweets: 0</p>
+  	    <a class="permalink" href="../1566506698499670016">link</a>
+  	  </article>
+
+
+  	  <article class="tweet parent " >
+  	    <p class="display_name">
+  	      Martin Escardo
+  	    </p>
+  	    <p class="user_name">
+  	      @EscardoMartin
+  	    </p>
+  	    <p class="full_text">
+  	      cross :: Integer -&gt; [Maybe a] -&gt; [Maybe a]<br>cross n = h (n-1)<br>  where<br>   h 0 (p : s) = Nothing : h (n-1) s<br>   h i (p : s) = p : h (i-1) s<br>4/
+  	    </p>
+  	    <p class="created_at">
+  	      04/09/2022, 20:21:16
+  	    </p>
+  	    <p class="favorite_count">Favs: 3</p>
+  	    <p class="retweet_count">Retweets: 0</p>
+  	    <a class="permalink" href="../1566506700965830663">link</a>
+  	  </article>
+
+
+  	  <article class="tweet parent " >
+  	    <p class="display_name">
+  	      Martin Escardo
+  	    </p>
+  	    <p class="user_name">
+  	      @EscardoMartin
+  	    </p>
+  	    <p class="full_text">
+  	      sieve :: [Maybe Integer] -&gt; [Maybe Integer]<br>sieve (Nothing : s) = Nothing : sieve s<br>sieve (Just p  : s) = Just p  : sieve (cross p s)<br>5/
+  	    </p>
+  	    <p class="created_at">
+  	      04/09/2022, 20:21:17
+  	    </p>
+  	    <p class="favorite_count">Favs: 2</p>
+  	    <p class="retweet_count">Retweets: 0</p>
+  	    <a class="permalink" href="../1566506703553691649">link</a>
+  	  </article>
+
+
+  	  <article class="tweet parent " >
+  	    <p class="display_name">
+  	      Martin Escardo
+  	    </p>
+  	    <p class="user_name">
+  	      @EscardoMartin
+  	    </p>
+  	    <p class="full_text">
+  	      eratosthenes :: [Maybe Integer]<br>eratosthenes = sieve (map Just ([2..]))<br>6/
+  	    </p>
+  	    <p class="created_at">
+  	      04/09/2022, 20:21:17
+  	    </p>
+  	    <p class="favorite_count">Favs: 3</p>
+  	    <p class="retweet_count">Retweets: 0</p>
+  	    <a class="permalink" href="../1566506705868947457">link</a>
+  	  </article>
+
+
+  	  <article class="tweet parent " >
+  	    <p class="display_name">
+  	      Martin Escardo
+  	    </p>
+  	    <p class="user_name">
+  	      @EscardoMartin
+  	    </p>
+  	    <p class="full_text">
+  	      That's it. In particular, no addition, no multiplication and no division. Just +1 and -1 and basic operations on infinite lists (where +1 occurs in [2..]).<br>7/
+  	    </p>
+  	    <p class="created_at">
+  	      04/09/2022, 20:21:18
+  	    </p>
+  	    <p class="favorite_count">Favs: 5</p>
+  	    <p class="retweet_count">Retweets: 0</p>
+  	    <a class="permalink" href="../1566506708398211072">link</a>
+  	  </article>
+
+
+  	  <article class="tweet  " id="main">
+  	    <p class="display_name">
+  	      Martin Escardo
+  	    </p>
+  	    <p class="user_name">
+  	      @EscardoMartin
+  	    </p>
+  	    <p class="full_text">
+  	      And an equality test for zero in the helper function h.<br>8/
+  	    </p>
+  	    <p class="created_at">
+  	      04/09/2022, 20:25:17
+  	    </p>
+  	    <p class="favorite_count">Favs: 2</p>
+  	    <p class="retweet_count">Retweets: 0</p>
+  	    <a class="permalink" href="../1566507711965052930">link</a>
+  	  </article>
+
+
+  	  <article class="tweet  child" >
+  	    <p class="display_name">
+  	      Martin Escardo
+  	    </p>
+  	    <p class="user_name">
+  	      @EscardoMartin
+  	    </p>
+  	    <p class="full_text">
+  	      Can anybody formulate and prove in Agda that this indeed lists the sequence of prime numbers?<br>9/
+  	    </p>
+  	    <p class="created_at">
+  	      04/09/2022, 22:14:50
+  	    </p>
+  	    <p class="favorite_count">Favs: 8</p>
+  	    <p class="retweet_count">Retweets: 0</p>
+  	    <a class="permalink" href="../1566535279799836674">link</a>
+  	  </article>
+
+  	</div>
+  </div>
+</body>
+<script>
+document.getElementById('main').scrollIntoView();
+</script>
+</html>
