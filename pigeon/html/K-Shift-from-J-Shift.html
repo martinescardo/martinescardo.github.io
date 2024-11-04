@@ -1,0 +1,337 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+><head
+  ><title
+    >K-Shift-from-J-Shift</title
+    ><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"
+     /><meta http-equiv="Content-Style-Type" content="text/css"
+     /><link href="Agda.css" rel="stylesheet" type="text/css"
+     /></head
+  ><body
+  ><pre
+    ><a name="1" class="Keyword"
+      >module</a
+      ><a name="7"
+      > </a
+      ><a name="8" href="K-Shift-from-J-Shift.html#8" class="Module"
+      >K-Shift-from-J-Shift</a
+      ><a name="28"
+      > </a
+      ><a name="29" class="Keyword"
+      >where</a
+      ><a name="34"
+      >
+
+</a
+      ><a name="36" class="Keyword"
+      >open</a
+      ><a name="40"
+      > </a
+      ><a name="41" class="Keyword"
+      >import</a
+      ><a name="47"
+      > </a
+      ><a name="48" href="Logic.html#8" class="Module"
+      >Logic</a
+      ><a name="53"
+      >
+</a
+      ><a name="54" class="Keyword"
+      >open</a
+      ><a name="58"
+      > </a
+      ><a name="59" class="Keyword"
+      >import</a
+      ><a name="65"
+      > </a
+      ><a name="66" href="LogicalFacts.html#8" class="Module"
+      >LogicalFacts</a
+      ><a name="78"
+      >
+</a
+      ><a name="79" class="Keyword"
+      >open</a
+      ><a name="83"
+      > </a
+      ><a name="84" class="Keyword"
+      >import</a
+      ><a name="90"
+      > </a
+      ><a name="91" href="Naturals.html#8" class="Module"
+      >Naturals</a
+      ><a name="99"
+      >
+</a
+      ><a name="100" class="Keyword"
+      >open</a
+      ><a name="104"
+      > </a
+      ><a name="105" class="Keyword"
+      >import</a
+      ><a name="111"
+      > </a
+      ><a name="112" href="JK-Monads.html#8" class="Module"
+      >JK-Monads</a
+      ><a name="121"
+      >
+</a
+      ><a name="122" class="Keyword"
+      >open</a
+      ><a name="126"
+      > </a
+      ><a name="127" class="Keyword"
+      >import</a
+      ><a name="133"
+      > </a
+      ><a name="134" href="J-Shift.html#8" class="Module"
+      >J-Shift</a
+      ><a name="141"
+      >
+
+</a
+      ><a name="143" href="K-Shift-from-J-Shift.html#143" class="Function"
+      >K-&#8704;-shift</a
+      ><a name="152"
+      > </a
+      ><a name="153" class="Symbol"
+      >:</a
+      ><a name="154"
+      > </a
+      ><a name="155" class="Symbol"
+      >{</a
+      ><a name="156" href="K-Shift-from-J-Shift.html#156" class="Bound"
+      >R</a
+      ><a name="157"
+      > </a
+      ><a name="158" class="Symbol"
+      >:</a
+      ><a name="159"
+      > </a
+      ><a name="160" href="Logic.html#77" class="Function"
+      >&#937;</a
+      ><a name="161" class="Symbol"
+      >}</a
+      ><a name="162"
+      > </a
+      ><a name="163" class="Symbol"
+      >{</a
+      ><a name="164" href="K-Shift-from-J-Shift.html#164" class="Bound"
+      >A</a
+      ><a name="165"
+      > </a
+      ><a name="166" class="Symbol"
+      >:</a
+      ><a name="167"
+      > </a
+      ><a name="168" href="Naturals.html#48" class="Datatype"
+      >&#8469;</a
+      ><a name="169"
+      > </a
+      ><a name="170" class="Symbol"
+      >&#8594;</a
+      ><a name="171"
+      > </a
+      ><a name="172" href="Logic.html#77" class="Function"
+      >&#937;</a
+      ><a name="173" class="Symbol"
+      >}</a
+      ><a name="174"
+      > </a
+      ><a name="175" class="Symbol"
+      >&#8594;</a
+      ><a name="176"
+      >
+</a
+      ><a name="178" class="Comment"
+      >---------</a
+      ><a name="187"
+      >
+            </a
+      ><a name="200" class="Symbol"
+      >(&#8704;(</a
+      ><a name="203" href="K-Shift-from-J-Shift.html#203" class="Bound"
+      >n</a
+      ><a name="204"
+      > </a
+      ><a name="205" class="Symbol"
+      >:</a
+      ><a name="206"
+      > </a
+      ><a name="207" href="Naturals.html#48" class="Datatype"
+      >&#8469;</a
+      ><a name="208" class="Symbol"
+      >)</a
+      ><a name="209"
+      > </a
+      ><a name="210" class="Symbol"
+      >&#8594;</a
+      ><a name="211"
+      > </a
+      ><a name="212" href="K-Shift-from-J-Shift.html#156" class="Bound"
+      >R</a
+      ><a name="213"
+      > </a
+      ><a name="214" class="Symbol"
+      >&#8594;</a
+      ><a name="215"
+      > </a
+      ><a name="216" href="K-Shift-from-J-Shift.html#164" class="Bound"
+      >A</a
+      ><a name="217"
+      > </a
+      ><a name="218" href="K-Shift-from-J-Shift.html#203" class="Bound"
+      >n</a
+      ><a name="219" class="Symbol"
+      >)</a
+      ><a name="220"
+      > </a
+      ><a name="221" class="Symbol"
+      >&#8594;</a
+      ><a name="222"
+      >                   </a
+      ><a name="241" class="Comment"
+      >-- efqs,</a
+      ><a name="249"
+      >
+            </a
+      ><a name="262" class="Symbol"
+      >(&#8704;(</a
+      ><a name="265" href="K-Shift-from-J-Shift.html#265" class="Bound"
+      >n</a
+      ><a name="266"
+      > </a
+      ><a name="267" class="Symbol"
+      >:</a
+      ><a name="268"
+      > </a
+      ><a name="269" href="Naturals.html#48" class="Datatype"
+      >&#8469;</a
+      ><a name="270" class="Symbol"
+      >)</a
+      ><a name="271"
+      > </a
+      ><a name="272" class="Symbol"
+      >&#8594;</a
+      ><a name="273"
+      > </a
+      ><a name="274" href="JK-Monads.html#374" class="Function"
+      >K</a
+      ><a name="275" class="Symbol"
+      >(</a
+      ><a name="276" href="K-Shift-from-J-Shift.html#164" class="Bound"
+      >A</a
+      ><a name="277"
+      > </a
+      ><a name="278" href="K-Shift-from-J-Shift.html#265" class="Bound"
+      >n</a
+      ><a name="279" class="Symbol"
+      >))</a
+      ><a name="281"
+      > </a
+      ><a name="282" class="Symbol"
+      >&#8594;</a
+      ><a name="283"
+      > </a
+      ><a name="284" href="JK-Monads.html#374" class="Function"
+      >K</a
+      ><a name="285" class="Symbol"
+      >(&#8704;(</a
+      ><a name="288" href="K-Shift-from-J-Shift.html#288" class="Bound"
+      >n</a
+      ><a name="289"
+      > </a
+      ><a name="290" class="Symbol"
+      >:</a
+      ><a name="291"
+      > </a
+      ><a name="292" href="Naturals.html#48" class="Datatype"
+      >&#8469;</a
+      ><a name="293" class="Symbol"
+      >)</a
+      ><a name="294"
+      > </a
+      ><a name="295" class="Symbol"
+      >&#8594;</a
+      ><a name="296"
+      > </a
+      ><a name="297" href="K-Shift-from-J-Shift.html#164" class="Bound"
+      >A</a
+      ><a name="298"
+      > </a
+      ><a name="299" href="K-Shift-from-J-Shift.html#288" class="Bound"
+      >n</a
+      ><a name="300" class="Symbol"
+      >)</a
+      ><a name="301"
+      >  </a
+      ><a name="303" class="Comment"
+      >-- shift.</a
+      ><a name="312"
+      >
+
+</a
+      ><a name="314" href="K-Shift-from-J-Shift.html#143" class="Function"
+      >K-&#8704;-shift</a
+      ><a name="323"
+      > </a
+      ><a name="324" href="K-Shift-from-J-Shift.html#324" class="Bound"
+      >efqs</a
+      ><a name="328"
+      > </a
+      ><a name="329" href="K-Shift-from-J-Shift.html#329" class="Bound"
+      >&#966;s</a
+      ><a name="331"
+      > </a
+      ><a name="332" class="Symbol"
+      >=</a
+      ><a name="333"
+      > </a
+      ><a name="334" href="JK-Monads.html#601" class="Function"
+      >J-K</a
+      ><a name="337" class="Symbol"
+      >(</a
+      ><a name="338" href="J-Shift.html#262" class="Function"
+      >J-&#8704;-shift</a
+      ><a name="347" class="Symbol"
+      >(&#955;</a
+      ><a name="349"
+      > </a
+      ><a name="350" href="K-Shift-from-J-Shift.html#350" class="Bound"
+      >n</a
+      ><a name="351"
+      > </a
+      ><a name="352" class="Symbol"
+      >&#8594;</a
+      ><a name="353"
+      > </a
+      ><a name="354" href="JK-Monads.html#820" class="Function"
+      >K-J</a
+      ><a name="357" class="Symbol"
+      >(</a
+      ><a name="358" href="K-Shift-from-J-Shift.html#324" class="Bound"
+      >efqs</a
+      ><a name="362"
+      > </a
+      ><a name="363" href="K-Shift-from-J-Shift.html#350" class="Bound"
+      >n</a
+      ><a name="364" class="Symbol"
+      >)</a
+      ><a name="365"
+      > </a
+      ><a name="366" class="Symbol"
+      >(</a
+      ><a name="367" href="K-Shift-from-J-Shift.html#329" class="Bound"
+      >&#966;s</a
+      ><a name="369"
+      > </a
+      ><a name="370" href="K-Shift-from-J-Shift.html#350" class="Bound"
+      >n</a
+      ><a name="371" class="Symbol"
+      >)))</a
+      ><a name="374"
+      >
+</a
+      ></pre
+    ></body
+  ></html
+>

@@ -1,0 +1,1858 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+><head
+  ><title
+    >FinitePigeon</title
+    ><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"
+     /><meta http-equiv="Content-Style-Type" content="text/css"
+     /><link href="Agda.css" rel="stylesheet" type="text/css"
+     /></head
+  ><body
+  ><pre
+    ><a name="1" class="Keyword"
+      >module</a
+      ><a name="7"
+      > </a
+      ><a name="8" href="FinitePigeon.html#8" class="Module"
+      >FinitePigeon</a
+      ><a name="20"
+      > </a
+      ><a name="21" class="Keyword"
+      >where</a
+      ><a name="26"
+      >
+
+</a
+      ><a name="28" class="Keyword"
+      >open</a
+      ><a name="32"
+      > </a
+      ><a name="33" class="Keyword"
+      >import</a
+      ><a name="39"
+      > </a
+      ><a name="40" href="InfinitePigeon.html#8" class="Module"
+      >InfinitePigeon</a
+      ><a name="54"
+      >
+</a
+      ><a name="55" class="Keyword"
+      >open</a
+      ><a name="59"
+      > </a
+      ><a name="60" class="Keyword"
+      >import</a
+      ><a name="66"
+      > </a
+      ><a name="67" href="Logic.html#8" class="Module"
+      >Logic</a
+      ><a name="72"
+      >
+</a
+      ><a name="73" class="Keyword"
+      >open</a
+      ><a name="77"
+      > </a
+      ><a name="78" class="Keyword"
+      >import</a
+      ><a name="84"
+      > </a
+      ><a name="85" href="LogicalFacts.html#8" class="Module"
+      >LogicalFacts</a
+      ><a name="97"
+      >
+</a
+      ><a name="98" class="Keyword"
+      >open</a
+      ><a name="102"
+      > </a
+      ><a name="103" class="Keyword"
+      >import</a
+      ><a name="109"
+      > </a
+      ><a name="110" href="Two.html#8" class="Module"
+      >Two</a
+      ><a name="113"
+      >
+</a
+      ><a name="114" class="Keyword"
+      >open</a
+      ><a name="118"
+      > </a
+      ><a name="119" class="Keyword"
+      >import</a
+      ><a name="125"
+      > </a
+      ><a name="126" href="Naturals.html#8" class="Module"
+      >Naturals</a
+      ><a name="134"
+      >
+</a
+      ><a name="135" class="Keyword"
+      >open</a
+      ><a name="139"
+      > </a
+      ><a name="140" class="Keyword"
+      >import</a
+      ><a name="146"
+      > </a
+      ><a name="147" href="Addition.html#8" class="Module"
+      >Addition</a
+      ><a name="155"
+      >
+</a
+      ><a name="156" class="Keyword"
+      >open</a
+      ><a name="160"
+      > </a
+      ><a name="161" class="Keyword"
+      >import</a
+      ><a name="167"
+      > </a
+      ><a name="168" href="Order.html#8" class="Module"
+      >Order</a
+      ><a name="173"
+      >
+</a
+      ><a name="174" class="Keyword"
+      >open</a
+      ><a name="178"
+      > </a
+      ><a name="179" class="Keyword"
+      >import</a
+      ><a name="185"
+      > </a
+      ><a name="186" href="Cantor.html#8" class="Module"
+      >Cantor</a
+      ><a name="192"
+      >
+</a
+      ><a name="193" class="Keyword"
+      >open</a
+      ><a name="197"
+      > </a
+      ><a name="198" class="Keyword"
+      >import</a
+      ><a name="204"
+      > </a
+      ><a name="205" href="JK-Monads.html#8" class="Module"
+      >JK-Monads</a
+      ><a name="214"
+      >
+</a
+      ><a name="215" class="Keyword"
+      >open</a
+      ><a name="219"
+      > </a
+      ><a name="220" class="Keyword"
+      >import</a
+      ><a name="226"
+      > </a
+      ><a name="227" href="Equality.html#8" class="Module"
+      >Equality</a
+      ><a name="235"
+      >
+</a
+      ><a name="236" class="Keyword"
+      >open</a
+      ><a name="240"
+      > </a
+      ><a name="241" class="Keyword"
+      >import</a
+      ><a name="247"
+      > </a
+      ><a name="248" href="JK-LogicalFacts.html#8" class="Module"
+      >JK-LogicalFacts</a
+      ><a name="263"
+      >
+</a
+      ><a name="264" class="Keyword"
+      >open</a
+      ><a name="268"
+      > </a
+      ><a name="269" class="Keyword"
+      >import</a
+      ><a name="275"
+      > </a
+      ><a name="276" href="Finite.html#8" class="Module"
+      >Finite</a
+      ><a name="282"
+      >
+
+
+</a
+      ><a name="285" class="Comment"
+      >-- We use the classical, infinite pigeonhole principle (in another</a
+      ><a name="351"
+      >
+</a
+      ><a name="352" class="Comment"
+      >-- module) to derive a finite one:</a
+      ><a name="386"
+      >
+
+
+</a
+      ><a name="389" href="FinitePigeon.html#389" class="Function"
+      >Finite-Pigeonhole</a
+      ><a name="406"
+      > </a
+      ><a name="407" class="Symbol"
+      >:</a
+      ><a name="408"
+      > </a
+      ><a name="409" href="Cantor.html#60" class="Function"
+      >&#8322;&#8469;</a
+      ><a name="411"
+      > </a
+      ><a name="412" class="Symbol"
+      >&#8594;</a
+      ><a name="413"
+      > </a
+      ><a name="414" href="Naturals.html#48" class="Datatype"
+      >&#8469;</a
+      ><a name="415"
+      > </a
+      ><a name="416" class="Symbol"
+      >&#8594;</a
+      ><a name="417"
+      > </a
+      ><a name="418" href="Logic.html#77" class="Function"
+      >&#937;</a
+      ><a name="419"
+      >
+</a
+      ><a name="420" href="FinitePigeon.html#389" class="Function"
+      >Finite-Pigeonhole</a
+      ><a name="437"
+      > </a
+      ><a name="438" href="FinitePigeon.html#438" class="Bound"
+      >&#945;</a
+      ><a name="439"
+      > </a
+      ><a name="440" href="FinitePigeon.html#440" class="Bound"
+      >m</a
+      ><a name="441"
+      > </a
+      ><a name="442" class="Symbol"
+      >=</a
+      ><a name="443"
+      >
+    </a
+      ><a name="448" href="Logic.html#1060" class="Datatype"
+      >&#8707;</a
+      ><a name="449"
+      > </a
+      ><a name="450" class="Symbol"
+      >\(</a
+      ><a name="452" href="FinitePigeon.html#452" class="Bound"
+      >b</a
+      ><a name="453"
+      > </a
+      ><a name="454" class="Symbol"
+      >:</a
+      ><a name="455"
+      > </a
+      ><a name="456" href="Two.html#24" class="Datatype"
+      >&#8322;</a
+      ><a name="457" class="Symbol"
+      >)</a
+      ><a name="458"
+      > </a
+      ><a name="459" class="Symbol"
+      >&#8594;</a
+      ><a name="460"
+      > </a
+      ><a name="461" href="Logic.html#1060" class="Datatype"
+      >&#8707;</a
+      ><a name="462"
+      > </a
+      ><a name="463" class="Symbol"
+      >\(</a
+      ><a name="465" href="FinitePigeon.html#465" class="Bound"
+      >s</a
+      ><a name="466"
+      > </a
+      ><a name="467" class="Symbol"
+      >:</a
+      ><a name="468"
+      > </a
+      ><a name="469" href="Finite.html#165" class="Datatype"
+      >smaller</a
+      ><a name="476" class="Symbol"
+      >(</a
+      ><a name="477" href="FinitePigeon.html#440" class="Bound"
+      >m</a
+      ><a name="478"
+      > </a
+      ><a name="479" href="Addition.html#467" class="Function Operator"
+      >+</a
+      ><a name="480"
+      > </a
+      ><a name="481" class="Number"
+      >1</a
+      ><a name="482" class="Symbol"
+      >)</a
+      ><a name="483"
+      > </a
+      ><a name="484" class="Symbol"
+      >&#8594;</a
+      ><a name="485"
+      > </a
+      ><a name="486" href="Naturals.html#48" class="Datatype"
+      >&#8469;</a
+      ><a name="487" class="Symbol"
+      >)</a
+      ><a name="488"
+      > </a
+      ><a name="489" class="Symbol"
+      >&#8594;</a
+      ><a name="490"
+      >
+                    </a
+      ><a name="512" class="Symbol"
+      >(&#8704;(</a
+      ><a name="515" href="FinitePigeon.html#515" class="Bound"
+      >n</a
+      ><a name="516"
+      > </a
+      ><a name="517" class="Symbol"
+      >:</a
+      ><a name="518"
+      > </a
+      ><a name="519" href="Finite.html#165" class="Datatype"
+      >smaller</a
+      ><a name="526"
+      > </a
+      ><a name="527" href="FinitePigeon.html#440" class="Bound"
+      >m</a
+      ><a name="528" class="Symbol"
+      >)</a
+      ><a name="529"
+      > </a
+      ><a name="530" class="Symbol"
+      >&#8594;</a
+      ><a name="531"
+      > </a
+      ><a name="532" href="FinitePigeon.html#465" class="Bound"
+      >s</a
+      ><a name="533" class="Symbol"
+      >(</a
+      ><a name="534" href="Finite.html#474" class="Function"
+      >coerce</a
+      ><a name="540"
+      > </a
+      ><a name="541" href="FinitePigeon.html#515" class="Bound"
+      >n</a
+      ><a name="542" class="Symbol"
+      >)</a
+      ><a name="543"
+      > </a
+      ><a name="544" href="Order.html#152" class="Function Operator"
+      >&lt;</a
+      ><a name="545"
+      > </a
+      ><a name="546" href="FinitePigeon.html#465" class="Bound"
+      >s</a
+      ><a name="547" class="Symbol"
+      >(</a
+      ><a name="548" href="Finite.html#227" class="InductiveConstructor"
+      >fsucc</a
+      ><a name="553"
+      > </a
+      ><a name="554" href="FinitePigeon.html#515" class="Bound"
+      >n</a
+      ><a name="555" class="Symbol"
+      >))</a
+      ><a name="557"
+      >
+                  </a
+      ><a name="576" href="Logic.html#282" class="Datatype Operator"
+      >&#8743;</a
+      ><a name="577"
+      > </a
+      ><a name="578" class="Symbol"
+      >(&#8704;(</a
+      ><a name="581" href="FinitePigeon.html#581" class="Bound"
+      >n</a
+      ><a name="582"
+      > </a
+      ><a name="583" class="Symbol"
+      >:</a
+      ><a name="584"
+      > </a
+      ><a name="585" href="Finite.html#165" class="Datatype"
+      >smaller</a
+      ><a name="592" class="Symbol"
+      >(</a
+      ><a name="593" href="FinitePigeon.html#440" class="Bound"
+      >m</a
+      ><a name="594"
+      > </a
+      ><a name="595" href="Addition.html#467" class="Function Operator"
+      >+</a
+      ><a name="596"
+      > </a
+      ><a name="597" class="Number"
+      >1</a
+      ><a name="598" class="Symbol"
+      >))</a
+      ><a name="600"
+      > </a
+      ><a name="601" class="Symbol"
+      >&#8594;</a
+      ><a name="602"
+      > </a
+      ><a name="603" href="FinitePigeon.html#438" class="Bound"
+      >&#945;</a
+      ><a name="604" class="Symbol"
+      >(</a
+      ><a name="605" href="FinitePigeon.html#465" class="Bound"
+      >s</a
+      ><a name="606"
+      > </a
+      ><a name="607" href="FinitePigeon.html#581" class="Bound"
+      >n</a
+      ><a name="608" class="Symbol"
+      >)</a
+      ><a name="609"
+      > </a
+      ><a name="610" href="Equality.html#48" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="611"
+      > </a
+      ><a name="612" href="FinitePigeon.html#452" class="Bound"
+      >b</a
+      ><a name="613" class="Symbol"
+      >)</a
+      ><a name="614"
+      >
+
+
+</a
+      ><a name="617" class="Comment"
+      >-- Before proving this in the theorem below, we prove it prefixed by K</a
+      ><a name="687"
+      >
+</a
+      ><a name="688" class="Comment"
+      >-- in the following lemma, where some sublemmas have K deep inside,</a
+      ><a name="755"
+      >
+</a
+      ><a name="756" class="Comment"
+      >-- prefixing the equation:</a
+      ><a name="782"
+      >
+
+
+</a
+      ><a name="785" href="FinitePigeon.html#785" class="Function"
+      >Finite-Pigeonhole-K</a
+      ><a name="804"
+      > </a
+      ><a name="805" class="Symbol"
+      >:</a
+      ><a name="806"
+      > </a
+      ><a name="807" class="Symbol"
+      >{</a
+      ><a name="808" href="FinitePigeon.html#808" class="Bound"
+      >R</a
+      ><a name="809"
+      > </a
+      ><a name="810" class="Symbol"
+      >:</a
+      ><a name="811"
+      > </a
+      ><a name="812" href="Logic.html#77" class="Function"
+      >&#937;</a
+      ><a name="813" class="Symbol"
+      >}</a
+      ><a name="814"
+      > </a
+      ><a name="815" class="Symbol"
+      >&#8594;</a
+      ><a name="816"
+      > </a
+      ><a name="817" href="Cantor.html#60" class="Function"
+      >&#8322;&#8469;</a
+      ><a name="819"
+      > </a
+      ><a name="820" class="Symbol"
+      >&#8594;</a
+      ><a name="821"
+      > </a
+      ><a name="822" href="Naturals.html#48" class="Datatype"
+      >&#8469;</a
+      ><a name="823"
+      > </a
+      ><a name="824" class="Symbol"
+      >&#8594;</a
+      ><a name="825"
+      > </a
+      ><a name="826" href="Logic.html#77" class="Function"
+      >&#937;</a
+      ><a name="827"
+      >
+</a
+      ><a name="828" href="FinitePigeon.html#785" class="Function"
+      >Finite-Pigeonhole-K</a
+      ><a name="847"
+      > </a
+      ><a name="848" class="Symbol"
+      >{</a
+      ><a name="849" href="FinitePigeon.html#849" class="Bound"
+      >R</a
+      ><a name="850" class="Symbol"
+      >}</a
+      ><a name="851"
+      > </a
+      ><a name="852" href="FinitePigeon.html#852" class="Bound"
+      >&#945;</a
+      ><a name="853"
+      > </a
+      ><a name="854" href="FinitePigeon.html#854" class="Bound"
+      >m</a
+      ><a name="855"
+      > </a
+      ><a name="856" class="Symbol"
+      >=</a
+      ><a name="857"
+      >
+    </a
+      ><a name="862" href="Logic.html#1060" class="Datatype"
+      >&#8707;</a
+      ><a name="863"
+      > </a
+      ><a name="864" class="Symbol"
+      >\(</a
+      ><a name="866" href="FinitePigeon.html#866" class="Bound"
+      >b</a
+      ><a name="867"
+      > </a
+      ><a name="868" class="Symbol"
+      >:</a
+      ><a name="869"
+      > </a
+      ><a name="870" href="Two.html#24" class="Datatype"
+      >&#8322;</a
+      ><a name="871" class="Symbol"
+      >)</a
+      ><a name="872"
+      > </a
+      ><a name="873" class="Symbol"
+      >&#8594;</a
+      ><a name="874"
+      > </a
+      ><a name="875" href="Logic.html#1060" class="Datatype"
+      >&#8707;</a
+      ><a name="876"
+      > </a
+      ><a name="877" class="Symbol"
+      >\(</a
+      ><a name="879" href="FinitePigeon.html#879" class="Bound"
+      >s</a
+      ><a name="880"
+      > </a
+      ><a name="881" class="Symbol"
+      >:</a
+      ><a name="882"
+      > </a
+      ><a name="883" href="Finite.html#165" class="Datatype"
+      >smaller</a
+      ><a name="890" class="Symbol"
+      >(</a
+      ><a name="891" href="FinitePigeon.html#854" class="Bound"
+      >m</a
+      ><a name="892"
+      > </a
+      ><a name="893" href="Addition.html#467" class="Function Operator"
+      >+</a
+      ><a name="894"
+      > </a
+      ><a name="895" class="Number"
+      >1</a
+      ><a name="896" class="Symbol"
+      >)</a
+      ><a name="897"
+      > </a
+      ><a name="898" class="Symbol"
+      >&#8594;</a
+      ><a name="899"
+      > </a
+      ><a name="900" href="Naturals.html#48" class="Datatype"
+      >&#8469;</a
+      ><a name="901" class="Symbol"
+      >)</a
+      ><a name="902"
+      > </a
+      ><a name="903" class="Symbol"
+      >&#8594;</a
+      ><a name="904"
+      >
+                    </a
+      ><a name="926" class="Symbol"
+      >(&#8704;(</a
+      ><a name="929" href="FinitePigeon.html#929" class="Bound"
+      >n</a
+      ><a name="930"
+      > </a
+      ><a name="931" class="Symbol"
+      >:</a
+      ><a name="932"
+      > </a
+      ><a name="933" href="Finite.html#165" class="Datatype"
+      >smaller</a
+      ><a name="940"
+      > </a
+      ><a name="941" href="FinitePigeon.html#854" class="Bound"
+      >m</a
+      ><a name="942" class="Symbol"
+      >)</a
+      ><a name="943"
+      > </a
+      ><a name="944" class="Symbol"
+      >&#8594;</a
+      ><a name="945"
+      > </a
+      ><a name="946" href="FinitePigeon.html#879" class="Bound"
+      >s</a
+      ><a name="947" class="Symbol"
+      >(</a
+      ><a name="948" href="Finite.html#474" class="Function"
+      >coerce</a
+      ><a name="954"
+      > </a
+      ><a name="955" href="FinitePigeon.html#929" class="Bound"
+      >n</a
+      ><a name="956" class="Symbol"
+      >)</a
+      ><a name="957"
+      > </a
+      ><a name="958" href="Order.html#152" class="Function Operator"
+      >&lt;</a
+      ><a name="959"
+      > </a
+      ><a name="960" href="FinitePigeon.html#879" class="Bound"
+      >s</a
+      ><a name="961" class="Symbol"
+      >(</a
+      ><a name="962" href="Finite.html#227" class="InductiveConstructor"
+      >fsucc</a
+      ><a name="967"
+      > </a
+      ><a name="968" href="FinitePigeon.html#929" class="Bound"
+      >n</a
+      ><a name="969" class="Symbol"
+      >))</a
+      ><a name="971"
+      >
+                  </a
+      ><a name="990" href="Logic.html#282" class="Datatype Operator"
+      >&#8743;</a
+      ><a name="991"
+      > </a
+      ><a name="992" class="Symbol"
+      >(&#8704;(</a
+      ><a name="995" href="FinitePigeon.html#995" class="Bound"
+      >n</a
+      ><a name="996"
+      > </a
+      ><a name="997" class="Symbol"
+      >:</a
+      ><a name="998"
+      > </a
+      ><a name="999" href="Finite.html#165" class="Datatype"
+      >smaller</a
+      ><a name="1006" class="Symbol"
+      >(</a
+      ><a name="1007" href="FinitePigeon.html#854" class="Bound"
+      >m</a
+      ><a name="1008"
+      > </a
+      ><a name="1009" href="Addition.html#467" class="Function Operator"
+      >+</a
+      ><a name="1010"
+      > </a
+      ><a name="1011" class="Number"
+      >1</a
+      ><a name="1012" class="Symbol"
+      >))</a
+      ><a name="1014"
+      > </a
+      ><a name="1015" class="Symbol"
+      >&#8594;</a
+      ><a name="1016"
+      > </a
+      ><a name="1017" href="JK-Monads.html#374" class="Function"
+      >K</a
+      ><a name="1018" class="Symbol"
+      >{</a
+      ><a name="1019" href="FinitePigeon.html#849" class="Bound"
+      >R</a
+      ><a name="1020" class="Symbol"
+      >}(</a
+      ><a name="1022" href="FinitePigeon.html#852" class="Bound"
+      >&#945;</a
+      ><a name="1023" class="Symbol"
+      >(</a
+      ><a name="1024" href="FinitePigeon.html#879" class="Bound"
+      >s</a
+      ><a name="1025"
+      > </a
+      ><a name="1026" href="FinitePigeon.html#995" class="Bound"
+      >n</a
+      ><a name="1027" class="Symbol"
+      >)</a
+      ><a name="1028"
+      > </a
+      ><a name="1029" href="Equality.html#48" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="1030"
+      > </a
+      ><a name="1031" href="FinitePigeon.html#866" class="Bound"
+      >b</a
+      ><a name="1032" class="Symbol"
+      >))</a
+      ><a name="1034"
+      >
+
+
+</a
+      ><a name="1037" href="FinitePigeon.html#1037" class="Function"
+      >finite-pigeonhole-lemma</a
+      ><a name="1060"
+      > </a
+      ><a name="1061" class="Symbol"
+      >:</a
+      ><a name="1062"
+      > </a
+      ><a name="1063" class="Symbol"
+      >{</a
+      ><a name="1064" href="FinitePigeon.html#1064" class="Bound"
+      >R</a
+      ><a name="1065"
+      > </a
+      ><a name="1066" class="Symbol"
+      >:</a
+      ><a name="1067"
+      > </a
+      ><a name="1068" href="Logic.html#77" class="Function"
+      >&#937;</a
+      ><a name="1069" class="Symbol"
+      >}</a
+      ><a name="1070"
+      > </a
+      ><a name="1071" class="Symbol"
+      >&#8594;</a
+      ><a name="1072"
+      >
+</a
+      ><a name="1074" class="Comment"
+      >-----------------------</a
+      ><a name="1097"
+      >
+
+ </a
+      ><a name="1100" class="Symbol"
+      >&#8704;(</a
+      ><a name="1102" href="FinitePigeon.html#1102" class="Bound"
+      >&#945;</a
+      ><a name="1103"
+      > </a
+      ><a name="1104" class="Symbol"
+      >:</a
+      ><a name="1105"
+      > </a
+      ><a name="1106" href="Cantor.html#60" class="Function"
+      >&#8322;&#8469;</a
+      ><a name="1108" class="Symbol"
+      >)</a
+      ><a name="1109"
+      > </a
+      ><a name="1110" class="Symbol"
+      >&#8594;</a
+      ><a name="1111"
+      > </a
+      ><a name="1112" class="Symbol"
+      >&#8704;(</a
+      ><a name="1114" href="FinitePigeon.html#1114" class="Bound"
+      >m</a
+      ><a name="1115"
+      > </a
+      ><a name="1116" class="Symbol"
+      >:</a
+      ><a name="1117"
+      > </a
+      ><a name="1118" href="Naturals.html#48" class="Datatype"
+      >&#8469;</a
+      ><a name="1119" class="Symbol"
+      >)</a
+      ><a name="1120"
+      > </a
+      ><a name="1121" class="Symbol"
+      >&#8594;</a
+      ><a name="1122"
+      > </a
+      ><a name="1123" href="JK-Monads.html#374" class="Function"
+      >K</a
+      ><a name="1124" class="Symbol"
+      >(</a
+      ><a name="1125" href="FinitePigeon.html#389" class="Function"
+      >Finite-Pigeonhole</a
+      ><a name="1142"
+      > </a
+      ><a name="1143" href="FinitePigeon.html#1102" class="Bound"
+      >&#945;</a
+      ><a name="1144"
+      > </a
+      ><a name="1145" href="FinitePigeon.html#1114" class="Bound"
+      >m</a
+      ><a name="1146" class="Symbol"
+      >)</a
+      ><a name="1147"
+      >
+
+
+</a
+      ><a name="1150" href="FinitePigeon.html#1037" class="Function"
+      >finite-pigeonhole-lemma</a
+      ><a name="1173"
+      > </a
+      ><a name="1174" class="Symbol"
+      >{</a
+      ><a name="1175" href="FinitePigeon.html#1175" class="Bound"
+      >R</a
+      ><a name="1176" class="Symbol"
+      >}</a
+      ><a name="1177"
+      > </a
+      ><a name="1178" href="FinitePigeon.html#1178" class="Bound"
+      >&#945;</a
+      ><a name="1179"
+      > </a
+      ><a name="1180" href="FinitePigeon.html#1180" class="Bound"
+      >m</a
+      ><a name="1181"
+      > </a
+      ><a name="1182" class="Symbol"
+      >=</a
+      ><a name="1183"
+      >  </a
+      ><a name="1185" href="JK-Monads.html#4331" class="Function"
+      >K-extend</a
+      ><a name="1193"
+      > </a
+      ><a name="1194" href="FinitePigeon.html#2056" class="Function"
+      >lemma&#8322;</a
+      ><a name="1200"
+      > </a
+      ><a name="1201" href="FinitePigeon.html#1974" class="Function"
+      >lemma&#8321;</a
+      ><a name="1207"
+      >
+ </a
+      ><a name="1209" class="Keyword"
+      >where</a
+      ><a name="1214"
+      >
+  </a
+      ><a name="1217" href="FinitePigeon.html#1217" class="Function"
+      >lemma&#8320;</a
+      ><a name="1223"
+      > </a
+      ><a name="1224" class="Symbol"
+      >:</a
+      ><a name="1225"
+      > </a
+      ><a name="1226" href="InfinitePigeon.html#3915" class="Function"
+      >Pigeonhole</a
+      ><a name="1236"
+      > </a
+      ><a name="1237" href="FinitePigeon.html#1178" class="Bound"
+      >&#945;</a
+      ><a name="1238"
+      > </a
+      ><a name="1239" class="Symbol"
+      >&#8594;</a
+      ><a name="1240"
+      > </a
+      ><a name="1241" href="FinitePigeon.html#785" class="Function"
+      >Finite-Pigeonhole-K</a
+      ><a name="1260"
+      > </a
+      ><a name="1261" class="Symbol"
+      >{</a
+      ><a name="1262" href="FinitePigeon.html#1175" class="Bound"
+      >R</a
+      ><a name="1263" class="Symbol"
+      >}</a
+      ><a name="1264"
+      > </a
+      ><a name="1265" href="FinitePigeon.html#1178" class="Bound"
+      >&#945;</a
+      ><a name="1266"
+      > </a
+      ><a name="1267" href="FinitePigeon.html#1180" class="Bound"
+      >m</a
+      ><a name="1268"
+      >
+  </a
+      ><a name="1271" href="FinitePigeon.html#1217" class="Function"
+      >lemma&#8320;</a
+      ><a name="1277"
+      > </a
+      ><a name="1278" class="Symbol"
+      >(</a
+      ><a name="1279" href="Logic.html#1099" class="InductiveConstructor"
+      >&#8707;-intro</a
+      ><a name="1286"
+      > </a
+      ><a name="1287" href="FinitePigeon.html#1287" class="Bound"
+      >b</a
+      ><a name="1288"
+      > </a
+      ><a name="1289" class="Symbol"
+      >(</a
+      ><a name="1290" href="Logic.html#1099" class="InductiveConstructor"
+      >&#8707;-intro</a
+      ><a name="1297"
+      > </a
+      ><a name="1298" href="FinitePigeon.html#1298" class="Bound"
+      >g</a
+      ><a name="1299"
+      > </a
+      ><a name="1300" href="FinitePigeon.html#1300" class="Bound"
+      >h</a
+      ><a name="1301" class="Symbol"
+      >))</a
+      ><a name="1303"
+      > </a
+      ><a name="1304" class="Symbol"
+      >=</a
+      ><a name="1305"
+      >
+          </a
+      ><a name="1317" href="Logic.html#1099" class="InductiveConstructor"
+      >&#8707;-intro</a
+      ><a name="1324"
+      > </a
+      ><a name="1325" href="FinitePigeon.html#1287" class="Bound"
+      >b</a
+      ><a name="1326"
+      > </a
+      ><a name="1327" class="Symbol"
+      >(</a
+      ><a name="1328" href="Logic.html#1099" class="InductiveConstructor"
+      >&#8707;-intro</a
+      ><a name="1335"
+      > </a
+      ><a name="1336" href="FinitePigeon.html#1378" class="Function"
+      >s</a
+      ><a name="1337"
+      > </a
+      ><a name="1338" class="Symbol"
+      >(</a
+      ><a name="1339" href="Logic.html#310" class="InductiveConstructor"
+      >&#8743;-intro</a
+      ><a name="1346"
+      > </a
+      ><a name="1347" href="FinitePigeon.html#1545" class="Function"
+      >fact&#8321;</a
+      ><a name="1352"
+      > </a
+      ><a name="1353" href="FinitePigeon.html#1867" class="Function"
+      >fact&#8323;</a
+      ><a name="1358" class="Symbol"
+      >))</a
+      ><a name="1360"
+      >
+    </a
+      ><a name="1365" class="Keyword"
+      >where</a
+      ><a name="1370"
+      >
+      </a
+      ><a name="1378" href="FinitePigeon.html#1378" class="Function"
+      >s</a
+      ><a name="1379"
+      > </a
+      ><a name="1380" class="Symbol"
+      >:</a
+      ><a name="1381"
+      > </a
+      ><a name="1382" href="Finite.html#165" class="Datatype"
+      >smaller</a
+      ><a name="1389" class="Symbol"
+      >(</a
+      ><a name="1390" href="FinitePigeon.html#1180" class="Bound"
+      >m</a
+      ><a name="1391"
+      > </a
+      ><a name="1392" href="Addition.html#467" class="Function Operator"
+      >+</a
+      ><a name="1393"
+      > </a
+      ><a name="1394" class="Number"
+      >1</a
+      ><a name="1395" class="Symbol"
+      >)</a
+      ><a name="1396"
+      > </a
+      ><a name="1397" class="Symbol"
+      >&#8594;</a
+      ><a name="1398"
+      > </a
+      ><a name="1399" href="Naturals.html#48" class="Datatype"
+      >&#8469;</a
+      ><a name="1400"
+      >
+      </a
+      ><a name="1407" href="FinitePigeon.html#1378" class="Function"
+      >s</a
+      ><a name="1408"
+      > </a
+      ><a name="1409" class="Symbol"
+      >=</a
+      ><a name="1410"
+      > </a
+      ><a name="1411" href="Finite.html#388" class="Function"
+      >restriction</a
+      ><a name="1422"
+      > </a
+      ><a name="1423" href="FinitePigeon.html#1298" class="Bound"
+      >g</a
+      ><a name="1424"
+      >
+
+      </a
+      ><a name="1432" href="FinitePigeon.html#1432" class="Function"
+      >fact&#8320;</a
+      ><a name="1437"
+      > </a
+      ><a name="1438" class="Symbol"
+      >:</a
+      ><a name="1439"
+      > </a
+      ><a name="1440" class="Symbol"
+      >&#8704;(</a
+      ><a name="1442" href="FinitePigeon.html#1442" class="Bound"
+      >n</a
+      ><a name="1443"
+      > </a
+      ><a name="1444" class="Symbol"
+      >:</a
+      ><a name="1445"
+      > </a
+      ><a name="1446" href="Finite.html#165" class="Datatype"
+      >smaller</a
+      ><a name="1453"
+      > </a
+      ><a name="1454" href="FinitePigeon.html#1180" class="Bound"
+      >m</a
+      ><a name="1455" class="Symbol"
+      >)</a
+      ><a name="1456"
+      > </a
+      ><a name="1457" class="Symbol"
+      >&#8594;</a
+      ><a name="1458"
+      > </a
+      ><a name="1459" href="FinitePigeon.html#1298" class="Bound"
+      >g</a
+      ><a name="1460" class="Symbol"
+      >(</a
+      ><a name="1461" href="Finite.html#275" class="Function"
+      >embed</a
+      ><a name="1466"
+      > </a
+      ><a name="1467" href="FinitePigeon.html#1442" class="Bound"
+      >n</a
+      ><a name="1468" class="Symbol"
+      >)</a
+      ><a name="1469"
+      > </a
+      ><a name="1470" href="Equality.html#48" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="1471"
+      > </a
+      ><a name="1472" href="FinitePigeon.html#1378" class="Function"
+      >s</a
+      ><a name="1473" class="Symbol"
+      >(</a
+      ><a name="1474" href="Finite.html#474" class="Function"
+      >coerce</a
+      ><a name="1480"
+      > </a
+      ><a name="1481" href="FinitePigeon.html#1442" class="Bound"
+      >n</a
+      ><a name="1482" class="Symbol"
+      >)</a
+      ><a name="1483"
+      >
+      </a
+      ><a name="1490" href="FinitePigeon.html#1432" class="Function"
+      >fact&#8320;</a
+      ><a name="1495"
+      > </a
+      ><a name="1496" href="FinitePigeon.html#1496" class="Bound"
+      >n</a
+      ><a name="1497"
+      > </a
+      ><a name="1498" class="Symbol"
+      >=</a
+      ><a name="1499"
+      > </a
+      ><a name="1500" href="Equality.html#516" class="Function"
+      >compositionality</a
+      ><a name="1516"
+      > </a
+      ><a name="1517" href="FinitePigeon.html#1298" class="Bound"
+      >g</a
+      ><a name="1518"
+      > </a
+      ><a name="1519" href="Finite.html#658" class="Function"
+      >embed-coerce-lemma</a
+      ><a name="1537"
+      >
+
+      </a
+      ><a name="1545" href="FinitePigeon.html#1545" class="Function"
+      >fact&#8321;</a
+      ><a name="1550"
+      > </a
+      ><a name="1551" class="Symbol"
+      >:</a
+      ><a name="1552"
+      > </a
+      ><a name="1553" class="Symbol"
+      >&#8704;(</a
+      ><a name="1555" href="FinitePigeon.html#1555" class="Bound"
+      >n</a
+      ><a name="1556"
+      > </a
+      ><a name="1557" class="Symbol"
+      >:</a
+      ><a name="1558"
+      > </a
+      ><a name="1559" href="Finite.html#165" class="Datatype"
+      >smaller</a
+      ><a name="1566"
+      > </a
+      ><a name="1567" href="FinitePigeon.html#1180" class="Bound"
+      >m</a
+      ><a name="1568" class="Symbol"
+      >)</a
+      ><a name="1569"
+      > </a
+      ><a name="1570" class="Symbol"
+      >&#8594;</a
+      ><a name="1571"
+      > </a
+      ><a name="1572" href="FinitePigeon.html#1378" class="Function"
+      >s</a
+      ><a name="1573" class="Symbol"
+      >(</a
+      ><a name="1574" href="Finite.html#474" class="Function"
+      >coerce</a
+      ><a name="1580"
+      > </a
+      ><a name="1581" href="FinitePigeon.html#1555" class="Bound"
+      >n</a
+      ><a name="1582" class="Symbol"
+      >)</a
+      ><a name="1583"
+      > </a
+      ><a name="1584" href="Order.html#152" class="Function Operator"
+      >&lt;</a
+      ><a name="1585"
+      > </a
+      ><a name="1586" href="FinitePigeon.html#1378" class="Function"
+      >s</a
+      ><a name="1587" class="Symbol"
+      >(</a
+      ><a name="1588" href="Finite.html#227" class="InductiveConstructor"
+      >fsucc</a
+      ><a name="1593"
+      > </a
+      ><a name="1594" href="FinitePigeon.html#1555" class="Bound"
+      >n</a
+      ><a name="1595" class="Symbol"
+      >)</a
+      ><a name="1596"
+      >
+      </a
+      ><a name="1603" href="FinitePigeon.html#1545" class="Function"
+      >fact&#8321;</a
+      ><a name="1608"
+      > </a
+      ><a name="1609" href="FinitePigeon.html#1609" class="Bound"
+      >n</a
+      ><a name="1610"
+      > </a
+      ><a name="1611" class="Symbol"
+      >=</a
+      ><a name="1612"
+      > </a
+      ><a name="1613" href="Equality.html#788" class="Function"
+      >binary-predicate-compositionality</a
+      ><a name="1646"
+      > </a
+      ><a name="1647" class="Symbol"
+      >{</a
+      ><a name="1648" href="Naturals.html#48" class="Datatype"
+      >&#8469;</a
+      ><a name="1649" class="Symbol"
+      >}</a
+      ><a name="1650"
+      > </a
+      ><a name="1651" class="Symbol"
+      >{</a
+      ><a name="1652" href="Naturals.html#48" class="Datatype"
+      >&#8469;</a
+      ><a name="1653" class="Symbol"
+      >}</a
+      ><a name="1654"
+      > </a
+      ><a name="1655" class="Symbol"
+      >{</a
+      ><a name="1656" href="Order.html#152" class="Function Operator"
+      >_&lt;_</a
+      ><a name="1659" class="Symbol"
+      >}</a
+      ><a name="1660"
+      >
+                  </a
+      ><a name="1680" class="Symbol"
+      >(</a
+      ><a name="1681" href="FinitePigeon.html#1432" class="Function"
+      >fact&#8320;</a
+      ><a name="1686"
+      > </a
+      ><a name="1687" href="FinitePigeon.html#1609" class="Bound"
+      >n</a
+      ><a name="1688" class="Symbol"
+      >)</a
+      ><a name="1689"
+      > </a
+      ><a name="1690" href="Equality.html#82" class="InductiveConstructor"
+      >reflexivity</a
+      ><a name="1701"
+      > </a
+      ><a name="1702" class="Symbol"
+      >(</a
+      ><a name="1703" href="Logic.html#355" class="Function"
+      >&#8743;-elim&#8320;</a
+      ><a name="1710" class="Symbol"
+      >(</a
+      ><a name="1711" href="FinitePigeon.html#1300" class="Bound"
+      >h</a
+      ><a name="1712" class="Symbol"
+      >(</a
+      ><a name="1713" href="Finite.html#275" class="Function"
+      >embed</a
+      ><a name="1718"
+      > </a
+      ><a name="1719" href="FinitePigeon.html#1609" class="Bound"
+      >n</a
+      ><a name="1720" class="Symbol"
+      >)))</a
+      ><a name="1723"
+      >
+
+      </a
+      ><a name="1731" href="FinitePigeon.html#1731" class="Function"
+      >fact&#8322;</a
+      ><a name="1736"
+      > </a
+      ><a name="1737" class="Symbol"
+      >:</a
+      ><a name="1738"
+      > </a
+      ><a name="1739" class="Symbol"
+      >&#8704;(</a
+      ><a name="1741" href="FinitePigeon.html#1741" class="Bound"
+      >n</a
+      ><a name="1742"
+      > </a
+      ><a name="1743" class="Symbol"
+      >:</a
+      ><a name="1744"
+      > </a
+      ><a name="1745" href="Finite.html#165" class="Datatype"
+      >smaller</a
+      ><a name="1752" class="Symbol"
+      >(</a
+      ><a name="1753" href="FinitePigeon.html#1180" class="Bound"
+      >m</a
+      ><a name="1754"
+      > </a
+      ><a name="1755" href="Addition.html#467" class="Function Operator"
+      >+</a
+      ><a name="1756"
+      > </a
+      ><a name="1757" class="Number"
+      >1</a
+      ><a name="1758" class="Symbol"
+      >))</a
+      ><a name="1760"
+      > </a
+      ><a name="1761" class="Symbol"
+      >&#8594;</a
+      ><a name="1762"
+      > </a
+      ><a name="1763" href="FinitePigeon.html#1178" class="Bound"
+      >&#945;</a
+      ><a name="1764" class="Symbol"
+      >(</a
+      ><a name="1765" href="FinitePigeon.html#1298" class="Bound"
+      >g</a
+      ><a name="1766" class="Symbol"
+      >(</a
+      ><a name="1767" href="Finite.html#275" class="Function"
+      >embed</a
+      ><a name="1772"
+      > </a
+      ><a name="1773" href="FinitePigeon.html#1741" class="Bound"
+      >n</a
+      ><a name="1774" class="Symbol"
+      >))</a
+      ><a name="1776"
+      > </a
+      ><a name="1777" href="Equality.html#48" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="1778"
+      > </a
+      ><a name="1779" href="FinitePigeon.html#1287" class="Bound"
+      >b</a
+      ><a name="1780"
+      > </a
+      ><a name="1781" class="Symbol"
+      >&#8594;</a
+      ><a name="1782"
+      > </a
+      ><a name="1783" href="FinitePigeon.html#1178" class="Bound"
+      >&#945;</a
+      ><a name="1784" class="Symbol"
+      >(</a
+      ><a name="1785" href="FinitePigeon.html#1378" class="Function"
+      >s</a
+      ><a name="1786"
+      > </a
+      ><a name="1787" href="FinitePigeon.html#1741" class="Bound"
+      >n</a
+      ><a name="1788" class="Symbol"
+      >)</a
+      ><a name="1789"
+      > </a
+      ><a name="1790" href="Equality.html#48" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="1791"
+      > </a
+      ><a name="1792" href="FinitePigeon.html#1287" class="Bound"
+      >b</a
+      ><a name="1793"
+      >
+      </a
+      ><a name="1800" href="FinitePigeon.html#1731" class="Function"
+      >fact&#8322;</a
+      ><a name="1805"
+      > </a
+      ><a name="1806" href="FinitePigeon.html#1806" class="Bound"
+      >n</a
+      ><a name="1807"
+      > </a
+      ><a name="1808" class="Symbol"
+      >=</a
+      ><a name="1809"
+      > </a
+      ><a name="1810" href="Equality.html#128" class="Function"
+      >two-things-equal-to-a-third-are-equal</a
+      ><a name="1847"
+      > </a
+      ><a name="1848" href="Equality.html#82" class="InductiveConstructor"
+      >reflexivity</a
+      ><a name="1859"
+      >
+
+      </a
+      ><a name="1867" href="FinitePigeon.html#1867" class="Function"
+      >fact&#8323;</a
+      ><a name="1872"
+      > </a
+      ><a name="1873" class="Symbol"
+      >:</a
+      ><a name="1874"
+      > </a
+      ><a name="1875" class="Symbol"
+      >&#8704;(</a
+      ><a name="1877" href="FinitePigeon.html#1877" class="Bound"
+      >n</a
+      ><a name="1878"
+      > </a
+      ><a name="1879" class="Symbol"
+      >:</a
+      ><a name="1880"
+      > </a
+      ><a name="1881" href="Finite.html#165" class="Datatype"
+      >smaller</a
+      ><a name="1888" class="Symbol"
+      >(</a
+      ><a name="1889" href="FinitePigeon.html#1180" class="Bound"
+      >m</a
+      ><a name="1890"
+      > </a
+      ><a name="1891" href="Addition.html#467" class="Function Operator"
+      >+</a
+      ><a name="1892"
+      > </a
+      ><a name="1893" class="Number"
+      >1</a
+      ><a name="1894" class="Symbol"
+      >))</a
+      ><a name="1896"
+      > </a
+      ><a name="1897" class="Symbol"
+      >&#8594;</a
+      ><a name="1898"
+      > </a
+      ><a name="1899" href="JK-Monads.html#374" class="Function"
+      >K</a
+      ><a name="1900" class="Symbol"
+      >(</a
+      ><a name="1901" href="FinitePigeon.html#1178" class="Bound"
+      >&#945;</a
+      ><a name="1902" class="Symbol"
+      >(</a
+      ><a name="1903" href="FinitePigeon.html#1378" class="Function"
+      >s</a
+      ><a name="1904"
+      > </a
+      ><a name="1905" href="FinitePigeon.html#1877" class="Bound"
+      >n</a
+      ><a name="1906" class="Symbol"
+      >)</a
+      ><a name="1907"
+      > </a
+      ><a name="1908" href="Equality.html#48" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="1909"
+      > </a
+      ><a name="1910" href="FinitePigeon.html#1287" class="Bound"
+      >b</a
+      ><a name="1911" class="Symbol"
+      >)</a
+      ><a name="1912"
+      >
+      </a
+      ><a name="1919" href="FinitePigeon.html#1867" class="Function"
+      >fact&#8323;</a
+      ><a name="1924"
+      > </a
+      ><a name="1925" href="FinitePigeon.html#1925" class="Bound"
+      >n</a
+      ><a name="1926"
+      > </a
+      ><a name="1927" class="Symbol"
+      >=</a
+      ><a name="1928"
+      > </a
+      ><a name="1929" href="JK-Monads.html#1456" class="Function"
+      >K-functor</a
+      ><a name="1938"
+      > </a
+      ><a name="1939" class="Symbol"
+      >(</a
+      ><a name="1940" href="FinitePigeon.html#1731" class="Function"
+      >fact&#8322;</a
+      ><a name="1945"
+      > </a
+      ><a name="1946" href="FinitePigeon.html#1925" class="Bound"
+      >n</a
+      ><a name="1947" class="Symbol"
+      >)</a
+      ><a name="1948"
+      > </a
+      ><a name="1949" class="Symbol"
+      >(</a
+      ><a name="1950" href="Logic.html#423" class="Function"
+      >&#8743;-elim&#8321;</a
+      ><a name="1957" class="Symbol"
+      >(</a
+      ><a name="1958" href="FinitePigeon.html#1300" class="Bound"
+      >h</a
+      ><a name="1959" class="Symbol"
+      >(</a
+      ><a name="1960" href="Finite.html#275" class="Function"
+      >embed</a
+      ><a name="1965"
+      > </a
+      ><a name="1966" href="FinitePigeon.html#1925" class="Bound"
+      >n</a
+      ><a name="1967" class="Symbol"
+      >)))</a
+      ><a name="1970"
+      >
+
+  </a
+      ><a name="1974" href="FinitePigeon.html#1974" class="Function"
+      >lemma&#8321;</a
+      ><a name="1980"
+      > </a
+      ><a name="1981" class="Symbol"
+      >:</a
+      ><a name="1982"
+      > </a
+      ><a name="1983" href="JK-Monads.html#374" class="Function"
+      >K</a
+      ><a name="1984" class="Symbol"
+      >(</a
+      ><a name="1985" href="FinitePigeon.html#785" class="Function"
+      >Finite-Pigeonhole-K</a
+      ><a name="2004"
+      > </a
+      ><a name="2005" href="FinitePigeon.html#1178" class="Bound"
+      >&#945;</a
+      ><a name="2006"
+      > </a
+      ><a name="2007" href="FinitePigeon.html#1180" class="Bound"
+      >m</a
+      ><a name="2008" class="Symbol"
+      >)</a
+      ><a name="2009"
+      >
+  </a
+      ><a name="2012" href="FinitePigeon.html#1974" class="Function"
+      >lemma&#8321;</a
+      ><a name="2018"
+      > </a
+      ><a name="2019" class="Symbol"
+      >=</a
+      ><a name="2020"
+      > </a
+      ><a name="2021" href="JK-Monads.html#1456" class="Function"
+      >K-functor</a
+      ><a name="2030"
+      > </a
+      ><a name="2031" href="FinitePigeon.html#1217" class="Function"
+      >lemma&#8320;</a
+      ><a name="2037"
+      > </a
+      ><a name="2038" class="Symbol"
+      >(</a
+      ><a name="2039" href="InfinitePigeon.html#4050" class="Function"
+      >pigeonhole</a
+      ><a name="2049"
+      > </a
+      ><a name="2050" href="FinitePigeon.html#1178" class="Bound"
+      >&#945;</a
+      ><a name="2051" class="Symbol"
+      >)</a
+      ><a name="2052"
+      >
+
+  </a
+      ><a name="2056" href="FinitePigeon.html#2056" class="Function"
+      >lemma&#8322;</a
+      ><a name="2062"
+      > </a
+      ><a name="2063" class="Symbol"
+      >:</a
+      ><a name="2064"
+      > </a
+      ><a name="2065" href="FinitePigeon.html#785" class="Function"
+      >Finite-Pigeonhole-K</a
+      ><a name="2084"
+      > </a
+      ><a name="2085" href="FinitePigeon.html#1178" class="Bound"
+      >&#945;</a
+      ><a name="2086"
+      > </a
+      ><a name="2087" href="FinitePigeon.html#1180" class="Bound"
+      >m</a
+      ><a name="2088"
+      > </a
+      ><a name="2089" class="Symbol"
+      >&#8594;</a
+      ><a name="2090"
+      > </a
+      ><a name="2091" href="JK-Monads.html#374" class="Function"
+      >K</a
+      ><a name="2092" class="Symbol"
+      >(</a
+      ><a name="2093" href="FinitePigeon.html#389" class="Function"
+      >Finite-Pigeonhole</a
+      ><a name="2110"
+      > </a
+      ><a name="2111" href="FinitePigeon.html#1178" class="Bound"
+      >&#945;</a
+      ><a name="2112"
+      > </a
+      ><a name="2113" href="FinitePigeon.html#1180" class="Bound"
+      >m</a
+      ><a name="2114" class="Symbol"
+      >)</a
+      ><a name="2115"
+      >
+
+  </a
+      ><a name="2119" href="FinitePigeon.html#2056" class="Function"
+      >lemma&#8322;</a
+      ><a name="2125"
+      > </a
+      ><a name="2126" class="Symbol"
+      >(</a
+      ><a name="2127" href="Logic.html#1099" class="InductiveConstructor"
+      >&#8707;-intro</a
+      ><a name="2134"
+      > </a
+      ><a name="2135" href="FinitePigeon.html#2135" class="Bound"
+      >b</a
+      ><a name="2136"
+      > </a
+      ><a name="2137" class="Symbol"
+      >(</a
+      ><a name="2138" href="Logic.html#1099" class="InductiveConstructor"
+      >&#8707;-intro</a
+      ><a name="2145"
+      > </a
+      ><a name="2146" href="FinitePigeon.html#2146" class="Bound"
+      >s</a
+      ><a name="2147"
+      > </a
+      ><a name="2148" class="Symbol"
+      >(</a
+      ><a name="2149" href="Logic.html#310" class="InductiveConstructor"
+      >&#8743;-intro</a
+      ><a name="2156"
+      > </a
+      ><a name="2157" href="FinitePigeon.html#2157" class="Bound"
+      >h</a
+      ><a name="2158"
+      > </a
+      ><a name="2159" href="FinitePigeon.html#2159" class="Bound"
+      >k</a
+      ><a name="2160" class="Symbol"
+      >)))</a
+      ><a name="2163"
+      > </a
+      ><a name="2164" class="Symbol"
+      >=</a
+      ><a name="2165"
+      >
+         </a
+      ><a name="2175" href="JK-LogicalFacts.html#1028" class="Function"
+      >K-&#8707;-shift</a
+      ><a name="2184" class="Symbol"
+      >(</a
+      ><a name="2185" href="Logic.html#1099" class="InductiveConstructor"
+      >&#8707;-intro</a
+      ><a name="2192"
+      > </a
+      ><a name="2193" href="FinitePigeon.html#2135" class="Bound"
+      >b</a
+      ><a name="2194"
+      > </a
+      ><a name="2195" class="Symbol"
+      >(</a
+      ><a name="2196" href="JK-LogicalFacts.html#1028" class="Function"
+      >K-&#8707;-shift</a
+      ><a name="2205" class="Symbol"
+      >(</a
+      ><a name="2206" href="Logic.html#1099" class="InductiveConstructor"
+      >&#8707;-intro</a
+      ><a name="2213"
+      > </a
+      ><a name="2214" href="FinitePigeon.html#2146" class="Bound"
+      >s</a
+      ><a name="2215"
+      >
+           </a
+      ><a name="2228" class="Symbol"
+      >(</a
+      ><a name="2229" href="JK-Monads.html#5434" class="Function"
+      >K-strength</a
+      ><a name="2239" class="Symbol"
+      >(</a
+      ><a name="2240" href="Logic.html#310" class="InductiveConstructor"
+      >&#8743;-intro</a
+      ><a name="2247"
+      > </a
+      ><a name="2248" href="FinitePigeon.html#2157" class="Bound"
+      >h</a
+      ><a name="2249"
+      > </a
+      ><a name="2250" class="Symbol"
+      >(</a
+      ><a name="2251" href="Finite.html#2626" class="Function"
+      >fK-&#8704;-shift</a
+      ><a name="2261"
+      > </a
+      ><a name="2262" href="FinitePigeon.html#2159" class="Bound"
+      >k</a
+      ><a name="2263" class="Symbol"
+      >))))))</a
+      ><a name="2269"
+      >
+
+
+</a
+      ><a name="2272" class="Comment"
+      >-- We now apply Friedman's trick. For given &#945; and m, we let R be the</a
+      ><a name="2340"
+      >
+</a
+      ><a name="2341" class="Comment"
+      >-- proposition we want to prove, namely Finite-Pigeonhole &#945; m. But we</a
+      ><a name="2410"
+      >
+</a
+      ><a name="2411" class="Comment"
+      >-- have proved K{R}R in the above lemma. Because this is (R&#8594;R)&#8594;R, we</a
+      ><a name="2479"
+      >
+</a
+      ><a name="2480" class="Comment"
+      >-- get R if we apply it to the proof id: R&#8594;R.</a
+      ><a name="2525"
+      >
+
+
+</a
+      ><a name="2528" href="FinitePigeon.html#2528" class="Function"
+      >Theorem</a
+      ><a name="2535"
+      > </a
+      ><a name="2536" class="Symbol"
+      >:</a
+      ><a name="2537"
+      >
+</a
+      ><a name="2540" class="Comment"
+      >-------</a
+      ><a name="2547"
+      >
+
+ </a
+      ><a name="2550" class="Symbol"
+      >&#8704;(</a
+      ><a name="2552" href="FinitePigeon.html#2552" class="Bound"
+      >&#945;</a
+      ><a name="2553"
+      > </a
+      ><a name="2554" class="Symbol"
+      >:</a
+      ><a name="2555"
+      > </a
+      ><a name="2556" href="Cantor.html#60" class="Function"
+      >&#8322;&#8469;</a
+      ><a name="2558" class="Symbol"
+      >)</a
+      ><a name="2559"
+      > </a
+      ><a name="2560" class="Symbol"
+      >&#8594;</a
+      ><a name="2561"
+      > </a
+      ><a name="2562" class="Symbol"
+      >&#8704;(</a
+      ><a name="2564" href="FinitePigeon.html#2564" class="Bound"
+      >m</a
+      ><a name="2565"
+      > </a
+      ><a name="2566" class="Symbol"
+      >:</a
+      ><a name="2567"
+      > </a
+      ><a name="2568" href="Naturals.html#48" class="Datatype"
+      >&#8469;</a
+      ><a name="2569" class="Symbol"
+      >)</a
+      ><a name="2570"
+      > </a
+      ><a name="2571" class="Symbol"
+      >&#8594;</a
+      ><a name="2572"
+      > </a
+      ><a name="2573" href="FinitePigeon.html#389" class="Function"
+      >Finite-Pigeonhole</a
+      ><a name="2590"
+      > </a
+      ><a name="2591" href="FinitePigeon.html#2552" class="Bound"
+      >&#945;</a
+      ><a name="2592"
+      > </a
+      ><a name="2593" href="FinitePigeon.html#2564" class="Bound"
+      >m</a
+      ><a name="2594"
+      >
+
+</a
+      ><a name="2596" href="FinitePigeon.html#2528" class="Function"
+      >Theorem</a
+      ><a name="2603"
+      > </a
+      ><a name="2604" href="FinitePigeon.html#2604" class="Bound"
+      >&#945;</a
+      ><a name="2605"
+      > </a
+      ><a name="2606" href="FinitePigeon.html#2606" class="Bound"
+      >m</a
+      ><a name="2607"
+      > </a
+      ><a name="2608" class="Symbol"
+      >=</a
+      ><a name="2609"
+      > </a
+      ><a name="2610" href="FinitePigeon.html#1037" class="Function"
+      >finite-pigeonhole-lemma</a
+      ><a name="2633"
+      > </a
+      ><a name="2634" class="Symbol"
+      >{</a
+      ><a name="2635" href="FinitePigeon.html#389" class="Function"
+      >Finite-Pigeonhole</a
+      ><a name="2652"
+      > </a
+      ><a name="2653" href="FinitePigeon.html#2604" class="Bound"
+      >&#945;</a
+      ><a name="2654"
+      > </a
+      ><a name="2655" href="FinitePigeon.html#2606" class="Bound"
+      >m</a
+      ><a name="2656" class="Symbol"
+      >}</a
+      ><a name="2657"
+      > </a
+      ><a name="2658" href="FinitePigeon.html#2604" class="Bound"
+      >&#945;</a
+      ><a name="2659"
+      > </a
+      ><a name="2660" href="FinitePigeon.html#2606" class="Bound"
+      >m</a
+      ><a name="2661"
+      > </a
+      ><a name="2662" href="LogicalFacts.html#175" class="Function"
+      >id</a
+      ><a name="2664"
+      >
+
+
+</a
+      ><a name="2668" class="Comment"
+      >-- NB. If we remove the implicit parameter in this call to</a
+      ><a name="2726"
+      >
+</a
+      ><a name="2727" class="Comment"
+      >-- finite-pigeonhole-lemma, Agda infers the required R.</a
+      ><a name="2782"
+      >
+
+</a
+      ></pre
+    >
+</body
+  ></html
+>

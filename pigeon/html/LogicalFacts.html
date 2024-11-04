@@ -1,0 +1,1864 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+><head
+  ><title
+    >LogicalFacts</title
+    ><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"
+     /><meta http-equiv="Content-Style-Type" content="text/css"
+     /><link href="Agda.css" rel="stylesheet" type="text/css"
+     /></head
+  ><body
+  ><pre
+    ><a name="1" class="Keyword"
+      >module</a
+      ><a name="7"
+      > </a
+      ><a name="8" href="LogicalFacts.html#8" class="Module"
+      >LogicalFacts</a
+      ><a name="20"
+      > </a
+      ><a name="21" class="Keyword"
+      >where</a
+      ><a name="26"
+      >
+
+</a
+      ><a name="28" class="Keyword"
+      >infixl</a
+      ><a name="34"
+      > </a
+      ><a name="35" class="Number"
+      >30</a
+      ><a name="37"
+      > _&#8728;_
+
+</a
+      ><a name="44" class="Keyword"
+      >open</a
+      ><a name="48"
+      > </a
+      ><a name="49" class="Keyword"
+      >import</a
+      ><a name="55"
+      > </a
+      ><a name="56" href="Logic.html#8" class="Module"
+      >Logic</a
+      ><a name="61"
+      >
+
+</a
+      ><a name="63" href="LogicalFacts.html#63" class="Function Operator"
+      >_&#8728;_</a
+      ><a name="66"
+      > </a
+      ><a name="67" class="Symbol"
+      >:</a
+      ><a name="68"
+      > </a
+      ><a name="69" class="Symbol"
+      >{</a
+      ><a name="70" href="LogicalFacts.html#70" class="Bound"
+      >A</a
+      ><a name="71"
+      > </a
+      ><a name="72" href="LogicalFacts.html#72" class="Bound"
+      >B</a
+      ><a name="73"
+      > </a
+      ><a name="74" class="Symbol"
+      >:</a
+      ><a name="75"
+      > </a
+      ><a name="76" href="Logic.html#77" class="Function"
+      >&#937;</a
+      ><a name="77" class="Symbol"
+      >}</a
+      ><a name="78"
+      > </a
+      ><a name="79" class="Symbol"
+      >{</a
+      ><a name="80" href="LogicalFacts.html#80" class="Bound"
+      >C</a
+      ><a name="81"
+      > </a
+      ><a name="82" class="Symbol"
+      >:</a
+      ><a name="83"
+      > </a
+      ><a name="84" href="LogicalFacts.html#72" class="Bound"
+      >B</a
+      ><a name="85"
+      > </a
+      ><a name="86" class="Symbol"
+      >&#8594;</a
+      ><a name="87"
+      > </a
+      ><a name="88" href="Logic.html#77" class="Function"
+      >&#937;</a
+      ><a name="89" class="Symbol"
+      >}</a
+      ><a name="90"
+      > </a
+      ><a name="91" class="Symbol"
+      >&#8594;</a
+      ><a name="92"
+      >
+      </a
+      ><a name="99" class="Symbol"
+      >(&#8704;(</a
+      ><a name="102" href="LogicalFacts.html#102" class="Bound"
+      >b</a
+      ><a name="103"
+      > </a
+      ><a name="104" class="Symbol"
+      >:</a
+      ><a name="105"
+      > </a
+      ><a name="106" href="LogicalFacts.html#72" class="Bound"
+      >B</a
+      ><a name="107" class="Symbol"
+      >)</a
+      ><a name="108"
+      > </a
+      ><a name="109" class="Symbol"
+      >&#8594;</a
+      ><a name="110"
+      > </a
+      ><a name="111" href="LogicalFacts.html#80" class="Bound"
+      >C</a
+      ><a name="112"
+      > </a
+      ><a name="113" href="LogicalFacts.html#102" class="Bound"
+      >b</a
+      ><a name="114" class="Symbol"
+      >)</a
+      ><a name="115"
+      > </a
+      ><a name="116" class="Symbol"
+      >&#8594;</a
+      ><a name="117"
+      > </a
+      ><a name="118" class="Symbol"
+      >&#8704;(</a
+      ><a name="120" href="LogicalFacts.html#120" class="Bound"
+      >f</a
+      ><a name="121"
+      > </a
+      ><a name="122" class="Symbol"
+      >:</a
+      ><a name="123"
+      > </a
+      ><a name="124" href="LogicalFacts.html#70" class="Bound"
+      >A</a
+      ><a name="125"
+      > </a
+      ><a name="126" class="Symbol"
+      >&#8594;</a
+      ><a name="127"
+      > </a
+      ><a name="128" href="LogicalFacts.html#72" class="Bound"
+      >B</a
+      ><a name="129" class="Symbol"
+      >)</a
+      ><a name="130"
+      > </a
+      ><a name="131" class="Symbol"
+      >&#8594;</a
+      ><a name="132"
+      > </a
+      ><a name="133" class="Symbol"
+      >&#8704;(</a
+      ><a name="135" href="LogicalFacts.html#135" class="Bound"
+      >a</a
+      ><a name="136"
+      > </a
+      ><a name="137" class="Symbol"
+      >:</a
+      ><a name="138"
+      > </a
+      ><a name="139" href="LogicalFacts.html#70" class="Bound"
+      >A</a
+      ><a name="140" class="Symbol"
+      >)</a
+      ><a name="141"
+      > </a
+      ><a name="142" class="Symbol"
+      >&#8594;</a
+      ><a name="143"
+      > </a
+      ><a name="144" href="LogicalFacts.html#80" class="Bound"
+      >C</a
+      ><a name="145" class="Symbol"
+      >(</a
+      ><a name="146" href="LogicalFacts.html#120" class="Bound"
+      >f</a
+      ><a name="147"
+      > </a
+      ><a name="148" href="LogicalFacts.html#135" class="Bound"
+      >a</a
+      ><a name="149" class="Symbol"
+      >)</a
+      ><a name="150"
+      >
+
+</a
+      ><a name="152" href="LogicalFacts.html#152" class="Bound"
+      >g</a
+      ><a name="153"
+      > </a
+      ><a name="154" href="LogicalFacts.html#63" class="Function Operator"
+      >&#8728;</a
+      ><a name="155"
+      > </a
+      ><a name="156" href="LogicalFacts.html#156" class="Bound"
+      >f</a
+      ><a name="157"
+      > </a
+      ><a name="158" class="Symbol"
+      >=</a
+      ><a name="159"
+      > </a
+      ><a name="160" class="Symbol"
+      >&#955;</a
+      ><a name="161"
+      > </a
+      ><a name="162" href="LogicalFacts.html#162" class="Bound"
+      >x</a
+      ><a name="163"
+      > </a
+      ><a name="164" class="Symbol"
+      >&#8594;</a
+      ><a name="165"
+      > </a
+      ><a name="166" href="LogicalFacts.html#152" class="Bound"
+      >g</a
+      ><a name="167" class="Symbol"
+      >(</a
+      ><a name="168" href="LogicalFacts.html#156" class="Bound"
+      >f</a
+      ><a name="169"
+      > </a
+      ><a name="170" href="LogicalFacts.html#162" class="Bound"
+      >x</a
+      ><a name="171" class="Symbol"
+      >)</a
+      ><a name="172"
+      >
+
+
+</a
+      ><a name="175" href="LogicalFacts.html#175" class="Function"
+      >id</a
+      ><a name="177"
+      > </a
+      ><a name="178" class="Symbol"
+      >:</a
+      ><a name="179"
+      > </a
+      ><a name="180" class="Symbol"
+      >{</a
+      ><a name="181" href="LogicalFacts.html#181" class="Bound"
+      >A</a
+      ><a name="182"
+      > </a
+      ><a name="183" class="Symbol"
+      >:</a
+      ><a name="184"
+      > </a
+      ><a name="185" href="Logic.html#77" class="Function"
+      >&#937;</a
+      ><a name="186" class="Symbol"
+      >}</a
+      ><a name="187"
+      > </a
+      ><a name="188" class="Symbol"
+      >&#8594;</a
+      ><a name="189"
+      > </a
+      ><a name="190" href="LogicalFacts.html#181" class="Bound"
+      >A</a
+      ><a name="191"
+      > </a
+      ><a name="192" class="Symbol"
+      >&#8594;</a
+      ><a name="193"
+      > </a
+      ><a name="194" href="LogicalFacts.html#181" class="Bound"
+      >A</a
+      ><a name="195"
+      >
+</a
+      ><a name="196" href="LogicalFacts.html#175" class="Function"
+      >id</a
+      ><a name="198"
+      > </a
+      ><a name="199" href="LogicalFacts.html#199" class="Bound"
+      >x</a
+      ><a name="200"
+      > </a
+      ><a name="201" class="Symbol"
+      >=</a
+      ><a name="202"
+      > </a
+      ><a name="203" href="LogicalFacts.html#199" class="Bound"
+      >x</a
+      ><a name="204"
+      >
+
+
+</a
+      ><a name="207" href="LogicalFacts.html#207" class="Function"
+      >uncurry</a
+      ><a name="214"
+      > </a
+      ><a name="215" class="Symbol"
+      >:</a
+      ><a name="216"
+      > </a
+      ><a name="217" class="Symbol"
+      >{</a
+      ><a name="218" href="LogicalFacts.html#218" class="Bound"
+      >A</a
+      ><a name="219"
+      > </a
+      ><a name="220" href="LogicalFacts.html#220" class="Bound"
+      >B</a
+      ><a name="221"
+      > </a
+      ><a name="222" href="LogicalFacts.html#222" class="Bound"
+      >C</a
+      ><a name="223"
+      > </a
+      ><a name="224" class="Symbol"
+      >:</a
+      ><a name="225"
+      > </a
+      ><a name="226" href="Logic.html#77" class="Function"
+      >&#937;</a
+      ><a name="227" class="Symbol"
+      >}</a
+      ><a name="228"
+      > </a
+      ><a name="229" class="Symbol"
+      >&#8594;</a
+      ><a name="230"
+      >
+  </a
+      ><a name="233" class="Symbol"
+      >(</a
+      ><a name="234" href="LogicalFacts.html#218" class="Bound"
+      >A</a
+      ><a name="235"
+      > </a
+      ><a name="236" class="Symbol"
+      >&#8594;</a
+      ><a name="237"
+      > </a
+      ><a name="238" href="LogicalFacts.html#220" class="Bound"
+      >B</a
+      ><a name="239"
+      > </a
+      ><a name="240" class="Symbol"
+      >&#8594;</a
+      ><a name="241"
+      > </a
+      ><a name="242" href="LogicalFacts.html#222" class="Bound"
+      >C</a
+      ><a name="243" class="Symbol"
+      >)</a
+      ><a name="244"
+      > </a
+      ><a name="245" class="Symbol"
+      >&#8594;</a
+      ><a name="246"
+      > </a
+      ><a name="247" href="LogicalFacts.html#218" class="Bound"
+      >A</a
+      ><a name="248"
+      > </a
+      ><a name="249" href="Logic.html#282" class="Datatype Operator"
+      >&#8743;</a
+      ><a name="250"
+      > </a
+      ><a name="251" href="LogicalFacts.html#220" class="Bound"
+      >B</a
+      ><a name="252"
+      > </a
+      ><a name="253" class="Symbol"
+      >&#8594;</a
+      ><a name="254"
+      > </a
+      ><a name="255" href="LogicalFacts.html#222" class="Bound"
+      >C</a
+      ><a name="256"
+      >
+
+</a
+      ><a name="258" href="LogicalFacts.html#207" class="Function"
+      >uncurry</a
+      ><a name="265"
+      > </a
+      ><a name="266" href="LogicalFacts.html#266" class="Bound"
+      >f</a
+      ><a name="267"
+      > </a
+      ><a name="268" class="Symbol"
+      >(</a
+      ><a name="269" href="Logic.html#310" class="InductiveConstructor"
+      >&#8743;-intro</a
+      ><a name="276"
+      > </a
+      ><a name="277" href="LogicalFacts.html#277" class="Bound"
+      >a</a
+      ><a name="278"
+      > </a
+      ><a name="279" href="LogicalFacts.html#279" class="Bound"
+      >b</a
+      ><a name="280" class="Symbol"
+      >)</a
+      ><a name="281"
+      > </a
+      ><a name="282" class="Symbol"
+      >=</a
+      ><a name="283"
+      > </a
+      ><a name="284" href="LogicalFacts.html#266" class="Bound"
+      >f</a
+      ><a name="285"
+      > </a
+      ><a name="286" href="LogicalFacts.html#277" class="Bound"
+      >a</a
+      ><a name="287"
+      > </a
+      ><a name="288" href="LogicalFacts.html#279" class="Bound"
+      >b</a
+      ><a name="289"
+      >
+
+
+</a
+      ><a name="292" href="LogicalFacts.html#292" class="Function"
+      >curry</a
+      ><a name="297"
+      > </a
+      ><a name="298" class="Symbol"
+      >:</a
+      ><a name="299"
+      > </a
+      ><a name="300" class="Symbol"
+      >{</a
+      ><a name="301" href="LogicalFacts.html#301" class="Bound"
+      >A</a
+      ><a name="302"
+      > </a
+      ><a name="303" href="LogicalFacts.html#303" class="Bound"
+      >B</a
+      ><a name="304"
+      > </a
+      ><a name="305" href="LogicalFacts.html#305" class="Bound"
+      >C</a
+      ><a name="306"
+      > </a
+      ><a name="307" class="Symbol"
+      >:</a
+      ><a name="308"
+      > </a
+      ><a name="309" href="Logic.html#77" class="Function"
+      >&#937;</a
+      ><a name="310" class="Symbol"
+      >}</a
+      ><a name="311"
+      > </a
+      ><a name="312" class="Symbol"
+      >&#8594;</a
+      ><a name="313"
+      >
+  </a
+      ><a name="316" class="Symbol"
+      >(</a
+      ><a name="317" href="LogicalFacts.html#301" class="Bound"
+      >A</a
+      ><a name="318"
+      > </a
+      ><a name="319" href="Logic.html#282" class="Datatype Operator"
+      >&#8743;</a
+      ><a name="320"
+      > </a
+      ><a name="321" href="LogicalFacts.html#303" class="Bound"
+      >B</a
+      ><a name="322"
+      > </a
+      ><a name="323" class="Symbol"
+      >&#8594;</a
+      ><a name="324"
+      > </a
+      ><a name="325" href="LogicalFacts.html#305" class="Bound"
+      >C</a
+      ><a name="326" class="Symbol"
+      >)</a
+      ><a name="327"
+      > </a
+      ><a name="328" class="Symbol"
+      >&#8594;</a
+      ><a name="329"
+      > </a
+      ><a name="330" href="LogicalFacts.html#301" class="Bound"
+      >A</a
+      ><a name="331"
+      > </a
+      ><a name="332" class="Symbol"
+      >&#8594;</a
+      ><a name="333"
+      > </a
+      ><a name="334" href="LogicalFacts.html#303" class="Bound"
+      >B</a
+      ><a name="335"
+      > </a
+      ><a name="336" class="Symbol"
+      >&#8594;</a
+      ><a name="337"
+      > </a
+      ><a name="338" href="LogicalFacts.html#305" class="Bound"
+      >C</a
+      ><a name="339"
+      >
+
+</a
+      ><a name="341" href="LogicalFacts.html#292" class="Function"
+      >curry</a
+      ><a name="346"
+      > </a
+      ><a name="347" href="LogicalFacts.html#347" class="Bound"
+      >f</a
+      ><a name="348"
+      > </a
+      ><a name="349" href="LogicalFacts.html#349" class="Bound"
+      >a</a
+      ><a name="350"
+      > </a
+      ><a name="351" href="LogicalFacts.html#351" class="Bound"
+      >b</a
+      ><a name="352"
+      > </a
+      ><a name="353" class="Symbol"
+      >=</a
+      ><a name="354"
+      > </a
+      ><a name="355" href="LogicalFacts.html#347" class="Bound"
+      >f</a
+      ><a name="356" class="Symbol"
+      >(</a
+      ><a name="357" href="Logic.html#310" class="InductiveConstructor"
+      >&#8743;-intro</a
+      ><a name="364"
+      > </a
+      ><a name="365" href="LogicalFacts.html#349" class="Bound"
+      >a</a
+      ><a name="366"
+      > </a
+      ><a name="367" href="LogicalFacts.html#351" class="Bound"
+      >b</a
+      ><a name="368" class="Symbol"
+      >)</a
+      ><a name="369"
+      >
+
+
+</a
+      ><a name="372" href="LogicalFacts.html#372" class="Function"
+      >double-negation-intro</a
+      ><a name="393"
+      > </a
+      ><a name="394" class="Symbol"
+      >:</a
+      ><a name="395"
+      > </a
+      ><a name="396" class="Symbol"
+      >{</a
+      ><a name="397" href="LogicalFacts.html#397" class="Bound"
+      >R</a
+      ><a name="398"
+      > </a
+      ><a name="399" href="LogicalFacts.html#399" class="Bound"
+      >A</a
+      ><a name="400"
+      > </a
+      ><a name="401" class="Symbol"
+      >:</a
+      ><a name="402"
+      > </a
+      ><a name="403" href="Logic.html#77" class="Function"
+      >&#937;</a
+      ><a name="404" class="Symbol"
+      >}</a
+      ><a name="405"
+      > </a
+      ><a name="406" class="Symbol"
+      >&#8594;</a
+      ><a name="407"
+      >
+ </a
+      ><a name="409" href="LogicalFacts.html#399" class="Bound"
+      >A</a
+      ><a name="410"
+      > </a
+      ><a name="411" class="Symbol"
+      >&#8594;</a
+      ><a name="412"
+      > </a
+      ><a name="413" class="Symbol"
+      >((</a
+      ><a name="415" href="LogicalFacts.html#399" class="Bound"
+      >A</a
+      ><a name="416"
+      > </a
+      ><a name="417" class="Symbol"
+      >&#8594;</a
+      ><a name="418"
+      > </a
+      ><a name="419" href="LogicalFacts.html#397" class="Bound"
+      >R</a
+      ><a name="420" class="Symbol"
+      >)</a
+      ><a name="421"
+      > </a
+      ><a name="422" class="Symbol"
+      >&#8594;</a
+      ><a name="423"
+      > </a
+      ><a name="424" href="LogicalFacts.html#397" class="Bound"
+      >R</a
+      ><a name="425" class="Symbol"
+      >)</a
+      ><a name="426"
+      >
+
+</a
+      ><a name="428" href="LogicalFacts.html#372" class="Function"
+      >double-negation-intro</a
+      ><a name="449"
+      > </a
+      ><a name="450" href="LogicalFacts.html#450" class="Bound"
+      >a</a
+      ><a name="451"
+      > </a
+      ><a name="452" href="LogicalFacts.html#452" class="Bound"
+      >p</a
+      ><a name="453"
+      > </a
+      ><a name="454" class="Symbol"
+      >=</a
+      ><a name="455"
+      > </a
+      ><a name="456" href="LogicalFacts.html#452" class="Bound"
+      >p</a
+      ><a name="457"
+      > </a
+      ><a name="458" href="LogicalFacts.html#450" class="Bound"
+      >a</a
+      ><a name="459"
+      >
+
+
+</a
+      ><a name="462" href="LogicalFacts.html#462" class="Function"
+      >contra-positive</a
+      ><a name="477"
+      > </a
+      ><a name="478" class="Symbol"
+      >:</a
+      ><a name="479"
+      > </a
+      ><a name="480" class="Symbol"
+      >{</a
+      ><a name="481" href="LogicalFacts.html#481" class="Bound"
+      >R</a
+      ><a name="482"
+      > </a
+      ><a name="483" href="LogicalFacts.html#483" class="Bound"
+      >A</a
+      ><a name="484"
+      > </a
+      ><a name="485" href="LogicalFacts.html#485" class="Bound"
+      >B</a
+      ><a name="486"
+      > </a
+      ><a name="487" class="Symbol"
+      >:</a
+      ><a name="488"
+      > </a
+      ><a name="489" href="Logic.html#77" class="Function"
+      >&#937;</a
+      ><a name="490" class="Symbol"
+      >}</a
+      ><a name="491"
+      > </a
+      ><a name="492" class="Symbol"
+      >&#8594;</a
+      ><a name="493"
+      >
+ </a
+      ><a name="496" class="Symbol"
+      >(</a
+      ><a name="497" href="LogicalFacts.html#483" class="Bound"
+      >A</a
+      ><a name="498"
+      > </a
+      ><a name="499" class="Symbol"
+      >&#8594;</a
+      ><a name="500"
+      > </a
+      ><a name="501" href="LogicalFacts.html#485" class="Bound"
+      >B</a
+      ><a name="502" class="Symbol"
+      >)</a
+      ><a name="503"
+      > </a
+      ><a name="504" class="Symbol"
+      >&#8594;</a
+      ><a name="505"
+      > </a
+      ><a name="506" class="Symbol"
+      >(</a
+      ><a name="507" href="LogicalFacts.html#485" class="Bound"
+      >B</a
+      ><a name="508"
+      > </a
+      ><a name="509" class="Symbol"
+      >&#8594;</a
+      ><a name="510"
+      > </a
+      ><a name="511" href="LogicalFacts.html#481" class="Bound"
+      >R</a
+      ><a name="512" class="Symbol"
+      >)</a
+      ><a name="513"
+      > </a
+      ><a name="514" class="Symbol"
+      >&#8594;</a
+      ><a name="515"
+      > </a
+      ><a name="516" class="Symbol"
+      >(</a
+      ><a name="517" href="LogicalFacts.html#483" class="Bound"
+      >A</a
+      ><a name="518"
+      > </a
+      ><a name="519" class="Symbol"
+      >&#8594;</a
+      ><a name="520"
+      > </a
+      ><a name="521" href="LogicalFacts.html#481" class="Bound"
+      >R</a
+      ><a name="522" class="Symbol"
+      >)</a
+      ><a name="523"
+      >
+
+</a
+      ><a name="525" href="LogicalFacts.html#462" class="Function"
+      >contra-positive</a
+      ><a name="540"
+      > </a
+      ><a name="541" href="LogicalFacts.html#541" class="Bound"
+      >f</a
+      ><a name="542"
+      > </a
+      ><a name="543" href="LogicalFacts.html#543" class="Bound"
+      >p</a
+      ><a name="544"
+      > </a
+      ><a name="545" class="Symbol"
+      >=</a
+      ><a name="546"
+      > </a
+      ><a name="547" href="LogicalFacts.html#543" class="Bound"
+      >p</a
+      ><a name="548"
+      > </a
+      ><a name="549" href="LogicalFacts.html#63" class="Function Operator"
+      >&#8728;</a
+      ><a name="550"
+      > </a
+      ><a name="551" href="LogicalFacts.html#541" class="Bound"
+      >f</a
+      ><a name="552"
+      >
+
+
+</a
+      ><a name="555" href="LogicalFacts.html#555" class="Function"
+      >three-negations-imply-one</a
+      ><a name="580"
+      > </a
+      ><a name="581" class="Symbol"
+      >:</a
+      ><a name="582"
+      > </a
+      ><a name="583" class="Symbol"
+      >{</a
+      ><a name="584" href="LogicalFacts.html#584" class="Bound"
+      >R</a
+      ><a name="585"
+      > </a
+      ><a name="586" href="LogicalFacts.html#586" class="Bound"
+      >A</a
+      ><a name="587"
+      > </a
+      ><a name="588" class="Symbol"
+      >:</a
+      ><a name="589"
+      > </a
+      ><a name="590" href="Logic.html#77" class="Function"
+      >&#937;</a
+      ><a name="591" class="Symbol"
+      >}</a
+      ><a name="592"
+      > </a
+      ><a name="593" class="Symbol"
+      >&#8594;</a
+      ><a name="594"
+      >
+  </a
+      ><a name="598" class="Symbol"
+      >(((</a
+      ><a name="601" href="LogicalFacts.html#586" class="Bound"
+      >A</a
+      ><a name="602"
+      > </a
+      ><a name="603" class="Symbol"
+      >&#8594;</a
+      ><a name="604"
+      > </a
+      ><a name="605" href="LogicalFacts.html#584" class="Bound"
+      >R</a
+      ><a name="606" class="Symbol"
+      >)</a
+      ><a name="607"
+      > </a
+      ><a name="608" class="Symbol"
+      >&#8594;</a
+      ><a name="609"
+      > </a
+      ><a name="610" href="LogicalFacts.html#584" class="Bound"
+      >R</a
+      ><a name="611" class="Symbol"
+      >)</a
+      ><a name="612"
+      > </a
+      ><a name="613" class="Symbol"
+      >&#8594;</a
+      ><a name="614"
+      > </a
+      ><a name="615" href="LogicalFacts.html#584" class="Bound"
+      >R</a
+      ><a name="616" class="Symbol"
+      >)</a
+      ><a name="617"
+      > </a
+      ><a name="618" class="Symbol"
+      >&#8594;</a
+      ><a name="619"
+      > </a
+      ><a name="620" class="Symbol"
+      >(</a
+      ><a name="621" href="LogicalFacts.html#586" class="Bound"
+      >A</a
+      ><a name="622"
+      > </a
+      ><a name="623" class="Symbol"
+      >&#8594;</a
+      ><a name="624"
+      > </a
+      ><a name="625" href="LogicalFacts.html#584" class="Bound"
+      >R</a
+      ><a name="626" class="Symbol"
+      >)</a
+      ><a name="627"
+      >
+
+</a
+      ><a name="629" href="LogicalFacts.html#555" class="Function"
+      >three-negations-imply-one</a
+      ><a name="654"
+      > </a
+      ><a name="655" class="Symbol"
+      >=</a
+      ><a name="656"
+      > </a
+      ><a name="657" href="LogicalFacts.html#462" class="Function"
+      >contra-positive</a
+      ><a name="672"
+      > </a
+      ><a name="673" href="LogicalFacts.html#372" class="Function"
+      >double-negation-intro</a
+      ><a name="694"
+      >
+
+
+</a
+      ><a name="697" href="LogicalFacts.html#697" class="Function"
+      >not-exists-implies-forall-not</a
+      ><a name="726"
+      > </a
+      ><a name="727" class="Symbol"
+      >:</a
+      ><a name="728"
+      > </a
+      ><a name="729" class="Symbol"
+      >{</a
+      ><a name="730" href="LogicalFacts.html#730" class="Bound"
+      >R</a
+      ><a name="731"
+      > </a
+      ><a name="732" class="Symbol"
+      >:</a
+      ><a name="733"
+      > </a
+      ><a name="734" href="Logic.html#77" class="Function"
+      >&#937;</a
+      ><a name="735" class="Symbol"
+      >}</a
+      ><a name="736"
+      > </a
+      ><a name="737" class="Symbol"
+      >&#8594;</a
+      ><a name="738"
+      > </a
+      ><a name="739" class="Symbol"
+      >{</a
+      ><a name="740" href="LogicalFacts.html#740" class="Bound"
+      >X</a
+      ><a name="741"
+      > </a
+      ><a name="742" class="Symbol"
+      >:</a
+      ><a name="743"
+      > </a
+      ><a name="744" class="PrimitiveType"
+      >Set</a
+      ><a name="747" class="Symbol"
+      >}</a
+      ><a name="748"
+      > </a
+      ><a name="749" class="Symbol"
+      >&#8594;</a
+      ><a name="750"
+      > </a
+      ><a name="751" class="Symbol"
+      >{</a
+      ><a name="752" href="LogicalFacts.html#752" class="Bound"
+      >A</a
+      ><a name="753"
+      > </a
+      ><a name="754" class="Symbol"
+      >:</a
+      ><a name="755"
+      > </a
+      ><a name="756" href="LogicalFacts.html#740" class="Bound"
+      >X</a
+      ><a name="757"
+      > </a
+      ><a name="758" class="Symbol"
+      >&#8594;</a
+      ><a name="759"
+      > </a
+      ><a name="760" href="Logic.html#77" class="Function"
+      >&#937;</a
+      ><a name="761" class="Symbol"
+      >}</a
+      ><a name="762"
+      > </a
+      ><a name="763" class="Symbol"
+      >&#8594;</a
+      ><a name="764"
+      >
+ </a
+      ><a name="767" class="Symbol"
+      >((</a
+      ><a name="769" href="Logic.html#1060" class="Datatype"
+      >&#8707;</a
+      ><a name="770"
+      > </a
+      ><a name="771" class="Symbol"
+      >\(</a
+      ><a name="773" href="LogicalFacts.html#773" class="Bound"
+      >x</a
+      ><a name="774"
+      > </a
+      ><a name="775" class="Symbol"
+      >:</a
+      ><a name="776"
+      > </a
+      ><a name="777" href="LogicalFacts.html#740" class="Bound"
+      >X</a
+      ><a name="778" class="Symbol"
+      >)</a
+      ><a name="779"
+      > </a
+      ><a name="780" class="Symbol"
+      >&#8594;</a
+      ><a name="781"
+      > </a
+      ><a name="782" href="LogicalFacts.html#752" class="Bound"
+      >A</a
+      ><a name="783"
+      > </a
+      ><a name="784" href="LogicalFacts.html#773" class="Bound"
+      >x</a
+      ><a name="785" class="Symbol"
+      >)</a
+      ><a name="786"
+      > </a
+      ><a name="787" class="Symbol"
+      >&#8594;</a
+      ><a name="788"
+      > </a
+      ><a name="789" href="LogicalFacts.html#730" class="Bound"
+      >R</a
+      ><a name="790" class="Symbol"
+      >)</a
+      ><a name="791"
+      > </a
+      ><a name="792" class="Symbol"
+      >&#8594;</a
+      ><a name="793"
+      > </a
+      ><a name="794" class="Symbol"
+      >&#8704;(</a
+      ><a name="796" href="LogicalFacts.html#796" class="Bound"
+      >x</a
+      ><a name="797"
+      > </a
+      ><a name="798" class="Symbol"
+      >:</a
+      ><a name="799"
+      > </a
+      ><a name="800" href="LogicalFacts.html#740" class="Bound"
+      >X</a
+      ><a name="801" class="Symbol"
+      >)</a
+      ><a name="802"
+      > </a
+      ><a name="803" class="Symbol"
+      >&#8594;</a
+      ><a name="804"
+      > </a
+      ><a name="805" href="LogicalFacts.html#752" class="Bound"
+      >A</a
+      ><a name="806"
+      > </a
+      ><a name="807" href="LogicalFacts.html#796" class="Bound"
+      >x</a
+      ><a name="808"
+      > </a
+      ><a name="809" class="Symbol"
+      >&#8594;</a
+      ><a name="810"
+      > </a
+      ><a name="811" href="LogicalFacts.html#730" class="Bound"
+      >R</a
+      ><a name="812"
+      >
+
+</a
+      ><a name="814" href="LogicalFacts.html#697" class="Function"
+      >not-exists-implies-forall-not</a
+      ><a name="843"
+      > </a
+      ><a name="844" href="LogicalFacts.html#844" class="Bound"
+      >f</a
+      ><a name="845"
+      > </a
+      ><a name="846" href="LogicalFacts.html#846" class="Bound"
+      >x</a
+      ><a name="847"
+      > </a
+      ><a name="848" href="LogicalFacts.html#848" class="Bound"
+      >a</a
+      ><a name="849"
+      > </a
+      ><a name="850" class="Symbol"
+      >=</a
+      ><a name="851"
+      > </a
+      ><a name="852" href="LogicalFacts.html#844" class="Bound"
+      >f</a
+      ><a name="853" class="Symbol"
+      >(</a
+      ><a name="854" href="Logic.html#1099" class="InductiveConstructor"
+      >&#8707;-intro</a
+      ><a name="861"
+      > </a
+      ><a name="862" href="LogicalFacts.html#846" class="Bound"
+      >x</a
+      ><a name="863"
+      > </a
+      ><a name="864" href="LogicalFacts.html#848" class="Bound"
+      >a</a
+      ><a name="865" class="Symbol"
+      >)</a
+      ><a name="866"
+      >
+
+
+</a
+      ><a name="870" href="LogicalFacts.html#870" class="Function"
+      >forall-not-implies-not-exists</a
+      ><a name="899"
+      > </a
+      ><a name="900" class="Symbol"
+      >:</a
+      ><a name="901"
+      > </a
+      ><a name="902" class="Symbol"
+      >{</a
+      ><a name="903" href="LogicalFacts.html#903" class="Bound"
+      >R</a
+      ><a name="904"
+      > </a
+      ><a name="905" class="Symbol"
+      >:</a
+      ><a name="906"
+      > </a
+      ><a name="907" href="Logic.html#77" class="Function"
+      >&#937;</a
+      ><a name="908" class="Symbol"
+      >}</a
+      ><a name="909"
+      > </a
+      ><a name="910" class="Symbol"
+      >&#8594;</a
+      ><a name="911"
+      > </a
+      ><a name="912" class="Symbol"
+      >{</a
+      ><a name="913" href="LogicalFacts.html#913" class="Bound"
+      >X</a
+      ><a name="914"
+      > </a
+      ><a name="915" class="Symbol"
+      >:</a
+      ><a name="916"
+      > </a
+      ><a name="917" class="PrimitiveType"
+      >Set</a
+      ><a name="920" class="Symbol"
+      >}</a
+      ><a name="921"
+      > </a
+      ><a name="922" class="Symbol"
+      >&#8594;</a
+      ><a name="923"
+      > </a
+      ><a name="924" class="Symbol"
+      >{</a
+      ><a name="925" href="LogicalFacts.html#925" class="Bound"
+      >A</a
+      ><a name="926"
+      > </a
+      ><a name="927" class="Symbol"
+      >:</a
+      ><a name="928"
+      > </a
+      ><a name="929" href="LogicalFacts.html#913" class="Bound"
+      >X</a
+      ><a name="930"
+      > </a
+      ><a name="931" class="Symbol"
+      >&#8594;</a
+      ><a name="932"
+      > </a
+      ><a name="933" href="Logic.html#77" class="Function"
+      >&#937;</a
+      ><a name="934" class="Symbol"
+      >}</a
+      ><a name="935"
+      > </a
+      ><a name="936" class="Symbol"
+      >&#8594;</a
+      ><a name="937"
+      >
+ </a
+      ><a name="940" class="Symbol"
+      >(&#8704;(</a
+      ><a name="943" href="LogicalFacts.html#943" class="Bound"
+      >x</a
+      ><a name="944"
+      > </a
+      ><a name="945" class="Symbol"
+      >:</a
+      ><a name="946"
+      > </a
+      ><a name="947" href="LogicalFacts.html#913" class="Bound"
+      >X</a
+      ><a name="948" class="Symbol"
+      >)</a
+      ><a name="949"
+      > </a
+      ><a name="950" class="Symbol"
+      >&#8594;</a
+      ><a name="951"
+      > </a
+      ><a name="952" href="LogicalFacts.html#925" class="Bound"
+      >A</a
+      ><a name="953"
+      > </a
+      ><a name="954" href="LogicalFacts.html#943" class="Bound"
+      >x</a
+      ><a name="955"
+      > </a
+      ><a name="956" class="Symbol"
+      >&#8594;</a
+      ><a name="957"
+      > </a
+      ><a name="958" href="LogicalFacts.html#903" class="Bound"
+      >R</a
+      ><a name="959" class="Symbol"
+      >)</a
+      ><a name="960"
+      > </a
+      ><a name="961" class="Symbol"
+      >&#8594;</a
+      ><a name="962"
+      > </a
+      ><a name="963" class="Symbol"
+      >(</a
+      ><a name="964" href="Logic.html#1060" class="Datatype"
+      >&#8707;</a
+      ><a name="965"
+      > </a
+      ><a name="966" class="Symbol"
+      >\(</a
+      ><a name="968" href="LogicalFacts.html#968" class="Bound"
+      >x</a
+      ><a name="969"
+      > </a
+      ><a name="970" class="Symbol"
+      >:</a
+      ><a name="971"
+      > </a
+      ><a name="972" href="LogicalFacts.html#913" class="Bound"
+      >X</a
+      ><a name="973" class="Symbol"
+      >)</a
+      ><a name="974"
+      > </a
+      ><a name="975" class="Symbol"
+      >&#8594;</a
+      ><a name="976"
+      > </a
+      ><a name="977" href="LogicalFacts.html#925" class="Bound"
+      >A</a
+      ><a name="978"
+      > </a
+      ><a name="979" href="LogicalFacts.html#968" class="Bound"
+      >x</a
+      ><a name="980" class="Symbol"
+      >)</a
+      ><a name="981"
+      > </a
+      ><a name="982" class="Symbol"
+      >&#8594;</a
+      ><a name="983"
+      > </a
+      ><a name="984" href="LogicalFacts.html#903" class="Bound"
+      >R</a
+      ><a name="985"
+      >
+
+</a
+      ><a name="987" href="LogicalFacts.html#870" class="Function"
+      >forall-not-implies-not-exists</a
+      ><a name="1016"
+      > </a
+      ><a name="1017" href="LogicalFacts.html#1017" class="Bound"
+      >f</a
+      ><a name="1018"
+      > </a
+      ><a name="1019" class="Symbol"
+      >(</a
+      ><a name="1020" href="Logic.html#1099" class="InductiveConstructor"
+      >&#8707;-intro</a
+      ><a name="1027"
+      > </a
+      ><a name="1028" href="LogicalFacts.html#1028" class="Bound"
+      >x</a
+      ><a name="1029"
+      > </a
+      ><a name="1030" href="LogicalFacts.html#1030" class="Bound"
+      >a</a
+      ><a name="1031" class="Symbol"
+      >)</a
+      ><a name="1032"
+      > </a
+      ><a name="1033" class="Symbol"
+      >=</a
+      ><a name="1034"
+      > </a
+      ><a name="1035" href="LogicalFacts.html#1017" class="Bound"
+      >f</a
+      ><a name="1036"
+      > </a
+      ><a name="1037" href="LogicalFacts.html#1028" class="Bound"
+      >x</a
+      ><a name="1038"
+      > </a
+      ><a name="1039" href="LogicalFacts.html#1030" class="Bound"
+      >a</a
+      ><a name="1040"
+      >
+
+
+</a
+      ><a name="1043" href="LogicalFacts.html#1043" class="Function"
+      >&#8707;-functor</a
+      ><a name="1052"
+      > </a
+      ><a name="1053" class="Symbol"
+      >:</a
+      ><a name="1054"
+      > </a
+      ><a name="1055" class="Symbol"
+      >{</a
+      ><a name="1056" href="LogicalFacts.html#1056" class="Bound"
+      >X</a
+      ><a name="1057"
+      > </a
+      ><a name="1058" class="Symbol"
+      >:</a
+      ><a name="1059"
+      > </a
+      ><a name="1060" class="PrimitiveType"
+      >Set</a
+      ><a name="1063" class="Symbol"
+      >}</a
+      ><a name="1064"
+      > </a
+      ><a name="1065" class="Symbol"
+      >{</a
+      ><a name="1066" href="LogicalFacts.html#1066" class="Bound"
+      >A</a
+      ><a name="1067"
+      > </a
+      ><a name="1068" href="LogicalFacts.html#1068" class="Bound"
+      >B</a
+      ><a name="1069"
+      > </a
+      ><a name="1070" class="Symbol"
+      >:</a
+      ><a name="1071"
+      > </a
+      ><a name="1072" href="LogicalFacts.html#1056" class="Bound"
+      >X</a
+      ><a name="1073"
+      > </a
+      ><a name="1074" class="Symbol"
+      >&#8594;</a
+      ><a name="1075"
+      > </a
+      ><a name="1076" href="Logic.html#77" class="Function"
+      >&#937;</a
+      ><a name="1077" class="Symbol"
+      >}</a
+      ><a name="1078"
+      > </a
+      ><a name="1079" class="Symbol"
+      >&#8594;</a
+      ><a name="1080"
+      >
+ </a
+      ><a name="1082" class="Symbol"
+      >({</a
+      ><a name="1084" href="LogicalFacts.html#1084" class="Bound"
+      >x</a
+      ><a name="1085"
+      > </a
+      ><a name="1086" class="Symbol"
+      >:</a
+      ><a name="1087"
+      > </a
+      ><a name="1088" href="LogicalFacts.html#1056" class="Bound"
+      >X</a
+      ><a name="1089" class="Symbol"
+      >}</a
+      ><a name="1090"
+      > </a
+      ><a name="1091" class="Symbol"
+      >&#8594;</a
+      ><a name="1092"
+      > </a
+      ><a name="1093" href="LogicalFacts.html#1066" class="Bound"
+      >A</a
+      ><a name="1094"
+      > </a
+      ><a name="1095" href="LogicalFacts.html#1084" class="Bound"
+      >x</a
+      ><a name="1096"
+      > </a
+      ><a name="1097" class="Symbol"
+      >&#8594;</a
+      ><a name="1098"
+      > </a
+      ><a name="1099" href="LogicalFacts.html#1068" class="Bound"
+      >B</a
+      ><a name="1100"
+      > </a
+      ><a name="1101" href="LogicalFacts.html#1084" class="Bound"
+      >x</a
+      ><a name="1102" class="Symbol"
+      >)</a
+      ><a name="1103"
+      > </a
+      ><a name="1104" class="Symbol"
+      >&#8594;</a
+      ><a name="1105"
+      >
+ </a
+      ><a name="1108" class="Symbol"
+      >(</a
+      ><a name="1109" href="Logic.html#1060" class="Datatype"
+      >&#8707;</a
+      ><a name="1110"
+      > </a
+      ><a name="1111" class="Symbol"
+      >\(</a
+      ><a name="1113" href="LogicalFacts.html#1113" class="Bound"
+      >x</a
+      ><a name="1114"
+      > </a
+      ><a name="1115" class="Symbol"
+      >:</a
+      ><a name="1116"
+      > </a
+      ><a name="1117" href="LogicalFacts.html#1056" class="Bound"
+      >X</a
+      ><a name="1118" class="Symbol"
+      >)</a
+      ><a name="1119"
+      > </a
+      ><a name="1120" class="Symbol"
+      >&#8594;</a
+      ><a name="1121"
+      > </a
+      ><a name="1122" href="LogicalFacts.html#1066" class="Bound"
+      >A</a
+      ><a name="1123"
+      > </a
+      ><a name="1124" href="LogicalFacts.html#1113" class="Bound"
+      >x</a
+      ><a name="1125" class="Symbol"
+      >)</a
+      ><a name="1126"
+      > </a
+      ><a name="1127" class="Symbol"
+      >&#8594;</a
+      ><a name="1128"
+      >  </a
+      ><a name="1130" href="Logic.html#1060" class="Datatype"
+      >&#8707;</a
+      ><a name="1131"
+      > </a
+      ><a name="1132" class="Symbol"
+      >\(</a
+      ><a name="1134" href="LogicalFacts.html#1134" class="Bound"
+      >x</a
+      ><a name="1135"
+      > </a
+      ><a name="1136" class="Symbol"
+      >:</a
+      ><a name="1137"
+      > </a
+      ><a name="1138" href="LogicalFacts.html#1056" class="Bound"
+      >X</a
+      ><a name="1139" class="Symbol"
+      >)</a
+      ><a name="1140"
+      > </a
+      ><a name="1141" class="Symbol"
+      >&#8594;</a
+      ><a name="1142"
+      > </a
+      ><a name="1143" href="LogicalFacts.html#1068" class="Bound"
+      >B</a
+      ><a name="1144"
+      > </a
+      ><a name="1145" href="LogicalFacts.html#1134" class="Bound"
+      >x</a
+      ><a name="1146"
+      >
+
+</a
+      ><a name="1148" href="LogicalFacts.html#1043" class="Function"
+      >&#8707;-functor</a
+      ><a name="1157"
+      > </a
+      ><a name="1158" href="LogicalFacts.html#1158" class="Bound"
+      >f</a
+      ><a name="1159"
+      > </a
+      ><a name="1160" class="Symbol"
+      >(</a
+      ><a name="1161" href="Logic.html#1099" class="InductiveConstructor"
+      >&#8707;-intro</a
+      ><a name="1168"
+      > </a
+      ><a name="1169" href="LogicalFacts.html#1169" class="Bound"
+      >x</a
+      ><a name="1170"
+      > </a
+      ><a name="1171" href="LogicalFacts.html#1171" class="Bound"
+      >a</a
+      ><a name="1172" class="Symbol"
+      >)</a
+      ><a name="1173"
+      > </a
+      ><a name="1174" class="Symbol"
+      >=</a
+      ><a name="1175"
+      > </a
+      ><a name="1176" href="Logic.html#1099" class="InductiveConstructor"
+      >&#8707;-intro</a
+      ><a name="1183"
+      > </a
+      ><a name="1184" href="LogicalFacts.html#1169" class="Bound"
+      >x</a
+      ><a name="1185"
+      > </a
+      ><a name="1186" class="Symbol"
+      >(</a
+      ><a name="1187" href="LogicalFacts.html#1158" class="Bound"
+      >f</a
+      ><a name="1188"
+      > </a
+      ><a name="1189" href="LogicalFacts.html#1171" class="Bound"
+      >a</a
+      ><a name="1190" class="Symbol"
+      >)</a
+      ><a name="1191"
+      >
+
+
+</a
+      ><a name="1194" href="LogicalFacts.html#1194" class="Function"
+      >&#8707;-nested-functor</a
+      ><a name="1210"
+      > </a
+      ><a name="1211" class="Symbol"
+      >:</a
+      ><a name="1212"
+      > </a
+      ><a name="1213" class="Symbol"
+      >{</a
+      ><a name="1214" href="LogicalFacts.html#1214" class="Bound"
+      >X</a
+      ><a name="1215"
+      > </a
+      ><a name="1216" href="LogicalFacts.html#1216" class="Bound"
+      >Y</a
+      ><a name="1217"
+      > </a
+      ><a name="1218" class="Symbol"
+      >:</a
+      ><a name="1219"
+      > </a
+      ><a name="1220" class="PrimitiveType"
+      >Set</a
+      ><a name="1223" class="Symbol"
+      >}</a
+      ><a name="1224"
+      > </a
+      ><a name="1225" class="Symbol"
+      >{</a
+      ><a name="1226" href="LogicalFacts.html#1226" class="Bound"
+      >A</a
+      ><a name="1227"
+      > </a
+      ><a name="1228" href="LogicalFacts.html#1228" class="Bound"
+      >B</a
+      ><a name="1229"
+      > </a
+      ><a name="1230" class="Symbol"
+      >:</a
+      ><a name="1231"
+      > </a
+      ><a name="1232" href="LogicalFacts.html#1214" class="Bound"
+      >X</a
+      ><a name="1233"
+      > </a
+      ><a name="1234" class="Symbol"
+      >&#8594;</a
+      ><a name="1235"
+      > </a
+      ><a name="1236" href="LogicalFacts.html#1216" class="Bound"
+      >Y</a
+      ><a name="1237"
+      > </a
+      ><a name="1238" class="Symbol"
+      >&#8594;</a
+      ><a name="1239"
+      > </a
+      ><a name="1240" href="Logic.html#77" class="Function"
+      >&#937;</a
+      ><a name="1241" class="Symbol"
+      >}</a
+      ><a name="1242"
+      > </a
+      ><a name="1243" class="Symbol"
+      >&#8594;</a
+      ><a name="1244"
+      >
+ </a
+      ><a name="1246" class="Symbol"
+      >({</a
+      ><a name="1248" href="LogicalFacts.html#1248" class="Bound"
+      >x</a
+      ><a name="1249"
+      > </a
+      ><a name="1250" class="Symbol"
+      >:</a
+      ><a name="1251"
+      > </a
+      ><a name="1252" href="LogicalFacts.html#1214" class="Bound"
+      >X</a
+      ><a name="1253" class="Symbol"
+      >}</a
+      ><a name="1254"
+      > </a
+      ><a name="1255" class="Symbol"
+      >&#8594;</a
+      ><a name="1256"
+      > </a
+      ><a name="1257" class="Symbol"
+      >{</a
+      ><a name="1258" href="LogicalFacts.html#1258" class="Bound"
+      >y</a
+      ><a name="1259"
+      > </a
+      ><a name="1260" class="Symbol"
+      >:</a
+      ><a name="1261"
+      > </a
+      ><a name="1262" href="LogicalFacts.html#1216" class="Bound"
+      >Y</a
+      ><a name="1263" class="Symbol"
+      >}</a
+      ><a name="1264"
+      > </a
+      ><a name="1265" class="Symbol"
+      >&#8594;</a
+      ><a name="1266"
+      > </a
+      ><a name="1267" href="LogicalFacts.html#1226" class="Bound"
+      >A</a
+      ><a name="1268"
+      > </a
+      ><a name="1269" href="LogicalFacts.html#1248" class="Bound"
+      >x</a
+      ><a name="1270"
+      > </a
+      ><a name="1271" href="LogicalFacts.html#1258" class="Bound"
+      >y</a
+      ><a name="1272"
+      > </a
+      ><a name="1273" class="Symbol"
+      >&#8594;</a
+      ><a name="1274"
+      > </a
+      ><a name="1275" href="LogicalFacts.html#1228" class="Bound"
+      >B</a
+      ><a name="1276"
+      > </a
+      ><a name="1277" href="LogicalFacts.html#1248" class="Bound"
+      >x</a
+      ><a name="1278"
+      > </a
+      ><a name="1279" href="LogicalFacts.html#1258" class="Bound"
+      >y</a
+      ><a name="1280" class="Symbol"
+      >)</a
+      ><a name="1281"
+      > </a
+      ><a name="1282" class="Symbol"
+      >&#8594;</a
+      ><a name="1283"
+      >
+ </a
+      ><a name="1286" class="Symbol"
+      >(</a
+      ><a name="1287" href="Logic.html#1060" class="Datatype"
+      >&#8707;</a
+      ><a name="1288"
+      > </a
+      ><a name="1289" class="Symbol"
+      >\(</a
+      ><a name="1291" href="LogicalFacts.html#1291" class="Bound"
+      >x</a
+      ><a name="1292"
+      > </a
+      ><a name="1293" class="Symbol"
+      >:</a
+      ><a name="1294"
+      > </a
+      ><a name="1295" href="LogicalFacts.html#1214" class="Bound"
+      >X</a
+      ><a name="1296" class="Symbol"
+      >)</a
+      ><a name="1297"
+      > </a
+      ><a name="1298" class="Symbol"
+      >&#8594;</a
+      ><a name="1299"
+      > </a
+      ><a name="1300" href="Logic.html#1060" class="Datatype"
+      >&#8707;</a
+      ><a name="1301"
+      > </a
+      ><a name="1302" class="Symbol"
+      >\(</a
+      ><a name="1304" href="LogicalFacts.html#1304" class="Bound"
+      >y</a
+      ><a name="1305"
+      > </a
+      ><a name="1306" class="Symbol"
+      >:</a
+      ><a name="1307"
+      > </a
+      ><a name="1308" href="LogicalFacts.html#1216" class="Bound"
+      >Y</a
+      ><a name="1309" class="Symbol"
+      >)</a
+      ><a name="1310"
+      > </a
+      ><a name="1311" class="Symbol"
+      >&#8594;</a
+      ><a name="1312"
+      > </a
+      ><a name="1313" href="LogicalFacts.html#1226" class="Bound"
+      >A</a
+      ><a name="1314"
+      > </a
+      ><a name="1315" href="LogicalFacts.html#1291" class="Bound"
+      >x</a
+      ><a name="1316"
+      > </a
+      ><a name="1317" href="LogicalFacts.html#1304" class="Bound"
+      >y</a
+      ><a name="1318" class="Symbol"
+      >)</a
+      ><a name="1319"
+      > </a
+      ><a name="1320" class="Symbol"
+      >&#8594;</a
+      ><a name="1321"
+      >  </a
+      ><a name="1323" href="Logic.html#1060" class="Datatype"
+      >&#8707;</a
+      ><a name="1324"
+      > </a
+      ><a name="1325" class="Symbol"
+      >\(</a
+      ><a name="1327" href="LogicalFacts.html#1327" class="Bound"
+      >x</a
+      ><a name="1328"
+      > </a
+      ><a name="1329" class="Symbol"
+      >:</a
+      ><a name="1330"
+      > </a
+      ><a name="1331" href="LogicalFacts.html#1214" class="Bound"
+      >X</a
+      ><a name="1332" class="Symbol"
+      >)</a
+      ><a name="1333"
+      > </a
+      ><a name="1334" class="Symbol"
+      >&#8594;</a
+      ><a name="1335"
+      > </a
+      ><a name="1336" href="Logic.html#1060" class="Datatype"
+      >&#8707;</a
+      ><a name="1337"
+      > </a
+      ><a name="1338" class="Symbol"
+      >\(</a
+      ><a name="1340" href="LogicalFacts.html#1340" class="Bound"
+      >y</a
+      ><a name="1341"
+      > </a
+      ><a name="1342" class="Symbol"
+      >:</a
+      ><a name="1343"
+      > </a
+      ><a name="1344" href="LogicalFacts.html#1216" class="Bound"
+      >Y</a
+      ><a name="1345" class="Symbol"
+      >)</a
+      ><a name="1346"
+      > </a
+      ><a name="1347" class="Symbol"
+      >&#8594;</a
+      ><a name="1348"
+      > </a
+      ><a name="1349" href="LogicalFacts.html#1228" class="Bound"
+      >B</a
+      ><a name="1350"
+      > </a
+      ><a name="1351" href="LogicalFacts.html#1327" class="Bound"
+      >x</a
+      ><a name="1352"
+      > </a
+      ><a name="1353" href="LogicalFacts.html#1340" class="Bound"
+      >y</a
+      ><a name="1354"
+      >
+
+</a
+      ><a name="1356" href="LogicalFacts.html#1194" class="Function"
+      >&#8707;-nested-functor</a
+      ><a name="1372"
+      > </a
+      ><a name="1373" href="LogicalFacts.html#1373" class="Bound"
+      >f</a
+      ><a name="1374"
+      > </a
+      ><a name="1375" class="Symbol"
+      >=</a
+      ><a name="1376"
+      > </a
+      ><a name="1377" href="LogicalFacts.html#1043" class="Function"
+      >&#8707;-functor</a
+      ><a name="1386"
+      > </a
+      ><a name="1387" class="Symbol"
+      >(&#955;</a
+      ><a name="1389"
+      > </a
+      ><a name="1390" href="LogicalFacts.html#1390" class="Bound"
+      >a</a
+      ><a name="1391"
+      > </a
+      ><a name="1392" class="Symbol"
+      >&#8594;</a
+      ><a name="1393"
+      > </a
+      ><a name="1394" href="LogicalFacts.html#1043" class="Function"
+      >&#8707;-functor</a
+      ><a name="1403"
+      > </a
+      ><a name="1404" href="LogicalFacts.html#1373" class="Bound"
+      >f</a
+      ><a name="1405"
+      > </a
+      ><a name="1406" href="LogicalFacts.html#1390" class="Bound"
+      >a</a
+      ><a name="1407" class="Symbol"
+      >)</a
+      ><a name="1408"
+      >
+
+</a
+      ></pre
+    ></body
+  ></html
+>

@@ -1,0 +1,1174 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+><head
+  ><title
+    >J-AC-N</title
+    ><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"
+     /><meta http-equiv="Content-Style-Type" content="text/css"
+     /><link href="Agda.css" rel="stylesheet" type="text/css"
+     /></head
+  ><body
+  ><pre
+    ><a name="1" class="Keyword"
+      >module</a
+      ><a name="7"
+      > </a
+      ><a name="8" href="J-AC-N.html#8" class="Module"
+      >J-AC-N</a
+      ><a name="14"
+      > </a
+      ><a name="15" class="Keyword"
+      >where</a
+      ><a name="20"
+      >
+
+</a
+      ><a name="22" class="Keyword"
+      >open</a
+      ><a name="26"
+      > </a
+      ><a name="27" class="Keyword"
+      >import</a
+      ><a name="33"
+      > </a
+      ><a name="34" href="Logic.html#8" class="Module"
+      >Logic</a
+      ><a name="39"
+      >
+</a
+      ><a name="40" class="Keyword"
+      >open</a
+      ><a name="44"
+      > </a
+      ><a name="45" class="Keyword"
+      >import</a
+      ><a name="51"
+      > </a
+      ><a name="52" href="LogicalFacts.html#8" class="Module"
+      >LogicalFacts</a
+      ><a name="64"
+      >
+</a
+      ><a name="65" class="Keyword"
+      >open</a
+      ><a name="69"
+      > </a
+      ><a name="70" class="Keyword"
+      >import</a
+      ><a name="76"
+      > </a
+      ><a name="77" href="JK-LogicalFacts.html#8" class="Module"
+      >JK-LogicalFacts</a
+      ><a name="92"
+      >
+</a
+      ><a name="93" class="Keyword"
+      >open</a
+      ><a name="97"
+      > </a
+      ><a name="98" class="Keyword"
+      >import</a
+      ><a name="104"
+      > </a
+      ><a name="105" href="Naturals.html#8" class="Module"
+      >Naturals</a
+      ><a name="113"
+      >
+</a
+      ><a name="114" class="Keyword"
+      >open</a
+      ><a name="118"
+      > </a
+      ><a name="119" class="Keyword"
+      >import</a
+      ><a name="125"
+      > </a
+      ><a name="126" href="Addition.html#8" class="Module"
+      >Addition</a
+      ><a name="134"
+      >
+</a
+      ><a name="135" class="Keyword"
+      >open</a
+      ><a name="139"
+      > </a
+      ><a name="140" class="Keyword"
+      >import</a
+      ><a name="146"
+      > </a
+      ><a name="147" href="JK-Monads.html#8" class="Module"
+      >JK-Monads</a
+      ><a name="156"
+      >
+</a
+      ><a name="157" class="Keyword"
+      >open</a
+      ><a name="161"
+      > </a
+      ><a name="162" class="Keyword"
+      >import</a
+      ><a name="168"
+      > </a
+      ><a name="169" href="Choice.html#8" class="Module"
+      >Choice</a
+      ><a name="175"
+      >
+</a
+      ><a name="176" class="Keyword"
+      >open</a
+      ><a name="180"
+      > </a
+      ><a name="181" class="Keyword"
+      >import</a
+      ><a name="187"
+      > </a
+      ><a name="188" href="Equality.html#8" class="Module"
+      >Equality</a
+      ><a name="196"
+      >
+</a
+      ><a name="197" class="Keyword"
+      >open</a
+      ><a name="201"
+      > </a
+      ><a name="202" class="Keyword"
+      >import</a
+      ><a name="208"
+      > </a
+      ><a name="209" href="J-Shift.html#8" class="Module"
+      >J-Shift</a
+      ><a name="216"
+      >
+
+</a
+      ><a name="218" class="Comment"
+      >------------------------------------------------------------------------</a
+      ><a name="290"
+      >
+</a
+      ><a name="291" class="Comment"
+      >-- Proof of the J translation of the axiom of countable choice        --</a
+      ><a name="363"
+      >
+</a
+      ><a name="364" class="Comment"
+      >-- from the proof of the axiom of choice using J-&#8704;-shift as a lemma.  --</a
+      ><a name="436"
+      >
+</a
+      ><a name="437" class="Comment"
+      >------------------------------------------------------------------------</a
+      ><a name="509"
+      >
+
+</a
+      ><a name="511" href="J-AC-N.html#511" class="Function"
+      >J-AC-&#8469;</a
+      ><a name="517"
+      > </a
+      ><a name="518" class="Symbol"
+      >:</a
+      ><a name="519"
+      > </a
+      ><a name="520" class="Symbol"
+      >{</a
+      ><a name="521" href="J-AC-N.html#521" class="Bound"
+      >R</a
+      ><a name="522"
+      > </a
+      ><a name="523" class="Symbol"
+      >:</a
+      ><a name="524"
+      > </a
+      ><a name="525" href="Logic.html#77" class="Function"
+      >&#937;</a
+      ><a name="526" class="Symbol"
+      >}</a
+      ><a name="527"
+      > </a
+      ><a name="528" class="Symbol"
+      >{</a
+      ><a name="529" href="J-AC-N.html#529" class="Bound"
+      >X</a
+      ><a name="530"
+      > </a
+      ><a name="531" class="Symbol"
+      >:</a
+      ><a name="532"
+      > </a
+      ><a name="533" href="Naturals.html#48" class="Datatype"
+      >&#8469;</a
+      ><a name="534"
+      > </a
+      ><a name="535" class="Symbol"
+      >&#8594;</a
+      ><a name="536"
+      > </a
+      ><a name="537" class="PrimitiveType"
+      >Set</a
+      ><a name="540" class="Symbol"
+      >}</a
+      ><a name="541"
+      > </a
+      ><a name="542" class="Symbol"
+      >{</a
+      ><a name="543" href="J-AC-N.html#543" class="Bound"
+      >P</a
+      ><a name="544"
+      > </a
+      ><a name="545" class="Symbol"
+      >:</a
+      ><a name="546"
+      > </a
+      ><a name="547" class="Symbol"
+      >(</a
+      ><a name="548" href="J-AC-N.html#548" class="Bound"
+      >n</a
+      ><a name="549"
+      > </a
+      ><a name="550" class="Symbol"
+      >:</a
+      ><a name="551"
+      > </a
+      ><a name="552" href="Naturals.html#48" class="Datatype"
+      >&#8469;</a
+      ><a name="553" class="Symbol"
+      >)</a
+      ><a name="554"
+      > </a
+      ><a name="555" class="Symbol"
+      >&#8594;</a
+      ><a name="556"
+      > </a
+      ><a name="557" href="J-AC-N.html#529" class="Bound"
+      >X</a
+      ><a name="558"
+      > </a
+      ><a name="559" href="J-AC-N.html#548" class="Bound"
+      >n</a
+      ><a name="560"
+      > </a
+      ><a name="561" class="Symbol"
+      >&#8594;</a
+      ><a name="562"
+      > </a
+      ><a name="563" href="Logic.html#77" class="Function"
+      >&#937;</a
+      ><a name="564" class="Symbol"
+      >}</a
+      ><a name="565"
+      > </a
+      ><a name="566" class="Symbol"
+      >&#8594;</a
+      ><a name="567"
+      >
+</a
+      ><a name="568" class="Comment"
+      >-------</a
+      ><a name="575"
+      >
+           </a
+      ><a name="587" class="Symbol"
+      >(&#8704;(</a
+      ><a name="590" href="J-AC-N.html#590" class="Bound"
+      >n</a
+      ><a name="591"
+      > </a
+      ><a name="592" class="Symbol"
+      >:</a
+      ><a name="593"
+      > </a
+      ><a name="594" href="Naturals.html#48" class="Datatype"
+      >&#8469;</a
+      ><a name="595" class="Symbol"
+      >)</a
+      ><a name="596"
+      > </a
+      ><a name="597" class="Symbol"
+      >&#8594;</a
+      ><a name="598"
+      > </a
+      ><a name="599" href="JK-LogicalFacts.html#304" class="Function"
+      >J&#8707;</a
+      ><a name="601"
+      > </a
+      ><a name="602" class="Symbol"
+      >\(</a
+      ><a name="604" href="J-AC-N.html#604" class="Bound"
+      >x</a
+      ><a name="605"
+      > </a
+      ><a name="606" class="Symbol"
+      >:</a
+      ><a name="607"
+      > </a
+      ><a name="608" href="J-AC-N.html#529" class="Bound"
+      >X</a
+      ><a name="609"
+      > </a
+      ><a name="610" href="J-AC-N.html#590" class="Bound"
+      >n</a
+      ><a name="611" class="Symbol"
+      >)</a
+      ><a name="612"
+      > </a
+      ><a name="613" class="Symbol"
+      >&#8594;</a
+      ><a name="614"
+      > </a
+      ><a name="615" href="J-AC-N.html#543" class="Bound"
+      >P</a
+      ><a name="616"
+      > </a
+      ><a name="617" href="J-AC-N.html#590" class="Bound"
+      >n</a
+      ><a name="618"
+      > </a
+      ><a name="619" href="J-AC-N.html#604" class="Bound"
+      >x</a
+      ><a name="620" class="Symbol"
+      >)</a
+      ><a name="621"
+      >
+        </a
+      ><a name="630" class="Symbol"
+      >&#8594;</a
+      ><a name="631"
+      > </a
+      ><a name="632" href="JK-LogicalFacts.html#304" class="Function"
+      >J&#8707;</a
+      ><a name="634"
+      > </a
+      ><a name="635" class="Symbol"
+      >\(</a
+      ><a name="637" href="J-AC-N.html#637" class="Bound"
+      >f</a
+      ><a name="638"
+      > </a
+      ><a name="639" class="Symbol"
+      >:</a
+      ><a name="640"
+      > </a
+      ><a name="641" class="Symbol"
+      >((</a
+      ><a name="643" href="J-AC-N.html#643" class="Bound"
+      >n</a
+      ><a name="644"
+      > </a
+      ><a name="645" class="Symbol"
+      >:</a
+      ><a name="646"
+      > </a
+      ><a name="647" href="Naturals.html#48" class="Datatype"
+      >&#8469;</a
+      ><a name="648" class="Symbol"
+      >)</a
+      ><a name="649"
+      > </a
+      ><a name="650" class="Symbol"
+      >&#8594;</a
+      ><a name="651"
+      > </a
+      ><a name="652" href="J-AC-N.html#529" class="Bound"
+      >X</a
+      ><a name="653"
+      > </a
+      ><a name="654" href="J-AC-N.html#643" class="Bound"
+      >n</a
+      ><a name="655" class="Symbol"
+      >))</a
+      ><a name="657"
+      > </a
+      ><a name="658" class="Symbol"
+      >&#8594;</a
+      ><a name="659"
+      > </a
+      ><a name="660" class="Symbol"
+      >&#8704;(</a
+      ><a name="662" href="J-AC-N.html#662" class="Bound"
+      >n</a
+      ><a name="663"
+      > </a
+      ><a name="664" class="Symbol"
+      >:</a
+      ><a name="665"
+      > </a
+      ><a name="666" href="Naturals.html#48" class="Datatype"
+      >&#8469;</a
+      ><a name="667" class="Symbol"
+      >)</a
+      ><a name="668"
+      > </a
+      ><a name="669" class="Symbol"
+      >&#8594;</a
+      ><a name="670"
+      > </a
+      ><a name="671" href="J-AC-N.html#543" class="Bound"
+      >P</a
+      ><a name="672"
+      > </a
+      ><a name="673" href="J-AC-N.html#662" class="Bound"
+      >n</a
+      ><a name="674"
+      > </a
+      ><a name="675" class="Symbol"
+      >(</a
+      ><a name="676" href="J-AC-N.html#637" class="Bound"
+      >f</a
+      ><a name="677"
+      > </a
+      ><a name="678" href="J-AC-N.html#662" class="Bound"
+      >n</a
+      ><a name="679" class="Symbol"
+      >)</a
+      ><a name="680"
+      >
+
+</a
+      ><a name="682" href="J-AC-N.html#511" class="Function"
+      >J-AC-&#8469;</a
+      ><a name="688"
+      > </a
+      ><a name="689" class="Symbol"
+      >{</a
+      ><a name="690" href="J-AC-N.html#690" class="Bound"
+      >R</a
+      ><a name="691" class="Symbol"
+      >}</a
+      ><a name="692"
+      > </a
+      ><a name="693" class="Symbol"
+      >=</a
+      ><a name="694"
+      > </a
+      ><a name="695" class="Symbol"
+      >(</a
+      ><a name="696" href="JK-Monads.html#1345" class="Function"
+      >J-functor</a
+      ><a name="705"
+      > </a
+      ><a name="706" class="Symbol"
+      >{</a
+      ><a name="707" href="J-AC-N.html#690" class="Bound"
+      >R</a
+      ><a name="708" class="Symbol"
+      >}</a
+      ><a name="709"
+      > </a
+      ><a name="710" href="Choice.html#83" class="Function"
+      >AC</a
+      ><a name="712" class="Symbol"
+      >)</a
+      ><a name="713"
+      > </a
+      ><a name="714" href="LogicalFacts.html#63" class="Function Operator"
+      >&#8728;</a
+      ><a name="715"
+      > </a
+      ><a name="716" href="J-Shift.html#262" class="Function"
+      >J-&#8704;-shift</a
+      ><a name="725"
+      >
+
+
+</a
+      ><a name="728" class="Comment"
+      >----------------------------------------------</a
+      ><a name="774"
+      >
+</a
+      ><a name="775" class="Comment"
+      >--                                          --</a
+      ><a name="821"
+      >
+</a
+      ><a name="822" class="Comment"
+      >-- Now the translations of dependent choice --</a
+      ><a name="868"
+      >
+</a
+      ><a name="869" class="Comment"
+      >--                                          --</a
+      ><a name="915"
+      >
+</a
+      ><a name="916" class="Comment"
+      >----------------------------------------------</a
+      ><a name="962"
+      >
+
+
+</a
+      ><a name="965" href="J-AC-N.html#965" class="Function"
+      >J-&#8704;-double-shift</a
+      ><a name="981"
+      > </a
+      ><a name="982" class="Symbol"
+      >:</a
+      ><a name="983"
+      > </a
+      ><a name="984" class="Symbol"
+      >{</a
+      ><a name="985" href="J-AC-N.html#985" class="Bound"
+      >R</a
+      ><a name="986"
+      > </a
+      ><a name="987" class="Symbol"
+      >:</a
+      ><a name="988"
+      > </a
+      ><a name="989" href="Logic.html#77" class="Function"
+      >&#937;</a
+      ><a name="990" class="Symbol"
+      >}</a
+      ><a name="991"
+      > </a
+      ><a name="992" class="Symbol"
+      >{</a
+      ><a name="993" href="J-AC-N.html#993" class="Bound"
+      >P</a
+      ><a name="994"
+      > </a
+      ><a name="995" class="Symbol"
+      >:</a
+      ><a name="996"
+      > </a
+      ><a name="997" href="Naturals.html#48" class="Datatype"
+      >&#8469;</a
+      ><a name="998"
+      > </a
+      ><a name="999" class="Symbol"
+      >&#8594;</a
+      ><a name="1000"
+      > </a
+      ><a name="1001" href="Naturals.html#48" class="Datatype"
+      >&#8469;</a
+      ><a name="1002"
+      > </a
+      ><a name="1003" class="Symbol"
+      >&#8594;</a
+      ><a name="1004"
+      > </a
+      ><a name="1005" href="Naturals.html#48" class="Datatype"
+      >&#8469;</a
+      ><a name="1006"
+      > </a
+      ><a name="1007" class="Symbol"
+      >&#8594;</a
+      ><a name="1008"
+      > </a
+      ><a name="1009" href="Logic.html#77" class="Function"
+      >&#937;</a
+      ><a name="1010" class="Symbol"
+      >}</a
+      ><a name="1011"
+      > </a
+      ><a name="1012" class="Symbol"
+      >&#8594;</a
+      ><a name="1013"
+      >
+</a
+      ><a name="1014" class="Comment"
+      >---------------</a
+      ><a name="1029"
+      >
+     </a
+      ><a name="1035" class="Symbol"
+      >(&#8704;(</a
+      ><a name="1038" href="J-AC-N.html#1038" class="Bound"
+      >n</a
+      ><a name="1039"
+      > </a
+      ><a name="1040" class="Symbol"
+      >:</a
+      ><a name="1041"
+      > </a
+      ><a name="1042" href="Naturals.html#48" class="Datatype"
+      >&#8469;</a
+      ><a name="1043" class="Symbol"
+      >)</a
+      ><a name="1044"
+      > </a
+      ><a name="1045" class="Symbol"
+      >&#8594;</a
+      ><a name="1046"
+      > </a
+      ><a name="1047" class="Symbol"
+      >&#8704;(</a
+      ><a name="1049" href="J-AC-N.html#1049" class="Bound"
+      >x</a
+      ><a name="1050"
+      > </a
+      ><a name="1051" class="Symbol"
+      >:</a
+      ><a name="1052"
+      > </a
+      ><a name="1053" href="Naturals.html#48" class="Datatype"
+      >&#8469;</a
+      ><a name="1054" class="Symbol"
+      >)</a
+      ><a name="1055"
+      > </a
+      ><a name="1056" class="Symbol"
+      >&#8594;</a
+      ><a name="1057"
+      > </a
+      ><a name="1058" href="JK-LogicalFacts.html#304" class="Function"
+      >J&#8707;</a
+      ><a name="1060"
+      > </a
+      ><a name="1061" class="Symbol"
+      >\(</a
+      ><a name="1063" href="J-AC-N.html#1063" class="Bound"
+      >y</a
+      ><a name="1064"
+      > </a
+      ><a name="1065" class="Symbol"
+      >:</a
+      ><a name="1066"
+      > </a
+      ><a name="1067" href="Naturals.html#48" class="Datatype"
+      >&#8469;</a
+      ><a name="1068" class="Symbol"
+      >)</a
+      ><a name="1069"
+      > </a
+      ><a name="1070" class="Symbol"
+      >&#8594;</a
+      ><a name="1071"
+      > </a
+      ><a name="1072" href="J-AC-N.html#993" class="Bound"
+      >P</a
+      ><a name="1073"
+      > </a
+      ><a name="1074" href="J-AC-N.html#1038" class="Bound"
+      >n</a
+      ><a name="1075"
+      > </a
+      ><a name="1076" href="J-AC-N.html#1049" class="Bound"
+      >x</a
+      ><a name="1077"
+      > </a
+      ><a name="1078" href="J-AC-N.html#1063" class="Bound"
+      >y</a
+      ><a name="1079" class="Symbol"
+      >)</a
+      ><a name="1080"
+      > </a
+      ><a name="1081" class="Symbol"
+      >&#8594;</a
+      ><a name="1082"
+      >
+     </a
+      ><a name="1088" href="JK-Monads.html#331" class="Function"
+      >J</a
+      ><a name="1089" class="Symbol"
+      >(&#8704;(</a
+      ><a name="1092" href="J-AC-N.html#1092" class="Bound"
+      >n</a
+      ><a name="1093"
+      > </a
+      ><a name="1094" class="Symbol"
+      >:</a
+      ><a name="1095"
+      > </a
+      ><a name="1096" href="Naturals.html#48" class="Datatype"
+      >&#8469;</a
+      ><a name="1097" class="Symbol"
+      >)</a
+      ><a name="1098"
+      > </a
+      ><a name="1099" class="Symbol"
+      >&#8594;</a
+      ><a name="1100"
+      > </a
+      ><a name="1101" class="Symbol"
+      >&#8704;(</a
+      ><a name="1103" href="J-AC-N.html#1103" class="Bound"
+      >x</a
+      ><a name="1104"
+      > </a
+      ><a name="1105" class="Symbol"
+      >:</a
+      ><a name="1106"
+      > </a
+      ><a name="1107" href="Naturals.html#48" class="Datatype"
+      >&#8469;</a
+      ><a name="1108" class="Symbol"
+      >)</a
+      ><a name="1109"
+      > </a
+      ><a name="1110" class="Symbol"
+      >&#8594;</a
+      ><a name="1111"
+      > </a
+      ><a name="1112" href="Logic.html#1060" class="Datatype"
+      >&#8707;</a
+      ><a name="1113"
+      > </a
+      ><a name="1114" class="Symbol"
+      >\(</a
+      ><a name="1116" href="J-AC-N.html#1116" class="Bound"
+      >y</a
+      ><a name="1117"
+      > </a
+      ><a name="1118" class="Symbol"
+      >:</a
+      ><a name="1119"
+      > </a
+      ><a name="1120" href="Naturals.html#48" class="Datatype"
+      >&#8469;</a
+      ><a name="1121" class="Symbol"
+      >)</a
+      ><a name="1122"
+      > </a
+      ><a name="1123" class="Symbol"
+      >&#8594;</a
+      ><a name="1124"
+      > </a
+      ><a name="1125" href="J-AC-N.html#993" class="Bound"
+      >P</a
+      ><a name="1126"
+      > </a
+      ><a name="1127" href="J-AC-N.html#1092" class="Bound"
+      >n</a
+      ><a name="1128"
+      > </a
+      ><a name="1129" href="J-AC-N.html#1103" class="Bound"
+      >x</a
+      ><a name="1130"
+      > </a
+      ><a name="1131" href="J-AC-N.html#1116" class="Bound"
+      >y</a
+      ><a name="1132" class="Symbol"
+      >)</a
+      ><a name="1133"
+      >
+
+</a
+      ><a name="1135" href="J-AC-N.html#965" class="Function"
+      >J-&#8704;-double-shift</a
+      ><a name="1151"
+      > </a
+      ><a name="1152" class="Symbol"
+      >{</a
+      ><a name="1153" href="J-AC-N.html#1153" class="Bound"
+      >R</a
+      ><a name="1154" class="Symbol"
+      >}</a
+      ><a name="1155"
+      > </a
+      ><a name="1156" href="J-AC-N.html#1156" class="Bound"
+      >f</a
+      ><a name="1157"
+      > </a
+      ><a name="1158" class="Symbol"
+      >=</a
+      ><a name="1159"
+      > </a
+      ><a name="1160" href="J-Shift.html#262" class="Function"
+      >J-&#8704;-shift</a
+      ><a name="1169"
+      > </a
+      ><a name="1170" class="Symbol"
+      >{</a
+      ><a name="1171" href="J-AC-N.html#1153" class="Bound"
+      >R</a
+      ><a name="1172" class="Symbol"
+      >}</a
+      ><a name="1173"
+      > </a
+      ><a name="1174" class="Symbol"
+      >(&#955;</a
+      ><a name="1176"
+      > </a
+      ><a name="1177" href="J-AC-N.html#1177" class="Bound"
+      >n</a
+      ><a name="1178"
+      > </a
+      ><a name="1179" class="Symbol"
+      >&#8594;</a
+      ><a name="1180"
+      > </a
+      ><a name="1181" href="J-Shift.html#262" class="Function"
+      >J-&#8704;-shift</a
+      ><a name="1190"
+      > </a
+      ><a name="1191" class="Symbol"
+      >(</a
+      ><a name="1192" href="J-AC-N.html#1156" class="Bound"
+      >f</a
+      ><a name="1193"
+      > </a
+      ><a name="1194" href="J-AC-N.html#1177" class="Bound"
+      >n</a
+      ><a name="1195" class="Symbol"
+      >))</a
+      ><a name="1197"
+      >
+
+
+</a
+      ><a name="1200" href="J-AC-N.html#1200" class="Function"
+      >J-DC-&#8469;</a
+      ><a name="1206"
+      > </a
+      ><a name="1207" class="Symbol"
+      >:</a
+      ><a name="1208"
+      > </a
+      ><a name="1209" class="Symbol"
+      >{</a
+      ><a name="1210" href="J-AC-N.html#1210" class="Bound"
+      >R</a
+      ><a name="1211"
+      > </a
+      ><a name="1212" class="Symbol"
+      >:</a
+      ><a name="1213"
+      > </a
+      ><a name="1214" href="Logic.html#77" class="Function"
+      >&#937;</a
+      ><a name="1215" class="Symbol"
+      >}</a
+      ><a name="1216"
+      > </a
+      ><a name="1217" class="Symbol"
+      >{</a
+      ><a name="1218" href="J-AC-N.html#1218" class="Bound"
+      >P</a
+      ><a name="1219"
+      > </a
+      ><a name="1220" class="Symbol"
+      >:</a
+      ><a name="1221"
+      > </a
+      ><a name="1222" href="Naturals.html#48" class="Datatype"
+      >&#8469;</a
+      ><a name="1223"
+      > </a
+      ><a name="1224" class="Symbol"
+      >&#8594;</a
+      ><a name="1225"
+      > </a
+      ><a name="1226" href="Naturals.html#48" class="Datatype"
+      >&#8469;</a
+      ><a name="1227"
+      > </a
+      ><a name="1228" class="Symbol"
+      >&#8594;</a
+      ><a name="1229"
+      > </a
+      ><a name="1230" href="Naturals.html#48" class="Datatype"
+      >&#8469;</a
+      ><a name="1231"
+      > </a
+      ><a name="1232" class="Symbol"
+      >&#8594;</a
+      ><a name="1233"
+      > </a
+      ><a name="1234" href="Logic.html#77" class="Function"
+      >&#937;</a
+      ><a name="1235" class="Symbol"
+      >}</a
+      ><a name="1236"
+      > </a
+      ><a name="1237" class="Symbol"
+      >&#8594;</a
+      ><a name="1238"
+      >
+</a
+      ><a name="1239" class="Comment"
+      >-------</a
+      ><a name="1246"
+      >
+      </a
+      ><a name="1253" class="Symbol"
+      >&#8704;(</a
+      ><a name="1255" href="J-AC-N.html#1255" class="Bound"
+      >x&#8320;</a
+      ><a name="1257"
+      > </a
+      ><a name="1258" class="Symbol"
+      >:</a
+      ><a name="1259"
+      > </a
+      ><a name="1260" href="Naturals.html#48" class="Datatype"
+      >&#8469;</a
+      ><a name="1261" class="Symbol"
+      >)</a
+      ><a name="1262"
+      > </a
+      ><a name="1263" class="Symbol"
+      >&#8594;</a
+      ><a name="1264"
+      >
+     </a
+      ><a name="1271" class="Symbol"
+      >(&#8704;(</a
+      ><a name="1274" href="J-AC-N.html#1274" class="Bound"
+      >n</a
+      ><a name="1275"
+      > </a
+      ><a name="1276" class="Symbol"
+      >:</a
+      ><a name="1277"
+      > </a
+      ><a name="1278" href="Naturals.html#48" class="Datatype"
+      >&#8469;</a
+      ><a name="1279" class="Symbol"
+      >)</a
+      ><a name="1280"
+      > </a
+      ><a name="1281" class="Symbol"
+      >&#8594;</a
+      ><a name="1282"
+      > </a
+      ><a name="1283" class="Symbol"
+      >&#8704;(</a
+      ><a name="1285" href="J-AC-N.html#1285" class="Bound"
+      >x</a
+      ><a name="1286"
+      > </a
+      ><a name="1287" class="Symbol"
+      >:</a
+      ><a name="1288"
+      > </a
+      ><a name="1289" href="Naturals.html#48" class="Datatype"
+      >&#8469;</a
+      ><a name="1290" class="Symbol"
+      >)</a
+      ><a name="1291"
+      > </a
+      ><a name="1292" class="Symbol"
+      >&#8594;</a
+      ><a name="1293"
+      > </a
+      ><a name="1294" href="JK-LogicalFacts.html#304" class="Function"
+      >J&#8707;</a
+      ><a name="1296"
+      > </a
+      ><a name="1297" class="Symbol"
+      >\(</a
+      ><a name="1299" href="J-AC-N.html#1299" class="Bound"
+      >y</a
+      ><a name="1300"
+      > </a
+      ><a name="1301" class="Symbol"
+      >:</a
+      ><a name="1302"
+      > </a
+      ><a name="1303" href="Naturals.html#48" class="Datatype"
+      >&#8469;</a
+      ><a name="1304" class="Symbol"
+      >)</a
+      ><a name="1305"
+      > </a
+      ><a name="1306" class="Symbol"
+      >&#8594;</a
+      ><a name="1307"
+      > </a
+      ><a name="1308" href="J-AC-N.html#1218" class="Bound"
+      >P</a
+      ><a name="1309"
+      > </a
+      ><a name="1310" href="J-AC-N.html#1274" class="Bound"
+      >n</a
+      ><a name="1311"
+      > </a
+      ><a name="1312" href="J-AC-N.html#1285" class="Bound"
+      >x</a
+      ><a name="1313"
+      > </a
+      ><a name="1314" href="J-AC-N.html#1299" class="Bound"
+      >y</a
+      ><a name="1315" class="Symbol"
+      >)</a
+      ><a name="1316"
+      > </a
+      ><a name="1317" class="Symbol"
+      >&#8594;</a
+      ><a name="1318"
+      >
+     </a
+      ><a name="1325" href="JK-LogicalFacts.html#304" class="Function"
+      >J&#8707;</a
+      ><a name="1327"
+      > </a
+      ><a name="1328" class="Symbol"
+      >\(</a
+      ><a name="1330" href="J-AC-N.html#1330" class="Bound"
+      >&#945;</a
+      ><a name="1331"
+      > </a
+      ><a name="1332" class="Symbol"
+      >:</a
+      ><a name="1333"
+      > </a
+      ><a name="1334" href="Naturals.html#48" class="Datatype"
+      >&#8469;</a
+      ><a name="1335"
+      > </a
+      ><a name="1336" class="Symbol"
+      >&#8594;</a
+      ><a name="1337"
+      > </a
+      ><a name="1338" href="Naturals.html#48" class="Datatype"
+      >&#8469;</a
+      ><a name="1339" class="Symbol"
+      >)</a
+      ><a name="1340"
+      > </a
+      ><a name="1341" class="Symbol"
+      >&#8594;</a
+      ><a name="1342"
+      > </a
+      ><a name="1343" href="J-AC-N.html#1330" class="Bound"
+      >&#945;</a
+      ><a name="1344"
+      > </a
+      ><a name="1345" href="Naturals.html#68" class="InductiveConstructor"
+      >O</a
+      ><a name="1346"
+      > </a
+      ><a name="1347" href="Equality.html#48" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="1348"
+      > </a
+      ><a name="1349" href="J-AC-N.html#1255" class="Bound"
+      >x&#8320;</a
+      ><a name="1351"
+      > </a
+      ><a name="1352" href="Logic.html#282" class="Datatype Operator"
+      >&#8743;</a
+      ><a name="1353"
+      > </a
+      ><a name="1354" class="Symbol"
+      >(&#8704;(</a
+      ><a name="1357" href="J-AC-N.html#1357" class="Bound"
+      >n</a
+      ><a name="1358"
+      > </a
+      ><a name="1359" class="Symbol"
+      >:</a
+      ><a name="1360"
+      > </a
+      ><a name="1361" href="Naturals.html#48" class="Datatype"
+      >&#8469;</a
+      ><a name="1362" class="Symbol"
+      >)</a
+      ><a name="1363"
+      > </a
+      ><a name="1364" class="Symbol"
+      >&#8594;</a
+      ><a name="1365"
+      > </a
+      ><a name="1366" href="J-AC-N.html#1218" class="Bound"
+      >P</a
+      ><a name="1367"
+      > </a
+      ><a name="1368" href="J-AC-N.html#1357" class="Bound"
+      >n</a
+      ><a name="1369"
+      > </a
+      ><a name="1370" class="Symbol"
+      >(</a
+      ><a name="1371" href="J-AC-N.html#1330" class="Bound"
+      >&#945;</a
+      ><a name="1372"
+      > </a
+      ><a name="1373" href="J-AC-N.html#1357" class="Bound"
+      >n</a
+      ><a name="1374" class="Symbol"
+      >)</a
+      ><a name="1375"
+      > </a
+      ><a name="1376" class="Symbol"
+      >(</a
+      ><a name="1377" href="J-AC-N.html#1330" class="Bound"
+      >&#945;</a
+      ><a name="1378" class="Symbol"
+      >(</a
+      ><a name="1379" href="J-AC-N.html#1357" class="Bound"
+      >n</a
+      ><a name="1380"
+      > </a
+      ><a name="1381" href="Addition.html#467" class="Function Operator"
+      >+</a
+      ><a name="1382"
+      > </a
+      ><a name="1383" class="Number"
+      >1</a
+      ><a name="1384" class="Symbol"
+      >)))</a
+      ><a name="1387"
+      >
+
+</a
+      ><a name="1389" href="J-AC-N.html#1200" class="Function"
+      >J-DC-&#8469;</a
+      ><a name="1395"
+      > </a
+      ><a name="1396" class="Symbol"
+      >{</a
+      ><a name="1397" href="J-AC-N.html#1397" class="Bound"
+      >R</a
+      ><a name="1398" class="Symbol"
+      >}</a
+      ><a name="1399"
+      > </a
+      ><a name="1400" href="J-AC-N.html#1400" class="Bound"
+      >x&#8320;</a
+      ><a name="1402"
+      > </a
+      ><a name="1403" href="J-AC-N.html#1403" class="Bound"
+      >f</a
+      ><a name="1404"
+      > </a
+      ><a name="1405" class="Symbol"
+      >=</a
+      ><a name="1406"
+      > </a
+      ><a name="1407" class="Symbol"
+      >(</a
+      ><a name="1408" href="JK-Monads.html#1345" class="Function"
+      >J-functor</a
+      ><a name="1417"
+      > </a
+      ><a name="1418" class="Symbol"
+      >{</a
+      ><a name="1419" href="J-AC-N.html#1397" class="Bound"
+      >R</a
+      ><a name="1420" class="Symbol"
+      >}</a
+      ><a name="1421"
+      > </a
+      ><a name="1422" class="Symbol"
+      >(</a
+      ><a name="1423" href="Choice.html#299" class="Function"
+      >DC</a
+      ><a name="1425"
+      > </a
+      ><a name="1426" href="J-AC-N.html#1400" class="Bound"
+      >x&#8320;</a
+      ><a name="1428" class="Symbol"
+      >))</a
+      ><a name="1430"
+      > </a
+      ><a name="1431" class="Symbol"
+      >(</a
+      ><a name="1432" href="J-AC-N.html#965" class="Function"
+      >J-&#8704;-double-shift</a
+      ><a name="1448"
+      > </a
+      ><a name="1449" href="J-AC-N.html#1403" class="Bound"
+      >f</a
+      ><a name="1450" class="Symbol"
+      >)</a
+      ><a name="1451"
+      >
+</a
+      ></pre
+    ></body
+  ></html
+>

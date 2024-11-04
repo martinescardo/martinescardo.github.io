@@ -1,0 +1,400 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+><head
+  ><title
+    >Order</title
+    ><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"
+     /><meta http-equiv="Content-Style-Type" content="text/css"
+     /><link href="Agda.css" rel="stylesheet" type="text/css"
+     /></head
+  ><body
+  ><pre
+    ><a name="1" class="Keyword"
+      >module</a
+      ><a name="7"
+      > </a
+      ><a name="8" href="Order.html#8" class="Module"
+      >Order</a
+      ><a name="13"
+      > </a
+      ><a name="14" class="Keyword"
+      >where</a
+      ><a name="19"
+      >
+
+</a
+      ><a name="21" class="Keyword"
+      >open</a
+      ><a name="25"
+      > </a
+      ><a name="26" class="Keyword"
+      >import</a
+      ><a name="32"
+      > </a
+      ><a name="33" href="Logic.html#8" class="Module"
+      >Logic</a
+      ><a name="38"
+      >
+</a
+      ><a name="39" class="Keyword"
+      >open</a
+      ><a name="43"
+      > </a
+      ><a name="44" class="Keyword"
+      >import</a
+      ><a name="50"
+      > </a
+      ><a name="51" href="Naturals.html#8" class="Module"
+      >Naturals</a
+      ><a name="59"
+      >
+</a
+      ><a name="60" class="Keyword"
+      >open</a
+      ><a name="64"
+      > </a
+      ><a name="65" class="Keyword"
+      >import</a
+      ><a name="71"
+      > </a
+      ><a name="72" href="Addition.html#8" class="Module"
+      >Addition</a
+      ><a name="80"
+      >
+</a
+      ><a name="81" class="Keyword"
+      >open</a
+      ><a name="85"
+      > </a
+      ><a name="86" class="Keyword"
+      >import</a
+      ><a name="92"
+      > </a
+      ><a name="93" href="Equality.html#8" class="Module"
+      >Equality</a
+      ><a name="101"
+      >
+
+</a
+      ><a name="103" href="Order.html#103" class="Function Operator"
+      >_&#8804;_</a
+      ><a name="106"
+      > </a
+      ><a name="107" class="Symbol"
+      >:</a
+      ><a name="108"
+      > </a
+      ><a name="109" href="Naturals.html#48" class="Datatype"
+      >&#8469;</a
+      ><a name="110"
+      > </a
+      ><a name="111" class="Symbol"
+      >&#8594;</a
+      ><a name="112"
+      > </a
+      ><a name="113" href="Naturals.html#48" class="Datatype"
+      >&#8469;</a
+      ><a name="114"
+      > </a
+      ><a name="115" class="Symbol"
+      >&#8594;</a
+      ><a name="116"
+      > </a
+      ><a name="117" href="Logic.html#77" class="Function"
+      >&#937;</a
+      ><a name="118"
+      >
+</a
+      ><a name="119" href="Order.html#119" class="Bound"
+      >x</a
+      ><a name="120"
+      > </a
+      ><a name="121" href="Order.html#103" class="Function Operator"
+      >&#8804;</a
+      ><a name="122"
+      > </a
+      ><a name="123" href="Order.html#123" class="Bound"
+      >y</a
+      ><a name="124"
+      > </a
+      ><a name="125" class="Symbol"
+      >=</a
+      ><a name="126"
+      > </a
+      ><a name="127" href="Logic.html#1060" class="Datatype"
+      >&#8707;</a
+      ><a name="128"
+      > </a
+      ><a name="129" class="Symbol"
+      >\(</a
+      ><a name="131" href="Order.html#131" class="Bound"
+      >n</a
+      ><a name="132"
+      > </a
+      ><a name="133" class="Symbol"
+      >:</a
+      ><a name="134"
+      > </a
+      ><a name="135" href="Naturals.html#48" class="Datatype"
+      >&#8469;</a
+      ><a name="136" class="Symbol"
+      >)</a
+      ><a name="137"
+      > </a
+      ><a name="138" class="Symbol"
+      >&#8594;</a
+      ><a name="139"
+      > </a
+      ><a name="140" href="Order.html#119" class="Bound"
+      >x</a
+      ><a name="141"
+      > </a
+      ><a name="142" href="Addition.html#467" class="Function Operator"
+      >+</a
+      ><a name="143"
+      > </a
+      ><a name="144" href="Order.html#131" class="Bound"
+      >n</a
+      ><a name="145"
+      > </a
+      ><a name="146" href="Equality.html#48" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="147"
+      > </a
+      ><a name="148" href="Order.html#123" class="Bound"
+      >y</a
+      ><a name="149"
+      >
+
+</a
+      ><a name="152" href="Order.html#152" class="Function Operator"
+      >_&lt;_</a
+      ><a name="155"
+      > </a
+      ><a name="156" class="Symbol"
+      >:</a
+      ><a name="157"
+      > </a
+      ><a name="158" href="Naturals.html#48" class="Datatype"
+      >&#8469;</a
+      ><a name="159"
+      > </a
+      ><a name="160" class="Symbol"
+      >&#8594;</a
+      ><a name="161"
+      > </a
+      ><a name="162" href="Naturals.html#48" class="Datatype"
+      >&#8469;</a
+      ><a name="163"
+      > </a
+      ><a name="164" class="Symbol"
+      >&#8594;</a
+      ><a name="165"
+      > </a
+      ><a name="166" href="Logic.html#77" class="Function"
+      >&#937;</a
+      ><a name="167"
+      >
+</a
+      ><a name="168" href="Order.html#168" class="Bound"
+      >x</a
+      ><a name="169"
+      > </a
+      ><a name="170" href="Order.html#152" class="Function Operator"
+      >&lt;</a
+      ><a name="171"
+      > </a
+      ><a name="172" href="Order.html#172" class="Bound"
+      >y</a
+      ><a name="173"
+      > </a
+      ><a name="174" class="Symbol"
+      >=</a
+      ><a name="175"
+      > </a
+      ><a name="176" href="Logic.html#1060" class="Datatype"
+      >&#8707;</a
+      ><a name="177"
+      > </a
+      ><a name="178" class="Symbol"
+      >\(</a
+      ><a name="180" href="Order.html#180" class="Bound"
+      >n</a
+      ><a name="181"
+      > </a
+      ><a name="182" class="Symbol"
+      >:</a
+      ><a name="183"
+      > </a
+      ><a name="184" href="Naturals.html#48" class="Datatype"
+      >&#8469;</a
+      ><a name="185" class="Symbol"
+      >)</a
+      ><a name="186"
+      > </a
+      ><a name="187" class="Symbol"
+      >&#8594;</a
+      ><a name="188"
+      > </a
+      ><a name="189" href="Order.html#168" class="Bound"
+      >x</a
+      ><a name="190"
+      > </a
+      ><a name="191" href="Addition.html#467" class="Function Operator"
+      >+</a
+      ><a name="192"
+      > </a
+      ><a name="193" href="Order.html#180" class="Bound"
+      >n</a
+      ><a name="194"
+      > </a
+      ><a name="195" href="Addition.html#467" class="Function Operator"
+      >+</a
+      ><a name="196"
+      > </a
+      ><a name="197" class="Number"
+      >1</a
+      ><a name="198"
+      > </a
+      ><a name="199" href="Equality.html#48" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="200"
+      > </a
+      ><a name="201" href="Order.html#172" class="Bound"
+      >y</a
+      ><a name="202"
+      >
+
+</a
+      ><a name="205" class="Keyword"
+      >infix</a
+      ><a name="210"
+      > </a
+      ><a name="211" class="Number"
+      >30</a
+      ><a name="213"
+      > _&lt;_
+</a
+      ><a name="218" class="Keyword"
+      >infix</a
+      ><a name="223"
+      > </a
+      ><a name="224" class="Number"
+      >30</a
+      ><a name="226"
+      > _&#8804;_
+
+</a
+      ><a name="232" class="Comment"
+      >-- This is how we are going to write inequality proofs (when possible):</a
+      ><a name="303"
+      >
+
+</a
+      ><a name="305" href="Order.html#305" class="Function"
+      >less-proof</a
+      ><a name="315"
+      > </a
+      ><a name="316" class="Symbol"
+      >:</a
+      ><a name="317"
+      > </a
+      ><a name="318" class="Symbol"
+      >{</a
+      ><a name="319" href="Order.html#319" class="Bound"
+      >x</a
+      ><a name="320"
+      > </a
+      ><a name="321" class="Symbol"
+      >:</a
+      ><a name="322"
+      > </a
+      ><a name="323" href="Naturals.html#48" class="Datatype"
+      >&#8469;</a
+      ><a name="324" class="Symbol"
+      >}</a
+      ><a name="325"
+      > </a
+      ><a name="326" class="Symbol"
+      >&#8594;</a
+      ><a name="327"
+      > </a
+      ><a name="328" class="Symbol"
+      >(</a
+      ><a name="329" href="Order.html#329" class="Bound"
+      >n</a
+      ><a name="330"
+      > </a
+      ><a name="331" class="Symbol"
+      >:</a
+      ><a name="332"
+      > </a
+      ><a name="333" href="Naturals.html#48" class="Datatype"
+      >&#8469;</a
+      ><a name="334" class="Symbol"
+      >)</a
+      ><a name="335"
+      > </a
+      ><a name="336" class="Symbol"
+      >&#8594;</a
+      ><a name="337"
+      > </a
+      ><a name="338" href="Order.html#319" class="Bound"
+      >x</a
+      ><a name="339"
+      > </a
+      ><a name="340" href="Order.html#152" class="Function Operator"
+      >&lt;</a
+      ><a name="341"
+      > </a
+      ><a name="342" href="Order.html#319" class="Bound"
+      >x</a
+      ><a name="343"
+      > </a
+      ><a name="344" href="Addition.html#467" class="Function Operator"
+      >+</a
+      ><a name="345"
+      > </a
+      ><a name="346" href="Order.html#329" class="Bound"
+      >n</a
+      ><a name="347"
+      > </a
+      ><a name="348" href="Addition.html#467" class="Function Operator"
+      >+</a
+      ><a name="349"
+      > </a
+      ><a name="350" class="Number"
+      >1</a
+      ><a name="351"
+      >
+</a
+      ><a name="352" href="Order.html#305" class="Function"
+      >less-proof</a
+      ><a name="362"
+      > </a
+      ><a name="363" href="Order.html#363" class="Bound"
+      >n</a
+      ><a name="364"
+      > </a
+      ><a name="365" class="Symbol"
+      >=</a
+      ><a name="366"
+      > </a
+      ><a name="367" href="Logic.html#1099" class="InductiveConstructor"
+      >&#8707;-intro</a
+      ><a name="374"
+      > </a
+      ><a name="375" href="Order.html#363" class="Bound"
+      >n</a
+      ><a name="376"
+      > </a
+      ><a name="377" href="Equality.html#82" class="InductiveConstructor"
+      >reflexivity</a
+      ><a name="388"
+      >
+
+</a
+      ></pre
+    ></body
+  ></html
+>

@@ -1,0 +1,559 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+><head
+  ><title
+    >K-AC-N</title
+    ><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"
+     /><meta http-equiv="Content-Style-Type" content="text/css"
+     /><link href="Agda.css" rel="stylesheet" type="text/css"
+     /></head
+  ><body
+  ><pre
+    ><a name="1" class="Keyword"
+      >module</a
+      ><a name="7"
+      > </a
+      ><a name="8" href="K-AC-N.html#8" class="Module"
+      >K-AC-N</a
+      ><a name="14"
+      > </a
+      ><a name="15" class="Keyword"
+      >where</a
+      ><a name="20"
+      >
+
+</a
+      ><a name="22" class="Keyword"
+      >open</a
+      ><a name="26"
+      > </a
+      ><a name="27" class="Keyword"
+      >import</a
+      ><a name="33"
+      > </a
+      ><a name="34" href="Logic.html#8" class="Module"
+      >Logic</a
+      ><a name="39"
+      >
+</a
+      ><a name="40" class="Keyword"
+      >open</a
+      ><a name="44"
+      > </a
+      ><a name="45" class="Keyword"
+      >import</a
+      ><a name="51"
+      > </a
+      ><a name="52" href="LogicalFacts.html#8" class="Module"
+      >LogicalFacts</a
+      ><a name="64"
+      >
+</a
+      ><a name="65" class="Keyword"
+      >open</a
+      ><a name="69"
+      > </a
+      ><a name="70" class="Keyword"
+      >import</a
+      ><a name="76"
+      > </a
+      ><a name="77" href="JK-LogicalFacts.html#8" class="Module"
+      >JK-LogicalFacts</a
+      ><a name="92"
+      >
+</a
+      ><a name="93" class="Keyword"
+      >open</a
+      ><a name="97"
+      > </a
+      ><a name="98" class="Keyword"
+      >import</a
+      ><a name="104"
+      > </a
+      ><a name="105" href="Naturals.html#8" class="Module"
+      >Naturals</a
+      ><a name="113"
+      >
+</a
+      ><a name="114" class="Keyword"
+      >open</a
+      ><a name="118"
+      > </a
+      ><a name="119" class="Keyword"
+      >import</a
+      ><a name="125"
+      > </a
+      ><a name="126" href="JK-Monads.html#8" class="Module"
+      >JK-Monads</a
+      ><a name="135"
+      >
+</a
+      ><a name="136" class="Keyword"
+      >open</a
+      ><a name="140"
+      > </a
+      ><a name="141" class="Keyword"
+      >import</a
+      ><a name="147"
+      > </a
+      ><a name="148" href="Choice.html#8" class="Module"
+      >Choice</a
+      ><a name="154"
+      >
+</a
+      ><a name="155" class="Keyword"
+      >open</a
+      ><a name="159"
+      > </a
+      ><a name="160" class="Keyword"
+      >import</a
+      ><a name="166"
+      > </a
+      ><a name="167" href="K-Shift.html#8" class="Module"
+      >K-Shift</a
+      ><a name="174"
+      >
+
+</a
+      ><a name="176" class="Comment"
+      >-----------------------------------------------------------------------</a
+      ><a name="247"
+      >
+</a
+      ><a name="248" class="Comment"
+      >-- The K-translation of countable choice AC-N can be proved only for --</a
+      ><a name="319"
+      >
+</a
+      ><a name="320" class="Comment"
+      >-- certain formulas, including those that are in the image of the    --</a
+      ><a name="391"
+      >
+</a
+      ><a name="392" class="Comment"
+      >-- K-translation.                                                    --</a
+      ><a name="463"
+      >
+</a
+      ><a name="464" class="Comment"
+      >--                                                                   --</a
+      ><a name="535"
+      >
+</a
+      ><a name="536" class="Comment"
+      >-- Hence we have a restriction efq (ex falso quadlibet).             --</a
+      ><a name="607"
+      >
+</a
+      ><a name="608" class="Comment"
+      >--                                                                   --</a
+      ><a name="679"
+      >
+</a
+      ><a name="680" class="Comment"
+      >-- This is because there is no general K-&#8704;-shift.                    --</a
+      ><a name="751"
+      >
+</a
+      ><a name="752" class="Comment"
+      >-----------------------------------------------------------------------</a
+      ><a name="823"
+      >
+
+
+</a
+      ><a name="826" href="K-AC-N.html#826" class="Function"
+      >K-AC-&#8469;</a
+      ><a name="832"
+      > </a
+      ><a name="833" class="Symbol"
+      >:</a
+      ><a name="834"
+      > </a
+      ><a name="835" class="Symbol"
+      >{</a
+      ><a name="836" href="K-AC-N.html#836" class="Bound"
+      >R</a
+      ><a name="837"
+      > </a
+      ><a name="838" class="Symbol"
+      >:</a
+      ><a name="839"
+      > </a
+      ><a name="840" href="Logic.html#77" class="Function"
+      >&#937;</a
+      ><a name="841" class="Symbol"
+      >}</a
+      ><a name="842"
+      > </a
+      ><a name="843" class="Symbol"
+      >{</a
+      ><a name="844" href="K-AC-N.html#844" class="Bound"
+      >X</a
+      ><a name="845"
+      > </a
+      ><a name="846" class="Symbol"
+      >:</a
+      ><a name="847"
+      > </a
+      ><a name="848" href="Naturals.html#48" class="Datatype"
+      >&#8469;</a
+      ><a name="849"
+      > </a
+      ><a name="850" class="Symbol"
+      >&#8594;</a
+      ><a name="851"
+      > </a
+      ><a name="852" class="PrimitiveType"
+      >Set</a
+      ><a name="855" class="Symbol"
+      >}</a
+      ><a name="856"
+      > </a
+      ><a name="857" class="Symbol"
+      >{</a
+      ><a name="858" href="K-AC-N.html#858" class="Bound"
+      >P</a
+      ><a name="859"
+      > </a
+      ><a name="860" class="Symbol"
+      >:</a
+      ><a name="861"
+      > </a
+      ><a name="862" class="Symbol"
+      >(</a
+      ><a name="863" href="K-AC-N.html#863" class="Bound"
+      >n</a
+      ><a name="864"
+      > </a
+      ><a name="865" class="Symbol"
+      >:</a
+      ><a name="866"
+      > </a
+      ><a name="867" href="Naturals.html#48" class="Datatype"
+      >&#8469;</a
+      ><a name="868" class="Symbol"
+      >)</a
+      ><a name="869"
+      > </a
+      ><a name="870" class="Symbol"
+      >&#8594;</a
+      ><a name="871"
+      > </a
+      ><a name="872" href="K-AC-N.html#844" class="Bound"
+      >X</a
+      ><a name="873"
+      > </a
+      ><a name="874" href="K-AC-N.html#863" class="Bound"
+      >n</a
+      ><a name="875"
+      > </a
+      ><a name="876" class="Symbol"
+      >&#8594;</a
+      ><a name="877"
+      > </a
+      ><a name="878" href="Logic.html#77" class="Function"
+      >&#937;</a
+      ><a name="879" class="Symbol"
+      >}</a
+      ><a name="880"
+      > </a
+      ><a name="881" class="Symbol"
+      >&#8594;</a
+      ><a name="882"
+      >
+</a
+      ><a name="883" class="Comment"
+      >-------</a
+      ><a name="890"
+      >
+        </a
+      ><a name="899" class="Symbol"
+      >(&#8704;(</a
+      ><a name="902" href="K-AC-N.html#902" class="Bound"
+      >n</a
+      ><a name="903"
+      > </a
+      ><a name="904" class="Symbol"
+      >:</a
+      ><a name="905"
+      > </a
+      ><a name="906" href="Naturals.html#48" class="Datatype"
+      >&#8469;</a
+      ><a name="907" class="Symbol"
+      >)</a
+      ><a name="908"
+      > </a
+      ><a name="909" class="Symbol"
+      >&#8594;</a
+      ><a name="910"
+      > </a
+      ><a name="911" href="K-AC-N.html#836" class="Bound"
+      >R</a
+      ><a name="912"
+      > </a
+      ><a name="913" class="Symbol"
+      >&#8594;</a
+      ><a name="914"
+      > </a
+      ><a name="915" href="Logic.html#1060" class="Datatype"
+      >&#8707;</a
+      ><a name="916"
+      > </a
+      ><a name="917" class="Symbol"
+      >\(</a
+      ><a name="919" href="K-AC-N.html#919" class="Bound"
+      >m</a
+      ><a name="920"
+      > </a
+      ><a name="921" class="Symbol"
+      >:</a
+      ><a name="922"
+      > </a
+      ><a name="923" href="K-AC-N.html#844" class="Bound"
+      >X</a
+      ><a name="924"
+      > </a
+      ><a name="925" href="K-AC-N.html#902" class="Bound"
+      >n</a
+      ><a name="926" class="Symbol"
+      >)</a
+      ><a name="927"
+      > </a
+      ><a name="928" class="Symbol"
+      >&#8594;</a
+      ><a name="929"
+      > </a
+      ><a name="930" href="K-AC-N.html#858" class="Bound"
+      >P</a
+      ><a name="931"
+      > </a
+      ><a name="932" href="K-AC-N.html#902" class="Bound"
+      >n</a
+      ><a name="933"
+      > </a
+      ><a name="934" href="K-AC-N.html#919" class="Bound"
+      >m</a
+      ><a name="935" class="Symbol"
+      >)</a
+      ><a name="936"
+      >               </a
+      ><a name="951" class="Comment"
+      >-- efqs,</a
+      ><a name="959"
+      >
+      </a
+      ><a name="966" class="Symbol"
+      >&#8594;</a
+      ><a name="967"
+      > </a
+      ><a name="968" class="Symbol"
+      >(&#8704;(</a
+      ><a name="971" href="K-AC-N.html#971" class="Bound"
+      >n</a
+      ><a name="972"
+      > </a
+      ><a name="973" class="Symbol"
+      >:</a
+      ><a name="974"
+      > </a
+      ><a name="975" href="Naturals.html#48" class="Datatype"
+      >&#8469;</a
+      ><a name="976" class="Symbol"
+      >)</a
+      ><a name="977"
+      > </a
+      ><a name="978" class="Symbol"
+      >&#8594;</a
+      ><a name="979"
+      > </a
+      ><a name="980" href="JK-LogicalFacts.html#172" class="Function"
+      >K&#8707;</a
+      ><a name="982"
+      > </a
+      ><a name="983" class="Symbol"
+      >\(</a
+      ><a name="985" href="K-AC-N.html#985" class="Bound"
+      >m</a
+      ><a name="986"
+      > </a
+      ><a name="987" class="Symbol"
+      >:</a
+      ><a name="988"
+      > </a
+      ><a name="989" href="K-AC-N.html#844" class="Bound"
+      >X</a
+      ><a name="990"
+      > </a
+      ><a name="991" href="K-AC-N.html#971" class="Bound"
+      >n</a
+      ><a name="992" class="Symbol"
+      >)</a
+      ><a name="993"
+      > </a
+      ><a name="994" class="Symbol"
+      >&#8594;</a
+      ><a name="995"
+      > </a
+      ><a name="996" href="K-AC-N.html#858" class="Bound"
+      >P</a
+      ><a name="997"
+      > </a
+      ><a name="998" href="K-AC-N.html#971" class="Bound"
+      >n</a
+      ><a name="999"
+      > </a
+      ><a name="1000" href="K-AC-N.html#985" class="Bound"
+      >m</a
+      ><a name="1001" class="Symbol"
+      >)</a
+      ><a name="1002"
+      >                  </a
+      ><a name="1020" class="Comment"
+      >-- premise,</a
+      ><a name="1031"
+      >
+      </a
+      ><a name="1038" class="Symbol"
+      >&#8594;</a
+      ><a name="1039"
+      > </a
+      ><a name="1040" href="JK-LogicalFacts.html#172" class="Function"
+      >K&#8707;</a
+      ><a name="1042"
+      > </a
+      ><a name="1043" class="Symbol"
+      >\(</a
+      ><a name="1045" href="K-AC-N.html#1045" class="Bound"
+      >f</a
+      ><a name="1046"
+      > </a
+      ><a name="1047" class="Symbol"
+      >:</a
+      ><a name="1048"
+      > </a
+      ><a name="1049" class="Symbol"
+      >((</a
+      ><a name="1051" href="K-AC-N.html#1051" class="Bound"
+      >n</a
+      ><a name="1052"
+      > </a
+      ><a name="1053" class="Symbol"
+      >:</a
+      ><a name="1054"
+      > </a
+      ><a name="1055" href="Naturals.html#48" class="Datatype"
+      >&#8469;</a
+      ><a name="1056" class="Symbol"
+      >)</a
+      ><a name="1057"
+      > </a
+      ><a name="1058" class="Symbol"
+      >&#8594;</a
+      ><a name="1059"
+      > </a
+      ><a name="1060" href="K-AC-N.html#844" class="Bound"
+      >X</a
+      ><a name="1061"
+      > </a
+      ><a name="1062" href="K-AC-N.html#1051" class="Bound"
+      >n</a
+      ><a name="1063" class="Symbol"
+      >))</a
+      ><a name="1065"
+      > </a
+      ><a name="1066" class="Symbol"
+      >&#8594;</a
+      ><a name="1067"
+      > </a
+      ><a name="1068" class="Symbol"
+      >&#8704;(</a
+      ><a name="1070" href="K-AC-N.html#1070" class="Bound"
+      >n</a
+      ><a name="1071"
+      > </a
+      ><a name="1072" class="Symbol"
+      >:</a
+      ><a name="1073"
+      > </a
+      ><a name="1074" href="Naturals.html#48" class="Datatype"
+      >&#8469;</a
+      ><a name="1075" class="Symbol"
+      >)</a
+      ><a name="1076"
+      > </a
+      ><a name="1077" class="Symbol"
+      >&#8594;</a
+      ><a name="1078"
+      > </a
+      ><a name="1079" href="K-AC-N.html#858" class="Bound"
+      >P</a
+      ><a name="1080"
+      > </a
+      ><a name="1081" href="K-AC-N.html#1070" class="Bound"
+      >n</a
+      ><a name="1082"
+      > </a
+      ><a name="1083" class="Symbol"
+      >(</a
+      ><a name="1084" href="K-AC-N.html#1045" class="Bound"
+      >f</a
+      ><a name="1085"
+      > </a
+      ><a name="1086" href="K-AC-N.html#1070" class="Bound"
+      >n</a
+      ><a name="1087" class="Symbol"
+      >)</a
+      ><a name="1088"
+      >    </a
+      ><a name="1092" class="Comment"
+      >-- conclusion.</a
+      ><a name="1106"
+      >
+
+</a
+      ><a name="1108" href="K-AC-N.html#826" class="Function"
+      >K-AC-&#8469;</a
+      ><a name="1114"
+      > </a
+      ><a name="1115" href="K-AC-N.html#1115" class="Bound"
+      >efqs</a
+      ><a name="1119"
+      > </a
+      ><a name="1120" class="Symbol"
+      >=</a
+      ><a name="1121"
+      > </a
+      ><a name="1122" class="Symbol"
+      >(</a
+      ><a name="1123" href="JK-Monads.html#1456" class="Function"
+      >K-functor</a
+      ><a name="1132"
+      > </a
+      ><a name="1133" href="Choice.html#83" class="Function"
+      >AC</a
+      ><a name="1135" class="Symbol"
+      >)</a
+      ><a name="1136"
+      > </a
+      ><a name="1137" href="LogicalFacts.html#63" class="Function Operator"
+      >&#8728;</a
+      ><a name="1138"
+      > </a
+      ><a name="1139" class="Symbol"
+      >(</a
+      ><a name="1140" href="K-Shift.html#239" class="Function"
+      >K-&#8704;-shift</a
+      ><a name="1149"
+      > </a
+      ><a name="1150" href="K-AC-N.html#1115" class="Bound"
+      >efqs</a
+      ><a name="1154" class="Symbol"
+      >)</a
+      ><a name="1155"
+      >
+</a
+      ></pre
+    ></body
+  ></html
+>

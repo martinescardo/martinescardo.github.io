@@ -1,0 +1,940 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+><head
+  ><title
+    >DataStructures</title
+    ><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"
+     /><meta http-equiv="Content-Style-Type" content="text/css"
+     /><link href="Agda.css" rel="stylesheet" type="text/css"
+     /></head
+  ><body
+  ><pre
+    ><a name="1" class="Keyword"
+      >module</a
+      ><a name="7"
+      > </a
+      ><a name="8" href="DataStructures.html#8" class="Module"
+      >DataStructures</a
+      ><a name="22"
+      > </a
+      ><a name="23" class="Keyword"
+      >where</a
+      ><a name="28"
+      >
+
+</a
+      ><a name="30" class="Comment"
+      >-- Some definitions of standard things</a
+      ><a name="68"
+      >
+</a
+      ><a name="69" class="Comment"
+      >-- (sorry for not using libraries).</a
+      ><a name="104"
+      >
+
+</a
+      ><a name="106" class="Keyword"
+      >open</a
+      ><a name="110"
+      > </a
+      ><a name="111" class="Keyword"
+      >import</a
+      ><a name="117"
+      > </a
+      ><a name="118" href="Naturals.html#8" class="Module"
+      >Naturals</a
+      ><a name="126"
+      >
+</a
+      ><a name="127" class="Keyword"
+      >open</a
+      ><a name="131"
+      > </a
+      ><a name="132" class="Keyword"
+      >import</a
+      ><a name="138"
+      > </a
+      ><a name="139" href="Addition.html#8" class="Module"
+      >Addition</a
+      ><a name="147"
+      >
+</a
+      ><a name="148" class="Keyword"
+      >open</a
+      ><a name="152"
+      > </a
+      ><a name="153" class="Keyword"
+      >import</a
+      ><a name="159"
+      > </a
+      ><a name="160" href="Finite.html#8" class="Module"
+      >Finite</a
+      ><a name="166"
+      >
+</a
+      ><a name="167" class="Keyword"
+      >open</a
+      ><a name="171"
+      > </a
+      ><a name="172" class="Keyword"
+      >import</a
+      ><a name="178"
+      > </a
+      ><a name="179" href="LogicalFacts.html#8" class="Module"
+      >LogicalFacts</a
+      ><a name="191"
+      >
+
+
+</a
+      ><a name="194" class="Keyword"
+      >data</a
+      ><a name="198"
+      > </a
+      ><a name="199" href="DataStructures.html#199" class="Datatype"
+      >List</a
+      ><a name="203"
+      > </a
+      ><a name="204" class="Symbol"
+      >(</a
+      ><a name="205" href="DataStructures.html#205" class="Bound"
+      >X</a
+      ><a name="206"
+      > </a
+      ><a name="207" class="Symbol"
+      >:</a
+      ><a name="208"
+      > </a
+      ><a name="209" class="PrimitiveType"
+      >Set</a
+      ><a name="212" class="Symbol"
+      >)</a
+      ><a name="213"
+      > </a
+      ><a name="214" class="Symbol"
+      >:</a
+      ><a name="215"
+      > </a
+      ><a name="216" class="PrimitiveType"
+      >Set</a
+      ><a name="219"
+      > </a
+      ><a name="220" class="Keyword"
+      >where</a
+      ><a name="225"
+      >
+ </a
+      ><a name="227" href="DataStructures.html#227" class="InductiveConstructor"
+      >[]</a
+      ><a name="229"
+      > </a
+      ><a name="230" class="Symbol"
+      >:</a
+      ><a name="231"
+      > </a
+      ><a name="232" href="DataStructures.html#199" class="Datatype"
+      >List</a
+      ><a name="236"
+      > </a
+      ><a name="237" href="DataStructures.html#205" class="Bound"
+      >X</a
+      ><a name="238"
+      >
+ </a
+      ><a name="240" href="DataStructures.html#240" class="InductiveConstructor Operator"
+      >_::_</a
+      ><a name="244"
+      >  </a
+      ><a name="246" class="Symbol"
+      >:</a
+      ><a name="247"
+      > </a
+      ><a name="248" href="DataStructures.html#205" class="Bound"
+      >X</a
+      ><a name="249"
+      > </a
+      ><a name="250" class="Symbol"
+      >&#8594;</a
+      ><a name="251"
+      > </a
+      ><a name="252" href="DataStructures.html#199" class="Datatype"
+      >List</a
+      ><a name="256"
+      > </a
+      ><a name="257" href="DataStructures.html#205" class="Bound"
+      >X</a
+      ><a name="258"
+      > </a
+      ><a name="259" class="Symbol"
+      >&#8594;</a
+      ><a name="260"
+      > </a
+      ><a name="261" href="DataStructures.html#199" class="Datatype"
+      >List</a
+      ><a name="265"
+      > </a
+      ><a name="266" href="DataStructures.html#205" class="Bound"
+      >X</a
+      ><a name="267"
+      >
+
+</a
+      ><a name="269" class="Keyword"
+      >infixr</a
+      ><a name="275"
+      > </a
+      ><a name="276" class="Number"
+      >30</a
+      ><a name="278"
+      > _::_
+
+
+</a
+      ><a name="286" class="Comment"
+      >-- Transforms a finite list given as a map to an enumerated finite</a
+      ><a name="352"
+      >
+</a
+      ><a name="353" class="Comment"
+      >-- list:</a
+      ><a name="361"
+      >
+
+</a
+      ><a name="363" href="DataStructures.html#363" class="Function"
+      >list</a
+      ><a name="367"
+      > </a
+      ><a name="368" class="Symbol"
+      >:</a
+      ><a name="369"
+      > </a
+      ><a name="370" class="Symbol"
+      >{</a
+      ><a name="371" href="DataStructures.html#371" class="Bound"
+      >m</a
+      ><a name="372"
+      > </a
+      ><a name="373" class="Symbol"
+      >:</a
+      ><a name="374"
+      > </a
+      ><a name="375" href="Naturals.html#48" class="Datatype"
+      >&#8469;</a
+      ><a name="376" class="Symbol"
+      >}</a
+      ><a name="377"
+      > </a
+      ><a name="378" class="Symbol"
+      >{</a
+      ><a name="379" href="DataStructures.html#379" class="Bound"
+      >X</a
+      ><a name="380"
+      > </a
+      ><a name="381" class="Symbol"
+      >:</a
+      ><a name="382"
+      > </a
+      ><a name="383" class="PrimitiveType"
+      >Set</a
+      ><a name="386" class="Symbol"
+      >}</a
+      ><a name="387"
+      > </a
+      ><a name="388" class="Symbol"
+      >&#8594;</a
+      ><a name="389"
+      > </a
+      ><a name="390" class="Symbol"
+      >(</a
+      ><a name="391" href="Finite.html#165" class="Datatype"
+      >smaller</a
+      ><a name="398"
+      > </a
+      ><a name="399" href="DataStructures.html#371" class="Bound"
+      >m</a
+      ><a name="400"
+      > </a
+      ><a name="401" class="Symbol"
+      >&#8594;</a
+      ><a name="402"
+      > </a
+      ><a name="403" href="DataStructures.html#379" class="Bound"
+      >X</a
+      ><a name="404" class="Symbol"
+      >)</a
+      ><a name="405"
+      > </a
+      ><a name="406" class="Symbol"
+      >&#8594;</a
+      ><a name="407"
+      > </a
+      ><a name="408" href="DataStructures.html#199" class="Datatype"
+      >List</a
+      ><a name="412"
+      > </a
+      ><a name="413" href="DataStructures.html#379" class="Bound"
+      >X</a
+      ><a name="414"
+      >
+</a
+      ><a name="415" href="DataStructures.html#363" class="Function"
+      >list</a
+      ><a name="419"
+      > </a
+      ><a name="420" class="Symbol"
+      >{</a
+      ><a name="421" href="Naturals.html#68" class="InductiveConstructor"
+      >0</a
+      ><a name="422" class="Symbol"
+      >}</a
+      ><a name="423"
+      > </a
+      ><a name="424" href="DataStructures.html#424" class="Bound"
+      >s</a
+      ><a name="425"
+      > </a
+      ><a name="426" class="Symbol"
+      >=</a
+      ><a name="427"
+      > </a
+      ><a name="428" href="DataStructures.html#227" class="InductiveConstructor"
+      >[]</a
+      ><a name="430"
+      >
+</a
+      ><a name="431" href="DataStructures.html#363" class="Function"
+      >list</a
+      ><a name="435"
+      > </a
+      ><a name="436" class="Symbol"
+      >{</a
+      ><a name="437" href="Naturals.html#121" class="InductiveConstructor"
+      >succ</a
+      ><a name="441"
+      > </a
+      ><a name="442" href="DataStructures.html#442" class="Bound"
+      >m</a
+      ><a name="443" class="Symbol"
+      >}</a
+      ><a name="444"
+      > </a
+      ><a name="445" href="DataStructures.html#445" class="Bound"
+      >s</a
+      ><a name="446"
+      > </a
+      ><a name="447" class="Symbol"
+      >=</a
+      ><a name="448"
+      > </a
+      ><a name="449" href="DataStructures.html#445" class="Bound"
+      >s</a
+      ><a name="450"
+      > </a
+      ><a name="451" href="Finite.html#191" class="InductiveConstructor"
+      >fzero</a
+      ><a name="456"
+      > </a
+      ><a name="457" href="DataStructures.html#240" class="InductiveConstructor Operator"
+      >::</a
+      ><a name="459"
+      > </a
+      ><a name="460" href="DataStructures.html#363" class="Function"
+      >list</a
+      ><a name="464"
+      > </a
+      ><a name="465" class="Symbol"
+      >{</a
+      ><a name="466" href="DataStructures.html#442" class="Bound"
+      >m</a
+      ><a name="467" class="Symbol"
+      >}</a
+      ><a name="468"
+      > </a
+      ><a name="469" class="Symbol"
+      >(</a
+      ><a name="470" href="DataStructures.html#445" class="Bound"
+      >s</a
+      ><a name="471"
+      > </a
+      ><a name="472" href="LogicalFacts.html#63" class="Function Operator"
+      >&#8728;</a
+      ><a name="473"
+      > </a
+      ><a name="474" href="Finite.html#227" class="InductiveConstructor"
+      >fsucc</a
+      ><a name="479" class="Symbol"
+      >)</a
+      ><a name="480"
+      >
+
+
+</a
+      ><a name="483" class="Comment"
+      >-- Binary products:</a
+      ><a name="502"
+      >
+
+</a
+      ><a name="504" class="Keyword"
+      >data</a
+      ><a name="508"
+      > </a
+      ><a name="509" href="DataStructures.html#509" class="Datatype Operator"
+      >_&#215;_</a
+      ><a name="512"
+      > </a
+      ><a name="513" class="Symbol"
+      >(</a
+      ><a name="514" href="DataStructures.html#514" class="Bound"
+      >X</a
+      ><a name="515"
+      > </a
+      ><a name="516" href="DataStructures.html#516" class="Bound"
+      >Y</a
+      ><a name="517"
+      > </a
+      ><a name="518" class="Symbol"
+      >:</a
+      ><a name="519"
+      > </a
+      ><a name="520" class="PrimitiveType"
+      >Set</a
+      ><a name="523" class="Symbol"
+      >)</a
+      ><a name="524"
+      > </a
+      ><a name="525" class="Symbol"
+      >:</a
+      ><a name="526"
+      > </a
+      ><a name="527" class="PrimitiveType"
+      >Set</a
+      ><a name="530"
+      > </a
+      ><a name="531" class="Keyword"
+      >where</a
+      ><a name="536"
+      >
+ </a
+      ><a name="538" href="DataStructures.html#538" class="InductiveConstructor Operator"
+      >_,_</a
+      ><a name="541"
+      > </a
+      ><a name="542" class="Symbol"
+      >:</a
+      ><a name="543"
+      > </a
+      ><a name="544" href="DataStructures.html#514" class="Bound"
+      >X</a
+      ><a name="545"
+      > </a
+      ><a name="546" class="Symbol"
+      >&#8594;</a
+      ><a name="547"
+      > </a
+      ><a name="548" href="DataStructures.html#516" class="Bound"
+      >Y</a
+      ><a name="549"
+      > </a
+      ><a name="550" class="Symbol"
+      >&#8594;</a
+      ><a name="551"
+      > </a
+      ><a name="552" href="DataStructures.html#514" class="Bound"
+      >X</a
+      ><a name="553"
+      > </a
+      ><a name="554" href="DataStructures.html#509" class="Datatype Operator"
+      >&#215;</a
+      ><a name="555"
+      > </a
+      ><a name="556" href="DataStructures.html#516" class="Bound"
+      >Y</a
+      ><a name="557"
+      >
+
+
+</a
+      ><a name="560" class="Keyword"
+      >infixr</a
+      ><a name="566"
+      > </a
+      ><a name="567" class="Number"
+      >20</a
+      ><a name="569"
+      > _,_
+
+
+</a
+      ><a name="576" class="Comment"
+      >-- The cons operation for the Cantor space:</a
+      ><a name="619"
+      >
+
+</a
+      ><a name="621" class="Keyword"
+      >open</a
+      ><a name="625"
+      > </a
+      ><a name="626" class="Keyword"
+      >import</a
+      ><a name="632"
+      > </a
+      ><a name="633" href="Cantor.html#8" class="Module"
+      >Cantor</a
+      ><a name="639"
+      >
+</a
+      ><a name="640" class="Keyword"
+      >open</a
+      ><a name="644"
+      > </a
+      ><a name="645" class="Keyword"
+      >import</a
+      ><a name="651"
+      > </a
+      ><a name="652" href="Two.html#8" class="Module"
+      >Two</a
+      ><a name="655"
+      >
+
+</a
+      ><a name="657" href="DataStructures.html#657" class="Function Operator"
+      >_^_</a
+      ><a name="660"
+      > </a
+      ><a name="661" class="Symbol"
+      >:</a
+      ><a name="662"
+      > </a
+      ><a name="663" href="Naturals.html#48" class="Datatype"
+      >&#8469;</a
+      ><a name="664"
+      > </a
+      ><a name="665" class="Symbol"
+      >&#8594;</a
+      ><a name="666"
+      > </a
+      ><a name="667" href="Cantor.html#60" class="Function"
+      >&#8322;&#8469;</a
+      ><a name="669"
+      > </a
+      ><a name="670" class="Symbol"
+      >&#8594;</a
+      ><a name="671"
+      > </a
+      ><a name="672" href="Cantor.html#60" class="Function"
+      >&#8322;&#8469;</a
+      ><a name="674"
+      >
+</a
+      ><a name="675" class="Symbol"
+      >(</a
+      ><a name="676" href="Naturals.html#68" class="InductiveConstructor"
+      >0</a
+      ><a name="677"
+      > </a
+      ><a name="678" href="DataStructures.html#657" class="Function Operator"
+      >^</a
+      ><a name="679"
+      > </a
+      ><a name="680" href="DataStructures.html#680" class="Bound"
+      >&#945;</a
+      ><a name="681" class="Symbol"
+      >)</a
+      ><a name="682"
+      > </a
+      ><a name="683" href="Naturals.html#68" class="InductiveConstructor"
+      >0</a
+      ><a name="684"
+      > </a
+      ><a name="685" class="Symbol"
+      >=</a
+      ><a name="686"
+      > </a
+      ><a name="687" href="Two.html#39" class="InductiveConstructor"
+      >&#8320;</a
+      ><a name="688"
+      >
+</a
+      ><a name="689" class="Symbol"
+      >((</a
+      ><a name="691" href="Naturals.html#121" class="InductiveConstructor"
+      >succ</a
+      ><a name="695"
+      > </a
+      ><a name="696" href="DataStructures.html#696" class="Bound"
+      >n</a
+      ><a name="697" class="Symbol"
+      >)</a
+      ><a name="698"
+      > </a
+      ><a name="699" href="DataStructures.html#657" class="Function Operator"
+      >^</a
+      ><a name="700"
+      > </a
+      ><a name="701" href="DataStructures.html#701" class="Bound"
+      >&#945;</a
+      ><a name="702" class="Symbol"
+      >)</a
+      ><a name="703"
+      > </a
+      ><a name="704" href="Naturals.html#68" class="InductiveConstructor"
+      >0</a
+      ><a name="705"
+      > </a
+      ><a name="706" class="Symbol"
+      >=</a
+      ><a name="707"
+      > </a
+      ><a name="708" href="Two.html#46" class="InductiveConstructor"
+      >&#8321;</a
+      ><a name="709"
+      >
+</a
+      ><a name="710" class="Symbol"
+      >(</a
+      ><a name="711" href="DataStructures.html#711" class="Bound"
+      >b</a
+      ><a name="712"
+      > </a
+      ><a name="713" href="DataStructures.html#657" class="Function Operator"
+      >^</a
+      ><a name="714"
+      > </a
+      ><a name="715" href="DataStructures.html#715" class="Bound"
+      >&#945;</a
+      ><a name="716" class="Symbol"
+      >)</a
+      ><a name="717"
+      > </a
+      ><a name="718" class="Symbol"
+      >(</a
+      ><a name="719" href="Naturals.html#121" class="InductiveConstructor"
+      >succ</a
+      ><a name="723"
+      > </a
+      ><a name="724" href="DataStructures.html#724" class="Bound"
+      >n</a
+      ><a name="725" class="Symbol"
+      >)</a
+      ><a name="726"
+      > </a
+      ><a name="727" class="Symbol"
+      >=</a
+      ><a name="728"
+      > </a
+      ><a name="729" href="DataStructures.html#715" class="Bound"
+      >&#945;</a
+      ><a name="730"
+      > </a
+      ><a name="731" href="DataStructures.html#724" class="Bound"
+      >n</a
+      ><a name="732"
+      >
+
+</a
+      ><a name="734" class="Keyword"
+      >infixr</a
+      ><a name="740"
+      > </a
+      ><a name="741" class="Number"
+      >30</a
+      ><a name="743"
+      > _^_
+
+
+</a
+      ><a name="750" class="Comment"
+      >-- Take a finite initial sublist of an infinite sequence.</a
+      ><a name="807"
+      >
+
+</a
+      ><a name="809" href="DataStructures.html#809" class="Function"
+      >take</a
+      ><a name="813"
+      > </a
+      ><a name="814" class="Symbol"
+      >:</a
+      ><a name="815"
+      > </a
+      ><a name="816" class="Symbol"
+      >(</a
+      ><a name="817" href="DataStructures.html#817" class="Bound"
+      >m</a
+      ><a name="818"
+      > </a
+      ><a name="819" class="Symbol"
+      >:</a
+      ><a name="820"
+      > </a
+      ><a name="821" href="Naturals.html#48" class="Datatype"
+      >&#8469;</a
+      ><a name="822" class="Symbol"
+      >)</a
+      ><a name="823"
+      > </a
+      ><a name="824" class="Symbol"
+      >{</a
+      ><a name="825" href="DataStructures.html#825" class="Bound"
+      >X</a
+      ><a name="826"
+      > </a
+      ><a name="827" class="Symbol"
+      >:</a
+      ><a name="828"
+      > </a
+      ><a name="829" class="PrimitiveType"
+      >Set</a
+      ><a name="832" class="Symbol"
+      >}</a
+      ><a name="833"
+      > </a
+      ><a name="834" class="Symbol"
+      >&#8594;</a
+      ><a name="835"
+      > </a
+      ><a name="836" class="Symbol"
+      >(</a
+      ><a name="837" href="Naturals.html#48" class="Datatype"
+      >&#8469;</a
+      ><a name="838"
+      > </a
+      ><a name="839" class="Symbol"
+      >&#8594;</a
+      ><a name="840"
+      > </a
+      ><a name="841" href="DataStructures.html#825" class="Bound"
+      >X</a
+      ><a name="842" class="Symbol"
+      >)</a
+      ><a name="843"
+      > </a
+      ><a name="844" class="Symbol"
+      >&#8594;</a
+      ><a name="845"
+      > </a
+      ><a name="846" href="DataStructures.html#199" class="Datatype"
+      >List</a
+      ><a name="850"
+      > </a
+      ><a name="851" href="DataStructures.html#825" class="Bound"
+      >X</a
+      ><a name="852"
+      >
+</a
+      ><a name="853" href="DataStructures.html#809" class="Function"
+      >take</a
+      ><a name="857"
+      > </a
+      ><a name="858" href="Naturals.html#68" class="InductiveConstructor"
+      >0</a
+      ><a name="859"
+      > </a
+      ><a name="860" href="DataStructures.html#860" class="Bound"
+      >&#945;</a
+      ><a name="861"
+      > </a
+      ><a name="862" class="Symbol"
+      >=</a
+      ><a name="863"
+      > </a
+      ><a name="864" href="DataStructures.html#227" class="InductiveConstructor"
+      >[]</a
+      ><a name="866"
+      >
+</a
+      ><a name="867" href="DataStructures.html#809" class="Function"
+      >take</a
+      ><a name="871"
+      > </a
+      ><a name="872" class="Symbol"
+      >(</a
+      ><a name="873" href="Naturals.html#121" class="InductiveConstructor"
+      >succ</a
+      ><a name="877"
+      > </a
+      ><a name="878" href="DataStructures.html#878" class="Bound"
+      >m</a
+      ><a name="879" class="Symbol"
+      >)</a
+      ><a name="880"
+      > </a
+      ><a name="881" href="DataStructures.html#881" class="Bound"
+      >&#945;</a
+      ><a name="882"
+      > </a
+      ><a name="883" class="Symbol"
+      >=</a
+      ><a name="884"
+      > </a
+      ><a name="885" href="DataStructures.html#881" class="Bound"
+      >&#945;</a
+      ><a name="886"
+      > </a
+      ><a name="887" class="Number"
+      >0</a
+      ><a name="888"
+      > </a
+      ><a name="889" href="DataStructures.html#240" class="InductiveConstructor Operator"
+      >::</a
+      ><a name="891"
+      > </a
+      ><a name="892" href="DataStructures.html#809" class="Function"
+      >take</a
+      ><a name="896"
+      > </a
+      ><a name="897" href="DataStructures.html#878" class="Bound"
+      >m</a
+      ><a name="898"
+      > </a
+      ><a name="899" class="Symbol"
+      >(</a
+      ><a name="900" href="DataStructures.html#881" class="Bound"
+      >&#945;</a
+      ><a name="901"
+      > </a
+      ><a name="902" href="LogicalFacts.html#63" class="Function Operator"
+      >&#8728;</a
+      ><a name="903"
+      > </a
+      ><a name="904" href="Naturals.html#121" class="InductiveConstructor"
+      >succ</a
+      ><a name="908" class="Symbol"
+      >)</a
+      ><a name="909"
+      >
+
+</a
+      ><a name="911" class="Comment"
+      >-- Index a finite sequence:</a
+      ><a name="938"
+      >
+
+</a
+      ><a name="940" href="DataStructures.html#940" class="Function Operator"
+      >_!_</a
+      ><a name="943"
+      > </a
+      ><a name="944" class="Symbol"
+      >:</a
+      ><a name="945"
+      > </a
+      ><a name="946" class="Symbol"
+      >{</a
+      ><a name="947" href="DataStructures.html#947" class="Bound"
+      >m</a
+      ><a name="948"
+      > </a
+      ><a name="949" class="Symbol"
+      >:</a
+      ><a name="950"
+      > </a
+      ><a name="951" href="Naturals.html#48" class="Datatype"
+      >&#8469;</a
+      ><a name="952" class="Symbol"
+      >}</a
+      ><a name="953"
+      > </a
+      ><a name="954" class="Symbol"
+      >&#8594;</a
+      ><a name="955"
+      > </a
+      ><a name="956" class="Symbol"
+      >(</a
+      ><a name="957" href="Finite.html#165" class="Datatype"
+      >smaller</a
+      ><a name="964" class="Symbol"
+      >(</a
+      ><a name="965" href="DataStructures.html#947" class="Bound"
+      >m</a
+      ><a name="966"
+      > </a
+      ><a name="967" href="Addition.html#467" class="Function Operator"
+      >+</a
+      ><a name="968"
+      > </a
+      ><a name="969" class="Number"
+      >1</a
+      ><a name="970" class="Symbol"
+      >)</a
+      ><a name="971"
+      > </a
+      ><a name="972" class="Symbol"
+      >&#8594;</a
+      ><a name="973"
+      > </a
+      ><a name="974" href="Naturals.html#48" class="Datatype"
+      >&#8469;</a
+      ><a name="975" class="Symbol"
+      >)</a
+      ><a name="976"
+      > </a
+      ><a name="977" class="Symbol"
+      >&#8594;</a
+      ><a name="978"
+      > </a
+      ><a name="979" href="Naturals.html#48" class="Datatype"
+      >&#8469;</a
+      ><a name="980"
+      > </a
+      ><a name="981" class="Symbol"
+      >&#8594;</a
+      ><a name="982"
+      > </a
+      ><a name="983" href="Naturals.html#48" class="Datatype"
+      >&#8469;</a
+      ><a name="984"
+      >
+</a
+      ><a name="985" href="DataStructures.html#940" class="Function Operator"
+      >_!_</a
+      ><a name="988"
+      > </a
+      ><a name="989" class="Symbol"
+      >{</a
+      ><a name="990" href="DataStructures.html#990" class="Bound"
+      >m</a
+      ><a name="991" class="Symbol"
+      >}</a
+      ><a name="992"
+      > </a
+      ><a name="993" href="DataStructures.html#993" class="Bound"
+      >s</a
+      ><a name="994"
+      > </a
+      ><a name="995" href="DataStructures.html#995" class="Bound"
+      >n</a
+      ><a name="996"
+      > </a
+      ><a name="997" class="Symbol"
+      >=</a
+      ><a name="998"
+      > </a
+      ><a name="999" href="DataStructures.html#993" class="Bound"
+      >s</a
+      ><a name="1000" class="Symbol"
+      >(</a
+      ><a name="1001" href="Finite.html#1675" class="Function"
+      >fmin</a
+      ><a name="1005"
+      > </a
+      ><a name="1006" href="DataStructures.html#990" class="Bound"
+      >m</a
+      ><a name="1007"
+      > </a
+      ><a name="1008" href="DataStructures.html#995" class="Bound"
+      >n</a
+      ><a name="1009" class="Symbol"
+      >)</a
+      ><a name="1010"
+      >
+
+</a
+      ></pre
+    ></body
+  ></html
+>

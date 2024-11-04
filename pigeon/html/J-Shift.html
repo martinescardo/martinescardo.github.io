@@ -1,0 +1,259 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+><head
+  ><title
+    >J-Shift</title
+    ><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"
+     /><meta http-equiv="Content-Style-Type" content="text/css"
+     /><link href="Agda.css" rel="stylesheet" type="text/css"
+     /></head
+  ><body
+  ><pre
+    ><a name="1" class="Keyword"
+      >module</a
+      ><a name="7"
+      > </a
+      ><a name="8" href="J-Shift.html#8" class="Module"
+      >J-Shift</a
+      ><a name="15"
+      > </a
+      ><a name="16" class="Keyword"
+      >where</a
+      ><a name="21"
+      >
+
+</a
+      ><a name="23" class="Comment"
+      >-- Import one of J-Shift-BBC or J-Shift-Selection.</a
+      ><a name="73"
+      >
+
+</a
+      ><a name="75" class="Keyword"
+      >open</a
+      ><a name="79"
+      > </a
+      ><a name="80" class="Keyword"
+      >import</a
+      ><a name="86"
+      > </a
+      ><a name="87" href="Logic.html#8" class="Module"
+      >Logic</a
+      ><a name="92"
+      >
+</a
+      ><a name="93" class="Keyword"
+      >open</a
+      ><a name="97"
+      > </a
+      ><a name="98" class="Keyword"
+      >import</a
+      ><a name="104"
+      > </a
+      ><a name="105" href="Naturals.html#8" class="Module"
+      >Naturals</a
+      ><a name="113"
+      >
+</a
+      ><a name="114" class="Keyword"
+      >open</a
+      ><a name="118"
+      > </a
+      ><a name="119" class="Keyword"
+      >import</a
+      ><a name="125"
+      > </a
+      ><a name="126" href="JK-Monads.html#8" class="Module"
+      >JK-Monads</a
+      ><a name="135"
+      >
+</a
+      ><a name="136" class="Keyword"
+      >open</a
+      ><a name="140"
+      > </a
+      ><a name="141" class="Keyword"
+      >import</a
+      ><a name="147"
+      > </a
+      ><a name="148" href="J-Shift-Selection.html#173" class="Module"
+      >J-Shift-Selection</a
+      ><a name="165"
+      >        </a
+      ><a name="173" class="Comment"
+      >-- Choose here...</a
+      ><a name="190"
+      >
+
+</a
+      ><a name="192" class="Comment"
+      >-- Use one of K-&#8704;-shift-bbc or K-&#8704;-shift-mbr or K-&#8704;-shift-selection:</a
+      ><a name="260"
+      >
+
+</a
+      ><a name="262" href="J-Shift.html#262" class="Function"
+      >J-&#8704;-shift</a
+      ><a name="271"
+      > </a
+      ><a name="272" class="Symbol"
+      >:</a
+      ><a name="273"
+      > </a
+      ><a name="274" class="Symbol"
+      >{</a
+      ><a name="275" href="J-Shift.html#275" class="Bound"
+      >R</a
+      ><a name="276"
+      > </a
+      ><a name="277" class="Symbol"
+      >:</a
+      ><a name="278"
+      > </a
+      ><a name="279" href="Logic.html#77" class="Function"
+      >&#937;</a
+      ><a name="280" class="Symbol"
+      >}</a
+      ><a name="281"
+      > </a
+      ><a name="282" class="Symbol"
+      >{</a
+      ><a name="283" href="J-Shift.html#283" class="Bound"
+      >A</a
+      ><a name="284"
+      > </a
+      ><a name="285" class="Symbol"
+      >:</a
+      ><a name="286"
+      > </a
+      ><a name="287" href="Naturals.html#48" class="Datatype"
+      >&#8469;</a
+      ><a name="288"
+      > </a
+      ><a name="289" class="Symbol"
+      >&#8594;</a
+      ><a name="290"
+      > </a
+      ><a name="291" href="Logic.html#77" class="Function"
+      >&#937;</a
+      ><a name="292" class="Symbol"
+      >}</a
+      ><a name="293"
+      > </a
+      ><a name="294" class="Symbol"
+      >&#8594;</a
+      ><a name="295"
+      >
+</a
+      ><a name="297" class="Comment"
+      >---------</a
+      ><a name="306"
+      >
+
+   </a
+      ><a name="311" class="Symbol"
+      >(&#8704;(</a
+      ><a name="314" href="J-Shift.html#314" class="Bound"
+      >n</a
+      ><a name="315"
+      > </a
+      ><a name="316" class="Symbol"
+      >:</a
+      ><a name="317"
+      > </a
+      ><a name="318" href="Naturals.html#48" class="Datatype"
+      >&#8469;</a
+      ><a name="319" class="Symbol"
+      >)</a
+      ><a name="320"
+      > </a
+      ><a name="321" class="Symbol"
+      >&#8594;</a
+      ><a name="322"
+      > </a
+      ><a name="323" href="JK-Monads.html#331" class="Function"
+      >J</a
+      ><a name="324" class="Symbol"
+      >(</a
+      ><a name="325" href="J-Shift.html#283" class="Bound"
+      >A</a
+      ><a name="326"
+      > </a
+      ><a name="327" href="J-Shift.html#314" class="Bound"
+      >n</a
+      ><a name="328" class="Symbol"
+      >))</a
+      ><a name="330"
+      > </a
+      ><a name="331" class="Symbol"
+      >&#8594;</a
+      ><a name="332"
+      > </a
+      ><a name="333" href="JK-Monads.html#331" class="Function"
+      >J</a
+      ><a name="334"
+      > </a
+      ><a name="335" class="Symbol"
+      >{</a
+      ><a name="336" href="J-Shift.html#275" class="Bound"
+      >R</a
+      ><a name="337" class="Symbol"
+      >}</a
+      ><a name="338"
+      > </a
+      ><a name="339" class="Symbol"
+      >(&#8704;(</a
+      ><a name="342" href="J-Shift.html#342" class="Bound"
+      >n</a
+      ><a name="343"
+      > </a
+      ><a name="344" class="Symbol"
+      >:</a
+      ><a name="345"
+      > </a
+      ><a name="346" href="Naturals.html#48" class="Datatype"
+      >&#8469;</a
+      ><a name="347" class="Symbol"
+      >)</a
+      ><a name="348"
+      > </a
+      ><a name="349" class="Symbol"
+      >&#8594;</a
+      ><a name="350"
+      > </a
+      ><a name="351" href="J-Shift.html#283" class="Bound"
+      >A</a
+      ><a name="352"
+      > </a
+      ><a name="353" href="J-Shift.html#342" class="Bound"
+      >n</a
+      ><a name="354" class="Symbol"
+      >)</a
+      ><a name="355"
+      >
+
+</a
+      ><a name="357" href="J-Shift.html#262" class="Function"
+      >J-&#8704;-shift</a
+      ><a name="366"
+      > </a
+      ><a name="367" class="Symbol"
+      >=</a
+      ><a name="368"
+      > </a
+      ><a name="369" href="J-Shift-Selection.html#409" class="Function"
+      >J-&#8704;-shift-selection</a
+      ><a name="388"
+      >     </a
+      ><a name="393" class="Comment"
+      >-- ... and here accordingly.</a
+      ><a name="421"
+      >
+
+
+
+</a
+      ></pre
+    ></body
+  ></html
+>

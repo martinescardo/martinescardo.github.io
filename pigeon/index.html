@@ -1,0 +1,69 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+<HEAD>
+<script type="text/javascript" src="ASCIIMathML.js"></script>
+   <TITLE>           Running the classical pigeonhole principle in Agda
+        </TITLE>
+   <META NAME="GENERATOR" CONTENT="Mozilla/3.0Gold (X11; I; SunOS 4.1.4 sun4c) [Netscape]">
+</head>
+<BODY>
+
+
+
+<H2>Running the classical pigeonhole principle in Agda</H2>
+<hr>
+Martin Escardo & Paulo Oliva, May 2011.  In collaboration with Ulrich
+Berger & Monika Seisenberger.  Transcribed to Agda 29 April - 3 May
+2011 by Martin Escardo, based on other Agda modules produced in
+previous years (for the selection monad J and continuation monad K, double-negation shift, classical choice etc., which are also included below).
+<hr>
+This version 27th May 2011, 19:27 BST.
+<hr>
+You can download <a href="Pigeon.zip">all the agda files as a zip file</a>.
+<hr>
+The main Agda files (html-formated with hyperlinks to the other files, which allow navigation by clicking at any word) are
+<ol>
+  <li><a href="http://www.cs.bham.ac.uk/~mhe/.talks/mfps2011/mfps2011.pdf">Slides</a> of talk given at MFPS.</li><p>
+  <li><a href="html/InfinitePigeon.html">InfinitePigeon</a></li><p>
+
+  (See also <a href="html/InfinitePigeonLessEfficient.html">InfinitePigeonLessEfficient</a>.) <p>
+
+  <li><a href="html/FinitePigeon.html">FinitePigeon</a></li><p>
+  <li><a href="html/Examples.html">Examples</a></li><p>
+</ol>
+The classical axiom of countable choice (that is, choice formulated with the classical existential quantifier) is realized in <a href="html/K-AC-N.html">K-AC-N</a> using any of
+<ol>
+  <li><a href="html/K-Shift-BBC.html">K-Shift-BBC</a>
+with <a href="http://projecteuclid.org/DPubS?service=UI&version=1.0&verb=Display&handle=euclid.jsl/1183745524">Berardi, Bezem and Coquand's functional</a>,</li><p>
+ <li><a href="html/K-Shift-MBR.html">K-Shift-MBR</a>
+with <a href="http://journals.cambridge.org/action/displayAbstract?fromPage=online&aid=439279&fulltextType=RA&fileId=S0960129506005093">Berger-Oliva modified bar recursion</a>,</li><p>
+  <li><a href="html/K-Shift-Selection.html">K-Shift-Selection</a> with <a href="http://portal.acm.org/citation.cfm?id=1876437">Escardo and Oliva's countable product of selection functions</a> (download <a href="http://www.cs.bham.ac.uk/~mhe/papers/peirce.pdf">pdf</a>),</li><p>
+</ol>
+by performing a suitable choice in the wrapper module <a href="html/K-Shift.html">K-Shift</a>. <p>
+<hr>
+The classical infinite pigeonhole principle says that any infinite
+sequence of booleans has an infinite constant subsequence (this is the
+program/proof "pigeonhole"
+in <a href="html/InfinitePigeon.html">InfinitePigeon</a>).
+<p>
+We work with the negative translation or more generally Friedman's
+A-translation, which amounts to prefixing "K R" (double negation
+monad) in front of existential quantifiers, disjunctions, and atomic
+formulas (equations of ground type), where R is an arbitrary
+proposition (as a first approximation, think of the parameter R as
+false).
+<p>
+Starting with a proof that uses both excluded middle and classical
+countable choice (i.e. choice formulated with the classical
+existential quantifier), we eventually get to a theorem that avoids K
+and considers a finite version of the pigeonhole principle. The point
+is to illustrate how one can extract witnesses from proofs that use
+classical logic and countable choice.
+<p>
+(We don't use the Agda libraries, and hence this set of Agda files is
+self-contained.)
+<hr>
+<A HREF="index.html">Martin Escardo</A>
+    <address><a href="mailto:m.escardo@cs.bham.ac.uk">m.escardo@cs.bham.ac.uk</a></address>
+</BODY>
+</HTML>

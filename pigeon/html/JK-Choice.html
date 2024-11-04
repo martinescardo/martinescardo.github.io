@@ -1,0 +1,2492 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+><head
+  ><title
+    >JK-Choice</title
+    ><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"
+     /><meta http-equiv="Content-Style-Type" content="text/css"
+     /><link href="Agda.css" rel="stylesheet" type="text/css"
+     /></head
+  ><body
+  ><pre
+    ><a name="1" class="Keyword"
+      >module</a
+      ><a name="7"
+      > </a
+      ><a name="8" href="JK-Choice.html#8" class="Module"
+      >JK-Choice</a
+      ><a name="17"
+      > </a
+      ><a name="18" class="Keyword"
+      >where</a
+      ><a name="23"
+      >
+
+</a
+      ><a name="25" class="Keyword"
+      >open</a
+      ><a name="29"
+      > </a
+      ><a name="30" class="Keyword"
+      >import</a
+      ><a name="36"
+      > </a
+      ><a name="37" href="Logic.html#8" class="Module"
+      >Logic</a
+      ><a name="42"
+      >
+</a
+      ><a name="43" class="Keyword"
+      >open</a
+      ><a name="47"
+      > </a
+      ><a name="48" class="Keyword"
+      >import</a
+      ><a name="54"
+      > </a
+      ><a name="55" href="LogicalFacts.html#8" class="Module"
+      >LogicalFacts</a
+      ><a name="67"
+      >
+</a
+      ><a name="68" class="Keyword"
+      >open</a
+      ><a name="72"
+      > </a
+      ><a name="73" class="Keyword"
+      >import</a
+      ><a name="79"
+      > </a
+      ><a name="80" href="JK-LogicalFacts.html#8" class="Module"
+      >JK-LogicalFacts</a
+      ><a name="95"
+      >
+</a
+      ><a name="96" class="Keyword"
+      >open</a
+      ><a name="100"
+      > </a
+      ><a name="101" class="Keyword"
+      >import</a
+      ><a name="107"
+      > </a
+      ><a name="108" href="Naturals.html#8" class="Module"
+      >Naturals</a
+      ><a name="116"
+      >
+</a
+      ><a name="117" class="Keyword"
+      >open</a
+      ><a name="121"
+      > </a
+      ><a name="122" class="Keyword"
+      >import</a
+      ><a name="128"
+      > </a
+      ><a name="129" href="Addition.html#8" class="Module"
+      >Addition</a
+      ><a name="137"
+      >
+</a
+      ><a name="138" class="Keyword"
+      >open</a
+      ><a name="142"
+      > </a
+      ><a name="143" class="Keyword"
+      >import</a
+      ><a name="149"
+      > </a
+      ><a name="150" href="JK-Monads.html#8" class="Module"
+      >JK-Monads</a
+      ><a name="159"
+      >
+</a
+      ><a name="160" class="Keyword"
+      >open</a
+      ><a name="164"
+      > </a
+      ><a name="165" class="Keyword"
+      >import</a
+      ><a name="171"
+      > </a
+      ><a name="172" href="Choice.html#8" class="Module"
+      >Choice</a
+      ><a name="178"
+      >
+</a
+      ><a name="179" class="Keyword"
+      >open</a
+      ><a name="183"
+      > </a
+      ><a name="184" class="Keyword"
+      >import</a
+      ><a name="190"
+      > </a
+      ><a name="191" href="Equality.html#8" class="Module"
+      >Equality</a
+      ><a name="199"
+      >
+</a
+      ><a name="200" class="Keyword"
+      >open</a
+      ><a name="204"
+      > </a
+      ><a name="205" class="Keyword"
+      >import</a
+      ><a name="211"
+      > </a
+      ><a name="212" href="Infinite-JK-Shifts.html#8" class="Module"
+      >Infinite-JK-Shifts</a
+      ><a name="230"
+      >
+
+</a
+      ><a name="232" class="Comment"
+      >------------------------------------------------------------------------</a
+      ><a name="304"
+      >
+</a
+      ><a name="305" class="Comment"
+      >-- Proof of the J translation of the axiom of countable choice        --</a
+      ><a name="377"
+      >
+</a
+      ><a name="378" class="Comment"
+      >-- from the proof of the axiom of choice using J-&#8704;-shift as a lemma.  --</a
+      ><a name="450"
+      >
+</a
+      ><a name="451" class="Comment"
+      >------------------------------------------------------------------------</a
+      ><a name="523"
+      >
+
+</a
+      ><a name="525" href="JK-Choice.html#525" class="Function"
+      >J-AC-&#8469;</a
+      ><a name="531"
+      > </a
+      ><a name="532" class="Symbol"
+      >:</a
+      ><a name="533"
+      > </a
+      ><a name="534" class="Symbol"
+      >{</a
+      ><a name="535" href="JK-Choice.html#535" class="Bound"
+      >R</a
+      ><a name="536"
+      > </a
+      ><a name="537" class="Symbol"
+      >:</a
+      ><a name="538"
+      > </a
+      ><a name="539" href="Logic.html#77" class="Function"
+      >&#937;</a
+      ><a name="540" class="Symbol"
+      >}</a
+      ><a name="541"
+      > </a
+      ><a name="542" class="Symbol"
+      >{</a
+      ><a name="543" href="JK-Choice.html#543" class="Bound"
+      >X</a
+      ><a name="544"
+      > </a
+      ><a name="545" class="Symbol"
+      >:</a
+      ><a name="546"
+      > </a
+      ><a name="547" href="Naturals.html#48" class="Datatype"
+      >&#8469;</a
+      ><a name="548"
+      > </a
+      ><a name="549" class="Symbol"
+      >&#8594;</a
+      ><a name="550"
+      > </a
+      ><a name="551" class="PrimitiveType"
+      >Set</a
+      ><a name="554" class="Symbol"
+      >}</a
+      ><a name="555"
+      > </a
+      ><a name="556" class="Symbol"
+      >{</a
+      ><a name="557" href="JK-Choice.html#557" class="Bound"
+      >P</a
+      ><a name="558"
+      > </a
+      ><a name="559" class="Symbol"
+      >:</a
+      ><a name="560"
+      > </a
+      ><a name="561" class="Symbol"
+      >(</a
+      ><a name="562" href="JK-Choice.html#562" class="Bound"
+      >n</a
+      ><a name="563"
+      > </a
+      ><a name="564" class="Symbol"
+      >:</a
+      ><a name="565"
+      > </a
+      ><a name="566" href="Naturals.html#48" class="Datatype"
+      >&#8469;</a
+      ><a name="567" class="Symbol"
+      >)</a
+      ><a name="568"
+      > </a
+      ><a name="569" class="Symbol"
+      >&#8594;</a
+      ><a name="570"
+      > </a
+      ><a name="571" href="JK-Choice.html#543" class="Bound"
+      >X</a
+      ><a name="572"
+      > </a
+      ><a name="573" href="JK-Choice.html#562" class="Bound"
+      >n</a
+      ><a name="574"
+      > </a
+      ><a name="575" class="Symbol"
+      >&#8594;</a
+      ><a name="576"
+      > </a
+      ><a name="577" href="Logic.html#77" class="Function"
+      >&#937;</a
+      ><a name="578" class="Symbol"
+      >}</a
+      ><a name="579"
+      > </a
+      ><a name="580" class="Symbol"
+      >&#8594;</a
+      ><a name="581"
+      >
+</a
+      ><a name="582" class="Comment"
+      >-------</a
+      ><a name="589"
+      >
+           </a
+      ><a name="601" class="Symbol"
+      >(&#8704;(</a
+      ><a name="604" href="JK-Choice.html#604" class="Bound"
+      >n</a
+      ><a name="605"
+      > </a
+      ><a name="606" class="Symbol"
+      >:</a
+      ><a name="607"
+      > </a
+      ><a name="608" href="Naturals.html#48" class="Datatype"
+      >&#8469;</a
+      ><a name="609" class="Symbol"
+      >)</a
+      ><a name="610"
+      > </a
+      ><a name="611" class="Symbol"
+      >&#8594;</a
+      ><a name="612"
+      > </a
+      ><a name="613" href="JK-LogicalFacts.html#303" class="Function"
+      >J&#8707;</a
+      ><a name="615"
+      > </a
+      ><a name="616" class="Symbol"
+      >\(</a
+      ><a name="618" href="JK-Choice.html#618" class="Bound"
+      >x</a
+      ><a name="619"
+      > </a
+      ><a name="620" class="Symbol"
+      >:</a
+      ><a name="621"
+      > </a
+      ><a name="622" href="JK-Choice.html#543" class="Bound"
+      >X</a
+      ><a name="623"
+      > </a
+      ><a name="624" href="JK-Choice.html#604" class="Bound"
+      >n</a
+      ><a name="625" class="Symbol"
+      >)</a
+      ><a name="626"
+      > </a
+      ><a name="627" class="Symbol"
+      >&#8594;</a
+      ><a name="628"
+      > </a
+      ><a name="629" href="JK-Choice.html#557" class="Bound"
+      >P</a
+      ><a name="630"
+      > </a
+      ><a name="631" href="JK-Choice.html#604" class="Bound"
+      >n</a
+      ><a name="632"
+      > </a
+      ><a name="633" href="JK-Choice.html#618" class="Bound"
+      >x</a
+      ><a name="634" class="Symbol"
+      >)</a
+      ><a name="635"
+      >
+        </a
+      ><a name="644" class="Symbol"
+      >&#8594;</a
+      ><a name="645"
+      > </a
+      ><a name="646" href="JK-LogicalFacts.html#303" class="Function"
+      >J&#8707;</a
+      ><a name="648"
+      > </a
+      ><a name="649" class="Symbol"
+      >\(</a
+      ><a name="651" href="JK-Choice.html#651" class="Bound"
+      >f</a
+      ><a name="652"
+      > </a
+      ><a name="653" class="Symbol"
+      >:</a
+      ><a name="654"
+      > </a
+      ><a name="655" class="Symbol"
+      >((</a
+      ><a name="657" href="JK-Choice.html#657" class="Bound"
+      >n</a
+      ><a name="658"
+      > </a
+      ><a name="659" class="Symbol"
+      >:</a
+      ><a name="660"
+      > </a
+      ><a name="661" href="Naturals.html#48" class="Datatype"
+      >&#8469;</a
+      ><a name="662" class="Symbol"
+      >)</a
+      ><a name="663"
+      > </a
+      ><a name="664" class="Symbol"
+      >&#8594;</a
+      ><a name="665"
+      > </a
+      ><a name="666" href="JK-Choice.html#543" class="Bound"
+      >X</a
+      ><a name="667"
+      > </a
+      ><a name="668" href="JK-Choice.html#657" class="Bound"
+      >n</a
+      ><a name="669" class="Symbol"
+      >))</a
+      ><a name="671"
+      > </a
+      ><a name="672" class="Symbol"
+      >&#8594;</a
+      ><a name="673"
+      > </a
+      ><a name="674" class="Symbol"
+      >&#8704;(</a
+      ><a name="676" href="JK-Choice.html#676" class="Bound"
+      >n</a
+      ><a name="677"
+      > </a
+      ><a name="678" class="Symbol"
+      >:</a
+      ><a name="679"
+      > </a
+      ><a name="680" href="Naturals.html#48" class="Datatype"
+      >&#8469;</a
+      ><a name="681" class="Symbol"
+      >)</a
+      ><a name="682"
+      > </a
+      ><a name="683" class="Symbol"
+      >&#8594;</a
+      ><a name="684"
+      > </a
+      ><a name="685" href="JK-Choice.html#557" class="Bound"
+      >P</a
+      ><a name="686"
+      > </a
+      ><a name="687" href="JK-Choice.html#676" class="Bound"
+      >n</a
+      ><a name="688"
+      > </a
+      ><a name="689" class="Symbol"
+      >(</a
+      ><a name="690" href="JK-Choice.html#651" class="Bound"
+      >f</a
+      ><a name="691"
+      > </a
+      ><a name="692" href="JK-Choice.html#676" class="Bound"
+      >n</a
+      ><a name="693" class="Symbol"
+      >)</a
+      ><a name="694"
+      >
+
+</a
+      ><a name="696" href="JK-Choice.html#525" class="Function"
+      >J-AC-&#8469;</a
+      ><a name="702"
+      > </a
+      ><a name="703" class="Symbol"
+      >{</a
+      ><a name="704" href="JK-Choice.html#704" class="Bound"
+      >R</a
+      ><a name="705" class="Symbol"
+      >}</a
+      ><a name="706"
+      > </a
+      ><a name="707" href="JK-Choice.html#707" class="Bound"
+      >g</a
+      ><a name="708"
+      > </a
+      ><a name="709" class="Symbol"
+      >=</a
+      ><a name="710"
+      > </a
+      ><a name="711" class="Symbol"
+      >(</a
+      ><a name="712" href="JK-Monads.html#1345" class="Function"
+      >J-functor</a
+      ><a name="721"
+      > </a
+      ><a name="722" class="Symbol"
+      >{</a
+      ><a name="723" href="JK-Choice.html#704" class="Bound"
+      >R</a
+      ><a name="724" class="Symbol"
+      >}</a
+      ><a name="725"
+      > </a
+      ><a name="726" href="Choice.html#83" class="Function"
+      >AC</a
+      ><a name="728" class="Symbol"
+      >)</a
+      ><a name="729"
+      > </a
+      ><a name="730" class="Symbol"
+      >(</a
+      ><a name="731" href="Infinite-JK-Shifts.html#306" class="Function"
+      >J-&#8704;-shift</a
+      ><a name="740"
+      > </a
+      ><a name="741" href="JK-Choice.html#707" class="Bound"
+      >g</a
+      ><a name="742" class="Symbol"
+      >)</a
+      ><a name="743"
+      >
+
+
+</a
+      ><a name="746" class="Comment"
+      >-----------------------------------------------------------------------</a
+      ><a name="817"
+      >
+</a
+      ><a name="818" class="Comment"
+      >-- The K-translation of AC can be proved only for certain formulas,  --</a
+      ><a name="889"
+      >
+</a
+      ><a name="890" class="Comment"
+      >-- including those that are in the image of the K-translation.       --</a
+      ><a name="961"
+      >
+</a
+      ><a name="962" class="Comment"
+      >--                                                                   --</a
+      ><a name="1033"
+      >
+</a
+      ><a name="1034" class="Comment"
+      >-- Hence most theorems in this part have restrictions (efq).         --</a
+      ><a name="1105"
+      >
+</a
+      ><a name="1106" class="Comment"
+      >--                                       ------------                --</a
+      ><a name="1177"
+      >
+</a
+      ><a name="1178" class="Comment"
+      >--                                                                   --</a
+      ><a name="1249"
+      >
+</a
+      ><a name="1250" class="Comment"
+      >-- This is because there is no general K-&#8704;-shift.                    --</a
+      ><a name="1321"
+      >
+</a
+      ><a name="1322" class="Comment"
+      >-----------------------------------------------------------------------</a
+      ><a name="1393"
+      >
+
+
+</a
+      ><a name="1396" href="JK-Choice.html#1396" class="Function"
+      >K-AC-&#8469;</a
+      ><a name="1402"
+      > </a
+      ><a name="1403" class="Symbol"
+      >:</a
+      ><a name="1404"
+      > </a
+      ><a name="1405" class="Symbol"
+      >{</a
+      ><a name="1406" href="JK-Choice.html#1406" class="Bound"
+      >R</a
+      ><a name="1407"
+      > </a
+      ><a name="1408" class="Symbol"
+      >:</a
+      ><a name="1409"
+      > </a
+      ><a name="1410" href="Logic.html#77" class="Function"
+      >&#937;</a
+      ><a name="1411" class="Symbol"
+      >}</a
+      ><a name="1412"
+      > </a
+      ><a name="1413" class="Symbol"
+      >{</a
+      ><a name="1414" href="JK-Choice.html#1414" class="Bound"
+      >X</a
+      ><a name="1415"
+      > </a
+      ><a name="1416" class="Symbol"
+      >:</a
+      ><a name="1417"
+      > </a
+      ><a name="1418" href="Naturals.html#48" class="Datatype"
+      >&#8469;</a
+      ><a name="1419"
+      > </a
+      ><a name="1420" class="Symbol"
+      >&#8594;</a
+      ><a name="1421"
+      > </a
+      ><a name="1422" class="PrimitiveType"
+      >Set</a
+      ><a name="1425" class="Symbol"
+      >}</a
+      ><a name="1426"
+      > </a
+      ><a name="1427" class="Symbol"
+      >{</a
+      ><a name="1428" href="JK-Choice.html#1428" class="Bound"
+      >P</a
+      ><a name="1429"
+      > </a
+      ><a name="1430" class="Symbol"
+      >:</a
+      ><a name="1431"
+      > </a
+      ><a name="1432" class="Symbol"
+      >(</a
+      ><a name="1433" href="JK-Choice.html#1433" class="Bound"
+      >n</a
+      ><a name="1434"
+      > </a
+      ><a name="1435" class="Symbol"
+      >:</a
+      ><a name="1436"
+      > </a
+      ><a name="1437" href="Naturals.html#48" class="Datatype"
+      >&#8469;</a
+      ><a name="1438" class="Symbol"
+      >)</a
+      ><a name="1439"
+      > </a
+      ><a name="1440" class="Symbol"
+      >&#8594;</a
+      ><a name="1441"
+      > </a
+      ><a name="1442" href="JK-Choice.html#1414" class="Bound"
+      >X</a
+      ><a name="1443"
+      > </a
+      ><a name="1444" href="JK-Choice.html#1433" class="Bound"
+      >n</a
+      ><a name="1445"
+      > </a
+      ><a name="1446" class="Symbol"
+      >&#8594;</a
+      ><a name="1447"
+      > </a
+      ><a name="1448" href="Logic.html#77" class="Function"
+      >&#937;</a
+      ><a name="1449" class="Symbol"
+      >}</a
+      ><a name="1450"
+      > </a
+      ><a name="1451" class="Symbol"
+      >&#8594;</a
+      ><a name="1452"
+      >
+</a
+      ><a name="1453" class="Comment"
+      >-------</a
+      ><a name="1460"
+      >
+         </a
+      ><a name="1470" class="Symbol"
+      >(&#8704;(</a
+      ><a name="1473" href="JK-Choice.html#1473" class="Bound"
+      >n</a
+      ><a name="1474"
+      > </a
+      ><a name="1475" class="Symbol"
+      >:</a
+      ><a name="1476"
+      > </a
+      ><a name="1477" href="Naturals.html#48" class="Datatype"
+      >&#8469;</a
+      ><a name="1478" class="Symbol"
+      >)</a
+      ><a name="1479"
+      > </a
+      ><a name="1480" class="Symbol"
+      >&#8594;</a
+      ><a name="1481"
+      > </a
+      ><a name="1482" href="JK-Choice.html#1406" class="Bound"
+      >R</a
+      ><a name="1483"
+      > </a
+      ><a name="1484" class="Symbol"
+      >&#8594;</a
+      ><a name="1485"
+      > </a
+      ><a name="1486" href="Logic.html#1060" class="Datatype"
+      >&#8707;</a
+      ><a name="1487"
+      > </a
+      ><a name="1488" class="Symbol"
+      >\(</a
+      ><a name="1490" href="JK-Choice.html#1490" class="Bound"
+      >m</a
+      ><a name="1491"
+      > </a
+      ><a name="1492" class="Symbol"
+      >:</a
+      ><a name="1493"
+      > </a
+      ><a name="1494" href="JK-Choice.html#1414" class="Bound"
+      >X</a
+      ><a name="1495"
+      > </a
+      ><a name="1496" href="JK-Choice.html#1473" class="Bound"
+      >n</a
+      ><a name="1497" class="Symbol"
+      >)</a
+      ><a name="1498"
+      > </a
+      ><a name="1499" class="Symbol"
+      >&#8594;</a
+      ><a name="1500"
+      > </a
+      ><a name="1501" href="JK-Choice.html#1428" class="Bound"
+      >P</a
+      ><a name="1502"
+      > </a
+      ><a name="1503" href="JK-Choice.html#1473" class="Bound"
+      >n</a
+      ><a name="1504"
+      > </a
+      ><a name="1505" href="JK-Choice.html#1490" class="Bound"
+      >m</a
+      ><a name="1506" class="Symbol"
+      >)</a
+      ><a name="1507"
+      >              </a
+      ><a name="1521" class="Comment"
+      >-- efqs.</a
+      ><a name="1529"
+      >
+      </a
+      ><a name="1536" class="Symbol"
+      >&#8594;</a
+      ><a name="1537"
+      > </a
+      ><a name="1538" class="Symbol"
+      >(&#8704;(</a
+      ><a name="1541" href="JK-Choice.html#1541" class="Bound"
+      >n</a
+      ><a name="1542"
+      > </a
+      ><a name="1543" class="Symbol"
+      >:</a
+      ><a name="1544"
+      > </a
+      ><a name="1545" href="Naturals.html#48" class="Datatype"
+      >&#8469;</a
+      ><a name="1546" class="Symbol"
+      >)</a
+      ><a name="1547"
+      > </a
+      ><a name="1548" class="Symbol"
+      >&#8594;</a
+      ><a name="1549"
+      > </a
+      ><a name="1550" href="JK-LogicalFacts.html#172" class="Function"
+      >K&#8707;</a
+      ><a name="1552"
+      > </a
+      ><a name="1553" class="Symbol"
+      >\(</a
+      ><a name="1555" href="JK-Choice.html#1555" class="Bound"
+      >m</a
+      ><a name="1556"
+      > </a
+      ><a name="1557" class="Symbol"
+      >:</a
+      ><a name="1558"
+      > </a
+      ><a name="1559" href="JK-Choice.html#1414" class="Bound"
+      >X</a
+      ><a name="1560"
+      > </a
+      ><a name="1561" href="JK-Choice.html#1541" class="Bound"
+      >n</a
+      ><a name="1562" class="Symbol"
+      >)</a
+      ><a name="1563"
+      > </a
+      ><a name="1564" class="Symbol"
+      >&#8594;</a
+      ><a name="1565"
+      > </a
+      ><a name="1566" href="JK-Choice.html#1428" class="Bound"
+      >P</a
+      ><a name="1567"
+      > </a
+      ><a name="1568" href="JK-Choice.html#1541" class="Bound"
+      >n</a
+      ><a name="1569"
+      > </a
+      ><a name="1570" href="JK-Choice.html#1555" class="Bound"
+      >m</a
+      ><a name="1571" class="Symbol"
+      >)</a
+      ><a name="1572"
+      >                  </a
+      ><a name="1590" class="Comment"
+      >-- premise,</a
+      ><a name="1601"
+      >
+      </a
+      ><a name="1608" class="Symbol"
+      >&#8594;</a
+      ><a name="1609"
+      > </a
+      ><a name="1610" href="JK-LogicalFacts.html#172" class="Function"
+      >K&#8707;</a
+      ><a name="1612"
+      > </a
+      ><a name="1613" class="Symbol"
+      >\(</a
+      ><a name="1615" href="JK-Choice.html#1615" class="Bound"
+      >f</a
+      ><a name="1616"
+      > </a
+      ><a name="1617" class="Symbol"
+      >:</a
+      ><a name="1618"
+      > </a
+      ><a name="1619" class="Symbol"
+      >((</a
+      ><a name="1621" href="JK-Choice.html#1621" class="Bound"
+      >n</a
+      ><a name="1622"
+      > </a
+      ><a name="1623" class="Symbol"
+      >:</a
+      ><a name="1624"
+      > </a
+      ><a name="1625" href="Naturals.html#48" class="Datatype"
+      >&#8469;</a
+      ><a name="1626" class="Symbol"
+      >)</a
+      ><a name="1627"
+      > </a
+      ><a name="1628" class="Symbol"
+      >&#8594;</a
+      ><a name="1629"
+      > </a
+      ><a name="1630" href="JK-Choice.html#1414" class="Bound"
+      >X</a
+      ><a name="1631"
+      > </a
+      ><a name="1632" href="JK-Choice.html#1621" class="Bound"
+      >n</a
+      ><a name="1633" class="Symbol"
+      >))</a
+      ><a name="1635"
+      > </a
+      ><a name="1636" class="Symbol"
+      >&#8594;</a
+      ><a name="1637"
+      > </a
+      ><a name="1638" class="Symbol"
+      >&#8704;(</a
+      ><a name="1640" href="JK-Choice.html#1640" class="Bound"
+      >n</a
+      ><a name="1641"
+      > </a
+      ><a name="1642" class="Symbol"
+      >:</a
+      ><a name="1643"
+      > </a
+      ><a name="1644" href="Naturals.html#48" class="Datatype"
+      >&#8469;</a
+      ><a name="1645" class="Symbol"
+      >)</a
+      ><a name="1646"
+      > </a
+      ><a name="1647" class="Symbol"
+      >&#8594;</a
+      ><a name="1648"
+      > </a
+      ><a name="1649" href="JK-Choice.html#1428" class="Bound"
+      >P</a
+      ><a name="1650"
+      > </a
+      ><a name="1651" href="JK-Choice.html#1640" class="Bound"
+      >n</a
+      ><a name="1652"
+      > </a
+      ><a name="1653" class="Symbol"
+      >(</a
+      ><a name="1654" href="JK-Choice.html#1615" class="Bound"
+      >f</a
+      ><a name="1655"
+      > </a
+      ><a name="1656" href="JK-Choice.html#1640" class="Bound"
+      >n</a
+      ><a name="1657" class="Symbol"
+      >)</a
+      ><a name="1658"
+      >   </a
+      ><a name="1661" class="Comment"
+      >-- conclusion.</a
+      ><a name="1675"
+      >
+
+</a
+      ><a name="1677" href="JK-Choice.html#1396" class="Function"
+      >K-AC-&#8469;</a
+      ><a name="1683"
+      > </a
+      ><a name="1684" href="JK-Choice.html#1684" class="Bound"
+      >efqs</a
+      ><a name="1688"
+      > </a
+      ><a name="1689" href="JK-Choice.html#1689" class="Bound"
+      >g</a
+      ><a name="1690"
+      > </a
+      ><a name="1691" class="Symbol"
+      >=</a
+      ><a name="1692"
+      > </a
+      ><a name="1693" class="Symbol"
+      >(</a
+      ><a name="1694" href="JK-Monads.html#1456" class="Function"
+      >K-functor</a
+      ><a name="1703"
+      > </a
+      ><a name="1704" href="Choice.html#83" class="Function"
+      >AC</a
+      ><a name="1706" class="Symbol"
+      >)</a
+      ><a name="1707"
+      > </a
+      ><a name="1708" class="Symbol"
+      >(</a
+      ><a name="1709" href="Infinite-JK-Shifts.html#775" class="Function"
+      >K-&#8704;-shift</a
+      ><a name="1718"
+      > </a
+      ><a name="1719" href="JK-Choice.html#1684" class="Bound"
+      >efqs</a
+      ><a name="1723"
+      > </a
+      ><a name="1724" href="JK-Choice.html#1689" class="Bound"
+      >g</a
+      ><a name="1725" class="Symbol"
+      >)</a
+      ><a name="1726"
+      >
+
+
+</a
+      ><a name="1729" class="Comment"
+      >----------------------------------------------</a
+      ><a name="1775"
+      >
+</a
+      ><a name="1776" class="Comment"
+      >--                                          --</a
+      ><a name="1822"
+      >
+</a
+      ><a name="1823" class="Comment"
+      >-- Now the translations of dependent choice --</a
+      ><a name="1869"
+      >
+</a
+      ><a name="1870" class="Comment"
+      >--                                          --</a
+      ><a name="1916"
+      >
+</a
+      ><a name="1917" class="Comment"
+      >----------------------------------------------</a
+      ><a name="1963"
+      >
+
+
+</a
+      ><a name="1966" href="JK-Choice.html#1966" class="Function"
+      >J-&#8704;-double-shift</a
+      ><a name="1982"
+      > </a
+      ><a name="1983" class="Symbol"
+      >:</a
+      ><a name="1984"
+      > </a
+      ><a name="1985" class="Symbol"
+      >{</a
+      ><a name="1986" href="JK-Choice.html#1986" class="Bound"
+      >R</a
+      ><a name="1987"
+      > </a
+      ><a name="1988" class="Symbol"
+      >:</a
+      ><a name="1989"
+      > </a
+      ><a name="1990" href="Logic.html#77" class="Function"
+      >&#937;</a
+      ><a name="1991" class="Symbol"
+      >}</a
+      ><a name="1992"
+      > </a
+      ><a name="1993" class="Symbol"
+      >{</a
+      ><a name="1994" href="JK-Choice.html#1994" class="Bound"
+      >P</a
+      ><a name="1995"
+      > </a
+      ><a name="1996" class="Symbol"
+      >:</a
+      ><a name="1997"
+      > </a
+      ><a name="1998" href="Naturals.html#48" class="Datatype"
+      >&#8469;</a
+      ><a name="1999"
+      > </a
+      ><a name="2000" class="Symbol"
+      >&#8594;</a
+      ><a name="2001"
+      > </a
+      ><a name="2002" href="Naturals.html#48" class="Datatype"
+      >&#8469;</a
+      ><a name="2003"
+      > </a
+      ><a name="2004" class="Symbol"
+      >&#8594;</a
+      ><a name="2005"
+      > </a
+      ><a name="2006" href="Naturals.html#48" class="Datatype"
+      >&#8469;</a
+      ><a name="2007"
+      > </a
+      ><a name="2008" class="Symbol"
+      >&#8594;</a
+      ><a name="2009"
+      > </a
+      ><a name="2010" href="Logic.html#77" class="Function"
+      >&#937;</a
+      ><a name="2011" class="Symbol"
+      >}</a
+      ><a name="2012"
+      > </a
+      ><a name="2013" class="Symbol"
+      >&#8594;</a
+      ><a name="2014"
+      >
+</a
+      ><a name="2015" class="Comment"
+      >---------------</a
+      ><a name="2030"
+      >
+     </a
+      ><a name="2036" class="Symbol"
+      >(&#8704;(</a
+      ><a name="2039" href="JK-Choice.html#2039" class="Bound"
+      >n</a
+      ><a name="2040"
+      > </a
+      ><a name="2041" class="Symbol"
+      >:</a
+      ><a name="2042"
+      > </a
+      ><a name="2043" href="Naturals.html#48" class="Datatype"
+      >&#8469;</a
+      ><a name="2044" class="Symbol"
+      >)</a
+      ><a name="2045"
+      > </a
+      ><a name="2046" class="Symbol"
+      >&#8594;</a
+      ><a name="2047"
+      > </a
+      ><a name="2048" class="Symbol"
+      >&#8704;(</a
+      ><a name="2050" href="JK-Choice.html#2050" class="Bound"
+      >x</a
+      ><a name="2051"
+      > </a
+      ><a name="2052" class="Symbol"
+      >:</a
+      ><a name="2053"
+      > </a
+      ><a name="2054" href="Naturals.html#48" class="Datatype"
+      >&#8469;</a
+      ><a name="2055" class="Symbol"
+      >)</a
+      ><a name="2056"
+      > </a
+      ><a name="2057" class="Symbol"
+      >&#8594;</a
+      ><a name="2058"
+      > </a
+      ><a name="2059" href="JK-LogicalFacts.html#303" class="Function"
+      >J&#8707;</a
+      ><a name="2061"
+      > </a
+      ><a name="2062" class="Symbol"
+      >\(</a
+      ><a name="2064" href="JK-Choice.html#2064" class="Bound"
+      >y</a
+      ><a name="2065"
+      > </a
+      ><a name="2066" class="Symbol"
+      >:</a
+      ><a name="2067"
+      > </a
+      ><a name="2068" href="Naturals.html#48" class="Datatype"
+      >&#8469;</a
+      ><a name="2069" class="Symbol"
+      >)</a
+      ><a name="2070"
+      > </a
+      ><a name="2071" class="Symbol"
+      >&#8594;</a
+      ><a name="2072"
+      > </a
+      ><a name="2073" href="JK-Choice.html#1994" class="Bound"
+      >P</a
+      ><a name="2074"
+      > </a
+      ><a name="2075" href="JK-Choice.html#2039" class="Bound"
+      >n</a
+      ><a name="2076"
+      > </a
+      ><a name="2077" href="JK-Choice.html#2050" class="Bound"
+      >x</a
+      ><a name="2078"
+      > </a
+      ><a name="2079" href="JK-Choice.html#2064" class="Bound"
+      >y</a
+      ><a name="2080" class="Symbol"
+      >)</a
+      ><a name="2081"
+      > </a
+      ><a name="2082" class="Symbol"
+      >&#8594;</a
+      ><a name="2083"
+      >
+     </a
+      ><a name="2089" href="JK-Monads.html#331" class="Function"
+      >J</a
+      ><a name="2090" class="Symbol"
+      >(&#8704;(</a
+      ><a name="2093" href="JK-Choice.html#2093" class="Bound"
+      >n</a
+      ><a name="2094"
+      > </a
+      ><a name="2095" class="Symbol"
+      >:</a
+      ><a name="2096"
+      > </a
+      ><a name="2097" href="Naturals.html#48" class="Datatype"
+      >&#8469;</a
+      ><a name="2098" class="Symbol"
+      >)</a
+      ><a name="2099"
+      > </a
+      ><a name="2100" class="Symbol"
+      >&#8594;</a
+      ><a name="2101"
+      > </a
+      ><a name="2102" class="Symbol"
+      >&#8704;(</a
+      ><a name="2104" href="JK-Choice.html#2104" class="Bound"
+      >x</a
+      ><a name="2105"
+      > </a
+      ><a name="2106" class="Symbol"
+      >:</a
+      ><a name="2107"
+      > </a
+      ><a name="2108" href="Naturals.html#48" class="Datatype"
+      >&#8469;</a
+      ><a name="2109" class="Symbol"
+      >)</a
+      ><a name="2110"
+      > </a
+      ><a name="2111" class="Symbol"
+      >&#8594;</a
+      ><a name="2112"
+      > </a
+      ><a name="2113" href="Logic.html#1060" class="Datatype"
+      >&#8707;</a
+      ><a name="2114"
+      > </a
+      ><a name="2115" class="Symbol"
+      >\(</a
+      ><a name="2117" href="JK-Choice.html#2117" class="Bound"
+      >y</a
+      ><a name="2118"
+      > </a
+      ><a name="2119" class="Symbol"
+      >:</a
+      ><a name="2120"
+      > </a
+      ><a name="2121" href="Naturals.html#48" class="Datatype"
+      >&#8469;</a
+      ><a name="2122" class="Symbol"
+      >)</a
+      ><a name="2123"
+      > </a
+      ><a name="2124" class="Symbol"
+      >&#8594;</a
+      ><a name="2125"
+      > </a
+      ><a name="2126" href="JK-Choice.html#1994" class="Bound"
+      >P</a
+      ><a name="2127"
+      > </a
+      ><a name="2128" href="JK-Choice.html#2093" class="Bound"
+      >n</a
+      ><a name="2129"
+      > </a
+      ><a name="2130" href="JK-Choice.html#2104" class="Bound"
+      >x</a
+      ><a name="2131"
+      > </a
+      ><a name="2132" href="JK-Choice.html#2117" class="Bound"
+      >y</a
+      ><a name="2133" class="Symbol"
+      >)</a
+      ><a name="2134"
+      >
+
+</a
+      ><a name="2136" href="JK-Choice.html#1966" class="Function"
+      >J-&#8704;-double-shift</a
+      ><a name="2152"
+      > </a
+      ><a name="2153" class="Symbol"
+      >{</a
+      ><a name="2154" href="JK-Choice.html#2154" class="Bound"
+      >R</a
+      ><a name="2155" class="Symbol"
+      >}</a
+      ><a name="2156"
+      > </a
+      ><a name="2157" href="JK-Choice.html#2157" class="Bound"
+      >f</a
+      ><a name="2158"
+      > </a
+      ><a name="2159" class="Symbol"
+      >=</a
+      ><a name="2160"
+      > </a
+      ><a name="2161" href="Infinite-JK-Shifts.html#306" class="Function"
+      >J-&#8704;-shift</a
+      ><a name="2170"
+      > </a
+      ><a name="2171" class="Symbol"
+      >{</a
+      ><a name="2172" href="JK-Choice.html#2154" class="Bound"
+      >R</a
+      ><a name="2173" class="Symbol"
+      >}</a
+      ><a name="2174"
+      > </a
+      ><a name="2175" class="Symbol"
+      >(&#955;</a
+      ><a name="2177"
+      > </a
+      ><a name="2178" href="JK-Choice.html#2178" class="Bound"
+      >n</a
+      ><a name="2179"
+      > </a
+      ><a name="2180" class="Symbol"
+      >&#8594;</a
+      ><a name="2181"
+      > </a
+      ><a name="2182" href="Infinite-JK-Shifts.html#306" class="Function"
+      >J-&#8704;-shift</a
+      ><a name="2191"
+      > </a
+      ><a name="2192" class="Symbol"
+      >(</a
+      ><a name="2193" href="JK-Choice.html#2157" class="Bound"
+      >f</a
+      ><a name="2194"
+      > </a
+      ><a name="2195" href="JK-Choice.html#2178" class="Bound"
+      >n</a
+      ><a name="2196" class="Symbol"
+      >))</a
+      ><a name="2198"
+      >
+
+
+</a
+      ><a name="2201" href="JK-Choice.html#2201" class="Function"
+      >J-DC-&#8469;</a
+      ><a name="2207"
+      > </a
+      ><a name="2208" class="Symbol"
+      >:</a
+      ><a name="2209"
+      > </a
+      ><a name="2210" class="Symbol"
+      >{</a
+      ><a name="2211" href="JK-Choice.html#2211" class="Bound"
+      >R</a
+      ><a name="2212"
+      > </a
+      ><a name="2213" class="Symbol"
+      >:</a
+      ><a name="2214"
+      > </a
+      ><a name="2215" href="Logic.html#77" class="Function"
+      >&#937;</a
+      ><a name="2216" class="Symbol"
+      >}</a
+      ><a name="2217"
+      > </a
+      ><a name="2218" class="Symbol"
+      >{</a
+      ><a name="2219" href="JK-Choice.html#2219" class="Bound"
+      >P</a
+      ><a name="2220"
+      > </a
+      ><a name="2221" class="Symbol"
+      >:</a
+      ><a name="2222"
+      > </a
+      ><a name="2223" href="Naturals.html#48" class="Datatype"
+      >&#8469;</a
+      ><a name="2224"
+      > </a
+      ><a name="2225" class="Symbol"
+      >&#8594;</a
+      ><a name="2226"
+      > </a
+      ><a name="2227" href="Naturals.html#48" class="Datatype"
+      >&#8469;</a
+      ><a name="2228"
+      > </a
+      ><a name="2229" class="Symbol"
+      >&#8594;</a
+      ><a name="2230"
+      > </a
+      ><a name="2231" href="Naturals.html#48" class="Datatype"
+      >&#8469;</a
+      ><a name="2232"
+      > </a
+      ><a name="2233" class="Symbol"
+      >&#8594;</a
+      ><a name="2234"
+      > </a
+      ><a name="2235" href="Logic.html#77" class="Function"
+      >&#937;</a
+      ><a name="2236" class="Symbol"
+      >}</a
+      ><a name="2237"
+      > </a
+      ><a name="2238" class="Symbol"
+      >&#8594;</a
+      ><a name="2239"
+      >
+</a
+      ><a name="2240" class="Comment"
+      >-------</a
+      ><a name="2247"
+      >
+      </a
+      ><a name="2254" class="Symbol"
+      >&#8704;(</a
+      ><a name="2256" href="JK-Choice.html#2256" class="Bound"
+      >x&#8320;</a
+      ><a name="2258"
+      > </a
+      ><a name="2259" class="Symbol"
+      >:</a
+      ><a name="2260"
+      > </a
+      ><a name="2261" href="Naturals.html#48" class="Datatype"
+      >&#8469;</a
+      ><a name="2262" class="Symbol"
+      >)</a
+      ><a name="2263"
+      > </a
+      ><a name="2264" class="Symbol"
+      >&#8594;</a
+      ><a name="2265"
+      >
+     </a
+      ><a name="2272" class="Symbol"
+      >(&#8704;(</a
+      ><a name="2275" href="JK-Choice.html#2275" class="Bound"
+      >n</a
+      ><a name="2276"
+      > </a
+      ><a name="2277" class="Symbol"
+      >:</a
+      ><a name="2278"
+      > </a
+      ><a name="2279" href="Naturals.html#48" class="Datatype"
+      >&#8469;</a
+      ><a name="2280" class="Symbol"
+      >)</a
+      ><a name="2281"
+      > </a
+      ><a name="2282" class="Symbol"
+      >&#8594;</a
+      ><a name="2283"
+      > </a
+      ><a name="2284" class="Symbol"
+      >&#8704;(</a
+      ><a name="2286" href="JK-Choice.html#2286" class="Bound"
+      >x</a
+      ><a name="2287"
+      > </a
+      ><a name="2288" class="Symbol"
+      >:</a
+      ><a name="2289"
+      > </a
+      ><a name="2290" href="Naturals.html#48" class="Datatype"
+      >&#8469;</a
+      ><a name="2291" class="Symbol"
+      >)</a
+      ><a name="2292"
+      > </a
+      ><a name="2293" class="Symbol"
+      >&#8594;</a
+      ><a name="2294"
+      > </a
+      ><a name="2295" href="JK-LogicalFacts.html#303" class="Function"
+      >J&#8707;</a
+      ><a name="2297"
+      > </a
+      ><a name="2298" class="Symbol"
+      >\(</a
+      ><a name="2300" href="JK-Choice.html#2300" class="Bound"
+      >y</a
+      ><a name="2301"
+      > </a
+      ><a name="2302" class="Symbol"
+      >:</a
+      ><a name="2303"
+      > </a
+      ><a name="2304" href="Naturals.html#48" class="Datatype"
+      >&#8469;</a
+      ><a name="2305" class="Symbol"
+      >)</a
+      ><a name="2306"
+      > </a
+      ><a name="2307" class="Symbol"
+      >&#8594;</a
+      ><a name="2308"
+      > </a
+      ><a name="2309" href="JK-Choice.html#2219" class="Bound"
+      >P</a
+      ><a name="2310"
+      > </a
+      ><a name="2311" href="JK-Choice.html#2275" class="Bound"
+      >n</a
+      ><a name="2312"
+      > </a
+      ><a name="2313" href="JK-Choice.html#2286" class="Bound"
+      >x</a
+      ><a name="2314"
+      > </a
+      ><a name="2315" href="JK-Choice.html#2300" class="Bound"
+      >y</a
+      ><a name="2316" class="Symbol"
+      >)</a
+      ><a name="2317"
+      > </a
+      ><a name="2318" class="Symbol"
+      >&#8594;</a
+      ><a name="2319"
+      >
+     </a
+      ><a name="2326" href="JK-LogicalFacts.html#303" class="Function"
+      >J&#8707;</a
+      ><a name="2328"
+      > </a
+      ><a name="2329" class="Symbol"
+      >\(</a
+      ><a name="2331" href="JK-Choice.html#2331" class="Bound"
+      >&#945;</a
+      ><a name="2332"
+      > </a
+      ><a name="2333" class="Symbol"
+      >:</a
+      ><a name="2334"
+      > </a
+      ><a name="2335" href="Naturals.html#48" class="Datatype"
+      >&#8469;</a
+      ><a name="2336"
+      > </a
+      ><a name="2337" class="Symbol"
+      >&#8594;</a
+      ><a name="2338"
+      > </a
+      ><a name="2339" href="Naturals.html#48" class="Datatype"
+      >&#8469;</a
+      ><a name="2340" class="Symbol"
+      >)</a
+      ><a name="2341"
+      > </a
+      ><a name="2342" class="Symbol"
+      >&#8594;</a
+      ><a name="2343"
+      > </a
+      ><a name="2344" href="JK-Choice.html#2331" class="Bound"
+      >&#945;</a
+      ><a name="2345"
+      > </a
+      ><a name="2346" href="Naturals.html#68" class="InductiveConstructor"
+      >O</a
+      ><a name="2347"
+      > </a
+      ><a name="2348" href="Equality.html#77" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="2349"
+      > </a
+      ><a name="2350" href="JK-Choice.html#2256" class="Bound"
+      >x&#8320;</a
+      ><a name="2352"
+      > </a
+      ><a name="2353" href="Logic.html#282" class="Datatype Operator"
+      >&#8743;</a
+      ><a name="2354"
+      > </a
+      ><a name="2355" class="Symbol"
+      >(&#8704;(</a
+      ><a name="2358" href="JK-Choice.html#2358" class="Bound"
+      >n</a
+      ><a name="2359"
+      > </a
+      ><a name="2360" class="Symbol"
+      >:</a
+      ><a name="2361"
+      > </a
+      ><a name="2362" href="Naturals.html#48" class="Datatype"
+      >&#8469;</a
+      ><a name="2363" class="Symbol"
+      >)</a
+      ><a name="2364"
+      > </a
+      ><a name="2365" class="Symbol"
+      >&#8594;</a
+      ><a name="2366"
+      > </a
+      ><a name="2367" href="JK-Choice.html#2219" class="Bound"
+      >P</a
+      ><a name="2368"
+      > </a
+      ><a name="2369" href="JK-Choice.html#2358" class="Bound"
+      >n</a
+      ><a name="2370"
+      > </a
+      ><a name="2371" class="Symbol"
+      >(</a
+      ><a name="2372" href="JK-Choice.html#2331" class="Bound"
+      >&#945;</a
+      ><a name="2373"
+      > </a
+      ><a name="2374" href="JK-Choice.html#2358" class="Bound"
+      >n</a
+      ><a name="2375" class="Symbol"
+      >)</a
+      ><a name="2376"
+      > </a
+      ><a name="2377" class="Symbol"
+      >(</a
+      ><a name="2378" href="JK-Choice.html#2331" class="Bound"
+      >&#945;</a
+      ><a name="2379" class="Symbol"
+      >(</a
+      ><a name="2380" href="JK-Choice.html#2358" class="Bound"
+      >n</a
+      ><a name="2381"
+      > </a
+      ><a name="2382" href="Addition.html#467" class="Function Operator"
+      >+</a
+      ><a name="2383"
+      > </a
+      ><a name="2384" class="Number"
+      >1</a
+      ><a name="2385" class="Symbol"
+      >)))</a
+      ><a name="2388"
+      >
+
+</a
+      ><a name="2390" href="JK-Choice.html#2201" class="Function"
+      >J-DC-&#8469;</a
+      ><a name="2396"
+      > </a
+      ><a name="2397" class="Symbol"
+      >{</a
+      ><a name="2398" href="JK-Choice.html#2398" class="Bound"
+      >R</a
+      ><a name="2399" class="Symbol"
+      >}</a
+      ><a name="2400"
+      > </a
+      ><a name="2401" href="JK-Choice.html#2401" class="Bound"
+      >x&#8320;</a
+      ><a name="2403"
+      > </a
+      ><a name="2404" href="JK-Choice.html#2404" class="Bound"
+      >f</a
+      ><a name="2405"
+      > </a
+      ><a name="2406" class="Symbol"
+      >=</a
+      ><a name="2407"
+      > </a
+      ><a name="2408" class="Symbol"
+      >(</a
+      ><a name="2409" href="JK-Monads.html#1345" class="Function"
+      >J-functor</a
+      ><a name="2418"
+      > </a
+      ><a name="2419" class="Symbol"
+      >{</a
+      ><a name="2420" href="JK-Choice.html#2398" class="Bound"
+      >R</a
+      ><a name="2421" class="Symbol"
+      >}</a
+      ><a name="2422"
+      > </a
+      ><a name="2423" class="Symbol"
+      >(</a
+      ><a name="2424" href="Choice.html#297" class="Function"
+      >DC</a
+      ><a name="2426"
+      > </a
+      ><a name="2427" href="JK-Choice.html#2401" class="Bound"
+      >x&#8320;</a
+      ><a name="2429" class="Symbol"
+      >))</a
+      ><a name="2431"
+      > </a
+      ><a name="2432" class="Symbol"
+      >(</a
+      ><a name="2433" href="JK-Choice.html#1966" class="Function"
+      >J-&#8704;-double-shift</a
+      ><a name="2449"
+      > </a
+      ><a name="2450" href="JK-Choice.html#2404" class="Bound"
+      >f</a
+      ><a name="2451" class="Symbol"
+      >)</a
+      ><a name="2452"
+      >
+
+
+</a
+      ><a name="2455" href="JK-Choice.html#2455" class="Function"
+      >K-&#8704;-double-shift</a
+      ><a name="2471"
+      > </a
+      ><a name="2472" class="Symbol"
+      >:</a
+      ><a name="2473"
+      > </a
+      ><a name="2474" class="Symbol"
+      >{</a
+      ><a name="2475" href="JK-Choice.html#2475" class="Bound"
+      >R</a
+      ><a name="2476"
+      > </a
+      ><a name="2477" class="Symbol"
+      >:</a
+      ><a name="2478"
+      > </a
+      ><a name="2479" href="Logic.html#77" class="Function"
+      >&#937;</a
+      ><a name="2480" class="Symbol"
+      >}</a
+      ><a name="2481"
+      > </a
+      ><a name="2482" class="Symbol"
+      >{</a
+      ><a name="2483" href="JK-Choice.html#2483" class="Bound"
+      >P</a
+      ><a name="2484"
+      > </a
+      ><a name="2485" class="Symbol"
+      >:</a
+      ><a name="2486"
+      > </a
+      ><a name="2487" href="Naturals.html#48" class="Datatype"
+      >&#8469;</a
+      ><a name="2488"
+      > </a
+      ><a name="2489" class="Symbol"
+      >&#8594;</a
+      ><a name="2490"
+      > </a
+      ><a name="2491" href="Naturals.html#48" class="Datatype"
+      >&#8469;</a
+      ><a name="2492"
+      > </a
+      ><a name="2493" class="Symbol"
+      >&#8594;</a
+      ><a name="2494"
+      > </a
+      ><a name="2495" href="Naturals.html#48" class="Datatype"
+      >&#8469;</a
+      ><a name="2496"
+      > </a
+      ><a name="2497" class="Symbol"
+      >&#8594;</a
+      ><a name="2498"
+      > </a
+      ><a name="2499" href="Logic.html#77" class="Function"
+      >&#937;</a
+      ><a name="2500" class="Symbol"
+      >}</a
+      ><a name="2501"
+      > </a
+      ><a name="2502" class="Symbol"
+      >&#8594;</a
+      ><a name="2503"
+      >
+</a
+      ><a name="2504" class="Comment"
+      >---------------</a
+      ><a name="2519"
+      >
+     </a
+      ><a name="2525" class="Symbol"
+      >(&#8704;(</a
+      ><a name="2528" href="JK-Choice.html#2528" class="Bound"
+      >n</a
+      ><a name="2529"
+      > </a
+      ><a name="2530" class="Symbol"
+      >:</a
+      ><a name="2531"
+      > </a
+      ><a name="2532" href="Naturals.html#48" class="Datatype"
+      >&#8469;</a
+      ><a name="2533" class="Symbol"
+      >)</a
+      ><a name="2534"
+      > </a
+      ><a name="2535" class="Symbol"
+      >&#8594;</a
+      ><a name="2536"
+      > </a
+      ><a name="2537" class="Symbol"
+      >&#8704;(</a
+      ><a name="2539" href="JK-Choice.html#2539" class="Bound"
+      >x</a
+      ><a name="2540"
+      > </a
+      ><a name="2541" class="Symbol"
+      >:</a
+      ><a name="2542"
+      > </a
+      ><a name="2543" href="Naturals.html#48" class="Datatype"
+      >&#8469;</a
+      ><a name="2544" class="Symbol"
+      >)</a
+      ><a name="2545"
+      > </a
+      ><a name="2546" class="Symbol"
+      >&#8594;</a
+      ><a name="2547"
+      > </a
+      ><a name="2548" href="JK-Choice.html#2475" class="Bound"
+      >R</a
+      ><a name="2549"
+      > </a
+      ><a name="2550" class="Symbol"
+      >&#8594;</a
+      ><a name="2551"
+      > </a
+      ><a name="2552" href="Logic.html#1060" class="Datatype"
+      >&#8707;</a
+      ><a name="2553"
+      > </a
+      ><a name="2554" class="Symbol"
+      >\(</a
+      ><a name="2556" href="JK-Choice.html#2556" class="Bound"
+      >y</a
+      ><a name="2557"
+      > </a
+      ><a name="2558" class="Symbol"
+      >:</a
+      ><a name="2559"
+      > </a
+      ><a name="2560" href="Naturals.html#48" class="Datatype"
+      >&#8469;</a
+      ><a name="2561" class="Symbol"
+      >)</a
+      ><a name="2562"
+      > </a
+      ><a name="2563" class="Symbol"
+      >&#8594;</a
+      ><a name="2564"
+      > </a
+      ><a name="2565" href="JK-Choice.html#2483" class="Bound"
+      >P</a
+      ><a name="2566"
+      > </a
+      ><a name="2567" href="JK-Choice.html#2528" class="Bound"
+      >n</a
+      ><a name="2568"
+      > </a
+      ><a name="2569" href="JK-Choice.html#2539" class="Bound"
+      >x</a
+      ><a name="2570"
+      > </a
+      ><a name="2571" href="JK-Choice.html#2556" class="Bound"
+      >y</a
+      ><a name="2572" class="Symbol"
+      >)</a
+      ><a name="2573"
+      > </a
+      ><a name="2574" class="Symbol"
+      >&#8594;</a
+      ><a name="2575"
+      >
+     </a
+      ><a name="2581" class="Symbol"
+      >(&#8704;(</a
+      ><a name="2584" href="JK-Choice.html#2584" class="Bound"
+      >n</a
+      ><a name="2585"
+      > </a
+      ><a name="2586" class="Symbol"
+      >:</a
+      ><a name="2587"
+      > </a
+      ><a name="2588" href="Naturals.html#48" class="Datatype"
+      >&#8469;</a
+      ><a name="2589" class="Symbol"
+      >)</a
+      ><a name="2590"
+      > </a
+      ><a name="2591" class="Symbol"
+      >&#8594;</a
+      ><a name="2592"
+      > </a
+      ><a name="2593" class="Symbol"
+      >&#8704;(</a
+      ><a name="2595" href="JK-Choice.html#2595" class="Bound"
+      >x</a
+      ><a name="2596"
+      > </a
+      ><a name="2597" class="Symbol"
+      >:</a
+      ><a name="2598"
+      > </a
+      ><a name="2599" href="Naturals.html#48" class="Datatype"
+      >&#8469;</a
+      ><a name="2600" class="Symbol"
+      >)</a
+      ><a name="2601"
+      > </a
+      ><a name="2602" class="Symbol"
+      >&#8594;</a
+      ><a name="2603"
+      > </a
+      ><a name="2604" href="JK-LogicalFacts.html#172" class="Function"
+      >K&#8707;</a
+      ><a name="2606"
+      > </a
+      ><a name="2607" class="Symbol"
+      >\(</a
+      ><a name="2609" href="JK-Choice.html#2609" class="Bound"
+      >y</a
+      ><a name="2610"
+      > </a
+      ><a name="2611" class="Symbol"
+      >:</a
+      ><a name="2612"
+      > </a
+      ><a name="2613" href="Naturals.html#48" class="Datatype"
+      >&#8469;</a
+      ><a name="2614" class="Symbol"
+      >)</a
+      ><a name="2615"
+      > </a
+      ><a name="2616" class="Symbol"
+      >&#8594;</a
+      ><a name="2617"
+      > </a
+      ><a name="2618" href="JK-Choice.html#2483" class="Bound"
+      >P</a
+      ><a name="2619"
+      > </a
+      ><a name="2620" href="JK-Choice.html#2584" class="Bound"
+      >n</a
+      ><a name="2621"
+      > </a
+      ><a name="2622" href="JK-Choice.html#2595" class="Bound"
+      >x</a
+      ><a name="2623"
+      > </a
+      ><a name="2624" href="JK-Choice.html#2609" class="Bound"
+      >y</a
+      ><a name="2625" class="Symbol"
+      >)</a
+      ><a name="2626"
+      > </a
+      ><a name="2627" class="Symbol"
+      >&#8594;</a
+      ><a name="2628"
+      >
+     </a
+      ><a name="2634" href="JK-Monads.html#374" class="Function"
+      >K</a
+      ><a name="2635" class="Symbol"
+      >(&#8704;(</a
+      ><a name="2638" href="JK-Choice.html#2638" class="Bound"
+      >n</a
+      ><a name="2639"
+      > </a
+      ><a name="2640" class="Symbol"
+      >:</a
+      ><a name="2641"
+      > </a
+      ><a name="2642" href="Naturals.html#48" class="Datatype"
+      >&#8469;</a
+      ><a name="2643" class="Symbol"
+      >)</a
+      ><a name="2644"
+      > </a
+      ><a name="2645" class="Symbol"
+      >&#8594;</a
+      ><a name="2646"
+      > </a
+      ><a name="2647" class="Symbol"
+      >&#8704;(</a
+      ><a name="2649" href="JK-Choice.html#2649" class="Bound"
+      >x</a
+      ><a name="2650"
+      > </a
+      ><a name="2651" class="Symbol"
+      >:</a
+      ><a name="2652"
+      > </a
+      ><a name="2653" href="Naturals.html#48" class="Datatype"
+      >&#8469;</a
+      ><a name="2654" class="Symbol"
+      >)</a
+      ><a name="2655"
+      > </a
+      ><a name="2656" class="Symbol"
+      >&#8594;</a
+      ><a name="2657"
+      > </a
+      ><a name="2658" href="Logic.html#1060" class="Datatype"
+      >&#8707;</a
+      ><a name="2659"
+      > </a
+      ><a name="2660" class="Symbol"
+      >\(</a
+      ><a name="2662" href="JK-Choice.html#2662" class="Bound"
+      >y</a
+      ><a name="2663"
+      > </a
+      ><a name="2664" class="Symbol"
+      >:</a
+      ><a name="2665"
+      > </a
+      ><a name="2666" href="Naturals.html#48" class="Datatype"
+      >&#8469;</a
+      ><a name="2667" class="Symbol"
+      >)</a
+      ><a name="2668"
+      > </a
+      ><a name="2669" class="Symbol"
+      >&#8594;</a
+      ><a name="2670"
+      > </a
+      ><a name="2671" href="JK-Choice.html#2483" class="Bound"
+      >P</a
+      ><a name="2672"
+      > </a
+      ><a name="2673" href="JK-Choice.html#2638" class="Bound"
+      >n</a
+      ><a name="2674"
+      > </a
+      ><a name="2675" href="JK-Choice.html#2649" class="Bound"
+      >x</a
+      ><a name="2676"
+      > </a
+      ><a name="2677" href="JK-Choice.html#2662" class="Bound"
+      >y</a
+      ><a name="2678" class="Symbol"
+      >)</a
+      ><a name="2679"
+      >
+
+</a
+      ><a name="2681" href="JK-Choice.html#2455" class="Function"
+      >K-&#8704;-double-shift</a
+      ><a name="2697"
+      > </a
+      ><a name="2698" href="JK-Choice.html#2698" class="Bound"
+      >efqs</a
+      ><a name="2702"
+      > </a
+      ><a name="2703" href="JK-Choice.html#2703" class="Bound"
+      >f</a
+      ><a name="2704"
+      > </a
+      ><a name="2705" class="Symbol"
+      >=</a
+      ><a name="2706"
+      >
+  </a
+      ><a name="2710" href="JK-Monads.html#601" class="Function"
+      >J-K</a
+      ><a name="2713" class="Symbol"
+      >(</a
+      ><a name="2714" href="JK-Choice.html#1966" class="Function"
+      >J-&#8704;-double-shift</a
+      ><a name="2730" class="Symbol"
+      >(&#955;</a
+      ><a name="2732"
+      > </a
+      ><a name="2733" href="JK-Choice.html#2733" class="Bound"
+      >n</a
+      ><a name="2734"
+      > </a
+      ><a name="2735" href="JK-Choice.html#2735" class="Bound"
+      >x</a
+      ><a name="2736"
+      > </a
+      ><a name="2737" class="Symbol"
+      >&#8594;</a
+      ><a name="2738"
+      > </a
+      ><a name="2739" href="JK-Monads.html#820" class="Function"
+      >K-J</a
+      ><a name="2742" class="Symbol"
+      >(</a
+      ><a name="2743" href="JK-Choice.html#2698" class="Bound"
+      >efqs</a
+      ><a name="2747"
+      > </a
+      ><a name="2748" href="JK-Choice.html#2733" class="Bound"
+      >n</a
+      ><a name="2749"
+      > </a
+      ><a name="2750" href="JK-Choice.html#2735" class="Bound"
+      >x</a
+      ><a name="2751" class="Symbol"
+      >)</a
+      ><a name="2752"
+      > </a
+      ><a name="2753" class="Symbol"
+      >(</a
+      ><a name="2754" href="JK-Choice.html#2703" class="Bound"
+      >f</a
+      ><a name="2755"
+      > </a
+      ><a name="2756" href="JK-Choice.html#2733" class="Bound"
+      >n</a
+      ><a name="2757"
+      > </a
+      ><a name="2758" href="JK-Choice.html#2735" class="Bound"
+      >x</a
+      ><a name="2759" class="Symbol"
+      >)))</a
+      ><a name="2762"
+      >
+
+
+</a
+      ><a name="2766" href="JK-Choice.html#2766" class="Function"
+      >K-DC-&#8469;</a
+      ><a name="2772"
+      > </a
+      ><a name="2773" class="Symbol"
+      >:</a
+      ><a name="2774"
+      > </a
+      ><a name="2775" class="Symbol"
+      >{</a
+      ><a name="2776" href="JK-Choice.html#2776" class="Bound"
+      >R</a
+      ><a name="2777"
+      > </a
+      ><a name="2778" class="Symbol"
+      >:</a
+      ><a name="2779"
+      > </a
+      ><a name="2780" href="Logic.html#77" class="Function"
+      >&#937;</a
+      ><a name="2781" class="Symbol"
+      >}</a
+      ><a name="2782"
+      > </a
+      ><a name="2783" class="Symbol"
+      >{</a
+      ><a name="2784" href="JK-Choice.html#2784" class="Bound"
+      >P</a
+      ><a name="2785"
+      > </a
+      ><a name="2786" class="Symbol"
+      >:</a
+      ><a name="2787"
+      > </a
+      ><a name="2788" href="Naturals.html#48" class="Datatype"
+      >&#8469;</a
+      ><a name="2789"
+      > </a
+      ><a name="2790" class="Symbol"
+      >&#8594;</a
+      ><a name="2791"
+      > </a
+      ><a name="2792" href="Naturals.html#48" class="Datatype"
+      >&#8469;</a
+      ><a name="2793"
+      > </a
+      ><a name="2794" class="Symbol"
+      >&#8594;</a
+      ><a name="2795"
+      > </a
+      ><a name="2796" href="Naturals.html#48" class="Datatype"
+      >&#8469;</a
+      ><a name="2797"
+      > </a
+      ><a name="2798" class="Symbol"
+      >&#8594;</a
+      ><a name="2799"
+      > </a
+      ><a name="2800" href="Logic.html#77" class="Function"
+      >&#937;</a
+      ><a name="2801" class="Symbol"
+      >}</a
+      ><a name="2802"
+      > </a
+      ><a name="2803" class="Symbol"
+      >&#8594;</a
+      ><a name="2804"
+      >
+</a
+      ><a name="2805" class="Comment"
+      >-------</a
+      ><a name="2812"
+      >
+    </a
+      ><a name="2817" class="Symbol"
+      >(&#8704;(</a
+      ><a name="2820" href="JK-Choice.html#2820" class="Bound"
+      >n</a
+      ><a name="2821"
+      > </a
+      ><a name="2822" class="Symbol"
+      >:</a
+      ><a name="2823"
+      > </a
+      ><a name="2824" href="Naturals.html#48" class="Datatype"
+      >&#8469;</a
+      ><a name="2825" class="Symbol"
+      >)</a
+      ><a name="2826"
+      > </a
+      ><a name="2827" class="Symbol"
+      >&#8594;</a
+      ><a name="2828"
+      > </a
+      ><a name="2829" class="Symbol"
+      >&#8704;(</a
+      ><a name="2831" href="JK-Choice.html#2831" class="Bound"
+      >x</a
+      ><a name="2832"
+      > </a
+      ><a name="2833" class="Symbol"
+      >:</a
+      ><a name="2834"
+      > </a
+      ><a name="2835" href="Naturals.html#48" class="Datatype"
+      >&#8469;</a
+      ><a name="2836" class="Symbol"
+      >)</a
+      ><a name="2837"
+      > </a
+      ><a name="2838" class="Symbol"
+      >&#8594;</a
+      ><a name="2839"
+      > </a
+      ><a name="2840" href="JK-Choice.html#2776" class="Bound"
+      >R</a
+      ><a name="2841"
+      > </a
+      ><a name="2842" class="Symbol"
+      >&#8594;</a
+      ><a name="2843"
+      > </a
+      ><a name="2844" href="Logic.html#1060" class="Datatype"
+      >&#8707;</a
+      ><a name="2845"
+      > </a
+      ><a name="2846" class="Symbol"
+      >\(</a
+      ><a name="2848" href="JK-Choice.html#2848" class="Bound"
+      >y</a
+      ><a name="2849"
+      > </a
+      ><a name="2850" class="Symbol"
+      >:</a
+      ><a name="2851"
+      > </a
+      ><a name="2852" href="Naturals.html#48" class="Datatype"
+      >&#8469;</a
+      ><a name="2853" class="Symbol"
+      >)</a
+      ><a name="2854"
+      > </a
+      ><a name="2855" class="Symbol"
+      >&#8594;</a
+      ><a name="2856"
+      > </a
+      ><a name="2857" href="JK-Choice.html#2784" class="Bound"
+      >P</a
+      ><a name="2858"
+      > </a
+      ><a name="2859" href="JK-Choice.html#2820" class="Bound"
+      >n</a
+      ><a name="2860"
+      > </a
+      ><a name="2861" href="JK-Choice.html#2831" class="Bound"
+      >x</a
+      ><a name="2862"
+      > </a
+      ><a name="2863" href="JK-Choice.html#2848" class="Bound"
+      >y</a
+      ><a name="2864" class="Symbol"
+      >)</a
+      ><a name="2865"
+      >
+ </a
+      ><a name="2867" class="Symbol"
+      >&#8594;</a
+      ><a name="2868"
+      >  </a
+      ><a name="2870" class="Symbol"
+      >&#8704;(</a
+      ><a name="2872" href="JK-Choice.html#2872" class="Bound"
+      >x&#8320;</a
+      ><a name="2874"
+      > </a
+      ><a name="2875" class="Symbol"
+      >:</a
+      ><a name="2876"
+      > </a
+      ><a name="2877" href="Naturals.html#48" class="Datatype"
+      >&#8469;</a
+      ><a name="2878" class="Symbol"
+      >)</a
+      ><a name="2879"
+      >
+ </a
+      ><a name="2882" class="Symbol"
+      >&#8594;</a
+      ><a name="2883"
+      > </a
+      ><a name="2884" class="Symbol"
+      >(&#8704;(</a
+      ><a name="2887" href="JK-Choice.html#2887" class="Bound"
+      >n</a
+      ><a name="2888"
+      > </a
+      ><a name="2889" class="Symbol"
+      >:</a
+      ><a name="2890"
+      > </a
+      ><a name="2891" href="Naturals.html#48" class="Datatype"
+      >&#8469;</a
+      ><a name="2892" class="Symbol"
+      >)</a
+      ><a name="2893"
+      > </a
+      ><a name="2894" class="Symbol"
+      >&#8594;</a
+      ><a name="2895"
+      > </a
+      ><a name="2896" class="Symbol"
+      >&#8704;(</a
+      ><a name="2898" href="JK-Choice.html#2898" class="Bound"
+      >x</a
+      ><a name="2899"
+      > </a
+      ><a name="2900" class="Symbol"
+      >:</a
+      ><a name="2901"
+      > </a
+      ><a name="2902" href="Naturals.html#48" class="Datatype"
+      >&#8469;</a
+      ><a name="2903" class="Symbol"
+      >)</a
+      ><a name="2904"
+      > </a
+      ><a name="2905" class="Symbol"
+      >&#8594;</a
+      ><a name="2906"
+      > </a
+      ><a name="2907" href="JK-LogicalFacts.html#172" class="Function"
+      >K&#8707;</a
+      ><a name="2909"
+      > </a
+      ><a name="2910" class="Symbol"
+      >\(</a
+      ><a name="2912" href="JK-Choice.html#2912" class="Bound"
+      >y</a
+      ><a name="2913"
+      > </a
+      ><a name="2914" class="Symbol"
+      >:</a
+      ><a name="2915"
+      > </a
+      ><a name="2916" href="Naturals.html#48" class="Datatype"
+      >&#8469;</a
+      ><a name="2917" class="Symbol"
+      >)</a
+      ><a name="2918"
+      > </a
+      ><a name="2919" class="Symbol"
+      >&#8594;</a
+      ><a name="2920"
+      > </a
+      ><a name="2921" href="JK-Choice.html#2784" class="Bound"
+      >P</a
+      ><a name="2922"
+      > </a
+      ><a name="2923" href="JK-Choice.html#2887" class="Bound"
+      >n</a
+      ><a name="2924"
+      > </a
+      ><a name="2925" href="JK-Choice.html#2898" class="Bound"
+      >x</a
+      ><a name="2926"
+      > </a
+      ><a name="2927" href="JK-Choice.html#2912" class="Bound"
+      >y</a
+      ><a name="2928" class="Symbol"
+      >)</a
+      ><a name="2929"
+      >
+ </a
+      ><a name="2931" class="Symbol"
+      >&#8594;</a
+      ><a name="2932"
+      > </a
+      ><a name="2933" href="JK-LogicalFacts.html#172" class="Function"
+      >K&#8707;</a
+      ><a name="2935"
+      > </a
+      ><a name="2936" class="Symbol"
+      >\(</a
+      ><a name="2938" href="JK-Choice.html#2938" class="Bound"
+      >&#945;</a
+      ><a name="2939"
+      > </a
+      ><a name="2940" class="Symbol"
+      >:</a
+      ><a name="2941"
+      > </a
+      ><a name="2942" href="Naturals.html#48" class="Datatype"
+      >&#8469;</a
+      ><a name="2943"
+      > </a
+      ><a name="2944" class="Symbol"
+      >&#8594;</a
+      ><a name="2945"
+      > </a
+      ><a name="2946" href="Naturals.html#48" class="Datatype"
+      >&#8469;</a
+      ><a name="2947" class="Symbol"
+      >)</a
+      ><a name="2948"
+      > </a
+      ><a name="2949" class="Symbol"
+      >&#8594;</a
+      ><a name="2950"
+      > </a
+      ><a name="2951" href="JK-Choice.html#2938" class="Bound"
+      >&#945;</a
+      ><a name="2952"
+      > </a
+      ><a name="2953" href="Naturals.html#68" class="InductiveConstructor"
+      >O</a
+      ><a name="2954"
+      > </a
+      ><a name="2955" href="Equality.html#77" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="2956"
+      > </a
+      ><a name="2957" href="JK-Choice.html#2872" class="Bound"
+      >x&#8320;</a
+      ><a name="2959"
+      > </a
+      ><a name="2960" href="Logic.html#282" class="Datatype Operator"
+      >&#8743;</a
+      ><a name="2961"
+      > </a
+      ><a name="2962" class="Symbol"
+      >(&#8704;(</a
+      ><a name="2965" href="JK-Choice.html#2965" class="Bound"
+      >n</a
+      ><a name="2966"
+      > </a
+      ><a name="2967" class="Symbol"
+      >:</a
+      ><a name="2968"
+      > </a
+      ><a name="2969" href="Naturals.html#48" class="Datatype"
+      >&#8469;</a
+      ><a name="2970" class="Symbol"
+      >)</a
+      ><a name="2971"
+      > </a
+      ><a name="2972" class="Symbol"
+      >&#8594;</a
+      ><a name="2973"
+      > </a
+      ><a name="2974" href="JK-Choice.html#2784" class="Bound"
+      >P</a
+      ><a name="2975"
+      > </a
+      ><a name="2976" href="JK-Choice.html#2965" class="Bound"
+      >n</a
+      ><a name="2977"
+      > </a
+      ><a name="2978" class="Symbol"
+      >(</a
+      ><a name="2979" href="JK-Choice.html#2938" class="Bound"
+      >&#945;</a
+      ><a name="2980"
+      > </a
+      ><a name="2981" href="JK-Choice.html#2965" class="Bound"
+      >n</a
+      ><a name="2982" class="Symbol"
+      >)</a
+      ><a name="2983"
+      > </a
+      ><a name="2984" class="Symbol"
+      >(</a
+      ><a name="2985" href="JK-Choice.html#2938" class="Bound"
+      >&#945;</a
+      ><a name="2986" class="Symbol"
+      >(</a
+      ><a name="2987" href="JK-Choice.html#2965" class="Bound"
+      >n</a
+      ><a name="2988"
+      > </a
+      ><a name="2989" href="Addition.html#467" class="Function Operator"
+      >+</a
+      ><a name="2990"
+      > </a
+      ><a name="2991" class="Number"
+      >1</a
+      ><a name="2992" class="Symbol"
+      >)))</a
+      ><a name="2995"
+      >
+
+</a
+      ><a name="2997" href="JK-Choice.html#2766" class="Function"
+      >K-DC-&#8469;</a
+      ><a name="3003"
+      > </a
+      ><a name="3004" href="JK-Choice.html#3004" class="Bound"
+      >efqs</a
+      ><a name="3008"
+      > </a
+      ><a name="3009" href="JK-Choice.html#3009" class="Bound"
+      >x&#8320;</a
+      ><a name="3011"
+      > </a
+      ><a name="3012" href="JK-Choice.html#3012" class="Bound"
+      >f</a
+      ><a name="3013"
+      > </a
+      ><a name="3014" class="Symbol"
+      >=</a
+      ><a name="3015"
+      > </a
+      ><a name="3016" class="Symbol"
+      >(</a
+      ><a name="3017" href="JK-Monads.html#1456" class="Function"
+      >K-functor</a
+      ><a name="3026"
+      > </a
+      ><a name="3027" class="Symbol"
+      >(</a
+      ><a name="3028" href="Choice.html#297" class="Function"
+      >DC</a
+      ><a name="3030"
+      > </a
+      ><a name="3031" href="JK-Choice.html#3009" class="Bound"
+      >x&#8320;</a
+      ><a name="3033" class="Symbol"
+      >))</a
+      ><a name="3035"
+      > </a
+      ><a name="3036" class="Symbol"
+      >(</a
+      ><a name="3037" href="JK-Choice.html#2455" class="Function"
+      >K-&#8704;-double-shift</a
+      ><a name="3053"
+      > </a
+      ><a name="3054" href="JK-Choice.html#3004" class="Bound"
+      >efqs</a
+      ><a name="3058"
+      > </a
+      ><a name="3059" href="JK-Choice.html#3012" class="Bound"
+      >f</a
+      ><a name="3060" class="Symbol"
+      >)</a
+      ><a name="3061"
+      >
+</a
+      ></pre
+    ></body
+  ></html
+>

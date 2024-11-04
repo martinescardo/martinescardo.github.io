@@ -1,0 +1,326 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+><head
+  ><title
+    >K-Shift-Selection</title
+    ><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"
+     /><meta http-equiv="Content-Style-Type" content="text/css"
+     /><link href="Agda.css" rel="stylesheet" type="text/css"
+     /></head
+  ><body
+  ><pre
+    ><a name="1" class="Keyword"
+      >module</a
+      ><a name="7"
+      > </a
+      ><a name="8" href="K-Shift-Selection.html#8" class="Module"
+      >K-Shift-Selection</a
+      ><a name="25"
+      > </a
+      ><a name="26" class="Keyword"
+      >where</a
+      ><a name="31"
+      >
+
+</a
+      ><a name="33" class="Keyword"
+      >open</a
+      ><a name="37"
+      > </a
+      ><a name="38" class="Keyword"
+      >import</a
+      ><a name="44"
+      > </a
+      ><a name="45" href="Logic.html#8" class="Module"
+      >Logic</a
+      ><a name="50"
+      >
+</a
+      ><a name="51" class="Keyword"
+      >open</a
+      ><a name="55"
+      > </a
+      ><a name="56" class="Keyword"
+      >import</a
+      ><a name="62"
+      > </a
+      ><a name="63" href="Naturals.html#8" class="Module"
+      >Naturals</a
+      ><a name="71"
+      >
+</a
+      ><a name="72" class="Keyword"
+      >open</a
+      ><a name="76"
+      > </a
+      ><a name="77" class="Keyword"
+      >import</a
+      ><a name="83"
+      > </a
+      ><a name="84" href="JK-Monads.html#8" class="Module"
+      >JK-Monads</a
+      ><a name="93"
+      >
+</a
+      ><a name="94" class="Keyword"
+      >open</a
+      ><a name="98"
+      > </a
+      ><a name="99" class="Keyword"
+      >import</a
+      ><a name="105"
+      > </a
+      ><a name="106" href="J-Shift-Selection.html#173" class="Module"
+      >J-Shift-Selection</a
+      ><a name="123"
+      >
+
+
+</a
+      ><a name="126" href="K-Shift-Selection.html#126" class="Function"
+      >K-&#8704;-shift-selection</a
+      ><a name="145"
+      > </a
+      ><a name="146" class="Symbol"
+      >:</a
+      ><a name="147"
+      > </a
+      ><a name="148" class="Symbol"
+      >{</a
+      ><a name="149" href="K-Shift-Selection.html#149" class="Bound"
+      >R</a
+      ><a name="150"
+      > </a
+      ><a name="151" class="Symbol"
+      >:</a
+      ><a name="152"
+      > </a
+      ><a name="153" href="Logic.html#77" class="Function"
+      >&#937;</a
+      ><a name="154" class="Symbol"
+      >}</a
+      ><a name="155"
+      > </a
+      ><a name="156" class="Symbol"
+      >{</a
+      ><a name="157" href="K-Shift-Selection.html#157" class="Bound"
+      >A</a
+      ><a name="158"
+      > </a
+      ><a name="159" class="Symbol"
+      >:</a
+      ><a name="160"
+      > </a
+      ><a name="161" href="Naturals.html#48" class="Datatype"
+      >&#8469;</a
+      ><a name="162"
+      > </a
+      ><a name="163" class="Symbol"
+      >&#8594;</a
+      ><a name="164"
+      > </a
+      ><a name="165" href="Logic.html#77" class="Function"
+      >&#937;</a
+      ><a name="166" class="Symbol"
+      >}</a
+      ><a name="167"
+      > </a
+      ><a name="168" class="Symbol"
+      >&#8594;</a
+      ><a name="169"
+      >
+</a
+      ><a name="171" class="Comment"
+      >-------------------</a
+      ><a name="190"
+      >
+
+            </a
+      ><a name="204" class="Symbol"
+      >(&#8704;(</a
+      ><a name="207" href="K-Shift-Selection.html#207" class="Bound"
+      >n</a
+      ><a name="208"
+      > </a
+      ><a name="209" class="Symbol"
+      >:</a
+      ><a name="210"
+      > </a
+      ><a name="211" href="Naturals.html#48" class="Datatype"
+      >&#8469;</a
+      ><a name="212" class="Symbol"
+      >)</a
+      ><a name="213"
+      > </a
+      ><a name="214" class="Symbol"
+      >&#8594;</a
+      ><a name="215"
+      > </a
+      ><a name="216" href="K-Shift-Selection.html#149" class="Bound"
+      >R</a
+      ><a name="217"
+      > </a
+      ><a name="218" class="Symbol"
+      >&#8594;</a
+      ><a name="219"
+      > </a
+      ><a name="220" href="K-Shift-Selection.html#157" class="Bound"
+      >A</a
+      ><a name="221"
+      > </a
+      ><a name="222" href="K-Shift-Selection.html#207" class="Bound"
+      >n</a
+      ><a name="223" class="Symbol"
+      >)</a
+      ><a name="224"
+      > </a
+      ><a name="225" class="Symbol"
+      >&#8594;</a
+      ><a name="226"
+      >                   </a
+      ><a name="245" class="Comment"
+      >-- efqs,</a
+      ><a name="253"
+      >
+            </a
+      ><a name="266" class="Symbol"
+      >(&#8704;(</a
+      ><a name="269" href="K-Shift-Selection.html#269" class="Bound"
+      >n</a
+      ><a name="270"
+      > </a
+      ><a name="271" class="Symbol"
+      >:</a
+      ><a name="272"
+      > </a
+      ><a name="273" href="Naturals.html#48" class="Datatype"
+      >&#8469;</a
+      ><a name="274" class="Symbol"
+      >)</a
+      ><a name="275"
+      > </a
+      ><a name="276" class="Symbol"
+      >&#8594;</a
+      ><a name="277"
+      > </a
+      ><a name="278" href="JK-Monads.html#374" class="Function"
+      >K</a
+      ><a name="279" class="Symbol"
+      >(</a
+      ><a name="280" href="K-Shift-Selection.html#157" class="Bound"
+      >A</a
+      ><a name="281"
+      > </a
+      ><a name="282" href="K-Shift-Selection.html#269" class="Bound"
+      >n</a
+      ><a name="283" class="Symbol"
+      >))</a
+      ><a name="285"
+      > </a
+      ><a name="286" class="Symbol"
+      >&#8594;</a
+      ><a name="287"
+      > </a
+      ><a name="288" href="JK-Monads.html#374" class="Function"
+      >K</a
+      ><a name="289" class="Symbol"
+      >(&#8704;(</a
+      ><a name="292" href="K-Shift-Selection.html#292" class="Bound"
+      >n</a
+      ><a name="293"
+      > </a
+      ><a name="294" class="Symbol"
+      >:</a
+      ><a name="295"
+      > </a
+      ><a name="296" href="Naturals.html#48" class="Datatype"
+      >&#8469;</a
+      ><a name="297" class="Symbol"
+      >)</a
+      ><a name="298"
+      > </a
+      ><a name="299" class="Symbol"
+      >&#8594;</a
+      ><a name="300"
+      > </a
+      ><a name="301" href="K-Shift-Selection.html#157" class="Bound"
+      >A</a
+      ><a name="302"
+      > </a
+      ><a name="303" href="K-Shift-Selection.html#292" class="Bound"
+      >n</a
+      ><a name="304" class="Symbol"
+      >)</a
+      ><a name="305"
+      >  </a
+      ><a name="307" class="Comment"
+      >-- shift.</a
+      ><a name="316"
+      >
+
+</a
+      ><a name="318" href="K-Shift-Selection.html#126" class="Function"
+      >K-&#8704;-shift-selection</a
+      ><a name="337"
+      > </a
+      ><a name="338" href="K-Shift-Selection.html#338" class="Bound"
+      >efqs</a
+      ><a name="342"
+      > </a
+      ><a name="343" href="K-Shift-Selection.html#343" class="Bound"
+      >&#966;s</a
+      ><a name="345"
+      > </a
+      ><a name="346" class="Symbol"
+      >=</a
+      ><a name="347"
+      > </a
+      ><a name="348" href="JK-Monads.html#601" class="Function"
+      >J-K</a
+      ><a name="351" class="Symbol"
+      >(</a
+      ><a name="352" href="J-Shift-Selection.html#409" class="Function"
+      >J-&#8704;-shift-selection</a
+      ><a name="371" class="Symbol"
+      >(&#955;</a
+      ><a name="373"
+      > </a
+      ><a name="374" href="K-Shift-Selection.html#374" class="Bound"
+      >n</a
+      ><a name="375"
+      > </a
+      ><a name="376" class="Symbol"
+      >&#8594;</a
+      ><a name="377"
+      > </a
+      ><a name="378" href="JK-Monads.html#820" class="Function"
+      >K-J</a
+      ><a name="381" class="Symbol"
+      >(</a
+      ><a name="382" href="K-Shift-Selection.html#338" class="Bound"
+      >efqs</a
+      ><a name="386"
+      > </a
+      ><a name="387" href="K-Shift-Selection.html#374" class="Bound"
+      >n</a
+      ><a name="388" class="Symbol"
+      >)</a
+      ><a name="389"
+      > </a
+      ><a name="390" class="Symbol"
+      >(</a
+      ><a name="391" href="K-Shift-Selection.html#343" class="Bound"
+      >&#966;s</a
+      ><a name="393"
+      > </a
+      ><a name="394" href="K-Shift-Selection.html#374" class="Bound"
+      >n</a
+      ><a name="395" class="Symbol"
+      >)))</a
+      ><a name="398"
+      >
+</a
+      ></pre
+    ></body
+  ></html
+>

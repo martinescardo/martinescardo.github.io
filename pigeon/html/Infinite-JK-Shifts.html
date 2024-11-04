@@ -1,0 +1,541 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+><head
+  ><title
+    >Infinite-JK-Shifts</title
+    ><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"
+     /><meta http-equiv="Content-Style-Type" content="text/css"
+     /><link href="Agda.css" rel="stylesheet" type="text/css"
+     /></head
+  ><body
+  ><pre
+    ><a name="1" class="Keyword"
+      >module</a
+      ><a name="7"
+      > </a
+      ><a name="8" href="Infinite-JK-Shifts.html#8" class="Module"
+      >Infinite-JK-Shifts</a
+      ><a name="26"
+      > </a
+      ><a name="27" class="Keyword"
+      >where</a
+      ><a name="32"
+      >
+
+</a
+      ><a name="34" class="Comment"
+      >-- This is a wrapper.</a
+      ><a name="55"
+      >
+</a
+      ><a name="56" class="Comment"
+      >-- Import either Infinite-JK-Shifts-BBC or Infinite-JK-Shifts-Selection.</a
+      ><a name="128"
+      >
+
+</a
+      ><a name="130" class="Keyword"
+      >open</a
+      ><a name="134"
+      > </a
+      ><a name="135" class="Keyword"
+      >import</a
+      ><a name="141"
+      > </a
+      ><a name="142" href="Logic.html#8" class="Module"
+      >Logic</a
+      ><a name="147"
+      >
+</a
+      ><a name="148" class="Keyword"
+      >open</a
+      ><a name="152"
+      > </a
+      ><a name="153" class="Keyword"
+      >import</a
+      ><a name="159"
+      > </a
+      ><a name="160" href="Naturals.html#8" class="Module"
+      >Naturals</a
+      ><a name="168"
+      >
+</a
+      ><a name="169" class="Keyword"
+      >open</a
+      ><a name="173"
+      > </a
+      ><a name="174" class="Keyword"
+      >import</a
+      ><a name="180"
+      > </a
+      ><a name="181" href="JK-Monads.html#8" class="Module"
+      >JK-Monads</a
+      ><a name="190"
+      >
+</a
+      ><a name="191" class="Keyword"
+      >open</a
+      ><a name="195"
+      > </a
+      ><a name="196" class="Keyword"
+      >import</a
+      ><a name="202"
+      > </a
+      ><a name="203" href="Infinite-J-Shift-Selection.html#273" class="Module"
+      >Infinite-J-Shift-Selection</a
+      ><a name="229"
+      >
+
+</a
+      ><a name="231" class="Comment"
+      >-- In the following use either J-&#8704;-shift-bbc or else J-&#8704;-shift-selection:</a
+      ><a name="304"
+      >
+
+</a
+      ><a name="306" href="Infinite-JK-Shifts.html#306" class="Function"
+      >J-&#8704;-shift</a
+      ><a name="315"
+      > </a
+      ><a name="316" class="Symbol"
+      >:</a
+      ><a name="317"
+      > </a
+      ><a name="318" class="Symbol"
+      >{</a
+      ><a name="319" href="Infinite-JK-Shifts.html#319" class="Bound"
+      >R</a
+      ><a name="320"
+      > </a
+      ><a name="321" class="Symbol"
+      >:</a
+      ><a name="322"
+      > </a
+      ><a name="323" href="Logic.html#77" class="Function"
+      >&#937;</a
+      ><a name="324" class="Symbol"
+      >}</a
+      ><a name="325"
+      > </a
+      ><a name="326" class="Symbol"
+      >{</a
+      ><a name="327" href="Infinite-JK-Shifts.html#327" class="Bound"
+      >A</a
+      ><a name="328"
+      > </a
+      ><a name="329" class="Symbol"
+      >:</a
+      ><a name="330"
+      > </a
+      ><a name="331" href="Naturals.html#48" class="Datatype"
+      >&#8469;</a
+      ><a name="332"
+      > </a
+      ><a name="333" class="Symbol"
+      >&#8594;</a
+      ><a name="334"
+      > </a
+      ><a name="335" href="Logic.html#77" class="Function"
+      >&#937;</a
+      ><a name="336" class="Symbol"
+      >}</a
+      ><a name="337"
+      > </a
+      ><a name="338" class="Symbol"
+      >&#8594;</a
+      ><a name="339"
+      >
+</a
+      ><a name="341" class="Comment"
+      >---------</a
+      ><a name="350"
+      >
+
+      </a
+      ><a name="358" class="Symbol"
+      >(&#8704;(</a
+      ><a name="361" href="Infinite-JK-Shifts.html#361" class="Bound"
+      >n</a
+      ><a name="362"
+      > </a
+      ><a name="363" class="Symbol"
+      >:</a
+      ><a name="364"
+      > </a
+      ><a name="365" href="Naturals.html#48" class="Datatype"
+      >&#8469;</a
+      ><a name="366" class="Symbol"
+      >)</a
+      ><a name="367"
+      > </a
+      ><a name="368" class="Symbol"
+      >&#8594;</a
+      ><a name="369"
+      > </a
+      ><a name="370" href="JK-Monads.html#331" class="Function"
+      >J</a
+      ><a name="371"
+      > </a
+      ><a name="372" class="Symbol"
+      >{</a
+      ><a name="373" href="Infinite-JK-Shifts.html#319" class="Bound"
+      >R</a
+      ><a name="374" class="Symbol"
+      >}</a
+      ><a name="375"
+      > </a
+      ><a name="376" class="Symbol"
+      >(</a
+      ><a name="377" href="Infinite-JK-Shifts.html#327" class="Bound"
+      >A</a
+      ><a name="378"
+      > </a
+      ><a name="379" href="Infinite-JK-Shifts.html#361" class="Bound"
+      >n</a
+      ><a name="380" class="Symbol"
+      >))</a
+      ><a name="382"
+      > </a
+      ><a name="383" class="Symbol"
+      >&#8594;</a
+      ><a name="384"
+      > </a
+      ><a name="385" href="JK-Monads.html#331" class="Function"
+      >J</a
+      ><a name="386"
+      > </a
+      ><a name="387" class="Symbol"
+      >{</a
+      ><a name="388" href="Infinite-JK-Shifts.html#319" class="Bound"
+      >R</a
+      ><a name="389" class="Symbol"
+      >}</a
+      ><a name="390"
+      > </a
+      ><a name="391" class="Symbol"
+      >(&#8704;(</a
+      ><a name="394" href="Infinite-JK-Shifts.html#394" class="Bound"
+      >n</a
+      ><a name="395"
+      > </a
+      ><a name="396" class="Symbol"
+      >:</a
+      ><a name="397"
+      > </a
+      ><a name="398" href="Naturals.html#48" class="Datatype"
+      >&#8469;</a
+      ><a name="399" class="Symbol"
+      >)</a
+      ><a name="400"
+      > </a
+      ><a name="401" class="Symbol"
+      >&#8594;</a
+      ><a name="402"
+      > </a
+      ><a name="403" href="Infinite-JK-Shifts.html#327" class="Bound"
+      >A</a
+      ><a name="404"
+      > </a
+      ><a name="405" href="Infinite-JK-Shifts.html#394" class="Bound"
+      >n</a
+      ><a name="406" class="Symbol"
+      >)</a
+      ><a name="407"
+      >
+
+</a
+      ><a name="409" href="Infinite-JK-Shifts.html#306" class="Function"
+      >J-&#8704;-shift</a
+      ><a name="418"
+      > </a
+      ><a name="419" class="Symbol"
+      >=</a
+      ><a name="420"
+      > </a
+      ><a name="421" href="Infinite-J-Shift-Selection.html#518" class="Function"
+      >J-&#8704;-shift-selection</a
+      ><a name="440"
+      >
+
+
+</a
+      ><a name="443" class="Comment"
+      >-- The remainder of this module can be left untouched.</a
+      ><a name="497"
+      >
+
+</a
+      ><a name="499" class="Comment"
+      >---------------------------------------------------------</a
+      ><a name="556"
+      >
+</a
+      ><a name="557" class="Comment"
+      >-- We reduce the double negation shift to the J-shift. --</a
+      ><a name="614"
+      >
+</a
+      ><a name="615" class="Comment"
+      >---------------------------------------------------------</a
+      ><a name="672"
+      >
+
+</a
+      ><a name="674" class="Comment"
+      >-- We need a hypothesis, which amounts to ex falso quodlibet, with R</a
+      ><a name="742"
+      >
+</a
+      ><a name="743" class="Comment"
+      >-- playing the role of false.</a
+      ><a name="772"
+      >
+
+
+</a
+      ><a name="775" href="Infinite-JK-Shifts.html#775" class="Function"
+      >K-&#8704;-shift</a
+      ><a name="784"
+      > </a
+      ><a name="785" class="Symbol"
+      >:</a
+      ><a name="786"
+      > </a
+      ><a name="787" class="Symbol"
+      >{</a
+      ><a name="788" href="Infinite-JK-Shifts.html#788" class="Bound"
+      >R</a
+      ><a name="789"
+      > </a
+      ><a name="790" class="Symbol"
+      >:</a
+      ><a name="791"
+      > </a
+      ><a name="792" href="Logic.html#77" class="Function"
+      >&#937;</a
+      ><a name="793" class="Symbol"
+      >}</a
+      ><a name="794"
+      > </a
+      ><a name="795" class="Symbol"
+      >{</a
+      ><a name="796" href="Infinite-JK-Shifts.html#796" class="Bound"
+      >A</a
+      ><a name="797"
+      > </a
+      ><a name="798" class="Symbol"
+      >:</a
+      ><a name="799"
+      > </a
+      ><a name="800" href="Naturals.html#48" class="Datatype"
+      >&#8469;</a
+      ><a name="801"
+      > </a
+      ><a name="802" class="Symbol"
+      >&#8594;</a
+      ><a name="803"
+      > </a
+      ><a name="804" href="Logic.html#77" class="Function"
+      >&#937;</a
+      ><a name="805" class="Symbol"
+      >}</a
+      ><a name="806"
+      > </a
+      ><a name="807" class="Symbol"
+      >&#8594;</a
+      ><a name="808"
+      >
+</a
+      ><a name="810" class="Comment"
+      >---------</a
+      ><a name="819"
+      >
+            </a
+      ><a name="832" class="Symbol"
+      >(&#8704;(</a
+      ><a name="835" href="Infinite-JK-Shifts.html#835" class="Bound"
+      >n</a
+      ><a name="836"
+      > </a
+      ><a name="837" class="Symbol"
+      >:</a
+      ><a name="838"
+      > </a
+      ><a name="839" href="Naturals.html#48" class="Datatype"
+      >&#8469;</a
+      ><a name="840" class="Symbol"
+      >)</a
+      ><a name="841"
+      > </a
+      ><a name="842" class="Symbol"
+      >&#8594;</a
+      ><a name="843"
+      > </a
+      ><a name="844" href="Infinite-JK-Shifts.html#788" class="Bound"
+      >R</a
+      ><a name="845"
+      > </a
+      ><a name="846" class="Symbol"
+      >&#8594;</a
+      ><a name="847"
+      > </a
+      ><a name="848" href="Infinite-JK-Shifts.html#796" class="Bound"
+      >A</a
+      ><a name="849"
+      > </a
+      ><a name="850" href="Infinite-JK-Shifts.html#835" class="Bound"
+      >n</a
+      ><a name="851" class="Symbol"
+      >)</a
+      ><a name="852"
+      > </a
+      ><a name="853" class="Symbol"
+      >&#8594;</a
+      ><a name="854"
+      >                   </a
+      ><a name="873" class="Comment"
+      >-- efqs,</a
+      ><a name="881"
+      >
+            </a
+      ><a name="894" class="Symbol"
+      >(&#8704;(</a
+      ><a name="897" href="Infinite-JK-Shifts.html#897" class="Bound"
+      >n</a
+      ><a name="898"
+      > </a
+      ><a name="899" class="Symbol"
+      >:</a
+      ><a name="900"
+      > </a
+      ><a name="901" href="Naturals.html#48" class="Datatype"
+      >&#8469;</a
+      ><a name="902" class="Symbol"
+      >)</a
+      ><a name="903"
+      > </a
+      ><a name="904" class="Symbol"
+      >&#8594;</a
+      ><a name="905"
+      > </a
+      ><a name="906" href="JK-Monads.html#374" class="Function"
+      >K</a
+      ><a name="907" class="Symbol"
+      >(</a
+      ><a name="908" href="Infinite-JK-Shifts.html#796" class="Bound"
+      >A</a
+      ><a name="909"
+      > </a
+      ><a name="910" href="Infinite-JK-Shifts.html#897" class="Bound"
+      >n</a
+      ><a name="911" class="Symbol"
+      >))</a
+      ><a name="913"
+      > </a
+      ><a name="914" class="Symbol"
+      >&#8594;</a
+      ><a name="915"
+      > </a
+      ><a name="916" href="JK-Monads.html#374" class="Function"
+      >K</a
+      ><a name="917" class="Symbol"
+      >(&#8704;(</a
+      ><a name="920" href="Infinite-JK-Shifts.html#920" class="Bound"
+      >n</a
+      ><a name="921"
+      > </a
+      ><a name="922" class="Symbol"
+      >:</a
+      ><a name="923"
+      > </a
+      ><a name="924" href="Naturals.html#48" class="Datatype"
+      >&#8469;</a
+      ><a name="925" class="Symbol"
+      >)</a
+      ><a name="926"
+      > </a
+      ><a name="927" class="Symbol"
+      >&#8594;</a
+      ><a name="928"
+      > </a
+      ><a name="929" href="Infinite-JK-Shifts.html#796" class="Bound"
+      >A</a
+      ><a name="930"
+      > </a
+      ><a name="931" href="Infinite-JK-Shifts.html#920" class="Bound"
+      >n</a
+      ><a name="932" class="Symbol"
+      >)</a
+      ><a name="933"
+      >  </a
+      ><a name="935" class="Comment"
+      >-- shift.</a
+      ><a name="944"
+      >
+
+</a
+      ><a name="946" href="Infinite-JK-Shifts.html#775" class="Function"
+      >K-&#8704;-shift</a
+      ><a name="955"
+      > </a
+      ><a name="956" href="Infinite-JK-Shifts.html#956" class="Bound"
+      >efqs</a
+      ><a name="960"
+      > </a
+      ><a name="961" href="Infinite-JK-Shifts.html#961" class="Bound"
+      >&#966;s</a
+      ><a name="963"
+      > </a
+      ><a name="964" class="Symbol"
+      >=</a
+      ><a name="965"
+      > </a
+      ><a name="966" href="JK-Monads.html#601" class="Function"
+      >J-K</a
+      ><a name="969" class="Symbol"
+      >(</a
+      ><a name="970" href="Infinite-JK-Shifts.html#306" class="Function"
+      >J-&#8704;-shift</a
+      ><a name="979" class="Symbol"
+      >(&#955;</a
+      ><a name="981"
+      > </a
+      ><a name="982" href="Infinite-JK-Shifts.html#982" class="Bound"
+      >n</a
+      ><a name="983"
+      > </a
+      ><a name="984" class="Symbol"
+      >&#8594;</a
+      ><a name="985"
+      > </a
+      ><a name="986" href="JK-Monads.html#820" class="Function"
+      >K-J</a
+      ><a name="989" class="Symbol"
+      >(</a
+      ><a name="990" href="Infinite-JK-Shifts.html#956" class="Bound"
+      >efqs</a
+      ><a name="994"
+      > </a
+      ><a name="995" href="Infinite-JK-Shifts.html#982" class="Bound"
+      >n</a
+      ><a name="996" class="Symbol"
+      >)</a
+      ><a name="997"
+      > </a
+      ><a name="998" class="Symbol"
+      >(</a
+      ><a name="999" href="Infinite-JK-Shifts.html#961" class="Bound"
+      >&#966;s</a
+      ><a name="1001"
+      > </a
+      ><a name="1002" href="Infinite-JK-Shifts.html#982" class="Bound"
+      >n</a
+      ><a name="1003" class="Symbol"
+      >)))</a
+      ><a name="1006"
+      >
+</a
+      ></pre
+    ></body
+  ></html
+>

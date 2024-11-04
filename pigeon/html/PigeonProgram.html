@@ -1,0 +1,333 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+><head
+  ><title
+    >PigeonProgram</title
+    ><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"
+     /><meta http-equiv="Content-Style-Type" content="text/css"
+     /><link href="Agda.css" rel="stylesheet" type="text/css"
+     /></head
+  ><body
+  ><pre
+    ><a name="1" class="Keyword"
+      >module</a
+      ><a name="7"
+      > </a
+      ><a name="8" href="PigeonProgram.html#8" class="Module"
+      >PigeonProgram</a
+      ><a name="21"
+      > </a
+      ><a name="22" class="Keyword"
+      >where</a
+      ><a name="27"
+      >
+
+</a
+      ><a name="29" class="Keyword"
+      >open</a
+      ><a name="33"
+      > </a
+      ><a name="34" class="Keyword"
+      >import</a
+      ><a name="40"
+      > </a
+      ><a name="41" href="Cantor.html#8" class="Module"
+      >Cantor</a
+      ><a name="47"
+      >
+</a
+      ><a name="48" class="Keyword"
+      >open</a
+      ><a name="52"
+      > </a
+      ><a name="53" class="Keyword"
+      >import</a
+      ><a name="59"
+      > </a
+      ><a name="60" href="Naturals.html#8" class="Module"
+      >Naturals</a
+      ><a name="68"
+      >
+</a
+      ><a name="69" class="Keyword"
+      >open</a
+      ><a name="73"
+      > </a
+      ><a name="74" class="Keyword"
+      >import</a
+      ><a name="80"
+      > </a
+      ><a name="81" href="Two.html#8" class="Module"
+      >Two</a
+      ><a name="84"
+      >
+</a
+      ><a name="85" class="Keyword"
+      >open</a
+      ><a name="89"
+      > </a
+      ><a name="90" class="Keyword"
+      >import</a
+      ><a name="96"
+      > </a
+      ><a name="97" href="Logic.html#8" class="Module"
+      >Logic</a
+      ><a name="102"
+      >
+</a
+      ><a name="103" class="Keyword"
+      >open</a
+      ><a name="107"
+      > </a
+      ><a name="108" class="Keyword"
+      >import</a
+      ><a name="114"
+      > </a
+      ><a name="115" href="FinitePigeon.html#8" class="Module"
+      >FinitePigeon</a
+      ><a name="127"
+      >
+</a
+      ><a name="128" class="Keyword"
+      >open</a
+      ><a name="132"
+      > </a
+      ><a name="133" class="Keyword"
+      >import</a
+      ><a name="139"
+      > </a
+      ><a name="140" href="DataStructures.html#8" class="Module"
+      >DataStructures</a
+      ><a name="154"
+      >
+
+</a
+      ><a name="156" class="Comment"
+      >-- Given an infinite boolean sequence &#945; and a natural number m, find a</a
+      ><a name="226"
+      >
+</a
+      ><a name="227" class="Comment"
+      >-- boolean b and a finite list of length n with the indices of a</a
+      ><a name="291"
+      >
+</a
+      ><a name="292" class="Comment"
+      >-- finite constant subsequence of &#945; with value b at all</a
+      ><a name="347"
+      >
+</a
+      ><a name="348" class="Comment"
+      >-- positions. </a
+      ><a name="362"
+      >
+</a
+      ><a name="363" class="Comment"
+      >-- </a
+      ><a name="366"
+      >
+</a
+      ><a name="367" class="Comment"
+      >-- This is usually how such programs are specified in functional</a
+      ><a name="431"
+      >
+</a
+      ><a name="432" class="Comment"
+      >-- programming (if they are at all). Here Theorem (defined in the</a
+      ><a name="497"
+      >
+</a
+      ><a name="498" class="Comment"
+      >-- module FinitePigeon) is the program with the formal specification,</a
+      ><a name="567"
+      >
+</a
+      ><a name="568" class="Comment"
+      >-- also formally checked. Once this is done we can erase the</a
+      ><a name="628"
+      >
+</a
+      ><a name="629" class="Comment"
+      >-- specification.</a
+      ><a name="646"
+      >
+
+</a
+      ><a name="648" href="PigeonProgram.html#648" class="Function"
+      >pigeon-program</a
+      ><a name="662"
+      > </a
+      ><a name="663" class="Symbol"
+      >:</a
+      ><a name="664"
+      > </a
+      ><a name="665" href="Cantor.html#60" class="Function"
+      >&#8322;&#8469;</a
+      ><a name="667"
+      > </a
+      ><a name="668" class="Symbol"
+      >&#8594;</a
+      ><a name="669"
+      >  </a
+      ><a name="671" href="Naturals.html#48" class="Datatype"
+      >&#8469;</a
+      ><a name="672"
+      >  </a
+      ><a name="674" class="Symbol"
+      >&#8594;</a
+      ><a name="675"
+      >  </a
+      ><a name="677" href="Two.html#24" class="Datatype"
+      >&#8322;</a
+      ><a name="678"
+      >  </a
+      ><a name="680" href="DataStructures.html#509" class="Datatype Operator"
+      >&#215;</a
+      ><a name="681"
+      >  </a
+      ><a name="683" href="DataStructures.html#199" class="Datatype"
+      >List</a
+      ><a name="687"
+      > </a
+      ><a name="688" href="Naturals.html#48" class="Datatype"
+      >&#8469;</a
+      ><a name="689"
+      >
+</a
+      ><a name="690" href="PigeonProgram.html#648" class="Function"
+      >pigeon-program</a
+      ><a name="704"
+      > </a
+      ><a name="705" href="PigeonProgram.html#705" class="Bound"
+      >&#945;</a
+      ><a name="706"
+      > </a
+      ><a name="707" href="PigeonProgram.html#707" class="Bound"
+      >m</a
+      ><a name="708"
+      > </a
+      ><a name="709" class="Symbol"
+      >=</a
+      ><a name="710"
+      > </a
+      ><a name="711" href="PigeonProgram.html#733" class="Function"
+      >f</a
+      ><a name="712" class="Symbol"
+      >(</a
+      ><a name="713" href="FinitePigeon.html#2528" class="Function"
+      >Theorem</a
+      ><a name="720"
+      > </a
+      ><a name="721" href="PigeonProgram.html#705" class="Bound"
+      >&#945;</a
+      ><a name="722"
+      > </a
+      ><a name="723" href="PigeonProgram.html#707" class="Bound"
+      >m</a
+      ><a name="724" class="Symbol"
+      >)</a
+      ><a name="725"
+      >
+ </a
+      ><a name="727" class="Keyword"
+      >where</a
+      ><a name="732"
+      > </a
+      ><a name="733" href="PigeonProgram.html#733" class="Function"
+      >f</a
+      ><a name="734"
+      > </a
+      ><a name="735" class="Symbol"
+      >:</a
+      ><a name="736"
+      > </a
+      ><a name="737" href="FinitePigeon.html#389" class="Function"
+      >Finite-Pigeonhole</a
+      ><a name="754"
+      > </a
+      ><a name="755" href="PigeonProgram.html#705" class="Bound"
+      >&#945;</a
+      ><a name="756"
+      > </a
+      ><a name="757" href="PigeonProgram.html#707" class="Bound"
+      >m</a
+      ><a name="758"
+      > </a
+      ><a name="759" class="Symbol"
+      >&#8594;</a
+      ><a name="760"
+      > </a
+      ><a name="761" href="Two.html#24" class="Datatype"
+      >&#8322;</a
+      ><a name="762"
+      > </a
+      ><a name="763" href="DataStructures.html#509" class="Datatype Operator"
+      >&#215;</a
+      ><a name="764"
+      > </a
+      ><a name="765" href="DataStructures.html#199" class="Datatype"
+      >List</a
+      ><a name="769"
+      > </a
+      ><a name="770" href="Naturals.html#48" class="Datatype"
+      >&#8469;</a
+      ><a name="771"
+      >
+       </a
+      ><a name="779" href="PigeonProgram.html#733" class="Function"
+      >f</a
+      ><a name="780" class="Symbol"
+      >(</a
+      ><a name="781" href="Logic.html#1099" class="InductiveConstructor"
+      >&#8707;-intro</a
+      ><a name="788"
+      > </a
+      ><a name="789" href="PigeonProgram.html#789" class="Bound"
+      >b</a
+      ><a name="790"
+      > </a
+      ><a name="791" class="Symbol"
+      >(</a
+      ><a name="792" href="Logic.html#1099" class="InductiveConstructor"
+      >&#8707;-intro</a
+      ><a name="799"
+      > </a
+      ><a name="800" href="PigeonProgram.html#800" class="Bound"
+      >s</a
+      ><a name="801"
+      > </a
+      ><a name="802" href="PigeonProgram.html#802" class="Bound"
+      >proof</a
+      ><a name="807" class="Symbol"
+      >))</a
+      ><a name="809"
+      > </a
+      ><a name="810" class="Symbol"
+      >=</a
+      ><a name="811"
+      > </a
+      ><a name="812" class="Symbol"
+      >(</a
+      ><a name="813" href="PigeonProgram.html#789" class="Bound"
+      >b</a
+      ><a name="814"
+      > </a
+      ><a name="815" href="DataStructures.html#538" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="816"
+      > </a
+      ><a name="817" href="DataStructures.html#363" class="Function"
+      >list</a
+      ><a name="821"
+      > </a
+      ><a name="822" href="PigeonProgram.html#800" class="Bound"
+      >s</a
+      ><a name="823" class="Symbol"
+      >)</a
+      ><a name="824"
+      >
+</a
+      ></pre
+    ></body
+  ></html
+>

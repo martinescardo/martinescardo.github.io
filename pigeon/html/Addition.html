@@ -1,0 +1,3247 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+><head
+  ><title
+    >Addition</title
+    ><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"
+     /><meta http-equiv="Content-Style-Type" content="text/css"
+     /><link href="Agda.css" rel="stylesheet" type="text/css"
+     /></head
+  ><body
+  ><pre
+    ><a name="1" class="Keyword"
+      >module</a
+      ><a name="7"
+      > </a
+      ><a name="8" href="Addition.html#8" class="Module"
+      >Addition</a
+      ><a name="16"
+      > </a
+      ><a name="17" class="Keyword"
+      >where</a
+      ><a name="22"
+      >
+
+</a
+      ><a name="24" class="Comment"
+      >-- The following was implemented by Martin Escardo and his student</a
+      ><a name="90"
+      >
+</a
+      ><a name="91" class="Comment"
+      >-- Chuangje Xu as part of his Individual Study module on Agda and</a
+      ><a name="156"
+      >
+</a
+      ><a name="157" class="Comment"
+      >-- Curry-Howard isomorphism (UG student in Computer Science,</a
+      ><a name="217"
+      >
+</a
+      ><a name="218" class="Comment"
+      >-- Birmingham, UK, academic year 2010-2011). We also did</a
+      ><a name="274"
+      >
+</a
+      ><a name="275" class="Comment"
+      >-- multiplication and its properties, and other things, but this is</a
+      ><a name="342"
+      >
+</a
+      ><a name="343" class="Comment"
+      >-- not included here.</a
+      ><a name="364"
+      >
+
+</a
+      ><a name="366" class="Keyword"
+      >open</a
+      ><a name="370"
+      > </a
+      ><a name="371" class="Keyword"
+      >import</a
+      ><a name="377"
+      > </a
+      ><a name="378" href="Naturals.html#8" class="Module"
+      >Naturals</a
+      ><a name="386"
+      >
+</a
+      ><a name="387" class="Keyword"
+      >open</a
+      ><a name="391"
+      > </a
+      ><a name="392" class="Keyword"
+      >import</a
+      ><a name="398"
+      > </a
+      ><a name="399" href="Logic.html#8" class="Module"
+      >Logic</a
+      ><a name="404"
+      >
+</a
+      ><a name="405" class="Keyword"
+      >open</a
+      ><a name="409"
+      > </a
+      ><a name="410" class="Keyword"
+      >import</a
+      ><a name="416"
+      > </a
+      ><a name="417" href="LogicalFacts.html#8" class="Module"
+      >LogicalFacts</a
+      ><a name="429"
+      >
+</a
+      ><a name="430" class="Keyword"
+      >open</a
+      ><a name="434"
+      > </a
+      ><a name="435" class="Keyword"
+      >import</a
+      ><a name="441"
+      > </a
+      ><a name="442" href="Equality.html#8" class="Module"
+      >Equality</a
+      ><a name="450"
+      >
+
+</a
+      ><a name="452" class="Keyword"
+      >infixl</a
+      ><a name="458"
+      > </a
+      ><a name="459" class="Number"
+      >30</a
+      ><a name="461"
+      > _+_
+
+</a
+      ><a name="467" href="Addition.html#467" class="Function Operator"
+      >_+_</a
+      ><a name="470"
+      > </a
+      ><a name="471" class="Symbol"
+      >:</a
+      ><a name="472"
+      > </a
+      ><a name="473" href="Naturals.html#48" class="Datatype"
+      >&#8469;</a
+      ><a name="474"
+      > </a
+      ><a name="475" class="Symbol"
+      >&#8594;</a
+      ><a name="476"
+      > </a
+      ><a name="477" href="Naturals.html#48" class="Datatype"
+      >&#8469;</a
+      ><a name="478"
+      > </a
+      ><a name="479" class="Symbol"
+      >&#8594;</a
+      ><a name="480"
+      > </a
+      ><a name="481" href="Naturals.html#48" class="Datatype"
+      >&#8469;</a
+      ><a name="482"
+      >
+</a
+      ><a name="483" href="Addition.html#483" class="Bound"
+      >n</a
+      ><a name="484"
+      > </a
+      ><a name="485" href="Addition.html#467" class="Function Operator"
+      >+</a
+      ><a name="486"
+      > </a
+      ><a name="487" href="Naturals.html#68" class="InductiveConstructor"
+      >0</a
+      ><a name="488"
+      > </a
+      ><a name="489" class="Symbol"
+      >=</a
+      ><a name="490"
+      > </a
+      ><a name="491" href="Addition.html#483" class="Bound"
+      >n</a
+      ><a name="492"
+      >
+</a
+      ><a name="493" href="Addition.html#493" class="Bound"
+      >n</a
+      ><a name="494"
+      > </a
+      ><a name="495" href="Addition.html#467" class="Function Operator"
+      >+</a
+      ><a name="496"
+      > </a
+      ><a name="497" class="Symbol"
+      >(</a
+      ><a name="498" href="Naturals.html#121" class="InductiveConstructor"
+      >succ</a
+      ><a name="502"
+      > </a
+      ><a name="503" href="Addition.html#503" class="Bound"
+      >m</a
+      ><a name="504" class="Symbol"
+      >)</a
+      ><a name="505"
+      > </a
+      ><a name="506" class="Symbol"
+      >=</a
+      ><a name="507"
+      > </a
+      ><a name="508" href="Naturals.html#121" class="InductiveConstructor"
+      >succ</a
+      ><a name="512" class="Symbol"
+      >(</a
+      ><a name="513" href="Addition.html#493" class="Bound"
+      >n</a
+      ><a name="514"
+      > </a
+      ><a name="515" href="Addition.html#467" class="Function Operator"
+      >+</a
+      ><a name="516"
+      > </a
+      ><a name="517" href="Addition.html#503" class="Bound"
+      >m</a
+      ><a name="518" class="Symbol"
+      >)</a
+      ><a name="519"
+      >
+
+
+</a
+      ><a name="522" href="Addition.html#522" class="Function"
+      >n-plus-zero-equals-n</a
+      ><a name="542"
+      > </a
+      ><a name="543" class="Symbol"
+      >:</a
+      ><a name="544"
+      > </a
+      ><a name="545" class="Symbol"
+      >&#8704;(</a
+      ><a name="547" href="Addition.html#547" class="Bound"
+      >n</a
+      ><a name="548"
+      > </a
+      ><a name="549" class="Symbol"
+      >:</a
+      ><a name="550"
+      > </a
+      ><a name="551" href="Naturals.html#48" class="Datatype"
+      >&#8469;</a
+      ><a name="552" class="Symbol"
+      >)</a
+      ><a name="553"
+      > </a
+      ><a name="554" class="Symbol"
+      >&#8594;</a
+      ><a name="555"
+      > </a
+      ><a name="556" href="Addition.html#547" class="Bound"
+      >n</a
+      ><a name="557"
+      > </a
+      ><a name="558" href="Addition.html#467" class="Function Operator"
+      >+</a
+      ><a name="559"
+      > </a
+      ><a name="560" class="Number"
+      >0</a
+      ><a name="561"
+      > </a
+      ><a name="562" href="Equality.html#48" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="563"
+      > </a
+      ><a name="564" href="Addition.html#547" class="Bound"
+      >n</a
+      ><a name="565"
+      >
+</a
+      ><a name="566" href="Addition.html#522" class="Function"
+      >n-plus-zero-equals-n</a
+      ><a name="586"
+      > </a
+      ><a name="587" href="Addition.html#587" class="Bound"
+      >n</a
+      ><a name="588"
+      > </a
+      ><a name="589" class="Symbol"
+      >=</a
+      ><a name="590"
+      > </a
+      ><a name="591" href="Equality.html#82" class="InductiveConstructor"
+      >reflexivity</a
+      ><a name="602"
+      >
+
+
+</a
+      ><a name="605" href="Addition.html#605" class="Function"
+      >zero-plus-n-equals-n</a
+      ><a name="625"
+      > </a
+      ><a name="626" class="Symbol"
+      >:</a
+      ><a name="627"
+      > </a
+      ><a name="628" class="Symbol"
+      >&#8704;(</a
+      ><a name="630" href="Addition.html#630" class="Bound"
+      >n</a
+      ><a name="631"
+      > </a
+      ><a name="632" class="Symbol"
+      >:</a
+      ><a name="633"
+      > </a
+      ><a name="634" href="Naturals.html#48" class="Datatype"
+      >&#8469;</a
+      ><a name="635" class="Symbol"
+      >)</a
+      ><a name="636"
+      > </a
+      ><a name="637" class="Symbol"
+      >&#8594;</a
+      ><a name="638"
+      > </a
+      ><a name="639" class="Number"
+      >0</a
+      ><a name="640"
+      > </a
+      ><a name="641" href="Addition.html#467" class="Function Operator"
+      >+</a
+      ><a name="642"
+      > </a
+      ><a name="643" href="Addition.html#630" class="Bound"
+      >n</a
+      ><a name="644"
+      > </a
+      ><a name="645" href="Equality.html#48" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="646"
+      > </a
+      ><a name="647" href="Addition.html#630" class="Bound"
+      >n</a
+      ><a name="648"
+      >
+</a
+      ><a name="649" href="Addition.html#605" class="Function"
+      >zero-plus-n-equals-n</a
+      ><a name="669"
+      > </a
+      ><a name="670" class="Symbol"
+      >=</a
+      ><a name="671"
+      > </a
+      ><a name="672" href="Naturals.html#232" class="Function"
+      >induction</a
+      ><a name="681"
+      > </a
+      ><a name="682" href="Addition.html#700" class="Function"
+      >base</a
+      ><a name="686"
+      > </a
+      ><a name="687" href="Addition.html#753" class="Function"
+      >step</a
+      ><a name="691"
+      >
+  </a
+      ><a name="694" class="Keyword"
+      >where</a
+      ><a name="699"
+      > </a
+      ><a name="700" href="Addition.html#700" class="Function"
+      >base</a
+      ><a name="704"
+      > </a
+      ><a name="705" class="Symbol"
+      >:</a
+      ><a name="706"
+      > </a
+      ><a name="707" class="Number"
+      >0</a
+      ><a name="708"
+      > </a
+      ><a name="709" href="Addition.html#467" class="Function Operator"
+      >+</a
+      ><a name="710"
+      > </a
+      ><a name="711" class="Number"
+      >0</a
+      ><a name="712"
+      > </a
+      ><a name="713" href="Equality.html#48" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="714"
+      > </a
+      ><a name="715" class="Number"
+      >0</a
+      ><a name="716"
+      >
+        </a
+      ><a name="725" href="Addition.html#700" class="Function"
+      >base</a
+      ><a name="729"
+      > </a
+      ><a name="730" class="Symbol"
+      >=</a
+      ><a name="731"
+      > </a
+      ><a name="732" href="Equality.html#82" class="InductiveConstructor"
+      >reflexivity</a
+      ><a name="743"
+      >
+
+        </a
+      ><a name="753" href="Addition.html#753" class="Function"
+      >step</a
+      ><a name="757"
+      > </a
+      ><a name="758" class="Symbol"
+      >:</a
+      ><a name="759"
+      > </a
+      ><a name="760" class="Symbol"
+      >&#8704;(</a
+      ><a name="762" href="Addition.html#762" class="Bound"
+      >n</a
+      ><a name="763"
+      > </a
+      ><a name="764" class="Symbol"
+      >:</a
+      ><a name="765"
+      > </a
+      ><a name="766" href="Naturals.html#48" class="Datatype"
+      >&#8469;</a
+      ><a name="767" class="Symbol"
+      >)</a
+      ><a name="768"
+      > </a
+      ><a name="769" class="Symbol"
+      >&#8594;</a
+      ><a name="770"
+      > </a
+      ><a name="771" class="Number"
+      >0</a
+      ><a name="772"
+      > </a
+      ><a name="773" href="Addition.html#467" class="Function Operator"
+      >+</a
+      ><a name="774"
+      > </a
+      ><a name="775" href="Addition.html#762" class="Bound"
+      >n</a
+      ><a name="776"
+      > </a
+      ><a name="777" href="Equality.html#48" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="778"
+      > </a
+      ><a name="779" href="Addition.html#762" class="Bound"
+      >n</a
+      ><a name="780"
+      > </a
+      ><a name="781" class="Symbol"
+      >&#8594;</a
+      ><a name="782"
+      > </a
+      ><a name="783" class="Number"
+      >0</a
+      ><a name="784"
+      > </a
+      ><a name="785" href="Addition.html#467" class="Function Operator"
+      >+</a
+      ><a name="786"
+      > </a
+      ><a name="787" href="Naturals.html#121" class="InductiveConstructor"
+      >succ</a
+      ><a name="791"
+      > </a
+      ><a name="792" href="Addition.html#762" class="Bound"
+      >n</a
+      ><a name="793"
+      > </a
+      ><a name="794" href="Equality.html#48" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="795"
+      > </a
+      ><a name="796" href="Naturals.html#121" class="InductiveConstructor"
+      >succ</a
+      ><a name="800"
+      > </a
+      ><a name="801" href="Addition.html#762" class="Bound"
+      >n</a
+      ><a name="802"
+      >
+        </a
+      ><a name="811" href="Addition.html#753" class="Function"
+      >step</a
+      ><a name="815"
+      > </a
+      ><a name="816" href="Addition.html#816" class="Bound"
+      >n</a
+      ><a name="817"
+      > </a
+      ><a name="818" href="Addition.html#818" class="Bound"
+      >IH</a
+      ><a name="820"
+      > </a
+      ><a name="821" class="Symbol"
+      >=</a
+      ><a name="822"
+      > </a
+      ><a name="823" href="Addition.html#1031" class="Function"
+      >goal</a
+      ><a name="827"
+      >
+          </a
+      ><a name="838" class="Keyword"
+      >where</a
+      ><a name="843"
+      > </a
+      ><a name="844" href="Addition.html#844" class="Function"
+      >lemma&#8320;</a
+      ><a name="850"
+      > </a
+      ><a name="851" class="Symbol"
+      >:</a
+      ><a name="852"
+      > </a
+      ><a name="853" class="Number"
+      >0</a
+      ><a name="854"
+      > </a
+      ><a name="855" href="Addition.html#467" class="Function Operator"
+      >+</a
+      ><a name="856"
+      > </a
+      ><a name="857" href="Naturals.html#121" class="InductiveConstructor"
+      >succ</a
+      ><a name="861"
+      > </a
+      ><a name="862" href="Addition.html#816" class="Bound"
+      >n</a
+      ><a name="863"
+      > </a
+      ><a name="864" href="Equality.html#48" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="865"
+      > </a
+      ><a name="866" href="Naturals.html#121" class="InductiveConstructor"
+      >succ</a
+      ><a name="870"
+      > </a
+      ><a name="871" class="Symbol"
+      >(</a
+      ><a name="872" class="Number"
+      >0</a
+      ><a name="873"
+      > </a
+      ><a name="874" href="Addition.html#467" class="Function Operator"
+      >+</a
+      ><a name="875"
+      > </a
+      ><a name="876" href="Addition.html#816" class="Bound"
+      >n</a
+      ><a name="877" class="Symbol"
+      >)</a
+      ><a name="878"
+      >
+                </a
+      ><a name="895" href="Addition.html#844" class="Function"
+      >lemma&#8320;</a
+      ><a name="901"
+      > </a
+      ><a name="902" class="Symbol"
+      >=</a
+      ><a name="903"
+      > </a
+      ><a name="904" href="Equality.html#82" class="InductiveConstructor"
+      >reflexivity</a
+      ><a name="915"
+      >
+
+                </a
+      ><a name="933" href="Addition.html#933" class="Function"
+      >lemma&#8321;</a
+      ><a name="939"
+      > </a
+      ><a name="940" class="Symbol"
+      >:</a
+      ><a name="941"
+      > </a
+      ><a name="942" href="Naturals.html#121" class="InductiveConstructor"
+      >succ</a
+      ><a name="946"
+      > </a
+      ><a name="947" class="Symbol"
+      >(</a
+      ><a name="948" class="Number"
+      >0</a
+      ><a name="949"
+      > </a
+      ><a name="950" href="Addition.html#467" class="Function Operator"
+      >+</a
+      ><a name="951"
+      > </a
+      ><a name="952" href="Addition.html#816" class="Bound"
+      >n</a
+      ><a name="953" class="Symbol"
+      >)</a
+      ><a name="954"
+      > </a
+      ><a name="955" href="Equality.html#48" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="956"
+      > </a
+      ><a name="957" href="Naturals.html#121" class="InductiveConstructor"
+      >succ</a
+      ><a name="961"
+      > </a
+      ><a name="962" href="Addition.html#816" class="Bound"
+      >n</a
+      ><a name="963"
+      >
+                </a
+      ><a name="980" href="Addition.html#933" class="Function"
+      >lemma&#8321;</a
+      ><a name="986"
+      > </a
+      ><a name="987" class="Symbol"
+      >=</a
+      ><a name="988"
+      > </a
+      ><a name="989" href="Equality.html#516" class="Function"
+      >compositionality</a
+      ><a name="1005"
+      > </a
+      ><a name="1006" href="Naturals.html#121" class="InductiveConstructor"
+      >succ</a
+      ><a name="1010"
+      > </a
+      ><a name="1011" href="Addition.html#818" class="Bound"
+      >IH</a
+      ><a name="1013"
+      >
+
+                </a
+      ><a name="1031" href="Addition.html#1031" class="Function"
+      >goal</a
+      ><a name="1035"
+      > </a
+      ><a name="1036" class="Symbol"
+      >:</a
+      ><a name="1037"
+      > </a
+      ><a name="1038" class="Number"
+      >0</a
+      ><a name="1039"
+      > </a
+      ><a name="1040" href="Addition.html#467" class="Function Operator"
+      >+</a
+      ><a name="1041"
+      > </a
+      ><a name="1042" href="Naturals.html#121" class="InductiveConstructor"
+      >succ</a
+      ><a name="1046"
+      > </a
+      ><a name="1047" href="Addition.html#816" class="Bound"
+      >n</a
+      ><a name="1048"
+      > </a
+      ><a name="1049" href="Equality.html#48" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="1050"
+      > </a
+      ><a name="1051" href="Naturals.html#121" class="InductiveConstructor"
+      >succ</a
+      ><a name="1055"
+      > </a
+      ><a name="1056" href="Addition.html#816" class="Bound"
+      >n</a
+      ><a name="1057"
+      >
+                </a
+      ><a name="1074" href="Addition.html#1031" class="Function"
+      >goal</a
+      ><a name="1078"
+      > </a
+      ><a name="1079" class="Symbol"
+      >=</a
+      ><a name="1080"
+      > </a
+      ><a name="1081" href="Equality.html#309" class="Function"
+      >transitivity</a
+      ><a name="1093"
+      > </a
+      ><a name="1094" href="Addition.html#844" class="Function"
+      >lemma&#8320;</a
+      ><a name="1100"
+      > </a
+      ><a name="1101" href="Addition.html#933" class="Function"
+      >lemma&#8321;</a
+      ><a name="1107"
+      >
+
+
+</a
+      ><a name="1110" href="Addition.html#1110" class="Function"
+      >addition-associativity</a
+      ><a name="1132"
+      > </a
+      ><a name="1133" class="Symbol"
+      >:</a
+      ><a name="1134"
+      > </a
+      ><a name="1135" class="Symbol"
+      >&#8704;(</a
+      ><a name="1137" href="Addition.html#1137" class="Bound"
+      >l</a
+      ><a name="1138"
+      > </a
+      ><a name="1139" href="Addition.html#1139" class="Bound"
+      >n</a
+      ><a name="1140"
+      > </a
+      ><a name="1141" href="Addition.html#1141" class="Bound"
+      >m</a
+      ><a name="1142"
+      > </a
+      ><a name="1143" class="Symbol"
+      >:</a
+      ><a name="1144"
+      > </a
+      ><a name="1145" href="Naturals.html#48" class="Datatype"
+      >&#8469;</a
+      ><a name="1146" class="Symbol"
+      >)</a
+      ><a name="1147"
+      > </a
+      ><a name="1148" class="Symbol"
+      >&#8594;</a
+      ><a name="1149"
+      > </a
+      ><a name="1150" class="Symbol"
+      >(</a
+      ><a name="1151" href="Addition.html#1137" class="Bound"
+      >l</a
+      ><a name="1152"
+      > </a
+      ><a name="1153" href="Addition.html#467" class="Function Operator"
+      >+</a
+      ><a name="1154"
+      > </a
+      ><a name="1155" href="Addition.html#1139" class="Bound"
+      >n</a
+      ><a name="1156" class="Symbol"
+      >)</a
+      ><a name="1157"
+      > </a
+      ><a name="1158" href="Addition.html#467" class="Function Operator"
+      >+</a
+      ><a name="1159"
+      > </a
+      ><a name="1160" href="Addition.html#1141" class="Bound"
+      >m</a
+      ><a name="1161"
+      > </a
+      ><a name="1162" href="Equality.html#48" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="1163"
+      > </a
+      ><a name="1164" href="Addition.html#1137" class="Bound"
+      >l</a
+      ><a name="1165"
+      > </a
+      ><a name="1166" href="Addition.html#467" class="Function Operator"
+      >+</a
+      ><a name="1167"
+      > </a
+      ><a name="1168" class="Symbol"
+      >(</a
+      ><a name="1169" href="Addition.html#1139" class="Bound"
+      >n</a
+      ><a name="1170"
+      > </a
+      ><a name="1171" href="Addition.html#467" class="Function Operator"
+      >+</a
+      ><a name="1172"
+      > </a
+      ><a name="1173" href="Addition.html#1141" class="Bound"
+      >m</a
+      ><a name="1174" class="Symbol"
+      >)</a
+      ><a name="1175"
+      >
+</a
+      ><a name="1176" href="Addition.html#1110" class="Function"
+      >addition-associativity</a
+      ><a name="1198"
+      > </a
+      ><a name="1199" href="Addition.html#1199" class="Bound"
+      >l</a
+      ><a name="1200"
+      > </a
+      ><a name="1201" href="Addition.html#1201" class="Bound"
+      >n</a
+      ><a name="1202"
+      > </a
+      ><a name="1203" class="Symbol"
+      >=</a
+      ><a name="1204"
+      > </a
+      ><a name="1205" href="Naturals.html#232" class="Function"
+      >induction</a
+      ><a name="1214"
+      > </a
+      ><a name="1215" href="Addition.html#1233" class="Function"
+      >base</a
+      ><a name="1219"
+      > </a
+      ><a name="1220" href="Addition.html#1560" class="Function"
+      >step</a
+      ><a name="1224"
+      >
+  </a
+      ><a name="1227" class="Keyword"
+      >where</a
+      ><a name="1232"
+      > </a
+      ><a name="1233" href="Addition.html#1233" class="Function"
+      >base</a
+      ><a name="1237"
+      > </a
+      ><a name="1238" class="Symbol"
+      >:</a
+      ><a name="1239"
+      > </a
+      ><a name="1240" class="Symbol"
+      >(</a
+      ><a name="1241" href="Addition.html#1199" class="Bound"
+      >l</a
+      ><a name="1242"
+      > </a
+      ><a name="1243" href="Addition.html#467" class="Function Operator"
+      >+</a
+      ><a name="1244"
+      > </a
+      ><a name="1245" href="Addition.html#1201" class="Bound"
+      >n</a
+      ><a name="1246" class="Symbol"
+      >)</a
+      ><a name="1247"
+      > </a
+      ><a name="1248" href="Addition.html#467" class="Function Operator"
+      >+</a
+      ><a name="1249"
+      > </a
+      ><a name="1250" class="Number"
+      >0</a
+      ><a name="1251"
+      > </a
+      ><a name="1252" href="Equality.html#48" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="1253"
+      > </a
+      ><a name="1254" href="Addition.html#1199" class="Bound"
+      >l</a
+      ><a name="1255"
+      > </a
+      ><a name="1256" href="Addition.html#467" class="Function Operator"
+      >+</a
+      ><a name="1257"
+      > </a
+      ><a name="1258" class="Symbol"
+      >(</a
+      ><a name="1259" href="Addition.html#1201" class="Bound"
+      >n</a
+      ><a name="1260"
+      > </a
+      ><a name="1261" href="Addition.html#467" class="Function Operator"
+      >+</a
+      ><a name="1262"
+      > </a
+      ><a name="1263" class="Number"
+      >0</a
+      ><a name="1264" class="Symbol"
+      >)</a
+      ><a name="1265"
+      >
+        </a
+      ><a name="1274" href="Addition.html#1233" class="Function"
+      >base</a
+      ><a name="1278"
+      > </a
+      ><a name="1279" class="Symbol"
+      >=</a
+      ><a name="1280"
+      > </a
+      ><a name="1281" href="Addition.html#1468" class="Function"
+      >goal</a
+      ><a name="1285"
+      >
+          </a
+      ><a name="1296" class="Keyword"
+      >where</a
+      ><a name="1301"
+      > </a
+      ><a name="1302" href="Addition.html#1302" class="Function"
+      >lemma&#8320;</a
+      ><a name="1308"
+      > </a
+      ><a name="1309" class="Symbol"
+      >:</a
+      ><a name="1310"
+      > </a
+      ><a name="1311" class="Symbol"
+      >(</a
+      ><a name="1312" href="Addition.html#1199" class="Bound"
+      >l</a
+      ><a name="1313"
+      > </a
+      ><a name="1314" href="Addition.html#467" class="Function Operator"
+      >+</a
+      ><a name="1315"
+      > </a
+      ><a name="1316" href="Addition.html#1201" class="Bound"
+      >n</a
+      ><a name="1317" class="Symbol"
+      >)</a
+      ><a name="1318"
+      > </a
+      ><a name="1319" href="Addition.html#467" class="Function Operator"
+      >+</a
+      ><a name="1320"
+      > </a
+      ><a name="1321" class="Number"
+      >0</a
+      ><a name="1322"
+      > </a
+      ><a name="1323" href="Equality.html#48" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="1324"
+      > </a
+      ><a name="1325" href="Addition.html#1199" class="Bound"
+      >l</a
+      ><a name="1326"
+      > </a
+      ><a name="1327" href="Addition.html#467" class="Function Operator"
+      >+</a
+      ><a name="1328"
+      > </a
+      ><a name="1329" href="Addition.html#1201" class="Bound"
+      >n</a
+      ><a name="1330"
+      >
+                </a
+      ><a name="1347" href="Addition.html#1302" class="Function"
+      >lemma&#8320;</a
+      ><a name="1353"
+      > </a
+      ><a name="1354" class="Symbol"
+      >=</a
+      ><a name="1355"
+      > </a
+      ><a name="1356" href="Equality.html#82" class="InductiveConstructor"
+      >reflexivity</a
+      ><a name="1367"
+      >
+
+                </a
+      ><a name="1385" href="Addition.html#1385" class="Function"
+      >lemma&#8321;</a
+      ><a name="1391"
+      > </a
+      ><a name="1392" class="Symbol"
+      >:</a
+      ><a name="1393"
+      > </a
+      ><a name="1394" href="Addition.html#1199" class="Bound"
+      >l</a
+      ><a name="1395"
+      > </a
+      ><a name="1396" href="Addition.html#467" class="Function Operator"
+      >+</a
+      ><a name="1397"
+      > </a
+      ><a name="1398" href="Addition.html#1201" class="Bound"
+      >n</a
+      ><a name="1399"
+      > </a
+      ><a name="1400" href="Equality.html#48" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="1401"
+      > </a
+      ><a name="1402" href="Addition.html#1199" class="Bound"
+      >l</a
+      ><a name="1403"
+      > </a
+      ><a name="1404" href="Addition.html#467" class="Function Operator"
+      >+</a
+      ><a name="1405"
+      > </a
+      ><a name="1406" class="Symbol"
+      >(</a
+      ><a name="1407" href="Addition.html#1201" class="Bound"
+      >n</a
+      ><a name="1408"
+      > </a
+      ><a name="1409" href="Addition.html#467" class="Function Operator"
+      >+</a
+      ><a name="1410"
+      > </a
+      ><a name="1411" class="Number"
+      >0</a
+      ><a name="1412" class="Symbol"
+      >)</a
+      ><a name="1413"
+      >
+                </a
+      ><a name="1430" href="Addition.html#1385" class="Function"
+      >lemma&#8321;</a
+      ><a name="1436"
+      > </a
+      ><a name="1437" class="Symbol"
+      >=</a
+      ><a name="1438"
+      > </a
+      ><a name="1439" href="Equality.html#82" class="InductiveConstructor"
+      >reflexivity</a
+      ><a name="1450"
+      >
+
+                </a
+      ><a name="1468" href="Addition.html#1468" class="Function"
+      >goal</a
+      ><a name="1472"
+      > </a
+      ><a name="1473" class="Symbol"
+      >:</a
+      ><a name="1474"
+      > </a
+      ><a name="1475" class="Symbol"
+      >(</a
+      ><a name="1476" href="Addition.html#1199" class="Bound"
+      >l</a
+      ><a name="1477"
+      > </a
+      ><a name="1478" href="Addition.html#467" class="Function Operator"
+      >+</a
+      ><a name="1479"
+      > </a
+      ><a name="1480" href="Addition.html#1201" class="Bound"
+      >n</a
+      ><a name="1481" class="Symbol"
+      >)</a
+      ><a name="1482"
+      > </a
+      ><a name="1483" href="Addition.html#467" class="Function Operator"
+      >+</a
+      ><a name="1484"
+      > </a
+      ><a name="1485" class="Number"
+      >0</a
+      ><a name="1486"
+      > </a
+      ><a name="1487" href="Equality.html#48" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="1488"
+      > </a
+      ><a name="1489" href="Addition.html#1199" class="Bound"
+      >l</a
+      ><a name="1490"
+      > </a
+      ><a name="1491" href="Addition.html#467" class="Function Operator"
+      >+</a
+      ><a name="1492"
+      > </a
+      ><a name="1493" class="Symbol"
+      >(</a
+      ><a name="1494" href="Addition.html#1201" class="Bound"
+      >n</a
+      ><a name="1495"
+      > </a
+      ><a name="1496" href="Addition.html#467" class="Function Operator"
+      >+</a
+      ><a name="1497"
+      > </a
+      ><a name="1498" class="Number"
+      >0</a
+      ><a name="1499" class="Symbol"
+      >)</a
+      ><a name="1500"
+      >
+                </a
+      ><a name="1517" href="Addition.html#1468" class="Function"
+      >goal</a
+      ><a name="1521"
+      > </a
+      ><a name="1522" class="Symbol"
+      >=</a
+      ><a name="1523"
+      > </a
+      ><a name="1524" href="Equality.html#309" class="Function"
+      >transitivity</a
+      ><a name="1536"
+      > </a
+      ><a name="1537" href="Addition.html#1302" class="Function"
+      >lemma&#8320;</a
+      ><a name="1543"
+      > </a
+      ><a name="1544" href="Addition.html#1385" class="Function"
+      >lemma&#8321;</a
+      ><a name="1550"
+      >
+
+        </a
+      ><a name="1560" href="Addition.html#1560" class="Function"
+      >step</a
+      ><a name="1564"
+      > </a
+      ><a name="1565" class="Symbol"
+      >:</a
+      ><a name="1566"
+      > </a
+      ><a name="1567" class="Symbol"
+      >&#8704;(</a
+      ><a name="1569" href="Addition.html#1569" class="Bound"
+      >m</a
+      ><a name="1570"
+      > </a
+      ><a name="1571" class="Symbol"
+      >:</a
+      ><a name="1572"
+      > </a
+      ><a name="1573" href="Naturals.html#48" class="Datatype"
+      >&#8469;</a
+      ><a name="1574" class="Symbol"
+      >)</a
+      ><a name="1575"
+      > </a
+      ><a name="1576" class="Symbol"
+      >&#8594;</a
+      ><a name="1577"
+      > </a
+      ><a name="1578" class="Symbol"
+      >(</a
+      ><a name="1579" href="Addition.html#1199" class="Bound"
+      >l</a
+      ><a name="1580"
+      > </a
+      ><a name="1581" href="Addition.html#467" class="Function Operator"
+      >+</a
+      ><a name="1582"
+      > </a
+      ><a name="1583" href="Addition.html#1201" class="Bound"
+      >n</a
+      ><a name="1584" class="Symbol"
+      >)</a
+      ><a name="1585"
+      > </a
+      ><a name="1586" href="Addition.html#467" class="Function Operator"
+      >+</a
+      ><a name="1587"
+      > </a
+      ><a name="1588" href="Addition.html#1569" class="Bound"
+      >m</a
+      ><a name="1589"
+      > </a
+      ><a name="1590" href="Equality.html#48" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="1591"
+      > </a
+      ><a name="1592" href="Addition.html#1199" class="Bound"
+      >l</a
+      ><a name="1593"
+      > </a
+      ><a name="1594" href="Addition.html#467" class="Function Operator"
+      >+</a
+      ><a name="1595"
+      > </a
+      ><a name="1596" class="Symbol"
+      >(</a
+      ><a name="1597" href="Addition.html#1201" class="Bound"
+      >n</a
+      ><a name="1598"
+      > </a
+      ><a name="1599" href="Addition.html#467" class="Function Operator"
+      >+</a
+      ><a name="1600"
+      > </a
+      ><a name="1601" href="Addition.html#1569" class="Bound"
+      >m</a
+      ><a name="1602" class="Symbol"
+      >)</a
+      ><a name="1603"
+      > </a
+      ><a name="1604" class="Symbol"
+      >&#8594;</a
+      ><a name="1605"
+      >
+                          </a
+      ><a name="1633" class="Symbol"
+      >(</a
+      ><a name="1634" href="Addition.html#1199" class="Bound"
+      >l</a
+      ><a name="1635"
+      > </a
+      ><a name="1636" href="Addition.html#467" class="Function Operator"
+      >+</a
+      ><a name="1637"
+      > </a
+      ><a name="1638" href="Addition.html#1201" class="Bound"
+      >n</a
+      ><a name="1639" class="Symbol"
+      >)</a
+      ><a name="1640"
+      > </a
+      ><a name="1641" href="Addition.html#467" class="Function Operator"
+      >+</a
+      ><a name="1642"
+      > </a
+      ><a name="1643" href="Naturals.html#121" class="InductiveConstructor"
+      >succ</a
+      ><a name="1647"
+      > </a
+      ><a name="1648" href="Addition.html#1569" class="Bound"
+      >m</a
+      ><a name="1649"
+      > </a
+      ><a name="1650" href="Equality.html#48" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="1651"
+      > </a
+      ><a name="1652" href="Addition.html#1199" class="Bound"
+      >l</a
+      ><a name="1653"
+      > </a
+      ><a name="1654" href="Addition.html#467" class="Function Operator"
+      >+</a
+      ><a name="1655"
+      > </a
+      ><a name="1656" class="Symbol"
+      >(</a
+      ><a name="1657" href="Addition.html#1201" class="Bound"
+      >n</a
+      ><a name="1658"
+      > </a
+      ><a name="1659" href="Addition.html#467" class="Function Operator"
+      >+</a
+      ><a name="1660"
+      > </a
+      ><a name="1661" href="Naturals.html#121" class="InductiveConstructor"
+      >succ</a
+      ><a name="1665"
+      > </a
+      ><a name="1666" href="Addition.html#1569" class="Bound"
+      >m</a
+      ><a name="1667" class="Symbol"
+      >)</a
+      ><a name="1668"
+      >
+        </a
+      ><a name="1677" href="Addition.html#1560" class="Function"
+      >step</a
+      ><a name="1681"
+      > </a
+      ><a name="1682" href="Addition.html#1682" class="Bound"
+      >m</a
+      ><a name="1683"
+      > </a
+      ><a name="1684" href="Addition.html#1684" class="Bound"
+      >IH</a
+      ><a name="1686"
+      > </a
+      ><a name="1687" class="Symbol"
+      >=</a
+      ><a name="1688"
+      > </a
+      ><a name="1689" href="Addition.html#2127" class="Function"
+      >goal</a
+      ><a name="1693"
+      >
+          </a
+      ><a name="1704" class="Keyword"
+      >where</a
+      ><a name="1709"
+      > </a
+      ><a name="1710" href="Addition.html#1710" class="Function"
+      >lemma&#8320;</a
+      ><a name="1716"
+      > </a
+      ><a name="1717" class="Symbol"
+      >:</a
+      ><a name="1718"
+      > </a
+      ><a name="1719" class="Symbol"
+      >(</a
+      ><a name="1720" href="Addition.html#1199" class="Bound"
+      >l</a
+      ><a name="1721"
+      > </a
+      ><a name="1722" href="Addition.html#467" class="Function Operator"
+      >+</a
+      ><a name="1723"
+      > </a
+      ><a name="1724" href="Addition.html#1201" class="Bound"
+      >n</a
+      ><a name="1725" class="Symbol"
+      >)</a
+      ><a name="1726"
+      > </a
+      ><a name="1727" href="Addition.html#467" class="Function Operator"
+      >+</a
+      ><a name="1728"
+      > </a
+      ><a name="1729" href="Naturals.html#121" class="InductiveConstructor"
+      >succ</a
+      ><a name="1733"
+      > </a
+      ><a name="1734" href="Addition.html#1682" class="Bound"
+      >m</a
+      ><a name="1735"
+      > </a
+      ><a name="1736" href="Equality.html#48" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="1737"
+      > </a
+      ><a name="1738" href="Naturals.html#121" class="InductiveConstructor"
+      >succ</a
+      ><a name="1742"
+      > </a
+      ><a name="1743" class="Symbol"
+      >((</a
+      ><a name="1745" href="Addition.html#1199" class="Bound"
+      >l</a
+      ><a name="1746"
+      > </a
+      ><a name="1747" href="Addition.html#467" class="Function Operator"
+      >+</a
+      ><a name="1748"
+      > </a
+      ><a name="1749" href="Addition.html#1201" class="Bound"
+      >n</a
+      ><a name="1750" class="Symbol"
+      >)</a
+      ><a name="1751"
+      > </a
+      ><a name="1752" href="Addition.html#467" class="Function Operator"
+      >+</a
+      ><a name="1753"
+      > </a
+      ><a name="1754" href="Addition.html#1682" class="Bound"
+      >m</a
+      ><a name="1755" class="Symbol"
+      >)</a
+      ><a name="1756"
+      >
+                </a
+      ><a name="1773" href="Addition.html#1710" class="Function"
+      >lemma&#8320;</a
+      ><a name="1779"
+      > </a
+      ><a name="1780" class="Symbol"
+      >=</a
+      ><a name="1781"
+      > </a
+      ><a name="1782" href="Equality.html#82" class="InductiveConstructor"
+      >reflexivity</a
+      ><a name="1793"
+      >
+
+                </a
+      ><a name="1811" href="Addition.html#1811" class="Function"
+      >lemma&#8321;</a
+      ><a name="1817"
+      > </a
+      ><a name="1818" class="Symbol"
+      >:</a
+      ><a name="1819"
+      > </a
+      ><a name="1820" href="Naturals.html#121" class="InductiveConstructor"
+      >succ</a
+      ><a name="1824"
+      > </a
+      ><a name="1825" class="Symbol"
+      >((</a
+      ><a name="1827" href="Addition.html#1199" class="Bound"
+      >l</a
+      ><a name="1828"
+      > </a
+      ><a name="1829" href="Addition.html#467" class="Function Operator"
+      >+</a
+      ><a name="1830"
+      > </a
+      ><a name="1831" href="Addition.html#1201" class="Bound"
+      >n</a
+      ><a name="1832" class="Symbol"
+      >)</a
+      ><a name="1833"
+      > </a
+      ><a name="1834" href="Addition.html#467" class="Function Operator"
+      >+</a
+      ><a name="1835"
+      > </a
+      ><a name="1836" href="Addition.html#1682" class="Bound"
+      >m</a
+      ><a name="1837" class="Symbol"
+      >)</a
+      ><a name="1838"
+      > </a
+      ><a name="1839" href="Equality.html#48" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="1840"
+      > </a
+      ><a name="1841" href="Naturals.html#121" class="InductiveConstructor"
+      >succ</a
+      ><a name="1845"
+      > </a
+      ><a name="1846" class="Symbol"
+      >(</a
+      ><a name="1847" href="Addition.html#1199" class="Bound"
+      >l</a
+      ><a name="1848"
+      > </a
+      ><a name="1849" href="Addition.html#467" class="Function Operator"
+      >+</a
+      ><a name="1850"
+      > </a
+      ><a name="1851" class="Symbol"
+      >(</a
+      ><a name="1852" href="Addition.html#1201" class="Bound"
+      >n</a
+      ><a name="1853"
+      > </a
+      ><a name="1854" href="Addition.html#467" class="Function Operator"
+      >+</a
+      ><a name="1855"
+      > </a
+      ><a name="1856" href="Addition.html#1682" class="Bound"
+      >m</a
+      ><a name="1857" class="Symbol"
+      >))</a
+      ><a name="1859"
+      >
+                </a
+      ><a name="1876" href="Addition.html#1811" class="Function"
+      >lemma&#8321;</a
+      ><a name="1882"
+      > </a
+      ><a name="1883" class="Symbol"
+      >=</a
+      ><a name="1884"
+      > </a
+      ><a name="1885" href="Equality.html#516" class="Function"
+      >compositionality</a
+      ><a name="1901"
+      > </a
+      ><a name="1902" href="Naturals.html#121" class="InductiveConstructor"
+      >succ</a
+      ><a name="1906"
+      > </a
+      ><a name="1907" href="Addition.html#1684" class="Bound"
+      >IH</a
+      ><a name="1909"
+      >
+
+                </a
+      ><a name="1927" href="Addition.html#1927" class="Function"
+      >lemma&#8322;</a
+      ><a name="1933"
+      > </a
+      ><a name="1934" class="Symbol"
+      >:</a
+      ><a name="1935"
+      > </a
+      ><a name="1936" href="Naturals.html#121" class="InductiveConstructor"
+      >succ</a
+      ><a name="1940"
+      > </a
+      ><a name="1941" class="Symbol"
+      >(</a
+      ><a name="1942" href="Addition.html#1199" class="Bound"
+      >l</a
+      ><a name="1943"
+      > </a
+      ><a name="1944" href="Addition.html#467" class="Function Operator"
+      >+</a
+      ><a name="1945"
+      > </a
+      ><a name="1946" class="Symbol"
+      >(</a
+      ><a name="1947" href="Addition.html#1201" class="Bound"
+      >n</a
+      ><a name="1948"
+      > </a
+      ><a name="1949" href="Addition.html#467" class="Function Operator"
+      >+</a
+      ><a name="1950"
+      > </a
+      ><a name="1951" href="Addition.html#1682" class="Bound"
+      >m</a
+      ><a name="1952" class="Symbol"
+      >))</a
+      ><a name="1954"
+      > </a
+      ><a name="1955" href="Equality.html#48" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="1956"
+      > </a
+      ><a name="1957" href="Addition.html#1199" class="Bound"
+      >l</a
+      ><a name="1958"
+      > </a
+      ><a name="1959" href="Addition.html#467" class="Function Operator"
+      >+</a
+      ><a name="1960"
+      > </a
+      ><a name="1961" href="Naturals.html#121" class="InductiveConstructor"
+      >succ</a
+      ><a name="1965"
+      > </a
+      ><a name="1966" class="Symbol"
+      >(</a
+      ><a name="1967" href="Addition.html#1201" class="Bound"
+      >n</a
+      ><a name="1968"
+      > </a
+      ><a name="1969" href="Addition.html#467" class="Function Operator"
+      >+</a
+      ><a name="1970"
+      > </a
+      ><a name="1971" href="Addition.html#1682" class="Bound"
+      >m</a
+      ><a name="1972" class="Symbol"
+      >)</a
+      ><a name="1973"
+      >
+                </a
+      ><a name="1990" href="Addition.html#1927" class="Function"
+      >lemma&#8322;</a
+      ><a name="1996"
+      > </a
+      ><a name="1997" class="Symbol"
+      >=</a
+      ><a name="1998"
+      > </a
+      ><a name="1999" href="Equality.html#82" class="InductiveConstructor"
+      >reflexivity</a
+      ><a name="2010"
+      >
+
+                </a
+      ><a name="2028" href="Addition.html#2028" class="Function"
+      >lemma&#8323;</a
+      ><a name="2034"
+      > </a
+      ><a name="2035" class="Symbol"
+      >:</a
+      ><a name="2036"
+      > </a
+      ><a name="2037" href="Addition.html#1199" class="Bound"
+      >l</a
+      ><a name="2038"
+      > </a
+      ><a name="2039" href="Addition.html#467" class="Function Operator"
+      >+</a
+      ><a name="2040"
+      > </a
+      ><a name="2041" href="Naturals.html#121" class="InductiveConstructor"
+      >succ</a
+      ><a name="2045"
+      > </a
+      ><a name="2046" class="Symbol"
+      >(</a
+      ><a name="2047" href="Addition.html#1201" class="Bound"
+      >n</a
+      ><a name="2048"
+      > </a
+      ><a name="2049" href="Addition.html#467" class="Function Operator"
+      >+</a
+      ><a name="2050"
+      > </a
+      ><a name="2051" href="Addition.html#1682" class="Bound"
+      >m</a
+      ><a name="2052" class="Symbol"
+      >)</a
+      ><a name="2053"
+      > </a
+      ><a name="2054" href="Equality.html#48" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="2055"
+      > </a
+      ><a name="2056" href="Addition.html#1199" class="Bound"
+      >l</a
+      ><a name="2057"
+      > </a
+      ><a name="2058" href="Addition.html#467" class="Function Operator"
+      >+</a
+      ><a name="2059"
+      > </a
+      ><a name="2060" class="Symbol"
+      >(</a
+      ><a name="2061" href="Addition.html#1201" class="Bound"
+      >n</a
+      ><a name="2062"
+      > </a
+      ><a name="2063" href="Addition.html#467" class="Function Operator"
+      >+</a
+      ><a name="2064"
+      > </a
+      ><a name="2065" href="Naturals.html#121" class="InductiveConstructor"
+      >succ</a
+      ><a name="2069"
+      > </a
+      ><a name="2070" href="Addition.html#1682" class="Bound"
+      >m</a
+      ><a name="2071" class="Symbol"
+      >)</a
+      ><a name="2072"
+      >
+                </a
+      ><a name="2089" href="Addition.html#2028" class="Function"
+      >lemma&#8323;</a
+      ><a name="2095"
+      > </a
+      ><a name="2096" class="Symbol"
+      >=</a
+      ><a name="2097"
+      > </a
+      ><a name="2098" href="Equality.html#82" class="InductiveConstructor"
+      >reflexivity</a
+      ><a name="2109"
+      >
+
+                </a
+      ><a name="2127" href="Addition.html#2127" class="Function"
+      >goal</a
+      ><a name="2131"
+      > </a
+      ><a name="2132" class="Symbol"
+      >:</a
+      ><a name="2133"
+      > </a
+      ><a name="2134" class="Symbol"
+      >(</a
+      ><a name="2135" href="Addition.html#1199" class="Bound"
+      >l</a
+      ><a name="2136"
+      > </a
+      ><a name="2137" href="Addition.html#467" class="Function Operator"
+      >+</a
+      ><a name="2138"
+      > </a
+      ><a name="2139" href="Addition.html#1201" class="Bound"
+      >n</a
+      ><a name="2140" class="Symbol"
+      >)</a
+      ><a name="2141"
+      > </a
+      ><a name="2142" href="Addition.html#467" class="Function Operator"
+      >+</a
+      ><a name="2143"
+      > </a
+      ><a name="2144" href="Naturals.html#121" class="InductiveConstructor"
+      >succ</a
+      ><a name="2148"
+      > </a
+      ><a name="2149" href="Addition.html#1682" class="Bound"
+      >m</a
+      ><a name="2150"
+      > </a
+      ><a name="2151" href="Equality.html#48" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="2152"
+      > </a
+      ><a name="2153" href="Addition.html#1199" class="Bound"
+      >l</a
+      ><a name="2154"
+      > </a
+      ><a name="2155" href="Addition.html#467" class="Function Operator"
+      >+</a
+      ><a name="2156"
+      > </a
+      ><a name="2157" class="Symbol"
+      >(</a
+      ><a name="2158" href="Addition.html#1201" class="Bound"
+      >n</a
+      ><a name="2159"
+      > </a
+      ><a name="2160" href="Addition.html#467" class="Function Operator"
+      >+</a
+      ><a name="2161"
+      > </a
+      ><a name="2162" href="Naturals.html#121" class="InductiveConstructor"
+      >succ</a
+      ><a name="2166"
+      > </a
+      ><a name="2167" href="Addition.html#1682" class="Bound"
+      >m</a
+      ><a name="2168" class="Symbol"
+      >)</a
+      ><a name="2169"
+      >
+                </a
+      ><a name="2186" href="Addition.html#2127" class="Function"
+      >goal</a
+      ><a name="2190"
+      > </a
+      ><a name="2191" class="Symbol"
+      >=</a
+      ><a name="2192"
+      > </a
+      ><a name="2193" href="Equality.html#309" class="Function"
+      >transitivity</a
+      ><a name="2205"
+      > </a
+      ><a name="2206" href="Addition.html#1710" class="Function"
+      >lemma&#8320;</a
+      ><a name="2212"
+      > </a
+      ><a name="2213" class="Symbol"
+      >(</a
+      ><a name="2214" href="Equality.html#309" class="Function"
+      >transitivity</a
+      ><a name="2226"
+      > </a
+      ><a name="2227" href="Addition.html#1811" class="Function"
+      >lemma&#8321;</a
+      ><a name="2233"
+      >
+                      </a
+      ><a name="2257" class="Symbol"
+      >(</a
+      ><a name="2258" href="Equality.html#309" class="Function"
+      >transitivity</a
+      ><a name="2270"
+      > </a
+      ><a name="2271" href="Addition.html#1927" class="Function"
+      >lemma&#8322;</a
+      ><a name="2277"
+      > </a
+      ><a name="2278" href="Addition.html#2028" class="Function"
+      >lemma&#8323;</a
+      ><a name="2284" class="Symbol"
+      >))</a
+      ><a name="2286"
+      >
+
+</a
+      ><a name="2288" href="Addition.html#2288" class="Function"
+      >addition-commutativity</a
+      ><a name="2310"
+      > </a
+      ><a name="2311" class="Symbol"
+      >:</a
+      ><a name="2312"
+      > </a
+      ><a name="2313" class="Symbol"
+      >&#8704;(</a
+      ><a name="2315" href="Addition.html#2315" class="Bound"
+      >n</a
+      ><a name="2316"
+      > </a
+      ><a name="2317" href="Addition.html#2317" class="Bound"
+      >m</a
+      ><a name="2318"
+      > </a
+      ><a name="2319" class="Symbol"
+      >:</a
+      ><a name="2320"
+      > </a
+      ><a name="2321" href="Naturals.html#48" class="Datatype"
+      >&#8469;</a
+      ><a name="2322" class="Symbol"
+      >)</a
+      ><a name="2323"
+      > </a
+      ><a name="2324" class="Symbol"
+      >&#8594;</a
+      ><a name="2325"
+      > </a
+      ><a name="2326" href="Addition.html#2315" class="Bound"
+      >n</a
+      ><a name="2327"
+      > </a
+      ><a name="2328" href="Addition.html#467" class="Function Operator"
+      >+</a
+      ><a name="2329"
+      > </a
+      ><a name="2330" href="Addition.html#2317" class="Bound"
+      >m</a
+      ><a name="2331"
+      > </a
+      ><a name="2332" href="Equality.html#48" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="2333"
+      > </a
+      ><a name="2334" href="Addition.html#2317" class="Bound"
+      >m</a
+      ><a name="2335"
+      > </a
+      ><a name="2336" href="Addition.html#467" class="Function Operator"
+      >+</a
+      ><a name="2337"
+      > </a
+      ><a name="2338" href="Addition.html#2315" class="Bound"
+      >n</a
+      ><a name="2339"
+      >
+</a
+      ><a name="2340" href="Addition.html#2288" class="Function"
+      >addition-commutativity</a
+      ><a name="2362"
+      > </a
+      ><a name="2363" href="Addition.html#2363" class="Bound"
+      >n</a
+      ><a name="2364"
+      > </a
+      ><a name="2365" class="Symbol"
+      >=</a
+      ><a name="2366"
+      > </a
+      ><a name="2367" href="Naturals.html#232" class="Function"
+      >induction</a
+      ><a name="2376"
+      > </a
+      ><a name="2377" href="Addition.html#2395" class="Function"
+      >base</a
+      ><a name="2381"
+      > </a
+      ><a name="2382" href="Addition.html#2543" class="Function"
+      >step</a
+      ><a name="2386"
+      >
+  </a
+      ><a name="2389" class="Keyword"
+      >where</a
+      ><a name="2394"
+      > </a
+      ><a name="2395" href="Addition.html#2395" class="Function"
+      >base</a
+      ><a name="2399"
+      > </a
+      ><a name="2400" class="Symbol"
+      >:</a
+      ><a name="2401"
+      > </a
+      ><a name="2402" href="Addition.html#2363" class="Bound"
+      >n</a
+      ><a name="2403"
+      > </a
+      ><a name="2404" href="Addition.html#467" class="Function Operator"
+      >+</a
+      ><a name="2405"
+      > </a
+      ><a name="2406" class="Number"
+      >0</a
+      ><a name="2407"
+      > </a
+      ><a name="2408" href="Equality.html#48" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="2409"
+      > </a
+      ><a name="2410" class="Number"
+      >0</a
+      ><a name="2411"
+      > </a
+      ><a name="2412" href="Addition.html#467" class="Function Operator"
+      >+</a
+      ><a name="2413"
+      > </a
+      ><a name="2414" href="Addition.html#2363" class="Bound"
+      >n</a
+      ><a name="2415"
+      >
+        </a
+      ><a name="2424" href="Addition.html#2395" class="Function"
+      >base</a
+      ><a name="2428"
+      > </a
+      ><a name="2429" class="Symbol"
+      >=</a
+      ><a name="2430"
+      > </a
+      ><a name="2431" href="Equality.html#309" class="Function"
+      >transitivity</a
+      ><a name="2443"
+      > </a
+      ><a name="2444" class="Symbol"
+      >(</a
+      ><a name="2445" href="Addition.html#522" class="Function"
+      >n-plus-zero-equals-n</a
+      ><a name="2465"
+      > </a
+      ><a name="2466" href="Addition.html#2363" class="Bound"
+      >n</a
+      ><a name="2467" class="Symbol"
+      >)</a
+      ><a name="2468"
+      >
+                            </a
+      ><a name="2498" class="Symbol"
+      >(</a
+      ><a name="2499" href="Equality.html#430" class="Function"
+      >symmetry</a
+      ><a name="2507"
+      > </a
+      ><a name="2508" class="Symbol"
+      >(</a
+      ><a name="2509" href="Addition.html#605" class="Function"
+      >zero-plus-n-equals-n</a
+      ><a name="2529"
+      > </a
+      ><a name="2530" href="Addition.html#2363" class="Bound"
+      >n</a
+      ><a name="2531" class="Symbol"
+      >))</a
+      ><a name="2533"
+      >
+
+        </a
+      ><a name="2543" href="Addition.html#2543" class="Function"
+      >step</a
+      ><a name="2547"
+      > </a
+      ><a name="2548" class="Symbol"
+      >:</a
+      ><a name="2549"
+      > </a
+      ><a name="2550" class="Symbol"
+      >&#8704;(</a
+      ><a name="2552" href="Addition.html#2552" class="Bound"
+      >m</a
+      ><a name="2553"
+      > </a
+      ><a name="2554" class="Symbol"
+      >:</a
+      ><a name="2555"
+      > </a
+      ><a name="2556" href="Naturals.html#48" class="Datatype"
+      >&#8469;</a
+      ><a name="2557" class="Symbol"
+      >)</a
+      ><a name="2558"
+      > </a
+      ><a name="2559" class="Symbol"
+      >&#8594;</a
+      ><a name="2560"
+      > </a
+      ><a name="2561" href="Addition.html#2363" class="Bound"
+      >n</a
+      ><a name="2562"
+      > </a
+      ><a name="2563" href="Addition.html#467" class="Function Operator"
+      >+</a
+      ><a name="2564"
+      > </a
+      ><a name="2565" href="Addition.html#2552" class="Bound"
+      >m</a
+      ><a name="2566"
+      > </a
+      ><a name="2567" href="Equality.html#48" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="2568"
+      > </a
+      ><a name="2569" href="Addition.html#2552" class="Bound"
+      >m</a
+      ><a name="2570"
+      > </a
+      ><a name="2571" href="Addition.html#467" class="Function Operator"
+      >+</a
+      ><a name="2572"
+      > </a
+      ><a name="2573" href="Addition.html#2363" class="Bound"
+      >n</a
+      ><a name="2574"
+      > </a
+      ><a name="2575" class="Symbol"
+      >&#8594;</a
+      ><a name="2576"
+      > </a
+      ><a name="2577" href="Addition.html#2363" class="Bound"
+      >n</a
+      ><a name="2578"
+      > </a
+      ><a name="2579" href="Addition.html#467" class="Function Operator"
+      >+</a
+      ><a name="2580"
+      > </a
+      ><a name="2581" href="Naturals.html#121" class="InductiveConstructor"
+      >succ</a
+      ><a name="2585"
+      > </a
+      ><a name="2586" href="Addition.html#2552" class="Bound"
+      >m</a
+      ><a name="2587"
+      > </a
+      ><a name="2588" href="Equality.html#48" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="2589"
+      > </a
+      ><a name="2590" href="Naturals.html#121" class="InductiveConstructor"
+      >succ</a
+      ><a name="2594"
+      > </a
+      ><a name="2595" href="Addition.html#2552" class="Bound"
+      >m</a
+      ><a name="2596"
+      > </a
+      ><a name="2597" href="Addition.html#467" class="Function Operator"
+      >+</a
+      ><a name="2598"
+      > </a
+      ><a name="2599" href="Addition.html#2363" class="Bound"
+      >n</a
+      ><a name="2600"
+      >
+        </a
+      ><a name="2609" href="Addition.html#2543" class="Function"
+      >step</a
+      ><a name="2613"
+      > </a
+      ><a name="2614" href="Addition.html#2614" class="Bound"
+      >m</a
+      ><a name="2615"
+      > </a
+      ><a name="2616" href="Addition.html#2616" class="Bound"
+      >IH</a
+      ><a name="2618"
+      > </a
+      ><a name="2619" class="Symbol"
+      >=</a
+      ><a name="2620"
+      > </a
+      ><a name="2621" href="Addition.html#3966" class="Function"
+      >goal</a
+      ><a name="2625"
+      >
+          </a
+      ><a name="2636" class="Keyword"
+      >where</a
+      ><a name="2641"
+      > </a
+      ><a name="2642" href="Addition.html#2642" class="Function"
+      >lemma&#8320;</a
+      ><a name="2648"
+      > </a
+      ><a name="2649" class="Symbol"
+      >:</a
+      ><a name="2650"
+      > </a
+      ><a name="2651" class="Symbol"
+      >&#8704;(</a
+      ><a name="2653" href="Addition.html#2653" class="Bound"
+      >k</a
+      ><a name="2654"
+      > </a
+      ><a name="2655" class="Symbol"
+      >:</a
+      ><a name="2656"
+      > </a
+      ><a name="2657" href="Naturals.html#48" class="Datatype"
+      >&#8469;</a
+      ><a name="2658" class="Symbol"
+      >)</a
+      ><a name="2659"
+      > </a
+      ><a name="2660" class="Symbol"
+      >&#8594;</a
+      ><a name="2661"
+      > </a
+      ><a name="2662" href="Naturals.html#121" class="InductiveConstructor"
+      >succ</a
+      ><a name="2666"
+      > </a
+      ><a name="2667" href="Addition.html#2653" class="Bound"
+      >k</a
+      ><a name="2668"
+      > </a
+      ><a name="2669" href="Equality.html#48" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="2670"
+      > </a
+      ><a name="2671" class="Number"
+      >1</a
+      ><a name="2672"
+      > </a
+      ><a name="2673" href="Addition.html#467" class="Function Operator"
+      >+</a
+      ><a name="2674"
+      > </a
+      ><a name="2675" href="Addition.html#2653" class="Bound"
+      >k</a
+      ><a name="2676"
+      >
+                </a
+      ><a name="2693" href="Addition.html#2642" class="Function"
+      >lemma&#8320;</a
+      ><a name="2699"
+      > </a
+      ><a name="2700" class="Symbol"
+      >=</a
+      ><a name="2701"
+      > </a
+      ><a name="2702" href="Naturals.html#232" class="Function"
+      >induction</a
+      ><a name="2711"
+      > </a
+      ><a name="2712" href="Addition.html#2748" class="Function"
+      >base&#8320;</a
+      ><a name="2717"
+      > </a
+      ><a name="2718" href="Addition.html#2840" class="Function"
+      >step&#8320;</a
+      ><a name="2723"
+      >
+                  </a
+      ><a name="2742" class="Keyword"
+      >where</a
+      ><a name="2747"
+      > </a
+      ><a name="2748" href="Addition.html#2748" class="Function"
+      >base&#8320;</a
+      ><a name="2753"
+      > </a
+      ><a name="2754" class="Symbol"
+      >:</a
+      ><a name="2755"
+      > </a
+      ><a name="2756" href="Naturals.html#121" class="InductiveConstructor"
+      >succ</a
+      ><a name="2760"
+      > </a
+      ><a name="2761" class="Number"
+      >0</a
+      ><a name="2762"
+      > </a
+      ><a name="2763" href="Equality.html#48" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="2764"
+      > </a
+      ><a name="2765" class="Number"
+      >1</a
+      ><a name="2766"
+      > </a
+      ><a name="2767" href="Addition.html#467" class="Function Operator"
+      >+</a
+      ><a name="2768"
+      > </a
+      ><a name="2769" class="Number"
+      >0</a
+      ><a name="2770"
+      >
+                        </a
+      ><a name="2795" href="Addition.html#2748" class="Function"
+      >base&#8320;</a
+      ><a name="2800"
+      > </a
+      ><a name="2801" class="Symbol"
+      >=</a
+      ><a name="2802"
+      > </a
+      ><a name="2803" href="Equality.html#82" class="InductiveConstructor"
+      >reflexivity</a
+      ><a name="2814"
+      >
+
+                        </a
+      ><a name="2840" href="Addition.html#2840" class="Function"
+      >step&#8320;</a
+      ><a name="2845"
+      > </a
+      ><a name="2846" class="Symbol"
+      >:</a
+      ><a name="2847"
+      > </a
+      ><a name="2848" class="Symbol"
+      >&#8704;(</a
+      ><a name="2850" href="Addition.html#2850" class="Bound"
+      >k</a
+      ><a name="2851"
+      > </a
+      ><a name="2852" class="Symbol"
+      >:</a
+      ><a name="2853"
+      > </a
+      ><a name="2854" href="Naturals.html#48" class="Datatype"
+      >&#8469;</a
+      ><a name="2855" class="Symbol"
+      >)</a
+      ><a name="2856"
+      > </a
+      ><a name="2857" class="Symbol"
+      >&#8594;</a
+      ><a name="2858"
+      > </a
+      ><a name="2859" href="Naturals.html#121" class="InductiveConstructor"
+      >succ</a
+      ><a name="2863"
+      > </a
+      ><a name="2864" href="Addition.html#2850" class="Bound"
+      >k</a
+      ><a name="2865"
+      > </a
+      ><a name="2866" href="Equality.html#48" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="2867"
+      > </a
+      ><a name="2868" class="Number"
+      >1</a
+      ><a name="2869"
+      > </a
+      ><a name="2870" href="Addition.html#467" class="Function Operator"
+      >+</a
+      ><a name="2871"
+      > </a
+      ><a name="2872" href="Addition.html#2850" class="Bound"
+      >k</a
+      ><a name="2873"
+      > </a
+      ><a name="2874" class="Symbol"
+      >&#8594;</a
+      ><a name="2875"
+      >
+                                           </a
+      ><a name="2919" href="Naturals.html#121" class="InductiveConstructor"
+      >succ</a
+      ><a name="2923"
+      > </a
+      ><a name="2924" class="Symbol"
+      >(</a
+      ><a name="2925" href="Naturals.html#121" class="InductiveConstructor"
+      >succ</a
+      ><a name="2929"
+      > </a
+      ><a name="2930" href="Addition.html#2850" class="Bound"
+      >k</a
+      ><a name="2931" class="Symbol"
+      >)</a
+      ><a name="2932"
+      > </a
+      ><a name="2933" href="Equality.html#48" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="2934"
+      > </a
+      ><a name="2935" class="Number"
+      >1</a
+      ><a name="2936"
+      > </a
+      ><a name="2937" href="Addition.html#467" class="Function Operator"
+      >+</a
+      ><a name="2938"
+      > </a
+      ><a name="2939" class="Symbol"
+      >(</a
+      ><a name="2940" href="Naturals.html#121" class="InductiveConstructor"
+      >succ</a
+      ><a name="2944"
+      > </a
+      ><a name="2945" href="Addition.html#2850" class="Bound"
+      >k</a
+      ><a name="2946" class="Symbol"
+      >)</a
+      ><a name="2947"
+      >
+                        </a
+      ><a name="2972" href="Addition.html#2840" class="Function"
+      >step&#8320;</a
+      ><a name="2977"
+      > </a
+      ><a name="2978" href="Addition.html#2978" class="Bound"
+      >k</a
+      ><a name="2979"
+      > </a
+      ><a name="2980" href="Addition.html#2980" class="Bound"
+      >IH'</a
+      ><a name="2983"
+      > </a
+      ><a name="2984" class="Symbol"
+      >=</a
+      ><a name="2985"
+      > </a
+      ><a name="2986" href="Addition.html#3300" class="Function"
+      >goal&#8320;</a
+      ><a name="2991"
+      >
+                          </a
+      ><a name="3018" class="Keyword"
+      >where</a
+      ><a name="3023"
+      > </a
+      ><a name="3024" href="Addition.html#3024" class="Function"
+      >lemma&#8320;'</a
+      ><a name="3031"
+      > </a
+      ><a name="3032" class="Symbol"
+      >:</a
+      ><a name="3033"
+      > </a
+      ><a name="3034" class="Number"
+      >1</a
+      ><a name="3035"
+      > </a
+      ><a name="3036" href="Addition.html#467" class="Function Operator"
+      >+</a
+      ><a name="3037"
+      > </a
+      ><a name="3038" class="Symbol"
+      >(</a
+      ><a name="3039" href="Naturals.html#121" class="InductiveConstructor"
+      >succ</a
+      ><a name="3043"
+      > </a
+      ><a name="3044" href="Addition.html#2978" class="Bound"
+      >k</a
+      ><a name="3045" class="Symbol"
+      >)</a
+      ><a name="3046"
+      > </a
+      ><a name="3047" href="Equality.html#48" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="3048"
+      > </a
+      ><a name="3049" href="Naturals.html#121" class="InductiveConstructor"
+      >succ</a
+      ><a name="3053"
+      > </a
+      ><a name="3054" class="Symbol"
+      >(</a
+      ><a name="3055" class="Number"
+      >1</a
+      ><a name="3056"
+      > </a
+      ><a name="3057" href="Addition.html#467" class="Function Operator"
+      >+</a
+      ><a name="3058"
+      > </a
+      ><a name="3059" href="Addition.html#2978" class="Bound"
+      >k</a
+      ><a name="3060" class="Symbol"
+      >)</a
+      ><a name="3061"
+      >
+                                </a
+      ><a name="3094" href="Addition.html#3024" class="Function"
+      >lemma&#8320;'</a
+      ><a name="3101"
+      > </a
+      ><a name="3102" class="Symbol"
+      >=</a
+      ><a name="3103"
+      > </a
+      ><a name="3104" href="Equality.html#82" class="InductiveConstructor"
+      >reflexivity</a
+      ><a name="3115"
+      >
+
+                                </a
+      ><a name="3149" href="Addition.html#3149" class="Function"
+      >lemma&#8321;'</a
+      ><a name="3156"
+      > </a
+      ><a name="3157" class="Symbol"
+      >:</a
+      ><a name="3158"
+      > </a
+      ><a name="3159" href="Naturals.html#121" class="InductiveConstructor"
+      >succ</a
+      ><a name="3163"
+      > </a
+      ><a name="3164" class="Symbol"
+      >(</a
+      ><a name="3165" class="Number"
+      >1</a
+      ><a name="3166"
+      > </a
+      ><a name="3167" href="Addition.html#467" class="Function Operator"
+      >+</a
+      ><a name="3168"
+      > </a
+      ><a name="3169" href="Addition.html#2978" class="Bound"
+      >k</a
+      ><a name="3170" class="Symbol"
+      >)</a
+      ><a name="3171"
+      > </a
+      ><a name="3172" href="Equality.html#48" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="3173"
+      > </a
+      ><a name="3174" href="Naturals.html#121" class="InductiveConstructor"
+      >succ</a
+      ><a name="3178"
+      > </a
+      ><a name="3179" class="Symbol"
+      >(</a
+      ><a name="3180" href="Naturals.html#121" class="InductiveConstructor"
+      >succ</a
+      ><a name="3184"
+      > </a
+      ><a name="3185" href="Addition.html#2978" class="Bound"
+      >k</a
+      ><a name="3186" class="Symbol"
+      >)</a
+      ><a name="3187"
+      >
+                                </a
+      ><a name="3220" href="Addition.html#3149" class="Function"
+      >lemma&#8321;'</a
+      ><a name="3227"
+      > </a
+      ><a name="3228" class="Symbol"
+      >=</a
+      ><a name="3229"
+      > </a
+      ><a name="3230" href="Equality.html#516" class="Function"
+      >compositionality</a
+      ><a name="3246"
+      > </a
+      ><a name="3247" href="Naturals.html#121" class="InductiveConstructor"
+      >succ</a
+      ><a name="3251"
+      > </a
+      ><a name="3252" class="Symbol"
+      >(</a
+      ><a name="3253" href="Equality.html#430" class="Function"
+      >symmetry</a
+      ><a name="3261"
+      > </a
+      ><a name="3262" href="Addition.html#2980" class="Bound"
+      >IH'</a
+      ><a name="3265" class="Symbol"
+      >)</a
+      ><a name="3266"
+      >
+
+                                </a
+      ><a name="3300" href="Addition.html#3300" class="Function"
+      >goal&#8320;</a
+      ><a name="3305"
+      > </a
+      ><a name="3306" class="Symbol"
+      >:</a
+      ><a name="3307"
+      > </a
+      ><a name="3308" href="Naturals.html#121" class="InductiveConstructor"
+      >succ</a
+      ><a name="3312"
+      > </a
+      ><a name="3313" class="Symbol"
+      >(</a
+      ><a name="3314" href="Naturals.html#121" class="InductiveConstructor"
+      >succ</a
+      ><a name="3318"
+      > </a
+      ><a name="3319" href="Addition.html#2978" class="Bound"
+      >k</a
+      ><a name="3320" class="Symbol"
+      >)</a
+      ><a name="3321"
+      > </a
+      ><a name="3322" href="Equality.html#48" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="3323"
+      > </a
+      ><a name="3324" class="Number"
+      >1</a
+      ><a name="3325"
+      > </a
+      ><a name="3326" href="Addition.html#467" class="Function Operator"
+      >+</a
+      ><a name="3327"
+      > </a
+      ><a name="3328" class="Symbol"
+      >(</a
+      ><a name="3329" href="Naturals.html#121" class="InductiveConstructor"
+      >succ</a
+      ><a name="3333"
+      > </a
+      ><a name="3334" href="Addition.html#2978" class="Bound"
+      >k</a
+      ><a name="3335" class="Symbol"
+      >)</a
+      ><a name="3336"
+      >
+                                </a
+      ><a name="3369" href="Addition.html#3300" class="Function"
+      >goal&#8320;</a
+      ><a name="3374"
+      > </a
+      ><a name="3375" class="Symbol"
+      >=</a
+      ><a name="3376"
+      > </a
+      ><a name="3377" href="Equality.html#430" class="Function"
+      >symmetry</a
+      ><a name="3385"
+      > </a
+      ><a name="3386" class="Symbol"
+      >(</a
+      ><a name="3387" href="Equality.html#309" class="Function"
+      >transitivity</a
+      ><a name="3399"
+      > </a
+      ><a name="3400" href="Addition.html#3024" class="Function"
+      >lemma&#8320;'</a
+      ><a name="3407"
+      > </a
+      ><a name="3408" href="Addition.html#3149" class="Function"
+      >lemma&#8321;'</a
+      ><a name="3415" class="Symbol"
+      >)</a
+      ><a name="3416"
+      >
+
+                </a
+      ><a name="3434" href="Addition.html#3434" class="Function"
+      >lemma&#8321;</a
+      ><a name="3440"
+      > </a
+      ><a name="3441" class="Symbol"
+      >:</a
+      ><a name="3442"
+      > </a
+      ><a name="3443" href="Addition.html#2363" class="Bound"
+      >n</a
+      ><a name="3444"
+      > </a
+      ><a name="3445" href="Addition.html#467" class="Function Operator"
+      >+</a
+      ><a name="3446"
+      > </a
+      ><a name="3447" href="Naturals.html#121" class="InductiveConstructor"
+      >succ</a
+      ><a name="3451"
+      > </a
+      ><a name="3452" href="Addition.html#2614" class="Bound"
+      >m</a
+      ><a name="3453"
+      > </a
+      ><a name="3454" href="Equality.html#48" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="3455"
+      > </a
+      ><a name="3456" href="Naturals.html#121" class="InductiveConstructor"
+      >succ</a
+      ><a name="3460"
+      > </a
+      ><a name="3461" class="Symbol"
+      >(</a
+      ><a name="3462" href="Addition.html#2363" class="Bound"
+      >n</a
+      ><a name="3463"
+      > </a
+      ><a name="3464" href="Addition.html#467" class="Function Operator"
+      >+</a
+      ><a name="3465"
+      > </a
+      ><a name="3466" href="Addition.html#2614" class="Bound"
+      >m</a
+      ><a name="3467" class="Symbol"
+      >)</a
+      ><a name="3468"
+      >
+                </a
+      ><a name="3485" href="Addition.html#3434" class="Function"
+      >lemma&#8321;</a
+      ><a name="3491"
+      > </a
+      ><a name="3492" class="Symbol"
+      >=</a
+      ><a name="3493"
+      > </a
+      ><a name="3494" href="Equality.html#82" class="InductiveConstructor"
+      >reflexivity</a
+      ><a name="3505"
+      >
+
+                </a
+      ><a name="3523" href="Addition.html#3523" class="Function"
+      >lemma&#8322;</a
+      ><a name="3529"
+      > </a
+      ><a name="3530" class="Symbol"
+      >:</a
+      ><a name="3531"
+      > </a
+      ><a name="3532" href="Naturals.html#121" class="InductiveConstructor"
+      >succ</a
+      ><a name="3536"
+      > </a
+      ><a name="3537" class="Symbol"
+      >(</a
+      ><a name="3538" href="Addition.html#2363" class="Bound"
+      >n</a
+      ><a name="3539"
+      > </a
+      ><a name="3540" href="Addition.html#467" class="Function Operator"
+      >+</a
+      ><a name="3541"
+      > </a
+      ><a name="3542" href="Addition.html#2614" class="Bound"
+      >m</a
+      ><a name="3543" class="Symbol"
+      >)</a
+      ><a name="3544"
+      > </a
+      ><a name="3545" href="Equality.html#48" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="3546"
+      > </a
+      ><a name="3547" href="Naturals.html#121" class="InductiveConstructor"
+      >succ</a
+      ><a name="3551"
+      > </a
+      ><a name="3552" class="Symbol"
+      >(</a
+      ><a name="3553" href="Addition.html#2614" class="Bound"
+      >m</a
+      ><a name="3554"
+      > </a
+      ><a name="3555" href="Addition.html#467" class="Function Operator"
+      >+</a
+      ><a name="3556"
+      > </a
+      ><a name="3557" href="Addition.html#2363" class="Bound"
+      >n</a
+      ><a name="3558" class="Symbol"
+      >)</a
+      ><a name="3559"
+      >
+                </a
+      ><a name="3576" href="Addition.html#3523" class="Function"
+      >lemma&#8322;</a
+      ><a name="3582"
+      > </a
+      ><a name="3583" class="Symbol"
+      >=</a
+      ><a name="3584"
+      > </a
+      ><a name="3585" href="Equality.html#516" class="Function"
+      >compositionality</a
+      ><a name="3601"
+      > </a
+      ><a name="3602" href="Naturals.html#121" class="InductiveConstructor"
+      >succ</a
+      ><a name="3606"
+      > </a
+      ><a name="3607" href="Addition.html#2616" class="Bound"
+      >IH</a
+      ><a name="3609"
+      >
+
+                </a
+      ><a name="3627" href="Addition.html#3627" class="Function"
+      >lemma&#8323;</a
+      ><a name="3633"
+      > </a
+      ><a name="3634" class="Symbol"
+      >:</a
+      ><a name="3635"
+      > </a
+      ><a name="3636" href="Naturals.html#121" class="InductiveConstructor"
+      >succ</a
+      ><a name="3640"
+      > </a
+      ><a name="3641" class="Symbol"
+      >(</a
+      ><a name="3642" href="Addition.html#2614" class="Bound"
+      >m</a
+      ><a name="3643"
+      > </a
+      ><a name="3644" href="Addition.html#467" class="Function Operator"
+      >+</a
+      ><a name="3645"
+      > </a
+      ><a name="3646" href="Addition.html#2363" class="Bound"
+      >n</a
+      ><a name="3647" class="Symbol"
+      >)</a
+      ><a name="3648"
+      > </a
+      ><a name="3649" href="Equality.html#48" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="3650"
+      > </a
+      ><a name="3651" class="Number"
+      >1</a
+      ><a name="3652"
+      > </a
+      ><a name="3653" href="Addition.html#467" class="Function Operator"
+      >+</a
+      ><a name="3654"
+      > </a
+      ><a name="3655" class="Symbol"
+      >(</a
+      ><a name="3656" href="Addition.html#2614" class="Bound"
+      >m</a
+      ><a name="3657"
+      > </a
+      ><a name="3658" href="Addition.html#467" class="Function Operator"
+      >+</a
+      ><a name="3659"
+      > </a
+      ><a name="3660" href="Addition.html#2363" class="Bound"
+      >n</a
+      ><a name="3661" class="Symbol"
+      >)</a
+      ><a name="3662"
+      >
+                </a
+      ><a name="3679" href="Addition.html#3627" class="Function"
+      >lemma&#8323;</a
+      ><a name="3685"
+      > </a
+      ><a name="3686" class="Symbol"
+      >=</a
+      ><a name="3687"
+      > </a
+      ><a name="3688" href="Addition.html#2642" class="Function"
+      >lemma&#8320;</a
+      ><a name="3694"
+      > </a
+      ><a name="3695" class="Symbol"
+      >(</a
+      ><a name="3696" href="Addition.html#2614" class="Bound"
+      >m</a
+      ><a name="3697"
+      > </a
+      ><a name="3698" href="Addition.html#467" class="Function Operator"
+      >+</a
+      ><a name="3699"
+      > </a
+      ><a name="3700" href="Addition.html#2363" class="Bound"
+      >n</a
+      ><a name="3701" class="Symbol"
+      >)</a
+      ><a name="3702"
+      >
+
+                </a
+      ><a name="3720" href="Addition.html#3720" class="Function"
+      >lemma&#8324;</a
+      ><a name="3726"
+      > </a
+      ><a name="3727" class="Symbol"
+      >:</a
+      ><a name="3728"
+      > </a
+      ><a name="3729" class="Number"
+      >1</a
+      ><a name="3730"
+      > </a
+      ><a name="3731" href="Addition.html#467" class="Function Operator"
+      >+</a
+      ><a name="3732"
+      > </a
+      ><a name="3733" class="Symbol"
+      >(</a
+      ><a name="3734" href="Addition.html#2614" class="Bound"
+      >m</a
+      ><a name="3735"
+      > </a
+      ><a name="3736" href="Addition.html#467" class="Function Operator"
+      >+</a
+      ><a name="3737"
+      > </a
+      ><a name="3738" href="Addition.html#2363" class="Bound"
+      >n</a
+      ><a name="3739" class="Symbol"
+      >)</a
+      ><a name="3740"
+      > </a
+      ><a name="3741" href="Equality.html#48" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="3742"
+      > </a
+      ><a name="3743" class="Symbol"
+      >(</a
+      ><a name="3744" class="Number"
+      >1</a
+      ><a name="3745"
+      > </a
+      ><a name="3746" href="Addition.html#467" class="Function Operator"
+      >+</a
+      ><a name="3747"
+      > </a
+      ><a name="3748" href="Addition.html#2614" class="Bound"
+      >m</a
+      ><a name="3749" class="Symbol"
+      >)</a
+      ><a name="3750"
+      > </a
+      ><a name="3751" href="Addition.html#467" class="Function Operator"
+      >+</a
+      ><a name="3752"
+      > </a
+      ><a name="3753" href="Addition.html#2363" class="Bound"
+      >n</a
+      ><a name="3754"
+      >
+                </a
+      ><a name="3771" href="Addition.html#3720" class="Function"
+      >lemma&#8324;</a
+      ><a name="3777"
+      > </a
+      ><a name="3778" class="Symbol"
+      >=</a
+      ><a name="3779"
+      > </a
+      ><a name="3780" href="Equality.html#430" class="Function"
+      >symmetry</a
+      ><a name="3788"
+      > </a
+      ><a name="3789" class="Symbol"
+      >(</a
+      ><a name="3790" href="Addition.html#1110" class="Function"
+      >addition-associativity</a
+      ><a name="3812"
+      > </a
+      ><a name="3813" class="Number"
+      >1</a
+      ><a name="3814"
+      > </a
+      ><a name="3815" href="Addition.html#2614" class="Bound"
+      >m</a
+      ><a name="3816"
+      > </a
+      ><a name="3817" href="Addition.html#2363" class="Bound"
+      >n</a
+      ><a name="3818" class="Symbol"
+      >)</a
+      ><a name="3819"
+      >
+
+                </a
+      ><a name="3837" href="Addition.html#3837" class="Function"
+      >lemma&#8325;</a
+      ><a name="3843"
+      > </a
+      ><a name="3844" class="Symbol"
+      >:</a
+      ><a name="3845"
+      > </a
+      ><a name="3846" class="Symbol"
+      >(</a
+      ><a name="3847" class="Number"
+      >1</a
+      ><a name="3848"
+      > </a
+      ><a name="3849" href="Addition.html#467" class="Function Operator"
+      >+</a
+      ><a name="3850"
+      > </a
+      ><a name="3851" href="Addition.html#2614" class="Bound"
+      >m</a
+      ><a name="3852" class="Symbol"
+      >)</a
+      ><a name="3853"
+      > </a
+      ><a name="3854" href="Addition.html#467" class="Function Operator"
+      >+</a
+      ><a name="3855"
+      > </a
+      ><a name="3856" href="Addition.html#2363" class="Bound"
+      >n</a
+      ><a name="3857"
+      > </a
+      ><a name="3858" href="Equality.html#48" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="3859"
+      > </a
+      ><a name="3860" href="Naturals.html#121" class="InductiveConstructor"
+      >succ</a
+      ><a name="3864"
+      > </a
+      ><a name="3865" href="Addition.html#2614" class="Bound"
+      >m</a
+      ><a name="3866"
+      > </a
+      ><a name="3867" href="Addition.html#467" class="Function Operator"
+      >+</a
+      ><a name="3868"
+      > </a
+      ><a name="3869" href="Addition.html#2363" class="Bound"
+      >n</a
+      ><a name="3870"
+      >
+                </a
+      ><a name="3887" href="Addition.html#3837" class="Function"
+      >lemma&#8325;</a
+      ><a name="3893"
+      > </a
+      ><a name="3894" class="Symbol"
+      >=</a
+      ><a name="3895"
+      > </a
+      ><a name="3896" href="Equality.html#516" class="Function"
+      >compositionality</a
+      ><a name="3912"
+      > </a
+      ><a name="3913" class="Symbol"
+      >(&#955;</a
+      ><a name="3915"
+      > </a
+      ><a name="3916" href="Addition.html#3916" class="Bound"
+      >x</a
+      ><a name="3917"
+      > </a
+      ><a name="3918" class="Symbol"
+      >&#8594;</a
+      ><a name="3919"
+      > </a
+      ><a name="3920" href="Addition.html#3916" class="Bound"
+      >x</a
+      ><a name="3921"
+      > </a
+      ><a name="3922" href="Addition.html#467" class="Function Operator"
+      >+</a
+      ><a name="3923"
+      > </a
+      ><a name="3924" href="Addition.html#2363" class="Bound"
+      >n</a
+      ><a name="3925" class="Symbol"
+      >)</a
+      ><a name="3926"
+      > </a
+      ><a name="3927" class="Symbol"
+      >(</a
+      ><a name="3928" href="Equality.html#430" class="Function"
+      >symmetry</a
+      ><a name="3936"
+      > </a
+      ><a name="3937" class="Symbol"
+      >(</a
+      ><a name="3938" href="Addition.html#2642" class="Function"
+      >lemma&#8320;</a
+      ><a name="3944"
+      > </a
+      ><a name="3945" href="Addition.html#2614" class="Bound"
+      >m</a
+      ><a name="3946" class="Symbol"
+      >))</a
+      ><a name="3948"
+      >
+
+                </a
+      ><a name="3966" href="Addition.html#3966" class="Function"
+      >goal</a
+      ><a name="3970"
+      > </a
+      ><a name="3971" class="Symbol"
+      >:</a
+      ><a name="3972"
+      > </a
+      ><a name="3973" href="Addition.html#2363" class="Bound"
+      >n</a
+      ><a name="3974"
+      > </a
+      ><a name="3975" href="Addition.html#467" class="Function Operator"
+      >+</a
+      ><a name="3976"
+      > </a
+      ><a name="3977" href="Naturals.html#121" class="InductiveConstructor"
+      >succ</a
+      ><a name="3981"
+      > </a
+      ><a name="3982" href="Addition.html#2614" class="Bound"
+      >m</a
+      ><a name="3983"
+      > </a
+      ><a name="3984" href="Equality.html#48" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="3985"
+      > </a
+      ><a name="3986" href="Naturals.html#121" class="InductiveConstructor"
+      >succ</a
+      ><a name="3990"
+      > </a
+      ><a name="3991" href="Addition.html#2614" class="Bound"
+      >m</a
+      ><a name="3992"
+      > </a
+      ><a name="3993" href="Addition.html#467" class="Function Operator"
+      >+</a
+      ><a name="3994"
+      > </a
+      ><a name="3995" href="Addition.html#2363" class="Bound"
+      >n</a
+      ><a name="3996"
+      >
+                </a
+      ><a name="4013" href="Addition.html#3966" class="Function"
+      >goal</a
+      ><a name="4017"
+      > </a
+      ><a name="4018" class="Symbol"
+      >=</a
+      ><a name="4019"
+      > </a
+      ><a name="4020" href="Equality.html#309" class="Function"
+      >transitivity</a
+      ><a name="4032"
+      > </a
+      ><a name="4033" href="Addition.html#3434" class="Function"
+      >lemma&#8321;</a
+      ><a name="4039"
+      > </a
+      ><a name="4040" class="Symbol"
+      >(</a
+      ><a name="4041" href="Equality.html#309" class="Function"
+      >transitivity</a
+      ><a name="4053"
+      > </a
+      ><a name="4054" href="Addition.html#3523" class="Function"
+      >lemma&#8322;</a
+      ><a name="4060"
+      >
+                      </a
+      ><a name="4084" class="Symbol"
+      >(</a
+      ><a name="4085" href="Equality.html#309" class="Function"
+      >transitivity</a
+      ><a name="4097"
+      > </a
+      ><a name="4098" href="Addition.html#3627" class="Function"
+      >lemma&#8323;</a
+      ><a name="4104"
+      > </a
+      ><a name="4105" class="Symbol"
+      >(</a
+      ><a name="4106" href="Equality.html#309" class="Function"
+      >transitivity</a
+      ><a name="4118"
+      > </a
+      ><a name="4119" href="Addition.html#3720" class="Function"
+      >lemma&#8324;</a
+      ><a name="4125"
+      > </a
+      ><a name="4126" href="Addition.html#3837" class="Function"
+      >lemma&#8325;</a
+      ><a name="4132" class="Symbol"
+      >)))</a
+      ><a name="4135"
+      >
+
+
+</a
+      ><a name="4138" href="Addition.html#4138" class="Function"
+      >trivial-addition-rearrangement</a
+      ><a name="4168"
+      > </a
+      ><a name="4169" class="Symbol"
+      >:</a
+      ><a name="4170"
+      > </a
+      ><a name="4171" class="Symbol"
+      >&#8704;(</a
+      ><a name="4173" href="Addition.html#4173" class="Bound"
+      >x</a
+      ><a name="4174"
+      > </a
+      ><a name="4175" href="Addition.html#4175" class="Bound"
+      >y</a
+      ><a name="4176"
+      > </a
+      ><a name="4177" href="Addition.html#4177" class="Bound"
+      >z</a
+      ><a name="4178"
+      > </a
+      ><a name="4179" class="Symbol"
+      >:</a
+      ><a name="4180"
+      > </a
+      ><a name="4181" href="Naturals.html#48" class="Datatype"
+      >&#8469;</a
+      ><a name="4182" class="Symbol"
+      >)</a
+      ><a name="4183"
+      > </a
+      ><a name="4184" class="Symbol"
+      >&#8594;</a
+      ><a name="4185"
+      > </a
+      ><a name="4186" href="Addition.html#4173" class="Bound"
+      >x</a
+      ><a name="4187"
+      > </a
+      ><a name="4188" href="Addition.html#467" class="Function Operator"
+      >+</a
+      ><a name="4189"
+      > </a
+      ><a name="4190" href="Addition.html#4175" class="Bound"
+      >y</a
+      ><a name="4191"
+      > </a
+      ><a name="4192" href="Addition.html#467" class="Function Operator"
+      >+</a
+      ><a name="4193"
+      > </a
+      ><a name="4194" href="Addition.html#4177" class="Bound"
+      >z</a
+      ><a name="4195"
+      > </a
+      ><a name="4196" href="Equality.html#48" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="4197"
+      > </a
+      ><a name="4198" href="Addition.html#4173" class="Bound"
+      >x</a
+      ><a name="4199"
+      > </a
+      ><a name="4200" href="Addition.html#467" class="Function Operator"
+      >+</a
+      ><a name="4201"
+      > </a
+      ><a name="4202" href="Addition.html#4177" class="Bound"
+      >z</a
+      ><a name="4203"
+      > </a
+      ><a name="4204" href="Addition.html#467" class="Function Operator"
+      >+</a
+      ><a name="4205"
+      > </a
+      ><a name="4206" href="Addition.html#4175" class="Bound"
+      >y</a
+      ><a name="4207"
+      >
+</a
+      ><a name="4208" href="Addition.html#4138" class="Function"
+      >trivial-addition-rearrangement</a
+      ><a name="4238"
+      > </a
+      ><a name="4239" href="Addition.html#4239" class="Bound"
+      >x</a
+      ><a name="4240"
+      > </a
+      ><a name="4241" href="Addition.html#4241" class="Bound"
+      >y</a
+      ><a name="4242"
+      > </a
+      ><a name="4243" href="Addition.html#4243" class="Bound"
+      >z</a
+      ><a name="4244"
+      > </a
+      ><a name="4245" class="Symbol"
+      >=</a
+      ><a name="4246"
+      >
+      </a
+      ><a name="4254" href="Equality.html#309" class="Function"
+      >transitivity</a
+      ><a name="4266"
+      >
+        </a
+      ><a name="4276" class="Symbol"
+      >(</a
+      ><a name="4277" href="Addition.html#1110" class="Function"
+      >addition-associativity</a
+      ><a name="4299"
+      > </a
+      ><a name="4300" href="Addition.html#4239" class="Bound"
+      >x</a
+      ><a name="4301"
+      > </a
+      ><a name="4302" href="Addition.html#4241" class="Bound"
+      >y</a
+      ><a name="4303"
+      > </a
+      ><a name="4304" href="Addition.html#4243" class="Bound"
+      >z</a
+      ><a name="4305" class="Symbol"
+      >)</a
+      ><a name="4306"
+      >
+        </a
+      ><a name="4315" class="Symbol"
+      >(</a
+      ><a name="4316" href="Equality.html#309" class="Function"
+      >transitivity</a
+      ><a name="4328"
+      >
+           </a
+      ><a name="4341" class="Symbol"
+      >(</a
+      ><a name="4342" href="Equality.html#516" class="Function"
+      >compositionality</a
+      ><a name="4358"
+      > </a
+      ><a name="4359" class="Symbol"
+      >(&#955;</a
+      ><a name="4361"
+      > </a
+      ><a name="4362" href="Addition.html#4362" class="Bound"
+      >t</a
+      ><a name="4363"
+      > </a
+      ><a name="4364" class="Symbol"
+      >&#8594;</a
+      ><a name="4365"
+      > </a
+      ><a name="4366" href="Addition.html#4239" class="Bound"
+      >x</a
+      ><a name="4367"
+      > </a
+      ><a name="4368" href="Addition.html#467" class="Function Operator"
+      >+</a
+      ><a name="4369"
+      > </a
+      ><a name="4370" href="Addition.html#4362" class="Bound"
+      >t</a
+      ><a name="4371" class="Symbol"
+      >)</a
+      ><a name="4372"
+      > </a
+      ><a name="4373" class="Symbol"
+      >(</a
+      ><a name="4374" href="Addition.html#2288" class="Function"
+      >addition-commutativity</a
+      ><a name="4396"
+      > </a
+      ><a name="4397" href="Addition.html#4241" class="Bound"
+      >y</a
+      ><a name="4398"
+      > </a
+      ><a name="4399" href="Addition.html#4243" class="Bound"
+      >z</a
+      ><a name="4400" class="Symbol"
+      >))</a
+      ><a name="4402"
+      >
+           </a
+      ><a name="4414" class="Symbol"
+      >(</a
+      ><a name="4415" href="Equality.html#430" class="Function"
+      >symmetry</a
+      ><a name="4423"
+      > </a
+      ><a name="4424" class="Symbol"
+      >(</a
+      ><a name="4425" href="Addition.html#1110" class="Function"
+      >addition-associativity</a
+      ><a name="4447"
+      > </a
+      ><a name="4448" href="Addition.html#4239" class="Bound"
+      >x</a
+      ><a name="4449"
+      > </a
+      ><a name="4450" href="Addition.html#4243" class="Bound"
+      >z</a
+      ><a name="4451"
+      > </a
+      ><a name="4452" href="Addition.html#4241" class="Bound"
+      >y</a
+      ><a name="4453" class="Symbol"
+      >)))</a
+      ><a name="4456"
+      >
+</a
+      ></pre
+    ></body
+  ></html
+>

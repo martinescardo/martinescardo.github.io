@@ -1,0 +1,1388 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+><head
+  ><title
+    >Choice</title
+    ><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"
+     /><meta http-equiv="Content-Style-Type" content="text/css"
+     /><link href="Agda.css" rel="stylesheet" type="text/css"
+     /></head
+  ><body
+  ><pre
+    ><a name="1" class="Keyword"
+      >module</a
+      ><a name="7"
+      > </a
+      ><a name="8" href="Choice.html#8" class="Module"
+      >Choice</a
+      ><a name="14"
+      > </a
+      ><a name="15" class="Keyword"
+      >where</a
+      ><a name="20"
+      >
+
+</a
+      ><a name="22" class="Keyword"
+      >open</a
+      ><a name="26"
+      > </a
+      ><a name="27" class="Keyword"
+      >import</a
+      ><a name="33"
+      > </a
+      ><a name="34" href="Logic.html#8" class="Module"
+      >Logic</a
+      ><a name="39"
+      >
+</a
+      ><a name="40" class="Keyword"
+      >open</a
+      ><a name="44"
+      > </a
+      ><a name="45" class="Keyword"
+      >import</a
+      ><a name="51"
+      > </a
+      ><a name="52" href="Naturals.html#8" class="Module"
+      >Naturals</a
+      ><a name="60"
+      >
+</a
+      ><a name="61" class="Keyword"
+      >open</a
+      ><a name="65"
+      > </a
+      ><a name="66" class="Keyword"
+      >import</a
+      ><a name="72"
+      > </a
+      ><a name="73" href="Equality.html#8" class="Module"
+      >Equality</a
+      ><a name="81"
+      >
+
+</a
+      ><a name="83" href="Choice.html#83" class="Function"
+      >AC</a
+      ><a name="85"
+      > </a
+      ><a name="86" class="Symbol"
+      >:</a
+      ><a name="87"
+      > </a
+      ><a name="88" class="Symbol"
+      >{</a
+      ><a name="89" href="Choice.html#89" class="Bound"
+      >X</a
+      ><a name="90"
+      > </a
+      ><a name="91" class="Symbol"
+      >:</a
+      ><a name="92"
+      > </a
+      ><a name="93" class="PrimitiveType"
+      >Set</a
+      ><a name="96" class="Symbol"
+      >}</a
+      ><a name="97"
+      > </a
+      ><a name="98" class="Symbol"
+      >{</a
+      ><a name="99" href="Choice.html#99" class="Bound"
+      >Y</a
+      ><a name="100"
+      > </a
+      ><a name="101" class="Symbol"
+      >:</a
+      ><a name="102"
+      > </a
+      ><a name="103" href="Choice.html#89" class="Bound"
+      >X</a
+      ><a name="104"
+      > </a
+      ><a name="105" class="Symbol"
+      >&#8594;</a
+      ><a name="106"
+      > </a
+      ><a name="107" class="PrimitiveType"
+      >Set</a
+      ><a name="110" class="Symbol"
+      >}</a
+      ><a name="111"
+      > </a
+      ><a name="112" class="Symbol"
+      >{</a
+      ><a name="113" href="Choice.html#113" class="Bound"
+      >A</a
+      ><a name="114"
+      > </a
+      ><a name="115" class="Symbol"
+      >:</a
+      ><a name="116"
+      > </a
+      ><a name="117" class="Symbol"
+      >(</a
+      ><a name="118" href="Choice.html#118" class="Bound"
+      >x</a
+      ><a name="119"
+      > </a
+      ><a name="120" class="Symbol"
+      >:</a
+      ><a name="121"
+      > </a
+      ><a name="122" href="Choice.html#89" class="Bound"
+      >X</a
+      ><a name="123" class="Symbol"
+      >)</a
+      ><a name="124"
+      > </a
+      ><a name="125" class="Symbol"
+      >&#8594;</a
+      ><a name="126"
+      > </a
+      ><a name="127" href="Choice.html#99" class="Bound"
+      >Y</a
+      ><a name="128"
+      > </a
+      ><a name="129" href="Choice.html#118" class="Bound"
+      >x</a
+      ><a name="130"
+      > </a
+      ><a name="131" class="Symbol"
+      >&#8594;</a
+      ><a name="132"
+      > </a
+      ><a name="133" href="Logic.html#77" class="Function"
+      >&#937;</a
+      ><a name="134" class="Symbol"
+      >}</a
+      ><a name="135"
+      > </a
+      ><a name="136" class="Symbol"
+      >&#8594;</a
+      ><a name="137"
+      >
+</a
+      ><a name="138" class="Comment"
+      >--</a
+      ><a name="140"
+      >
+      </a
+      ><a name="147" class="Symbol"
+      >(&#8704;(</a
+      ><a name="150" href="Choice.html#150" class="Bound"
+      >x</a
+      ><a name="151"
+      > </a
+      ><a name="152" class="Symbol"
+      >:</a
+      ><a name="153"
+      > </a
+      ><a name="154" href="Choice.html#89" class="Bound"
+      >X</a
+      ><a name="155" class="Symbol"
+      >)</a
+      ><a name="156"
+      > </a
+      ><a name="157" class="Symbol"
+      >&#8594;</a
+      ><a name="158"
+      > </a
+      ><a name="159" href="Logic.html#1060" class="Datatype"
+      >&#8707;</a
+      ><a name="160"
+      > </a
+      ><a name="161" class="Symbol"
+      >\(</a
+      ><a name="163" href="Choice.html#163" class="Bound"
+      >y</a
+      ><a name="164"
+      > </a
+      ><a name="165" class="Symbol"
+      >:</a
+      ><a name="166"
+      > </a
+      ><a name="167" href="Choice.html#99" class="Bound"
+      >Y</a
+      ><a name="168"
+      > </a
+      ><a name="169" href="Choice.html#150" class="Bound"
+      >x</a
+      ><a name="170" class="Symbol"
+      >)</a
+      ><a name="171"
+      > </a
+      ><a name="172" class="Symbol"
+      >&#8594;</a
+      ><a name="173"
+      > </a
+      ><a name="174" href="Choice.html#113" class="Bound"
+      >A</a
+      ><a name="175"
+      > </a
+      ><a name="176" href="Choice.html#150" class="Bound"
+      >x</a
+      ><a name="177"
+      > </a
+      ><a name="178" href="Choice.html#163" class="Bound"
+      >y</a
+      ><a name="179" class="Symbol"
+      >)</a
+      ><a name="180"
+      >
+     </a
+      ><a name="186" class="Symbol"
+      >&#8594;</a
+      ><a name="187"
+      > </a
+      ><a name="188" href="Logic.html#1060" class="Datatype"
+      >&#8707;</a
+      ><a name="189"
+      > </a
+      ><a name="190" class="Symbol"
+      >\(</a
+      ><a name="192" href="Choice.html#192" class="Bound"
+      >f</a
+      ><a name="193"
+      > </a
+      ><a name="194" class="Symbol"
+      >:</a
+      ><a name="195"
+      > </a
+      ><a name="196" class="Symbol"
+      >((</a
+      ><a name="198" href="Choice.html#198" class="Bound"
+      >x</a
+      ><a name="199"
+      > </a
+      ><a name="200" class="Symbol"
+      >:</a
+      ><a name="201"
+      > </a
+      ><a name="202" href="Choice.html#89" class="Bound"
+      >X</a
+      ><a name="203" class="Symbol"
+      >)</a
+      ><a name="204"
+      > </a
+      ><a name="205" class="Symbol"
+      >&#8594;</a
+      ><a name="206"
+      > </a
+      ><a name="207" href="Choice.html#99" class="Bound"
+      >Y</a
+      ><a name="208"
+      > </a
+      ><a name="209" href="Choice.html#198" class="Bound"
+      >x</a
+      ><a name="210" class="Symbol"
+      >))</a
+      ><a name="212"
+      > </a
+      ><a name="213" class="Symbol"
+      >&#8594;</a
+      ><a name="214"
+      > </a
+      ><a name="215" class="Symbol"
+      >&#8704;(</a
+      ><a name="217" href="Choice.html#217" class="Bound"
+      >x</a
+      ><a name="218"
+      > </a
+      ><a name="219" class="Symbol"
+      >:</a
+      ><a name="220"
+      > </a
+      ><a name="221" href="Choice.html#89" class="Bound"
+      >X</a
+      ><a name="222" class="Symbol"
+      >)</a
+      ><a name="223"
+      > </a
+      ><a name="224" class="Symbol"
+      >&#8594;</a
+      ><a name="225"
+      > </a
+      ><a name="226" href="Choice.html#113" class="Bound"
+      >A</a
+      ><a name="227"
+      > </a
+      ><a name="228" href="Choice.html#217" class="Bound"
+      >x</a
+      ><a name="229"
+      > </a
+      ><a name="230" class="Symbol"
+      >(</a
+      ><a name="231" href="Choice.html#192" class="Bound"
+      >f</a
+      ><a name="232"
+      > </a
+      ><a name="233" href="Choice.html#217" class="Bound"
+      >x</a
+      ><a name="234" class="Symbol"
+      >)</a
+      ><a name="235"
+      >
+
+</a
+      ><a name="237" href="Choice.html#83" class="Function"
+      >AC</a
+      ><a name="239"
+      > </a
+      ><a name="240" href="Choice.html#240" class="Bound"
+      >g</a
+      ><a name="241"
+      > </a
+      ><a name="242" class="Symbol"
+      >=</a
+      ><a name="243"
+      > </a
+      ><a name="244" href="Logic.html#1099" class="InductiveConstructor"
+      >&#8707;-intro</a
+      ><a name="251"
+      > </a
+      ><a name="252" class="Symbol"
+      >(&#955;</a
+      ><a name="254"
+      > </a
+      ><a name="255" href="Choice.html#255" class="Bound"
+      >x</a
+      ><a name="256"
+      > </a
+      ><a name="257" class="Symbol"
+      >&#8594;</a
+      ><a name="258"
+      > </a
+      ><a name="259" href="Logic.html#1146" class="Function"
+      >&#8707;-witness</a
+      ><a name="268"
+      > </a
+      ><a name="269" class="Symbol"
+      >(</a
+      ><a name="270" href="Choice.html#240" class="Bound"
+      >g</a
+      ><a name="271"
+      > </a
+      ><a name="272" href="Choice.html#255" class="Bound"
+      >x</a
+      ><a name="273" class="Symbol"
+      >))</a
+      ><a name="275"
+      > </a
+      ><a name="276" class="Symbol"
+      >(&#955;</a
+      ><a name="278"
+      > </a
+      ><a name="279" href="Choice.html#279" class="Bound"
+      >x</a
+      ><a name="280"
+      > </a
+      ><a name="281" class="Symbol"
+      >&#8594;</a
+      ><a name="282"
+      > </a
+      ><a name="283" href="Logic.html#1235" class="Function"
+      >&#8707;-elim</a
+      ><a name="289"
+      > </a
+      ><a name="290" class="Symbol"
+      >(</a
+      ><a name="291" href="Choice.html#240" class="Bound"
+      >g</a
+      ><a name="292"
+      > </a
+      ><a name="293" href="Choice.html#279" class="Bound"
+      >x</a
+      ><a name="294" class="Symbol"
+      >))</a
+      ><a name="296"
+      >
+
+
+</a
+      ><a name="299" href="Choice.html#299" class="Function"
+      >DC</a
+      ><a name="301"
+      > </a
+      ><a name="302" class="Symbol"
+      >:</a
+      ><a name="303"
+      > </a
+      ><a name="304" class="Symbol"
+      >{</a
+      ><a name="305" href="Choice.html#305" class="Bound"
+      >X</a
+      ><a name="306"
+      > </a
+      ><a name="307" class="Symbol"
+      >:</a
+      ><a name="308"
+      > </a
+      ><a name="309" class="PrimitiveType"
+      >Set</a
+      ><a name="312" class="Symbol"
+      >}</a
+      ><a name="313"
+      > </a
+      ><a name="314" class="Symbol"
+      >{</a
+      ><a name="315" href="Choice.html#315" class="Bound"
+      >P</a
+      ><a name="316"
+      > </a
+      ><a name="317" class="Symbol"
+      >:</a
+      ><a name="318"
+      > </a
+      ><a name="319" href="Naturals.html#48" class="Datatype"
+      >&#8469;</a
+      ><a name="320"
+      > </a
+      ><a name="321" class="Symbol"
+      >&#8594;</a
+      ><a name="322"
+      > </a
+      ><a name="323" href="Choice.html#305" class="Bound"
+      >X</a
+      ><a name="324"
+      > </a
+      ><a name="325" class="Symbol"
+      >&#8594;</a
+      ><a name="326"
+      > </a
+      ><a name="327" href="Choice.html#305" class="Bound"
+      >X</a
+      ><a name="328"
+      > </a
+      ><a name="329" class="Symbol"
+      >&#8594;</a
+      ><a name="330"
+      > </a
+      ><a name="331" href="Logic.html#77" class="Function"
+      >&#937;</a
+      ><a name="332" class="Symbol"
+      >}</a
+      ><a name="333"
+      > </a
+      ><a name="334" class="Symbol"
+      >&#8594;</a
+      ><a name="335"
+      >
+</a
+      ><a name="336" class="Comment"
+      >--</a
+      ><a name="338"
+      >
+    </a
+      ><a name="343" class="Symbol"
+      >&#8704;(</a
+      ><a name="345" href="Choice.html#345" class="Bound"
+      >x&#8320;</a
+      ><a name="347"
+      > </a
+      ><a name="348" class="Symbol"
+      >:</a
+      ><a name="349"
+      > </a
+      ><a name="350" href="Choice.html#305" class="Bound"
+      >X</a
+      ><a name="351" class="Symbol"
+      >)</a
+      ><a name="352"
+      > </a
+      ><a name="353" class="Symbol"
+      >&#8594;</a
+      ><a name="354"
+      > </a
+      ><a name="355" class="Symbol"
+      >(&#8704;(</a
+      ><a name="358" href="Choice.html#358" class="Bound"
+      >n</a
+      ><a name="359"
+      > </a
+      ><a name="360" class="Symbol"
+      >:</a
+      ><a name="361"
+      > </a
+      ><a name="362" href="Naturals.html#48" class="Datatype"
+      >&#8469;</a
+      ><a name="363" class="Symbol"
+      >)</a
+      ><a name="364"
+      > </a
+      ><a name="365" class="Symbol"
+      >&#8594;</a
+      ><a name="366"
+      > </a
+      ><a name="367" class="Symbol"
+      >&#8704;(</a
+      ><a name="369" href="Choice.html#369" class="Bound"
+      >x</a
+      ><a name="370"
+      > </a
+      ><a name="371" class="Symbol"
+      >:</a
+      ><a name="372"
+      > </a
+      ><a name="373" href="Choice.html#305" class="Bound"
+      >X</a
+      ><a name="374" class="Symbol"
+      >)</a
+      ><a name="375"
+      > </a
+      ><a name="376" class="Symbol"
+      >&#8594;</a
+      ><a name="377"
+      > </a
+      ><a name="378" href="Logic.html#1060" class="Datatype"
+      >&#8707;</a
+      ><a name="379"
+      > </a
+      ><a name="380" class="Symbol"
+      >\(</a
+      ><a name="382" href="Choice.html#382" class="Bound"
+      >y</a
+      ><a name="383"
+      > </a
+      ><a name="384" class="Symbol"
+      >:</a
+      ><a name="385"
+      > </a
+      ><a name="386" href="Choice.html#305" class="Bound"
+      >X</a
+      ><a name="387" class="Symbol"
+      >)</a
+      ><a name="388"
+      > </a
+      ><a name="389" class="Symbol"
+      >&#8594;</a
+      ><a name="390"
+      > </a
+      ><a name="391" href="Choice.html#315" class="Bound"
+      >P</a
+      ><a name="392"
+      > </a
+      ><a name="393" href="Choice.html#358" class="Bound"
+      >n</a
+      ><a name="394"
+      > </a
+      ><a name="395" href="Choice.html#369" class="Bound"
+      >x</a
+      ><a name="396"
+      > </a
+      ><a name="397" href="Choice.html#382" class="Bound"
+      >y</a
+      ><a name="398" class="Symbol"
+      >)</a
+      ><a name="399"
+      >
+ </a
+      ><a name="401" class="Symbol"
+      >&#8594;</a
+      ><a name="402"
+      >  </a
+      ><a name="404" href="Logic.html#1060" class="Datatype"
+      >&#8707;</a
+      ><a name="405"
+      > </a
+      ><a name="406" class="Symbol"
+      >\(</a
+      ><a name="408" href="Choice.html#408" class="Bound"
+      >&#945;</a
+      ><a name="409"
+      > </a
+      ><a name="410" class="Symbol"
+      >:</a
+      ><a name="411"
+      > </a
+      ><a name="412" href="Naturals.html#48" class="Datatype"
+      >&#8469;</a
+      ><a name="413"
+      > </a
+      ><a name="414" class="Symbol"
+      >&#8594;</a
+      ><a name="415"
+      > </a
+      ><a name="416" href="Choice.html#305" class="Bound"
+      >X</a
+      ><a name="417" class="Symbol"
+      >)</a
+      ><a name="418"
+      > </a
+      ><a name="419" class="Symbol"
+      >&#8594;</a
+      ><a name="420"
+      > </a
+      ><a name="421" href="Choice.html#408" class="Bound"
+      >&#945;</a
+      ><a name="422"
+      > </a
+      ><a name="423" href="Naturals.html#68" class="InductiveConstructor"
+      >O</a
+      ><a name="424"
+      > </a
+      ><a name="425" href="Equality.html#48" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="426"
+      > </a
+      ><a name="427" href="Choice.html#345" class="Bound"
+      >x&#8320;</a
+      ><a name="429"
+      > </a
+      ><a name="430" href="Logic.html#282" class="Datatype Operator"
+      >&#8743;</a
+      ><a name="431"
+      > </a
+      ><a name="432" class="Symbol"
+      >(&#8704;(</a
+      ><a name="435" href="Choice.html#435" class="Bound"
+      >n</a
+      ><a name="436"
+      > </a
+      ><a name="437" class="Symbol"
+      >:</a
+      ><a name="438"
+      > </a
+      ><a name="439" href="Naturals.html#48" class="Datatype"
+      >&#8469;</a
+      ><a name="440" class="Symbol"
+      >)</a
+      ><a name="441"
+      > </a
+      ><a name="442" class="Symbol"
+      >&#8594;</a
+      ><a name="443"
+      > </a
+      ><a name="444" href="Choice.html#315" class="Bound"
+      >P</a
+      ><a name="445"
+      > </a
+      ><a name="446" href="Choice.html#435" class="Bound"
+      >n</a
+      ><a name="447"
+      > </a
+      ><a name="448" class="Symbol"
+      >(</a
+      ><a name="449" href="Choice.html#408" class="Bound"
+      >&#945;</a
+      ><a name="450"
+      > </a
+      ><a name="451" href="Choice.html#435" class="Bound"
+      >n</a
+      ><a name="452" class="Symbol"
+      >)</a
+      ><a name="453"
+      > </a
+      ><a name="454" class="Symbol"
+      >(</a
+      ><a name="455" href="Choice.html#408" class="Bound"
+      >&#945;</a
+      ><a name="456" class="Symbol"
+      >(</a
+      ><a name="457" href="Naturals.html#121" class="InductiveConstructor"
+      >succ</a
+      ><a name="461"
+      > </a
+      ><a name="462" href="Choice.html#435" class="Bound"
+      >n</a
+      ><a name="463" class="Symbol"
+      >)))</a
+      ><a name="466"
+      >
+
+</a
+      ><a name="468" href="Choice.html#299" class="Function"
+      >DC</a
+      ><a name="470"
+      > </a
+      ><a name="471" class="Symbol"
+      >{</a
+      ><a name="472" href="Choice.html#472" class="Bound"
+      >X</a
+      ><a name="473" class="Symbol"
+      >}</a
+      ><a name="474"
+      > </a
+      ><a name="475" href="Choice.html#475" class="Bound"
+      >x&#8320;</a
+      ><a name="477"
+      > </a
+      ><a name="478" href="Choice.html#478" class="Bound"
+      >g</a
+      ><a name="479"
+      > </a
+      ><a name="480" class="Symbol"
+      >=</a
+      ><a name="481"
+      > </a
+      ><a name="482" href="Logic.html#1099" class="InductiveConstructor"
+      >&#8707;-intro</a
+      ><a name="489"
+      > </a
+      ><a name="490" href="Choice.html#550" class="Function"
+      >&#945;</a
+      ><a name="491"
+      > </a
+      ><a name="492" class="Symbol"
+      >(</a
+      ><a name="493" href="Logic.html#310" class="InductiveConstructor"
+      >&#8743;-intro</a
+      ><a name="500"
+      > </a
+      ><a name="501" href="Equality.html#82" class="InductiveConstructor"
+      >reflexivity</a
+      ><a name="512"
+      > </a
+      ><a name="513" class="Symbol"
+      >(&#955;</a
+      ><a name="515"
+      > </a
+      ><a name="516" href="Choice.html#516" class="Bound"
+      >n</a
+      ><a name="517"
+      > </a
+      ><a name="518" class="Symbol"
+      >&#8594;</a
+      ><a name="519"
+      > </a
+      ><a name="520" href="Logic.html#1235" class="Function"
+      >&#8707;-elim</a
+      ><a name="526" class="Symbol"
+      >(</a
+      ><a name="527" href="Choice.html#478" class="Bound"
+      >g</a
+      ><a name="528"
+      > </a
+      ><a name="529" href="Choice.html#516" class="Bound"
+      >n</a
+      ><a name="530"
+      > </a
+      ><a name="531" class="Symbol"
+      >(</a
+      ><a name="532" href="Choice.html#550" class="Function"
+      >&#945;</a
+      ><a name="533"
+      > </a
+      ><a name="534" href="Choice.html#516" class="Bound"
+      >n</a
+      ><a name="535" class="Symbol"
+      >))))</a
+      ><a name="539"
+      >
+    </a
+      ><a name="544" class="Keyword"
+      >where</a
+      ><a name="549"
+      > </a
+      ><a name="550" href="Choice.html#550" class="Function"
+      >&#945;</a
+      ><a name="551"
+      > </a
+      ><a name="552" class="Symbol"
+      >:</a
+      ><a name="553"
+      > </a
+      ><a name="554" href="Naturals.html#48" class="Datatype"
+      >&#8469;</a
+      ><a name="555"
+      > </a
+      ><a name="556" class="Symbol"
+      >&#8594;</a
+      ><a name="557"
+      > </a
+      ><a name="558" href="Choice.html#472" class="Bound"
+      >X</a
+      ><a name="559"
+      >
+          </a
+      ><a name="570" href="Choice.html#550" class="Function"
+      >&#945;</a
+      ><a name="571"
+      > </a
+      ><a name="572" class="Symbol"
+      >=</a
+      ><a name="573"
+      > </a
+      ><a name="574" href="Naturals.html#232" class="Function"
+      >induction</a
+      ><a name="583"
+      > </a
+      ><a name="584" href="Choice.html#475" class="Bound"
+      >x&#8320;</a
+      ><a name="586"
+      > </a
+      ><a name="587" class="Symbol"
+      >(&#955;</a
+      ><a name="589"
+      > </a
+      ><a name="590" href="Choice.html#590" class="Bound"
+      >k</a
+      ><a name="591"
+      > </a
+      ><a name="592" href="Choice.html#592" class="Bound"
+      >x</a
+      ><a name="593"
+      > </a
+      ><a name="594" class="Symbol"
+      >&#8594;</a
+      ><a name="595"
+      > </a
+      ><a name="596" href="Logic.html#1146" class="Function"
+      >&#8707;-witness</a
+      ><a name="605" class="Symbol"
+      >(</a
+      ><a name="606" href="Choice.html#478" class="Bound"
+      >g</a
+      ><a name="607"
+      > </a
+      ><a name="608" href="Choice.html#590" class="Bound"
+      >k</a
+      ><a name="609"
+      > </a
+      ><a name="610" href="Choice.html#592" class="Bound"
+      >x</a
+      ><a name="611" class="Symbol"
+      >))</a
+      ><a name="613"
+      >
+
+</a
+      ><a name="616" class="Comment"
+      >-- Dependently typed, dependent choice:</a
+      ><a name="655"
+      >
+
+</a
+      ><a name="657" href="Choice.html#657" class="Function"
+      >DDC</a
+      ><a name="660"
+      > </a
+      ><a name="661" class="Symbol"
+      >:</a
+      ><a name="662"
+      > </a
+      ><a name="663" class="Symbol"
+      >{</a
+      ><a name="664" href="Choice.html#664" class="Bound"
+      >X</a
+      ><a name="665"
+      > </a
+      ><a name="666" class="Symbol"
+      >:</a
+      ><a name="667"
+      > </a
+      ><a name="668" href="Naturals.html#48" class="Datatype"
+      >&#8469;</a
+      ><a name="669"
+      > </a
+      ><a name="670" class="Symbol"
+      >&#8594;</a
+      ><a name="671"
+      > </a
+      ><a name="672" class="PrimitiveType"
+      >Set</a
+      ><a name="675" class="Symbol"
+      >}</a
+      ><a name="676"
+      > </a
+      ><a name="677" class="Symbol"
+      >{</a
+      ><a name="678" href="Choice.html#678" class="Bound"
+      >P</a
+      ><a name="679"
+      > </a
+      ><a name="680" class="Symbol"
+      >:</a
+      ><a name="681"
+      > </a
+      ><a name="682" class="Symbol"
+      >(</a
+      ><a name="683" href="Choice.html#683" class="Bound"
+      >n</a
+      ><a name="684"
+      > </a
+      ><a name="685" class="Symbol"
+      >:</a
+      ><a name="686"
+      > </a
+      ><a name="687" href="Naturals.html#48" class="Datatype"
+      >&#8469;</a
+      ><a name="688" class="Symbol"
+      >)</a
+      ><a name="689"
+      > </a
+      ><a name="690" class="Symbol"
+      >&#8594;</a
+      ><a name="691"
+      > </a
+      ><a name="692" href="Choice.html#664" class="Bound"
+      >X</a
+      ><a name="693"
+      > </a
+      ><a name="694" href="Choice.html#683" class="Bound"
+      >n</a
+      ><a name="695"
+      > </a
+      ><a name="696" class="Symbol"
+      >&#8594;</a
+      ><a name="697"
+      > </a
+      ><a name="698" href="Choice.html#664" class="Bound"
+      >X</a
+      ><a name="699" class="Symbol"
+      >(</a
+      ><a name="700" href="Naturals.html#121" class="InductiveConstructor"
+      >succ</a
+      ><a name="704"
+      > </a
+      ><a name="705" href="Choice.html#683" class="Bound"
+      >n</a
+      ><a name="706" class="Symbol"
+      >)</a
+      ><a name="707"
+      > </a
+      ><a name="708" class="Symbol"
+      >&#8594;</a
+      ><a name="709"
+      > </a
+      ><a name="710" href="Logic.html#77" class="Function"
+      >&#937;</a
+      ><a name="711" class="Symbol"
+      >}</a
+      ><a name="712"
+      > </a
+      ><a name="713" class="Symbol"
+      >&#8594;</a
+      ><a name="714"
+      >
+</a
+      ><a name="715" class="Comment"
+      >---</a
+      ><a name="718"
+      >
+    </a
+      ><a name="723" class="Symbol"
+      >&#8704;(</a
+      ><a name="725" href="Choice.html#725" class="Bound"
+      >x&#8320;</a
+      ><a name="727"
+      > </a
+      ><a name="728" class="Symbol"
+      >:</a
+      ><a name="729"
+      > </a
+      ><a name="730" href="Choice.html#664" class="Bound"
+      >X</a
+      ><a name="731"
+      > </a
+      ><a name="732" href="Naturals.html#68" class="InductiveConstructor"
+      >O</a
+      ><a name="733" class="Symbol"
+      >)</a
+      ><a name="734"
+      > </a
+      ><a name="735" class="Symbol"
+      >&#8594;</a
+      ><a name="736"
+      > </a
+      ><a name="737" class="Symbol"
+      >(&#8704;(</a
+      ><a name="740" href="Choice.html#740" class="Bound"
+      >n</a
+      ><a name="741"
+      > </a
+      ><a name="742" class="Symbol"
+      >:</a
+      ><a name="743"
+      > </a
+      ><a name="744" href="Naturals.html#48" class="Datatype"
+      >&#8469;</a
+      ><a name="745" class="Symbol"
+      >)</a
+      ><a name="746"
+      > </a
+      ><a name="747" class="Symbol"
+      >&#8594;</a
+      ><a name="748"
+      > </a
+      ><a name="749" class="Symbol"
+      >&#8704;(</a
+      ><a name="751" href="Choice.html#751" class="Bound"
+      >x</a
+      ><a name="752"
+      > </a
+      ><a name="753" class="Symbol"
+      >:</a
+      ><a name="754"
+      > </a
+      ><a name="755" href="Choice.html#664" class="Bound"
+      >X</a
+      ><a name="756"
+      > </a
+      ><a name="757" href="Choice.html#740" class="Bound"
+      >n</a
+      ><a name="758" class="Symbol"
+      >)</a
+      ><a name="759"
+      > </a
+      ><a name="760" class="Symbol"
+      >&#8594;</a
+      ><a name="761"
+      > </a
+      ><a name="762" href="Logic.html#1060" class="Datatype"
+      >&#8707;</a
+      ><a name="763"
+      > </a
+      ><a name="764" class="Symbol"
+      >\(</a
+      ><a name="766" href="Choice.html#766" class="Bound"
+      >y</a
+      ><a name="767"
+      > </a
+      ><a name="768" class="Symbol"
+      >:</a
+      ><a name="769"
+      > </a
+      ><a name="770" href="Choice.html#664" class="Bound"
+      >X</a
+      ><a name="771" class="Symbol"
+      >(</a
+      ><a name="772" href="Naturals.html#121" class="InductiveConstructor"
+      >succ</a
+      ><a name="776"
+      > </a
+      ><a name="777" href="Choice.html#740" class="Bound"
+      >n</a
+      ><a name="778" class="Symbol"
+      >))</a
+      ><a name="780"
+      > </a
+      ><a name="781" class="Symbol"
+      >&#8594;</a
+      ><a name="782"
+      > </a
+      ><a name="783" href="Choice.html#678" class="Bound"
+      >P</a
+      ><a name="784"
+      > </a
+      ><a name="785" href="Choice.html#740" class="Bound"
+      >n</a
+      ><a name="786"
+      > </a
+      ><a name="787" href="Choice.html#751" class="Bound"
+      >x</a
+      ><a name="788"
+      > </a
+      ><a name="789" href="Choice.html#766" class="Bound"
+      >y</a
+      ><a name="790" class="Symbol"
+      >)</a
+      ><a name="791"
+      >
+ </a
+      ><a name="793" class="Symbol"
+      >&#8594;</a
+      ><a name="794"
+      >  </a
+      ><a name="796" href="Logic.html#1060" class="Datatype"
+      >&#8707;</a
+      ><a name="797"
+      > </a
+      ><a name="798" class="Symbol"
+      >\(</a
+      ><a name="800" href="Choice.html#800" class="Bound"
+      >&#945;</a
+      ><a name="801"
+      > </a
+      ><a name="802" class="Symbol"
+      >:</a
+      ><a name="803"
+      > </a
+      ><a name="804" class="Symbol"
+      >(</a
+      ><a name="805" href="Choice.html#805" class="Bound"
+      >n</a
+      ><a name="806"
+      > </a
+      ><a name="807" class="Symbol"
+      >:</a
+      ><a name="808"
+      > </a
+      ><a name="809" href="Naturals.html#48" class="Datatype"
+      >&#8469;</a
+      ><a name="810" class="Symbol"
+      >)</a
+      ><a name="811"
+      > </a
+      ><a name="812" class="Symbol"
+      >&#8594;</a
+      ><a name="813"
+      > </a
+      ><a name="814" href="Choice.html#664" class="Bound"
+      >X</a
+      ><a name="815"
+      > </a
+      ><a name="816" href="Choice.html#805" class="Bound"
+      >n</a
+      ><a name="817" class="Symbol"
+      >)</a
+      ><a name="818"
+      > </a
+      ><a name="819" class="Symbol"
+      >&#8594;</a
+      ><a name="820"
+      > </a
+      ><a name="821" href="Choice.html#800" class="Bound"
+      >&#945;</a
+      ><a name="822"
+      > </a
+      ><a name="823" href="Naturals.html#68" class="InductiveConstructor"
+      >O</a
+      ><a name="824"
+      > </a
+      ><a name="825" href="Equality.html#48" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="826"
+      > </a
+      ><a name="827" href="Choice.html#725" class="Bound"
+      >x&#8320;</a
+      ><a name="829"
+      > </a
+      ><a name="830" href="Logic.html#282" class="Datatype Operator"
+      >&#8743;</a
+      ><a name="831"
+      > </a
+      ><a name="832" class="Symbol"
+      >(&#8704;(</a
+      ><a name="835" href="Choice.html#835" class="Bound"
+      >n</a
+      ><a name="836"
+      > </a
+      ><a name="837" class="Symbol"
+      >:</a
+      ><a name="838"
+      > </a
+      ><a name="839" href="Naturals.html#48" class="Datatype"
+      >&#8469;</a
+      ><a name="840" class="Symbol"
+      >)</a
+      ><a name="841"
+      > </a
+      ><a name="842" class="Symbol"
+      >&#8594;</a
+      ><a name="843"
+      > </a
+      ><a name="844" href="Choice.html#678" class="Bound"
+      >P</a
+      ><a name="845"
+      > </a
+      ><a name="846" href="Choice.html#835" class="Bound"
+      >n</a
+      ><a name="847"
+      > </a
+      ><a name="848" class="Symbol"
+      >(</a
+      ><a name="849" href="Choice.html#800" class="Bound"
+      >&#945;</a
+      ><a name="850"
+      > </a
+      ><a name="851" href="Choice.html#835" class="Bound"
+      >n</a
+      ><a name="852" class="Symbol"
+      >)</a
+      ><a name="853"
+      > </a
+      ><a name="854" class="Symbol"
+      >(</a
+      ><a name="855" href="Choice.html#800" class="Bound"
+      >&#945;</a
+      ><a name="856" class="Symbol"
+      >(</a
+      ><a name="857" href="Naturals.html#121" class="InductiveConstructor"
+      >succ</a
+      ><a name="861"
+      > </a
+      ><a name="862" href="Choice.html#835" class="Bound"
+      >n</a
+      ><a name="863" class="Symbol"
+      >)))</a
+      ><a name="866"
+      >
+
+</a
+      ><a name="868" href="Choice.html#657" class="Function"
+      >DDC</a
+      ><a name="871"
+      > </a
+      ><a name="872" class="Symbol"
+      >{</a
+      ><a name="873" href="Choice.html#873" class="Bound"
+      >X</a
+      ><a name="874" class="Symbol"
+      >}</a
+      ><a name="875"
+      > </a
+      ><a name="876" href="Choice.html#876" class="Bound"
+      >x&#8320;</a
+      ><a name="878"
+      > </a
+      ><a name="879" href="Choice.html#879" class="Bound"
+      >g</a
+      ><a name="880"
+      > </a
+      ><a name="881" class="Symbol"
+      >=</a
+      ><a name="882"
+      > </a
+      ><a name="883" href="Logic.html#1099" class="InductiveConstructor"
+      >&#8707;-intro</a
+      ><a name="890"
+      > </a
+      ><a name="891" href="Choice.html#951" class="Function"
+      >&#945;</a
+      ><a name="892"
+      > </a
+      ><a name="893" class="Symbol"
+      >(</a
+      ><a name="894" href="Logic.html#310" class="InductiveConstructor"
+      >&#8743;-intro</a
+      ><a name="901"
+      > </a
+      ><a name="902" href="Equality.html#82" class="InductiveConstructor"
+      >reflexivity</a
+      ><a name="913"
+      > </a
+      ><a name="914" class="Symbol"
+      >(&#955;</a
+      ><a name="916"
+      > </a
+      ><a name="917" href="Choice.html#917" class="Bound"
+      >n</a
+      ><a name="918"
+      > </a
+      ><a name="919" class="Symbol"
+      >&#8594;</a
+      ><a name="920"
+      > </a
+      ><a name="921" href="Logic.html#1235" class="Function"
+      >&#8707;-elim</a
+      ><a name="927" class="Symbol"
+      >(</a
+      ><a name="928" href="Choice.html#879" class="Bound"
+      >g</a
+      ><a name="929"
+      > </a
+      ><a name="930" href="Choice.html#917" class="Bound"
+      >n</a
+      ><a name="931"
+      > </a
+      ><a name="932" class="Symbol"
+      >(</a
+      ><a name="933" href="Choice.html#951" class="Function"
+      >&#945;</a
+      ><a name="934"
+      > </a
+      ><a name="935" href="Choice.html#917" class="Bound"
+      >n</a
+      ><a name="936" class="Symbol"
+      >))))</a
+      ><a name="940"
+      >
+    </a
+      ><a name="945" class="Keyword"
+      >where</a
+      ><a name="950"
+      > </a
+      ><a name="951" href="Choice.html#951" class="Function"
+      >&#945;</a
+      ><a name="952"
+      > </a
+      ><a name="953" class="Symbol"
+      >:</a
+      ><a name="954"
+      > </a
+      ><a name="955" class="Symbol"
+      >(</a
+      ><a name="956" href="Choice.html#956" class="Bound"
+      >n</a
+      ><a name="957"
+      > </a
+      ><a name="958" class="Symbol"
+      >:</a
+      ><a name="959"
+      > </a
+      ><a name="960" href="Naturals.html#48" class="Datatype"
+      >&#8469;</a
+      ><a name="961" class="Symbol"
+      >)</a
+      ><a name="962"
+      > </a
+      ><a name="963" class="Symbol"
+      >&#8594;</a
+      ><a name="964"
+      > </a
+      ><a name="965" href="Choice.html#873" class="Bound"
+      >X</a
+      ><a name="966"
+      > </a
+      ><a name="967" href="Choice.html#956" class="Bound"
+      >n</a
+      ><a name="968"
+      >
+          </a
+      ><a name="979" href="Choice.html#951" class="Function"
+      >&#945;</a
+      ><a name="980"
+      > </a
+      ><a name="981" class="Symbol"
+      >=</a
+      ><a name="982"
+      > </a
+      ><a name="983" href="Naturals.html#232" class="Function"
+      >induction</a
+      ><a name="992"
+      > </a
+      ><a name="993" href="Choice.html#876" class="Bound"
+      >x&#8320;</a
+      ><a name="995"
+      > </a
+      ><a name="996" class="Symbol"
+      >(&#955;</a
+      ><a name="998"
+      > </a
+      ><a name="999" href="Choice.html#999" class="Bound"
+      >k</a
+      ><a name="1000"
+      > </a
+      ><a name="1001" href="Choice.html#1001" class="Bound"
+      >x</a
+      ><a name="1002"
+      > </a
+      ><a name="1003" class="Symbol"
+      >&#8594;</a
+      ><a name="1004"
+      > </a
+      ><a name="1005" href="Logic.html#1146" class="Function"
+      >&#8707;-witness</a
+      ><a name="1014" class="Symbol"
+      >(</a
+      ><a name="1015" href="Choice.html#879" class="Bound"
+      >g</a
+      ><a name="1016"
+      > </a
+      ><a name="1017" href="Choice.html#999" class="Bound"
+      >k</a
+      ><a name="1018"
+      > </a
+      ><a name="1019" href="Choice.html#1001" class="Bound"
+      >x</a
+      ><a name="1020" class="Symbol"
+      >))</a
+      ><a name="1022"
+      >
+</a
+      ></pre
+    ></body
+  ></html
+>

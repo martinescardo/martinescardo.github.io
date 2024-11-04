@@ -1,0 +1,344 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+><head
+  ><title
+    >html-generator</title
+    ><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"
+     /><meta http-equiv="Content-Style-Type" content="text/css"
+     /><link href="Agda.css" rel="stylesheet" type="text/css"
+     /></head
+  ><body
+  ><pre
+    ><a name="1" class="Keyword"
+      >module</a
+      ><a name="7"
+      > </a
+      ><a name="8" href="html-generator.html#8" class="Module"
+      >html-generator</a
+      ><a name="22"
+      > </a
+      ><a name="23" class="Keyword"
+      >where</a
+      ><a name="28"
+      >
+
+</a
+      ><a name="30" class="Comment"
+      >-- We import everything so that html is generated for all files, even</a
+      ><a name="99"
+      >
+</a
+      ><a name="100" class="Comment"
+      >-- those that are alternatives, when with compile with --html.</a
+      ><a name="162"
+      >
+</a
+      ><a name="163" class="Comment"
+      >--</a
+      ><a name="165"
+      >
+</a
+      ><a name="166" class="Comment"
+      >-- Hence this file should be imported in the top file, namely</a
+      ><a name="227"
+      >
+</a
+      ><a name="228" class="Comment"
+      >-- Examples.agda.</a
+      ><a name="245"
+      >
+
+
+</a
+      ><a name="248" class="Keyword"
+      >import</a
+      ><a name="254"
+      > </a
+      ><a name="255" href="Addition.html#8" class="Module"
+      >Addition</a
+      ><a name="263"
+      >
+</a
+      ><a name="264" class="Keyword"
+      >import</a
+      ><a name="270"
+      > </a
+      ><a name="271" href="Cantor.html#8" class="Module"
+      >Cantor</a
+      ><a name="277"
+      >
+</a
+      ><a name="278" class="Keyword"
+      >import</a
+      ><a name="284"
+      > </a
+      ><a name="285" href="Choice.html#8" class="Module"
+      >Choice</a
+      ><a name="291"
+      >
+</a
+      ><a name="292" class="Keyword"
+      >import</a
+      ><a name="298"
+      > </a
+      ><a name="299" href="DataStructures.html#8" class="Module"
+      >DataStructures</a
+      ><a name="313"
+      >
+</a
+      ><a name="314" class="Keyword"
+      >import</a
+      ><a name="320"
+      > </a
+      ><a name="321" href="Equality.html#8" class="Module"
+      >Equality</a
+      ><a name="329"
+      >
+</a
+      ><a name="330" class="Keyword"
+      >import</a
+      ><a name="336"
+      > </a
+      ><a name="337" href="Finite.html#8" class="Module"
+      >Finite</a
+      ><a name="343"
+      >
+</a
+      ><a name="344" class="Keyword"
+      >import</a
+      ><a name="350"
+      > </a
+      ><a name="351" href="Finite-JK-Shifts.html#8" class="Module"
+      >Finite-JK-Shifts</a
+      ><a name="367"
+      >
+</a
+      ><a name="368" class="Keyword"
+      >import</a
+      ><a name="374"
+      > </a
+      ><a name="375" href="FinitePigeon.html#8" class="Module"
+      >FinitePigeon</a
+      ><a name="387"
+      >
+</a
+      ><a name="388" class="Keyword"
+      >import</a
+      ><a name="394"
+      > </a
+      ><a name="395" href="InfinitePigeon.html#8" class="Module"
+      >InfinitePigeon</a
+      ><a name="409"
+      >
+</a
+      ><a name="410" class="Keyword"
+      >import</a
+      ><a name="416"
+      > </a
+      ><a name="417" href="InfinitePigeon2011-05-12.html#8" class="Module"
+      >InfinitePigeon2011-05-12</a
+      ><a name="441"
+      >
+</a
+      ><a name="442" class="Keyword"
+      >import</a
+      ><a name="448"
+      > </a
+      ><a name="449" href="InfinitePigeonLessEfficient.html#8" class="Module"
+      >InfinitePigeonLessEfficient</a
+      ><a name="476"
+      >
+</a
+      ><a name="477" class="Keyword"
+      >import</a
+      ><a name="483"
+      > </a
+      ><a name="484" href="InfinitePigeonOriginal.html#8" class="Module"
+      >InfinitePigeonOriginal</a
+      ><a name="506"
+      >
+</a
+      ><a name="507" class="Keyword"
+      >import</a
+      ><a name="513"
+      > </a
+      ><a name="514" href="J-AC-N.html#8" class="Module"
+      >J-AC-N</a
+      ><a name="520"
+      >
+</a
+      ><a name="521" class="Keyword"
+      >import</a
+      ><a name="527"
+      > </a
+      ><a name="528" href="J-DC.html#8" class="Module"
+      >J-DC</a
+      ><a name="532"
+      >
+</a
+      ><a name="533" class="Keyword"
+      >import</a
+      ><a name="539"
+      > </a
+      ><a name="540" href="J-Shift.html#8" class="Module"
+      >J-Shift</a
+      ><a name="547"
+      >
+</a
+      ><a name="548" class="Keyword"
+      >import</a
+      ><a name="554"
+      > </a
+      ><a name="555" href="J-Shift-BBC.html#165" class="Module"
+      >J-Shift-BBC</a
+      ><a name="566"
+      >
+</a
+      ><a name="567" class="Keyword"
+      >import</a
+      ><a name="573"
+      > </a
+      ><a name="574" href="J-Shift-Selection.html#173" class="Module"
+      >J-Shift-Selection</a
+      ><a name="591"
+      >
+</a
+      ><a name="592" class="Keyword"
+      >import</a
+      ><a name="598"
+      > </a
+      ><a name="599" href="JK-LogicalFacts.html#8" class="Module"
+      >JK-LogicalFacts</a
+      ><a name="614"
+      >
+</a
+      ><a name="615" class="Keyword"
+      >import</a
+      ><a name="621"
+      > </a
+      ><a name="622" href="JK-Monads.html#8" class="Module"
+      >JK-Monads</a
+      ><a name="631"
+      >
+</a
+      ><a name="632" class="Keyword"
+      >import</a
+      ><a name="638"
+      > </a
+      ><a name="639" href="K-AC-N.html#8" class="Module"
+      >K-AC-N</a
+      ><a name="645"
+      >
+</a
+      ><a name="646" class="Keyword"
+      >import</a
+      ><a name="652"
+      > </a
+      ><a name="653" href="K-DC.html#8" class="Module"
+      >K-DC</a
+      ><a name="657"
+      >
+</a
+      ><a name="658" class="Keyword"
+      >import</a
+      ><a name="664"
+      > </a
+      ><a name="665" href="K-Shift.html#8" class="Module"
+      >K-Shift</a
+      ><a name="672"
+      >
+</a
+      ><a name="673" class="Keyword"
+      >import</a
+      ><a name="679"
+      > </a
+      ><a name="680" href="K-Shift-BBC.html#8" class="Module"
+      >K-Shift-BBC</a
+      ><a name="691"
+      >
+</a
+      ><a name="692" class="Keyword"
+      >import</a
+      ><a name="698"
+      > </a
+      ><a name="699" href="K-Shift-MBR.html#129" class="Module"
+      >K-Shift-MBR</a
+      ><a name="710"
+      >
+</a
+      ><a name="711" class="Keyword"
+      >import</a
+      ><a name="717"
+      > </a
+      ><a name="718" href="K-Shift-Selection.html#8" class="Module"
+      >K-Shift-Selection</a
+      ><a name="735"
+      >
+</a
+      ><a name="736" class="Keyword"
+      >import</a
+      ><a name="742"
+      > </a
+      ><a name="743" href="K-Shift-from-J-Shift.html#8" class="Module"
+      >K-Shift-from-J-Shift</a
+      ><a name="763"
+      >
+</a
+      ><a name="764" class="Keyword"
+      >import</a
+      ><a name="770"
+      > </a
+      ><a name="771" href="Logic.html#8" class="Module"
+      >Logic</a
+      ><a name="776"
+      >
+</a
+      ><a name="777" class="Keyword"
+      >import</a
+      ><a name="783"
+      > </a
+      ><a name="784" href="LogicalFacts.html#8" class="Module"
+      >LogicalFacts</a
+      ><a name="796"
+      >
+</a
+      ><a name="797" class="Keyword"
+      >import</a
+      ><a name="803"
+      > </a
+      ><a name="804" href="Naturals.html#8" class="Module"
+      >Naturals</a
+      ><a name="812"
+      >
+</a
+      ><a name="813" class="Keyword"
+      >import</a
+      ><a name="819"
+      > </a
+      ><a name="820" href="Order.html#8" class="Module"
+      >Order</a
+      ><a name="825"
+      >
+</a
+      ><a name="826" class="Keyword"
+      >import</a
+      ><a name="832"
+      > </a
+      ><a name="833" href="PigeonProgram.html#8" class="Module"
+      >PigeonProgram</a
+      ><a name="846"
+      >
+</a
+      ><a name="847" class="Keyword"
+      >import</a
+      ><a name="853"
+      > </a
+      ><a name="854" href="Two.html#8" class="Module"
+      >Two</a
+      ><a name="857"
+      >
+</a
+      ></pre
+    ></body
+  ></html
+>
