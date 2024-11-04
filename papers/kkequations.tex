@@ -1,0 +1,1459 @@
+\documentclass[10pt]{article}
+
+\newcommand{\Omit}[1]{}
+
+\usepackage{times}
+
+\usepackage{amsmath,amssymb,stmaryrd,amsthm,amscd,alltt,url,times}
+\usepackage[english]{babel}
+\usepackage{ukdate}
+
+\usepackage{a4}
+\usepackage{url}
+%\usepackage[colorlinks=true,hypertexnames=true,linkcolor=blue]{hyperref}
+
+\newcommand{\cauchy}{\operatorname{Cauchy}}
+\newcommand{\godel}[1]{\ulcorner #1 \urcorner}
+\newcommand{\mycite}[1]{{[#1]}}
+
+\usepackage{diagrams}
+\newarrow{Equal} =====
+\newarrow{Into} C--->
+\newarrow{Onto} ----{>>}
+\newarrow{Dashto} {}{dash}{}{dash}>
+\newarrow{Dashonto} {}{dash}{}{dash}{>>}
+
+\newcommand{\fullversion}[1]{}
+
+\newcommand{\tail}{\operatorname{tl}} 
+\newcommand{\myomega}{\omega}
+\newcommand{\cons}{\cdot}%{\operatorname{:{\!}:}}
+\newcommand{\berger}{\varepsilon^{\text{Berger}}}
+\newcommand{\bergerp}{\varepsilon^{\text{Berger}'}}
+\newcommand{\varepsilonprod}{\varepsilon^{\prod}}
+\newcommand{\varepsilonprodp}{\varepsilon^{\prod'}}
+\newcommand{\varepsilonprodpp}{\varepsilon^{\prod''}}
+\newcommand{\eberger}{\exists^{\text{Berger}}}
+\newcommand{\ebergerp}{\exists^{\text{Berger}'}}
+\newcommand{\evarepsilonprod}{\exists^{\prod}}
+\newcommand{\aberger}{\forall^{\text{Berger}}}
+\newcommand{\abergerp}{\forall^{\text{Berger}'}}
+\newcommand{\avarepsilonprod}{\forall^{\prod}}
+\newcommand{\cat}{}%{\cdot}
+\newcommand{\eqdef}{\mathrel{:=}}%{\stackrel{\text{def}}{=}}
+\newcommand{\id}{\operatorname{id}}
+\newcommand{\K}{\mathcal{K}}
+\newcommand{\Z}{\mathbb{Z}}%{\mathcal{Z}}
+\newtheorem{cor}{Corollary}[section]
+\newtheorem{lemma}[cor]{Lemma}
+\newtheorem{Def}[cor]{Definition}
+\newtheorem{Alg}[cor]{Algorithm}
+\newtheorem{Algs}[cor]{Algorithms}
+\newtheorem{Hypothesis}[cor]{Hypothesis}
+\newtheorem{Rem}[cor]{Remark}
+\newtheorem{Rems}[cor]{Remarks}
+\newtheorem{prop}[cor]{Proposition}
+\newtheorem{Example}[cor]{Example}
+\newtheorem{conjecture}[cor]{Conjecture}
+\newtheorem{Experiment}[cor]{Experiment}
+\newtheorem{Question}[cor]{Question}
+\newtheorem{Examples}[cor]{Examples}
+\newtheorem{theorem}[cor]{Theorem}
+\newtheorem{Discussion}[cor]{Discussion}
+\newenvironment{definition}{\begin{Def}\em}{\end{Def}}
+\newenvironment{algorithm}{\begin{Alg}\em}{\end{Alg}}
+\newenvironment{algorithms}{\begin{Algs}\em}{\end{Algs}}
+\newenvironment{discussion}{\begin{Discussion}\em}{\end{Discussion}}
+\newenvironment{hypothesis}{\begin{Hypothesis}\em}{\end{Hypothesis}}
+\newenvironment{experiment}{\begin{Experiment}\em}{\end{Experiment}}
+\newenvironment{rem}{\begin{Rem}\em}{\end{Rem}}
+\newenvironment{rems}{\begin{Rems}\em}{\end{Rems}}
+\newenvironment{question}{\begin{Question}\em}{\end{Question}}
+\newenvironment{example}{\begin{Example}\em}{\end{Example}}
+\newenvironment{examples}{\begin{Examples}\em}{\end{Examples}}
+\newcommand{\myparagraph}{\paragraph}%[1]{\vspace{0.5ex}\noindent{\itshape\bfseries #1}}%{\vspace{-2ex}\paragraph}
+
+\newcommand{\below}{\sqsubseteq}
+\newcommand{\bnf}{\mathrel{::=}}
+\newcommand{\lift}[1]{#1_{\bot}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\I}{\mathbb{I}}
+\newcommand{\Bool}{2}%{\mathbb{B}}
+\newcommand{\Sierp}{\mathcal{S}}
+\newcommand{\pN}{{\N_{\bot}}}
+\newcommand{\pT}{\mathcal{T}}
+\newcommand{\pU}{\mathcal{U}}
+\newcommand{\pI}{\mathcal{I}}
+\newcommand{\pM}{\mathcal{M}}
+\newcommand{\pR}{\mathcal{R}}
+\newcommand{\pB}{{2_{\bot}}}
+\newcommand{\pBool}{\mathcal{B}}
+\newcommand{\If}{\,\mathrel{\operatorname{if}}}
+\newcommand{\Then}{\mathrel{\operatorname{then}}}
+\newcommand{\Else}{\mathrel{\operatorname{else}}}
+\newcommand{\True}{1}%{\operatorname{tt}}%{\operatorname{true}}
+\newcommand{\False}{0}%{\operatorname{ff}}%{\operatorname{false}}
+\newcommand{\domain}[1]{{\D_{#1}}}
+\newcommand{\total}[1]{{\T_{#1}}}
+\newcommand{\totaleq}[1]{\sim_{#1}}
+\newcommand{\quo}[1]{\qq_{#1}}
+\newcommand{\qq}{\rho}
+\newcommand{\D}{D}
+\newcommand{\E}{E}
+\newcommand{\C}{C}
+\newcommand{\T}{T}
+\newcommand{\kk}[1]{{\C_{#1}}}
+\newcommand{\Scott}{\operatorname{Scott}}
+\newcommand{\tproduct}{\sigma \times \tau}
+\newcommand{\tfunction}{\sigma \to \tau}
+\newcommand{\rh}[1]{\rho_{#1}}
+\newcommand{\comp}{\circ}
+\newcommand{\siff}{\iff}%{\Leftrightarrow}
+\newcommand{\Search}{\operatorname{\mathcal{S}}}
+\newcommand{\RR}{\operatorname{\text{\boldmath{$R$}}}}
+\newcommand{\XX}{\operatorname{\text{\boldmath{$X$}}}}
+\newcommand{\YY}{\operatorname{\text{\boldmath{$Y$}}}}
+\newcommand{\ZZ}{\operatorname{\text{\boldmath{$Z$}}}}
+\newcommand{\dd}{\operatorname{\text{\boldmath{$d$}}}}
+\newcommand{\g}{\operatorname{\text{\boldmath{$g$}}}}
+\newcommand{\f}{\operatorname{\text{\boldmath{$f$}}}}
+\newcommand{\x}{\operatorname{\text{\boldmath{$x$}}}}
+\newcommand{\e}{\operatorname{\text{\boldmath{$e$}}}}
+\newcommand{\sK}{\operatorname{\text{\boldmath{$K$}}}}
+\newcommand{\sF}{\operatorname{\text{\boldmath{$F$}}}}
+\newcommand{\sU}{\operatorname{\text{\boldmath{$U$}}}}
+\newcommand{\sV}{\operatorname{\text{\boldmath{$V$}}}}
+\newcommand{\sQ}{\operatorname{\text{\boldmath{$Q$}}}}
+\newcommand{\sP}{\operatorname{\text{\boldmath{$P$}}}}
+\newcommand{\sE}{\operatorname{\text{\boldmath{$E$}}}}
+
+\begin{document}
+
+\author{Mart\'\i n Escard\'o \\
+{\normalsize School of Computer Science, University of Birmingham, UK}}
+
+\title{Computability of continuous solutions of \\ higher-type equations}
+
+\date{{\normalsize Work in progress, draft version of \today}}
+
+\maketitle
+
+\section{Introduction}
+
+
+We investigate the following problem in higher-type computation: 
+\begin{quote}
+  Given computable functionals $f \colon X \to Y$ and $y \in X$,
+  compute $x \in X$ such that $f(x)=y$, if such an $x$ exists.
+\end{quote}
+We show that if $x$ is unique and $X$ and $Y$ are retracts
+of Kleene--Kreisel spaces with~$X$ exhaustible in the sense
+of~\cite{escardo:exhaustible}, then $x$ is computable uniformly in
+$f$, $y$ and~$\forall_X$. The computation of unique solutions of
+equations of the form $g(x)=h(x)$ with $g,h \colon X \to Y$ is easily
+reduced to the previous case, because there are group structures on
+the ground types that can be lifted componentwise to product types and
+pointwise to function types. And, by cartesian closedness, the case in
+which $g$ and $h$ computably depend on parameters, and in which the
+solution computably depends on the same parameters, is covered.
+Moreover, because Kleene--Kreisel spaces are closed under finite
+products and countable powers, this includes the solution of finite
+and countably infinite systems of equations with functionals of
+finitely many or countably infinitely many variables.
+
+We also consider generalizations to computational metric spaces that
+apply to computational analysis, where $f$ can be a functional and $x$
+a function. And we develop examples of sets of analytic functions that
+are exhaustible and can play the role of the space~$X$.
+
+The nature of the problem forces us to consider partial functionals
+defined on total data, because the unique-solution functional is
+promised to be defined on $(f,y,\phi)$ iff there is a unique $x$ with
+$f(x)=y$ and $\phi=\forall_X$,
+and cannot fulfill a better promise (see~\cite{beeson} and
+the discussion in Section~\ref{discussion}).  Similar headaches
+involving totality and partiality took place in our previous work on
+exhaustible sets.  Before developing the above results, we consider a
+remedy in Section~\ref{remedy}. In Section~\ref{reformulation} we
+reformulate the definitions and results of our previous work on
+exhaustible sets in a technically and conceptually simpler way using
+the set-up of Section~\ref{remedy}. And then finally from
+Section~\ref{proceed} onwards we proceed to develop the results discussed
+above.
+
+\section{Prerequisites and disclaimer} \label{prerequisites}
+
+For the moment, we assume the notation and terminology of our paper
+paper ``Exhaustible sets in higher-type
+computation''~\cite{escardo:exhaustible}.  At present, the exposition
+lacks proper background and credits and citations, and is written for
+readers who are conversant with a particular, but also general,
+approach to computability. Later we'll also address a more general set
+of readers. This is a preliminary report, with emphasis on the
+technical results.  A more detailed version will be written later. 
+% If you feel that you or somebody else should be given credit or
+% priority to any result, please let me know that I'll be happy to
+% rectify this in a future version.
+
+\section{Discussion on uniqueness and exhaustibility} 
+\label{discussion}
+
+This section justifies the assumptions made in later sections, and can
+be safely skipped.
+%
+Given Kleene--Kreisel spaces $X$ and $Y$,
+a continuous function $f \colon X \to Y$ and $y \in Y$,
+we wish to compute $x \in X$, uniformly in $f$ and $y$, such that
+\[
+f(x)=y.
+\]
+We discuss several cases for $X$ and $Y$ and explain why, in general,
+further assumptions and data are required.
+
+The simplest case is $X=Y=\N$, for which the algorithm
+\[
+\mu x. f(x)=y
+\]
+computes a solution iff a solution exists. This is subsumed by the
+next case. 
+
+Consider $X$ arbitrary and $Y=\N$. By the Kleene--Kreisel density
+theorem, $X$ has a computable dense sequence $\delta \colon \N \to X$, and,
+by continuity of~$f$ and discreteness of~$\N$, if the equation has a
+solution, there is one of the form $x=\delta_n$ for some~$n$. Hence the
+algorithm
+\[
+x = \delta_{\mu n. f(\delta_n)=y}
+\]
+computes a solution iff a solution exists. Moreover, in this
+particular case it is semi-decidable whether a solution exists,
+with the algorithm $\exists n. f(\delta_n)=y$.
+% Notice also that, by
+% discreteness of $\N$, whenever there is a solution, there are
+% miuncountably many solutions unless $X=\N$, and so solutions are never
+% unique in this case.
+
+Now consider $X=2$ and $Y=\N^\N$. Then a function $f \colon X \to Y$
+amounts to two functions $f_0,f_1 \colon \N \to \N$, and computing a
+solution to the above equation amounts to finding $i \in 2$ such that
+$f_i = y$, that is, $f_i(n)=y(n)$ for all $n \in \N$. In other words,
+under the assumption that
+\begin{quote}
+  $f_0 = y$ or $f_1 = y$,
+\end{quote}
+we want to find $i$ such that $f_i = y$. If the only data supplied to
+the desired algorithm are $f_0,f_1,y$, this is not possible, because
+no finite amount of information about the data can determine that one
+particular disjunct holds (a similar situation is worked out in detail
+below). However, if we instead assume that
+\begin{quote}
+  one of $f_0 = y$ and $f_1 = y$ holds, but not both,
+\end{quote}
+then we can compute $i$ as follows:
+\begin{quote}
+  Find the least $n$ such that $f_0(n)\ne y(n)$ or $f_1(n) \ne y(n)$,
+  and let $i$ be the unique number such that $f_i(n)=y(n)$.
+\end{quote}
+Thus, in general, it is not possible to compute solutions unless we
+know that they are unique, and in this particular case one can compute
+unique solutions. This kind of phenomenon is well known --- see
+e.g.~\cite{beeson}.
+
+Next consider $X=\N$ and $Y=\N^\N$, and assume that the equation
+$f(x)=y$ has a unique solution. Now it is no longer possible to
+compute it uniformly in $f$ and $y$. For suppose there existed a
+computable partial functional $s \colon (\N^\N)^\N \times \N^\N \to
+\N$, defined on some superset of 
+\[
+S=\{ (f,y) \mid \text{$f(x)=y$ has a unique solution $x_0$}\}, 
+\]
+such that $x_0=s(f,y)$ is the solution
+for $f,y \in S$.  By continuity, for any $(f,y) \in S$
+there is a number $n$ such that $s(f,y)=x_0=s(g,y)$ for every $g$ such
+that $g(x)(i)=f(x)(i)$ for all $x < n$ and $i<n$.  W.l.o.g.\ we can
+assume that $x_0 < n$ by replacing $n$ by $\max(n,x_0)+1$ if
+necessary.  Choose~$g$ defined by
+\[
+g(x)(i) = 
+\begin{cases}
+f(x)(i) & \text{if $x<n$ and $i<n$,} \\
+y(i) & \text{if $x=n$}, \\
+y(i)+1 & \text{otherwise.}
+\end{cases}
+\]
+By construction, $x=n$ is the unique solution of $g(x)=y$, and hence
+$s(g,y)= n$, which contradicts $s(g,y)=x_0$, and concludes the proof
+of the impossibility claim. However, if we know that there is a unique
+solution in a finite set $K \subseteq \N$, then the solution can be
+found uniformly in $f,y$ and a finite enumeration $e_0,\dots, e_{k-1}$
+of~$K$, as follows:
+\begin{quote}
+  Find $n$ and $j<k$ such that the decidable conditions $\forall
+  i<n.f(e_j)(i)=y(i)$ and $\forall l<k, l \ne j. \exists i<n.
+  f(e_l)(i) \ne y(i)$ hold, and take $x=e_j$.
+\end{quote}
+This generalizes the situation $X=2$, and is a particular case of
+Theorem~\ref{unique:solution} below, which shows that unique solutions
+in exhaustible subsets $X$ of Kleene--Kreisel spaces are computable
+uniformly in $f$, $y$ and~$\forall_X$.
+
+\section{Computational spaces} \label{remedy}
+
+In order to simplify the development, both technically and
+conceptually, we work with a computational category
+investigated by Bauer~\cite{bauer:thesis}, with continuous versions discussed
+by Bauer, Birkedal and Scott~\cite{bauer:birkedal:scott}. This goes
+back to a 1996 unpublished manuscript by Scott in which he introduced
+equilogical spaces.  In summary, we work with the category
+$\operatorname{Mod}(\operatorname{EffScott})$, where
+$\operatorname{EffScott}$ is the cartesian closed category of
+computable maps of effectively given Scott domains. We propose to
+refer to the objects of this category as \emph{computational spaces}
+and to its morphisms as \emph{computable functions}.  This general
+terminology for the objects is justified by the fact that this
+category incorporates, as discussed
+in~\cite{bauer:birkedal:scott,MR1948051}, all known models of
+effective computation, including effectively given domains,
+Kleene--Kreisel spaces, Berger's domains with totality, Weihrauch's
+TTE, Blanck's domain representations, Schr\"oder and Simpson's QCB
+spaces. But this is only a justification for our terminology: our main
+reason for considering this category is simplicity in the formulation
+and proofs of theorems, rather than just generality.
+
+\subsection{Definition of the category of computational spaces}
+
+Explicitly, the category we are interested in is defined as follows:
+\begin{enumerate}
+\item A \emph{computational space}, or \emph{space} for short, is a list
+  $X=(|X|,D_X, T_X,\rho_X)$ consisting of an underlying set~$|X|$,
+  often denoted by $X$ by an abuse of notation, equipped with an
+  effectively given domain $D_X$ together with a set $T_X \subseteq
+  D_X$ and a surjection $\rho_X \colon T_X \to |X|$.  
+
+  The structure of the underlying set $X$ is presented in diagrammatic
+  form as
+\begin{diagram}[small]
+   D_X & \lInto & T_X & \rOnto^{\rho_{X}} & X.
+\end{diagram}
+
+The idea is that the domain $D_X$ collects all possible total and
+partial data that a particular computational mechanism can produce,
+the subset $T_X$ collects the data one is interested in for a
+particular purpose, and the set $X$ identifies different pieces of
+relevant data that one regards as equivalent for that
+purpose.
+
+\pagebreak[3]
+\item A computable map $f \colon X \to Y$ is a function of the
+  underlying sets that is tracked by some computable map $\godel{f} \colon
+  D_X \to D_Y$, in the sense that the diagram
+\begin{diagram}[small]
+   D_X & \lInto & T_X & \rOnto^{\rho_{X}} & X \\
+   \dTo^{\godel{f}} &  & \dDashto &  & \dTo_{f} \\
+   D_Y & \lInto & T_Y & \rOnto^{\rho_{Y}} & Y
+\end{diagram}
+commutes for some function $T_X \to T_Y$, which then must be the
+restriction of~$\godel{f}$. This is equivalent to saying that, for any $d
+\in T_X$, we have that $\godel{f}(d) \in T_Y$ and
+\[ f(\rho_X(d))=\rho_Y(\godel{f}(d)).\]
+
+\item Identities and composition are inherited from the category of sets.
+\end{enumerate}
+Notice that, in this category, computable maps $f \colon X \to Y$ are
+always defined, in the mathematical sense, for every $x \in X$.
+Partiality, in the computational sense, if desired, is achieved by
+allowing $Y$ to have undefined or partially defined elements. We
+denote finite products and exponentials in this category by the usual
+notations $X \times Y$ and~$Y^X$, and sometimes $(X \to Y)$. For their
+construction, see~\cite{bauer:thesis,bauer:birkedal:scott}. We just
+emphasize that the underlying set of $Y^X$ consists of the maps that
+are tracked by continuous, rather than computable functions, despite
+the fact that morphisms of the category are tracked by computable
+functions.  Computable maps, and elements of exponentials, are
+continuous with respect to the computational topology:
+\begin{definition}
+  We endow a computational space $X$ with the $\rho_X$-quotient topology of
+  the relative Scott topology of $D_X$ on $T_X$, called the \emph{computational
+    topology of $X$}. \qed
+\end{definition}
+ \pagebreak[3]
+
+\begin{examples} \label{examples}
+We agree that
+\begin{enumerate}
+\item An effectively given domain $D$ is regarded as the space
+described by
+\begin{diagram}[small]
+   D & \lEqual & D & \rEqual & D.
+\end{diagram}
+Then a computable map $D \to E$ of effectively given domains is a
+computable map in the usual sense. That is, this construction is a
+full embedding of the category of effectively given domains into the
+category of computational spaces. Moreover, this embedding preserves
+the cartesian closed structure.
+\item This applies, in particular, to the domains $D_\sigma$ 
+of the simple type hierarchy.
+\item A Kleene--Kreisel space $C_\sigma$
+is regarded as the space described by
+\begin{diagram}[small]
+   D_\sigma & \lInto & T_\sigma & \rOnto^{\rho_\sigma} & C_\sigma.
+\end{diagram}
+Then again a computable map $C_\sigma \to C_\tau$ is a computable map
+in the usual sense, and this construction is a full embedding of
+the category of Kleene--Kreisel spaces with computable maps into the
+category of computational spaces, with the embedding preserving
+the cartesian closed structure~\cite{bauer:birkedal:scott}.
+
+\item $\N$ denotes the Kleene--Kreisel space $C_{\iota}$,
+\begin{diagram}[small]
+   \pN & \lInto & \N & \rEqual & \N, 
+\end{diagram}
+which has the discrete topology. 
+
+\item $2$ denotes the Kleene--Kreisel space $C_o$, with underlying set $\{0,1\}$,
+\begin{diagram}[small]
+   \pB & \lInto & 2 & \rEqual & 2,
+\end{diagram}
+which again has the discrete topology (rather than the Sierpinski
+topology).
+
+NB.\ Of course, it is not necessary to include the base type $o$
+because $2$ also arises as a computable retract of the Kleene--Kreisel
+space~$\N$. \qed
+\end{enumerate}
+\end{examples}
+
+\pagebreak[3]
+\subsection{Subspaces, images and quotients}
+
+We'll often use the following constructions to build spaces:
+\begin{definition} \label{subspace} \leavevmode
+A subspace inclusion $S \to X$ is a computable map of the form:
+\begin{diagram}[small]
+   D_S & \lInto & T_S & \rOnto^{\rho_{S}} & S \\
+   \dEqual &  & \dInto &  & \dInto \\
+   D_X & \lInto & T_X & \rOnto^{\rho_{X}} & X.
+\end{diagram}
+Given a space $X$ and a subset $S$, the relative subspace structure on
+$S$ is given by taking $D_S=D_X$, $T_S = \rho_X^{-1}(S)$ and $\rho_S$
+the restriction of $\rho_X$.  \qed
+\end{definition}
+\begin{definition}
+  The image of a computable map $f \colon X \to Y$ is the
+  set-theoretical image $f[X]$ equipped with the subspace structure.
+  \qed
+\end{definition}
+
+\begin{definition} \label{quotient} \leavevmode A quotient map $q
+  \colon A \to X$ is a computable map of the form
+ \begin{diagram}[small]
+    D_A & \lInto & T_A    & \rOnto^{\rho_A} & A \\
+    \dEqual    &          & \dEqual &         & \dOnto_{q} \\
+    D_X & \lInto & T_X    & \rOnto^{\rho_{X}} & X.
+ \end{diagram}
+ Given a space $A$, a set $X$, and a surjection $q \colon A \to X$,
+the quotient structure on~$X$ is then given by
+ $D_X=D_A$, $T_X=T_A$, and $\rho_X = q \comp \rho_A$. \qed
+\end{definition}
+\pagebreak[3]
+The following will play an important role:
+\begin{examples} \label{real} \leavevmode
+  \begin{enumerate}
+  \item The sets $\Z$ of integers and $\Q$ of rational numbers are
+    regarded as discrete spaces via standard codings based on natural
+    numbers.
+  \item Then $\Q^\N$ is also a space by cartesian closedness, and so
+    is its subset $\cauchy(\Q)$ of Cauchy sequences $q \in
+    \Q^N$ such that $|q_n - q_{n+1}|<2^{-n}$ with the subspace structure.
+  \item The \emph{real line} in the category of computational spaces
+    is the set $\R$ of real numbers with the quotient structure
+    induced by the surjection $\lim \colon \cauchy(\Q) \to \R$ that
+    takes a sequence to its limit.
+  \item We endow $[0,\infty)$, $[0,1]$, $[-1,1]$ etc.\ with the
+    relative subspace structure of~$\R$. \qed
+  \end{enumerate}
+\end{examples}
+\noindent
+This material can and should be put in a proper categorical setting,
+but at the moment we are giving priority to applications.
+
+\subsection{Representing spaces}
+
+For certain applications, we consider the structure $T_X$ of a space
+$X$ as a space on its own (an object of the category, denoted by
+$\godel{X}$), and the structure $\rho_X \colon T_X \to X$ of $X$ as a
+computable map (a morphism of the category, denoted by the same name
+without danger of
+ambiguity):
+\begin{definition} \label{representation} For any space $X$,
+  define the \emph{representing space} $\godel{X}$ by
+  \[ 
+  D_{\godel{X}}=D_X, \quad T_{\godel{X}}=|\godel{X}|=T_X, \quad
+  \rho_{\godel{X}}=\id_{T_X}.
+  \] 
+  In diagrammatic form, $\godel{X}$ is
+  the space
+\begin{diagram}[small]
+   D_X & \lInto & T_X & \rEqual & T_X,
+\end{diagram}
+which of course is also written as
+\begin{diagram}[small]
+  D_{\godel{X}} & \lInto & T_{\godel{X}} & \rOnto^{\rho_{\godel{X}}} & \godel{X},
+\end{diagram}
+using our general convention for denoting spaces. Then $\rho_X$ is
+regarded as a quotient map $\godel{X} \to X$, called the
+\emph{representation function}, as follows:
+\begin{diagram}[small]
+  D_X & \lInto & T_X & \rEqual & T_X \\
+   \dEqual &  & \dEqual &  & \dOnto_{\rho_{X}} \\
+   D_X & \lInto & T_X & \rOnto^{\rho_{X}} & X.
+\end{diagram}
+Because it is tracked by the identity, it is computable. \qed
+\end{definition}
+Notice that $\godel{X \times Y} = \godel{X} \times \godel{Y}$.  Of
+course, the map $\godel{f}$ defined below is not uniquely determined
+by~$f$, and hence there is no computable map $\godel{-} \colon Y^X \to
+\godel{Y}^{\godel{X}}$.
+\begin{lemma} \label{representation:function} \label{kk:exhaustible:image}
+  For any computable function $f \colon X \to Y$ there is a computable function
+  $\godel{f} \colon \godel{X} \to \godel{Y}$ such that $f \comp \rho_X
+  = \rho_Y \comp \godel{f}$:
+\begin{diagram}[small]
+\godel{X} & \rTo^{\godel{f}} & \godel{Y} \\
+\dOnto^{\rho_X} & & \dOnto_{\rho_Y} \\
+X & \rTo^{f} & Y.
+\end{diagram}
+Moreover, if $f \colon X \to Y$ is a surjection, then so is any representative
+$\godel{f}$.
+\end{lemma}
+\begin{proof}
+  Take the restriction of some computable $\godel{f} \colon D_X \to
+  D_Y$ that tracks $f \colon X \to Y$ to $T_X \to T_Y$.  This regarded
+  as a map $\godel{f} \colon \godel{X} \to \godel{Y}$ is computable,
+  because it is also tracked by $\godel{f} \colon D_X \to D_Y$.  If
+  $f$ is a surjection, three arrows of the square, without counting
+  $\godel{f}$, are surjections, and hence the remaining one must also
+  be a surjection.
+\end{proof}
+
+\section{Exhaustible spaces} \label{reformulation}
+
+In previous work we investigated exhaustible \emph{subsets} of effectively
+given domains, with emphasis on exhaustible sets of total elements, or
+more precisely entire sets~\cite{escardo:exhaustible}. Here we define
+exhaustible \emph{spaces} and transfer results for them
+from that work. 
+
+\subsection{Exhaustibility and related notions}
+\begin{definition} \label{new:exhaustible}
+\leavevmode
+  \begin{enumerate}
+  \item A space $K$ is called \emph{exhaustible} if the universal
+    quantification functional \[ \forall_K \colon 2^K \to 2\] defined
+    by
+   \[
+   \forall_K(p)=1 \iff \text{$p(x)=1$ for all $x \in K$}
+   \]
+   is computable.
+ \item It is called \emph{searchable} if there is a
+   computable selection functional \[\varepsilon_K \colon 2^K \to K\] such
+   that for all $p \in 2^K$, if there is $x \in K$ with $p(x)=1$ then
+   $x=\varepsilon_K(p)$ is an example. 
+ \item A set $F \subseteq X$ is \emph{decidable} if its characteristic
+map $X \to 2$ is computable. \qed
+ \end{enumerate}
+\end{definition}
+\noindent
+Equivalently, $K$ is exhaustible iff the map 
+$\exists_K \colon 2^K \to 2$ defined by
+\[
+\exists_K(p)=1 \iff \text{$p(x)=1$ for some $x \in K$}
+\]
+is computable, as $\exists_K$ and $\forall_K$ are inter-definable
+using the De Morgan laws. 
+If $K$ is searchable, then it is exhaustible,
+because
+\[ \exists_K(p)=p(\varepsilon_K(p)).\]
+The empty set is exhaustible, but
+not searchable, because there is no map $2^\emptyset \to \emptyset$.
+
+\medskip
+\pagebreak[3]
+We regard a subset $K$ of a domain $D$ as a space by firstly regarding
+$D$ as a space (Examples~\ref{examples}) and then endowing
+$K$ with subspace structure (Definition~\ref{subspace}).
+\begin{lemma} 
+The following are equivalent for any subset $K$ of a domain $D$:
+\begin{enumerate}
+  \item $K$ is exhaustible as a set, in the sense of~\cite{escardo:exhaustible}.
+  \item $K$ is exhaustible as a space, in the sense of
+    Definition~\ref{new:exhaustible}. 
+\end{enumerate}
+The two statements remain equivalent with \emph{searchable} in place
+of \emph{exhaustible}. 
+\end{lemma}
+\begin{proof}
+We just observe that if a
+map $\godel{p} \colon D \to 2_{\bot}$ tracks a map $p \colon K \to 2$,
+then $\godel{p}$ is defined on the set $K$, in the terminology
+of~\cite{escardo:exhaustible}. 
+\end{proof}
+\subsection{Exhaustible subspaces of Kleene--Kreisel spaces}
+
+%The following results are imported to our setting from~\cite{escardo:exhaustible}.
+\begin{lemma}\leavevmode
+\begin{enumerate} 
+\item \label{cantor} The Cantor space $2^\N$ is searchable.
+
+\item \label{exhaustible} Any exhaustible subspace of a
+  Kleene--Kreisel space is compact in the computational topology, and
+  moreover, if it is non-empty, it is searchable, a computable retract
+  of the Kleene--Kreisel space, and a computable image of the Cantor
+  space.
+
+\item \label{searchable:1} Searchable spaces are closed under
+  computable images, finite intersections with decidable sets, and
+  finite products.
+
+\item \label{searchable}
+Searchable spaces that share the same domain structure are closed
+  under countable products.
+\end{enumerate}
+\end{lemma}
+\begin{proof}
+  (\ref{cantor}):~It is searchable as a subset of a domain, using
+  Berger's algorithm~\cite{escardo:exhaustible}.
+%
+  (\ref{exhaustible}):~This is formulated and proved for entire sets
+  in~\cite{escardo:exhaustible}.
+%
+  (\ref{searchable:1}):~The algorithms given
+  in~\cite{escardo:exhaustible} apply more generally to computational
+  spaces. 
+%
+  (\ref{searchable}):~Use the product algorithm
+  of~\cite{escardo:exhaustible} to building the tracking map.
+\end{proof}
+
+It is well known that any Kleene--Kreisel space is a computable
+retract of a Kleene--Kreisel space of the form~$\N^X$, and we use this
+in our arguments of Section~\ref{equations} below, which then
+automatically apply to $kk$-spaces:
+\begin{definition}
+  A \emph{$kk$-space} is a computable retract of a Kleene--Kreisel
+  space. \qed
+\end{definition}
+\noindent
+Because retracts compose, the $kk$-spaces are precisely the computable
+retracts of the Kleene--Kreisel spaces of the form~$\N^X$.  By a
+general and easy argument, $kk$-spaces are closed under the formation
+of finite products and exponentials.  Moreover, they form the smallest
+collection of spaces containing the Kleene--Kreisel spaces and
+satisfying this condition. For example, the discrete space
+$3=\{-1,0,1\}$ and the exponential $3^\N$ are $kk$-spaces but not
+Kleene--Kreisel spaces.
+\begin{lemma} \label{kk:subspace} \leavevmode
+  \begin{enumerate}
+  \item \label{kk:1} Any exhaustible $kk$-space is compact, and
+    searchable if it is non-empty.
+\item \label{kk:2} An exhaustible space is a $kk$-space iff
+  it is a subspace of some Kleene--Kreisel space.
+  \end{enumerate}
+\end{lemma}
+\begin{proof}
+  (\ref{kk:1}):~Because $kk$-spaces are subspaces of Kleene--Kreisel
+  spaces. (\ref{kk:2}):~Because any non-empty exhaustible subspace of
+  a Kleene--Kreisel space is a computable retract.
+\end{proof}
+
+\subsection{Spaces with exhaustible $kk$-spaces of representatives}
+\label{kk:exhaustible:section}
+
+The remainder of this section is not needed until
+Section~\ref{metric:spaces}.  We observed
+in~\cite{escardo:exhaustible} that if a space $X$ is connected, as
+will be the case in applications of
+Theorem~\ref{unique:solution:metric} to analysis, computable maps $p
+\colon X \to 2$ are constant, and hence $X$ is trivially exhaustible
+if it has some computable point $x_0$, as its quantifier is computable
+as $\forall_X(p)=p(x_0)$.  On the other hand, any $kk$-space $X$ is
+totally separated (the clopen sets, or equivalently, the continuous
+predicates $p \colon X \to 2$, separate the points), which implies
+that it is totally disconnected (the connected components are
+singletons). This partly explains why $kk$-spaces have the good
+properties discussed above, for example that exhaustibility implies
+compactness, which, as we have just seen, fails for connected spaces.
+Moreover, $kk$-spaces are computationally totally separated, in the
+sense that the computable predicates separate the points.  This
+motivates the use, in Theorem~\ref{unique:solution:metric}, of
+computational (metric) spaces~$X$ with exhaustible $kk$-spaces of
+representatives. Such a space, being the computable (and hence
+continuous) image of the representing map, is exhaustible and compact.
+
+In general, $kk$-spaces are topological \emph{quotients} of subspaces
+of hereditarily total elements of domains under the Scott topology, as
+is well known.  By the continuous versions of the constructions
+of~\cite{escardo:exhaustible}, every \emph{compact} $kk$-space arises
+as a topological \emph{subspace} of total elements of such a domain.
+Concrete examples are given below. Recall the notion of
+representing space given in Definition~\ref{representation}.
+
+\begin{definition} \label{kk:exhaustible} A computational space is
+  called \emph{$kk$-exhaustible} if it is isomorphic to some space $X$
+  such that its representing space~$\godel{X}$ is an exhaustible
+  $kk$-space.  \qed
+\end{definition}
+\noindent
+(The isomorphism is automatically required to be computable,
+because the morphisms of our underlying category are computable maps.)
+\begin{examples} \label{kk:examples} The following are $kk$-exhaustible:
+  \begin{enumerate}
+  \item \emph{Any interval $[a,b]$ with $a,b \in\R$ computable.}
+    \begin{quote}
+      Given our particular construction of $[-1,1]$ in
+      Examples~\ref{real}, its representing space is not exhaustible.
+      But, as is well known $[-1,1]$ is isomorphic to the set $[-1,1]$
+      endowed with signed-digit binary representation, with
+      representing space $3^\N$ where $3=\{-1,0,1\}$, which is an
+      exhaustible $kk$-space. The general case $[a,b]$ is easily reduced to this.
+    \end{quote}
+
+  \item \emph{Finite products, countable powers and retracts of $kk$-exhaustible spaces.}
+
+    \begin{quote}
+      We omit the routine details, at least for the moment. 
+    \end{quote}
+  \end{enumerate}
+Of course, the real line is not $kk$-exhaustible, because it is not compact. \qed
+\end{examples}
+\noindent
+We'll see in Section~\ref{applications} that interesting subspaces of
+analytic functions of the space $\R^{[-\epsilon,\epsilon]}$, with $0 <
+\epsilon < 1$, are $kk$-exhaustible, which will allow us to compute
+solutions of functional equations with analytic unknowns.
+
+
+\section{Equations over Kleene--Kreisel spaces}
+\label{equations} \label{proceed}
+
+\begin{theorem} \label{unique:solution} \label{bijection} If $f\colon
+  X \to Y$ is a computable map of $kk$-spaces with $X$ exhaustible,
+  and $y \in Y$ is computable, then, uniformly in $\forall_X$, $f$,
+  and~$y$:
+\begin{enumerate}
+\item \label{unique:solution:2} It is semi-decidable whether the
+  equation $f(x) = y$ fails to have a solution $x \in X$.
+\item \label{unique:solution:1} If $f(x) = y$ has a unique solution
+  $x \in X$, then it is computable. 
+\end{enumerate}
+Hence if $f\colon X \to Y$ is a computable bijection then it has a
+computable inverse, uniformly in~$\forall_X$ and~$f$.
+\end{theorem}
+\noindent
+The conclusion is a computational version for $kk$-spaces of the
+topological theorem that any continuous bijection of compact Hausdorff
+spaces is a homeomorphism.
+%
+This gives an alternative route to the following fact
+established in~\cite{escardo:exhaustible}:
+\begin{theorem} \label{alternative}
+  Any exhaustible $kk$-space
+  is computably homeomorphic to an exhaustible subspace of the Baire
+  space~$\N^\N$. 
+\end{theorem}
+\begin{proof}
+  Let $K$ be an exhaustible $kk$-space, let $s \colon K \to \N^Z$ and
+  $r \colon \N^Z \to K$ be computable maps with $r \comp s = \id_K$
+  and $Z$ a Kleene--Kreisel space, and let $\delta_n \in Z$ be a
+  computable dense sequence. The subspace $X = s(K) \subseteq \N^Z$,
+  being a computable image of an exhaustible space, is itself
+  exhaustible. As in~\cite{escardo:exhaustible}, we consider the map
+  $X \to \N^\N$ that sends $u \in X$ to the
+  sequence~$u(\delta_n)$, but we argue using
+  Theorem~\ref{bijection} instead.  Let $f \colon X \to Y$ be the
+  restriction of this map to its image $Y \subseteq \N^\N$.  By
+  density, $f$ is one-to-one, and, by construction, it is onto, and
+  hence it has a computable inverse. Therefore there is computable map
+  $g \colon K \to Y$ defined by $g(k)=f(s(k))$ with computable inverse
+  given by $g^{-1}(\alpha)=r(f^{-1}(\alpha))$.
+\end{proof}
+
+\medskip
+We now prove Theorem~\ref{unique:solution}.  The following will be
+applied to semi-decide that equations fail to have solutions:
+\begin{lemma} \label{empty} Let $X$ be an exhaustible $kk$-space and
+  $K_n \subseteq X$ be a sequence of sets that are decidable uniformly
+  in $n$ and satisfy $K_n \supseteq K_{n+1}$.
+\begin{quote}
+  Emptiness of $\bigcap_n K_n$ is semi-decidable,
+\end{quote}
+uniformly in the quantifier of $X$ and the sequence of decision
+procedures for $K_n$.
+\end{lemma}
+\begin{proof} 
+  Because $X$ is compact by exhaustibility, $K_n$ is also compact as
+  it is closed.  Because $X$ is Hausdorff, $\bigcap_n K_n = \emptyset$
+  iff there is $n$ such that $K_n=\emptyset$.  But emptiness of this
+  set is decidable uniformly in $n$ by the algorithm $\forall x \in X.
+  x \not\in K_n$.  Hence a semi-decision procedure is given by
+  $\exists n.\forall x \in X. x \not\in K_n$.
+\end{proof}
+
+As a preparation for a lemma that will be applied to
+compute unique solutions, notice that if a singleton $\{u\} \subseteq
+\N^Z$ is exhaustible, then the function $u$ is computable, because
+$u(z) = \mu m.\forall v \in\{ u \}.u(z)=m$. Moreover, $u$ is
+computable uniformly in~$\forall_{\{u\}}$, in the sense that there is
+a computable functional
+\[ \text{$U \colon S \to \N^Z$ \quad with \quad $S = \{ \phi \in
+  2^{2^{\N^Z}} \mid \text{$\phi=\forall_{\{v\}}$ for some $v \in
+    \N^Z$} \}$},
+\]
+such that \[ u=U\left(\forall_{\{u\}}\right),\] 
+namely
+\[
+U(\phi)(z)=\mu m.\phi(\lambda u.u(z)=m).
+\]
+%In what follows, we won't explicitly exhibit uniformity functionals.
+%
+Lemma~\ref{unique} below generalizes this, using an
+argument from~\cite{escardo:exhaustible} that was originally used to
+prove that non-empty exhaustible subsets of $kk$-spaces are computable
+images of the Cantor space and hence searchable.  Here we find
+additional applications and further useful generalizations.
+
+\pagebreak[3]
+\begin{lemma} \label{unique} Let $X$ be a $kk$-space and $K_n
+  \subseteq X$ be a sequence of sets that are exhaustible uniformly in
+  $n$ and satisfy $K_n \supseteq K_{n+1}$.
+  \begin{quote}
+  If $\bigcap_n
+    K_n$ is a singleton $\{x\}$, then $x$ is computable,
+  \end{quote}
+uniformly in the sequence $\forall_{K_n}$.
+\end{lemma}
+\begin{proof} 
+  Let $X$ be a $kk$-space and $s \colon X \to \N^Z$ and $r \colon \N^Z
+  \to X$ be computable functions with $r \comp s = \id_X$.  It
+  suffices to show that the function $u=s(x) \in \N^Z$ is computable,
+  because $x = r(u)$.  The sets $L_n = s(K_n) \subseteq \N^Z$, being
+  computable images of exhaustible sets, are themselves exhaustible.
+%
+  For any $z \in Z$, the set $U_{z} = \{ v \in \N^Z \mid v(z) =
+  u(z) \}$ is clopen and $\bigcap_n L_n = \{ u \} \subseteq U_{z}$.
+  Because $\N^Z$ is Hausdorff, because $L_n \supseteq L_{n+1}$,
+  because each $L_n$ is compact and because $U_{z}$ is open, there is
+  $n$ such that $L_n \subseteq U_{z}$, that is, $v \in L_n$ implies
+  $v(z) = u(z)$. Therefore, for every~$z \in Z$ there is~$n$ such that
+  $v(z) = w(z)$ for all $v,w \in L_n$.
+%
+  Now, the function $n(z)=\mu n.\forall v,w \in L_n.  v(z)=w(z)$ is
+  computable by the exhaustibility of $L_n$.  But $u \in L_{n(z)}$ for
+  any~$z \in Z$ and therefore $u$ is computable by exhaustibility as
+  $u(z)=\mu m.  \forall v \in L_{n(z)}.  v(z)=m$.
+\end{proof}
+
+To build sets $K_n$ suitable for applying this lemma, we use:
+\begin{lemma} \label{equalupto} 
+  For every $kk$-space $X$ there is a family $(=_n)$ of equivalence
+  relations that are decidable uniformly in $n$ and satisfy
+\begin{eqnarray*}
+x=x' & \iff & \forall n.\,x =_n x', \\
+x =_{n+1} x' & \implies & x =_n x'.
+\end{eqnarray*}
+\end{lemma}
+\begin{proof}
+  Let $X$ be a Kleene--Kreisel space and $s \colon X \to \N^Z$ and $r
+  \colon \N^Z \to X$ be computable maps with $r \comp s = \id_X$. By
+  the density theorem, there is a computable dense sequence $\delta_n
+  \in Z$.  Then the definition
+  \[
+  x =_n x' \iff \forall i < n. s(x)(\delta_i) = s(x')(\delta_i)
+  \]
+  clearly produces an equivalence relation that is decidable uniformly
+  in~$n$ and satisfies $x =_{n+1} x' \implies x =_n x'$. Moreover, $x
+  = x'$ iff $s(x)=s(x')$, because $s$ is injective, iff
+  $s(x)(\delta_n)=s(x')(\delta_n)$ for every $n$, by density, iff $x
+  =_n x'$ for every $n$, by definition.
+\end{proof}
+
+%\medskip
+\begin{proof}[Proof of Theorem~\ref{unique:solution}]
+  The set $K_n = \{ x \in X \mid f(x) =_n y\}$, being a decidable
+  subset of an exhaustible space, is exhaustible.  Therefore the
+  result follows from Lemmas~\ref{empty} and~\ref{unique}, because $x
+  \in \bigcap_n K_n$ iff $f(x) =_n y$ for every~$n$ iff $f(x) = y$ by
+  Lemma~\ref{equalupto}.
+\end{proof}
+
+\begin{algorithms} \label{solve}
+  In summary, the algorithm for semi-deciding non-existence of
+  solutions is
+\[ 
+\exists n.\forall x \in X.f(x) \ne_n y,
+\]
+and that for computing the solution $x_0$ as a function of
+$\forall_X$, $f$, and $y$ is:
+\begin{eqnarray*}
+\forall x \in K_n.p(x) & = & \forall x \in X. f(x) =_n y \implies p(x), \\
+\forall v \in L_n.q(v) & = & \forall x \in K_n. q(s(x)), \\
+n(z) & = & \mu n.\forall v,w \in L_n.  v(z)=w(z), \\
+u(z)& = & \mu m.  \forall v \in L_{n(z)}.  v(z)=m, \\
+  x_0 & = & r(u).
+\end{eqnarray*}
+Here the parameters $r$ and $s$ come from the assumption that $X$ is a
+$kk$-space. \qed
+\end{algorithms}
+
+\begin{rem} \label{approximate} Even in the absence of uniqueness,
+  \emph{approximate} solutions with precision~$n$ are trivially
+  computable with the algorithm
+\[ 
+    \varepsilon_X(\lambda x.f(x)=_n y), 
+\] 
+using the fact that non-empty exhaustible subsets of $kk$-spaces are
+searchable. But the above unique-solution algorithm uses the
+quantification functional~$\forall_X$ rather than the selection
+functional~$\varepsilon_X$. In the next section, we compute solutions
+as limits of approximate solutions (cf.\
+Remark~\ref{approximate:bis}). \qed
+\end{rem}
+
+% \begin{algorithm}
+%   Regarding the isomorphism $g \colon K \to Y$
+%   with $Y \subseteq \N^\N$ given in the proof of
+%   Theorem~\ref{alternative}, we take $r$ and $s$ coming from the
+%   assumption that $K$ is a $kk$-space, and the $r$ and $s$ of
+%   Algorithms~\ref{solve} can be taken to be the identity, because the
+%   $kk$-space under consideration is already of the form $\N^Z$, and
+%   hence luckily don't appear, avoiding a potential name clash. The
+%   algorithms given by unfolding the proofs are:
+%  \begin{eqnarray*}
+%    g(k) & = & \lambda i.s(k)(\delta_i), \\
+%    g^{-1}(\alpha) & = & r(u_0),
+%  \end{eqnarray*}
+%  where 
+%  \begin{eqnarray*}
+%  \forall u \in K_n.p(u) & = & \forall k \in K. (\forall i<n.s(k)(\delta_i) = \alpha_i) \implies p(s(k)), \\
+%  n(z) & = & \mu n.\forall v,w \in K_n.  v(z)=w(z), \\
+%  u_0(z) & = & \mu m.  \forall v \in K_{n(z)}.  v(z)=m. \qquad\qquad\qquad\qquad\qquad\qed
+%  \end{eqnarray*}
+% \end{algorithm}
+
+\section{Equations over metric spaces} \label{metric:spaces}
+
+We first formulate the main result of this section and then define
+the missing concepts. (Recall the notion of $kk$-exhaustibility
+defined in Section~\ref{kk:exhaustible:section}.)
+\begin{theorem} \label{unique:solution:metric} Let $X$ and $Y$ be
+  computational metric spaces with $X$ computationally complete and
+  $kk$-exhaustible.
+\begin{quote}
+  If $f\colon X \to Y$ and $y \in Y$ are computable, then, uniformly
+  in $f$, $y$ and the exhaustibility condition:
+\begin{enumerate}
+\item \label{unique:solution:metric2} It is semi-decidable whether the
+  equation $f(x) = y$ fails to have a solution $x \in X$.
+\item \label{unique:solution:metric:1} If $f(x) = y$ has a unique solution
+  $x \in X$, then it is computable.
+\end{enumerate}
+\end{quote}
+Hence any computable bijection $f\colon X \to
+  Y$ has a computable inverse, uniformly in $f$ and the exhaustibility
+  condition.
+\end{theorem}
+
+\medskip There is a technical difficulty in the proof of the theorem:
+at the intensional level, where computations take place, solutions are
+unique only up to equivalence of representatives.  In order to
+overcome this, we work with pseudo-metric spaces at the intensional
+level and with a notion of decidable closeness for them.  Recall that
+a \emph{pseudo-metric} on a set $X$ is a function $d \colon X \times X
+\to [0,\infty)$ such that
+\begin{enumerate}
+\item $d(x,x)=0$,
+\item $d(x,y) = d(y,x)$,
+\item $d(x,z) \le d(x,y) + d(y,z)$.
+\end{enumerate}
+Then $d$ is a \emph{metric} if it additionally satisfies $d(x,y)=0 \implies x=y$.
+If $d$ is only a pseudo-metric, then $(\sim)$ defined by
+\[
+x \sim y \iff d(x,y)=0
+\]
+is an equivalence relation, referred to as \emph{pseudo-metric
+  equivalence}.  A pseudo-metric topology is Hausdorff iff it is $T_0$
+iff the pseudo-metric is a metric. Moreover, two points are
+equivalent iff they have the same neighbourhoods.  Hence any sequence
+has at most one limit up to equivalence.
+\begin{definition} We regard $[0,\infty)$ as a computational space as
+  in Example~\ref{real}.
+\begin{enumerate}
+\item  A \emph{computational pseudo-metric space} is a computational space $X$
+   endowed with a computable pseudo-metric, denoted by $d_X \colon X
+   \times X \to [0,\infty)$ or simply~$d$. 
+
+   We emphasize that we don't require the computational topology
+   of $X$ to agree with the pseudo-metric topology generated by open
+   balls (cf.\ Remark~\ref{firstly}).
+
+ \item A \emph{computational metric space} is a computational
+   pseudo-metric space in which the pseudo-metric is actually a
+   metric, and hence we formulate the following definitions in
+   the generality of pseudo-metric spaces.
+
+ \item A \emph{fast Cauchy sequence} in a computational pseudo-metric
+   space~$X$ is a sequence $x_n \in X$ with $d(x_n,x_{n+1}) < 2^{-n}$.
+   The subspace of $X^\N$ consisting of fast Cauchy sequences is
+   denoted by $\cauchy(X)$.
+
+ \item A computational pseudo-metric space $X$ is called
+   \emph{computationally complete} if every sequence $x_n \in
+   \cauchy(X)$ has a limit uniformly in~$x_n$, i.e.\ there is a
+   computable map $\lim \colon \cauchy(X) \to X$ such that $\lim_n
+   (x_n)$ is a limit of $x_n$ for every sequence $x_n \in \cauchy(X)$.
+\item A computational pseudo-metric space $X$ has \emph{decidable
+    closeness} if there is a family of relations
+  $\sim_n$ on~$X$ that are decidable uniformly in $n$ and satisfy:
+\begin{enumerate}
+\item $x \sim_n y \implies d(x,y) < 2^{-n}$, 
+\item $x \sim y \implies \forall_n. x \sim_n y$.
+\item $x \sim_{n+1} y \implies x \sim_n y$,
+\item $x \sim_n y \iff y \sim_n x$,
+\item $x \sim_{n+1} y \sim_{n+1} z \implies x \sim_n z$.
+\end{enumerate}
+The last condition is a counter-part of the triangle inequality.  It
+follows from the first condition that if $x \sim_n y$ for every~$n$,
+then $x \sim y$.  Write
+\[
+[x] = \{ y \in X \mid x \sim y\}, \qquad\qquad
+[x]_n = \{ y \in X \mid x \sim_n y\}.
+\]
+Then the equivalence class $[x]$ is the closed ball
+of radius zero centered at~$x$.
+\end{enumerate}
+We omit the qualification ``computational'' when it is clear
+that the context requires it. \qed
+\end{definition}
+For instance, the computational spaces $\R$ and $[0,\infty)$ defined
+in Example~\ref{real}, are complete metric spaces in this
+computational sense under the Euclidean metric, as is well known, but
+don't have decidable closeness.  We now proceed to prove the theorem.
+\pagebreak[3]
+\begin{lemma} \label{closeness:cover} For every computational metric
+  space~$X$ there is a canonical computable pseudo-metric~$d =
+  d_{\godel{X}}$ on the representing space~$\godel{X}$ such that:
+  \begin{enumerate}
+  \item The representation map $\rho = \rho_X \colon \godel{X} \to X$ is an isometry:
+    \[ d(t,u) = d(\rho(t),\rho(u)). \]
+
+  In particular:
+    \begin{enumerate}
+    \item $t \sim u \iff d(t,u)=0 \iff \rho(t)=\rho(u)$.
+    \item If $f \colon X \to Y$ is a computable map of metric spaces,
+      then any representative $\godel{f} \colon \godel{X} \to
+      \godel{Y}$ preserves the relation~($\sim$).
+  \end{enumerate}
+
+  \item If $X$ is computationally complete then so is $\godel{X}$.
+
+  \item The representing space $\godel{X}$ has decidable closeness.
+  \end{enumerate}
+\end{lemma}
+\begin{proof}
+  Construct $d_{\godel{X}} \colon \godel{X} \times \godel{X} \to
+  {[0,\infty)}$ as the composition of a computable representative
+  $\godel{d_X} \colon \godel{X} \times \godel{X} \to
+  \godel{{[0,\infty)}}$ of $d_X \colon X \times X \to {[0,\infty)}$
+  with the representation map $\rho_{{[0,\infty)}} \colon
+  \godel{{[0,\infty)}} \to {[0,\infty)}$.  A limit operator for
+  $\godel{X}$ from a limit operator for $X$ is constructed in a
+  similar manner.  For given $t,u \in \godel{X}$, let $q_n$ be the
+  $n$-th term of the sequence $\godel{d_X}(t,u) \in
+  \godel{[0,\infty)}\subseteq \cauchy(\Q)$, and define $t \sim_n u$ to
+  mean that the interval $[-2^{-n},2^{-n}]$ is contained in
+  $[q_n-2^{-n+1},q_n+2^{-n+1}]$.
+\end{proof}
+
+\pagebreak[3] We now work at the intensional level and later transfer
+the results to the extensional level with the aid of the above lemma.
+\begin{lemma} \label{unique:bis:bis} Let $Z$ be a complete
+  computational pseudo-metric $kk$-space with decidable closeness, and
+  $K_n \subseteq Z$ be a sequence of sets that are exhaustible
+  uniformly in $n$ and satisfy $K_n \supseteq K_{n+1}$.
+  \begin{quote} If $\bigcap_n K_n$ is an equivalence class, then it
+    has a computable member,
+  \end{quote}
+uniformly in the given computational data.
+\end{lemma}
+\noindent
+\begin{proof}
+  Let $z \in \bigcap_n K_n$. For any $m$, we
+  have $\bigcap_n K_n = [z] \subseteq [z]_{m+1}$, and hence there is~$n$
+  such that $K_n \subseteq [z]_{m+1}$, because the sets $K_n$ are compact,
+  because $K_n \supseteq K_{n+1}$, because $Z$ is Hausdorff and
+  because $[z]_{m+1}$ is open.  Hence for every $u \in K_n$ we have $u
+  \sim_{m+1} z$, and so for all $u,v \in K_n$ we have $u \sim_m v$. By
+  exhaustibility of $K_n$ and decidability of~$(\sim_n$), the function
+  %\[
+  $n(m) = \mu n. \forall u,v \in K_n.\, u \sim_m v$
+  %\]
+  is computable. By searchability of~$K_n$, there is a computable
+  sequence $u_m \in K_{n(m)}$. Because $n(m) \le n(m+1)$, we have that
+  $K_{n(m)} \supseteq K_{n(m+1)}$ and hence $u_m \sim_m u_{m+1}$ and
+  so $d(u_m,u_{m+1}) < 2^{-m}$ and $u_m$ is a Cauchy sequence. By
+  completeness, $u_m$ converges to a computable point $u_\infty$.
+  Because $z \in K_{n(m)}$, we have $u_m \sim_m z$ for every $m$, and
+  hence $d(u_m,z) < 2^{-m}$. And because $d(u_\infty,u_m) < 2^{-m+1}$,
+  the triangle inequality gives $d(u_\infty,z) < 2^{-m} + 2^{-m+1}$
+  for every~$m$ and hence $d(u_\infty,z)=0$ and therefore $u_\infty
+  \in \bigcap_n K_n$.
+\end{proof}
+The proof of the following is essentially the same as that of
+Theorem~\ref{unique:solution}, but uses Lemma~\ref{unique:bis:bis}
+rather than Lemma~\ref{unique}, and doesn't rely on an analogue of
+Lemma~\ref{equalupto}, which is built into the definition of decidable
+closeness.
+\pagebreak[3]
+\begin{lemma} \label{unique:solution:bis} Let $Z$ and $W$ be
+  pseudo-metric spaces with decidable closeness, and assume that $Z$
+  is complete, exhaustible and a $kk$-space.  
+\begin{quote}
+If $g\colon Z \to W$ is
+  a computable map that preserves pseudo-metric equivalence and $w \in
+  W$ is computable, then, uniformly in $\forall_Z$, $g$, and~$w$:
+\begin{enumerate}
+\item \label{unique:solution:bis:2} It is semi-decidable whether the
+  equivalence $g(z) \sim w$ fails to have a solution $z \in Z$.
+\item \label{unique:solution:bis:1} If $g(z) \sim w$ has a unique solution
+  $z \in Z$ up to equivalence, then some solution is computable. 
+\end{enumerate}
+\end{quote}
+\end{lemma}
+\begin{proof}
+  The set $K_n = \{ z \in Z \mid g(z) \sim_n w\}$, being a decidable
+  subset of an exhaustible space, is exhaustible.  Therefore the
+  result follows from Lemmas~\ref{empty} and \ref{unique:bis:bis}, because $z
+  \in \bigcap_n K_n$ iff $g(z) \sim_n w$ for every~$n$ iff $g(z) = w$.
+\end{proof}
+\begin{algorithm}
+The algorithm for computing the solution $z = u_\infty$ from
+$\forall_Z$, $g$ and $w$ is then the following, where we have expanded
+$\forall_{K_n}$ as a quantification over~$Z$:
+\begin{eqnarray*}
+n(m) & = & \mu n. \forall u,v \in Z.\, g(u) \sim_n w \wedge g(v) \sim_n w \implies u \sim_m v,\\
+u_\infty & = & \lim_m \varepsilon_K(\lambda z.g(z) \sim_{n(m)} w).
+\end{eqnarray*}
+Thus, although there are common ingredients with
+Theorem~\ref{unique:solution}, the resulting algorithm is different,
+because it relies on the limit operator (but see
+Proposition~\ref{strictly:coarser} below). \qed
+\end{algorithm}
+
+\begin{rem} \label{approximate:bis}
+Again, approximate solutions are computable as in
+Remark~\ref{approximate}, and, in fact, we are computing the unique
+solution as the limit of approximate solutions.  But, for
+Theorem~\ref{unique:solution:metric}, approximate solutions are
+computable uniformly in $\godel{f}$ and $\godel{y}$ only, as different
+approximate solutions are obtained for different representatives of
+$f$ and $y$. \qed
+\end{rem}
+
+\begin{proof}[Proof of Theorem~\ref{unique:solution:metric}.]
+  Let $X$ and $Y$ be computational metric spaces with $X$
+  $kk$-exhaustible, and let $f\colon X \to Y$ and $y \in Y$ be
+  computable.  Now apply Lemma~\ref{unique:solution:bis} with
+  $Z=\godel{X}$, $W=\godel{Y}$, $g=\godel{f}$, $w=\godel{y}$, using
+  Lemma~\ref{closeness:cover} to fulfill the necessary hypotheses.  If
+  $f(x)=y$ has a unique solution~$x$, then $g(z) \sim w$ has a unique
+  solution~$z$ up to equivalence, and $x=\rho(z)$ for any
+  solution~$z$, and hence $x$ is computable. Because $g$ preserves
+  $(\sim)$ by Lemma~\ref{closeness:cover}, if $g(z) \sim w$ has a
+  solution~$z$, then $x=\rho(z)$ is a solution of $f(x)=y$.  This
+  shows that $f(x)=y$ has a solution iff $g(z)=w$ has a solution, and
+  we can reduce the semi-decision of absence of solutions of $f(x)=y$
+  to absence of solutions of $g(z)=w$.
+\end{proof}
+
+Before giving examples in computational real analysis, in
+Section~\ref{applications}, we clarify some aspects of the above
+development.
+\begin{rem} \label{firstly} The metric topology of a computational
+  space is always coarser than the computational topology, because, by
+  continuity of the metric, open balls are open in the computational
+  topology. Hence the computational topology of any computational
+  metric space is Hausdorff. If $X$ is $kk$-exhaustible and the metric
+  topology is compact, then both topologies agree, because no compact
+  Hausdorff topology can be properly refined to another compact
+  Hausdorff topology.  For e.g.\ the real line, the metric topology
+  agrees with the computational topology, as is well-known, but in the
+  example given in Proposition~\ref{strictly:coarser} below, it is
+  strictly coarser.  It is also strictly coarser for any pseudo-metric
+  $kk$-space, because $kk$-spaces are Hausdorff and pseudo-metric
+  topologies are Hausdorff only for pseudo-metrics which are genuine
+  metrics.  \qed
+\end{rem}
+
+Recall that an ultra-metric space is a metric space for which the
+triangle inequality holds in the stronger form $d(x,z) \le
+\max(d(x,y),d(y,z))$, and that an ultra-metric topology is
+zero-dimensional because open balls are closed. Recall the equivalence
+relations $(=_n)$ given in Lemma~\ref{equalupto}.
+\begin{prop} \label{strictly:coarser}
+  Any $kk$-space $X$ equipped with $d$ defined by
+  \[
+  d(x,y) = \inf \{2^{-n} \mid x =_n y\}
+  \]
+  is a computational ultra-metric space. Moreover:
+\begin{enumerate}
+\item The metric has decidable closeness given by $(\sim_n)=(=_n)$.
+\item The metric topology is in general strictly coarser
+than the computational topology, but both agree on compact subsets.
+\item Exhaustible subspaces with the relative metric are computationally complete.
+\end{enumerate}
+\end{prop}
+\begin{proof}
+  Computability of the ultra-metric and decidability of closeness are
+  easy.
+
+  Let $s \colon X \to \N^Z$ and $r \colon \N^Z \to X$ be the same
+  computable functions selected in the proof of Lemma~\ref{equalupto},
+  let $\delta$ be the same dense sequence, and for $u,v \in \N^Z$
+  define $u =_n v \iff \forall i<n.\,u(\delta_i)=v(\delta_i)$ so that
+  $x =_n y$ iff $s(x) =_n s(y)$.
+
+  \medskip
+  \noindent
+  \emph{Agreement of topologies:} A subbasic open set in the topology
+  of pointwise convergence of $\N^Z$ is of the form $ N(z,V)=\{u \in
+  \N^Z \mid u(z) \in V\}$ with $z \in Z$ and $V \subseteq \N$. Now $u
+  =_n v$ iff $d(u,v) < 2^{-n}$, and hence the open ball
+  $B_{2^{-n}}(u)$ is the intersection of the pointwise open sets
+  $N(\delta_i,\{u(\delta_i)\})$, for $i<n$, and hence open balls are
+  open in the topology of pointwise convergence.  For a compact
+  subspace of $\N^Z$, density of $\delta$ gives that metric topology
+  agrees with the pointwise topology. But the relative topology on
+  compact subsets of~$\N^Z$ coincides with the topology of pointwise
+  convergence, by classical, and easy, Arzela--Ascoli type arguments,
+  and hence the three topologies agree. The reduction of this to $X$
+  via the retraction is easy.
+
+\pagebreak[3]
+  \medskip
+  \noindent
+  \emph{Completeness:}
+%
+  Let $z_n \in Z$ be a fast Cauchy sequence. Then $z_n =_n z_{n+1}$ and
+  hence $s(z_n) =_n s(z_{n+1})$. It suffices to show that the sequence
+  $f_n=s(z_n)$ converges to a computable limit~$f_\infty$, because
+  then the sequence $z_n = r(f_n)$ converges to the computable point
+  $z_\infty = r(f_\infty)$ by continuity of~$r$. The set $L=s(K)$ is
+  exhaustible because it is a computable image of an exhaustible set.
+  For any $n$, the set $L_n = \{ g \in L \mid g =_n f_n \}$ is
+  exhaustible because it is a decidable subset of an exhaustible set,
+  and $f_n \in L_n$.  By compactness, $\bigcap_n L_n \ne \emptyset$
+  because clearly $L_n \supseteq L_{n+1}$. If $g,h \in \bigcap_n L_n$,
+  then $g =_n f_n =_n h$ for every $n$, and hence $g=h$, and so
+  $\bigcap_n L_n = \{f_\infty\}$ for some computable $f_\infty$ by
+  Lemma~\ref{unique}.  Because $f_\infty \in \bigcap_n L_n$, we have
+  $f_\infty =_n f_n$ for every$~n$.  Hence if some ball $B_{2^{-k}}(h)$
+  is a neighbourhood of $f_\infty$, then $h =_k
+  f_\infty =_k f_n$ for all $n \ge k$, and hence $f_n \in B_k(h)$ for
+  all $n \ge k$, which shows that $f_n \to f_\infty$.
+\end{proof}
+In view of this proposition, Lemma~\ref{unique:bis:bis} generalizes
+Lemma~\ref{unique}. But Lemma~\ref{unique} cannot be eliminated,
+because it is used to prove the proposition.  
+\begin{algorithm}
+  Expanding Lemma~\ref{unique}, the algorithm for computing
+  $\lim_n f_n$ for a fast Cauchy sequence $f_n \in L \subseteq \N^Z$
+  with $L$ exhaustible is:
+\begin{eqnarray*}
+  n(z) & = & \mu n.\forall g,h \in L.  g =_n f_n \wedge h =_n f_n \implies g(z) = h(z), \\
+\lim_n f_n& = & \lambda z.\mu m.  \forall g \in L.  g =_{n(z)} f_{n(z)} \implies g(z)=m. 
+\end{eqnarray*}
+Notice that ``fast'' amounts to $f_n =_n f_{n+1}$. \qed
+\end{algorithm}
+\pagebreak[3]
+\begin{rem}
+  Independently of this, Matthias Schr\"oder (personal communication)
+  showed that if a QCB space $X$ is the sequential coreflection of a
+  zero-dimensional topology, then there is a metric $d$ on $X$ such
+  that: (1) The topology induced by $d$ is coarser than that of $X$
+  and than the zero-dimensional topology. (2) On compact subsets $X$,
+  the three topologies agree.  (3) The image of $d$ is $\{ 0 \} \cup
+  \{ 2^{-n} | n \in \N \}$.  This applies to all $kk$-spaces in
+  particular, as their topologies satisfy the hypothesis. His
+  construction uses countable pseudo-bases rather than dense
+  sequences.  However, he hasn't considered the computational versions
+  of these statements. \qed
+\end{rem}
+
+
+\section{Exhaustible spaces of analytic functions} \label{applications}
+
+For any $\epsilon \in (0,1)$, any $x \in [-\epsilon,\epsilon]$, any $b>0$,
+and any sequence $a \in [-b,b]^\N$, the Taylor series $\sum_n
+a_n x^n$ converges to a number in the interval
+$[-b/(1+\epsilon),b/(1-\epsilon)]$. 
+
+\begin{lemma} \label{uniform:analytic}
+  Any analytic function $f \in \R^{[-\epsilon,\epsilon]}$ of the form
+  \[
+  f(x) = \sum_n a_n x^n
+  \]
+  is computable uniformly in any given computable $\epsilon \in (0,1)$, $b >
+  0$ and $a \in [-b,b]^\N$.
+\end{lemma}
+\begin{proof}
+  Standard computational analysis argument. 
+\end{proof}
+\begin{definition}
+  Denote by \[ A = A(\epsilon,b)\] the subspace of such analytic
+  functions and by \[ T = T_{\epsilon,b} \colon [-b,b]^\N \to
+  A(\epsilon,b)\] the functional that implements the uniformity
+  condition, so that $f = T(a)$. \qed
+\end{definition}
+The following results also hold uniformly in $\epsilon$ and $b$,
+but we omit explicit indications. Also, the results are uniform in the
+exhaustibility assumptions. 
+
+\begin{theorem}
+  The space $A$ is $kk$-exhaustible.
+\end{theorem}
+\begin{proof}
+  The space $[-b,b]^\N$ is $kk$-exhaustible by
+  Examples~\ref{kk:examples}.  By Lemma~\ref{kk:exhaustible:image},
+  any computable representative $\godel{T} \colon \godel{[-b,b]^\N}
+  \to \godel{A}$ is a surjection, and hence
+  $\godel{A}$ is exhaustible. It follows from
+  Lemma~\ref{kk:subspace} that $\godel{A}$ is a
+  $kk$-space, because the representing space $\godel{A}$
+  is clearly a subspace of a Kleene--Kreisel space.
+\end{proof}
+
+Hence the solution of a functional equation with a unique analytic
+unknown in~$A$ can be computed using
+Theorem~\ref{unique:solution:metric}.
+
+\begin{lemma}
+  For any non-empty $kk$-exhaustible space $X$, the maximum- and
+  minimum-value functionals
+  \[
+  {\max}_X, {\min}_X \colon \R^X \to \R
+  \]
+  are computable.
+\end{lemma}
+\noindent
+NB.\ Of course, any $f \in \R^X$ attains its maximum value because it
+is continuous and because $kk$-exhaustible spaces are compact.
+\begin{proof}
+  We discuss $\max$ only. By e.g.\ the algorithm given by
+  Simpson~\cite{simpson:integration}, this is the case for $X=2^\N$.
+  Because the representing space $\godel{X}$, being a non-empty
+  exhaustible $kk$-space, is a computable image of the Cantor space,
+  the space $X$ itself is a computable image of the cantor space, say
+  with $q \colon 2^\N \to X$. Then the algorithm $\max_X(f)=\max_{2^N}(f
+  \comp q)$ gives the required conclusion.
+\end{proof}
+
+\begin{cor}
+  Any $kk$-exhaustible subspace $K$ of a metric space $X$ is
+  computably located in the sense that the distance function $d_K
+  \colon X \to \R$ defined by
+  \[ d_K(x) = \min \{ d(x,y) \mid y \in K \} \]
+  is computable.
+\end{cor}
+\begin{proof}
+  $d_K(x)=\min_K(\lambda y.d(x,y))$.
+\end{proof}
+
+\begin{cor}
+  For any non-empty $kk$-exhaustible metric space $X$, the max-metric
+  on $\R^X$
+  \[
+  d(f,g) = \max \{ d(f(x),g(x)) \mid x \in X \}
+  \]
+  is computable.
+\end{cor}
+\noindent
+\begin{proof}
+  $d(f,g)=\max_X(\lambda x.d(f(x),g(x)))$.
+\end{proof}
+\begin{cor}
+  For $f \in \R^X$, it is semi-decidable whether $f \not\in A$. 
+\end{cor}
+\begin{proof}
+  Because $A$ is computationally located in
+  $\R^{[-\epsilon,\epsilon]}$ as it is
+  $kk$-exhaustible, and because $f \not\in A \iff d_A(f) \ne 0$.
+\end{proof}
+
+Another proof, which doesn't rely on the $kk$-exhaustibility of $A$,
+uses Theorem~\ref{unique:solution:metric}: $f \not\in A$ iff the
+equation $T(a)=f$ doesn't have a solution $a \in [-b,b]^\N$.  But this
+alternative proof relies on a complete metric on $[-b,b]^\N$. For
+simplicity, we consider a standard construction for $1$-bounded metric
+spaces. This is no loss of generality for our purposes, because for
+any metric $d$, the metric $d'(x,y)=\min(1,d(x,y))$ has the same
+Cauchy sequences.  (Moreover, because we shall confine our attention
+to $kk$-exhaustible metric spaces, this is no loss of generality with
+the alternative reason that the diameter of such a space is computable
+as $\max(\lambda x.\max(\lambda y.d(x,y))$.)
+
+\begin{lemma} \label{product:metric} For any computational $1$-bounded
+  metric space $X$, the metric on~$X^\N$ defined by
+  \[
+  d(x,y) = \sum_n 2^{-n-1} d(x_n,y_n) 
+  \]
+  is computable and $1$-bounded, and it is computationally complete if
+  $X$ is.
+\end{lemma}
+\begin{proof}
+  Use the fact that the map $[0,1]^\N \to [0,1]$ that sends a sequence
+  $a \in [0,1]^\N$ to the number $\sum_n 2^{-n-1} a_n$ is computable.
+  Regarding completeness, it is well known that a sequence in the
+  space~$X^\N$ is Cauchy iff it is componentwise Cauchy in $X$, and in
+  this case its limit is calculated componentwise. (To compute the
+  limit componentwise, maybe we need suitable shifting to make sure
+  that the components converge at the required speed --- I have to
+  check this.)
+\end{proof}
+
+\begin{cor}
+  The Taylor coefficients of any $f \in A$ can be
+  computed from $f$.
+\end{cor}
+\begin{proof}
+  The space $[-b,b]^\N$ is $kk$-exhaustible by
+  Examples~\ref{kk:examples}, and hence the function $T$ is invertible
+  by Theorem~\ref{unique:solution:metric} and
+  Lemma~\ref{product:metric}.
+\end{proof}
+
+\medskip
+Now, it remains to write down: analytic functions of the form $\sum_n a_n
+x^n/n!$, with the same restrictions on $a$ and $\epsilon$, are also
+$kk$-exhaustible, and are closed under differentiation, and they are
+computably differentiable. Then it remains to think whether this can
+be used to solve differential equations using e.g.\ the classical
+Peano theorem.  In certain cases, it is known that analytic solutions
+are unique, but this uses the complex plane. It should be easy to
+generalize the above results to complex analytic functions. Can the
+results discussed above be developed in the internal logic of the
+category and then be extracted via realizability? Work on this paper will
+have to be suspended for at least a month, unfortunately.
+
+\pagebreak[3]
+{%\footnotesize 
+ \bibliographystyle{plain} 
+\bibliography{references}
+}
+
+%\vfill
+
+%{\footnotesize \tableofcontents} 
+
+\end{document}

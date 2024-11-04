@@ -1,0 +1,41 @@
+Errata
+------
+
+29 July 2010
+------------
+
+Typos: "to" should be deleted in the second line of Section 1. "that
+that" somewhere.
+
+
+29 July 2010
+------------
+
+Luke Palmer rightly pointed out that "p True" is just as lazy as "if p
+True then True else False", contrarily to what is claimed in the paper
+He argued operationally. But this is also easy to see denotationally:
+The only potentially problematic case is when p(bot) = b /= bot. In
+this case both expressions return b. The same applies to a similar
+remark about the expression "p True < p False" in the paper.
+
+11 August 2010.
+--------------
+
+Phil Wadler pointed out that the equation "findnot = find.not" is not
+quite correct, and that it should have been instead "findnot xs p =
+find xs (not.p)".
+
+12 August 2010.
+--------------
+
+Typos: f_n should be f_k in item 2 about optimal strategies in Section
+4.1.
+
+12 August 2010.
+--------------
+
+"[Compact] sets of total elements form countably based Hausdorff
+spaces": the word "compact" is missing in the original. Without
+compactness, the Hausdorff property still holds, but the countability
+condition fails in general.
+

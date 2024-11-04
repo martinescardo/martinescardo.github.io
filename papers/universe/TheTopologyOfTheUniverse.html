@@ -1,0 +1,4658 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+><head
+  ><title
+    >TheTopologyOfTheUniverse</title
+    ><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"
+     /><meta http-equiv="Content-Style-Type" content="text/css"
+     /><link href="Agda.css" rel="stylesheet" type="text/css"
+     /></head
+  ><body
+  ><pre
+    ><a name="1"
+      >
+
+</a
+      ><a name="3" class="Comment"
+      >  T h e   i n t r i n s i c   t o p o l o g y   o f   a</a
+      ><a name="58"
+      >
+</a
+      ><a name="59" class="Comment"
+      >  M a r t i n - L o f   u n i v e r s e</a
+      ><a name="98"
+      >
+
+
+</a
+      ><a name="101" class="Comment"
+      >    Martin Escardo, University of Birmingham, UK.</a
+      ><a name="150"
+      >
+</a
+      ><a name="151" class="Comment"
+      >    February 2012, last updated 17 Feb 2012.</a
+      ><a name="195"
+      >
+</a
+      ><a name="196" class="Comment"
+      >    </a
+      ><a name="200"
+      >
+</a
+      ><a name="201" class="Comment"
+      >    This is a proof in intensional Martin-Lof type theory,</a
+      ><a name="259"
+      >
+</a
+      ><a name="260" class="Comment"
+      >    extended with the propositional axiom of extensionality as a</a
+      ><a name="324"
+      >
+</a
+      ><a name="325" class="Comment"
+      >    postulate, written in Agda notation. The K-rule or UIP axiom</a
+      ><a name="389"
+      >
+</a
+      ><a name="390" class="Comment"
+      >    are not used, except in a few instances where they can be</a
+      ><a name="451"
+      >
+</a
+      ><a name="452" class="Comment"
+      >    proved. The proof type-checks in Agda 2.3.0.</a
+      ><a name="500"
+      >
+
+
+</a
+      ><a name="503" class="Comment"
+      >A b s t r a c t. We show that a Martin-Lof universe `a la Russell</a
+      ><a name="568"
+      >
+</a
+      ><a name="569" class="Comment"
+      >is topologically indiscrete in a precise sense defined below. As a</a
+      ><a name="635"
+      >
+</a
+      ><a name="636" class="Comment"
+      >corollary, we derive Rice's Theorem for the universe: it has no</a
+      ><a name="699"
+      >
+</a
+      ><a name="700" class="Comment"
+      >non-trivial, decidable, extensional properties.</a
+      ><a name="747"
+      >
+
+
+</a
+      ><a name="750" class="Comment"
+      >I n t r o d u c t i o n</a
+      ><a name="773"
+      >
+
+</a
+      ><a name="775" class="Comment"
+      >This universe indiscreteness theorem may be surprising, because</a
+      ><a name="838"
+      >
+</a
+      ><a name="839" class="Comment"
+      >types like the Cantor space of infinite binary sequences are far</a
+      ><a name="903"
+      >
+</a
+      ><a name="904" class="Comment"
+      >from indiscrete in the sense considered here, as they have plenty</a
+      ><a name="969"
+      >
+</a
+      ><a name="970" class="Comment"
+      >of decidable properties. The Cantor space also fails to be</a
+      ><a name="1028"
+      >
+</a
+      ><a name="1029" class="Comment"
+      >discrete, because it doesn't have decidable equality, and this</a
+      ><a name="1091"
+      >
+</a
+      ><a name="1092" class="Comment"
+      >fact shows up in the proof of Rice's Theorem.</a
+      ><a name="1137"
+      >
+
+</a
+      ><a name="1139" class="Comment"
+      >We need to postulate the axiom of extensionality, but nothing else</a
+      ><a name="1205"
+      >
+</a
+      ><a name="1206" class="Comment"
+      >(the univalence axiom would give a slightly sharper result). In</a
+      ><a name="1269"
+      >
+</a
+      ><a name="1270" class="Comment"
+      >particular, Brouwerian continuity axioms are not postulated, even</a
+      ><a name="1335"
+      >
+</a
+      ><a name="1336" class="Comment"
+      >though this is about topology in constructive mathematics.</a
+      ><a name="1394"
+      >
+
+</a
+      ><a name="1396" class="Comment"
+      >We show that the universe Set, in Agda notation, is indiscrete, in</a
+      ><a name="1462"
+      >
+</a
+      ><a name="1463" class="Comment"
+      >the sense that every sequence of types converges to any desired</a
+      ><a name="1526"
+      >
+</a
+      ><a name="1527" class="Comment"
+      >type. Convergence is defined using &#8469;&#8734;, the generic convergent</a
+      ><a name="1588"
+      >
+</a
+      ><a name="1589" class="Comment"
+      >sequence, constructed in the module GenericConvergentSequence, but</a
+      ><a name="1655"
+      >
+</a
+      ><a name="1656" class="Comment"
+      >briefly introduced below.</a
+      ><a name="1681"
+      >
+
+</a
+      ><a name="1683" class="Comment"
+      >For the sake of motivation, let's define convergence for sequences</a
+      ><a name="1749"
+      >
+</a
+      ><a name="1750" class="Comment"
+      >of elements of types first.</a
+      ><a name="1777"
+      >
+
+</a
+      ><a name="1779" class="Comment"
+      >We say that a sequence x : &#8469; &#8594; X in a type X converges to a limit</a
+      ><a name="1844"
+      >
+</a
+      ><a name="1845" class="Comment"
+      >x&#8734; : X if one can construct a &quot;limiting sequence&quot; x' : &#8469;&#8734; &#8594; X such</a
+      ><a name="1911"
+      >
+</a
+      ><a name="1912" class="Comment"
+      >that</a
+      ><a name="1916"
+      >
+
+</a
+      ><a name="1918" class="Comment"
+      >     x n = x'(under n)</a
+      ><a name="1940"
+      >
+</a
+      ><a name="1941" class="Comment"
+      >      x&#8734; = x' &#8734;</a
+      ><a name="1956"
+      >
+
+</a
+      ><a name="1958" class="Comment"
+      >where under : &#8469; &#8594; &#8469;&#8734; (standing for &quot;underline&quot;) is the embedding</a
+      ><a name="2022"
+      >
+</a
+      ><a name="2023" class="Comment"
+      >of &#8469; into &#8469;&#8734;. It is easy to see that every function of any two</a
+      ><a name="2085"
+      >
+</a
+      ><a name="2086" class="Comment"
+      >types now becomes automatically continuous in the sense that it</a
+      ><a name="2149"
+      >
+</a
+      ><a name="2150" class="Comment"
+      >preserves limits, without considering any model or any continuity</a
+      ><a name="2215"
+      >
+</a
+      ><a name="2216" class="Comment"
+      >axiom within type theory. The collection of convergent sequences</a
+      ><a name="2280"
+      >
+</a
+      ><a name="2281" class="Comment"
+      >defined above constitutes the intrinsic topology of the type X.</a
+      ><a name="2344"
+      >
+
+</a
+      ><a name="2346" class="Comment"
+      >This is motivated as follows. There is an interpretation of type</a
+      ><a name="2410"
+      >
+</a
+      ><a name="2411" class="Comment"
+      >theory (Johnstone's topological topos) in which types are spaces</a
+      ><a name="2475"
+      >
+</a
+      ><a name="2476" class="Comment"
+      >and all functions are continuous. In this interpretation, &#8469; is the</a
+      ><a name="2542"
+      >
+</a
+      ><a name="2543" class="Comment"
+      >discrete space of natural numbers and the space &#8469;&#8734; is the</a
+      ><a name="2600"
+      >
+</a
+      ><a name="2601" class="Comment"
+      >one-point compactification of &#8469;. Moreover, in this interpretation,</a
+      ><a name="2667"
+      >
+</a
+      ><a name="2668" class="Comment"
+      >convergence defined in the above sense coincides with topological</a
+      ><a name="2733"
+      >
+</a
+      ><a name="2734" class="Comment"
+      >convergence.</a
+      ><a name="2746"
+      >
+
+</a
+      ><a name="2748" class="Comment"
+      >Using a general construction by Streicher, assuming a Grothendieck</a
+      ><a name="2814"
+      >
+</a
+      ><a name="2815" class="Comment"
+      >universe in set theory, one can build a space in the topological</a
+      ><a name="2879"
+      >
+</a
+      ><a name="2880" class="Comment"
+      >topos that is the interpretation of the universe.  Voevodsky asked</a
+      ><a name="2946"
+      >
+</a
+      ><a name="2947" class="Comment"
+      >what the topology of this interpretation of the Martin-Lof</a
+      ><a name="3005"
+      >
+</a
+      ><a name="3006" class="Comment"
+      >universe is. I don't know the answer, but it follows from what we</a
+      ><a name="3071"
+      >
+</a
+      ><a name="3072" class="Comment"
+      >prove here that the quotient by type isomorphism is the indiscrete</a
+      ><a name="3138"
+      >
+</a
+      ><a name="3139" class="Comment"
+      >topology.  (Moreover, I conjecture that the Grothendieck universe</a
+      ><a name="3204"
+      >
+</a
+      ><a name="3205" class="Comment"
+      >with the indiscrete topology can be given the structure needed to</a
+      ><a name="3270"
+      >
+</a
+      ><a name="3271" class="Comment"
+      >interpret a Martin-Lof universe `a la Russell. But this may be a</a
+      ><a name="3335"
+      >
+</a
+      ><a name="3336" class="Comment"
+      >bit too audacious.)</a
+      ><a name="3355"
+      >
+
+</a
+      ><a name="3357" class="Comment"
+      >A space is indiscrete if the only open sets are the empty set and</a
+      ><a name="3422"
+      >
+</a
+      ><a name="3423" class="Comment"
+      >the whole space. It is an easy exercise, if one knows basic</a
+      ><a name="3482"
+      >
+</a
+      ><a name="3483" class="Comment"
+      >topology, to show that this is equivalent to saying that every</a
+      ><a name="3545"
+      >
+</a
+      ><a name="3546" class="Comment"
+      >sequence converges to any point.</a
+      ><a name="3578"
+      >
+
+</a
+      ><a name="3580" class="Comment"
+      >The appropriate notion of equality for elements of the universe</a
+      ><a name="3643"
+      >
+</a
+      ><a name="3644" class="Comment"
+      >Set of types is isomorphism. Hence we reformulate the above</a
+      ><a name="3703"
+      >
+</a
+      ><a name="3704" class="Comment"
+      >definition for limits of sequences of types as follows.</a
+      ><a name="3759"
+      >
+
+</a
+      ><a name="3761" class="Comment"
+      >We say that a sequence of types X : &#8469; &#8594; Set converges to a limit</a
+      ><a name="3825"
+      >
+</a
+      ><a name="3826" class="Comment"
+      >X&#8734; : Set if one can find a &quot;limiting sequence&quot; X' : &#8469;&#8734; &#8594; X such</a
+      ><a name="3889"
+      >
+</a
+      ><a name="3890" class="Comment"
+      >that</a
+      ><a name="3894"
+      >
+
+</a
+      ><a name="3896" class="Comment"
+      >     X n &#8773; X'(under n)</a
+      ><a name="3918"
+      >
+</a
+      ><a name="3919" class="Comment"
+      >      X&#8734; &#8773; X' &#8734;</a
+      ><a name="3934"
+      >
+
+</a
+      ><a name="3936" class="Comment"
+      >If one assumes the univalence axiom, one can replace the</a
+      ><a name="3992"
+      >
+</a
+      ><a name="3993" class="Comment"
+      >isomorphisms by equalities to get an equivalent notion. But notice</a
+      ><a name="4059"
+      >
+</a
+      ><a name="4060" class="Comment"
+      >that in the topological topos isomorphism is not the same thing as</a
+      ><a name="4126"
+      >
+</a
+      ><a name="4127" class="Comment"
+      >equality.</a
+      ><a name="4136"
+      >
+
+</a
+      ><a name="4138" class="Comment"
+      >In this Agda module we show that every sequence of types converges</a
+      ><a name="4204"
+      >
+</a
+      ><a name="4205" class="Comment"
+      >to any type whatsoever. This explains, in particular, why there</a
+      ><a name="4268"
+      >
+</a
+      ><a name="4269" class="Comment"
+      >can't be non-trivial extensional functions Set &#8594; &#8322;, where &#8322; is the</a
+      ><a name="4335"
+      >
+</a
+      ><a name="4336" class="Comment"
+      >discrete type of binary numbers. Such functions are the</a
+      ><a name="4391"
+      >
+</a
+      ><a name="4392" class="Comment"
+      >(continuous characteristic functions of) clopen sets of the</a
+      ><a name="4451"
+      >
+</a
+      ><a name="4452" class="Comment"
+      >universe, and indiscreteness shows that there can be only two of</a
+      ><a name="4516"
+      >
+</a
+      ><a name="4517" class="Comment"
+      >them, so to speak. This is Rice's Theorem for the universe Set.</a
+      ><a name="4580"
+      >
+
+</a
+      ><a name="4582" class="Comment"
+      >(NB. The auxiliary modules develop much more material than we need</a
+      ><a name="4648"
+      >
+</a
+      ><a name="4649" class="Comment"
+      >(and many silly things on the way - apologies).)</a
+      ><a name="4697"
+      >
+
+\begin{code}
+
+</a
+      ><a name="4713" class="Symbol"
+      >{-#</a
+      ><a name="4716"
+      > </a
+      ><a name="4717" class="Keyword"
+      >OPTIONS</a
+      ><a name="4724"
+      > --without-K </a
+      ><a name="4737" class="Symbol"
+      >#-}</a
+      ><a name="4740"
+      >
+
+</a
+      ><a name="4742" class="Keyword"
+      >module</a
+      ><a name="4748"
+      > </a
+      ><a name="4749" href="TheTopologyOfTheUniverse.html#1" class="Module"
+      >TheTopologyOfTheUniverse</a
+      ><a name="4773"
+      > </a
+      ><a name="4774" class="Keyword"
+      >where</a
+      ><a name="4779"
+      >
+
+</a
+      ><a name="4781" class="Keyword"
+      >open</a
+      ><a name="4785"
+      > </a
+      ><a name="4786" class="Keyword"
+      >import</a
+      ><a name="4792"
+      > </a
+      ><a name="4793" href="Cantor.html#1" class="Module"
+      >Cantor</a
+      ><a name="4799"
+      >
+</a
+      ><a name="4800" class="Keyword"
+      >open</a
+      ><a name="4804"
+      > </a
+      ><a name="4805" class="Keyword"
+      >import</a
+      ><a name="4811"
+      > </a
+      ><a name="4812" href="CurryHoward.html#1" class="Module"
+      >CurryHoward</a
+      ><a name="4823"
+      >
+</a
+      ><a name="4824" class="Keyword"
+      >open</a
+      ><a name="4828"
+      > </a
+      ><a name="4829" class="Keyword"
+      >import</a
+      ><a name="4835"
+      > </a
+      ><a name="4836" href="Equality.html#1" class="Module"
+      >Equality</a
+      ><a name="4844"
+      >
+</a
+      ><a name="4845" class="Keyword"
+      >open</a
+      ><a name="4849"
+      > </a
+      ><a name="4850" class="Keyword"
+      >import</a
+      ><a name="4856"
+      > </a
+      ><a name="4857" href="Extensionality.html#1" class="Module"
+      >Extensionality</a
+      ><a name="4871"
+      >
+</a
+      ><a name="4872" class="Keyword"
+      >open</a
+      ><a name="4876"
+      > </a
+      ><a name="4877" class="Keyword"
+      >import</a
+      ><a name="4883"
+      > </a
+      ><a name="4884" href="GenericConvergentSequence.html#1" class="Module"
+      >GenericConvergentSequence</a
+      ><a name="4909"
+      >
+</a
+      ><a name="4910" class="Keyword"
+      >open</a
+      ><a name="4914"
+      > </a
+      ><a name="4915" class="Keyword"
+      >import</a
+      ><a name="4921"
+      > </a
+      ><a name="4922" href="Isomorphism.html#1" class="Module"
+      >Isomorphism</a
+      ><a name="4933"
+      >
+</a
+      ><a name="4934" class="Keyword"
+      >open</a
+      ><a name="4938"
+      > </a
+      ><a name="4939" class="Keyword"
+      >import</a
+      ><a name="4945"
+      > </a
+      ><a name="4946" href="Naturals.html#1" class="Module"
+      >Naturals</a
+      ><a name="4954"
+      >
+</a
+      ><a name="4955" class="Keyword"
+      >open</a
+      ><a name="4959"
+      > </a
+      ><a name="4960" class="Keyword"
+      >import</a
+      ><a name="4966"
+      > </a
+      ><a name="4967" href="SetsAndFunctions.html#1" class="Module"
+      >SetsAndFunctions</a
+      ><a name="4983"
+      >
+</a
+      ><a name="4984" class="Keyword"
+      >open</a
+      ><a name="4988"
+      > </a
+      ><a name="4989" class="Keyword"
+      >import</a
+      ><a name="4995"
+      > </a
+      ><a name="4996" href="Two.html#1" class="Module"
+      >Two</a
+      ><a name="4999"
+      >
+
+\end{code}
+
+</a
+      ><a name="5013" class="Comment"
+      >The following is the crucial construction. It attaches the</a
+      ><a name="5071"
+      >
+</a
+      ><a name="5072" class="Comment"
+      >singleton type &#9312; as the limit to any given sequence of types.</a
+      ><a name="5133"
+      >
+
+</a
+      ><a name="5135" class="Comment"
+      >The idea is that for any u : &#8469;&#8734;, the type &#931; \(n : &#8469;) &#8594; u &#8803; n has</a
+      ><a name="5199"
+      >
+</a
+      ><a name="5200" class="Comment"
+      >at most one element, namely n if u &#8803; n, and none if u = &#8734;. In the</a
+      ><a name="5265"
+      >
+</a
+      ><a name="5266" class="Comment"
+      >latter case we get a function with empty graph as the only</a
+      ><a name="5324"
+      >
+</a
+      ><a name="5325" class="Comment"
+      >inhabitant, making this into a singleton type.  In the former</a
+      ><a name="5386"
+      >
+</a
+      ><a name="5387" class="Comment"
+      >case, we get X n back.</a
+      ><a name="5409"
+      >
+
+\begin{code}
+
+</a
+      ><a name="5425" href="TheTopologyOfTheUniverse.html#5425" class="Function"
+      >attach-&#9312;</a
+      ><a name="5433"
+      > </a
+      ><a name="5434" class="Symbol"
+      >:</a
+      ><a name="5435"
+      > </a
+      ><a name="5436" class="Symbol"
+      >(</a
+      ><a name="5437" href="Naturals.html#202" class="Datatype"
+      >&#8469;</a
+      ><a name="5438"
+      > </a
+      ><a name="5439" class="Symbol"
+      >&#8594;</a
+      ><a name="5440"
+      > </a
+      ><a name="5441" class="PrimitiveType"
+      >Set</a
+      ><a name="5444" class="Symbol"
+      >)</a
+      ><a name="5445"
+      > </a
+      ><a name="5446" class="Symbol"
+      >&#8594;</a
+      ><a name="5447"
+      > </a
+      ><a name="5448" class="Symbol"
+      >(</a
+      ><a name="5449" href="GenericConvergentSequence.html#736" class="Function"
+      >&#8469;&#8734;</a
+      ><a name="5451"
+      > </a
+      ><a name="5452" class="Symbol"
+      >&#8594;</a
+      ><a name="5453"
+      > </a
+      ><a name="5454" class="PrimitiveType"
+      >Set</a
+      ><a name="5457" class="Symbol"
+      >)</a
+      ><a name="5458"
+      >
+</a
+      ><a name="5459" href="TheTopologyOfTheUniverse.html#5425" class="Function"
+      >attach-&#9312;</a
+      ><a name="5467"
+      > </a
+      ><a name="5468" href="TheTopologyOfTheUniverse.html#5468" class="Bound"
+      >X</a
+      ><a name="5469"
+      > </a
+      ><a name="5470" href="TheTopologyOfTheUniverse.html#5470" class="Bound"
+      >u</a
+      ><a name="5471"
+      > </a
+      ><a name="5472" class="Symbol"
+      >=</a
+      ><a name="5473"
+      > </a
+      ><a name="5474" class="Symbol"
+      >(</a
+      ><a name="5475" href="TheTopologyOfTheUniverse.html#5475" class="Bound"
+      >s</a
+      ><a name="5476"
+      > </a
+      ><a name="5477" class="Symbol"
+      >:</a
+      ><a name="5478"
+      > </a
+      ><a name="5479" href="SetsAndFunctions.html#804" class="Record"
+      >&#931;</a
+      ><a name="5480"
+      > </a
+      ><a name="5481" class="Symbol"
+      >\(</a
+      ><a name="5483" href="TheTopologyOfTheUniverse.html#5483" class="Bound"
+      >n</a
+      ><a name="5484"
+      > </a
+      ><a name="5485" class="Symbol"
+      >:</a
+      ><a name="5486"
+      > </a
+      ><a name="5487" href="Naturals.html#202" class="Datatype"
+      >&#8469;</a
+      ><a name="5488" class="Symbol"
+      >)</a
+      ><a name="5489"
+      > </a
+      ><a name="5490" class="Symbol"
+      >&#8594;</a
+      ><a name="5491"
+      > </a
+      ><a name="5492" href="TheTopologyOfTheUniverse.html#5470" class="Bound"
+      >u</a
+      ><a name="5493"
+      > </a
+      ><a name="5494" href="GenericConvergentSequence.html#2698" class="Function Operator"
+      >&#8803;</a
+      ><a name="5495"
+      > </a
+      ><a name="5496" href="TheTopologyOfTheUniverse.html#5483" class="Bound"
+      >n</a
+      ><a name="5497" class="Symbol"
+      >)</a
+      ><a name="5498"
+      > </a
+      ><a name="5499" class="Symbol"
+      >&#8594;</a
+      ><a name="5500"
+      > </a
+      ><a name="5501" href="TheTopologyOfTheUniverse.html#5468" class="Bound"
+      >X</a
+      ><a name="5502" class="Symbol"
+      >(</a
+      ><a name="5503" href="SetsAndFunctions.html#893" class="Function"
+      >&#960;&#8320;</a
+      ><a name="5505"
+      > </a
+      ><a name="5506" href="TheTopologyOfTheUniverse.html#5475" class="Bound"
+      >s</a
+      ><a name="5507" class="Symbol"
+      >)</a
+      ><a name="5508"
+      >
+
+\end{code}
+
+</a
+      ><a name="5522" class="Comment"
+      >We first show that the constructed limiting sequence extends the</a
+      ><a name="5586"
+      >
+</a
+      ><a name="5587" class="Comment"
+      >given sequence:</a
+      ><a name="5602"
+      >
+
+\begin{code}
+
+</a
+      ><a name="5618" href="TheTopologyOfTheUniverse.html#5618" class="Function Operator"
+      >_[_]</a
+      ><a name="5622"
+      > </a
+      ><a name="5623" class="Symbol"
+      >:</a
+      ><a name="5624"
+      > </a
+      ><a name="5625" class="Symbol"
+      >(</a
+      ><a name="5626" href="GenericConvergentSequence.html#736" class="Function"
+      >&#8469;&#8734;</a
+      ><a name="5628"
+      > </a
+      ><a name="5629" class="Symbol"
+      >&#8594;</a
+      ><a name="5630"
+      > </a
+      ><a name="5631" class="PrimitiveType"
+      >Set</a
+      ><a name="5634" class="Symbol"
+      >)</a
+      ><a name="5635"
+      > </a
+      ><a name="5636" class="Symbol"
+      >&#8594;</a
+      ><a name="5637"
+      > </a
+      ><a name="5638" class="Symbol"
+      >(</a
+      ><a name="5639" href="Naturals.html#202" class="Datatype"
+      >&#8469;</a
+      ><a name="5640"
+      > </a
+      ><a name="5641" class="Symbol"
+      >&#8594;</a
+      ><a name="5642"
+      > </a
+      ><a name="5643" class="PrimitiveType"
+      >Set</a
+      ><a name="5646" class="Symbol"
+      >)</a
+      ><a name="5647"
+      >
+</a
+      ><a name="5648" href="TheTopologyOfTheUniverse.html#5648" class="Bound"
+      >X</a
+      ><a name="5649"
+      > </a
+      ><a name="5650" href="TheTopologyOfTheUniverse.html#5618" class="Function Operator"
+      >[</a
+      ><a name="5651"
+      > </a
+      ><a name="5652" href="TheTopologyOfTheUniverse.html#5652" class="Bound"
+      >i</a
+      ><a name="5653"
+      > </a
+      ><a name="5654" href="TheTopologyOfTheUniverse.html#5618" class="Function Operator"
+      >]</a
+      ><a name="5655"
+      > </a
+      ><a name="5656" class="Symbol"
+      >=</a
+      ><a name="5657"
+      > </a
+      ><a name="5658" href="TheTopologyOfTheUniverse.html#5648" class="Bound"
+      >X</a
+      ><a name="5659" class="Symbol"
+      >(</a
+      ><a name="5660" href="GenericConvergentSequence.html#2636" class="Function"
+      >under</a
+      ><a name="5665"
+      > </a
+      ><a name="5666" href="TheTopologyOfTheUniverse.html#5652" class="Bound"
+      >i</a
+      ><a name="5667" class="Symbol"
+      >)</a
+      ><a name="5668"
+      >
+
+
+</a
+      ><a name="5671" href="TheTopologyOfTheUniverse.html#5671" class="Function"
+      >attach-&#9312;-lemma</a
+      ><a name="5685"
+      > </a
+      ><a name="5686" class="Symbol"
+      >:</a
+      ><a name="5687"
+      >
+
+ </a
+      ><a name="5691" class="Symbol"
+      >&#8704;(</a
+      ><a name="5693" href="TheTopologyOfTheUniverse.html#5693" class="Bound"
+      >X</a
+      ><a name="5694"
+      > </a
+      ><a name="5695" class="Symbol"
+      >:</a
+      ><a name="5696"
+      > </a
+      ><a name="5697" href="Naturals.html#202" class="Datatype"
+      >&#8469;</a
+      ><a name="5698"
+      > </a
+      ><a name="5699" class="Symbol"
+      >&#8594;</a
+      ><a name="5700"
+      > </a
+      ><a name="5701" class="PrimitiveType"
+      >Set</a
+      ><a name="5704" class="Symbol"
+      >)</a
+      ><a name="5705"
+      > </a
+      ><a name="5706" class="Symbol"
+      >&#8594;</a
+      ><a name="5707"
+      > </a
+      ><a name="5708" class="Symbol"
+      >&#8704;</a
+      ><a name="5709"
+      > </a
+      ><a name="5710" href="TheTopologyOfTheUniverse.html#5710" class="Bound"
+      >i</a
+      ><a name="5711"
+      > </a
+      ><a name="5712" class="Symbol"
+      >&#8594;</a
+      ><a name="5713"
+      > </a
+      ><a name="5714" href="TheTopologyOfTheUniverse.html#5425" class="Function"
+      >attach-&#9312;</a
+      ><a name="5722"
+      > </a
+      ><a name="5723" href="TheTopologyOfTheUniverse.html#5693" class="Bound"
+      >X</a
+      ><a name="5724"
+      > </a
+      ><a name="5725" href="TheTopologyOfTheUniverse.html#5618" class="Function Operator"
+      >[</a
+      ><a name="5726"
+      > </a
+      ><a name="5727" href="TheTopologyOfTheUniverse.html#5710" class="Bound"
+      >i</a
+      ><a name="5728"
+      > </a
+      ><a name="5729" href="TheTopologyOfTheUniverse.html#5618" class="Function Operator"
+      >]</a
+      ><a name="5730"
+      > </a
+      ><a name="5731" href="Isomorphism.html#239" class="Function Operator"
+      >&#8773;</a
+      ><a name="5732"
+      >  </a
+      ><a name="5734" href="TheTopologyOfTheUniverse.html#5693" class="Bound"
+      >X</a
+      ><a name="5735"
+      > </a
+      ><a name="5736" href="TheTopologyOfTheUniverse.html#5710" class="Bound"
+      >i</a
+      ><a name="5737"
+      >
+
+</a
+      ><a name="5739" href="TheTopologyOfTheUniverse.html#5671" class="Function"
+      >attach-&#9312;-lemma</a
+      ><a name="5753"
+      > </a
+      ><a name="5754" href="TheTopologyOfTheUniverse.html#5754" class="Bound"
+      >X</a
+      ><a name="5755"
+      > </a
+      ><a name="5756" href="TheTopologyOfTheUniverse.html#5756" class="Bound"
+      >i</a
+      ><a name="5757"
+      > </a
+      ><a name="5758" class="Symbol"
+      >=</a
+      ><a name="5759"
+      >
+ </a
+      ><a name="5762" class="Symbol"
+      >(</a
+      ><a name="5763" href="TheTopologyOfTheUniverse.html#5913" class="Function"
+      >g</a
+      ><a name="5764"
+      > </a
+      ><a name="5765" href="TheTopologyOfTheUniverse.html#5756" class="Bound"
+      >i</a
+      ><a name="5766"
+      > </a
+      ><a name="5767" href="SetsAndFunctions.html#856" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="5768"
+      > </a
+      ><a name="5769" href="TheTopologyOfTheUniverse.html#5828" class="Function"
+      >f</a
+      ><a name="5770"
+      > </a
+      ><a name="5771" href="TheTopologyOfTheUniverse.html#5756" class="Bound"
+      >i</a
+      ><a name="5772"
+      > </a
+      ><a name="5773" href="SetsAndFunctions.html#856" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="5774"
+      > </a
+      ><a name="5775" href="Extensionality.html#101" class="Postulate"
+      >extensionality</a
+      ><a name="5789" class="Symbol"
+      >(</a
+      ><a name="5790" href="TheTopologyOfTheUniverse.html#6697" class="Function"
+      >S</a
+      ><a name="5791"
+      > </a
+      ><a name="5792" href="TheTopologyOfTheUniverse.html#5756" class="Bound"
+      >i</a
+      ><a name="5793" class="Symbol"
+      >)</a
+      ><a name="5794"
+      > </a
+      ><a name="5795" href="SetsAndFunctions.html#856" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="5796"
+      > </a
+      ><a name="5797" href="Extensionality.html#101" class="Postulate"
+      >extensionality</a
+      ><a name="5811" class="Symbol"
+      >(</a
+      ><a name="5812" href="TheTopologyOfTheUniverse.html#6494" class="Function"
+      >R</a
+      ><a name="5813"
+      > </a
+      ><a name="5814" href="TheTopologyOfTheUniverse.html#5756" class="Bound"
+      >i</a
+      ><a name="5815" class="Symbol"
+      >))</a
+      ><a name="5817"
+      >
+ </a
+      ><a name="5819" class="Keyword"
+      >where</a
+      ><a name="5824"
+      >
+  </a
+      ><a name="5828" href="TheTopologyOfTheUniverse.html#5828" class="Function"
+      >f</a
+      ><a name="5829"
+      > </a
+      ><a name="5830" class="Symbol"
+      >:</a
+      ><a name="5831"
+      > </a
+      ><a name="5832" class="Symbol"
+      >&#8704;</a
+      ><a name="5833"
+      > </a
+      ><a name="5834" href="TheTopologyOfTheUniverse.html#5834" class="Bound"
+      >i</a
+      ><a name="5835"
+      > </a
+      ><a name="5836" class="Symbol"
+      >&#8594;</a
+      ><a name="5837"
+      > </a
+      ><a name="5838" href="TheTopologyOfTheUniverse.html#5754" class="Bound"
+      >X</a
+      ><a name="5839"
+      > </a
+      ><a name="5840" href="TheTopologyOfTheUniverse.html#5834" class="Bound"
+      >i</a
+      ><a name="5841"
+      > </a
+      ><a name="5842" class="Symbol"
+      >&#8594;</a
+      ><a name="5843"
+      > </a
+      ><a name="5844" href="TheTopologyOfTheUniverse.html#5425" class="Function"
+      >attach-&#9312;</a
+      ><a name="5852"
+      > </a
+      ><a name="5853" href="TheTopologyOfTheUniverse.html#5754" class="Bound"
+      >X</a
+      ><a name="5854"
+      > </a
+      ><a name="5855" href="TheTopologyOfTheUniverse.html#5618" class="Function Operator"
+      >[</a
+      ><a name="5856"
+      > </a
+      ><a name="5857" href="TheTopologyOfTheUniverse.html#5834" class="Bound"
+      >i</a
+      ><a name="5858"
+      > </a
+      ><a name="5859" href="TheTopologyOfTheUniverse.html#5618" class="Function Operator"
+      >]</a
+      ><a name="5860"
+      >
+  </a
+      ><a name="5863" href="TheTopologyOfTheUniverse.html#5828" class="Function"
+      >f</a
+      ><a name="5864"
+      > </a
+      ><a name="5865" href="TheTopologyOfTheUniverse.html#5865" class="Bound"
+      >i</a
+      ><a name="5866"
+      > </a
+      ><a name="5867" href="TheTopologyOfTheUniverse.html#5867" class="Bound"
+      >x</a
+      ><a name="5868"
+      > </a
+      ><a name="5869" class="Symbol"
+      >(</a
+      ><a name="5870" href="TheTopologyOfTheUniverse.html#5870" class="Bound"
+      >n</a
+      ><a name="5871"
+      > </a
+      ><a name="5872" href="SetsAndFunctions.html#856" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="5873"
+      > </a
+      ><a name="5874" href="TheTopologyOfTheUniverse.html#5874" class="Bound"
+      >r</a
+      ><a name="5875" class="Symbol"
+      >)</a
+      ><a name="5876"
+      > </a
+      ><a name="5877" class="Symbol"
+      >=</a
+      ><a name="5878"
+      > </a
+      ><a name="5879" href="Equality.html#905" class="Function"
+      >subst</a
+      ><a name="5884"
+      > </a
+      ><a name="5885" class="Symbol"
+      >{</a
+      ><a name="5886" href="Naturals.html#202" class="Datatype"
+      >&#8469;</a
+      ><a name="5887" class="Symbol"
+      >}</a
+      ><a name="5888"
+      > </a
+      ><a name="5889" class="Symbol"
+      >{</a
+      ><a name="5890" href="TheTopologyOfTheUniverse.html#5754" class="Bound"
+      >X</a
+      ><a name="5891" class="Symbol"
+      >}</a
+      ><a name="5892"
+      > </a
+      ><a name="5893" class="Symbol"
+      >(</a
+      ><a name="5894" href="GenericConvergentSequence.html#2739" class="Function"
+      >under-mono</a
+      ><a name="5904"
+      > </a
+      ><a name="5905" href="TheTopologyOfTheUniverse.html#5874" class="Bound"
+      >r</a
+      ><a name="5906" class="Symbol"
+      >)</a
+      ><a name="5907"
+      > </a
+      ><a name="5908" href="TheTopologyOfTheUniverse.html#5867" class="Bound"
+      >x</a
+      ><a name="5909"
+      >
+
+  </a
+      ><a name="5913" href="TheTopologyOfTheUniverse.html#5913" class="Function"
+      >g</a
+      ><a name="5914"
+      > </a
+      ><a name="5915" class="Symbol"
+      >:</a
+      ><a name="5916"
+      > </a
+      ><a name="5917" class="Symbol"
+      >&#8704;</a
+      ><a name="5918"
+      > </a
+      ><a name="5919" href="TheTopologyOfTheUniverse.html#5919" class="Bound"
+      >i</a
+      ><a name="5920"
+      > </a
+      ><a name="5921" class="Symbol"
+      >&#8594;</a
+      ><a name="5922"
+      > </a
+      ><a name="5923" href="TheTopologyOfTheUniverse.html#5425" class="Function"
+      >attach-&#9312;</a
+      ><a name="5931"
+      > </a
+      ><a name="5932" href="TheTopologyOfTheUniverse.html#5754" class="Bound"
+      >X</a
+      ><a name="5933"
+      > </a
+      ><a name="5934" href="TheTopologyOfTheUniverse.html#5618" class="Function Operator"
+      >[</a
+      ><a name="5935"
+      > </a
+      ><a name="5936" href="TheTopologyOfTheUniverse.html#5919" class="Bound"
+      >i</a
+      ><a name="5937"
+      > </a
+      ><a name="5938" href="TheTopologyOfTheUniverse.html#5618" class="Function Operator"
+      >]</a
+      ><a name="5939"
+      > </a
+      ><a name="5940" class="Symbol"
+      >&#8594;</a
+      ><a name="5941"
+      > </a
+      ><a name="5942" href="TheTopologyOfTheUniverse.html#5754" class="Bound"
+      >X</a
+      ><a name="5943"
+      > </a
+      ><a name="5944" href="TheTopologyOfTheUniverse.html#5919" class="Bound"
+      >i</a
+      ><a name="5945"
+      >
+  </a
+      ><a name="5948" href="TheTopologyOfTheUniverse.html#5913" class="Function"
+      >g</a
+      ><a name="5949"
+      > </a
+      ><a name="5950" href="TheTopologyOfTheUniverse.html#5950" class="Bound"
+      >i</a
+      ><a name="5951"
+      > </a
+      ><a name="5952" href="TheTopologyOfTheUniverse.html#5952" class="Bound"
+      >h</a
+      ><a name="5953"
+      > </a
+      ><a name="5954" class="Symbol"
+      >=</a
+      ><a name="5955"
+      > </a
+      ><a name="5956" href="TheTopologyOfTheUniverse.html#5952" class="Bound"
+      >h</a
+      ><a name="5957" class="Symbol"
+      >(</a
+      ><a name="5958" href="TheTopologyOfTheUniverse.html#5950" class="Bound"
+      >i</a
+      ><a name="5959"
+      > </a
+      ><a name="5960" href="SetsAndFunctions.html#856" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="5961"
+      > </a
+      ><a name="5962" href="Equality.html#275" class="InductiveConstructor"
+      >refl</a
+      ><a name="5966" class="Symbol"
+      >)</a
+      ><a name="5967"
+      >
+
+  </a
+      ><a name="5971" href="TheTopologyOfTheUniverse.html#5971" class="Function"
+      >R-lemma</a
+      ><a name="5978"
+      > </a
+      ><a name="5979" class="Symbol"
+      >:</a
+      ><a name="5980"
+      >
+
+   </a
+      ><a name="5985" class="Symbol"
+      >&#8704;</a
+      ><a name="5986"
+      > </a
+      ><a name="5987" href="TheTopologyOfTheUniverse.html#5987" class="Bound"
+      >i</a
+      ><a name="5988"
+      > </a
+      ><a name="5989" href="TheTopologyOfTheUniverse.html#5989" class="Bound"
+      >n</a
+      ><a name="5990"
+      > </a
+      ><a name="5991" class="Symbol"
+      >&#8594;</a
+      ><a name="5992"
+      > </a
+      ><a name="5993" class="Symbol"
+      >&#8704;(</a
+      ><a name="5995" href="TheTopologyOfTheUniverse.html#5995" class="Bound"
+      >r</a
+      ><a name="5996"
+      > </a
+      ><a name="5997" class="Symbol"
+      >:</a
+      ><a name="5998"
+      > </a
+      ><a name="5999" href="GenericConvergentSequence.html#2636" class="Function"
+      >under</a
+      ><a name="6004"
+      > </a
+      ><a name="6005" href="TheTopologyOfTheUniverse.html#5987" class="Bound"
+      >i</a
+      ><a name="6006"
+      > </a
+      ><a name="6007" href="Equality.html#239" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="6008"
+      > </a
+      ><a name="6009" href="GenericConvergentSequence.html#2636" class="Function"
+      >under</a
+      ><a name="6014"
+      > </a
+      ><a name="6015" href="TheTopologyOfTheUniverse.html#5989" class="Bound"
+      >n</a
+      ><a name="6016" class="Symbol"
+      >)</a
+      ><a name="6017"
+      > </a
+      ><a name="6018" class="Symbol"
+      >&#8594;</a
+      ><a name="6019"
+      > </a
+      ><a name="6020" class="Symbol"
+      >&#8704;(</a
+      ><a name="6022" href="TheTopologyOfTheUniverse.html#6022" class="Bound"
+      >h</a
+      ><a name="6023"
+      > </a
+      ><a name="6024" class="Symbol"
+      >:</a
+      ><a name="6025"
+      > </a
+      ><a name="6026" href="TheTopologyOfTheUniverse.html#5425" class="Function"
+      >attach-&#9312;</a
+      ><a name="6034"
+      > </a
+      ><a name="6035" href="TheTopologyOfTheUniverse.html#5754" class="Bound"
+      >X</a
+      ><a name="6036"
+      > </a
+      ><a name="6037" href="TheTopologyOfTheUniverse.html#5618" class="Function Operator"
+      >[</a
+      ><a name="6038"
+      > </a
+      ><a name="6039" href="TheTopologyOfTheUniverse.html#5987" class="Bound"
+      >i</a
+      ><a name="6040"
+      > </a
+      ><a name="6041" href="TheTopologyOfTheUniverse.html#5618" class="Function Operator"
+      >]</a
+      ><a name="6042" class="Symbol"
+      >)</a
+      ><a name="6043"
+      >
+        </a
+      ><a name="6053" class="Symbol"
+      >&#8594;</a
+      ><a name="6054"
+      > </a
+      ><a name="6055" href="Equality.html#905" class="Function"
+      >subst</a
+      ><a name="6060"
+      > </a
+      ><a name="6061" class="Symbol"
+      >(</a
+      ><a name="6062" href="GenericConvergentSequence.html#2739" class="Function"
+      >under-mono</a
+      ><a name="6072"
+      > </a
+      ><a name="6073" class="Symbol"
+      >{</a
+      ><a name="6074" href="TheTopologyOfTheUniverse.html#5987" class="Bound"
+      >i</a
+      ><a name="6075" class="Symbol"
+      >}</a
+      ><a name="6076"
+      > </a
+      ><a name="6077" class="Symbol"
+      >{</a
+      ><a name="6078" href="TheTopologyOfTheUniverse.html#5989" class="Bound"
+      >n</a
+      ><a name="6079" class="Symbol"
+      >}</a
+      ><a name="6080"
+      > </a
+      ><a name="6081" href="TheTopologyOfTheUniverse.html#5995" class="Bound"
+      >r</a
+      ><a name="6082" class="Symbol"
+      >)</a
+      ><a name="6083"
+      > </a
+      ><a name="6084" class="Symbol"
+      >(</a
+      ><a name="6085" href="TheTopologyOfTheUniverse.html#6022" class="Bound"
+      >h</a
+      ><a name="6086" class="Symbol"
+      >(</a
+      ><a name="6087" href="TheTopologyOfTheUniverse.html#5987" class="Bound"
+      >i</a
+      ><a name="6088"
+      > </a
+      ><a name="6089" href="SetsAndFunctions.html#856" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="6090"
+      > </a
+      ><a name="6091" href="Equality.html#275" class="InductiveConstructor"
+      >refl</a
+      ><a name="6095" class="Symbol"
+      >))</a
+      ><a name="6097"
+      > </a
+      ><a name="6098" href="Equality.html#239" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="6099"
+      > </a
+      ><a name="6100" href="TheTopologyOfTheUniverse.html#6022" class="Bound"
+      >h</a
+      ><a name="6101" class="Symbol"
+      >(</a
+      ><a name="6102" href="TheTopologyOfTheUniverse.html#5989" class="Bound"
+      >n</a
+      ><a name="6103"
+      > </a
+      ><a name="6104" href="SetsAndFunctions.html#856" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="6105"
+      > </a
+      ><a name="6106" href="TheTopologyOfTheUniverse.html#5995" class="Bound"
+      >r</a
+      ><a name="6107" class="Symbol"
+      >)</a
+      ><a name="6108"
+      >
+
+  </a
+      ><a name="6112" href="TheTopologyOfTheUniverse.html#5971" class="Function"
+      >R-lemma</a
+      ><a name="6119"
+      > </a
+      ><a name="6120" href="TheTopologyOfTheUniverse.html#6120" class="Bound"
+      >i</a
+      ><a name="6121"
+      > </a
+      ><a name="6122" href="TheTopologyOfTheUniverse.html#6122" class="Bound"
+      >n</a
+      ><a name="6123"
+      > </a
+      ><a name="6124" href="TheTopologyOfTheUniverse.html#6124" class="Bound"
+      >r</a
+      ><a name="6125"
+      > </a
+      ><a name="6126" href="TheTopologyOfTheUniverse.html#6126" class="Bound"
+      >h</a
+      ><a name="6127"
+      > </a
+      ><a name="6128" class="Symbol"
+      >=</a
+      ><a name="6129"
+      >
+   </a
+      ><a name="6134" href="Equality.html#986" class="Function"
+      >trans</a
+      ><a name="6139"
+      > </a
+      ><a name="6140" class="Symbol"
+      >(</a
+      ><a name="6141" href="TheTopologyOfTheUniverse.html#6398" class="Function"
+      >lemma</a
+      ><a name="6146"
+      > </a
+      ><a name="6147" href="TheTopologyOfTheUniverse.html#6237" class="Function"
+      >q</a
+      ><a name="6148"
+      > </a
+      ><a name="6149" href="TheTopologyOfTheUniverse.html#6126" class="Bound"
+      >h</a
+      ><a name="6150" class="Symbol"
+      >)</a
+      ><a name="6151"
+      > </a
+      ><a name="6152" class="Symbol"
+      >(</a
+      ><a name="6153" href="Equality.html#1133" class="Function"
+      >cong</a
+      ><a name="6157"
+      > </a
+      ><a name="6158" class="Symbol"
+      >(&#955;</a
+      ><a name="6160"
+      > </a
+      ><a name="6161" href="TheTopologyOfTheUniverse.html#6161" class="Bound"
+      >p</a
+      ><a name="6162"
+      >  </a
+      ><a name="6164" class="Symbol"
+      >&#8594;</a
+      ><a name="6165"
+      > </a
+      ><a name="6166" href="TheTopologyOfTheUniverse.html#6126" class="Bound"
+      >h</a
+      ><a name="6167" class="Symbol"
+      >(</a
+      ><a name="6168" href="TheTopologyOfTheUniverse.html#6122" class="Bound"
+      >n</a
+      ><a name="6169"
+      > </a
+      ><a name="6170" href="SetsAndFunctions.html#856" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="6171"
+      > </a
+      ><a name="6172" href="TheTopologyOfTheUniverse.html#6161" class="Bound"
+      >p</a
+      ><a name="6173" class="Symbol"
+      >))</a
+      ><a name="6175"
+      > </a
+      ><a name="6176" class="Symbol"
+      >(</a
+      ><a name="6177" href="UIP.html#753" class="Function"
+      >UIP</a
+      ><a name="6180"
+      > </a
+      ><a name="6181" href="GenericConvergentSequence.html#736" class="Function"
+      >&#8469;&#8734;</a
+      ><a name="6183"
+      > </a
+      ><a name="6184" class="Symbol"
+      >(</a
+      ><a name="6185" href="Equality.html#1133" class="Function"
+      >cong</a
+      ><a name="6189"
+      > </a
+      ><a name="6190" href="GenericConvergentSequence.html#2636" class="Function"
+      >under</a
+      ><a name="6195"
+      > </a
+      ><a name="6196" href="TheTopologyOfTheUniverse.html#6237" class="Function"
+      >q</a
+      ><a name="6197" class="Symbol"
+      >)</a
+      ><a name="6198"
+      > </a
+      ><a name="6199" href="TheTopologyOfTheUniverse.html#6124" class="Bound"
+      >r</a
+      ><a name="6200" class="Symbol"
+      >))</a
+      ><a name="6202"
+      >
+   </a
+      ><a name="6206" class="Keyword"
+      >where</a
+      ><a name="6211"
+      >
+    </a
+      ><a name="6217" class="Keyword"
+      >open</a
+      ><a name="6221"
+      > </a
+      ><a name="6222" class="Keyword"
+      >import</a
+      ><a name="6228"
+      > </a
+      ><a name="6229" href="UIP.html#1" class="Module"
+      >UIP</a
+      ><a name="6232"
+      >
+    </a
+      ><a name="6237" href="TheTopologyOfTheUniverse.html#6237" class="Function"
+      >q</a
+      ><a name="6238"
+      > </a
+      ><a name="6239" class="Symbol"
+      >:</a
+      ><a name="6240"
+      > </a
+      ><a name="6241" href="TheTopologyOfTheUniverse.html#6120" class="Bound"
+      >i</a
+      ><a name="6242"
+      > </a
+      ><a name="6243" href="Equality.html#239" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="6244"
+      > </a
+      ><a name="6245" href="TheTopologyOfTheUniverse.html#6122" class="Bound"
+      >n</a
+      ><a name="6246"
+      >
+    </a
+      ><a name="6251" href="TheTopologyOfTheUniverse.html#6237" class="Function"
+      >q</a
+      ><a name="6252"
+      > </a
+      ><a name="6253" class="Symbol"
+      >=</a
+      ><a name="6254"
+      > </a
+      ><a name="6255" href="GenericConvergentSequence.html#2739" class="Function"
+      >under-mono</a
+      ><a name="6265"
+      > </a
+      ><a name="6266" href="TheTopologyOfTheUniverse.html#6124" class="Bound"
+      >r</a
+      ><a name="6267"
+      >
+    </a
+      ><a name="6272" href="TheTopologyOfTheUniverse.html#6272" class="Function"
+      >A</a
+      ><a name="6273"
+      > </a
+      ><a name="6274" class="Symbol"
+      >:</a
+      ><a name="6275"
+      > </a
+      ><a name="6276" class="Symbol"
+      >&#8704;</a
+      ><a name="6277"
+      > </a
+      ><a name="6278" href="TheTopologyOfTheUniverse.html#6278" class="Bound"
+      >i</a
+      ><a name="6279"
+      > </a
+      ><a name="6280" href="TheTopologyOfTheUniverse.html#6280" class="Bound"
+      >n</a
+      ><a name="6281"
+      > </a
+      ><a name="6282" class="Symbol"
+      >&#8594;</a
+      ><a name="6283"
+      > </a
+      ><a name="6284" href="TheTopologyOfTheUniverse.html#6278" class="Bound"
+      >i</a
+      ><a name="6285"
+      > </a
+      ><a name="6286" href="Equality.html#239" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="6287"
+      > </a
+      ><a name="6288" href="TheTopologyOfTheUniverse.html#6280" class="Bound"
+      >n</a
+      ><a name="6289"
+      > </a
+      ><a name="6290" class="Symbol"
+      >&#8594;</a
+      ><a name="6291"
+      > </a
+      ><a name="6292" href="CurryHoward.html#259" class="Function"
+      >Prp</a
+      ><a name="6295"
+      >
+    </a
+      ><a name="6300" href="TheTopologyOfTheUniverse.html#6272" class="Function"
+      >A</a
+      ><a name="6301"
+      > </a
+      ><a name="6302" href="TheTopologyOfTheUniverse.html#6302" class="Bound"
+      >i</a
+      ><a name="6303"
+      > </a
+      ><a name="6304" href="TheTopologyOfTheUniverse.html#6304" class="Bound"
+      >n</a
+      ><a name="6305"
+      > </a
+      ><a name="6306" href="TheTopologyOfTheUniverse.html#6306" class="Bound"
+      >q</a
+      ><a name="6307"
+      > </a
+      ><a name="6308" class="Symbol"
+      >=</a
+      ><a name="6309"
+      > </a
+      ><a name="6310" class="Symbol"
+      >&#8704;(</a
+      ><a name="6312" href="TheTopologyOfTheUniverse.html#6312" class="Bound"
+      >h</a
+      ><a name="6313"
+      > </a
+      ><a name="6314" class="Symbol"
+      >:</a
+      ><a name="6315"
+      > </a
+      ><a name="6316" href="TheTopologyOfTheUniverse.html#5425" class="Function"
+      >attach-&#9312;</a
+      ><a name="6324"
+      > </a
+      ><a name="6325" href="TheTopologyOfTheUniverse.html#5754" class="Bound"
+      >X</a
+      ><a name="6326"
+      > </a
+      ><a name="6327" href="TheTopologyOfTheUniverse.html#5618" class="Function Operator"
+      >[</a
+      ><a name="6328"
+      > </a
+      ><a name="6329" href="TheTopologyOfTheUniverse.html#6302" class="Bound"
+      >i</a
+      ><a name="6330"
+      > </a
+      ><a name="6331" href="TheTopologyOfTheUniverse.html#5618" class="Function Operator"
+      >]</a
+      ><a name="6332" class="Symbol"
+      >)</a
+      ><a name="6333"
+      >
+             </a
+      ><a name="6348" class="Symbol"
+      >&#8594;</a
+      ><a name="6349"
+      > </a
+      ><a name="6350" href="Equality.html#905" class="Function"
+      >subst</a
+      ><a name="6355"
+      > </a
+      ><a name="6356" href="TheTopologyOfTheUniverse.html#6306" class="Bound"
+      >q</a
+      ><a name="6357"
+      > </a
+      ><a name="6358" class="Symbol"
+      >(</a
+      ><a name="6359" href="TheTopologyOfTheUniverse.html#6312" class="Bound"
+      >h</a
+      ><a name="6360" class="Symbol"
+      >(</a
+      ><a name="6361" href="TheTopologyOfTheUniverse.html#6302" class="Bound"
+      >i</a
+      ><a name="6362"
+      > </a
+      ><a name="6363" href="SetsAndFunctions.html#856" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="6364"
+      > </a
+      ><a name="6365" href="Equality.html#275" class="InductiveConstructor"
+      >refl</a
+      ><a name="6369" class="Symbol"
+      >))</a
+      ><a name="6371"
+      > </a
+      ><a name="6372" href="Equality.html#239" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="6373"
+      > </a
+      ><a name="6374" href="TheTopologyOfTheUniverse.html#6312" class="Bound"
+      >h</a
+      ><a name="6375" class="Symbol"
+      >(</a
+      ><a name="6376" href="TheTopologyOfTheUniverse.html#6304" class="Bound"
+      >n</a
+      ><a name="6377"
+      > </a
+      ><a name="6378" href="SetsAndFunctions.html#856" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="6379"
+      > </a
+      ><a name="6380" href="Equality.html#1133" class="Function"
+      >cong</a
+      ><a name="6384"
+      > </a
+      ><a name="6385" href="GenericConvergentSequence.html#2636" class="Function"
+      >under</a
+      ><a name="6390"
+      > </a
+      ><a name="6391" href="TheTopologyOfTheUniverse.html#6306" class="Bound"
+      >q</a
+      ><a name="6392" class="Symbol"
+      >)</a
+      ><a name="6393"
+      >
+    </a
+      ><a name="6398" href="TheTopologyOfTheUniverse.html#6398" class="Function"
+      >lemma</a
+      ><a name="6403"
+      > </a
+      ><a name="6404" class="Symbol"
+      >:</a
+      ><a name="6405"
+      > </a
+      ><a name="6406" class="Symbol"
+      >&#8704;{</a
+      ><a name="6408" href="TheTopologyOfTheUniverse.html#6408" class="Bound"
+      >i</a
+      ><a name="6409"
+      > </a
+      ><a name="6410" href="TheTopologyOfTheUniverse.html#6410" class="Bound"
+      >n</a
+      ><a name="6411" class="Symbol"
+      >}</a
+      ><a name="6412"
+      > </a
+      ><a name="6413" class="Symbol"
+      >&#8594;</a
+      ><a name="6414"
+      > </a
+      ><a name="6415" class="Symbol"
+      >&#8704;(</a
+      ><a name="6417" href="TheTopologyOfTheUniverse.html#6417" class="Bound"
+      >q</a
+      ><a name="6418"
+      > </a
+      ><a name="6419" class="Symbol"
+      >:</a
+      ><a name="6420"
+      > </a
+      ><a name="6421" href="TheTopologyOfTheUniverse.html#6408" class="Bound"
+      >i</a
+      ><a name="6422"
+      > </a
+      ><a name="6423" href="Equality.html#239" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="6424"
+      > </a
+      ><a name="6425" href="TheTopologyOfTheUniverse.html#6410" class="Bound"
+      >n</a
+      ><a name="6426" class="Symbol"
+      >)</a
+      ><a name="6427"
+      > </a
+      ><a name="6428" class="Symbol"
+      >&#8594;</a
+      ><a name="6429"
+      > </a
+      ><a name="6430" href="TheTopologyOfTheUniverse.html#6272" class="Function"
+      >A</a
+      ><a name="6431"
+      > </a
+      ><a name="6432" href="TheTopologyOfTheUniverse.html#6408" class="Bound"
+      >i</a
+      ><a name="6433"
+      > </a
+      ><a name="6434" href="TheTopologyOfTheUniverse.html#6410" class="Bound"
+      >n</a
+      ><a name="6435"
+      > </a
+      ><a name="6436" href="TheTopologyOfTheUniverse.html#6417" class="Bound"
+      >q</a
+      ><a name="6437"
+      >
+    </a
+      ><a name="6442" href="TheTopologyOfTheUniverse.html#6398" class="Function"
+      >lemma</a
+      ><a name="6447"
+      > </a
+      ><a name="6448" class="Symbol"
+      >=</a
+      ><a name="6449"
+      > </a
+      ><a name="6450" href="Equality.html#396" class="Function"
+      >J</a
+      ><a name="6451"
+      > </a
+      ><a name="6452" href="TheTopologyOfTheUniverse.html#6272" class="Function"
+      >A</a
+      ><a name="6453"
+      > </a
+      ><a name="6454" class="Symbol"
+      >(&#955;</a
+      ><a name="6456"
+      > </a
+      ><a name="6457" href="TheTopologyOfTheUniverse.html#6457" class="Bound"
+      >i</a
+      ><a name="6458"
+      > </a
+      ><a name="6459" href="TheTopologyOfTheUniverse.html#6459" class="Bound"
+      >h</a
+      ><a name="6460"
+      > </a
+      ><a name="6461" class="Symbol"
+      >&#8594;</a
+      ><a name="6462"
+      > </a
+      ><a name="6463" href="Equality.html#1133" class="Function"
+      >cong</a
+      ><a name="6467"
+      > </a
+      ><a name="6468" class="Symbol"
+      >(&#955;</a
+      ><a name="6470"
+      > </a
+      ><a name="6471" href="TheTopologyOfTheUniverse.html#6471" class="Bound"
+      >p</a
+      ><a name="6472"
+      > </a
+      ><a name="6473" class="Symbol"
+      >&#8594;</a
+      ><a name="6474"
+      > </a
+      ><a name="6475" href="TheTopologyOfTheUniverse.html#6459" class="Bound"
+      >h</a
+      ><a name="6476" class="Symbol"
+      >(</a
+      ><a name="6477" href="TheTopologyOfTheUniverse.html#6457" class="Bound"
+      >i</a
+      ><a name="6478"
+      > </a
+      ><a name="6479" href="SetsAndFunctions.html#856" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="6480"
+      > </a
+      ><a name="6481" href="TheTopologyOfTheUniverse.html#6471" class="Bound"
+      >p</a
+      ><a name="6482" class="Symbol"
+      >))</a
+      ><a name="6484"
+      > </a
+      ><a name="6485" href="Equality.html#275" class="InductiveConstructor"
+      >refl</a
+      ><a name="6489" class="Symbol"
+      >)</a
+      ><a name="6490"
+      >
+
+  </a
+      ><a name="6494" href="TheTopologyOfTheUniverse.html#6494" class="Function"
+      >R</a
+      ><a name="6495"
+      > </a
+      ><a name="6496" class="Symbol"
+      >:</a
+      ><a name="6497"
+      > </a
+      ><a name="6498" class="Symbol"
+      >&#8704;</a
+      ><a name="6499"
+      > </a
+      ><a name="6500" href="TheTopologyOfTheUniverse.html#6500" class="Bound"
+      >i</a
+      ><a name="6501"
+      > </a
+      ><a name="6502" class="Symbol"
+      >&#8594;</a
+      ><a name="6503"
+      > </a
+      ><a name="6504" class="Symbol"
+      >&#8704;</a
+      ><a name="6505"
+      > </a
+      ><a name="6506" href="TheTopologyOfTheUniverse.html#6506" class="Bound"
+      >h</a
+      ><a name="6507"
+      > </a
+      ><a name="6508" class="Symbol"
+      >&#8594;</a
+      ><a name="6509"
+      > </a
+      ><a name="6510" href="TheTopologyOfTheUniverse.html#5828" class="Function"
+      >f</a
+      ><a name="6511"
+      > </a
+      ><a name="6512" href="TheTopologyOfTheUniverse.html#6500" class="Bound"
+      >i</a
+      ><a name="6513"
+      > </a
+      ><a name="6514" class="Symbol"
+      >(</a
+      ><a name="6515" href="TheTopologyOfTheUniverse.html#5913" class="Function"
+      >g</a
+      ><a name="6516"
+      > </a
+      ><a name="6517" href="TheTopologyOfTheUniverse.html#6500" class="Bound"
+      >i</a
+      ><a name="6518"
+      > </a
+      ><a name="6519" href="TheTopologyOfTheUniverse.html#6506" class="Bound"
+      >h</a
+      ><a name="6520" class="Symbol"
+      >)</a
+      ><a name="6521"
+      > </a
+      ><a name="6522" href="Equality.html#239" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="6523"
+      > </a
+      ><a name="6524" href="TheTopologyOfTheUniverse.html#6506" class="Bound"
+      >h</a
+      ><a name="6525"
+      >
+  </a
+      ><a name="6528" href="TheTopologyOfTheUniverse.html#6494" class="Function"
+      >R</a
+      ><a name="6529"
+      > </a
+      ><a name="6530" href="TheTopologyOfTheUniverse.html#6530" class="Bound"
+      >i</a
+      ><a name="6531"
+      > </a
+      ><a name="6532" href="TheTopologyOfTheUniverse.html#6532" class="Bound"
+      >h</a
+      ><a name="6533"
+      > </a
+      ><a name="6534" class="Symbol"
+      >=</a
+      ><a name="6535"
+      > </a
+      ><a name="6536" href="Extensionality.html#101" class="Postulate"
+      >extensionality</a
+      ><a name="6550" class="Symbol"
+      >(</a
+      ><a name="6551" href="TheTopologyOfTheUniverse.html#6576" class="Function"
+      >lemma</a
+      ><a name="6556"
+      > </a
+      ><a name="6557" href="TheTopologyOfTheUniverse.html#6530" class="Bound"
+      >i</a
+      ><a name="6558"
+      > </a
+      ><a name="6559" href="TheTopologyOfTheUniverse.html#6532" class="Bound"
+      >h</a
+      ><a name="6560" class="Symbol"
+      >)</a
+      ><a name="6561"
+      >
+   </a
+      ><a name="6565" class="Keyword"
+      >where</a
+      ><a name="6570"
+      >
+    </a
+      ><a name="6576" href="TheTopologyOfTheUniverse.html#6576" class="Function"
+      >lemma</a
+      ><a name="6581"
+      > </a
+      ><a name="6582" class="Symbol"
+      >:</a
+      ><a name="6583"
+      > </a
+      ><a name="6584" class="Symbol"
+      >&#8704;</a
+      ><a name="6585"
+      > </a
+      ><a name="6586" href="TheTopologyOfTheUniverse.html#6586" class="Bound"
+      >i</a
+      ><a name="6587"
+      > </a
+      ><a name="6588" class="Symbol"
+      >&#8594;</a
+      ><a name="6589"
+      > </a
+      ><a name="6590" class="Symbol"
+      >&#8704;</a
+      ><a name="6591"
+      > </a
+      ><a name="6592" class="Symbol"
+      >(</a
+      ><a name="6593" href="TheTopologyOfTheUniverse.html#6593" class="Bound"
+      >h</a
+      ><a name="6594"
+      > </a
+      ><a name="6595" class="Symbol"
+      >:</a
+      ><a name="6596"
+      > </a
+      ><a name="6597" href="TheTopologyOfTheUniverse.html#5425" class="Function"
+      >attach-&#9312;</a
+      ><a name="6605"
+      > </a
+      ><a name="6606" href="TheTopologyOfTheUniverse.html#5754" class="Bound"
+      >X</a
+      ><a name="6607"
+      > </a
+      ><a name="6608" href="TheTopologyOfTheUniverse.html#5618" class="Function Operator"
+      >[</a
+      ><a name="6609"
+      > </a
+      ><a name="6610" href="TheTopologyOfTheUniverse.html#6586" class="Bound"
+      >i</a
+      ><a name="6611"
+      > </a
+      ><a name="6612" href="TheTopologyOfTheUniverse.html#5618" class="Function Operator"
+      >]</a
+      ><a name="6613" class="Symbol"
+      >)</a
+      ><a name="6614"
+      >
+          </a
+      ><a name="6626" class="Symbol"
+      >&#8594;</a
+      ><a name="6627"
+      > </a
+      ><a name="6628" class="Symbol"
+      >&#8704;</a
+      ><a name="6629"
+      > </a
+      ><a name="6630" href="TheTopologyOfTheUniverse.html#6630" class="Bound"
+      >s</a
+      ><a name="6631"
+      > </a
+      ><a name="6632" class="Symbol"
+      >&#8594;</a
+      ><a name="6633"
+      > </a
+      ><a name="6634" href="TheTopologyOfTheUniverse.html#5828" class="Function"
+      >f</a
+      ><a name="6635"
+      > </a
+      ><a name="6636" href="TheTopologyOfTheUniverse.html#6586" class="Bound"
+      >i</a
+      ><a name="6637"
+      > </a
+      ><a name="6638" class="Symbol"
+      >(</a
+      ><a name="6639" href="TheTopologyOfTheUniverse.html#5913" class="Function"
+      >g</a
+      ><a name="6640"
+      > </a
+      ><a name="6641" href="TheTopologyOfTheUniverse.html#6586" class="Bound"
+      >i</a
+      ><a name="6642"
+      > </a
+      ><a name="6643" href="TheTopologyOfTheUniverse.html#6593" class="Bound"
+      >h</a
+      ><a name="6644" class="Symbol"
+      >)</a
+      ><a name="6645"
+      > </a
+      ><a name="6646" href="TheTopologyOfTheUniverse.html#6630" class="Bound"
+      >s</a
+      ><a name="6647"
+      > </a
+      ><a name="6648" href="Equality.html#239" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="6649"
+      > </a
+      ><a name="6650" href="TheTopologyOfTheUniverse.html#6593" class="Bound"
+      >h</a
+      ><a name="6651"
+      > </a
+      ><a name="6652" href="TheTopologyOfTheUniverse.html#6630" class="Bound"
+      >s</a
+      ><a name="6653"
+      >
+    </a
+      ><a name="6658" href="TheTopologyOfTheUniverse.html#6576" class="Function"
+      >lemma</a
+      ><a name="6663"
+      > </a
+      ><a name="6664" href="TheTopologyOfTheUniverse.html#6664" class="Bound"
+      >i</a
+      ><a name="6665"
+      > </a
+      ><a name="6666" href="TheTopologyOfTheUniverse.html#6666" class="Bound"
+      >h</a
+      ><a name="6667"
+      > </a
+      ><a name="6668" class="Symbol"
+      >(</a
+      ><a name="6669" href="TheTopologyOfTheUniverse.html#6669" class="Bound"
+      >n</a
+      ><a name="6670"
+      > </a
+      ><a name="6671" href="SetsAndFunctions.html#856" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="6672"
+      > </a
+      ><a name="6673" href="TheTopologyOfTheUniverse.html#6673" class="Bound"
+      >r</a
+      ><a name="6674" class="Symbol"
+      >)</a
+      ><a name="6675"
+      > </a
+      ><a name="6676" class="Symbol"
+      >=</a
+      ><a name="6677"
+      > </a
+      ><a name="6678" href="TheTopologyOfTheUniverse.html#5971" class="Function"
+      >R-lemma</a
+      ><a name="6685"
+      > </a
+      ><a name="6686" href="TheTopologyOfTheUniverse.html#6664" class="Bound"
+      >i</a
+      ><a name="6687"
+      > </a
+      ><a name="6688" href="TheTopologyOfTheUniverse.html#6669" class="Bound"
+      >n</a
+      ><a name="6689"
+      > </a
+      ><a name="6690" href="TheTopologyOfTheUniverse.html#6673" class="Bound"
+      >r</a
+      ><a name="6691"
+      > </a
+      ><a name="6692" href="TheTopologyOfTheUniverse.html#6666" class="Bound"
+      >h</a
+      ><a name="6693"
+      >
+
+  </a
+      ><a name="6697" href="TheTopologyOfTheUniverse.html#6697" class="Function"
+      >S</a
+      ><a name="6698"
+      > </a
+      ><a name="6699" class="Symbol"
+      >:</a
+      ><a name="6700"
+      > </a
+      ><a name="6701" class="Symbol"
+      >&#8704;</a
+      ><a name="6702"
+      > </a
+      ><a name="6703" href="TheTopologyOfTheUniverse.html#6703" class="Bound"
+      >i</a
+      ><a name="6704"
+      > </a
+      ><a name="6705" class="Symbol"
+      >&#8594;</a
+      ><a name="6706"
+      > </a
+      ><a name="6707" class="Symbol"
+      >&#8704;</a
+      ><a name="6708"
+      > </a
+      ><a name="6709" href="TheTopologyOfTheUniverse.html#6709" class="Bound"
+      >x</a
+      ><a name="6710"
+      > </a
+      ><a name="6711" class="Symbol"
+      >&#8594;</a
+      ><a name="6712"
+      > </a
+      ><a name="6713" href="TheTopologyOfTheUniverse.html#5913" class="Function"
+      >g</a
+      ><a name="6714"
+      > </a
+      ><a name="6715" href="TheTopologyOfTheUniverse.html#6703" class="Bound"
+      >i</a
+      ><a name="6716"
+      > </a
+      ><a name="6717" class="Symbol"
+      >(</a
+      ><a name="6718" href="TheTopologyOfTheUniverse.html#5828" class="Function"
+      >f</a
+      ><a name="6719"
+      > </a
+      ><a name="6720" href="TheTopologyOfTheUniverse.html#6703" class="Bound"
+      >i</a
+      ><a name="6721"
+      > </a
+      ><a name="6722" href="TheTopologyOfTheUniverse.html#6709" class="Bound"
+      >x</a
+      ><a name="6723" class="Symbol"
+      >)</a
+      ><a name="6724"
+      > </a
+      ><a name="6725" href="Equality.html#239" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="6726"
+      > </a
+      ><a name="6727" href="TheTopologyOfTheUniverse.html#6709" class="Bound"
+      >x</a
+      ><a name="6728"
+      >
+  </a
+      ><a name="6731" href="TheTopologyOfTheUniverse.html#6697" class="Function"
+      >S</a
+      ><a name="6732"
+      > </a
+      ><a name="6733" href="TheTopologyOfTheUniverse.html#6733" class="Bound"
+      >i</a
+      ><a name="6734"
+      > </a
+      ><a name="6735" href="TheTopologyOfTheUniverse.html#6735" class="Bound"
+      >x</a
+      ><a name="6736"
+      > </a
+      ><a name="6737" class="Symbol"
+      >=</a
+      ><a name="6738"
+      > </a
+      ><a name="6739" href="Equality.html#1133" class="Function"
+      >cong</a
+      ><a name="6743"
+      > </a
+      ><a name="6744" class="Symbol"
+      >(&#955;</a
+      ><a name="6746"
+      > </a
+      ><a name="6747" href="TheTopologyOfTheUniverse.html#6747" class="Bound"
+      >r</a
+      ><a name="6748"
+      > </a
+      ><a name="6749" class="Symbol"
+      >&#8594;</a
+      ><a name="6750"
+      > </a
+      ><a name="6751" href="Equality.html#905" class="Function"
+      >subst</a
+      ><a name="6756"
+      > </a
+      ><a name="6757" class="Symbol"
+      >{</a
+      ><a name="6758" href="Naturals.html#202" class="Datatype"
+      >&#8469;</a
+      ><a name="6759" class="Symbol"
+      >}</a
+      ><a name="6760"
+      > </a
+      ><a name="6761" class="Symbol"
+      >{</a
+      ><a name="6762" href="TheTopologyOfTheUniverse.html#5754" class="Bound"
+      >X</a
+      ><a name="6763" class="Symbol"
+      >}</a
+      ><a name="6764"
+      > </a
+      ><a name="6765" href="TheTopologyOfTheUniverse.html#6747" class="Bound"
+      >r</a
+      ><a name="6766"
+      > </a
+      ><a name="6767" href="TheTopologyOfTheUniverse.html#6735" class="Bound"
+      >x</a
+      ><a name="6768" class="Symbol"
+      >)</a
+      ><a name="6769"
+      > </a
+      ><a name="6770" href="TheTopologyOfTheUniverse.html#6810" class="Function"
+      >lemma</a
+      ><a name="6775"
+      >
+   </a
+      ><a name="6779" class="Keyword"
+      >where</a
+      ><a name="6784"
+      >
+    </a
+      ><a name="6790" class="Keyword"
+      >open</a
+      ><a name="6794"
+      > </a
+      ><a name="6795" class="Keyword"
+      >import</a
+      ><a name="6801"
+      > </a
+      ><a name="6802" href="UIP.html#1" class="Module"
+      >UIP</a
+      ><a name="6805"
+      >
+    </a
+      ><a name="6810" href="TheTopologyOfTheUniverse.html#6810" class="Function"
+      >lemma</a
+      ><a name="6815"
+      > </a
+      ><a name="6816" class="Symbol"
+      >:</a
+      ><a name="6817"
+      > </a
+      ><a name="6818" href="GenericConvergentSequence.html#2739" class="Function"
+      >under-mono</a
+      ><a name="6828"
+      > </a
+      ><a name="6829" href="Equality.html#275" class="InductiveConstructor"
+      >refl</a
+      ><a name="6833"
+      > </a
+      ><a name="6834" href="Equality.html#239" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="6835"
+      > </a
+      ><a name="6836" href="Equality.html#275" class="InductiveConstructor"
+      >refl</a
+      ><a name="6840"
+      >
+    </a
+      ><a name="6845" href="TheTopologyOfTheUniverse.html#6810" class="Function"
+      >lemma</a
+      ><a name="6850"
+      > </a
+      ><a name="6851" class="Symbol"
+      >=</a
+      ><a name="6852"
+      > </a
+      ><a name="6853" href="UIP.html#753" class="Function"
+      >UIP</a
+      ><a name="6856"
+      > </a
+      ><a name="6857" href="Naturals.html#202" class="Datatype"
+      >&#8469;</a
+      ><a name="6858"
+      > </a
+      ><a name="6859" class="Symbol"
+      >(</a
+      ><a name="6860" href="GenericConvergentSequence.html#2739" class="Function"
+      >under-mono</a
+      ><a name="6870"
+      > </a
+      ><a name="6871" href="Equality.html#275" class="InductiveConstructor"
+      >refl</a
+      ><a name="6875" class="Symbol"
+      >)</a
+      ><a name="6876"
+      > </a
+      ><a name="6877" href="Equality.html#275" class="InductiveConstructor"
+      >refl</a
+      ><a name="6881"
+      >
+
+\end{code}
+
+</a
+      ><a name="6895" class="Comment"
+      >And then we show that the added limit point is what we claimed:</a
+      ><a name="6958"
+      >
+
+\begin{code}
+
+</a
+      ><a name="6974" href="TheTopologyOfTheUniverse.html#6974" class="Function"
+      >attach-&#9312;-lemma&#8734;</a
+      ><a name="6989"
+      > </a
+      ><a name="6990" class="Symbol"
+      >:</a
+      ><a name="6991"
+      >
+
+  </a
+      ><a name="6996" class="Symbol"
+      >&#8704;(</a
+      ><a name="6998" href="TheTopologyOfTheUniverse.html#6998" class="Bound"
+      >X</a
+      ><a name="6999"
+      > </a
+      ><a name="7000" class="Symbol"
+      >:</a
+      ><a name="7001"
+      > </a
+      ><a name="7002" href="Naturals.html#202" class="Datatype"
+      >&#8469;</a
+      ><a name="7003"
+      > </a
+      ><a name="7004" class="Symbol"
+      >&#8594;</a
+      ><a name="7005"
+      > </a
+      ><a name="7006" class="PrimitiveType"
+      >Set</a
+      ><a name="7009" class="Symbol"
+      >)</a
+      ><a name="7010"
+      > </a
+      ><a name="7011" class="Symbol"
+      >&#8594;</a
+      ><a name="7012"
+      > </a
+      ><a name="7013" href="TheTopologyOfTheUniverse.html#5425" class="Function"
+      >attach-&#9312;</a
+      ><a name="7021"
+      > </a
+      ><a name="7022" href="TheTopologyOfTheUniverse.html#6998" class="Bound"
+      >X</a
+      ><a name="7023"
+      > </a
+      ><a name="7024" href="GenericConvergentSequence.html#1794" class="Function"
+      >&#8734;</a
+      ><a name="7025"
+      > </a
+      ><a name="7026" href="Isomorphism.html#239" class="Function Operator"
+      >&#8773;</a
+      ><a name="7027"
+      > </a
+      ><a name="7028" href="SetsAndFunctions.html#328" class="Datatype"
+      >&#9312;</a
+      ><a name="7029"
+      >
+
+</a
+      ><a name="7032" href="TheTopologyOfTheUniverse.html#6974" class="Function"
+      >attach-&#9312;-lemma&#8734;</a
+      ><a name="7047"
+      > </a
+      ><a name="7048" href="TheTopologyOfTheUniverse.html#7048" class="Bound"
+      >X</a
+      ><a name="7049"
+      > </a
+      ><a name="7050" class="Symbol"
+      >=</a
+      ><a name="7051"
+      > </a
+      ><a name="7052" href="Isomorphism.html#893" class="Function"
+      >only-one-iso</a
+      ><a name="7064"
+      > </a
+      ><a name="7065" href="TheTopologyOfTheUniverse.html#7099" class="Function"
+      >the-only-element</a
+      ><a name="7081"
+      > </a
+      ><a name="7082" href="TheTopologyOfTheUniverse.html#7331" class="Function"
+      >lemma&#8321;</a
+      ><a name="7088"
+      >
+ </a
+      ><a name="7090" class="Keyword"
+      >where</a
+      ><a name="7095"
+      >
+  </a
+      ><a name="7099" href="TheTopologyOfTheUniverse.html#7099" class="Function"
+      >the-only-element</a
+      ><a name="7115"
+      > </a
+      ><a name="7116" class="Symbol"
+      >:</a
+      ><a name="7117"
+      > </a
+      ><a name="7118" href="TheTopologyOfTheUniverse.html#5425" class="Function"
+      >attach-&#9312;</a
+      ><a name="7126"
+      > </a
+      ><a name="7127" href="TheTopologyOfTheUniverse.html#7048" class="Bound"
+      >X</a
+      ><a name="7128"
+      > </a
+      ><a name="7129" href="GenericConvergentSequence.html#1794" class="Function"
+      >&#8734;</a
+      ><a name="7130"
+      >
+  </a
+      ><a name="7133" href="TheTopologyOfTheUniverse.html#7099" class="Function"
+      >the-only-element</a
+      ><a name="7149"
+      > </a
+      ><a name="7150" class="Symbol"
+      >(</a
+      ><a name="7151" href="TheTopologyOfTheUniverse.html#7151" class="Bound"
+      >n</a
+      ><a name="7152"
+      > </a
+      ><a name="7153" href="SetsAndFunctions.html#856" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="7154"
+      > </a
+      ><a name="7155" href="TheTopologyOfTheUniverse.html#7155" class="Bound"
+      >r</a
+      ><a name="7156" class="Symbol"
+      >)</a
+      ><a name="7157"
+      > </a
+      ><a name="7158" class="Symbol"
+      >=</a
+      ><a name="7159"
+      > </a
+      ><a name="7160" href="SetsAndFunctions.html#182" class="Function"
+      >unique-from-&#8709;</a
+      ><a name="7173" class="Symbol"
+      >(</a
+      ><a name="7174" href="GenericConvergentSequence.html#4794" class="Function"
+      >&#8734;-is-not-&#8469;</a
+      ><a name="7184"
+      > </a
+      ><a name="7185" href="TheTopologyOfTheUniverse.html#7151" class="Bound"
+      >n</a
+      ><a name="7186"
+      > </a
+      ><a name="7187" href="TheTopologyOfTheUniverse.html#7155" class="Bound"
+      >r</a
+      ><a name="7188" class="Symbol"
+      >)</a
+      ><a name="7189"
+      >
+
+  </a
+      ><a name="7193" href="TheTopologyOfTheUniverse.html#7193" class="Function"
+      >lemma&#8320;</a
+      ><a name="7199"
+      > </a
+      ><a name="7200" class="Symbol"
+      >:</a
+      ><a name="7201"
+      > </a
+      ><a name="7202" class="Symbol"
+      >&#8704;(</a
+      ><a name="7204" href="TheTopologyOfTheUniverse.html#7204" class="Bound"
+      >f</a
+      ><a name="7205"
+      > </a
+      ><a name="7206" href="TheTopologyOfTheUniverse.html#7206" class="Bound"
+      >g</a
+      ><a name="7207"
+      > </a
+      ><a name="7208" class="Symbol"
+      >:</a
+      ><a name="7209"
+      > </a
+      ><a name="7210" href="TheTopologyOfTheUniverse.html#5425" class="Function"
+      >attach-&#9312;</a
+      ><a name="7218"
+      > </a
+      ><a name="7219" href="TheTopologyOfTheUniverse.html#7048" class="Bound"
+      >X</a
+      ><a name="7220"
+      > </a
+      ><a name="7221" href="GenericConvergentSequence.html#1794" class="Function"
+      >&#8734;</a
+      ><a name="7222" class="Symbol"
+      >)</a
+      ><a name="7223"
+      >
+         </a
+      ><a name="7234" class="Symbol"
+      >&#8594;</a
+      ><a name="7235"
+      > </a
+      ><a name="7236" class="Symbol"
+      >&#8704;(</a
+      ><a name="7238" href="TheTopologyOfTheUniverse.html#7238" class="Bound"
+      >s</a
+      ><a name="7239"
+      > </a
+      ><a name="7240" class="Symbol"
+      >:</a
+      ><a name="7241"
+      > </a
+      ><a name="7242" href="SetsAndFunctions.html#804" class="Record"
+      >&#931;</a
+      ><a name="7243"
+      > </a
+      ><a name="7244" class="Symbol"
+      >\(</a
+      ><a name="7246" href="TheTopologyOfTheUniverse.html#7246" class="Bound"
+      >n</a
+      ><a name="7247"
+      > </a
+      ><a name="7248" class="Symbol"
+      >:</a
+      ><a name="7249"
+      > </a
+      ><a name="7250" href="Naturals.html#202" class="Datatype"
+      >&#8469;</a
+      ><a name="7251" class="Symbol"
+      >)</a
+      ><a name="7252"
+      > </a
+      ><a name="7253" class="Symbol"
+      >&#8594;</a
+      ><a name="7254"
+      > </a
+      ><a name="7255" href="GenericConvergentSequence.html#1794" class="Function"
+      >&#8734;</a
+      ><a name="7256"
+      > </a
+      ><a name="7257" href="GenericConvergentSequence.html#2698" class="Function Operator"
+      >&#8803;</a
+      ><a name="7258"
+      > </a
+      ><a name="7259" href="TheTopologyOfTheUniverse.html#7246" class="Bound"
+      >n</a
+      ><a name="7260" class="Symbol"
+      >)</a
+      ><a name="7261"
+      > </a
+      ><a name="7262" class="Symbol"
+      >&#8594;</a
+      ><a name="7263"
+      > </a
+      ><a name="7264" href="TheTopologyOfTheUniverse.html#7204" class="Bound"
+      >f</a
+      ><a name="7265"
+      > </a
+      ><a name="7266" href="TheTopologyOfTheUniverse.html#7238" class="Bound"
+      >s</a
+      ><a name="7267"
+      > </a
+      ><a name="7268" href="Equality.html#239" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="7269"
+      > </a
+      ><a name="7270" href="TheTopologyOfTheUniverse.html#7206" class="Bound"
+      >g</a
+      ><a name="7271"
+      > </a
+      ><a name="7272" href="TheTopologyOfTheUniverse.html#7238" class="Bound"
+      >s</a
+      ><a name="7273"
+      >
+  </a
+      ><a name="7276" href="TheTopologyOfTheUniverse.html#7193" class="Function"
+      >lemma&#8320;</a
+      ><a name="7282"
+      > </a
+      ><a name="7283" href="TheTopologyOfTheUniverse.html#7283" class="Bound"
+      >f</a
+      ><a name="7284"
+      > </a
+      ><a name="7285" href="TheTopologyOfTheUniverse.html#7285" class="Bound"
+      >g</a
+      ><a name="7286"
+      > </a
+      ><a name="7287" class="Symbol"
+      >(</a
+      ><a name="7288" href="TheTopologyOfTheUniverse.html#7288" class="Bound"
+      >n</a
+      ><a name="7289"
+      > </a
+      ><a name="7290" href="SetsAndFunctions.html#856" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="7291"
+      > </a
+      ><a name="7292" href="TheTopologyOfTheUniverse.html#7292" class="Bound"
+      >r</a
+      ><a name="7293" class="Symbol"
+      >)</a
+      ><a name="7294"
+      > </a
+      ><a name="7295" class="Symbol"
+      >=</a
+      ><a name="7296"
+      > </a
+      ><a name="7297" href="SetsAndFunctions.html#182" class="Function"
+      >unique-from-&#8709;</a
+      ><a name="7310" class="Symbol"
+      >(</a
+      ><a name="7311" href="GenericConvergentSequence.html#4794" class="Function"
+      >&#8734;-is-not-&#8469;</a
+      ><a name="7321"
+      > </a
+      ><a name="7322" href="TheTopologyOfTheUniverse.html#7288" class="Bound"
+      >n</a
+      ><a name="7323"
+      > </a
+      ><a name="7324" href="TheTopologyOfTheUniverse.html#7292" class="Bound"
+      >r</a
+      ><a name="7325" class="Symbol"
+      >)</a
+      ><a name="7326"
+      >
+
+  </a
+      ><a name="7331" href="TheTopologyOfTheUniverse.html#7331" class="Function"
+      >lemma&#8321;</a
+      ><a name="7337"
+      > </a
+      ><a name="7338" class="Symbol"
+      >:</a
+      ><a name="7339"
+      > </a
+      ><a name="7340" class="Symbol"
+      >&#8704;(</a
+      ><a name="7342" href="TheTopologyOfTheUniverse.html#7342" class="Bound"
+      >f</a
+      ><a name="7343"
+      > </a
+      ><a name="7344" href="TheTopologyOfTheUniverse.html#7344" class="Bound"
+      >g</a
+      ><a name="7345"
+      > </a
+      ><a name="7346" class="Symbol"
+      >:</a
+      ><a name="7347"
+      > </a
+      ><a name="7348" href="TheTopologyOfTheUniverse.html#5425" class="Function"
+      >attach-&#9312;</a
+      ><a name="7356"
+      > </a
+      ><a name="7357" href="TheTopologyOfTheUniverse.html#7048" class="Bound"
+      >X</a
+      ><a name="7358"
+      > </a
+      ><a name="7359" href="GenericConvergentSequence.html#1794" class="Function"
+      >&#8734;</a
+      ><a name="7360" class="Symbol"
+      >)</a
+      ><a name="7361"
+      > </a
+      ><a name="7362" class="Symbol"
+      >&#8594;</a
+      ><a name="7363"
+      > </a
+      ><a name="7364" href="TheTopologyOfTheUniverse.html#7342" class="Bound"
+      >f</a
+      ><a name="7365"
+      > </a
+      ><a name="7366" href="Equality.html#239" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="7367"
+      > </a
+      ><a name="7368" href="TheTopologyOfTheUniverse.html#7344" class="Bound"
+      >g</a
+      ><a name="7369"
+      >
+  </a
+      ><a name="7372" href="TheTopologyOfTheUniverse.html#7331" class="Function"
+      >lemma&#8321;</a
+      ><a name="7378"
+      > </a
+      ><a name="7379" href="TheTopologyOfTheUniverse.html#7379" class="Bound"
+      >f</a
+      ><a name="7380"
+      > </a
+      ><a name="7381" href="TheTopologyOfTheUniverse.html#7381" class="Bound"
+      >g</a
+      ><a name="7382"
+      > </a
+      ><a name="7383" class="Symbol"
+      >=</a
+      ><a name="7384"
+      > </a
+      ><a name="7385" href="Extensionality.html#101" class="Postulate"
+      >extensionality</a
+      ><a name="7399" class="Symbol"
+      >(</a
+      ><a name="7400" href="TheTopologyOfTheUniverse.html#7193" class="Function"
+      >lemma&#8320;</a
+      ><a name="7406"
+      > </a
+      ><a name="7407" href="TheTopologyOfTheUniverse.html#7379" class="Bound"
+      >f</a
+      ><a name="7408"
+      > </a
+      ><a name="7409" href="TheTopologyOfTheUniverse.html#7381" class="Bound"
+      >g</a
+      ><a name="7410" class="Symbol"
+      >)</a
+      ><a name="7411"
+      >
+
+\end{code}
+
+</a
+      ><a name="7425" class="Comment"
+      >The following follows the above pattern: We give a series of</a
+      ><a name="7485"
+      >
+</a
+      ><a name="7486" class="Comment"
+      >constructions of limiting sequences, each one followed by two</a
+      ><a name="7547"
+      >
+</a
+      ><a name="7548" class="Comment"
+      >lemmas, one saying what the limiting sequence is and the other</a
+      ><a name="7610"
+      >
+</a
+      ><a name="7611" class="Comment"
+      >saying what its limit (value at &#8734;) is.</a
+      ><a name="7649"
+      >
+
+</a
+      ><a name="7651" class="Comment"
+      >We begin with a particular case of the above, for the sake of</a
+      ><a name="7712"
+      >
+</a
+      ><a name="7713" class="Comment"
+      >clarity, and because it is used twice: the constant sequence &#8709;,</a
+      ><a name="7776"
+      >
+</a
+      ><a name="7777" class="Comment"
+      >where &#8709; is the empty type, converges to the singleton type &#9312;:</a
+      ><a name="7838"
+      >
+
+\begin{code}
+
+</a
+      ><a name="7854" href="TheTopologyOfTheUniverse.html#7854" class="Function"
+      >constant-&#8709;-converging-to-&#9312;</a
+      ><a name="7880"
+      > </a
+      ><a name="7881" class="Symbol"
+      >:</a
+      ><a name="7882"
+      > </a
+      ><a name="7883" href="GenericConvergentSequence.html#736" class="Function"
+      >&#8469;&#8734;</a
+      ><a name="7885"
+      > </a
+      ><a name="7886" class="Symbol"
+      >&#8594;</a
+      ><a name="7887"
+      > </a
+      ><a name="7888" class="PrimitiveType"
+      >Set</a
+      ><a name="7891"
+      >
+</a
+      ><a name="7892" href="TheTopologyOfTheUniverse.html#7854" class="Function"
+      >constant-&#8709;-converging-to-&#9312;</a
+      ><a name="7918"
+      > </a
+      ><a name="7919" class="Symbol"
+      >=</a
+      ><a name="7920"
+      > </a
+      ><a name="7921" href="TheTopologyOfTheUniverse.html#5425" class="Function"
+      >attach-&#9312;</a
+      ><a name="7929" class="Symbol"
+      >(&#955;</a
+      ><a name="7931"
+      > </a
+      ><a name="7932" href="TheTopologyOfTheUniverse.html#7932" class="Bound"
+      >i</a
+      ><a name="7933"
+      > </a
+      ><a name="7934" class="Symbol"
+      >&#8594;</a
+      ><a name="7935"
+      > </a
+      ><a name="7936" href="SetsAndFunctions.html#167" class="Datatype"
+      >&#8709;</a
+      ><a name="7937" class="Symbol"
+      >)</a
+      ><a name="7938"
+      >
+
+
+</a
+      ><a name="7941" href="TheTopologyOfTheUniverse.html#7941" class="Function"
+      >constant-&#8709;-converging-to-&#9312;-lemma</a
+      ><a name="7973"
+      > </a
+      ><a name="7974" class="Symbol"
+      >:</a
+      ><a name="7975"
+      >
+
+  </a
+      ><a name="7980" class="Symbol"
+      >&#8704;(</a
+      ><a name="7982" href="TheTopologyOfTheUniverse.html#7982" class="Bound"
+      >i</a
+      ><a name="7983"
+      > </a
+      ><a name="7984" class="Symbol"
+      >:</a
+      ><a name="7985"
+      > </a
+      ><a name="7986" href="Naturals.html#202" class="Datatype"
+      >&#8469;</a
+      ><a name="7987" class="Symbol"
+      >)</a
+      ><a name="7988"
+      > </a
+      ><a name="7989" class="Symbol"
+      >&#8594;</a
+      ><a name="7990"
+      > </a
+      ><a name="7991" href="TheTopologyOfTheUniverse.html#7854" class="Function"
+      >constant-&#8709;-converging-to-&#9312;</a
+      ><a name="8017"
+      > </a
+      ><a name="8018" href="TheTopologyOfTheUniverse.html#5618" class="Function Operator"
+      >[</a
+      ><a name="8019"
+      > </a
+      ><a name="8020" href="TheTopologyOfTheUniverse.html#7982" class="Bound"
+      >i</a
+      ><a name="8021"
+      > </a
+      ><a name="8022" href="TheTopologyOfTheUniverse.html#5618" class="Function Operator"
+      >]</a
+      ><a name="8023"
+      > </a
+      ><a name="8024" href="Isomorphism.html#239" class="Function Operator"
+      >&#8773;</a
+      ><a name="8025"
+      > </a
+      ><a name="8026" href="SetsAndFunctions.html#167" class="Datatype"
+      >&#8709;</a
+      ><a name="8027"
+      >
+
+</a
+      ><a name="8029" href="TheTopologyOfTheUniverse.html#7941" class="Function"
+      >constant-&#8709;-converging-to-&#9312;-lemma</a
+      ><a name="8061"
+      > </a
+      ><a name="8062" class="Symbol"
+      >=</a
+      ><a name="8063"
+      > </a
+      ><a name="8064" href="TheTopologyOfTheUniverse.html#5671" class="Function"
+      >attach-&#9312;-lemma</a
+      ><a name="8078" class="Symbol"
+      >(&#955;</a
+      ><a name="8080"
+      > </a
+      ><a name="8081" href="TheTopologyOfTheUniverse.html#8081" class="Bound"
+      >i</a
+      ><a name="8082"
+      > </a
+      ><a name="8083" class="Symbol"
+      >&#8594;</a
+      ><a name="8084"
+      > </a
+      ><a name="8085" href="SetsAndFunctions.html#167" class="Datatype"
+      >&#8709;</a
+      ><a name="8086" class="Symbol"
+      >)</a
+      ><a name="8087"
+      >
+
+
+</a
+      ><a name="8090" href="TheTopologyOfTheUniverse.html#8090" class="Function"
+      >constant-&#8709;-converging-to-&#9312;-lemma&#8734;</a
+      ><a name="8123"
+      > </a
+      ><a name="8124" class="Symbol"
+      >:</a
+      ><a name="8125"
+      >
+
+ </a
+      ><a name="8129" href="TheTopologyOfTheUniverse.html#7854" class="Function"
+      >constant-&#8709;-converging-to-&#9312;</a
+      ><a name="8155"
+      > </a
+      ><a name="8156" href="GenericConvergentSequence.html#1794" class="Function"
+      >&#8734;</a
+      ><a name="8157"
+      > </a
+      ><a name="8158" href="Isomorphism.html#239" class="Function Operator"
+      >&#8773;</a
+      ><a name="8159"
+      > </a
+      ><a name="8160" href="SetsAndFunctions.html#328" class="Datatype"
+      >&#9312;</a
+      ><a name="8161"
+      >
+
+</a
+      ><a name="8163" href="TheTopologyOfTheUniverse.html#8090" class="Function"
+      >constant-&#8709;-converging-to-&#9312;-lemma&#8734;</a
+      ><a name="8196"
+      > </a
+      ><a name="8197" class="Symbol"
+      >=</a
+      ><a name="8198"
+      > </a
+      ><a name="8199" href="TheTopologyOfTheUniverse.html#6974" class="Function"
+      >attach-&#9312;-lemma&#8734;</a
+      ><a name="8214" class="Symbol"
+      >(&#955;</a
+      ><a name="8216"
+      > </a
+      ><a name="8217" href="TheTopologyOfTheUniverse.html#8217" class="Bound"
+      >i</a
+      ><a name="8218"
+      > </a
+      ><a name="8219" class="Symbol"
+      >&#8594;</a
+      ><a name="8220"
+      > </a
+      ><a name="8221" href="SetsAndFunctions.html#167" class="Datatype"
+      >&#8709;</a
+      ><a name="8222" class="Symbol"
+      >)</a
+      ><a name="8223"
+      >
+
+\end{code}
+
+</a
+      ><a name="8237" class="Comment"
+      >The constant sequence &#8709; converges to any desired type Y, by</a
+      ><a name="8296"
+      >
+</a
+      ><a name="8297" class="Comment"
+      >multiplying the previous sequence pointwise by Y:</a
+      ><a name="8346"
+      >
+
+\begin{code}
+
+</a
+      ><a name="8362" href="TheTopologyOfTheUniverse.html#8362" class="Function"
+      >constant-&#8709;-converging-to-anything</a
+      ><a name="8395"
+      > </a
+      ><a name="8396" class="Symbol"
+      >:</a
+      ><a name="8397"
+      > </a
+      ><a name="8398" class="PrimitiveType"
+      >Set</a
+      ><a name="8401"
+      > </a
+      ><a name="8402" class="Symbol"
+      >&#8594;</a
+      ><a name="8403"
+      > </a
+      ><a name="8404" class="Symbol"
+      >(</a
+      ><a name="8405" href="GenericConvergentSequence.html#736" class="Function"
+      >&#8469;&#8734;</a
+      ><a name="8407"
+      > </a
+      ><a name="8408" class="Symbol"
+      >&#8594;</a
+      ><a name="8409"
+      > </a
+      ><a name="8410" class="PrimitiveType"
+      >Set</a
+      ><a name="8413" class="Symbol"
+      >)</a
+      ><a name="8414"
+      >
+</a
+      ><a name="8415" href="TheTopologyOfTheUniverse.html#8362" class="Function"
+      >constant-&#8709;-converging-to-anything</a
+      ><a name="8448"
+      > </a
+      ><a name="8449" href="TheTopologyOfTheUniverse.html#8449" class="Bound"
+      >Y</a
+      ><a name="8450"
+      > </a
+      ><a name="8451" href="TheTopologyOfTheUniverse.html#8451" class="Bound"
+      >u</a
+      ><a name="8452"
+      > </a
+      ><a name="8453" class="Symbol"
+      >=</a
+      ><a name="8454"
+      > </a
+      ><a name="8455" class="Symbol"
+      >(</a
+      ><a name="8456" href="TheTopologyOfTheUniverse.html#7854" class="Function"
+      >constant-&#8709;-converging-to-&#9312;</a
+      ><a name="8482"
+      > </a
+      ><a name="8483" href="TheTopologyOfTheUniverse.html#8451" class="Bound"
+      >u</a
+      ><a name="8484" class="Symbol"
+      >)</a
+      ><a name="8485"
+      > </a
+      ><a name="8486" href="SetsAndFunctions.html#1643" class="Function Operator"
+      >&#215;</a
+      ><a name="8487"
+      > </a
+      ><a name="8488" href="TheTopologyOfTheUniverse.html#8449" class="Bound"
+      >Y</a
+      ><a name="8489"
+      >
+
+
+</a
+      ><a name="8492" href="TheTopologyOfTheUniverse.html#8492" class="Function"
+      >constant-&#8709;-converging-to-anything-lemma</a
+      ><a name="8531"
+      > </a
+      ><a name="8532" class="Symbol"
+      >:</a
+      ><a name="8533"
+      >
+
+ </a
+      ><a name="8537" class="Symbol"
+      >&#8704;(</a
+      ><a name="8539" href="TheTopologyOfTheUniverse.html#8539" class="Bound"
+      >Y</a
+      ><a name="8540"
+      > </a
+      ><a name="8541" class="Symbol"
+      >:</a
+      ><a name="8542"
+      > </a
+      ><a name="8543" class="PrimitiveType"
+      >Set</a
+      ><a name="8546" class="Symbol"
+      >)</a
+      ><a name="8547"
+      > </a
+      ><a name="8548" class="Symbol"
+      >&#8594;</a
+      ><a name="8549"
+      > </a
+      ><a name="8550" class="Symbol"
+      >&#8704;(</a
+      ><a name="8552" href="TheTopologyOfTheUniverse.html#8552" class="Bound"
+      >i</a
+      ><a name="8553"
+      > </a
+      ><a name="8554" class="Symbol"
+      >:</a
+      ><a name="8555"
+      > </a
+      ><a name="8556" href="Naturals.html#202" class="Datatype"
+      >&#8469;</a
+      ><a name="8557" class="Symbol"
+      >)</a
+      ><a name="8558"
+      > </a
+      ><a name="8559" class="Symbol"
+      >&#8594;</a
+      ><a name="8560"
+      > </a
+      ><a name="8561" href="TheTopologyOfTheUniverse.html#8362" class="Function"
+      >constant-&#8709;-converging-to-anything</a
+      ><a name="8594"
+      > </a
+      ><a name="8595" href="TheTopologyOfTheUniverse.html#8539" class="Bound"
+      >Y</a
+      ><a name="8596"
+      > </a
+      ><a name="8597" href="TheTopologyOfTheUniverse.html#5618" class="Function Operator"
+      >[</a
+      ><a name="8598"
+      > </a
+      ><a name="8599" href="TheTopologyOfTheUniverse.html#8552" class="Bound"
+      >i</a
+      ><a name="8600"
+      > </a
+      ><a name="8601" href="TheTopologyOfTheUniverse.html#5618" class="Function Operator"
+      >]</a
+      ><a name="8602"
+      > </a
+      ><a name="8603" href="Isomorphism.html#239" class="Function Operator"
+      >&#8773;</a
+      ><a name="8604"
+      > </a
+      ><a name="8605" href="SetsAndFunctions.html#167" class="Datatype"
+      >&#8709;</a
+      ><a name="8606"
+      >
+
+</a
+      ><a name="8608" href="TheTopologyOfTheUniverse.html#8492" class="Function"
+      >constant-&#8709;-converging-to-anything-lemma</a
+      ><a name="8647"
+      > </a
+      ><a name="8648" href="TheTopologyOfTheUniverse.html#8648" class="Bound"
+      >Y</a
+      ><a name="8649"
+      > </a
+      ><a name="8650" href="TheTopologyOfTheUniverse.html#8650" class="Bound"
+      >i</a
+      ><a name="8651"
+      > </a
+      ><a name="8652" class="Symbol"
+      >=</a
+      ><a name="8653"
+      >
+ </a
+      ><a name="8656" href="Isomorphism.html#466" class="Function"
+      >&#8773;-trans</a
+      ><a name="8663"
+      > </a
+      ><a name="8664" class="Symbol"
+      >(</a
+      ><a name="8665" href="Isomorphism.html#3068" class="Function"
+      >lemma[X&#8773;X'&#8594;X&#215;Y&#8773;X'&#215;Y]</a
+      ><a name="8685"
+      > </a
+      ><a name="8686" class="Symbol"
+      >(</a
+      ><a name="8687" href="TheTopologyOfTheUniverse.html#7941" class="Function"
+      >constant-&#8709;-converging-to-&#9312;-lemma</a
+      ><a name="8719"
+      > </a
+      ><a name="8720" href="TheTopologyOfTheUniverse.html#8650" class="Bound"
+      >i</a
+      ><a name="8721" class="Symbol"
+      >))</a
+      ><a name="8723"
+      >
+          </a
+      ><a name="8735" href="Isomorphism.html#1153" class="Function"
+      >lemma[&#8709;&#215;Y&#8773;&#8709;]</a
+      ><a name="8747"
+      >
+
+
+</a
+      ><a name="8750" href="TheTopologyOfTheUniverse.html#8750" class="Function"
+      >constant-&#8709;-converging-to-anything-lemma&#8734;</a
+      ><a name="8790"
+      > </a
+      ><a name="8791" class="Symbol"
+      >:</a
+      ><a name="8792"
+      >
+
+ </a
+      ><a name="8796" class="Symbol"
+      >&#8704;(</a
+      ><a name="8798" href="TheTopologyOfTheUniverse.html#8798" class="Bound"
+      >Y</a
+      ><a name="8799"
+      > </a
+      ><a name="8800" class="Symbol"
+      >:</a
+      ><a name="8801"
+      > </a
+      ><a name="8802" class="PrimitiveType"
+      >Set</a
+      ><a name="8805" class="Symbol"
+      >)</a
+      ><a name="8806"
+      > </a
+      ><a name="8807" class="Symbol"
+      >&#8594;</a
+      ><a name="8808"
+      > </a
+      ><a name="8809" href="TheTopologyOfTheUniverse.html#8362" class="Function"
+      >constant-&#8709;-converging-to-anything</a
+      ><a name="8842"
+      > </a
+      ><a name="8843" href="TheTopologyOfTheUniverse.html#8798" class="Bound"
+      >Y</a
+      ><a name="8844"
+      > </a
+      ><a name="8845" href="GenericConvergentSequence.html#1794" class="Function"
+      >&#8734;</a
+      ><a name="8846"
+      > </a
+      ><a name="8847" href="Isomorphism.html#239" class="Function Operator"
+      >&#8773;</a
+      ><a name="8848"
+      > </a
+      ><a name="8849" href="TheTopologyOfTheUniverse.html#8798" class="Bound"
+      >Y</a
+      ><a name="8850"
+      >
+
+</a
+      ><a name="8852" href="TheTopologyOfTheUniverse.html#8750" class="Function"
+      >constant-&#8709;-converging-to-anything-lemma&#8734;</a
+      ><a name="8892"
+      > </a
+      ><a name="8893" href="TheTopologyOfTheUniverse.html#8893" class="Bound"
+      >Y</a
+      ><a name="8894"
+      > </a
+      ><a name="8895" class="Symbol"
+      >=</a
+      ><a name="8896"
+      >
+ </a
+      ><a name="8900" href="Isomorphism.html#466" class="Function"
+      >&#8773;-trans</a
+      ><a name="8907"
+      > </a
+      ><a name="8908" class="Symbol"
+      >(</a
+      ><a name="8909" href="Isomorphism.html#3068" class="Function"
+      >lemma[X&#8773;X'&#8594;X&#215;Y&#8773;X'&#215;Y]</a
+      ><a name="8929"
+      > </a
+      ><a name="8930" href="TheTopologyOfTheUniverse.html#8090" class="Function"
+      >constant-&#8709;-converging-to-&#9312;-lemma&#8734;</a
+      ><a name="8963" class="Symbol"
+      >)</a
+      ><a name="8964"
+      >
+          </a
+      ><a name="8976" href="Isomorphism.html#1419" class="Function"
+      >lemma[&#9312;&#215;Y&#8773;Y]</a
+      ><a name="8988"
+      >
+
+\end{code}
+
+</a
+      ><a name="9002" class="Comment"
+      >The constant sequence &#9312; converges to &#8709;, by applying the</a
+      ><a name="9057"
+      >
+</a
+      ><a name="9058" class="Comment"
+      >&quot;negation&quot; function X &#8614; (X &#8594; &#8709;) to the constant sequence &#8709; that</a
+      ><a name="9121"
+      >
+</a
+      ><a name="9122" class="Comment"
+      >converges to &#9312;.</a
+      ><a name="9137"
+      >
+
+\begin{code}
+
+</a
+      ><a name="9153" href="TheTopologyOfTheUniverse.html#9153" class="Function"
+      >constant-&#9312;-converging-to-&#8709;</a
+      ><a name="9179"
+      > </a
+      ><a name="9180" class="Symbol"
+      >:</a
+      ><a name="9181"
+      > </a
+      ><a name="9182" href="GenericConvergentSequence.html#736" class="Function"
+      >&#8469;&#8734;</a
+      ><a name="9184"
+      > </a
+      ><a name="9185" class="Symbol"
+      >&#8594;</a
+      ><a name="9186"
+      > </a
+      ><a name="9187" class="PrimitiveType"
+      >Set</a
+      ><a name="9190"
+      >
+</a
+      ><a name="9191" href="TheTopologyOfTheUniverse.html#9153" class="Function"
+      >constant-&#9312;-converging-to-&#8709;</a
+      ><a name="9217"
+      > </a
+      ><a name="9218" href="TheTopologyOfTheUniverse.html#9218" class="Bound"
+      >u</a
+      ><a name="9219"
+      > </a
+      ><a name="9220" class="Symbol"
+      >=</a
+      ><a name="9221"
+      > </a
+      ><a name="9222" class="Symbol"
+      >(</a
+      ><a name="9223" href="TheTopologyOfTheUniverse.html#7854" class="Function"
+      >constant-&#8709;-converging-to-&#9312;</a
+      ><a name="9249"
+      > </a
+      ><a name="9250" href="TheTopologyOfTheUniverse.html#9218" class="Bound"
+      >u</a
+      ><a name="9251" class="Symbol"
+      >)</a
+      ><a name="9252"
+      > </a
+      ><a name="9253" class="Symbol"
+      >&#8594;</a
+      ><a name="9254"
+      > </a
+      ><a name="9255" href="SetsAndFunctions.html#167" class="Datatype"
+      >&#8709;</a
+      ><a name="9256"
+      >
+
+
+</a
+      ><a name="9259" href="TheTopologyOfTheUniverse.html#9259" class="Function"
+      >constant-&#9312;-converging-to-&#8709;-lemma</a
+      ><a name="9291"
+      > </a
+      ><a name="9292" class="Symbol"
+      >:</a
+      ><a name="9293"
+      >
+
+ </a
+      ><a name="9297" class="Symbol"
+      >&#8704;(</a
+      ><a name="9299" href="TheTopologyOfTheUniverse.html#9299" class="Bound"
+      >i</a
+      ><a name="9300"
+      > </a
+      ><a name="9301" class="Symbol"
+      >:</a
+      ><a name="9302"
+      > </a
+      ><a name="9303" href="Naturals.html#202" class="Datatype"
+      >&#8469;</a
+      ><a name="9304" class="Symbol"
+      >)</a
+      ><a name="9305"
+      > </a
+      ><a name="9306" class="Symbol"
+      >&#8594;</a
+      ><a name="9307"
+      > </a
+      ><a name="9308" href="TheTopologyOfTheUniverse.html#9153" class="Function"
+      >constant-&#9312;-converging-to-&#8709;</a
+      ><a name="9334"
+      > </a
+      ><a name="9335" href="TheTopologyOfTheUniverse.html#5618" class="Function Operator"
+      >[</a
+      ><a name="9336"
+      > </a
+      ><a name="9337" href="TheTopologyOfTheUniverse.html#9299" class="Bound"
+      >i</a
+      ><a name="9338"
+      > </a
+      ><a name="9339" href="TheTopologyOfTheUniverse.html#5618" class="Function Operator"
+      >]</a
+      ><a name="9340"
+      > </a
+      ><a name="9341" href="Isomorphism.html#239" class="Function Operator"
+      >&#8773;</a
+      ><a name="9342"
+      > </a
+      ><a name="9343" href="SetsAndFunctions.html#328" class="Datatype"
+      >&#9312;</a
+      ><a name="9344"
+      >
+
+</a
+      ><a name="9346" href="TheTopologyOfTheUniverse.html#9259" class="Function"
+      >constant-&#9312;-converging-to-&#8709;-lemma</a
+      ><a name="9378"
+      > </a
+      ><a name="9379" href="TheTopologyOfTheUniverse.html#9379" class="Bound"
+      >i</a
+      ><a name="9380"
+      > </a
+      ><a name="9381" class="Symbol"
+      >=</a
+      ><a name="9382"
+      >
+ </a
+      ><a name="9386" href="Isomorphism.html#466" class="Function"
+      >&#8773;-trans</a
+      ><a name="9393"
+      > </a
+      ><a name="9394" class="Symbol"
+      >(</a
+      ><a name="9395" href="Isomorphism.html#5305" class="Function"
+      >lemma[X&#8773;X'&#8594;[X&#8594;Y]&#8773;[X'&#8594;Y]]</a
+      ><a name="9419"
+      > </a
+      ><a name="9420" class="Symbol"
+      >(</a
+      ><a name="9421" href="TheTopologyOfTheUniverse.html#7941" class="Function"
+      >constant-&#8709;-converging-to-&#9312;-lemma</a
+      ><a name="9453"
+      > </a
+      ><a name="9454" href="TheTopologyOfTheUniverse.html#9379" class="Bound"
+      >i</a
+      ><a name="9455" class="Symbol"
+      >))</a
+      ><a name="9457"
+      >
+          </a
+      ><a name="9469" href="Isomorphism.html#4734" class="Function"
+      >lemma[[&#8709;&#8594;&#8709;]&#8773;&#9312;]</a
+      ><a name="9483"
+      >
+
+
+</a
+      ><a name="9486" href="TheTopologyOfTheUniverse.html#9486" class="Function"
+      >constant-&#9312;-converging-to-&#8709;-lemma&#8734;</a
+      ><a name="9519"
+      > </a
+      ><a name="9520" class="Symbol"
+      >:</a
+      ><a name="9521"
+      >
+
+ </a
+      ><a name="9525" href="TheTopologyOfTheUniverse.html#9153" class="Function"
+      >constant-&#9312;-converging-to-&#8709;</a
+      ><a name="9551"
+      > </a
+      ><a name="9552" href="GenericConvergentSequence.html#1794" class="Function"
+      >&#8734;</a
+      ><a name="9553"
+      > </a
+      ><a name="9554" href="Isomorphism.html#239" class="Function Operator"
+      >&#8773;</a
+      ><a name="9555"
+      > </a
+      ><a name="9556" href="SetsAndFunctions.html#167" class="Datatype"
+      >&#8709;</a
+      ><a name="9557"
+      >
+
+</a
+      ><a name="9559" href="TheTopologyOfTheUniverse.html#9486" class="Function"
+      >constant-&#9312;-converging-to-&#8709;-lemma&#8734;</a
+      ><a name="9592"
+      > </a
+      ><a name="9593" class="Symbol"
+      >=</a
+      ><a name="9594"
+      >
+ </a
+      ><a name="9597" href="Isomorphism.html#466" class="Function"
+      >&#8773;-trans</a
+      ><a name="9604"
+      > </a
+      ><a name="9605" class="Symbol"
+      >(</a
+      ><a name="9606" href="Isomorphism.html#5305" class="Function"
+      >lemma[X&#8773;X'&#8594;[X&#8594;Y]&#8773;[X'&#8594;Y]]</a
+      ><a name="9630"
+      > </a
+      ><a name="9631" href="TheTopologyOfTheUniverse.html#8090" class="Function"
+      >constant-&#8709;-converging-to-&#9312;-lemma&#8734;</a
+      ><a name="9664" class="Symbol"
+      >)</a
+      ><a name="9665"
+      >
+          </a
+      ><a name="9677" href="Isomorphism.html#5025" class="Function"
+      >lemma[[&#9312;&#8594;&#8709;]&#8773;&#8709;]</a
+      ><a name="9691"
+      >
+
+\end{code}
+
+</a
+      ><a name="9705" class="Comment"
+      >By multiplying the previous limiting sequence pointwise with the</a
+      ><a name="9769"
+      >
+</a
+      ><a name="9770" class="Comment"
+      >sequence that converges to one, we get that any sequence converges</a
+      ><a name="9836"
+      >
+</a
+      ><a name="9837" class="Comment"
+      >to &#8709;:</a
+      ><a name="9842"
+      >
+
+\begin{code}
+
+</a
+      ><a name="9858" href="TheTopologyOfTheUniverse.html#9858" class="Function"
+      >attach-&#8709;</a
+      ><a name="9866"
+      > </a
+      ><a name="9867" class="Symbol"
+      >:</a
+      ><a name="9868"
+      > </a
+      ><a name="9869" class="Symbol"
+      >(</a
+      ><a name="9870" href="Naturals.html#202" class="Datatype"
+      >&#8469;</a
+      ><a name="9871"
+      > </a
+      ><a name="9872" class="Symbol"
+      >&#8594;</a
+      ><a name="9873"
+      > </a
+      ><a name="9874" class="PrimitiveType"
+      >Set</a
+      ><a name="9877" class="Symbol"
+      >)</a
+      ><a name="9878"
+      > </a
+      ><a name="9879" class="Symbol"
+      >&#8594;</a
+      ><a name="9880"
+      > </a
+      ><a name="9881" class="Symbol"
+      >(</a
+      ><a name="9882" href="GenericConvergentSequence.html#736" class="Function"
+      >&#8469;&#8734;</a
+      ><a name="9884"
+      > </a
+      ><a name="9885" class="Symbol"
+      >&#8594;</a
+      ><a name="9886"
+      > </a
+      ><a name="9887" class="PrimitiveType"
+      >Set</a
+      ><a name="9890" class="Symbol"
+      >)</a
+      ><a name="9891"
+      >
+</a
+      ><a name="9892" href="TheTopologyOfTheUniverse.html#9858" class="Function"
+      >attach-&#8709;</a
+      ><a name="9900"
+      > </a
+      ><a name="9901" href="TheTopologyOfTheUniverse.html#9901" class="Bound"
+      >X</a
+      ><a name="9902"
+      > </a
+      ><a name="9903" href="TheTopologyOfTheUniverse.html#9903" class="Bound"
+      >u</a
+      ><a name="9904"
+      > </a
+      ><a name="9905" class="Symbol"
+      >=</a
+      ><a name="9906"
+      > </a
+      ><a name="9907" class="Symbol"
+      >(</a
+      ><a name="9908" href="TheTopologyOfTheUniverse.html#5425" class="Function"
+      >attach-&#9312;</a
+      ><a name="9916"
+      > </a
+      ><a name="9917" href="TheTopologyOfTheUniverse.html#9901" class="Bound"
+      >X</a
+      ><a name="9918"
+      > </a
+      ><a name="9919" href="TheTopologyOfTheUniverse.html#9903" class="Bound"
+      >u</a
+      ><a name="9920" class="Symbol"
+      >)</a
+      ><a name="9921"
+      > </a
+      ><a name="9922" href="SetsAndFunctions.html#1643" class="Function Operator"
+      >&#215;</a
+      ><a name="9923"
+      > </a
+      ><a name="9924" class="Symbol"
+      >(</a
+      ><a name="9925" href="TheTopologyOfTheUniverse.html#9153" class="Function"
+      >constant-&#9312;-converging-to-&#8709;</a
+      ><a name="9951"
+      > </a
+      ><a name="9952" href="TheTopologyOfTheUniverse.html#9903" class="Bound"
+      >u</a
+      ><a name="9953" class="Symbol"
+      >)</a
+      ><a name="9954"
+      >
+
+
+</a
+      ><a name="9957" href="TheTopologyOfTheUniverse.html#9957" class="Function"
+      >attach-&#8709;-lemma</a
+      ><a name="9971"
+      > </a
+      ><a name="9972" class="Symbol"
+      >:</a
+      ><a name="9973"
+      >
+
+ </a
+      ><a name="9977" class="Symbol"
+      >&#8704;(</a
+      ><a name="9979" href="TheTopologyOfTheUniverse.html#9979" class="Bound"
+      >X</a
+      ><a name="9980"
+      > </a
+      ><a name="9981" class="Symbol"
+      >:</a
+      ><a name="9982"
+      > </a
+      ><a name="9983" href="Naturals.html#202" class="Datatype"
+      >&#8469;</a
+      ><a name="9984"
+      > </a
+      ><a name="9985" class="Symbol"
+      >&#8594;</a
+      ><a name="9986"
+      > </a
+      ><a name="9987" class="PrimitiveType"
+      >Set</a
+      ><a name="9990" class="Symbol"
+      >)</a
+      ><a name="9991"
+      > </a
+      ><a name="9992" class="Symbol"
+      >&#8594;</a
+      ><a name="9993"
+      > </a
+      ><a name="9994" class="Symbol"
+      >&#8704;(</a
+      ><a name="9996" href="TheTopologyOfTheUniverse.html#9996" class="Bound"
+      >i</a
+      ><a name="9997"
+      > </a
+      ><a name="9998" class="Symbol"
+      >:</a
+      ><a name="9999"
+      > </a
+      ><a name="10000" href="Naturals.html#202" class="Datatype"
+      >&#8469;</a
+      ><a name="10001" class="Symbol"
+      >)</a
+      ><a name="10002"
+      > </a
+      ><a name="10003" class="Symbol"
+      >&#8594;</a
+      ><a name="10004"
+      > </a
+      ><a name="10005" href="TheTopologyOfTheUniverse.html#9858" class="Function"
+      >attach-&#8709;</a
+      ><a name="10013"
+      > </a
+      ><a name="10014" href="TheTopologyOfTheUniverse.html#9979" class="Bound"
+      >X</a
+      ><a name="10015"
+      > </a
+      ><a name="10016" href="TheTopologyOfTheUniverse.html#5618" class="Function Operator"
+      >[</a
+      ><a name="10017"
+      > </a
+      ><a name="10018" href="TheTopologyOfTheUniverse.html#9996" class="Bound"
+      >i</a
+      ><a name="10019"
+      > </a
+      ><a name="10020" href="TheTopologyOfTheUniverse.html#5618" class="Function Operator"
+      >]</a
+      ><a name="10021"
+      > </a
+      ><a name="10022" href="Isomorphism.html#239" class="Function Operator"
+      >&#8773;</a
+      ><a name="10023"
+      > </a
+      ><a name="10024" href="TheTopologyOfTheUniverse.html#9979" class="Bound"
+      >X</a
+      ><a name="10025"
+      > </a
+      ><a name="10026" href="TheTopologyOfTheUniverse.html#9996" class="Bound"
+      >i</a
+      ><a name="10027"
+      >
+
+</a
+      ><a name="10029" href="TheTopologyOfTheUniverse.html#9957" class="Function"
+      >attach-&#8709;-lemma</a
+      ><a name="10043"
+      > </a
+      ><a name="10044" href="TheTopologyOfTheUniverse.html#10044" class="Bound"
+      >X</a
+      ><a name="10045"
+      > </a
+      ><a name="10046" href="TheTopologyOfTheUniverse.html#10046" class="Bound"
+      >i</a
+      ><a name="10047"
+      > </a
+      ><a name="10048" class="Symbol"
+      >=</a
+      ><a name="10049"
+      >
+ </a
+      ><a name="10052" href="Isomorphism.html#466" class="Function"
+      >&#8773;-trans</a
+      ><a name="10059"
+      > </a
+      ><a name="10060" class="Symbol"
+      >(</a
+      ><a name="10061" href="Isomorphism.html#2205" class="Function"
+      >lemma[X&#8773;X'&#8594;Y&#8773;Y'&#8594;[X&#215;Y]&#8773;[X'&#215;Y']]</a
+      ><a name="10091"
+      >
+                </a
+      ><a name="10109" class="Symbol"
+      >(</a
+      ><a name="10110" href="TheTopologyOfTheUniverse.html#5671" class="Function"
+      >attach-&#9312;-lemma</a
+      ><a name="10124"
+      > </a
+      ><a name="10125" href="TheTopologyOfTheUniverse.html#10044" class="Bound"
+      >X</a
+      ><a name="10126"
+      > </a
+      ><a name="10127" href="TheTopologyOfTheUniverse.html#10046" class="Bound"
+      >i</a
+      ><a name="10128" class="Symbol"
+      >)</a
+      ><a name="10129"
+      >
+                </a
+      ><a name="10147" class="Symbol"
+      >(</a
+      ><a name="10148" href="TheTopologyOfTheUniverse.html#9259" class="Function"
+      >constant-&#9312;-converging-to-&#8709;-lemma</a
+      ><a name="10180"
+      > </a
+      ><a name="10181" href="TheTopologyOfTheUniverse.html#10046" class="Bound"
+      >i</a
+      ><a name="10182" class="Symbol"
+      >))</a
+      ><a name="10184"
+      >
+          </a
+      ><a name="10196" href="Isomorphism.html#2026" class="Function"
+      >lemma[Y&#215;&#9312;&#8773;Y]</a
+      ><a name="10208"
+      >
+
+
+</a
+      ><a name="10212" href="TheTopologyOfTheUniverse.html#10212" class="Function"
+      >attach-&#8709;-lemma&#8734;</a
+      ><a name="10227"
+      > </a
+      ><a name="10228" class="Symbol"
+      >:</a
+      ><a name="10229"
+      >
+
+ </a
+      ><a name="10233" class="Symbol"
+      >&#8704;(</a
+      ><a name="10235" href="TheTopologyOfTheUniverse.html#10235" class="Bound"
+      >X</a
+      ><a name="10236"
+      > </a
+      ><a name="10237" class="Symbol"
+      >:</a
+      ><a name="10238"
+      > </a
+      ><a name="10239" href="Naturals.html#202" class="Datatype"
+      >&#8469;</a
+      ><a name="10240"
+      > </a
+      ><a name="10241" class="Symbol"
+      >&#8594;</a
+      ><a name="10242"
+      > </a
+      ><a name="10243" class="PrimitiveType"
+      >Set</a
+      ><a name="10246" class="Symbol"
+      >)</a
+      ><a name="10247"
+      > </a
+      ><a name="10248" class="Symbol"
+      >&#8594;</a
+      ><a name="10249"
+      > </a
+      ><a name="10250" href="TheTopologyOfTheUniverse.html#9858" class="Function"
+      >attach-&#8709;</a
+      ><a name="10258"
+      > </a
+      ><a name="10259" href="TheTopologyOfTheUniverse.html#10235" class="Bound"
+      >X</a
+      ><a name="10260"
+      > </a
+      ><a name="10261" href="GenericConvergentSequence.html#1794" class="Function"
+      >&#8734;</a
+      ><a name="10262"
+      > </a
+      ><a name="10263" href="Isomorphism.html#239" class="Function Operator"
+      >&#8773;</a
+      ><a name="10264"
+      > </a
+      ><a name="10265" href="SetsAndFunctions.html#167" class="Datatype"
+      >&#8709;</a
+      ><a name="10266"
+      >
+
+</a
+      ><a name="10268" href="TheTopologyOfTheUniverse.html#10212" class="Function"
+      >attach-&#8709;-lemma&#8734;</a
+      ><a name="10283"
+      > </a
+      ><a name="10284" href="TheTopologyOfTheUniverse.html#10284" class="Bound"
+      >X</a
+      ><a name="10285"
+      > </a
+      ><a name="10286" class="Symbol"
+      >=</a
+      ><a name="10287"
+      >
+ </a
+      ><a name="10290" href="Isomorphism.html#466" class="Function"
+      >&#8773;-trans</a
+      ><a name="10297"
+      > </a
+      ><a name="10298" class="Symbol"
+      >(</a
+      ><a name="10299" href="Isomorphism.html#2205" class="Function"
+      >lemma[X&#8773;X'&#8594;Y&#8773;Y'&#8594;[X&#215;Y]&#8773;[X'&#215;Y']]</a
+      ><a name="10329"
+      >
+                </a
+      ><a name="10347" class="Symbol"
+      >(</a
+      ><a name="10348" href="TheTopologyOfTheUniverse.html#6974" class="Function"
+      >attach-&#9312;-lemma&#8734;</a
+      ><a name="10363"
+      > </a
+      ><a name="10364" href="TheTopologyOfTheUniverse.html#10284" class="Bound"
+      >X</a
+      ><a name="10365" class="Symbol"
+      >)</a
+      ><a name="10366"
+      >
+                </a
+      ><a name="10384" class="Symbol"
+      >(</a
+      ><a name="10385" href="TheTopologyOfTheUniverse.html#9486" class="Function"
+      >constant-&#9312;-converging-to-&#8709;-lemma&#8734;</a
+      ><a name="10418" class="Symbol"
+      >))</a
+      ><a name="10420"
+      >
+          </a
+      ><a name="10432" href="Isomorphism.html#2116" class="Function"
+      >lemma[Y&#215;&#8709;&#8773;&#8709;]</a
+      ><a name="10444"
+      >
+
+\end{code}
+
+</a
+      ><a name="10460" class="Comment"
+      >Finally, by adding pointwise a sequence that converges to &#8709; to the</a
+      ><a name="10526"
+      >
+</a
+      ><a name="10527" class="Comment"
+      >constant sequence &#8709; converging to anything, we get any sequence X to</a
+      ><a name="10595"
+      >
+</a
+      ><a name="10596" class="Comment"
+      >converge to any type Y we please:</a
+      ><a name="10629"
+      >
+
+\begin{code}
+
+</a
+      ><a name="10645" href="TheTopologyOfTheUniverse.html#10645" class="Function"
+      >attach</a
+      ><a name="10651"
+      > </a
+      ><a name="10652" class="Symbol"
+      >:</a
+      ><a name="10653"
+      > </a
+      ><a name="10654" class="Symbol"
+      >(</a
+      ><a name="10655" href="Naturals.html#202" class="Datatype"
+      >&#8469;</a
+      ><a name="10656"
+      > </a
+      ><a name="10657" class="Symbol"
+      >&#8594;</a
+      ><a name="10658"
+      > </a
+      ><a name="10659" class="PrimitiveType"
+      >Set</a
+      ><a name="10662" class="Symbol"
+      >)</a
+      ><a name="10663"
+      > </a
+      ><a name="10664" class="Symbol"
+      >&#8594;</a
+      ><a name="10665"
+      > </a
+      ><a name="10666" class="PrimitiveType"
+      >Set</a
+      ><a name="10669"
+      > </a
+      ><a name="10670" class="Symbol"
+      >&#8594;</a
+      ><a name="10671"
+      > </a
+      ><a name="10672" class="Symbol"
+      >(</a
+      ><a name="10673" href="GenericConvergentSequence.html#736" class="Function"
+      >&#8469;&#8734;</a
+      ><a name="10675"
+      > </a
+      ><a name="10676" class="Symbol"
+      >&#8594;</a
+      ><a name="10677"
+      > </a
+      ><a name="10678" class="PrimitiveType"
+      >Set</a
+      ><a name="10681" class="Symbol"
+      >)</a
+      ><a name="10682"
+      >
+</a
+      ><a name="10683" href="TheTopologyOfTheUniverse.html#10645" class="Function"
+      >attach</a
+      ><a name="10689"
+      > </a
+      ><a name="10690" href="TheTopologyOfTheUniverse.html#10690" class="Bound"
+      >X</a
+      ><a name="10691"
+      > </a
+      ><a name="10692" href="TheTopologyOfTheUniverse.html#10692" class="Bound"
+      >Y</a
+      ><a name="10693"
+      > </a
+      ><a name="10694" href="TheTopologyOfTheUniverse.html#10694" class="Bound"
+      >u</a
+      ><a name="10695"
+      > </a
+      ><a name="10696" class="Symbol"
+      >=</a
+      ><a name="10697"
+      >
+ </a
+      ><a name="10700" class="Symbol"
+      >(</a
+      ><a name="10701" href="TheTopologyOfTheUniverse.html#9858" class="Function"
+      >attach-&#8709;</a
+      ><a name="10709"
+      > </a
+      ><a name="10710" href="TheTopologyOfTheUniverse.html#10690" class="Bound"
+      >X</a
+      ><a name="10711"
+      > </a
+      ><a name="10712" href="TheTopologyOfTheUniverse.html#10694" class="Bound"
+      >u</a
+      ><a name="10713" class="Symbol"
+      >)</a
+      ><a name="10714"
+      > </a
+      ><a name="10715" href="SetsAndFunctions.html#1803" class="Datatype Operator"
+      >+</a
+      ><a name="10716"
+      > </a
+      ><a name="10717" class="Symbol"
+      >(</a
+      ><a name="10718" href="TheTopologyOfTheUniverse.html#8362" class="Function"
+      >constant-&#8709;-converging-to-anything</a
+      ><a name="10751"
+      > </a
+      ><a name="10752" href="TheTopologyOfTheUniverse.html#10692" class="Bound"
+      >Y</a
+      ><a name="10753"
+      > </a
+      ><a name="10754" href="TheTopologyOfTheUniverse.html#10694" class="Bound"
+      >u</a
+      ><a name="10755" class="Symbol"
+      >)</a
+      ><a name="10756"
+      >
+
+
+</a
+      ><a name="10760" href="TheTopologyOfTheUniverse.html#10760" class="Function"
+      >attach-lemma</a
+      ><a name="10772"
+      > </a
+      ><a name="10773" class="Symbol"
+      >:</a
+      ><a name="10774"
+      >
+
+ </a
+      ><a name="10778" class="Symbol"
+      >&#8704;(</a
+      ><a name="10780" href="TheTopologyOfTheUniverse.html#10780" class="Bound"
+      >X</a
+      ><a name="10781"
+      > </a
+      ><a name="10782" class="Symbol"
+      >:</a
+      ><a name="10783"
+      > </a
+      ><a name="10784" href="Naturals.html#202" class="Datatype"
+      >&#8469;</a
+      ><a name="10785"
+      > </a
+      ><a name="10786" class="Symbol"
+      >&#8594;</a
+      ><a name="10787"
+      > </a
+      ><a name="10788" class="PrimitiveType"
+      >Set</a
+      ><a name="10791" class="Symbol"
+      >)</a
+      ><a name="10792"
+      > </a
+      ><a name="10793" class="Symbol"
+      >&#8594;</a
+      ><a name="10794"
+      > </a
+      ><a name="10795" class="Symbol"
+      >&#8704;(</a
+      ><a name="10797" href="TheTopologyOfTheUniverse.html#10797" class="Bound"
+      >Y</a
+      ><a name="10798"
+      > </a
+      ><a name="10799" class="Symbol"
+      >:</a
+      ><a name="10800"
+      > </a
+      ><a name="10801" class="PrimitiveType"
+      >Set</a
+      ><a name="10804" class="Symbol"
+      >)</a
+      ><a name="10805"
+      > </a
+      ><a name="10806" class="Symbol"
+      >&#8594;</a
+      ><a name="10807"
+      > </a
+      ><a name="10808" class="Symbol"
+      >&#8704;</a
+      ><a name="10809"
+      > </a
+      ><a name="10810" href="TheTopologyOfTheUniverse.html#10810" class="Bound"
+      >i</a
+      ><a name="10811"
+      > </a
+      ><a name="10812" class="Symbol"
+      >&#8594;</a
+      ><a name="10813"
+      > </a
+      ><a name="10814" href="TheTopologyOfTheUniverse.html#10645" class="Function"
+      >attach</a
+      ><a name="10820"
+      > </a
+      ><a name="10821" href="TheTopologyOfTheUniverse.html#10780" class="Bound"
+      >X</a
+      ><a name="10822"
+      > </a
+      ><a name="10823" href="TheTopologyOfTheUniverse.html#10797" class="Bound"
+      >Y</a
+      ><a name="10824"
+      > </a
+      ><a name="10825" href="TheTopologyOfTheUniverse.html#5618" class="Function Operator"
+      >[</a
+      ><a name="10826"
+      > </a
+      ><a name="10827" href="TheTopologyOfTheUniverse.html#10810" class="Bound"
+      >i</a
+      ><a name="10828"
+      > </a
+      ><a name="10829" href="TheTopologyOfTheUniverse.html#5618" class="Function Operator"
+      >]</a
+      ><a name="10830"
+      > </a
+      ><a name="10831" href="Isomorphism.html#239" class="Function Operator"
+      >&#8773;</a
+      ><a name="10832"
+      > </a
+      ><a name="10833" href="TheTopologyOfTheUniverse.html#10780" class="Bound"
+      >X</a
+      ><a name="10834"
+      > </a
+      ><a name="10835" href="TheTopologyOfTheUniverse.html#10810" class="Bound"
+      >i</a
+      ><a name="10836"
+      >
+
+</a
+      ><a name="10838" href="TheTopologyOfTheUniverse.html#10760" class="Function"
+      >attach-lemma</a
+      ><a name="10850"
+      > </a
+      ><a name="10851" href="TheTopologyOfTheUniverse.html#10851" class="Bound"
+      >X</a
+      ><a name="10852"
+      > </a
+      ><a name="10853" href="TheTopologyOfTheUniverse.html#10853" class="Bound"
+      >Y</a
+      ><a name="10854"
+      > </a
+      ><a name="10855" href="TheTopologyOfTheUniverse.html#10855" class="Bound"
+      >i</a
+      ><a name="10856"
+      > </a
+      ><a name="10857" class="Symbol"
+      >=</a
+      ><a name="10858"
+      >
+ </a
+      ><a name="10860" href="Isomorphism.html#466" class="Function"
+      >&#8773;-trans</a
+      ><a name="10867"
+      > </a
+      ><a name="10868" class="Symbol"
+      >(</a
+      ><a name="10869" href="Isomorphism.html#4036" class="Function"
+      >lemma[X&#8773;X'&#8594;Y&#8773;Y'&#8594;[X+Y]&#8773;[X'+Y']]</a
+      ><a name="10899"
+      >
+                </a
+      ><a name="10917" class="Symbol"
+      >(</a
+      ><a name="10918" href="TheTopologyOfTheUniverse.html#9957" class="Function"
+      >attach-&#8709;-lemma</a
+      ><a name="10932"
+      > </a
+      ><a name="10933" href="TheTopologyOfTheUniverse.html#10851" class="Bound"
+      >X</a
+      ><a name="10934"
+      > </a
+      ><a name="10935" href="TheTopologyOfTheUniverse.html#10855" class="Bound"
+      >i</a
+      ><a name="10936" class="Symbol"
+      >)</a
+      ><a name="10937"
+      >
+                </a
+      ><a name="10955" class="Symbol"
+      >(</a
+      ><a name="10956" href="TheTopologyOfTheUniverse.html#8492" class="Function"
+      >constant-&#8709;-converging-to-anything-lemma</a
+      ><a name="10995"
+      > </a
+      ><a name="10996" href="TheTopologyOfTheUniverse.html#10853" class="Bound"
+      >Y</a
+      ><a name="10997"
+      > </a
+      ><a name="10998" href="TheTopologyOfTheUniverse.html#10855" class="Bound"
+      >i</a
+      ><a name="10999" class="Symbol"
+      >))</a
+      ><a name="11001"
+      >
+          </a
+      ><a name="11013" href="Isomorphism.html#3216" class="Function"
+      >lemma[Y+&#8709;&#8773;Y]</a
+      ><a name="11025"
+      >
+
+
+</a
+      ><a name="11029" href="TheTopologyOfTheUniverse.html#11029" class="Function"
+      >attach-lemma&#8734;</a
+      ><a name="11042"
+      > </a
+      ><a name="11043" class="Symbol"
+      >:</a
+      ><a name="11044"
+      >
+
+ </a
+      ><a name="11048" class="Symbol"
+      >&#8704;(</a
+      ><a name="11050" href="TheTopologyOfTheUniverse.html#11050" class="Bound"
+      >X</a
+      ><a name="11051"
+      > </a
+      ><a name="11052" class="Symbol"
+      >:</a
+      ><a name="11053"
+      > </a
+      ><a name="11054" href="Naturals.html#202" class="Datatype"
+      >&#8469;</a
+      ><a name="11055"
+      > </a
+      ><a name="11056" class="Symbol"
+      >&#8594;</a
+      ><a name="11057"
+      > </a
+      ><a name="11058" class="PrimitiveType"
+      >Set</a
+      ><a name="11061" class="Symbol"
+      >)</a
+      ><a name="11062"
+      > </a
+      ><a name="11063" class="Symbol"
+      >&#8594;</a
+      ><a name="11064"
+      > </a
+      ><a name="11065" class="Symbol"
+      >&#8704;(</a
+      ><a name="11067" href="TheTopologyOfTheUniverse.html#11067" class="Bound"
+      >Y</a
+      ><a name="11068"
+      > </a
+      ><a name="11069" class="Symbol"
+      >:</a
+      ><a name="11070"
+      > </a
+      ><a name="11071" class="PrimitiveType"
+      >Set</a
+      ><a name="11074" class="Symbol"
+      >)</a
+      ><a name="11075"
+      > </a
+      ><a name="11076" class="Symbol"
+      >&#8594;</a
+      ><a name="11077"
+      > </a
+      ><a name="11078" href="TheTopologyOfTheUniverse.html#10645" class="Function"
+      >attach</a
+      ><a name="11084"
+      > </a
+      ><a name="11085" href="TheTopologyOfTheUniverse.html#11050" class="Bound"
+      >X</a
+      ><a name="11086"
+      > </a
+      ><a name="11087" href="TheTopologyOfTheUniverse.html#11067" class="Bound"
+      >Y</a
+      ><a name="11088"
+      > </a
+      ><a name="11089" href="GenericConvergentSequence.html#1794" class="Function"
+      >&#8734;</a
+      ><a name="11090"
+      > </a
+      ><a name="11091" href="Isomorphism.html#239" class="Function Operator"
+      >&#8773;</a
+      ><a name="11092"
+      > </a
+      ><a name="11093" href="TheTopologyOfTheUniverse.html#11067" class="Bound"
+      >Y</a
+      ><a name="11094"
+      >
+
+</a
+      ><a name="11096" href="TheTopologyOfTheUniverse.html#11029" class="Function"
+      >attach-lemma&#8734;</a
+      ><a name="11109"
+      > </a
+      ><a name="11110" href="TheTopologyOfTheUniverse.html#11110" class="Bound"
+      >X</a
+      ><a name="11111"
+      > </a
+      ><a name="11112" href="TheTopologyOfTheUniverse.html#11112" class="Bound"
+      >Y</a
+      ><a name="11113"
+      > </a
+      ><a name="11114" class="Symbol"
+      >=</a
+      ><a name="11115"
+      >
+ </a
+      ><a name="11119" href="Isomorphism.html#466" class="Function"
+      >&#8773;-trans</a
+      ><a name="11126"
+      > </a
+      ><a name="11127" class="Symbol"
+      >(</a
+      ><a name="11128" href="Isomorphism.html#4036" class="Function"
+      >lemma[X&#8773;X'&#8594;Y&#8773;Y'&#8594;[X+Y]&#8773;[X'+Y']]</a
+      ><a name="11158"
+      >
+                </a
+      ><a name="11176" class="Symbol"
+      >(</a
+      ><a name="11177" href="TheTopologyOfTheUniverse.html#10212" class="Function"
+      >attach-&#8709;-lemma&#8734;</a
+      ><a name="11192"
+      > </a
+      ><a name="11193" href="TheTopologyOfTheUniverse.html#11110" class="Bound"
+      >X</a
+      ><a name="11194" class="Symbol"
+      >)</a
+      ><a name="11195"
+      >
+                </a
+      ><a name="11213" class="Symbol"
+      >(</a
+      ><a name="11214" href="TheTopologyOfTheUniverse.html#8750" class="Function"
+      >constant-&#8709;-converging-to-anything-lemma&#8734;</a
+      ><a name="11254"
+      > </a
+      ><a name="11255" href="TheTopologyOfTheUniverse.html#11112" class="Bound"
+      >Y</a
+      ><a name="11256" class="Symbol"
+      >))</a
+      ><a name="11258"
+      >
+          </a
+      ><a name="11270" href="Isomorphism.html#3946" class="Function"
+      >lemma[&#8709;+Y&#8773;Y]</a
+      ><a name="11282"
+      >
+
+\end{code}
+
+</a
+      ><a name="11296" class="Comment"
+      >We pack the previous three lemmas together to get the Universe</a
+      ><a name="11358"
+      >
+</a
+      ><a name="11359" class="Comment"
+      >Indiscreteness Theorem, which says that any type Y : Set can be</a
+      ><a name="11422"
+      >
+</a
+      ><a name="11423" class="Comment"
+      >attached as a limit of any given sequence X : &#8469; &#8594; Set:</a
+      ><a name="11477"
+      >
+
+\begin{code}
+
+</a
+      ><a name="11493" href="TheTopologyOfTheUniverse.html#11493" class="Function"
+      >Universe-Indiscreteness-Theorem</a
+      ><a name="11524"
+      > </a
+      ><a name="11525" class="Symbol"
+      >:</a
+      ><a name="11526"
+      > </a
+      ><a name="11527" class="Symbol"
+      >&#8704;(</a
+      ><a name="11529" href="TheTopologyOfTheUniverse.html#11529" class="Bound"
+      >X</a
+      ><a name="11530"
+      > </a
+      ><a name="11531" class="Symbol"
+      >:</a
+      ><a name="11532"
+      > </a
+      ><a name="11533" href="Naturals.html#202" class="Datatype"
+      >&#8469;</a
+      ><a name="11534"
+      > </a
+      ><a name="11535" class="Symbol"
+      >&#8594;</a
+      ><a name="11536"
+      > </a
+      ><a name="11537" class="PrimitiveType"
+      >Set</a
+      ><a name="11540" class="Symbol"
+      >)</a
+      ><a name="11541"
+      > </a
+      ><a name="11542" class="Symbol"
+      >&#8594;</a
+      ><a name="11543"
+      > </a
+      ><a name="11544" class="Symbol"
+      >&#8704;(</a
+      ><a name="11546" href="TheTopologyOfTheUniverse.html#11546" class="Bound"
+      >Y</a
+      ><a name="11547"
+      > </a
+      ><a name="11548" class="Symbol"
+      >:</a
+      ><a name="11549"
+      > </a
+      ><a name="11550" class="PrimitiveType"
+      >Set</a
+      ><a name="11553" class="Symbol"
+      >)</a
+      ><a name="11554"
+      > </a
+      ><a name="11555" class="Symbol"
+      >&#8594;</a
+      ><a name="11556"
+      >
+
+  </a
+      ><a name="11560" class="Symbol"
+      >(&#8704;</a
+      ><a name="11562"
+      > </a
+      ><a name="11563" href="TheTopologyOfTheUniverse.html#11563" class="Bound"
+      >i</a
+      ><a name="11564"
+      > </a
+      ><a name="11565" class="Symbol"
+      >&#8594;</a
+      ><a name="11566"
+      > </a
+      ><a name="11567" href="TheTopologyOfTheUniverse.html#10645" class="Function"
+      >attach</a
+      ><a name="11573"
+      > </a
+      ><a name="11574" href="TheTopologyOfTheUniverse.html#11529" class="Bound"
+      >X</a
+      ><a name="11575"
+      > </a
+      ><a name="11576" href="TheTopologyOfTheUniverse.html#11546" class="Bound"
+      >Y</a
+      ><a name="11577"
+      > </a
+      ><a name="11578" href="TheTopologyOfTheUniverse.html#5618" class="Function Operator"
+      >[</a
+      ><a name="11579"
+      > </a
+      ><a name="11580" href="TheTopologyOfTheUniverse.html#11563" class="Bound"
+      >i</a
+      ><a name="11581"
+      > </a
+      ><a name="11582" href="TheTopologyOfTheUniverse.html#5618" class="Function Operator"
+      >]</a
+      ><a name="11583"
+      > </a
+      ><a name="11584" href="Isomorphism.html#239" class="Function Operator"
+      >&#8773;</a
+      ><a name="11585"
+      > </a
+      ><a name="11586" href="TheTopologyOfTheUniverse.html#11529" class="Bound"
+      >X</a
+      ><a name="11587"
+      > </a
+      ><a name="11588" href="TheTopologyOfTheUniverse.html#11563" class="Bound"
+      >i</a
+      ><a name="11589" class="Symbol"
+      >)</a
+      ><a name="11590"
+      >  </a
+      ><a name="11592" href="CurryHoward.html#601" class="Function Operator"
+      >&#8743;</a
+      ><a name="11593"
+      >  </a
+      ><a name="11595" href="TheTopologyOfTheUniverse.html#10645" class="Function"
+      >attach</a
+      ><a name="11601"
+      > </a
+      ><a name="11602" href="TheTopologyOfTheUniverse.html#11529" class="Bound"
+      >X</a
+      ><a name="11603"
+      > </a
+      ><a name="11604" href="TheTopologyOfTheUniverse.html#11546" class="Bound"
+      >Y</a
+      ><a name="11605"
+      > </a
+      ><a name="11606" href="GenericConvergentSequence.html#1794" class="Function"
+      >&#8734;</a
+      ><a name="11607"
+      > </a
+      ><a name="11608" href="Isomorphism.html#239" class="Function Operator"
+      >&#8773;</a
+      ><a name="11609"
+      > </a
+      ><a name="11610" href="TheTopologyOfTheUniverse.html#11546" class="Bound"
+      >Y</a
+      ><a name="11611"
+      >
+
+</a
+      ><a name="11613" href="TheTopologyOfTheUniverse.html#11493" class="Function"
+      >Universe-Indiscreteness-Theorem</a
+      ><a name="11644"
+      > </a
+      ><a name="11645" href="TheTopologyOfTheUniverse.html#11645" class="Bound"
+      >X</a
+      ><a name="11646"
+      > </a
+      ><a name="11647" href="TheTopologyOfTheUniverse.html#11647" class="Bound"
+      >Y</a
+      ><a name="11648"
+      > </a
+      ><a name="11649" class="Symbol"
+      >=</a
+      ><a name="11650"
+      >
+ </a
+      ><a name="11653" href="CurryHoward.html#744" class="Function"
+      >&#8743;-intro</a
+      ><a name="11660"
+      > </a
+      ><a name="11661" class="Symbol"
+      >(</a
+      ><a name="11662" href="TheTopologyOfTheUniverse.html#10760" class="Function"
+      >attach-lemma</a
+      ><a name="11674"
+      > </a
+      ><a name="11675" href="TheTopologyOfTheUniverse.html#11645" class="Bound"
+      >X</a
+      ><a name="11676"
+      > </a
+      ><a name="11677" href="TheTopologyOfTheUniverse.html#11647" class="Bound"
+      >Y</a
+      ><a name="11678" class="Symbol"
+      >)</a
+      ><a name="11679"
+      > </a
+      ><a name="11680" class="Symbol"
+      >(</a
+      ><a name="11681" href="TheTopologyOfTheUniverse.html#11029" class="Function"
+      >attach-lemma&#8734;</a
+      ><a name="11694"
+      > </a
+      ><a name="11695" href="TheTopologyOfTheUniverse.html#11645" class="Bound"
+      >X</a
+      ><a name="11696"
+      > </a
+      ><a name="11697" href="TheTopologyOfTheUniverse.html#11647" class="Bound"
+      >Y</a
+      ><a name="11698" class="Symbol"
+      >)</a
+      ><a name="11699"
+      >
+
+\end{code}
+
+</a
+      ><a name="11713" class="Comment"
+      >As a corollary of The Universe Indiscreteness Theorem, we get Rice's</a
+      ><a name="11781"
+      >
+</a
+      ><a name="11782" class="Comment"
+      >Theorem for the universe, which can be found in the module</a
+      ><a name="11840"
+      >
+</a
+      ><a name="11841" class="Comment"
+      >RicesTheoremForTheUniverse.</a
+      ><a name="11868"
+      >
+</a
+      ></pre
+    >/body
+  ></html
+>

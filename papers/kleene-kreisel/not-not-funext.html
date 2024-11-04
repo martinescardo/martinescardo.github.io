@@ -1,0 +1,5438 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+><head
+  ><title
+    >not-not-funext</title
+    ><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"
+     /><meta http-equiv="Content-Style-Type" content="text/css"
+     /><link href="Agda.css" rel="stylesheet" type="text/css"
+     /></head
+  ><body
+  ><pre
+    ><a name="1" class="Comment"
+      >Chuangjie Xu and Martin Escardo 2013.</a
+      ><a name="38"
+      >
+
+</a
+      ><a name="40" class="Comment"
+      >We postulate the double negation of function extensionality. With</a
+      ><a name="105"
+      >
+</a
+      ><a name="106" class="Comment"
+      >this, we don't lose canonicity.</a
+      ><a name="137"
+      >
+
+</a
+      ><a name="139" class="Comment"
+      >Actually, something weaker than the double negation is sufficient,</a
+      ><a name="205"
+      >
+</a
+      ><a name="206" class="Comment"
+      >called funext&#185;, but we postulate the double negation, because we know</a
+      ><a name="275"
+      >
+</a
+      ><a name="276" class="Comment"
+      >that double negation of consistent axioms don't break canonicity.</a
+      ><a name="341"
+      >
+</a
+      ><a name="342" class="Comment"
+      >http://www.cs.bham.ac.uk/~mhe/papers/negative-axioms.pdf</a
+      ><a name="398"
+      >
+
+\begin{code}
+
+</a
+      ><a name="414" class="Keyword"
+      >module</a
+      ><a name="420"
+      > </a
+      ><a name="421" href="not-not-funext.html#1" class="Module"
+      >not-not-funext</a
+      ><a name="435"
+      > </a
+      ><a name="436" class="Keyword"
+      >where</a
+      ><a name="441"
+      >
+
+</a
+      ><a name="443" class="Keyword"
+      >open</a
+      ><a name="447"
+      > </a
+      ><a name="448" class="Keyword"
+      >import</a
+      ><a name="454"
+      > </a
+      ><a name="455" href="MiniLibrary.html#1" class="Module"
+      >MiniLibrary</a
+      ><a name="466"
+      >
+</a
+      ><a name="467" class="Keyword"
+      >open</a
+      ><a name="471"
+      > </a
+      ><a name="472" class="Keyword"
+      >import</a
+      ><a name="478"
+      > </a
+      ><a name="479" href="not-not.html#1" class="Module"
+      >not-not</a
+      ><a name="486"
+      >
+</a
+      ><a name="487" class="Keyword"
+      >open</a
+      ><a name="491"
+      > </a
+      ><a name="492" class="Keyword"
+      >import</a
+      ><a name="498"
+      > </a
+      ><a name="499" href="Sequence.html#1" class="Module"
+      >Sequence</a
+      ><a name="507"
+      >
+</a
+      ><a name="508" class="Keyword"
+      >open</a
+      ><a name="512"
+      > </a
+      ><a name="513" class="Keyword"
+      >import</a
+      ><a name="519"
+      > </a
+      ><a name="520" href="Inequality.html#1" class="Module"
+      >Inequality</a
+      ><a name="530"
+      >
+
+</a
+      ><a name="532" href="not-not-funext.html#532" class="Function"
+      >Funext</a
+      ><a name="538"
+      > </a
+      ><a name="539" class="Symbol"
+      >:</a
+      ><a name="540"
+      > </a
+      ><a name="541" class="PrimitiveType"
+      >Set&#8321;</a
+      ><a name="545"
+      >
+</a
+      ><a name="546" href="not-not-funext.html#532" class="Function"
+      >Funext</a
+      ><a name="552"
+      > </a
+      ><a name="553" class="Symbol"
+      >=</a
+      ><a name="554"
+      > </a
+      ><a name="555" class="Symbol"
+      >{</a
+      ><a name="556" href="not-not-funext.html#556" class="Bound"
+      >X</a
+      ><a name="557"
+      > </a
+      ><a name="558" class="Symbol"
+      >:</a
+      ><a name="559"
+      > </a
+      ><a name="560" class="PrimitiveType"
+      >Set</a
+      ><a name="563" class="Symbol"
+      >}{</a
+      ><a name="565" href="not-not-funext.html#565" class="Bound"
+      >Y</a
+      ><a name="566"
+      > </a
+      ><a name="567" class="Symbol"
+      >:</a
+      ><a name="568"
+      > </a
+      ><a name="569" href="not-not-funext.html#556" class="Bound"
+      >X</a
+      ><a name="570"
+      > </a
+      ><a name="571" class="Symbol"
+      >&#8594;</a
+      ><a name="572"
+      > </a
+      ><a name="573" class="PrimitiveType"
+      >Set</a
+      ><a name="576" class="Symbol"
+      >}{</a
+      ><a name="578" href="not-not-funext.html#578" class="Bound"
+      >f</a
+      ><a name="579"
+      > </a
+      ><a name="580" href="not-not-funext.html#580" class="Bound"
+      >g</a
+      ><a name="581"
+      > </a
+      ><a name="582" class="Symbol"
+      >:</a
+      ><a name="583"
+      > </a
+      ><a name="584" class="Symbol"
+      >(</a
+      ><a name="585" href="not-not-funext.html#585" class="Bound"
+      >x</a
+      ><a name="586"
+      > </a
+      ><a name="587" class="Symbol"
+      >:</a
+      ><a name="588"
+      > </a
+      ><a name="589" href="not-not-funext.html#556" class="Bound"
+      >X</a
+      ><a name="590" class="Symbol"
+      >)</a
+      ><a name="591"
+      > </a
+      ><a name="592" class="Symbol"
+      >&#8594;</a
+      ><a name="593"
+      > </a
+      ><a name="594" href="not-not-funext.html#565" class="Bound"
+      >Y</a
+      ><a name="595"
+      > </a
+      ><a name="596" href="not-not-funext.html#585" class="Bound"
+      >x</a
+      ><a name="597" class="Symbol"
+      >}</a
+      ><a name="598"
+      > </a
+      ><a name="599" class="Symbol"
+      >&#8594;</a
+      ><a name="600"
+      >
+         </a
+      ><a name="610" class="Symbol"
+      >(&#8704;(</a
+      ><a name="613" href="not-not-funext.html#613" class="Bound"
+      >x</a
+      ><a name="614"
+      > </a
+      ><a name="615" class="Symbol"
+      >:</a
+      ><a name="616"
+      > </a
+      ><a name="617" href="not-not-funext.html#556" class="Bound"
+      >X</a
+      ><a name="618" class="Symbol"
+      >)</a
+      ><a name="619"
+      > </a
+      ><a name="620" class="Symbol"
+      >&#8594;</a
+      ><a name="621"
+      > </a
+      ><a name="622" href="not-not-funext.html#578" class="Bound"
+      >f</a
+      ><a name="623"
+      > </a
+      ><a name="624" href="not-not-funext.html#613" class="Bound"
+      >x</a
+      ><a name="625"
+      > </a
+      ><a name="626" href="MiniLibrary.html#1706" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="627"
+      > </a
+      ><a name="628" href="not-not-funext.html#580" class="Bound"
+      >g</a
+      ><a name="629"
+      > </a
+      ><a name="630" href="not-not-funext.html#613" class="Bound"
+      >x</a
+      ><a name="631" class="Symbol"
+      >)</a
+      ><a name="632"
+      > </a
+      ><a name="633" class="Symbol"
+      >&#8594;</a
+      ><a name="634"
+      > </a
+      ><a name="635" href="not-not-funext.html#578" class="Bound"
+      >f</a
+      ><a name="636"
+      > </a
+      ><a name="637" href="MiniLibrary.html#1706" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="638"
+      > </a
+      ><a name="639" href="not-not-funext.html#580" class="Bound"
+      >g</a
+      ><a name="640"
+      >
+
+</a
+      ><a name="642" class="Keyword"
+      >postulate</a
+      ><a name="651"
+      > </a
+      ><a name="652" href="not-not-funext.html#652" class="Postulate"
+      >[funext]</a
+      ><a name="660"
+      > </a
+      ><a name="661" class="Symbol"
+      >:</a
+      ><a name="662"
+      > </a
+      ><a name="663" href="not-not.html#113" class="Function Operator"
+      >[</a
+      ><a name="664"
+      > </a
+      ><a name="665" href="not-not-funext.html#532" class="Function"
+      >Funext</a
+      ><a name="671"
+      > </a
+      ><a name="672" href="not-not.html#113" class="Function Operator"
+      >]</a
+      ><a name="673"
+      >
+
+
+</a
+      ><a name="676" href="not-not-funext.html#676" class="Function"
+      >funext&#185;</a
+      ><a name="683"
+      > </a
+      ><a name="684" class="Symbol"
+      >:</a
+      ><a name="685"
+      > </a
+      ><a name="686" class="Symbol"
+      >{</a
+      ><a name="687" href="not-not-funext.html#687" class="Bound"
+      >X</a
+      ><a name="688"
+      > </a
+      ><a name="689" class="Symbol"
+      >:</a
+      ><a name="690"
+      > </a
+      ><a name="691" class="PrimitiveType"
+      >Set</a
+      ><a name="694" class="Symbol"
+      >}{</a
+      ><a name="696" href="not-not-funext.html#696" class="Bound"
+      >Y</a
+      ><a name="697"
+      > </a
+      ><a name="698" class="Symbol"
+      >:</a
+      ><a name="699"
+      > </a
+      ><a name="700" href="not-not-funext.html#687" class="Bound"
+      >X</a
+      ><a name="701"
+      > </a
+      ><a name="702" class="Symbol"
+      >&#8594;</a
+      ><a name="703"
+      > </a
+      ><a name="704" class="PrimitiveType"
+      >Set</a
+      ><a name="707" class="Symbol"
+      >}{</a
+      ><a name="709" href="not-not-funext.html#709" class="Bound"
+      >f</a
+      ><a name="710"
+      > </a
+      ><a name="711" href="not-not-funext.html#711" class="Bound"
+      >g</a
+      ><a name="712"
+      > </a
+      ><a name="713" class="Symbol"
+      >:</a
+      ><a name="714"
+      > </a
+      ><a name="715" class="Symbol"
+      >(</a
+      ><a name="716" href="not-not-funext.html#716" class="Bound"
+      >x</a
+      ><a name="717"
+      > </a
+      ><a name="718" class="Symbol"
+      >:</a
+      ><a name="719"
+      > </a
+      ><a name="720" href="not-not-funext.html#687" class="Bound"
+      >X</a
+      ><a name="721" class="Symbol"
+      >)</a
+      ><a name="722"
+      > </a
+      ><a name="723" class="Symbol"
+      >&#8594;</a
+      ><a name="724"
+      > </a
+      ><a name="725" href="not-not-funext.html#696" class="Bound"
+      >Y</a
+      ><a name="726"
+      > </a
+      ><a name="727" href="not-not-funext.html#716" class="Bound"
+      >x</a
+      ><a name="728" class="Symbol"
+      >}</a
+      ><a name="729"
+      > </a
+      ><a name="730" class="Symbol"
+      >&#8594;</a
+      ><a name="731"
+      >
+         </a
+      ><a name="741" class="Symbol"
+      >(&#8704;(</a
+      ><a name="744" href="not-not-funext.html#744" class="Bound"
+      >x</a
+      ><a name="745"
+      > </a
+      ><a name="746" class="Symbol"
+      >:</a
+      ><a name="747"
+      > </a
+      ><a name="748" href="not-not-funext.html#687" class="Bound"
+      >X</a
+      ><a name="749" class="Symbol"
+      >)</a
+      ><a name="750"
+      > </a
+      ><a name="751" class="Symbol"
+      >&#8594;</a
+      ><a name="752"
+      > </a
+      ><a name="753" href="not-not-funext.html#709" class="Bound"
+      >f</a
+      ><a name="754"
+      > </a
+      ><a name="755" href="not-not-funext.html#744" class="Bound"
+      >x</a
+      ><a name="756"
+      > </a
+      ><a name="757" href="MiniLibrary.html#1706" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="758"
+      > </a
+      ><a name="759" href="not-not-funext.html#711" class="Bound"
+      >g</a
+      ><a name="760"
+      > </a
+      ><a name="761" href="not-not-funext.html#744" class="Bound"
+      >x</a
+      ><a name="762" class="Symbol"
+      >)</a
+      ><a name="763"
+      > </a
+      ><a name="764" class="Symbol"
+      >&#8594;</a
+      ><a name="765"
+      > </a
+      ><a name="766" href="not-not.html#113" class="Function Operator"
+      >[</a
+      ><a name="767"
+      > </a
+      ><a name="768" href="not-not-funext.html#709" class="Bound"
+      >f</a
+      ><a name="769"
+      > </a
+      ><a name="770" href="MiniLibrary.html#1706" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="771"
+      > </a
+      ><a name="772" href="not-not-funext.html#711" class="Bound"
+      >g</a
+      ><a name="773"
+      > </a
+      ><a name="774" href="not-not.html#113" class="Function Operator"
+      >]</a
+      ><a name="775"
+      >
+</a
+      ><a name="776" href="not-not-funext.html#676" class="Function"
+      >funext&#185;</a
+      ><a name="783"
+      > </a
+      ><a name="784" href="not-not-funext.html#784" class="Bound"
+      >e</a
+      ><a name="785"
+      > </a
+      ><a name="786" href="not-not-funext.html#786" class="Bound"
+      >u</a
+      ><a name="787"
+      > </a
+      ><a name="788" class="Symbol"
+      >=</a
+      ><a name="789"
+      > </a
+      ><a name="790" href="not-not-funext.html#652" class="Postulate"
+      >[funext]</a
+      ><a name="798"
+      > </a
+      ><a name="799" class="Symbol"
+      >(&#955;</a
+      ><a name="801"
+      > </a
+      ><a name="802" href="not-not-funext.html#802" class="Bound"
+      >f</a
+      ><a name="803"
+      > </a
+      ><a name="804" class="Symbol"
+      >&#8594;</a
+      ><a name="805"
+      > </a
+      ><a name="806" href="not-not-funext.html#786" class="Bound"
+      >u</a
+      ><a name="807"
+      > </a
+      ><a name="808" class="Symbol"
+      >(</a
+      ><a name="809" href="not-not-funext.html#802" class="Bound"
+      >f</a
+      ><a name="810"
+      > </a
+      ><a name="811" href="not-not-funext.html#784" class="Bound"
+      >e</a
+      ><a name="812" class="Symbol"
+      >))</a
+      ><a name="814"
+      >
+
+</a
+      ><a name="816" href="not-not-funext.html#816" class="Function"
+      >funext&#178;</a
+      ><a name="823"
+      > </a
+      ><a name="824" class="Symbol"
+      >:</a
+      ><a name="825"
+      > </a
+      ><a name="826" class="Symbol"
+      >{</a
+      ><a name="827" href="not-not-funext.html#827" class="Bound"
+      >X</a
+      ><a name="828"
+      > </a
+      ><a name="829" class="Symbol"
+      >:</a
+      ><a name="830"
+      > </a
+      ><a name="831" class="PrimitiveType"
+      >Set</a
+      ><a name="834" class="Symbol"
+      >}{</a
+      ><a name="836" href="not-not-funext.html#836" class="Bound"
+      >Y</a
+      ><a name="837"
+      > </a
+      ><a name="838" class="Symbol"
+      >:</a
+      ><a name="839"
+      > </a
+      ><a name="840" href="not-not-funext.html#827" class="Bound"
+      >X</a
+      ><a name="841"
+      > </a
+      ><a name="842" class="Symbol"
+      >&#8594;</a
+      ><a name="843"
+      > </a
+      ><a name="844" class="PrimitiveType"
+      >Set</a
+      ><a name="847" class="Symbol"
+      >}{</a
+      ><a name="849" href="not-not-funext.html#849" class="Bound"
+      >Z</a
+      ><a name="850"
+      > </a
+      ><a name="851" class="Symbol"
+      >:</a
+      ><a name="852"
+      > </a
+      ><a name="853" class="Symbol"
+      >(</a
+      ><a name="854" href="not-not-funext.html#854" class="Bound"
+      >x</a
+      ><a name="855"
+      > </a
+      ><a name="856" class="Symbol"
+      >:</a
+      ><a name="857"
+      > </a
+      ><a name="858" href="not-not-funext.html#827" class="Bound"
+      >X</a
+      ><a name="859" class="Symbol"
+      >)</a
+      ><a name="860"
+      > </a
+      ><a name="861" class="Symbol"
+      >&#8594;</a
+      ><a name="862"
+      > </a
+      ><a name="863" class="Symbol"
+      >(</a
+      ><a name="864" href="not-not-funext.html#864" class="Bound"
+      >y</a
+      ><a name="865"
+      > </a
+      ><a name="866" class="Symbol"
+      >:</a
+      ><a name="867"
+      > </a
+      ><a name="868" href="not-not-funext.html#836" class="Bound"
+      >Y</a
+      ><a name="869"
+      > </a
+      ><a name="870" href="not-not-funext.html#854" class="Bound"
+      >x</a
+      ><a name="871" class="Symbol"
+      >)</a
+      ><a name="872"
+      > </a
+      ><a name="873" class="Symbol"
+      >&#8594;</a
+      ><a name="874"
+      > </a
+      ><a name="875" class="PrimitiveType"
+      >Set</a
+      ><a name="878" class="Symbol"
+      >}</a
+      ><a name="879"
+      > </a
+      ><a name="880" class="Symbol"
+      >&#8594;</a
+      ><a name="881"
+      >
+          </a
+      ><a name="892" class="Symbol"
+      >{</a
+      ><a name="893" href="not-not-funext.html#893" class="Bound"
+      >f</a
+      ><a name="894"
+      > </a
+      ><a name="895" href="not-not-funext.html#895" class="Bound"
+      >g</a
+      ><a name="896"
+      > </a
+      ><a name="897" class="Symbol"
+      >:</a
+      ><a name="898"
+      > </a
+      ><a name="899" class="Symbol"
+      >(</a
+      ><a name="900" href="not-not-funext.html#900" class="Bound"
+      >x</a
+      ><a name="901"
+      > </a
+      ><a name="902" class="Symbol"
+      >:</a
+      ><a name="903"
+      > </a
+      ><a name="904" href="not-not-funext.html#827" class="Bound"
+      >X</a
+      ><a name="905" class="Symbol"
+      >)</a
+      ><a name="906"
+      > </a
+      ><a name="907" class="Symbol"
+      >&#8594;</a
+      ><a name="908"
+      > </a
+      ><a name="909" class="Symbol"
+      >(</a
+      ><a name="910" href="not-not-funext.html#910" class="Bound"
+      >y</a
+      ><a name="911"
+      > </a
+      ><a name="912" class="Symbol"
+      >:</a
+      ><a name="913"
+      > </a
+      ><a name="914" href="not-not-funext.html#836" class="Bound"
+      >Y</a
+      ><a name="915"
+      > </a
+      ><a name="916" href="not-not-funext.html#900" class="Bound"
+      >x</a
+      ><a name="917" class="Symbol"
+      >)</a
+      ><a name="918"
+      > </a
+      ><a name="919" class="Symbol"
+      >&#8594;</a
+      ><a name="920"
+      > </a
+      ><a name="921" href="not-not-funext.html#849" class="Bound"
+      >Z</a
+      ><a name="922"
+      > </a
+      ><a name="923" href="not-not-funext.html#900" class="Bound"
+      >x</a
+      ><a name="924"
+      > </a
+      ><a name="925" href="not-not-funext.html#910" class="Bound"
+      >y</a
+      ><a name="926" class="Symbol"
+      >}</a
+      ><a name="927"
+      > </a
+      ><a name="928" class="Symbol"
+      >&#8594;</a
+      ><a name="929"
+      >
+          </a
+      ><a name="940" class="Symbol"
+      >(&#8704;(</a
+      ><a name="943" href="not-not-funext.html#943" class="Bound"
+      >x</a
+      ><a name="944"
+      > </a
+      ><a name="945" class="Symbol"
+      >:</a
+      ><a name="946"
+      > </a
+      ><a name="947" href="not-not-funext.html#827" class="Bound"
+      >X</a
+      ><a name="948" class="Symbol"
+      >)(</a
+      ><a name="950" href="not-not-funext.html#950" class="Bound"
+      >y</a
+      ><a name="951"
+      > </a
+      ><a name="952" class="Symbol"
+      >:</a
+      ><a name="953"
+      > </a
+      ><a name="954" href="not-not-funext.html#836" class="Bound"
+      >Y</a
+      ><a name="955"
+      > </a
+      ><a name="956" href="not-not-funext.html#943" class="Bound"
+      >x</a
+      ><a name="957" class="Symbol"
+      >)</a
+      ><a name="958"
+      > </a
+      ><a name="959" class="Symbol"
+      >&#8594;</a
+      ><a name="960"
+      > </a
+      ><a name="961" href="not-not-funext.html#893" class="Bound"
+      >f</a
+      ><a name="962"
+      > </a
+      ><a name="963" href="not-not-funext.html#943" class="Bound"
+      >x</a
+      ><a name="964"
+      > </a
+      ><a name="965" href="not-not-funext.html#950" class="Bound"
+      >y</a
+      ><a name="966"
+      > </a
+      ><a name="967" href="MiniLibrary.html#1706" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="968"
+      > </a
+      ><a name="969" href="not-not-funext.html#895" class="Bound"
+      >g</a
+      ><a name="970"
+      > </a
+      ><a name="971" href="not-not-funext.html#943" class="Bound"
+      >x</a
+      ><a name="972"
+      > </a
+      ><a name="973" href="not-not-funext.html#950" class="Bound"
+      >y</a
+      ><a name="974" class="Symbol"
+      >)</a
+      ><a name="975"
+      > </a
+      ><a name="976" class="Symbol"
+      >&#8594;</a
+      ><a name="977"
+      > </a
+      ><a name="978" href="not-not.html#113" class="Function Operator"
+      >[</a
+      ><a name="979"
+      > </a
+      ><a name="980" href="not-not-funext.html#893" class="Bound"
+      >f</a
+      ><a name="981"
+      > </a
+      ><a name="982" href="MiniLibrary.html#1706" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="983"
+      > </a
+      ><a name="984" href="not-not-funext.html#895" class="Bound"
+      >g</a
+      ><a name="985"
+      > </a
+      ><a name="986" href="not-not.html#113" class="Function Operator"
+      >]</a
+      ><a name="987"
+      >
+</a
+      ><a name="988" href="not-not-funext.html#816" class="Function"
+      >funext&#178;</a
+      ><a name="995"
+      > </a
+      ><a name="996" class="Symbol"
+      >{</a
+      ><a name="997" href="not-not-funext.html#997" class="Bound"
+      >X</a
+      ><a name="998" class="Symbol"
+      >}</a
+      ><a name="999"
+      > </a
+      ><a name="1000" class="Symbol"
+      >{</a
+      ><a name="1001" href="not-not-funext.html#1001" class="Bound"
+      >Y</a
+      ><a name="1002" class="Symbol"
+      >}</a
+      ><a name="1003"
+      > </a
+      ><a name="1004" class="Symbol"
+      >{</a
+      ><a name="1005" href="not-not-funext.html#1005" class="Bound"
+      >Z</a
+      ><a name="1006" class="Symbol"
+      >}</a
+      ><a name="1007"
+      > </a
+      ><a name="1008" class="Symbol"
+      >{</a
+      ><a name="1009" href="not-not-funext.html#1009" class="Bound"
+      >f</a
+      ><a name="1010" class="Symbol"
+      >}</a
+      ><a name="1011"
+      > </a
+      ><a name="1012" class="Symbol"
+      >{</a
+      ><a name="1013" href="not-not-funext.html#1013" class="Bound"
+      >g</a
+      ><a name="1014" class="Symbol"
+      >}</a
+      ><a name="1015"
+      > </a
+      ><a name="1016" href="not-not-funext.html#1016" class="Bound"
+      >exy</a
+      ><a name="1019"
+      > </a
+      ><a name="1020" class="Symbol"
+      >=</a
+      ><a name="1021"
+      > </a
+      ><a name="1022" href="not-not-funext.html#1226" class="Function"
+      >goal</a
+      ><a name="1026"
+      >
+ </a
+      ><a name="1028" class="Keyword"
+      >where</a
+      ><a name="1033"
+      >
+  </a
+      ><a name="1036" href="not-not-funext.html#1036" class="Function"
+      >F</a
+      ><a name="1037"
+      > </a
+      ><a name="1038" href="not-not-funext.html#1038" class="Function"
+      >G</a
+      ><a name="1039"
+      > </a
+      ><a name="1040" class="Symbol"
+      >:</a
+      ><a name="1041"
+      > </a
+      ><a name="1042" class="Symbol"
+      >(</a
+      ><a name="1043" href="not-not-funext.html#1043" class="Bound"
+      >w</a
+      ><a name="1044"
+      > </a
+      ><a name="1045" class="Symbol"
+      >:</a
+      ><a name="1046"
+      > </a
+      ><a name="1047" href="MiniLibrary.html#745" class="Record"
+      >&#931;</a
+      ><a name="1048"
+      > </a
+      ><a name="1049" class="Symbol"
+      >\(</a
+      ><a name="1051" href="not-not-funext.html#1051" class="Bound"
+      >x</a
+      ><a name="1052"
+      > </a
+      ><a name="1053" class="Symbol"
+      >:</a
+      ><a name="1054"
+      > </a
+      ><a name="1055" href="not-not-funext.html#997" class="Bound"
+      >X</a
+      ><a name="1056" class="Symbol"
+      >)</a
+      ><a name="1057"
+      > </a
+      ><a name="1058" class="Symbol"
+      >&#8594;</a
+      ><a name="1059"
+      > </a
+      ><a name="1060" href="not-not-funext.html#1001" class="Bound"
+      >Y</a
+      ><a name="1061"
+      > </a
+      ><a name="1062" href="not-not-funext.html#1051" class="Bound"
+      >x</a
+      ><a name="1063" class="Symbol"
+      >)</a
+      ><a name="1064"
+      > </a
+      ><a name="1065" class="Symbol"
+      >&#8594;</a
+      ><a name="1066"
+      > </a
+      ><a name="1067" href="not-not-funext.html#1005" class="Bound"
+      >Z</a
+      ><a name="1068"
+      > </a
+      ><a name="1069" class="Symbol"
+      >(</a
+      ><a name="1070" href="MiniLibrary.html#840" class="Function"
+      >&#960;&#8320;</a
+      ><a name="1072"
+      > </a
+      ><a name="1073" href="not-not-funext.html#1043" class="Bound"
+      >w</a
+      ><a name="1074" class="Symbol"
+      >)</a
+      ><a name="1075"
+      > </a
+      ><a name="1076" class="Symbol"
+      >(</a
+      ><a name="1077" href="MiniLibrary.html#850" class="Function"
+      >&#960;&#8321;</a
+      ><a name="1079"
+      > </a
+      ><a name="1080" href="not-not-funext.html#1043" class="Bound"
+      >w</a
+      ><a name="1081" class="Symbol"
+      >)</a
+      ><a name="1082"
+      >
+  </a
+      ><a name="1085" href="not-not-funext.html#1036" class="Function"
+      >F</a
+      ><a name="1086"
+      > </a
+      ><a name="1087" class="Symbol"
+      >(</a
+      ><a name="1088" href="not-not-funext.html#1088" class="Bound"
+      >x</a
+      ><a name="1089"
+      > </a
+      ><a name="1090" href="MiniLibrary.html#825" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="1091"
+      > </a
+      ><a name="1092" href="not-not-funext.html#1092" class="Bound"
+      >y</a
+      ><a name="1093" class="Symbol"
+      >)</a
+      ><a name="1094"
+      > </a
+      ><a name="1095" class="Symbol"
+      >=</a
+      ><a name="1096"
+      > </a
+      ><a name="1097" href="not-not-funext.html#1009" class="Bound"
+      >f</a
+      ><a name="1098"
+      > </a
+      ><a name="1099" href="not-not-funext.html#1088" class="Bound"
+      >x</a
+      ><a name="1100"
+      > </a
+      ><a name="1101" href="not-not-funext.html#1092" class="Bound"
+      >y</a
+      ><a name="1102"
+      >
+  </a
+      ><a name="1105" href="not-not-funext.html#1038" class="Function"
+      >G</a
+      ><a name="1106"
+      > </a
+      ><a name="1107" class="Symbol"
+      >(</a
+      ><a name="1108" href="not-not-funext.html#1108" class="Bound"
+      >x</a
+      ><a name="1109"
+      > </a
+      ><a name="1110" href="MiniLibrary.html#825" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="1111"
+      > </a
+      ><a name="1112" href="not-not-funext.html#1112" class="Bound"
+      >y</a
+      ><a name="1113" class="Symbol"
+      >)</a
+      ><a name="1114"
+      > </a
+      ><a name="1115" class="Symbol"
+      >=</a
+      ><a name="1116"
+      > </a
+      ><a name="1117" href="not-not-funext.html#1013" class="Bound"
+      >g</a
+      ><a name="1118"
+      > </a
+      ><a name="1119" href="not-not-funext.html#1108" class="Bound"
+      >x</a
+      ><a name="1120"
+      > </a
+      ><a name="1121" href="not-not-funext.html#1112" class="Bound"
+      >y</a
+      ><a name="1122"
+      >
+  </a
+      ><a name="1125" href="not-not-funext.html#1125" class="Function"
+      >Exy</a
+      ><a name="1128"
+      > </a
+      ><a name="1129" class="Symbol"
+      >:</a
+      ><a name="1130"
+      > </a
+      ><a name="1131" class="Symbol"
+      >(</a
+      ><a name="1132" href="not-not-funext.html#1132" class="Bound"
+      >w</a
+      ><a name="1133"
+      > </a
+      ><a name="1134" class="Symbol"
+      >:</a
+      ><a name="1135"
+      > </a
+      ><a name="1136" href="MiniLibrary.html#745" class="Record"
+      >&#931;</a
+      ><a name="1137"
+      > </a
+      ><a name="1138" class="Symbol"
+      >\(</a
+      ><a name="1140" href="not-not-funext.html#1140" class="Bound"
+      >x</a
+      ><a name="1141"
+      > </a
+      ><a name="1142" class="Symbol"
+      >:</a
+      ><a name="1143"
+      > </a
+      ><a name="1144" href="not-not-funext.html#997" class="Bound"
+      >X</a
+      ><a name="1145" class="Symbol"
+      >)</a
+      ><a name="1146"
+      > </a
+      ><a name="1147" class="Symbol"
+      >&#8594;</a
+      ><a name="1148"
+      > </a
+      ><a name="1149" href="not-not-funext.html#1001" class="Bound"
+      >Y</a
+      ><a name="1150"
+      > </a
+      ><a name="1151" href="not-not-funext.html#1140" class="Bound"
+      >x</a
+      ><a name="1152" class="Symbol"
+      >)</a
+      ><a name="1153"
+      > </a
+      ><a name="1154" class="Symbol"
+      >&#8594;</a
+      ><a name="1155"
+      > </a
+      ><a name="1156" href="not-not-funext.html#1036" class="Function"
+      >F</a
+      ><a name="1157"
+      > </a
+      ><a name="1158" href="not-not-funext.html#1132" class="Bound"
+      >w</a
+      ><a name="1159"
+      > </a
+      ><a name="1160" href="MiniLibrary.html#1706" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="1161"
+      > </a
+      ><a name="1162" href="not-not-funext.html#1038" class="Function"
+      >G</a
+      ><a name="1163"
+      > </a
+      ><a name="1164" href="not-not-funext.html#1132" class="Bound"
+      >w</a
+      ><a name="1165"
+      >
+  </a
+      ><a name="1168" href="not-not-funext.html#1125" class="Function"
+      >Exy</a
+      ><a name="1171"
+      > </a
+      ><a name="1172" class="Symbol"
+      >(</a
+      ><a name="1173" href="not-not-funext.html#1173" class="Bound"
+      >x</a
+      ><a name="1174"
+      > </a
+      ><a name="1175" href="MiniLibrary.html#825" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="1176"
+      > </a
+      ><a name="1177" href="not-not-funext.html#1177" class="Bound"
+      >y</a
+      ><a name="1178" class="Symbol"
+      >)</a
+      ><a name="1179"
+      > </a
+      ><a name="1180" class="Symbol"
+      >=</a
+      ><a name="1181"
+      > </a
+      ><a name="1182" href="not-not-funext.html#1016" class="Bound"
+      >exy</a
+      ><a name="1185"
+      > </a
+      ><a name="1186" href="not-not-funext.html#1173" class="Bound"
+      >x</a
+      ><a name="1187"
+      > </a
+      ><a name="1188" href="not-not-funext.html#1177" class="Bound"
+      >y</a
+      ><a name="1189"
+      >
+  </a
+      ><a name="1192" href="not-not-funext.html#1192" class="Function"
+      >E</a
+      ><a name="1193"
+      > </a
+      ><a name="1194" class="Symbol"
+      >:</a
+      ><a name="1195"
+      > </a
+      ><a name="1196" href="not-not.html#113" class="Function Operator"
+      >[</a
+      ><a name="1197"
+      > </a
+      ><a name="1198" href="not-not-funext.html#1036" class="Function"
+      >F</a
+      ><a name="1199"
+      > </a
+      ><a name="1200" href="MiniLibrary.html#1706" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="1201"
+      > </a
+      ><a name="1202" href="not-not-funext.html#1038" class="Function"
+      >G</a
+      ><a name="1203"
+      > </a
+      ><a name="1204" href="not-not.html#113" class="Function Operator"
+      >]</a
+      ><a name="1205"
+      >
+  </a
+      ><a name="1208" href="not-not-funext.html#1192" class="Function"
+      >E</a
+      ><a name="1209"
+      > </a
+      ><a name="1210" class="Symbol"
+      >=</a
+      ><a name="1211"
+      > </a
+      ><a name="1212" href="not-not-funext.html#676" class="Function"
+      >funext&#185;</a
+      ><a name="1219"
+      > </a
+      ><a name="1220" href="not-not-funext.html#1125" class="Function"
+      >Exy</a
+      ><a name="1223"
+      >
+  </a
+      ><a name="1226" href="not-not-funext.html#1226" class="Function"
+      >goal</a
+      ><a name="1230"
+      > </a
+      ><a name="1231" class="Symbol"
+      >:</a
+      ><a name="1232"
+      > </a
+      ><a name="1233" href="not-not.html#113" class="Function Operator"
+      >[</a
+      ><a name="1234"
+      > </a
+      ><a name="1235" href="not-not-funext.html#1009" class="Bound"
+      >f</a
+      ><a name="1236"
+      > </a
+      ><a name="1237" href="MiniLibrary.html#1706" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="1238"
+      > </a
+      ><a name="1239" href="not-not-funext.html#1013" class="Bound"
+      >g</a
+      ><a name="1240"
+      > </a
+      ><a name="1241" href="not-not.html#113" class="Function Operator"
+      >]</a
+      ><a name="1242"
+      >
+  </a
+      ><a name="1246" href="not-not-funext.html#1226" class="Function"
+      >goal</a
+      ><a name="1250"
+      > </a
+      ><a name="1251" class="Symbol"
+      >=</a
+      ><a name="1252"
+      > </a
+      ><a name="1253" href="not-not.html#551" class="Function"
+      >functor</a
+      ><a name="1260"
+      > </a
+      ><a name="1261" class="Symbol"
+      >(</a
+      ><a name="1262" href="MiniLibrary.html#2001" class="Function"
+      >ap</a
+      ><a name="1264"
+      > </a
+      ><a name="1265" class="Symbol"
+      >(&#955;</a
+      ><a name="1267"
+      > </a
+      ><a name="1268" href="not-not-funext.html#1268" class="Bound"
+      >&#966;</a
+      ><a name="1269"
+      > </a
+      ><a name="1270" href="not-not-funext.html#1270" class="Bound"
+      >x</a
+      ><a name="1271"
+      > </a
+      ><a name="1272" href="not-not-funext.html#1272" class="Bound"
+      >y</a
+      ><a name="1273"
+      > </a
+      ><a name="1274" class="Symbol"
+      >&#8594;</a
+      ><a name="1275"
+      > </a
+      ><a name="1276" href="not-not-funext.html#1268" class="Bound"
+      >&#966;</a
+      ><a name="1277" class="Symbol"
+      >(</a
+      ><a name="1278" href="not-not-funext.html#1270" class="Bound"
+      >x</a
+      ><a name="1279"
+      > </a
+      ><a name="1280" href="MiniLibrary.html#825" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="1281"
+      > </a
+      ><a name="1282" href="not-not-funext.html#1272" class="Bound"
+      >y</a
+      ><a name="1283" class="Symbol"
+      >)))</a
+      ><a name="1286"
+      > </a
+      ><a name="1287" href="not-not-funext.html#1192" class="Function"
+      >E</a
+      ><a name="1288"
+      >
+
+
+</a
+      ><a name="1291" href="not-not-funext.html#1291" class="Function"
+      >funext&#179;</a
+      ><a name="1298"
+      > </a
+      ><a name="1299" class="Symbol"
+      >:</a
+      ><a name="1300"
+      > </a
+      ><a name="1301" class="Symbol"
+      >{</a
+      ><a name="1302" href="not-not-funext.html#1302" class="Bound"
+      >X</a
+      ><a name="1303"
+      > </a
+      ><a name="1304" class="Symbol"
+      >:</a
+      ><a name="1305"
+      > </a
+      ><a name="1306" class="PrimitiveType"
+      >Set</a
+      ><a name="1309" class="Symbol"
+      >}{</a
+      ><a name="1311" href="not-not-funext.html#1311" class="Bound"
+      >Y</a
+      ><a name="1312"
+      > </a
+      ><a name="1313" class="Symbol"
+      >:</a
+      ><a name="1314"
+      > </a
+      ><a name="1315" href="not-not-funext.html#1302" class="Bound"
+      >X</a
+      ><a name="1316"
+      > </a
+      ><a name="1317" class="Symbol"
+      >&#8594;</a
+      ><a name="1318"
+      > </a
+      ><a name="1319" class="PrimitiveType"
+      >Set</a
+      ><a name="1322" class="Symbol"
+      >}{</a
+      ><a name="1324" href="not-not-funext.html#1324" class="Bound"
+      >Z</a
+      ><a name="1325"
+      > </a
+      ><a name="1326" class="Symbol"
+      >:</a
+      ><a name="1327"
+      > </a
+      ><a name="1328" class="Symbol"
+      >(</a
+      ><a name="1329" href="not-not-funext.html#1329" class="Bound"
+      >x</a
+      ><a name="1330"
+      > </a
+      ><a name="1331" class="Symbol"
+      >:</a
+      ><a name="1332"
+      > </a
+      ><a name="1333" href="not-not-funext.html#1302" class="Bound"
+      >X</a
+      ><a name="1334" class="Symbol"
+      >)</a
+      ><a name="1335"
+      > </a
+      ><a name="1336" class="Symbol"
+      >&#8594;</a
+      ><a name="1337"
+      > </a
+      ><a name="1338" href="not-not-funext.html#1311" class="Bound"
+      >Y</a
+      ><a name="1339"
+      > </a
+      ><a name="1340" href="not-not-funext.html#1329" class="Bound"
+      >x</a
+      ><a name="1341"
+      > </a
+      ><a name="1342" class="Symbol"
+      >&#8594;</a
+      ><a name="1343"
+      > </a
+      ><a name="1344" class="PrimitiveType"
+      >Set</a
+      ><a name="1347" class="Symbol"
+      >}{</a
+      ><a name="1349" href="not-not-funext.html#1349" class="Bound"
+      >W</a
+      ><a name="1350"
+      > </a
+      ><a name="1351" class="Symbol"
+      >:</a
+      ><a name="1352"
+      > </a
+      ><a name="1353" class="Symbol"
+      >(</a
+      ><a name="1354" href="not-not-funext.html#1354" class="Bound"
+      >x</a
+      ><a name="1355"
+      > </a
+      ><a name="1356" class="Symbol"
+      >:</a
+      ><a name="1357"
+      > </a
+      ><a name="1358" href="not-not-funext.html#1302" class="Bound"
+      >X</a
+      ><a name="1359" class="Symbol"
+      >)</a
+      ><a name="1360"
+      > </a
+      ><a name="1361" class="Symbol"
+      >&#8594;</a
+      ><a name="1362"
+      > </a
+      ><a name="1363" class="Symbol"
+      >(</a
+      ><a name="1364" href="not-not-funext.html#1364" class="Bound"
+      >y</a
+      ><a name="1365"
+      > </a
+      ><a name="1366" class="Symbol"
+      >:</a
+      ><a name="1367"
+      > </a
+      ><a name="1368" href="not-not-funext.html#1311" class="Bound"
+      >Y</a
+      ><a name="1369"
+      > </a
+      ><a name="1370" href="not-not-funext.html#1354" class="Bound"
+      >x</a
+      ><a name="1371" class="Symbol"
+      >)</a
+      ><a name="1372"
+      > </a
+      ><a name="1373" class="Symbol"
+      >&#8594;</a
+      ><a name="1374"
+      > </a
+      ><a name="1375" href="not-not-funext.html#1324" class="Bound"
+      >Z</a
+      ><a name="1376"
+      > </a
+      ><a name="1377" href="not-not-funext.html#1354" class="Bound"
+      >x</a
+      ><a name="1378"
+      > </a
+      ><a name="1379" href="not-not-funext.html#1364" class="Bound"
+      >y</a
+      ><a name="1380"
+      > </a
+      ><a name="1381" class="Symbol"
+      >&#8594;</a
+      ><a name="1382"
+      > </a
+      ><a name="1383" class="PrimitiveType"
+      >Set</a
+      ><a name="1386" class="Symbol"
+      >}</a
+      ><a name="1387"
+      > </a
+      ><a name="1388" class="Symbol"
+      >&#8594;</a
+      ><a name="1389"
+      >
+          </a
+      ><a name="1400" class="Symbol"
+      >{</a
+      ><a name="1401" href="not-not-funext.html#1401" class="Bound"
+      >f</a
+      ><a name="1402"
+      > </a
+      ><a name="1403" href="not-not-funext.html#1403" class="Bound"
+      >g</a
+      ><a name="1404"
+      > </a
+      ><a name="1405" class="Symbol"
+      >:</a
+      ><a name="1406"
+      > </a
+      ><a name="1407" class="Symbol"
+      >(</a
+      ><a name="1408" href="not-not-funext.html#1408" class="Bound"
+      >x</a
+      ><a name="1409"
+      > </a
+      ><a name="1410" class="Symbol"
+      >:</a
+      ><a name="1411"
+      > </a
+      ><a name="1412" href="not-not-funext.html#1302" class="Bound"
+      >X</a
+      ><a name="1413" class="Symbol"
+      >)</a
+      ><a name="1414"
+      > </a
+      ><a name="1415" class="Symbol"
+      >&#8594;</a
+      ><a name="1416"
+      > </a
+      ><a name="1417" class="Symbol"
+      >(</a
+      ><a name="1418" href="not-not-funext.html#1418" class="Bound"
+      >y</a
+      ><a name="1419"
+      > </a
+      ><a name="1420" class="Symbol"
+      >:</a
+      ><a name="1421"
+      > </a
+      ><a name="1422" href="not-not-funext.html#1311" class="Bound"
+      >Y</a
+      ><a name="1423"
+      > </a
+      ><a name="1424" href="not-not-funext.html#1408" class="Bound"
+      >x</a
+      ><a name="1425" class="Symbol"
+      >)</a
+      ><a name="1426"
+      > </a
+      ><a name="1427" class="Symbol"
+      >&#8594;</a
+      ><a name="1428"
+      > </a
+      ><a name="1429" class="Symbol"
+      >(</a
+      ><a name="1430" href="not-not-funext.html#1430" class="Bound"
+      >z</a
+      ><a name="1431"
+      > </a
+      ><a name="1432" class="Symbol"
+      >:</a
+      ><a name="1433"
+      > </a
+      ><a name="1434" href="not-not-funext.html#1324" class="Bound"
+      >Z</a
+      ><a name="1435"
+      > </a
+      ><a name="1436" href="not-not-funext.html#1408" class="Bound"
+      >x</a
+      ><a name="1437"
+      > </a
+      ><a name="1438" href="not-not-funext.html#1418" class="Bound"
+      >y</a
+      ><a name="1439" class="Symbol"
+      >)</a
+      ><a name="1440"
+      > </a
+      ><a name="1441" class="Symbol"
+      >&#8594;</a
+      ><a name="1442"
+      > </a
+      ><a name="1443" href="not-not-funext.html#1349" class="Bound"
+      >W</a
+      ><a name="1444"
+      > </a
+      ><a name="1445" href="not-not-funext.html#1408" class="Bound"
+      >x</a
+      ><a name="1446"
+      > </a
+      ><a name="1447" href="not-not-funext.html#1418" class="Bound"
+      >y</a
+      ><a name="1448"
+      > </a
+      ><a name="1449" href="not-not-funext.html#1430" class="Bound"
+      >z</a
+      ><a name="1450" class="Symbol"
+      >}</a
+      ><a name="1451"
+      > </a
+      ><a name="1452" class="Symbol"
+      >&#8594;</a
+      ><a name="1453"
+      >
+          </a
+      ><a name="1464" class="Symbol"
+      >(&#8704;(</a
+      ><a name="1467" href="not-not-funext.html#1467" class="Bound"
+      >x</a
+      ><a name="1468"
+      > </a
+      ><a name="1469" class="Symbol"
+      >:</a
+      ><a name="1470"
+      > </a
+      ><a name="1471" href="not-not-funext.html#1302" class="Bound"
+      >X</a
+      ><a name="1472" class="Symbol"
+      >)(</a
+      ><a name="1474" href="not-not-funext.html#1474" class="Bound"
+      >y</a
+      ><a name="1475"
+      > </a
+      ><a name="1476" class="Symbol"
+      >:</a
+      ><a name="1477"
+      > </a
+      ><a name="1478" href="not-not-funext.html#1311" class="Bound"
+      >Y</a
+      ><a name="1479"
+      > </a
+      ><a name="1480" href="not-not-funext.html#1467" class="Bound"
+      >x</a
+      ><a name="1481" class="Symbol"
+      >)(</a
+      ><a name="1483" href="not-not-funext.html#1483" class="Bound"
+      >z</a
+      ><a name="1484"
+      > </a
+      ><a name="1485" class="Symbol"
+      >:</a
+      ><a name="1486"
+      > </a
+      ><a name="1487" href="not-not-funext.html#1324" class="Bound"
+      >Z</a
+      ><a name="1488"
+      > </a
+      ><a name="1489" href="not-not-funext.html#1467" class="Bound"
+      >x</a
+      ><a name="1490"
+      > </a
+      ><a name="1491" href="not-not-funext.html#1474" class="Bound"
+      >y</a
+      ><a name="1492" class="Symbol"
+      >)</a
+      ><a name="1493"
+      > </a
+      ><a name="1494" class="Symbol"
+      >&#8594;</a
+      ><a name="1495"
+      > </a
+      ><a name="1496" href="not-not-funext.html#1401" class="Bound"
+      >f</a
+      ><a name="1497"
+      > </a
+      ><a name="1498" href="not-not-funext.html#1467" class="Bound"
+      >x</a
+      ><a name="1499"
+      > </a
+      ><a name="1500" href="not-not-funext.html#1474" class="Bound"
+      >y</a
+      ><a name="1501"
+      > </a
+      ><a name="1502" href="not-not-funext.html#1483" class="Bound"
+      >z</a
+      ><a name="1503"
+      > </a
+      ><a name="1504" href="MiniLibrary.html#1706" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="1505"
+      > </a
+      ><a name="1506" href="not-not-funext.html#1403" class="Bound"
+      >g</a
+      ><a name="1507"
+      > </a
+      ><a name="1508" href="not-not-funext.html#1467" class="Bound"
+      >x</a
+      ><a name="1509"
+      > </a
+      ><a name="1510" href="not-not-funext.html#1474" class="Bound"
+      >y</a
+      ><a name="1511"
+      > </a
+      ><a name="1512" href="not-not-funext.html#1483" class="Bound"
+      >z</a
+      ><a name="1513" class="Symbol"
+      >)</a
+      ><a name="1514"
+      > </a
+      ><a name="1515" class="Symbol"
+      >&#8594;</a
+      ><a name="1516"
+      > </a
+      ><a name="1517" href="not-not.html#113" class="Function Operator"
+      >[</a
+      ><a name="1518"
+      > </a
+      ><a name="1519" href="not-not-funext.html#1401" class="Bound"
+      >f</a
+      ><a name="1520"
+      > </a
+      ><a name="1521" href="MiniLibrary.html#1706" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="1522"
+      > </a
+      ><a name="1523" href="not-not-funext.html#1403" class="Bound"
+      >g</a
+      ><a name="1524"
+      > </a
+      ><a name="1525" href="not-not.html#113" class="Function Operator"
+      >]</a
+      ><a name="1526"
+      >
+</a
+      ><a name="1527" href="not-not-funext.html#1291" class="Function"
+      >funext&#179;</a
+      ><a name="1534"
+      > </a
+      ><a name="1535" class="Symbol"
+      >{</a
+      ><a name="1536" href="not-not-funext.html#1536" class="Bound"
+      >X</a
+      ><a name="1537" class="Symbol"
+      >}</a
+      ><a name="1538"
+      > </a
+      ><a name="1539" class="Symbol"
+      >{</a
+      ><a name="1540" href="not-not-funext.html#1540" class="Bound"
+      >Y</a
+      ><a name="1541" class="Symbol"
+      >}</a
+      ><a name="1542"
+      > </a
+      ><a name="1543" class="Symbol"
+      >{</a
+      ><a name="1544" href="not-not-funext.html#1544" class="Bound"
+      >Z</a
+      ><a name="1545" class="Symbol"
+      >}</a
+      ><a name="1546"
+      > </a
+      ><a name="1547" class="Symbol"
+      >{</a
+      ><a name="1548" href="not-not-funext.html#1548" class="Bound"
+      >W</a
+      ><a name="1549" class="Symbol"
+      >}</a
+      ><a name="1550"
+      > </a
+      ><a name="1551" class="Symbol"
+      >{</a
+      ><a name="1552" href="not-not-funext.html#1552" class="Bound"
+      >f</a
+      ><a name="1553" class="Symbol"
+      >}</a
+      ><a name="1554"
+      > </a
+      ><a name="1555" class="Symbol"
+      >{</a
+      ><a name="1556" href="not-not-funext.html#1556" class="Bound"
+      >g</a
+      ><a name="1557" class="Symbol"
+      >}</a
+      ><a name="1558"
+      > </a
+      ><a name="1559" href="not-not-funext.html#1559" class="Bound"
+      >exyz</a
+      ><a name="1563"
+      > </a
+      ><a name="1564" class="Symbol"
+      >=</a
+      ><a name="1565"
+      > </a
+      ><a name="1566" href="not-not-funext.html#1841" class="Function"
+      >goal</a
+      ><a name="1570"
+      >
+ </a
+      ><a name="1572" class="Keyword"
+      >where</a
+      ><a name="1577"
+      >
+  </a
+      ><a name="1580" href="not-not-funext.html#1580" class="Function"
+      >F</a
+      ><a name="1581"
+      > </a
+      ><a name="1582" href="not-not-funext.html#1582" class="Function"
+      >G</a
+      ><a name="1583"
+      > </a
+      ><a name="1584" class="Symbol"
+      >:</a
+      ><a name="1585"
+      > </a
+      ><a name="1586" class="Symbol"
+      >(</a
+      ><a name="1587" href="not-not-funext.html#1587" class="Bound"
+      >w</a
+      ><a name="1588"
+      > </a
+      ><a name="1589" class="Symbol"
+      >:</a
+      ><a name="1590"
+      > </a
+      ><a name="1591" href="MiniLibrary.html#745" class="Record"
+      >&#931;</a
+      ><a name="1592"
+      > </a
+      ><a name="1593" class="Symbol"
+      >\(</a
+      ><a name="1595" href="not-not-funext.html#1595" class="Bound"
+      >x</a
+      ><a name="1596"
+      > </a
+      ><a name="1597" class="Symbol"
+      >:</a
+      ><a name="1598"
+      > </a
+      ><a name="1599" href="not-not-funext.html#1536" class="Bound"
+      >X</a
+      ><a name="1600" class="Symbol"
+      >)</a
+      ><a name="1601"
+      > </a
+      ><a name="1602" class="Symbol"
+      >&#8594;</a
+      ><a name="1603"
+      > </a
+      ><a name="1604" href="MiniLibrary.html#745" class="Record"
+      >&#931;</a
+      ><a name="1605"
+      > </a
+      ><a name="1606" class="Symbol"
+      >\(</a
+      ><a name="1608" href="not-not-funext.html#1608" class="Bound"
+      >y</a
+      ><a name="1609"
+      > </a
+      ><a name="1610" class="Symbol"
+      >:</a
+      ><a name="1611"
+      > </a
+      ><a name="1612" href="not-not-funext.html#1540" class="Bound"
+      >Y</a
+      ><a name="1613"
+      > </a
+      ><a name="1614" href="not-not-funext.html#1595" class="Bound"
+      >x</a
+      ><a name="1615" class="Symbol"
+      >)</a
+      ><a name="1616"
+      > </a
+      ><a name="1617" class="Symbol"
+      >&#8594;</a
+      ><a name="1618"
+      > </a
+      ><a name="1619" href="not-not-funext.html#1544" class="Bound"
+      >Z</a
+      ><a name="1620"
+      > </a
+      ><a name="1621" href="not-not-funext.html#1595" class="Bound"
+      >x</a
+      ><a name="1622"
+      > </a
+      ><a name="1623" href="not-not-funext.html#1608" class="Bound"
+      >y</a
+      ><a name="1624" class="Symbol"
+      >)</a
+      ><a name="1625"
+      > </a
+      ><a name="1626" class="Symbol"
+      >&#8594;</a
+      ><a name="1627"
+      > </a
+      ><a name="1628" href="not-not-funext.html#1548" class="Bound"
+      >W</a
+      ><a name="1629"
+      > </a
+      ><a name="1630" class="Symbol"
+      >(</a
+      ><a name="1631" href="MiniLibrary.html#840" class="Function"
+      >&#960;&#8320;</a
+      ><a name="1633"
+      > </a
+      ><a name="1634" href="not-not-funext.html#1587" class="Bound"
+      >w</a
+      ><a name="1635" class="Symbol"
+      >)</a
+      ><a name="1636"
+      > </a
+      ><a name="1637" class="Symbol"
+      >(</a
+      ><a name="1638" href="MiniLibrary.html#840" class="Function"
+      >&#960;&#8320;</a
+      ><a name="1640" class="Symbol"
+      >(</a
+      ><a name="1641" href="MiniLibrary.html#850" class="Function"
+      >&#960;&#8321;</a
+      ><a name="1643"
+      > </a
+      ><a name="1644" href="not-not-funext.html#1587" class="Bound"
+      >w</a
+      ><a name="1645" class="Symbol"
+      >))</a
+      ><a name="1647"
+      > </a
+      ><a name="1648" class="Symbol"
+      >(</a
+      ><a name="1649" href="MiniLibrary.html#850" class="Function"
+      >&#960;&#8321;</a
+      ><a name="1651" class="Symbol"
+      >(</a
+      ><a name="1652" href="MiniLibrary.html#850" class="Function"
+      >&#960;&#8321;</a
+      ><a name="1654"
+      > </a
+      ><a name="1655" href="not-not-funext.html#1587" class="Bound"
+      >w</a
+      ><a name="1656" class="Symbol"
+      >))</a
+      ><a name="1658"
+      >
+  </a
+      ><a name="1661" href="not-not-funext.html#1580" class="Function"
+      >F</a
+      ><a name="1662"
+      > </a
+      ><a name="1663" class="Symbol"
+      >(</a
+      ><a name="1664" href="not-not-funext.html#1664" class="Bound"
+      >x</a
+      ><a name="1665"
+      > </a
+      ><a name="1666" href="MiniLibrary.html#825" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="1667"
+      > </a
+      ><a name="1668" href="not-not-funext.html#1668" class="Bound"
+      >y</a
+      ><a name="1669"
+      > </a
+      ><a name="1670" href="MiniLibrary.html#825" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="1671"
+      > </a
+      ><a name="1672" href="not-not-funext.html#1672" class="Bound"
+      >z</a
+      ><a name="1673" class="Symbol"
+      >)</a
+      ><a name="1674"
+      > </a
+      ><a name="1675" class="Symbol"
+      >=</a
+      ><a name="1676"
+      > </a
+      ><a name="1677" href="not-not-funext.html#1552" class="Bound"
+      >f</a
+      ><a name="1678"
+      > </a
+      ><a name="1679" href="not-not-funext.html#1664" class="Bound"
+      >x</a
+      ><a name="1680"
+      > </a
+      ><a name="1681" href="not-not-funext.html#1668" class="Bound"
+      >y</a
+      ><a name="1682"
+      > </a
+      ><a name="1683" href="not-not-funext.html#1672" class="Bound"
+      >z</a
+      ><a name="1684"
+      >
+  </a
+      ><a name="1687" href="not-not-funext.html#1582" class="Function"
+      >G</a
+      ><a name="1688"
+      > </a
+      ><a name="1689" class="Symbol"
+      >(</a
+      ><a name="1690" href="not-not-funext.html#1690" class="Bound"
+      >x</a
+      ><a name="1691"
+      > </a
+      ><a name="1692" href="MiniLibrary.html#825" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="1693"
+      > </a
+      ><a name="1694" href="not-not-funext.html#1694" class="Bound"
+      >y</a
+      ><a name="1695"
+      > </a
+      ><a name="1696" href="MiniLibrary.html#825" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="1697"
+      > </a
+      ><a name="1698" href="not-not-funext.html#1698" class="Bound"
+      >z</a
+      ><a name="1699" class="Symbol"
+      >)</a
+      ><a name="1700"
+      > </a
+      ><a name="1701" class="Symbol"
+      >=</a
+      ><a name="1702"
+      > </a
+      ><a name="1703" href="not-not-funext.html#1556" class="Bound"
+      >g</a
+      ><a name="1704"
+      > </a
+      ><a name="1705" href="not-not-funext.html#1690" class="Bound"
+      >x</a
+      ><a name="1706"
+      > </a
+      ><a name="1707" href="not-not-funext.html#1694" class="Bound"
+      >y</a
+      ><a name="1708"
+      > </a
+      ><a name="1709" href="not-not-funext.html#1698" class="Bound"
+      >z</a
+      ><a name="1710"
+      >
+  </a
+      ><a name="1713" href="not-not-funext.html#1713" class="Function"
+      >Exyz</a
+      ><a name="1717"
+      > </a
+      ><a name="1718" class="Symbol"
+      >:</a
+      ><a name="1719"
+      > </a
+      ><a name="1720" class="Symbol"
+      >(</a
+      ><a name="1721" href="not-not-funext.html#1721" class="Bound"
+      >w</a
+      ><a name="1722"
+      > </a
+      ><a name="1723" class="Symbol"
+      >:</a
+      ><a name="1724"
+      > </a
+      ><a name="1725" href="MiniLibrary.html#745" class="Record"
+      >&#931;</a
+      ><a name="1726"
+      > </a
+      ><a name="1727" class="Symbol"
+      >\(</a
+      ><a name="1729" href="not-not-funext.html#1729" class="Bound"
+      >x</a
+      ><a name="1730"
+      > </a
+      ><a name="1731" class="Symbol"
+      >:</a
+      ><a name="1732"
+      > </a
+      ><a name="1733" href="not-not-funext.html#1536" class="Bound"
+      >X</a
+      ><a name="1734" class="Symbol"
+      >)</a
+      ><a name="1735"
+      > </a
+      ><a name="1736" class="Symbol"
+      >&#8594;</a
+      ><a name="1737"
+      > </a
+      ><a name="1738" href="MiniLibrary.html#745" class="Record"
+      >&#931;</a
+      ><a name="1739"
+      > </a
+      ><a name="1740" class="Symbol"
+      >\(</a
+      ><a name="1742" href="not-not-funext.html#1742" class="Bound"
+      >y</a
+      ><a name="1743"
+      > </a
+      ><a name="1744" class="Symbol"
+      >:</a
+      ><a name="1745"
+      > </a
+      ><a name="1746" href="not-not-funext.html#1540" class="Bound"
+      >Y</a
+      ><a name="1747"
+      > </a
+      ><a name="1748" href="not-not-funext.html#1729" class="Bound"
+      >x</a
+      ><a name="1749" class="Symbol"
+      >)</a
+      ><a name="1750"
+      > </a
+      ><a name="1751" class="Symbol"
+      >&#8594;</a
+      ><a name="1752"
+      > </a
+      ><a name="1753" href="not-not-funext.html#1544" class="Bound"
+      >Z</a
+      ><a name="1754"
+      > </a
+      ><a name="1755" href="not-not-funext.html#1729" class="Bound"
+      >x</a
+      ><a name="1756"
+      > </a
+      ><a name="1757" href="not-not-funext.html#1742" class="Bound"
+      >y</a
+      ><a name="1758" class="Symbol"
+      >)</a
+      ><a name="1759"
+      > </a
+      ><a name="1760" class="Symbol"
+      >&#8594;</a
+      ><a name="1761"
+      > </a
+      ><a name="1762" href="not-not-funext.html#1580" class="Function"
+      >F</a
+      ><a name="1763"
+      > </a
+      ><a name="1764" href="not-not-funext.html#1721" class="Bound"
+      >w</a
+      ><a name="1765"
+      > </a
+      ><a name="1766" href="MiniLibrary.html#1706" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="1767"
+      > </a
+      ><a name="1768" href="not-not-funext.html#1582" class="Function"
+      >G</a
+      ><a name="1769"
+      > </a
+      ><a name="1770" href="not-not-funext.html#1721" class="Bound"
+      >w</a
+      ><a name="1771"
+      >
+  </a
+      ><a name="1774" href="not-not-funext.html#1713" class="Function"
+      >Exyz</a
+      ><a name="1778"
+      > </a
+      ><a name="1779" class="Symbol"
+      >(</a
+      ><a name="1780" href="not-not-funext.html#1780" class="Bound"
+      >x</a
+      ><a name="1781"
+      > </a
+      ><a name="1782" href="MiniLibrary.html#825" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="1783"
+      > </a
+      ><a name="1784" href="not-not-funext.html#1784" class="Bound"
+      >y</a
+      ><a name="1785"
+      > </a
+      ><a name="1786" href="MiniLibrary.html#825" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="1787"
+      > </a
+      ><a name="1788" href="not-not-funext.html#1788" class="Bound"
+      >z</a
+      ><a name="1789" class="Symbol"
+      >)</a
+      ><a name="1790"
+      > </a
+      ><a name="1791" class="Symbol"
+      >=</a
+      ><a name="1792"
+      > </a
+      ><a name="1793" href="not-not-funext.html#1559" class="Bound"
+      >exyz</a
+      ><a name="1797"
+      > </a
+      ><a name="1798" href="not-not-funext.html#1780" class="Bound"
+      >x</a
+      ><a name="1799"
+      > </a
+      ><a name="1800" href="not-not-funext.html#1784" class="Bound"
+      >y</a
+      ><a name="1801"
+      > </a
+      ><a name="1802" href="not-not-funext.html#1788" class="Bound"
+      >z</a
+      ><a name="1803"
+      >
+  </a
+      ><a name="1806" href="not-not-funext.html#1806" class="Function"
+      >E</a
+      ><a name="1807"
+      > </a
+      ><a name="1808" class="Symbol"
+      >:</a
+      ><a name="1809"
+      > </a
+      ><a name="1810" href="not-not.html#113" class="Function Operator"
+      >[</a
+      ><a name="1811"
+      > </a
+      ><a name="1812" href="not-not-funext.html#1580" class="Function"
+      >F</a
+      ><a name="1813"
+      > </a
+      ><a name="1814" href="MiniLibrary.html#1706" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="1815"
+      > </a
+      ><a name="1816" href="not-not-funext.html#1582" class="Function"
+      >G</a
+      ><a name="1817"
+      > </a
+      ><a name="1818" href="not-not.html#113" class="Function Operator"
+      >]</a
+      ><a name="1819"
+      >
+  </a
+      ><a name="1822" href="not-not-funext.html#1806" class="Function"
+      >E</a
+      ><a name="1823"
+      > </a
+      ><a name="1824" class="Symbol"
+      >=</a
+      ><a name="1825"
+      > </a
+      ><a name="1826" href="not-not-funext.html#676" class="Function"
+      >funext&#185;</a
+      ><a name="1833"
+      > </a
+      ><a name="1834" href="not-not-funext.html#1713" class="Function"
+      >Exyz</a
+      ><a name="1838"
+      >
+  </a
+      ><a name="1841" href="not-not-funext.html#1841" class="Function"
+      >goal</a
+      ><a name="1845"
+      > </a
+      ><a name="1846" class="Symbol"
+      >:</a
+      ><a name="1847"
+      > </a
+      ><a name="1848" href="not-not.html#113" class="Function Operator"
+      >[</a
+      ><a name="1849"
+      > </a
+      ><a name="1850" href="not-not-funext.html#1552" class="Bound"
+      >f</a
+      ><a name="1851"
+      > </a
+      ><a name="1852" href="MiniLibrary.html#1706" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="1853"
+      > </a
+      ><a name="1854" href="not-not-funext.html#1556" class="Bound"
+      >g</a
+      ><a name="1855"
+      > </a
+      ><a name="1856" href="not-not.html#113" class="Function Operator"
+      >]</a
+      ><a name="1857"
+      >
+  </a
+      ><a name="1860" href="not-not-funext.html#1841" class="Function"
+      >goal</a
+      ><a name="1864"
+      > </a
+      ><a name="1865" class="Symbol"
+      >=</a
+      ><a name="1866"
+      > </a
+      ><a name="1867" href="not-not.html#551" class="Function"
+      >functor</a
+      ><a name="1874"
+      > </a
+      ><a name="1875" class="Symbol"
+      >(</a
+      ><a name="1876" href="MiniLibrary.html#2001" class="Function"
+      >ap</a
+      ><a name="1878"
+      > </a
+      ><a name="1879" class="Symbol"
+      >(&#955;</a
+      ><a name="1881"
+      > </a
+      ><a name="1882" href="not-not-funext.html#1882" class="Bound"
+      >&#966;</a
+      ><a name="1883"
+      > </a
+      ><a name="1884" href="not-not-funext.html#1884" class="Bound"
+      >x</a
+      ><a name="1885"
+      > </a
+      ><a name="1886" href="not-not-funext.html#1886" class="Bound"
+      >y</a
+      ><a name="1887"
+      > </a
+      ><a name="1888" href="not-not-funext.html#1888" class="Bound"
+      >z</a
+      ><a name="1889"
+      > </a
+      ><a name="1890" class="Symbol"
+      >&#8594;</a
+      ><a name="1891"
+      > </a
+      ><a name="1892" href="not-not-funext.html#1882" class="Bound"
+      >&#966;</a
+      ><a name="1893" class="Symbol"
+      >(</a
+      ><a name="1894" href="not-not-funext.html#1884" class="Bound"
+      >x</a
+      ><a name="1895"
+      > </a
+      ><a name="1896" href="MiniLibrary.html#825" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="1897"
+      > </a
+      ><a name="1898" href="not-not-funext.html#1886" class="Bound"
+      >y</a
+      ><a name="1899"
+      > </a
+      ><a name="1900" href="MiniLibrary.html#825" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="1901"
+      > </a
+      ><a name="1902" href="not-not-funext.html#1888" class="Bound"
+      >z</a
+      ><a name="1903" class="Symbol"
+      >)))</a
+      ><a name="1906"
+      > </a
+      ><a name="1907" href="not-not-funext.html#1806" class="Function"
+      >E</a
+      ><a name="1908"
+      >
+
+
+</a
+      ><a name="1911" href="not-not-funext.html#1911" class="Function"
+      >funext&#8308;</a
+      ><a name="1918"
+      > </a
+      ><a name="1919" class="Symbol"
+      >:</a
+      ><a name="1920"
+      > </a
+      ><a name="1921" class="Symbol"
+      >{</a
+      ><a name="1922" href="not-not-funext.html#1922" class="Bound"
+      >X</a
+      ><a name="1923"
+      > </a
+      ><a name="1924" class="Symbol"
+      >:</a
+      ><a name="1925"
+      > </a
+      ><a name="1926" class="PrimitiveType"
+      >Set</a
+      ><a name="1929" class="Symbol"
+      >}</a
+      ><a name="1930"
+      > </a
+      ><a name="1931" class="Symbol"
+      >&#8594;</a
+      ><a name="1932"
+      >
+          </a
+      ><a name="1943" class="Symbol"
+      >{</a
+      ><a name="1944" href="not-not-funext.html#1944" class="Bound"
+      >Y</a
+      ><a name="1945"
+      > </a
+      ><a name="1946" class="Symbol"
+      >:</a
+      ><a name="1947"
+      > </a
+      ><a name="1948" href="not-not-funext.html#1922" class="Bound"
+      >X</a
+      ><a name="1949"
+      > </a
+      ><a name="1950" class="Symbol"
+      >&#8594;</a
+      ><a name="1951"
+      > </a
+      ><a name="1952" class="PrimitiveType"
+      >Set</a
+      ><a name="1955" class="Symbol"
+      >}</a
+      ><a name="1956"
+      > </a
+      ><a name="1957" class="Symbol"
+      >&#8594;</a
+      ><a name="1958"
+      >
+          </a
+      ><a name="1969" class="Symbol"
+      >{</a
+      ><a name="1970" href="not-not-funext.html#1970" class="Bound"
+      >Z</a
+      ><a name="1971"
+      > </a
+      ><a name="1972" class="Symbol"
+      >:</a
+      ><a name="1973"
+      > </a
+      ><a name="1974" class="Symbol"
+      >(</a
+      ><a name="1975" href="not-not-funext.html#1975" class="Bound"
+      >x</a
+      ><a name="1976"
+      > </a
+      ><a name="1977" class="Symbol"
+      >:</a
+      ><a name="1978"
+      > </a
+      ><a name="1979" href="not-not-funext.html#1922" class="Bound"
+      >X</a
+      ><a name="1980" class="Symbol"
+      >)</a
+      ><a name="1981"
+      > </a
+      ><a name="1982" class="Symbol"
+      >&#8594;</a
+      ><a name="1983"
+      > </a
+      ><a name="1984" href="not-not-funext.html#1944" class="Bound"
+      >Y</a
+      ><a name="1985"
+      > </a
+      ><a name="1986" href="not-not-funext.html#1975" class="Bound"
+      >x</a
+      ><a name="1987"
+      > </a
+      ><a name="1988" class="Symbol"
+      >&#8594;</a
+      ><a name="1989"
+      > </a
+      ><a name="1990" class="PrimitiveType"
+      >Set</a
+      ><a name="1993" class="Symbol"
+      >}</a
+      ><a name="1994"
+      > </a
+      ><a name="1995" class="Symbol"
+      >&#8594;</a
+      ><a name="1996"
+      >
+          </a
+      ><a name="2007" class="Symbol"
+      >{</a
+      ><a name="2008" href="not-not-funext.html#2008" class="Bound"
+      >W</a
+      ><a name="2009"
+      > </a
+      ><a name="2010" class="Symbol"
+      >:</a
+      ><a name="2011"
+      > </a
+      ><a name="2012" class="Symbol"
+      >(</a
+      ><a name="2013" href="not-not-funext.html#2013" class="Bound"
+      >x</a
+      ><a name="2014"
+      > </a
+      ><a name="2015" class="Symbol"
+      >:</a
+      ><a name="2016"
+      > </a
+      ><a name="2017" href="not-not-funext.html#1922" class="Bound"
+      >X</a
+      ><a name="2018" class="Symbol"
+      >)</a
+      ><a name="2019"
+      > </a
+      ><a name="2020" class="Symbol"
+      >&#8594;</a
+      ><a name="2021"
+      > </a
+      ><a name="2022" class="Symbol"
+      >(</a
+      ><a name="2023" href="not-not-funext.html#2023" class="Bound"
+      >y</a
+      ><a name="2024"
+      > </a
+      ><a name="2025" class="Symbol"
+      >:</a
+      ><a name="2026"
+      > </a
+      ><a name="2027" href="not-not-funext.html#1944" class="Bound"
+      >Y</a
+      ><a name="2028"
+      > </a
+      ><a name="2029" href="not-not-funext.html#2013" class="Bound"
+      >x</a
+      ><a name="2030" class="Symbol"
+      >)</a
+      ><a name="2031"
+      > </a
+      ><a name="2032" class="Symbol"
+      >&#8594;</a
+      ><a name="2033"
+      > </a
+      ><a name="2034" href="not-not-funext.html#1970" class="Bound"
+      >Z</a
+      ><a name="2035"
+      > </a
+      ><a name="2036" href="not-not-funext.html#2013" class="Bound"
+      >x</a
+      ><a name="2037"
+      > </a
+      ><a name="2038" href="not-not-funext.html#2023" class="Bound"
+      >y</a
+      ><a name="2039"
+      > </a
+      ><a name="2040" class="Symbol"
+      >&#8594;</a
+      ><a name="2041"
+      > </a
+      ><a name="2042" class="PrimitiveType"
+      >Set</a
+      ><a name="2045" class="Symbol"
+      >}</a
+      ><a name="2046"
+      > </a
+      ><a name="2047" class="Symbol"
+      >&#8594;</a
+      ><a name="2048"
+      >
+          </a
+      ><a name="2059" class="Symbol"
+      >{</a
+      ><a name="2060" href="not-not-funext.html#2060" class="Bound"
+      >U</a
+      ><a name="2061"
+      > </a
+      ><a name="2062" class="Symbol"
+      >:</a
+      ><a name="2063"
+      > </a
+      ><a name="2064" class="Symbol"
+      >(</a
+      ><a name="2065" href="not-not-funext.html#2065" class="Bound"
+      >x</a
+      ><a name="2066"
+      > </a
+      ><a name="2067" class="Symbol"
+      >:</a
+      ><a name="2068"
+      > </a
+      ><a name="2069" href="not-not-funext.html#1922" class="Bound"
+      >X</a
+      ><a name="2070" class="Symbol"
+      >)</a
+      ><a name="2071"
+      > </a
+      ><a name="2072" class="Symbol"
+      >&#8594;</a
+      ><a name="2073"
+      > </a
+      ><a name="2074" class="Symbol"
+      >(</a
+      ><a name="2075" href="not-not-funext.html#2075" class="Bound"
+      >y</a
+      ><a name="2076"
+      > </a
+      ><a name="2077" class="Symbol"
+      >:</a
+      ><a name="2078"
+      > </a
+      ><a name="2079" href="not-not-funext.html#1944" class="Bound"
+      >Y</a
+      ><a name="2080"
+      > </a
+      ><a name="2081" href="not-not-funext.html#2065" class="Bound"
+      >x</a
+      ><a name="2082" class="Symbol"
+      >)</a
+      ><a name="2083"
+      > </a
+      ><a name="2084" class="Symbol"
+      >&#8594;</a
+      ><a name="2085"
+      > </a
+      ><a name="2086" class="Symbol"
+      >(</a
+      ><a name="2087" href="not-not-funext.html#2087" class="Bound"
+      >z</a
+      ><a name="2088"
+      > </a
+      ><a name="2089" class="Symbol"
+      >:</a
+      ><a name="2090"
+      > </a
+      ><a name="2091" href="not-not-funext.html#1970" class="Bound"
+      >Z</a
+      ><a name="2092"
+      > </a
+      ><a name="2093" href="not-not-funext.html#2065" class="Bound"
+      >x</a
+      ><a name="2094"
+      > </a
+      ><a name="2095" href="not-not-funext.html#2075" class="Bound"
+      >y</a
+      ><a name="2096" class="Symbol"
+      >)</a
+      ><a name="2097"
+      > </a
+      ><a name="2098" class="Symbol"
+      >&#8594;</a
+      ><a name="2099"
+      > </a
+      ><a name="2100" class="Symbol"
+      >(</a
+      ><a name="2101" href="not-not-funext.html#2101" class="Bound"
+      >w</a
+      ><a name="2102"
+      > </a
+      ><a name="2103" class="Symbol"
+      >:</a
+      ><a name="2104"
+      > </a
+      ><a name="2105" href="not-not-funext.html#2008" class="Bound"
+      >W</a
+      ><a name="2106"
+      > </a
+      ><a name="2107" href="not-not-funext.html#2065" class="Bound"
+      >x</a
+      ><a name="2108"
+      > </a
+      ><a name="2109" href="not-not-funext.html#2075" class="Bound"
+      >y</a
+      ><a name="2110"
+      > </a
+      ><a name="2111" href="not-not-funext.html#2087" class="Bound"
+      >z</a
+      ><a name="2112" class="Symbol"
+      >)</a
+      ><a name="2113"
+      > </a
+      ><a name="2114" class="Symbol"
+      >&#8594;</a
+      ><a name="2115"
+      > </a
+      ><a name="2116" class="PrimitiveType"
+      >Set</a
+      ><a name="2119" class="Symbol"
+      >}</a
+      ><a name="2120"
+      > </a
+      ><a name="2121" class="Symbol"
+      >&#8594;</a
+      ><a name="2122"
+      >
+          </a
+      ><a name="2134" class="Symbol"
+      >{</a
+      ><a name="2135" href="not-not-funext.html#2135" class="Bound"
+      >f</a
+      ><a name="2136"
+      > </a
+      ><a name="2137" href="not-not-funext.html#2137" class="Bound"
+      >g</a
+      ><a name="2138"
+      > </a
+      ><a name="2139" class="Symbol"
+      >:</a
+      ><a name="2140"
+      > </a
+      ><a name="2141" class="Symbol"
+      >(</a
+      ><a name="2142" href="not-not-funext.html#2142" class="Bound"
+      >x</a
+      ><a name="2143"
+      > </a
+      ><a name="2144" class="Symbol"
+      >:</a
+      ><a name="2145"
+      > </a
+      ><a name="2146" href="not-not-funext.html#1922" class="Bound"
+      >X</a
+      ><a name="2147" class="Symbol"
+      >)</a
+      ><a name="2148"
+      > </a
+      ><a name="2149" class="Symbol"
+      >&#8594;</a
+      ><a name="2150"
+      > </a
+      ><a name="2151" class="Symbol"
+      >(</a
+      ><a name="2152" href="not-not-funext.html#2152" class="Bound"
+      >y</a
+      ><a name="2153"
+      > </a
+      ><a name="2154" class="Symbol"
+      >:</a
+      ><a name="2155"
+      > </a
+      ><a name="2156" href="not-not-funext.html#1944" class="Bound"
+      >Y</a
+      ><a name="2157"
+      > </a
+      ><a name="2158" href="not-not-funext.html#2142" class="Bound"
+      >x</a
+      ><a name="2159" class="Symbol"
+      >)</a
+      ><a name="2160"
+      > </a
+      ><a name="2161" class="Symbol"
+      >&#8594;</a
+      ><a name="2162"
+      > </a
+      ><a name="2163" class="Symbol"
+      >(</a
+      ><a name="2164" href="not-not-funext.html#2164" class="Bound"
+      >z</a
+      ><a name="2165"
+      > </a
+      ><a name="2166" class="Symbol"
+      >:</a
+      ><a name="2167"
+      > </a
+      ><a name="2168" href="not-not-funext.html#1970" class="Bound"
+      >Z</a
+      ><a name="2169"
+      > </a
+      ><a name="2170" href="not-not-funext.html#2142" class="Bound"
+      >x</a
+      ><a name="2171"
+      > </a
+      ><a name="2172" href="not-not-funext.html#2152" class="Bound"
+      >y</a
+      ><a name="2173" class="Symbol"
+      >)</a
+      ><a name="2174"
+      > </a
+      ><a name="2175" class="Symbol"
+      >&#8594;</a
+      ><a name="2176"
+      > </a
+      ><a name="2177" class="Symbol"
+      >(</a
+      ><a name="2178" href="not-not-funext.html#2178" class="Bound"
+      >w</a
+      ><a name="2179"
+      > </a
+      ><a name="2180" class="Symbol"
+      >:</a
+      ><a name="2181"
+      > </a
+      ><a name="2182" href="not-not-funext.html#2008" class="Bound"
+      >W</a
+      ><a name="2183"
+      > </a
+      ><a name="2184" href="not-not-funext.html#2142" class="Bound"
+      >x</a
+      ><a name="2185"
+      > </a
+      ><a name="2186" href="not-not-funext.html#2152" class="Bound"
+      >y</a
+      ><a name="2187"
+      > </a
+      ><a name="2188" href="not-not-funext.html#2164" class="Bound"
+      >z</a
+      ><a name="2189" class="Symbol"
+      >)</a
+      ><a name="2190"
+      > </a
+      ><a name="2191" class="Symbol"
+      >&#8594;</a
+      ><a name="2192"
+      > </a
+      ><a name="2193" href="not-not-funext.html#2060" class="Bound"
+      >U</a
+      ><a name="2194"
+      > </a
+      ><a name="2195" href="not-not-funext.html#2142" class="Bound"
+      >x</a
+      ><a name="2196"
+      > </a
+      ><a name="2197" href="not-not-funext.html#2152" class="Bound"
+      >y</a
+      ><a name="2198"
+      > </a
+      ><a name="2199" href="not-not-funext.html#2164" class="Bound"
+      >z</a
+      ><a name="2200"
+      > </a
+      ><a name="2201" href="not-not-funext.html#2178" class="Bound"
+      >w</a
+      ><a name="2202" class="Symbol"
+      >}</a
+      ><a name="2203"
+      > </a
+      ><a name="2204" class="Symbol"
+      >&#8594;</a
+      ><a name="2205"
+      >
+          </a
+      ><a name="2216" class="Symbol"
+      >(&#8704;(</a
+      ><a name="2219" href="not-not-funext.html#2219" class="Bound"
+      >x</a
+      ><a name="2220"
+      > </a
+      ><a name="2221" class="Symbol"
+      >:</a
+      ><a name="2222"
+      > </a
+      ><a name="2223" href="not-not-funext.html#1922" class="Bound"
+      >X</a
+      ><a name="2224" class="Symbol"
+      >)(</a
+      ><a name="2226" href="not-not-funext.html#2226" class="Bound"
+      >y</a
+      ><a name="2227"
+      > </a
+      ><a name="2228" class="Symbol"
+      >:</a
+      ><a name="2229"
+      > </a
+      ><a name="2230" href="not-not-funext.html#1944" class="Bound"
+      >Y</a
+      ><a name="2231"
+      > </a
+      ><a name="2232" href="not-not-funext.html#2219" class="Bound"
+      >x</a
+      ><a name="2233" class="Symbol"
+      >)(</a
+      ><a name="2235" href="not-not-funext.html#2235" class="Bound"
+      >z</a
+      ><a name="2236"
+      > </a
+      ><a name="2237" class="Symbol"
+      >:</a
+      ><a name="2238"
+      > </a
+      ><a name="2239" href="not-not-funext.html#1970" class="Bound"
+      >Z</a
+      ><a name="2240"
+      > </a
+      ><a name="2241" href="not-not-funext.html#2219" class="Bound"
+      >x</a
+      ><a name="2242"
+      > </a
+      ><a name="2243" href="not-not-funext.html#2226" class="Bound"
+      >y</a
+      ><a name="2244" class="Symbol"
+      >)(</a
+      ><a name="2246" href="not-not-funext.html#2246" class="Bound"
+      >w</a
+      ><a name="2247"
+      > </a
+      ><a name="2248" class="Symbol"
+      >:</a
+      ><a name="2249"
+      > </a
+      ><a name="2250" href="not-not-funext.html#2008" class="Bound"
+      >W</a
+      ><a name="2251"
+      > </a
+      ><a name="2252" href="not-not-funext.html#2219" class="Bound"
+      >x</a
+      ><a name="2253"
+      > </a
+      ><a name="2254" href="not-not-funext.html#2226" class="Bound"
+      >y</a
+      ><a name="2255"
+      > </a
+      ><a name="2256" href="not-not-funext.html#2235" class="Bound"
+      >z</a
+      ><a name="2257" class="Symbol"
+      >)</a
+      ><a name="2258"
+      > </a
+      ><a name="2259" class="Symbol"
+      >&#8594;</a
+      ><a name="2260"
+      > </a
+      ><a name="2261" href="not-not-funext.html#2135" class="Bound"
+      >f</a
+      ><a name="2262"
+      > </a
+      ><a name="2263" href="not-not-funext.html#2219" class="Bound"
+      >x</a
+      ><a name="2264"
+      > </a
+      ><a name="2265" href="not-not-funext.html#2226" class="Bound"
+      >y</a
+      ><a name="2266"
+      > </a
+      ><a name="2267" href="not-not-funext.html#2235" class="Bound"
+      >z</a
+      ><a name="2268"
+      > </a
+      ><a name="2269" href="not-not-funext.html#2246" class="Bound"
+      >w</a
+      ><a name="2270"
+      > </a
+      ><a name="2271" href="MiniLibrary.html#1706" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="2272"
+      > </a
+      ><a name="2273" href="not-not-funext.html#2137" class="Bound"
+      >g</a
+      ><a name="2274"
+      > </a
+      ><a name="2275" href="not-not-funext.html#2219" class="Bound"
+      >x</a
+      ><a name="2276"
+      > </a
+      ><a name="2277" href="not-not-funext.html#2226" class="Bound"
+      >y</a
+      ><a name="2278"
+      > </a
+      ><a name="2279" href="not-not-funext.html#2235" class="Bound"
+      >z</a
+      ><a name="2280"
+      > </a
+      ><a name="2281" href="not-not-funext.html#2246" class="Bound"
+      >w</a
+      ><a name="2282" class="Symbol"
+      >)</a
+      ><a name="2283"
+      > </a
+      ><a name="2284" class="Symbol"
+      >&#8594;</a
+      ><a name="2285"
+      > </a
+      ><a name="2286" href="not-not.html#113" class="Function Operator"
+      >[</a
+      ><a name="2287"
+      > </a
+      ><a name="2288" href="not-not-funext.html#2135" class="Bound"
+      >f</a
+      ><a name="2289"
+      > </a
+      ><a name="2290" href="MiniLibrary.html#1706" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="2291"
+      > </a
+      ><a name="2292" href="not-not-funext.html#2137" class="Bound"
+      >g</a
+      ><a name="2293"
+      > </a
+      ><a name="2294" href="not-not.html#113" class="Function Operator"
+      >]</a
+      ><a name="2295"
+      >
+</a
+      ><a name="2296" href="not-not-funext.html#1911" class="Function"
+      >funext&#8308;</a
+      ><a name="2303"
+      > </a
+      ><a name="2304" class="Symbol"
+      >{</a
+      ><a name="2305" href="not-not-funext.html#2305" class="Bound"
+      >X</a
+      ><a name="2306" class="Symbol"
+      >}</a
+      ><a name="2307"
+      > </a
+      ><a name="2308" class="Symbol"
+      >{</a
+      ><a name="2309" href="not-not-funext.html#2309" class="Bound"
+      >Y</a
+      ><a name="2310" class="Symbol"
+      >}</a
+      ><a name="2311"
+      > </a
+      ><a name="2312" class="Symbol"
+      >{</a
+      ><a name="2313" href="not-not-funext.html#2313" class="Bound"
+      >Z</a
+      ><a name="2314" class="Symbol"
+      >}</a
+      ><a name="2315"
+      > </a
+      ><a name="2316" class="Symbol"
+      >{</a
+      ><a name="2317" href="not-not-funext.html#2317" class="Bound"
+      >W</a
+      ><a name="2318" class="Symbol"
+      >}</a
+      ><a name="2319"
+      > </a
+      ><a name="2320" class="Symbol"
+      >{</a
+      ><a name="2321" href="not-not-funext.html#2321" class="Bound"
+      >U</a
+      ><a name="2322" class="Symbol"
+      >}</a
+      ><a name="2323"
+      > </a
+      ><a name="2324" class="Symbol"
+      >{</a
+      ><a name="2325" href="not-not-funext.html#2325" class="Bound"
+      >f</a
+      ><a name="2326" class="Symbol"
+      >}</a
+      ><a name="2327"
+      > </a
+      ><a name="2328" class="Symbol"
+      >{</a
+      ><a name="2329" href="not-not-funext.html#2329" class="Bound"
+      >g</a
+      ><a name="2330" class="Symbol"
+      >}</a
+      ><a name="2331"
+      > </a
+      ><a name="2332" href="not-not-funext.html#2332" class="Bound"
+      >ex</a
+      ><a name="2334"
+      > </a
+      ><a name="2335" class="Symbol"
+      >=</a
+      ><a name="2336"
+      > </a
+      ><a name="2337" href="not-not-funext.html#2646" class="Function"
+      >goal</a
+      ><a name="2341"
+      >
+ </a
+      ><a name="2343" class="Keyword"
+      >where</a
+      ><a name="2348"
+      >
+  </a
+      ><a name="2351" href="not-not-funext.html#2351" class="Function"
+      >&#937;</a
+      ><a name="2352"
+      > </a
+      ><a name="2353" class="Symbol"
+      >:</a
+      ><a name="2354"
+      > </a
+      ><a name="2355" class="PrimitiveType"
+      >Set</a
+      ><a name="2358"
+      >
+  </a
+      ><a name="2361" href="not-not-funext.html#2351" class="Function"
+      >&#937;</a
+      ><a name="2362"
+      > </a
+      ><a name="2363" class="Symbol"
+      >=</a
+      ><a name="2364"
+      > </a
+      ><a name="2365" href="MiniLibrary.html#745" class="Record"
+      >&#931;</a
+      ><a name="2366"
+      > </a
+      ><a name="2367" class="Symbol"
+      >\(</a
+      ><a name="2369" href="not-not-funext.html#2369" class="Bound"
+      >x</a
+      ><a name="2370"
+      > </a
+      ><a name="2371" class="Symbol"
+      >:</a
+      ><a name="2372"
+      > </a
+      ><a name="2373" href="not-not-funext.html#2305" class="Bound"
+      >X</a
+      ><a name="2374" class="Symbol"
+      >)</a
+      ><a name="2375"
+      > </a
+      ><a name="2376" class="Symbol"
+      >&#8594;</a
+      ><a name="2377"
+      > </a
+      ><a name="2378" href="MiniLibrary.html#745" class="Record"
+      >&#931;</a
+      ><a name="2379"
+      > </a
+      ><a name="2380" class="Symbol"
+      >\(</a
+      ><a name="2382" href="not-not-funext.html#2382" class="Bound"
+      >y</a
+      ><a name="2383"
+      > </a
+      ><a name="2384" class="Symbol"
+      >:</a
+      ><a name="2385"
+      > </a
+      ><a name="2386" href="not-not-funext.html#2309" class="Bound"
+      >Y</a
+      ><a name="2387"
+      > </a
+      ><a name="2388" href="not-not-funext.html#2369" class="Bound"
+      >x</a
+      ><a name="2389" class="Symbol"
+      >)</a
+      ><a name="2390"
+      > </a
+      ><a name="2391" class="Symbol"
+      >&#8594;</a
+      ><a name="2392"
+      > </a
+      ><a name="2393" href="MiniLibrary.html#745" class="Record"
+      >&#931;</a
+      ><a name="2394"
+      > </a
+      ><a name="2395" class="Symbol"
+      >\(</a
+      ><a name="2397" href="not-not-funext.html#2397" class="Bound"
+      >z</a
+      ><a name="2398"
+      > </a
+      ><a name="2399" class="Symbol"
+      >:</a
+      ><a name="2400"
+      > </a
+      ><a name="2401" href="not-not-funext.html#2313" class="Bound"
+      >Z</a
+      ><a name="2402"
+      > </a
+      ><a name="2403" href="not-not-funext.html#2369" class="Bound"
+      >x</a
+      ><a name="2404"
+      > </a
+      ><a name="2405" href="not-not-funext.html#2382" class="Bound"
+      >y</a
+      ><a name="2406" class="Symbol"
+      >)</a
+      ><a name="2407"
+      > </a
+      ><a name="2408" class="Symbol"
+      >&#8594;</a
+      ><a name="2409"
+      > </a
+      ><a name="2410" href="not-not-funext.html#2317" class="Bound"
+      >W</a
+      ><a name="2411"
+      > </a
+      ><a name="2412" href="not-not-funext.html#2369" class="Bound"
+      >x</a
+      ><a name="2413"
+      > </a
+      ><a name="2414" href="not-not-funext.html#2382" class="Bound"
+      >y</a
+      ><a name="2415"
+      > </a
+      ><a name="2416" href="not-not-funext.html#2397" class="Bound"
+      >z</a
+      ><a name="2417"
+      >
+  </a
+      ><a name="2420" href="not-not-funext.html#2420" class="Function"
+      >F</a
+      ><a name="2421"
+      > </a
+      ><a name="2422" href="not-not-funext.html#2422" class="Function"
+      >G</a
+      ><a name="2423"
+      > </a
+      ><a name="2424" class="Symbol"
+      >:</a
+      ><a name="2425"
+      > </a
+      ><a name="2426" class="Symbol"
+      >(</a
+      ><a name="2427" href="not-not-funext.html#2427" class="Bound"
+      >&#969;</a
+      ><a name="2428"
+      > </a
+      ><a name="2429" class="Symbol"
+      >:</a
+      ><a name="2430"
+      > </a
+      ><a name="2431" href="not-not-funext.html#2351" class="Function"
+      >&#937;</a
+      ><a name="2432" class="Symbol"
+      >)</a
+      ><a name="2433"
+      > </a
+      ><a name="2434" class="Symbol"
+      >&#8594;</a
+      ><a name="2435"
+      > </a
+      ><a name="2436" href="not-not-funext.html#2321" class="Bound"
+      >U</a
+      ><a name="2437"
+      > </a
+      ><a name="2438" class="Symbol"
+      >(</a
+      ><a name="2439" href="MiniLibrary.html#840" class="Function"
+      >&#960;&#8320;</a
+      ><a name="2441"
+      > </a
+      ><a name="2442" href="not-not-funext.html#2427" class="Bound"
+      >&#969;</a
+      ><a name="2443" class="Symbol"
+      >)</a
+      ><a name="2444"
+      > </a
+      ><a name="2445" class="Symbol"
+      >(</a
+      ><a name="2446" href="MiniLibrary.html#840" class="Function"
+      >&#960;&#8320;</a
+      ><a name="2448" class="Symbol"
+      >(</a
+      ><a name="2449" href="MiniLibrary.html#850" class="Function"
+      >&#960;&#8321;</a
+      ><a name="2451"
+      > </a
+      ><a name="2452" href="not-not-funext.html#2427" class="Bound"
+      >&#969;</a
+      ><a name="2453" class="Symbol"
+      >))</a
+      ><a name="2455"
+      > </a
+      ><a name="2456" class="Symbol"
+      >(</a
+      ><a name="2457" href="MiniLibrary.html#840" class="Function"
+      >&#960;&#8320;</a
+      ><a name="2459" class="Symbol"
+      >(</a
+      ><a name="2460" href="MiniLibrary.html#850" class="Function"
+      >&#960;&#8321;</a
+      ><a name="2462" class="Symbol"
+      >(</a
+      ><a name="2463" href="MiniLibrary.html#850" class="Function"
+      >&#960;&#8321;</a
+      ><a name="2465"
+      > </a
+      ><a name="2466" href="not-not-funext.html#2427" class="Bound"
+      >&#969;</a
+      ><a name="2467" class="Symbol"
+      >)))</a
+      ><a name="2470"
+      > </a
+      ><a name="2471" class="Symbol"
+      >(</a
+      ><a name="2472" href="MiniLibrary.html#850" class="Function"
+      >&#960;&#8321;</a
+      ><a name="2474" class="Symbol"
+      >(</a
+      ><a name="2475" href="MiniLibrary.html#850" class="Function"
+      >&#960;&#8321;</a
+      ><a name="2477" class="Symbol"
+      >(</a
+      ><a name="2478" href="MiniLibrary.html#850" class="Function"
+      >&#960;&#8321;</a
+      ><a name="2480"
+      > </a
+      ><a name="2481" href="not-not-funext.html#2427" class="Bound"
+      >&#969;</a
+      ><a name="2482" class="Symbol"
+      >)))</a
+      ><a name="2485"
+      >
+  </a
+      ><a name="2488" href="not-not-funext.html#2420" class="Function"
+      >F</a
+      ><a name="2489"
+      > </a
+      ><a name="2490" class="Symbol"
+      >(</a
+      ><a name="2491" href="not-not-funext.html#2491" class="Bound"
+      >x</a
+      ><a name="2492"
+      > </a
+      ><a name="2493" href="MiniLibrary.html#825" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="2494"
+      > </a
+      ><a name="2495" href="not-not-funext.html#2495" class="Bound"
+      >y</a
+      ><a name="2496"
+      > </a
+      ><a name="2497" href="MiniLibrary.html#825" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="2498"
+      > </a
+      ><a name="2499" href="not-not-funext.html#2499" class="Bound"
+      >z</a
+      ><a name="2500"
+      > </a
+      ><a name="2501" href="MiniLibrary.html#825" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="2502"
+      > </a
+      ><a name="2503" href="not-not-funext.html#2503" class="Bound"
+      >w</a
+      ><a name="2504" class="Symbol"
+      >)</a
+      ><a name="2505"
+      > </a
+      ><a name="2506" class="Symbol"
+      >=</a
+      ><a name="2507"
+      > </a
+      ><a name="2508" href="not-not-funext.html#2325" class="Bound"
+      >f</a
+      ><a name="2509"
+      > </a
+      ><a name="2510" href="not-not-funext.html#2491" class="Bound"
+      >x</a
+      ><a name="2511"
+      > </a
+      ><a name="2512" href="not-not-funext.html#2495" class="Bound"
+      >y</a
+      ><a name="2513"
+      > </a
+      ><a name="2514" href="not-not-funext.html#2499" class="Bound"
+      >z</a
+      ><a name="2515"
+      > </a
+      ><a name="2516" href="not-not-funext.html#2503" class="Bound"
+      >w</a
+      ><a name="2517"
+      >
+  </a
+      ><a name="2520" href="not-not-funext.html#2422" class="Function"
+      >G</a
+      ><a name="2521"
+      > </a
+      ><a name="2522" class="Symbol"
+      >(</a
+      ><a name="2523" href="not-not-funext.html#2523" class="Bound"
+      >x</a
+      ><a name="2524"
+      > </a
+      ><a name="2525" href="MiniLibrary.html#825" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="2526"
+      > </a
+      ><a name="2527" href="not-not-funext.html#2527" class="Bound"
+      >y</a
+      ><a name="2528"
+      > </a
+      ><a name="2529" href="MiniLibrary.html#825" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="2530"
+      > </a
+      ><a name="2531" href="not-not-funext.html#2531" class="Bound"
+      >z</a
+      ><a name="2532"
+      > </a
+      ><a name="2533" href="MiniLibrary.html#825" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="2534"
+      > </a
+      ><a name="2535" href="not-not-funext.html#2535" class="Bound"
+      >w</a
+      ><a name="2536" class="Symbol"
+      >)</a
+      ><a name="2537"
+      > </a
+      ><a name="2538" class="Symbol"
+      >=</a
+      ><a name="2539"
+      > </a
+      ><a name="2540" href="not-not-funext.html#2329" class="Bound"
+      >g</a
+      ><a name="2541"
+      > </a
+      ><a name="2542" href="not-not-funext.html#2523" class="Bound"
+      >x</a
+      ><a name="2543"
+      > </a
+      ><a name="2544" href="not-not-funext.html#2527" class="Bound"
+      >y</a
+      ><a name="2545"
+      > </a
+      ><a name="2546" href="not-not-funext.html#2531" class="Bound"
+      >z</a
+      ><a name="2547"
+      > </a
+      ><a name="2548" href="not-not-funext.html#2535" class="Bound"
+      >w</a
+      ><a name="2549"
+      >
+  </a
+      ><a name="2552" href="not-not-funext.html#2552" class="Function"
+      >Ex</a
+      ><a name="2554"
+      > </a
+      ><a name="2555" class="Symbol"
+      >:</a
+      ><a name="2556"
+      > </a
+      ><a name="2557" class="Symbol"
+      >(</a
+      ><a name="2558" href="not-not-funext.html#2558" class="Bound"
+      >&#969;</a
+      ><a name="2559"
+      > </a
+      ><a name="2560" class="Symbol"
+      >:</a
+      ><a name="2561"
+      > </a
+      ><a name="2562" href="not-not-funext.html#2351" class="Function"
+      >&#937;</a
+      ><a name="2563" class="Symbol"
+      >)</a
+      ><a name="2564"
+      > </a
+      ><a name="2565" class="Symbol"
+      >&#8594;</a
+      ><a name="2566"
+      > </a
+      ><a name="2567" href="not-not-funext.html#2420" class="Function"
+      >F</a
+      ><a name="2568"
+      > </a
+      ><a name="2569" href="not-not-funext.html#2558" class="Bound"
+      >&#969;</a
+      ><a name="2570"
+      > </a
+      ><a name="2571" href="MiniLibrary.html#1706" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="2572"
+      > </a
+      ><a name="2573" href="not-not-funext.html#2422" class="Function"
+      >G</a
+      ><a name="2574"
+      > </a
+      ><a name="2575" href="not-not-funext.html#2558" class="Bound"
+      >&#969;</a
+      ><a name="2576"
+      >
+  </a
+      ><a name="2579" href="not-not-funext.html#2552" class="Function"
+      >Ex</a
+      ><a name="2581"
+      > </a
+      ><a name="2582" class="Symbol"
+      >(</a
+      ><a name="2583" href="not-not-funext.html#2583" class="Bound"
+      >x</a
+      ><a name="2584"
+      > </a
+      ><a name="2585" href="MiniLibrary.html#825" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="2586"
+      > </a
+      ><a name="2587" href="not-not-funext.html#2587" class="Bound"
+      >y</a
+      ><a name="2588"
+      > </a
+      ><a name="2589" href="MiniLibrary.html#825" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="2590"
+      > </a
+      ><a name="2591" href="not-not-funext.html#2591" class="Bound"
+      >z</a
+      ><a name="2592"
+      > </a
+      ><a name="2593" href="MiniLibrary.html#825" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="2594"
+      > </a
+      ><a name="2595" href="not-not-funext.html#2595" class="Bound"
+      >w</a
+      ><a name="2596" class="Symbol"
+      >)</a
+      ><a name="2597"
+      > </a
+      ><a name="2598" class="Symbol"
+      >=</a
+      ><a name="2599"
+      > </a
+      ><a name="2600" href="not-not-funext.html#2332" class="Bound"
+      >ex</a
+      ><a name="2602"
+      > </a
+      ><a name="2603" href="not-not-funext.html#2583" class="Bound"
+      >x</a
+      ><a name="2604"
+      > </a
+      ><a name="2605" href="not-not-funext.html#2587" class="Bound"
+      >y</a
+      ><a name="2606"
+      > </a
+      ><a name="2607" href="not-not-funext.html#2591" class="Bound"
+      >z</a
+      ><a name="2608"
+      > </a
+      ><a name="2609" href="not-not-funext.html#2595" class="Bound"
+      >w</a
+      ><a name="2610"
+      >
+  </a
+      ><a name="2613" href="not-not-funext.html#2613" class="Function"
+      >E</a
+      ><a name="2614"
+      > </a
+      ><a name="2615" class="Symbol"
+      >:</a
+      ><a name="2616"
+      > </a
+      ><a name="2617" href="not-not.html#113" class="Function Operator"
+      >[</a
+      ><a name="2618"
+      > </a
+      ><a name="2619" href="not-not-funext.html#2420" class="Function"
+      >F</a
+      ><a name="2620"
+      > </a
+      ><a name="2621" href="MiniLibrary.html#1706" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="2622"
+      > </a
+      ><a name="2623" href="not-not-funext.html#2422" class="Function"
+      >G</a
+      ><a name="2624"
+      > </a
+      ><a name="2625" href="not-not.html#113" class="Function Operator"
+      >]</a
+      ><a name="2626"
+      >
+  </a
+      ><a name="2629" href="not-not-funext.html#2613" class="Function"
+      >E</a
+      ><a name="2630"
+      > </a
+      ><a name="2631" class="Symbol"
+      >=</a
+      ><a name="2632"
+      > </a
+      ><a name="2633" href="not-not-funext.html#676" class="Function"
+      >funext&#185;</a
+      ><a name="2640"
+      > </a
+      ><a name="2641" href="not-not-funext.html#2552" class="Function"
+      >Ex</a
+      ><a name="2643"
+      >
+  </a
+      ><a name="2646" href="not-not-funext.html#2646" class="Function"
+      >goal</a
+      ><a name="2650"
+      > </a
+      ><a name="2651" class="Symbol"
+      >:</a
+      ><a name="2652"
+      > </a
+      ><a name="2653" href="not-not.html#113" class="Function Operator"
+      >[</a
+      ><a name="2654"
+      > </a
+      ><a name="2655" href="not-not-funext.html#2325" class="Bound"
+      >f</a
+      ><a name="2656"
+      > </a
+      ><a name="2657" href="MiniLibrary.html#1706" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="2658"
+      > </a
+      ><a name="2659" href="not-not-funext.html#2329" class="Bound"
+      >g</a
+      ><a name="2660"
+      > </a
+      ><a name="2661" href="not-not.html#113" class="Function Operator"
+      >]</a
+      ><a name="2662"
+      >
+  </a
+      ><a name="2665" href="not-not-funext.html#2646" class="Function"
+      >goal</a
+      ><a name="2669"
+      > </a
+      ><a name="2670" class="Symbol"
+      >=</a
+      ><a name="2671"
+      > </a
+      ><a name="2672" href="not-not.html#551" class="Function"
+      >functor</a
+      ><a name="2679"
+      > </a
+      ><a name="2680" class="Symbol"
+      >(</a
+      ><a name="2681" href="MiniLibrary.html#2001" class="Function"
+      >ap</a
+      ><a name="2683"
+      > </a
+      ><a name="2684" class="Symbol"
+      >(&#955;</a
+      ><a name="2686"
+      > </a
+      ><a name="2687" href="not-not-funext.html#2687" class="Bound"
+      >&#966;</a
+      ><a name="2688"
+      > </a
+      ><a name="2689" href="not-not-funext.html#2689" class="Bound"
+      >x</a
+      ><a name="2690"
+      > </a
+      ><a name="2691" href="not-not-funext.html#2691" class="Bound"
+      >y</a
+      ><a name="2692"
+      > </a
+      ><a name="2693" href="not-not-funext.html#2693" class="Bound"
+      >z</a
+      ><a name="2694"
+      > </a
+      ><a name="2695" href="not-not-funext.html#2695" class="Bound"
+      >w</a
+      ><a name="2696"
+      > </a
+      ><a name="2697" class="Symbol"
+      >&#8594;</a
+      ><a name="2698"
+      > </a
+      ><a name="2699" href="not-not-funext.html#2687" class="Bound"
+      >&#966;</a
+      ><a name="2700" class="Symbol"
+      >(</a
+      ><a name="2701" href="not-not-funext.html#2689" class="Bound"
+      >x</a
+      ><a name="2702"
+      > </a
+      ><a name="2703" href="MiniLibrary.html#825" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="2704"
+      > </a
+      ><a name="2705" href="not-not-funext.html#2691" class="Bound"
+      >y</a
+      ><a name="2706"
+      > </a
+      ><a name="2707" href="MiniLibrary.html#825" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="2708"
+      > </a
+      ><a name="2709" href="not-not-funext.html#2693" class="Bound"
+      >z</a
+      ><a name="2710"
+      > </a
+      ><a name="2711" href="MiniLibrary.html#825" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="2712"
+      > </a
+      ><a name="2713" href="not-not-funext.html#2695" class="Bound"
+      >w</a
+      ><a name="2714" class="Symbol"
+      >)))</a
+      ><a name="2717"
+      > </a
+      ><a name="2718" href="not-not-funext.html#2613" class="Function"
+      >E</a
+      ><a name="2719"
+      >
+
+
+</a
+      ><a name="2722" href="not-not-funext.html#2722" class="Function"
+      >funext&#8309;</a
+      ><a name="2729"
+      > </a
+      ><a name="2730" class="Symbol"
+      >:</a
+      ><a name="2731"
+      > </a
+      ><a name="2732" class="Symbol"
+      >{</a
+      ><a name="2733" href="not-not-funext.html#2733" class="Bound"
+      >X</a
+      ><a name="2734"
+      > </a
+      ><a name="2735" class="Symbol"
+      >:</a
+      ><a name="2736"
+      > </a
+      ><a name="2737" class="PrimitiveType"
+      >Set</a
+      ><a name="2740" class="Symbol"
+      >}</a
+      ><a name="2741"
+      > </a
+      ><a name="2742" class="Symbol"
+      >&#8594;</a
+      ><a name="2743"
+      >
+          </a
+      ><a name="2754" class="Symbol"
+      >{</a
+      ><a name="2755" href="not-not-funext.html#2755" class="Bound"
+      >Y</a
+      ><a name="2756"
+      > </a
+      ><a name="2757" class="Symbol"
+      >:</a
+      ><a name="2758"
+      > </a
+      ><a name="2759" href="not-not-funext.html#2733" class="Bound"
+      >X</a
+      ><a name="2760"
+      > </a
+      ><a name="2761" class="Symbol"
+      >&#8594;</a
+      ><a name="2762"
+      > </a
+      ><a name="2763" class="PrimitiveType"
+      >Set</a
+      ><a name="2766" class="Symbol"
+      >}</a
+      ><a name="2767"
+      > </a
+      ><a name="2768" class="Symbol"
+      >&#8594;</a
+      ><a name="2769"
+      >
+          </a
+      ><a name="2780" class="Symbol"
+      >{</a
+      ><a name="2781" href="not-not-funext.html#2781" class="Bound"
+      >Z</a
+      ><a name="2782"
+      > </a
+      ><a name="2783" class="Symbol"
+      >:</a
+      ><a name="2784"
+      > </a
+      ><a name="2785" class="Symbol"
+      >(</a
+      ><a name="2786" href="not-not-funext.html#2786" class="Bound"
+      >x</a
+      ><a name="2787"
+      > </a
+      ><a name="2788" class="Symbol"
+      >:</a
+      ><a name="2789"
+      > </a
+      ><a name="2790" href="not-not-funext.html#2733" class="Bound"
+      >X</a
+      ><a name="2791" class="Symbol"
+      >)</a
+      ><a name="2792"
+      > </a
+      ><a name="2793" class="Symbol"
+      >&#8594;</a
+      ><a name="2794"
+      > </a
+      ><a name="2795" href="not-not-funext.html#2755" class="Bound"
+      >Y</a
+      ><a name="2796"
+      > </a
+      ><a name="2797" href="not-not-funext.html#2786" class="Bound"
+      >x</a
+      ><a name="2798"
+      > </a
+      ><a name="2799" class="Symbol"
+      >&#8594;</a
+      ><a name="2800"
+      > </a
+      ><a name="2801" class="PrimitiveType"
+      >Set</a
+      ><a name="2804" class="Symbol"
+      >}</a
+      ><a name="2805"
+      > </a
+      ><a name="2806" class="Symbol"
+      >&#8594;</a
+      ><a name="2807"
+      >
+          </a
+      ><a name="2818" class="Symbol"
+      >{</a
+      ><a name="2819" href="not-not-funext.html#2819" class="Bound"
+      >W</a
+      ><a name="2820"
+      > </a
+      ><a name="2821" class="Symbol"
+      >:</a
+      ><a name="2822"
+      > </a
+      ><a name="2823" class="Symbol"
+      >(</a
+      ><a name="2824" href="not-not-funext.html#2824" class="Bound"
+      >x</a
+      ><a name="2825"
+      > </a
+      ><a name="2826" class="Symbol"
+      >:</a
+      ><a name="2827"
+      > </a
+      ><a name="2828" href="not-not-funext.html#2733" class="Bound"
+      >X</a
+      ><a name="2829" class="Symbol"
+      >)</a
+      ><a name="2830"
+      > </a
+      ><a name="2831" class="Symbol"
+      >&#8594;</a
+      ><a name="2832"
+      > </a
+      ><a name="2833" class="Symbol"
+      >(</a
+      ><a name="2834" href="not-not-funext.html#2834" class="Bound"
+      >y</a
+      ><a name="2835"
+      > </a
+      ><a name="2836" class="Symbol"
+      >:</a
+      ><a name="2837"
+      > </a
+      ><a name="2838" href="not-not-funext.html#2755" class="Bound"
+      >Y</a
+      ><a name="2839"
+      > </a
+      ><a name="2840" href="not-not-funext.html#2824" class="Bound"
+      >x</a
+      ><a name="2841" class="Symbol"
+      >)</a
+      ><a name="2842"
+      > </a
+      ><a name="2843" class="Symbol"
+      >&#8594;</a
+      ><a name="2844"
+      > </a
+      ><a name="2845" href="not-not-funext.html#2781" class="Bound"
+      >Z</a
+      ><a name="2846"
+      > </a
+      ><a name="2847" href="not-not-funext.html#2824" class="Bound"
+      >x</a
+      ><a name="2848"
+      > </a
+      ><a name="2849" href="not-not-funext.html#2834" class="Bound"
+      >y</a
+      ><a name="2850"
+      > </a
+      ><a name="2851" class="Symbol"
+      >&#8594;</a
+      ><a name="2852"
+      > </a
+      ><a name="2853" class="PrimitiveType"
+      >Set</a
+      ><a name="2856" class="Symbol"
+      >}</a
+      ><a name="2857"
+      > </a
+      ><a name="2858" class="Symbol"
+      >&#8594;</a
+      ><a name="2859"
+      >
+          </a
+      ><a name="2870" class="Symbol"
+      >{</a
+      ><a name="2871" href="not-not-funext.html#2871" class="Bound"
+      >U</a
+      ><a name="2872"
+      > </a
+      ><a name="2873" class="Symbol"
+      >:</a
+      ><a name="2874"
+      > </a
+      ><a name="2875" class="Symbol"
+      >(</a
+      ><a name="2876" href="not-not-funext.html#2876" class="Bound"
+      >x</a
+      ><a name="2877"
+      > </a
+      ><a name="2878" class="Symbol"
+      >:</a
+      ><a name="2879"
+      > </a
+      ><a name="2880" href="not-not-funext.html#2733" class="Bound"
+      >X</a
+      ><a name="2881" class="Symbol"
+      >)</a
+      ><a name="2882"
+      > </a
+      ><a name="2883" class="Symbol"
+      >&#8594;</a
+      ><a name="2884"
+      > </a
+      ><a name="2885" class="Symbol"
+      >(</a
+      ><a name="2886" href="not-not-funext.html#2886" class="Bound"
+      >y</a
+      ><a name="2887"
+      > </a
+      ><a name="2888" class="Symbol"
+      >:</a
+      ><a name="2889"
+      > </a
+      ><a name="2890" href="not-not-funext.html#2755" class="Bound"
+      >Y</a
+      ><a name="2891"
+      > </a
+      ><a name="2892" href="not-not-funext.html#2876" class="Bound"
+      >x</a
+      ><a name="2893" class="Symbol"
+      >)</a
+      ><a name="2894"
+      > </a
+      ><a name="2895" class="Symbol"
+      >&#8594;</a
+      ><a name="2896"
+      > </a
+      ><a name="2897" class="Symbol"
+      >(</a
+      ><a name="2898" href="not-not-funext.html#2898" class="Bound"
+      >z</a
+      ><a name="2899"
+      > </a
+      ><a name="2900" class="Symbol"
+      >:</a
+      ><a name="2901"
+      > </a
+      ><a name="2902" href="not-not-funext.html#2781" class="Bound"
+      >Z</a
+      ><a name="2903"
+      > </a
+      ><a name="2904" href="not-not-funext.html#2876" class="Bound"
+      >x</a
+      ><a name="2905"
+      > </a
+      ><a name="2906" href="not-not-funext.html#2886" class="Bound"
+      >y</a
+      ><a name="2907" class="Symbol"
+      >)</a
+      ><a name="2908"
+      > </a
+      ><a name="2909" class="Symbol"
+      >&#8594;</a
+      ><a name="2910"
+      > </a
+      ><a name="2911" href="not-not-funext.html#2819" class="Bound"
+      >W</a
+      ><a name="2912"
+      > </a
+      ><a name="2913" href="not-not-funext.html#2876" class="Bound"
+      >x</a
+      ><a name="2914"
+      > </a
+      ><a name="2915" href="not-not-funext.html#2886" class="Bound"
+      >y</a
+      ><a name="2916"
+      > </a
+      ><a name="2917" href="not-not-funext.html#2898" class="Bound"
+      >z</a
+      ><a name="2918"
+      > </a
+      ><a name="2919" class="Symbol"
+      >&#8594;</a
+      ><a name="2920"
+      > </a
+      ><a name="2921" class="PrimitiveType"
+      >Set</a
+      ><a name="2924" class="Symbol"
+      >}</a
+      ><a name="2925"
+      > </a
+      ><a name="2926" class="Symbol"
+      >&#8594;</a
+      ><a name="2927"
+      >
+          </a
+      ><a name="2938" class="Symbol"
+      >{</a
+      ><a name="2939" href="not-not-funext.html#2939" class="Bound"
+      >V</a
+      ><a name="2940"
+      > </a
+      ><a name="2941" class="Symbol"
+      >:</a
+      ><a name="2942"
+      > </a
+      ><a name="2943" class="Symbol"
+      >(</a
+      ><a name="2944" href="not-not-funext.html#2944" class="Bound"
+      >x</a
+      ><a name="2945"
+      > </a
+      ><a name="2946" class="Symbol"
+      >:</a
+      ><a name="2947"
+      > </a
+      ><a name="2948" href="not-not-funext.html#2733" class="Bound"
+      >X</a
+      ><a name="2949" class="Symbol"
+      >)</a
+      ><a name="2950"
+      > </a
+      ><a name="2951" class="Symbol"
+      >&#8594;</a
+      ><a name="2952"
+      > </a
+      ><a name="2953" class="Symbol"
+      >(</a
+      ><a name="2954" href="not-not-funext.html#2954" class="Bound"
+      >y</a
+      ><a name="2955"
+      > </a
+      ><a name="2956" class="Symbol"
+      >:</a
+      ><a name="2957"
+      > </a
+      ><a name="2958" href="not-not-funext.html#2755" class="Bound"
+      >Y</a
+      ><a name="2959"
+      > </a
+      ><a name="2960" href="not-not-funext.html#2944" class="Bound"
+      >x</a
+      ><a name="2961" class="Symbol"
+      >)</a
+      ><a name="2962"
+      > </a
+      ><a name="2963" class="Symbol"
+      >&#8594;</a
+      ><a name="2964"
+      > </a
+      ><a name="2965" class="Symbol"
+      >(</a
+      ><a name="2966" href="not-not-funext.html#2966" class="Bound"
+      >z</a
+      ><a name="2967"
+      > </a
+      ><a name="2968" class="Symbol"
+      >:</a
+      ><a name="2969"
+      > </a
+      ><a name="2970" href="not-not-funext.html#2781" class="Bound"
+      >Z</a
+      ><a name="2971"
+      > </a
+      ><a name="2972" href="not-not-funext.html#2944" class="Bound"
+      >x</a
+      ><a name="2973"
+      > </a
+      ><a name="2974" href="not-not-funext.html#2954" class="Bound"
+      >y</a
+      ><a name="2975" class="Symbol"
+      >)</a
+      ><a name="2976"
+      > </a
+      ><a name="2977" class="Symbol"
+      >&#8594;</a
+      ><a name="2978"
+      > </a
+      ><a name="2979" class="Symbol"
+      >(</a
+      ><a name="2980" href="not-not-funext.html#2980" class="Bound"
+      >w</a
+      ><a name="2981"
+      > </a
+      ><a name="2982" class="Symbol"
+      >:</a
+      ><a name="2983"
+      > </a
+      ><a name="2984" href="not-not-funext.html#2819" class="Bound"
+      >W</a
+      ><a name="2985"
+      > </a
+      ><a name="2986" href="not-not-funext.html#2944" class="Bound"
+      >x</a
+      ><a name="2987"
+      > </a
+      ><a name="2988" href="not-not-funext.html#2954" class="Bound"
+      >y</a
+      ><a name="2989"
+      > </a
+      ><a name="2990" href="not-not-funext.html#2966" class="Bound"
+      >z</a
+      ><a name="2991" class="Symbol"
+      >)</a
+      ><a name="2992"
+      > </a
+      ><a name="2993" class="Symbol"
+      >&#8594;</a
+      ><a name="2994"
+      > </a
+      ><a name="2995" href="not-not-funext.html#2871" class="Bound"
+      >U</a
+      ><a name="2996"
+      > </a
+      ><a name="2997" href="not-not-funext.html#2944" class="Bound"
+      >x</a
+      ><a name="2998"
+      > </a
+      ><a name="2999" href="not-not-funext.html#2954" class="Bound"
+      >y</a
+      ><a name="3000"
+      > </a
+      ><a name="3001" href="not-not-funext.html#2966" class="Bound"
+      >z</a
+      ><a name="3002"
+      > </a
+      ><a name="3003" href="not-not-funext.html#2980" class="Bound"
+      >w</a
+      ><a name="3004"
+      > </a
+      ><a name="3005" class="Symbol"
+      >&#8594;</a
+      ><a name="3006"
+      > </a
+      ><a name="3007" class="PrimitiveType"
+      >Set</a
+      ><a name="3010" class="Symbol"
+      >}</a
+      ><a name="3011"
+      >
+          </a
+      ><a name="3022" class="Symbol"
+      >{</a
+      ><a name="3023" href="not-not-funext.html#3023" class="Bound"
+      >f</a
+      ><a name="3024"
+      > </a
+      ><a name="3025" href="not-not-funext.html#3025" class="Bound"
+      >g</a
+      ><a name="3026"
+      > </a
+      ><a name="3027" class="Symbol"
+      >:</a
+      ><a name="3028"
+      > </a
+      ><a name="3029" class="Symbol"
+      >(</a
+      ><a name="3030" href="not-not-funext.html#3030" class="Bound"
+      >x</a
+      ><a name="3031"
+      > </a
+      ><a name="3032" class="Symbol"
+      >:</a
+      ><a name="3033"
+      > </a
+      ><a name="3034" href="not-not-funext.html#2733" class="Bound"
+      >X</a
+      ><a name="3035" class="Symbol"
+      >)</a
+      ><a name="3036"
+      > </a
+      ><a name="3037" class="Symbol"
+      >&#8594;</a
+      ><a name="3038"
+      > </a
+      ><a name="3039" class="Symbol"
+      >(</a
+      ><a name="3040" href="not-not-funext.html#3040" class="Bound"
+      >y</a
+      ><a name="3041"
+      > </a
+      ><a name="3042" class="Symbol"
+      >:</a
+      ><a name="3043"
+      > </a
+      ><a name="3044" href="not-not-funext.html#2755" class="Bound"
+      >Y</a
+      ><a name="3045"
+      > </a
+      ><a name="3046" href="not-not-funext.html#3030" class="Bound"
+      >x</a
+      ><a name="3047" class="Symbol"
+      >)</a
+      ><a name="3048"
+      > </a
+      ><a name="3049" class="Symbol"
+      >&#8594;</a
+      ><a name="3050"
+      > </a
+      ><a name="3051" class="Symbol"
+      >(</a
+      ><a name="3052" href="not-not-funext.html#3052" class="Bound"
+      >z</a
+      ><a name="3053"
+      > </a
+      ><a name="3054" class="Symbol"
+      >:</a
+      ><a name="3055"
+      > </a
+      ><a name="3056" href="not-not-funext.html#2781" class="Bound"
+      >Z</a
+      ><a name="3057"
+      > </a
+      ><a name="3058" href="not-not-funext.html#3030" class="Bound"
+      >x</a
+      ><a name="3059"
+      > </a
+      ><a name="3060" href="not-not-funext.html#3040" class="Bound"
+      >y</a
+      ><a name="3061" class="Symbol"
+      >)</a
+      ><a name="3062"
+      > </a
+      ><a name="3063" class="Symbol"
+      >&#8594;</a
+      ><a name="3064"
+      > </a
+      ><a name="3065" class="Symbol"
+      >(</a
+      ><a name="3066" href="not-not-funext.html#3066" class="Bound"
+      >w</a
+      ><a name="3067"
+      > </a
+      ><a name="3068" class="Symbol"
+      >:</a
+      ><a name="3069"
+      > </a
+      ><a name="3070" href="not-not-funext.html#2819" class="Bound"
+      >W</a
+      ><a name="3071"
+      > </a
+      ><a name="3072" href="not-not-funext.html#3030" class="Bound"
+      >x</a
+      ><a name="3073"
+      > </a
+      ><a name="3074" href="not-not-funext.html#3040" class="Bound"
+      >y</a
+      ><a name="3075"
+      > </a
+      ><a name="3076" href="not-not-funext.html#3052" class="Bound"
+      >z</a
+      ><a name="3077" class="Symbol"
+      >)</a
+      ><a name="3078"
+      > </a
+      ><a name="3079" class="Symbol"
+      >&#8594;</a
+      ><a name="3080"
+      > </a
+      ><a name="3081" class="Symbol"
+      >(</a
+      ><a name="3082" href="not-not-funext.html#3082" class="Bound"
+      >u</a
+      ><a name="3083"
+      > </a
+      ><a name="3084" class="Symbol"
+      >:</a
+      ><a name="3085"
+      > </a
+      ><a name="3086" href="not-not-funext.html#2871" class="Bound"
+      >U</a
+      ><a name="3087"
+      > </a
+      ><a name="3088" href="not-not-funext.html#3030" class="Bound"
+      >x</a
+      ><a name="3089"
+      > </a
+      ><a name="3090" href="not-not-funext.html#3040" class="Bound"
+      >y</a
+      ><a name="3091"
+      > </a
+      ><a name="3092" href="not-not-funext.html#3052" class="Bound"
+      >z</a
+      ><a name="3093"
+      > </a
+      ><a name="3094" href="not-not-funext.html#3066" class="Bound"
+      >w</a
+      ><a name="3095" class="Symbol"
+      >)</a
+      ><a name="3096"
+      > </a
+      ><a name="3097" class="Symbol"
+      >&#8594;</a
+      ><a name="3098"
+      > </a
+      ><a name="3099" href="not-not-funext.html#2939" class="Bound"
+      >V</a
+      ><a name="3100"
+      > </a
+      ><a name="3101" href="not-not-funext.html#3030" class="Bound"
+      >x</a
+      ><a name="3102"
+      > </a
+      ><a name="3103" href="not-not-funext.html#3040" class="Bound"
+      >y</a
+      ><a name="3104"
+      > </a
+      ><a name="3105" href="not-not-funext.html#3052" class="Bound"
+      >z</a
+      ><a name="3106"
+      > </a
+      ><a name="3107" href="not-not-funext.html#3066" class="Bound"
+      >w</a
+      ><a name="3108"
+      > </a
+      ><a name="3109" href="not-not-funext.html#3082" class="Bound"
+      >u</a
+      ><a name="3110" class="Symbol"
+      >}</a
+      ><a name="3111"
+      > </a
+      ><a name="3112" class="Symbol"
+      >&#8594;</a
+      ><a name="3113"
+      >
+          </a
+      ><a name="3124" class="Symbol"
+      >(&#8704;(</a
+      ><a name="3127" href="not-not-funext.html#3127" class="Bound"
+      >x</a
+      ><a name="3128"
+      > </a
+      ><a name="3129" class="Symbol"
+      >:</a
+      ><a name="3130"
+      > </a
+      ><a name="3131" href="not-not-funext.html#2733" class="Bound"
+      >X</a
+      ><a name="3132" class="Symbol"
+      >)(</a
+      ><a name="3134" href="not-not-funext.html#3134" class="Bound"
+      >y</a
+      ><a name="3135"
+      > </a
+      ><a name="3136" class="Symbol"
+      >:</a
+      ><a name="3137"
+      > </a
+      ><a name="3138" href="not-not-funext.html#2755" class="Bound"
+      >Y</a
+      ><a name="3139"
+      > </a
+      ><a name="3140" href="not-not-funext.html#3127" class="Bound"
+      >x</a
+      ><a name="3141" class="Symbol"
+      >)(</a
+      ><a name="3143" href="not-not-funext.html#3143" class="Bound"
+      >z</a
+      ><a name="3144"
+      > </a
+      ><a name="3145" class="Symbol"
+      >:</a
+      ><a name="3146"
+      > </a
+      ><a name="3147" href="not-not-funext.html#2781" class="Bound"
+      >Z</a
+      ><a name="3148"
+      > </a
+      ><a name="3149" href="not-not-funext.html#3127" class="Bound"
+      >x</a
+      ><a name="3150"
+      > </a
+      ><a name="3151" href="not-not-funext.html#3134" class="Bound"
+      >y</a
+      ><a name="3152" class="Symbol"
+      >)(</a
+      ><a name="3154" href="not-not-funext.html#3154" class="Bound"
+      >w</a
+      ><a name="3155"
+      > </a
+      ><a name="3156" class="Symbol"
+      >:</a
+      ><a name="3157"
+      > </a
+      ><a name="3158" href="not-not-funext.html#2819" class="Bound"
+      >W</a
+      ><a name="3159"
+      > </a
+      ><a name="3160" href="not-not-funext.html#3127" class="Bound"
+      >x</a
+      ><a name="3161"
+      > </a
+      ><a name="3162" href="not-not-funext.html#3134" class="Bound"
+      >y</a
+      ><a name="3163"
+      > </a
+      ><a name="3164" href="not-not-funext.html#3143" class="Bound"
+      >z</a
+      ><a name="3165" class="Symbol"
+      >)(</a
+      ><a name="3167" href="not-not-funext.html#3167" class="Bound"
+      >u</a
+      ><a name="3168"
+      > </a
+      ><a name="3169" class="Symbol"
+      >:</a
+      ><a name="3170"
+      > </a
+      ><a name="3171" href="not-not-funext.html#2871" class="Bound"
+      >U</a
+      ><a name="3172"
+      > </a
+      ><a name="3173" href="not-not-funext.html#3127" class="Bound"
+      >x</a
+      ><a name="3174"
+      > </a
+      ><a name="3175" href="not-not-funext.html#3134" class="Bound"
+      >y</a
+      ><a name="3176"
+      > </a
+      ><a name="3177" href="not-not-funext.html#3143" class="Bound"
+      >z</a
+      ><a name="3178"
+      > </a
+      ><a name="3179" href="not-not-funext.html#3154" class="Bound"
+      >w</a
+      ><a name="3180" class="Symbol"
+      >)</a
+      ><a name="3181"
+      > </a
+      ><a name="3182" class="Symbol"
+      >&#8594;</a
+      ><a name="3183"
+      > </a
+      ><a name="3184" href="not-not-funext.html#3023" class="Bound"
+      >f</a
+      ><a name="3185"
+      > </a
+      ><a name="3186" href="not-not-funext.html#3127" class="Bound"
+      >x</a
+      ><a name="3187"
+      > </a
+      ><a name="3188" href="not-not-funext.html#3134" class="Bound"
+      >y</a
+      ><a name="3189"
+      > </a
+      ><a name="3190" href="not-not-funext.html#3143" class="Bound"
+      >z</a
+      ><a name="3191"
+      > </a
+      ><a name="3192" href="not-not-funext.html#3154" class="Bound"
+      >w</a
+      ><a name="3193"
+      > </a
+      ><a name="3194" href="not-not-funext.html#3167" class="Bound"
+      >u</a
+      ><a name="3195"
+      > </a
+      ><a name="3196" href="MiniLibrary.html#1706" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="3197"
+      > </a
+      ><a name="3198" href="not-not-funext.html#3025" class="Bound"
+      >g</a
+      ><a name="3199"
+      > </a
+      ><a name="3200" href="not-not-funext.html#3127" class="Bound"
+      >x</a
+      ><a name="3201"
+      > </a
+      ><a name="3202" href="not-not-funext.html#3134" class="Bound"
+      >y</a
+      ><a name="3203"
+      > </a
+      ><a name="3204" href="not-not-funext.html#3143" class="Bound"
+      >z</a
+      ><a name="3205"
+      > </a
+      ><a name="3206" href="not-not-funext.html#3154" class="Bound"
+      >w</a
+      ><a name="3207"
+      > </a
+      ><a name="3208" href="not-not-funext.html#3167" class="Bound"
+      >u</a
+      ><a name="3209" class="Symbol"
+      >)</a
+      ><a name="3210"
+      > </a
+      ><a name="3211" class="Symbol"
+      >&#8594;</a
+      ><a name="3212"
+      > </a
+      ><a name="3213" href="not-not.html#113" class="Function Operator"
+      >[</a
+      ><a name="3214"
+      > </a
+      ><a name="3215" href="not-not-funext.html#3023" class="Bound"
+      >f</a
+      ><a name="3216"
+      > </a
+      ><a name="3217" href="MiniLibrary.html#1706" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="3218"
+      > </a
+      ><a name="3219" href="not-not-funext.html#3025" class="Bound"
+      >g</a
+      ><a name="3220"
+      > </a
+      ><a name="3221" href="not-not.html#113" class="Function Operator"
+      >]</a
+      ><a name="3222"
+      >
+</a
+      ><a name="3223" href="not-not-funext.html#2722" class="Function"
+      >funext&#8309;</a
+      ><a name="3230"
+      > </a
+      ><a name="3231" class="Symbol"
+      >{</a
+      ><a name="3232" href="not-not-funext.html#3232" class="Bound"
+      >X</a
+      ><a name="3233" class="Symbol"
+      >}</a
+      ><a name="3234"
+      > </a
+      ><a name="3235" class="Symbol"
+      >{</a
+      ><a name="3236" href="not-not-funext.html#3236" class="Bound"
+      >Y</a
+      ><a name="3237" class="Symbol"
+      >}</a
+      ><a name="3238"
+      > </a
+      ><a name="3239" class="Symbol"
+      >{</a
+      ><a name="3240" href="not-not-funext.html#3240" class="Bound"
+      >Z</a
+      ><a name="3241" class="Symbol"
+      >}</a
+      ><a name="3242"
+      > </a
+      ><a name="3243" class="Symbol"
+      >{</a
+      ><a name="3244" href="not-not-funext.html#3244" class="Bound"
+      >W</a
+      ><a name="3245" class="Symbol"
+      >}</a
+      ><a name="3246"
+      > </a
+      ><a name="3247" class="Symbol"
+      >{</a
+      ><a name="3248" href="not-not-funext.html#3248" class="Bound"
+      >U</a
+      ><a name="3249" class="Symbol"
+      >}</a
+      ><a name="3250"
+      > </a
+      ><a name="3251" class="Symbol"
+      >{</a
+      ><a name="3252" href="not-not-funext.html#3252" class="Bound"
+      >V</a
+      ><a name="3253" class="Symbol"
+      >}</a
+      ><a name="3254"
+      > </a
+      ><a name="3255" class="Symbol"
+      >{</a
+      ><a name="3256" href="not-not-funext.html#3256" class="Bound"
+      >f</a
+      ><a name="3257" class="Symbol"
+      >}</a
+      ><a name="3258"
+      > </a
+      ><a name="3259" class="Symbol"
+      >{</a
+      ><a name="3260" href="not-not-funext.html#3260" class="Bound"
+      >g</a
+      ><a name="3261" class="Symbol"
+      >}</a
+      ><a name="3262"
+      > </a
+      ><a name="3263" href="not-not-funext.html#3263" class="Bound"
+      >ex</a
+      ><a name="3265"
+      > </a
+      ><a name="3266" class="Symbol"
+      >=</a
+      ><a name="3267"
+      > </a
+      ><a name="3268" href="not-not-funext.html#3639" class="Function"
+      >goal</a
+      ><a name="3272"
+      >
+ </a
+      ><a name="3274" class="Keyword"
+      >where</a
+      ><a name="3279"
+      >
+  </a
+      ><a name="3282" href="not-not-funext.html#3282" class="Function"
+      >&#937;</a
+      ><a name="3283"
+      > </a
+      ><a name="3284" class="Symbol"
+      >:</a
+      ><a name="3285"
+      > </a
+      ><a name="3286" class="PrimitiveType"
+      >Set</a
+      ><a name="3289"
+      >
+  </a
+      ><a name="3292" href="not-not-funext.html#3282" class="Function"
+      >&#937;</a
+      ><a name="3293"
+      > </a
+      ><a name="3294" class="Symbol"
+      >=</a
+      ><a name="3295"
+      > </a
+      ><a name="3296" href="MiniLibrary.html#745" class="Record"
+      >&#931;</a
+      ><a name="3297"
+      > </a
+      ><a name="3298" class="Symbol"
+      >\(</a
+      ><a name="3300" href="not-not-funext.html#3300" class="Bound"
+      >x</a
+      ><a name="3301"
+      > </a
+      ><a name="3302" class="Symbol"
+      >:</a
+      ><a name="3303"
+      > </a
+      ><a name="3304" href="not-not-funext.html#3232" class="Bound"
+      >X</a
+      ><a name="3305" class="Symbol"
+      >)</a
+      ><a name="3306"
+      > </a
+      ><a name="3307" class="Symbol"
+      >&#8594;</a
+      ><a name="3308"
+      > </a
+      ><a name="3309" href="MiniLibrary.html#745" class="Record"
+      >&#931;</a
+      ><a name="3310"
+      > </a
+      ><a name="3311" class="Symbol"
+      >\(</a
+      ><a name="3313" href="not-not-funext.html#3313" class="Bound"
+      >y</a
+      ><a name="3314"
+      > </a
+      ><a name="3315" class="Symbol"
+      >:</a
+      ><a name="3316"
+      > </a
+      ><a name="3317" href="not-not-funext.html#3236" class="Bound"
+      >Y</a
+      ><a name="3318"
+      > </a
+      ><a name="3319" href="not-not-funext.html#3300" class="Bound"
+      >x</a
+      ><a name="3320" class="Symbol"
+      >)</a
+      ><a name="3321"
+      > </a
+      ><a name="3322" class="Symbol"
+      >&#8594;</a
+      ><a name="3323"
+      > </a
+      ><a name="3324" href="MiniLibrary.html#745" class="Record"
+      >&#931;</a
+      ><a name="3325"
+      > </a
+      ><a name="3326" class="Symbol"
+      >\(</a
+      ><a name="3328" href="not-not-funext.html#3328" class="Bound"
+      >z</a
+      ><a name="3329"
+      > </a
+      ><a name="3330" class="Symbol"
+      >:</a
+      ><a name="3331"
+      > </a
+      ><a name="3332" href="not-not-funext.html#3240" class="Bound"
+      >Z</a
+      ><a name="3333"
+      > </a
+      ><a name="3334" href="not-not-funext.html#3300" class="Bound"
+      >x</a
+      ><a name="3335"
+      > </a
+      ><a name="3336" href="not-not-funext.html#3313" class="Bound"
+      >y</a
+      ><a name="3337" class="Symbol"
+      >)</a
+      ><a name="3338"
+      > </a
+      ><a name="3339" class="Symbol"
+      >&#8594;</a
+      ><a name="3340"
+      > </a
+      ><a name="3341" href="MiniLibrary.html#745" class="Record"
+      >&#931;</a
+      ><a name="3342"
+      > </a
+      ><a name="3343" class="Symbol"
+      >\(</a
+      ><a name="3345" href="not-not-funext.html#3345" class="Bound"
+      >w</a
+      ><a name="3346"
+      > </a
+      ><a name="3347" class="Symbol"
+      >:</a
+      ><a name="3348"
+      > </a
+      ><a name="3349" href="not-not-funext.html#3244" class="Bound"
+      >W</a
+      ><a name="3350"
+      > </a
+      ><a name="3351" href="not-not-funext.html#3300" class="Bound"
+      >x</a
+      ><a name="3352"
+      > </a
+      ><a name="3353" href="not-not-funext.html#3313" class="Bound"
+      >y</a
+      ><a name="3354"
+      > </a
+      ><a name="3355" href="not-not-funext.html#3328" class="Bound"
+      >z</a
+      ><a name="3356" class="Symbol"
+      >)</a
+      ><a name="3357"
+      > </a
+      ><a name="3358" class="Symbol"
+      >&#8594;</a
+      ><a name="3359"
+      > </a
+      ><a name="3360" href="not-not-funext.html#3248" class="Bound"
+      >U</a
+      ><a name="3361"
+      > </a
+      ><a name="3362" href="not-not-funext.html#3300" class="Bound"
+      >x</a
+      ><a name="3363"
+      > </a
+      ><a name="3364" href="not-not-funext.html#3313" class="Bound"
+      >y</a
+      ><a name="3365"
+      > </a
+      ><a name="3366" href="not-not-funext.html#3328" class="Bound"
+      >z</a
+      ><a name="3367"
+      > </a
+      ><a name="3368" href="not-not-funext.html#3345" class="Bound"
+      >w</a
+      ><a name="3369"
+      >
+  </a
+      ><a name="3372" href="not-not-funext.html#3372" class="Function"
+      >F</a
+      ><a name="3373"
+      > </a
+      ><a name="3374" href="not-not-funext.html#3374" class="Function"
+      >G</a
+      ><a name="3375"
+      > </a
+      ><a name="3376" class="Symbol"
+      >:</a
+      ><a name="3377"
+      > </a
+      ><a name="3378" class="Symbol"
+      >(</a
+      ><a name="3379" href="not-not-funext.html#3379" class="Bound"
+      >&#969;</a
+      ><a name="3380"
+      > </a
+      ><a name="3381" class="Symbol"
+      >:</a
+      ><a name="3382"
+      > </a
+      ><a name="3383" href="not-not-funext.html#3282" class="Function"
+      >&#937;</a
+      ><a name="3384" class="Symbol"
+      >)</a
+      ><a name="3385"
+      > </a
+      ><a name="3386" class="Symbol"
+      >&#8594;</a
+      ><a name="3387"
+      > </a
+      ><a name="3388" href="not-not-funext.html#3252" class="Bound"
+      >V</a
+      ><a name="3389"
+      > </a
+      ><a name="3390" class="Symbol"
+      >(</a
+      ><a name="3391" href="MiniLibrary.html#840" class="Function"
+      >&#960;&#8320;</a
+      ><a name="3393"
+      > </a
+      ><a name="3394" href="not-not-funext.html#3379" class="Bound"
+      >&#969;</a
+      ><a name="3395" class="Symbol"
+      >)</a
+      ><a name="3396"
+      > </a
+      ><a name="3397" class="Symbol"
+      >(</a
+      ><a name="3398" href="MiniLibrary.html#840" class="Function"
+      >&#960;&#8320;</a
+      ><a name="3400" class="Symbol"
+      >(</a
+      ><a name="3401" href="MiniLibrary.html#850" class="Function"
+      >&#960;&#8321;</a
+      ><a name="3403"
+      > </a
+      ><a name="3404" href="not-not-funext.html#3379" class="Bound"
+      >&#969;</a
+      ><a name="3405" class="Symbol"
+      >))</a
+      ><a name="3407"
+      > </a
+      ><a name="3408" class="Symbol"
+      >(</a
+      ><a name="3409" href="MiniLibrary.html#840" class="Function"
+      >&#960;&#8320;</a
+      ><a name="3411" class="Symbol"
+      >(</a
+      ><a name="3412" href="MiniLibrary.html#850" class="Function"
+      >&#960;&#8321;</a
+      ><a name="3414" class="Symbol"
+      >(</a
+      ><a name="3415" href="MiniLibrary.html#850" class="Function"
+      >&#960;&#8321;</a
+      ><a name="3417"
+      > </a
+      ><a name="3418" href="not-not-funext.html#3379" class="Bound"
+      >&#969;</a
+      ><a name="3419" class="Symbol"
+      >)))</a
+      ><a name="3422"
+      > </a
+      ><a name="3423" class="Symbol"
+      >(</a
+      ><a name="3424" href="MiniLibrary.html#840" class="Function"
+      >&#960;&#8320;</a
+      ><a name="3426" class="Symbol"
+      >(</a
+      ><a name="3427" href="MiniLibrary.html#850" class="Function"
+      >&#960;&#8321;</a
+      ><a name="3429" class="Symbol"
+      >(</a
+      ><a name="3430" href="MiniLibrary.html#850" class="Function"
+      >&#960;&#8321;</a
+      ><a name="3432" class="Symbol"
+      >(</a
+      ><a name="3433" href="MiniLibrary.html#850" class="Function"
+      >&#960;&#8321;</a
+      ><a name="3435"
+      > </a
+      ><a name="3436" href="not-not-funext.html#3379" class="Bound"
+      >&#969;</a
+      ><a name="3437" class="Symbol"
+      >))))</a
+      ><a name="3441"
+      > </a
+      ><a name="3442" class="Symbol"
+      >(</a
+      ><a name="3443" href="MiniLibrary.html#850" class="Function"
+      >&#960;&#8321;</a
+      ><a name="3445" class="Symbol"
+      >(</a
+      ><a name="3446" href="MiniLibrary.html#850" class="Function"
+      >&#960;&#8321;</a
+      ><a name="3448" class="Symbol"
+      >(</a
+      ><a name="3449" href="MiniLibrary.html#850" class="Function"
+      >&#960;&#8321;</a
+      ><a name="3451" class="Symbol"
+      >(</a
+      ><a name="3452" href="MiniLibrary.html#850" class="Function"
+      >&#960;&#8321;</a
+      ><a name="3454"
+      > </a
+      ><a name="3455" href="not-not-funext.html#3379" class="Bound"
+      >&#969;</a
+      ><a name="3456" class="Symbol"
+      >))))</a
+      ><a name="3460"
+      >
+  </a
+      ><a name="3463" href="not-not-funext.html#3372" class="Function"
+      >F</a
+      ><a name="3464"
+      > </a
+      ><a name="3465" class="Symbol"
+      >(</a
+      ><a name="3466" href="not-not-funext.html#3466" class="Bound"
+      >x</a
+      ><a name="3467"
+      > </a
+      ><a name="3468" href="MiniLibrary.html#825" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="3469"
+      > </a
+      ><a name="3470" href="not-not-funext.html#3470" class="Bound"
+      >y</a
+      ><a name="3471"
+      > </a
+      ><a name="3472" href="MiniLibrary.html#825" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="3473"
+      > </a
+      ><a name="3474" href="not-not-funext.html#3474" class="Bound"
+      >z</a
+      ><a name="3475"
+      > </a
+      ><a name="3476" href="MiniLibrary.html#825" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="3477"
+      > </a
+      ><a name="3478" href="not-not-funext.html#3478" class="Bound"
+      >w</a
+      ><a name="3479"
+      > </a
+      ><a name="3480" href="MiniLibrary.html#825" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="3481"
+      > </a
+      ><a name="3482" href="not-not-funext.html#3482" class="Bound"
+      >u</a
+      ><a name="3483" class="Symbol"
+      >)</a
+      ><a name="3484"
+      > </a
+      ><a name="3485" class="Symbol"
+      >=</a
+      ><a name="3486"
+      > </a
+      ><a name="3487" href="not-not-funext.html#3256" class="Bound"
+      >f</a
+      ><a name="3488"
+      > </a
+      ><a name="3489" href="not-not-funext.html#3466" class="Bound"
+      >x</a
+      ><a name="3490"
+      > </a
+      ><a name="3491" href="not-not-funext.html#3470" class="Bound"
+      >y</a
+      ><a name="3492"
+      > </a
+      ><a name="3493" href="not-not-funext.html#3474" class="Bound"
+      >z</a
+      ><a name="3494"
+      > </a
+      ><a name="3495" href="not-not-funext.html#3478" class="Bound"
+      >w</a
+      ><a name="3496"
+      > </a
+      ><a name="3497" href="not-not-funext.html#3482" class="Bound"
+      >u</a
+      ><a name="3498"
+      >
+  </a
+      ><a name="3501" href="not-not-funext.html#3374" class="Function"
+      >G</a
+      ><a name="3502"
+      > </a
+      ><a name="3503" class="Symbol"
+      >(</a
+      ><a name="3504" href="not-not-funext.html#3504" class="Bound"
+      >x</a
+      ><a name="3505"
+      > </a
+      ><a name="3506" href="MiniLibrary.html#825" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="3507"
+      > </a
+      ><a name="3508" href="not-not-funext.html#3508" class="Bound"
+      >y</a
+      ><a name="3509"
+      > </a
+      ><a name="3510" href="MiniLibrary.html#825" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="3511"
+      > </a
+      ><a name="3512" href="not-not-funext.html#3512" class="Bound"
+      >z</a
+      ><a name="3513"
+      > </a
+      ><a name="3514" href="MiniLibrary.html#825" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="3515"
+      > </a
+      ><a name="3516" href="not-not-funext.html#3516" class="Bound"
+      >w</a
+      ><a name="3517"
+      > </a
+      ><a name="3518" href="MiniLibrary.html#825" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="3519"
+      > </a
+      ><a name="3520" href="not-not-funext.html#3520" class="Bound"
+      >u</a
+      ><a name="3521" class="Symbol"
+      >)</a
+      ><a name="3522"
+      > </a
+      ><a name="3523" class="Symbol"
+      >=</a
+      ><a name="3524"
+      > </a
+      ><a name="3525" href="not-not-funext.html#3260" class="Bound"
+      >g</a
+      ><a name="3526"
+      > </a
+      ><a name="3527" href="not-not-funext.html#3504" class="Bound"
+      >x</a
+      ><a name="3528"
+      > </a
+      ><a name="3529" href="not-not-funext.html#3508" class="Bound"
+      >y</a
+      ><a name="3530"
+      > </a
+      ><a name="3531" href="not-not-funext.html#3512" class="Bound"
+      >z</a
+      ><a name="3532"
+      > </a
+      ><a name="3533" href="not-not-funext.html#3516" class="Bound"
+      >w</a
+      ><a name="3534"
+      > </a
+      ><a name="3535" href="not-not-funext.html#3520" class="Bound"
+      >u</a
+      ><a name="3536"
+      >
+  </a
+      ><a name="3539" href="not-not-funext.html#3539" class="Function"
+      >Ex</a
+      ><a name="3541"
+      > </a
+      ><a name="3542" class="Symbol"
+      >:</a
+      ><a name="3543"
+      > </a
+      ><a name="3544" class="Symbol"
+      >(</a
+      ><a name="3545" href="not-not-funext.html#3545" class="Bound"
+      >&#969;</a
+      ><a name="3546"
+      > </a
+      ><a name="3547" class="Symbol"
+      >:</a
+      ><a name="3548"
+      > </a
+      ><a name="3549" href="not-not-funext.html#3282" class="Function"
+      >&#937;</a
+      ><a name="3550" class="Symbol"
+      >)</a
+      ><a name="3551"
+      > </a
+      ><a name="3552" class="Symbol"
+      >&#8594;</a
+      ><a name="3553"
+      > </a
+      ><a name="3554" href="not-not-funext.html#3372" class="Function"
+      >F</a
+      ><a name="3555"
+      > </a
+      ><a name="3556" href="not-not-funext.html#3545" class="Bound"
+      >&#969;</a
+      ><a name="3557"
+      > </a
+      ><a name="3558" href="MiniLibrary.html#1706" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="3559"
+      > </a
+      ><a name="3560" href="not-not-funext.html#3374" class="Function"
+      >G</a
+      ><a name="3561"
+      > </a
+      ><a name="3562" href="not-not-funext.html#3545" class="Bound"
+      >&#969;</a
+      ><a name="3563"
+      >
+  </a
+      ><a name="3566" href="not-not-funext.html#3539" class="Function"
+      >Ex</a
+      ><a name="3568"
+      > </a
+      ><a name="3569" class="Symbol"
+      >(</a
+      ><a name="3570" href="not-not-funext.html#3570" class="Bound"
+      >x</a
+      ><a name="3571"
+      > </a
+      ><a name="3572" href="MiniLibrary.html#825" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="3573"
+      > </a
+      ><a name="3574" href="not-not-funext.html#3574" class="Bound"
+      >y</a
+      ><a name="3575"
+      > </a
+      ><a name="3576" href="MiniLibrary.html#825" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="3577"
+      > </a
+      ><a name="3578" href="not-not-funext.html#3578" class="Bound"
+      >z</a
+      ><a name="3579"
+      > </a
+      ><a name="3580" href="MiniLibrary.html#825" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="3581"
+      > </a
+      ><a name="3582" href="not-not-funext.html#3582" class="Bound"
+      >w</a
+      ><a name="3583"
+      > </a
+      ><a name="3584" href="MiniLibrary.html#825" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="3585"
+      > </a
+      ><a name="3586" href="not-not-funext.html#3586" class="Bound"
+      >u</a
+      ><a name="3587" class="Symbol"
+      >)</a
+      ><a name="3588"
+      > </a
+      ><a name="3589" class="Symbol"
+      >=</a
+      ><a name="3590"
+      > </a
+      ><a name="3591" href="not-not-funext.html#3263" class="Bound"
+      >ex</a
+      ><a name="3593"
+      > </a
+      ><a name="3594" href="not-not-funext.html#3570" class="Bound"
+      >x</a
+      ><a name="3595"
+      > </a
+      ><a name="3596" href="not-not-funext.html#3574" class="Bound"
+      >y</a
+      ><a name="3597"
+      > </a
+      ><a name="3598" href="not-not-funext.html#3578" class="Bound"
+      >z</a
+      ><a name="3599"
+      > </a
+      ><a name="3600" href="not-not-funext.html#3582" class="Bound"
+      >w</a
+      ><a name="3601"
+      > </a
+      ><a name="3602" href="not-not-funext.html#3586" class="Bound"
+      >u</a
+      ><a name="3603"
+      >
+  </a
+      ><a name="3606" href="not-not-funext.html#3606" class="Function"
+      >E</a
+      ><a name="3607"
+      > </a
+      ><a name="3608" class="Symbol"
+      >:</a
+      ><a name="3609"
+      > </a
+      ><a name="3610" href="not-not.html#113" class="Function Operator"
+      >[</a
+      ><a name="3611"
+      > </a
+      ><a name="3612" href="not-not-funext.html#3372" class="Function"
+      >F</a
+      ><a name="3613"
+      > </a
+      ><a name="3614" href="MiniLibrary.html#1706" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="3615"
+      > </a
+      ><a name="3616" href="not-not-funext.html#3374" class="Function"
+      >G</a
+      ><a name="3617"
+      > </a
+      ><a name="3618" href="not-not.html#113" class="Function Operator"
+      >]</a
+      ><a name="3619"
+      >
+  </a
+      ><a name="3622" href="not-not-funext.html#3606" class="Function"
+      >E</a
+      ><a name="3623"
+      > </a
+      ><a name="3624" class="Symbol"
+      >=</a
+      ><a name="3625"
+      > </a
+      ><a name="3626" href="not-not-funext.html#676" class="Function"
+      >funext&#185;</a
+      ><a name="3633"
+      > </a
+      ><a name="3634" href="not-not-funext.html#3539" class="Function"
+      >Ex</a
+      ><a name="3636"
+      >
+  </a
+      ><a name="3639" href="not-not-funext.html#3639" class="Function"
+      >goal</a
+      ><a name="3643"
+      > </a
+      ><a name="3644" class="Symbol"
+      >:</a
+      ><a name="3645"
+      > </a
+      ><a name="3646" href="not-not.html#113" class="Function Operator"
+      >[</a
+      ><a name="3647"
+      > </a
+      ><a name="3648" href="not-not-funext.html#3256" class="Bound"
+      >f</a
+      ><a name="3649"
+      > </a
+      ><a name="3650" href="MiniLibrary.html#1706" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="3651"
+      > </a
+      ><a name="3652" href="not-not-funext.html#3260" class="Bound"
+      >g</a
+      ><a name="3653"
+      > </a
+      ><a name="3654" href="not-not.html#113" class="Function Operator"
+      >]</a
+      ><a name="3655"
+      >
+  </a
+      ><a name="3658" href="not-not-funext.html#3639" class="Function"
+      >goal</a
+      ><a name="3662"
+      > </a
+      ><a name="3663" class="Symbol"
+      >=</a
+      ><a name="3664"
+      > </a
+      ><a name="3665" href="not-not.html#551" class="Function"
+      >functor</a
+      ><a name="3672"
+      > </a
+      ><a name="3673" class="Symbol"
+      >(</a
+      ><a name="3674" href="MiniLibrary.html#2001" class="Function"
+      >ap</a
+      ><a name="3676"
+      > </a
+      ><a name="3677" class="Symbol"
+      >(&#955;</a
+      ><a name="3679"
+      > </a
+      ><a name="3680" href="not-not-funext.html#3680" class="Bound"
+      >&#966;</a
+      ><a name="3681"
+      > </a
+      ><a name="3682" href="not-not-funext.html#3682" class="Bound"
+      >x</a
+      ><a name="3683"
+      > </a
+      ><a name="3684" href="not-not-funext.html#3684" class="Bound"
+      >y</a
+      ><a name="3685"
+      > </a
+      ><a name="3686" href="not-not-funext.html#3686" class="Bound"
+      >z</a
+      ><a name="3687"
+      > </a
+      ><a name="3688" href="not-not-funext.html#3688" class="Bound"
+      >w</a
+      ><a name="3689"
+      > </a
+      ><a name="3690" href="not-not-funext.html#3690" class="Bound"
+      >u</a
+      ><a name="3691"
+      > </a
+      ><a name="3692" class="Symbol"
+      >&#8594;</a
+      ><a name="3693"
+      > </a
+      ><a name="3694" href="not-not-funext.html#3680" class="Bound"
+      >&#966;</a
+      ><a name="3695" class="Symbol"
+      >(</a
+      ><a name="3696" href="not-not-funext.html#3682" class="Bound"
+      >x</a
+      ><a name="3697"
+      > </a
+      ><a name="3698" href="MiniLibrary.html#825" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="3699"
+      > </a
+      ><a name="3700" href="not-not-funext.html#3684" class="Bound"
+      >y</a
+      ><a name="3701"
+      > </a
+      ><a name="3702" href="MiniLibrary.html#825" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="3703"
+      > </a
+      ><a name="3704" href="not-not-funext.html#3686" class="Bound"
+      >z</a
+      ><a name="3705"
+      > </a
+      ><a name="3706" href="MiniLibrary.html#825" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="3707"
+      > </a
+      ><a name="3708" href="not-not-funext.html#3688" class="Bound"
+      >w</a
+      ><a name="3709"
+      > </a
+      ><a name="3710" href="MiniLibrary.html#825" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="3711"
+      > </a
+      ><a name="3712" href="not-not-funext.html#3690" class="Bound"
+      >u</a
+      ><a name="3713" class="Symbol"
+      >)))</a
+      ><a name="3716"
+      > </a
+      ><a name="3717" href="not-not-funext.html#3606" class="Function"
+      >E</a
+      ><a name="3718"
+      >
+
+
+
+</a
+      ><a name="3722" href="not-not-funext.html#3722" class="Function"
+      >Lemma[[]-[hprop]]</a
+      ><a name="3739"
+      > </a
+      ><a name="3740" class="Symbol"
+      >:</a
+      ><a name="3741"
+      > </a
+      ><a name="3742" class="Symbol"
+      >{</a
+      ><a name="3743" href="not-not-funext.html#3743" class="Bound"
+      >X</a
+      ><a name="3744"
+      > </a
+      ><a name="3745" class="Symbol"
+      >:</a
+      ><a name="3746"
+      > </a
+      ><a name="3747" class="PrimitiveType"
+      >Set</a
+      ><a name="3750" class="Symbol"
+      >}</a
+      ><a name="3751"
+      > </a
+      ><a name="3752" class="Symbol"
+      >&#8594;</a
+      ><a name="3753"
+      > </a
+      ><a name="3754" class="Symbol"
+      >(</a
+      ><a name="3755" href="not-not-funext.html#3755" class="Bound"
+      >xh</a
+      ><a name="3757"
+      > </a
+      ><a name="3758" href="not-not-funext.html#3758" class="Bound"
+      >yh</a
+      ><a name="3760"
+      > </a
+      ><a name="3761" class="Symbol"
+      >:</a
+      ><a name="3762"
+      > </a
+      ><a name="3763" href="not-not.html#113" class="Function Operator"
+      >[</a
+      ><a name="3764"
+      > </a
+      ><a name="3765" href="not-not-funext.html#3743" class="Bound"
+      >X</a
+      ><a name="3766"
+      > </a
+      ><a name="3767" href="not-not.html#113" class="Function Operator"
+      >]</a
+      ><a name="3768" class="Symbol"
+      >)</a
+      ><a name="3769"
+      > </a
+      ><a name="3770" class="Symbol"
+      >&#8594;</a
+      ><a name="3771"
+      > </a
+      ><a name="3772" href="not-not.html#113" class="Function Operator"
+      >[</a
+      ><a name="3773"
+      > </a
+      ><a name="3774" href="not-not-funext.html#3755" class="Bound"
+      >xh</a
+      ><a name="3776"
+      > </a
+      ><a name="3777" href="MiniLibrary.html#1706" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="3778"
+      > </a
+      ><a name="3779" href="not-not-funext.html#3758" class="Bound"
+      >yh</a
+      ><a name="3781"
+      > </a
+      ><a name="3782" href="not-not.html#113" class="Function Operator"
+      >]</a
+      ><a name="3783"
+      >
+</a
+      ><a name="3784" href="not-not-funext.html#3722" class="Function"
+      >Lemma[[]-[hprop]]</a
+      ><a name="3801"
+      > </a
+      ><a name="3802" class="Symbol"
+      >{</a
+      ><a name="3803" href="not-not-funext.html#3803" class="Bound"
+      >X</a
+      ><a name="3804" class="Symbol"
+      >}</a
+      ><a name="3805"
+      > </a
+      ><a name="3806" href="not-not-funext.html#3806" class="Bound"
+      >xh</a
+      ><a name="3808"
+      > </a
+      ><a name="3809" href="not-not-funext.html#3809" class="Bound"
+      >yh</a
+      ><a name="3811"
+      > </a
+      ><a name="3812" class="Symbol"
+      >=</a
+      ><a name="3813"
+      > </a
+      ><a name="3814" href="not-not-funext.html#676" class="Function"
+      >funext&#185;</a
+      ><a name="3821"
+      > </a
+      ><a name="3822" href="not-not-funext.html#3834" class="Function"
+      >eu</a
+      ><a name="3824"
+      >
+ </a
+      ><a name="3826" class="Keyword"
+      >where</a
+      ><a name="3831"
+      >
+  </a
+      ><a name="3834" href="not-not-funext.html#3834" class="Function"
+      >eu</a
+      ><a name="3836"
+      > </a
+      ><a name="3837" class="Symbol"
+      >:</a
+      ><a name="3838"
+      > </a
+      ><a name="3839" class="Symbol"
+      >(</a
+      ><a name="3840" href="not-not-funext.html#3840" class="Bound"
+      >u</a
+      ><a name="3841"
+      > </a
+      ><a name="3842" class="Symbol"
+      >:</a
+      ><a name="3843"
+      > </a
+      ><a name="3844" href="MiniLibrary.html#3284" class="Function"
+      >&#172;</a
+      ><a name="3845"
+      > </a
+      ><a name="3846" href="not-not-funext.html#3803" class="Bound"
+      >X</a
+      ><a name="3847" class="Symbol"
+      >)</a
+      ><a name="3848"
+      > </a
+      ><a name="3849" class="Symbol"
+      >&#8594;</a
+      ><a name="3850"
+      > </a
+      ><a name="3851" href="not-not-funext.html#3806" class="Bound"
+      >xh</a
+      ><a name="3853"
+      > </a
+      ><a name="3854" href="not-not-funext.html#3840" class="Bound"
+      >u</a
+      ><a name="3855"
+      > </a
+      ><a name="3856" href="MiniLibrary.html#1706" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="3857"
+      > </a
+      ><a name="3858" href="not-not-funext.html#3809" class="Bound"
+      >yh</a
+      ><a name="3860"
+      > </a
+      ><a name="3861" href="not-not-funext.html#3840" class="Bound"
+      >u</a
+      ><a name="3862"
+      >
+  </a
+      ><a name="3865" href="not-not-funext.html#3834" class="Function"
+      >eu</a
+      ><a name="3867"
+      > </a
+      ><a name="3868" href="not-not-funext.html#3868" class="Bound"
+      >u</a
+      ><a name="3869"
+      > </a
+      ><a name="3870" class="Symbol"
+      >=</a
+      ><a name="3871"
+      > </a
+      ><a name="3872" href="MiniLibrary.html#3229" class="Function"
+      >&#8709;-elim</a
+      ><a name="3878"
+      > </a
+      ><a name="3879" class="Symbol"
+      >(</a
+      ><a name="3880" href="not-not-funext.html#3806" class="Bound"
+      >xh</a
+      ><a name="3882"
+      > </a
+      ><a name="3883" href="not-not-funext.html#3868" class="Bound"
+      >u</a
+      ><a name="3884" class="Symbol"
+      >)</a
+      ><a name="3885"
+      >
+
+\end{code}
+</a
+      ></pre
+    ></body
+  ></html
+>

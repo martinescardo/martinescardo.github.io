@@ -1,0 +1,5603 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+><head
+  ><title
+    >Space-exponential</title
+    ><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"
+     /><meta http-equiv="Content-Style-Type" content="text/css"
+     /><link href="Agda.css" rel="stylesheet" type="text/css"
+     /></head
+  ><body
+  ><pre
+    ><a name="1" class="Comment"
+      >Chuangjie Xu, 2012</a
+      ><a name="19"
+      >
+
+\begin{code}
+
+</a
+      ><a name="35" class="Keyword"
+      >module</a
+      ><a name="41"
+      > </a
+      ><a name="42" href="Space-exponential.html#1" class="Module"
+      >Space-exponential</a
+      ><a name="59"
+      > </a
+      ><a name="60" class="Keyword"
+      >where</a
+      ><a name="65"
+      >
+
+</a
+      ><a name="67" class="Keyword"
+      >open</a
+      ><a name="71"
+      > </a
+      ><a name="72" class="Keyword"
+      >import</a
+      ><a name="78"
+      > </a
+      ><a name="79" href="Mini-library.html#1" class="Module"
+      >Mini-library</a
+      ><a name="91"
+      >
+</a
+      ><a name="92" class="Keyword"
+      >open</a
+      ><a name="96"
+      > </a
+      ><a name="97" class="Keyword"
+      >import</a
+      ><a name="103"
+      > </a
+      ><a name="104" href="Setoid.html#1" class="Module"
+      >Setoid</a
+      ><a name="110"
+      >
+</a
+      ><a name="111" class="Keyword"
+      >open</a
+      ><a name="115"
+      > </a
+      ><a name="116" class="Keyword"
+      >import</a
+      ><a name="122"
+      > </a
+      ><a name="123" href="ConsHeadTail.html#1" class="Module"
+      >ConsHeadTail</a
+      ><a name="135"
+      >
+</a
+      ><a name="136" class="Keyword"
+      >open</a
+      ><a name="140"
+      > </a
+      ><a name="141" class="Keyword"
+      >import</a
+      ><a name="147"
+      > </a
+      ><a name="148" href="Space.html#1" class="Module"
+      >Space</a
+      ><a name="153"
+      >
+</a
+      ><a name="154" class="Keyword"
+      >open</a
+      ><a name="158"
+      > </a
+      ><a name="159" class="Keyword"
+      >import</a
+      ><a name="165"
+      > </a
+      ><a name="166" href="Uniform-continuity.html#1" class="Module"
+      >Uniform-continuity</a
+      ><a name="184"
+      >
+
+</a
+      ><a name="186" class="Comment"
+      >-- Exponentials of C-spaces</a
+      ><a name="213"
+      >
+
+</a
+      ><a name="215" href="Space-exponential.html#215" class="Function"
+      >exp</a
+      ><a name="218"
+      > </a
+      ><a name="219" class="Symbol"
+      >:</a
+      ><a name="220"
+      > </a
+      ><a name="221" class="Symbol"
+      >(</a
+      ><a name="222" href="Space-exponential.html#222" class="Bound"
+      >X</a
+      ><a name="223"
+      > </a
+      ><a name="224" href="Space-exponential.html#224" class="Bound"
+      >Y</a
+      ><a name="225"
+      > </a
+      ><a name="226" class="Symbol"
+      >:</a
+      ><a name="227"
+      > </a
+      ><a name="228" href="Space.html#3755" class="Function"
+      >Space</a
+      ><a name="233" class="Symbol"
+      >)</a
+      ><a name="234"
+      > </a
+      ><a name="235" class="Symbol"
+      >&#8594;</a
+      ><a name="236"
+      >
+      </a
+      ><a name="243" href="Setoid.html#4554" class="Function"
+      >E-map-&#8322;&#8469;</a
+      ><a name="251"
+      > </a
+      ><a name="252" class="Symbol"
+      >(</a
+      ><a name="253" href="Space.html#4919" class="Function"
+      >MapSetoid</a
+      ><a name="262"
+      > </a
+      ><a name="263" href="Space-exponential.html#222" class="Bound"
+      >X</a
+      ><a name="264"
+      > </a
+      ><a name="265" href="Space-exponential.html#224" class="Bound"
+      >Y</a
+      ><a name="266" class="Symbol"
+      >)</a
+      ><a name="267"
+      > </a
+      ><a name="268" class="Symbol"
+      >&#8594;</a
+      ><a name="269"
+      > </a
+      ><a name="270" href="Setoid.html#4604" class="Function"
+      >E-map-&#8322;&#8469;-&#8322;&#8469;</a
+      ><a name="281"
+      > </a
+      ><a name="282" class="Symbol"
+      >&#8594;</a
+      ><a name="283"
+      > </a
+      ><a name="284" href="Setoid.html#4554" class="Function"
+      >E-map-&#8322;&#8469;</a
+      ><a name="292"
+      > </a
+      ><a name="293" class="Symbol"
+      >(</a
+      ><a name="294" href="Space.html#3808" class="Function"
+      >U</a
+      ><a name="295"
+      > </a
+      ><a name="296" href="Space-exponential.html#222" class="Bound"
+      >X</a
+      ><a name="297" class="Symbol"
+      >)</a
+      ><a name="298"
+      > </a
+      ><a name="299" class="Symbol"
+      >&#8594;</a
+      ><a name="300"
+      >
+      </a
+      ><a name="307" href="Setoid.html#4554" class="Function"
+      >E-map-&#8322;&#8469;</a
+      ><a name="315"
+      > </a
+      ><a name="316" class="Symbol"
+      >(</a
+      ><a name="317" href="Space.html#3808" class="Function"
+      >U</a
+      ><a name="318"
+      > </a
+      ><a name="319" href="Space-exponential.html#224" class="Bound"
+      >Y</a
+      ><a name="320" class="Symbol"
+      >)</a
+      ><a name="321"
+      >
+</a
+      ><a name="322" href="Space-exponential.html#215" class="Function"
+      >exp</a
+      ><a name="325"
+      > </a
+      ><a name="326" href="Space-exponential.html#326" class="Bound"
+      >X</a
+      ><a name="327"
+      > </a
+      ><a name="328" href="Space-exponential.html#328" class="Bound"
+      >Y</a
+      ><a name="329"
+      > </a
+      ><a name="330" class="Symbol"
+      >(</a
+      ><a name="331" href="Space-exponential.html#331" class="Bound"
+      >r</a
+      ><a name="332"
+      > </a
+      ><a name="333" href="Mini-library.html#705" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="334"
+      > </a
+      ><a name="335" href="Space-exponential.html#335" class="Bound"
+      >er</a
+      ><a name="337" class="Symbol"
+      >)</a
+      ><a name="338"
+      > </a
+      ><a name="339" class="Symbol"
+      >(</a
+      ><a name="340" href="Space-exponential.html#340" class="Bound"
+      >t</a
+      ><a name="341"
+      > </a
+      ><a name="342" href="Mini-library.html#705" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="343"
+      > </a
+      ><a name="344" href="Space-exponential.html#344" class="Bound"
+      >et</a
+      ><a name="346" class="Symbol"
+      >)</a
+      ><a name="347"
+      > </a
+      ><a name="348" class="Symbol"
+      >(</a
+      ><a name="349" href="Space-exponential.html#349" class="Bound"
+      >p</a
+      ><a name="350"
+      > </a
+      ><a name="351" href="Mini-library.html#705" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="352"
+      > </a
+      ><a name="353" href="Space-exponential.html#353" class="Bound"
+      >ep</a
+      ><a name="355" class="Symbol"
+      >)</a
+      ><a name="356"
+      > </a
+      ><a name="357" class="Symbol"
+      >=</a
+      ><a name="358"
+      > </a
+      ><a name="359" href="Space-exponential.html#423" class="Function"
+      >q</a
+      ><a name="360"
+      > </a
+      ><a name="361" href="Mini-library.html#705" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="362"
+      > </a
+      ><a name="363" href="Space-exponential.html#474" class="Function"
+      >eq</a
+      ><a name="365"
+      >
+ </a
+      ><a name="367" class="Keyword"
+      >where</a
+      ><a name="372"
+      >
+  </a
+      ><a name="375" href="Space-exponential.html#375" class="Function Operator"
+      >_&#8776;_</a
+      ><a name="378"
+      > </a
+      ><a name="379" class="Symbol"
+      >:</a
+      ><a name="380"
+      > </a
+      ><a name="381" href="Setoid.html#295" class="Function"
+      >&#360;</a
+      ><a name="382"
+      > </a
+      ><a name="383" class="Symbol"
+      >(</a
+      ><a name="384" href="Space.html#3808" class="Function"
+      >U</a
+      ><a name="385"
+      > </a
+      ><a name="386" href="Space-exponential.html#328" class="Bound"
+      >Y</a
+      ><a name="387" class="Symbol"
+      >)</a
+      ><a name="388"
+      > </a
+      ><a name="389" class="Symbol"
+      >&#8594;</a
+      ><a name="390"
+      > </a
+      ><a name="391" href="Setoid.html#295" class="Function"
+      >&#360;</a
+      ><a name="392"
+      > </a
+      ><a name="393" class="Symbol"
+      >(</a
+      ><a name="394" href="Space.html#3808" class="Function"
+      >U</a
+      ><a name="395"
+      > </a
+      ><a name="396" href="Space-exponential.html#328" class="Bound"
+      >Y</a
+      ><a name="397" class="Symbol"
+      >)</a
+      ><a name="398"
+      > </a
+      ><a name="399" class="Symbol"
+      >&#8594;</a
+      ><a name="400"
+      > </a
+      ><a name="401" class="PrimitiveType"
+      >Set</a
+      ><a name="404"
+      >
+  </a
+      ><a name="407" href="Space-exponential.html#375" class="Function Operator"
+      >_&#8776;_</a
+      ><a name="410"
+      > </a
+      ><a name="411" class="Symbol"
+      >=</a
+      ><a name="412"
+      > </a
+      ><a name="413" href="Setoid.html#327" class="Function"
+      >E</a
+      ><a name="414"
+      > </a
+      ><a name="415" class="Symbol"
+      >(</a
+      ><a name="416" href="Space.html#3808" class="Function"
+      >U</a
+      ><a name="417"
+      > </a
+      ><a name="418" href="Space-exponential.html#328" class="Bound"
+      >Y</a
+      ><a name="419" class="Symbol"
+      >)</a
+      ><a name="420"
+      >
+  </a
+      ><a name="423" href="Space-exponential.html#423" class="Function"
+      >q</a
+      ><a name="424"
+      > </a
+      ><a name="425" class="Symbol"
+      >:</a
+      ><a name="426"
+      > </a
+      ><a name="427" href="Mini-library.html#6102" class="Function"
+      >&#8322;&#8469;</a
+      ><a name="429"
+      > </a
+      ><a name="430" class="Symbol"
+      >&#8594;</a
+      ><a name="431"
+      > </a
+      ><a name="432" href="Setoid.html#295" class="Function"
+      >&#360;</a
+      ><a name="433"
+      > </a
+      ><a name="434" class="Symbol"
+      >(</a
+      ><a name="435" href="Space.html#3808" class="Function"
+      >U</a
+      ><a name="436"
+      > </a
+      ><a name="437" href="Space-exponential.html#328" class="Bound"
+      >Y</a
+      ><a name="438" class="Symbol"
+      >)</a
+      ><a name="439"
+      >
+  </a
+      ><a name="442" href="Space-exponential.html#423" class="Function"
+      >q</a
+      ><a name="443"
+      > </a
+      ><a name="444" href="Space-exponential.html#444" class="Bound"
+      >&#945;</a
+      ><a name="445"
+      > </a
+      ><a name="446" class="Symbol"
+      >=</a
+      ><a name="447"
+      > </a
+      ><a name="448" href="Mini-library.html#741" class="Function"
+      >&#960;&#8320;</a
+      ><a name="450"
+      > </a
+      ><a name="451" class="Symbol"
+      >(</a
+      ><a name="452" href="Mini-library.html#741" class="Function"
+      >&#960;&#8320;</a
+      ><a name="454"
+      > </a
+      ><a name="455" class="Symbol"
+      >(</a
+      ><a name="456" href="Space-exponential.html#331" class="Bound"
+      >r</a
+      ><a name="457"
+      > </a
+      ><a name="458" class="Symbol"
+      >(</a
+      ><a name="459" href="Space-exponential.html#340" class="Bound"
+      >t</a
+      ><a name="460"
+      > </a
+      ><a name="461" href="Space-exponential.html#444" class="Bound"
+      >&#945;</a
+      ><a name="462" class="Symbol"
+      >)))</a
+      ><a name="465"
+      > </a
+      ><a name="466" class="Symbol"
+      >(</a
+      ><a name="467" href="Space-exponential.html#349" class="Bound"
+      >p</a
+      ><a name="468"
+      > </a
+      ><a name="469" href="Space-exponential.html#444" class="Bound"
+      >&#945;</a
+      ><a name="470" class="Symbol"
+      >)</a
+      ><a name="471"
+      >
+  </a
+      ><a name="474" href="Space-exponential.html#474" class="Function"
+      >eq</a
+      ><a name="476"
+      > </a
+      ><a name="477" class="Symbol"
+      >:</a
+      ><a name="478"
+      > </a
+      ><a name="479" class="Symbol"
+      >&#8704;(</a
+      ><a name="481" href="Space-exponential.html#481" class="Bound"
+      >&#945;</a
+      ><a name="482"
+      > </a
+      ><a name="483" href="Space-exponential.html#483" class="Bound"
+      >&#946;</a
+      ><a name="484"
+      > </a
+      ><a name="485" class="Symbol"
+      >:</a
+      ><a name="486"
+      > </a
+      ><a name="487" href="Mini-library.html#6102" class="Function"
+      >&#8322;&#8469;</a
+      ><a name="489" class="Symbol"
+      >)</a
+      ><a name="490"
+      > </a
+      ><a name="491" class="Symbol"
+      >&#8594;</a
+      ><a name="492"
+      > </a
+      ><a name="493" href="Space-exponential.html#481" class="Bound"
+      >&#945;</a
+      ><a name="494"
+      > </a
+      ><a name="495" href="Setoid.html#4042" class="Function Operator"
+      >&#8803;</a
+      ><a name="496"
+      > </a
+      ><a name="497" href="Space-exponential.html#483" class="Bound"
+      >&#946;</a
+      ><a name="498"
+      > </a
+      ><a name="499" class="Symbol"
+      >&#8594;</a
+      ><a name="500"
+      > </a
+      ><a name="501" href="Space-exponential.html#423" class="Function"
+      >q</a
+      ><a name="502"
+      > </a
+      ><a name="503" href="Space-exponential.html#481" class="Bound"
+      >&#945;</a
+      ><a name="504"
+      > </a
+      ><a name="505" href="Space-exponential.html#375" class="Function Operator"
+      >&#8776;</a
+      ><a name="506"
+      > </a
+      ><a name="507" href="Space-exponential.html#423" class="Function"
+      >q</a
+      ><a name="508"
+      > </a
+      ><a name="509" href="Space-exponential.html#483" class="Bound"
+      >&#946;</a
+      ><a name="510"
+      >
+  </a
+      ><a name="513" href="Space-exponential.html#474" class="Function"
+      >eq</a
+      ><a name="515"
+      > </a
+      ><a name="516" href="Space-exponential.html#516" class="Bound"
+      >&#945;</a
+      ><a name="517"
+      > </a
+      ><a name="518" href="Space-exponential.html#518" class="Bound"
+      >&#946;</a
+      ><a name="519"
+      > </a
+      ><a name="520" href="Space-exponential.html#520" class="Bound"
+      >e</a
+      ><a name="521"
+      > </a
+      ><a name="522" class="Symbol"
+      >=</a
+      ><a name="523"
+      > </a
+      ><a name="524" href="Setoid.html#540" class="Function"
+      >Trans</a
+      ><a name="529"
+      > </a
+      ><a name="530" class="Symbol"
+      >(</a
+      ><a name="531" href="Space.html#3808" class="Function"
+      >U</a
+      ><a name="532"
+      > </a
+      ><a name="533" href="Space-exponential.html#328" class="Bound"
+      >Y</a
+      ><a name="534" class="Symbol"
+      >)</a
+      ><a name="535"
+      > </a
+      ><a name="536" class="Symbol"
+      >(</a
+      ><a name="537" href="Space-exponential.html#423" class="Function"
+      >q</a
+      ><a name="538"
+      > </a
+      ><a name="539" href="Space-exponential.html#516" class="Bound"
+      >&#945;</a
+      ><a name="540" class="Symbol"
+      >)</a
+      ><a name="541"
+      > </a
+      ><a name="542" class="Symbol"
+      >(</a
+      ><a name="543" href="Mini-library.html#741" class="Function"
+      >&#960;&#8320;</a
+      ><a name="545"
+      > </a
+      ><a name="546" class="Symbol"
+      >(</a
+      ><a name="547" href="Mini-library.html#741" class="Function"
+      >&#960;&#8320;</a
+      ><a name="549"
+      > </a
+      ><a name="550" class="Symbol"
+      >(</a
+      ><a name="551" href="Space-exponential.html#331" class="Bound"
+      >r</a
+      ><a name="552"
+      > </a
+      ><a name="553" class="Symbol"
+      >(</a
+      ><a name="554" href="Space-exponential.html#340" class="Bound"
+      >t</a
+      ><a name="555"
+      > </a
+      ><a name="556" href="Space-exponential.html#518" class="Bound"
+      >&#946;</a
+      ><a name="557" class="Symbol"
+      >)))</a
+      ><a name="560"
+      > </a
+      ><a name="561" class="Symbol"
+      >(</a
+      ><a name="562" href="Space-exponential.html#349" class="Bound"
+      >p</a
+      ><a name="563"
+      > </a
+      ><a name="564" href="Space-exponential.html#516" class="Bound"
+      >&#945;</a
+      ><a name="565" class="Symbol"
+      >))</a
+      ><a name="567"
+      > </a
+      ><a name="568" class="Symbol"
+      >(</a
+      ><a name="569" href="Space-exponential.html#423" class="Function"
+      >q</a
+      ><a name="570"
+      > </a
+      ><a name="571" href="Space-exponential.html#518" class="Bound"
+      >&#946;</a
+      ><a name="572" class="Symbol"
+      >)</a
+      ><a name="573"
+      > </a
+      ><a name="574" href="Space-exponential.html#601" class="Function"
+      >claim&#8320;</a
+      ><a name="580"
+      > </a
+      ><a name="581" href="Space-exponential.html#709" class="Function"
+      >claim&#8321;</a
+      ><a name="587"
+      >
+   </a
+      ><a name="591" class="Keyword"
+      >where</a
+      ><a name="596"
+      >
+    </a
+      ><a name="601" href="Space-exponential.html#601" class="Function"
+      >claim&#8320;</a
+      ><a name="607"
+      > </a
+      ><a name="608" class="Symbol"
+      >:</a
+      ><a name="609"
+      > </a
+      ><a name="610" href="Mini-library.html#741" class="Function"
+      >&#960;&#8320;</a
+      ><a name="612"
+      > </a
+      ><a name="613" class="Symbol"
+      >(</a
+      ><a name="614" href="Mini-library.html#741" class="Function"
+      >&#960;&#8320;</a
+      ><a name="616"
+      > </a
+      ><a name="617" class="Symbol"
+      >(</a
+      ><a name="618" href="Space-exponential.html#331" class="Bound"
+      >r</a
+      ><a name="619"
+      > </a
+      ><a name="620" class="Symbol"
+      >(</a
+      ><a name="621" href="Space-exponential.html#340" class="Bound"
+      >t</a
+      ><a name="622"
+      > </a
+      ><a name="623" href="Space-exponential.html#516" class="Bound"
+      >&#945;</a
+      ><a name="624" class="Symbol"
+      >)))</a
+      ><a name="627"
+      > </a
+      ><a name="628" class="Symbol"
+      >(</a
+      ><a name="629" href="Space-exponential.html#349" class="Bound"
+      >p</a
+      ><a name="630"
+      > </a
+      ><a name="631" href="Space-exponential.html#516" class="Bound"
+      >&#945;</a
+      ><a name="632" class="Symbol"
+      >)</a
+      ><a name="633"
+      > </a
+      ><a name="634" href="Space-exponential.html#375" class="Function Operator"
+      >&#8776;</a
+      ><a name="635"
+      > </a
+      ><a name="636" href="Mini-library.html#741" class="Function"
+      >&#960;&#8320;</a
+      ><a name="638"
+      > </a
+      ><a name="639" class="Symbol"
+      >(</a
+      ><a name="640" href="Mini-library.html#741" class="Function"
+      >&#960;&#8320;</a
+      ><a name="642"
+      > </a
+      ><a name="643" class="Symbol"
+      >(</a
+      ><a name="644" href="Space-exponential.html#331" class="Bound"
+      >r</a
+      ><a name="645"
+      > </a
+      ><a name="646" class="Symbol"
+      >(</a
+      ><a name="647" href="Space-exponential.html#340" class="Bound"
+      >t</a
+      ><a name="648"
+      > </a
+      ><a name="649" href="Space-exponential.html#518" class="Bound"
+      >&#946;</a
+      ><a name="650" class="Symbol"
+      >)))</a
+      ><a name="653"
+      > </a
+      ><a name="654" class="Symbol"
+      >(</a
+      ><a name="655" href="Space-exponential.html#349" class="Bound"
+      >p</a
+      ><a name="656"
+      > </a
+      ><a name="657" href="Space-exponential.html#516" class="Bound"
+      >&#945;</a
+      ><a name="658" class="Symbol"
+      >)</a
+      ><a name="659"
+      >
+    </a
+      ><a name="664" href="Space-exponential.html#601" class="Function"
+      >claim&#8320;</a
+      ><a name="670"
+      > </a
+      ><a name="671" class="Symbol"
+      >=</a
+      ><a name="672"
+      > </a
+      ><a name="673" href="Space-exponential.html#335" class="Bound"
+      >er</a
+      ><a name="675"
+      > </a
+      ><a name="676" class="Symbol"
+      >(</a
+      ><a name="677" href="Space-exponential.html#340" class="Bound"
+      >t</a
+      ><a name="678"
+      > </a
+      ><a name="679" href="Space-exponential.html#516" class="Bound"
+      >&#945;</a
+      ><a name="680" class="Symbol"
+      >)</a
+      ><a name="681"
+      > </a
+      ><a name="682" class="Symbol"
+      >(</a
+      ><a name="683" href="Space-exponential.html#340" class="Bound"
+      >t</a
+      ><a name="684"
+      > </a
+      ><a name="685" href="Space-exponential.html#518" class="Bound"
+      >&#946;</a
+      ><a name="686" class="Symbol"
+      >)</a
+      ><a name="687"
+      > </a
+      ><a name="688" class="Symbol"
+      >(</a
+      ><a name="689" href="Space-exponential.html#344" class="Bound"
+      >et</a
+      ><a name="691"
+      > </a
+      ><a name="692" href="Space-exponential.html#516" class="Bound"
+      >&#945;</a
+      ><a name="693"
+      > </a
+      ><a name="694" href="Space-exponential.html#518" class="Bound"
+      >&#946;</a
+      ><a name="695"
+      > </a
+      ><a name="696" href="Space-exponential.html#520" class="Bound"
+      >e</a
+      ><a name="697" class="Symbol"
+      >)</a
+      ><a name="698"
+      > </a
+      ><a name="699" class="Symbol"
+      >(</a
+      ><a name="700" href="Space-exponential.html#349" class="Bound"
+      >p</a
+      ><a name="701"
+      > </a
+      ><a name="702" href="Space-exponential.html#516" class="Bound"
+      >&#945;</a
+      ><a name="703" class="Symbol"
+      >)</a
+      ><a name="704"
+      >
+    </a
+      ><a name="709" href="Space-exponential.html#709" class="Function"
+      >claim&#8321;</a
+      ><a name="715"
+      > </a
+      ><a name="716" class="Symbol"
+      >:</a
+      ><a name="717"
+      > </a
+      ><a name="718" href="Mini-library.html#741" class="Function"
+      >&#960;&#8320;</a
+      ><a name="720"
+      > </a
+      ><a name="721" class="Symbol"
+      >(</a
+      ><a name="722" href="Mini-library.html#741" class="Function"
+      >&#960;&#8320;</a
+      ><a name="724"
+      > </a
+      ><a name="725" class="Symbol"
+      >(</a
+      ><a name="726" href="Space-exponential.html#331" class="Bound"
+      >r</a
+      ><a name="727"
+      > </a
+      ><a name="728" class="Symbol"
+      >(</a
+      ><a name="729" href="Space-exponential.html#340" class="Bound"
+      >t</a
+      ><a name="730"
+      > </a
+      ><a name="731" href="Space-exponential.html#518" class="Bound"
+      >&#946;</a
+      ><a name="732" class="Symbol"
+      >)))</a
+      ><a name="735"
+      > </a
+      ><a name="736" class="Symbol"
+      >(</a
+      ><a name="737" href="Space-exponential.html#349" class="Bound"
+      >p</a
+      ><a name="738"
+      > </a
+      ><a name="739" href="Space-exponential.html#516" class="Bound"
+      >&#945;</a
+      ><a name="740" class="Symbol"
+      >)</a
+      ><a name="741"
+      > </a
+      ><a name="742" href="Space-exponential.html#375" class="Function Operator"
+      >&#8776;</a
+      ><a name="743"
+      > </a
+      ><a name="744" href="Mini-library.html#741" class="Function"
+      >&#960;&#8320;</a
+      ><a name="746"
+      > </a
+      ><a name="747" class="Symbol"
+      >(</a
+      ><a name="748" href="Mini-library.html#741" class="Function"
+      >&#960;&#8320;</a
+      ><a name="750"
+      > </a
+      ><a name="751" class="Symbol"
+      >(</a
+      ><a name="752" href="Space-exponential.html#331" class="Bound"
+      >r</a
+      ><a name="753"
+      > </a
+      ><a name="754" class="Symbol"
+      >(</a
+      ><a name="755" href="Space-exponential.html#340" class="Bound"
+      >t</a
+      ><a name="756"
+      > </a
+      ><a name="757" href="Space-exponential.html#518" class="Bound"
+      >&#946;</a
+      ><a name="758" class="Symbol"
+      >)))</a
+      ><a name="761"
+      > </a
+      ><a name="762" class="Symbol"
+      >(</a
+      ><a name="763" href="Space-exponential.html#349" class="Bound"
+      >p</a
+      ><a name="764"
+      > </a
+      ><a name="765" href="Space-exponential.html#518" class="Bound"
+      >&#946;</a
+      ><a name="766" class="Symbol"
+      >)</a
+      ><a name="767"
+      >
+    </a
+      ><a name="772" href="Space-exponential.html#709" class="Function"
+      >claim&#8321;</a
+      ><a name="778"
+      > </a
+      ><a name="779" class="Symbol"
+      >=</a
+      ><a name="780"
+      > </a
+      ><a name="781" href="Mini-library.html#833" class="Function"
+      >&#960;&#8321;</a
+      ><a name="783"
+      > </a
+      ><a name="784" class="Symbol"
+      >(</a
+      ><a name="785" href="Mini-library.html#741" class="Function"
+      >&#960;&#8320;</a
+      ><a name="787"
+      > </a
+      ><a name="788" class="Symbol"
+      >(</a
+      ><a name="789" href="Space-exponential.html#331" class="Bound"
+      >r</a
+      ><a name="790"
+      > </a
+      ><a name="791" class="Symbol"
+      >(</a
+      ><a name="792" href="Space-exponential.html#340" class="Bound"
+      >t</a
+      ><a name="793"
+      > </a
+      ><a name="794" href="Space-exponential.html#518" class="Bound"
+      >&#946;</a
+      ><a name="795" class="Symbol"
+      >)))</a
+      ><a name="798"
+      > </a
+      ><a name="799" class="Symbol"
+      >(</a
+      ><a name="800" href="Space-exponential.html#349" class="Bound"
+      >p</a
+      ><a name="801"
+      > </a
+      ><a name="802" href="Space-exponential.html#516" class="Bound"
+      >&#945;</a
+      ><a name="803" class="Symbol"
+      >)</a
+      ><a name="804"
+      > </a
+      ><a name="805" class="Symbol"
+      >(</a
+      ><a name="806" href="Space-exponential.html#349" class="Bound"
+      >p</a
+      ><a name="807"
+      > </a
+      ><a name="808" href="Space-exponential.html#518" class="Bound"
+      >&#946;</a
+      ><a name="809" class="Symbol"
+      >)</a
+      ><a name="810"
+      > </a
+      ><a name="811" class="Symbol"
+      >(</a
+      ><a name="812" href="Space-exponential.html#353" class="Bound"
+      >ep</a
+      ><a name="814"
+      > </a
+      ><a name="815" href="Space-exponential.html#516" class="Bound"
+      >&#945;</a
+      ><a name="816"
+      > </a
+      ><a name="817" href="Space-exponential.html#518" class="Bound"
+      >&#946;</a
+      ><a name="818"
+      > </a
+      ><a name="819" href="Space-exponential.html#520" class="Bound"
+      >e</a
+      ><a name="820" class="Symbol"
+      >)</a
+      ><a name="821"
+      >
+
+
+</a
+      ><a name="824" class="Keyword"
+      >infixr</a
+      ><a name="830"
+      > </a
+      ><a name="831" class="Number"
+      >3</a
+      ><a name="832"
+      > _&#8658;_
+
+</a
+      ><a name="838" href="Space-exponential.html#838" class="Function Operator"
+      >_&#8658;_</a
+      ><a name="841"
+      > </a
+      ><a name="842" class="Symbol"
+      >:</a
+      ><a name="843"
+      > </a
+      ><a name="844" href="Space.html#3755" class="Function"
+      >Space</a
+      ><a name="849"
+      > </a
+      ><a name="850" class="Symbol"
+      >&#8594;</a
+      ><a name="851"
+      > </a
+      ><a name="852" href="Space.html#3755" class="Function"
+      >Space</a
+      ><a name="857"
+      > </a
+      ><a name="858" class="Symbol"
+      >&#8594;</a
+      ><a name="859"
+      > </a
+      ><a name="860" href="Space.html#3755" class="Function"
+      >Space</a
+      ><a name="865"
+      >
+</a
+      ><a name="866" href="Space-exponential.html#866" class="Bound"
+      >X</a
+      ><a name="867"
+      > </a
+      ><a name="868" href="Space-exponential.html#838" class="Function Operator"
+      >&#8658;</a
+      ><a name="869"
+      > </a
+      ><a name="870" href="Space-exponential.html#870" class="Bound"
+      >Y</a
+      ><a name="871"
+      > </a
+      ><a name="872" class="Symbol"
+      >=</a
+      ><a name="873"
+      > </a
+      ><a name="874" href="Space.html#4919" class="Function"
+      >MapSetoid</a
+      ><a name="883"
+      > </a
+      ><a name="884" href="Space-exponential.html#866" class="Bound"
+      >X</a
+      ><a name="885"
+      > </a
+      ><a name="886" href="Space-exponential.html#870" class="Bound"
+      >Y</a
+      ><a name="887"
+      > </a
+      ><a name="888" href="Mini-library.html#705" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="889"
+      > </a
+      ><a name="890" href="Space-exponential.html#1100" class="Function"
+      >R</a
+      ><a name="891"
+      > </a
+      ><a name="892" href="Mini-library.html#705" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="893"
+      > </a
+      ><a name="894" href="Space-exponential.html#1240" class="Function"
+      >rc&#8320;</a
+      ><a name="897"
+      > </a
+      ><a name="898" href="Mini-library.html#705" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="899"
+      > </a
+      ><a name="900" href="Space-exponential.html#1772" class="Function"
+      >rc&#8321;</a
+      ><a name="903"
+      > </a
+      ><a name="904" href="Mini-library.html#705" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="905"
+      > </a
+      ><a name="906" href="Space-exponential.html#1962" class="Function"
+      >rc&#8322;</a
+      ><a name="909"
+      > </a
+      ><a name="910" href="Mini-library.html#705" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="911"
+      > </a
+      ><a name="912" href="Space-exponential.html#4546" class="Function"
+      >rc&#8323;</a
+      ><a name="915"
+      >
+ </a
+      ><a name="917" class="Keyword"
+      >where</a
+      ><a name="922"
+      >
+  </a
+      ><a name="925" href="Space-exponential.html#925" class="Function Operator"
+      >_~_</a
+      ><a name="928"
+      > </a
+      ><a name="929" class="Symbol"
+      >:</a
+      ><a name="930"
+      > </a
+      ><a name="931" href="Setoid.html#295" class="Function"
+      >&#360;</a
+      ><a name="932"
+      > </a
+      ><a name="933" class="Symbol"
+      >(</a
+      ><a name="934" href="Space.html#3808" class="Function"
+      >U</a
+      ><a name="935"
+      > </a
+      ><a name="936" href="Space-exponential.html#866" class="Bound"
+      >X</a
+      ><a name="937" class="Symbol"
+      >)</a
+      ><a name="938"
+      > </a
+      ><a name="939" class="Symbol"
+      >&#8594;</a
+      ><a name="940"
+      > </a
+      ><a name="941" href="Setoid.html#295" class="Function"
+      >&#360;</a
+      ><a name="942"
+      > </a
+      ><a name="943" class="Symbol"
+      >(</a
+      ><a name="944" href="Space.html#3808" class="Function"
+      >U</a
+      ><a name="945"
+      > </a
+      ><a name="946" href="Space-exponential.html#866" class="Bound"
+      >X</a
+      ><a name="947" class="Symbol"
+      >)</a
+      ><a name="948"
+      > </a
+      ><a name="949" class="Symbol"
+      >&#8594;</a
+      ><a name="950"
+      > </a
+      ><a name="951" class="PrimitiveType"
+      >Set</a
+      ><a name="954"
+      >
+  </a
+      ><a name="957" href="Space-exponential.html#925" class="Function Operator"
+      >_~_</a
+      ><a name="960"
+      > </a
+      ><a name="961" class="Symbol"
+      >=</a
+      ><a name="962"
+      > </a
+      ><a name="963" href="Setoid.html#327" class="Function"
+      >E</a
+      ><a name="964"
+      > </a
+      ><a name="965" class="Symbol"
+      >(</a
+      ><a name="966" href="Space.html#3808" class="Function"
+      >U</a
+      ><a name="967"
+      > </a
+      ><a name="968" href="Space-exponential.html#866" class="Bound"
+      >X</a
+      ><a name="969" class="Symbol"
+      >)</a
+      ><a name="970"
+      >
+  </a
+      ><a name="973" href="Space-exponential.html#973" class="Function Operator"
+      >_&#8776;_</a
+      ><a name="976"
+      > </a
+      ><a name="977" class="Symbol"
+      >:</a
+      ><a name="978"
+      > </a
+      ><a name="979" href="Setoid.html#295" class="Function"
+      >&#360;</a
+      ><a name="980"
+      > </a
+      ><a name="981" class="Symbol"
+      >(</a
+      ><a name="982" href="Space.html#3808" class="Function"
+      >U</a
+      ><a name="983"
+      > </a
+      ><a name="984" href="Space-exponential.html#870" class="Bound"
+      >Y</a
+      ><a name="985" class="Symbol"
+      >)</a
+      ><a name="986"
+      > </a
+      ><a name="987" class="Symbol"
+      >&#8594;</a
+      ><a name="988"
+      > </a
+      ><a name="989" href="Setoid.html#295" class="Function"
+      >&#360;</a
+      ><a name="990"
+      > </a
+      ><a name="991" class="Symbol"
+      >(</a
+      ><a name="992" href="Space.html#3808" class="Function"
+      >U</a
+      ><a name="993"
+      > </a
+      ><a name="994" href="Space-exponential.html#870" class="Bound"
+      >Y</a
+      ><a name="995" class="Symbol"
+      >)</a
+      ><a name="996"
+      > </a
+      ><a name="997" class="Symbol"
+      >&#8594;</a
+      ><a name="998"
+      > </a
+      ><a name="999" class="PrimitiveType"
+      >Set</a
+      ><a name="1002"
+      >
+  </a
+      ><a name="1005" href="Space-exponential.html#973" class="Function Operator"
+      >_&#8776;_</a
+      ><a name="1008"
+      > </a
+      ><a name="1009" class="Symbol"
+      >=</a
+      ><a name="1010"
+      > </a
+      ><a name="1011" href="Setoid.html#327" class="Function"
+      >E</a
+      ><a name="1012"
+      > </a
+      ><a name="1013" class="Symbol"
+      >(</a
+      ><a name="1014" href="Space.html#3808" class="Function"
+      >U</a
+      ><a name="1015"
+      > </a
+      ><a name="1016" href="Space-exponential.html#870" class="Bound"
+      >Y</a
+      ><a name="1017" class="Symbol"
+      >)</a
+      ><a name="1018"
+      >
+  </a
+      ><a name="1021" href="Space-exponential.html#1021" class="Function Operator"
+      >_&#8779;_</a
+      ><a name="1024"
+      > </a
+      ><a name="1025" class="Symbol"
+      >:</a
+      ><a name="1026"
+      > </a
+      ><a name="1027" href="Setoid.html#295" class="Function"
+      >&#360;</a
+      ><a name="1028"
+      > </a
+      ><a name="1029" class="Symbol"
+      >(</a
+      ><a name="1030" href="Space.html#4919" class="Function"
+      >MapSetoid</a
+      ><a name="1039"
+      > </a
+      ><a name="1040" href="Space-exponential.html#866" class="Bound"
+      >X</a
+      ><a name="1041"
+      > </a
+      ><a name="1042" href="Space-exponential.html#870" class="Bound"
+      >Y</a
+      ><a name="1043" class="Symbol"
+      >)</a
+      ><a name="1044"
+      > </a
+      ><a name="1045" class="Symbol"
+      >&#8594;</a
+      ><a name="1046"
+      > </a
+      ><a name="1047" href="Setoid.html#295" class="Function"
+      >&#360;</a
+      ><a name="1048"
+      > </a
+      ><a name="1049" class="Symbol"
+      >(</a
+      ><a name="1050" href="Space.html#4919" class="Function"
+      >MapSetoid</a
+      ><a name="1059"
+      > </a
+      ><a name="1060" href="Space-exponential.html#866" class="Bound"
+      >X</a
+      ><a name="1061"
+      > </a
+      ><a name="1062" href="Space-exponential.html#870" class="Bound"
+      >Y</a
+      ><a name="1063" class="Symbol"
+      >)</a
+      ><a name="1064"
+      > </a
+      ><a name="1065" class="Symbol"
+      >&#8594;</a
+      ><a name="1066"
+      > </a
+      ><a name="1067" class="PrimitiveType"
+      >Set</a
+      ><a name="1070"
+      >
+  </a
+      ><a name="1073" href="Space-exponential.html#1021" class="Function Operator"
+      >_&#8779;_</a
+      ><a name="1076"
+      > </a
+      ><a name="1077" class="Symbol"
+      >=</a
+      ><a name="1078"
+      > </a
+      ><a name="1079" href="Setoid.html#327" class="Function"
+      >E</a
+      ><a name="1080"
+      > </a
+      ><a name="1081" class="Symbol"
+      >(</a
+      ><a name="1082" href="Space.html#4919" class="Function"
+      >MapSetoid</a
+      ><a name="1091"
+      > </a
+      ><a name="1092" href="Space-exponential.html#866" class="Bound"
+      >X</a
+      ><a name="1093"
+      > </a
+      ><a name="1094" href="Space-exponential.html#870" class="Bound"
+      >Y</a
+      ><a name="1095" class="Symbol"
+      >)</a
+      ><a name="1096"
+      >
+
+  </a
+      ><a name="1100" href="Space-exponential.html#1100" class="Function"
+      >R</a
+      ><a name="1101"
+      > </a
+      ><a name="1102" class="Symbol"
+      >:</a
+      ><a name="1103"
+      > </a
+      ><a name="1104" href="Mini-library.html#254" class="Function"
+      >Subset</a
+      ><a name="1110"
+      > </a
+      ><a name="1111" class="Symbol"
+      >(</a
+      ><a name="1112" href="Setoid.html#4554" class="Function"
+      >E-map-&#8322;&#8469;</a
+      ><a name="1120"
+      > </a
+      ><a name="1121" class="Symbol"
+      >(</a
+      ><a name="1122" href="Space.html#4919" class="Function"
+      >MapSetoid</a
+      ><a name="1131"
+      > </a
+      ><a name="1132" href="Space-exponential.html#866" class="Bound"
+      >X</a
+      ><a name="1133"
+      > </a
+      ><a name="1134" href="Space-exponential.html#870" class="Bound"
+      >Y</a
+      ><a name="1135" class="Symbol"
+      >))</a
+      ><a name="1137"
+      >
+  </a
+      ><a name="1140" href="Space-exponential.html#1100" class="Function"
+      >R</a
+      ><a name="1141"
+      > </a
+      ><a name="1142" href="Space-exponential.html#1142" class="Bound"
+      >r</a
+      ><a name="1143"
+      > </a
+      ><a name="1144" class="Symbol"
+      >=</a
+      ><a name="1145"
+      > </a
+      ><a name="1146" class="Symbol"
+      >&#8704;(</a
+      ><a name="1148" href="Space-exponential.html#1148" class="Bound"
+      >p</a
+      ><a name="1149"
+      > </a
+      ><a name="1150" class="Symbol"
+      >:</a
+      ><a name="1151"
+      > </a
+      ><a name="1152" href="Setoid.html#4554" class="Function"
+      >E-map-&#8322;&#8469;</a
+      ><a name="1160"
+      > </a
+      ><a name="1161" class="Symbol"
+      >(</a
+      ><a name="1162" href="Space.html#3808" class="Function"
+      >U</a
+      ><a name="1163"
+      > </a
+      ><a name="1164" href="Space-exponential.html#866" class="Bound"
+      >X</a
+      ><a name="1165" class="Symbol"
+      >))</a
+      ><a name="1167"
+      > </a
+      ><a name="1168" class="Symbol"
+      >&#8594;</a
+      ><a name="1169"
+      > </a
+      ><a name="1170" href="Space-exponential.html#1148" class="Bound"
+      >p</a
+      ><a name="1171"
+      > </a
+      ><a name="1172" href="Mini-library.html#294" class="Function Operator"
+      >&#8712;</a
+      ><a name="1173"
+      > </a
+      ><a name="1174" href="Space.html#3873" class="Function"
+      >Probe</a
+      ><a name="1179"
+      > </a
+      ><a name="1180" href="Space-exponential.html#866" class="Bound"
+      >X</a
+      ><a name="1181"
+      > </a
+      ><a name="1182" class="Symbol"
+      >&#8594;</a
+      ><a name="1183"
+      > </a
+      ><a name="1184" class="Symbol"
+      >&#8704;(</a
+      ><a name="1186" href="Space-exponential.html#1186" class="Bound"
+      >t</a
+      ><a name="1187"
+      > </a
+      ><a name="1188" class="Symbol"
+      >:</a
+      ><a name="1189"
+      > </a
+      ><a name="1190" href="Setoid.html#4604" class="Function"
+      >E-map-&#8322;&#8469;-&#8322;&#8469;</a
+      ><a name="1201" class="Symbol"
+      >)</a
+      ><a name="1202"
+      > </a
+      ><a name="1203" class="Symbol"
+      >&#8594;</a
+      ><a name="1204"
+      > </a
+      ><a name="1205" href="Space-exponential.html#1186" class="Bound"
+      >t</a
+      ><a name="1206"
+      > </a
+      ><a name="1207" href="Mini-library.html#294" class="Function Operator"
+      >&#8712;</a
+      ><a name="1208"
+      > </a
+      ><a name="1209" href="Space.html#498" class="Function"
+      >C</a
+      ><a name="1210"
+      > </a
+      ><a name="1211" class="Symbol"
+      >&#8594;</a
+      ><a name="1212"
+      > </a
+      ><a name="1213" href="Space-exponential.html#215" class="Function"
+      >exp</a
+      ><a name="1216"
+      > </a
+      ><a name="1217" href="Space-exponential.html#866" class="Bound"
+      >X</a
+      ><a name="1218"
+      > </a
+      ><a name="1219" href="Space-exponential.html#870" class="Bound"
+      >Y</a
+      ><a name="1220"
+      > </a
+      ><a name="1221" href="Space-exponential.html#1142" class="Bound"
+      >r</a
+      ><a name="1222"
+      > </a
+      ><a name="1223" href="Space-exponential.html#1186" class="Bound"
+      >t</a
+      ><a name="1224"
+      > </a
+      ><a name="1225" href="Space-exponential.html#1148" class="Bound"
+      >p</a
+      ><a name="1226"
+      > </a
+      ><a name="1227" href="Mini-library.html#294" class="Function Operator"
+      >&#8712;</a
+      ><a name="1228"
+      > </a
+      ><a name="1229" href="Space.html#3873" class="Function"
+      >Probe</a
+      ><a name="1234"
+      > </a
+      ><a name="1235" href="Space-exponential.html#870" class="Bound"
+      >Y</a
+      ><a name="1236"
+      >
+
+  </a
+      ><a name="1240" href="Space-exponential.html#1240" class="Function"
+      >rc&#8320;</a
+      ><a name="1243"
+      > </a
+      ><a name="1244" class="Symbol"
+      >:</a
+      ><a name="1245"
+      > </a
+      ><a name="1246" class="Symbol"
+      >&#8704;(</a
+      ><a name="1248" href="Space-exponential.html#1248" class="Bound"
+      >r</a
+      ><a name="1249"
+      > </a
+      ><a name="1250" class="Symbol"
+      >:</a
+      ><a name="1251"
+      > </a
+      ><a name="1252" href="Setoid.html#4554" class="Function"
+      >E-map-&#8322;&#8469;</a
+      ><a name="1260"
+      > </a
+      ><a name="1261" class="Symbol"
+      >(</a
+      ><a name="1262" href="Space.html#4919" class="Function"
+      >MapSetoid</a
+      ><a name="1271"
+      > </a
+      ><a name="1272" href="Space-exponential.html#866" class="Bound"
+      >X</a
+      ><a name="1273"
+      > </a
+      ><a name="1274" href="Space-exponential.html#870" class="Bound"
+      >Y</a
+      ><a name="1275" class="Symbol"
+      >))</a
+      ><a name="1277"
+      > </a
+      ><a name="1278" class="Symbol"
+      >&#8594;</a
+      ><a name="1279"
+      > </a
+      ><a name="1280" href="Uniform-continuity.html#114" class="Function"
+      >constant</a
+      ><a name="1288"
+      > </a
+      ><a name="1289" class="Symbol"
+      >{</a
+      ><a name="1290" href="Setoid.html#4092" class="Function"
+      >E&#8322;&#8469;</a
+      ><a name="1293" class="Symbol"
+      >}</a
+      ><a name="1294"
+      > </a
+      ><a name="1295" class="Symbol"
+      >{</a
+      ><a name="1296" href="Space.html#4919" class="Function"
+      >MapSetoid</a
+      ><a name="1305"
+      > </a
+      ><a name="1306" href="Space-exponential.html#866" class="Bound"
+      >X</a
+      ><a name="1307"
+      > </a
+      ><a name="1308" href="Space-exponential.html#870" class="Bound"
+      >Y</a
+      ><a name="1309" class="Symbol"
+      >}</a
+      ><a name="1310"
+      > </a
+      ><a name="1311" href="Space-exponential.html#1248" class="Bound"
+      >r</a
+      ><a name="1312"
+      > </a
+      ><a name="1313" class="Symbol"
+      >&#8594;</a
+      ><a name="1314"
+      > </a
+      ><a name="1315" href="Space-exponential.html#1248" class="Bound"
+      >r</a
+      ><a name="1316"
+      > </a
+      ><a name="1317" href="Mini-library.html#294" class="Function Operator"
+      >&#8712;</a
+      ><a name="1318"
+      > </a
+      ><a name="1319" href="Space-exponential.html#1100" class="Function"
+      >R</a
+      ><a name="1320"
+      >
+  </a
+      ><a name="1323" href="Space-exponential.html#1240" class="Function"
+      >rc&#8320;</a
+      ><a name="1326"
+      > </a
+      ><a name="1327" href="Space-exponential.html#1327" class="Bound"
+      >r</a
+      ><a name="1328"
+      > </a
+      ><a name="1329" href="Space-exponential.html#1329" class="Bound"
+      >cr</a
+      ><a name="1331"
+      > </a
+      ><a name="1332" href="Space-exponential.html#1332" class="Bound"
+      >p</a
+      ><a name="1333"
+      > </a
+      ><a name="1334" href="Space-exponential.html#1334" class="Bound"
+      >pP</a
+      ><a name="1336"
+      > </a
+      ><a name="1337" href="Space-exponential.html#1337" class="Bound"
+      >t</a
+      ><a name="1338"
+      > </a
+      ><a name="1339" href="Space-exponential.html#1339" class="Bound"
+      >uc</a
+      ><a name="1341"
+      > </a
+      ><a name="1342" class="Symbol"
+      >=</a
+      ><a name="1343"
+      > </a
+      ><a name="1344" href="Space.html#4413" class="Function"
+      >cond&#8323;</a
+      ><a name="1349"
+      > </a
+      ><a name="1350" href="Space-exponential.html#870" class="Bound"
+      >Y</a
+      ><a name="1351"
+      > </a
+      ><a name="1352" href="Space-exponential.html#1397" class="Function"
+      >q</a
+      ><a name="1353"
+      > </a
+      ><a name="1354" class="Symbol"
+      >(</a
+      ><a name="1355" href="Space-exponential.html#215" class="Function"
+      >exp</a
+      ><a name="1358"
+      > </a
+      ><a name="1359" href="Space-exponential.html#866" class="Bound"
+      >X</a
+      ><a name="1360"
+      > </a
+      ><a name="1361" href="Space-exponential.html#870" class="Bound"
+      >Y</a
+      ><a name="1362"
+      > </a
+      ><a name="1363" href="Space-exponential.html#1327" class="Bound"
+      >r</a
+      ><a name="1364"
+      > </a
+      ><a name="1365" href="Space-exponential.html#1337" class="Bound"
+      >t</a
+      ><a name="1366"
+      > </a
+      ><a name="1367" href="Space-exponential.html#1332" class="Bound"
+      >p</a
+      ><a name="1368" class="Symbol"
+      >)</a
+      ><a name="1369"
+      > </a
+      ><a name="1370" href="Space-exponential.html#1623" class="Function"
+      >claim&#8320;</a
+      ><a name="1376"
+      > </a
+      ><a name="1377" href="Space-exponential.html#1717" class="Function"
+      >claim&#8321;</a
+      ><a name="1383"
+      >
+   </a
+      ><a name="1387" class="Keyword"
+      >where</a
+      ><a name="1392"
+      >
+    </a
+      ><a name="1397" href="Space-exponential.html#1397" class="Function"
+      >q</a
+      ><a name="1398"
+      > </a
+      ><a name="1399" class="Symbol"
+      >:</a
+      ><a name="1400"
+      > </a
+      ><a name="1401" href="Setoid.html#4554" class="Function"
+      >E-map-&#8322;&#8469;</a
+      ><a name="1409"
+      > </a
+      ><a name="1410" class="Symbol"
+      >(</a
+      ><a name="1411" href="Space.html#3808" class="Function"
+      >U</a
+      ><a name="1412"
+      > </a
+      ><a name="1413" href="Space-exponential.html#870" class="Bound"
+      >Y</a
+      ><a name="1414" class="Symbol"
+      >)</a
+      ><a name="1415"
+      >
+    </a
+      ><a name="1420" href="Space-exponential.html#1397" class="Function"
+      >q</a
+      ><a name="1421"
+      > </a
+      ><a name="1422" class="Symbol"
+      >=</a
+      ><a name="1423"
+      > </a
+      ><a name="1424" href="Space-exponential.html#1450" class="Function"
+      >qq</a
+      ><a name="1426"
+      > </a
+      ><a name="1427" href="Mini-library.html#705" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="1428"
+      > </a
+      ><a name="1429" href="Space-exponential.html#1512" class="Function"
+      >eqq</a
+      ><a name="1432"
+      >
+     </a
+      ><a name="1438" class="Keyword"
+      >where</a
+      ><a name="1443"
+      >
+      </a
+      ><a name="1450" href="Space-exponential.html#1450" class="Function"
+      >qq</a
+      ><a name="1452"
+      > </a
+      ><a name="1453" class="Symbol"
+      >:</a
+      ><a name="1454"
+      > </a
+      ><a name="1455" href="Mini-library.html#6102" class="Function"
+      >&#8322;&#8469;</a
+      ><a name="1457"
+      > </a
+      ><a name="1458" class="Symbol"
+      >&#8594;</a
+      ><a name="1459"
+      > </a
+      ><a name="1460" href="Setoid.html#295" class="Function"
+      >&#360;</a
+      ><a name="1461"
+      > </a
+      ><a name="1462" class="Symbol"
+      >(</a
+      ><a name="1463" href="Space.html#3808" class="Function"
+      >U</a
+      ><a name="1464"
+      > </a
+      ><a name="1465" href="Space-exponential.html#870" class="Bound"
+      >Y</a
+      ><a name="1466" class="Symbol"
+      >)</a
+      ><a name="1467"
+      >
+      </a
+      ><a name="1474" href="Space-exponential.html#1450" class="Function"
+      >qq</a
+      ><a name="1476"
+      > </a
+      ><a name="1477" class="Symbol"
+      >=</a
+      ><a name="1478"
+      > </a
+      ><a name="1479" href="Mini-library.html#741" class="Function"
+      >&#960;&#8320;</a
+      ><a name="1481"
+      > </a
+      ><a name="1482" class="Symbol"
+      >(</a
+      ><a name="1483" href="Mini-library.html#741" class="Function"
+      >&#960;&#8320;</a
+      ><a name="1485"
+      > </a
+      ><a name="1486" class="Symbol"
+      >(</a
+      ><a name="1487" href="Mini-library.html#741" class="Function"
+      >&#960;&#8320;</a
+      ><a name="1489"
+      > </a
+      ><a name="1490" href="Space-exponential.html#1327" class="Bound"
+      >r</a
+      ><a name="1491"
+      > </a
+      ><a name="1492" href="Mini-library.html#6123" class="Function"
+      >0&#772;</a
+      ><a name="1494" class="Symbol"
+      >))</a
+      ><a name="1496"
+      > </a
+      ><a name="1497" href="Mini-library.html#161" class="Function Operator"
+      >&#8728;</a
+      ><a name="1498"
+      > </a
+      ><a name="1499" class="Symbol"
+      >(</a
+      ><a name="1500" href="Mini-library.html#741" class="Function"
+      >&#960;&#8320;</a
+      ><a name="1502"
+      > </a
+      ><a name="1503" href="Space-exponential.html#1332" class="Bound"
+      >p</a
+      ><a name="1504" class="Symbol"
+      >)</a
+      ><a name="1505"
+      >
+      </a
+      ><a name="1512" href="Space-exponential.html#1512" class="Function"
+      >eqq</a
+      ><a name="1515"
+      > </a
+      ><a name="1516" class="Symbol"
+      >:</a
+      ><a name="1517"
+      > </a
+      ><a name="1518" class="Symbol"
+      >&#8704;(</a
+      ><a name="1520" href="Space-exponential.html#1520" class="Bound"
+      >&#945;</a
+      ><a name="1521"
+      > </a
+      ><a name="1522" href="Space-exponential.html#1522" class="Bound"
+      >&#946;</a
+      ><a name="1523"
+      > </a
+      ><a name="1524" class="Symbol"
+      >:</a
+      ><a name="1525"
+      > </a
+      ><a name="1526" href="Mini-library.html#6102" class="Function"
+      >&#8322;&#8469;</a
+      ><a name="1528" class="Symbol"
+      >)</a
+      ><a name="1529"
+      > </a
+      ><a name="1530" class="Symbol"
+      >&#8594;</a
+      ><a name="1531"
+      > </a
+      ><a name="1532" href="Space-exponential.html#1520" class="Bound"
+      >&#945;</a
+      ><a name="1533"
+      > </a
+      ><a name="1534" href="Setoid.html#4042" class="Function Operator"
+      >&#8803;</a
+      ><a name="1535"
+      > </a
+      ><a name="1536" href="Space-exponential.html#1522" class="Bound"
+      >&#946;</a
+      ><a name="1537"
+      > </a
+      ><a name="1538" class="Symbol"
+      >&#8594;</a
+      ><a name="1539"
+      > </a
+      ><a name="1540" href="Space-exponential.html#1450" class="Function"
+      >qq</a
+      ><a name="1542"
+      > </a
+      ><a name="1543" href="Space-exponential.html#1520" class="Bound"
+      >&#945;</a
+      ><a name="1544"
+      > </a
+      ><a name="1545" href="Space-exponential.html#973" class="Function Operator"
+      >&#8776;</a
+      ><a name="1546"
+      > </a
+      ><a name="1547" href="Space-exponential.html#1450" class="Function"
+      >qq</a
+      ><a name="1549"
+      > </a
+      ><a name="1550" href="Space-exponential.html#1522" class="Bound"
+      >&#946;</a
+      ><a name="1551"
+      >
+      </a
+      ><a name="1558" href="Space-exponential.html#1512" class="Function"
+      >eqq</a
+      ><a name="1561"
+      > </a
+      ><a name="1562" href="Space-exponential.html#1562" class="Bound"
+      >&#945;</a
+      ><a name="1563"
+      > </a
+      ><a name="1564" href="Space-exponential.html#1564" class="Bound"
+      >&#946;</a
+      ><a name="1565"
+      > </a
+      ><a name="1566" href="Space-exponential.html#1566" class="Bound"
+      >e</a
+      ><a name="1567"
+      > </a
+      ><a name="1568" class="Symbol"
+      >=</a
+      ><a name="1569"
+      > </a
+      ><a name="1570" href="Mini-library.html#833" class="Function"
+      >&#960;&#8321;</a
+      ><a name="1572"
+      > </a
+      ><a name="1573" class="Symbol"
+      >(</a
+      ><a name="1574" href="Mini-library.html#741" class="Function"
+      >&#960;&#8320;</a
+      ><a name="1576"
+      > </a
+      ><a name="1577" class="Symbol"
+      >(</a
+      ><a name="1578" href="Mini-library.html#741" class="Function"
+      >&#960;&#8320;</a
+      ><a name="1580"
+      > </a
+      ><a name="1581" href="Space-exponential.html#1327" class="Bound"
+      >r</a
+      ><a name="1582"
+      > </a
+      ><a name="1583" href="Mini-library.html#6123" class="Function"
+      >0&#772;</a
+      ><a name="1585" class="Symbol"
+      >))</a
+      ><a name="1587"
+      > </a
+      ><a name="1588" class="Symbol"
+      >(</a
+      ><a name="1589" href="Mini-library.html#741" class="Function"
+      >&#960;&#8320;</a
+      ><a name="1591"
+      > </a
+      ><a name="1592" href="Space-exponential.html#1332" class="Bound"
+      >p</a
+      ><a name="1593"
+      > </a
+      ><a name="1594" href="Space-exponential.html#1562" class="Bound"
+      >&#945;</a
+      ><a name="1595" class="Symbol"
+      >)</a
+      ><a name="1596"
+      > </a
+      ><a name="1597" class="Symbol"
+      >(</a
+      ><a name="1598" href="Mini-library.html#741" class="Function"
+      >&#960;&#8320;</a
+      ><a name="1600"
+      > </a
+      ><a name="1601" href="Space-exponential.html#1332" class="Bound"
+      >p</a
+      ><a name="1602"
+      > </a
+      ><a name="1603" href="Space-exponential.html#1564" class="Bound"
+      >&#946;</a
+      ><a name="1604" class="Symbol"
+      >)</a
+      ><a name="1605"
+      > </a
+      ><a name="1606" class="Symbol"
+      >(</a
+      ><a name="1607" href="Mini-library.html#833" class="Function"
+      >&#960;&#8321;</a
+      ><a name="1609"
+      > </a
+      ><a name="1610" href="Space-exponential.html#1332" class="Bound"
+      >p</a
+      ><a name="1611"
+      > </a
+      ><a name="1612" href="Space-exponential.html#1562" class="Bound"
+      >&#945;</a
+      ><a name="1613"
+      > </a
+      ><a name="1614" href="Space-exponential.html#1564" class="Bound"
+      >&#946;</a
+      ><a name="1615"
+      > </a
+      ><a name="1616" href="Space-exponential.html#1566" class="Bound"
+      >e</a
+      ><a name="1617" class="Symbol"
+      >)</a
+      ><a name="1618"
+      >
+    </a
+      ><a name="1623" href="Space-exponential.html#1623" class="Function"
+      >claim&#8320;</a
+      ><a name="1629"
+      > </a
+      ><a name="1630" class="Symbol"
+      >:</a
+      ><a name="1631"
+      > </a
+      ><a name="1632" class="Symbol"
+      >&#8704;(</a
+      ><a name="1634" href="Space-exponential.html#1634" class="Bound"
+      >&#945;</a
+      ><a name="1635"
+      > </a
+      ><a name="1636" class="Symbol"
+      >:</a
+      ><a name="1637"
+      > </a
+      ><a name="1638" href="Mini-library.html#6102" class="Function"
+      >&#8322;&#8469;</a
+      ><a name="1640" class="Symbol"
+      >)</a
+      ><a name="1641"
+      > </a
+      ><a name="1642" class="Symbol"
+      >&#8594;</a
+      ><a name="1643"
+      > </a
+      ><a name="1644" href="Mini-library.html#741" class="Function"
+      >&#960;&#8320;</a
+      ><a name="1646"
+      > </a
+      ><a name="1647" href="Space-exponential.html#1397" class="Function"
+      >q</a
+      ><a name="1648"
+      > </a
+      ><a name="1649" href="Space-exponential.html#1634" class="Bound"
+      >&#945;</a
+      ><a name="1650"
+      > </a
+      ><a name="1651" href="Space-exponential.html#973" class="Function Operator"
+      >&#8776;</a
+      ><a name="1652"
+      > </a
+      ><a name="1653" href="Mini-library.html#741" class="Function"
+      >&#960;&#8320;</a
+      ><a name="1655"
+      > </a
+      ><a name="1656" class="Symbol"
+      >(</a
+      ><a name="1657" href="Space-exponential.html#215" class="Function"
+      >exp</a
+      ><a name="1660"
+      > </a
+      ><a name="1661" href="Space-exponential.html#866" class="Bound"
+      >X</a
+      ><a name="1662"
+      > </a
+      ><a name="1663" href="Space-exponential.html#870" class="Bound"
+      >Y</a
+      ><a name="1664"
+      > </a
+      ><a name="1665" href="Space-exponential.html#1327" class="Bound"
+      >r</a
+      ><a name="1666"
+      > </a
+      ><a name="1667" href="Space-exponential.html#1337" class="Bound"
+      >t</a
+      ><a name="1668"
+      > </a
+      ><a name="1669" href="Space-exponential.html#1332" class="Bound"
+      >p</a
+      ><a name="1670" class="Symbol"
+      >)</a
+      ><a name="1671"
+      > </a
+      ><a name="1672" href="Space-exponential.html#1634" class="Bound"
+      >&#945;</a
+      ><a name="1673"
+      >
+    </a
+      ><a name="1678" href="Space-exponential.html#1623" class="Function"
+      >claim&#8320;</a
+      ><a name="1684"
+      > </a
+      ><a name="1685" href="Space-exponential.html#1685" class="Bound"
+      >&#945;</a
+      ><a name="1686"
+      > </a
+      ><a name="1687" class="Symbol"
+      >=</a
+      ><a name="1688"
+      > </a
+      ><a name="1689" href="Space-exponential.html#1329" class="Bound"
+      >cr</a
+      ><a name="1691"
+      > </a
+      ><a name="1692" href="Mini-library.html#6123" class="Function"
+      >0&#772;</a
+      ><a name="1694"
+      > </a
+      ><a name="1695" class="Symbol"
+      >(</a
+      ><a name="1696" href="Mini-library.html#741" class="Function"
+      >&#960;&#8320;</a
+      ><a name="1698"
+      > </a
+      ><a name="1699" href="Space-exponential.html#1337" class="Bound"
+      >t</a
+      ><a name="1700"
+      > </a
+      ><a name="1701" href="Space-exponential.html#1685" class="Bound"
+      >&#945;</a
+      ><a name="1702" class="Symbol"
+      >)</a
+      ><a name="1703"
+      > </a
+      ><a name="1704" class="Symbol"
+      >(</a
+      ><a name="1705" href="Mini-library.html#741" class="Function"
+      >&#960;&#8320;</a
+      ><a name="1707"
+      > </a
+      ><a name="1708" href="Space-exponential.html#1332" class="Bound"
+      >p</a
+      ><a name="1709"
+      > </a
+      ><a name="1710" href="Space-exponential.html#1685" class="Bound"
+      >&#945;</a
+      ><a name="1711" class="Symbol"
+      >)</a
+      ><a name="1712"
+      >
+    </a
+      ><a name="1717" href="Space-exponential.html#1717" class="Function"
+      >claim&#8321;</a
+      ><a name="1723"
+      > </a
+      ><a name="1724" class="Symbol"
+      >:</a
+      ><a name="1725"
+      > </a
+      ><a name="1726" href="Space-exponential.html#1397" class="Function"
+      >q</a
+      ><a name="1727"
+      > </a
+      ><a name="1728" href="Mini-library.html#294" class="Function Operator"
+      >&#8712;</a
+      ><a name="1729"
+      > </a
+      ><a name="1730" href="Space.html#3873" class="Function"
+      >Probe</a
+      ><a name="1735"
+      > </a
+      ><a name="1736" href="Space-exponential.html#870" class="Bound"
+      >Y</a
+      ><a name="1737"
+      >
+    </a
+      ><a name="1742" href="Space-exponential.html#1717" class="Function"
+      >claim&#8321;</a
+      ><a name="1748"
+      > </a
+      ><a name="1749" class="Symbol"
+      >=</a
+      ><a name="1750"
+      > </a
+      ><a name="1751" href="Mini-library.html#833" class="Function"
+      >&#960;&#8321;</a
+      ><a name="1753"
+      > </a
+      ><a name="1754" class="Symbol"
+      >(</a
+      ><a name="1755" href="Mini-library.html#741" class="Function"
+      >&#960;&#8320;</a
+      ><a name="1757"
+      > </a
+      ><a name="1758" href="Space-exponential.html#1327" class="Bound"
+      >r</a
+      ><a name="1759"
+      > </a
+      ><a name="1760" href="Mini-library.html#6123" class="Function"
+      >0&#772;</a
+      ><a name="1762" class="Symbol"
+      >)</a
+      ><a name="1763"
+      > </a
+      ><a name="1764" href="Space-exponential.html#1332" class="Bound"
+      >p</a
+      ><a name="1765"
+      > </a
+      ><a name="1766" href="Space-exponential.html#1334" class="Bound"
+      >pP</a
+      ><a name="1768"
+      >
+
+  </a
+      ><a name="1772" href="Space-exponential.html#1772" class="Function"
+      >rc&#8321;</a
+      ><a name="1775"
+      > </a
+      ><a name="1776" class="Symbol"
+      >:</a
+      ><a name="1777"
+      > </a
+      ><a name="1778" class="Symbol"
+      >&#8704;(</a
+      ><a name="1780" href="Space-exponential.html#1780" class="Bound"
+      >t</a
+      ><a name="1781"
+      > </a
+      ><a name="1782" class="Symbol"
+      >:</a
+      ><a name="1783"
+      > </a
+      ><a name="1784" href="Setoid.html#4604" class="Function"
+      >E-map-&#8322;&#8469;-&#8322;&#8469;</a
+      ><a name="1795" class="Symbol"
+      >)</a
+      ><a name="1796"
+      > </a
+      ><a name="1797" class="Symbol"
+      >&#8594;</a
+      ><a name="1798"
+      > </a
+      ><a name="1799" href="Space-exponential.html#1780" class="Bound"
+      >t</a
+      ><a name="1800"
+      > </a
+      ><a name="1801" href="Mini-library.html#294" class="Function Operator"
+      >&#8712;</a
+      ><a name="1802"
+      > </a
+      ><a name="1803" href="Space.html#498" class="Function"
+      >C</a
+      ><a name="1804"
+      > </a
+      ><a name="1805" class="Symbol"
+      >&#8594;</a
+      ><a name="1806"
+      > </a
+      ><a name="1807" class="Symbol"
+      >&#8704;(</a
+      ><a name="1809" href="Space-exponential.html#1809" class="Bound"
+      >r</a
+      ><a name="1810"
+      > </a
+      ><a name="1811" class="Symbol"
+      >:</a
+      ><a name="1812"
+      > </a
+      ><a name="1813" href="Setoid.html#4554" class="Function"
+      >E-map-&#8322;&#8469;</a
+      ><a name="1821"
+      > </a
+      ><a name="1822" class="Symbol"
+      >(</a
+      ><a name="1823" href="Space.html#4919" class="Function"
+      >MapSetoid</a
+      ><a name="1832"
+      > </a
+      ><a name="1833" href="Space-exponential.html#866" class="Bound"
+      >X</a
+      ><a name="1834"
+      > </a
+      ><a name="1835" href="Space-exponential.html#870" class="Bound"
+      >Y</a
+      ><a name="1836" class="Symbol"
+      >))</a
+      ><a name="1838"
+      > </a
+      ><a name="1839" class="Symbol"
+      >&#8594;</a
+      ><a name="1840"
+      > </a
+      ><a name="1841" href="Space-exponential.html#1809" class="Bound"
+      >r</a
+      ><a name="1842"
+      > </a
+      ><a name="1843" href="Mini-library.html#294" class="Function Operator"
+      >&#8712;</a
+      ><a name="1844"
+      > </a
+      ><a name="1845" href="Space-exponential.html#1100" class="Function"
+      >R</a
+      ><a name="1846"
+      > </a
+      ><a name="1847" class="Symbol"
+      >&#8594;</a
+      ><a name="1848"
+      >
+         </a
+      ><a name="1858" href="Setoid.html#4344" class="Function Operator"
+      >&#10216;</a
+      ><a name="1859"
+      > </a
+      ><a name="1860" href="Space.html#4919" class="Function"
+      >MapSetoid</a
+      ><a name="1869"
+      > </a
+      ><a name="1870" href="Space-exponential.html#866" class="Bound"
+      >X</a
+      ><a name="1871"
+      > </a
+      ><a name="1872" href="Space-exponential.html#870" class="Bound"
+      >Y</a
+      ><a name="1873"
+      > </a
+      ><a name="1874" href="Setoid.html#4344" class="Function Operator"
+      >&#10217;</a
+      ><a name="1875"
+      > </a
+      ><a name="1876" href="Space-exponential.html#1809" class="Bound"
+      >r</a
+      ><a name="1877"
+      > </a
+      ><a name="1878" href="Setoid.html#4344" class="Function Operator"
+      >&#9678;</a
+      ><a name="1879"
+      > </a
+      ><a name="1880" href="Space-exponential.html#1780" class="Bound"
+      >t</a
+      ><a name="1881"
+      > </a
+      ><a name="1882" href="Mini-library.html#294" class="Function Operator"
+      >&#8712;</a
+      ><a name="1883"
+      > </a
+      ><a name="1884" href="Space-exponential.html#1100" class="Function"
+      >R</a
+      ><a name="1885"
+      >
+  </a
+      ><a name="1888" href="Space-exponential.html#1772" class="Function"
+      >rc&#8321;</a
+      ><a name="1891"
+      > </a
+      ><a name="1892" href="Space-exponential.html#1892" class="Bound"
+      >t</a
+      ><a name="1893"
+      > </a
+      ><a name="1894" href="Space-exponential.html#1894" class="Bound"
+      >uc</a
+      ><a name="1896"
+      > </a
+      ><a name="1897" href="Space-exponential.html#1897" class="Bound"
+      >r</a
+      ><a name="1898"
+      > </a
+      ><a name="1899" href="Space-exponential.html#1899" class="Bound"
+      >rR</a
+      ><a name="1901"
+      > </a
+      ><a name="1902" href="Space-exponential.html#1902" class="Bound"
+      >p</a
+      ><a name="1903"
+      > </a
+      ><a name="1904" href="Space-exponential.html#1904" class="Bound"
+      >pP</a
+      ><a name="1906"
+      > </a
+      ><a name="1907" href="Space-exponential.html#1907" class="Bound"
+      >t'</a
+      ><a name="1909"
+      > </a
+      ><a name="1910" href="Space-exponential.html#1910" class="Bound"
+      >uc'</a
+      ><a name="1913"
+      > </a
+      ><a name="1914" class="Symbol"
+      >=</a
+      ><a name="1915"
+      > </a
+      ><a name="1916" href="Space-exponential.html#1899" class="Bound"
+      >rR</a
+      ><a name="1918"
+      > </a
+      ><a name="1919" href="Space-exponential.html#1902" class="Bound"
+      >p</a
+      ><a name="1920"
+      > </a
+      ><a name="1921" href="Space-exponential.html#1904" class="Bound"
+      >pP</a
+      ><a name="1923"
+      > </a
+      ><a name="1924" class="Symbol"
+      >(</a
+      ><a name="1925" href="Space-exponential.html#1892" class="Bound"
+      >t</a
+      ><a name="1926"
+      > </a
+      ><a name="1927" href="Setoid.html#4465" class="Function Operator"
+      >&#9678;</a
+      ><a name="1928"
+      > </a
+      ><a name="1929" href="Space-exponential.html#1907" class="Bound"
+      >t'</a
+      ><a name="1931" class="Symbol"
+      >)</a
+      ><a name="1932"
+      > </a
+      ><a name="1933" class="Symbol"
+      >(</a
+      ><a name="1934" href="Uniform-continuity.html#2802" class="Function"
+      >Lemma[&#9678;-UC]</a
+      ><a name="1945"
+      > </a
+      ><a name="1946" href="Space-exponential.html#1892" class="Bound"
+      >t</a
+      ><a name="1947"
+      > </a
+      ><a name="1948" href="Space-exponential.html#1894" class="Bound"
+      >uc</a
+      ><a name="1950"
+      > </a
+      ><a name="1951" href="Space-exponential.html#1907" class="Bound"
+      >t'</a
+      ><a name="1953"
+      > </a
+      ><a name="1954" href="Space-exponential.html#1910" class="Bound"
+      >uc'</a
+      ><a name="1957" class="Symbol"
+      >)</a
+      ><a name="1958"
+      >
+
+  </a
+      ><a name="1962" href="Space-exponential.html#1962" class="Function"
+      >rc&#8322;</a
+      ><a name="1965"
+      > </a
+      ><a name="1966" class="Symbol"
+      >:</a
+      ><a name="1967"
+      > </a
+      ><a name="1968" class="Symbol"
+      >&#8704;(</a
+      ><a name="1970" href="Space-exponential.html#1970" class="Bound"
+      >r</a
+      ><a name="1971"
+      > </a
+      ><a name="1972" class="Symbol"
+      >:</a
+      ><a name="1973"
+      > </a
+      ><a name="1974" href="Setoid.html#4554" class="Function"
+      >E-map-&#8322;&#8469;</a
+      ><a name="1982"
+      > </a
+      ><a name="1983" class="Symbol"
+      >(</a
+      ><a name="1984" href="Space.html#4919" class="Function"
+      >MapSetoid</a
+      ><a name="1993"
+      > </a
+      ><a name="1994" href="Space-exponential.html#866" class="Bound"
+      >X</a
+      ><a name="1995"
+      > </a
+      ><a name="1996" href="Space-exponential.html#870" class="Bound"
+      >Y</a
+      ><a name="1997" class="Symbol"
+      >))</a
+      ><a name="1999"
+      > </a
+      ><a name="2000" class="Symbol"
+      >&#8594;</a
+      ><a name="2001"
+      >
+         </a
+      ><a name="2011" class="Symbol"
+      >(</a
+      ><a name="2012" href="Mini-library.html#1240" class="Function"
+      >&#8707;</a
+      ><a name="2013"
+      > </a
+      ><a name="2014" class="Symbol"
+      >\(</a
+      ><a name="2016" href="Space-exponential.html#2016" class="Bound"
+      >n</a
+      ><a name="2017"
+      > </a
+      ><a name="2018" class="Symbol"
+      >:</a
+      ><a name="2019"
+      > </a
+      ><a name="2020" href="Mini-library.html#2935" class="Datatype"
+      >&#8469;</a
+      ><a name="2021" class="Symbol"
+      >)</a
+      ><a name="2022"
+      > </a
+      ><a name="2023" class="Symbol"
+      >&#8594;</a
+      ><a name="2024"
+      > </a
+      ><a name="2025" class="Symbol"
+      >&#8704;(</a
+      ><a name="2027" href="Space-exponential.html#2027" class="Bound"
+      >s</a
+      ><a name="2028"
+      > </a
+      ><a name="2029" class="Symbol"
+      >:</a
+      ><a name="2030"
+      > </a
+      ><a name="2031" href="Mini-library.html#6619" class="Function"
+      >&#8322;Fin</a
+      ><a name="2035"
+      > </a
+      ><a name="2036" href="Space-exponential.html#2016" class="Bound"
+      >n</a
+      ><a name="2037" class="Symbol"
+      >)</a
+      ><a name="2038"
+      > </a
+      ><a name="2039" class="Symbol"
+      >&#8594;</a
+      ><a name="2040"
+      > </a
+      ><a name="2041" href="Setoid.html#4344" class="Function Operator"
+      >&#10216;</a
+      ><a name="2042"
+      > </a
+      ><a name="2043" href="Space.html#4919" class="Function"
+      >MapSetoid</a
+      ><a name="2052"
+      > </a
+      ><a name="2053" href="Space-exponential.html#866" class="Bound"
+      >X</a
+      ><a name="2054"
+      > </a
+      ><a name="2055" href="Space-exponential.html#870" class="Bound"
+      >Y</a
+      ><a name="2056"
+      > </a
+      ><a name="2057" href="Setoid.html#4344" class="Function Operator"
+      >&#10217;</a
+      ><a name="2058"
+      > </a
+      ><a name="2059" href="Space-exponential.html#1970" class="Bound"
+      >r</a
+      ><a name="2060"
+      > </a
+      ><a name="2061" href="Setoid.html#4344" class="Function Operator"
+      >&#9678;</a
+      ><a name="2062"
+      > </a
+      ><a name="2063" class="Symbol"
+      >(</a
+      ><a name="2064" href="ConsHeadTail.html#687" class="Function"
+      >E-cons</a
+      ><a name="2070"
+      > </a
+      ><a name="2071" href="Space-exponential.html#2027" class="Bound"
+      >s</a
+      ><a name="2072" class="Symbol"
+      >)</a
+      ><a name="2073"
+      > </a
+      ><a name="2074" href="Mini-library.html#294" class="Function Operator"
+      >&#8712;</a
+      ><a name="2075"
+      > </a
+      ><a name="2076" href="Space-exponential.html#1100" class="Function"
+      >R</a
+      ><a name="2077" class="Symbol"
+      >)</a
+      ><a name="2078"
+      > </a
+      ><a name="2079" class="Symbol"
+      >&#8594;</a
+      ><a name="2080"
+      >
+          </a
+      ><a name="2091" href="Space-exponential.html#1970" class="Bound"
+      >r</a
+      ><a name="2092"
+      > </a
+      ><a name="2093" href="Mini-library.html#294" class="Function Operator"
+      >&#8712;</a
+      ><a name="2094"
+      > </a
+      ><a name="2095" href="Space-exponential.html#1100" class="Function"
+      >R</a
+      ><a name="2096"
+      >
+  </a
+      ><a name="2099" href="Space-exponential.html#1962" class="Function"
+      >rc&#8322;</a
+      ><a name="2102"
+      > </a
+      ><a name="2103" href="Space-exponential.html#2103" class="Bound"
+      >r</a
+      ><a name="2104"
+      > </a
+      ><a name="2105" class="Symbol"
+      >(</a
+      ><a name="2106" href="Space-exponential.html#2106" class="Bound"
+      >n</a
+      ><a name="2107"
+      > </a
+      ><a name="2108" href="Mini-library.html#705" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="2109"
+      > </a
+      ><a name="2110" href="Space-exponential.html#2110" class="Bound"
+      >pr</a
+      ><a name="2112" class="Symbol"
+      >)</a
+      ><a name="2113"
+      > </a
+      ><a name="2114" href="Space-exponential.html#2114" class="Bound"
+      >p</a
+      ><a name="2115"
+      > </a
+      ><a name="2116" href="Space-exponential.html#2116" class="Bound"
+      >pP</a
+      ><a name="2118"
+      > </a
+      ><a name="2119" href="Space-exponential.html#2119" class="Bound"
+      >t</a
+      ><a name="2120"
+      > </a
+      ><a name="2121" href="Space-exponential.html#2121" class="Bound"
+      >uc</a
+      ><a name="2123"
+      > </a
+      ><a name="2124" class="Symbol"
+      >=</a
+      ><a name="2125"
+      > </a
+      ><a name="2126" href="Space.html#4224" class="Function"
+      >cond&#8322;</a
+      ><a name="2131"
+      > </a
+      ><a name="2132" href="Space-exponential.html#870" class="Bound"
+      >Y</a
+      ><a name="2133"
+      > </a
+      ><a name="2134" class="Symbol"
+      >(</a
+      ><a name="2135" href="Space-exponential.html#215" class="Function"
+      >exp</a
+      ><a name="2138"
+      > </a
+      ><a name="2139" href="Space-exponential.html#866" class="Bound"
+      >X</a
+      ><a name="2140"
+      > </a
+      ><a name="2141" href="Space-exponential.html#870" class="Bound"
+      >Y</a
+      ><a name="2142"
+      > </a
+      ><a name="2143" href="Space-exponential.html#2103" class="Bound"
+      >r</a
+      ><a name="2144"
+      > </a
+      ><a name="2145" href="Space-exponential.html#2119" class="Bound"
+      >t</a
+      ><a name="2146"
+      > </a
+      ><a name="2147" href="Space-exponential.html#2114" class="Bound"
+      >p</a
+      ><a name="2148" class="Symbol"
+      >)</a
+      ><a name="2149"
+      > </a
+      ><a name="2150" class="Symbol"
+      >(</a
+      ><a name="2151" href="Space-exponential.html#2173" class="Function"
+      >m</a
+      ><a name="2152"
+      > </a
+      ><a name="2153" href="Mini-library.html#705" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="2154"
+      > </a
+      ><a name="2155" href="Space-exponential.html#2226" class="Function"
+      >prf</a
+      ><a name="2158" class="Symbol"
+      >)</a
+      ><a name="2159"
+      >
+   </a
+      ><a name="2163" class="Keyword"
+      >where</a
+      ><a name="2168"
+      >
+    </a
+      ><a name="2173" href="Space-exponential.html#2173" class="Function"
+      >m</a
+      ><a name="2174"
+      > </a
+      ><a name="2175" class="Symbol"
+      >:</a
+      ><a name="2176"
+      > </a
+      ><a name="2177" href="Mini-library.html#2935" class="Datatype"
+      >&#8469;</a
+      ><a name="2178"
+      >
+    </a
+      ><a name="2183" href="Space-exponential.html#2173" class="Function"
+      >m</a
+      ><a name="2184"
+      > </a
+      ><a name="2185" class="Symbol"
+      >=</a
+      ><a name="2186"
+      > </a
+      ><a name="2187" href="Mini-library.html#1377" class="Function"
+      >&#8707;-witness</a
+      ><a name="2196"
+      > </a
+      ><a name="2197" class="Symbol"
+      >(</a
+      ><a name="2198" href="Space.html#688" class="Function"
+      >Axiom[coverage]</a
+      ><a name="2213"
+      > </a
+      ><a name="2214" href="Space-exponential.html#2106" class="Bound"
+      >n</a
+      ><a name="2215"
+      > </a
+      ><a name="2216" href="Space-exponential.html#2119" class="Bound"
+      >t</a
+      ><a name="2217"
+      > </a
+      ><a name="2218" href="Space-exponential.html#2121" class="Bound"
+      >uc</a
+      ><a name="2220" class="Symbol"
+      >)</a
+      ><a name="2221"
+      >
+    </a
+      ><a name="2226" href="Space-exponential.html#2226" class="Function"
+      >prf</a
+      ><a name="2229"
+      > </a
+      ><a name="2230" class="Symbol"
+      >:</a
+      ><a name="2231"
+      > </a
+      ><a name="2232" class="Symbol"
+      >&#8704;(</a
+      ><a name="2234" href="Space-exponential.html#2234" class="Bound"
+      >s</a
+      ><a name="2235"
+      > </a
+      ><a name="2236" class="Symbol"
+      >:</a
+      ><a name="2237"
+      > </a
+      ><a name="2238" href="Mini-library.html#6619" class="Function"
+      >&#8322;Fin</a
+      ><a name="2242"
+      > </a
+      ><a name="2243" href="Space-exponential.html#2173" class="Function"
+      >m</a
+      ><a name="2244" class="Symbol"
+      >)</a
+      ><a name="2245"
+      > </a
+      ><a name="2246" class="Symbol"
+      >&#8594;</a
+      ><a name="2247"
+      > </a
+      ><a name="2248" href="Setoid.html#4344" class="Function Operator"
+      >&#10216;</a
+      ><a name="2249"
+      > </a
+      ><a name="2250" href="Space.html#3808" class="Function"
+      >U</a
+      ><a name="2251"
+      > </a
+      ><a name="2252" href="Space-exponential.html#870" class="Bound"
+      >Y</a
+      ><a name="2253"
+      > </a
+      ><a name="2254" href="Setoid.html#4344" class="Function Operator"
+      >&#10217;</a
+      ><a name="2255"
+      > </a
+      ><a name="2256" class="Symbol"
+      >(</a
+      ><a name="2257" href="Space-exponential.html#215" class="Function"
+      >exp</a
+      ><a name="2260"
+      > </a
+      ><a name="2261" href="Space-exponential.html#866" class="Bound"
+      >X</a
+      ><a name="2262"
+      > </a
+      ><a name="2263" href="Space-exponential.html#870" class="Bound"
+      >Y</a
+      ><a name="2264"
+      > </a
+      ><a name="2265" href="Space-exponential.html#2103" class="Bound"
+      >r</a
+      ><a name="2266"
+      > </a
+      ><a name="2267" href="Space-exponential.html#2119" class="Bound"
+      >t</a
+      ><a name="2268"
+      > </a
+      ><a name="2269" href="Space-exponential.html#2114" class="Bound"
+      >p</a
+      ><a name="2270" class="Symbol"
+      >)</a
+      ><a name="2271"
+      > </a
+      ><a name="2272" href="Setoid.html#4344" class="Function Operator"
+      >&#9678;</a
+      ><a name="2273"
+      > </a
+      ><a name="2274" class="Symbol"
+      >(</a
+      ><a name="2275" href="ConsHeadTail.html#687" class="Function"
+      >E-cons</a
+      ><a name="2281"
+      > </a
+      ><a name="2282" href="Space-exponential.html#2234" class="Bound"
+      >s</a
+      ><a name="2283" class="Symbol"
+      >)</a
+      ><a name="2284"
+      > </a
+      ><a name="2285" href="Mini-library.html#294" class="Function Operator"
+      >&#8712;</a
+      ><a name="2286"
+      > </a
+      ><a name="2287" href="Space.html#3873" class="Function"
+      >Probe</a
+      ><a name="2292"
+      > </a
+      ><a name="2293" href="Space-exponential.html#870" class="Bound"
+      >Y</a
+      ><a name="2294"
+      >
+    </a
+      ><a name="2299" href="Space-exponential.html#2226" class="Function"
+      >prf</a
+      ><a name="2302"
+      > </a
+      ><a name="2303" href="Space-exponential.html#2303" class="Bound"
+      >s</a
+      ><a name="2304"
+      > </a
+      ><a name="2305" class="Symbol"
+      >=</a
+      ><a name="2306"
+      > </a
+      ><a name="2307" href="Space.html#4413" class="Function"
+      >cond&#8323;</a
+      ><a name="2312"
+      > </a
+      ><a name="2313" href="Space-exponential.html#870" class="Bound"
+      >Y</a
+      ><a name="2314"
+      > </a
+      ><a name="2315" href="Space-exponential.html#2644" class="Function"
+      >q</a
+      ><a name="2316"
+      > </a
+      ><a name="2317" class="Symbol"
+      >(</a
+      ><a name="2318" href="Setoid.html#4344" class="Function Operator"
+      >&#10216;</a
+      ><a name="2319"
+      > </a
+      ><a name="2320" href="Space.html#3808" class="Function"
+      >U</a
+      ><a name="2321"
+      > </a
+      ><a name="2322" href="Space-exponential.html#870" class="Bound"
+      >Y</a
+      ><a name="2323"
+      > </a
+      ><a name="2324" href="Setoid.html#4344" class="Function Operator"
+      >&#10217;</a
+      ><a name="2325"
+      > </a
+      ><a name="2326" class="Symbol"
+      >(</a
+      ><a name="2327" href="Space-exponential.html#215" class="Function"
+      >exp</a
+      ><a name="2330"
+      > </a
+      ><a name="2331" href="Space-exponential.html#866" class="Bound"
+      >X</a
+      ><a name="2332"
+      > </a
+      ><a name="2333" href="Space-exponential.html#870" class="Bound"
+      >Y</a
+      ><a name="2334"
+      > </a
+      ><a name="2335" href="Space-exponential.html#2103" class="Bound"
+      >r</a
+      ><a name="2336"
+      > </a
+      ><a name="2337" href="Space-exponential.html#2119" class="Bound"
+      >t</a
+      ><a name="2338"
+      > </a
+      ><a name="2339" href="Space-exponential.html#2114" class="Bound"
+      >p</a
+      ><a name="2340" class="Symbol"
+      >)</a
+      ><a name="2341"
+      > </a
+      ><a name="2342" href="Setoid.html#4344" class="Function Operator"
+      >&#9678;</a
+      ><a name="2343"
+      > </a
+      ><a name="2344" class="Symbol"
+      >(</a
+      ><a name="2345" href="ConsHeadTail.html#687" class="Function"
+      >E-cons</a
+      ><a name="2351"
+      > </a
+      ><a name="2352" href="Space-exponential.html#2303" class="Bound"
+      >s</a
+      ><a name="2353" class="Symbol"
+      >))</a
+      ><a name="2355"
+      > </a
+      ><a name="2356" href="Space-exponential.html#4152" class="Function"
+      >claim&#8321;</a
+      ><a name="2362"
+      > </a
+      ><a name="2363" href="Space-exponential.html#4401" class="Function"
+      >claim&#8322;</a
+      ><a name="2369"
+      >
+     </a
+      ><a name="2375" class="Keyword"
+      >where</a
+      ><a name="2380"
+      >
+      </a
+      ><a name="2387" href="Space-exponential.html#2387" class="Function"
+      >s'</a
+      ><a name="2389"
+      > </a
+      ><a name="2390" class="Symbol"
+      >:</a
+      ><a name="2391"
+      > </a
+      ><a name="2392" href="Mini-library.html#6619" class="Function"
+      >&#8322;Fin</a
+      ><a name="2396"
+      > </a
+      ><a name="2397" href="Space-exponential.html#2106" class="Bound"
+      >n</a
+      ><a name="2398"
+      >
+      </a
+      ><a name="2405" href="Space-exponential.html#2387" class="Function"
+      >s'</a
+      ><a name="2407"
+      > </a
+      ><a name="2408" class="Symbol"
+      >=</a
+      ><a name="2409"
+      > </a
+      ><a name="2410" href="Mini-library.html#1377" class="Function"
+      >&#8707;-witness</a
+      ><a name="2419"
+      > </a
+      ><a name="2420" class="Symbol"
+      >(</a
+      ><a name="2421" href="Mini-library.html#1453" class="Function"
+      >&#8707;-elim</a
+      ><a name="2427"
+      > </a
+      ><a name="2428" class="Symbol"
+      >(</a
+      ><a name="2429" href="Space.html#688" class="Function"
+      >Axiom[coverage]</a
+      ><a name="2444"
+      > </a
+      ><a name="2445" href="Space-exponential.html#2106" class="Bound"
+      >n</a
+      ><a name="2446"
+      > </a
+      ><a name="2447" href="Space-exponential.html#2119" class="Bound"
+      >t</a
+      ><a name="2448"
+      > </a
+      ><a name="2449" href="Space-exponential.html#2121" class="Bound"
+      >uc</a
+      ><a name="2451" class="Symbol"
+      >)</a
+      ><a name="2452"
+      > </a
+      ><a name="2453" href="Space-exponential.html#2303" class="Bound"
+      >s</a
+      ><a name="2454" class="Symbol"
+      >)</a
+      ><a name="2455"
+      >
+      </a
+      ><a name="2462" href="Space-exponential.html#2462" class="Function"
+      >t'</a
+      ><a name="2464"
+      > </a
+      ><a name="2465" class="Symbol"
+      >:</a
+      ><a name="2466"
+      > </a
+      ><a name="2467" href="Setoid.html#4604" class="Function"
+      >E-map-&#8322;&#8469;-&#8322;&#8469;</a
+      ><a name="2478"
+      >
+      </a
+      ><a name="2485" href="Space-exponential.html#2462" class="Function"
+      >t'</a
+      ><a name="2487"
+      > </a
+      ><a name="2488" class="Symbol"
+      >=</a
+      ><a name="2489"
+      > </a
+      ><a name="2490" href="Mini-library.html#1377" class="Function"
+      >&#8707;-witness</a
+      ><a name="2499"
+      > </a
+      ><a name="2500" class="Symbol"
+      >(</a
+      ><a name="2501" href="Mini-library.html#1453" class="Function"
+      >&#8707;-elim</a
+      ><a name="2507"
+      > </a
+      ><a name="2508" class="Symbol"
+      >(</a
+      ><a name="2509" href="Mini-library.html#1453" class="Function"
+      >&#8707;-elim</a
+      ><a name="2515"
+      > </a
+      ><a name="2516" class="Symbol"
+      >(</a
+      ><a name="2517" href="Space.html#688" class="Function"
+      >Axiom[coverage]</a
+      ><a name="2532"
+      > </a
+      ><a name="2533" href="Space-exponential.html#2106" class="Bound"
+      >n</a
+      ><a name="2534"
+      > </a
+      ><a name="2535" href="Space-exponential.html#2119" class="Bound"
+      >t</a
+      ><a name="2536"
+      > </a
+      ><a name="2537" href="Space-exponential.html#2121" class="Bound"
+      >uc</a
+      ><a name="2539" class="Symbol"
+      >)</a
+      ><a name="2540"
+      > </a
+      ><a name="2541" href="Space-exponential.html#2303" class="Bound"
+      >s</a
+      ><a name="2542" class="Symbol"
+      >))</a
+      ><a name="2544"
+      >
+      </a
+      ><a name="2551" href="Space-exponential.html#2551" class="Function"
+      >uc'</a
+      ><a name="2554"
+      > </a
+      ><a name="2555" class="Symbol"
+      >:</a
+      ><a name="2556"
+      > </a
+      ><a name="2557" href="Space-exponential.html#2462" class="Function"
+      >t'</a
+      ><a name="2559"
+      > </a
+      ><a name="2560" href="Mini-library.html#294" class="Function Operator"
+      >&#8712;</a
+      ><a name="2561"
+      > </a
+      ><a name="2562" href="Space.html#498" class="Function"
+      >C</a
+      ><a name="2563"
+      >
+      </a
+      ><a name="2570" href="Space-exponential.html#2551" class="Function"
+      >uc'</a
+      ><a name="2573"
+      > </a
+      ><a name="2574" class="Symbol"
+      >=</a
+      ><a name="2575"
+      > </a
+      ><a name="2576" href="Mini-library.html#1063" class="Function"
+      >&#8743;-elim&#8320;</a
+      ><a name="2583"
+      > </a
+      ><a name="2584" class="Symbol"
+      >(</a
+      ><a name="2585" href="Mini-library.html#1453" class="Function"
+      >&#8707;-elim</a
+      ><a name="2591"
+      > </a
+      ><a name="2592" class="Symbol"
+      >(</a
+      ><a name="2593" href="Mini-library.html#1453" class="Function"
+      >&#8707;-elim</a
+      ><a name="2599"
+      > </a
+      ><a name="2600" class="Symbol"
+      >(</a
+      ><a name="2601" href="Mini-library.html#1453" class="Function"
+      >&#8707;-elim</a
+      ><a name="2607"
+      > </a
+      ><a name="2608" class="Symbol"
+      >(</a
+      ><a name="2609" href="Space.html#688" class="Function"
+      >Axiom[coverage]</a
+      ><a name="2624"
+      > </a
+      ><a name="2625" href="Space-exponential.html#2106" class="Bound"
+      >n</a
+      ><a name="2626"
+      > </a
+      ><a name="2627" href="Space-exponential.html#2119" class="Bound"
+      >t</a
+      ><a name="2628"
+      > </a
+      ><a name="2629" href="Space-exponential.html#2121" class="Bound"
+      >uc</a
+      ><a name="2631" class="Symbol"
+      >)</a
+      ><a name="2632"
+      > </a
+      ><a name="2633" href="Space-exponential.html#2303" class="Bound"
+      >s</a
+      ><a name="2634" class="Symbol"
+      >)))</a
+      ><a name="2637"
+      >
+      </a
+      ><a name="2644" href="Space-exponential.html#2644" class="Function"
+      >q</a
+      ><a name="2645"
+      > </a
+      ><a name="2646" class="Symbol"
+      >:</a
+      ><a name="2647"
+      > </a
+      ><a name="2648" href="Setoid.html#4554" class="Function"
+      >E-map-&#8322;&#8469;</a
+      ><a name="2656"
+      > </a
+      ><a name="2657" class="Symbol"
+      >(</a
+      ><a name="2658" href="Space.html#3808" class="Function"
+      >U</a
+      ><a name="2659"
+      > </a
+      ><a name="2660" href="Space-exponential.html#870" class="Bound"
+      >Y</a
+      ><a name="2661" class="Symbol"
+      >)</a
+      ><a name="2662"
+      >
+      </a
+      ><a name="2669" href="Space-exponential.html#2644" class="Function"
+      >q</a
+      ><a name="2670"
+      > </a
+      ><a name="2671" class="Symbol"
+      >=</a
+      ><a name="2672"
+      > </a
+      ><a name="2673" href="Space-exponential.html#2703" class="Function"
+      >qq</a
+      ><a name="2675"
+      > </a
+      ><a name="2676" href="Mini-library.html#705" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="2677"
+      > </a
+      ><a name="2678" href="Space-exponential.html#2797" class="Function"
+      >eqq</a
+      ><a name="2681"
+      >
+       </a
+      ><a name="2689" class="Keyword"
+      >where</a
+      ><a name="2694"
+      >
+        </a
+      ><a name="2703" href="Space-exponential.html#2703" class="Function"
+      >qq</a
+      ><a name="2705"
+      > </a
+      ><a name="2706" class="Symbol"
+      >:</a
+      ><a name="2707"
+      > </a
+      ><a name="2708" href="Mini-library.html#6102" class="Function"
+      >&#8322;&#8469;</a
+      ><a name="2710"
+      > </a
+      ><a name="2711" class="Symbol"
+      >&#8594;</a
+      ><a name="2712"
+      > </a
+      ><a name="2713" href="Setoid.html#295" class="Function"
+      >&#360;</a
+      ><a name="2714"
+      > </a
+      ><a name="2715" class="Symbol"
+      >(</a
+      ><a name="2716" href="Space.html#3808" class="Function"
+      >U</a
+      ><a name="2717"
+      > </a
+      ><a name="2718" href="Space-exponential.html#870" class="Bound"
+      >Y</a
+      ><a name="2719" class="Symbol"
+      >)</a
+      ><a name="2720"
+      >
+        </a
+      ><a name="2729" href="Space-exponential.html#2703" class="Function"
+      >qq</a
+      ><a name="2731"
+      > </a
+      ><a name="2732" href="Space-exponential.html#2732" class="Bound"
+      >&#945;</a
+      ><a name="2733"
+      > </a
+      ><a name="2734" class="Symbol"
+      >=</a
+      ><a name="2735"
+      > </a
+      ><a name="2736" href="Mini-library.html#741" class="Function"
+      >&#960;&#8320;</a
+      ><a name="2738"
+      > </a
+      ><a name="2739" class="Symbol"
+      >(</a
+      ><a name="2740" href="Mini-library.html#741" class="Function"
+      >&#960;&#8320;</a
+      ><a name="2742"
+      > </a
+      ><a name="2743" class="Symbol"
+      >(</a
+      ><a name="2744" href="Mini-library.html#741" class="Function"
+      >&#960;&#8320;</a
+      ><a name="2746"
+      > </a
+      ><a name="2747" href="Space-exponential.html#2103" class="Bound"
+      >r</a
+      ><a name="2748"
+      > </a
+      ><a name="2749" class="Symbol"
+      >(</a
+      ><a name="2750" href="ConsHeadTail.html#175" class="Function"
+      >cons</a
+      ><a name="2754"
+      > </a
+      ><a name="2755" href="Space-exponential.html#2387" class="Function"
+      >s'</a
+      ><a name="2757"
+      > </a
+      ><a name="2758" class="Symbol"
+      >(</a
+      ><a name="2759" href="Mini-library.html#741" class="Function"
+      >&#960;&#8320;</a
+      ><a name="2761"
+      > </a
+      ><a name="2762" href="Space-exponential.html#2462" class="Function"
+      >t'</a
+      ><a name="2764"
+      > </a
+      ><a name="2765" href="Space-exponential.html#2732" class="Bound"
+      >&#945;</a
+      ><a name="2766" class="Symbol"
+      >))))</a
+      ><a name="2770"
+      > </a
+      ><a name="2771" class="Symbol"
+      >(</a
+      ><a name="2772" href="Mini-library.html#741" class="Function"
+      >&#960;&#8320;</a
+      ><a name="2774"
+      > </a
+      ><a name="2775" href="Space-exponential.html#2114" class="Bound"
+      >p</a
+      ><a name="2776"
+      > </a
+      ><a name="2777" class="Symbol"
+      >(</a
+      ><a name="2778" href="ConsHeadTail.html#175" class="Function"
+      >cons</a
+      ><a name="2782"
+      > </a
+      ><a name="2783" href="Space-exponential.html#2303" class="Bound"
+      >s</a
+      ><a name="2784"
+      > </a
+      ><a name="2785" href="Space-exponential.html#2732" class="Bound"
+      >&#945;</a
+      ><a name="2786" class="Symbol"
+      >))</a
+      ><a name="2788"
+      >
+        </a
+      ><a name="2797" href="Space-exponential.html#2797" class="Function"
+      >eqq</a
+      ><a name="2800"
+      > </a
+      ><a name="2801" class="Symbol"
+      >:</a
+      ><a name="2802"
+      > </a
+      ><a name="2803" class="Symbol"
+      >&#8704;(</a
+      ><a name="2805" href="Space-exponential.html#2805" class="Bound"
+      >&#945;</a
+      ><a name="2806"
+      > </a
+      ><a name="2807" href="Space-exponential.html#2807" class="Bound"
+      >&#946;</a
+      ><a name="2808"
+      > </a
+      ><a name="2809" class="Symbol"
+      >:</a
+      ><a name="2810"
+      > </a
+      ><a name="2811" href="Mini-library.html#6102" class="Function"
+      >&#8322;&#8469;</a
+      ><a name="2813" class="Symbol"
+      >)</a
+      ><a name="2814"
+      > </a
+      ><a name="2815" class="Symbol"
+      >&#8594;</a
+      ><a name="2816"
+      > </a
+      ><a name="2817" href="Space-exponential.html#2805" class="Bound"
+      >&#945;</a
+      ><a name="2818"
+      > </a
+      ><a name="2819" href="Setoid.html#4042" class="Function Operator"
+      >&#8803;</a
+      ><a name="2820"
+      > </a
+      ><a name="2821" href="Space-exponential.html#2807" class="Bound"
+      >&#946;</a
+      ><a name="2822"
+      > </a
+      ><a name="2823" class="Symbol"
+      >&#8594;</a
+      ><a name="2824"
+      > </a
+      ><a name="2825" href="Space-exponential.html#2703" class="Function"
+      >qq</a
+      ><a name="2827"
+      > </a
+      ><a name="2828" href="Space-exponential.html#2805" class="Bound"
+      >&#945;</a
+      ><a name="2829"
+      > </a
+      ><a name="2830" href="Space-exponential.html#973" class="Function Operator"
+      >&#8776;</a
+      ><a name="2831"
+      > </a
+      ><a name="2832" href="Space-exponential.html#2703" class="Function"
+      >qq</a
+      ><a name="2834"
+      > </a
+      ><a name="2835" href="Space-exponential.html#2807" class="Bound"
+      >&#946;</a
+      ><a name="2836"
+      >
+        </a
+      ><a name="2845" href="Space-exponential.html#2797" class="Function"
+      >eqq</a
+      ><a name="2848"
+      > </a
+      ><a name="2849" href="Space-exponential.html#2849" class="Bound"
+      >&#945;</a
+      ><a name="2850"
+      > </a
+      ><a name="2851" href="Space-exponential.html#2851" class="Bound"
+      >&#946;</a
+      ><a name="2852"
+      > </a
+      ><a name="2853" href="Space-exponential.html#2853" class="Bound"
+      >e</a
+      ><a name="2854"
+      > </a
+      ><a name="2855" class="Symbol"
+      >=</a
+      ><a name="2856"
+      > </a
+      ><a name="2857" href="Setoid.html#540" class="Function"
+      >Trans</a
+      ><a name="2862"
+      > </a
+      ><a name="2863" class="Symbol"
+      >(</a
+      ><a name="2864" href="Space.html#3808" class="Function"
+      >U</a
+      ><a name="2865"
+      > </a
+      ><a name="2866" href="Space-exponential.html#870" class="Bound"
+      >Y</a
+      ><a name="2867" class="Symbol"
+      >)</a
+      ><a name="2868"
+      > </a
+      ><a name="2869" class="Symbol"
+      >(</a
+      ><a name="2870" href="Mini-library.html#741" class="Function"
+      >&#960;&#8320;</a
+      ><a name="2872"
+      > </a
+      ><a name="2873" class="Symbol"
+      >(</a
+      ><a name="2874" href="Mini-library.html#741" class="Function"
+      >&#960;&#8320;</a
+      ><a name="2876"
+      > </a
+      ><a name="2877" class="Symbol"
+      >(</a
+      ><a name="2878" href="Mini-library.html#741" class="Function"
+      >&#960;&#8320;</a
+      ><a name="2880"
+      > </a
+      ><a name="2881" href="Space-exponential.html#2103" class="Bound"
+      >r</a
+      ><a name="2882"
+      > </a
+      ><a name="2883" class="Symbol"
+      >(</a
+      ><a name="2884" href="ConsHeadTail.html#175" class="Function"
+      >cons</a
+      ><a name="2888"
+      > </a
+      ><a name="2889" href="Space-exponential.html#2387" class="Function"
+      >s'</a
+      ><a name="2891"
+      > </a
+      ><a name="2892" class="Symbol"
+      >(</a
+      ><a name="2893" href="Mini-library.html#741" class="Function"
+      >&#960;&#8320;</a
+      ><a name="2895"
+      > </a
+      ><a name="2896" href="Space-exponential.html#2462" class="Function"
+      >t'</a
+      ><a name="2898"
+      > </a
+      ><a name="2899" href="Space-exponential.html#2849" class="Bound"
+      >&#945;</a
+      ><a name="2900" class="Symbol"
+      >))))</a
+      ><a name="2904"
+      > </a
+      ><a name="2905" class="Symbol"
+      >(</a
+      ><a name="2906" href="Mini-library.html#741" class="Function"
+      >&#960;&#8320;</a
+      ><a name="2908"
+      > </a
+      ><a name="2909" href="Space-exponential.html#2114" class="Bound"
+      >p</a
+      ><a name="2910"
+      > </a
+      ><a name="2911" class="Symbol"
+      >(</a
+      ><a name="2912" href="ConsHeadTail.html#175" class="Function"
+      >cons</a
+      ><a name="2916"
+      > </a
+      ><a name="2917" href="Space-exponential.html#2303" class="Bound"
+      >s</a
+      ><a name="2918"
+      > </a
+      ><a name="2919" href="Space-exponential.html#2849" class="Bound"
+      >&#945;</a
+      ><a name="2920" class="Symbol"
+      >)))</a
+      ><a name="2923"
+      >
+                                </a
+      ><a name="2956" class="Symbol"
+      >(</a
+      ><a name="2957" href="Mini-library.html#741" class="Function"
+      >&#960;&#8320;</a
+      ><a name="2959"
+      > </a
+      ><a name="2960" class="Symbol"
+      >(</a
+      ><a name="2961" href="Mini-library.html#741" class="Function"
+      >&#960;&#8320;</a
+      ><a name="2963"
+      > </a
+      ><a name="2964" class="Symbol"
+      >(</a
+      ><a name="2965" href="Mini-library.html#741" class="Function"
+      >&#960;&#8320;</a
+      ><a name="2967"
+      > </a
+      ><a name="2968" href="Space-exponential.html#2103" class="Bound"
+      >r</a
+      ><a name="2969"
+      > </a
+      ><a name="2970" class="Symbol"
+      >(</a
+      ><a name="2971" href="ConsHeadTail.html#175" class="Function"
+      >cons</a
+      ><a name="2975"
+      > </a
+      ><a name="2976" href="Space-exponential.html#2387" class="Function"
+      >s'</a
+      ><a name="2978"
+      > </a
+      ><a name="2979" class="Symbol"
+      >(</a
+      ><a name="2980" href="Mini-library.html#741" class="Function"
+      >&#960;&#8320;</a
+      ><a name="2982"
+      > </a
+      ><a name="2983" href="Space-exponential.html#2462" class="Function"
+      >t'</a
+      ><a name="2985"
+      > </a
+      ><a name="2986" href="Space-exponential.html#2851" class="Bound"
+      >&#946;</a
+      ><a name="2987" class="Symbol"
+      >))))</a
+      ><a name="2991"
+      > </a
+      ><a name="2992" class="Symbol"
+      >(</a
+      ><a name="2993" href="Mini-library.html#741" class="Function"
+      >&#960;&#8320;</a
+      ><a name="2995"
+      > </a
+      ><a name="2996" href="Space-exponential.html#2114" class="Bound"
+      >p</a
+      ><a name="2997"
+      > </a
+      ><a name="2998" class="Symbol"
+      >(</a
+      ><a name="2999" href="ConsHeadTail.html#175" class="Function"
+      >cons</a
+      ><a name="3003"
+      > </a
+      ><a name="3004" href="Space-exponential.html#2303" class="Bound"
+      >s</a
+      ><a name="3005"
+      > </a
+      ><a name="3006" href="Space-exponential.html#2849" class="Bound"
+      >&#945;</a
+      ><a name="3007" class="Symbol"
+      >)))</a
+      ><a name="3010"
+      >
+                                </a
+      ><a name="3043" class="Symbol"
+      >(</a
+      ><a name="3044" href="Mini-library.html#741" class="Function"
+      >&#960;&#8320;</a
+      ><a name="3046"
+      > </a
+      ><a name="3047" class="Symbol"
+      >(</a
+      ><a name="3048" href="Mini-library.html#741" class="Function"
+      >&#960;&#8320;</a
+      ><a name="3050"
+      > </a
+      ><a name="3051" class="Symbol"
+      >(</a
+      ><a name="3052" href="Mini-library.html#741" class="Function"
+      >&#960;&#8320;</a
+      ><a name="3054"
+      > </a
+      ><a name="3055" href="Space-exponential.html#2103" class="Bound"
+      >r</a
+      ><a name="3056"
+      > </a
+      ><a name="3057" class="Symbol"
+      >(</a
+      ><a name="3058" href="ConsHeadTail.html#175" class="Function"
+      >cons</a
+      ><a name="3062"
+      > </a
+      ><a name="3063" href="Space-exponential.html#2387" class="Function"
+      >s'</a
+      ><a name="3065"
+      > </a
+      ><a name="3066" class="Symbol"
+      >(</a
+      ><a name="3067" href="Mini-library.html#741" class="Function"
+      >&#960;&#8320;</a
+      ><a name="3069"
+      > </a
+      ><a name="3070" href="Space-exponential.html#2462" class="Function"
+      >t'</a
+      ><a name="3072"
+      > </a
+      ><a name="3073" href="Space-exponential.html#2851" class="Bound"
+      >&#946;</a
+      ><a name="3074" class="Symbol"
+      >))))</a
+      ><a name="3078"
+      > </a
+      ><a name="3079" class="Symbol"
+      >(</a
+      ><a name="3080" href="Mini-library.html#741" class="Function"
+      >&#960;&#8320;</a
+      ><a name="3082"
+      > </a
+      ><a name="3083" href="Space-exponential.html#2114" class="Bound"
+      >p</a
+      ><a name="3084"
+      > </a
+      ><a name="3085" class="Symbol"
+      >(</a
+      ><a name="3086" href="ConsHeadTail.html#175" class="Function"
+      >cons</a
+      ><a name="3090"
+      > </a
+      ><a name="3091" href="Space-exponential.html#2303" class="Bound"
+      >s</a
+      ><a name="3092"
+      > </a
+      ><a name="3093" href="Space-exponential.html#2851" class="Bound"
+      >&#946;</a
+      ><a name="3094" class="Symbol"
+      >)))</a
+      ><a name="3097"
+      >
+                                </a
+      ><a name="3130" href="Space-exponential.html#3442" class="Function"
+      >claim&#8322;</a
+      ><a name="3136"
+      > </a
+      ><a name="3137" href="Space-exponential.html#3759" class="Function"
+      >claim&#8324;</a
+      ><a name="3143"
+      >
+         </a
+      ><a name="3153" class="Keyword"
+      >where</a
+      ><a name="3158"
+      >
+          </a
+      ><a name="3169" href="Space-exponential.html#3169" class="Function"
+      >claim&#8320;</a
+      ><a name="3175"
+      > </a
+      ><a name="3176" class="Symbol"
+      >:</a
+      ><a name="3177"
+      > </a
+      ><a name="3178" href="ConsHeadTail.html#175" class="Function"
+      >cons</a
+      ><a name="3182"
+      > </a
+      ><a name="3183" href="Space-exponential.html#2387" class="Function"
+      >s'</a
+      ><a name="3185"
+      > </a
+      ><a name="3186" class="Symbol"
+      >(</a
+      ><a name="3187" href="Mini-library.html#741" class="Function"
+      >&#960;&#8320;</a
+      ><a name="3189"
+      > </a
+      ><a name="3190" href="Space-exponential.html#2462" class="Function"
+      >t'</a
+      ><a name="3192"
+      > </a
+      ><a name="3193" href="Space-exponential.html#2849" class="Bound"
+      >&#945;</a
+      ><a name="3194" class="Symbol"
+      >)</a
+      ><a name="3195"
+      > </a
+      ><a name="3196" href="Setoid.html#4042" class="Function Operator"
+      >&#8803;</a
+      ><a name="3197"
+      > </a
+      ><a name="3198" href="ConsHeadTail.html#175" class="Function"
+      >cons</a
+      ><a name="3202"
+      > </a
+      ><a name="3203" href="Space-exponential.html#2387" class="Function"
+      >s'</a
+      ><a name="3205"
+      > </a
+      ><a name="3206" class="Symbol"
+      >(</a
+      ><a name="3207" href="Mini-library.html#741" class="Function"
+      >&#960;&#8320;</a
+      ><a name="3209"
+      > </a
+      ><a name="3210" href="Space-exponential.html#2462" class="Function"
+      >t'</a
+      ><a name="3212"
+      > </a
+      ><a name="3213" href="Space-exponential.html#2851" class="Bound"
+      >&#946;</a
+      ><a name="3214" class="Symbol"
+      >)</a
+      ><a name="3215"
+      >
+          </a
+      ><a name="3226" href="Space-exponential.html#3169" class="Function"
+      >claim&#8320;</a
+      ><a name="3232"
+      > </a
+      ><a name="3233" class="Symbol"
+      >=</a
+      ><a name="3234"
+      > </a
+      ><a name="3235" href="ConsHeadTail.html#426" class="Function"
+      >Lemma[cons-E-map]</a
+      ><a name="3252"
+      > </a
+      ><a name="3253" href="Space-exponential.html#2387" class="Function"
+      >s'</a
+      ><a name="3255"
+      > </a
+      ><a name="3256" class="Symbol"
+      >(</a
+      ><a name="3257" href="Mini-library.html#741" class="Function"
+      >&#960;&#8320;</a
+      ><a name="3259"
+      > </a
+      ><a name="3260" href="Space-exponential.html#2462" class="Function"
+      >t'</a
+      ><a name="3262"
+      > </a
+      ><a name="3263" href="Space-exponential.html#2849" class="Bound"
+      >&#945;</a
+      ><a name="3264" class="Symbol"
+      >)</a
+      ><a name="3265"
+      > </a
+      ><a name="3266" class="Symbol"
+      >(</a
+      ><a name="3267" href="Mini-library.html#741" class="Function"
+      >&#960;&#8320;</a
+      ><a name="3269"
+      > </a
+      ><a name="3270" href="Space-exponential.html#2462" class="Function"
+      >t'</a
+      ><a name="3272"
+      > </a
+      ><a name="3273" href="Space-exponential.html#2851" class="Bound"
+      >&#946;</a
+      ><a name="3274" class="Symbol"
+      >)</a
+      ><a name="3275"
+      > </a
+      ><a name="3276" class="Symbol"
+      >(</a
+      ><a name="3277" href="Mini-library.html#833" class="Function"
+      >&#960;&#8321;</a
+      ><a name="3279"
+      > </a
+      ><a name="3280" href="Space-exponential.html#2462" class="Function"
+      >t'</a
+      ><a name="3282"
+      > </a
+      ><a name="3283" href="Space-exponential.html#2849" class="Bound"
+      >&#945;</a
+      ><a name="3284"
+      > </a
+      ><a name="3285" href="Space-exponential.html#2851" class="Bound"
+      >&#946;</a
+      ><a name="3286"
+      > </a
+      ><a name="3287" href="Space-exponential.html#2853" class="Bound"
+      >e</a
+      ><a name="3288" class="Symbol"
+      >)</a
+      ><a name="3289"
+      >
+          </a
+      ><a name="3300" href="Space-exponential.html#3300" class="Function"
+      >claim&#8321;</a
+      ><a name="3306"
+      > </a
+      ><a name="3307" class="Symbol"
+      >:</a
+      ><a name="3308"
+      > </a
+      ><a name="3309" href="Mini-library.html#741" class="Function"
+      >&#960;&#8320;</a
+      ><a name="3311"
+      > </a
+      ><a name="3312" href="Space-exponential.html#2103" class="Bound"
+      >r</a
+      ><a name="3313"
+      > </a
+      ><a name="3314" class="Symbol"
+      >(</a
+      ><a name="3315" href="ConsHeadTail.html#175" class="Function"
+      >cons</a
+      ><a name="3319"
+      > </a
+      ><a name="3320" href="Space-exponential.html#2387" class="Function"
+      >s'</a
+      ><a name="3322"
+      > </a
+      ><a name="3323" class="Symbol"
+      >(</a
+      ><a name="3324" href="Mini-library.html#741" class="Function"
+      >&#960;&#8320;</a
+      ><a name="3326"
+      > </a
+      ><a name="3327" href="Space-exponential.html#2462" class="Function"
+      >t'</a
+      ><a name="3329"
+      > </a
+      ><a name="3330" href="Space-exponential.html#2849" class="Bound"
+      >&#945;</a
+      ><a name="3331" class="Symbol"
+      >))</a
+      ><a name="3333"
+      > </a
+      ><a name="3334" href="Space-exponential.html#1021" class="Function Operator"
+      >&#8779;</a
+      ><a name="3335"
+      > </a
+      ><a name="3336" href="Mini-library.html#741" class="Function"
+      >&#960;&#8320;</a
+      ><a name="3338"
+      > </a
+      ><a name="3339" href="Space-exponential.html#2103" class="Bound"
+      >r</a
+      ><a name="3340"
+      > </a
+      ><a name="3341" class="Symbol"
+      >(</a
+      ><a name="3342" href="ConsHeadTail.html#175" class="Function"
+      >cons</a
+      ><a name="3346"
+      > </a
+      ><a name="3347" href="Space-exponential.html#2387" class="Function"
+      >s'</a
+      ><a name="3349"
+      > </a
+      ><a name="3350" class="Symbol"
+      >(</a
+      ><a name="3351" href="Mini-library.html#741" class="Function"
+      >&#960;&#8320;</a
+      ><a name="3353"
+      > </a
+      ><a name="3354" href="Space-exponential.html#2462" class="Function"
+      >t'</a
+      ><a name="3356"
+      > </a
+      ><a name="3357" href="Space-exponential.html#2851" class="Bound"
+      >&#946;</a
+      ><a name="3358" class="Symbol"
+      >))</a
+      ><a name="3360"
+      >
+          </a
+      ><a name="3371" href="Space-exponential.html#3300" class="Function"
+      >claim&#8321;</a
+      ><a name="3377"
+      > </a
+      ><a name="3378" class="Symbol"
+      >=</a
+      ><a name="3379"
+      > </a
+      ><a name="3380" href="Mini-library.html#833" class="Function"
+      >&#960;&#8321;</a
+      ><a name="3382"
+      > </a
+      ><a name="3383" href="Space-exponential.html#2103" class="Bound"
+      >r</a
+      ><a name="3384"
+      > </a
+      ><a name="3385" class="Symbol"
+      >(</a
+      ><a name="3386" href="ConsHeadTail.html#175" class="Function"
+      >cons</a
+      ><a name="3390"
+      > </a
+      ><a name="3391" href="Space-exponential.html#2387" class="Function"
+      >s'</a
+      ><a name="3393"
+      > </a
+      ><a name="3394" class="Symbol"
+      >(</a
+      ><a name="3395" href="Mini-library.html#741" class="Function"
+      >&#960;&#8320;</a
+      ><a name="3397"
+      > </a
+      ><a name="3398" href="Space-exponential.html#2462" class="Function"
+      >t'</a
+      ><a name="3400"
+      > </a
+      ><a name="3401" href="Space-exponential.html#2849" class="Bound"
+      >&#945;</a
+      ><a name="3402" class="Symbol"
+      >))</a
+      ><a name="3404"
+      > </a
+      ><a name="3405" class="Symbol"
+      >(</a
+      ><a name="3406" href="ConsHeadTail.html#175" class="Function"
+      >cons</a
+      ><a name="3410"
+      > </a
+      ><a name="3411" href="Space-exponential.html#2387" class="Function"
+      >s'</a
+      ><a name="3413"
+      > </a
+      ><a name="3414" class="Symbol"
+      >(</a
+      ><a name="3415" href="Mini-library.html#741" class="Function"
+      >&#960;&#8320;</a
+      ><a name="3417"
+      > </a
+      ><a name="3418" href="Space-exponential.html#2462" class="Function"
+      >t'</a
+      ><a name="3420"
+      > </a
+      ><a name="3421" href="Space-exponential.html#2851" class="Bound"
+      >&#946;</a
+      ><a name="3422" class="Symbol"
+      >))</a
+      ><a name="3424"
+      > </a
+      ><a name="3425" href="Space-exponential.html#3169" class="Function"
+      >claim&#8320;</a
+      ><a name="3431"
+      >
+          </a
+      ><a name="3442" href="Space-exponential.html#3442" class="Function"
+      >claim&#8322;</a
+      ><a name="3448"
+      > </a
+      ><a name="3449" class="Symbol"
+      >:</a
+      ><a name="3450"
+      >  </a
+      ><a name="3452" href="Mini-library.html#741" class="Function"
+      >&#960;&#8320;</a
+      ><a name="3454"
+      > </a
+      ><a name="3455" class="Symbol"
+      >(</a
+      ><a name="3456" href="Mini-library.html#741" class="Function"
+      >&#960;&#8320;</a
+      ><a name="3458"
+      > </a
+      ><a name="3459" class="Symbol"
+      >(</a
+      ><a name="3460" href="Mini-library.html#741" class="Function"
+      >&#960;&#8320;</a
+      ><a name="3462"
+      > </a
+      ><a name="3463" href="Space-exponential.html#2103" class="Bound"
+      >r</a
+      ><a name="3464"
+      > </a
+      ><a name="3465" class="Symbol"
+      >(</a
+      ><a name="3466" href="ConsHeadTail.html#175" class="Function"
+      >cons</a
+      ><a name="3470"
+      > </a
+      ><a name="3471" href="Space-exponential.html#2387" class="Function"
+      >s'</a
+      ><a name="3473"
+      > </a
+      ><a name="3474" class="Symbol"
+      >(</a
+      ><a name="3475" href="Mini-library.html#741" class="Function"
+      >&#960;&#8320;</a
+      ><a name="3477"
+      > </a
+      ><a name="3478" href="Space-exponential.html#2462" class="Function"
+      >t'</a
+      ><a name="3480"
+      > </a
+      ><a name="3481" href="Space-exponential.html#2849" class="Bound"
+      >&#945;</a
+      ><a name="3482" class="Symbol"
+      >))))</a
+      ><a name="3486"
+      > </a
+      ><a name="3487" class="Symbol"
+      >(</a
+      ><a name="3488" href="Mini-library.html#741" class="Function"
+      >&#960;&#8320;</a
+      ><a name="3490"
+      > </a
+      ><a name="3491" href="Space-exponential.html#2114" class="Bound"
+      >p</a
+      ><a name="3492"
+      > </a
+      ><a name="3493" class="Symbol"
+      >(</a
+      ><a name="3494" href="ConsHeadTail.html#175" class="Function"
+      >cons</a
+      ><a name="3498"
+      > </a
+      ><a name="3499" href="Space-exponential.html#2303" class="Bound"
+      >s</a
+      ><a name="3500"
+      > </a
+      ><a name="3501" href="Space-exponential.html#2849" class="Bound"
+      >&#945;</a
+      ><a name="3502" class="Symbol"
+      >))</a
+      ><a name="3504"
+      >
+                  </a
+      ><a name="3523" href="Space-exponential.html#973" class="Function Operator"
+      >&#8776;</a
+      ><a name="3524"
+      > </a
+      ><a name="3525" href="Mini-library.html#741" class="Function"
+      >&#960;&#8320;</a
+      ><a name="3527"
+      > </a
+      ><a name="3528" class="Symbol"
+      >(</a
+      ><a name="3529" href="Mini-library.html#741" class="Function"
+      >&#960;&#8320;</a
+      ><a name="3531"
+      > </a
+      ><a name="3532" class="Symbol"
+      >(</a
+      ><a name="3533" href="Mini-library.html#741" class="Function"
+      >&#960;&#8320;</a
+      ><a name="3535"
+      > </a
+      ><a name="3536" href="Space-exponential.html#2103" class="Bound"
+      >r</a
+      ><a name="3537"
+      > </a
+      ><a name="3538" class="Symbol"
+      >(</a
+      ><a name="3539" href="ConsHeadTail.html#175" class="Function"
+      >cons</a
+      ><a name="3543"
+      > </a
+      ><a name="3544" href="Space-exponential.html#2387" class="Function"
+      >s'</a
+      ><a name="3546"
+      > </a
+      ><a name="3547" class="Symbol"
+      >(</a
+      ><a name="3548" href="Mini-library.html#741" class="Function"
+      >&#960;&#8320;</a
+      ><a name="3550"
+      > </a
+      ><a name="3551" href="Space-exponential.html#2462" class="Function"
+      >t'</a
+      ><a name="3553"
+      > </a
+      ><a name="3554" href="Space-exponential.html#2851" class="Bound"
+      >&#946;</a
+      ><a name="3555" class="Symbol"
+      >))))</a
+      ><a name="3559"
+      > </a
+      ><a name="3560" class="Symbol"
+      >(</a
+      ><a name="3561" href="Mini-library.html#741" class="Function"
+      >&#960;&#8320;</a
+      ><a name="3563"
+      > </a
+      ><a name="3564" href="Space-exponential.html#2114" class="Bound"
+      >p</a
+      ><a name="3565"
+      > </a
+      ><a name="3566" class="Symbol"
+      >(</a
+      ><a name="3567" href="ConsHeadTail.html#175" class="Function"
+      >cons</a
+      ><a name="3571"
+      > </a
+      ><a name="3572" href="Space-exponential.html#2303" class="Bound"
+      >s</a
+      ><a name="3573"
+      > </a
+      ><a name="3574" href="Space-exponential.html#2849" class="Bound"
+      >&#945;</a
+      ><a name="3575" class="Symbol"
+      >))</a
+      ><a name="3577"
+      >
+          </a
+      ><a name="3588" href="Space-exponential.html#3442" class="Function"
+      >claim&#8322;</a
+      ><a name="3594"
+      > </a
+      ><a name="3595" class="Symbol"
+      >=</a
+      ><a name="3596"
+      > </a
+      ><a name="3597" href="Space-exponential.html#3300" class="Function"
+      >claim&#8321;</a
+      ><a name="3603"
+      > </a
+      ><a name="3604" class="Symbol"
+      >(</a
+      ><a name="3605" href="Mini-library.html#741" class="Function"
+      >&#960;&#8320;</a
+      ><a name="3607"
+      > </a
+      ><a name="3608" href="Space-exponential.html#2114" class="Bound"
+      >p</a
+      ><a name="3609"
+      > </a
+      ><a name="3610" class="Symbol"
+      >(</a
+      ><a name="3611" href="ConsHeadTail.html#175" class="Function"
+      >cons</a
+      ><a name="3615"
+      > </a
+      ><a name="3616" href="Space-exponential.html#2303" class="Bound"
+      >s</a
+      ><a name="3617"
+      > </a
+      ><a name="3618" href="Space-exponential.html#2849" class="Bound"
+      >&#945;</a
+      ><a name="3619" class="Symbol"
+      >))</a
+      ><a name="3621"
+      >
+          </a
+      ><a name="3632" href="Space-exponential.html#3632" class="Function"
+      >claim&#8323;</a
+      ><a name="3638"
+      > </a
+      ><a name="3639" class="Symbol"
+      >:</a
+      ><a name="3640"
+      > </a
+      ><a name="3641" href="Mini-library.html#741" class="Function"
+      >&#960;&#8320;</a
+      ><a name="3643"
+      > </a
+      ><a name="3644" href="Space-exponential.html#2114" class="Bound"
+      >p</a
+      ><a name="3645"
+      > </a
+      ><a name="3646" class="Symbol"
+      >(</a
+      ><a name="3647" href="ConsHeadTail.html#175" class="Function"
+      >cons</a
+      ><a name="3651"
+      > </a
+      ><a name="3652" href="Space-exponential.html#2303" class="Bound"
+      >s</a
+      ><a name="3653"
+      > </a
+      ><a name="3654" href="Space-exponential.html#2849" class="Bound"
+      >&#945;</a
+      ><a name="3655" class="Symbol"
+      >)</a
+      ><a name="3656"
+      > </a
+      ><a name="3657" href="Space-exponential.html#925" class="Function Operator"
+      >~</a
+      ><a name="3658"
+      > </a
+      ><a name="3659" href="Mini-library.html#741" class="Function"
+      >&#960;&#8320;</a
+      ><a name="3661"
+      > </a
+      ><a name="3662" href="Space-exponential.html#2114" class="Bound"
+      >p</a
+      ><a name="3663"
+      > </a
+      ><a name="3664" class="Symbol"
+      >(</a
+      ><a name="3665" href="ConsHeadTail.html#175" class="Function"
+      >cons</a
+      ><a name="3669"
+      > </a
+      ><a name="3670" href="Space-exponential.html#2303" class="Bound"
+      >s</a
+      ><a name="3671"
+      > </a
+      ><a name="3672" href="Space-exponential.html#2851" class="Bound"
+      >&#946;</a
+      ><a name="3673" class="Symbol"
+      >)</a
+      ><a name="3674"
+      >
+          </a
+      ><a name="3685" href="Space-exponential.html#3632" class="Function"
+      >claim&#8323;</a
+      ><a name="3691"
+      > </a
+      ><a name="3692" class="Symbol"
+      >=</a
+      ><a name="3693"
+      > </a
+      ><a name="3694" href="Mini-library.html#833" class="Function"
+      >&#960;&#8321;</a
+      ><a name="3696"
+      > </a
+      ><a name="3697" href="Space-exponential.html#2114" class="Bound"
+      >p</a
+      ><a name="3698"
+      > </a
+      ><a name="3699" class="Symbol"
+      >(</a
+      ><a name="3700" href="ConsHeadTail.html#175" class="Function"
+      >cons</a
+      ><a name="3704"
+      > </a
+      ><a name="3705" href="Space-exponential.html#2303" class="Bound"
+      >s</a
+      ><a name="3706"
+      > </a
+      ><a name="3707" href="Space-exponential.html#2849" class="Bound"
+      >&#945;</a
+      ><a name="3708" class="Symbol"
+      >)</a
+      ><a name="3709"
+      > </a
+      ><a name="3710" class="Symbol"
+      >(</a
+      ><a name="3711" href="ConsHeadTail.html#175" class="Function"
+      >cons</a
+      ><a name="3715"
+      > </a
+      ><a name="3716" href="Space-exponential.html#2303" class="Bound"
+      >s</a
+      ><a name="3717"
+      > </a
+      ><a name="3718" href="Space-exponential.html#2851" class="Bound"
+      >&#946;</a
+      ><a name="3719" class="Symbol"
+      >)</a
+      ><a name="3720"
+      > </a
+      ><a name="3721" class="Symbol"
+      >(</a
+      ><a name="3722" href="ConsHeadTail.html#426" class="Function"
+      >Lemma[cons-E-map]</a
+      ><a name="3739"
+      > </a
+      ><a name="3740" href="Space-exponential.html#2303" class="Bound"
+      >s</a
+      ><a name="3741"
+      > </a
+      ><a name="3742" href="Space-exponential.html#2849" class="Bound"
+      >&#945;</a
+      ><a name="3743"
+      > </a
+      ><a name="3744" href="Space-exponential.html#2851" class="Bound"
+      >&#946;</a
+      ><a name="3745"
+      > </a
+      ><a name="3746" href="Space-exponential.html#2853" class="Bound"
+      >e</a
+      ><a name="3747" class="Symbol"
+      >)</a
+      ><a name="3748"
+      >
+          </a
+      ><a name="3759" href="Space-exponential.html#3759" class="Function"
+      >claim&#8324;</a
+      ><a name="3765"
+      > </a
+      ><a name="3766" class="Symbol"
+      >:</a
+      ><a name="3767"
+      >  </a
+      ><a name="3769" href="Mini-library.html#741" class="Function"
+      >&#960;&#8320;</a
+      ><a name="3771"
+      > </a
+      ><a name="3772" class="Symbol"
+      >(</a
+      ><a name="3773" href="Mini-library.html#741" class="Function"
+      >&#960;&#8320;</a
+      ><a name="3775"
+      > </a
+      ><a name="3776" class="Symbol"
+      >(</a
+      ><a name="3777" href="Mini-library.html#741" class="Function"
+      >&#960;&#8320;</a
+      ><a name="3779"
+      > </a
+      ><a name="3780" href="Space-exponential.html#2103" class="Bound"
+      >r</a
+      ><a name="3781"
+      > </a
+      ><a name="3782" class="Symbol"
+      >(</a
+      ><a name="3783" href="ConsHeadTail.html#175" class="Function"
+      >cons</a
+      ><a name="3787"
+      > </a
+      ><a name="3788" href="Space-exponential.html#2387" class="Function"
+      >s'</a
+      ><a name="3790"
+      > </a
+      ><a name="3791" class="Symbol"
+      >(</a
+      ><a name="3792" href="Mini-library.html#741" class="Function"
+      >&#960;&#8320;</a
+      ><a name="3794"
+      > </a
+      ><a name="3795" href="Space-exponential.html#2462" class="Function"
+      >t'</a
+      ><a name="3797"
+      > </a
+      ><a name="3798" href="Space-exponential.html#2851" class="Bound"
+      >&#946;</a
+      ><a name="3799" class="Symbol"
+      >))))</a
+      ><a name="3803"
+      > </a
+      ><a name="3804" class="Symbol"
+      >(</a
+      ><a name="3805" href="Mini-library.html#741" class="Function"
+      >&#960;&#8320;</a
+      ><a name="3807"
+      > </a
+      ><a name="3808" href="Space-exponential.html#2114" class="Bound"
+      >p</a
+      ><a name="3809"
+      > </a
+      ><a name="3810" class="Symbol"
+      >(</a
+      ><a name="3811" href="ConsHeadTail.html#175" class="Function"
+      >cons</a
+      ><a name="3815"
+      > </a
+      ><a name="3816" href="Space-exponential.html#2303" class="Bound"
+      >s</a
+      ><a name="3817"
+      > </a
+      ><a name="3818" href="Space-exponential.html#2849" class="Bound"
+      >&#945;</a
+      ><a name="3819" class="Symbol"
+      >))</a
+      ><a name="3821"
+      >
+                  </a
+      ><a name="3840" href="Space-exponential.html#973" class="Function Operator"
+      >&#8776;</a
+      ><a name="3841"
+      > </a
+      ><a name="3842" href="Mini-library.html#741" class="Function"
+      >&#960;&#8320;</a
+      ><a name="3844"
+      > </a
+      ><a name="3845" class="Symbol"
+      >(</a
+      ><a name="3846" href="Mini-library.html#741" class="Function"
+      >&#960;&#8320;</a
+      ><a name="3848"
+      > </a
+      ><a name="3849" class="Symbol"
+      >(</a
+      ><a name="3850" href="Mini-library.html#741" class="Function"
+      >&#960;&#8320;</a
+      ><a name="3852"
+      > </a
+      ><a name="3853" href="Space-exponential.html#2103" class="Bound"
+      >r</a
+      ><a name="3854"
+      > </a
+      ><a name="3855" class="Symbol"
+      >(</a
+      ><a name="3856" href="ConsHeadTail.html#175" class="Function"
+      >cons</a
+      ><a name="3860"
+      > </a
+      ><a name="3861" href="Space-exponential.html#2387" class="Function"
+      >s'</a
+      ><a name="3863"
+      > </a
+      ><a name="3864" class="Symbol"
+      >(</a
+      ><a name="3865" href="Mini-library.html#741" class="Function"
+      >&#960;&#8320;</a
+      ><a name="3867"
+      > </a
+      ><a name="3868" href="Space-exponential.html#2462" class="Function"
+      >t'</a
+      ><a name="3870"
+      > </a
+      ><a name="3871" href="Space-exponential.html#2851" class="Bound"
+      >&#946;</a
+      ><a name="3872" class="Symbol"
+      >))))</a
+      ><a name="3876"
+      > </a
+      ><a name="3877" class="Symbol"
+      >(</a
+      ><a name="3878" href="Mini-library.html#741" class="Function"
+      >&#960;&#8320;</a
+      ><a name="3880"
+      > </a
+      ><a name="3881" href="Space-exponential.html#2114" class="Bound"
+      >p</a
+      ><a name="3882"
+      > </a
+      ><a name="3883" class="Symbol"
+      >(</a
+      ><a name="3884" href="ConsHeadTail.html#175" class="Function"
+      >cons</a
+      ><a name="3888"
+      > </a
+      ><a name="3889" href="Space-exponential.html#2303" class="Bound"
+      >s</a
+      ><a name="3890"
+      > </a
+      ><a name="3891" href="Space-exponential.html#2851" class="Bound"
+      >&#946;</a
+      ><a name="3892" class="Symbol"
+      >))</a
+      ><a name="3894"
+      >
+          </a
+      ><a name="3905" href="Space-exponential.html#3759" class="Function"
+      >claim&#8324;</a
+      ><a name="3911"
+      > </a
+      ><a name="3912" class="Symbol"
+      >=</a
+      ><a name="3913"
+      > </a
+      ><a name="3914" href="Mini-library.html#833" class="Function"
+      >&#960;&#8321;</a
+      ><a name="3916"
+      > </a
+      ><a name="3917" class="Symbol"
+      >(</a
+      ><a name="3918" href="Mini-library.html#741" class="Function"
+      >&#960;&#8320;</a
+      ><a name="3920"
+      > </a
+      ><a name="3921" class="Symbol"
+      >(</a
+      ><a name="3922" href="Mini-library.html#741" class="Function"
+      >&#960;&#8320;</a
+      ><a name="3924"
+      > </a
+      ><a name="3925" href="Space-exponential.html#2103" class="Bound"
+      >r</a
+      ><a name="3926"
+      > </a
+      ><a name="3927" class="Symbol"
+      >(</a
+      ><a name="3928" href="ConsHeadTail.html#175" class="Function"
+      >cons</a
+      ><a name="3932"
+      > </a
+      ><a name="3933" href="Space-exponential.html#2387" class="Function"
+      >s'</a
+      ><a name="3935"
+      > </a
+      ><a name="3936" class="Symbol"
+      >(</a
+      ><a name="3937" href="Mini-library.html#741" class="Function"
+      >&#960;&#8320;</a
+      ><a name="3939"
+      > </a
+      ><a name="3940" href="Space-exponential.html#2462" class="Function"
+      >t'</a
+      ><a name="3942"
+      > </a
+      ><a name="3943" href="Space-exponential.html#2851" class="Bound"
+      >&#946;</a
+      ><a name="3944" class="Symbol"
+      >))))</a
+      ><a name="3948"
+      > </a
+      ><a name="3949" class="Symbol"
+      >(</a
+      ><a name="3950" href="Mini-library.html#741" class="Function"
+      >&#960;&#8320;</a
+      ><a name="3952"
+      > </a
+      ><a name="3953" href="Space-exponential.html#2114" class="Bound"
+      >p</a
+      ><a name="3954"
+      > </a
+      ><a name="3955" class="Symbol"
+      >(</a
+      ><a name="3956" href="ConsHeadTail.html#175" class="Function"
+      >cons</a
+      ><a name="3960"
+      > </a
+      ><a name="3961" href="Space-exponential.html#2303" class="Bound"
+      >s</a
+      ><a name="3962"
+      > </a
+      ><a name="3963" href="Space-exponential.html#2849" class="Bound"
+      >&#945;</a
+      ><a name="3964" class="Symbol"
+      >))</a
+      ><a name="3966"
+      > </a
+      ><a name="3967" class="Symbol"
+      >(</a
+      ><a name="3968" href="Mini-library.html#741" class="Function"
+      >&#960;&#8320;</a
+      ><a name="3970"
+      > </a
+      ><a name="3971" href="Space-exponential.html#2114" class="Bound"
+      >p</a
+      ><a name="3972"
+      > </a
+      ><a name="3973" class="Symbol"
+      >(</a
+      ><a name="3974" href="ConsHeadTail.html#175" class="Function"
+      >cons</a
+      ><a name="3978"
+      > </a
+      ><a name="3979" href="Space-exponential.html#2303" class="Bound"
+      >s</a
+      ><a name="3980"
+      > </a
+      ><a name="3981" href="Space-exponential.html#2851" class="Bound"
+      >&#946;</a
+      ><a name="3982" class="Symbol"
+      >))</a
+      ><a name="3984"
+      > </a
+      ><a name="3985" href="Space-exponential.html#3632" class="Function"
+      >claim&#8323;</a
+      ><a name="3991"
+      >
+      </a
+      ><a name="3998" href="Space-exponential.html#3998" class="Function"
+      >claim&#8320;</a
+      ><a name="4004"
+      > </a
+      ><a name="4005" class="Symbol"
+      >:</a
+      ><a name="4006"
+      > </a
+      ><a name="4007" class="Symbol"
+      >&#8704;(</a
+      ><a name="4009" href="Space-exponential.html#4009" class="Bound"
+      >&#945;</a
+      ><a name="4010"
+      > </a
+      ><a name="4011" class="Symbol"
+      >:</a
+      ><a name="4012"
+      > </a
+      ><a name="4013" href="Mini-library.html#6102" class="Function"
+      >&#8322;&#8469;</a
+      ><a name="4015" class="Symbol"
+      >)</a
+      ><a name="4016"
+      > </a
+      ><a name="4017" class="Symbol"
+      >&#8594;</a
+      ><a name="4018"
+      > </a
+      ><a name="4019" href="ConsHeadTail.html#175" class="Function"
+      >cons</a
+      ><a name="4023"
+      > </a
+      ><a name="4024" href="Space-exponential.html#2387" class="Function"
+      >s'</a
+      ><a name="4026"
+      > </a
+      ><a name="4027" class="Symbol"
+      >(</a
+      ><a name="4028" href="Mini-library.html#741" class="Function"
+      >&#960;&#8320;</a
+      ><a name="4030"
+      > </a
+      ><a name="4031" href="Space-exponential.html#2462" class="Function"
+      >t'</a
+      ><a name="4033"
+      > </a
+      ><a name="4034" href="Space-exponential.html#4009" class="Bound"
+      >&#945;</a
+      ><a name="4035" class="Symbol"
+      >)</a
+      ><a name="4036"
+      > </a
+      ><a name="4037" href="Setoid.html#4042" class="Function Operator"
+      >&#8803;</a
+      ><a name="4038"
+      > </a
+      ><a name="4039" href="Mini-library.html#741" class="Function"
+      >&#960;&#8320;</a
+      ><a name="4041"
+      > </a
+      ><a name="4042" href="Space-exponential.html#2119" class="Bound"
+      >t</a
+      ><a name="4043"
+      > </a
+      ><a name="4044" class="Symbol"
+      >(</a
+      ><a name="4045" href="ConsHeadTail.html#175" class="Function"
+      >cons</a
+      ><a name="4049"
+      > </a
+      ><a name="4050" href="Space-exponential.html#2303" class="Bound"
+      >s</a
+      ><a name="4051"
+      > </a
+      ><a name="4052" href="Space-exponential.html#4009" class="Bound"
+      >&#945;</a
+      ><a name="4053" class="Symbol"
+      >)</a
+      ><a name="4054"
+      >
+      </a
+      ><a name="4061" href="Space-exponential.html#3998" class="Function"
+      >claim&#8320;</a
+      ><a name="4067"
+      > </a
+      ><a name="4068" href="Space-exponential.html#4068" class="Bound"
+      >&#945;</a
+      ><a name="4069"
+      > </a
+      ><a name="4070" href="Space-exponential.html#4070" class="Bound"
+      >i</a
+      ><a name="4071"
+      > </a
+      ><a name="4072" class="Symbol"
+      >=</a
+      ><a name="4073"
+      > </a
+      ><a name="4074" href="Mini-library.html#1814" class="Function"
+      >sym</a
+      ><a name="4077"
+      > </a
+      ><a name="4078" class="Symbol"
+      >(</a
+      ><a name="4079" href="Mini-library.html#1116" class="Function"
+      >&#8743;-elim&#8321;</a
+      ><a name="4086"
+      > </a
+      ><a name="4087" class="Symbol"
+      >(</a
+      ><a name="4088" href="Mini-library.html#1453" class="Function"
+      >&#8707;-elim</a
+      ><a name="4094"
+      > </a
+      ><a name="4095" class="Symbol"
+      >(</a
+      ><a name="4096" href="Mini-library.html#1453" class="Function"
+      >&#8707;-elim</a
+      ><a name="4102"
+      > </a
+      ><a name="4103" class="Symbol"
+      >(</a
+      ><a name="4104" href="Mini-library.html#1453" class="Function"
+      >&#8707;-elim</a
+      ><a name="4110"
+      > </a
+      ><a name="4111" class="Symbol"
+      >(</a
+      ><a name="4112" href="Space.html#688" class="Function"
+      >Axiom[coverage]</a
+      ><a name="4127"
+      > </a
+      ><a name="4128" href="Space-exponential.html#2106" class="Bound"
+      >n</a
+      ><a name="4129"
+      > </a
+      ><a name="4130" href="Space-exponential.html#2119" class="Bound"
+      >t</a
+      ><a name="4131"
+      > </a
+      ><a name="4132" href="Space-exponential.html#2121" class="Bound"
+      >uc</a
+      ><a name="4134" class="Symbol"
+      >)</a
+      ><a name="4135"
+      > </a
+      ><a name="4136" href="Space-exponential.html#2303" class="Bound"
+      >s</a
+      ><a name="4137" class="Symbol"
+      >)))</a
+      ><a name="4140"
+      > </a
+      ><a name="4141" href="Space-exponential.html#4068" class="Bound"
+      >&#945;</a
+      ><a name="4142"
+      > </a
+      ><a name="4143" href="Space-exponential.html#4070" class="Bound"
+      >i</a
+      ><a name="4144" class="Symbol"
+      >)</a
+      ><a name="4145"
+      >
+      </a
+      ><a name="4152" href="Space-exponential.html#4152" class="Function"
+      >claim&#8321;</a
+      ><a name="4158"
+      > </a
+      ><a name="4159" class="Symbol"
+      >:</a
+      ><a name="4160"
+      > </a
+      ><a name="4161" class="Symbol"
+      >&#8704;(</a
+      ><a name="4163" href="Space-exponential.html#4163" class="Bound"
+      >&#945;</a
+      ><a name="4164"
+      > </a
+      ><a name="4165" class="Symbol"
+      >:</a
+      ><a name="4166"
+      > </a
+      ><a name="4167" href="Mini-library.html#6102" class="Function"
+      >&#8322;&#8469;</a
+      ><a name="4169" class="Symbol"
+      >)</a
+      ><a name="4170"
+      > </a
+      ><a name="4171" class="Symbol"
+      >&#8594;</a
+      ><a name="4172"
+      >  </a
+      ><a name="4174" href="Mini-library.html#741" class="Function"
+      >&#960;&#8320;</a
+      ><a name="4176"
+      > </a
+      ><a name="4177" class="Symbol"
+      >(</a
+      ><a name="4178" href="Mini-library.html#741" class="Function"
+      >&#960;&#8320;</a
+      ><a name="4180"
+      > </a
+      ><a name="4181" class="Symbol"
+      >(</a
+      ><a name="4182" href="Mini-library.html#741" class="Function"
+      >&#960;&#8320;</a
+      ><a name="4184"
+      > </a
+      ><a name="4185" href="Space-exponential.html#2103" class="Bound"
+      >r</a
+      ><a name="4186"
+      > </a
+      ><a name="4187" class="Symbol"
+      >(</a
+      ><a name="4188" href="ConsHeadTail.html#175" class="Function"
+      >cons</a
+      ><a name="4192"
+      > </a
+      ><a name="4193" href="Space-exponential.html#2387" class="Function"
+      >s'</a
+      ><a name="4195"
+      > </a
+      ><a name="4196" class="Symbol"
+      >(</a
+      ><a name="4197" href="Mini-library.html#741" class="Function"
+      >&#960;&#8320;</a
+      ><a name="4199"
+      > </a
+      ><a name="4200" href="Space-exponential.html#2462" class="Function"
+      >t'</a
+      ><a name="4202"
+      > </a
+      ><a name="4203" href="Space-exponential.html#4163" class="Bound"
+      >&#945;</a
+      ><a name="4204" class="Symbol"
+      >))))</a
+      ><a name="4208"
+      > </a
+      ><a name="4209" class="Symbol"
+      >(</a
+      ><a name="4210" href="Mini-library.html#741" class="Function"
+      >&#960;&#8320;</a
+      ><a name="4212"
+      > </a
+      ><a name="4213" href="Space-exponential.html#2114" class="Bound"
+      >p</a
+      ><a name="4214"
+      > </a
+      ><a name="4215" class="Symbol"
+      >(</a
+      ><a name="4216" href="ConsHeadTail.html#175" class="Function"
+      >cons</a
+      ><a name="4220"
+      > </a
+      ><a name="4221" href="Space-exponential.html#2303" class="Bound"
+      >s</a
+      ><a name="4222"
+      > </a
+      ><a name="4223" href="Space-exponential.html#4163" class="Bound"
+      >&#945;</a
+      ><a name="4224" class="Symbol"
+      >))</a
+      ><a name="4226"
+      >
+                          </a
+      ><a name="4253" href="Space-exponential.html#973" class="Function Operator"
+      >&#8776;</a
+      ><a name="4254"
+      > </a
+      ><a name="4255" href="Mini-library.html#741" class="Function"
+      >&#960;&#8320;</a
+      ><a name="4257"
+      > </a
+      ><a name="4258" class="Symbol"
+      >(</a
+      ><a name="4259" href="Mini-library.html#741" class="Function"
+      >&#960;&#8320;</a
+      ><a name="4261"
+      > </a
+      ><a name="4262" class="Symbol"
+      >(</a
+      ><a name="4263" href="Mini-library.html#741" class="Function"
+      >&#960;&#8320;</a
+      ><a name="4265"
+      > </a
+      ><a name="4266" href="Space-exponential.html#2103" class="Bound"
+      >r</a
+      ><a name="4267"
+      > </a
+      ><a name="4268" class="Symbol"
+      >(</a
+      ><a name="4269" href="Mini-library.html#741" class="Function"
+      >&#960;&#8320;</a
+      ><a name="4271"
+      > </a
+      ><a name="4272" href="Space-exponential.html#2119" class="Bound"
+      >t</a
+      ><a name="4273"
+      > </a
+      ><a name="4274" class="Symbol"
+      >(</a
+      ><a name="4275" href="ConsHeadTail.html#175" class="Function"
+      >cons</a
+      ><a name="4279"
+      > </a
+      ><a name="4280" href="Space-exponential.html#2303" class="Bound"
+      >s</a
+      ><a name="4281"
+      > </a
+      ><a name="4282" href="Space-exponential.html#4163" class="Bound"
+      >&#945;</a
+      ><a name="4283" class="Symbol"
+      >))))</a
+      ><a name="4287"
+      > </a
+      ><a name="4288" class="Symbol"
+      >(</a
+      ><a name="4289" href="Mini-library.html#741" class="Function"
+      >&#960;&#8320;</a
+      ><a name="4291"
+      > </a
+      ><a name="4292" href="Space-exponential.html#2114" class="Bound"
+      >p</a
+      ><a name="4293"
+      > </a
+      ><a name="4294" class="Symbol"
+      >(</a
+      ><a name="4295" href="ConsHeadTail.html#175" class="Function"
+      >cons</a
+      ><a name="4299"
+      > </a
+      ><a name="4300" href="Space-exponential.html#2303" class="Bound"
+      >s</a
+      ><a name="4301"
+      > </a
+      ><a name="4302" href="Space-exponential.html#4163" class="Bound"
+      >&#945;</a
+      ><a name="4303" class="Symbol"
+      >))</a
+      ><a name="4305"
+      >
+      </a
+      ><a name="4312" href="Space-exponential.html#4152" class="Function"
+      >claim&#8321;</a
+      ><a name="4318"
+      > </a
+      ><a name="4319" href="Space-exponential.html#4319" class="Bound"
+      >&#945;</a
+      ><a name="4320"
+      > </a
+      ><a name="4321" class="Symbol"
+      >=</a
+      ><a name="4322"
+      > </a
+      ><a name="4323" href="Mini-library.html#833" class="Function"
+      >&#960;&#8321;</a
+      ><a name="4325"
+      > </a
+      ><a name="4326" href="Space-exponential.html#2103" class="Bound"
+      >r</a
+      ><a name="4327"
+      > </a
+      ><a name="4328" class="Symbol"
+      >(</a
+      ><a name="4329" href="ConsHeadTail.html#175" class="Function"
+      >cons</a
+      ><a name="4333"
+      > </a
+      ><a name="4334" href="Space-exponential.html#2387" class="Function"
+      >s'</a
+      ><a name="4336"
+      > </a
+      ><a name="4337" class="Symbol"
+      >(</a
+      ><a name="4338" href="Mini-library.html#741" class="Function"
+      >&#960;&#8320;</a
+      ><a name="4340"
+      > </a
+      ><a name="4341" href="Space-exponential.html#2462" class="Function"
+      >t'</a
+      ><a name="4343"
+      > </a
+      ><a name="4344" href="Space-exponential.html#4319" class="Bound"
+      >&#945;</a
+      ><a name="4345" class="Symbol"
+      >))</a
+      ><a name="4347"
+      > </a
+      ><a name="4348" class="Symbol"
+      >(</a
+      ><a name="4349" href="Mini-library.html#741" class="Function"
+      >&#960;&#8320;</a
+      ><a name="4351"
+      > </a
+      ><a name="4352" href="Space-exponential.html#2119" class="Bound"
+      >t</a
+      ><a name="4353"
+      > </a
+      ><a name="4354" class="Symbol"
+      >(</a
+      ><a name="4355" href="ConsHeadTail.html#175" class="Function"
+      >cons</a
+      ><a name="4359"
+      > </a
+      ><a name="4360" href="Space-exponential.html#2303" class="Bound"
+      >s</a
+      ><a name="4361"
+      > </a
+      ><a name="4362" href="Space-exponential.html#4319" class="Bound"
+      >&#945;</a
+      ><a name="4363" class="Symbol"
+      >))</a
+      ><a name="4365"
+      > </a
+      ><a name="4366" class="Symbol"
+      >(</a
+      ><a name="4367" href="Space-exponential.html#3998" class="Function"
+      >claim&#8320;</a
+      ><a name="4373"
+      > </a
+      ><a name="4374" href="Space-exponential.html#4319" class="Bound"
+      >&#945;</a
+      ><a name="4375" class="Symbol"
+      >)</a
+      ><a name="4376"
+      > </a
+      ><a name="4377" class="Symbol"
+      >(</a
+      ><a name="4378" href="Mini-library.html#741" class="Function"
+      >&#960;&#8320;</a
+      ><a name="4380"
+      > </a
+      ><a name="4381" href="Space-exponential.html#2114" class="Bound"
+      >p</a
+      ><a name="4382"
+      > </a
+      ><a name="4383" class="Symbol"
+      >(</a
+      ><a name="4384" href="ConsHeadTail.html#175" class="Function"
+      >cons</a
+      ><a name="4388"
+      > </a
+      ><a name="4389" href="Space-exponential.html#2303" class="Bound"
+      >s</a
+      ><a name="4390"
+      > </a
+      ><a name="4391" href="Space-exponential.html#4319" class="Bound"
+      >&#945;</a
+      ><a name="4392" class="Symbol"
+      >))</a
+      ><a name="4394"
+      >
+      </a
+      ><a name="4401" href="Space-exponential.html#4401" class="Function"
+      >claim&#8322;</a
+      ><a name="4407"
+      > </a
+      ><a name="4408" class="Symbol"
+      >:</a
+      ><a name="4409"
+      > </a
+      ><a name="4410" href="Space-exponential.html#2644" class="Function"
+      >q</a
+      ><a name="4411"
+      > </a
+      ><a name="4412" href="Mini-library.html#294" class="Function Operator"
+      >&#8712;</a
+      ><a name="4413"
+      > </a
+      ><a name="4414" href="Space.html#3873" class="Function"
+      >Probe</a
+      ><a name="4419"
+      > </a
+      ><a name="4420" href="Space-exponential.html#870" class="Bound"
+      >Y</a
+      ><a name="4421"
+      >
+      </a
+      ><a name="4428" href="Space-exponential.html#4401" class="Function"
+      >claim&#8322;</a
+      ><a name="4434"
+      > </a
+      ><a name="4435" class="Symbol"
+      >=</a
+      ><a name="4436"
+      > </a
+      ><a name="4437" href="Space-exponential.html#2110" class="Bound"
+      >pr</a
+      ><a name="4439"
+      > </a
+      ><a name="4440" href="Space-exponential.html#2387" class="Function"
+      >s'</a
+      ><a name="4442"
+      > </a
+      ><a name="4443" class="Symbol"
+      >(</a
+      ><a name="4444" href="Setoid.html#4344" class="Function Operator"
+      >&#10216;</a
+      ><a name="4445"
+      > </a
+      ><a name="4446" href="Space.html#3808" class="Function"
+      >U</a
+      ><a name="4447"
+      > </a
+      ><a name="4448" href="Space-exponential.html#866" class="Bound"
+      >X</a
+      ><a name="4449"
+      > </a
+      ><a name="4450" href="Setoid.html#4344" class="Function Operator"
+      >&#10217;</a
+      ><a name="4451"
+      > </a
+      ><a name="4452" href="Space-exponential.html#2114" class="Bound"
+      >p</a
+      ><a name="4453"
+      > </a
+      ><a name="4454" href="Setoid.html#4344" class="Function Operator"
+      >&#9678;</a
+      ><a name="4455"
+      > </a
+      ><a name="4456" class="Symbol"
+      >(</a
+      ><a name="4457" href="ConsHeadTail.html#687" class="Function"
+      >E-cons</a
+      ><a name="4463"
+      > </a
+      ><a name="4464" href="Space-exponential.html#2303" class="Bound"
+      >s</a
+      ><a name="4465" class="Symbol"
+      >))</a
+      ><a name="4467"
+      >
+                     </a
+      ><a name="4489" class="Symbol"
+      >(</a
+      ><a name="4490" href="Space.html#4061" class="Function"
+      >cond&#8321;</a
+      ><a name="4495"
+      > </a
+      ><a name="4496" href="Space-exponential.html#866" class="Bound"
+      >X</a
+      ><a name="4497"
+      > </a
+      ><a name="4498" class="Symbol"
+      >(</a
+      ><a name="4499" href="ConsHeadTail.html#687" class="Function"
+      >E-cons</a
+      ><a name="4505"
+      > </a
+      ><a name="4506" href="Space-exponential.html#2303" class="Bound"
+      >s</a
+      ><a name="4507" class="Symbol"
+      >)</a
+      ><a name="4508"
+      > </a
+      ><a name="4509" class="Symbol"
+      >(</a
+      ><a name="4510" href="ConsHeadTail.html#770" class="Function"
+      >Lemma[E-cons-UC]</a
+      ><a name="4526"
+      > </a
+      ><a name="4527" href="Space-exponential.html#2303" class="Bound"
+      >s</a
+      ><a name="4528" class="Symbol"
+      >)</a
+      ><a name="4529"
+      > </a
+      ><a name="4530" href="Space-exponential.html#2114" class="Bound"
+      >p</a
+      ><a name="4531"
+      > </a
+      ><a name="4532" href="Space-exponential.html#2116" class="Bound"
+      >pP</a
+      ><a name="4534" class="Symbol"
+      >)</a
+      ><a name="4535"
+      > </a
+      ><a name="4536" href="Space-exponential.html#2462" class="Function"
+      >t'</a
+      ><a name="4538"
+      > </a
+      ><a name="4539" href="Space-exponential.html#2551" class="Function"
+      >uc'</a
+      ><a name="4542"
+      >
+
+  </a
+      ><a name="4546" href="Space-exponential.html#4546" class="Function"
+      >rc&#8323;</a
+      ><a name="4549"
+      > </a
+      ><a name="4550" class="Symbol"
+      >:</a
+      ><a name="4551"
+      > </a
+      ><a name="4552" class="Symbol"
+      >&#8704;(</a
+      ><a name="4554" href="Space-exponential.html#4554" class="Bound"
+      >r</a
+      ><a name="4555"
+      > </a
+      ><a name="4556" href="Space-exponential.html#4556" class="Bound"
+      >r'</a
+      ><a name="4558"
+      > </a
+      ><a name="4559" class="Symbol"
+      >:</a
+      ><a name="4560"
+      > </a
+      ><a name="4561" href="Setoid.html#4554" class="Function"
+      >E-map-&#8322;&#8469;</a
+      ><a name="4569"
+      > </a
+      ><a name="4570" class="Symbol"
+      >(</a
+      ><a name="4571" href="Space.html#4919" class="Function"
+      >MapSetoid</a
+      ><a name="4580"
+      > </a
+      ><a name="4581" href="Space-exponential.html#866" class="Bound"
+      >X</a
+      ><a name="4582"
+      > </a
+      ><a name="4583" href="Space-exponential.html#870" class="Bound"
+      >Y</a
+      ><a name="4584" class="Symbol"
+      >))</a
+      ><a name="4586"
+      > </a
+      ><a name="4587" class="Symbol"
+      >&#8594;</a
+      ><a name="4588"
+      > </a
+      ><a name="4589" class="Symbol"
+      >(&#8704;(</a
+      ><a name="4592" href="Space-exponential.html#4592" class="Bound"
+      >&#945;</a
+      ><a name="4593"
+      > </a
+      ><a name="4594" class="Symbol"
+      >:</a
+      ><a name="4595"
+      > </a
+      ><a name="4596" href="Mini-library.html#6102" class="Function"
+      >&#8322;&#8469;</a
+      ><a name="4598" class="Symbol"
+      >)</a
+      ><a name="4599"
+      > </a
+      ><a name="4600" class="Symbol"
+      >&#8594;</a
+      ><a name="4601"
+      > </a
+      ><a name="4602" href="Mini-library.html#741" class="Function"
+      >&#960;&#8320;</a
+      ><a name="4604"
+      > </a
+      ><a name="4605" href="Space-exponential.html#4554" class="Bound"
+      >r</a
+      ><a name="4606"
+      > </a
+      ><a name="4607" href="Space-exponential.html#4592" class="Bound"
+      >&#945;</a
+      ><a name="4608"
+      > </a
+      ><a name="4609" href="Space-exponential.html#1021" class="Function Operator"
+      >&#8779;</a
+      ><a name="4610"
+      > </a
+      ><a name="4611" href="Mini-library.html#741" class="Function"
+      >&#960;&#8320;</a
+      ><a name="4613"
+      > </a
+      ><a name="4614" href="Space-exponential.html#4556" class="Bound"
+      >r'</a
+      ><a name="4616"
+      > </a
+      ><a name="4617" href="Space-exponential.html#4592" class="Bound"
+      >&#945;</a
+      ><a name="4618" class="Symbol"
+      >)</a
+      ><a name="4619"
+      > </a
+      ><a name="4620" class="Symbol"
+      >&#8594;</a
+      ><a name="4621"
+      > </a
+      ><a name="4622" href="Space-exponential.html#4554" class="Bound"
+      >r</a
+      ><a name="4623"
+      > </a
+      ><a name="4624" href="Mini-library.html#294" class="Function Operator"
+      >&#8712;</a
+      ><a name="4625"
+      > </a
+      ><a name="4626" href="Space-exponential.html#1100" class="Function"
+      >R</a
+      ><a name="4627"
+      > </a
+      ><a name="4628" class="Symbol"
+      >&#8594;</a
+      ><a name="4629"
+      > </a
+      ><a name="4630" href="Space-exponential.html#4556" class="Bound"
+      >r'</a
+      ><a name="4632"
+      > </a
+      ><a name="4633" href="Mini-library.html#294" class="Function Operator"
+      >&#8712;</a
+      ><a name="4634"
+      > </a
+      ><a name="4635" href="Space-exponential.html#1100" class="Function"
+      >R</a
+      ><a name="4636"
+      >
+  </a
+      ><a name="4639" href="Space-exponential.html#4546" class="Function"
+      >rc&#8323;</a
+      ><a name="4642"
+      > </a
+      ><a name="4643" href="Space-exponential.html#4643" class="Bound"
+      >r</a
+      ><a name="4644"
+      > </a
+      ><a name="4645" href="Space-exponential.html#4645" class="Bound"
+      >r'</a
+      ><a name="4647"
+      > </a
+      ><a name="4648" href="Space-exponential.html#4648" class="Bound"
+      >f</a
+      ><a name="4649"
+      > </a
+      ><a name="4650" href="Space-exponential.html#4650" class="Bound"
+      >rR</a
+      ><a name="4652"
+      > </a
+      ><a name="4653" href="Space-exponential.html#4653" class="Bound"
+      >p</a
+      ><a name="4654"
+      > </a
+      ><a name="4655" href="Space-exponential.html#4655" class="Bound"
+      >pP</a
+      ><a name="4657"
+      > </a
+      ><a name="4658" href="Space-exponential.html#4658" class="Bound"
+      >t</a
+      ><a name="4659"
+      > </a
+      ><a name="4660" href="Space-exponential.html#4660" class="Bound"
+      >uc</a
+      ><a name="4662"
+      > </a
+      ><a name="4663" class="Symbol"
+      >=</a
+      ><a name="4664"
+      > </a
+      ><a name="4665" href="Space.html#4413" class="Function"
+      >cond&#8323;</a
+      ><a name="4670"
+      > </a
+      ><a name="4671" href="Space-exponential.html#870" class="Bound"
+      >Y</a
+      ><a name="4672"
+      > </a
+      ><a name="4673" class="Symbol"
+      >(</a
+      ><a name="4674" href="Space-exponential.html#215" class="Function"
+      >exp</a
+      ><a name="4677"
+      > </a
+      ><a name="4678" href="Space-exponential.html#866" class="Bound"
+      >X</a
+      ><a name="4679"
+      > </a
+      ><a name="4680" href="Space-exponential.html#870" class="Bound"
+      >Y</a
+      ><a name="4681"
+      > </a
+      ><a name="4682" href="Space-exponential.html#4643" class="Bound"
+      >r</a
+      ><a name="4683"
+      > </a
+      ><a name="4684" href="Space-exponential.html#4658" class="Bound"
+      >t</a
+      ><a name="4685"
+      > </a
+      ><a name="4686" href="Space-exponential.html#4653" class="Bound"
+      >p</a
+      ><a name="4687" class="Symbol"
+      >)</a
+      ><a name="4688"
+      > </a
+      ><a name="4689" class="Symbol"
+      >(</a
+      ><a name="4690" href="Space-exponential.html#215" class="Function"
+      >exp</a
+      ><a name="4693"
+      > </a
+      ><a name="4694" href="Space-exponential.html#866" class="Bound"
+      >X</a
+      ><a name="4695"
+      > </a
+      ><a name="4696" href="Space-exponential.html#870" class="Bound"
+      >Y</a
+      ><a name="4697"
+      > </a
+      ><a name="4698" href="Space-exponential.html#4645" class="Bound"
+      >r'</a
+      ><a name="4700"
+      > </a
+      ><a name="4701" href="Space-exponential.html#4658" class="Bound"
+      >t</a
+      ><a name="4702"
+      > </a
+      ><a name="4703" href="Space-exponential.html#4653" class="Bound"
+      >p</a
+      ><a name="4704" class="Symbol"
+      >)</a
+      ><a name="4705"
+      > </a
+      ><a name="4706" href="Space-exponential.html#4733" class="Function"
+      >claim&#8320;</a
+      ><a name="4712"
+      > </a
+      ><a name="4713" href="Space-exponential.html#4838" class="Function"
+      >claim&#8321;</a
+      ><a name="4719"
+      >
+   </a
+      ><a name="4723" class="Keyword"
+      >where</a
+      ><a name="4728"
+      >
+    </a
+      ><a name="4733" href="Space-exponential.html#4733" class="Function"
+      >claim&#8320;</a
+      ><a name="4739"
+      > </a
+      ><a name="4740" class="Symbol"
+      >:</a
+      ><a name="4741"
+      > </a
+      ><a name="4742" class="Symbol"
+      >&#8704;(</a
+      ><a name="4744" href="Space-exponential.html#4744" class="Bound"
+      >&#945;</a
+      ><a name="4745"
+      > </a
+      ><a name="4746" class="Symbol"
+      >:</a
+      ><a name="4747"
+      > </a
+      ><a name="4748" href="Mini-library.html#6102" class="Function"
+      >&#8322;&#8469;</a
+      ><a name="4750" class="Symbol"
+      >)</a
+      ><a name="4751"
+      > </a
+      ><a name="4752" class="Symbol"
+      >&#8594;</a
+      ><a name="4753"
+      > </a
+      ><a name="4754" href="Mini-library.html#741" class="Function"
+      >&#960;&#8320;</a
+      ><a name="4756"
+      > </a
+      ><a name="4757" class="Symbol"
+      >(</a
+      ><a name="4758" href="Space-exponential.html#215" class="Function"
+      >exp</a
+      ><a name="4761"
+      > </a
+      ><a name="4762" href="Space-exponential.html#866" class="Bound"
+      >X</a
+      ><a name="4763"
+      > </a
+      ><a name="4764" href="Space-exponential.html#870" class="Bound"
+      >Y</a
+      ><a name="4765"
+      > </a
+      ><a name="4766" href="Space-exponential.html#4643" class="Bound"
+      >r</a
+      ><a name="4767"
+      > </a
+      ><a name="4768" href="Space-exponential.html#4658" class="Bound"
+      >t</a
+      ><a name="4769"
+      > </a
+      ><a name="4770" href="Space-exponential.html#4653" class="Bound"
+      >p</a
+      ><a name="4771" class="Symbol"
+      >)</a
+      ><a name="4772"
+      > </a
+      ><a name="4773" href="Space-exponential.html#4744" class="Bound"
+      >&#945;</a
+      ><a name="4774"
+      > </a
+      ><a name="4775" href="Space-exponential.html#973" class="Function Operator"
+      >&#8776;</a
+      ><a name="4776"
+      > </a
+      ><a name="4777" href="Mini-library.html#741" class="Function"
+      >&#960;&#8320;</a
+      ><a name="4779"
+      > </a
+      ><a name="4780" class="Symbol"
+      >(</a
+      ><a name="4781" href="Space-exponential.html#215" class="Function"
+      >exp</a
+      ><a name="4784"
+      > </a
+      ><a name="4785" href="Space-exponential.html#866" class="Bound"
+      >X</a
+      ><a name="4786"
+      > </a
+      ><a name="4787" href="Space-exponential.html#870" class="Bound"
+      >Y</a
+      ><a name="4788"
+      > </a
+      ><a name="4789" href="Space-exponential.html#4645" class="Bound"
+      >r'</a
+      ><a name="4791"
+      > </a
+      ><a name="4792" href="Space-exponential.html#4658" class="Bound"
+      >t</a
+      ><a name="4793"
+      > </a
+      ><a name="4794" href="Space-exponential.html#4653" class="Bound"
+      >p</a
+      ><a name="4795" class="Symbol"
+      >)</a
+      ><a name="4796"
+      > </a
+      ><a name="4797" href="Space-exponential.html#4744" class="Bound"
+      >&#945;</a
+      ><a name="4798"
+      >
+    </a
+      ><a name="4803" href="Space-exponential.html#4733" class="Function"
+      >claim&#8320;</a
+      ><a name="4809"
+      > </a
+      ><a name="4810" href="Space-exponential.html#4810" class="Bound"
+      >&#945;</a
+      ><a name="4811"
+      > </a
+      ><a name="4812" class="Symbol"
+      >=</a
+      ><a name="4813"
+      > </a
+      ><a name="4814" href="Space-exponential.html#4648" class="Bound"
+      >f</a
+      ><a name="4815"
+      > </a
+      ><a name="4816" class="Symbol"
+      >(</a
+      ><a name="4817" href="Mini-library.html#741" class="Function"
+      >&#960;&#8320;</a
+      ><a name="4819"
+      > </a
+      ><a name="4820" href="Space-exponential.html#4658" class="Bound"
+      >t</a
+      ><a name="4821"
+      > </a
+      ><a name="4822" href="Space-exponential.html#4810" class="Bound"
+      >&#945;</a
+      ><a name="4823" class="Symbol"
+      >)</a
+      ><a name="4824"
+      > </a
+      ><a name="4825" class="Symbol"
+      >(</a
+      ><a name="4826" href="Mini-library.html#741" class="Function"
+      >&#960;&#8320;</a
+      ><a name="4828"
+      > </a
+      ><a name="4829" href="Space-exponential.html#4653" class="Bound"
+      >p</a
+      ><a name="4830"
+      > </a
+      ><a name="4831" href="Space-exponential.html#4810" class="Bound"
+      >&#945;</a
+      ><a name="4832" class="Symbol"
+      >)</a
+      ><a name="4833"
+      >
+    </a
+      ><a name="4838" href="Space-exponential.html#4838" class="Function"
+      >claim&#8321;</a
+      ><a name="4844"
+      > </a
+      ><a name="4845" class="Symbol"
+      >:</a
+      ><a name="4846"
+      > </a
+      ><a name="4847" href="Space-exponential.html#215" class="Function"
+      >exp</a
+      ><a name="4850"
+      > </a
+      ><a name="4851" href="Space-exponential.html#866" class="Bound"
+      >X</a
+      ><a name="4852"
+      > </a
+      ><a name="4853" href="Space-exponential.html#870" class="Bound"
+      >Y</a
+      ><a name="4854"
+      > </a
+      ><a name="4855" href="Space-exponential.html#4643" class="Bound"
+      >r</a
+      ><a name="4856"
+      > </a
+      ><a name="4857" href="Space-exponential.html#4658" class="Bound"
+      >t</a
+      ><a name="4858"
+      > </a
+      ><a name="4859" href="Space-exponential.html#4653" class="Bound"
+      >p</a
+      ><a name="4860"
+      > </a
+      ><a name="4861" href="Mini-library.html#294" class="Function Operator"
+      >&#8712;</a
+      ><a name="4862"
+      > </a
+      ><a name="4863" href="Space.html#3873" class="Function"
+      >Probe</a
+      ><a name="4868"
+      > </a
+      ><a name="4869" href="Space-exponential.html#870" class="Bound"
+      >Y</a
+      ><a name="4870"
+      >
+    </a
+      ><a name="4875" href="Space-exponential.html#4838" class="Function"
+      >claim&#8321;</a
+      ><a name="4881"
+      > </a
+      ><a name="4882" class="Symbol"
+      >=</a
+      ><a name="4883"
+      > </a
+      ><a name="4884" href="Space-exponential.html#4650" class="Bound"
+      >rR</a
+      ><a name="4886"
+      > </a
+      ><a name="4887" href="Space-exponential.html#4653" class="Bound"
+      >p</a
+      ><a name="4888"
+      > </a
+      ><a name="4889" href="Space-exponential.html#4655" class="Bound"
+      >pP</a
+      ><a name="4891"
+      > </a
+      ><a name="4892" href="Space-exponential.html#4658" class="Bound"
+      >t</a
+      ><a name="4893"
+      > </a
+      ><a name="4894" href="Space-exponential.html#4660" class="Bound"
+      >uc</a
+      ><a name="4896"
+      >
+
+\end{code}</a
+      ></pre
+    ></body
+  ></html
+>

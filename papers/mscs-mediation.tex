@@ -1,0 +1,791 @@
+\documentclass[12pt]{article}
+
+\usepackage{amssymb,amsmath,stmaryrd}
+
+\usepackage[english]{babel}
+
+\usepackage{a4wide}
+
+\newcommand{\path}[2]{\operatorname{path}_{#1,#2}}
+\newcommand{\test}[2]{\operatorname{test}_{#1,#2}}
+\newcommand{\cons}[1]{\operatorname{cons}_{#1}}
+\newcommand{\sizeof}[1]{|#1|}
+\newcommand{\wpor}{\operatorname{wpor}}
+\newtheorem{thm}{Theorem}[section]
+\newtheorem{prop}{Proposition}[section]
+\newtheorem{lem}{Lemma}[section]
+\newtheorem{cor}{Corollary}[section]
+\newtheorem{definition}{Definition}[section]
+\newtheorem{fact}{Fact}[section]
+\newtheorem{rem}{Remark}[section]
+\newtheorem{conj}{Conjecture}[section]
+\def\QED {{\unskip\nobreak\hfill\penalty50
+  \hskip2em\hbox{}\nobreak\hfill$\square$
+  \parfillskip=0pt \finalhyphendemerits=0 \par}}
+% Proof environment
+\newenvironment{proof}{\paragraph{Proof.}}{\QED\paragraph{}\noindent}
+
+\newenvironment{defn}{\begin{definition}\em}{\end{definition}}
+
+               
+% self-defined commands
+\newcommand{\meet}{\sqcap}
+\newcommand{\arr}{\to}%{\rightarrow}
+\newcommand{\obs}{\sqsubseteq}
+\newcommand{\Pot}{\mathcal{P}}
+\newcommand{\I}{\mathcal{I}}
+\newcommand{\R}{\mathcal{R}}
+\newcommand{\LL}{L}%{\mathcal{L}}
+\newcommand{\RR}{R}%{\mathcal{R}}
+\newcommand{\N}{{\Bbb N}}
+\newcommand{\A}{{\Bbb A}}
+\newcommand{\B}{{\Bbb B}}
+\newcommand{\C}{{\Bbb C}}
+\newcommand{\E}{{\Bbb E}}
+\newcommand{\T}{{\Bbb T}}
+\newcommand{\X}{{\Bbb X}}
+\newcommand{\eps}{\varepsilon}
+\newcommand{\aeps}{a_{\varepsilon}}
+\def\Two{{2 \kern-0.4em 1}}
+\def\TWO{{2 \kern-0.5em 1}}
+\def\lbr{\mathopen{{[\kern-0.14em[}}}   % opening [[ value delimiter
+\def\rbr{\mathclose{{]\kern-0.14em]}}}  % closing ]] value delimiter
+\newcommand{\sem}[1]{\lbr#1\rbr}
+\newcommand{\inc}{\hookrightarrow}
+
+\newcommand{\True}{\operatorname{\mathrm{True}}}
+\newcommand{\False}{\operatorname{\mathrm{False}}}
+\newcommand{\por}{\operatorname{\mathrm{por}}}
+\newcommand{\red}{\to}
+\newcommand{\Meaning}[1]{\llbracket #1 \rrbracket}
+
+\begin{document}
+
+\title{On the non-sequential nature of \\ the 
+  interval-domain model of real-number computation}
+
+  \author{Mart\'\i n Escard\'o, Martin Hofmann, Thomas Streicher}
+
+\date{April 1999, version of \today}
+
+\maketitle
+
+\begin{abstract}
+  We show that real-number computations in the interval-domain
+  environment are ``inherently parallel'' in a precise mathematical
+  sense. We do this by reducing computations of the weak parallel-or
+  operation on the Sierpinski domain to computations of the addition
+  operation on the interval domain.
+\end{abstract}
+
+\section{Introduction}
+
+\newcommand{\bool}{\textit{bool}}
+\newcommand{\real}{\textit{real}}
+
+Suppose we extend a functional programming language with an abstract
+data type $\real$ meant to represent infinite-precision real
+numbers~\cite{boehm:cartwright}.  What is a sensible semantics for
+such a type or how does one explain to users what their programs
+involving $\real$ actually mean?  It is probably not sensible to
+interpret $\real$ as just the set of real numbers as this would not
+assign meaning to nonterminating computations (``$\bot$'') nor to
+partial computations, say one that outputs the information that a
+number lies between $0$ and $0.5$ but does not terminate upon requests
+for higher accuracy.
+
+Scott proposed the \emph{interval domain} as a possible answer to this
+question~\cite{scott:intervaldomain}. For simplicity and without
+essential loss of generality, we consider here only its restriction to
+the unit interval $[0,1]$. The elements of the interval domain
+$\mathcal{I}$ are the closed intervals $x=[\underline
+x,\overline x]$ where $0\leq \underline x\leq \overline x\leq 1$.
+These are ordered by reverse inclusion, i.e., $x\sqsubseteq y$ if and
+only if $\underline x\leq \underline y$ and $\overline y\leq\overline
+x$.  Then $(\mathcal{I},\sqsubseteq)$ becomes a directed complete
+partial order and thus supports general recursion via fixed points.
+The idea of the relation $x \sqsubseteq y$ is that $y$ gives at least
+as much information as $x$ about an unknown real number in the unit
+interval, and possibly more.  If $y$ is a singleton, that is, a
+maximal element in the ordering, then it gives complete or
+\emph{total} information.  The ordered set~$\I$ is a typical example
+of a \emph{continuous Scott domain}.  For an exposition of the general
+theory, the reader is referred to Abramsky and
+Jung~\cite{abramsky:jung}, Amadio and Curien~\cite{amadio:curien} or
+to the forthcoming treatise by Gierz et al.~\cite{newcompendium}.  For
+a topological view, see the survey paper by
+Mislove~\cite{mislove:survey}, and, for recent applications, the
+reader is referred to the survey paper by Edalat~\cite{Eda97}.
+
+The first-named author has developed a lazy functional programming
+language called Real PCF based on the interval domain. One of the
+central results concerning Real PCF is that its interpretation in
+terms of the interval domain is \emph{computationally adequate} with
+respect to a lazy operational semantics~\cite{escardo:pcf}.  This
+operational semantics associates with expressions of type $\real$ a
+shrinking sequence of rational intervals.  Computational adequacy
+asserts that the intersection of these intervals agrees with the
+denotational semantics in $\mathcal{I}$ of such an expression.
+
+In contrast to most ordinary functional languages, Real PCF contains a
+construct whose operational semantics requires parallel evaluation (or
+``dovetailing'' in the terminology of recursion theory~\cite{rogers}).
+More precisely, one has a construct
+$\textsf{pif}:\bool\times\real\times\real\rightarrow\real$ defined by
+$\textsf{pif}(\textsf{true},x,y)=x$ and
+$\textsf{pif}(\textsf{false},x,y)=y$ and
+$\textsf{pif}(\bot,x,y)=x\sqcap y$ where $x\sqcap y$ is the least
+interval containing both $x$ and~$y$. In particular,
+$\textsf{pif}(\bot,x,x)=x$.  It is clear that when evaluating a term
+$\textsf{pif}(b,x,y)$ we must evaluate $b,x,y$ in parallel and output
+partial results while the computation of $b$ has not yet finished.
+This construct is used in order to ensure that Real PCF is
+Turing-universal, in the sense that all real functions and functionals
+that are computable in the sense of recursion theory are programmable
+in the language~\cite{MR2000b:03216}.
+
+It is natural to ask whether the presence of this parallel construct
+is an artifact of Real PCF or whether it is required for intrinsic
+reasons. The result of this paper confirms that the latter is the
+case.  More precisely, we show that, under very mild and reasonable
+assumptions, any language that is computationally adequate with
+respect to the interval domain must necessarily allow the definition
+of the ``weak parallel-or'' construct $\textsf{wpor}$ defined on the
+Sierpinski domain $\{ \bot, \top \}$ (interpreting the unit
+type or arising as a retract of any other type), given by
+$\textsf{wpor}(x,y)=\top$ if and only if $x=\top$ or $y=\top$.
+Clearly, to evaluate $\textsf{wpor}(x,y)$ one must evaluate $x$ and
+$y$ in parallel in order to be able to terminate as soon as either $x$
+or $y$ has terminated.
+
+The presence of such a parallel construct is a disadvantage from a
+practical point of view because it renders the evaluation process
+inefficient due to the exponential spawning of processes in recursive
+definitions involving them.  However, the ultimate practical
+consequences of our result, which, we emphasize, is specific to the
+interval-domain model, are not clear cut. On the one hand, it may be
+that there exists an alternative mathematical model, yet to be found,
+which doesn't exhibit this parallel behaviour.  In this case, the
+interpretation of our result would be that the interval-domain model
+is at fault, and hence one should look for another, sequential model.
+%(Notice that in the usual categories of stable or strongly stable
+%domains the retracts are algebraic again and, therefore, don't allow
+%for the interval domain.)  
+On the other hand, it may be that this is
+not a fault of the interval-domain model, but rather an intrinsic
+property of the real numbers --- this is supported, for instance, by
+the work of Luckhardt~\cite{luckhardt}.  In this case, one should look
+for a proof that any reasonable model exhibits the same behaviour.  We
+have at this point little theoretical or empirical evidence for any of
+these two conclusions and therefore leave the interpretation to the
+reader and to future work.
+
+We now proceed to a more technical introduction to our result, in
+which we give a simple proof of an important particular case.
+
+Let's take intervals with rational end-points as the ``observable
+tokens'' in infinite-precision real-number computations (of course,
+one could instead work with dyadic numbers or any other convenient
+recursively enumerable dense set).  A computation can be taken as an
+r.e.\ ascending sequence $r_i$ of tokens. This computes the interval
+$\bigsqcup_i r_i = \bigcap_i r_i = [\sup_i \underline{r_i}, \inf_i
+\overline{r_i}]$. If the end-points of this are equal, then this is a
+computation of a real number; otherwise, it is a \emph{partial
+  computation} of a real number, or, as we prefer to see it, a
+computation of a \emph{partial(ly defined) real number}.
+
+Suppose that we wish to compute the midpoint operation $m:[0,1]^2 \to
+[0,1]$ defined by
+\[
+m(x,y) = (x+y)/2.
+\]
+Then we need a process that, given computations~$r_i$ of~$x$ and~$s_i$
+of~$y$, produces a computation~$t_i$ of~$m(x,y)$. In this case, it is
+obvious what to do: just define $t_i = m(r_i,s_i)$, where the midpoint
+of two intervals is taken pointwise. This process not only computes
+the midpoint operation $m:[0,1]^2 \to [0,1]$, but also its
+pointwise extension to partial numbers $\hat{m}:\I^2 \to \I$
+defined by
+\[
+\hat{m}(x,y) = 
+[m(\underline{x},\underline{y}),m(\overline{x},\overline{y})].
+\]
+But this is just one among many possible ways of performing the
+computation. Another, perhaps artificial, way is this: At stage~$i$ of
+the computation, read two tokens~$r_i$ and~$s_i$ from the input. If
+they have an upper bound in the ordering (that is, overlap as
+intervals) output their meet $t_i = r_i \sqcap s_i$ (that is, their
+union as intervals). Otherwise, as in the previous example, output the
+pointwise midpoint $t_i = m(r_i,s_i)$. For total(ly defined) numbers,
+this behaves as the midpoint operation. More generally, this gives
+rise to the extension $\tilde{m}:\I^2 \to \I$ defined by
+\[
+\tilde{m}(x,y) = 
+\begin{cases}
+x \meet y & \text{if $x$ and $y$ have an upper bound,} \\
+\hat{m}(x,y) & \text{otherwise.} 
+\end{cases}
+\]
+The above two extensions of the midpoint operation are easily seen to
+be Scott continuous.  Our last example of a computation illustrates a
+different phenomenon: At stage $i$, read two tokens $r_i$ and $s_i$
+from the input. If the sum of their lengths is strictly bigger
+than~$1$, output $t_i = [0,1]$, the bottom element of~$\I$.
+Otherwise, as in the first example, output the pointwise midpoint $t_i
+= m(r_i,s_i)$. For total numbers, this again computes the midpoint.
+However, this computation cannot be modelled by a third extension of
+the midpoint operation to the interval domain. In fact, consider the
+case in which the inputs are $x=y=[0,1/2]$. One possible pair of
+computations of $x$ and $y$ are just the constant sequences
+$r_i=s_i=[0,1/2]$, for which we get the constant sequence
+$t_i=[0,1/2]$ as output. But another possible pair of computations is
+$r_i=s_i=[0,1/2+1/(i+1)]$, for which we get the constant sequence
+$t_i=[0,1]$ as output. Thus, the output of this algorithm depends not
+only on the input but also on the way the input is presented.
+
+If one is interested only in total numbers, there is nothing wrong
+with the last example. But if one works with the interval domain to
+attach mathematical meaning to partial computations and uses functions
+to account for the input-output behaviour of algorithms, such
+computations are ruled out. Notice that the phenomenon illustrated by
+the last example is not particular to the interval domain and can be
+reproduced in more traditional Scott domains, where the tokens are
+elements of a countable basis of the domain.
+
+In practice, one doesn't work with computations as above. A
+paradigmatic example is the functional programming language
+PCF~\cite{plotkin:lcf}.  The terms of the language can be interpreted
+either as mathematical expressions (via the denotational semantics) or
+as algorithms (via the operational semantics).  The operational
+semantics consists of a set of mathematically valid equations and
+algorithmic rules for applying them. For example, out of the term
+``3+7'' the calculation produces the term~``10''.  The case of
+real-number computation is a bit subtler, as the ``final value''
+cannot be computed in finitely many steps and exhibited at once, but
+is based on the same principle~\cite{escardo:pcf}.
+
+In both cases, it is of interest to know whether the operational
+semantics is ``sequential''. To explain this, we refer to the process
+of replacing a subterm of a term by an equal term, according to the
+equations of the operational semantics, as \emph{reduction}.  Then the
+language is said to be sequential if any unevaluated term~$M$ has a
+subterm that has to be reduced first in order to evaluate~$M$.  In the
+case of PCF, this is made precise by the Activity
+Lemma~\cite{plotkin:lcf}.
+
+The aim of this paper is to show that, under reasonable assumptions, a
+language with a data type for real numbers which is mathematically
+interpreted as the interval domain and whose constructs are
+interpreted as Scott continuous functions cannot have a sequential
+operational semantics.  Of course, we assume that computational
+adequacy holds: the mathematical and operational meanings 
+of the language coincide for terms of base types.
+
+A simple instance of the failure of sequentiality is incorporated in
+the first extension of the midpoint operation. In order to see this,
+consider the Sierpinski domain $\Sigma = \{ \bot,\top \}$ with $\bot
+\sqsubseteq \top$, where, computationally, $\bot$ denotes
+non-termination and $\top$ denotes termination (without any further
+output), and the two computable functions
+$e:\Sigma \to \I$ and $p: \I \to \Sigma$ defined by
+\begin{gather*}
+e(b) = \begin{cases}
+1 & \text{if $b=\top$,} \\
+[0,1] & \text{otherwise,}
+\end{cases} \qquad\qquad
+p(x)  =  \begin{cases}
+\top & \text{if $\underline{x} > 1/3$,} \\
+\bot & \text{otherwise.}  
+\end{cases} 
+\end{gather*}
+Here $1$ stands for the singleton interval $[1,1]$, and, following the
+philosophy discussed above, we generally identify, conceptually and
+notationally, singleton intervals with real numbers.  These functions
+are intuitively sequential: For the first, we just wait for the input
+to terminate; if it does, then we output any computation of~$1$;
+otherwise we just wait for ever in vain, so that our output is a
+non-terminating computation, which corresponds to complete absence of
+information (that is, the bottom interval~$[0,1]$). For the second, we
+just read tokens from the input until some satisfies the required
+condition, in which case we terminate; if this condition is never
+met, then our output is a non-terminating computation, as required.
+
+Now consider the function $f:\Sigma^2 \to \Sigma$ defined by
+\[
+f(b,c) = p(m(e(b),e(c)).
+\]
+If $m$ were sequential, then so would be $f$. But $f$ is a
+prototypical example of a non-sequentially computable function, the
+so-called weak parallel or discussed above:
+\begin{gather*}
+  f(\bot,\bot) = p(m([0,1],[0,1])) = p([0,1]) = \bot, \\
+  f(\bot,\top) = p(m([0,1],1)) = p([1/2,1]) = \top,  \\
+  f(\top,\bot) = p(m(1,[0,1])) = p([1/2,1]) = \top, \\
+  f(\top,\top) = p(m(1,1)) = p(1) = \top. \\
+\end{gather*}
+That is, the computation of $f$ terminates if and only if the
+computation of at least one of its arguments terminates, so that it is
+not possible to choose one argument to evaluate first in order to
+correctly compute the output --- one has to alternate between watching
+the first and second arguments until one becomes~$\top$.
+
+One might suspect that the problem here is that one is working with
+the \emph{greatest} continuous extension of the midpoint operation.
+With a more complicated argument, we show in Section~\ref{proof} below
+that, no matter which continuous extension is chosen, weak parallel or
+is sequentially definable from it.
+
+The midpoint operation and the unit interval domain~$\I$ have been
+chosen for technical and expositional reasons. One can equally well
+work with addition and the full interval domain~$\R$. But the
+corresponding result for this follows by reduction to the previous
+case.  We just observe that (1)~the pointwise extension of the
+operation $x \mapsto x/2$ to the full interval domain is manifestly
+sequential, (2)~the function $r:\mathbb{R} \to [0,1]$ given by
+\begin{gather*}
+  r(x) = \max(0,\min(x,1)),
+\end{gather*}
+extends to a computable function $r:\R \to \I$ which is manifestly
+sequential, and (3)~any continuous extension of addition to the full
+interval domain gives rise to a continuous extension of the midpoint
+operation on the unit interval domain by composition with the
+functions defined in (1) and (2).
+
+
+\section{Inherently parallel functions}
+
+For the purposes of the present paper, it is convenient to refer to
+the sublanguage of Real PCF consisting of terms in which the parallel
+conditional doesn't occur as Weak Real PCF. The operational semantics
+of the sublanguage is clearly sequential, and the ``manifestly
+sequential'' functions considered in the introduction and in the
+development that follows are programmable in the sublanguage.  Notice
+that all of them are \emph{unary} functions. But, we emphasize, for
+the purposes of the arguments that follow, no previous knowledge of
+Real PCF is needed
+
+After briefly summarizing some of the notation and terminology
+established in the introduction, we precisely formulate the theorem to
+be proved.
+
+Let $\I$ be the continuous Scott domain of non-empty closed
+subintervals of $[0,1]$ ordered by reverse inclusion denoted
+by~$\sqsubseteq$ and referred to as the information order. Hence
+$\bot=[0,1]$ is the least element of $\I$.  Any $x \in \I$ is of the
+form $[\underline{x},\overline{x}]$ with $0 \leq \underline{x} \leq
+\overline{x} \leq 1$.  We write $\sizeof{x}$ for the size of an
+interval $x$, given as $\overline{x}-\underline{x}$.  The elements $x$
+with $\underline{x}<\overline{x}$ are called partial real numbers;
+those with $\underline{x}=\overline{x}$ are called total real numbers;
+we identify the total elements of~$\I$ with points of $[0,1]$. A
+rational interval is one with both endpoints rational numbers.
+
+Any two members of~$\I$ have a meet, or greatest lower bound, in the
+information order, namely the smallest closed interval containing
+their set-theoretical union.  Two elements of~$\I$ are
+\emph{compatible} if they have an upper bound in the information order
+(that is, overlap as intervals).  In this case, their set-theoretical
+union is already an interval and hence gives their meet.
+
+We denote by $\Sigma$ the Sierpinki domain $\{\bot,\top\}$ with the
+ordering $\bot\sqsubseteq\top$.  The ``weak parallel-or'' function
+$\wpor:\Sigma^2 \to\Sigma$ is given by $\wpor(x,y)=\top$ if and only
+if $x=\top$ or $y=\top$.  Our goal is to define $\wpor$ from any
+continuous extension of the midpoint operation and certain basic
+functions which are regarded as undoubtedly sequential and we now
+describe. As explained above, all of them are Weak Real PCF definable.
+
+First, we need test functions from $\I$ to $\Sigma$. We can leave
+these largely unspecified and simply assume that for any $a,b\in\I$
+with
+\[
+\text{$a\sqsubseteq b$ and $a \ne b$} 
+\]
+there is a test function
+\[
+\test{a}{b}:\I\arr \Sigma
+\]
+such that
+\begin{gather*}
+\test{a}{b}(a)=\bot, \qquad
+\test{a}{b}(b)=\top.
+\end{gather*}
+%
+For any rational $p,q\in \I$ with 
+\[
+p \sqsubseteq q
+\]
+we
+have the path function 
+\[
+\path{p}{q} : \Sigma\to \I 
+\]
+with
+\begin{gather*}
+\path{p}{q}(\bot)=p, \qquad
+\path{p}{q}(\top)=q.
+\end{gather*}
+%
+For a rational interval $q$ we let 
+\[
+\cons{q}:\I\arr\I
+\]
+be the unique increasing affine transformation sending $\bot=[0,1]$ to
+$q$. In fact, we have 
+\[
+\cons{q}(x)=a x+b = [a \underline{x}+b, a \overline{x}+b]
+\]
+when 
+\[
+q=[b,a+b].
+\]
+\begin{defn}
+  Let $f:\I^m \to \I$ be a function.  A function $h:\I^n \to \I$ is
+  called $f$-definable if it can be obtained from $f$, the test
+  functions $\test{a}{b}$, the path functions $\path{p}{q}$, the
+  affine transformations $\cons{q}$, and the constants
+  $\bot,\top\in\Sigma$, using projections and substitution.
+\end{defn}
+In other words, the $f$-definable functions are the clone generated by
+$f$ and the basic functions.
+%
+We consider the function $\wpor$ as indisputably parallel and use
+definability of $\wpor$ as definition of inherent parallelism.
+\begin{defn}
+A function $f$ is \emph{inherently parallel} if the function $\wpor$
+is $f$-definable. 
+\end{defn}
+A function $f:\I^2 \arr \I$ is an extension of the midpoint
+operation if for total elements $x,y\in \I$ the value $f(x,y)$ is also
+total and moreover
+$
+f(x,y) = (x+y)/2.
+$
+We are interested in (Scott) \emph{continuous} extensions of the
+midpoint operation.  Two examples of extensions have been considered in
+the introduction.
+%In particular, we have the greatest continuous
+%extension given by
+%\[
+%m(x,y) = 
+%[m(\underline{x},\underline{y}),m(\overline{x},\overline{y})].
+%\] 
+%Another continuous extension has been exhibited in the introduction.
+%\[
+%\tilde{m}(x,y) = 
+%\begin{cases}
+%x \meet y & \text{if $x$ and $y$ have an upper bound,} \\
+%m(x,y) & \text{otherwise.} 
+%\end{cases}
+%\]
+
+The next section is devoted to showing that any continuous extension of
+the midpoint operation is inherently parallel.
+
+\section{Mediation is inherently parallel} \label{proof}
+
+We begin our study of inherent parallelism with a design for a
+definition of $\wpor$ which works in particular for the greatest
+continuous extension of the midpoint operation.
+%For the sake of contradiction, we assume that
+%$f:\I^2 \to \I$ is a continuous extension of the 
+%midpoint operation which is \emph{not} inherently parallel.
+\begin{lem}\label{designone}
+  Any continuous function $f:\I^2 \to \I$ for which there are
+  $a,a',b,b' \in \I$ with $a\sqsubseteq a'$, $b\sqsubseteq b'$ and
+%\[
+$f(a,b) \ne f(a',b) \meet f(a,b')$
+%\] 
+is inherently parallel. 
+\end{lem}
+\begin{proof}
+  By monotonicity, we have $f(a,b) \sqsubseteq f(a',b)\meet
+  f(a,b')$, and, by continuity, we can assume w.l.o.g.\ that $a,a',b,b'$
+  are rational intervals. The result then follows from the fact that
+\[
+\wpor(x,y) = \test{f(a,b)}{f(a',b)\meet
+  f(a,b')}(f(\path{a}{a'}(x),\path{b}{b'}(y))).
+\] 
+\end{proof}
+
+\begin{cor}
+  The greatest continuous extension of the midpoint operation is
+  inherently parallel.
+\end{cor}
+\begin{proof}
+  Apply Lemma~\ref{designone} with  $a=b=\bot$ and $a'=b'=1$.
+\end{proof}
+
+The next result shows that unless a function is inherently parallel
+one can construct from it a unary non-stable function which moreover
+exhibits its non-stability at an a priori chosen pair of intervals.
+\begin{lem}\label{nonstab}
+  Let $f:\I^2 \to \I$ be a continuous extension of the midpoint
+  operation. Then $f$ is either inherently parallel or
+for any two compatible intervals $a,b\in\I$ such that
+  $a\meet b \ne a$ and $a\meet b \ne b$ there is an $f$-definable
+  function $h:\I \to \I$ with
+\[
+h(a\meet b) \ne h(a)\meet h(b).
+\]
+\end{lem}
+\begin{proof}
+Assume that $f$ is not inherently parallel.  We use
+Lemma~\ref{designone} to produce the desired function $h$.  By the
+assumption on $a,b$, there is a number $\lambda<1$ such that
+$\max(\sizeof{a},\sizeof{b}) < \lambda \sizeof{a\meet b}$.
+%  
+Let $u$ be the lower endpoint of $a\meet b$ which w.l.o.g.\ we assume
+to be the lower endpoint of $a$ as well. Let $v$ be any rational point
+in $a\meet b$ but not $a$.
+%  
+Lemma~\ref{designone} shows that
+\begin{equation}
+f(a\meet b,a\meet b) = f(a\meet b,v)\meet f(v,a\meet b).
+\end{equation}
+Since $f$ is an extension of the midpoint operation, $u\in f(a\meet
+b,a\meet b)$, and hence either $u \in f(a\meet b,v)$ or $u\in
+f(v,a\meet b)$.  W.l.o.g., we assume the former:
+\begin{equation}\label{assone}
+u\in f(a\meet b,v).
+\end{equation} 
+We then claim that there exists a
+rational interval $d$ such that 
+\begin{equation}\label{claim}
+f(\cons{d}(a\meet b),v) \ne f(\cons{d}(a),v)\meet
+f(\cons{d}(b),v)
+\end{equation}
+so we would be done with 
+\begin{equation}\label{nonstablefunction}
+h(x)= f(\cons{d}(x),v).
+\end{equation} 
+%If we want to exclude total elements from the $f$-definable ones we
+%can of course replace $v$ by a sufficiently close rational interval.
+%
+For the sake of contradiction, assume that
+\begin{equation}\label{asscontr}
+f(\cons{d}(a\meet b),v)= f(\cons{d}(a),v)\meet
+f(\cons{d}(b),v)
+\end{equation}
+for each rational interval $d$. 
+%
+We define inductively a 
+ sequence $(d_i)_{i\in\mathbb{N}}$ of rational intervals such that 
+\begin{equation}\label{asstwo}
+u\in f(\cons{d_i}(a\meet b),v).
+\end{equation}
+and $\cons{d_i}(a\meet b)$ converges to a total real number. This
+will give the desired contradiction as $u \ne (z + v)/2=f(z,v)$ for any
+total $z\in a\meet b$. 
+%
+We put $d_0=\bot$; then $f(\cons{d_0}(a\meet b),v)=f(a\meet b,v)$ and
+$u\in f(\cons{d_0}(a\meet b),v)$ by assumption (\ref{assone}). If
+$d_i$ has already been constructed then by (\ref{asstwo}) we know that
+$u\in f(\cons{d_i}(a\meet b),v)$ and assumption (\ref{asscontr}) shows
+that $u$ belongs to either $f(\cons{d_i}(a),v)$ or
+$f(\cons{d_i}(b),v)$. W.l.o.g.\ we may assume the former and let
+$d_{i+1}$ be a rational interval satisfying
+\begin{enumerate}
+\item $\cons{d_{i+1}}(a\meet b)\sqsubseteq \cons{d_i}(a)$,
+\item $\sizeof{\cons{d_{i+1}}(a\meet b)}\leq \lambda
+  \sizeof{\cons{d_i}(a\meet b)}$.
+\end{enumerate}
+(Notice that if $a,b$ are rational intervals, we can simply choose
+$d_i$ as the unique rational interval making the first part of the
+specification an equality. Otherwise we slightly enlarge it so that
+the second part still holds.)  By construction (\ref{assone}) holds
+for $d_{i+1}$ and, since $\lambda<1$, the sequence of intervals
+$\cons{d_i}(a\meet b)$ shrinks and converges to a total number $w\in
+a\meet b$.
+%
+Now $f(w,v)=(w+v)/2$ is a total number different from $u$. Therefore,
+by continuity of~$f$, we must have
+\[
+u\not\in \bigsqcup_i f(\cons{d_i}(a\meet b,v)
+\]
+and hence $u\not\in f(\cons{d_i}(a\meet b),v)$ for some~$i$,
+contradicting~(\ref{asstwo}).
+\end{proof}
+
+\begin{rem}
+  If $f$ is inherently parallel, it is still the case that a unary
+  non-stable function can be defined from~$f$. In fact, consider
+  intervals $c \sqsubseteq c'$ with $c \neq c'$.  Since $\wpor$ is
+  $f$-definable by assumption, we can take
+\[
+h(x) = \path{c}{c'}(\wpor(\test{a \meet b}{a}(x),\test{a \meet
+  b}{b}(x))).
+\]
+But this is not needed for our purposes.
+\end{rem}
+
+We now establish a relationship between inherent parallelism and a
+naive generalization of sequentiality in the sense of Vuillemin.
+Assume that in a computation of $z=f(x,y)$, approximations $u
+\sqsubseteq x$ and $v \sqsubseteq y$ have been read from the input and
+that $w=f(u,v)$ is the partial output so far. If $f$ were
+``intuitively sequential'' then it would have to be that in this
+situation either $f$ awaits progress in its left argument, i.e.,
+$f(u,v')=w$ for all $v'\sqsupseteq v$ or the other way round, i.e.,
+$f(u',v)=w$ for all $u'\sqsupseteq u$. The following asserts that any
+$f$ that is not inherently parallel exhibits this property.
+\begin{lem}\label{designtwo}
+  If a continuous extension $f:\I^2 \to \I$ of the midpoint operation is
+  \emph{not} inherently parallel, then for any two intervals $u,v$ one
+  of the following cases holds:
+\begin{enumerate}
+\item $f(u,v)=f(u,v')$ whenever $v\sqsubseteq v'$, or
+\item $f(u,v)=f(u',v)$ whenever $u\sqsubseteq u'$.
+\end{enumerate}
+\end{lem}
+\begin{proof}
+  Suppose, for the sake of contradiction, that we are given intervals
+  $u,u',v,v'\in \I$ with $u\sqsubseteq u'$ and $v\sqsubseteq v'$ such
+  that
+\begin{enumerate}
+\item $f(u,v)\ne f(u',v)$, and
+\item  $f(u,v)\ne f(u,v')$.
+\end{enumerate}
+Let $a=f(u',v)$ and $b=f(u,v')$. By Lemma~\ref{designone} we have
+$f(u,v)=a\meet b$.  So, in this case $a\meet b\ne a$ and $a\meet b\ne
+b$.  Hence by Lemma~\ref{nonstab} we can find an $f$-definable
+function $h:\I \to \I$ such that
+\[
+h(a\meet b) \ne h(a)\meet h(b).
+\]
+It follows that 
+\[
+\wpor(x,y)=\test{h(a\meet b)}{h(a)\meet
+  h(b)}(h(f(\path{u}{u'}(x),\path{v}{v'}(y)))),
+\]
+as required.
+\end{proof}
+
+\pagebreak[3] We have now laid the groundwork to prove our main
+result.
+\begin{thm}
+  Any continuous extension of the midpoint operation is inherently
+  parallel.
+\end{thm}
+\begin{proof}
+  For a given continuous extension $f$ of the midpoint operation,
+  define subsets $\LL,\RR$ of $\I^2$ by
+\[\begin{array}{l}
+(a,b) \in  \LL \quad \Leftrightarrow \quad 
+  \forall b' \sqsupseteq b. \; f(a,b) = f(a,b'),\\
+(a,b) \in \RR \quad \Leftrightarrow \quad 
+  \forall a' \sqsupseteq a.\; f(a,b) = f(a',b).
+\end{array}\]
+In other words, $\LL$ consists of all arguments $(a,b)$ where
+improving the second argument does not improve output, i.e.\ ``$f$
+looks at its left argument first'', and analogously for $\RR$.
+
+We claim that the sets $\LL$ and $\RR$ are each closed under 
+under directed suprema. 
+Suppose that $(a_i,b_i)_{i \in I}$ is a directed family in $\LL$.
+Suppose $b' \sqsupseteq \bigsqcup_{i\in I} b_i$. Then for all $a_i$ we have
+$f(a_i,b') = f(a_i,b_i)$. Accordingly, we have
+\begin{equation}
+f(\bigsqcup_{i\in I} a_i , \bigsqcup_{i\in I} b_i) = 
+  \bigsqcup_{i\in I} f(a_i, b_i) = \bigsqcup_{i\in I} f(a_i, b') =
+  f(\bigsqcup_{i\in I} a_i , b')
+\end{equation}
+and, therefore, $(\bigsqcup_{i\in I} a_i , \bigsqcup_{i\in I} b_i) \in
+\LL$. The proof of the claim for $\RR$ is symmetric.
+
+Now assume for the sake of contradiction that $f$ is not inherently
+parallel.  Then Lemma~\ref{designtwo} states that
+$\LL\cup\RR=\I^2$.  Then for all total $x \in [0,1]$ we have $(x
+, \bot) \notin \LL$ as otherwise $f(x,y) = f(x,\bot)$ for all total $y
+\in [0,1]$ which is impossible as $f(x , y_1) \neq f(x , y_2)$ for
+different $y_1 , y_2 \in [0,1]$ as $f$ agrees with the midpoint
+operation at total elements. In particular, we have that $(0,\bot)
+\notin \LL$. Pick any $\epsilon>0$.  Since $\LL$ is closed under
+directed suprema this means that already $(a,\bot)\not\in\LL$ for some
+non-total element $a\in\I$ with $\sizeof{a}\leq\epsilon$ and $0 \in
+a$. Since $\LL\cup\RR=\I^2$ we must therefore have
+$(a,\bot)\in\RR$.
+
+By a similar argument as above we have for all total $y \in [0,1]$
+that the pair $(a,y) \notin \RR$ and that, therefore, for each such
+$y$ we can find a non-total element $b_y$ containing $y$ such that
+$(a,b_y) \notin \RR$, and hence $(a,b_y)\in\LL$.  Since the intervals
+$b_y$ cover $[0,1]$, compactness of $[0,1]$ gives finitely many
+intervals $b_1 , \dots , b_n$ with
+\begin{enumerate}
+\item[(1)] $b_1 \cup \dots \cup b_n = [0,1]$ and 
+\item[(2)] $(a,b_i) \in \LL$ for $i=1,\dots,n$.
+\end{enumerate}
+It follows from (2) that whenever $z \in b_i \cap b_j$ then $f(a, b_i)
+= f(a,z)=f(a,b_j)$.  By iterating this argument using (1) we get that
+$f(a,b_i)=f(a,b_j)$ for any two $i,j$. It follows from (2) that
+$f(a,0)=f(a,1)$ because there are $i$ and $j$ with $0 \in b_i$ and $1
+\in b_j$.
+
+Summing up, for each $\epsilon>0$ we can find an interval $a$ with $0
+\in a$ and with $\sizeof{a}\leq \epsilon$ such that $f(a,0)=f(a,1)$.
+In particular $1/2\in f(a,0)$, and continuity of $f$ then gives
+$1/2\in f(0,0)$, which contradicts the assumption that $f$ extends the
+midpoint operation.
+\end{proof}
+
+\pagebreak[3]
+
+\section{Remarks and questions}
+
+This work could be improved in a number of directions.  
+
+Firstly, we ask whether the main theorem holds for any domain (among a
+class of domains of interest) with subspace of maximal elements (with
+the relative Scott topology) homeomorphic to the Euclidean real line
+or unit interval. More generally, we can consider domains with a
+(densely) embedded copy of line or unit interval.
+
+In fact, there are many well-known variations of the interval domain,
+which have been used for different purposes. For example, one can
+consider: (1) The set of all non-empty closed and bounded real
+intervals --- this fails to be a continuous Scott domain only by
+lacking a bottom element; to remedy this, just include the interval
+$(-\infty,+\infty)$. (2) The previous together with the empty
+interval~$\emptyset$, a top element, so that one gets a continuous
+lattice --- this is the original interval domain considered by Scott.
+(3) The set of non-empty compact intervals of the two-point
+compactification $[-\infty,+\infty]$ of the real line. (4) The set of
+non-empty compact connected subsets of the one-point compactification
+of the line. This is isomorphic to the poset of non-empty closed
+intervals of the circle.  It is not a continuous Scott domain, but it
+is an FS-domain in the sense of Jung. (5) The set of all non-empty
+compact subsets of (some compactification of) the real line or of some
+subspace of the real line such as the unit interval. 
+
+It is easy to see that our result applies to these domains as well,
+with slight adaptations in the proofs. However, the domains having the
+real line as the subspace of maximal points are endless. For example,
+if $R$ is any such domain and $D$ is any domain with a top element,
+then $R \times D$ and $[D \to R]$ are also domains with the real line
+as the subspace of maximal points.  We suspect that our result should
+apply to any domain environment for the line or unit interval.  But
+notice that this doesn't rule out the possibility of sequential models
+of (higher type) real-number computation other than Scott domains.
+
+Secondly, we have claimed that Weak Real PCF is manifestly sequential.
+While hardly anyone would cast doubt on this claim, one would like to
+have a mathematical formulation and proof. Amin Farjudian has recently
+performed some steps in this direction, by showing that all
+first-order Weak Real PCF definable functions are Vuillemin
+sequential~\cite{amin:wrpcf} (moreover, his argument shows that any
+extension of the language with continuous first-order unary functions
+has the same property). A further case for manifest sequentiality of
+Weak Real PCF would be its conservativity over PCF.
+
+Thirdly, it would be interesting to know how parallel the midpoint
+operation is. For instance, is (strong) parallel or sequentially
+definable from it?
+
+\paragraph{Acknowledgment}
+This work was supported by an EPSRC grant number \\ GR/M64840.
+
+\bibliographystyle{plain}
+{\footnotesize \bibliography{references}}
+
+\end{document}

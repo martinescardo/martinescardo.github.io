@@ -1,0 +1,4249 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+><head
+  ><title
+    >ConsHeadTail</title
+    ><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"
+     /><meta http-equiv="Content-Style-Type" content="text/css"
+     /><link href="Agda.css" rel="stylesheet" type="text/css"
+     /></head
+  ><body
+  ><pre
+    ><a name="1"
+      >\begin{code}
+
+</a
+      ><a name="15" class="Keyword"
+      >module</a
+      ><a name="21"
+      > </a
+      ><a name="22" href="ConsHeadTail.html#1" class="Module"
+      >ConsHeadTail</a
+      ><a name="34"
+      > </a
+      ><a name="35" class="Keyword"
+      >where</a
+      ><a name="40"
+      >
+
+</a
+      ><a name="42" class="Keyword"
+      >open</a
+      ><a name="46"
+      > </a
+      ><a name="47" class="Keyword"
+      >import</a
+      ><a name="53"
+      > </a
+      ><a name="54" href="Mini-library.html#1" class="Module"
+      >Mini-library</a
+      ><a name="66"
+      >
+</a
+      ><a name="67" class="Keyword"
+      >open</a
+      ><a name="71"
+      > </a
+      ><a name="72" class="Keyword"
+      >import</a
+      ><a name="78"
+      > </a
+      ><a name="79" href="Setoid.html#1" class="Module"
+      >Setoid</a
+      ><a name="85"
+      >
+</a
+      ><a name="86" class="Keyword"
+      >open</a
+      ><a name="90"
+      > </a
+      ><a name="91" class="Keyword"
+      >import</a
+      ><a name="97"
+      > </a
+      ><a name="98" href="Uniform-continuity.html#1" class="Module"
+      >Uniform-continuity</a
+      ><a name="116"
+      >
+
+
+</a
+      ><a name="119" class="Comment"
+      >-- The concatenation maps and some of their properties</a
+      ><a name="173"
+      >
+
+</a
+      ><a name="175" href="ConsHeadTail.html#175" class="Function"
+      >cons</a
+      ><a name="179"
+      > </a
+      ><a name="180" class="Symbol"
+      >:</a
+      ><a name="181"
+      > </a
+      ><a name="182" class="Symbol"
+      >{</a
+      ><a name="183" href="ConsHeadTail.html#183" class="Bound"
+      >m</a
+      ><a name="184"
+      > </a
+      ><a name="185" class="Symbol"
+      >:</a
+      ><a name="186"
+      > </a
+      ><a name="187" href="Mini-library.html#2935" class="Datatype"
+      >&#8469;</a
+      ><a name="188" class="Symbol"
+      >}</a
+      ><a name="189"
+      > </a
+      ><a name="190" class="Symbol"
+      >&#8594;</a
+      ><a name="191"
+      > </a
+      ><a name="192" href="Mini-library.html#6619" class="Function"
+      >&#8322;Fin</a
+      ><a name="196"
+      > </a
+      ><a name="197" href="ConsHeadTail.html#183" class="Bound"
+      >m</a
+      ><a name="198"
+      > </a
+      ><a name="199" class="Symbol"
+      >&#8594;</a
+      ><a name="200"
+      > </a
+      ><a name="201" href="Mini-library.html#6102" class="Function"
+      >&#8322;&#8469;</a
+      ><a name="203"
+      > </a
+      ><a name="204" class="Symbol"
+      >&#8594;</a
+      ><a name="205"
+      > </a
+      ><a name="206" href="Mini-library.html#6102" class="Function"
+      >&#8322;&#8469;</a
+      ><a name="208"
+      >
+</a
+      ><a name="209" href="ConsHeadTail.html#175" class="Function"
+      >cons</a
+      ><a name="213"
+      > </a
+      ><a name="214" href="Mini-library.html#6243" class="InductiveConstructor"
+      >&#10216;&#10217;</a
+      ><a name="216"
+      >      </a
+      ><a name="222" href="ConsHeadTail.html#222" class="Bound"
+      >&#945;</a
+      ><a name="223"
+      > </a
+      ><a name="224" href="ConsHeadTail.html#224" class="Bound"
+      >i</a
+      ><a name="225"
+      >        </a
+      ><a name="233" class="Symbol"
+      >=</a
+      ><a name="234"
+      > </a
+      ><a name="235" href="ConsHeadTail.html#222" class="Bound"
+      >&#945;</a
+      ><a name="236"
+      > </a
+      ><a name="237" href="ConsHeadTail.html#224" class="Bound"
+      >i</a
+      ><a name="238"
+      >
+</a
+      ><a name="239" href="ConsHeadTail.html#175" class="Function"
+      >cons</a
+      ><a name="243"
+      > </a
+      ><a name="244" class="Symbol"
+      >(</a
+      ><a name="245" href="ConsHeadTail.html#245" class="Bound"
+      >h</a
+      ><a name="246"
+      > </a
+      ><a name="247" href="Mini-library.html#6257" class="InductiveConstructor Operator"
+      >&#8759;</a
+      ><a name="248"
+      > </a
+      ><a name="249" class="Symbol"
+      >_)</a
+      ><a name="251"
+      > </a
+      ><a name="252" href="ConsHeadTail.html#252" class="Bound"
+      >&#945;</a
+      ><a name="253"
+      > </a
+      ><a name="254" href="Mini-library.html#2952" class="InductiveConstructor"
+      >0</a
+      ><a name="255"
+      >        </a
+      ><a name="263" class="Symbol"
+      >=</a
+      ><a name="264"
+      > </a
+      ><a name="265" href="ConsHeadTail.html#245" class="Bound"
+      >h</a
+      ><a name="266"
+      >
+</a
+      ><a name="267" href="ConsHeadTail.html#175" class="Function"
+      >cons</a
+      ><a name="271"
+      > </a
+      ><a name="272" class="Symbol"
+      >(_</a
+      ><a name="274"
+      > </a
+      ><a name="275" href="Mini-library.html#6257" class="InductiveConstructor Operator"
+      >&#8759;</a
+      ><a name="276"
+      > </a
+      ><a name="277" href="ConsHeadTail.html#277" class="Bound"
+      >t</a
+      ><a name="278" class="Symbol"
+      >)</a
+      ><a name="279"
+      > </a
+      ><a name="280" href="ConsHeadTail.html#280" class="Bound"
+      >&#945;</a
+      ><a name="281"
+      > </a
+      ><a name="282" class="Symbol"
+      >(</a
+      ><a name="283" href="Mini-library.html#2963" class="InductiveConstructor"
+      >succ</a
+      ><a name="287"
+      > </a
+      ><a name="288" href="ConsHeadTail.html#288" class="Bound"
+      >i</a
+      ><a name="289" class="Symbol"
+      >)</a
+      ><a name="290"
+      > </a
+      ><a name="291" class="Symbol"
+      >=</a
+      ><a name="292"
+      > </a
+      ><a name="293" href="ConsHeadTail.html#175" class="Function"
+      >cons</a
+      ><a name="297"
+      > </a
+      ><a name="298" href="ConsHeadTail.html#277" class="Bound"
+      >t</a
+      ><a name="299"
+      > </a
+      ><a name="300" href="ConsHeadTail.html#280" class="Bound"
+      >&#945;</a
+      ><a name="301"
+      > </a
+      ><a name="302" href="ConsHeadTail.html#288" class="Bound"
+      >i</a
+      ><a name="303"
+      >
+
+</a
+      ><a name="305" href="ConsHeadTail.html#305" class="Function"
+      >cons&#8320;</a
+      ><a name="310"
+      > </a
+      ><a name="311" class="Symbol"
+      >:</a
+      ><a name="312"
+      > </a
+      ><a name="313" href="Mini-library.html#6102" class="Function"
+      >&#8322;&#8469;</a
+      ><a name="315"
+      > </a
+      ><a name="316" class="Symbol"
+      >&#8594;</a
+      ><a name="317"
+      > </a
+      ><a name="318" href="Mini-library.html#6102" class="Function"
+      >&#8322;&#8469;</a
+      ><a name="320"
+      >
+</a
+      ><a name="321" href="ConsHeadTail.html#305" class="Function"
+      >cons&#8320;</a
+      ><a name="326"
+      > </a
+      ><a name="327" href="ConsHeadTail.html#327" class="Bound"
+      >&#945;</a
+      ><a name="328"
+      > </a
+      ><a name="329" href="Mini-library.html#2952" class="InductiveConstructor"
+      >0</a
+      ><a name="330"
+      >        </a
+      ><a name="338" class="Symbol"
+      >=</a
+      ><a name="339"
+      > </a
+      ><a name="340" href="Mini-library.html#2803" class="InductiveConstructor"
+      >&#8320;</a
+      ><a name="341"
+      >
+</a
+      ><a name="342" href="ConsHeadTail.html#305" class="Function"
+      >cons&#8320;</a
+      ><a name="347"
+      > </a
+      ><a name="348" href="ConsHeadTail.html#348" class="Bound"
+      >&#945;</a
+      ><a name="349"
+      > </a
+      ><a name="350" class="Symbol"
+      >(</a
+      ><a name="351" href="Mini-library.html#2963" class="InductiveConstructor"
+      >succ</a
+      ><a name="355"
+      > </a
+      ><a name="356" href="ConsHeadTail.html#356" class="Bound"
+      >i</a
+      ><a name="357" class="Symbol"
+      >)</a
+      ><a name="358"
+      > </a
+      ><a name="359" class="Symbol"
+      >=</a
+      ><a name="360"
+      > </a
+      ><a name="361" href="ConsHeadTail.html#348" class="Bound"
+      >&#945;</a
+      ><a name="362"
+      > </a
+      ><a name="363" href="ConsHeadTail.html#356" class="Bound"
+      >i</a
+      ><a name="364"
+      >
+</a
+      ><a name="365" href="ConsHeadTail.html#365" class="Function"
+      >cons&#8321;</a
+      ><a name="370"
+      > </a
+      ><a name="371" class="Symbol"
+      >:</a
+      ><a name="372"
+      > </a
+      ><a name="373" href="Mini-library.html#6102" class="Function"
+      >&#8322;&#8469;</a
+      ><a name="375"
+      > </a
+      ><a name="376" class="Symbol"
+      >&#8594;</a
+      ><a name="377"
+      > </a
+      ><a name="378" href="Mini-library.html#6102" class="Function"
+      >&#8322;&#8469;</a
+      ><a name="380"
+      >
+</a
+      ><a name="381" href="ConsHeadTail.html#365" class="Function"
+      >cons&#8321;</a
+      ><a name="386"
+      > </a
+      ><a name="387" href="ConsHeadTail.html#387" class="Bound"
+      >&#945;</a
+      ><a name="388"
+      > </a
+      ><a name="389" href="Mini-library.html#2952" class="InductiveConstructor"
+      >0</a
+      ><a name="390"
+      >        </a
+      ><a name="398" class="Symbol"
+      >=</a
+      ><a name="399"
+      > </a
+      ><a name="400" href="Mini-library.html#2810" class="InductiveConstructor"
+      >&#8321;</a
+      ><a name="401"
+      >
+</a
+      ><a name="402" href="ConsHeadTail.html#365" class="Function"
+      >cons&#8321;</a
+      ><a name="407"
+      > </a
+      ><a name="408" href="ConsHeadTail.html#408" class="Bound"
+      >&#945;</a
+      ><a name="409"
+      > </a
+      ><a name="410" class="Symbol"
+      >(</a
+      ><a name="411" href="Mini-library.html#2963" class="InductiveConstructor"
+      >succ</a
+      ><a name="415"
+      > </a
+      ><a name="416" href="ConsHeadTail.html#416" class="Bound"
+      >i</a
+      ><a name="417" class="Symbol"
+      >)</a
+      ><a name="418"
+      > </a
+      ><a name="419" class="Symbol"
+      >=</a
+      ><a name="420"
+      > </a
+      ><a name="421" href="ConsHeadTail.html#408" class="Bound"
+      >&#945;</a
+      ><a name="422"
+      > </a
+      ><a name="423" href="ConsHeadTail.html#416" class="Bound"
+      >i</a
+      ><a name="424"
+      >
+
+</a
+      ><a name="426" href="ConsHeadTail.html#426" class="Function"
+      >Lemma[cons-E-map]</a
+      ><a name="443"
+      > </a
+      ><a name="444" class="Symbol"
+      >:</a
+      ><a name="445"
+      > </a
+      ><a name="446" class="Symbol"
+      >&#8704;{</a
+      ><a name="448" href="ConsHeadTail.html#448" class="Bound"
+      >m</a
+      ><a name="449"
+      > </a
+      ><a name="450" class="Symbol"
+      >:</a
+      ><a name="451"
+      > </a
+      ><a name="452" href="Mini-library.html#2935" class="Datatype"
+      >&#8469;</a
+      ><a name="453" class="Symbol"
+      >}</a
+      ><a name="454"
+      > </a
+      ><a name="455" class="Symbol"
+      >&#8594;</a
+      ><a name="456"
+      > </a
+      ><a name="457" class="Symbol"
+      >&#8704;(</a
+      ><a name="459" href="ConsHeadTail.html#459" class="Bound"
+      >s</a
+      ><a name="460"
+      > </a
+      ><a name="461" class="Symbol"
+      >:</a
+      ><a name="462"
+      > </a
+      ><a name="463" href="Mini-library.html#6619" class="Function"
+      >&#8322;Fin</a
+      ><a name="467"
+      > </a
+      ><a name="468" href="ConsHeadTail.html#448" class="Bound"
+      >m</a
+      ><a name="469" class="Symbol"
+      >)</a
+      ><a name="470"
+      > </a
+      ><a name="471" class="Symbol"
+      >&#8594;</a
+      ><a name="472"
+      > </a
+      ><a name="473" class="Symbol"
+      >&#8704;(</a
+      ><a name="475" href="ConsHeadTail.html#475" class="Bound"
+      >&#945;</a
+      ><a name="476"
+      > </a
+      ><a name="477" href="ConsHeadTail.html#477" class="Bound"
+      >&#946;</a
+      ><a name="478"
+      > </a
+      ><a name="479" class="Symbol"
+      >:</a
+      ><a name="480"
+      > </a
+      ><a name="481" href="Mini-library.html#6102" class="Function"
+      >&#8322;&#8469;</a
+      ><a name="483" class="Symbol"
+      >)</a
+      ><a name="484"
+      > </a
+      ><a name="485" class="Symbol"
+      >&#8594;</a
+      ><a name="486"
+      > </a
+      ><a name="487" href="ConsHeadTail.html#475" class="Bound"
+      >&#945;</a
+      ><a name="488"
+      > </a
+      ><a name="489" href="Setoid.html#4042" class="Function Operator"
+      >&#8803;</a
+      ><a name="490"
+      > </a
+      ><a name="491" href="ConsHeadTail.html#477" class="Bound"
+      >&#946;</a
+      ><a name="492"
+      > </a
+      ><a name="493" class="Symbol"
+      >&#8594;</a
+      ><a name="494"
+      > </a
+      ><a name="495" href="ConsHeadTail.html#175" class="Function"
+      >cons</a
+      ><a name="499"
+      > </a
+      ><a name="500" href="ConsHeadTail.html#459" class="Bound"
+      >s</a
+      ><a name="501"
+      > </a
+      ><a name="502" href="ConsHeadTail.html#475" class="Bound"
+      >&#945;</a
+      ><a name="503"
+      > </a
+      ><a name="504" href="Setoid.html#4042" class="Function Operator"
+      >&#8803;</a
+      ><a name="505"
+      > </a
+      ><a name="506" href="ConsHeadTail.html#175" class="Function"
+      >cons</a
+      ><a name="510"
+      > </a
+      ><a name="511" href="ConsHeadTail.html#459" class="Bound"
+      >s</a
+      ><a name="512"
+      > </a
+      ><a name="513" href="ConsHeadTail.html#477" class="Bound"
+      >&#946;</a
+      ><a name="514"
+      >
+</a
+      ><a name="515" href="ConsHeadTail.html#426" class="Function"
+      >Lemma[cons-E-map]</a
+      ><a name="532"
+      > </a
+      ><a name="533" href="Mini-library.html#6243" class="InductiveConstructor"
+      >&#10216;&#10217;</a
+      ><a name="535"
+      >      </a
+      ><a name="541" href="ConsHeadTail.html#541" class="Bound"
+      >&#945;</a
+      ><a name="542"
+      > </a
+      ><a name="543" href="ConsHeadTail.html#543" class="Bound"
+      >&#946;</a
+      ><a name="544"
+      > </a
+      ><a name="545" href="ConsHeadTail.html#545" class="Bound"
+      >eq</a
+      ><a name="547"
+      > </a
+      ><a name="548" href="ConsHeadTail.html#548" class="Bound"
+      >i</a
+      ><a name="549"
+      >        </a
+      ><a name="557" class="Symbol"
+      >=</a
+      ><a name="558"
+      > </a
+      ><a name="559" href="ConsHeadTail.html#545" class="Bound"
+      >eq</a
+      ><a name="561"
+      > </a
+      ><a name="562" href="ConsHeadTail.html#548" class="Bound"
+      >i</a
+      ><a name="563"
+      >
+</a
+      ><a name="564" href="ConsHeadTail.html#426" class="Function"
+      >Lemma[cons-E-map]</a
+      ><a name="581"
+      > </a
+      ><a name="582" class="Symbol"
+      >(</a
+      ><a name="583" href="ConsHeadTail.html#583" class="Bound"
+      >h</a
+      ><a name="584"
+      > </a
+      ><a name="585" href="Mini-library.html#6257" class="InductiveConstructor Operator"
+      >&#8759;</a
+      ><a name="586"
+      > </a
+      ><a name="587" class="Symbol"
+      >_)</a
+      ><a name="589"
+      > </a
+      ><a name="590" href="ConsHeadTail.html#590" class="Bound"
+      >&#945;</a
+      ><a name="591"
+      > </a
+      ><a name="592" href="ConsHeadTail.html#592" class="Bound"
+      >&#946;</a
+      ><a name="593"
+      > </a
+      ><a name="594" href="ConsHeadTail.html#594" class="Bound"
+      >eq</a
+      ><a name="596"
+      > </a
+      ><a name="597" href="Mini-library.html#2952" class="InductiveConstructor"
+      >0</a
+      ><a name="598"
+      >        </a
+      ><a name="606" class="Symbol"
+      >=</a
+      ><a name="607"
+      > </a
+      ><a name="608" href="Mini-library.html#1624" class="InductiveConstructor"
+      >refl</a
+      ><a name="612"
+      >
+</a
+      ><a name="613" href="ConsHeadTail.html#426" class="Function"
+      >Lemma[cons-E-map]</a
+      ><a name="630"
+      > </a
+      ><a name="631" class="Symbol"
+      >(_</a
+      ><a name="633"
+      > </a
+      ><a name="634" href="Mini-library.html#6257" class="InductiveConstructor Operator"
+      >&#8759;</a
+      ><a name="635"
+      > </a
+      ><a name="636" href="ConsHeadTail.html#636" class="Bound"
+      >t</a
+      ><a name="637" class="Symbol"
+      >)</a
+      ><a name="638"
+      > </a
+      ><a name="639" href="ConsHeadTail.html#639" class="Bound"
+      >&#945;</a
+      ><a name="640"
+      > </a
+      ><a name="641" href="ConsHeadTail.html#641" class="Bound"
+      >&#946;</a
+      ><a name="642"
+      > </a
+      ><a name="643" href="ConsHeadTail.html#643" class="Bound"
+      >eq</a
+      ><a name="645"
+      > </a
+      ><a name="646" class="Symbol"
+      >(</a
+      ><a name="647" href="Mini-library.html#2963" class="InductiveConstructor"
+      >succ</a
+      ><a name="651"
+      > </a
+      ><a name="652" href="ConsHeadTail.html#652" class="Bound"
+      >i</a
+      ><a name="653" class="Symbol"
+      >)</a
+      ><a name="654"
+      > </a
+      ><a name="655" class="Symbol"
+      >=</a
+      ><a name="656"
+      > </a
+      ><a name="657" href="ConsHeadTail.html#426" class="Function"
+      >Lemma[cons-E-map]</a
+      ><a name="674"
+      > </a
+      ><a name="675" href="ConsHeadTail.html#636" class="Bound"
+      >t</a
+      ><a name="676"
+      > </a
+      ><a name="677" href="ConsHeadTail.html#639" class="Bound"
+      >&#945;</a
+      ><a name="678"
+      > </a
+      ><a name="679" href="ConsHeadTail.html#641" class="Bound"
+      >&#946;</a
+      ><a name="680"
+      > </a
+      ><a name="681" href="ConsHeadTail.html#643" class="Bound"
+      >eq</a
+      ><a name="683"
+      > </a
+      ><a name="684" href="ConsHeadTail.html#652" class="Bound"
+      >i</a
+      ><a name="685"
+      >
+
+</a
+      ><a name="687" href="ConsHeadTail.html#687" class="Function"
+      >E-cons</a
+      ><a name="693"
+      > </a
+      ><a name="694" class="Symbol"
+      >:</a
+      ><a name="695"
+      > </a
+      ><a name="696" class="Symbol"
+      >{</a
+      ><a name="697" href="ConsHeadTail.html#697" class="Bound"
+      >m</a
+      ><a name="698"
+      > </a
+      ><a name="699" class="Symbol"
+      >:</a
+      ><a name="700"
+      > </a
+      ><a name="701" href="Mini-library.html#2935" class="Datatype"
+      >&#8469;</a
+      ><a name="702" class="Symbol"
+      >}</a
+      ><a name="703"
+      > </a
+      ><a name="704" class="Symbol"
+      >&#8594;</a
+      ><a name="705"
+      > </a
+      ><a name="706" href="Mini-library.html#6619" class="Function"
+      >&#8322;Fin</a
+      ><a name="710"
+      > </a
+      ><a name="711" href="ConsHeadTail.html#697" class="Bound"
+      >m</a
+      ><a name="712"
+      > </a
+      ><a name="713" class="Symbol"
+      >&#8594;</a
+      ><a name="714"
+      > </a
+      ><a name="715" href="Setoid.html#649" class="Function"
+      >E-map</a
+      ><a name="720"
+      > </a
+      ><a name="721" href="Setoid.html#4092" class="Function"
+      >E&#8322;&#8469;</a
+      ><a name="724"
+      > </a
+      ><a name="725" href="Setoid.html#4092" class="Function"
+      >E&#8322;&#8469;</a
+      ><a name="728"
+      >
+</a
+      ><a name="729" href="ConsHeadTail.html#687" class="Function"
+      >E-cons</a
+      ><a name="735"
+      > </a
+      ><a name="736" href="ConsHeadTail.html#736" class="Bound"
+      >s</a
+      ><a name="737"
+      > </a
+      ><a name="738" class="Symbol"
+      >=</a
+      ><a name="739"
+      > </a
+      ><a name="740" href="ConsHeadTail.html#175" class="Function"
+      >cons</a
+      ><a name="744"
+      > </a
+      ><a name="745" href="ConsHeadTail.html#736" class="Bound"
+      >s</a
+      ><a name="746"
+      > </a
+      ><a name="747" href="Mini-library.html#705" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="748"
+      > </a
+      ><a name="749" href="ConsHeadTail.html#426" class="Function"
+      >Lemma[cons-E-map]</a
+      ><a name="766"
+      > </a
+      ><a name="767" href="ConsHeadTail.html#736" class="Bound"
+      >s</a
+      ><a name="768"
+      >
+
+</a
+      ><a name="770" href="ConsHeadTail.html#770" class="Function"
+      >Lemma[E-cons-UC]</a
+      ><a name="786"
+      > </a
+      ><a name="787" class="Symbol"
+      >:</a
+      ><a name="788"
+      > </a
+      ><a name="789" class="Symbol"
+      >&#8704;{</a
+      ><a name="791" href="ConsHeadTail.html#791" class="Bound"
+      >m</a
+      ><a name="792"
+      > </a
+      ><a name="793" class="Symbol"
+      >:</a
+      ><a name="794"
+      > </a
+      ><a name="795" href="Mini-library.html#2935" class="Datatype"
+      >&#8469;</a
+      ><a name="796" class="Symbol"
+      >}</a
+      ><a name="797"
+      > </a
+      ><a name="798" class="Symbol"
+      >&#8594;</a
+      ><a name="799"
+      > </a
+      ><a name="800" class="Symbol"
+      >&#8704;(</a
+      ><a name="802" href="ConsHeadTail.html#802" class="Bound"
+      >s</a
+      ><a name="803"
+      > </a
+      ><a name="804" class="Symbol"
+      >:</a
+      ><a name="805"
+      > </a
+      ><a name="806" href="Mini-library.html#6619" class="Function"
+      >&#8322;Fin</a
+      ><a name="810"
+      > </a
+      ><a name="811" href="ConsHeadTail.html#791" class="Bound"
+      >m</a
+      ><a name="812" class="Symbol"
+      >)</a
+      ><a name="813"
+      > </a
+      ><a name="814" class="Symbol"
+      >&#8594;</a
+      ><a name="815"
+      > </a
+      ><a name="816" href="Uniform-continuity.html#2567" class="Function"
+      >uniformly-continuous-&#8322;&#8469;</a
+      ><a name="839"
+      > </a
+      ><a name="840" class="Symbol"
+      >(</a
+      ><a name="841" href="ConsHeadTail.html#687" class="Function"
+      >E-cons</a
+      ><a name="847"
+      > </a
+      ><a name="848" href="ConsHeadTail.html#802" class="Bound"
+      >s</a
+      ><a name="849" class="Symbol"
+      >)</a
+      ><a name="850"
+      >
+</a
+      ><a name="851" href="ConsHeadTail.html#770" class="Function"
+      >Lemma[E-cons-UC]</a
+      ><a name="867"
+      > </a
+      ><a name="868" href="Mini-library.html#6243" class="InductiveConstructor"
+      >&#10216;&#10217;</a
+      ><a name="870"
+      >      </a
+      ><a name="876" href="ConsHeadTail.html#876" class="Bound"
+      >m</a
+      ><a name="877"
+      >        </a
+      ><a name="885" class="Symbol"
+      >=</a
+      ><a name="886"
+      > </a
+      ><a name="887" href="ConsHeadTail.html#876" class="Bound"
+      >m</a
+      ><a name="888"
+      > </a
+      ><a name="889" href="Mini-library.html#705" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="890"
+      > </a
+      ><a name="891" class="Symbol"
+      >&#955;</a
+      ><a name="892"
+      > </a
+      ><a name="893" href="ConsHeadTail.html#893" class="Bound"
+      >&#945;</a
+      ><a name="894"
+      > </a
+      ><a name="895" href="ConsHeadTail.html#895" class="Bound"
+      >&#946;</a
+      ><a name="896"
+      > </a
+      ><a name="897" href="ConsHeadTail.html#897" class="Bound"
+      >e</a
+      ><a name="898"
+      > </a
+      ><a name="899" class="Symbol"
+      >&#8594;</a
+      ><a name="900"
+      > </a
+      ><a name="901" href="ConsHeadTail.html#897" class="Bound"
+      >e</a
+      ><a name="902"
+      >
+</a
+      ><a name="903" href="ConsHeadTail.html#770" class="Function"
+      >Lemma[E-cons-UC]</a
+      ><a name="919"
+      > </a
+      ><a name="920" class="Symbol"
+      >(</a
+      ><a name="921" href="ConsHeadTail.html#921" class="Bound"
+      >h</a
+      ><a name="922"
+      > </a
+      ><a name="923" href="Mini-library.html#6257" class="InductiveConstructor Operator"
+      >&#8759;</a
+      ><a name="924"
+      > </a
+      ><a name="925" class="Symbol"
+      >_)</a
+      ><a name="927"
+      > </a
+      ><a name="928" href="Mini-library.html#2952" class="InductiveConstructor"
+      >0</a
+      ><a name="929"
+      >        </a
+      ><a name="937" class="Symbol"
+      >=</a
+      ><a name="938"
+      > </a
+      ><a name="939" class="Number"
+      >0</a
+      ><a name="940"
+      > </a
+      ><a name="941" href="Mini-library.html#705" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="942"
+      > </a
+      ><a name="943" class="Symbol"
+      >&#955;</a
+      ><a name="944"
+      > </a
+      ><a name="945" href="ConsHeadTail.html#945" class="Bound"
+      >&#945;</a
+      ><a name="946"
+      > </a
+      ><a name="947" href="ConsHeadTail.html#947" class="Bound"
+      >&#946;</a
+      ><a name="948"
+      > </a
+      ><a name="949" href="ConsHeadTail.html#949" class="Bound"
+      >e</a
+      ><a name="950"
+      > </a
+      ><a name="951" href="ConsHeadTail.html#951" class="Bound"
+      >i</a
+      ><a name="952"
+      > </a
+      ><a name="953" class="Symbol"
+      >&#8594;</a
+      ><a name="954"
+      > </a
+      ><a name="955" class="Symbol"
+      >&#955;</a
+      ><a name="956"
+      > </a
+      ><a name="957" class="Symbol"
+      >()</a
+      ><a name="959"
+      >
+</a
+      ><a name="960" href="ConsHeadTail.html#770" class="Function"
+      >Lemma[E-cons-UC]</a
+      ><a name="976"
+      > </a
+      ><a name="977" class="Symbol"
+      >(</a
+      ><a name="978" href="ConsHeadTail.html#978" class="Bound"
+      >h</a
+      ><a name="979"
+      > </a
+      ><a name="980" href="Mini-library.html#6257" class="InductiveConstructor Operator"
+      >&#8759;</a
+      ><a name="981"
+      > </a
+      ><a name="982" href="ConsHeadTail.html#982" class="Bound"
+      >t</a
+      ><a name="983" class="Symbol"
+      >)</a
+      ><a name="984"
+      > </a
+      ><a name="985" class="Symbol"
+      >(</a
+      ><a name="986" href="Mini-library.html#2963" class="InductiveConstructor"
+      >succ</a
+      ><a name="990"
+      > </a
+      ><a name="991" href="ConsHeadTail.html#991" class="Bound"
+      >m</a
+      ><a name="992" class="Symbol"
+      >)</a
+      ><a name="993"
+      > </a
+      ><a name="994" class="Symbol"
+      >=</a
+      ><a name="995"
+      > </a
+      ><a name="996" href="ConsHeadTail.html#1013" class="Function"
+      >k</a
+      ><a name="997"
+      > </a
+      ><a name="998" href="Mini-library.html#705" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="999"
+      > </a
+      ><a name="1000" href="ConsHeadTail.html#1060" class="Function"
+      >prf</a
+      ><a name="1003"
+      >
+ </a
+      ><a name="1005" class="Keyword"
+      >where</a
+      ><a name="1010"
+      >
+  </a
+      ><a name="1013" href="ConsHeadTail.html#1013" class="Function"
+      >k</a
+      ><a name="1014"
+      > </a
+      ><a name="1015" class="Symbol"
+      >:</a
+      ><a name="1016"
+      > </a
+      ><a name="1017" href="Mini-library.html#2935" class="Datatype"
+      >&#8469;</a
+      ><a name="1018"
+      >
+  </a
+      ><a name="1021" href="ConsHeadTail.html#1013" class="Function"
+      >k</a
+      ><a name="1022"
+      > </a
+      ><a name="1023" class="Symbol"
+      >=</a
+      ><a name="1024"
+      > </a
+      ><a name="1025" href="Mini-library.html#1377" class="Function"
+      >&#8707;-witness</a
+      ><a name="1034"
+      > </a
+      ><a name="1035" class="Symbol"
+      >(</a
+      ><a name="1036" href="ConsHeadTail.html#770" class="Function"
+      >Lemma[E-cons-UC]</a
+      ><a name="1052"
+      > </a
+      ><a name="1053" href="ConsHeadTail.html#982" class="Bound"
+      >t</a
+      ><a name="1054"
+      > </a
+      ><a name="1055" href="ConsHeadTail.html#991" class="Bound"
+      >m</a
+      ><a name="1056" class="Symbol"
+      >)</a
+      ><a name="1057"
+      >
+  </a
+      ><a name="1060" href="ConsHeadTail.html#1060" class="Function"
+      >prf</a
+      ><a name="1063"
+      > </a
+      ><a name="1064" class="Symbol"
+      >:</a
+      ><a name="1065"
+      > </a
+      ><a name="1066" class="Symbol"
+      >&#8704;(</a
+      ><a name="1068" href="ConsHeadTail.html#1068" class="Bound"
+      >&#945;</a
+      ><a name="1069"
+      > </a
+      ><a name="1070" href="ConsHeadTail.html#1070" class="Bound"
+      >&#946;</a
+      ><a name="1071"
+      > </a
+      ><a name="1072" class="Symbol"
+      >:</a
+      ><a name="1073"
+      > </a
+      ><a name="1074" href="Mini-library.html#6102" class="Function"
+      >&#8322;&#8469;</a
+      ><a name="1076" class="Symbol"
+      >)</a
+      ><a name="1077"
+      > </a
+      ><a name="1078" class="Symbol"
+      >&#8594;</a
+      ><a name="1079"
+      > </a
+      ><a name="1080" href="ConsHeadTail.html#1068" class="Bound"
+      >&#945;</a
+      ><a name="1081"
+      > </a
+      ><a name="1082" href="Uniform-continuity.html#368" class="Function Operator"
+      >&#8803;</a
+      ><a name="1083"
+      > </a
+      ><a name="1084" href="ConsHeadTail.html#1013" class="Function"
+      >k</a
+      ><a name="1085"
+      > </a
+      ><a name="1086" href="Uniform-continuity.html#368" class="Function Operator"
+      >&#8803;</a
+      ><a name="1087"
+      > </a
+      ><a name="1088" href="ConsHeadTail.html#1070" class="Bound"
+      >&#946;</a
+      ><a name="1089"
+      > </a
+      ><a name="1090" class="Symbol"
+      >&#8594;</a
+      ><a name="1091"
+      > </a
+      ><a name="1092" href="ConsHeadTail.html#175" class="Function"
+      >cons</a
+      ><a name="1096"
+      > </a
+      ><a name="1097" class="Symbol"
+      >(</a
+      ><a name="1098" href="ConsHeadTail.html#978" class="Bound"
+      >h</a
+      ><a name="1099"
+      > </a
+      ><a name="1100" href="Mini-library.html#6257" class="InductiveConstructor Operator"
+      >&#8759;</a
+      ><a name="1101"
+      > </a
+      ><a name="1102" href="ConsHeadTail.html#982" class="Bound"
+      >t</a
+      ><a name="1103" class="Symbol"
+      >)</a
+      ><a name="1104"
+      > </a
+      ><a name="1105" href="ConsHeadTail.html#1068" class="Bound"
+      >&#945;</a
+      ><a name="1106"
+      > </a
+      ><a name="1107" href="Uniform-continuity.html#368" class="Function Operator"
+      >&#8803;</a
+      ><a name="1108"
+      > </a
+      ><a name="1109" href="Mini-library.html#2963" class="InductiveConstructor"
+      >succ</a
+      ><a name="1113"
+      > </a
+      ><a name="1114" href="ConsHeadTail.html#991" class="Bound"
+      >m</a
+      ><a name="1115"
+      > </a
+      ><a name="1116" href="Uniform-continuity.html#368" class="Function Operator"
+      >&#8803;</a
+      ><a name="1117"
+      > </a
+      ><a name="1118" href="ConsHeadTail.html#175" class="Function"
+      >cons</a
+      ><a name="1122"
+      > </a
+      ><a name="1123" class="Symbol"
+      >(</a
+      ><a name="1124" href="ConsHeadTail.html#978" class="Bound"
+      >h</a
+      ><a name="1125"
+      > </a
+      ><a name="1126" href="Mini-library.html#6257" class="InductiveConstructor Operator"
+      >&#8759;</a
+      ><a name="1127"
+      > </a
+      ><a name="1128" href="ConsHeadTail.html#982" class="Bound"
+      >t</a
+      ><a name="1129" class="Symbol"
+      >)</a
+      ><a name="1130"
+      > </a
+      ><a name="1131" href="ConsHeadTail.html#1070" class="Bound"
+      >&#946;</a
+      ><a name="1132"
+      >
+  </a
+      ><a name="1135" href="ConsHeadTail.html#1060" class="Function"
+      >prf</a
+      ><a name="1138"
+      > </a
+      ><a name="1139" href="ConsHeadTail.html#1139" class="Bound"
+      >&#945;</a
+      ><a name="1140"
+      > </a
+      ><a name="1141" href="ConsHeadTail.html#1141" class="Bound"
+      >&#946;</a
+      ><a name="1142"
+      > </a
+      ><a name="1143" href="ConsHeadTail.html#1143" class="Bound"
+      >e</a
+      ><a name="1144"
+      > </a
+      ><a name="1145" href="Mini-library.html#2952" class="InductiveConstructor"
+      >0</a
+      ><a name="1146"
+      >        </a
+      ><a name="1154" href="ConsHeadTail.html#1154" class="Bound"
+      >r</a
+      ><a name="1155"
+      >          </a
+      ><a name="1165" class="Symbol"
+      >=</a
+      ><a name="1166"
+      > </a
+      ><a name="1167" href="Mini-library.html#1624" class="InductiveConstructor"
+      >refl</a
+      ><a name="1171"
+      >
+  </a
+      ><a name="1174" href="ConsHeadTail.html#1060" class="Function"
+      >prf</a
+      ><a name="1177"
+      > </a
+      ><a name="1178" href="ConsHeadTail.html#1178" class="Bound"
+      >&#945;</a
+      ><a name="1179"
+      > </a
+      ><a name="1180" href="ConsHeadTail.html#1180" class="Bound"
+      >&#946;</a
+      ><a name="1181"
+      > </a
+      ><a name="1182" href="ConsHeadTail.html#1182" class="Bound"
+      >e</a
+      ><a name="1183"
+      > </a
+      ><a name="1184" class="Symbol"
+      >(</a
+      ><a name="1185" href="Mini-library.html#2963" class="InductiveConstructor"
+      >succ</a
+      ><a name="1189"
+      > </a
+      ><a name="1190" href="ConsHeadTail.html#1190" class="Bound"
+      >i</a
+      ><a name="1191" class="Symbol"
+      >)</a
+      ><a name="1192"
+      > </a
+      ><a name="1193" class="Symbol"
+      >(</a
+      ><a name="1194" href="Mini-library.html#4036" class="InductiveConstructor"
+      >&#8804;-succ</a
+      ><a name="1200"
+      > </a
+      ><a name="1201" href="ConsHeadTail.html#1201" class="Bound"
+      >r</a
+      ><a name="1202" class="Symbol"
+      >)</a
+      ><a name="1203"
+      > </a
+      ><a name="1204" class="Symbol"
+      >=</a
+      ><a name="1205"
+      > </a
+      ><a name="1206" href="Mini-library.html#1453" class="Function"
+      >&#8707;-elim</a
+      ><a name="1212"
+      > </a
+      ><a name="1213" class="Symbol"
+      >(</a
+      ><a name="1214" href="ConsHeadTail.html#770" class="Function"
+      >Lemma[E-cons-UC]</a
+      ><a name="1230"
+      > </a
+      ><a name="1231" href="ConsHeadTail.html#982" class="Bound"
+      >t</a
+      ><a name="1232"
+      > </a
+      ><a name="1233" href="ConsHeadTail.html#991" class="Bound"
+      >m</a
+      ><a name="1234" class="Symbol"
+      >)</a
+      ><a name="1235"
+      > </a
+      ><a name="1236" href="ConsHeadTail.html#1178" class="Bound"
+      >&#945;</a
+      ><a name="1237"
+      > </a
+      ><a name="1238" href="ConsHeadTail.html#1180" class="Bound"
+      >&#946;</a
+      ><a name="1239"
+      > </a
+      ><a name="1240" href="ConsHeadTail.html#1182" class="Bound"
+      >e</a
+      ><a name="1241"
+      > </a
+      ><a name="1242" href="ConsHeadTail.html#1190" class="Bound"
+      >i</a
+      ><a name="1243"
+      > </a
+      ><a name="1244" href="ConsHeadTail.html#1201" class="Bound"
+      >r</a
+      ><a name="1245"
+      >
+
+
+</a
+      ><a name="1248" href="ConsHeadTail.html#1248" class="Function"
+      >Lemma[cons-drop]</a
+      ><a name="1264"
+      > </a
+      ><a name="1265" class="Symbol"
+      >:</a
+      ><a name="1266"
+      > </a
+      ><a name="1267" class="Symbol"
+      >&#8704;(</a
+      ><a name="1269" href="ConsHeadTail.html#1269" class="Bound"
+      >n</a
+      ><a name="1270"
+      > </a
+      ><a name="1271" class="Symbol"
+      >:</a
+      ><a name="1272"
+      > </a
+      ><a name="1273" href="Mini-library.html#2935" class="Datatype"
+      >&#8469;</a
+      ><a name="1274" class="Symbol"
+      >)</a
+      ><a name="1275"
+      > </a
+      ><a name="1276" class="Symbol"
+      >&#8594;</a
+      ><a name="1277"
+      > </a
+      ><a name="1278" class="Symbol"
+      >&#8704;(</a
+      ><a name="1280" href="ConsHeadTail.html#1280" class="Bound"
+      >&#945;</a
+      ><a name="1281"
+      > </a
+      ><a name="1282" class="Symbol"
+      >:</a
+      ><a name="1283"
+      > </a
+      ><a name="1284" href="Mini-library.html#6102" class="Function"
+      >&#8322;&#8469;</a
+      ><a name="1286" class="Symbol"
+      >)</a
+      ><a name="1287"
+      > </a
+      ><a name="1288" class="Symbol"
+      >&#8594;</a
+      ><a name="1289"
+      > </a
+      ><a name="1290" class="Symbol"
+      >&#8704;(</a
+      ><a name="1292" href="ConsHeadTail.html#1292" class="Bound"
+      >i</a
+      ><a name="1293"
+      > </a
+      ><a name="1294" class="Symbol"
+      >:</a
+      ><a name="1295"
+      > </a
+      ><a name="1296" href="Mini-library.html#2935" class="Datatype"
+      >&#8469;</a
+      ><a name="1297" class="Symbol"
+      >)</a
+      ><a name="1298"
+      > </a
+      ><a name="1299" class="Symbol"
+      >&#8594;</a
+      ><a name="1300"
+      > </a
+      ><a name="1301" href="Mini-library.html#6787" class="Function"
+      >drop</a
+      ><a name="1305"
+      > </a
+      ><a name="1306" href="ConsHeadTail.html#1269" class="Bound"
+      >n</a
+      ><a name="1307"
+      > </a
+      ><a name="1308" href="ConsHeadTail.html#1280" class="Bound"
+      >&#945;</a
+      ><a name="1309"
+      > </a
+      ><a name="1310" href="ConsHeadTail.html#1292" class="Bound"
+      >i</a
+      ><a name="1311"
+      > </a
+      ><a name="1312" href="Mini-library.html#1588" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="1313"
+      > </a
+      ><a name="1314" href="ConsHeadTail.html#1280" class="Bound"
+      >&#945;</a
+      ><a name="1315"
+      > </a
+      ><a name="1316" class="Symbol"
+      >(</a
+      ><a name="1317" href="ConsHeadTail.html#1292" class="Bound"
+      >i</a
+      ><a name="1318"
+      > </a
+      ><a name="1319" href="Mini-library.html#3287" class="Function Operator"
+      >+</a
+      ><a name="1320"
+      > </a
+      ><a name="1321" href="ConsHeadTail.html#1269" class="Bound"
+      >n</a
+      ><a name="1322" class="Symbol"
+      >)</a
+      ><a name="1323"
+      >
+</a
+      ><a name="1324" href="ConsHeadTail.html#1248" class="Function"
+      >Lemma[cons-drop]</a
+      ><a name="1340"
+      > </a
+      ><a name="1341" href="Mini-library.html#2952" class="InductiveConstructor"
+      >0</a
+      ><a name="1342"
+      >        </a
+      ><a name="1350" href="ConsHeadTail.html#1350" class="Bound"
+      >&#945;</a
+      ><a name="1351"
+      > </a
+      ><a name="1352" href="ConsHeadTail.html#1352" class="Bound"
+      >i</a
+      ><a name="1353"
+      > </a
+      ><a name="1354" class="Symbol"
+      >=</a
+      ><a name="1355"
+      > </a
+      ><a name="1356" href="Mini-library.html#1624" class="InductiveConstructor"
+      >refl</a
+      ><a name="1360"
+      >
+</a
+      ><a name="1361" href="ConsHeadTail.html#1248" class="Function"
+      >Lemma[cons-drop]</a
+      ><a name="1377"
+      > </a
+      ><a name="1378" class="Symbol"
+      >(</a
+      ><a name="1379" href="Mini-library.html#2963" class="InductiveConstructor"
+      >succ</a
+      ><a name="1383"
+      > </a
+      ><a name="1384" href="ConsHeadTail.html#1384" class="Bound"
+      >n</a
+      ><a name="1385" class="Symbol"
+      >)</a
+      ><a name="1386"
+      > </a
+      ><a name="1387" href="ConsHeadTail.html#1387" class="Bound"
+      >&#945;</a
+      ><a name="1388"
+      > </a
+      ><a name="1389" href="ConsHeadTail.html#1389" class="Bound"
+      >i</a
+      ><a name="1390"
+      > </a
+      ><a name="1391" class="Symbol"
+      >=</a
+      ><a name="1392"
+      > </a
+      ><a name="1393" href="ConsHeadTail.html#1248" class="Function"
+      >Lemma[cons-drop]</a
+      ><a name="1409"
+      > </a
+      ><a name="1410" href="ConsHeadTail.html#1384" class="Bound"
+      >n</a
+      ><a name="1411"
+      > </a
+      ><a name="1412" class="Symbol"
+      >(</a
+      ><a name="1413" href="ConsHeadTail.html#1387" class="Bound"
+      >&#945;</a
+      ><a name="1414"
+      > </a
+      ><a name="1415" href="Mini-library.html#161" class="Function Operator"
+      >&#8728;</a
+      ><a name="1416"
+      > </a
+      ><a name="1417" href="Mini-library.html#2963" class="InductiveConstructor"
+      >succ</a
+      ><a name="1421" class="Symbol"
+      >)</a
+      ><a name="1422"
+      > </a
+      ><a name="1423" href="ConsHeadTail.html#1389" class="Bound"
+      >i</a
+      ><a name="1424"
+      >
+
+
+</a
+      ><a name="1427" href="ConsHeadTail.html#1427" class="Function"
+      >Lemma[cons-take-drop]</a
+      ><a name="1448"
+      > </a
+      ><a name="1449" class="Symbol"
+      >:</a
+      ><a name="1450"
+      > </a
+      ><a name="1451" class="Symbol"
+      >&#8704;(</a
+      ><a name="1453" href="ConsHeadTail.html#1453" class="Bound"
+      >n</a
+      ><a name="1454"
+      > </a
+      ><a name="1455" class="Symbol"
+      >:</a
+      ><a name="1456"
+      > </a
+      ><a name="1457" href="Mini-library.html#2935" class="Datatype"
+      >&#8469;</a
+      ><a name="1458" class="Symbol"
+      >)</a
+      ><a name="1459"
+      > </a
+      ><a name="1460" class="Symbol"
+      >&#8594;</a
+      ><a name="1461"
+      > </a
+      ><a name="1462" class="Symbol"
+      >&#8704;(</a
+      ><a name="1464" href="ConsHeadTail.html#1464" class="Bound"
+      >&#945;</a
+      ><a name="1465"
+      > </a
+      ><a name="1466" class="Symbol"
+      >:</a
+      ><a name="1467"
+      > </a
+      ><a name="1468" href="Mini-library.html#6102" class="Function"
+      >&#8322;&#8469;</a
+      ><a name="1470" class="Symbol"
+      >)</a
+      ><a name="1471"
+      > </a
+      ><a name="1472" class="Symbol"
+      >&#8594;</a
+      ><a name="1473"
+      > </a
+      ><a name="1474" href="ConsHeadTail.html#175" class="Function"
+      >cons</a
+      ><a name="1478"
+      > </a
+      ><a name="1479" class="Symbol"
+      >(</a
+      ><a name="1480" href="Mini-library.html#6701" class="Function"
+      >take</a
+      ><a name="1484"
+      > </a
+      ><a name="1485" href="ConsHeadTail.html#1453" class="Bound"
+      >n</a
+      ><a name="1486"
+      > </a
+      ><a name="1487" href="ConsHeadTail.html#1464" class="Bound"
+      >&#945;</a
+      ><a name="1488" class="Symbol"
+      >)</a
+      ><a name="1489"
+      > </a
+      ><a name="1490" class="Symbol"
+      >(</a
+      ><a name="1491" href="Mini-library.html#6787" class="Function"
+      >drop</a
+      ><a name="1495"
+      > </a
+      ><a name="1496" href="ConsHeadTail.html#1453" class="Bound"
+      >n</a
+      ><a name="1497"
+      > </a
+      ><a name="1498" href="ConsHeadTail.html#1464" class="Bound"
+      >&#945;</a
+      ><a name="1499" class="Symbol"
+      >)</a
+      ><a name="1500"
+      > </a
+      ><a name="1501" href="Setoid.html#4042" class="Function Operator"
+      >&#8803;</a
+      ><a name="1502"
+      > </a
+      ><a name="1503" href="ConsHeadTail.html#1464" class="Bound"
+      >&#945;</a
+      ><a name="1504"
+      >
+</a
+      ><a name="1505" href="ConsHeadTail.html#1427" class="Function"
+      >Lemma[cons-take-drop]</a
+      ><a name="1526"
+      > </a
+      ><a name="1527" href="Mini-library.html#2952" class="InductiveConstructor"
+      >0</a
+      ><a name="1528"
+      >        </a
+      ><a name="1536" href="ConsHeadTail.html#1536" class="Bound"
+      >&#945;</a
+      ><a name="1537"
+      > </a
+      ><a name="1538" href="ConsHeadTail.html#1538" class="Bound"
+      >i</a
+      ><a name="1539"
+      >        </a
+      ><a name="1547" class="Symbol"
+      >=</a
+      ><a name="1548"
+      > </a
+      ><a name="1549" href="Mini-library.html#1624" class="InductiveConstructor"
+      >refl</a
+      ><a name="1553"
+      >
+</a
+      ><a name="1554" href="ConsHeadTail.html#1427" class="Function"
+      >Lemma[cons-take-drop]</a
+      ><a name="1575"
+      > </a
+      ><a name="1576" class="Symbol"
+      >(</a
+      ><a name="1577" href="Mini-library.html#2963" class="InductiveConstructor"
+      >succ</a
+      ><a name="1581"
+      > </a
+      ><a name="1582" href="ConsHeadTail.html#1582" class="Bound"
+      >n</a
+      ><a name="1583" class="Symbol"
+      >)</a
+      ><a name="1584"
+      > </a
+      ><a name="1585" href="ConsHeadTail.html#1585" class="Bound"
+      >&#945;</a
+      ><a name="1586"
+      > </a
+      ><a name="1587" href="Mini-library.html#2952" class="InductiveConstructor"
+      >0</a
+      ><a name="1588"
+      >        </a
+      ><a name="1596" class="Symbol"
+      >=</a
+      ><a name="1597"
+      > </a
+      ><a name="1598" href="Mini-library.html#1624" class="InductiveConstructor"
+      >refl</a
+      ><a name="1602"
+      >
+</a
+      ><a name="1603" href="ConsHeadTail.html#1427" class="Function"
+      >Lemma[cons-take-drop]</a
+      ><a name="1624"
+      > </a
+      ><a name="1625" class="Symbol"
+      >(</a
+      ><a name="1626" href="Mini-library.html#2963" class="InductiveConstructor"
+      >succ</a
+      ><a name="1630"
+      > </a
+      ><a name="1631" href="ConsHeadTail.html#1631" class="Bound"
+      >n</a
+      ><a name="1632" class="Symbol"
+      >)</a
+      ><a name="1633"
+      > </a
+      ><a name="1634" href="ConsHeadTail.html#1634" class="Bound"
+      >&#945;</a
+      ><a name="1635"
+      > </a
+      ><a name="1636" class="Symbol"
+      >(</a
+      ><a name="1637" href="Mini-library.html#2963" class="InductiveConstructor"
+      >succ</a
+      ><a name="1641"
+      > </a
+      ><a name="1642" href="ConsHeadTail.html#1642" class="Bound"
+      >i</a
+      ><a name="1643" class="Symbol"
+      >)</a
+      ><a name="1644"
+      > </a
+      ><a name="1645" class="Symbol"
+      >=</a
+      ><a name="1646"
+      > </a
+      ><a name="1647" href="ConsHeadTail.html#1427" class="Function"
+      >Lemma[cons-take-drop]</a
+      ><a name="1668"
+      > </a
+      ><a name="1669" href="ConsHeadTail.html#1631" class="Bound"
+      >n</a
+      ><a name="1670"
+      > </a
+      ><a name="1671" class="Symbol"
+      >(</a
+      ><a name="1672" href="ConsHeadTail.html#1634" class="Bound"
+      >&#945;</a
+      ><a name="1673"
+      > </a
+      ><a name="1674" href="Mini-library.html#161" class="Function Operator"
+      >&#8728;</a
+      ><a name="1675"
+      > </a
+      ><a name="1676" href="Mini-library.html#2963" class="InductiveConstructor"
+      >succ</a
+      ><a name="1680" class="Symbol"
+      >)</a
+      ><a name="1681"
+      > </a
+      ><a name="1682" href="ConsHeadTail.html#1642" class="Bound"
+      >i</a
+      ><a name="1683"
+      >
+
+
+</a
+      ><a name="1686" href="ConsHeadTail.html#1686" class="Function Operator"
+      >Lemma[cons-&#8803;_&#8803;]</a
+      ><a name="1701"
+      > </a
+      ><a name="1702" class="Symbol"
+      >:</a
+      ><a name="1703"
+      > </a
+      ><a name="1704" class="Symbol"
+      >{</a
+      ><a name="1705" href="ConsHeadTail.html#1705" class="Bound"
+      >n</a
+      ><a name="1706"
+      > </a
+      ><a name="1707" class="Symbol"
+      >:</a
+      ><a name="1708"
+      > </a
+      ><a name="1709" href="Mini-library.html#2935" class="Datatype"
+      >&#8469;</a
+      ><a name="1710" class="Symbol"
+      >}</a
+      ><a name="1711"
+      > </a
+      ><a name="1712" class="Symbol"
+      >&#8594;</a
+      ><a name="1713"
+      > </a
+      ><a name="1714" class="Symbol"
+      >&#8704;(</a
+      ><a name="1716" href="ConsHeadTail.html#1716" class="Bound"
+      >s</a
+      ><a name="1717"
+      > </a
+      ><a name="1718" class="Symbol"
+      >:</a
+      ><a name="1719"
+      > </a
+      ><a name="1720" href="Mini-library.html#6619" class="Function"
+      >&#8322;Fin</a
+      ><a name="1724"
+      > </a
+      ><a name="1725" href="ConsHeadTail.html#1705" class="Bound"
+      >n</a
+      ><a name="1726" class="Symbol"
+      >)</a
+      ><a name="1727"
+      > </a
+      ><a name="1728" class="Symbol"
+      >&#8594;</a
+      ><a name="1729"
+      > </a
+      ><a name="1730" class="Symbol"
+      >&#8704;(</a
+      ><a name="1732" href="ConsHeadTail.html#1732" class="Bound"
+      >&#945;</a
+      ><a name="1733"
+      > </a
+      ><a name="1734" href="ConsHeadTail.html#1734" class="Bound"
+      >&#946;</a
+      ><a name="1735"
+      > </a
+      ><a name="1736" class="Symbol"
+      >:</a
+      ><a name="1737"
+      > </a
+      ><a name="1738" href="Mini-library.html#6102" class="Function"
+      >&#8322;&#8469;</a
+      ><a name="1740" class="Symbol"
+      >)</a
+      ><a name="1741"
+      > </a
+      ><a name="1742" class="Symbol"
+      >&#8594;</a
+      ><a name="1743"
+      > </a
+      ><a name="1744" href="ConsHeadTail.html#175" class="Function"
+      >cons</a
+      ><a name="1748"
+      > </a
+      ><a name="1749" href="ConsHeadTail.html#1716" class="Bound"
+      >s</a
+      ><a name="1750"
+      > </a
+      ><a name="1751" href="ConsHeadTail.html#1732" class="Bound"
+      >&#945;</a
+      ><a name="1752"
+      > </a
+      ><a name="1753" href="Uniform-continuity.html#368" class="Function Operator"
+      >&#8803;</a
+      ><a name="1754"
+      > </a
+      ><a name="1755" href="ConsHeadTail.html#1705" class="Bound"
+      >n</a
+      ><a name="1756"
+      > </a
+      ><a name="1757" href="Uniform-continuity.html#368" class="Function Operator"
+      >&#8803;</a
+      ><a name="1758"
+      > </a
+      ><a name="1759" href="ConsHeadTail.html#175" class="Function"
+      >cons</a
+      ><a name="1763"
+      > </a
+      ><a name="1764" href="ConsHeadTail.html#1716" class="Bound"
+      >s</a
+      ><a name="1765"
+      > </a
+      ><a name="1766" href="ConsHeadTail.html#1734" class="Bound"
+      >&#946;</a
+      ><a name="1767"
+      >
+</a
+      ><a name="1768" href="ConsHeadTail.html#1686" class="Function Operator"
+      >Lemma[cons-&#8803;_&#8803;]</a
+      ><a name="1783"
+      > </a
+      ><a name="1784" href="Mini-library.html#6243" class="InductiveConstructor"
+      >&#10216;&#10217;</a
+      ><a name="1786"
+      >      </a
+      ><a name="1792" href="ConsHeadTail.html#1792" class="Bound"
+      >&#945;</a
+      ><a name="1793"
+      > </a
+      ><a name="1794" href="ConsHeadTail.html#1794" class="Bound"
+      >&#946;</a
+      ><a name="1795"
+      > </a
+      ><a name="1796" href="ConsHeadTail.html#1796" class="Bound"
+      >i</a
+      ><a name="1797"
+      >        </a
+      ><a name="1805" class="Symbol"
+      >()</a
+      ><a name="1807"
+      >
+</a
+      ><a name="1808" href="ConsHeadTail.html#1686" class="Function Operator"
+      >Lemma[cons-&#8803;_&#8803;]</a
+      ><a name="1823"
+      > </a
+      ><a name="1824" class="Symbol"
+      >(</a
+      ><a name="1825" href="ConsHeadTail.html#1825" class="Bound"
+      >b</a
+      ><a name="1826"
+      > </a
+      ><a name="1827" href="Mini-library.html#6257" class="InductiveConstructor Operator"
+      >&#8759;</a
+      ><a name="1828"
+      > </a
+      ><a name="1829" href="ConsHeadTail.html#1829" class="Bound"
+      >s</a
+      ><a name="1830" class="Symbol"
+      >)</a
+      ><a name="1831"
+      > </a
+      ><a name="1832" href="ConsHeadTail.html#1832" class="Bound"
+      >&#945;</a
+      ><a name="1833"
+      > </a
+      ><a name="1834" href="ConsHeadTail.html#1834" class="Bound"
+      >&#946;</a
+      ><a name="1835"
+      > </a
+      ><a name="1836" href="Mini-library.html#2952" class="InductiveConstructor"
+      >0</a
+      ><a name="1837"
+      >        </a
+      ><a name="1845" href="ConsHeadTail.html#1845" class="Bound"
+      >r</a
+      ><a name="1846"
+      >          </a
+      ><a name="1856" class="Symbol"
+      >=</a
+      ><a name="1857"
+      > </a
+      ><a name="1858" href="Mini-library.html#1624" class="InductiveConstructor"
+      >refl</a
+      ><a name="1862"
+      >
+</a
+      ><a name="1863" href="ConsHeadTail.html#1686" class="Function Operator"
+      >Lemma[cons-&#8803;_&#8803;]</a
+      ><a name="1878"
+      > </a
+      ><a name="1879" class="Symbol"
+      >(</a
+      ><a name="1880" href="ConsHeadTail.html#1880" class="Bound"
+      >b</a
+      ><a name="1881"
+      > </a
+      ><a name="1882" href="Mini-library.html#6257" class="InductiveConstructor Operator"
+      >&#8759;</a
+      ><a name="1883"
+      > </a
+      ><a name="1884" href="ConsHeadTail.html#1884" class="Bound"
+      >s</a
+      ><a name="1885" class="Symbol"
+      >)</a
+      ><a name="1886"
+      > </a
+      ><a name="1887" href="ConsHeadTail.html#1887" class="Bound"
+      >&#945;</a
+      ><a name="1888"
+      > </a
+      ><a name="1889" href="ConsHeadTail.html#1889" class="Bound"
+      >&#946;</a
+      ><a name="1890"
+      > </a
+      ><a name="1891" class="Symbol"
+      >(</a
+      ><a name="1892" href="Mini-library.html#2963" class="InductiveConstructor"
+      >succ</a
+      ><a name="1896"
+      > </a
+      ><a name="1897" href="ConsHeadTail.html#1897" class="Bound"
+      >i</a
+      ><a name="1898" class="Symbol"
+      >)</a
+      ><a name="1899"
+      > </a
+      ><a name="1900" class="Symbol"
+      >(</a
+      ><a name="1901" href="Mini-library.html#4036" class="InductiveConstructor"
+      >&#8804;-succ</a
+      ><a name="1907"
+      > </a
+      ><a name="1908" href="ConsHeadTail.html#1908" class="Bound"
+      >r</a
+      ><a name="1909" class="Symbol"
+      >)</a
+      ><a name="1910"
+      > </a
+      ><a name="1911" class="Symbol"
+      >=</a
+      ><a name="1912"
+      > </a
+      ><a name="1913" href="ConsHeadTail.html#1686" class="Function Operator"
+      >Lemma[cons-&#8803;_&#8803;]</a
+      ><a name="1928"
+      > </a
+      ><a name="1929" href="ConsHeadTail.html#1884" class="Bound"
+      >s</a
+      ><a name="1930"
+      > </a
+      ><a name="1931" href="ConsHeadTail.html#1887" class="Bound"
+      >&#945;</a
+      ><a name="1932"
+      > </a
+      ><a name="1933" href="ConsHeadTail.html#1889" class="Bound"
+      >&#946;</a
+      ><a name="1934"
+      > </a
+      ><a name="1935" href="ConsHeadTail.html#1897" class="Bound"
+      >i</a
+      ><a name="1936"
+      > </a
+      ><a name="1937" href="ConsHeadTail.html#1908" class="Bound"
+      >r</a
+      ><a name="1938"
+      >
+
+
+</a
+      ><a name="1941" href="ConsHeadTail.html#1941" class="Function"
+      >Ftake</a
+      ><a name="1946"
+      > </a
+      ><a name="1947" class="Symbol"
+      >:</a
+      ><a name="1948"
+      > </a
+      ><a name="1949" class="Symbol"
+      >{</a
+      ><a name="1950" href="ConsHeadTail.html#1950" class="Bound"
+      >X</a
+      ><a name="1951"
+      > </a
+      ><a name="1952" class="Symbol"
+      >:</a
+      ><a name="1953"
+      > </a
+      ><a name="1954" class="PrimitiveType"
+      >Set</a
+      ><a name="1957" class="Symbol"
+      >}</a
+      ><a name="1958"
+      > </a
+      ><a name="1959" class="Symbol"
+      >&#8594;</a
+      ><a name="1960"
+      > </a
+      ><a name="1961" class="Symbol"
+      >(</a
+      ><a name="1962" href="ConsHeadTail.html#1962" class="Bound"
+      >n</a
+      ><a name="1963"
+      > </a
+      ><a name="1964" href="ConsHeadTail.html#1964" class="Bound"
+      >k</a
+      ><a name="1965"
+      > </a
+      ><a name="1966" class="Symbol"
+      >:</a
+      ><a name="1967"
+      > </a
+      ><a name="1968" href="Mini-library.html#2935" class="Datatype"
+      >&#8469;</a
+      ><a name="1969" class="Symbol"
+      >)</a
+      ><a name="1970"
+      > </a
+      ><a name="1971" class="Symbol"
+      >&#8594;</a
+      ><a name="1972"
+      > </a
+      ><a name="1973" href="Mini-library.html#6212" class="Datatype"
+      >Vec</a
+      ><a name="1976"
+      > </a
+      ><a name="1977" href="ConsHeadTail.html#1950" class="Bound"
+      >X</a
+      ><a name="1978"
+      > </a
+      ><a name="1979" class="Symbol"
+      >(</a
+      ><a name="1980" href="ConsHeadTail.html#1962" class="Bound"
+      >n</a
+      ><a name="1981"
+      > </a
+      ><a name="1982" href="Mini-library.html#3287" class="Function Operator"
+      >+</a
+      ><a name="1983"
+      > </a
+      ><a name="1984" href="ConsHeadTail.html#1964" class="Bound"
+      >k</a
+      ><a name="1985" class="Symbol"
+      >)</a
+      ><a name="1986"
+      > </a
+      ><a name="1987" class="Symbol"
+      >&#8594;</a
+      ><a name="1988"
+      > </a
+      ><a name="1989" href="Mini-library.html#6212" class="Datatype"
+      >Vec</a
+      ><a name="1992"
+      > </a
+      ><a name="1993" href="ConsHeadTail.html#1950" class="Bound"
+      >X</a
+      ><a name="1994"
+      > </a
+      ><a name="1995" href="ConsHeadTail.html#1964" class="Bound"
+      >k</a
+      ><a name="1996"
+      >
+</a
+      ><a name="1997" href="ConsHeadTail.html#1941" class="Function"
+      >Ftake</a
+      ><a name="2002"
+      > </a
+      ><a name="2003" href="ConsHeadTail.html#2003" class="Bound"
+      >n</a
+      ><a name="2004"
+      > </a
+      ><a name="2005" href="Mini-library.html#2952" class="InductiveConstructor"
+      >0</a
+      ><a name="2006"
+      >        </a
+      ><a name="2014" href="ConsHeadTail.html#2014" class="Bound"
+      >v</a
+      ><a name="2015"
+      >       </a
+      ><a name="2022" class="Symbol"
+      >=</a
+      ><a name="2023"
+      > </a
+      ><a name="2024" href="Mini-library.html#6243" class="InductiveConstructor"
+      >&#10216;&#10217;</a
+      ><a name="2026"
+      >
+</a
+      ><a name="2027" href="ConsHeadTail.html#1941" class="Function"
+      >Ftake</a
+      ><a name="2032"
+      > </a
+      ><a name="2033" href="ConsHeadTail.html#2033" class="Bound"
+      >n</a
+      ><a name="2034"
+      > </a
+      ><a name="2035" class="Symbol"
+      >(</a
+      ><a name="2036" href="Mini-library.html#2963" class="InductiveConstructor"
+      >succ</a
+      ><a name="2040"
+      > </a
+      ><a name="2041" href="ConsHeadTail.html#2041" class="Bound"
+      >k</a
+      ><a name="2042" class="Symbol"
+      >)</a
+      ><a name="2043"
+      > </a
+      ><a name="2044" class="Symbol"
+      >(</a
+      ><a name="2045" href="ConsHeadTail.html#2045" class="Bound"
+      >h</a
+      ><a name="2046"
+      > </a
+      ><a name="2047" href="Mini-library.html#6257" class="InductiveConstructor Operator"
+      >&#8759;</a
+      ><a name="2048"
+      > </a
+      ><a name="2049" href="ConsHeadTail.html#2049" class="Bound"
+      >t</a
+      ><a name="2050" class="Symbol"
+      >)</a
+      ><a name="2051"
+      > </a
+      ><a name="2052" class="Symbol"
+      >=</a
+      ><a name="2053"
+      > </a
+      ><a name="2054" href="ConsHeadTail.html#2045" class="Bound"
+      >h</a
+      ><a name="2055"
+      > </a
+      ><a name="2056" href="Mini-library.html#6257" class="InductiveConstructor Operator"
+      >&#8759;</a
+      ><a name="2057"
+      > </a
+      ><a name="2058" href="ConsHeadTail.html#1941" class="Function"
+      >Ftake</a
+      ><a name="2063"
+      > </a
+      ><a name="2064" href="ConsHeadTail.html#2033" class="Bound"
+      >n</a
+      ><a name="2065"
+      > </a
+      ><a name="2066" href="ConsHeadTail.html#2041" class="Bound"
+      >k</a
+      ><a name="2067"
+      > </a
+      ><a name="2068" href="ConsHeadTail.html#2049" class="Bound"
+      >t</a
+      ><a name="2069"
+      >
+
+</a
+      ><a name="2071" href="ConsHeadTail.html#2071" class="Function"
+      >Fdrop</a
+      ><a name="2076"
+      > </a
+      ><a name="2077" class="Symbol"
+      >:</a
+      ><a name="2078"
+      > </a
+      ><a name="2079" class="Symbol"
+      >{</a
+      ><a name="2080" href="ConsHeadTail.html#2080" class="Bound"
+      >X</a
+      ><a name="2081"
+      > </a
+      ><a name="2082" class="Symbol"
+      >:</a
+      ><a name="2083"
+      > </a
+      ><a name="2084" class="PrimitiveType"
+      >Set</a
+      ><a name="2087" class="Symbol"
+      >}</a
+      ><a name="2088"
+      > </a
+      ><a name="2089" class="Symbol"
+      >&#8594;</a
+      ><a name="2090"
+      > </a
+      ><a name="2091" class="Symbol"
+      >(</a
+      ><a name="2092" href="ConsHeadTail.html#2092" class="Bound"
+      >n</a
+      ><a name="2093"
+      > </a
+      ><a name="2094" href="ConsHeadTail.html#2094" class="Bound"
+      >k</a
+      ><a name="2095"
+      > </a
+      ><a name="2096" class="Symbol"
+      >:</a
+      ><a name="2097"
+      > </a
+      ><a name="2098" href="Mini-library.html#2935" class="Datatype"
+      >&#8469;</a
+      ><a name="2099" class="Symbol"
+      >)</a
+      ><a name="2100"
+      > </a
+      ><a name="2101" class="Symbol"
+      >&#8594;</a
+      ><a name="2102"
+      > </a
+      ><a name="2103" href="Mini-library.html#6212" class="Datatype"
+      >Vec</a
+      ><a name="2106"
+      > </a
+      ><a name="2107" href="ConsHeadTail.html#2080" class="Bound"
+      >X</a
+      ><a name="2108"
+      > </a
+      ><a name="2109" class="Symbol"
+      >(</a
+      ><a name="2110" href="ConsHeadTail.html#2092" class="Bound"
+      >n</a
+      ><a name="2111"
+      > </a
+      ><a name="2112" href="Mini-library.html#3287" class="Function Operator"
+      >+</a
+      ><a name="2113"
+      > </a
+      ><a name="2114" href="ConsHeadTail.html#2094" class="Bound"
+      >k</a
+      ><a name="2115" class="Symbol"
+      >)</a
+      ><a name="2116"
+      > </a
+      ><a name="2117" class="Symbol"
+      >&#8594;</a
+      ><a name="2118"
+      > </a
+      ><a name="2119" href="Mini-library.html#6212" class="Datatype"
+      >Vec</a
+      ><a name="2122"
+      > </a
+      ><a name="2123" href="ConsHeadTail.html#2080" class="Bound"
+      >X</a
+      ><a name="2124"
+      > </a
+      ><a name="2125" href="ConsHeadTail.html#2092" class="Bound"
+      >n</a
+      ><a name="2126"
+      >
+</a
+      ><a name="2127" href="ConsHeadTail.html#2071" class="Function"
+      >Fdrop</a
+      ><a name="2132"
+      > </a
+      ><a name="2133" href="ConsHeadTail.html#2133" class="Bound"
+      >n</a
+      ><a name="2134"
+      > </a
+      ><a name="2135" href="Mini-library.html#2952" class="InductiveConstructor"
+      >0</a
+      ><a name="2136"
+      >        </a
+      ><a name="2144" href="ConsHeadTail.html#2144" class="Bound"
+      >v</a
+      ><a name="2145"
+      >       </a
+      ><a name="2152" class="Symbol"
+      >=</a
+      ><a name="2153"
+      > </a
+      ><a name="2154" href="ConsHeadTail.html#2144" class="Bound"
+      >v</a
+      ><a name="2155"
+      >
+</a
+      ><a name="2156" href="ConsHeadTail.html#2071" class="Function"
+      >Fdrop</a
+      ><a name="2161"
+      > </a
+      ><a name="2162" href="ConsHeadTail.html#2162" class="Bound"
+      >n</a
+      ><a name="2163"
+      > </a
+      ><a name="2164" class="Symbol"
+      >(</a
+      ><a name="2165" href="Mini-library.html#2963" class="InductiveConstructor"
+      >succ</a
+      ><a name="2169"
+      > </a
+      ><a name="2170" href="ConsHeadTail.html#2170" class="Bound"
+      >k</a
+      ><a name="2171" class="Symbol"
+      >)</a
+      ><a name="2172"
+      > </a
+      ><a name="2173" class="Symbol"
+      >(</a
+      ><a name="2174" href="ConsHeadTail.html#2174" class="Bound"
+      >h</a
+      ><a name="2175"
+      > </a
+      ><a name="2176" href="Mini-library.html#6257" class="InductiveConstructor Operator"
+      >&#8759;</a
+      ><a name="2177"
+      > </a
+      ><a name="2178" href="ConsHeadTail.html#2178" class="Bound"
+      >t</a
+      ><a name="2179" class="Symbol"
+      >)</a
+      ><a name="2180"
+      > </a
+      ><a name="2181" class="Symbol"
+      >=</a
+      ><a name="2182"
+      > </a
+      ><a name="2183" href="ConsHeadTail.html#2071" class="Function"
+      >Fdrop</a
+      ><a name="2188"
+      > </a
+      ><a name="2189" href="ConsHeadTail.html#2162" class="Bound"
+      >n</a
+      ><a name="2190"
+      > </a
+      ><a name="2191" href="ConsHeadTail.html#2170" class="Bound"
+      >k</a
+      ><a name="2192"
+      > </a
+      ><a name="2193" href="ConsHeadTail.html#2178" class="Bound"
+      >t</a
+      ><a name="2194"
+      >
+
+</a
+      ><a name="2196" href="ConsHeadTail.html#2196" class="Function"
+      >Lemma[cons-Ftake-Fdrop]</a
+      ><a name="2219"
+      > </a
+      ><a name="2220" class="Symbol"
+      >:</a
+      ><a name="2221"
+      > </a
+      ><a name="2222" class="Symbol"
+      >&#8704;(</a
+      ><a name="2224" href="ConsHeadTail.html#2224" class="Bound"
+      >n</a
+      ><a name="2225"
+      > </a
+      ><a name="2226" href="ConsHeadTail.html#2226" class="Bound"
+      >k</a
+      ><a name="2227"
+      > </a
+      ><a name="2228" class="Symbol"
+      >:</a
+      ><a name="2229"
+      > </a
+      ><a name="2230" href="Mini-library.html#2935" class="Datatype"
+      >&#8469;</a
+      ><a name="2231" class="Symbol"
+      >)</a
+      ><a name="2232"
+      > </a
+      ><a name="2233" class="Symbol"
+      >&#8594;</a
+      ><a name="2234"
+      > </a
+      ><a name="2235" class="Symbol"
+      >&#8704;(</a
+      ><a name="2237" href="ConsHeadTail.html#2237" class="Bound"
+      >s</a
+      ><a name="2238"
+      > </a
+      ><a name="2239" class="Symbol"
+      >:</a
+      ><a name="2240"
+      > </a
+      ><a name="2241" href="Mini-library.html#6619" class="Function"
+      >&#8322;Fin</a
+      ><a name="2245"
+      > </a
+      ><a name="2246" class="Symbol"
+      >(</a
+      ><a name="2247" href="ConsHeadTail.html#2224" class="Bound"
+      >n</a
+      ><a name="2248"
+      > </a
+      ><a name="2249" href="Mini-library.html#3287" class="Function Operator"
+      >+</a
+      ><a name="2250"
+      > </a
+      ><a name="2251" href="ConsHeadTail.html#2226" class="Bound"
+      >k</a
+      ><a name="2252" class="Symbol"
+      >))</a
+      ><a name="2254"
+      > </a
+      ><a name="2255" class="Symbol"
+      >&#8594;</a
+      ><a name="2256"
+      > </a
+      ><a name="2257" class="Symbol"
+      >&#8704;(</a
+      ><a name="2259" href="ConsHeadTail.html#2259" class="Bound"
+      >&#945;</a
+      ><a name="2260"
+      > </a
+      ><a name="2261" class="Symbol"
+      >:</a
+      ><a name="2262"
+      > </a
+      ><a name="2263" href="Mini-library.html#6102" class="Function"
+      >&#8322;&#8469;</a
+      ><a name="2265" class="Symbol"
+      >)</a
+      ><a name="2266"
+      > </a
+      ><a name="2267" class="Symbol"
+      >&#8594;</a
+      ><a name="2268"
+      >
+                          </a
+      ><a name="2295" href="ConsHeadTail.html#175" class="Function"
+      >cons</a
+      ><a name="2299"
+      > </a
+      ><a name="2300" class="Symbol"
+      >(</a
+      ><a name="2301" href="ConsHeadTail.html#1941" class="Function"
+      >Ftake</a
+      ><a name="2306"
+      > </a
+      ><a name="2307" href="ConsHeadTail.html#2224" class="Bound"
+      >n</a
+      ><a name="2308"
+      > </a
+      ><a name="2309" href="ConsHeadTail.html#2226" class="Bound"
+      >k</a
+      ><a name="2310"
+      > </a
+      ><a name="2311" href="ConsHeadTail.html#2237" class="Bound"
+      >s</a
+      ><a name="2312" class="Symbol"
+      >)</a
+      ><a name="2313"
+      > </a
+      ><a name="2314" class="Symbol"
+      >(</a
+      ><a name="2315" href="ConsHeadTail.html#175" class="Function"
+      >cons</a
+      ><a name="2319"
+      > </a
+      ><a name="2320" class="Symbol"
+      >(</a
+      ><a name="2321" href="ConsHeadTail.html#2071" class="Function"
+      >Fdrop</a
+      ><a name="2326"
+      > </a
+      ><a name="2327" href="ConsHeadTail.html#2224" class="Bound"
+      >n</a
+      ><a name="2328"
+      > </a
+      ><a name="2329" href="ConsHeadTail.html#2226" class="Bound"
+      >k</a
+      ><a name="2330"
+      > </a
+      ><a name="2331" href="ConsHeadTail.html#2237" class="Bound"
+      >s</a
+      ><a name="2332" class="Symbol"
+      >)</a
+      ><a name="2333"
+      > </a
+      ><a name="2334" href="ConsHeadTail.html#2259" class="Bound"
+      >&#945;</a
+      ><a name="2335" class="Symbol"
+      >)</a
+      ><a name="2336"
+      > </a
+      ><a name="2337" href="Setoid.html#4042" class="Function Operator"
+      >&#8803;</a
+      ><a name="2338"
+      > </a
+      ><a name="2339" href="ConsHeadTail.html#175" class="Function"
+      >cons</a
+      ><a name="2343"
+      > </a
+      ><a name="2344" href="ConsHeadTail.html#2237" class="Bound"
+      >s</a
+      ><a name="2345"
+      > </a
+      ><a name="2346" href="ConsHeadTail.html#2259" class="Bound"
+      >&#945;</a
+      ><a name="2347"
+      >
+</a
+      ><a name="2348" href="ConsHeadTail.html#2196" class="Function"
+      >Lemma[cons-Ftake-Fdrop]</a
+      ><a name="2371"
+      > </a
+      ><a name="2372" href="ConsHeadTail.html#2372" class="Bound"
+      >n</a
+      ><a name="2373"
+      > </a
+      ><a name="2374" href="Mini-library.html#2952" class="InductiveConstructor"
+      >0</a
+      ><a name="2375"
+      >        </a
+      ><a name="2383" href="ConsHeadTail.html#2383" class="Bound"
+      >s</a
+      ><a name="2384"
+      >       </a
+      ><a name="2391" href="ConsHeadTail.html#2391" class="Bound"
+      >&#945;</a
+      ><a name="2392"
+      > </a
+      ><a name="2393" href="ConsHeadTail.html#2393" class="Bound"
+      >i</a
+      ><a name="2394"
+      >        </a
+      ><a name="2402" class="Symbol"
+      >=</a
+      ><a name="2403"
+      > </a
+      ><a name="2404" href="Mini-library.html#1624" class="InductiveConstructor"
+      >refl</a
+      ><a name="2408"
+      >
+</a
+      ><a name="2409" href="ConsHeadTail.html#2196" class="Function"
+      >Lemma[cons-Ftake-Fdrop]</a
+      ><a name="2432"
+      > </a
+      ><a name="2433" href="ConsHeadTail.html#2433" class="Bound"
+      >n</a
+      ><a name="2434"
+      > </a
+      ><a name="2435" class="Symbol"
+      >(</a
+      ><a name="2436" href="Mini-library.html#2963" class="InductiveConstructor"
+      >succ</a
+      ><a name="2440"
+      > </a
+      ><a name="2441" href="ConsHeadTail.html#2441" class="Bound"
+      >k</a
+      ><a name="2442" class="Symbol"
+      >)</a
+      ><a name="2443"
+      > </a
+      ><a name="2444" class="Symbol"
+      >(</a
+      ><a name="2445" href="ConsHeadTail.html#2445" class="Bound"
+      >b</a
+      ><a name="2446"
+      > </a
+      ><a name="2447" href="Mini-library.html#6257" class="InductiveConstructor Operator"
+      >&#8759;</a
+      ><a name="2448"
+      > </a
+      ><a name="2449" class="Symbol"
+      >_)</a
+      ><a name="2451"
+      > </a
+      ><a name="2452" href="ConsHeadTail.html#2452" class="Bound"
+      >&#945;</a
+      ><a name="2453"
+      > </a
+      ><a name="2454" href="Mini-library.html#2952" class="InductiveConstructor"
+      >0</a
+      ><a name="2455"
+      >        </a
+      ><a name="2463" class="Symbol"
+      >=</a
+      ><a name="2464"
+      > </a
+      ><a name="2465" href="Mini-library.html#1624" class="InductiveConstructor"
+      >refl</a
+      ><a name="2469"
+      >
+</a
+      ><a name="2470" href="ConsHeadTail.html#2196" class="Function"
+      >Lemma[cons-Ftake-Fdrop]</a
+      ><a name="2493"
+      > </a
+      ><a name="2494" href="ConsHeadTail.html#2494" class="Bound"
+      >n</a
+      ><a name="2495"
+      > </a
+      ><a name="2496" class="Symbol"
+      >(</a
+      ><a name="2497" href="Mini-library.html#2963" class="InductiveConstructor"
+      >succ</a
+      ><a name="2501"
+      > </a
+      ><a name="2502" href="ConsHeadTail.html#2502" class="Bound"
+      >k</a
+      ><a name="2503" class="Symbol"
+      >)</a
+      ><a name="2504"
+      > </a
+      ><a name="2505" class="Symbol"
+      >(_</a
+      ><a name="2507"
+      > </a
+      ><a name="2508" href="Mini-library.html#6257" class="InductiveConstructor Operator"
+      >&#8759;</a
+      ><a name="2509"
+      > </a
+      ><a name="2510" href="ConsHeadTail.html#2510" class="Bound"
+      >s</a
+      ><a name="2511" class="Symbol"
+      >)</a
+      ><a name="2512"
+      > </a
+      ><a name="2513" href="ConsHeadTail.html#2513" class="Bound"
+      >&#945;</a
+      ><a name="2514"
+      > </a
+      ><a name="2515" class="Symbol"
+      >(</a
+      ><a name="2516" href="Mini-library.html#2963" class="InductiveConstructor"
+      >succ</a
+      ><a name="2520"
+      > </a
+      ><a name="2521" href="ConsHeadTail.html#2521" class="Bound"
+      >i</a
+      ><a name="2522" class="Symbol"
+      >)</a
+      ><a name="2523"
+      > </a
+      ><a name="2524" class="Symbol"
+      >=</a
+      ><a name="2525"
+      > </a
+      ><a name="2526" href="ConsHeadTail.html#2196" class="Function"
+      >Lemma[cons-Ftake-Fdrop]</a
+      ><a name="2549"
+      > </a
+      ><a name="2550" href="ConsHeadTail.html#2494" class="Bound"
+      >n</a
+      ><a name="2551"
+      > </a
+      ><a name="2552" href="ConsHeadTail.html#2502" class="Bound"
+      >k</a
+      ><a name="2553"
+      > </a
+      ><a name="2554" href="ConsHeadTail.html#2510" class="Bound"
+      >s</a
+      ><a name="2555"
+      > </a
+      ><a name="2556" href="ConsHeadTail.html#2513" class="Bound"
+      >&#945;</a
+      ><a name="2557"
+      > </a
+      ><a name="2558" href="ConsHeadTail.html#2521" class="Bound"
+      >i</a
+      ><a name="2559"
+      >
+
+</a
+      ><a name="2561" href="ConsHeadTail.html#2561" class="Function"
+      >Lemma[cons-Ftake-Fdrop]&#178;</a
+      ><a name="2585"
+      > </a
+      ><a name="2586" class="Symbol"
+      >:</a
+      ><a name="2587"
+      > </a
+      ><a name="2588" class="Symbol"
+      >&#8704;(</a
+      ><a name="2590" href="ConsHeadTail.html#2590" class="Bound"
+      >n</a
+      ><a name="2591"
+      > </a
+      ><a name="2592" href="ConsHeadTail.html#2592" class="Bound"
+      >m</a
+      ><a name="2593"
+      > </a
+      ><a name="2594" href="ConsHeadTail.html#2594" class="Bound"
+      >l</a
+      ><a name="2595"
+      > </a
+      ><a name="2596" href="ConsHeadTail.html#2596" class="Bound"
+      >k</a
+      ><a name="2597"
+      > </a
+      ><a name="2598" class="Symbol"
+      >:</a
+      ><a name="2599"
+      > </a
+      ><a name="2600" href="Mini-library.html#2935" class="Datatype"
+      >&#8469;</a
+      ><a name="2601" class="Symbol"
+      >)</a
+      ><a name="2602"
+      > </a
+      ><a name="2603" class="Symbol"
+      >&#8594;</a
+      ><a name="2604"
+      > </a
+      ><a name="2605" class="Symbol"
+      >(</a
+      ><a name="2606" href="ConsHeadTail.html#2606" class="Bound"
+      >eq</a
+      ><a name="2608"
+      > </a
+      ><a name="2609" class="Symbol"
+      >:</a
+      ><a name="2610"
+      > </a
+      ><a name="2611" href="ConsHeadTail.html#2596" class="Bound"
+      >k</a
+      ><a name="2612"
+      > </a
+      ><a name="2613" href="Mini-library.html#1588" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="2614"
+      > </a
+      ><a name="2615" href="ConsHeadTail.html#2592" class="Bound"
+      >m</a
+      ><a name="2616"
+      > </a
+      ><a name="2617" href="Mini-library.html#3287" class="Function Operator"
+      >+</a
+      ><a name="2618"
+      > </a
+      ><a name="2619" href="ConsHeadTail.html#2594" class="Bound"
+      >l</a
+      ><a name="2620" class="Symbol"
+      >)</a
+      ><a name="2621"
+      > </a
+      ><a name="2622" class="Symbol"
+      >&#8594;</a
+      ><a name="2623"
+      >
+                            </a
+      ><a name="2652" class="Symbol"
+      >&#8704;(</a
+      ><a name="2654" href="ConsHeadTail.html#2654" class="Bound"
+      >s</a
+      ><a name="2655"
+      > </a
+      ><a name="2656" class="Symbol"
+      >:</a
+      ><a name="2657"
+      > </a
+      ><a name="2658" href="Mini-library.html#6619" class="Function"
+      >&#8322;Fin</a
+      ><a name="2662"
+      > </a
+      ><a name="2663" class="Symbol"
+      >(</a
+      ><a name="2664" href="ConsHeadTail.html#2596" class="Bound"
+      >k</a
+      ><a name="2665"
+      > </a
+      ><a name="2666" href="Mini-library.html#3287" class="Function Operator"
+      >+</a
+      ><a name="2667"
+      > </a
+      ><a name="2668" href="ConsHeadTail.html#2590" class="Bound"
+      >n</a
+      ><a name="2669" class="Symbol"
+      >))</a
+      ><a name="2671"
+      > </a
+      ><a name="2672" class="Symbol"
+      >&#8594;</a
+      ><a name="2673"
+      > </a
+      ><a name="2674" class="Symbol"
+      >&#8704;(</a
+      ><a name="2676" href="ConsHeadTail.html#2676" class="Bound"
+      >&#945;</a
+      ><a name="2677"
+      > </a
+      ><a name="2678" class="Symbol"
+      >:</a
+      ><a name="2679"
+      > </a
+      ><a name="2680" href="Mini-library.html#6102" class="Function"
+      >&#8322;&#8469;</a
+      ><a name="2682" class="Symbol"
+      >)</a
+      ><a name="2683"
+      > </a
+      ><a name="2684" class="Symbol"
+      >&#8594;</a
+      ><a name="2685"
+      >
+    </a
+      ><a name="2690" href="ConsHeadTail.html#175" class="Function"
+      >cons</a
+      ><a name="2694"
+      > </a
+      ><a name="2695" class="Symbol"
+      >(</a
+      ><a name="2696" href="ConsHeadTail.html#1941" class="Function"
+      >Ftake</a
+      ><a name="2701"
+      > </a
+      ><a name="2702" href="ConsHeadTail.html#2596" class="Bound"
+      >k</a
+      ><a name="2703"
+      > </a
+      ><a name="2704" href="ConsHeadTail.html#2590" class="Bound"
+      >n</a
+      ><a name="2705"
+      > </a
+      ><a name="2706" href="ConsHeadTail.html#2654" class="Bound"
+      >s</a
+      ><a name="2707" class="Symbol"
+      >)</a
+      ><a name="2708"
+      > 
+         </a
+      ><a name="2719" class="Symbol"
+      >(</a
+      ><a name="2720" href="ConsHeadTail.html#175" class="Function"
+      >cons</a
+      ><a name="2724"
+      > </a
+      ><a name="2725" class="Symbol"
+      >(</a
+      ><a name="2726" href="ConsHeadTail.html#1941" class="Function"
+      >Ftake</a
+      ><a name="2731"
+      > </a
+      ><a name="2732" href="ConsHeadTail.html#2592" class="Bound"
+      >m</a
+      ><a name="2733"
+      > </a
+      ><a name="2734" href="ConsHeadTail.html#2594" class="Bound"
+      >l</a
+      ><a name="2735"
+      > </a
+      ><a name="2736" class="Symbol"
+      >(</a
+      ><a name="2737" href="Mini-library.html#1648" class="Function"
+      >subst</a
+      ><a name="2742"
+      > </a
+      ><a name="2743" class="Symbol"
+      >{</a
+      ><a name="2744" href="Mini-library.html#2935" class="Datatype"
+      >&#8469;</a
+      ><a name="2745" class="Symbol"
+      >}</a
+      ><a name="2746"
+      > </a
+      ><a name="2747" class="Symbol"
+      >{&#955;</a
+      ><a name="2749"
+      > </a
+      ><a name="2750" href="ConsHeadTail.html#2750" class="Bound"
+      >x</a
+      ><a name="2751"
+      > </a
+      ><a name="2752" class="Symbol"
+      >&#8594;</a
+      ><a name="2753"
+      > </a
+      ><a name="2754" href="Mini-library.html#6619" class="Function"
+      >&#8322;Fin</a
+      ><a name="2758"
+      > </a
+      ><a name="2759" href="ConsHeadTail.html#2750" class="Bound"
+      >x</a
+      ><a name="2760" class="Symbol"
+      >}</a
+      ><a name="2761"
+      > </a
+      ><a name="2762" href="ConsHeadTail.html#2606" class="Bound"
+      >eq</a
+      ><a name="2764"
+      > </a
+      ><a name="2765" class="Symbol"
+      >(</a
+      ><a name="2766" href="ConsHeadTail.html#2071" class="Function"
+      >Fdrop</a
+      ><a name="2771"
+      > </a
+      ><a name="2772" href="ConsHeadTail.html#2596" class="Bound"
+      >k</a
+      ><a name="2773"
+      > </a
+      ><a name="2774" href="ConsHeadTail.html#2590" class="Bound"
+      >n</a
+      ><a name="2775"
+      > </a
+      ><a name="2776" href="ConsHeadTail.html#2654" class="Bound"
+      >s</a
+      ><a name="2777" class="Symbol"
+      >)))</a
+      ><a name="2780"
+      >
+               </a
+      ><a name="2796" class="Symbol"
+      >(</a
+      ><a name="2797" href="ConsHeadTail.html#175" class="Function"
+      >cons</a
+      ><a name="2801"
+      > </a
+      ><a name="2802" class="Symbol"
+      >(</a
+      ><a name="2803" href="ConsHeadTail.html#2071" class="Function"
+      >Fdrop</a
+      ><a name="2808"
+      > </a
+      ><a name="2809" href="ConsHeadTail.html#2592" class="Bound"
+      >m</a
+      ><a name="2810"
+      > </a
+      ><a name="2811" href="ConsHeadTail.html#2594" class="Bound"
+      >l</a
+      ><a name="2812"
+      > </a
+      ><a name="2813" class="Symbol"
+      >((</a
+      ><a name="2815" href="Mini-library.html#1648" class="Function"
+      >subst</a
+      ><a name="2820"
+      > </a
+      ><a name="2821" class="Symbol"
+      >{</a
+      ><a name="2822" href="Mini-library.html#2935" class="Datatype"
+      >&#8469;</a
+      ><a name="2823" class="Symbol"
+      >}</a
+      ><a name="2824"
+      > </a
+      ><a name="2825" class="Symbol"
+      >{&#955;</a
+      ><a name="2827"
+      > </a
+      ><a name="2828" href="ConsHeadTail.html#2828" class="Bound"
+      >x</a
+      ><a name="2829"
+      > </a
+      ><a name="2830" class="Symbol"
+      >&#8594;</a
+      ><a name="2831"
+      > </a
+      ><a name="2832" href="Mini-library.html#6619" class="Function"
+      >&#8322;Fin</a
+      ><a name="2836"
+      > </a
+      ><a name="2837" href="ConsHeadTail.html#2828" class="Bound"
+      >x</a
+      ><a name="2838" class="Symbol"
+      >}</a
+      ><a name="2839"
+      > </a
+      ><a name="2840" href="ConsHeadTail.html#2606" class="Bound"
+      >eq</a
+      ><a name="2842"
+      > </a
+      ><a name="2843" class="Symbol"
+      >(</a
+      ><a name="2844" href="ConsHeadTail.html#2071" class="Function"
+      >Fdrop</a
+      ><a name="2849"
+      > </a
+      ><a name="2850" href="ConsHeadTail.html#2596" class="Bound"
+      >k</a
+      ><a name="2851"
+      > </a
+      ><a name="2852" href="ConsHeadTail.html#2590" class="Bound"
+      >n</a
+      ><a name="2853"
+      > </a
+      ><a name="2854" href="ConsHeadTail.html#2654" class="Bound"
+      >s</a
+      ><a name="2855" class="Symbol"
+      >))))</a
+      ><a name="2859"
+      > </a
+      ><a name="2860" href="ConsHeadTail.html#2676" class="Bound"
+      >&#945;</a
+      ><a name="2861" class="Symbol"
+      >))</a
+      ><a name="2863"
+      >
+  </a
+      ><a name="2866" href="Setoid.html#4042" class="Function Operator"
+      >&#8803;</a
+      ><a name="2867"
+      > </a
+      ><a name="2868" href="ConsHeadTail.html#175" class="Function"
+      >cons</a
+      ><a name="2872"
+      > </a
+      ><a name="2873" href="ConsHeadTail.html#2654" class="Bound"
+      >s</a
+      ><a name="2874"
+      > </a
+      ><a name="2875" href="ConsHeadTail.html#2676" class="Bound"
+      >&#945;</a
+      ><a name="2876"
+      >
+</a
+      ><a name="2877" href="ConsHeadTail.html#2561" class="Function"
+      >Lemma[cons-Ftake-Fdrop]&#178;</a
+      ><a name="2901"
+      > </a
+      ><a name="2902" href="ConsHeadTail.html#2902" class="Bound"
+      >n</a
+      ><a name="2903"
+      > </a
+      ><a name="2904" href="ConsHeadTail.html#2904" class="Bound"
+      >m</a
+      ><a name="2905"
+      > </a
+      ><a name="2906" href="ConsHeadTail.html#2906" class="Bound"
+      >l</a
+      ><a name="2907"
+      > </a
+      ><a name="2908" href="ConsHeadTail.html#2908" class="Bound"
+      >k</a
+      ><a name="2909"
+      > </a
+      ><a name="2910" href="ConsHeadTail.html#2910" class="Bound"
+      >eq</a
+      ><a name="2912"
+      > </a
+      ><a name="2913" href="ConsHeadTail.html#2913" class="Bound"
+      >s</a
+      ><a name="2914"
+      > </a
+      ><a name="2915" href="ConsHeadTail.html#2915" class="Bound"
+      >&#945;</a
+      ><a name="2916"
+      > </a
+      ><a name="2917" class="Symbol"
+      >=</a
+      ><a name="2918"
+      > </a
+      ><a name="2919" href="ConsHeadTail.html#3720" class="Function"
+      >goal</a
+      ><a name="2923"
+      >
+ </a
+      ><a name="2925" class="Keyword"
+      >where</a
+      ><a name="2930"
+      >
+  </a
+      ><a name="2933" href="ConsHeadTail.html#2933" class="Function"
+      >ss</a
+      ><a name="2935"
+      > </a
+      ><a name="2936" class="Symbol"
+      >:</a
+      ><a name="2937"
+      > </a
+      ><a name="2938" href="Mini-library.html#6619" class="Function"
+      >&#8322;Fin</a
+      ><a name="2942"
+      > </a
+      ><a name="2943" href="ConsHeadTail.html#2908" class="Bound"
+      >k</a
+      ><a name="2944"
+      >
+  </a
+      ><a name="2947" href="ConsHeadTail.html#2933" class="Function"
+      >ss</a
+      ><a name="2949"
+      > </a
+      ><a name="2950" class="Symbol"
+      >=</a
+      ><a name="2951"
+      > </a
+      ><a name="2952" href="ConsHeadTail.html#2071" class="Function"
+      >Fdrop</a
+      ><a name="2957"
+      > </a
+      ><a name="2958" href="ConsHeadTail.html#2908" class="Bound"
+      >k</a
+      ><a name="2959"
+      > </a
+      ><a name="2960" href="ConsHeadTail.html#2902" class="Bound"
+      >n</a
+      ><a name="2961"
+      > </a
+      ><a name="2962" href="ConsHeadTail.html#2913" class="Bound"
+      >s</a
+      ><a name="2963"
+      >
+  </a
+      ><a name="2966" href="ConsHeadTail.html#2966" class="Function"
+      >ss'</a
+      ><a name="2969"
+      > </a
+      ><a name="2970" class="Symbol"
+      >:</a
+      ><a name="2971"
+      > </a
+      ><a name="2972" href="Mini-library.html#6619" class="Function"
+      >&#8322;Fin</a
+      ><a name="2976"
+      > </a
+      ><a name="2977" class="Symbol"
+      >(</a
+      ><a name="2978" href="ConsHeadTail.html#2904" class="Bound"
+      >m</a
+      ><a name="2979"
+      > </a
+      ><a name="2980" href="Mini-library.html#3287" class="Function Operator"
+      >+</a
+      ><a name="2981"
+      > </a
+      ><a name="2982" href="ConsHeadTail.html#2906" class="Bound"
+      >l</a
+      ><a name="2983" class="Symbol"
+      >)</a
+      ><a name="2984"
+      >
+  </a
+      ><a name="2987" href="ConsHeadTail.html#2966" class="Function"
+      >ss'</a
+      ><a name="2990"
+      > </a
+      ><a name="2991" class="Symbol"
+      >=</a
+      ><a name="2992"
+      > </a
+      ><a name="2993" href="Mini-library.html#1648" class="Function"
+      >subst</a
+      ><a name="2998"
+      > </a
+      ><a name="2999" class="Symbol"
+      >{</a
+      ><a name="3000" href="Mini-library.html#2935" class="Datatype"
+      >&#8469;</a
+      ><a name="3001" class="Symbol"
+      >}</a
+      ><a name="3002"
+      > </a
+      ><a name="3003" class="Symbol"
+      >{&#955;</a
+      ><a name="3005"
+      > </a
+      ><a name="3006" href="ConsHeadTail.html#3006" class="Bound"
+      >x</a
+      ><a name="3007"
+      > </a
+      ><a name="3008" class="Symbol"
+      >&#8594;</a
+      ><a name="3009"
+      > </a
+      ><a name="3010" href="Mini-library.html#6619" class="Function"
+      >&#8322;Fin</a
+      ><a name="3014"
+      > </a
+      ><a name="3015" href="ConsHeadTail.html#3006" class="Bound"
+      >x</a
+      ><a name="3016" class="Symbol"
+      >}</a
+      ><a name="3017"
+      > </a
+      ><a name="3018" href="ConsHeadTail.html#2910" class="Bound"
+      >eq</a
+      ><a name="3020"
+      > </a
+      ><a name="3021" href="ConsHeadTail.html#2933" class="Function"
+      >ss</a
+      ><a name="3023"
+      >
+  </a
+      ><a name="3026" href="ConsHeadTail.html#3026" class="Function"
+      >Q</a
+      ><a name="3027"
+      > </a
+      ><a name="3028" class="Symbol"
+      >:</a
+      ><a name="3029"
+      > </a
+      ><a name="3030" class="Symbol"
+      >(</a
+      ><a name="3031" href="ConsHeadTail.html#3031" class="Bound"
+      >i</a
+      ><a name="3032"
+      > </a
+      ><a name="3033" class="Symbol"
+      >:</a
+      ><a name="3034"
+      > </a
+      ><a name="3035" href="Mini-library.html#2935" class="Datatype"
+      >&#8469;</a
+      ><a name="3036" class="Symbol"
+      >)</a
+      ><a name="3037"
+      > </a
+      ><a name="3038" class="Symbol"
+      >&#8594;</a
+      ><a name="3039"
+      > </a
+      ><a name="3040" href="Mini-library.html#6619" class="Function"
+      >&#8322;Fin</a
+      ><a name="3044"
+      > </a
+      ><a name="3045" href="ConsHeadTail.html#3031" class="Bound"
+      >i</a
+      ><a name="3046"
+      >  </a
+      ><a name="3048" class="Symbol"
+      >&#8594;</a
+      ><a name="3049"
+      > </a
+      ><a name="3050" class="PrimitiveType"
+      >Set</a
+      ><a name="3053"
+      >
+  </a
+      ><a name="3056" href="ConsHeadTail.html#3026" class="Function"
+      >Q</a
+      ><a name="3057"
+      > </a
+      ><a name="3058" href="ConsHeadTail.html#3058" class="Bound"
+      >i</a
+      ><a name="3059"
+      > </a
+      ><a name="3060" href="ConsHeadTail.html#3060" class="Bound"
+      >t</a
+      ><a name="3061"
+      > </a
+      ><a name="3062" class="Symbol"
+      >=</a
+      ><a name="3063"
+      > </a
+      ><a name="3064" href="ConsHeadTail.html#175" class="Function"
+      >cons</a
+      ><a name="3068"
+      > </a
+      ><a name="3069" class="Symbol"
+      >(</a
+      ><a name="3070" href="ConsHeadTail.html#1941" class="Function"
+      >Ftake</a
+      ><a name="3075"
+      > </a
+      ><a name="3076" href="ConsHeadTail.html#2908" class="Bound"
+      >k</a
+      ><a name="3077"
+      > </a
+      ><a name="3078" href="ConsHeadTail.html#2902" class="Bound"
+      >n</a
+      ><a name="3079"
+      > </a
+      ><a name="3080" href="ConsHeadTail.html#2913" class="Bound"
+      >s</a
+      ><a name="3081" class="Symbol"
+      >)</a
+      ><a name="3082"
+      > </a
+      ><a name="3083" class="Symbol"
+      >(</a
+      ><a name="3084" href="ConsHeadTail.html#175" class="Function"
+      >cons</a
+      ><a name="3088"
+      > </a
+      ><a name="3089" href="ConsHeadTail.html#3060" class="Bound"
+      >t</a
+      ><a name="3090"
+      > </a
+      ><a name="3091" href="ConsHeadTail.html#2915" class="Bound"
+      >&#945;</a
+      ><a name="3092" class="Symbol"
+      >)</a
+      ><a name="3093"
+      > </a
+      ><a name="3094" href="Setoid.html#4042" class="Function Operator"
+      >&#8803;</a
+      ><a name="3095"
+      > </a
+      ><a name="3096" href="ConsHeadTail.html#175" class="Function"
+      >cons</a
+      ><a name="3100"
+      > </a
+      ><a name="3101" href="ConsHeadTail.html#2913" class="Bound"
+      >s</a
+      ><a name="3102"
+      > </a
+      ><a name="3103" href="ConsHeadTail.html#2915" class="Bound"
+      >&#945;</a
+      ><a name="3104"
+      >
+  </a
+      ><a name="3107" href="ConsHeadTail.html#3107" class="Function"
+      >claim&#8320;</a
+      ><a name="3113"
+      > </a
+      ><a name="3114" class="Symbol"
+      >:</a
+      ><a name="3115"
+      > </a
+      ><a name="3116" href="ConsHeadTail.html#175" class="Function"
+      >cons</a
+      ><a name="3120"
+      > </a
+      ><a name="3121" class="Symbol"
+      >(</a
+      ><a name="3122" href="ConsHeadTail.html#1941" class="Function"
+      >Ftake</a
+      ><a name="3127"
+      > </a
+      ><a name="3128" href="ConsHeadTail.html#2908" class="Bound"
+      >k</a
+      ><a name="3129"
+      > </a
+      ><a name="3130" href="ConsHeadTail.html#2902" class="Bound"
+      >n</a
+      ><a name="3131"
+      > </a
+      ><a name="3132" href="ConsHeadTail.html#2913" class="Bound"
+      >s</a
+      ><a name="3133" class="Symbol"
+      >)</a
+      ><a name="3134"
+      > </a
+      ><a name="3135" class="Symbol"
+      >(</a
+      ><a name="3136" href="ConsHeadTail.html#175" class="Function"
+      >cons</a
+      ><a name="3140"
+      > </a
+      ><a name="3141" href="ConsHeadTail.html#2933" class="Function"
+      >ss</a
+      ><a name="3143"
+      > </a
+      ><a name="3144" href="ConsHeadTail.html#2915" class="Bound"
+      >&#945;</a
+      ><a name="3145" class="Symbol"
+      >)</a
+      ><a name="3146"
+      > </a
+      ><a name="3147" href="Setoid.html#4042" class="Function Operator"
+      >&#8803;</a
+      ><a name="3148"
+      > </a
+      ><a name="3149" href="ConsHeadTail.html#175" class="Function"
+      >cons</a
+      ><a name="3153"
+      > </a
+      ><a name="3154" href="ConsHeadTail.html#2913" class="Bound"
+      >s</a
+      ><a name="3155"
+      > </a
+      ><a name="3156" href="ConsHeadTail.html#2915" class="Bound"
+      >&#945;</a
+      ><a name="3157"
+      >
+  </a
+      ><a name="3160" href="ConsHeadTail.html#3107" class="Function"
+      >claim&#8320;</a
+      ><a name="3166"
+      > </a
+      ><a name="3167" class="Symbol"
+      >=</a
+      ><a name="3168"
+      > </a
+      ><a name="3169" href="ConsHeadTail.html#2196" class="Function"
+      >Lemma[cons-Ftake-Fdrop]</a
+      ><a name="3192"
+      > </a
+      ><a name="3193" href="ConsHeadTail.html#2908" class="Bound"
+      >k</a
+      ><a name="3194"
+      > </a
+      ><a name="3195" href="ConsHeadTail.html#2902" class="Bound"
+      >n</a
+      ><a name="3196"
+      > </a
+      ><a name="3197" href="ConsHeadTail.html#2913" class="Bound"
+      >s</a
+      ><a name="3198"
+      > </a
+      ><a name="3199" href="ConsHeadTail.html#2915" class="Bound"
+      >&#945;</a
+      ><a name="3200"
+      >
+  </a
+      ><a name="3203" href="ConsHeadTail.html#3203" class="Function"
+      >claim&#8321;</a
+      ><a name="3209"
+      > </a
+      ><a name="3210" class="Symbol"
+      >:</a
+      ><a name="3211"
+      > </a
+      ><a name="3212" href="ConsHeadTail.html#175" class="Function"
+      >cons</a
+      ><a name="3216"
+      > </a
+      ><a name="3217" class="Symbol"
+      >(</a
+      ><a name="3218" href="ConsHeadTail.html#1941" class="Function"
+      >Ftake</a
+      ><a name="3223"
+      > </a
+      ><a name="3224" href="ConsHeadTail.html#2908" class="Bound"
+      >k</a
+      ><a name="3225"
+      > </a
+      ><a name="3226" href="ConsHeadTail.html#2902" class="Bound"
+      >n</a
+      ><a name="3227"
+      > </a
+      ><a name="3228" href="ConsHeadTail.html#2913" class="Bound"
+      >s</a
+      ><a name="3229" class="Symbol"
+      >)</a
+      ><a name="3230"
+      > </a
+      ><a name="3231" class="Symbol"
+      >(</a
+      ><a name="3232" href="ConsHeadTail.html#175" class="Function"
+      >cons</a
+      ><a name="3236"
+      > </a
+      ><a name="3237" href="ConsHeadTail.html#2966" class="Function"
+      >ss'</a
+      ><a name="3240"
+      > </a
+      ><a name="3241" href="ConsHeadTail.html#2915" class="Bound"
+      >&#945;</a
+      ><a name="3242" class="Symbol"
+      >)</a
+      ><a name="3243"
+      > </a
+      ><a name="3244" href="Setoid.html#4042" class="Function Operator"
+      >&#8803;</a
+      ><a name="3245"
+      > </a
+      ><a name="3246" href="ConsHeadTail.html#175" class="Function"
+      >cons</a
+      ><a name="3250"
+      > </a
+      ><a name="3251" href="ConsHeadTail.html#2913" class="Bound"
+      >s</a
+      ><a name="3252"
+      > </a
+      ><a name="3253" href="ConsHeadTail.html#2915" class="Bound"
+      >&#945;</a
+      ><a name="3254"
+      >
+  </a
+      ><a name="3257" href="ConsHeadTail.html#3203" class="Function"
+      >claim&#8321;</a
+      ><a name="3263"
+      > </a
+      ><a name="3264" class="Symbol"
+      >=</a
+      ><a name="3265"
+      > </a
+      ><a name="3266" href="Mini-library.html#2205" class="Function"
+      >Lemma[subst]</a
+      ><a name="3278"
+      > </a
+      ><a name="3279" href="Mini-library.html#2935" class="Datatype"
+      >&#8469;</a
+      ><a name="3280"
+      > </a
+      ><a name="3281" href="Mini-library.html#6619" class="Function"
+      >&#8322;Fin</a
+      ><a name="3285"
+      > </a
+      ><a name="3286" href="ConsHeadTail.html#3026" class="Function"
+      >Q</a
+      ><a name="3287"
+      > </a
+      ><a name="3288" href="ConsHeadTail.html#2908" class="Bound"
+      >k</a
+      ><a name="3289"
+      > </a
+      ><a name="3290" class="Symbol"
+      >(</a
+      ><a name="3291" href="ConsHeadTail.html#2904" class="Bound"
+      >m</a
+      ><a name="3292"
+      > </a
+      ><a name="3293" href="Mini-library.html#3287" class="Function Operator"
+      >+</a
+      ><a name="3294"
+      > </a
+      ><a name="3295" href="ConsHeadTail.html#2906" class="Bound"
+      >l</a
+      ><a name="3296" class="Symbol"
+      >)</a
+      ><a name="3297"
+      > </a
+      ><a name="3298" href="ConsHeadTail.html#2910" class="Bound"
+      >eq</a
+      ><a name="3300"
+      > </a
+      ><a name="3301" href="ConsHeadTail.html#2933" class="Function"
+      >ss</a
+      ><a name="3303"
+      > </a
+      ><a name="3304" href="ConsHeadTail.html#3107" class="Function"
+      >claim&#8320;</a
+      ><a name="3310"
+      >
+  </a
+      ><a name="3313" href="ConsHeadTail.html#3313" class="Function"
+      >claim&#8322;</a
+      ><a name="3319"
+      > </a
+      ><a name="3320" class="Symbol"
+      >:</a
+      ><a name="3321"
+      > </a
+      ><a name="3322" href="ConsHeadTail.html#175" class="Function"
+      >cons</a
+      ><a name="3326"
+      > </a
+      ><a name="3327" class="Symbol"
+      >(</a
+      ><a name="3328" href="ConsHeadTail.html#1941" class="Function"
+      >Ftake</a
+      ><a name="3333"
+      > </a
+      ><a name="3334" href="ConsHeadTail.html#2904" class="Bound"
+      >m</a
+      ><a name="3335"
+      > </a
+      ><a name="3336" href="ConsHeadTail.html#2906" class="Bound"
+      >l</a
+      ><a name="3337"
+      > </a
+      ><a name="3338" href="ConsHeadTail.html#2966" class="Function"
+      >ss'</a
+      ><a name="3341" class="Symbol"
+      >)</a
+      ><a name="3342"
+      > </a
+      ><a name="3343" class="Symbol"
+      >(</a
+      ><a name="3344" href="ConsHeadTail.html#175" class="Function"
+      >cons</a
+      ><a name="3348"
+      > </a
+      ><a name="3349" class="Symbol"
+      >(</a
+      ><a name="3350" href="ConsHeadTail.html#2071" class="Function"
+      >Fdrop</a
+      ><a name="3355"
+      > </a
+      ><a name="3356" href="ConsHeadTail.html#2904" class="Bound"
+      >m</a
+      ><a name="3357"
+      > </a
+      ><a name="3358" href="ConsHeadTail.html#2906" class="Bound"
+      >l</a
+      ><a name="3359"
+      > </a
+      ><a name="3360" href="ConsHeadTail.html#2966" class="Function"
+      >ss'</a
+      ><a name="3363" class="Symbol"
+      >)</a
+      ><a name="3364"
+      > </a
+      ><a name="3365" href="ConsHeadTail.html#2915" class="Bound"
+      >&#945;</a
+      ><a name="3366" class="Symbol"
+      >)</a
+      ><a name="3367"
+      > </a
+      ><a name="3368" href="Setoid.html#4042" class="Function Operator"
+      >&#8803;</a
+      ><a name="3369"
+      > </a
+      ><a name="3370" href="ConsHeadTail.html#175" class="Function"
+      >cons</a
+      ><a name="3374"
+      > </a
+      ><a name="3375" href="ConsHeadTail.html#2966" class="Function"
+      >ss'</a
+      ><a name="3378"
+      > </a
+      ><a name="3379" href="ConsHeadTail.html#2915" class="Bound"
+      >&#945;</a
+      ><a name="3380"
+      >
+  </a
+      ><a name="3383" href="ConsHeadTail.html#3313" class="Function"
+      >claim&#8322;</a
+      ><a name="3389"
+      > </a
+      ><a name="3390" class="Symbol"
+      >=</a
+      ><a name="3391"
+      > </a
+      ><a name="3392" href="ConsHeadTail.html#2196" class="Function"
+      >Lemma[cons-Ftake-Fdrop]</a
+      ><a name="3415"
+      > </a
+      ><a name="3416" href="ConsHeadTail.html#2904" class="Bound"
+      >m</a
+      ><a name="3417"
+      > </a
+      ><a name="3418" href="ConsHeadTail.html#2906" class="Bound"
+      >l</a
+      ><a name="3419"
+      > </a
+      ><a name="3420" href="ConsHeadTail.html#2966" class="Function"
+      >ss'</a
+      ><a name="3423"
+      > </a
+      ><a name="3424" href="ConsHeadTail.html#2915" class="Bound"
+      >&#945;</a
+      ><a name="3425"
+      >
+  </a
+      ><a name="3428" href="ConsHeadTail.html#3428" class="Function"
+      >claim&#8323;</a
+      ><a name="3434"
+      > </a
+      ><a name="3435" class="Symbol"
+      >:</a
+      ><a name="3436"
+      >  </a
+      ><a name="3438" href="ConsHeadTail.html#175" class="Function"
+      >cons</a
+      ><a name="3442"
+      > </a
+      ><a name="3443" class="Symbol"
+      >(</a
+      ><a name="3444" href="ConsHeadTail.html#1941" class="Function"
+      >Ftake</a
+      ><a name="3449"
+      > </a
+      ><a name="3450" href="ConsHeadTail.html#2908" class="Bound"
+      >k</a
+      ><a name="3451"
+      > </a
+      ><a name="3452" href="ConsHeadTail.html#2902" class="Bound"
+      >n</a
+      ><a name="3453"
+      > </a
+      ><a name="3454" href="ConsHeadTail.html#2913" class="Bound"
+      >s</a
+      ><a name="3455" class="Symbol"
+      >)</a
+      ><a name="3456"
+      > </a
+      ><a name="3457" class="Symbol"
+      >(</a
+      ><a name="3458" href="ConsHeadTail.html#175" class="Function"
+      >cons</a
+      ><a name="3462"
+      > </a
+      ><a name="3463" class="Symbol"
+      >(</a
+      ><a name="3464" href="ConsHeadTail.html#1941" class="Function"
+      >Ftake</a
+      ><a name="3469"
+      > </a
+      ><a name="3470" href="ConsHeadTail.html#2904" class="Bound"
+      >m</a
+      ><a name="3471"
+      > </a
+      ><a name="3472" href="ConsHeadTail.html#2906" class="Bound"
+      >l</a
+      ><a name="3473"
+      > </a
+      ><a name="3474" href="ConsHeadTail.html#2966" class="Function"
+      >ss'</a
+      ><a name="3477" class="Symbol"
+      >)</a
+      ><a name="3478"
+      > </a
+      ><a name="3479" class="Symbol"
+      >(</a
+      ><a name="3480" href="ConsHeadTail.html#175" class="Function"
+      >cons</a
+      ><a name="3484"
+      > </a
+      ><a name="3485" class="Symbol"
+      >(</a
+      ><a name="3486" href="ConsHeadTail.html#2071" class="Function"
+      >Fdrop</a
+      ><a name="3491"
+      > </a
+      ><a name="3492" href="ConsHeadTail.html#2904" class="Bound"
+      >m</a
+      ><a name="3493"
+      > </a
+      ><a name="3494" href="ConsHeadTail.html#2906" class="Bound"
+      >l</a
+      ><a name="3495"
+      > </a
+      ><a name="3496" href="ConsHeadTail.html#2966" class="Function"
+      >ss'</a
+      ><a name="3499" class="Symbol"
+      >)</a
+      ><a name="3500"
+      > </a
+      ><a name="3501" href="ConsHeadTail.html#2915" class="Bound"
+      >&#945;</a
+      ><a name="3502" class="Symbol"
+      >))</a
+      ><a name="3504"
+      >
+          </a
+      ><a name="3515" href="Setoid.html#4042" class="Function Operator"
+      >&#8803;</a
+      ><a name="3516"
+      > </a
+      ><a name="3517" href="ConsHeadTail.html#175" class="Function"
+      >cons</a
+      ><a name="3521"
+      > </a
+      ><a name="3522" class="Symbol"
+      >(</a
+      ><a name="3523" href="ConsHeadTail.html#1941" class="Function"
+      >Ftake</a
+      ><a name="3528"
+      > </a
+      ><a name="3529" href="ConsHeadTail.html#2908" class="Bound"
+      >k</a
+      ><a name="3530"
+      > </a
+      ><a name="3531" href="ConsHeadTail.html#2902" class="Bound"
+      >n</a
+      ><a name="3532"
+      > </a
+      ><a name="3533" href="ConsHeadTail.html#2913" class="Bound"
+      >s</a
+      ><a name="3534" class="Symbol"
+      >)</a
+      ><a name="3535"
+      > </a
+      ><a name="3536" class="Symbol"
+      >(</a
+      ><a name="3537" href="ConsHeadTail.html#175" class="Function"
+      >cons</a
+      ><a name="3541"
+      > </a
+      ><a name="3542" href="ConsHeadTail.html#2966" class="Function"
+      >ss'</a
+      ><a name="3545"
+      > </a
+      ><a name="3546" href="ConsHeadTail.html#2915" class="Bound"
+      >&#945;</a
+      ><a name="3547" class="Symbol"
+      >)</a
+      ><a name="3548"
+      >
+  </a
+      ><a name="3551" href="ConsHeadTail.html#3428" class="Function"
+      >claim&#8323;</a
+      ><a name="3557"
+      > </a
+      ><a name="3558" class="Symbol"
+      >=</a
+      ><a name="3559"
+      > </a
+      ><a name="3560" href="ConsHeadTail.html#426" class="Function"
+      >Lemma[cons-E-map]</a
+      ><a name="3577"
+      > </a
+      ><a name="3578" class="Symbol"
+      >(</a
+      ><a name="3579" href="ConsHeadTail.html#1941" class="Function"
+      >Ftake</a
+      ><a name="3584"
+      > </a
+      ><a name="3585" href="ConsHeadTail.html#2908" class="Bound"
+      >k</a
+      ><a name="3586"
+      > </a
+      ><a name="3587" href="ConsHeadTail.html#2902" class="Bound"
+      >n</a
+      ><a name="3588"
+      > </a
+      ><a name="3589" href="ConsHeadTail.html#2913" class="Bound"
+      >s</a
+      ><a name="3590" class="Symbol"
+      >)</a
+      ><a name="3591"
+      >
+                             </a
+      ><a name="3621" class="Symbol"
+      >(</a
+      ><a name="3622" href="ConsHeadTail.html#175" class="Function"
+      >cons</a
+      ><a name="3626"
+      > </a
+      ><a name="3627" class="Symbol"
+      >(</a
+      ><a name="3628" href="ConsHeadTail.html#1941" class="Function"
+      >Ftake</a
+      ><a name="3633"
+      > </a
+      ><a name="3634" href="ConsHeadTail.html#2904" class="Bound"
+      >m</a
+      ><a name="3635"
+      > </a
+      ><a name="3636" href="ConsHeadTail.html#2906" class="Bound"
+      >l</a
+      ><a name="3637"
+      > </a
+      ><a name="3638" href="ConsHeadTail.html#2966" class="Function"
+      >ss'</a
+      ><a name="3641" class="Symbol"
+      >)</a
+      ><a name="3642"
+      > </a
+      ><a name="3643" class="Symbol"
+      >(</a
+      ><a name="3644" href="ConsHeadTail.html#175" class="Function"
+      >cons</a
+      ><a name="3648"
+      > </a
+      ><a name="3649" class="Symbol"
+      >(</a
+      ><a name="3650" href="ConsHeadTail.html#2071" class="Function"
+      >Fdrop</a
+      ><a name="3655"
+      > </a
+      ><a name="3656" href="ConsHeadTail.html#2904" class="Bound"
+      >m</a
+      ><a name="3657"
+      > </a
+      ><a name="3658" href="ConsHeadTail.html#2906" class="Bound"
+      >l</a
+      ><a name="3659"
+      > </a
+      ><a name="3660" href="ConsHeadTail.html#2966" class="Function"
+      >ss'</a
+      ><a name="3663" class="Symbol"
+      >)</a
+      ><a name="3664"
+      > </a
+      ><a name="3665" href="ConsHeadTail.html#2915" class="Bound"
+      >&#945;</a
+      ><a name="3666" class="Symbol"
+      >))</a
+      ><a name="3668"
+      >
+                             </a
+      ><a name="3698" class="Symbol"
+      >(</a
+      ><a name="3699" href="ConsHeadTail.html#175" class="Function"
+      >cons</a
+      ><a name="3703"
+      > </a
+      ><a name="3704" href="ConsHeadTail.html#2966" class="Function"
+      >ss'</a
+      ><a name="3707"
+      > </a
+      ><a name="3708" href="ConsHeadTail.html#2915" class="Bound"
+      >&#945;</a
+      ><a name="3709" class="Symbol"
+      >)</a
+      ><a name="3710"
+      > </a
+      ><a name="3711" href="ConsHeadTail.html#3313" class="Function"
+      >claim&#8322;</a
+      ><a name="3717"
+      >
+  </a
+      ><a name="3720" href="ConsHeadTail.html#3720" class="Function"
+      >goal</a
+      ><a name="3724"
+      > </a
+      ><a name="3725" class="Symbol"
+      >:</a
+      ><a name="3726"
+      > </a
+      ><a name="3727" href="ConsHeadTail.html#175" class="Function"
+      >cons</a
+      ><a name="3731"
+      > </a
+      ><a name="3732" class="Symbol"
+      >(</a
+      ><a name="3733" href="ConsHeadTail.html#1941" class="Function"
+      >Ftake</a
+      ><a name="3738"
+      > </a
+      ><a name="3739" href="ConsHeadTail.html#2908" class="Bound"
+      >k</a
+      ><a name="3740"
+      > </a
+      ><a name="3741" href="ConsHeadTail.html#2902" class="Bound"
+      >n</a
+      ><a name="3742"
+      > </a
+      ><a name="3743" href="ConsHeadTail.html#2913" class="Bound"
+      >s</a
+      ><a name="3744" class="Symbol"
+      >)</a
+      ><a name="3745"
+      > </a
+      ><a name="3746" class="Symbol"
+      >(</a
+      ><a name="3747" href="ConsHeadTail.html#175" class="Function"
+      >cons</a
+      ><a name="3751"
+      > </a
+      ><a name="3752" class="Symbol"
+      >(</a
+      ><a name="3753" href="ConsHeadTail.html#1941" class="Function"
+      >Ftake</a
+      ><a name="3758"
+      > </a
+      ><a name="3759" href="ConsHeadTail.html#2904" class="Bound"
+      >m</a
+      ><a name="3760"
+      > </a
+      ><a name="3761" href="ConsHeadTail.html#2906" class="Bound"
+      >l</a
+      ><a name="3762"
+      > </a
+      ><a name="3763" href="ConsHeadTail.html#2966" class="Function"
+      >ss'</a
+      ><a name="3766" class="Symbol"
+      >)</a
+      ><a name="3767"
+      > </a
+      ><a name="3768" class="Symbol"
+      >(</a
+      ><a name="3769" href="ConsHeadTail.html#175" class="Function"
+      >cons</a
+      ><a name="3773"
+      > </a
+      ><a name="3774" class="Symbol"
+      >(</a
+      ><a name="3775" href="ConsHeadTail.html#2071" class="Function"
+      >Fdrop</a
+      ><a name="3780"
+      > </a
+      ><a name="3781" href="ConsHeadTail.html#2904" class="Bound"
+      >m</a
+      ><a name="3782"
+      > </a
+      ><a name="3783" href="ConsHeadTail.html#2906" class="Bound"
+      >l</a
+      ><a name="3784"
+      > </a
+      ><a name="3785" href="ConsHeadTail.html#2966" class="Function"
+      >ss'</a
+      ><a name="3788" class="Symbol"
+      >)</a
+      ><a name="3789"
+      > </a
+      ><a name="3790" href="ConsHeadTail.html#2915" class="Bound"
+      >&#945;</a
+      ><a name="3791" class="Symbol"
+      >))</a
+      ><a name="3793"
+      > </a
+      ><a name="3794" href="Setoid.html#4042" class="Function Operator"
+      >&#8803;</a
+      ><a name="3795"
+      > </a
+      ><a name="3796" href="ConsHeadTail.html#175" class="Function"
+      >cons</a
+      ><a name="3800"
+      > </a
+      ><a name="3801" href="ConsHeadTail.html#2913" class="Bound"
+      >s</a
+      ><a name="3802"
+      > </a
+      ><a name="3803" href="ConsHeadTail.html#2915" class="Bound"
+      >&#945;</a
+      ><a name="3804"
+      >
+  </a
+      ><a name="3807" href="ConsHeadTail.html#3720" class="Function"
+      >goal</a
+      ><a name="3811"
+      > </a
+      ><a name="3812" href="ConsHeadTail.html#3812" class="Bound"
+      >i</a
+      ><a name="3813"
+      > </a
+      ><a name="3814" class="Symbol"
+      >=</a
+      ><a name="3815"
+      > </a
+      ><a name="3816" href="Mini-library.html#1729" class="Function"
+      >trans</a
+      ><a name="3821"
+      > </a
+      ><a name="3822" class="Symbol"
+      >(</a
+      ><a name="3823" href="ConsHeadTail.html#3428" class="Function"
+      >claim&#8323;</a
+      ><a name="3829"
+      > </a
+      ><a name="3830" href="ConsHeadTail.html#3812" class="Bound"
+      >i</a
+      ><a name="3831" class="Symbol"
+      >)</a
+      ><a name="3832"
+      > </a
+      ><a name="3833" class="Symbol"
+      >(</a
+      ><a name="3834" href="ConsHeadTail.html#3203" class="Function"
+      >claim&#8321;</a
+      ><a name="3840"
+      > </a
+      ><a name="3841" href="ConsHeadTail.html#3812" class="Bound"
+      >i</a
+      ><a name="3842" class="Symbol"
+      >)</a
+      ><a name="3843"
+      >
+
+
+</a
+      ><a name="3846" href="ConsHeadTail.html#3846" class="Function Operator"
+      >Lemma[cons-take-&#8803;_&#8803;]</a
+      ><a name="3866"
+      > </a
+      ><a name="3867" class="Symbol"
+      >:</a
+      ><a name="3868"
+      > </a
+      ><a name="3869" class="Symbol"
+      >&#8704;(</a
+      ><a name="3871" href="ConsHeadTail.html#3871" class="Bound"
+      >n</a
+      ><a name="3872"
+      > </a
+      ><a name="3873" class="Symbol"
+      >:</a
+      ><a name="3874"
+      > </a
+      ><a name="3875" href="Mini-library.html#2935" class="Datatype"
+      >&#8469;</a
+      ><a name="3876" class="Symbol"
+      >)</a
+      ><a name="3877"
+      > </a
+      ><a name="3878" class="Symbol"
+      >&#8594;</a
+      ><a name="3879"
+      > </a
+      ><a name="3880" class="Symbol"
+      >&#8704;(</a
+      ><a name="3882" href="ConsHeadTail.html#3882" class="Bound"
+      >&#945;</a
+      ><a name="3883"
+      > </a
+      ><a name="3884" href="ConsHeadTail.html#3884" class="Bound"
+      >&#946;</a
+      ><a name="3885"
+      > </a
+      ><a name="3886" class="Symbol"
+      >:</a
+      ><a name="3887"
+      > </a
+      ><a name="3888" href="Mini-library.html#6102" class="Function"
+      >&#8322;&#8469;</a
+      ><a name="3890" class="Symbol"
+      >)</a
+      ><a name="3891"
+      > </a
+      ><a name="3892" class="Symbol"
+      >&#8594;</a
+      ><a name="3893"
+      > </a
+      ><a name="3894" href="ConsHeadTail.html#3882" class="Bound"
+      >&#945;</a
+      ><a name="3895"
+      > </a
+      ><a name="3896" href="Uniform-continuity.html#368" class="Function Operator"
+      >&#8803;</a
+      ><a name="3897"
+      > </a
+      ><a name="3898" href="ConsHeadTail.html#3871" class="Bound"
+      >n</a
+      ><a name="3899"
+      > </a
+      ><a name="3900" href="Uniform-continuity.html#368" class="Function Operator"
+      >&#8803;</a
+      ><a name="3901"
+      > </a
+      ><a name="3902" href="ConsHeadTail.html#175" class="Function"
+      >cons</a
+      ><a name="3906"
+      > </a
+      ><a name="3907" class="Symbol"
+      >(</a
+      ><a name="3908" href="Mini-library.html#6701" class="Function"
+      >take</a
+      ><a name="3912"
+      > </a
+      ><a name="3913" href="ConsHeadTail.html#3871" class="Bound"
+      >n</a
+      ><a name="3914"
+      > </a
+      ><a name="3915" href="ConsHeadTail.html#3882" class="Bound"
+      >&#945;</a
+      ><a name="3916" class="Symbol"
+      >)</a
+      ><a name="3917"
+      > </a
+      ><a name="3918" href="ConsHeadTail.html#3884" class="Bound"
+      >&#946;</a
+      ><a name="3919"
+      >
+</a
+      ><a name="3920" href="ConsHeadTail.html#3846" class="Function Operator"
+      >Lemma[cons-take-&#8803;_&#8803;]</a
+      ><a name="3940"
+      > </a
+      ><a name="3941" href="Mini-library.html#2952" class="InductiveConstructor"
+      >0</a
+      ><a name="3942"
+      >        </a
+      ><a name="3950" href="ConsHeadTail.html#3950" class="Bound"
+      >&#945;</a
+      ><a name="3951"
+      > </a
+      ><a name="3952" href="ConsHeadTail.html#3952" class="Bound"
+      >&#946;</a
+      ><a name="3953"
+      > </a
+      ><a name="3954" href="ConsHeadTail.html#3954" class="Bound"
+      >i</a
+      ><a name="3955"
+      >        </a
+      ><a name="3963" class="Symbol"
+      >()</a
+      ><a name="3965"
+      >
+</a
+      ><a name="3966" href="ConsHeadTail.html#3846" class="Function Operator"
+      >Lemma[cons-take-&#8803;_&#8803;]</a
+      ><a name="3986"
+      > </a
+      ><a name="3987" class="Symbol"
+      >(</a
+      ><a name="3988" href="Mini-library.html#2963" class="InductiveConstructor"
+      >succ</a
+      ><a name="3992"
+      > </a
+      ><a name="3993" href="ConsHeadTail.html#3993" class="Bound"
+      >n</a
+      ><a name="3994" class="Symbol"
+      >)</a
+      ><a name="3995"
+      > </a
+      ><a name="3996" href="ConsHeadTail.html#3996" class="Bound"
+      >&#945;</a
+      ><a name="3997"
+      > </a
+      ><a name="3998" href="ConsHeadTail.html#3998" class="Bound"
+      >&#946;</a
+      ><a name="3999"
+      > </a
+      ><a name="4000" href="Mini-library.html#2952" class="InductiveConstructor"
+      >0</a
+      ><a name="4001"
+      >        </a
+      ><a name="4009" href="ConsHeadTail.html#4009" class="Bound"
+      >r</a
+      ><a name="4010"
+      >          </a
+      ><a name="4020" class="Symbol"
+      >=</a
+      ><a name="4021"
+      > </a
+      ><a name="4022" href="Mini-library.html#1624" class="InductiveConstructor"
+      >refl</a
+      ><a name="4026"
+      >
+</a
+      ><a name="4027" href="ConsHeadTail.html#3846" class="Function Operator"
+      >Lemma[cons-take-&#8803;_&#8803;]</a
+      ><a name="4047"
+      > </a
+      ><a name="4048" class="Symbol"
+      >(</a
+      ><a name="4049" href="Mini-library.html#2963" class="InductiveConstructor"
+      >succ</a
+      ><a name="4053"
+      > </a
+      ><a name="4054" href="ConsHeadTail.html#4054" class="Bound"
+      >n</a
+      ><a name="4055" class="Symbol"
+      >)</a
+      ><a name="4056"
+      > </a
+      ><a name="4057" href="ConsHeadTail.html#4057" class="Bound"
+      >&#945;</a
+      ><a name="4058"
+      > </a
+      ><a name="4059" href="ConsHeadTail.html#4059" class="Bound"
+      >&#946;</a
+      ><a name="4060"
+      > </a
+      ><a name="4061" class="Symbol"
+      >(</a
+      ><a name="4062" href="Mini-library.html#2963" class="InductiveConstructor"
+      >succ</a
+      ><a name="4066"
+      > </a
+      ><a name="4067" href="ConsHeadTail.html#4067" class="Bound"
+      >i</a
+      ><a name="4068" class="Symbol"
+      >)</a
+      ><a name="4069"
+      > </a
+      ><a name="4070" class="Symbol"
+      >(</a
+      ><a name="4071" href="Mini-library.html#4036" class="InductiveConstructor"
+      >&#8804;-succ</a
+      ><a name="4077"
+      > </a
+      ><a name="4078" href="ConsHeadTail.html#4078" class="Bound"
+      >r</a
+      ><a name="4079" class="Symbol"
+      >)</a
+      ><a name="4080"
+      > </a
+      ><a name="4081" class="Symbol"
+      >=</a
+      ><a name="4082"
+      > </a
+      ><a name="4083" href="ConsHeadTail.html#3846" class="Function Operator"
+      >Lemma[cons-take-&#8803;_&#8803;]</a
+      ><a name="4103"
+      > </a
+      ><a name="4104" href="ConsHeadTail.html#4054" class="Bound"
+      >n</a
+      ><a name="4105"
+      > </a
+      ><a name="4106" class="Symbol"
+      >(</a
+      ><a name="4107" href="ConsHeadTail.html#4057" class="Bound"
+      >&#945;</a
+      ><a name="4108"
+      > </a
+      ><a name="4109" href="Mini-library.html#161" class="Function Operator"
+      >&#8728;</a
+      ><a name="4110"
+      > </a
+      ><a name="4111" href="Mini-library.html#2963" class="InductiveConstructor"
+      >succ</a
+      ><a name="4115" class="Symbol"
+      >)</a
+      ><a name="4116"
+      > </a
+      ><a name="4117" href="ConsHeadTail.html#4059" class="Bound"
+      >&#946;</a
+      ><a name="4118"
+      > </a
+      ><a name="4119" href="ConsHeadTail.html#4067" class="Bound"
+      >i</a
+      ><a name="4120"
+      > </a
+      ><a name="4121" href="ConsHeadTail.html#4078" class="Bound"
+      >r</a
+      ><a name="4122"
+      >
+
+\end{code}</a
+      ></pre
+    ></body
+  ></html
+>

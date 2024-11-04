@@ -1,0 +1,1502 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage{amssymb,latexsym}
+\usepackage{a4wide}
+
+\usepackage[all]{xy}
+%\CompileMatrices
+\UseComputerModernTips
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{1ex plus 0.5ex minus 0.2ex}
+
+\input{Dmacros} %Daniele's macros 
+\input{Mmacros} 
+\input{definitions}
+
+\newcommand{\tuple}[1]{\langle #1 \rangle }
+\newcommand{\implies}{\;\; \Rightarrow \;\;}
+\newcommand{\cppobot}{\mathit{Cppo}_\bot}
+\newcommand{\cpo}{\mathit{Cpo}}
+\renewcommand{\sets}{\mathit{Set}}
+\newcommand{\coalg}[1]{#1 \mbox{-\textit{Coalg}}}
+\renewcommand{\alg}[1]{#1 \mbox{-\textit{Alg}}}
+\newcommand{\recu}{\sharp}
+\newcommand{\ideps}{\id^\varepsilon}
+\newcommand{\Ideps}{\Id_\varepsilon}
+\newcommand{\monad}{T}
+\newcommand{\efunctor}{S}
+\newcommand{\contr}{\sigma}
+\newcommand{\contrcat}{\sigma \mbox{-\textit{EndoMaps}}}
+\newcommand{\contcat}{\sigma \mbox{-\textit{Maps}}}
+\newcommand{\factored}[1]{\overline{#1}}
+\newcommand{\omegabar}{\Omega}
+\newcommand{\delay}{\delta}
+\newcommand{\fp}{\mathbf{Y}}
+\newcommand{\fpp}{\overline{\fp}}
+\newcommand{\fpc}{\mathbf{Y}}
+\newcommand{\fppc}{\overline{\fp}}
+\newcommand{\ms}{\mathit{MS}}
+\newcommand{\cms}{\mathit{CMS}}
+\newcommand{\pointedfunctor}{\tuple{\efunctor , \contr}}
+\newcommand{\isom}[1]{\varphi_{#1}}
+\newcommand{\comparing}{\varphi}
+\newcommand{\inial}{\alpha '}
+\newcommand{\ti}{T}
+\newcommand{\esse}{S}
+\newcommand{\esseti}{ST}
+\newcommand{\nameof}[1]{\ulcorner #1 \urcorner}
+\renewcommand{\strength}{\mathfrak{t}}
+\newcommand{\stre}{\mathfrak{s}}
+\newcommand{\monoi}{\mathfrak{m}}
+\newcommand{\lolly}[2]{[#1 ,#2 ]} 
+                      % {#1 \triangleright #2}  %{( #1 \! \multimap \! #2 )}
+\newcommand{\f}{\mathfrak{f}}
+\newcommand{\g}{\mathfrak{g}}
+\newcommand{\computation}[2]{#2^{(#1)}}
+\newcommand{\h}{\varepsilon}
+\newcommand{\dd}{\overline{d}}
+\newcommand{\order}{\sqsubseteq}
+
+
+\title{{\Large\bf Fixpoint Monads}
+\\
+{\large\bf Reconciling Domain and Metric Theoretic Fixpoints}
+}
+
+\usepackage[english]{babel}
+
+\date{24th March 2000}
+
+\author{
+\begin{tabular}{c}
+Mart\'{\i}n H.\ Escard\'{o}\\
+%Division of Computer Science\\
+%School of Mathematical and Computational Sciences\\
+%Univ.\ of St Andrews\\
+{\tt <mhe@dcs.st-and.ac.uk>}
+\end{tabular}
+\hspace{7mm}
+\begin{tabular}{c}
+Daniele Turi\thanks{Research supported by EPSRC grant R34723.}
+\\
+%LFCS\\
+%Division of Informatics\\
+%Univ.\ of Edinburgh\\
+{\tt <dt@dcs.ed.ac.uk>}
+\end{tabular}
+}
+
+%\date{\today}
+
+\begin{document}
+
+\maketitle
+
+
+\begin{abstract}
+\noindent
+We show that least fixpoints of endomaps on pointed domains
+and unique fixpoints of contractive endomaps on complete metric spaces
+arise from one and the same categorical structure,
+namely that of a \emph{fixpoint monad} corresponding to 
+a pointed endofunctor.
+This specializes to the existing notion of a fixpoint object.
+As an application we give a criterion for algebraic compactness.
+\end{abstract}
+
+
+\section{Introduction}
+
+Traditionally,
+denotational models of computation have been
+based on some form of partial order (\emph{domain}) \cite{domains},
+with recursion modelled using Tarski's
+least fixpoint theorem.
+An alternative approach,
+developed especially for modelling concurrent computations,
+is the metric-theoretic one \cite{ACG},
+where recursion is modelled using Banach's unique
+fixpoint theorem.
+Various attempts have already been made to reconcile these
+two different approaches (see, eg, \cite{Smyth,Wagner}).
+Here we address one particular question,
+namely whether it is possible to provide
+a uniform framework for understanding
+both Tarski's and Banach's fixpoint theorems,
+despite their apparent heterogeneous nature.
+
+A motivation for our investigation
+is \cite{escardo:metric}, where
+a metric model of PCF is given
+which is very close to the traditional
+domain-theoretic model \cite{Scott}.
+Here we give a conceptual explanation
+of some constructions performed in that work.
+A crucial observation is 
+that $\varepsilon$-contractive maps
+$X\rightarrow Y$
+between metric spaces 
+are in bijection with 
+maps of type $\Id_\varepsilon X \rightarrow Y$,
+where $\Id_\varepsilon$ is the endofunctor
+scaling down the distance
+between the points of a space by a factor $\varepsilon \in [0,1)$.
+Contractive \emph{endomaps} thus appear as algebras 
+$\Id_\varepsilon X \rightarrow X$
+of the endofunctor $\Id_\varepsilon$.
+
+% rewrite this introduction completely
+
+
+We use this correspondence as a basis for
+an axiomatization of the notion of contractive endomap
+and Banach's fixpoint theorem,
+following closely the
+domain-theoretic axiomatization
+which led to the notion of \emph{fixpoint object} \cite{fpobject}.
+%The latter is based on the notion of lifting monad.
+However, we do not use 
+the notion of lifting monad as our starting point.
+There are at least two reasons for that. 
+Firstly,
+the the obvious candidate for 
+a metric counterpart of lifting
+is some form
+of down-scaler endofunctor,
+but down-scalers cannot be given the structure of a monad.
+The problem is that there is no map from $\Id_\varepsilon X$ to $X$ which
+is non-distance increasing, hence, in particular, no multiplication.
+Secondly,
+while
+the initial algebra of the \emph{endofunctor part} of
+the lifting monad is a fixpoint object,
+providing the basic structure to compute least fixpoints
+of endomaps on pointed domains,
+the initial algebra of any
+metric down-scaler endofunctor is the trivial empty metric space.
+
+We overcome the second obstacle by noticing
+that although the initial algebra,
+i.e.\ the free algebra over the initial object,
+is trivial,
+all other free algebras of $\Id_\varepsilon$
+can be used to obtain the 
+fixpoints of $\varepsilon$-contractive maps given by Banach's theorem
+in essentially the same way as for the fixpoints
+of endomaps on cppos from the fixpoint object.
+We proceed then by axiomatizing
+the relevant structure involved
+in the above remarks,
+obtaining the new notions of $\contr$-contractive map
+and of fixpoint monad relative to arbitrary pointed endofunctors
+$\pointedfunctor$.
+
+The theorems we prove are routine generalizations
+of those for fixpoint objects,
+once one realizes various unexploited generalities in the latter.
+For instance, one can start from a pointed endofunctor
+rather than from a monad in order to define the fixpoint object.
+This is crucial, because the down-scaler $\Id_\varepsilon$ comes with
+a natural point, namely the evident `almost identity' map 
+$\id^\varepsilon : \Id \rightarrow \Id_\varepsilon$,
+hence the structure of the lifting monad relevant 
+for fixpoints is shared by the down-scalers.
+In fact, we generalize the motivating theorem for fixpoint objects
+\cite[Thm 4.3]{alex}
+by considering fixpoints of (possibly weakly) $\contr$-contractive maps.
+This not only accounts for contractive maps in the metric sense,
+but also for all endomaps on cppos, the
+least element of a cppo giving algebraic structure which
+makes any endomap into an algebra of the lifting
+endofunctor.
+
+A further sign of the soundness of our generalization is
+that the theorems relating fixpoint objects
+and final coalgebras \cite{Fre90}
+also generalize to fixpoint monads.
+Indeed, we easily prove that the existence of
+a certain family of final coalgebras
+gives rise to a fixpoint monad.
+In the converse direction,
+we use the notion of 
+\emph{locally contractive} endofunctors
+on monoidal closed categories
+and the fact that they are algebraically compact.
+
+
+
+
+
+
+
+%This work is based on the combination of two elementary observations.
+%The first observation,
+%made in \cite{escardo:metric},
+%was that $\varepsilon$-contractive maps
+%$X\rightarrow Y$
+%between metric spaces 
+%are in 1-1 correspondence with 
+%maps of type $\Id_\varepsilon X \rightarrow Y$,
+%where $\Id_\varepsilon$ is the `down-scaler' endofunctor
+%on metric spaces which behaves as the identity on
+%the underlying sets while scaling down the distance
+%between the points by a factor $\varepsilon \in [0,1)$.
+%In particular,
+%$\varepsilon$-contractive \emph{endomaps} are then algebras 
+%$\Id_\varepsilon X \rightarrow X$
+%of the endofunctor $\Id_\varepsilon$.
+
+%When one tries to relate metric spaces to domains
+%one naturally looks for a metric notion of lifting.
+%A first candidate is some form of down-scaler endofunctor,
+%but that is bound to fail for down-scalers cannot be monads,
+%because there is no non-distance increasing map
+%from $\Id_\varepsilon X$ to $X$, hence no multiplication.
+%Morever, the initial algebra of the \emph{endofunctor part} of
+%the lifting monad is a fixpoint object,
+%providing the basic structure to compute least fixpoints
+%of endomaps on pointed domains,
+%while the initial algebra of any
+%metric down-scaler endofunctor is the trivial empty metric space.
+%It is here that our second observation took place.
+%We noted that although the initial algebra,
+%ie the free algebra over the initial object,
+%is trivial,
+%all other free algebras of $\Id_\varepsilon$
+%can be used to obtain the 
+%fixpoints of $\varepsilon$-contractive maps given by Banach's theorem
+%in essentially the same way as for the fixpoints
+%of endomaps on cppos from the fixpoint object.
+
+
+%\paragraph{Contents.}
+%In Section \ref{terminology} we 
+%recall a few notions regarding metric spaces and
+%algebras in order to fix some terminology and notation.
+%In Section \ref{contract}
+%we introduce the notion of contractive maps with
+%respect to a pointed endofunctor.
+%In Section \ref{fix} we introduce the notion of fixpoint monad
+%and prove the main theorem for it, generalizing
+%\cite[Theorem ??]{fpobject}.
+%Finally, in Section \ref{coalg}
+%we introduce the notion of locally contractive endofunctor and
+%generalize the results 
+
+
+
+
+\section{Terminology and Notation}
+
+\paragraph{Metric Spaces}
+In this paper by a \emph{metric space} we
+intend a \emph{non-empty} set $X$ together with
+a \emph{bounded} metric $d: X\times X \rightarrow [0,\infty )$.
+Without loss of generality, we assume the
+bound to be 1, hence $d: X\times X \rightarrow [0,1]$.
+Such metric spaces form a category
+with morphisms 
+$\tuple{X,d}\rightarrow \tuple{X',d'}$
+given by non-distance increasing functions
+$f:X\rightarrow X'$, ie
+$d' (f(x_1 ) ,f(x_2 ))\leq d(x_1 ,x_2 )$
+for all $x_1$ and $x_2$ in $X$.
+A special case of non-distance increasing functions
+are the $\varepsilon$-contractive ones,
+where $\varepsilon \in [0,1)$ and
+$d' (f(x_1 ) ,f(x_2 ))\leq \varepsilon \cdot d(x_1 ,x_2 )$
+for all $x_1$ and $x_2$ in $X$.
+(See, eg, \cite{Dugu} for more on metric spaces.)
+
+\paragraph{Algebras}
+A pointed endofunctor $\pointedfunctor$ 
+consists of an endofunctor on a category $\CC$
+and a natural transformation $\sigma : \Id \Rightarrow S$.
+(The latter is called the point of $S$, but will shall call
+points also the maps $1\rightarrow X$ from a terminal object.)
+In this paper we consider algebras of endofunctors $S$,
+of pointed endofunctors $\tuple{S,\sigma}$,
+and of monads $\tuple{S,\sigma ,\mu}$ on a category $\CC$.
+All three consist of maps $f:SX\rightarrow X$,
+but this map has to satisfy the equations
+$\id_X = f \comp \sigma_X$ and $f\comp Sf = f \comp \mu_X$
+if $S$ is a monad, only the first equation if $S$ is
+a pointed endofunctor, and no equation at all if $S$
+is just an endofunctor.
+When we say that $f$ is an algebra of an endofunctor $S$
+we mean that $f$ has to satisfy no equation at all,
+even if $S$ is a pointed endofunctor or a monad.
+
+The definition of algebra homomorphism 
+$h :\tuple{X,f} \rightarrow \tuple{Y,g}$
+is independent from
+the equations for the algebra structure;
+that is, in all three cases it consists of a morphism
+$h: X \rightarrow Y$ in the underlying category
+such that
+$$\xymatrix{
+\esse X \ar[d]_{f} \ar[r]^{\esse h} 
+     & \esse Y\ar[d]^{g}
+\\
+X \ar[r]_h &  Y
+}$$
+commutes.
+In the sequel, $\alg{S}$ 
+will denote the category of
+algebras of the endofunctor $S$.
+The symbol $T$ will be reserved for a monad,
+and $\alg{T}$ for the corresponding category.
+
+
+\section{$\contr$-Contractive Maps}
+
+\begin{definition}
+  Let $\tuple{\esse , \contr}$ be a pointed endofunctor.  We say that
+  a map $f:X\rightarrow Y$ is \emph{weakly $\contr$-contracting} if it
+  factors through $\contr_X : X \rightarrow \esse X$; if there is a
+  \emph{unique} $\factored{f} : \esse X \rightarrow Y$ such that
+$$\xymatrix{
+X \ar[r]^{\contr_X}  \ar[rd]_{f}  & {\esse X} \ar@{-->}[d]^{\factored{f}}  
+\\
+& Y
+}$$
+commutes then we say that $f$ is \emph{$\contr$-contracting}
+and we call such $\factored{f}$ the $\contr$-factor of $f$.
+\close
+\end{definition}
+
+\begin{example}
+  Lifting with eta in cpos. A map is weakly contractive iff its image
+  has a lower bound. In this case a factor maps bottom to a lower
+  bound. Hence, strong contractivity hardly ever occurs.
+\end{example}
+
+\begin{example}
+  The functor is down-scaler for a given fixed $\varepsilon$, the
+  point is the ``identity''. Contractive maps are contractive maps in
+  the metric sense, with contractivity factor~$\varepsilon$. Since the
+  ``identity'' is epi, weak and strong contractivity coincide, as the
+  following proposition shows.
+\end{example}
+
+
+\begin{proposition}
+  \begin{enumerate}
+  \item 
+  If the pushout of $\contr_X : \esse X \rightarrow Y$ along
+$f$ exists and it is the identity on $Y$
+then $f$ is $\contr$-contracting.
+$$\xymatrix{
+X \ar[r]^{\contr_X}  \ar[d]_{f}  & {\esse X} \ar[d]^{\factored{f}}  
+\\
+Y \ar[r]_{\id_Y} & Y
+}$$ 
+\item 
+If $\contr$ is pointwise epi and $f$ is weakly $\contr$-contracting,
+then the pushout of 
+$\contr_X : \esse X \rightarrow Y$ along
+$f$ exists and it is the identity on $Y$,
+hence $f$ is $\contr$-contracting.
+  \end{enumerate}
+
+\emph{Proof.}
+1) If $g:SX \rightarrow Y$ is such that $g\comp \contr_X = f$,
+then, by the universal property of pushouts,
+there is a unique $g': Y\rightarrow Y$ such that
+$g' \comp \id_Y = \id_Y$ and $g'\comp g = \factored{f}$,
+which implies that $g=\factored{f}$. 
+
+2) Let $\factored{f}$ be a $\contr$-factor for $f$.
+Take $h:SX \rightarrow Z$ and $k:Y\rightarrow Z$
+such that $k\comp f = h \comp \contr_X$. 
+Then $k\comp \factored{f} \comp \contr_X = h \comp \contr_X$,
+hence, since $\contr_X$ is epi, $k\comp \factored{f} = h $,
+which means that $k$ is the desired 
+unique mediating morphism from $Y$ to $Z$.
+\close
+\end{proposition}
+
+
+%\emph{Alternative definition.}
+%We say that $f:X\rightarrow Y$ is \emph{$\contr$-contracting}
+%if the pushout of $\contr_X : \esse X \rightarrow Y$ along
+%$f$ exists and it is the identity on $Y$.
+%$$\xymatrix{
+%X \ar[r]^{\contr_X}  \ar[d]_{f}  & {\esse X} \ar[d]^{\factored{f}}  
+%\\
+%Y \ar[r]_{\id_Y} & Y
+%}$$
+%We call the pushout $\factored{f}$ of $f$ along
+%$\contr_X : \esse X \rightarrow Y$ 
+%the $\contr$-factor of $f$.
+
+Note that if $f:X\rightarrow Y$ is (weakly) $\contr$-contractive
+so are the composites $f\comp g$ and $h\comp f$,
+for all maps $g:X' \rightarrow X$ and $h: Y\rightarrow Y'$.
+In particular, since any map $X\rightarrow 1$
+into a terminal object is trivially contracting,
+constant maps $X\rightarrow 1 \rightarrow Y$ are 
+contractive.
+
+If $\tuple{\esse , \contr , \mu}$ is a monad
+and $X$ is an algebra for the \emph{monad} $\esse$,
+then every map $f: X\rightarrow Y$ is trivially 
+weakly $\contr$-contractive,
+because the algebra structure cancels 
+the unit $\contr_X$ of the monad $\esse$.
+This is the case when $X$ is a cppo and $\esse$
+is the lifting monad (although $\contr$ is not pointwise epi).
+
+We now consider the $\contr$-contractive 
+maps for a pointed endofunctor $\pointedfunctor$
+on a category $\CC$ as the \emph{objects} of a category.
+The arrows $f\rightarrow g$
+are pairs of maps $h$ and $k$ in $\CC$ such that the diagram
+$$\xymatrix{
+X \ar[d]_{f} \ar[r]^{h} 
+     & X'\ar[d]^{g}
+\\
+Y \ar[r]_k &  Y'
+}$$
+commutes.
+Then, clearly, such a category is isomorphic to the 
+comma category
+$(\esse \downarrow \Id )$:
+$$\xymatrix{
+{\esse X} \ar[d]_{\factored{f}} \ar[r]^{\esse h} 
+     & {\esse X'} \ar[d]^{\factored{g}}
+\\
+Y \ar[r]_k &  Y'
+}$$
+This restricts to an isomorphism
+between the subcategory of $\contr$-contractive \emph{endomaps}
+and the category $\alg{\esse}$ of algebras $\esse X \rightarrow X$
+of the endofunctor $\esse$.
+
+
+%This gives a 1-1 correspondence between
+%$\contr$-contractive endomaps and $\esse$-algebras.
+%The following proposition shows that this extends to 
+%an isomorphism between the category $\alg{\esse}$ of 
+%$\esse$-algebras and the natural category $\contrcat$
+%of $\contr$-contractive endomaps.
+
+%\begin{proposition}
+%  If $\contr$ is pointwise epi then
+%the first diagram commutes if and only if the second does,
+%for all $\contr$-contractive maps $f$ and $f'$ and
+%all maps $h$ and $k$:
+%$$\xymatrix{
+%X \ar[d]_{f} \ar[r]^{h} 
+%     & X'\ar[d]^{g}
+%\\
+%Y \ar[r]_k &  Y'
+%}
+%\HSP
+%\xymatrix{
+%{\esse X} \ar[d]_{\factored{f}} \ar[r]^{\esse h} 
+%     & {\esse X'} \ar[d]^{\factored{g}}
+%\\
+%Y \ar[r]_k &  Y'
+%}$$
+%\close
+%\end{proposition}
+
+
+
+\section{Fixpoint Monads}
+
+If the (evident) forgetful functor $U : \alg{\esse} \rightarrow \CC$
+has a left adjoint, then
+we denote the monad generated by this adjunction by 
+$\ti = \tuple{\ti ,\eta ,\mu}$,
+and the free $\esse$-algebra over an object $X$ by
+$$\delta_X : \esse \ti X \rightarrow \ti X$$
+Note that $\delta_X$ is natural in $X$.
+We call $\ti$ the \emph{monad generated by $\esse$}.
+
+\begin{definition}
+Let $T$ be a monad on a category $\CC$ with a terminal object 1.
+Let 1 also denote the constantly 1 endofunctor on $\CC$.
+Then $\ti$ 
+is a \emph{fixpoint monad} for 
+a pointed endofunctor $(\esse , \contr )$
+if 
+it is generated by the endofunctor $\esse$
+and the parallel natural transformations
+$\delta \comp \contr_\ti$ and $\id_T$
+have an equalizer $\infty : 1 \rightarrow \ti $.
+\close
+\end{definition}
+Note that $\infty$ is then a fixpoint for $\delta \comp \contr_\ti$
+\begin{equation}
+  \label{eq:fpmonad}
+  \xymatrix{
+1 \ar[d]_-{\infty}  \ar[rrd]^{\infty} & &
+\\
+\ti  \ar[r]_-{\contr_{\ti}} & 
+{\esse \ti} \ar[r]_{\delta} & \ti
+}
+\end{equation}
+and that the naturality of $\infty_X$ is a consequence
+of the universal property of equalizers.
+
+\begin{example}
+  The monad $T$ generated by the endofunctor $\Id_\varepsilon$ is the
+  monad studied in \cite{escardo:metric}.  Its action on a (non-empty,
+  1-bounded) complete metric space $X=\tuple{X,d}$ is the set
+  $$\ti X = (X\times \Nat ) \cup \s{\infty}$$
+  endowed with the metric
+  $\dd :\ti X \times \ti X \rightarrow [0,1]$ defined by
+$$
+\dd (\infty,\infty) = 0, \qquad 
+\dd (\computation{n}{x} ,\infty) = \dd (\infty,\computation{n}{x}) = \h^{n}
+$$
+$$
+\dd (\computation{n}{x},\computation{n}{y})= \h^{n}\cdot d(x,y), \qquad
+\dd (\computation{n}{x},\computation{m}{y})=\h^{\min(n,m)} \qquad
+\mbox{for $n \ne m$}. 
+$$
+where $\computation{n}{x}$ stands for $(x,n)$.  We regard the
+points of $\ti X$ as ``abstract computations'' of elements of~$X$.
+The free algebra structure $\delta_X : \esse \ti X \rightarrow \ti X$
+is the \emph{delay operator}
+\[
+\delay_{X}(\computation{n}{x}) = \computation{n+1}{x}, \qquad
+\delay_{X}(\infty) = \infty.
+\]
+Finally, the unit $\eta_X : X \rightarrow \ti X$ and the
+multiplication $\mu_X = \isom{\delta_X} : \ti^2 X \rightarrow \ti X$
+are given as follows:
+\[ 
+\eta_X(x)  = \computation{0}{x}, \qquad
+\mu_X\left(\computation{m}{\left(\computation{n}{x}\right)}\right) =
+\computation{m+n}{x}.
+\] 
+\end{example}
+
+\begin{example}
+  The monad $T$ generated by the lifting endofunctor $L$ is
+  defined as follows.  Its action on a cpo $X$ is the set
+  $$\ti X = (X\times \Nat ) \cup (\Nat \cup \s{\infty})$$
+  ordered by:
+$$
+\computation{n}{x} \order \computation{n}{y}\iff x\order y \qquad
+n \order \computation{m}{x} \iff n \leq m
+$$
+$$
+n\order m \iff n \leq m \qquad n \order \infty
+$$
+where, again, $\computation{n}{x}$ stands for $(x,n)$.
+The free algebra structure is defined in a similar way as in the
+metric case, and for the extra points of $\Nat$ it is the
+successor. So is the unit [??what about multiplication??]
+\end{example}
+
+\begin{proposition}
+If an endofunctor $\esse$ generates a monad $\ti$
+then the canonical comparison functor
+$$K:\alg{\esse} \rightarrow \alg{\ti}$$
+between the algebras of the \emph{endofunctor} $\esse$ and
+the algebras of the \emph{monad} $\ti$ is an isomorphism.
+%
+%\emph{Proof.}
+%$$
+%\isom{\f} \comp \delta_X \comp \esse \eta_X
+%= \f \comp \esse \isom{\f} \comp \esse \eta_X
+%= \f
+%$$
+%$$
+%\g\comp \delta_X = \g\comp \delta_X \comp \esse \mu_X \comp \esse \eta_{TX}
+%= \g\comp \mu_X \comp \delta_{TX} \comp \esse \eta_{TX}
+%= \g\comp T\g \comp \delta_{TX} \comp \esse \eta_{TX}
+%$$
+%$$
+%= \g\comp \delta_X \comp \esse \ti \g \comp \esse \eta_{TX}
+%= \g\comp \delta_X \comp \esse \eta_{X} \comp \esse \g
+%$$
+\close
+\end{proposition}
+Before giving concrete examples, we give the general construction of
+this folklore isomorphism.
+
+The functor $K$ maps an $\esse$-algebra $\f: \esse X \rightarrow X$ to
+the $\ti$-algebra $\isom{\f} : TX \rightarrow X$, obtained by
+transposing the identity $\id_X :X\rightarrow X =U\tuple{X,\f}$ across
+the adjunction from $\CC$ to $\alg{\esse}$:
+\begin{equation}
+  \label{eq:kappa}
+  \xymatrix{
+{\esse TX} \ar[d]_{\delta_X} \ar[r]^{\esse \isom{\f}} 
+     & {\esse X} \ar[d]^{\f}
+\\
+TX \ar[r]_{\isom{\f}} &  X
+}
+\end{equation}
+
+\begin{example}
+Given a map $f:LX\rightarrow X$, the structure map sends
+$n$ to $f^n (f(\bot ))$, 
+and a point $\computation{n}{x}$ to $f^n (x)$.
+\end{example}
+
+\begin{example}
+  Given an $\varepsilon$-contractive map $f$
+the structure map sends $\infty$ to the fixpoint of $f$
+and a point $\computation{n}{x}$ to $f^n (x)$.
+\end{example}
+
+
+In other words, $\isom{\f}$ is the counit of the 
+adjunction applied to the algebra $\tuple{X,\f}$.
+On morphisms, the comparison functor behaves as the identity.
+Therefore:
+
+\begin{remark}
+  $\comparing_{\f}$ is natural in $\f$, in the sense
+that for every commuting square
+$$\xymatrix{
+\esse X \ar[d]_{\f} \ar[r]^{\esse h} 
+     & \esse Y\ar[d]^{\g}
+\\
+X \ar[r]_h &  Y
+}$$
+we have $\isom{\g}\comp Th = h\comp \isom{\f}$:
+$$\xymatrix{
+\ti X \ar[d]_{\isom{\f}} \ar[r]^{\esse h} 
+     & \esse \ti Y\ar[d]^{\isom{\g}}
+\\
+X \ar[r]_h &  Y
+}$$
+\close
+\end{remark}
+
+The inverse of $K$ acts on a $\ti$-algebra $\ti X \rightarrow X$
+by precomposing it with 
+$\esse X \stackrel{\esse \eta_X}{\rightarrow}\esse \ti X 
+  \stackrel{\delta_X}{\rightarrow} \ti X$.
+
+
+\begin{theorem} 
+If $\ti$ is
+a fixpoint monad for a pointed endofunctor $(\esse , \contr )$,
+then, for every $\esse$-algebra structure $\f:\esse X\rightarrow X$
+the point
+$$\fpc_{\f} \defin \isom{\f} \comp \infty_X : 1\rightarrow X$$
+has the following two properties:
+\begin{itemize}
+\item[1.] (\emph{$\contr$-fixpoint})
+$\fpc_\f$ is a $\contr$-fixpoint for $\f$,
+ie $\fpc_\f = \f \comp \contr_X \comp \fpc_\f$:
+$$\xymatrix{
+1 \ar[d]_-{\fpc_\f}  \ar[rrd]^-{\fpc_\f} & & 
+\\
+X \ar[r]_{\contr_X} & \esse X \ar[r]_-\f & X
+}$$
+\item[2.] (\emph{uniformity}) $\fpc_\f$ is natural in $\f$ in the sense that 
+for all $\esse$-algebra homomorphisms 
+$h:\tuple{X,\f} \rightarrow \tuple{Y,\g}$
+$$\xymatrix{
+\esse X \ar[d]_{\f} \ar[r]^{\esse h} 
+     & \esse Y\ar[d]^{\g}
+\\
+X \ar[r]_h &  Y
+}$$
+we have $\fpc_\g = h\comp \fpc_\f$:
+$$\xymatrix{
+1 \ar[d]_-{\fpc_\f}  \ar[rd]^-{\fpc_\g} & 
+\\
+X \ar[r]_-h & Y
+}$$
+\end{itemize}
+Moreover:
+\begin{itemize}
+\item[3.] (\emph{uniqueness})
+$\fpc$ is the unique operator verifying the two properties above.
+\end{itemize}
+
+\emph{Proof.}
+1)
+Just note that the following diagram commutes
+because of diagrams (\ref{eq:fpmonad}) and (\ref{eq:kappa})
+and of the naturality of $\contr$
+$$\xymatrix{
+1\ar[r]^-{\infty_X} \ar[rdd]_-{\infty_X}
+   & TX \ar[r]^{\isom{\f}} \ar[d]^{\contr_{TX}} 
+   & X \ar[d]^{\contr_X} %\ar@/^/[dd]
+\\
+   & \esse TX \ar[r]^{\esse \isom{\f}} \ar[d]^{\delta_X}
+   & \esse X \ar[d]^{\f}
+\\
+   & TX \ar[r]_{\isom{\f}} 
+   & X
+}$$
+2)
+By naturality of $\infty$ and $\comparing$:
+$$\fpc_\g = \isom{\g} \comp \infty_Y = 
+\isom{\g}\comp Th \comp \infty_X 
+  = h \comp \isom{\f} \comp \infty_X = h \comp \fpc_\f$$
+3)
+By the equalizing property of $\infty$,
+we have that any other $\contr$-fixpoint operator $\fppc$
+has the property that $\fppc_{\delta_X} = \infty_X$.
+Then, if $\fppc$ satisfies the second property,
+$$\fppc_\f = \isom{\f} \comp \fppc_{\delta_X}
+= \isom{\f} \comp \infty_X = \fpc_\f$$
+because, by definition,
+$\isom{\f}$ is an $\esse$-algebra homomorphism
+between $\delta_X$ and $\f$.
+\close
+\end{theorem}
+(Cf \cite[Thm 4.3]{alex} and \cite[Thm 3.12]{Mulry}.)
+
+\begin{example}
+  Cpos.
+
+The familiar fixpoint operator of domain theory 
+is recovered by considering maps 
+$$\esse X \stackrel{x}{\rightarrow} X \stackrel{f}{\rightarrow} X$$
+where $x$ is an algebra for the \emph{pointed} endofunctor $\pointedfunctor$,
+hence $x\comp \contr_x = \id_X$.
+Then we have that for every endomap $f:X\rightarrow X$
+on a $(\esse , \contr )$-algebra $\tuple{X,x }$
+the point
+$$\fp^x_f \defin \isom{f\comp x} \comp \infty_X : 1\rightarrow X$$
+is a fixpoint for $f$:
+$$\fp^x_f = f \comp x \comp \contr_X \comp \fp^x_f = f \comp \fp^x_f$$
+Moreover,
+$\fp$ is natural in $\tuple{f,x}$ in the sense that 
+for all endomaps 
+$f: X\rightarrow X$ and $g:Y\rightarrow Y$
+on $(\esse , \contr )$-algebras $\tuple{X,x }$ and $\tuple{Y,\upsilon }$
+and all homomorphisms $h:X \rightarrow Y$
+$$\xymatrix{
+\esse X \ar[d]_{x} \ar[r]^{\esse h} 
+     & \esse Y\ar[d]^{y}
+\\
+X \ar[d]_{f} \ar[r]^{h} 
+     & Y\ar[d]^{g}
+\\
+X \ar[r]_h &  Y
+}
+$$
+we have $\fp^y_g = h\comp \fp^x_f$.
+$\fp$ is the unique operator verifying the two properties above.
+Note that we do not need to assume that $\esse$ is a monad,
+although when we take $\esse$ to be the
+lifting monad on cpos then its (monad) algebras
+are property rather than
+structure, hence the superscript $x$ can be dropped.
+The fixpoint operator is then the one given
+by the least fixpoint theorem for 
+endomaps on cppos.
+\end{example}
+
+\begin{example}
+We can define a fixpoint operator
+$\fp$ for $\contr$-contractive endomaps
+$f:X\rightarrow X$:
+$$\fp_f \defin \isom{\factored{f}} \comp \infty_X : 1\rightarrow X$$
+Clearly:
+$$\fp_f = f \comp \fp_f$$
+and
+$\fp_f$ is natural in $f$ in the sense that 
+for all $\contr$-contractive endomaps 
+$f: X\rightarrow X$ and $g:Y\rightarrow Y$
+and all commuting squares
+$$\xymatrix{
+X \ar[d]_{f} \ar[r]^{h} 
+     & Y\ar[d]^{g}
+\\
+X \ar[r]_h &  Y
+}$$
+we have $\fp_g = h\comp \fp_f$.
+Moreover,
+$\fp$ is the unique operator verifying the two properties above.
+It corresponds to the fixpoint operator given
+by Banach's fixpoint theorem.
+\end{example}
+
+\begin{remark}
+  If $\ti$
+is a fixpoint monad for
+a pointed endofunctor on a category
+$\CC$ with an initial object $0$,
+then all equalizers $\infty_X$
+are determined by $\infty_0$,
+because $\infty_X = \fpc_{\delta_X}$
+hence, by uniformity,
+$\infty_X$ is the composition of
+$\infty_0 = \fpc_{\delta_0}$
+with the unique homomorphism from the initial algebra $\delta_0$
+to $\delta_X$.
+This explains why
+in categories with initial objects
+one can focus on the \emph{fixpoint object} $\ti 0$
+rather than on the whole monad $\ti$.
+\end{remark}
+
+
+In particular, for cppos, $T0$ is given by the ordered natural numbers
+together with a top infinity point.  In the metric case, when
+$\pointedfunctor$ is $(\Id_\varepsilon ,\id^\varepsilon )$, there is
+no algebra $x: \Id_\varepsilon X \rightarrow X$ such that $x\comp
+\id_X^\varepsilon = \id_X$.  Thus, instead of arbitrary endomaps
+between algebras of the \emph{pointed} endofunctor $(\Id_\varepsilon
+,\id^\varepsilon )$, one considers $\varepsilon$-contractive endomaps.
+Since $\id^\varepsilon$ is pointwise epi, there is an isomorphism
+$f\mapsto \factored{f}$ between the category of
+$\varepsilon$-contractive endomaps and the category of
+$\Id_\varepsilon$-algebras.
+
+%In general, even when $\contr$ is not pointwise epi
+%one can define such a fixpoint operator for
+%$\contr$-contractive maps
+%\emph{relative} to a functor
+%$$\ ^- : \contrcat \rightarrow \alg{\esse}$$
+%which enables to select one $\contr$-factor $\factored{f}$
+%for each $\contr$-contractive endomap.
+
+
+
+
+\section{Fixpoints and Final Coalgebras}
+
+Let us consider the case when the category $\CC$ has binary coproducts
+and the endofunctor $\esse$ \emph{freely generates a monad}
+$\ti$, in the sense that
+$\ti X \cong X+\esse \ti X$
+is an initial algebra for the endofunctor $(X+\esse )$
+for every $X$ in $\CC$.
+
+
+\begin{proposition}
+\label{propoabove}
+  If, for every $X$ in $\CC$,
+$\ti X\cong X+\esse \ti X$ is a 
+final $(X+\esse )$-coalgebra
+then
+$\ti$ is a fixpoint monad
+for $\pointedfunctor$
+for every point $\sigma :\Id \Rightarrow S$ of $S$.
+\end{proposition}
+
+We need the following technical lemma.
+
+\begin{lemma}
+Let $G$ and $H$ be two endofunctors on a category $\CC$
+connected by a natural transformation $\tau : H\Rightarrow GH$.
+Let $a : A\rightarrow GHA$ be a final $GH$-coalgebra with inverse
+$a ' :GHA \rightarrow A$.
+Then, the algebra $a ' \comp \tau_A : HA \rightarrow A$
+is final with respect to homomorphisms from $H$-coalgebras,
+ie
+for every $H$-coalgebra $y: Y \rightarrow HY$,
+there exists a unique $h: Y \rightarrow A$ 
+such that the diagram
+$$\xymatrix{
+Y \ar[r]^-{h}  \ar[d]_-{y} & A
+\\
+HY \ar[r]_-{Hh} & HA \ar[u]_-{a '\comp \tau_A} 
+}$$
+commutes.
+
+\emph{Proof.} Simply turn $y : Y \rightarrow HY$
+into a $GH$-coalgebra by composing it
+with $\tau_Y : HY \rightarrow GHY$
+and then use finality.
+\close
+%Let $A\cong X+HA$ be a final $(X+H)$-coalgebra
+%and let $[f,\alpha]: X+HA \rightarrow A$ be its inverse.
+%Then, the algebra $\alpha : HA \rightarrow A$
+%is final with respect to homomorphisms from $H$-coalgebras,
+%ie
+%for every $H$-coalgebra $\upsilon : Y \rightarrow HY$,
+%there exists a unique $h: Y \rightarrow A$ 
+%such that the diagram
+%$$\xymatrix{
+%Y \ar[r]^-{h}  \ar[d]_-{\upsilon} & A
+%\\
+%HY \ar[r]_-{Hh} & HA \ar[u]_-{\alpha} 
+%}$$
+%commutes.
+
+%\emph{Proof.} Simply turn $\upsilon : Y \rightarrow HY$
+%into an $(X+H)$-coalgebra by composing it
+%with the right injection $HY \rightarrow X+HY$
+%and then use finality.
+\end{lemma}
+
+\emph{Proof of Proposition \ref{propoabove}.}
+Define $\infty_X$ using the finality property of $\delta_X$
+given by the above lemma for $\tau =\inr : \esse \Rightarrow X+ \esse$:
+$$\xymatrix{
+1 \ar@{-->}[r]^-{\infty_X}  \ar[d]_{\contr_1} & TX
+\\
+\esse 1 \ar[r]_-{\esse (\infty_X )} & {\esse TX} \ar[u]_{\delta_X} 
+}$$
+Then, by the naturality of $\contr$:
+$$\delta_X \comp \contr_{TX} \comp \infty_X 
+  = \delta_X \comp \esse (\infty_X) \comp \contr_1
+  = \infty_X
+$$
+Further, that $\infty$ is an equalizer can 
+be proved as follows.
+Consider a map $f: A \rightarrow TX$ such that
+\begin{equation}
+  \label{eq:fequa}
+  f = \delta_X \comp \contr_{TX} \comp f
+\end{equation}
+The claim is that $f$ factors through $\infty_X : 1\rightarrow TX$.
+By the finality property of $\delta_X$ and the definition of $\infty_X$,
+it suffices to show that the following two diagrams commute:
+$$\xymatrix{
+A \ar[r]^-{f}  \ar[d]_{\contr_A} & TX
+\\
+\esse A \ar[r]_-{\esse f} & {\esse TX} \ar[u]_{\delta_X} 
+}
+\HSP
+\xymatrix{
+A \ar[r]^-{!}  \ar[d]_{\contr_A} & 1 \ar[d]^{\contr_1}
+\\
+\esse A \ar[r]_-{\esse !} & {\esse 1} 
+}
+$$
+But the commutativity of the second is trivial
+and the commutativity of the first follows from
+the naturality of $\contr$ and the assumption (\ref{eq:fequa}).
+\close
+
+
+\subsection*{Algebraic Compactness}
+
+In the rest of this section we assume
+familiarity with the results in \cite{Kock}.
+Thus recall that a monoidal pointed endofunctor $\pointedfunctor$
+on a monoidal category $\CC = \tuple{\CC , \otimes , I}$
+is equipped with
+a natural transformation
+$$\monoi_{X,Y} : X\otimes Y \rightarrow \esse (X\otimes Y)$$
+which gives rise to a tensorial strength
+$\strength_{X,Y} : X\otimes \esse Y \rightarrow \esse (X\otimes Y)$
+$$\xymatrix{
+X\otimes \esse Y \ar[r]^{\contr \otimes \id}  \ar[rd]_-{\strength}  
+  & \esse X\otimes \esse Y \ar[d]^{\monoi}  
+\\
+& \esse (X\otimes Y)
+}$$
+Also recall that in a (\emph{monoidal}) \emph{closed category}, 
+ie a category where $\fstarg \otimes X$ has
+a right adjoint $\lolly{X}{\fstarg}$,
+there is a 1-1 correspondence
+between tensorial strengths and ordinary strengths;
+the latter internalize the action of endofunctors on morphisms:
+$$\stre_{X,Y} : \lolly{X}{Y}\rightarrow \lolly{\esse X}{\esse Y}$$
+(see \cite[Thm 1.3]{Kock}).
+
+
+\begin{lemma}
+\label{exp}
+If $\pointedfunctor$ 
+is a monoidal pointed endofunctor
+on a closed category $\CC$,
+then 
+$\stre_{X,A} : \lolly{X}{A}\rightarrow \lolly{\esse X}{\esse A}$
+is weakly $\contr$-contractive for all $X$ and $A$ in $\CC$.
+
+\emph{Proof.}
+By definition, 
+$\stre_{X,A} : \lolly{X}{A}\rightarrow \lolly{\esse X}{\esse A}$
+is obtained by transposing the map
+$S\varepsilon \comp \monoi \comp (\contr \otimes \id )$,
+therefore it is the transposition of $S\varepsilon \comp \monoi$
+precomposed with $\contr$, which gives the desired factorization.
+\close
+\end{lemma}
+
+\begin{definition}
+Let $H$ be a monoidal endofunctor on a closed 
+category $\CC$.
+We say that $H$ is \emph{locally $\contr$-contractive}
+if its strength is $\contr$-contractive.
+\end{definition}
+
+\begin{theorem}
+Let $\pointedfunctor$ be a monoidal pointed endofunctor
+on a closed category $\CC = (\CC ,\otimes, I)$
+generating a fixpoint monad.
+Then every locally $\contr$-contractive
+endofunctor $H$ on $\CC$ is algebraically compact,
+ie if $\alpha :HA\cong A$ is an initial $H$-algebra then
+its inverse $\inial :A \cong HA$ is a
+final $H$-coalgebra.
+
+\emph{Proof.}
+We have to prove that for every $g: X\rightarrow HX$
+there exists a unique $h: X\rightarrow A$ making the diagram
+$$\xymatrix{
+X \ar[r]^-h  \ar[d]_g & A  \ar@/_/[d]_-{\inial}
+\\
+HX \ar[r]_-{Hh} 
+   & HA \ar@/_/[u]_-{\alpha} 
+}
+$$
+commute.
+By monoidal closure,
+the mapping $h \mapsto \alpha \comp Hh \comp g$
+corresponds to a map
+$$\Phi_g : \lolly{X}{A} \rightarrow \lolly{X}{A}$$
+which is $\contr$-contracting because it factors
+through the (by hypothesis) $\contr$-contractive map 
+$\stre_{X,A} : \lolly{X}{A} \rightarrow \lolly{HX}{HA}$
+as follows:
+$$\xymatrix{
+\lolly{X}{A} \ar[r]^-{\stre_{X,A}}
+ & \lolly{HX}{HA} \ar[r]^-{\lolly{g}{\alpha}}
+ & \lolly{X}{A}
+}
+$$
+By, again, monoidal closure,
+$\fp_{\Phi_g}$ is the name of a coalgebra map
+from $A$ to $\ti X$.
+This proves the existence part of the theorem.
+
+Next, uniqueness.
+Note that, by the initiality of $A$,
+the map $\Phi_{\inial}$ can have only one fixpoint,
+namely (the name of) the identity on $\lolly{A}{A}$.
+Therefore, by uniformity, 
+$\Phi_g$ is completely determined by
+a (necessarily unique) homomorphism
+from
+$\Phi_{\inial}$ to $\Phi_g$.
+But, as the following diagram shows, 
+such a homomorphism is given by
+$\lolly{h}{A}$,
+for any coalgebra
+homomorphism $h: X \rightarrow A$.
+$$\xymatrix{
+\lolly{A}{A} \ar[r]^-{\stre_{A,A}} \ar[d]_-{\lolly{h}{A}}
+ & \lolly{HA}{HA} \ar[r]^-{\lolly{\alpha '}{\alpha}} \ar[d]_-{\lolly{Hh}{HA}}
+ & \lolly{A}{A} \ar[d]^-{\lolly{h}{A}}
+\\
+\lolly{X}{A} \ar[r]_-{\stre_{X,A}}
+ & \lolly{HX}{HA} \ar[r]_-{\lolly{g}{\alpha}}
+ & \lolly{X}{A}
+}
+$$
+The first square commutes by naturality and the second
+by the fact that $h$ is a coalgebra homomorphism.
+\close
+\end{theorem}
+
+\begin{remark}
+[Note that this theorem does not apply to cppo...Strictness..]
+But maybe the idea could be elaborated to cover this case.
+\end{remark}
+
+
+By taking $H=X+S$ we have:
+\begin{corollary}
+If $\ti$ is a fixpoint monad freely generated by
+a monoidal pointed endofunctor
+$\pointedfunctor$ on a closed category $\CC$,
+then, for every $X$ in $\CC$,
+$\ti X\cong X+\esse \ti X$ is a 
+final $(X+\esse )$-coalgebra.
+\end{corollary}
+
+\begin{example}
+  ???
+\end{example}
+
+\paragraph{Future work.}
+The main question we would like to address next is whether
+it is possible to glue the various down-scalers together
+and obtain an endofunctor whose algebras are
+contractive maps, irrespective of their contraction
+factor. 
+
+
+
+\paragraph{Acknowledgements.} 
+We gratefully acknowledge discussions with Alex Simpson.
+
+\bibliographystyle{alpha}
+\bibliography{fixpoints}
+
+
+
+
+\end{document}
+
+
+
+\begin{theorem}
+Let $\pointedfunctor$ be an affine monoidal pointed endofunctor
+on an affine monoidal closed category $\CC = (\CC ,\otimes, 1)$
+generating a fixpoint monad
+and let $H$ be an endofunctor on $\CC$
+such that either $H\cong KS$ or $H\cong SK$
+for some strong endofunctor $K$.
+
+If $\alpha :HA\cong A$ is an initial $H$-algebra then
+its inverse $\inial :A \cong HA$ is a
+final $H$-coalgebra.
+
+\emph{Proof.}
+We have to prove that for every $g: X\rightarrow HX$
+there exists a unique $h: X\rightarrow A$ making the diagram
+$$\xymatrix{
+X \ar[r]^-h  \ar[d]_g & A  \ar@/_/[d]_-{\inial}
+\\
+HX \ar[r]_-{Hh} 
+   & HA \ar@/_/[u]_-{\alpha} 
+}
+$$
+%$$\xymatrix{
+%A \ar[r]^-h  \ar[d]_g & \ti X
+%\\
+%X+ \esse A \ar[r]_-{X+ \esse h} 
+%   & X+ \esse \ti X \ar[u]_{[\eta_X ,\delta_X ]} 
+%}
+%$$
+commute.
+By monoidal closure,
+the mapping $h \mapsto \alpha \comp Hh \comp g$
+induces a map
+$$\Phi_g : \lolly{X}{A} \rightarrow \lolly{X}{A}$$
+If it is $\contr$-contracting then 
+clearly we can prove the existence part of the theorem.
+In order to prove $\Phi_g$ $\contr$-contracting
+let us make its definition explicit as follows,
+where we have assumed that $H\cong KS$
+and where $\stre^\esse$ and $\stre^K$ are the strengths
+of $\esse$ and $K$ respectively.
+$$\xymatrix{
+\lolly{X}{A} \ar[r]^-{\stre^\esse}
+ & \lolly{\esse X}{\esse A}\ar[r]^-{\stre^K}
+ & \lolly {K\esse X}{K\esse A} \ar[r]^-{\cong}
+ & \lolly{HX}{HA} \ar[r]^-{\lolly{HX}{\alpha}}
+ & \lolly{HX}{A} \ar[r]^-{\lolly{g}{A}}
+ & \lolly{X}{A}
+}
+$$
+%$$\xymatrix{
+%\ti X^A \ar[r] 
+% & \esseti X^{\esse A} \ar[r]^-{\delta_X^{\esse A}}
+% & \ti X^{\esse A} \; \cong \; 1\times \ti X^{\esse A}
+%   \ar[r]^-{\nameof{\eta_X} \times \id } % \ti X^{\esse A} }
+% & \ti X^X \times \ti X^{\esse A} \; \cong \;
+%   \ti X^{X+ \esse A} \ar[r]^-{\ti X^g}
+% & \ti X^A
+%}
+%$$
+For every coalgebra $g: X \rightarrow HX$,
+weak $\contr$-contractivity is then immediate,
+because $\Phi_g$ factors
+through the map 
+$\stre : \lolly{X}{A} \rightarrow \lolly{\esse X}{\esse A}$
+which,
+by Lemma \ref{exp}, 
+is weakly $\contr$-contractive.
+Because $\CC$ is affine, ie the unit of the tensor is the terminal object,
+$\fp (\Phi_g )$ is the name of a coalgebra map
+from $A$ to $\ti X$.
+The same holds if $H\cong SK$.
+
+Next, uniqueness.
+We consider the case $H\cong KS$, but 
+the same holds for $H\cong SK$.
+Note that, by the initiality of $A$,
+the map $\Phi_{\inial}$ can have only one fixpoint,
+namely (the name of) the identity on $\lolly{A}{A}$.
+Therefore, by uniformity, 
+$\Phi_g$ is completely determined by
+a (necessarily unique) homomorphism
+from
+$\Phi_{\inial}$ to $\Phi_g$.
+But, as the following diagram shows, 
+such a homomorphism is given by
+$\lolly{h}{A}$,
+for any coalgebra
+homomorphism $h: X \rightarrow A$.
+$$\xymatrix{
+\lolly{A}{A} \ar[r]^-{\stre^\esse} \ar[d]_-{\lolly{h}{A}}
+ & \lolly{\esse A}{\esse A}\ar[r]^-{\stre^K} \ar[d]_-{\lolly{\esse h}{\esse A}}
+ & \lolly {K\esse A}{K\esse A} \ar[r]^-{\cong}
+   \ar[d]_-{\lolly{K\esse h}{K\esse A}}
+ & \lolly{HA}{HA} \ar[r]^-{\lolly{HA}{\alpha}} \ar[d]_-{\lolly{Hh}{HA}}
+ & \lolly{HA}{A} \ar[r]^-{\lolly{\alpha '}{A}} \ar[d]_-{\lolly{Hh}{A}}
+ & \lolly{A}{A} \ar[d]^-{\lolly{h}{A}}
+\\
+\lolly{X}{A} \ar[r]_-{\stre^\esse}
+ & \lolly{\esse X}{\esse A}\ar[r]_-{\stre^K}
+ & \lolly {K\esse X}{K\esse A} \ar[r]_-{\cong}
+ & \lolly{HX}{HA} \ar[r]_-{\lolly{HX}{\alpha}}
+ & \lolly{HX}{A} \ar[r]_-{\lolly{g}{A}}
+ & \lolly{X}{A}
+}
+$$
+All squares commute by naturality, but for the last,
+which commutes by the fact that $h$ is a coalgebra homomorphism.
+%(For the second square, note that $\delta_X^C$ is natural in $C$
+%because
+%$f^{( \midarg)}: A^{( \midarg)} \rightarrow B^{( \midarg)}$ 
+%is natural for any $f:A\rightarrow B$.)
+\close
+\end{theorem}
+(Cf Theorem 7.3 in \cite{TR98}.)
+
+By taking $H=X+S$ we have:
+\begin{corollary}
+If $\ti$ is a fixpoint monad freely generated by
+an affine monoidal pointed endofunctor
+$\pointedfunctor$ on an affine monoidal closed category $\CC$,
+then, for every $X$ in $\CC$,
+$\ti X\cong X+\esse \ti X$ is a 
+final $(X+\esse )$-coalgebra.
+\end{corollary}
+Note that we do not need to assume that
+$\infty$ is an equalizer.
+%Also note that
+%in the cpo case we need the extra assumption that $\esse$
+%is a commutative monad in order to ensure that $\ti X^h$
+%is strict, which fact we do not need here.
+
+\section{Rest}
+
+\begin{proposition}
+  If $F:X\rightarrow Y$
+is (weakly) $\contr$-contractive
+for a strong pointed endofunctor $\pointedfunctor$
+then $\lolly{A}{f} : \lolly{A}{X} \rightarrow \lolly{A}{Y}$
+is (weakly) $\contr$-contractive as well.
+\end{proposition}
+
+The proof is a consequence of the following lemma.
+
+\begin{lemma}
+  If $\pointedfunctor$ is a strong pointed endofunctor
+on a monoidal closed category $\CC$,
+then $\lolly{A}{\contr_X } : \lolly{A}{X} \rightarrow \lolly{A}{SX}$
+is weakly $\contr$-contractive for all $X$ and $A$ in $\CC$.
+
+\emph{Proof.}
+First consider the following commutative diagram.
+$$Bla$$
+Then transpose the two composites in the outer diagram
+$$bla$$
+and note that this gives the desired factorization.
+\close
+\end{lemma}
+
+\nocite{fpobject,Fre90,escardo:metric,alex}
+
+
+\paragraph{Acknowledgements.} 
+Alex Simpson.
+
+\bibliographystyle{alpha}
+\bibliography{metric}
+
+
+
+
+\end{document}
+
+
+
+
+\begin{theorem} \textbf{[Cpo case]}
+If $\ti$ is
+a fixpoint monad for a pointed endofunctor $(\esse , \contr )$,
+then, for every endomap $f:X\rightarrow X$
+on a $(\esse , \contr )$-algebra $\tuple{X,\xi }$
+the point
+$$\fp_f \defin \isom{f\comp \xi} \comp \infty_X : 1\rightarrow X$$
+has the following two properties:
+\begin{enumerate}
+\item (\emph{fixpoint})
+$\fp_f$ is a fixpoint for $f$,
+ie $\fp_f = f\comp \fp_f$:
+$$\xymatrix{
+1 \ar[d]_-{\fp_f}  \ar[rd]^-{\fp_f} & 
+\\
+X \ar[r]_-f & X
+}$$
+\item (\emph{uniformity}) $\fp_f$ is natural in $f$ in the sense that 
+for all endomaps 
+$f: X\rightarrow X$ and $g:Y\rightarrow Y$
+on $(\esse , \contr )$-algebras $\tuple{X,\xi }$ and $\tuple{Y,\upsilon }$
+and all commuting diagrams
+$$\xymatrix{
+\esse X \ar[d]_{\xi} \ar[r]^{\esse h} 
+     & \esse Y\ar[d]^{\upsilon}
+\\
+X \ar[d]_{f} 
+     & Y\ar[d]^{g}
+\\
+X \ar[r]_h &  Y
+}$$
+we have $\fp_g = h\comp \fp_f$:
+$$\xymatrix{
+1 \ar[d]_-{\fp_f}  \ar[rd]^-{\fp_g} & 
+\\
+X \ar[r]_-h & Y
+}$$
+Moreover:
+\item (\emph{uniqueness})
+$\fp$ is the unique operator verifying the two properties above.
+\end{enumerate}
+
+\emph{Proof.}
+1)
+$$\xymatrix{
+1\ar[r]^-{\infty_X} \ar[rdd]_-{\infty_X}
+   & TX \ar[r]^{\isom{f}} \ar[d]^{\contr_{TX}} 
+   & X \ar[d]_{\contr_X} %\ar@/^/[dd]
+\\
+   & \esse TX \ar[r]^{\esse \isom{f}} \ar[d]^{\delta_X}
+   & \esse X \ar[d]_{\factored{f}}
+\\
+   & TX \ar[r]_{\isom{f}} 
+   & X
+}$$
+2)
+By naturality of $\infty$ and $\comparing$:
+$$\fp_g = \isom{g\comp \upsilon} \comp \infty_Y = 
+\isom{g\comp \upsilon}\comp Th \comp \infty_X 
+  = h \comp \isom{f\comp \xi} \comp \infty_X = h \comp \fp_f$$
+3)
+By the equalizing property of $\infty$,
+we have that any other fixpoint operator $\fpp$
+has the property that $\fpp (\delta_X \comp \contr_{TX} ) = \infty_X$.
+Then, if $\fpp$ satisfies the second property,
+$$\fpp f = \isom{f\comp \xi} \comp \fpp (\delta_X \comp \contr_{TX} ) 
+= \isom{f\comp \xi} \comp \infty_X = \fp f$$
+because $\isom{f\comp \xi}$ is an $\esse$-algebra homomorphism
+between $\delta_X$ and $f\comp \xi$.
+\close
+\end{theorem}
+
+
+
+\begin{theorem}\textbf{[Metric case]}
+If $\ti$ is
+a fixpoint monad for a pointed endofunctor $(\esse , \contr )$,
+then, for every $\contr$-contracting endomap $f:X\rightarrow X$,
+the point
+$$\fp_f \defin \isom{f} \comp \infty_X : 1\rightarrow X$$
+has the following three properties:
+\begin{enumerate}
+\item (\emph{fixpoint})
+$\fp_f$ is a fixpoint for $f$,
+ie $\fp_f = f\comp \fp_f$:
+$$\xymatrix{
+1 \ar[d]_-{\fp_f}  \ar[rd]^-{\fp_f} & 
+\\
+X \ar[r]_-f & X
+}$$
+\item (\emph{uniformity}) $\fp_f$ is natural in $f$ in the sense that 
+for all $\contr$-contractive endomaps 
+$f: X\rightarrow X$ and $g:Y\rightarrow Y$
+and all commuting squares
+$$\xymatrix{
+X \ar[d]_{f} \ar[r]^{h} 
+     & Y\ar[d]^{g}
+\\
+X \ar[r]_h &  Y
+}$$
+we have $\fp_g = h\comp \fp_f$:
+$$\xymatrix{
+1 \ar[d]_-{\fp_f}  \ar[rd]^-{\fp_g} & 
+\\
+X \ar[r]_-h & Y
+}$$
+\item (\emph{uniqueness})
+$\fp$ is the unique operator verifying the two properties above.
+\end{enumerate}
+
+\emph{Proof.}
+1)
+$$\xymatrix{
+1\ar[r]^-{\infty_X} \ar[rdd]_-{\infty_X}
+   & TX \ar[r]^{\isom{f}} \ar[d]^{\contr_{TX}} 
+   & X \ar[d]_{\contr_X} %\ar@/^/[dd]
+\\
+   & \esse TX \ar[r]^{\esse \isom{f}} \ar[d]^{\delta_X}
+   & \esse X \ar[d]_{\factored{f}}
+\\
+   & TX \ar[r]_{\isom{f}} 
+   & X
+}$$
+2)
+By naturality of $\infty$ and $\comparing$:
+$$\fp_g = \isom{g}\comp \infty_Y = \isom{g}\comp Th \comp \infty_X 
+  = h \comp \isom{f} \comp \infty_X = h \comp \fp_f$$
+3)
+By the equalizing property of $\infty$,
+we have that any other fixpoint operator $\fpp$
+has the property that $\fpp (\delta_X \comp \contr_{TX} ) = \infty_X$.
+Then, if $\fpp$ satisfies the second property,
+$$\fpp f = \isom{f} \comp \fpp (\delta_X \comp \contr_{TX} ) 
+= \isom{f} \comp \infty_X = \fp f$$
+because $\isom{f}$ is an $\esse$-algebra homomorphism
+between $\delta_X$ and $\factored{f}$.
+\close
+\end{theorem}
+
+\begin{remark}
+  If $\ti$
+is a fixpoint monad for
+a pointed endofunctor on a category
+$\CC$ with an initial object,
+then all equalizers $\infty_X$
+are determined by $\infty_0$,
+because, by uniformity,
+$\infty_X = \delta_X^\recu \comp \infty_0$.
+One then can focus on the \emph{fixpoint object} $\ti 0$
+for the pointed endofunctor.
+\close
+\end{remark}
+
+
+\begin{proposition}
+  If, for every $X$, there exists a unique fixpoint 
+$\infty_X : 1 \rightarrow TX$ for $\delta_X \comp \contr_{TX}$,
+then $\s{\infty_X}_{X\in \CC}$ is the unique
+family of points such that 
+$h\comp \infty_X = \infty_Y$
+for every $\esse$-algebra homomorphism $h: TX \rightarrow TY$.
+The converse also holds under the assumption that
+$(\esse , \contr )$ is well-pointed,
+ie $\esse \contr = \contr_\esse$.
+
+\emph{Proof.}
+$$\xymatrix{
+1 \ar[d]_-{\infty_X}  \ar[rrd]^{\infty_X} & &
+\\
+TX \ar[d]_h \ar[r]_{\contr_{TX}} & 
+{\esse TX} \ar[d]^{\esse h} \ar[r]_{\delta_X} & TX \ar[d]^h
+\\
+TY \ar[r]_{\contr_{TY}} & 
+{\esse TY} \ar[r]_{\delta_Y} & TY
+}$$
+hence $h\comp \infty_X = \infty_Y$ by the uniqueness of
+$\infty_Y$ for $\delta_Y \comp \contr_{TY}$.
+
+For the converse use well-pointedness as follows.
+$$\xymatrix{
+1 \ar[d]_-{\infty_X}  \ar[rrd]^{\infty_X} & &
+\\
+TX  \ar[r]_{\contr_{TX}} & 
+{\esse TX} \ar[r]_{\delta_X} & TX 
+\\
+{\esse TX} \ar[u]^{\delta_X} \ar@/^/[r]^{\contr_{\esse TX}} 
+                                 \ar@/_/[r]_{\esse \contr_{TX}} & 
+{\esse^2 TX} \ar[u]_{\esse \delta_X} \ar[r]_{\esse \delta_X} &
+{\esse TX} \ar[u]_{\delta_X} 
+}$$
+\close
+\end{proposition}

@@ -1,0 +1,782 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+><head
+  ><title
+    >FirstProjectionInjective</title
+    ><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"
+     /><meta http-equiv="Content-Style-Type" content="text/css"
+     /><link href="Agda.css" rel="stylesheet" type="text/css"
+     /></head
+  ><body
+  ><pre
+    ><a name="1" class="Comment"
+      >Martin Escardo 2012. </a
+      ><a name="22"
+      >
+
+\begin{code}
+
+</a
+      ><a name="38" class="Symbol"
+      >{-#</a
+      ><a name="41"
+      > </a
+      ><a name="42" class="Keyword"
+      >OPTIONS</a
+      ><a name="49"
+      > --without-K </a
+      ><a name="62" class="Symbol"
+      >#-}</a
+      ><a name="65"
+      >
+
+</a
+      ><a name="67" class="Keyword"
+      >module</a
+      ><a name="73"
+      > </a
+      ><a name="74" href="FirstProjectionInjective.html#1" class="Module"
+      >FirstProjectionInjective</a
+      ><a name="98"
+      > </a
+      ><a name="99" class="Keyword"
+      >where</a
+      ><a name="104"
+      >
+
+</a
+      ><a name="106" class="Keyword"
+      >open</a
+      ><a name="110"
+      > </a
+      ><a name="111" class="Keyword"
+      >import</a
+      ><a name="117"
+      > </a
+      ><a name="118" href="Equality.html#1" class="Module"
+      >Equality</a
+      ><a name="126"
+      >
+</a
+      ><a name="127" class="Keyword"
+      >open</a
+      ><a name="131"
+      > </a
+      ><a name="132" class="Keyword"
+      >import</a
+      ><a name="138"
+      > </a
+      ><a name="139" href="SetsAndFunctions.html#1" class="Module"
+      >SetsAndFunctions</a
+      ><a name="155"
+      >
+
+</a
+      ><a name="157" href="FirstProjectionInjective.html#157" class="Function"
+      >&#960;&#8320;-mono</a
+      ><a name="164"
+      > </a
+      ><a name="165" class="Symbol"
+      >:</a
+      ><a name="166"
+      > </a
+      ><a name="167" class="Symbol"
+      >{</a
+      ><a name="168" href="FirstProjectionInjective.html#168" class="Bound"
+      >X</a
+      ><a name="169"
+      > </a
+      ><a name="170" class="Symbol"
+      >:</a
+      ><a name="171"
+      > </a
+      ><a name="172" class="PrimitiveType"
+      >Set</a
+      ><a name="175" class="Symbol"
+      >}</a
+      ><a name="176"
+      > </a
+      ><a name="177" class="Symbol"
+      >&#8594;</a
+      ><a name="178"
+      > </a
+      ><a name="179" class="Symbol"
+      >{</a
+      ><a name="180" href="FirstProjectionInjective.html#180" class="Bound"
+      >Y</a
+      ><a name="181"
+      > </a
+      ><a name="182" class="Symbol"
+      >:</a
+      ><a name="183"
+      > </a
+      ><a name="184" href="FirstProjectionInjective.html#168" class="Bound"
+      >X</a
+      ><a name="185"
+      > </a
+      ><a name="186" class="Symbol"
+      >&#8594;</a
+      ><a name="187"
+      > </a
+      ><a name="188" class="PrimitiveType"
+      >Set</a
+      ><a name="191" class="Symbol"
+      >}</a
+      ><a name="192"
+      > </a
+      ><a name="193" class="Symbol"
+      >&#8594;</a
+      ><a name="194"
+      > </a
+      ><a name="195" class="Symbol"
+      >(&#8704;{</a
+      ><a name="198" href="FirstProjectionInjective.html#198" class="Bound"
+      >x</a
+      ><a name="199"
+      > </a
+      ><a name="200" class="Symbol"
+      >:</a
+      ><a name="201"
+      > </a
+      ><a name="202" href="FirstProjectionInjective.html#168" class="Bound"
+      >X</a
+      ><a name="203" class="Symbol"
+      >}</a
+      ><a name="204"
+      > </a
+      ><a name="205" class="Symbol"
+      >&#8594;</a
+      ><a name="206"
+      > </a
+      ><a name="207" class="Symbol"
+      >&#8704;(</a
+      ><a name="209" href="FirstProjectionInjective.html#209" class="Bound"
+      >y</a
+      ><a name="210"
+      > </a
+      ><a name="211" href="FirstProjectionInjective.html#211" class="Bound"
+      >y'</a
+      ><a name="213"
+      > </a
+      ><a name="214" class="Symbol"
+      >:</a
+      ><a name="215"
+      > </a
+      ><a name="216" href="FirstProjectionInjective.html#180" class="Bound"
+      >Y</a
+      ><a name="217"
+      > </a
+      ><a name="218" href="FirstProjectionInjective.html#198" class="Bound"
+      >x</a
+      ><a name="219" class="Symbol"
+      >)</a
+      ><a name="220"
+      > </a
+      ><a name="221" class="Symbol"
+      >&#8594;</a
+      ><a name="222"
+      > </a
+      ><a name="223" href="FirstProjectionInjective.html#209" class="Bound"
+      >y</a
+      ><a name="224"
+      > </a
+      ><a name="225" href="Equality.html#239" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="226"
+      > </a
+      ><a name="227" href="FirstProjectionInjective.html#211" class="Bound"
+      >y'</a
+      ><a name="229" class="Symbol"
+      >)</a
+      ><a name="230"
+      >
+
+   </a
+      ><a name="235" class="Symbol"
+      >&#8594;</a
+      ><a name="236"
+      > </a
+      ><a name="237" class="Symbol"
+      >&#8704;(</a
+      ><a name="239" href="FirstProjectionInjective.html#239" class="Bound"
+      >u</a
+      ><a name="240"
+      > </a
+      ><a name="241" href="FirstProjectionInjective.html#241" class="Bound"
+      >v</a
+      ><a name="242"
+      > </a
+      ><a name="243" class="Symbol"
+      >:</a
+      ><a name="244"
+      > </a
+      ><a name="245" href="SetsAndFunctions.html#804" class="Record"
+      >&#931;</a
+      ><a name="246"
+      > </a
+      ><a name="247" class="Symbol"
+      >\(</a
+      ><a name="249" href="FirstProjectionInjective.html#249" class="Bound"
+      >x</a
+      ><a name="250"
+      > </a
+      ><a name="251" class="Symbol"
+      >:</a
+      ><a name="252"
+      > </a
+      ><a name="253" href="FirstProjectionInjective.html#168" class="Bound"
+      >X</a
+      ><a name="254" class="Symbol"
+      >)</a
+      ><a name="255"
+      > </a
+      ><a name="256" class="Symbol"
+      >&#8594;</a
+      ><a name="257"
+      > </a
+      ><a name="258" href="FirstProjectionInjective.html#180" class="Bound"
+      >Y</a
+      ><a name="259"
+      > </a
+      ><a name="260" href="FirstProjectionInjective.html#249" class="Bound"
+      >x</a
+      ><a name="261" class="Symbol"
+      >)</a
+      ><a name="262"
+      > </a
+      ><a name="263" class="Symbol"
+      >&#8594;</a
+      ><a name="264"
+      > </a
+      ><a name="265" href="SetsAndFunctions.html#893" class="Function"
+      >&#960;&#8320;</a
+      ><a name="267"
+      > </a
+      ><a name="268" href="FirstProjectionInjective.html#239" class="Bound"
+      >u</a
+      ><a name="269"
+      > </a
+      ><a name="270" href="Equality.html#239" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="271"
+      > </a
+      ><a name="272" href="SetsAndFunctions.html#893" class="Function"
+      >&#960;&#8320;</a
+      ><a name="274"
+      > </a
+      ><a name="275" href="FirstProjectionInjective.html#241" class="Bound"
+      >v</a
+      ><a name="276"
+      > </a
+      ><a name="277" class="Symbol"
+      >&#8594;</a
+      ><a name="278"
+      > </a
+      ><a name="279" href="FirstProjectionInjective.html#239" class="Bound"
+      >u</a
+      ><a name="280"
+      > </a
+      ><a name="281" href="Equality.html#239" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="282"
+      > </a
+      ><a name="283" href="FirstProjectionInjective.html#241" class="Bound"
+      >v</a
+      ><a name="284"
+      >
+
+</a
+      ><a name="286" href="FirstProjectionInjective.html#157" class="Function"
+      >&#960;&#8320;-mono</a
+      ><a name="293"
+      > </a
+      ><a name="294" class="Symbol"
+      >{</a
+      ><a name="295" href="FirstProjectionInjective.html#295" class="Bound"
+      >X</a
+      ><a name="296" class="Symbol"
+      >}</a
+      ><a name="297"
+      > </a
+      ><a name="298" class="Symbol"
+      >{</a
+      ><a name="299" href="FirstProjectionInjective.html#299" class="Bound"
+      >Y</a
+      ><a name="300" class="Symbol"
+      >}</a
+      ><a name="301"
+      > </a
+      ><a name="302" href="FirstProjectionInjective.html#302" class="Bound"
+      >f</a
+      ><a name="303"
+      > </a
+      ><a name="304" href="FirstProjectionInjective.html#304" class="Bound"
+      >u</a
+      ><a name="305"
+      > </a
+      ><a name="306" href="FirstProjectionInjective.html#306" class="Bound"
+      >v</a
+      ><a name="307"
+      > </a
+      ><a name="308" href="FirstProjectionInjective.html#308" class="Bound"
+      >r</a
+      ><a name="309"
+      > </a
+      ><a name="310" class="Symbol"
+      >=</a
+      ><a name="311"
+      >
+ </a
+      ><a name="314" href="FirstProjectionInjective.html#494" class="Function"
+      >lemma</a
+      ><a name="319"
+      > </a
+      ><a name="320" href="FirstProjectionInjective.html#308" class="Bound"
+      >r</a
+      ><a name="321"
+      > </a
+      ><a name="322" class="Symbol"
+      >(</a
+      ><a name="323" href="SetsAndFunctions.html#968" class="Function"
+      >&#960;&#8321;</a
+      ><a name="325"
+      > </a
+      ><a name="326" href="FirstProjectionInjective.html#304" class="Bound"
+      >u</a
+      ><a name="327" class="Symbol"
+      >)</a
+      ><a name="328"
+      > </a
+      ><a name="329" class="Symbol"
+      >(</a
+      ><a name="330" href="SetsAndFunctions.html#968" class="Function"
+      >&#960;&#8321;</a
+      ><a name="332"
+      > </a
+      ><a name="333" href="FirstProjectionInjective.html#306" class="Bound"
+      >v</a
+      ><a name="334" class="Symbol"
+      >)</a
+      ><a name="335"
+      > </a
+      ><a name="336" class="Symbol"
+      >(</a
+      ><a name="337" href="FirstProjectionInjective.html#302" class="Bound"
+      >f</a
+      ><a name="338"
+      > </a
+      ><a name="339" class="Symbol"
+      >(</a
+      ><a name="340" href="Equality.html#905" class="Function"
+      >subst</a
+      ><a name="345"
+      > </a
+      ><a name="346" class="Symbol"
+      >{</a
+      ><a name="347" href="FirstProjectionInjective.html#295" class="Bound"
+      >X</a
+      ><a name="348" class="Symbol"
+      >}</a
+      ><a name="349"
+      > </a
+      ><a name="350" class="Symbol"
+      >{</a
+      ><a name="351" href="FirstProjectionInjective.html#299" class="Bound"
+      >Y</a
+      ><a name="352" class="Symbol"
+      >}</a
+      ><a name="353"
+      > </a
+      ><a name="354" href="FirstProjectionInjective.html#308" class="Bound"
+      >r</a
+      ><a name="355"
+      > </a
+      ><a name="356" class="Symbol"
+      >(</a
+      ><a name="357" href="SetsAndFunctions.html#968" class="Function"
+      >&#960;&#8321;</a
+      ><a name="359"
+      > </a
+      ><a name="360" href="FirstProjectionInjective.html#304" class="Bound"
+      >u</a
+      ><a name="361" class="Symbol"
+      >))</a
+      ><a name="363"
+      > </a
+      ><a name="364" class="Symbol"
+      >(</a
+      ><a name="365" href="SetsAndFunctions.html#968" class="Function"
+      >&#960;&#8321;</a
+      ><a name="367"
+      > </a
+      ><a name="368" href="FirstProjectionInjective.html#306" class="Bound"
+      >v</a
+      ><a name="369" class="Symbol"
+      >))</a
+      ><a name="371"
+      >
+ </a
+      ><a name="373" class="Keyword"
+      >where</a
+      ><a name="378"
+      >
+  </a
+      ><a name="382" href="FirstProjectionInjective.html#382" class="Function"
+      >A</a
+      ><a name="383"
+      > </a
+      ><a name="384" class="Symbol"
+      >:</a
+      ><a name="385"
+      > </a
+      ><a name="386" class="Symbol"
+      >&#8704;(</a
+      ><a name="388" href="FirstProjectionInjective.html#388" class="Bound"
+      >x</a
+      ><a name="389"
+      > </a
+      ><a name="390" href="FirstProjectionInjective.html#390" class="Bound"
+      >x'</a
+      ><a name="392"
+      > </a
+      ><a name="393" class="Symbol"
+      >:</a
+      ><a name="394"
+      > </a
+      ><a name="395" href="FirstProjectionInjective.html#295" class="Bound"
+      >X</a
+      ><a name="396" class="Symbol"
+      >)</a
+      ><a name="397"
+      > </a
+      ><a name="398" class="Symbol"
+      >&#8594;</a
+      ><a name="399"
+      > </a
+      ><a name="400" href="FirstProjectionInjective.html#388" class="Bound"
+      >x</a
+      ><a name="401"
+      > </a
+      ><a name="402" href="Equality.html#239" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="403"
+      > </a
+      ><a name="404" href="FirstProjectionInjective.html#390" class="Bound"
+      >x'</a
+      ><a name="406"
+      > </a
+      ><a name="407" class="Symbol"
+      >&#8594;</a
+      ><a name="408"
+      > </a
+      ><a name="409" class="PrimitiveType"
+      >Set</a
+      ><a name="412"
+      >
+  </a
+      ><a name="415" href="FirstProjectionInjective.html#382" class="Function"
+      >A</a
+      ><a name="416"
+      > </a
+      ><a name="417" href="FirstProjectionInjective.html#417" class="Bound"
+      >x</a
+      ><a name="418"
+      > </a
+      ><a name="419" href="FirstProjectionInjective.html#419" class="Bound"
+      >x'</a
+      ><a name="421"
+      > </a
+      ><a name="422" href="FirstProjectionInjective.html#422" class="Bound"
+      >r</a
+      ><a name="423"
+      > </a
+      ><a name="424" class="Symbol"
+      >=</a
+      ><a name="425"
+      > </a
+      ><a name="426" class="Symbol"
+      >&#8704;(</a
+      ><a name="428" href="FirstProjectionInjective.html#428" class="Bound"
+      >y</a
+      ><a name="429"
+      > </a
+      ><a name="430" class="Symbol"
+      >:</a
+      ><a name="431"
+      > </a
+      ><a name="432" href="FirstProjectionInjective.html#299" class="Bound"
+      >Y</a
+      ><a name="433"
+      > </a
+      ><a name="434" href="FirstProjectionInjective.html#417" class="Bound"
+      >x</a
+      ><a name="435" class="Symbol"
+      >)</a
+      ><a name="436"
+      > </a
+      ><a name="437" class="Symbol"
+      >&#8594;</a
+      ><a name="438"
+      > </a
+      ><a name="439" class="Symbol"
+      >&#8704;(</a
+      ><a name="441" href="FirstProjectionInjective.html#441" class="Bound"
+      >y'</a
+      ><a name="443"
+      > </a
+      ><a name="444" class="Symbol"
+      >:</a
+      ><a name="445"
+      > </a
+      ><a name="446" href="FirstProjectionInjective.html#299" class="Bound"
+      >Y</a
+      ><a name="447"
+      > </a
+      ><a name="448" href="FirstProjectionInjective.html#419" class="Bound"
+      >x'</a
+      ><a name="450" class="Symbol"
+      >)</a
+      ><a name="451"
+      > </a
+      ><a name="452" class="Symbol"
+      >&#8594;</a
+      ><a name="453"
+      > </a
+      ><a name="454" href="Equality.html#905" class="Function"
+      >subst</a
+      ><a name="459"
+      > </a
+      ><a name="460" href="FirstProjectionInjective.html#422" class="Bound"
+      >r</a
+      ><a name="461"
+      > </a
+      ><a name="462" href="FirstProjectionInjective.html#428" class="Bound"
+      >y</a
+      ><a name="463"
+      > </a
+      ><a name="464" href="Equality.html#239" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="465"
+      > </a
+      ><a name="466" href="FirstProjectionInjective.html#441" class="Bound"
+      >y'</a
+      ><a name="468"
+      > </a
+      ><a name="469" class="Symbol"
+      >&#8594;</a
+      ><a name="470"
+      > </a
+      ><a name="471" class="Symbol"
+      >(</a
+      ><a name="472" href="FirstProjectionInjective.html#417" class="Bound"
+      >x</a
+      ><a name="473"
+      > </a
+      ><a name="474" href="SetsAndFunctions.html#856" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="475"
+      > </a
+      ><a name="476" href="FirstProjectionInjective.html#428" class="Bound"
+      >y</a
+      ><a name="477" class="Symbol"
+      >)</a
+      ><a name="478"
+      > </a
+      ><a name="479" href="Equality.html#239" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="480"
+      > </a
+      ><a name="481" class="Symbol"
+      >(</a
+      ><a name="482" href="FirstProjectionInjective.html#419" class="Bound"
+      >x'</a
+      ><a name="484"
+      > </a
+      ><a name="485" href="SetsAndFunctions.html#856" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="486"
+      > </a
+      ><a name="487" href="FirstProjectionInjective.html#441" class="Bound"
+      >y'</a
+      ><a name="489" class="Symbol"
+      >)</a
+      ><a name="490"
+      >
+
+  </a
+      ><a name="494" href="FirstProjectionInjective.html#494" class="Function"
+      >lemma</a
+      ><a name="499"
+      > </a
+      ><a name="500" class="Symbol"
+      >:</a
+      ><a name="501"
+      > </a
+      ><a name="502" class="Symbol"
+      >&#8704;{</a
+      ><a name="504" href="FirstProjectionInjective.html#504" class="Bound"
+      >x</a
+      ><a name="505"
+      > </a
+      ><a name="506" href="FirstProjectionInjective.html#506" class="Bound"
+      >x'</a
+      ><a name="508"
+      > </a
+      ><a name="509" class="Symbol"
+      >:</a
+      ><a name="510"
+      > </a
+      ><a name="511" href="FirstProjectionInjective.html#295" class="Bound"
+      >X</a
+      ><a name="512" class="Symbol"
+      >}</a
+      ><a name="513"
+      > </a
+      ><a name="514" class="Symbol"
+      >&#8594;</a
+      ><a name="515"
+      > </a
+      ><a name="516" class="Symbol"
+      >&#8704;(</a
+      ><a name="518" href="FirstProjectionInjective.html#518" class="Bound"
+      >r</a
+      ><a name="519"
+      > </a
+      ><a name="520" class="Symbol"
+      >:</a
+      ><a name="521"
+      > </a
+      ><a name="522" href="FirstProjectionInjective.html#504" class="Bound"
+      >x</a
+      ><a name="523"
+      > </a
+      ><a name="524" href="Equality.html#239" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="525"
+      > </a
+      ><a name="526" href="FirstProjectionInjective.html#506" class="Bound"
+      >x'</a
+      ><a name="528" class="Symbol"
+      >)</a
+      ><a name="529"
+      > </a
+      ><a name="530" class="Symbol"
+      >&#8594;</a
+      ><a name="531"
+      > </a
+      ><a name="532" href="FirstProjectionInjective.html#382" class="Function"
+      >A</a
+      ><a name="533"
+      > </a
+      ><a name="534" href="FirstProjectionInjective.html#504" class="Bound"
+      >x</a
+      ><a name="535"
+      > </a
+      ><a name="536" href="FirstProjectionInjective.html#506" class="Bound"
+      >x'</a
+      ><a name="538"
+      > </a
+      ><a name="539" href="FirstProjectionInjective.html#518" class="Bound"
+      >r</a
+      ><a name="540"
+      >
+  </a
+      ><a name="543" href="FirstProjectionInjective.html#494" class="Function"
+      >lemma</a
+      ><a name="548"
+      > </a
+      ><a name="549" class="Symbol"
+      >=</a
+      ><a name="550"
+      > </a
+      ><a name="551" href="Equality.html#396" class="Function"
+      >J</a
+      ><a name="552"
+      > </a
+      ><a name="553" href="FirstProjectionInjective.html#382" class="Function"
+      >A</a
+      ><a name="554"
+      > </a
+      ><a name="555" class="Symbol"
+      >(&#955;</a
+      ><a name="557"
+      > </a
+      ><a name="558" href="FirstProjectionInjective.html#558" class="Bound"
+      >x</a
+      ><a name="559"
+      > </a
+      ><a name="560" href="FirstProjectionInjective.html#560" class="Bound"
+      >x'</a
+      ><a name="562"
+      > </a
+      ><a name="563" href="FirstProjectionInjective.html#563" class="Bound"
+      >y</a
+      ><a name="564"
+      > </a
+      ><a name="565" class="Symbol"
+      >&#8594;</a
+      ><a name="566"
+      > </a
+      ><a name="567" href="Equality.html#1133" class="Function"
+      >cong</a
+      ><a name="571"
+      > </a
+      ><a name="572" class="Symbol"
+      >(&#955;</a
+      ><a name="574"
+      > </a
+      ><a name="575" href="FirstProjectionInjective.html#575" class="Bound"
+      >y</a
+      ><a name="576"
+      > </a
+      ><a name="577" class="Symbol"
+      >&#8594;</a
+      ><a name="578"
+      > </a
+      ><a name="579" class="Symbol"
+      >(</a
+      ><a name="580" href="FirstProjectionInjective.html#558" class="Bound"
+      >x</a
+      ><a name="581"
+      > </a
+      ><a name="582" href="SetsAndFunctions.html#856" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="583"
+      > </a
+      ><a name="584" href="FirstProjectionInjective.html#575" class="Bound"
+      >y</a
+      ><a name="585" class="Symbol"
+      >)))</a
+      ><a name="588"
+      >
+
+\end{code}
+
+</a
+      ><a name="603" class="Comment"
+      >I learned this useful theorem from Thierry Coquand. The idea is</a
+      ><a name="666"
+      >
+</a
+      ><a name="667" class="Comment"
+      >that if the premise holds, this means that &#931; \(x : X) &#8594; Y x) can</a
+      ><a name="731"
+      >
+</a
+      ><a name="732" class="Comment"
+      >be considered as the subobject of X of elements satisfying Y x,</a
+      ><a name="795"
+      >
+</a
+      ><a name="796" class="Comment"
+      >with the first projection as the monomorphic inclusion into X.</a
+      ><a name="858"
+      >
+
+
+
+</a
+      ></pre
+    ></body
+  ></html
+>

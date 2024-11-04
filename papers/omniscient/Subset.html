@@ -1,0 +1,335 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+><head
+  ><title
+    >Subset</title
+    ><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"
+     /><meta http-equiv="Content-Style-Type" content="text/css"
+     /><link href="Agda.css" rel="stylesheet" type="text/css"
+     /></head
+  ><body
+  ><pre
+    ><a name="1" class="Comment"
+      >-- Martin Escardo 2011.</a
+      ><a name="24"
+      >
+
+</a
+      ><a name="26" class="Keyword"
+      >module</a
+      ><a name="32"
+      > </a
+      ><a name="33" href="Subset.html#1" class="Module"
+      >Subset</a
+      ><a name="39"
+      > </a
+      ><a name="40" class="Keyword"
+      >where</a
+      ><a name="45"
+      >
+
+</a
+      ><a name="47" class="Keyword"
+      >open</a
+      ><a name="51"
+      > </a
+      ><a name="52" class="Keyword"
+      >import</a
+      ><a name="58"
+      > </a
+      ><a name="59" href="Logic.html#1" class="Module"
+      >Logic</a
+      ><a name="64"
+      >
+
+</a
+      ><a name="66" class="Comment"
+      >-- We implement subsets as &#931;-types as usual, but we use a special</a
+      ><a name="131"
+      >
+</a
+      ><a name="132" class="Comment"
+      >-- syntax for them:</a
+      ><a name="151"
+      >
+
+</a
+      ><a name="153" class="Keyword"
+      >record</a
+      ><a name="159"
+      > </a
+      ><a name="160" href="Subset.html#160" class="Record"
+      >subset</a
+      ><a name="166"
+      > </a
+      ><a name="167" class="Symbol"
+      >(</a
+      ><a name="168" href="Subset.html#168" class="Bound"
+      >X</a
+      ><a name="169"
+      > </a
+      ><a name="170" class="Symbol"
+      >:</a
+      ><a name="171"
+      > </a
+      ><a name="172" class="PrimitiveType"
+      >Set</a
+      ><a name="175" class="Symbol"
+      >)</a
+      ><a name="176"
+      > </a
+      ><a name="177" class="Symbol"
+      >(</a
+      ><a name="178" href="Subset.html#178" class="Bound"
+      >A</a
+      ><a name="179"
+      > </a
+      ><a name="180" class="Symbol"
+      >:</a
+      ><a name="181"
+      > </a
+      ><a name="182" href="Subset.html#168" class="Bound"
+      >X</a
+      ><a name="183"
+      > </a
+      ><a name="184" class="Symbol"
+      >&#8594;</a
+      ><a name="185"
+      > </a
+      ><a name="186" href="Logic.html#425" class="Function"
+      >Prp</a
+      ><a name="189" class="Symbol"
+      >)</a
+      ><a name="190"
+      > </a
+      ><a name="191" class="Symbol"
+      >:</a
+      ><a name="192"
+      > </a
+      ><a name="193" class="PrimitiveType"
+      >Set</a
+      ><a name="196"
+      > </a
+      ><a name="197" class="Keyword"
+      >where</a
+      ><a name="202"
+      >
+  </a
+      ><a name="205" class="Keyword"
+      >constructor</a
+      ><a name="216"
+      > </a
+      ><a name="217" href="Subset.html#217" class="InductiveConstructor Operator"
+      >_||_</a
+      ><a name="221"
+      >
+  </a
+      ><a name="224" class="Keyword"
+      >field</a
+      ><a name="229"
+      >
+   </a
+      ><a name="233" href="Subset.html#233" class="Field"
+      >element</a
+      ><a name="240"
+      > </a
+      ><a name="241" class="Symbol"
+      >:</a
+      ><a name="242"
+      > </a
+      ><a name="243" href="Subset.html#168" class="Bound"
+      >X</a
+      ><a name="244"
+      >
+   </a
+      ><a name="248" href="Subset.html#248" class="Field"
+      >membership-proof</a
+      ><a name="264"
+      > </a
+      ><a name="265" class="Symbol"
+      >:</a
+      ><a name="266"
+      > </a
+      ><a name="267" href="Subset.html#178" class="Bound"
+      >A</a
+      ><a name="268"
+      > </a
+      ><a name="269" href="Subset.html#233" class="Bound"
+      >element</a
+      ><a name="276"
+      >
+
+</a
+      ><a name="278" class="Keyword"
+      >syntax</a
+      ><a name="284"
+      > subset X </a
+      ><a name="294" class="Symbol"
+      >(&#955;</a
+      ><a name="296"
+      > x </a
+      ><a name="299" class="Symbol"
+      >&#8594;</a
+      ><a name="300"
+      > A</a
+      ><a name="302" class="Symbol"
+      >)</a
+      ><a name="303"
+      > </a
+      ><a name="304" class="Symbol"
+      >=</a
+      ><a name="305"
+      >  &#8261; x &#8758; X &#8739; A &#8262;
+
+</a
+      ><a name="322" class="Comment"
+      >-- Notice that &quot;&#8758;&quot; is typed as &quot;\:1&quot; and &#8739; is typed as &quot;\mid&quot; and the</a
+      ><a name="391"
+      >
+</a
+      ><a name="392" class="Comment"
+      >-- braces as &quot;\(&quot; followed by an option offered in the emacs</a
+      ><a name="452"
+      >
+</a
+      ><a name="453" class="Comment"
+      >-- mini-buffer.</a
+      ><a name="468"
+      >
+
+</a
+      ><a name="470" class="Comment"
+      >-- The inclusion of a subset into the ambient set amounts to the first</a
+      ><a name="540"
+      >
+</a
+      ><a name="541" class="Comment"
+      >-- projection:</a
+      ><a name="555"
+      >
+
+</a
+      ><a name="557" href="Subset.html#557" class="Function"
+      >incl</a
+      ><a name="561"
+      > </a
+      ><a name="562" class="Symbol"
+      >:</a
+      ><a name="563"
+      > </a
+      ><a name="564" class="Symbol"
+      >{</a
+      ><a name="565" href="Subset.html#565" class="Bound"
+      >X</a
+      ><a name="566"
+      > </a
+      ><a name="567" class="Symbol"
+      >:</a
+      ><a name="568"
+      > </a
+      ><a name="569" class="PrimitiveType"
+      >Set</a
+      ><a name="572" class="Symbol"
+      >}</a
+      ><a name="573"
+      > </a
+      ><a name="574" class="Symbol"
+      >{</a
+      ><a name="575" href="Subset.html#575" class="Bound"
+      >A</a
+      ><a name="576"
+      > </a
+      ><a name="577" class="Symbol"
+      >:</a
+      ><a name="578"
+      > </a
+      ><a name="579" href="Subset.html#565" class="Bound"
+      >X</a
+      ><a name="580"
+      > </a
+      ><a name="581" class="Symbol"
+      >&#8594;</a
+      ><a name="582"
+      > </a
+      ><a name="583" href="Logic.html#425" class="Function"
+      >Prp</a
+      ><a name="586" class="Symbol"
+      >}</a
+      ><a name="587"
+      > </a
+      ><a name="588" class="Symbol"
+      >&#8594;</a
+      ><a name="589"
+      > </a
+      ><a name="590" href="Subset.html#160" class="Record"
+      >&#8261;</a
+      ><a name="591"
+      > </a
+      ><a name="592" href="Subset.html#592" class="Bound"
+      >x</a
+      ><a name="593"
+      > </a
+      ><a name="594" href="Subset.html#160" class="Record"
+      >&#8758;</a
+      ><a name="595"
+      > </a
+      ><a name="596" href="Subset.html#565" class="Bound"
+      >X</a
+      ><a name="597"
+      > </a
+      ><a name="598" href="Subset.html#160" class="Record"
+      >&#8739;</a
+      ><a name="599"
+      > </a
+      ><a name="600" href="Subset.html#575" class="Bound"
+      >A</a
+      ><a name="601"
+      > </a
+      ><a name="602" href="Subset.html#592" class="Bound"
+      >x</a
+      ><a name="603"
+      > </a
+      ><a name="604" href="Subset.html#160" class="Record"
+      >&#8262;</a
+      ><a name="605"
+      > </a
+      ><a name="606" class="Symbol"
+      >&#8594;</a
+      ><a name="607"
+      > </a
+      ><a name="608" href="Subset.html#565" class="Bound"
+      >X</a
+      ><a name="609"
+      >
+</a
+      ><a name="610" href="Subset.html#557" class="Function"
+      >incl</a
+      ><a name="614" class="Symbol"
+      >(</a
+      ><a name="615" href="Subset.html#615" class="Bound"
+      >x</a
+      ><a name="616"
+      > </a
+      ><a name="617" href="Subset.html#217" class="InductiveConstructor Operator"
+      >||</a
+      ><a name="619"
+      > </a
+      ><a name="620" href="Subset.html#620" class="Bound"
+      >c</a
+      ><a name="621" class="Symbol"
+      >)</a
+      ><a name="622"
+      > </a
+      ><a name="623" class="Symbol"
+      >=</a
+      ><a name="624"
+      > </a
+      ><a name="625" href="Subset.html#615" class="Bound"
+      >x</a
+      ><a name="626"
+      >
+</a
+      ></pre
+    ></body
+  ></html
+>

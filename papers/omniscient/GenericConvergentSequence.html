@@ -1,0 +1,3369 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+><head
+  ><title
+    >GenericConvergentSequence</title
+    ><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"
+     /><meta http-equiv="Content-Style-Type" content="text/css"
+     /><link href="Agda.css" rel="stylesheet" type="text/css"
+     /></head
+  ><body
+  ><pre
+    ><a name="1" class="Keyword"
+      >module</a
+      ><a name="7"
+      > </a
+      ><a name="8" href="GenericConvergentSequence.html#1" class="Module"
+      >GenericConvergentSequence</a
+      ><a name="33"
+      > </a
+      ><a name="34" class="Keyword"
+      >where</a
+      ><a name="39"
+      >
+
+</a
+      ><a name="41" class="Keyword"
+      >open</a
+      ><a name="45"
+      > </a
+      ><a name="46" class="Keyword"
+      >import</a
+      ><a name="52"
+      > </a
+      ><a name="53" href="Logic.html#1" class="Module"
+      >Logic</a
+      ><a name="58"
+      >
+</a
+      ><a name="59" class="Keyword"
+      >open</a
+      ><a name="63"
+      > </a
+      ><a name="64" class="Keyword"
+      >import</a
+      ><a name="70"
+      > </a
+      ><a name="71" href="Equality.html#1" class="Module"
+      >Equality</a
+      ><a name="79"
+      >
+</a
+      ><a name="80" class="Keyword"
+      >open</a
+      ><a name="84"
+      > </a
+      ><a name="85" class="Keyword"
+      >import</a
+      ><a name="91"
+      > </a
+      ><a name="92" href="Naturals.html#1" class="Module"
+      >Naturals</a
+      ><a name="100"
+      >
+</a
+      ><a name="101" class="Keyword"
+      >open</a
+      ><a name="105"
+      > </a
+      ><a name="106" class="Keyword"
+      >import</a
+      ><a name="112"
+      > </a
+      ><a name="113" href="Two.html#1" class="Module"
+      >Two</a
+      ><a name="116"
+      >
+</a
+      ><a name="117" class="Keyword"
+      >open</a
+      ><a name="121"
+      > </a
+      ><a name="122" class="Keyword"
+      >import</a
+      ><a name="128"
+      > </a
+      ><a name="129" href="Cantor.html#1" class="Module"
+      >Cantor</a
+      ><a name="135"
+      >
+</a
+      ><a name="136" class="Keyword"
+      >open</a
+      ><a name="140"
+      > </a
+      ><a name="141" class="Keyword"
+      >import</a
+      ><a name="147"
+      > </a
+      ><a name="148" href="Subset.html#1" class="Module"
+      >Subset</a
+      ><a name="154"
+      >
+
+</a
+      ><a name="156" class="Comment"
+      >-- Definition (The generic convergent sequence).</a
+      ><a name="204"
+      >
+</a
+      ><a name="205" class="Comment"
+      >-- We use u,v to range over &#8469;&#8734; and &#945;,&#946; to range over &#8322;&#8469;.</a
+      ><a name="261"
+      >
+
+</a
+      ><a name="263" href="GenericConvergentSequence.html#263" class="Function"
+      >decreasing</a
+      ><a name="273"
+      > </a
+      ><a name="274" class="Symbol"
+      >:</a
+      ><a name="275"
+      > </a
+      ><a name="276" href="Cantor.html#159" class="Function"
+      >&#8322;&#8469;</a
+      ><a name="278"
+      > </a
+      ><a name="279" class="Symbol"
+      >&#8594;</a
+      ><a name="280"
+      > </a
+      ><a name="281" href="Logic.html#425" class="Function"
+      >Prp</a
+      ><a name="284"
+      >
+</a
+      ><a name="285" href="GenericConvergentSequence.html#263" class="Function"
+      >decreasing</a
+      ><a name="295"
+      > </a
+      ><a name="296" href="GenericConvergentSequence.html#296" class="Bound"
+      >&#945;</a
+      ><a name="297"
+      > </a
+      ><a name="298" class="Symbol"
+      >=</a
+      ><a name="299"
+      > </a
+      ><a name="300" class="Symbol"
+      >&#8704;(</a
+      ><a name="302" href="GenericConvergentSequence.html#302" class="Bound"
+      >i</a
+      ><a name="303"
+      > </a
+      ><a name="304" class="Symbol"
+      >:</a
+      ><a name="305"
+      > </a
+      ><a name="306" href="Naturals.html#29" class="Datatype"
+      >&#8469;</a
+      ><a name="307" class="Symbol"
+      >)</a
+      ><a name="308"
+      > </a
+      ><a name="309" class="Symbol"
+      >&#8594;</a
+      ><a name="310"
+      > </a
+      ><a name="311" href="GenericConvergentSequence.html#296" class="Bound"
+      >&#945;</a
+      ><a name="312"
+      > </a
+      ><a name="313" href="GenericConvergentSequence.html#302" class="Bound"
+      >i</a
+      ><a name="314"
+      > </a
+      ><a name="315" href="Two.html#1708" class="Function Operator"
+      >&#8805;</a
+      ><a name="316"
+      > </a
+      ><a name="317" href="GenericConvergentSequence.html#296" class="Bound"
+      >&#945;</a
+      ><a name="318" class="Symbol"
+      >(</a
+      ><a name="319" href="Naturals.html#69" class="InductiveConstructor"
+      >succ</a
+      ><a name="323"
+      > </a
+      ><a name="324" href="GenericConvergentSequence.html#302" class="Bound"
+      >i</a
+      ><a name="325" class="Symbol"
+      >)</a
+      ><a name="326"
+      >
+
+</a
+      ><a name="328" href="GenericConvergentSequence.html#328" class="Function"
+      >&#8469;&#8734;</a
+      ><a name="330"
+      > </a
+      ><a name="331" class="Symbol"
+      >:</a
+      ><a name="332"
+      > </a
+      ><a name="333" class="PrimitiveType"
+      >Set</a
+      ><a name="336"
+      >
+</a
+      ><a name="337" href="GenericConvergentSequence.html#328" class="Function"
+      >&#8469;&#8734;</a
+      ><a name="339"
+      > </a
+      ><a name="340" class="Symbol"
+      >=</a
+      ><a name="341"
+      > </a
+      ><a name="342" href="Subset.html#160" class="Record"
+      >&#8261;</a
+      ><a name="343"
+      > </a
+      ><a name="344" href="GenericConvergentSequence.html#344" class="Bound"
+      >&#945;</a
+      ><a name="345"
+      > </a
+      ><a name="346" href="Subset.html#160" class="Record"
+      >&#8758;</a
+      ><a name="347"
+      > </a
+      ><a name="348" href="Cantor.html#159" class="Function"
+      >&#8322;&#8469;</a
+      ><a name="350"
+      > </a
+      ><a name="351" href="Subset.html#160" class="Record"
+      >&#8739;</a
+      ><a name="352"
+      > </a
+      ><a name="353" href="GenericConvergentSequence.html#263" class="Function"
+      >decreasing</a
+      ><a name="363"
+      > </a
+      ><a name="364" href="GenericConvergentSequence.html#344" class="Bound"
+      >&#945;</a
+      ><a name="365"
+      > </a
+      ><a name="366" href="Subset.html#160" class="Record"
+      >&#8262;</a
+      ><a name="367"
+      >
+
+
+</a
+      ><a name="370" class="Comment"
+      >-- Definition (Extensional equality on &#8469;&#8734;):</a
+      ><a name="413"
+      >
+
+</a
+      ><a name="415" href="GenericConvergentSequence.html#415" class="Function Operator"
+      >_&#8803;_</a
+      ><a name="418"
+      > </a
+      ><a name="419" class="Symbol"
+      >:</a
+      ><a name="420"
+      > </a
+      ><a name="421" class="Symbol"
+      >(</a
+      ><a name="422" href="GenericConvergentSequence.html#422" class="Bound"
+      >u</a
+      ><a name="423"
+      > </a
+      ><a name="424" href="GenericConvergentSequence.html#424" class="Bound"
+      >v</a
+      ><a name="425"
+      > </a
+      ><a name="426" class="Symbol"
+      >:</a
+      ><a name="427"
+      > </a
+      ><a name="428" href="GenericConvergentSequence.html#328" class="Function"
+      >&#8469;&#8734;</a
+      ><a name="430" class="Symbol"
+      >)</a
+      ><a name="431"
+      >  </a
+      ><a name="433" class="Symbol"
+      >&#8594;</a
+      ><a name="434"
+      > </a
+      ><a name="435" href="Logic.html#425" class="Function"
+      >Prp</a
+      ><a name="438"
+      >
+</a
+      ><a name="439" href="GenericConvergentSequence.html#439" class="Bound"
+      >u</a
+      ><a name="440"
+      > </a
+      ><a name="441" href="GenericConvergentSequence.html#415" class="Function Operator"
+      >&#8803;</a
+      ><a name="442"
+      > </a
+      ><a name="443" href="GenericConvergentSequence.html#443" class="Bound"
+      >v</a
+      ><a name="444"
+      > </a
+      ><a name="445" class="Symbol"
+      >=</a
+      ><a name="446"
+      > </a
+      ><a name="447" class="Symbol"
+      >&#8704;</a
+      ><a name="448"
+      > </a
+      ><a name="449" href="GenericConvergentSequence.html#449" class="Bound"
+      >i</a
+      ><a name="450"
+      > </a
+      ><a name="451" class="Symbol"
+      >&#8594;</a
+      ><a name="452"
+      > </a
+      ><a name="453" href="Subset.html#557" class="Function"
+      >incl</a
+      ><a name="457"
+      > </a
+      ><a name="458" href="GenericConvergentSequence.html#439" class="Bound"
+      >u</a
+      ><a name="459"
+      > </a
+      ><a name="460" href="GenericConvergentSequence.html#449" class="Bound"
+      >i</a
+      ><a name="461"
+      > </a
+      ><a name="462" href="Equality.html#86" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="463"
+      > </a
+      ><a name="464" href="Subset.html#557" class="Function"
+      >incl</a
+      ><a name="468"
+      > </a
+      ><a name="469" href="GenericConvergentSequence.html#443" class="Bound"
+      >v</a
+      ><a name="470"
+      > </a
+      ><a name="471" href="GenericConvergentSequence.html#449" class="Bound"
+      >i</a
+      ><a name="472"
+      >
+
+</a
+      ><a name="475" class="Comment"
+      >-- Definition (Extensional functions on &#8469;&#8734;).</a
+      ><a name="519"
+      >
+</a
+      ><a name="520" href="GenericConvergentSequence.html#520" class="Function"
+      >extensional</a
+      ><a name="531"
+      > </a
+      ><a name="532" class="Symbol"
+      >:</a
+      ><a name="533"
+      > </a
+      ><a name="534" class="Symbol"
+      >{</a
+      ><a name="535" href="GenericConvergentSequence.html#535" class="Bound"
+      >Z</a
+      ><a name="536"
+      > </a
+      ><a name="537" class="Symbol"
+      >:</a
+      ><a name="538"
+      > </a
+      ><a name="539" class="PrimitiveType"
+      >Set</a
+      ><a name="542" class="Symbol"
+      >}</a
+      ><a name="543"
+      > </a
+      ><a name="544" class="Symbol"
+      >&#8594;</a
+      ><a name="545"
+      > </a
+      ><a name="546" class="Symbol"
+      >(</a
+      ><a name="547" href="GenericConvergentSequence.html#328" class="Function"
+      >&#8469;&#8734;</a
+      ><a name="549"
+      > </a
+      ><a name="550" class="Symbol"
+      >&#8594;</a
+      ><a name="551"
+      > </a
+      ><a name="552" href="GenericConvergentSequence.html#535" class="Bound"
+      >Z</a
+      ><a name="553" class="Symbol"
+      >)</a
+      ><a name="554"
+      > </a
+      ><a name="555" class="Symbol"
+      >&#8594;</a
+      ><a name="556"
+      > </a
+      ><a name="557" href="Logic.html#425" class="Function"
+      >Prp</a
+      ><a name="560"
+      >
+</a
+      ><a name="561" href="GenericConvergentSequence.html#520" class="Function"
+      >extensional</a
+      ><a name="572"
+      > </a
+      ><a name="573" href="GenericConvergentSequence.html#573" class="Bound"
+      >f</a
+      ><a name="574"
+      > </a
+      ><a name="575" class="Symbol"
+      >=</a
+      ><a name="576"
+      > </a
+      ><a name="577" class="Symbol"
+      >&#8704;{</a
+      ><a name="579" href="GenericConvergentSequence.html#579" class="Bound"
+      >u</a
+      ><a name="580"
+      > </a
+      ><a name="581" href="GenericConvergentSequence.html#581" class="Bound"
+      >v</a
+      ><a name="582"
+      > </a
+      ><a name="583" class="Symbol"
+      >:</a
+      ><a name="584"
+      > </a
+      ><a name="585" href="GenericConvergentSequence.html#328" class="Function"
+      >&#8469;&#8734;</a
+      ><a name="587" class="Symbol"
+      >}</a
+      ><a name="588"
+      > </a
+      ><a name="589" class="Symbol"
+      >&#8594;</a
+      ><a name="590"
+      > </a
+      ><a name="591" href="GenericConvergentSequence.html#579" class="Bound"
+      >u</a
+      ><a name="592"
+      > </a
+      ><a name="593" href="GenericConvergentSequence.html#415" class="Function Operator"
+      >&#8803;</a
+      ><a name="594"
+      > </a
+      ><a name="595" href="GenericConvergentSequence.html#581" class="Bound"
+      >v</a
+      ><a name="596"
+      > </a
+      ><a name="597" class="Symbol"
+      >&#8594;</a
+      ><a name="598"
+      > </a
+      ><a name="599" href="GenericConvergentSequence.html#573" class="Bound"
+      >f</a
+      ><a name="600"
+      > </a
+      ><a name="601" href="GenericConvergentSequence.html#579" class="Bound"
+      >u</a
+      ><a name="602"
+      > </a
+      ><a name="603" href="Equality.html#86" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="604"
+      > </a
+      ><a name="605" href="GenericConvergentSequence.html#573" class="Bound"
+      >f</a
+      ><a name="606"
+      > </a
+      ><a name="607" href="GenericConvergentSequence.html#581" class="Bound"
+      >v</a
+      ><a name="608"
+      >
+
+
+</a
+      ><a name="611" class="Comment"
+      >-- We now describe the elements of &#8469;&#8734; explicitly.  </a
+      ><a name="662"
+      >
+</a
+      ><a name="663" class="Comment"
+      >--</a
+      ><a name="665"
+      >
+</a
+      ><a name="666" class="Comment"
+      >-- First the curried characteristic function of the (&gt;) relation on &#8469;,</a
+      ><a name="736"
+      >
+</a
+      ><a name="737" class="Comment"
+      >-- seen as a function into the Cantor space.</a
+      ><a name="781"
+      >
+
+</a
+      ><a name="783" href="GenericConvergentSequence.html#783" class="Function"
+      >bigger</a
+      ><a name="789"
+      > </a
+      ><a name="790" class="Symbol"
+      >:</a
+      ><a name="791"
+      > </a
+      ><a name="792" href="Naturals.html#29" class="Datatype"
+      >&#8469;</a
+      ><a name="793"
+      > </a
+      ><a name="794" class="Symbol"
+      >&#8594;</a
+      ><a name="795"
+      > </a
+      ><a name="796" href="Cantor.html#159" class="Function"
+      >&#8322;&#8469;</a
+      ><a name="798"
+      >
+</a
+      ><a name="799" href="GenericConvergentSequence.html#783" class="Function"
+      >bigger</a
+      ><a name="805"
+      > </a
+      ><a name="806" href="Naturals.html#45" class="InductiveConstructor"
+      >0</a
+      ><a name="807"
+      > </a
+      ><a name="808" href="GenericConvergentSequence.html#808" class="Bound"
+      >i</a
+      ><a name="809"
+      > </a
+      ><a name="810" class="Symbol"
+      >=</a
+      ><a name="811"
+      > </a
+      ><a name="812" href="Two.html#192" class="InductiveConstructor"
+      >&#8320;</a
+      ><a name="813"
+      >
+</a
+      ><a name="814" href="GenericConvergentSequence.html#783" class="Function"
+      >bigger</a
+      ><a name="820"
+      > </a
+      ><a name="821" class="Symbol"
+      >(</a
+      ><a name="822" href="Naturals.html#69" class="InductiveConstructor"
+      >succ</a
+      ><a name="826"
+      > </a
+      ><a name="827" href="GenericConvergentSequence.html#827" class="Bound"
+      >n</a
+      ><a name="828" class="Symbol"
+      >)</a
+      ><a name="829"
+      > </a
+      ><a name="830" href="Naturals.html#45" class="InductiveConstructor"
+      >0</a
+      ><a name="831"
+      > </a
+      ><a name="832" class="Symbol"
+      >=</a
+      ><a name="833"
+      > </a
+      ><a name="834" href="Two.html#199" class="InductiveConstructor"
+      >&#8321;</a
+      ><a name="835"
+      >
+</a
+      ><a name="836" href="GenericConvergentSequence.html#783" class="Function"
+      >bigger</a
+      ><a name="842"
+      > </a
+      ><a name="843" class="Symbol"
+      >(</a
+      ><a name="844" href="Naturals.html#69" class="InductiveConstructor"
+      >succ</a
+      ><a name="848"
+      > </a
+      ><a name="849" href="GenericConvergentSequence.html#849" class="Bound"
+      >n</a
+      ><a name="850" class="Symbol"
+      >)</a
+      ><a name="851"
+      > </a
+      ><a name="852" class="Symbol"
+      >(</a
+      ><a name="853" href="Naturals.html#69" class="InductiveConstructor"
+      >succ</a
+      ><a name="857"
+      > </a
+      ><a name="858" href="GenericConvergentSequence.html#858" class="Bound"
+      >i</a
+      ><a name="859" class="Symbol"
+      >)</a
+      ><a name="860"
+      > </a
+      ><a name="861" class="Symbol"
+      >=</a
+      ><a name="862"
+      > </a
+      ><a name="863" href="GenericConvergentSequence.html#783" class="Function"
+      >bigger</a
+      ><a name="869"
+      > </a
+      ><a name="870" href="GenericConvergentSequence.html#849" class="Bound"
+      >n</a
+      ><a name="871"
+      > </a
+      ><a name="872" href="GenericConvergentSequence.html#858" class="Bound"
+      >i</a
+      ><a name="873"
+      >
+
+
+</a
+      ><a name="877" href="GenericConvergentSequence.html#877" class="Function"
+      >Lemma[bigger-0]</a
+      ><a name="892"
+      > </a
+      ><a name="893" class="Symbol"
+      >:</a
+      ><a name="894"
+      >
+</a
+      ><a name="896" class="Comment"
+      >---------------------------</a
+      ><a name="923"
+      >
+  </a
+      ><a name="926" class="Symbol"
+      >&#8704;(</a
+      ><a name="928" href="GenericConvergentSequence.html#928" class="Bound"
+      >n</a
+      ><a name="929"
+      > </a
+      ><a name="930" class="Symbol"
+      >:</a
+      ><a name="931"
+      > </a
+      ><a name="932" href="Naturals.html#29" class="Datatype"
+      >&#8469;</a
+      ><a name="933" class="Symbol"
+      >)</a
+      ><a name="934"
+      > </a
+      ><a name="935" class="Symbol"
+      >&#8594;</a
+      ><a name="936"
+      > </a
+      ><a name="937" href="GenericConvergentSequence.html#783" class="Function"
+      >bigger</a
+      ><a name="943"
+      > </a
+      ><a name="944" href="GenericConvergentSequence.html#928" class="Bound"
+      >n</a
+      ><a name="945"
+      > </a
+      ><a name="946" href="GenericConvergentSequence.html#928" class="Bound"
+      >n</a
+      ><a name="947"
+      > </a
+      ><a name="948" href="Equality.html#86" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="949"
+      > </a
+      ><a name="950" href="Two.html#192" class="InductiveConstructor"
+      >&#8320;</a
+      ><a name="951"
+      >
+</a
+      ><a name="952" class="Comment"
+      >---------------------------</a
+      ><a name="979"
+      >
+</a
+      ><a name="980" href="GenericConvergentSequence.html#877" class="Function"
+      >Lemma[bigger-0]</a
+      ><a name="995"
+      > </a
+      ><a name="996" href="Naturals.html#45" class="InductiveConstructor"
+      >0</a
+      ><a name="997"
+      > </a
+      ><a name="998" class="Symbol"
+      >=</a
+      ><a name="999"
+      > </a
+      ><a name="1000" href="Equality.html#122" class="InductiveConstructor"
+      >refl</a
+      ><a name="1004"
+      >
+</a
+      ><a name="1005" href="GenericConvergentSequence.html#877" class="Function"
+      >Lemma[bigger-0]</a
+      ><a name="1020"
+      > </a
+      ><a name="1021" class="Symbol"
+      >(</a
+      ><a name="1022" href="Naturals.html#69" class="InductiveConstructor"
+      >succ</a
+      ><a name="1026"
+      > </a
+      ><a name="1027" href="GenericConvergentSequence.html#1027" class="Bound"
+      >n</a
+      ><a name="1028" class="Symbol"
+      >)</a
+      ><a name="1029"
+      > </a
+      ><a name="1030" class="Symbol"
+      >=</a
+      ><a name="1031"
+      > </a
+      ><a name="1032" href="GenericConvergentSequence.html#877" class="Function"
+      >Lemma[bigger-0]</a
+      ><a name="1047"
+      > </a
+      ><a name="1048" href="GenericConvergentSequence.html#1027" class="Bound"
+      >n</a
+      ><a name="1049"
+      >
+
+
+</a
+      ><a name="1055" href="GenericConvergentSequence.html#1055" class="Function"
+      >Lemma[bigger-1]</a
+      ><a name="1070"
+      > </a
+      ><a name="1071" class="Symbol"
+      >:</a
+      ><a name="1072"
+      >
+</a
+      ><a name="1074" class="Comment"
+      >---------------------------------</a
+      ><a name="1107"
+      >
+  </a
+      ><a name="1110" class="Symbol"
+      >&#8704;(</a
+      ><a name="1112" href="GenericConvergentSequence.html#1112" class="Bound"
+      >n</a
+      ><a name="1113"
+      > </a
+      ><a name="1114" class="Symbol"
+      >:</a
+      ><a name="1115"
+      > </a
+      ><a name="1116" href="Naturals.html#29" class="Datatype"
+      >&#8469;</a
+      ><a name="1117" class="Symbol"
+      >)</a
+      ><a name="1118"
+      > </a
+      ><a name="1119" class="Symbol"
+      >&#8594;</a
+      ><a name="1120"
+      > </a
+      ><a name="1121" href="GenericConvergentSequence.html#783" class="Function"
+      >bigger</a
+      ><a name="1127" class="Symbol"
+      >(</a
+      ><a name="1128" href="Naturals.html#69" class="InductiveConstructor"
+      >succ</a
+      ><a name="1132"
+      > </a
+      ><a name="1133" href="GenericConvergentSequence.html#1112" class="Bound"
+      >n</a
+      ><a name="1134" class="Symbol"
+      >)</a
+      ><a name="1135"
+      > </a
+      ><a name="1136" href="GenericConvergentSequence.html#1112" class="Bound"
+      >n</a
+      ><a name="1137"
+      > </a
+      ><a name="1138" href="Equality.html#86" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="1139"
+      > </a
+      ><a name="1140" href="Two.html#199" class="InductiveConstructor"
+      >&#8321;</a
+      ><a name="1141"
+      >
+</a
+      ><a name="1142" class="Comment"
+      >---------------------------------</a
+      ><a name="1175"
+      >
+</a
+      ><a name="1176" href="GenericConvergentSequence.html#1055" class="Function"
+      >Lemma[bigger-1]</a
+      ><a name="1191"
+      > </a
+      ><a name="1192" href="Naturals.html#45" class="InductiveConstructor"
+      >0</a
+      ><a name="1193"
+      > </a
+      ><a name="1194" class="Symbol"
+      >=</a
+      ><a name="1195"
+      > </a
+      ><a name="1196" href="Equality.html#122" class="InductiveConstructor"
+      >refl</a
+      ><a name="1200"
+      >
+</a
+      ><a name="1201" href="GenericConvergentSequence.html#1055" class="Function"
+      >Lemma[bigger-1]</a
+      ><a name="1216"
+      > </a
+      ><a name="1217" class="Symbol"
+      >(</a
+      ><a name="1218" href="Naturals.html#69" class="InductiveConstructor"
+      >succ</a
+      ><a name="1222"
+      > </a
+      ><a name="1223" href="GenericConvergentSequence.html#1223" class="Bound"
+      >n</a
+      ><a name="1224" class="Symbol"
+      >)</a
+      ><a name="1225"
+      > </a
+      ><a name="1226" class="Symbol"
+      >=</a
+      ><a name="1227"
+      > </a
+      ><a name="1228" href="GenericConvergentSequence.html#1055" class="Function"
+      >Lemma[bigger-1]</a
+      ><a name="1243"
+      > </a
+      ><a name="1244" href="GenericConvergentSequence.html#1223" class="Bound"
+      >n</a
+      ><a name="1245"
+      >
+
+
+</a
+      ><a name="1249" class="Comment"
+      >-- Definition (Embedding of &#8469; into &#8469;&#8734;).</a
+      ><a name="1288"
+      >
+</a
+      ><a name="1289" href="GenericConvergentSequence.html#1289" class="Function"
+      >under</a
+      ><a name="1294"
+      > </a
+      ><a name="1295" class="Symbol"
+      >:</a
+      ><a name="1296"
+      > </a
+      ><a name="1297" href="Naturals.html#29" class="Datatype"
+      >&#8469;</a
+      ><a name="1298"
+      > </a
+      ><a name="1299" class="Symbol"
+      >&#8594;</a
+      ><a name="1300"
+      > </a
+      ><a name="1301" href="GenericConvergentSequence.html#328" class="Function"
+      >&#8469;&#8734;</a
+      ><a name="1303"
+      >
+</a
+      ><a name="1304" href="GenericConvergentSequence.html#1289" class="Function"
+      >under</a
+      ><a name="1309"
+      > </a
+      ><a name="1310" href="GenericConvergentSequence.html#1310" class="Bound"
+      >n</a
+      ><a name="1311"
+      > </a
+      ><a name="1312" class="Symbol"
+      >=</a
+      ><a name="1313"
+      > </a
+      ><a name="1314" href="GenericConvergentSequence.html#783" class="Function"
+      >bigger</a
+      ><a name="1320"
+      > </a
+      ><a name="1321" href="GenericConvergentSequence.html#1310" class="Bound"
+      >n</a
+      ><a name="1322"
+      > </a
+      ><a name="1323" href="Subset.html#217" class="InductiveConstructor Operator"
+      >||</a
+      ><a name="1325"
+      > </a
+      ><a name="1326" href="GenericConvergentSequence.html#1340" class="Function"
+      >m</a
+      ><a name="1327"
+      > </a
+      ><a name="1328" href="GenericConvergentSequence.html#1310" class="Bound"
+      >n</a
+      ><a name="1329"
+      >
+ </a
+      ><a name="1331" class="Keyword"
+      >where</a
+      ><a name="1336"
+      >
+  </a
+      ><a name="1340" href="GenericConvergentSequence.html#1340" class="Function"
+      >m</a
+      ><a name="1341"
+      > </a
+      ><a name="1342" class="Symbol"
+      >:</a
+      ><a name="1343"
+      >  </a
+      ><a name="1345" class="Symbol"
+      >&#8704;(</a
+      ><a name="1347" href="GenericConvergentSequence.html#1347" class="Bound"
+      >n</a
+      ><a name="1348"
+      > </a
+      ><a name="1349" class="Symbol"
+      >:</a
+      ><a name="1350"
+      > </a
+      ><a name="1351" href="Naturals.html#29" class="Datatype"
+      >&#8469;</a
+      ><a name="1352" class="Symbol"
+      >)</a
+      ><a name="1353"
+      > </a
+      ><a name="1354" class="Symbol"
+      >&#8594;</a
+      ><a name="1355"
+      > </a
+      ><a name="1356" href="GenericConvergentSequence.html#263" class="Function"
+      >decreasing</a
+      ><a name="1366" class="Symbol"
+      >(</a
+      ><a name="1367" href="GenericConvergentSequence.html#783" class="Function"
+      >bigger</a
+      ><a name="1373"
+      > </a
+      ><a name="1374" href="GenericConvergentSequence.html#1347" class="Bound"
+      >n</a
+      ><a name="1375" class="Symbol"
+      >)</a
+      ><a name="1376"
+      >
+  </a
+      ><a name="1379" href="GenericConvergentSequence.html#1340" class="Function"
+      >m</a
+      ><a name="1380"
+      > </a
+      ><a name="1381" href="Naturals.html#45" class="InductiveConstructor"
+      >0</a
+      ><a name="1382"
+      > </a
+      ><a name="1383" href="GenericConvergentSequence.html#1383" class="Bound"
+      >i</a
+      ><a name="1384"
+      > </a
+      ><a name="1385" href="GenericConvergentSequence.html#1385" class="Bound"
+      >r</a
+      ><a name="1386"
+      > </a
+      ><a name="1387" class="Symbol"
+      >=</a
+      ><a name="1388"
+      > </a
+      ><a name="1389" href="Logic.html#532" class="Function"
+      >&#8869;-elim</a
+      ><a name="1395" class="Symbol"
+      >(</a
+      ><a name="1396" href="Two.html#459" class="Function"
+      >Lemma[b&#8801;&#8321;&#8594;b&#8800;&#8320;]</a
+      ><a name="1410"
+      > </a
+      ><a name="1411" href="GenericConvergentSequence.html#1385" class="Bound"
+      >r</a
+      ><a name="1412"
+      > </a
+      ><a name="1413" href="Equality.html#122" class="InductiveConstructor"
+      >refl</a
+      ><a name="1417" class="Symbol"
+      >)</a
+      ><a name="1418"
+      >
+  </a
+      ><a name="1421" href="GenericConvergentSequence.html#1340" class="Function"
+      >m</a
+      ><a name="1422"
+      > </a
+      ><a name="1423" class="Symbol"
+      >(</a
+      ><a name="1424" href="Naturals.html#69" class="InductiveConstructor"
+      >succ</a
+      ><a name="1428"
+      > </a
+      ><a name="1429" href="GenericConvergentSequence.html#1429" class="Bound"
+      >n</a
+      ><a name="1430" class="Symbol"
+      >)</a
+      ><a name="1431"
+      > </a
+      ><a name="1432" href="Naturals.html#45" class="InductiveConstructor"
+      >0</a
+      ><a name="1433"
+      > </a
+      ><a name="1434" href="GenericConvergentSequence.html#1434" class="Bound"
+      >r</a
+      ><a name="1435"
+      > </a
+      ><a name="1436" class="Symbol"
+      >=</a
+      ><a name="1437"
+      > </a
+      ><a name="1438" href="Equality.html#122" class="InductiveConstructor"
+      >refl</a
+      ><a name="1442"
+      >
+  </a
+      ><a name="1445" href="GenericConvergentSequence.html#1340" class="Function"
+      >m</a
+      ><a name="1446"
+      > </a
+      ><a name="1447" class="Symbol"
+      >(</a
+      ><a name="1448" href="Naturals.html#69" class="InductiveConstructor"
+      >succ</a
+      ><a name="1452"
+      > </a
+      ><a name="1453" href="GenericConvergentSequence.html#1453" class="Bound"
+      >n</a
+      ><a name="1454" class="Symbol"
+      >)</a
+      ><a name="1455"
+      > </a
+      ><a name="1456" class="Symbol"
+      >(</a
+      ><a name="1457" href="Naturals.html#69" class="InductiveConstructor"
+      >succ</a
+      ><a name="1461"
+      > </a
+      ><a name="1462" href="GenericConvergentSequence.html#1462" class="Bound"
+      >i</a
+      ><a name="1463" class="Symbol"
+      >)</a
+      ><a name="1464"
+      > </a
+      ><a name="1465" href="GenericConvergentSequence.html#1465" class="Bound"
+      >r</a
+      ><a name="1466"
+      > </a
+      ><a name="1467" class="Symbol"
+      >=</a
+      ><a name="1468"
+      > </a
+      ><a name="1469" href="GenericConvergentSequence.html#1340" class="Function"
+      >m</a
+      ><a name="1470"
+      > </a
+      ><a name="1471" href="GenericConvergentSequence.html#1453" class="Bound"
+      >n</a
+      ><a name="1472"
+      > </a
+      ><a name="1473" href="GenericConvergentSequence.html#1462" class="Bound"
+      >i</a
+      ><a name="1474"
+      > </a
+      ><a name="1475" href="GenericConvergentSequence.html#1465" class="Bound"
+      >r</a
+      ><a name="1476"
+      >
+
+
+</a
+      ><a name="1479" class="Comment"
+      >-- Definition (Point at infinity).</a
+      ><a name="1513"
+      >
+</a
+      ><a name="1514" href="GenericConvergentSequence.html#1514" class="Function"
+      >&#8734;</a
+      ><a name="1515"
+      > </a
+      ><a name="1516" class="Symbol"
+      >:</a
+      ><a name="1517"
+      > </a
+      ><a name="1518" href="GenericConvergentSequence.html#328" class="Function"
+      >&#8469;&#8734;</a
+      ><a name="1520"
+      >
+</a
+      ><a name="1521" href="GenericConvergentSequence.html#1514" class="Function"
+      >&#8734;</a
+      ><a name="1522"
+      > </a
+      ><a name="1523" class="Symbol"
+      >=</a
+      ><a name="1524"
+      > </a
+      ><a name="1525" class="Symbol"
+      >(&#955;</a
+      ><a name="1527"
+      > </a
+      ><a name="1528" href="GenericConvergentSequence.html#1528" class="Bound"
+      >i</a
+      ><a name="1529"
+      > </a
+      ><a name="1530" class="Symbol"
+      >&#8594;</a
+      ><a name="1531"
+      > </a
+      ><a name="1532" href="Two.html#199" class="InductiveConstructor"
+      >&#8321;</a
+      ><a name="1533" class="Symbol"
+      >)</a
+      ><a name="1534"
+      > </a
+      ><a name="1535" href="Subset.html#217" class="InductiveConstructor Operator"
+      >||</a
+      ><a name="1537"
+      > </a
+      ><a name="1538" class="Symbol"
+      >&#955;</a
+      ><a name="1539"
+      > </a
+      ><a name="1540" href="GenericConvergentSequence.html#1540" class="Bound"
+      >i</a
+      ><a name="1541"
+      > </a
+      ><a name="1542" href="GenericConvergentSequence.html#1542" class="Bound"
+      >r</a
+      ><a name="1543"
+      > </a
+      ><a name="1544" class="Symbol"
+      >&#8594;</a
+      ><a name="1545"
+      > </a
+      ><a name="1546" href="Equality.html#122" class="InductiveConstructor"
+      >refl</a
+      ><a name="1550"
+      >
+
+
+</a
+      ><a name="1553" href="GenericConvergentSequence.html#1553" class="Function"
+      >Lemma[under0]</a
+      ><a name="1566"
+      > </a
+      ><a name="1567" class="Symbol"
+      >:</a
+      ><a name="1568"
+      >
+</a
+      ><a name="1570" class="Comment"
+      >-------------------------------------------------------</a
+      ><a name="1625"
+      >
+  </a
+      ><a name="1628" class="Symbol"
+      >&#8704;{</a
+      ><a name="1630" href="GenericConvergentSequence.html#1630" class="Bound"
+      >u</a
+      ><a name="1631"
+      > </a
+      ><a name="1632" class="Symbol"
+      >:</a
+      ><a name="1633"
+      > </a
+      ><a name="1634" href="GenericConvergentSequence.html#328" class="Function"
+      >&#8469;&#8734;</a
+      ><a name="1636" class="Symbol"
+      >}</a
+      ><a name="1637"
+      > </a
+      ><a name="1638" class="Symbol"
+      >&#8594;</a
+      ><a name="1639"
+      > </a
+      ><a name="1640" href="Subset.html#557" class="Function"
+      >incl</a
+      ><a name="1644"
+      > </a
+      ><a name="1645" href="GenericConvergentSequence.html#1630" class="Bound"
+      >u</a
+      ><a name="1646"
+      > </a
+      ><a name="1647" class="Number"
+      >0</a
+      ><a name="1648"
+      > </a
+      ><a name="1649" href="Equality.html#86" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="1650"
+      > </a
+      ><a name="1651" href="Two.html#192" class="InductiveConstructor"
+      >&#8320;</a
+      ><a name="1652"
+      > </a
+      ><a name="1653" class="Symbol"
+      >&#8594;</a
+      ><a name="1654"
+      > </a
+      ><a name="1655" href="GenericConvergentSequence.html#1630" class="Bound"
+      >u</a
+      ><a name="1656"
+      > </a
+      ><a name="1657" href="GenericConvergentSequence.html#415" class="Function Operator"
+      >&#8803;</a
+      ><a name="1658"
+      > </a
+      ><a name="1659" href="GenericConvergentSequence.html#1289" class="Function"
+      >under</a
+      ><a name="1664"
+      > </a
+      ><a name="1665" class="Number"
+      >0</a
+      ><a name="1666"
+      >
+</a
+      ><a name="1667" class="Comment"
+      >-------------------------------------------------------</a
+      ><a name="1722"
+      >
+</a
+      ><a name="1723" href="GenericConvergentSequence.html#1553" class="Function"
+      >Lemma[under0]</a
+      ><a name="1736"
+      > </a
+      ><a name="1737" class="Symbol"
+      >{</a
+      ><a name="1738" href="GenericConvergentSequence.html#1738" class="Bound"
+      >&#945;</a
+      ><a name="1739"
+      > </a
+      ><a name="1740" href="Subset.html#217" class="InductiveConstructor Operator"
+      >||</a
+      ><a name="1742"
+      > </a
+      ><a name="1743" href="GenericConvergentSequence.html#1743" class="Bound"
+      >m</a
+      ><a name="1744" class="Symbol"
+      >}</a
+      ><a name="1745"
+      > </a
+      ><a name="1746" href="GenericConvergentSequence.html#1746" class="Bound"
+      >base</a
+      ><a name="1750"
+      > </a
+      ><a name="1751" class="Symbol"
+      >=</a
+      ><a name="1752"
+      > </a
+      ><a name="1753" href="GenericConvergentSequence.html#1776" class="Function"
+      >by-induction</a
+      ><a name="1765"
+      >
+ </a
+      ><a name="1767" class="Keyword"
+      >where</a
+      ><a name="1772"
+      >
+  </a
+      ><a name="1776" href="GenericConvergentSequence.html#1776" class="Function"
+      >by-induction</a
+      ><a name="1788"
+      > </a
+      ><a name="1789" class="Symbol"
+      >:</a
+      ><a name="1790"
+      > </a
+      ><a name="1791" class="Symbol"
+      >&#8704;(</a
+      ><a name="1793" href="GenericConvergentSequence.html#1793" class="Bound"
+      >i</a
+      ><a name="1794"
+      > </a
+      ><a name="1795" class="Symbol"
+      >:</a
+      ><a name="1796"
+      > </a
+      ><a name="1797" href="Naturals.html#29" class="Datatype"
+      >&#8469;</a
+      ><a name="1798" class="Symbol"
+      >)</a
+      ><a name="1799"
+      > </a
+      ><a name="1800" class="Symbol"
+      >&#8594;</a
+      ><a name="1801"
+      > </a
+      ><a name="1802" href="GenericConvergentSequence.html#1738" class="Bound"
+      >&#945;</a
+      ><a name="1803"
+      > </a
+      ><a name="1804" href="GenericConvergentSequence.html#1793" class="Bound"
+      >i</a
+      ><a name="1805"
+      > </a
+      ><a name="1806" href="Equality.html#86" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="1807"
+      > </a
+      ><a name="1808" href="Two.html#192" class="InductiveConstructor"
+      >&#8320;</a
+      ><a name="1809"
+      >
+  </a
+      ><a name="1812" href="GenericConvergentSequence.html#1776" class="Function"
+      >by-induction</a
+      ><a name="1824"
+      > </a
+      ><a name="1825" href="Naturals.html#45" class="InductiveConstructor"
+      >0</a
+      ><a name="1826"
+      > </a
+      ><a name="1827" class="Symbol"
+      >=</a
+      ><a name="1828"
+      > </a
+      ><a name="1829" href="GenericConvergentSequence.html#1746" class="Bound"
+      >base</a
+      ><a name="1833"
+      >
+  </a
+      ><a name="1836" href="GenericConvergentSequence.html#1776" class="Function"
+      >by-induction</a
+      ><a name="1848"
+      > </a
+      ><a name="1849" class="Symbol"
+      >(</a
+      ><a name="1850" href="Naturals.html#69" class="InductiveConstructor"
+      >succ</a
+      ><a name="1854"
+      > </a
+      ><a name="1855" href="GenericConvergentSequence.html#1855" class="Bound"
+      >i</a
+      ><a name="1856" class="Symbol"
+      >)</a
+      ><a name="1857"
+      > </a
+      ><a name="1858" class="Symbol"
+      >=</a
+      ><a name="1859"
+      >
+    </a
+      ><a name="1865" href="Two.html#1101" class="Function"
+      >Lemma[[a&#8801;&#8321;&#8594;b&#8801;&#8321;]&#8594;b&#8801;&#8320;&#8594;a&#8801;&#8320;]</a
+      ><a name="1889"
+      > </a
+      ><a name="1890" class="Symbol"
+      >(</a
+      ><a name="1891" href="GenericConvergentSequence.html#1743" class="Bound"
+      >m</a
+      ><a name="1892"
+      > </a
+      ><a name="1893" href="GenericConvergentSequence.html#1855" class="Bound"
+      >i</a
+      ><a name="1894" class="Symbol"
+      >)</a
+      ><a name="1895"
+      > </a
+      ><a name="1896" class="Symbol"
+      >(</a
+      ><a name="1897" href="GenericConvergentSequence.html#1776" class="Function"
+      >by-induction</a
+      ><a name="1909"
+      > </a
+      ><a name="1910" href="GenericConvergentSequence.html#1855" class="Bound"
+      >i</a
+      ><a name="1911" class="Symbol"
+      >)</a
+      ><a name="1912"
+      >
+
+
+</a
+      ><a name="1915" href="GenericConvergentSequence.html#1915" class="Function"
+      >Lemma[under1]</a
+      ><a name="1928"
+      > </a
+      ><a name="1929" class="Symbol"
+      >:</a
+      ><a name="1930"
+      >
+</a
+      ><a name="1931" class="Comment"
+      >--------------------------------------------------------------</a
+      ><a name="1993"
+      >
+  </a
+      ><a name="1996" class="Symbol"
+      >&#8704;(</a
+      ><a name="1998" href="GenericConvergentSequence.html#1998" class="Bound"
+      >u</a
+      ><a name="1999"
+      > </a
+      ><a name="2000" class="Symbol"
+      >:</a
+      ><a name="2001"
+      > </a
+      ><a name="2002" href="GenericConvergentSequence.html#328" class="Function"
+      >&#8469;&#8734;</a
+      ><a name="2004" class="Symbol"
+      >)</a
+      ><a name="2005"
+      > </a
+      ><a name="2006" class="Symbol"
+      >&#8594;</a
+      ><a name="2007"
+      > </a
+      ><a name="2008" class="Symbol"
+      >&#8704;(</a
+      ><a name="2010" href="GenericConvergentSequence.html#2010" class="Bound"
+      >n</a
+      ><a name="2011"
+      > </a
+      ><a name="2012" class="Symbol"
+      >:</a
+      ><a name="2013"
+      > </a
+      ><a name="2014" href="Naturals.html#29" class="Datatype"
+      >&#8469;</a
+      ><a name="2015" class="Symbol"
+      >)</a
+      ><a name="2016"
+      > </a
+      ><a name="2017" class="Symbol"
+      >&#8594;</a
+      ><a name="2018"
+      >
+    </a
+      ><a name="2024" href="Subset.html#557" class="Function"
+      >incl</a
+      ><a name="2028"
+      > </a
+      ><a name="2029" href="GenericConvergentSequence.html#1998" class="Bound"
+      >u</a
+      ><a name="2030"
+      > </a
+      ><a name="2031" href="GenericConvergentSequence.html#2010" class="Bound"
+      >n</a
+      ><a name="2032"
+      > </a
+      ><a name="2033" href="Equality.html#86" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="2034"
+      > </a
+      ><a name="2035" href="Two.html#199" class="InductiveConstructor"
+      >&#8321;</a
+      ><a name="2036"
+      > </a
+      ><a name="2037" class="Symbol"
+      >&#8594;</a
+      ><a name="2038"
+      > </a
+      ><a name="2039" href="Subset.html#557" class="Function"
+      >incl</a
+      ><a name="2043"
+      > </a
+      ><a name="2044" href="GenericConvergentSequence.html#1998" class="Bound"
+      >u</a
+      ><a name="2045" class="Symbol"
+      >(</a
+      ><a name="2046" href="Naturals.html#69" class="InductiveConstructor"
+      >succ</a
+      ><a name="2050"
+      > </a
+      ><a name="2051" href="GenericConvergentSequence.html#2010" class="Bound"
+      >n</a
+      ><a name="2052" class="Symbol"
+      >)</a
+      ><a name="2053"
+      > </a
+      ><a name="2054" href="Equality.html#86" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="2055"
+      > </a
+      ><a name="2056" href="Two.html#192" class="InductiveConstructor"
+      >&#8320;</a
+      ><a name="2057"
+      > </a
+      ><a name="2058" class="Symbol"
+      >&#8594;</a
+      ><a name="2059"
+      > </a
+      ><a name="2060" href="GenericConvergentSequence.html#1998" class="Bound"
+      >u</a
+      ><a name="2061"
+      > </a
+      ><a name="2062" href="GenericConvergentSequence.html#415" class="Function Operator"
+      >&#8803;</a
+      ><a name="2063"
+      > </a
+      ><a name="2064" href="GenericConvergentSequence.html#1289" class="Function"
+      >under</a
+      ><a name="2069" class="Symbol"
+      >(</a
+      ><a name="2070" href="Naturals.html#69" class="InductiveConstructor"
+      >succ</a
+      ><a name="2074"
+      > </a
+      ><a name="2075" href="GenericConvergentSequence.html#2010" class="Bound"
+      >n</a
+      ><a name="2076" class="Symbol"
+      >)</a
+      ><a name="2077"
+      >
+</a
+      ><a name="2078" class="Comment"
+      >--------------------------------------------------------------</a
+      ><a name="2140"
+      >
+</a
+      ><a name="2141" href="GenericConvergentSequence.html#1915" class="Function"
+      >Lemma[under1]</a
+      ><a name="2154"
+      > </a
+      ><a name="2155" class="Symbol"
+      >(</a
+      ><a name="2156" href="GenericConvergentSequence.html#2156" class="Bound"
+      >&#945;</a
+      ><a name="2157"
+      > </a
+      ><a name="2158" href="Subset.html#217" class="InductiveConstructor Operator"
+      >||</a
+      ><a name="2160"
+      > </a
+      ><a name="2161" href="GenericConvergentSequence.html#2161" class="Bound"
+      >m</a
+      ><a name="2162" class="Symbol"
+      >)</a
+      ><a name="2163"
+      > </a
+      ><a name="2164" href="GenericConvergentSequence.html#2164" class="Bound"
+      >n</a
+      ><a name="2165"
+      > </a
+      ><a name="2166" href="GenericConvergentSequence.html#2166" class="Bound"
+      >r</a
+      ><a name="2167"
+      > </a
+      ><a name="2168" href="GenericConvergentSequence.html#2168" class="Bound"
+      >s</a
+      ><a name="2169"
+      > </a
+      ><a name="2170" class="Symbol"
+      >=</a
+      ><a name="2171"
+      >
+ </a
+      ><a name="2174" href="GenericConvergentSequence.html#2207" class="Function"
+      >by-induction</a
+      ><a name="2186"
+      > </a
+      ><a name="2187" href="GenericConvergentSequence.html#2164" class="Bound"
+      >n</a
+      ><a name="2188"
+      > </a
+      ><a name="2189" href="GenericConvergentSequence.html#2156" class="Bound"
+      >&#945;</a
+      ><a name="2190"
+      > </a
+      ><a name="2191" href="GenericConvergentSequence.html#2161" class="Bound"
+      >m</a
+      ><a name="2192"
+      > </a
+      ><a name="2193" href="GenericConvergentSequence.html#2166" class="Bound"
+      >r</a
+      ><a name="2194"
+      > </a
+      ><a name="2195" href="GenericConvergentSequence.html#2168" class="Bound"
+      >s</a
+      ><a name="2196"
+      >
+ </a
+      ><a name="2198" class="Keyword"
+      >where</a
+      ><a name="2203"
+      >
+  </a
+      ><a name="2207" href="GenericConvergentSequence.html#2207" class="Function"
+      >by-induction</a
+      ><a name="2219"
+      > </a
+      ><a name="2220" class="Symbol"
+      >:</a
+      ><a name="2221"
+      >
+   </a
+      ><a name="2227" class="Symbol"
+      >&#8704;(</a
+      ><a name="2229" href="GenericConvergentSequence.html#2229" class="Bound"
+      >n</a
+      ><a name="2230"
+      > </a
+      ><a name="2231" class="Symbol"
+      >:</a
+      ><a name="2232"
+      > </a
+      ><a name="2233" href="Naturals.html#29" class="Datatype"
+      >&#8469;</a
+      ><a name="2234" class="Symbol"
+      >)</a
+      ><a name="2235"
+      > </a
+      ><a name="2236" class="Symbol"
+      >&#8594;</a
+      ><a name="2237"
+      > </a
+      ><a name="2238" class="Symbol"
+      >&#8704;(</a
+      ><a name="2240" href="GenericConvergentSequence.html#2240" class="Bound"
+      >&#945;</a
+      ><a name="2241"
+      > </a
+      ><a name="2242" class="Symbol"
+      >:</a
+      ><a name="2243"
+      > </a
+      ><a name="2244" href="Cantor.html#159" class="Function"
+      >&#8322;&#8469;</a
+      ><a name="2246" class="Symbol"
+      >)</a
+      ><a name="2247"
+      > </a
+      ><a name="2248" class="Symbol"
+      >&#8594;</a
+      ><a name="2249"
+      > </a
+      ><a name="2250" href="GenericConvergentSequence.html#263" class="Function"
+      >decreasing</a
+      ><a name="2260"
+      > </a
+      ><a name="2261" href="GenericConvergentSequence.html#2240" class="Bound"
+      >&#945;</a
+      ><a name="2262"
+      > </a
+      ><a name="2263" class="Symbol"
+      >&#8594;</a
+      ><a name="2264"
+      >
+                </a
+      ><a name="2282" href="GenericConvergentSequence.html#2240" class="Bound"
+      >&#945;</a
+      ><a name="2283"
+      > </a
+      ><a name="2284" href="GenericConvergentSequence.html#2229" class="Bound"
+      >n</a
+      ><a name="2285"
+      > </a
+      ><a name="2286" href="Equality.html#86" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="2287"
+      > </a
+      ><a name="2288" href="Two.html#199" class="InductiveConstructor"
+      >&#8321;</a
+      ><a name="2289"
+      > </a
+      ><a name="2290" class="Symbol"
+      >&#8594;</a
+      ><a name="2291"
+      > </a
+      ><a name="2292" href="GenericConvergentSequence.html#2240" class="Bound"
+      >&#945;</a
+      ><a name="2293" class="Symbol"
+      >(</a
+      ><a name="2294" href="Naturals.html#69" class="InductiveConstructor"
+      >succ</a
+      ><a name="2298"
+      > </a
+      ><a name="2299" href="GenericConvergentSequence.html#2229" class="Bound"
+      >n</a
+      ><a name="2300" class="Symbol"
+      >)</a
+      ><a name="2301"
+      > </a
+      ><a name="2302" href="Equality.html#86" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="2303"
+      > </a
+      ><a name="2304" href="Two.html#192" class="InductiveConstructor"
+      >&#8320;</a
+      ><a name="2305"
+      > </a
+      ><a name="2306" class="Symbol"
+      >&#8594;</a
+      ><a name="2307"
+      > </a
+      ><a name="2308" class="Symbol"
+      >&#8704;</a
+      ><a name="2309"
+      > </a
+      ><a name="2310" href="GenericConvergentSequence.html#2310" class="Bound"
+      >i</a
+      ><a name="2311"
+      > </a
+      ><a name="2312" class="Symbol"
+      >&#8594;</a
+      ><a name="2313"
+      > </a
+      ><a name="2314" href="GenericConvergentSequence.html#2240" class="Bound"
+      >&#945;</a
+      ><a name="2315"
+      > </a
+      ><a name="2316" href="GenericConvergentSequence.html#2310" class="Bound"
+      >i</a
+      ><a name="2317"
+      > </a
+      ><a name="2318" href="Equality.html#86" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="2319"
+      > </a
+      ><a name="2320" href="GenericConvergentSequence.html#783" class="Function"
+      >bigger</a
+      ><a name="2326" class="Symbol"
+      >(</a
+      ><a name="2327" href="Naturals.html#69" class="InductiveConstructor"
+      >succ</a
+      ><a name="2331"
+      > </a
+      ><a name="2332" href="GenericConvergentSequence.html#2229" class="Bound"
+      >n</a
+      ><a name="2333" class="Symbol"
+      >)</a
+      ><a name="2334"
+      > </a
+      ><a name="2335" href="GenericConvergentSequence.html#2310" class="Bound"
+      >i</a
+      ><a name="2336"
+      >
+  </a
+      ><a name="2339" href="GenericConvergentSequence.html#2207" class="Function"
+      >by-induction</a
+      ><a name="2351"
+      > </a
+      ><a name="2352" href="Naturals.html#45" class="InductiveConstructor"
+      >0</a
+      ><a name="2353"
+      > </a
+      ><a name="2354" href="GenericConvergentSequence.html#2354" class="Bound"
+      >&#945;</a
+      ><a name="2355"
+      > </a
+      ><a name="2356" href="GenericConvergentSequence.html#2356" class="Bound"
+      >m</a
+      ><a name="2357"
+      > </a
+      ><a name="2358" href="GenericConvergentSequence.html#2358" class="Bound"
+      >r</a
+      ><a name="2359"
+      > </a
+      ><a name="2360" href="GenericConvergentSequence.html#2360" class="Bound"
+      >s</a
+      ><a name="2361"
+      > </a
+      ><a name="2362" href="GenericConvergentSequence.html#2362" class="Bound"
+      >i</a
+      ><a name="2363"
+      > </a
+      ><a name="2364" class="Symbol"
+      >=</a
+      ><a name="2365"
+      > </a
+      ><a name="2366" href="GenericConvergentSequence.html#2391" class="Function"
+      >by-cases</a
+      ><a name="2374"
+      > </a
+      ><a name="2375" href="GenericConvergentSequence.html#2362" class="Bound"
+      >i</a
+      ><a name="2376"
+      >
+   </a
+      ><a name="2380" class="Keyword"
+      >where</a
+      ><a name="2385"
+      >
+    </a
+      ><a name="2391" href="GenericConvergentSequence.html#2391" class="Function"
+      >by-cases</a
+      ><a name="2399"
+      > </a
+      ><a name="2400" class="Symbol"
+      >:</a
+      ><a name="2401"
+      > </a
+      ><a name="2402" class="Symbol"
+      >&#8704;</a
+      ><a name="2403"
+      > </a
+      ><a name="2404" href="GenericConvergentSequence.html#2404" class="Bound"
+      >i</a
+      ><a name="2405"
+      > </a
+      ><a name="2406" class="Symbol"
+      >&#8594;</a
+      ><a name="2407"
+      > </a
+      ><a name="2408" href="GenericConvergentSequence.html#2354" class="Bound"
+      >&#945;</a
+      ><a name="2409"
+      > </a
+      ><a name="2410" href="GenericConvergentSequence.html#2404" class="Bound"
+      >i</a
+      ><a name="2411"
+      > </a
+      ><a name="2412" href="Equality.html#86" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="2413"
+      > </a
+      ><a name="2414" href="GenericConvergentSequence.html#783" class="Function"
+      >bigger</a
+      ><a name="2420"
+      > </a
+      ><a name="2421" class="Number"
+      >1</a
+      ><a name="2422"
+      > </a
+      ><a name="2423" href="GenericConvergentSequence.html#2404" class="Bound"
+      >i</a
+      ><a name="2424"
+      >
+    </a
+      ><a name="2429" href="GenericConvergentSequence.html#2391" class="Function"
+      >by-cases</a
+      ><a name="2437"
+      > </a
+      ><a name="2438" href="Naturals.html#45" class="InductiveConstructor"
+      >0</a
+      ><a name="2439"
+      > </a
+      ><a name="2440" class="Symbol"
+      >=</a
+      ><a name="2441"
+      > </a
+      ><a name="2442" href="GenericConvergentSequence.html#2358" class="Bound"
+      >r</a
+      ><a name="2443"
+      >
+    </a
+      ><a name="2448" href="GenericConvergentSequence.html#2391" class="Function"
+      >by-cases</a
+      ><a name="2456"
+      > </a
+      ><a name="2457" class="Symbol"
+      >(</a
+      ><a name="2458" href="Naturals.html#69" class="InductiveConstructor"
+      >succ</a
+      ><a name="2462"
+      > </a
+      ><a name="2463" href="GenericConvergentSequence.html#2463" class="Bound"
+      >i</a
+      ><a name="2464" class="Symbol"
+      >)</a
+      ><a name="2465"
+      > </a
+      ><a name="2466" class="Symbol"
+      >=</a
+      ><a name="2467"
+      > </a
+      ><a name="2468" href="GenericConvergentSequence.html#2501" class="Function"
+      >by-nested-induction</a
+      ><a name="2487"
+      > </a
+      ><a name="2488" href="GenericConvergentSequence.html#2463" class="Bound"
+      >i</a
+      ><a name="2489"
+      >
+     </a
+      ><a name="2495" class="Keyword"
+      >where</a
+      ><a name="2500"
+      > </a
+      ><a name="2501" href="GenericConvergentSequence.html#2501" class="Function"
+      >by-nested-induction</a
+      ><a name="2520"
+      > </a
+      ><a name="2521" class="Symbol"
+      >:</a
+      ><a name="2522"
+      > </a
+      ><a name="2523" class="Symbol"
+      >&#8704;(</a
+      ><a name="2525" href="GenericConvergentSequence.html#2525" class="Bound"
+      >i</a
+      ><a name="2526"
+      > </a
+      ><a name="2527" class="Symbol"
+      >:</a
+      ><a name="2528"
+      > </a
+      ><a name="2529" href="Naturals.html#29" class="Datatype"
+      >&#8469;</a
+      ><a name="2530" class="Symbol"
+      >)</a
+      ><a name="2531"
+      > </a
+      ><a name="2532" class="Symbol"
+      >&#8594;</a
+      ><a name="2533"
+      > </a
+      ><a name="2534" href="GenericConvergentSequence.html#2354" class="Bound"
+      >&#945;</a
+      ><a name="2535" class="Symbol"
+      >(</a
+      ><a name="2536" href="Naturals.html#69" class="InductiveConstructor"
+      >succ</a
+      ><a name="2540"
+      > </a
+      ><a name="2541" href="GenericConvergentSequence.html#2525" class="Bound"
+      >i</a
+      ><a name="2542" class="Symbol"
+      >)</a
+      ><a name="2543"
+      > </a
+      ><a name="2544" href="Equality.html#86" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="2545"
+      > </a
+      ><a name="2546" href="Two.html#192" class="InductiveConstructor"
+      >&#8320;</a
+      ><a name="2547"
+      >
+           </a
+      ><a name="2560" href="GenericConvergentSequence.html#2501" class="Function"
+      >by-nested-induction</a
+      ><a name="2579"
+      > </a
+      ><a name="2580" href="Naturals.html#45" class="InductiveConstructor"
+      >0</a
+      ><a name="2581"
+      > </a
+      ><a name="2582" class="Symbol"
+      >=</a
+      ><a name="2583"
+      > </a
+      ><a name="2584" href="GenericConvergentSequence.html#2360" class="Bound"
+      >s</a
+      ><a name="2585"
+      >
+           </a
+      ><a name="2597" href="GenericConvergentSequence.html#2501" class="Function"
+      >by-nested-induction</a
+      ><a name="2616"
+      > </a
+      ><a name="2617" class="Symbol"
+      >(</a
+      ><a name="2618" href="Naturals.html#69" class="InductiveConstructor"
+      >succ</a
+      ><a name="2622"
+      > </a
+      ><a name="2623" href="GenericConvergentSequence.html#2623" class="Bound"
+      >i</a
+      ><a name="2624" class="Symbol"
+      >)</a
+      ><a name="2625"
+      > </a
+      ><a name="2626" class="Symbol"
+      >=</a
+      ><a name="2627"
+      >
+            </a
+      ><a name="2641" href="Two.html#1101" class="Function"
+      >Lemma[[a&#8801;&#8321;&#8594;b&#8801;&#8321;]&#8594;b&#8801;&#8320;&#8594;a&#8801;&#8320;]</a
+      ><a name="2665"
+      > </a
+      ><a name="2666" class="Symbol"
+      >(</a
+      ><a name="2667" href="GenericConvergentSequence.html#2356" class="Bound"
+      >m</a
+      ><a name="2668"
+      > </a
+      ><a name="2669" class="Symbol"
+      >(</a
+      ><a name="2670" href="Naturals.html#69" class="InductiveConstructor"
+      >succ</a
+      ><a name="2674"
+      > </a
+      ><a name="2675" href="GenericConvergentSequence.html#2623" class="Bound"
+      >i</a
+      ><a name="2676" class="Symbol"
+      >))</a
+      ><a name="2678"
+      > </a
+      ><a name="2679" class="Symbol"
+      >(</a
+      ><a name="2680" href="GenericConvergentSequence.html#2501" class="Function"
+      >by-nested-induction</a
+      ><a name="2699"
+      > </a
+      ><a name="2700" href="GenericConvergentSequence.html#2623" class="Bound"
+      >i</a
+      ><a name="2701" class="Symbol"
+      >)</a
+      ><a name="2702"
+      >
+  </a
+      ><a name="2705" href="GenericConvergentSequence.html#2207" class="Function"
+      >by-induction</a
+      ><a name="2717"
+      > </a
+      ><a name="2718" class="Symbol"
+      >(</a
+      ><a name="2719" href="Naturals.html#69" class="InductiveConstructor"
+      >succ</a
+      ><a name="2723"
+      > </a
+      ><a name="2724" href="GenericConvergentSequence.html#2724" class="Bound"
+      >n</a
+      ><a name="2725" class="Symbol"
+      >)</a
+      ><a name="2726"
+      > </a
+      ><a name="2727" href="GenericConvergentSequence.html#2727" class="Bound"
+      >&#945;</a
+      ><a name="2728"
+      > </a
+      ><a name="2729" href="GenericConvergentSequence.html#2729" class="Bound"
+      >m</a
+      ><a name="2730"
+      > </a
+      ><a name="2731" href="GenericConvergentSequence.html#2731" class="Bound"
+      >r</a
+      ><a name="2732"
+      > </a
+      ><a name="2733" href="GenericConvergentSequence.html#2733" class="Bound"
+      >s</a
+      ><a name="2734"
+      > </a
+      ><a name="2735" href="Naturals.html#45" class="InductiveConstructor"
+      >0</a
+      ><a name="2736"
+      > </a
+      ><a name="2737" class="Symbol"
+      >=</a
+      ><a name="2738"
+      > </a
+      ><a name="2739" href="GenericConvergentSequence.html#2784" class="Function"
+      >by-nested-induction</a
+      ><a name="2758"
+      > </a
+      ><a name="2759" class="Symbol"
+      >(</a
+      ><a name="2760" href="Naturals.html#69" class="InductiveConstructor"
+      >succ</a
+      ><a name="2764"
+      > </a
+      ><a name="2765" href="GenericConvergentSequence.html#2724" class="Bound"
+      >n</a
+      ><a name="2766" class="Symbol"
+      >)</a
+      ><a name="2767"
+      > </a
+      ><a name="2768" href="GenericConvergentSequence.html#2731" class="Bound"
+      >r</a
+      ><a name="2769"
+      >
+   </a
+      ><a name="2773" class="Keyword"
+      >where</a
+      ><a name="2778"
+      >
+    </a
+      ><a name="2784" href="GenericConvergentSequence.html#2784" class="Function"
+      >by-nested-induction</a
+      ><a name="2803"
+      > </a
+      ><a name="2804" class="Symbol"
+      >:</a
+      ><a name="2805"
+      > </a
+      ><a name="2806" class="Symbol"
+      >&#8704;(</a
+      ><a name="2808" href="GenericConvergentSequence.html#2808" class="Bound"
+      >n</a
+      ><a name="2809"
+      > </a
+      ><a name="2810" class="Symbol"
+      >:</a
+      ><a name="2811"
+      > </a
+      ><a name="2812" href="Naturals.html#29" class="Datatype"
+      >&#8469;</a
+      ><a name="2813" class="Symbol"
+      >)</a
+      ><a name="2814"
+      > </a
+      ><a name="2815" class="Symbol"
+      >&#8594;</a
+      ><a name="2816"
+      > </a
+      ><a name="2817" href="GenericConvergentSequence.html#2727" class="Bound"
+      >&#945;</a
+      ><a name="2818"
+      > </a
+      ><a name="2819" href="GenericConvergentSequence.html#2808" class="Bound"
+      >n</a
+      ><a name="2820"
+      > </a
+      ><a name="2821" href="Equality.html#86" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="2822"
+      > </a
+      ><a name="2823" href="Two.html#199" class="InductiveConstructor"
+      >&#8321;</a
+      ><a name="2824"
+      > </a
+      ><a name="2825" class="Symbol"
+      >&#8594;</a
+      ><a name="2826"
+      > </a
+      ><a name="2827" href="GenericConvergentSequence.html#2727" class="Bound"
+      >&#945;</a
+      ><a name="2828"
+      > </a
+      ><a name="2829" class="Number"
+      >0</a
+      ><a name="2830"
+      > </a
+      ><a name="2831" href="Equality.html#86" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="2832"
+      > </a
+      ><a name="2833" href="Two.html#199" class="InductiveConstructor"
+      >&#8321;</a
+      ><a name="2834"
+      >
+    </a
+      ><a name="2839" href="GenericConvergentSequence.html#2784" class="Function"
+      >by-nested-induction</a
+      ><a name="2858"
+      > </a
+      ><a name="2859" href="Naturals.html#45" class="InductiveConstructor"
+      >0</a
+      ><a name="2860"
+      > </a
+      ><a name="2861" href="GenericConvergentSequence.html#2861" class="Bound"
+      >t</a
+      ><a name="2862"
+      > </a
+      ><a name="2863" class="Symbol"
+      >=</a
+      ><a name="2864"
+      > </a
+      ><a name="2865" href="GenericConvergentSequence.html#2861" class="Bound"
+      >t</a
+      ><a name="2866"
+      >
+    </a
+      ><a name="2871" href="GenericConvergentSequence.html#2784" class="Function"
+      >by-nested-induction</a
+      ><a name="2890"
+      > </a
+      ><a name="2891" class="Symbol"
+      >(</a
+      ><a name="2892" href="Naturals.html#69" class="InductiveConstructor"
+      >succ</a
+      ><a name="2896"
+      > </a
+      ><a name="2897" href="GenericConvergentSequence.html#2897" class="Bound"
+      >n</a
+      ><a name="2898" class="Symbol"
+      >)</a
+      ><a name="2899"
+      > </a
+      ><a name="2900" href="GenericConvergentSequence.html#2900" class="Bound"
+      >t</a
+      ><a name="2901"
+      > </a
+      ><a name="2902" class="Symbol"
+      >=</a
+      ><a name="2903"
+      >
+     </a
+      ><a name="2910" href="GenericConvergentSequence.html#2784" class="Function"
+      >by-nested-induction</a
+      ><a name="2929"
+      > </a
+      ><a name="2930" href="GenericConvergentSequence.html#2897" class="Bound"
+      >n</a
+      ><a name="2931"
+      > </a
+      ><a name="2932" class="Symbol"
+      >(</a
+      ><a name="2933" href="GenericConvergentSequence.html#2729" class="Bound"
+      >m</a
+      ><a name="2934"
+      > </a
+      ><a name="2935" href="GenericConvergentSequence.html#2897" class="Bound"
+      >n</a
+      ><a name="2936"
+      > </a
+      ><a name="2937" href="GenericConvergentSequence.html#2900" class="Bound"
+      >t</a
+      ><a name="2938" class="Symbol"
+      >)</a
+      ><a name="2939"
+      >
+  </a
+      ><a name="2942" href="GenericConvergentSequence.html#2207" class="Function"
+      >by-induction</a
+      ><a name="2954"
+      > </a
+      ><a name="2955" class="Symbol"
+      >(</a
+      ><a name="2956" href="Naturals.html#69" class="InductiveConstructor"
+      >succ</a
+      ><a name="2960"
+      > </a
+      ><a name="2961" href="GenericConvergentSequence.html#2961" class="Bound"
+      >n</a
+      ><a name="2962" class="Symbol"
+      >)</a
+      ><a name="2963"
+      > </a
+      ><a name="2964" href="GenericConvergentSequence.html#2964" class="Bound"
+      >&#945;</a
+      ><a name="2965"
+      > </a
+      ><a name="2966" href="GenericConvergentSequence.html#2966" class="Bound"
+      >m</a
+      ><a name="2967"
+      > </a
+      ><a name="2968" href="GenericConvergentSequence.html#2968" class="Bound"
+      >r</a
+      ><a name="2969"
+      > </a
+      ><a name="2970" href="GenericConvergentSequence.html#2970" class="Bound"
+      >s</a
+      ><a name="2971"
+      > </a
+      ><a name="2972" class="Symbol"
+      >(</a
+      ><a name="2973" href="Naturals.html#69" class="InductiveConstructor"
+      >succ</a
+      ><a name="2977"
+      > </a
+      ><a name="2978" href="GenericConvergentSequence.html#2978" class="Bound"
+      >i</a
+      ><a name="2979" class="Symbol"
+      >)</a
+      ><a name="2980"
+      > </a
+      ><a name="2981" class="Symbol"
+      >=</a
+      ><a name="2982"
+      >
+   </a
+      ><a name="2987" href="GenericConvergentSequence.html#2207" class="Function"
+      >by-induction</a
+      ><a name="2999"
+      > </a
+      ><a name="3000" href="GenericConvergentSequence.html#2961" class="Bound"
+      >n</a
+      ><a name="3001"
+      > </a
+      ><a name="3002" class="Symbol"
+      >(</a
+      ><a name="3003" href="GenericConvergentSequence.html#2964" class="Bound"
+      >&#945;</a
+      ><a name="3004"
+      > </a
+      ><a name="3005" href="Logic.html#1734" class="Function Operator"
+      >&#8728;</a
+      ><a name="3006"
+      > </a
+      ><a name="3007" href="Naturals.html#69" class="InductiveConstructor"
+      >succ</a
+      ><a name="3011" class="Symbol"
+      >)</a
+      ><a name="3012"
+      > </a
+      ><a name="3013" class="Symbol"
+      >(</a
+      ><a name="3014" href="GenericConvergentSequence.html#2966" class="Bound"
+      >m</a
+      ><a name="3015"
+      > </a
+      ><a name="3016" href="Logic.html#1734" class="Function Operator"
+      >&#8728;</a
+      ><a name="3017"
+      > </a
+      ><a name="3018" href="Naturals.html#69" class="InductiveConstructor"
+      >succ</a
+      ><a name="3022" class="Symbol"
+      >)</a
+      ><a name="3023"
+      > </a
+      ><a name="3024" href="GenericConvergentSequence.html#2968" class="Bound"
+      >r</a
+      ><a name="3025"
+      > </a
+      ><a name="3026" href="GenericConvergentSequence.html#2970" class="Bound"
+      >s</a
+      ><a name="3027"
+      > </a
+      ><a name="3028" href="GenericConvergentSequence.html#2978" class="Bound"
+      >i</a
+      ><a name="3029"
+      >
+
+
+</a
+      ><a name="3032" href="GenericConvergentSequence.html#3032" class="Function"
+      >Lemma[&#8469;&#8734;&#8726;under[&#8469;]&#8838;[&#8734;]]</a
+      ><a name="3054"
+      > </a
+      ><a name="3055" class="Symbol"
+      >:</a
+      ><a name="3056"
+      >
+</a
+      ><a name="3058" class="Comment"
+      >------------------------------------------------------</a
+      ><a name="3112"
+      >
+  </a
+      ><a name="3115" class="Symbol"
+      >&#8704;(</a
+      ><a name="3117" href="GenericConvergentSequence.html#3117" class="Bound"
+      >u</a
+      ><a name="3118"
+      > </a
+      ><a name="3119" class="Symbol"
+      >:</a
+      ><a name="3120"
+      > </a
+      ><a name="3121" href="GenericConvergentSequence.html#328" class="Function"
+      >&#8469;&#8734;</a
+      ><a name="3123" class="Symbol"
+      >)</a
+      ><a name="3124"
+      > </a
+      ><a name="3125" class="Symbol"
+      >&#8594;</a
+      ><a name="3126"
+      > </a
+      ><a name="3127" class="Symbol"
+      >(&#8704;(</a
+      ><a name="3130" href="GenericConvergentSequence.html#3130" class="Bound"
+      >n</a
+      ><a name="3131"
+      > </a
+      ><a name="3132" class="Symbol"
+      >:</a
+      ><a name="3133"
+      > </a
+      ><a name="3134" href="Naturals.html#29" class="Datatype"
+      >&#8469;</a
+      ><a name="3135" class="Symbol"
+      >)</a
+      ><a name="3136"
+      > </a
+      ><a name="3137" class="Symbol"
+      >&#8594;</a
+      ><a name="3138"
+      > </a
+      ><a name="3139" href="Logic.html#574" class="Function Operator"
+      >&#172;</a
+      ><a name="3140" class="Symbol"
+      >(</a
+      ><a name="3141" href="GenericConvergentSequence.html#3117" class="Bound"
+      >u</a
+      ><a name="3142"
+      > </a
+      ><a name="3143" href="GenericConvergentSequence.html#415" class="Function Operator"
+      >&#8803;</a
+      ><a name="3144"
+      > </a
+      ><a name="3145" href="GenericConvergentSequence.html#1289" class="Function"
+      >under</a
+      ><a name="3150"
+      > </a
+      ><a name="3151" href="GenericConvergentSequence.html#3130" class="Bound"
+      >n</a
+      ><a name="3152" class="Symbol"
+      >))</a
+      ><a name="3154"
+      > </a
+      ><a name="3155" class="Symbol"
+      >&#8594;</a
+      ><a name="3156"
+      > </a
+      ><a name="3157" href="GenericConvergentSequence.html#3117" class="Bound"
+      >u</a
+      ><a name="3158"
+      > </a
+      ><a name="3159" href="GenericConvergentSequence.html#415" class="Function Operator"
+      >&#8803;</a
+      ><a name="3160"
+      > </a
+      ><a name="3161" href="GenericConvergentSequence.html#1514" class="Function"
+      >&#8734;</a
+      ><a name="3162"
+      >
+</a
+      ><a name="3163" class="Comment"
+      >------------------------------------------------------</a
+      ><a name="3217"
+      >
+</a
+      ><a name="3218" href="GenericConvergentSequence.html#3032" class="Function"
+      >Lemma[&#8469;&#8734;&#8726;under[&#8469;]&#8838;[&#8734;]]</a
+      ><a name="3240"
+      > </a
+      ><a name="3241" href="GenericConvergentSequence.html#3241" class="Bound"
+      >u</a
+      ><a name="3242"
+      > </a
+      ><a name="3243" href="GenericConvergentSequence.html#3243" class="Bound"
+      >f</a
+      ><a name="3244"
+      > </a
+      ><a name="3245" class="Symbol"
+      >=</a
+      ><a name="3246"
+      > </a
+      ><a name="3247" href="GenericConvergentSequence.html#3263" class="Function"
+      >Lemma</a
+      ><a name="3252"
+      >
+ </a
+      ><a name="3254" class="Keyword"
+      >where</a
+      ><a name="3259"
+      >
+  </a
+      ><a name="3263" href="GenericConvergentSequence.html#3263" class="Function"
+      >Lemma</a
+      ><a name="3268"
+      > </a
+      ><a name="3269" class="Symbol"
+      >:</a
+      ><a name="3270"
+      > </a
+      ><a name="3271" class="Symbol"
+      >&#8704;(</a
+      ><a name="3273" href="GenericConvergentSequence.html#3273" class="Bound"
+      >n</a
+      ><a name="3274"
+      > </a
+      ><a name="3275" class="Symbol"
+      >:</a
+      ><a name="3276"
+      > </a
+      ><a name="3277" href="Naturals.html#29" class="Datatype"
+      >&#8469;</a
+      ><a name="3278" class="Symbol"
+      >)</a
+      ><a name="3279"
+      > </a
+      ><a name="3280" class="Symbol"
+      >&#8594;</a
+      ><a name="3281"
+      > </a
+      ><a name="3282" href="Subset.html#557" class="Function"
+      >incl</a
+      ><a name="3286"
+      > </a
+      ><a name="3287" href="GenericConvergentSequence.html#3241" class="Bound"
+      >u</a
+      ><a name="3288"
+      > </a
+      ><a name="3289" href="GenericConvergentSequence.html#3273" class="Bound"
+      >n</a
+      ><a name="3290"
+      > </a
+      ><a name="3291" href="Equality.html#86" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="3292"
+      > </a
+      ><a name="3293" href="Two.html#199" class="InductiveConstructor"
+      >&#8321;</a
+      ><a name="3294"
+      >
+  </a
+      ><a name="3297" href="GenericConvergentSequence.html#3263" class="Function"
+      >Lemma</a
+      ><a name="3302"
+      > </a
+      ><a name="3303" href="Naturals.html#45" class="InductiveConstructor"
+      >0</a
+      ><a name="3304"
+      > </a
+      ><a name="3305" class="Symbol"
+      >=</a
+      ><a name="3306"
+      > </a
+      ><a name="3307" href="Two.html#612" class="Function"
+      >Lemma[b&#8800;&#8320;&#8594;b&#8801;&#8321;]</a
+      ><a name="3321"
+      > </a
+      ><a name="3322" href="GenericConvergentSequence.html#3342" class="Function"
+      >claim</a
+      ><a name="3327"
+      >
+   </a
+      ><a name="3331" class="Keyword"
+      >where</a
+      ><a name="3336"
+      >
+    </a
+      ><a name="3342" href="GenericConvergentSequence.html#3342" class="Function"
+      >claim</a
+      ><a name="3347"
+      > </a
+      ><a name="3348" class="Symbol"
+      >:</a
+      ><a name="3349"
+      > </a
+      ><a name="3350" href="Subset.html#557" class="Function"
+      >incl</a
+      ><a name="3354"
+      > </a
+      ><a name="3355" href="GenericConvergentSequence.html#3241" class="Bound"
+      >u</a
+      ><a name="3356"
+      > </a
+      ><a name="3357" class="Number"
+      >0</a
+      ><a name="3358"
+      > </a
+      ><a name="3359" href="Equality.html#211" class="Function Operator"
+      >&#8800;</a
+      ><a name="3360"
+      > </a
+      ><a name="3361" href="Two.html#192" class="InductiveConstructor"
+      >&#8320;</a
+      ><a name="3362"
+      >
+    </a
+      ><a name="3367" href="GenericConvergentSequence.html#3342" class="Function"
+      >claim</a
+      ><a name="3372"
+      > </a
+      ><a name="3373" href="GenericConvergentSequence.html#3373" class="Bound"
+      >r</a
+      ><a name="3374"
+      > </a
+      ><a name="3375" class="Symbol"
+      >=</a
+      ><a name="3376"
+      > </a
+      ><a name="3377" href="GenericConvergentSequence.html#3243" class="Bound"
+      >f</a
+      ><a name="3378"
+      > </a
+      ><a name="3379" class="Number"
+      >0</a
+      ><a name="3380"
+      > </a
+      ><a name="3381" class="Symbol"
+      >(</a
+      ><a name="3382" href="GenericConvergentSequence.html#1553" class="Function"
+      >Lemma[under0]</a
+      ><a name="3395"
+      > </a
+      ><a name="3396" class="Symbol"
+      >{</a
+      ><a name="3397" href="GenericConvergentSequence.html#3241" class="Bound"
+      >u</a
+      ><a name="3398" class="Symbol"
+      >}</a
+      ><a name="3399"
+      > </a
+      ><a name="3400" href="GenericConvergentSequence.html#3373" class="Bound"
+      >r</a
+      ><a name="3401" class="Symbol"
+      >)</a
+      ><a name="3402"
+      >
+  </a
+      ><a name="3405" href="GenericConvergentSequence.html#3263" class="Function"
+      >Lemma</a
+      ><a name="3410"
+      > </a
+      ><a name="3411" class="Symbol"
+      >(</a
+      ><a name="3412" href="Naturals.html#69" class="InductiveConstructor"
+      >succ</a
+      ><a name="3416"
+      > </a
+      ><a name="3417" href="GenericConvergentSequence.html#3417" class="Bound"
+      >n</a
+      ><a name="3418" class="Symbol"
+      >)</a
+      ><a name="3419"
+      > </a
+      ><a name="3420" class="Symbol"
+      >=</a
+      ><a name="3421"
+      > </a
+      ><a name="3422" href="Two.html#612" class="Function"
+      >Lemma[b&#8800;&#8320;&#8594;b&#8801;&#8321;]</a
+      ><a name="3436"
+      > </a
+      ><a name="3437" href="GenericConvergentSequence.html#3497" class="Function"
+      >claim</a
+      ><a name="3442"
+      >
+   </a
+      ><a name="3446" class="Keyword"
+      >where</a
+      ><a name="3451"
+      >
+    </a
+      ><a name="3457" href="GenericConvergentSequence.html#3457" class="Function"
+      >IH</a
+      ><a name="3459"
+      > </a
+      ><a name="3460" class="Symbol"
+      >:</a
+      ><a name="3461"
+      > </a
+      ><a name="3462" href="Subset.html#557" class="Function"
+      >incl</a
+      ><a name="3466"
+      > </a
+      ><a name="3467" href="GenericConvergentSequence.html#3241" class="Bound"
+      >u</a
+      ><a name="3468"
+      > </a
+      ><a name="3469" href="GenericConvergentSequence.html#3417" class="Bound"
+      >n</a
+      ><a name="3470"
+      > </a
+      ><a name="3471" href="Equality.html#86" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="3472"
+      > </a
+      ><a name="3473" href="Two.html#199" class="InductiveConstructor"
+      >&#8321;</a
+      ><a name="3474"
+      >
+    </a
+      ><a name="3479" href="GenericConvergentSequence.html#3457" class="Function"
+      >IH</a
+      ><a name="3481"
+      > </a
+      ><a name="3482" class="Symbol"
+      >=</a
+      ><a name="3483"
+      > </a
+      ><a name="3484" href="GenericConvergentSequence.html#3263" class="Function"
+      >Lemma</a
+      ><a name="3489"
+      > </a
+      ><a name="3490" href="GenericConvergentSequence.html#3417" class="Bound"
+      >n</a
+      ><a name="3491"
+      >
+
+    </a
+      ><a name="3497" href="GenericConvergentSequence.html#3497" class="Function"
+      >claim</a
+      ><a name="3502"
+      > </a
+      ><a name="3503" class="Symbol"
+      >:</a
+      ><a name="3504"
+      > </a
+      ><a name="3505" href="Subset.html#557" class="Function"
+      >incl</a
+      ><a name="3509"
+      > </a
+      ><a name="3510" href="GenericConvergentSequence.html#3241" class="Bound"
+      >u</a
+      ><a name="3511" class="Symbol"
+      >(</a
+      ><a name="3512" href="Naturals.html#69" class="InductiveConstructor"
+      >succ</a
+      ><a name="3516"
+      > </a
+      ><a name="3517" href="GenericConvergentSequence.html#3417" class="Bound"
+      >n</a
+      ><a name="3518" class="Symbol"
+      >)</a
+      ><a name="3519"
+      > </a
+      ><a name="3520" href="Equality.html#211" class="Function Operator"
+      >&#8800;</a
+      ><a name="3521"
+      > </a
+      ><a name="3522" href="Two.html#192" class="InductiveConstructor"
+      >&#8320;</a
+      ><a name="3523"
+      >
+    </a
+      ><a name="3529" href="GenericConvergentSequence.html#3497" class="Function"
+      >claim</a
+      ><a name="3534"
+      > </a
+      ><a name="3535" href="GenericConvergentSequence.html#3535" class="Bound"
+      >r</a
+      ><a name="3536"
+      > </a
+      ><a name="3537" class="Symbol"
+      >=</a
+      ><a name="3538"
+      > </a
+      ><a name="3539" href="GenericConvergentSequence.html#3243" class="Bound"
+      >f</a
+      ><a name="3540" class="Symbol"
+      >(</a
+      ><a name="3541" href="Naturals.html#69" class="InductiveConstructor"
+      >succ</a
+      ><a name="3545"
+      > </a
+      ><a name="3546" href="GenericConvergentSequence.html#3417" class="Bound"
+      >n</a
+      ><a name="3547" class="Symbol"
+      >)(</a
+      ><a name="3549" href="GenericConvergentSequence.html#1915" class="Function"
+      >Lemma[under1]</a
+      ><a name="3562"
+      > </a
+      ><a name="3563" href="GenericConvergentSequence.html#3241" class="Bound"
+      >u</a
+      ><a name="3564"
+      > </a
+      ><a name="3565" href="GenericConvergentSequence.html#3417" class="Bound"
+      >n</a
+      ><a name="3566"
+      > </a
+      ><a name="3567" href="GenericConvergentSequence.html#3457" class="Function"
+      >IH</a
+      ><a name="3569"
+      > </a
+      ><a name="3570" href="GenericConvergentSequence.html#3535" class="Bound"
+      >r</a
+      ><a name="3571" class="Symbol"
+      >)</a
+      ><a name="3572"
+      >
+
+
+</a
+      ><a name="3575" href="GenericConvergentSequence.html#3575" class="Function"
+      >Lemma[density]</a
+      ><a name="3589"
+      > </a
+      ><a name="3590" class="Symbol"
+      >:</a
+      ><a name="3591"
+      >
+</a
+      ><a name="3593" class="Comment"
+      >-----------------------------------------------------------------------------</a
+      ><a name="3670"
+      >
+  </a
+      ><a name="3673" class="Symbol"
+      >&#8704;(</a
+      ><a name="3675" href="GenericConvergentSequence.html#3675" class="Bound"
+      >p</a
+      ><a name="3676"
+      > </a
+      ><a name="3677" class="Symbol"
+      >:</a
+      ><a name="3678"
+      > </a
+      ><a name="3679" href="GenericConvergentSequence.html#328" class="Function"
+      >&#8469;&#8734;</a
+      ><a name="3681"
+      > </a
+      ><a name="3682" class="Symbol"
+      >&#8594;</a
+      ><a name="3683"
+      > </a
+      ><a name="3684" href="Two.html#177" class="Datatype"
+      >&#8322;</a
+      ><a name="3685" class="Symbol"
+      >)</a
+      ><a name="3686"
+      > </a
+      ><a name="3687" class="Symbol"
+      >&#8594;</a
+      ><a name="3688"
+      > </a
+      ><a name="3689" href="GenericConvergentSequence.html#520" class="Function"
+      >extensional</a
+      ><a name="3700"
+      > </a
+      ><a name="3701" href="GenericConvergentSequence.html#3675" class="Bound"
+      >p</a
+      ><a name="3702"
+      > </a
+      ><a name="3703" class="Symbol"
+      >&#8594;</a
+      ><a name="3704"
+      > </a
+      ><a name="3705" class="Symbol"
+      >(&#8704;(</a
+      ><a name="3708" href="GenericConvergentSequence.html#3708" class="Bound"
+      >n</a
+      ><a name="3709"
+      > </a
+      ><a name="3710" class="Symbol"
+      >:</a
+      ><a name="3711"
+      > </a
+      ><a name="3712" href="Naturals.html#29" class="Datatype"
+      >&#8469;</a
+      ><a name="3713" class="Symbol"
+      >)</a
+      ><a name="3714"
+      > </a
+      ><a name="3715" class="Symbol"
+      >&#8594;</a
+      ><a name="3716"
+      > </a
+      ><a name="3717" href="GenericConvergentSequence.html#3675" class="Bound"
+      >p</a
+      ><a name="3718" class="Symbol"
+      >(</a
+      ><a name="3719" href="GenericConvergentSequence.html#1289" class="Function"
+      >under</a
+      ><a name="3724"
+      > </a
+      ><a name="3725" href="GenericConvergentSequence.html#3708" class="Bound"
+      >n</a
+      ><a name="3726" class="Symbol"
+      >)</a
+      ><a name="3727"
+      > </a
+      ><a name="3728" href="Equality.html#86" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="3729"
+      > </a
+      ><a name="3730" href="Two.html#199" class="InductiveConstructor"
+      >&#8321;</a
+      ><a name="3731" class="Symbol"
+      >)</a
+      ><a name="3732"
+      > </a
+      ><a name="3733" class="Symbol"
+      >&#8594;</a
+      ><a name="3734"
+      > </a
+      ><a name="3735" href="GenericConvergentSequence.html#3675" class="Bound"
+      >p</a
+      ><a name="3736"
+      > </a
+      ><a name="3737" href="GenericConvergentSequence.html#1514" class="Function"
+      >&#8734;</a
+      ><a name="3738"
+      > </a
+      ><a name="3739" href="Equality.html#86" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="3740"
+      > </a
+      ><a name="3741" href="Two.html#199" class="InductiveConstructor"
+      >&#8321;</a
+      ><a name="3742"
+      > </a
+      ><a name="3743" class="Symbol"
+      >&#8594;</a
+      ><a name="3744"
+      >
+  </a
+      ><a name="3747" class="Symbol"
+      >&#8704;(</a
+      ><a name="3749" href="GenericConvergentSequence.html#3749" class="Bound"
+      >u</a
+      ><a name="3750"
+      > </a
+      ><a name="3751" class="Symbol"
+      >:</a
+      ><a name="3752"
+      > </a
+      ><a name="3753" href="GenericConvergentSequence.html#328" class="Function"
+      >&#8469;&#8734;</a
+      ><a name="3755" class="Symbol"
+      >)</a
+      ><a name="3756"
+      > </a
+      ><a name="3757" class="Symbol"
+      >&#8594;</a
+      ><a name="3758"
+      > </a
+      ><a name="3759" href="GenericConvergentSequence.html#3675" class="Bound"
+      >p</a
+      ><a name="3760"
+      > </a
+      ><a name="3761" href="GenericConvergentSequence.html#3749" class="Bound"
+      >u</a
+      ><a name="3762"
+      > </a
+      ><a name="3763" href="Equality.html#86" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="3764"
+      > </a
+      ><a name="3765" href="Two.html#199" class="InductiveConstructor"
+      >&#8321;</a
+      ><a name="3766"
+      >
+</a
+      ><a name="3767" class="Comment"
+      >-----------------------------------------------------------------------------</a
+      ><a name="3844"
+      >
+</a
+      ><a name="3845" href="GenericConvergentSequence.html#3575" class="Function"
+      >Lemma[density]</a
+      ><a name="3859"
+      > </a
+      ><a name="3860" href="GenericConvergentSequence.html#3860" class="Bound"
+      >p</a
+      ><a name="3861"
+      > </a
+      ><a name="3862" href="GenericConvergentSequence.html#3862" class="Bound"
+      >extensionality-of-p</a
+      ><a name="3881"
+      > </a
+      ><a name="3882" href="GenericConvergentSequence.html#3882" class="Bound"
+      >f</a
+      ><a name="3883"
+      > </a
+      ><a name="3884" href="GenericConvergentSequence.html#3884" class="Bound"
+      >r</a
+      ><a name="3885"
+      > </a
+      ><a name="3886" href="GenericConvergentSequence.html#3886" class="Bound"
+      >u</a
+      ><a name="3887"
+      > </a
+      ><a name="3888" class="Symbol"
+      >=</a
+      ><a name="3889"
+      >
+ </a
+      ><a name="3892" href="Two.html#612" class="Function"
+      >Lemma[b&#8800;&#8320;&#8594;b&#8801;&#8321;]</a
+      ><a name="3906"
+      > </a
+      ><a name="3907" href="GenericConvergentSequence.html#4329" class="Function"
+      >Lemma</a
+      ><a name="3912"
+      >
+  </a
+      ><a name="3915" class="Keyword"
+      >where</a
+      ><a name="3920"
+      >
+   </a
+      ><a name="3925" href="GenericConvergentSequence.html#3925" class="Function"
+      >Claim</a
+      ><a name="3930"
+      > </a
+      ><a name="3931" class="Symbol"
+      >:</a
+      ><a name="3932"
+      > </a
+      ><a name="3933" class="Symbol"
+      >&#8704;(</a
+      ><a name="3935" href="GenericConvergentSequence.html#3935" class="Bound"
+      >n</a
+      ><a name="3936"
+      > </a
+      ><a name="3937" class="Symbol"
+      >:</a
+      ><a name="3938"
+      > </a
+      ><a name="3939" href="Naturals.html#29" class="Datatype"
+      >&#8469;</a
+      ><a name="3940" class="Symbol"
+      >)</a
+      ><a name="3941"
+      > </a
+      ><a name="3942" class="Symbol"
+      >&#8594;</a
+      ><a name="3943"
+      > </a
+      ><a name="3944" href="GenericConvergentSequence.html#3860" class="Bound"
+      >p</a
+      ><a name="3945"
+      > </a
+      ><a name="3946" href="GenericConvergentSequence.html#3886" class="Bound"
+      >u</a
+      ><a name="3947"
+      > </a
+      ><a name="3948" href="Equality.html#86" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="3949"
+      > </a
+      ><a name="3950" href="Two.html#192" class="InductiveConstructor"
+      >&#8320;</a
+      ><a name="3951"
+      > </a
+      ><a name="3952" class="Symbol"
+      >&#8594;</a
+      ><a name="3953"
+      > </a
+      ><a name="3954" href="Logic.html#574" class="Function Operator"
+      >&#172;</a
+      ><a name="3955" class="Symbol"
+      >(</a
+      ><a name="3956" href="GenericConvergentSequence.html#3886" class="Bound"
+      >u</a
+      ><a name="3957"
+      > </a
+      ><a name="3958" href="GenericConvergentSequence.html#415" class="Function Operator"
+      >&#8803;</a
+      ><a name="3959"
+      > </a
+      ><a name="3960" href="GenericConvergentSequence.html#1289" class="Function"
+      >under</a
+      ><a name="3965"
+      > </a
+      ><a name="3966" href="GenericConvergentSequence.html#3935" class="Bound"
+      >n</a
+      ><a name="3967" class="Symbol"
+      >)</a
+      ><a name="3968"
+      >
+   </a
+      ><a name="3972" href="GenericConvergentSequence.html#3925" class="Function"
+      >Claim</a
+      ><a name="3977"
+      > </a
+      ><a name="3978" href="GenericConvergentSequence.html#3978" class="Bound"
+      >n</a
+      ><a name="3979"
+      > </a
+      ><a name="3980" class="Symbol"
+      >=</a
+      ><a name="3981"
+      > </a
+      ><a name="3982" class="Symbol"
+      >(</a
+      ><a name="3983" href="Logic.html#2009" class="Function"
+      >contra-positive</a
+      ><a name="3998"
+      >
+               </a
+      ><a name="4014" class="Symbol"
+      >(&#955;</a
+      ><a name="4016"
+      > </a
+      ><a name="4017" href="GenericConvergentSequence.html#4017" class="Bound"
+      >s</a
+      ><a name="4018"
+      > </a
+      ><a name="4019" class="Symbol"
+      >&#8594;</a
+      ><a name="4020"
+      > </a
+      ><a name="4021" href="Equality.html#265" class="Function"
+      >transitivity</a
+      ><a name="4033" class="Symbol"
+      >(</a
+      ><a name="4034" href="GenericConvergentSequence.html#3862" class="Bound"
+      >extensionality-of-p</a
+      ><a name="4053"
+      > </a
+      ><a name="4054" href="GenericConvergentSequence.html#4017" class="Bound"
+      >s</a
+      ><a name="4055" class="Symbol"
+      >)</a
+      ><a name="4056"
+      > </a
+      ><a name="4057" class="Symbol"
+      >(</a
+      ><a name="4058" href="GenericConvergentSequence.html#3882" class="Bound"
+      >f</a
+      ><a name="4059"
+      > </a
+      ><a name="4060" href="GenericConvergentSequence.html#3978" class="Bound"
+      >n</a
+      ><a name="4061" class="Symbol"
+      >)))</a
+      ><a name="4064"
+      >
+            </a
+      ><a name="4078" href="Logic.html#1734" class="Function Operator"
+      >&#8728;</a
+      ><a name="4079"
+      > </a
+      ><a name="4080" href="Two.html#948" class="Function"
+      >Lemma[b&#8801;&#8320;&#8594;b&#8800;&#8321;]</a
+      ><a name="4094"
+      >
+
+   </a
+      ><a name="4099" href="GenericConvergentSequence.html#4099" class="Function"
+      >Claim'</a
+      ><a name="4105"
+      > </a
+      ><a name="4106" class="Symbol"
+      >:</a
+      ><a name="4107"
+      > </a
+      ><a name="4108" href="GenericConvergentSequence.html#3860" class="Bound"
+      >p</a
+      ><a name="4109"
+      > </a
+      ><a name="4110" href="GenericConvergentSequence.html#3886" class="Bound"
+      >u</a
+      ><a name="4111"
+      > </a
+      ><a name="4112" href="Equality.html#86" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="4113"
+      > </a
+      ><a name="4114" href="Two.html#192" class="InductiveConstructor"
+      >&#8320;</a
+      ><a name="4115"
+      > </a
+      ><a name="4116" class="Symbol"
+      >&#8594;</a
+      ><a name="4117"
+      > </a
+      ><a name="4118" class="Symbol"
+      >&#8704;(</a
+      ><a name="4120" href="GenericConvergentSequence.html#4120" class="Bound"
+      >n</a
+      ><a name="4121"
+      > </a
+      ><a name="4122" class="Symbol"
+      >:</a
+      ><a name="4123"
+      > </a
+      ><a name="4124" href="Naturals.html#29" class="Datatype"
+      >&#8469;</a
+      ><a name="4125" class="Symbol"
+      >)</a
+      ><a name="4126"
+      > </a
+      ><a name="4127" class="Symbol"
+      >&#8594;</a
+      ><a name="4128"
+      > </a
+      ><a name="4129" href="Logic.html#574" class="Function Operator"
+      >&#172;</a
+      ><a name="4130" class="Symbol"
+      >(</a
+      ><a name="4131" href="GenericConvergentSequence.html#3886" class="Bound"
+      >u</a
+      ><a name="4132"
+      > </a
+      ><a name="4133" href="GenericConvergentSequence.html#415" class="Function Operator"
+      >&#8803;</a
+      ><a name="4134"
+      > </a
+      ><a name="4135" href="GenericConvergentSequence.html#1289" class="Function"
+      >under</a
+      ><a name="4140"
+      > </a
+      ><a name="4141" href="GenericConvergentSequence.html#4120" class="Bound"
+      >n</a
+      ><a name="4142" class="Symbol"
+      >)</a
+      ><a name="4143"
+      >
+   </a
+      ><a name="4147" href="GenericConvergentSequence.html#4099" class="Function"
+      >Claim'</a
+      ><a name="4153"
+      > </a
+      ><a name="4154" href="GenericConvergentSequence.html#4154" class="Bound"
+      >g</a
+      ><a name="4155"
+      > </a
+      ><a name="4156" href="GenericConvergentSequence.html#4156" class="Bound"
+      >n</a
+      ><a name="4157"
+      > </a
+      ><a name="4158" class="Symbol"
+      >=</a
+      ><a name="4159"
+      > </a
+      ><a name="4160" href="GenericConvergentSequence.html#3925" class="Function"
+      >Claim</a
+      ><a name="4165"
+      > </a
+      ><a name="4166" href="GenericConvergentSequence.html#4156" class="Bound"
+      >n</a
+      ><a name="4167"
+      > </a
+      ><a name="4168" href="GenericConvergentSequence.html#4154" class="Bound"
+      >g</a
+      ><a name="4169"
+      >
+
+   </a
+      ><a name="4174" href="GenericConvergentSequence.html#4174" class="Function"
+      >Claim-&#8734;</a
+      ><a name="4181"
+      > </a
+      ><a name="4182" class="Symbol"
+      >:</a
+      ><a name="4183"
+      > </a
+      ><a name="4184" href="GenericConvergentSequence.html#3860" class="Bound"
+      >p</a
+      ><a name="4185"
+      > </a
+      ><a name="4186" href="GenericConvergentSequence.html#3886" class="Bound"
+      >u</a
+      ><a name="4187"
+      > </a
+      ><a name="4188" href="Equality.html#86" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="4189"
+      > </a
+      ><a name="4190" href="Two.html#192" class="InductiveConstructor"
+      >&#8320;</a
+      ><a name="4191"
+      > </a
+      ><a name="4192" class="Symbol"
+      >&#8594;</a
+      ><a name="4193"
+      > </a
+      ><a name="4194" href="Logic.html#574" class="Function Operator"
+      >&#172;</a
+      ><a name="4195" class="Symbol"
+      >(</a
+      ><a name="4196" href="GenericConvergentSequence.html#3886" class="Bound"
+      >u</a
+      ><a name="4197"
+      > </a
+      ><a name="4198" href="GenericConvergentSequence.html#415" class="Function Operator"
+      >&#8803;</a
+      ><a name="4199"
+      > </a
+      ><a name="4200" href="GenericConvergentSequence.html#1514" class="Function"
+      >&#8734;</a
+      ><a name="4201" class="Symbol"
+      >)</a
+      ><a name="4202"
+      >
+   </a
+      ><a name="4206" href="GenericConvergentSequence.html#4174" class="Function"
+      >Claim-&#8734;</a
+      ><a name="4213"
+      > </a
+      ><a name="4214" class="Symbol"
+      >=</a
+      ><a name="4215"
+      > </a
+      ><a name="4216" class="Symbol"
+      >(</a
+      ><a name="4217" href="Logic.html#2009" class="Function"
+      >contra-positive</a
+      ><a name="4232"
+      >
+               </a
+      ><a name="4248" class="Symbol"
+      >(&#955;</a
+      ><a name="4250"
+      > </a
+      ><a name="4251" href="GenericConvergentSequence.html#4251" class="Bound"
+      >s</a
+      ><a name="4252"
+      > </a
+      ><a name="4253" class="Symbol"
+      >&#8594;</a
+      ><a name="4254"
+      > </a
+      ><a name="4255" href="Equality.html#265" class="Function"
+      >transitivity</a
+      ><a name="4267" class="Symbol"
+      >(</a
+      ><a name="4268" href="GenericConvergentSequence.html#3862" class="Bound"
+      >extensionality-of-p</a
+      ><a name="4287"
+      > </a
+      ><a name="4288" href="GenericConvergentSequence.html#4251" class="Bound"
+      >s</a
+      ><a name="4289" class="Symbol"
+      >)</a
+      ><a name="4290"
+      > </a
+      ><a name="4291" href="GenericConvergentSequence.html#3884" class="Bound"
+      >r</a
+      ><a name="4292" class="Symbol"
+      >))</a
+      ><a name="4294"
+      >
+            </a
+      ><a name="4308" href="Logic.html#1734" class="Function Operator"
+      >&#8728;</a
+      ><a name="4309"
+      > </a
+      ><a name="4310" href="Two.html#948" class="Function"
+      >Lemma[b&#8801;&#8320;&#8594;b&#8800;&#8321;]</a
+      ><a name="4324"
+      >
+
+   </a
+      ><a name="4329" href="GenericConvergentSequence.html#4329" class="Function"
+      >Lemma</a
+      ><a name="4334"
+      > </a
+      ><a name="4335" class="Symbol"
+      >:</a
+      ><a name="4336"
+      > </a
+      ><a name="4337" href="GenericConvergentSequence.html#3860" class="Bound"
+      >p</a
+      ><a name="4338"
+      > </a
+      ><a name="4339" href="GenericConvergentSequence.html#3886" class="Bound"
+      >u</a
+      ><a name="4340"
+      > </a
+      ><a name="4341" href="Equality.html#211" class="Function Operator"
+      >&#8800;</a
+      ><a name="4342"
+      > </a
+      ><a name="4343" href="Two.html#192" class="InductiveConstructor"
+      >&#8320;</a
+      ><a name="4344"
+      >
+   </a
+      ><a name="4348" href="GenericConvergentSequence.html#4329" class="Function"
+      >Lemma</a
+      ><a name="4353"
+      > </a
+      ><a name="4354" href="GenericConvergentSequence.html#4354" class="Bound"
+      >t</a
+      ><a name="4355"
+      > </a
+      ><a name="4356" class="Symbol"
+      >=</a
+      ><a name="4357"
+      > </a
+      ><a name="4358" class="Symbol"
+      >(</a
+      ><a name="4359" href="GenericConvergentSequence.html#4174" class="Function"
+      >Claim-&#8734;</a
+      ><a name="4366"
+      > </a
+      ><a name="4367" href="GenericConvergentSequence.html#4354" class="Bound"
+      >t</a
+      ><a name="4368" class="Symbol"
+      >)(</a
+      ><a name="4370" href="GenericConvergentSequence.html#3032" class="Function"
+      >Lemma[&#8469;&#8734;&#8726;under[&#8469;]&#8838;[&#8734;]]</a
+      ><a name="4392"
+      > </a
+      ><a name="4393" href="GenericConvergentSequence.html#3886" class="Bound"
+      >u</a
+      ><a name="4394"
+      > </a
+      ><a name="4395" class="Symbol"
+      >(</a
+      ><a name="4396" href="GenericConvergentSequence.html#4099" class="Function"
+      >Claim'</a
+      ><a name="4402"
+      > </a
+      ><a name="4403" href="GenericConvergentSequence.html#4354" class="Bound"
+      >t</a
+      ><a name="4404" class="Symbol"
+      >))</a
+      ><a name="4406"
+      >
+</a
+      ></pre
+    ></body
+  ></html
+>

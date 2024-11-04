@@ -1,0 +1,532 @@
+Dell D410 laptop 1.73 GHz running under ubuntu linux 7.04
+Under interpreted ghci 6.6, performed 1st Dec 2007. 
+
+Full Haskell code at 
+
+  http://www.cs.bham.ac.uk/~mhe/papers/exhaustive-journal.hs
+
+Article at
+
+  http://www.cs.bham.ac.uk/~mhe/papers/exhaustive-experimental-results.txt
+
+
+experiment1 :: Version -> N -> Bool
+experiment1 v n = forsome v (proj n)
+
+> experiment1 0 10
+True
+(0.03 secs, 1995424 bytes)
+
+> experiment1 0 11
+True
+(0.06 secs, 4179612 bytes)
+
+> experiment1 0 12
+True
+(0.13 secs, 9292264 bytes)
+
+> experiment1 0 13
+True
+(0.27 secs, 20090144 bytes)
+
+> experiment1 0 14
+True
+(0.58 secs, 43400592 bytes)
+
+> experiment1 0 15
+True
+(1.22 secs, 92313932 bytes)
+
+> experiment1 0 16
+True
+(2.57 secs, 196433172 bytes)
+
+> experiment1 0 17
+True
+(5.44 secs, 416114116 bytes)
+
+> experiment1 0 18
+True
+(11.45 secs, 878915256 bytes)
+
+
+> experiment1 1 100
+True
+(0.01 secs, 797188 bytes)
+
+> experiment1 1 200
+True
+(0.04 secs, 2573996 bytes)
+
+> experiment1 1 400
+True
+(0.16 secs, 9692160 bytes)
+
+> experiment1 1 800
+True
+(0.60 secs, 39552460 bytes)
+
+> experiment1 1 1600
+True
+(2.37 secs, 159585664 bytes)
+
+> experiment1 1 3200
+True
+(9.59 secs, 637795376 bytes)
+
+
+> experiment1 2 (2^100000)
+True
+(0.01 secs, 522312 bytes)
+
+> experiment1 2 (2^1000000)
+True
+(0.07 secs, 2562024 bytes)
+
+> experiment1 2 (2^10000000)
+True
+(0.87 secs, 23763432 bytes)
+
+> experiment1 2 (2^100000000)
+True
+(12.75 secs, 242786628 bytes)
+
+
+> 2^100000000 == 0
+False
+(12.75 secs, 242956840 bytes)
+
+
+> experiment1 3 10000
+True
+(0.05 secs, 3483664 bytes)
+
+> experiment1 3 20000
+True
+(0.09 secs, 6758816 bytes)
+
+> experiment1 3 40000
+True
+(0.23 secs, 13309060 bytes)
+
+> experiment1 3 80000
+True
+(0.42 secs, 26409500 bytes)
+
+> experiment1 3 160000
+True
+(0.90 secs, 53200344 bytes)
+
+> experiment1 3 320000
+True
+(1.83 secs, 106780672 bytes)
+
+> experiment1 3 640000
+True
+(3.68 secs, 212762612 bytes)
+
+> experiment1 3 1280000
+True
+(7.59 secs, 425896996 bytes)
+
+> experiment1 3 2560000
+True
+(15.38 secs, 852176968 bytes)
+
+
+> experiment1 4 (2^10000)
+True
+(0.20 secs, 39115984 bytes)
+
+> experiment1 4 (2^100000)
+True
+(10.69 secs, 3261979036 bytes)
+
+
+projlist :: [N] -> (Cantor -> Bool)
+projlist [] = \a -> True
+projlist (n:l) = \a -> (a n) && (projlist l a)
+
+experiment2 :: Version -> [N] -> Bool
+experiment2 v l = forsome v (projlist l)
+
+> experiment2 0 [10,15]
+True
+(1.84 secs, 122938620 bytes)
+
+> experiment2 1 [10,15]
+True
+(0.00 secs, 0 bytes)
+
+> experiment2 2 [10,15]
+True
+(0.00 secs, 0 bytes)
+
+> experiment2 3 [10,15]
+True
+(0.00 secs, 0 bytes)
+
+> experiment2 4 [10,15]
+True
+(0.00 secs, 0 bytes)
+
+
+> experiment2 0 [10,17]
+True
+(7.90 secs, 535954180 bytes)
+
+> experiment2 1 [10,17]
+True
+(0.00 secs, 0 bytes)
+
+> experiment2 2 [10,17]
+True
+(0.00 secs, 0 bytes)
+
+> experiment2 3 [10,17]
+True
+(0.00 secs, 0 bytes)
+
+> experiment2 4 [10,17]
+True
+(0.00 secs, 0 bytes)
+
+
+> experiment2 0 [0,2,4,6,8]
+True
+(0.02 secs, 905660 bytes)
+
+> experiment2 1 [0,2,4,6,8]
+True
+(0.00 secs, 0 bytes)
+
+> experiment2 2 [0,2,4,6,8]
+True
+(85.39 secs, 3898517156 bytes)
+
+> experiment2 3 [0,2,4,6,8]
+True
+(0.00 secs, 0 bytes)
+
+> experiment2 4 [0,2,4,6,8]
+True
+(0.00 secs, 0 bytes)
+
+
+> experiment2 0 [0,2,4,6,8,10,12]
+True
+(0.38 secs, 21318012 bytes)
+
+> experiment2 1 [0,2,4,6,8,10,12]
+True
+(0.00 secs, 0 bytes)
+
+> experiment2 2 [0,2,4,6,8,10,12,17]
+Interrupted.
+
+> experiment2 3 [0,2,4,6,8,10,12]
+True
+(0.01 secs, 0 bytes)
+
+> experiment2 4 [0,2,4,6,8,10,12]
+True
+(0.01 secs, 0 bytes)
+
+
+> experiment2 0 [0,2,4,6,8,10,12,17]
+True
+(16.02 secs, 914859896 bytes)
+
+> experiment2 1 [0,2,4,6,8,10,12,17]
+True
+(0.00 secs, 0 bytes)
+
+> experiment2 2 [0,2,4,6,8,10,12,17]
+Interrupted.
+
+> experiment2 3 [0,2,4,6,8,10,12,17]
+True
+(0.02 secs, 972184 bytes)
+
+> experiment2 4 [0,2,4,6,8,10,12,17]
+True
+(0.02 secs, 859156 bytes)
+
+> 
+
+
+> experiment2 2 [1000,10000,100000]
+True
+(0.00 secs, 0 bytes)
+
+> experiment2 3 [1000,10000,100000]
+True
+(2.43 secs, 134840096 bytes)
+
+> experiment2 4 [1000,10000,100000]
+True
+(0.00 secs, 0 bytes)
+
+
+> experiment2 2 [1000,10000,100000,1]
+True
+(0.04 secs, 1460192 bytes)
+
+> experiment2 3 [1000,10000,100000,1]
+True
+(4.73 secs, 269424292 bytes)
+
+> experiment2 4 [1000,10000,100000,1]
+True
+(0.00 secs, 0 bytes)
+
+
+> experiment2 2 [1000,10000,100000,1000000]
+True
+(0.03 secs, 1463224 bytes)
+
+> experiment2 3 [1000,10000,100000,1000000]
+Interrupted.
+
+> experiment2 4 [1000,10000,100000,1000000]
+True
+(0.00 secs, 0 bytes)
+
+
+> experiment2 4 [1000,10000,100000,1000000,10000000]
+True
+(0.01 secs, 0 bytes)
+
+> experiment2 2 [1000,10000,100000,1000000,10000000]
+True
+(85.90 secs, 3898524572 bytes)
+
+
+> experiment2 4 [10^3,10^4,10^5,10^6,10^7,10^8]
+True
+(0.02 secs, 3111320 bytes)
+
+> experiment2 4 [10^3,10^4,10^5,10^6,10^7,10^8,10^9]
+True
+(0.06 secs, 5202620 bytes)
+
+> experiment2 4 [10^3,10^4,10^5,10^6,10^7,10^8,10^10]
+True
+(0.06 secs, 6183260 bytes)
+
+> experiment2 4 [10^3,10^4,10^5,10^6,10^7,10^8,10^11]
+True
+(0.06 secs, 6157728 bytes)
+
+> experiment2 4 [10^3,10^4,10^5,10^6,10^7,10^8,10^12]
+True
+(0.06 secs, 6152508 bytes)
+
+> experiment2 4 [10^3,10^4,10^5,10^6,10^7,10^8,10^13]
+True
+(0.06 secs, 6131720 bytes)
+
+> experiment2 4 [10^3,10^4,10^5,10^6,10^7,10^8,10^14]
+True
+(0.06 secs, 6141548 bytes)
+
+> experiment2 4 [10^3,10^4,10^5,10^6,10^7,10^8,10^14]
+True
+(0.06 secs, 6141536 bytes)
+
+> experiment2 4 [10^3,10^4,10^5,10^6,10^7,10^8,10^16]
+True
+(0.06 secs, 6921336 bytes)
+
+> experiment2 4 [10^3,10^4,10^5,10^6,10^7,10^8,10^90]
+True
+(0.15 secs, 17344540 bytes)
+
+> experiment2 4 [10^3,10^4,10^5,10^6,10^7,10^8,10^91]
+True
+(0.15 secs, 17307136 bytes)
+
+> experiment2 4 [10^3,10^4,10^5,10^6,10^7,10^8,10^92]
+True
+(0.15 secs, 17305040 bytes)
+
+> experiment2 4 [10^3,10^4,10^5,10^6,10^7,10^8,10^93]
+True
+(0.15 secs, 17288352 bytes)
+
+> experiment2 4 [10^3,10^4,10^5,10^6,10^7,10^8,10^94]
+True
+(0.16 secs, 17969928 bytes)
+
+> experiment2 4 [10^3,10^4,10^5,10^6,10^7,10^8,10^95]
+True
+(0.15 secs, 17941632 bytes)
+
+> experiment2 4 [10^3,10^4,10^5,10^6,10^7,10^8,10^96]
+True
+(0.15 secs, 17926328 bytes)
+
+> 
+
+> experiment2 4 [10^3,10^4,10^5,10^6,10^7,10^8,10^9]
+True
+(0.05 secs, 5202620 bytes)
+
+> experiment2 4 [10^3,10^4,10^5,10^6,10^7,10^8,10^9,10^10]
+True
+(0.11 secs, 10596512 bytes)
+
+> experiment2 4 [10^3,10^4,10^5,10^6,10^7,10^8,10^9,10^10,10^11]
+True
+(0.26 secs, 23203752 bytes)
+
+> experiment2 4 [10^3,10^4,10^5,10^6,10^7,10^8,10^9,10^10,10^11,10^12]
+True
+(0.61 secs, 55380848 bytes)
+
+> experiment2 4 [10^3,10^4,10^5,10^6,10^7,10^8,10^9,10^10,10^11,10^12,10^13]
+True
+(1.49 secs, 131651444 bytes)
+
+> experiment2 4 [10^3,10^4,10^5,10^6,10^7,10^8,10^9,10^10,10^11,10^12,10^13,10^14]
+True
+(3.40 secs, 313581076 bytes)
+
+> experiment2 4 [10^3,10^4,10^5,10^6,10^7,10^8,10^9,10^10,10^11,10^12,10^13,10^14,10^15]
+True
+(7.96 secs, 735317496 bytes)
+
+> experiment2 4 [10^3,10^4,10^5,10^6,10^7,10^8,10^9,10^10,10^11,10^12,10^13,10^14,10^15,10^16]
+True
+(18.62 secs, 1712814224 bytes)
+
+> 
+
+> experiment2 4 [100^3,100^4,100^5,100^6,100^7,100^8,100^9,100^10,100^11,10^12,100^13,100^14,100^15,100^16]
+True
+(18.40 secs, 1991459884 bytes)
+
+
+> experiment2 4 [100^3,100^4,100^5,100^6,100^7,100^8,100^9,100^10]
+True
+(0.26 secs, 29573396 bytes)
+
+
+experiment3 :: Version -> [N] -> Bool
+experiment3 v l = forevery v (projlist l)
+
+
+> experiment3 4 [100^3,100^4,100^5,100^6,100^7,100^8,100^9,100^10]
+False
+(0.15 secs, 17291156 bytes)
+
+> experiment2 4 [100^3,100^4,100^5,100^6,100^7,100^8,100^9,100^10,100^11]
+True
+(0.60 secs, 64341692 bytes)
+
+> experiment3 4 [100^3,100^4,100^5,100^6,100^7,100^8,100^9,100^10,100^11]
+False
+(0.35 secs, 36634048 bytes)
+
+> experiment2 4 [100^3,100^4,100^5,100^6,100^7,100^8,100^9,100^10,100^11,100^12]
+True
+(1.44 secs, 149150148 bytes)
+
+> experiment3 4 [100^3,100^4,100^5,100^6,100^7,100^8,100^9,100^10,100^11,100^12]
+False
+(0.85 secs, 82657240 bytes)
+
+> experiment2 4 [100^3,100^4,100^5,100^6,100^7,100^8,100^9,100^10,100^11,100^12,100^13]
+True
+(3.29 secs, 347089824 bytes)
+
+> experiment3 4 [100^3,100^4,100^5,100^6,100^7,100^8,100^9,100^10,100^11,100^12,100^13]
+False
+(1.86 secs, 187219288 bytes)
+
+*Main> experiment2 4 [100^3,100^4,100^5,100^6,100^7,100^8,100^9,100^10]
+True(0.26 secs, 28244084 bytes)
+
+*Main> experiment2 4 [100^3,100^4,100^5,100^6,100^7,100^8,100^9,100^10,100^3,100^4,100^5,100^6,100^7,100^8,100^9,100^10]
+True(0.48 secs, 54318948 bytes)
+
+*Main> experiment2 4 [100^3,100^4,100^5,100^6,100^7,100^8,100^9,100^10,100^3,100^4,100^5,100^6,100^7,100^8,100^9,100^10,100^3,100^4,100^5,100^6,100^7,100^8,100^9,100^10,100^3,100^4,100^5,100^6,100^7,100^8,100^9,100^10,100^3,100^4,100^5,100^6,100^7,100^8,100^9,100^10,100^3,100^4,100^5,100^6,100^7,100^8,100^9,100^10,100^3,100^4,100^5,100^6,100^7,100^8,100^9,100^10]
+True
+(1.60 secs, 185077608 bytes)
+
+
+
+-- Experiment 4 (changes number of uses)
+
+experiment4 v l n = experiment3 v (take (n * length l) l')
+ where l' = l ++ l'
+
+*Main> experiment4 4 [100^3,100^4,100^5,100^6,100^7,100^8,100^9,100^10] 10
+False
+(1.11 secs, 119275828 bytes)
+
+*Main> experiment4 4 [100^3,100^4,100^5,100^6,100^7,100^8,100^9,100^10] 11
+False
+(1.21 secs, 130433820 bytes)
+
+*Main> experiment4 4 [100^3,100^4,100^5,100^6,100^7,100^8,100^9,100^10] 12
+False
+(1.32 secs, 142156664 bytes)
+
+*Main> experiment4 4 [100^3,100^4,100^5,100^6,100^7,100^8,100^9,100^10] 13
+False
+(1.42 secs, 153184072 bytes)
+
+*Main> experiment4 4 [100^3,100^4,100^5,100^6,100^7,100^8,100^9,100^10] 14
+False
+(1.53 secs, 164891576 bytes)
+
+*Main> experiment4 4 [100^3,100^4,100^5,100^6,100^7,100^8,100^9,100^10] 15
+False
+(1.63 secs, 175922216 bytes)
+
+*Main> experiment4 4 [100^3,100^4,100^5,100^6,100^7,100^8,100^9,100^10] 16
+False
+(1.74 secs, 187672068 bytes)
+
+*Main> experiment4 4 [100^3,100^4,100^5,100^6,100^7,100^8,100^9,100^10] 17
+False
+(1.84 secs, 198704448 bytes)
+
+*Main> experiment4 4 [100^3,100^4,100^5,100^6,100^7,100^8,100^9,100^10] 18
+False
+(1.96 secs, 210373720 bytes)
+
+*Main> experiment4 4 [100^3,100^4,100^5,100^6,100^7,100^8,100^9,100^10] 19
+False
+(2.06 secs, 221380648 bytes)
+
+*Main> experiment4 4 [100^3,100^4,100^5,100^6,100^7,100^8,100^9,100^10] 20
+False
+(2.16 secs, 233106684 bytes)
+
+-- equality experiment
+
+*Main> equal 4 f h
+True
+(0.15 secs, 14947892 bytes)
+
+*Main> equal 4 f g
+False
+(0.03 secs, 3253316 bytes)
+
+*Main> equal 4 g h
+False
+(0.04 secs, 3255612 bytes)
+
+*Main> equal 4 f f
+True
+(0.15 secs, 13907100 bytes)
+
+*Main> equal 4 g g
+True
+(0.18 secs, 18179584 bytes)
+
+*Main> equal 4 h h
+True
+(0.15 secs, 13839084 bytes)

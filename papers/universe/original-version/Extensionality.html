@@ -1,0 +1,215 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+><head
+  ><title
+    >Extensionality</title
+    ><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"
+     /><meta http-equiv="Content-Style-Type" content="text/css"
+     /><link href="Agda.css" rel="stylesheet" type="text/css"
+     /></head
+  ><body
+  ><pre
+    ><a name="1" class="Comment"
+      >Martin Escardo 2012.</a
+      ><a name="21"
+      >
+
+\begin{code}
+
+</a
+      ><a name="37" class="Keyword"
+      >module</a
+      ><a name="43"
+      > </a
+      ><a name="44" href="Extensionality.html#1" class="Module"
+      >Extensionality</a
+      ><a name="58"
+      > </a
+      ><a name="59" class="Keyword"
+      >where</a
+      ><a name="64"
+      >
+
+
+</a
+      ><a name="67" class="Keyword"
+      >open</a
+      ><a name="71"
+      > </a
+      ><a name="72" class="Keyword"
+      >import</a
+      ><a name="78"
+      > </a
+      ><a name="79" href="Equality.html#1" class="Module"
+      >Equality</a
+      ><a name="87"
+      >
+
+</a
+      ><a name="89" class="Keyword"
+      >postulate</a
+      ><a name="98"
+      >
+ </a
+      ><a name="101" href="Extensionality.html#101" class="Postulate"
+      >extensionality</a
+      ><a name="115"
+      > </a
+      ><a name="116" class="Symbol"
+      >:</a
+      ><a name="117"
+      > </a
+      ><a name="118" class="Symbol"
+      >{</a
+      ><a name="119" href="Extensionality.html#119" class="Bound"
+      >X</a
+      ><a name="120"
+      > </a
+      ><a name="121" class="Symbol"
+      >:</a
+      ><a name="122"
+      > </a
+      ><a name="123" class="PrimitiveType"
+      >Set</a
+      ><a name="126" class="Symbol"
+      >}</a
+      ><a name="127"
+      > </a
+      ><a name="128" class="Symbol"
+      >&#8594;</a
+      ><a name="129"
+      > </a
+      ><a name="130" class="Symbol"
+      >{</a
+      ><a name="131" href="Extensionality.html#131" class="Bound"
+      >Y</a
+      ><a name="132"
+      > </a
+      ><a name="133" class="Symbol"
+      >:</a
+      ><a name="134"
+      > </a
+      ><a name="135" href="Extensionality.html#119" class="Bound"
+      >X</a
+      ><a name="136"
+      > </a
+      ><a name="137" class="Symbol"
+      >-&gt;</a
+      ><a name="139"
+      > </a
+      ><a name="140" class="PrimitiveType"
+      >Set</a
+      ><a name="143" class="Symbol"
+      >}</a
+      ><a name="144"
+      > </a
+      ><a name="145" class="Symbol"
+      >&#8594;</a
+      ><a name="146"
+      >
+                  </a
+      ><a name="166" class="Symbol"
+      >&#8704;{</a
+      ><a name="168" href="Extensionality.html#168" class="Bound"
+      >f</a
+      ><a name="169"
+      > </a
+      ><a name="170" href="Extensionality.html#170" class="Bound"
+      >g</a
+      ><a name="171"
+      > </a
+      ><a name="172" class="Symbol"
+      >:</a
+      ><a name="173"
+      > </a
+      ><a name="174" class="Symbol"
+      >(</a
+      ><a name="175" href="Extensionality.html#175" class="Bound"
+      >x</a
+      ><a name="176"
+      > </a
+      ><a name="177" class="Symbol"
+      >:</a
+      ><a name="178"
+      > </a
+      ><a name="179" href="Extensionality.html#119" class="Bound"
+      >X</a
+      ><a name="180" class="Symbol"
+      >)</a
+      ><a name="181"
+      > </a
+      ><a name="182" class="Symbol"
+      >&#8594;</a
+      ><a name="183"
+      > </a
+      ><a name="184" href="Extensionality.html#131" class="Bound"
+      >Y</a
+      ><a name="185"
+      > </a
+      ><a name="186" href="Extensionality.html#175" class="Bound"
+      >x</a
+      ><a name="187" class="Symbol"
+      >}</a
+      ><a name="188"
+      > </a
+      ><a name="189" class="Symbol"
+      >&#8594;</a
+      ><a name="190"
+      > </a
+      ><a name="191" class="Symbol"
+      >(&#8704;</a
+      ><a name="193"
+      > </a
+      ><a name="194" href="Extensionality.html#194" class="Bound"
+      >x</a
+      ><a name="195"
+      > </a
+      ><a name="196" class="Symbol"
+      >&#8594;</a
+      ><a name="197"
+      > </a
+      ><a name="198" href="Extensionality.html#168" class="Bound"
+      >f</a
+      ><a name="199"
+      > </a
+      ><a name="200" href="Extensionality.html#194" class="Bound"
+      >x</a
+      ><a name="201"
+      > </a
+      ><a name="202" href="Equality.html#239" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="203"
+      > </a
+      ><a name="204" href="Extensionality.html#170" class="Bound"
+      >g</a
+      ><a name="205"
+      > </a
+      ><a name="206" href="Extensionality.html#194" class="Bound"
+      >x</a
+      ><a name="207" class="Symbol"
+      >)</a
+      ><a name="208"
+      > </a
+      ><a name="209" class="Symbol"
+      >&#8594;</a
+      ><a name="210"
+      > </a
+      ><a name="211" href="Extensionality.html#168" class="Bound"
+      >f</a
+      ><a name="212"
+      > </a
+      ><a name="213" href="Equality.html#239" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="214"
+      > </a
+      ><a name="215" href="Extensionality.html#170" class="Bound"
+      >g</a
+      ><a name="216"
+      >
+
+\end{code}
+</a
+      ></pre
+    ></body
+  ></html
+>

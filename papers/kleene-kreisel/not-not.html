@@ -1,0 +1,3248 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+><head
+  ><title
+    >not-not</title
+    ><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"
+     /><meta http-equiv="Content-Style-Type" content="text/css"
+     /><link href="Agda.css" rel="stylesheet" type="text/css"
+     /></head
+  ><body
+  ><pre
+    ><a name="1" class="Comment"
+      >This module discusses the double-negation monad.</a
+      ><a name="49"
+      >
+
+\begin{code}
+
+</a
+      ><a name="65" class="Keyword"
+      >module</a
+      ><a name="71"
+      > </a
+      ><a name="72" href="not-not.html#1" class="Module"
+      >not-not</a
+      ><a name="79"
+      > </a
+      ><a name="80" class="Keyword"
+      >where</a
+      ><a name="85"
+      >
+
+</a
+      ><a name="87" class="Keyword"
+      >open</a
+      ><a name="91"
+      > </a
+      ><a name="92" class="Keyword"
+      >import</a
+      ><a name="98"
+      > </a
+      ><a name="99" href="MiniLibrary.html#1" class="Module"
+      >MiniLibrary</a
+      ><a name="110"
+      >
+
+
+</a
+      ><a name="113" href="not-not.html#113" class="Function Operator"
+      >[_]</a
+      ><a name="116"
+      > </a
+      ><a name="117" class="Symbol"
+      >:</a
+      ><a name="118"
+      > </a
+      ><a name="119" class="Symbol"
+      >&#8704;{</a
+      ><a name="121" href="not-not.html#121" class="Bound"
+      >&#8467;</a
+      ><a name="122" class="Symbol"
+      >}</a
+      ><a name="123"
+      > </a
+      ><a name="124" class="Symbol"
+      >&#8594;</a
+      ><a name="125"
+      > </a
+      ><a name="126" class="PrimitiveType"
+      >Set</a
+      ><a name="129"
+      > </a
+      ><a name="130" href="not-not.html#121" class="Bound"
+      >&#8467;</a
+      ><a name="131"
+      > </a
+      ><a name="132" class="Symbol"
+      >&#8594;</a
+      ><a name="133"
+      > </a
+      ><a name="134" class="PrimitiveType"
+      >Set</a
+      ><a name="137"
+      > </a
+      ><a name="138" href="not-not.html#121" class="Bound"
+      >&#8467;</a
+      ><a name="139"
+      >
+</a
+      ><a name="140" href="not-not.html#113" class="Function Operator"
+      >[</a
+      ><a name="141"
+      > </a
+      ><a name="142" href="not-not.html#142" class="Bound"
+      >X</a
+      ><a name="143"
+      > </a
+      ><a name="144" href="not-not.html#113" class="Function Operator"
+      >]</a
+      ><a name="145"
+      > </a
+      ><a name="146" class="Symbol"
+      >=</a
+      ><a name="147"
+      > </a
+      ><a name="148" class="Symbol"
+      >(</a
+      ><a name="149" href="not-not.html#142" class="Bound"
+      >X</a
+      ><a name="150"
+      > </a
+      ><a name="151" class="Symbol"
+      >&#8594;</a
+      ><a name="152"
+      > </a
+      ><a name="153" href="MiniLibrary.html#3214" class="Datatype"
+      >&#8709;</a
+      ><a name="154" class="Symbol"
+      >)</a
+      ><a name="155"
+      > </a
+      ><a name="156" class="Symbol"
+      >&#8594;</a
+      ><a name="157"
+      > </a
+      ><a name="158" href="MiniLibrary.html#3214" class="Datatype"
+      >&#8709;</a
+      ><a name="159"
+      >
+
+</a
+      ><a name="161" href="not-not.html#161" class="Function"
+      >hide</a
+      ><a name="165"
+      > </a
+      ><a name="166" class="Symbol"
+      >:</a
+      ><a name="167"
+      > </a
+      ><a name="168" class="Symbol"
+      >{</a
+      ><a name="169" href="not-not.html#169" class="Bound"
+      >X</a
+      ><a name="170"
+      > </a
+      ><a name="171" class="Symbol"
+      >:</a
+      ><a name="172"
+      > </a
+      ><a name="173" class="PrimitiveType"
+      >Set</a
+      ><a name="176" class="Symbol"
+      >}</a
+      ><a name="177"
+      > </a
+      ><a name="178" class="Symbol"
+      >&#8594;</a
+      ><a name="179"
+      > </a
+      ><a name="180" href="not-not.html#169" class="Bound"
+      >X</a
+      ><a name="181"
+      > </a
+      ><a name="182" class="Symbol"
+      >&#8594;</a
+      ><a name="183"
+      > </a
+      ><a name="184" href="not-not.html#113" class="Function Operator"
+      >[</a
+      ><a name="185"
+      > </a
+      ><a name="186" href="not-not.html#169" class="Bound"
+      >X</a
+      ><a name="187"
+      > </a
+      ><a name="188" href="not-not.html#113" class="Function Operator"
+      >]</a
+      ><a name="189"
+      >
+</a
+      ><a name="190" href="not-not.html#161" class="Function"
+      >hide</a
+      ><a name="194"
+      > </a
+      ><a name="195" href="not-not.html#195" class="Bound"
+      >x</a
+      ><a name="196"
+      > </a
+      ><a name="197" href="not-not.html#197" class="Bound"
+      >u</a
+      ><a name="198"
+      > </a
+      ><a name="199" class="Symbol"
+      >=</a
+      ><a name="200"
+      > </a
+      ><a name="201" href="not-not.html#197" class="Bound"
+      >u</a
+      ><a name="202"
+      > </a
+      ><a name="203" href="not-not.html#195" class="Bound"
+      >x</a
+      ><a name="204"
+      >
+
+</a
+      ><a name="206" href="not-not.html#206" class="Function"
+      >back-to-&#8709;</a
+      ><a name="215"
+      > </a
+      ><a name="216" class="Symbol"
+      >:</a
+      ><a name="217"
+      > </a
+      ><a name="218" href="not-not.html#113" class="Function Operator"
+      >[</a
+      ><a name="219"
+      > </a
+      ><a name="220" href="MiniLibrary.html#3214" class="Datatype"
+      >&#8709;</a
+      ><a name="221"
+      > </a
+      ><a name="222" href="not-not.html#113" class="Function Operator"
+      >]</a
+      ><a name="223"
+      > </a
+      ><a name="224" class="Symbol"
+      >&#8594;</a
+      ><a name="225"
+      > </a
+      ><a name="226" href="MiniLibrary.html#3214" class="Datatype"
+      >&#8709;</a
+      ><a name="227"
+      >
+</a
+      ><a name="228" href="not-not.html#206" class="Function"
+      >back-to-&#8709;</a
+      ><a name="237"
+      > </a
+      ><a name="238" href="not-not.html#238" class="Bound"
+      >&#966;</a
+      ><a name="239"
+      > </a
+      ><a name="240" class="Symbol"
+      >=</a
+      ><a name="241"
+      > </a
+      ><a name="242" href="not-not.html#238" class="Bound"
+      >&#966;</a
+      ><a name="243"
+      > </a
+      ><a name="244" href="MiniLibrary.html#397" class="Function"
+      >id</a
+      ><a name="246"
+      >
+
+</a
+      ><a name="248" href="not-not.html#248" class="Function"
+      >extension</a
+      ><a name="257"
+      > </a
+      ><a name="258" class="Symbol"
+      >:</a
+      ><a name="259"
+      > </a
+      ><a name="260" class="Symbol"
+      >{</a
+      ><a name="261" href="not-not.html#261" class="Bound"
+      >X</a
+      ><a name="262"
+      > </a
+      ><a name="263" href="not-not.html#263" class="Bound"
+      >Y</a
+      ><a name="264"
+      > </a
+      ><a name="265" class="Symbol"
+      >:</a
+      ><a name="266"
+      > </a
+      ><a name="267" class="PrimitiveType"
+      >Set</a
+      ><a name="270" class="Symbol"
+      >}</a
+      ><a name="271"
+      > </a
+      ><a name="272" class="Symbol"
+      >&#8594;</a
+      ><a name="273"
+      > </a
+      ><a name="274" class="Symbol"
+      >(</a
+      ><a name="275" href="not-not.html#261" class="Bound"
+      >X</a
+      ><a name="276"
+      > </a
+      ><a name="277" class="Symbol"
+      >&#8594;</a
+      ><a name="278"
+      > </a
+      ><a name="279" href="not-not.html#113" class="Function Operator"
+      >[</a
+      ><a name="280"
+      > </a
+      ><a name="281" href="not-not.html#263" class="Bound"
+      >Y</a
+      ><a name="282"
+      > </a
+      ><a name="283" href="not-not.html#113" class="Function Operator"
+      >]</a
+      ><a name="284" class="Symbol"
+      >)</a
+      ><a name="285"
+      > </a
+      ><a name="286" class="Symbol"
+      >&#8594;</a
+      ><a name="287"
+      > </a
+      ><a name="288" href="not-not.html#113" class="Function Operator"
+      >[</a
+      ><a name="289"
+      > </a
+      ><a name="290" href="not-not.html#261" class="Bound"
+      >X</a
+      ><a name="291"
+      > </a
+      ><a name="292" href="not-not.html#113" class="Function Operator"
+      >]</a
+      ><a name="293"
+      > </a
+      ><a name="294" class="Symbol"
+      >&#8594;</a
+      ><a name="295"
+      > </a
+      ><a name="296" href="not-not.html#113" class="Function Operator"
+      >[</a
+      ><a name="297"
+      > </a
+      ><a name="298" href="not-not.html#263" class="Bound"
+      >Y</a
+      ><a name="299"
+      > </a
+      ><a name="300" href="not-not.html#113" class="Function Operator"
+      >]</a
+      ><a name="301"
+      >
+</a
+      ><a name="302" href="not-not.html#248" class="Function"
+      >extension</a
+      ><a name="311"
+      > </a
+      ><a name="312" href="not-not.html#312" class="Bound"
+      >f</a
+      ><a name="313"
+      > </a
+      ><a name="314" href="not-not.html#314" class="Bound"
+      >&#966;</a
+      ><a name="315"
+      > </a
+      ><a name="316" href="not-not.html#316" class="Bound"
+      >v</a
+      ><a name="317"
+      > </a
+      ><a name="318" class="Symbol"
+      >=</a
+      ><a name="319"
+      > </a
+      ><a name="320" href="not-not.html#314" class="Bound"
+      >&#966;</a
+      ><a name="321"
+      > </a
+      ><a name="322" class="Symbol"
+      >(&#955;</a
+      ><a name="324"
+      > </a
+      ><a name="325" href="not-not.html#325" class="Bound"
+      >x</a
+      ><a name="326"
+      > </a
+      ><a name="327" class="Symbol"
+      >&#8594;</a
+      ><a name="328"
+      > </a
+      ><a name="329" href="not-not.html#312" class="Bound"
+      >f</a
+      ><a name="330"
+      > </a
+      ><a name="331" href="not-not.html#325" class="Bound"
+      >x</a
+      ><a name="332"
+      > </a
+      ><a name="333" href="not-not.html#316" class="Bound"
+      >v</a
+      ><a name="334" class="Symbol"
+      >)</a
+      ><a name="335"
+      >
+
+\end{code}
+
+</a
+      ><a name="349" class="Comment"
+      >From now on, we only use [_], hide and the above extension operator to</a
+      ><a name="419"
+      >
+</a
+      ><a name="420" class="Comment"
+      >define everything else, and so works for any monad:</a
+      ><a name="471"
+      >
+
+\begin{code}
+
+</a
+      ><a name="487" href="not-not.html#487" class="Function"
+      >[&#8709;]-elim</a
+      ><a name="495"
+      > </a
+      ><a name="496" class="Symbol"
+      >:</a
+      ><a name="497"
+      > </a
+      ><a name="498" class="Symbol"
+      >{</a
+      ><a name="499" href="not-not.html#499" class="Bound"
+      >A</a
+      ><a name="500"
+      > </a
+      ><a name="501" class="Symbol"
+      >:</a
+      ><a name="502"
+      > </a
+      ><a name="503" class="PrimitiveType"
+      >Set</a
+      ><a name="506" class="Symbol"
+      >}</a
+      ><a name="507"
+      > </a
+      ><a name="508" class="Symbol"
+      >&#8594;</a
+      ><a name="509"
+      > </a
+      ><a name="510" href="not-not.html#113" class="Function Operator"
+      >[</a
+      ><a name="511"
+      > </a
+      ><a name="512" href="MiniLibrary.html#3214" class="Datatype"
+      >&#8709;</a
+      ><a name="513"
+      > </a
+      ><a name="514" href="not-not.html#113" class="Function Operator"
+      >]</a
+      ><a name="515"
+      > </a
+      ><a name="516" class="Symbol"
+      >&#8594;</a
+      ><a name="517"
+      > </a
+      ><a name="518" href="not-not.html#499" class="Bound"
+      >A</a
+      ><a name="519"
+      >
+</a
+      ><a name="520" href="not-not.html#487" class="Function"
+      >[&#8709;]-elim</a
+      ><a name="528"
+      > </a
+      ><a name="529" class="Symbol"
+      >=</a
+      ><a name="530"
+      > </a
+      ><a name="531" href="MiniLibrary.html#3229" class="Function"
+      >&#8709;-elim</a
+      ><a name="537"
+      > </a
+      ><a name="538" href="MiniLibrary.html#447" class="Function Operator"
+      >&#8728;</a
+      ><a name="539"
+      > </a
+      ><a name="540" href="not-not.html#206" class="Function"
+      >back-to-&#8709;</a
+      ><a name="549"
+      >
+
+</a
+      ><a name="551" href="not-not.html#551" class="Function"
+      >functor</a
+      ><a name="558"
+      > </a
+      ><a name="559" class="Symbol"
+      >:</a
+      ><a name="560"
+      > </a
+      ><a name="561" class="Symbol"
+      >{</a
+      ><a name="562" href="not-not.html#562" class="Bound"
+      >X</a
+      ><a name="563"
+      > </a
+      ><a name="564" href="not-not.html#564" class="Bound"
+      >Y</a
+      ><a name="565"
+      > </a
+      ><a name="566" class="Symbol"
+      >:</a
+      ><a name="567"
+      > </a
+      ><a name="568" class="PrimitiveType"
+      >Set</a
+      ><a name="571" class="Symbol"
+      >}</a
+      ><a name="572"
+      > </a
+      ><a name="573" class="Symbol"
+      >&#8594;</a
+      ><a name="574"
+      > </a
+      ><a name="575" class="Symbol"
+      >(</a
+      ><a name="576" href="not-not.html#562" class="Bound"
+      >X</a
+      ><a name="577"
+      > </a
+      ><a name="578" class="Symbol"
+      >&#8594;</a
+      ><a name="579"
+      > </a
+      ><a name="580" href="not-not.html#564" class="Bound"
+      >Y</a
+      ><a name="581" class="Symbol"
+      >)</a
+      ><a name="582"
+      > </a
+      ><a name="583" class="Symbol"
+      >&#8594;</a
+      ><a name="584"
+      > </a
+      ><a name="585" href="not-not.html#113" class="Function Operator"
+      >[</a
+      ><a name="586"
+      > </a
+      ><a name="587" href="not-not.html#562" class="Bound"
+      >X</a
+      ><a name="588"
+      > </a
+      ><a name="589" href="not-not.html#113" class="Function Operator"
+      >]</a
+      ><a name="590"
+      > </a
+      ><a name="591" class="Symbol"
+      >&#8594;</a
+      ><a name="592"
+      > </a
+      ><a name="593" href="not-not.html#113" class="Function Operator"
+      >[</a
+      ><a name="594"
+      > </a
+      ><a name="595" href="not-not.html#564" class="Bound"
+      >Y</a
+      ><a name="596"
+      > </a
+      ><a name="597" href="not-not.html#113" class="Function Operator"
+      >]</a
+      ><a name="598"
+      >
+</a
+      ><a name="599" href="not-not.html#551" class="Function"
+      >functor</a
+      ><a name="606"
+      > </a
+      ><a name="607" href="not-not.html#607" class="Bound"
+      >f</a
+      ><a name="608"
+      > </a
+      ><a name="609" class="Symbol"
+      >=</a
+      ><a name="610"
+      > </a
+      ><a name="611" href="not-not.html#248" class="Function"
+      >extension</a
+      ><a name="620"
+      > </a
+      ><a name="621" class="Symbol"
+      >(</a
+      ><a name="622" href="not-not.html#161" class="Function"
+      >hide</a
+      ><a name="626"
+      > </a
+      ><a name="627" href="MiniLibrary.html#447" class="Function Operator"
+      >&#8728;</a
+      ><a name="628"
+      > </a
+      ><a name="629" href="not-not.html#607" class="Bound"
+      >f</a
+      ><a name="630" class="Symbol"
+      >)</a
+      ><a name="631"
+      >
+
+</a
+      ><a name="633" href="not-not.html#633" class="Function"
+      >functor&#8322;</a
+      ><a name="641"
+      > </a
+      ><a name="642" class="Symbol"
+      >:</a
+      ><a name="643"
+      > </a
+      ><a name="644" class="Symbol"
+      >{</a
+      ><a name="645" href="not-not.html#645" class="Bound"
+      >X</a
+      ><a name="646"
+      > </a
+      ><a name="647" href="not-not.html#647" class="Bound"
+      >Y</a
+      ><a name="648"
+      > </a
+      ><a name="649" href="not-not.html#649" class="Bound"
+      >Z</a
+      ><a name="650"
+      > </a
+      ><a name="651" class="Symbol"
+      >:</a
+      ><a name="652"
+      > </a
+      ><a name="653" class="PrimitiveType"
+      >Set</a
+      ><a name="656" class="Symbol"
+      >}</a
+      ><a name="657"
+      > </a
+      ><a name="658" class="Symbol"
+      >&#8594;</a
+      ><a name="659"
+      > </a
+      ><a name="660" class="Symbol"
+      >(</a
+      ><a name="661" href="not-not.html#645" class="Bound"
+      >X</a
+      ><a name="662"
+      > </a
+      ><a name="663" class="Symbol"
+      >&#8594;</a
+      ><a name="664"
+      > </a
+      ><a name="665" href="not-not.html#647" class="Bound"
+      >Y</a
+      ><a name="666"
+      > </a
+      ><a name="667" class="Symbol"
+      >&#8594;</a
+      ><a name="668"
+      > </a
+      ><a name="669" href="not-not.html#649" class="Bound"
+      >Z</a
+      ><a name="670" class="Symbol"
+      >)</a
+      ><a name="671"
+      > </a
+      ><a name="672" class="Symbol"
+      >&#8594;</a
+      ><a name="673"
+      > </a
+      ><a name="674" href="not-not.html#113" class="Function Operator"
+      >[</a
+      ><a name="675"
+      > </a
+      ><a name="676" href="not-not.html#645" class="Bound"
+      >X</a
+      ><a name="677"
+      > </a
+      ><a name="678" href="not-not.html#113" class="Function Operator"
+      >]</a
+      ><a name="679"
+      > </a
+      ><a name="680" class="Symbol"
+      >&#8594;</a
+      ><a name="681"
+      > </a
+      ><a name="682" href="not-not.html#113" class="Function Operator"
+      >[</a
+      ><a name="683"
+      > </a
+      ><a name="684" href="not-not.html#647" class="Bound"
+      >Y</a
+      ><a name="685"
+      > </a
+      ><a name="686" href="not-not.html#113" class="Function Operator"
+      >]</a
+      ><a name="687"
+      > </a
+      ><a name="688" class="Symbol"
+      >&#8594;</a
+      ><a name="689"
+      > </a
+      ><a name="690" href="not-not.html#113" class="Function Operator"
+      >[</a
+      ><a name="691"
+      > </a
+      ><a name="692" href="not-not.html#649" class="Bound"
+      >Z</a
+      ><a name="693"
+      > </a
+      ><a name="694" href="not-not.html#113" class="Function Operator"
+      >]</a
+      ><a name="695"
+      >
+</a
+      ><a name="696" href="not-not.html#633" class="Function"
+      >functor&#8322;</a
+      ><a name="704"
+      > </a
+      ><a name="705" href="not-not.html#705" class="Bound"
+      >f</a
+      ><a name="706"
+      > </a
+      ><a name="707" href="not-not.html#707" class="Bound"
+      >xh</a
+      ><a name="709"
+      > </a
+      ><a name="710" href="not-not.html#710" class="Bound"
+      >yh</a
+      ><a name="712"
+      > </a
+      ><a name="713" class="Symbol"
+      >=</a
+      ><a name="714"
+      > </a
+      ><a name="715" href="not-not.html#248" class="Function"
+      >extension</a
+      ><a name="724" class="Symbol"
+      >(&#955;</a
+      ><a name="726"
+      > </a
+      ><a name="727" href="not-not.html#727" class="Bound"
+      >x</a
+      ><a name="728"
+      > </a
+      ><a name="729" class="Symbol"
+      >&#8594;</a
+      ><a name="730"
+      > </a
+      ><a name="731" href="not-not.html#551" class="Function"
+      >functor</a
+      ><a name="738"
+      > </a
+      ><a name="739" class="Symbol"
+      >(</a
+      ><a name="740" href="not-not.html#705" class="Bound"
+      >f</a
+      ><a name="741"
+      > </a
+      ><a name="742" href="not-not.html#727" class="Bound"
+      >x</a
+      ><a name="743" class="Symbol"
+      >)</a
+      ><a name="744"
+      > </a
+      ><a name="745" href="not-not.html#710" class="Bound"
+      >yh</a
+      ><a name="747" class="Symbol"
+      >)</a
+      ><a name="748"
+      > </a
+      ><a name="749" href="not-not.html#707" class="Bound"
+      >xh</a
+      ><a name="751"
+      >
+
+</a
+      ><a name="753" href="not-not.html#753" class="Function"
+      >Lemma[[X&#8594;Y]&#8658;X&#8594;[Y]]</a
+      ><a name="771"
+      > </a
+      ><a name="772" class="Symbol"
+      >:</a
+      ><a name="773"
+      > </a
+      ><a name="774" class="Symbol"
+      >{</a
+      ><a name="775" href="not-not.html#775" class="Bound"
+      >X</a
+      ><a name="776"
+      > </a
+      ><a name="777" class="Symbol"
+      >:</a
+      ><a name="778"
+      > </a
+      ><a name="779" class="PrimitiveType"
+      >Set</a
+      ><a name="782" class="Symbol"
+      >}{</a
+      ><a name="784" href="not-not.html#784" class="Bound"
+      >Y</a
+      ><a name="785"
+      > </a
+      ><a name="786" class="Symbol"
+      >:</a
+      ><a name="787"
+      > </a
+      ><a name="788" href="not-not.html#775" class="Bound"
+      >X</a
+      ><a name="789"
+      > </a
+      ><a name="790" class="Symbol"
+      >&#8594;</a
+      ><a name="791"
+      > </a
+      ><a name="792" class="PrimitiveType"
+      >Set</a
+      ><a name="795" class="Symbol"
+      >}</a
+      ><a name="796"
+      > </a
+      ><a name="797" class="Symbol"
+      >&#8594;</a
+      ><a name="798"
+      > </a
+      ><a name="799" href="not-not.html#113" class="Function Operator"
+      >[</a
+      ><a name="800"
+      > </a
+      ><a name="801" class="Symbol"
+      >((</a
+      ><a name="803" href="not-not.html#803" class="Bound"
+      >x</a
+      ><a name="804"
+      > </a
+      ><a name="805" class="Symbol"
+      >:</a
+      ><a name="806"
+      > </a
+      ><a name="807" href="not-not.html#775" class="Bound"
+      >X</a
+      ><a name="808" class="Symbol"
+      >)</a
+      ><a name="809"
+      > </a
+      ><a name="810" class="Symbol"
+      >&#8594;</a
+      ><a name="811"
+      > </a
+      ><a name="812" href="not-not.html#784" class="Bound"
+      >Y</a
+      ><a name="813"
+      > </a
+      ><a name="814" href="not-not.html#803" class="Bound"
+      >x</a
+      ><a name="815" class="Symbol"
+      >)</a
+      ><a name="816"
+      > </a
+      ><a name="817" href="not-not.html#113" class="Function Operator"
+      >]</a
+      ><a name="818"
+      > </a
+      ><a name="819" class="Symbol"
+      >&#8594;</a
+      ><a name="820"
+      > </a
+      ><a name="821" class="Symbol"
+      >(</a
+      ><a name="822" href="not-not.html#822" class="Bound"
+      >x</a
+      ><a name="823"
+      > </a
+      ><a name="824" class="Symbol"
+      >:</a
+      ><a name="825"
+      > </a
+      ><a name="826" href="not-not.html#775" class="Bound"
+      >X</a
+      ><a name="827" class="Symbol"
+      >)</a
+      ><a name="828"
+      > </a
+      ><a name="829" class="Symbol"
+      >&#8594;</a
+      ><a name="830"
+      > </a
+      ><a name="831" href="not-not.html#113" class="Function Operator"
+      >[</a
+      ><a name="832"
+      > </a
+      ><a name="833" href="not-not.html#784" class="Bound"
+      >Y</a
+      ><a name="834"
+      > </a
+      ><a name="835" href="not-not.html#822" class="Bound"
+      >x</a
+      ><a name="836"
+      > </a
+      ><a name="837" href="not-not.html#113" class="Function Operator"
+      >]</a
+      ><a name="838"
+      >
+</a
+      ><a name="839" href="not-not.html#753" class="Function"
+      >Lemma[[X&#8594;Y]&#8658;X&#8594;[Y]]</a
+      ><a name="857"
+      > </a
+      ><a name="858" href="not-not.html#858" class="Bound"
+      >fh</a
+      ><a name="860"
+      > </a
+      ><a name="861" href="not-not.html#861" class="Bound"
+      >x</a
+      ><a name="862"
+      > </a
+      ><a name="863" class="Symbol"
+      >=</a
+      ><a name="864"
+      > </a
+      ><a name="865" href="not-not.html#551" class="Function"
+      >functor</a
+      ><a name="872" class="Symbol"
+      >(&#955;</a
+      ><a name="874"
+      > </a
+      ><a name="875" href="not-not.html#875" class="Bound"
+      >f</a
+      ><a name="876"
+      > </a
+      ><a name="877" class="Symbol"
+      >&#8594;</a
+      ><a name="878"
+      > </a
+      ><a name="879" href="not-not.html#875" class="Bound"
+      >f</a
+      ><a name="880"
+      > </a
+      ><a name="881" href="not-not.html#861" class="Bound"
+      >x</a
+      ><a name="882" class="Symbol"
+      >)</a
+      ><a name="883"
+      > </a
+      ><a name="884" href="not-not.html#858" class="Bound"
+      >fh</a
+      ><a name="886"
+      >
+
+</a
+      ><a name="888" href="not-not.html#888" class="Function"
+      >Lemma[[X&#8594;Y]&#8658;[X]&#8594;[Y]]</a
+      ><a name="908"
+      > </a
+      ><a name="909" class="Symbol"
+      >:</a
+      ><a name="910"
+      > </a
+      ><a name="911" class="Symbol"
+      >{</a
+      ><a name="912" href="not-not.html#912" class="Bound"
+      >X</a
+      ><a name="913"
+      > </a
+      ><a name="914" href="not-not.html#914" class="Bound"
+      >Y</a
+      ><a name="915"
+      > </a
+      ><a name="916" class="Symbol"
+      >:</a
+      ><a name="917"
+      > </a
+      ><a name="918" class="PrimitiveType"
+      >Set</a
+      ><a name="921" class="Symbol"
+      >}</a
+      ><a name="922"
+      > </a
+      ><a name="923" class="Symbol"
+      >&#8594;</a
+      ><a name="924"
+      > </a
+      ><a name="925" href="not-not.html#113" class="Function Operator"
+      >[</a
+      ><a name="926"
+      > </a
+      ><a name="927" class="Symbol"
+      >(</a
+      ><a name="928" href="not-not.html#912" class="Bound"
+      >X</a
+      ><a name="929"
+      > </a
+      ><a name="930" class="Symbol"
+      >&#8594;</a
+      ><a name="931"
+      > </a
+      ><a name="932" href="not-not.html#914" class="Bound"
+      >Y</a
+      ><a name="933" class="Symbol"
+      >)</a
+      ><a name="934"
+      > </a
+      ><a name="935" href="not-not.html#113" class="Function Operator"
+      >]</a
+      ><a name="936"
+      > </a
+      ><a name="937" class="Symbol"
+      >&#8594;</a
+      ><a name="938"
+      > </a
+      ><a name="939" href="not-not.html#113" class="Function Operator"
+      >[</a
+      ><a name="940"
+      > </a
+      ><a name="941" href="not-not.html#912" class="Bound"
+      >X</a
+      ><a name="942"
+      > </a
+      ><a name="943" href="not-not.html#113" class="Function Operator"
+      >]</a
+      ><a name="944"
+      > </a
+      ><a name="945" class="Symbol"
+      >&#8594;</a
+      ><a name="946"
+      > </a
+      ><a name="947" href="not-not.html#113" class="Function Operator"
+      >[</a
+      ><a name="948"
+      > </a
+      ><a name="949" href="not-not.html#914" class="Bound"
+      >Y</a
+      ><a name="950"
+      > </a
+      ><a name="951" href="not-not.html#113" class="Function Operator"
+      >]</a
+      ><a name="952"
+      >
+</a
+      ><a name="953" href="not-not.html#888" class="Function"
+      >Lemma[[X&#8594;Y]&#8658;[X]&#8594;[Y]]</a
+      ><a name="973"
+      > </a
+      ><a name="974" href="not-not.html#974" class="Bound"
+      >fh</a
+      ><a name="976"
+      > </a
+      ><a name="977" class="Symbol"
+      >=</a
+      ><a name="978"
+      > </a
+      ><a name="979" href="not-not.html#248" class="Function"
+      >extension</a
+      ><a name="988" class="Symbol"
+      >(</a
+      ><a name="989" href="not-not.html#753" class="Function"
+      >Lemma[[X&#8594;Y]&#8658;X&#8594;[Y]]</a
+      ><a name="1007"
+      > </a
+      ><a name="1008" href="not-not.html#974" class="Bound"
+      >fh</a
+      ><a name="1010" class="Symbol"
+      >)</a
+      ><a name="1011"
+      >
+
+\end{code}
+
+</a
+      ><a name="1025" class="Comment"
+      >The double negations of identity type and related properties:</a
+      ><a name="1086"
+      >
+
+\begin{code}
+
+</a
+      ><a name="1102" href="not-not.html#1102" class="Function"
+      >[refl]</a
+      ><a name="1108"
+      > </a
+      ><a name="1109" class="Symbol"
+      >:</a
+      ><a name="1110"
+      > </a
+      ><a name="1111" class="Symbol"
+      >{</a
+      ><a name="1112" href="not-not.html#1112" class="Bound"
+      >X</a
+      ><a name="1113"
+      > </a
+      ><a name="1114" class="Symbol"
+      >:</a
+      ><a name="1115"
+      > </a
+      ><a name="1116" class="PrimitiveType"
+      >Set</a
+      ><a name="1119" class="Symbol"
+      >}{</a
+      ><a name="1121" href="not-not.html#1121" class="Bound"
+      >x</a
+      ><a name="1122"
+      > </a
+      ><a name="1123" class="Symbol"
+      >:</a
+      ><a name="1124"
+      > </a
+      ><a name="1125" href="not-not.html#1112" class="Bound"
+      >X</a
+      ><a name="1126" class="Symbol"
+      >}</a
+      ><a name="1127"
+      > </a
+      ><a name="1128" class="Symbol"
+      >&#8594;</a
+      ><a name="1129"
+      > </a
+      ><a name="1130" href="not-not.html#113" class="Function Operator"
+      >[</a
+      ><a name="1131"
+      > </a
+      ><a name="1132" href="not-not.html#1121" class="Bound"
+      >x</a
+      ><a name="1133"
+      > </a
+      ><a name="1134" href="MiniLibrary.html#1706" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="1135"
+      > </a
+      ><a name="1136" href="not-not.html#1121" class="Bound"
+      >x</a
+      ><a name="1137"
+      > </a
+      ><a name="1138" href="not-not.html#113" class="Function Operator"
+      >]</a
+      ><a name="1139"
+      >
+</a
+      ><a name="1140" href="not-not.html#1102" class="Function"
+      >[refl]</a
+      ><a name="1146"
+      > </a
+      ><a name="1147" class="Symbol"
+      >=</a
+      ><a name="1148"
+      > </a
+      ><a name="1149" href="not-not.html#161" class="Function"
+      >hide</a
+      ><a name="1153"
+      > </a
+      ><a name="1154" href="MiniLibrary.html#1742" class="InductiveConstructor"
+      >refl</a
+      ><a name="1158"
+      >
+
+</a
+      ><a name="1160" href="not-not.html#1160" class="Function"
+      >[sym]</a
+      ><a name="1165"
+      > </a
+      ><a name="1166" class="Symbol"
+      >:</a
+      ><a name="1167"
+      > </a
+      ><a name="1168" class="Symbol"
+      >{</a
+      ><a name="1169" href="not-not.html#1169" class="Bound"
+      >X</a
+      ><a name="1170"
+      > </a
+      ><a name="1171" class="Symbol"
+      >:</a
+      ><a name="1172"
+      > </a
+      ><a name="1173" class="PrimitiveType"
+      >Set</a
+      ><a name="1176" class="Symbol"
+      >}{</a
+      ><a name="1178" href="not-not.html#1178" class="Bound"
+      >x&#8320;</a
+      ><a name="1180"
+      > </a
+      ><a name="1181" href="not-not.html#1181" class="Bound"
+      >x&#8321;</a
+      ><a name="1183"
+      > </a
+      ><a name="1184" class="Symbol"
+      >:</a
+      ><a name="1185"
+      > </a
+      ><a name="1186" href="not-not.html#1169" class="Bound"
+      >X</a
+      ><a name="1187" class="Symbol"
+      >}</a
+      ><a name="1188"
+      > </a
+      ><a name="1189" class="Symbol"
+      >&#8594;</a
+      ><a name="1190"
+      > </a
+      ><a name="1191" href="not-not.html#113" class="Function Operator"
+      >[</a
+      ><a name="1192"
+      > </a
+      ><a name="1193" href="not-not.html#1178" class="Bound"
+      >x&#8320;</a
+      ><a name="1195"
+      > </a
+      ><a name="1196" href="MiniLibrary.html#1706" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="1197"
+      > </a
+      ><a name="1198" href="not-not.html#1181" class="Bound"
+      >x&#8321;</a
+      ><a name="1200"
+      > </a
+      ><a name="1201" href="not-not.html#113" class="Function Operator"
+      >]</a
+      ><a name="1202"
+      > </a
+      ><a name="1203" class="Symbol"
+      >&#8594;</a
+      ><a name="1204"
+      > </a
+      ><a name="1205" href="not-not.html#113" class="Function Operator"
+      >[</a
+      ><a name="1206"
+      > </a
+      ><a name="1207" href="not-not.html#1181" class="Bound"
+      >x&#8321;</a
+      ><a name="1209"
+      > </a
+      ><a name="1210" href="MiniLibrary.html#1706" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="1211"
+      > </a
+      ><a name="1212" href="not-not.html#1178" class="Bound"
+      >x&#8320;</a
+      ><a name="1214"
+      > </a
+      ><a name="1215" href="not-not.html#113" class="Function Operator"
+      >]</a
+      ><a name="1216"
+      >
+</a
+      ><a name="1217" href="not-not.html#1160" class="Function"
+      >[sym]</a
+      ><a name="1222"
+      > </a
+      ><a name="1223" class="Symbol"
+      >=</a
+      ><a name="1224"
+      > </a
+      ><a name="1225" href="not-not.html#551" class="Function"
+      >functor</a
+      ><a name="1232"
+      > </a
+      ><a name="1233" href="MiniLibrary.html#1940" class="Function"
+      >sym</a
+      ><a name="1236"
+      >
+
+</a
+      ><a name="1238" href="not-not.html#1238" class="Function"
+      >[trans]</a
+      ><a name="1245"
+      > </a
+      ><a name="1246" class="Symbol"
+      >:</a
+      ><a name="1247"
+      > </a
+      ><a name="1248" class="Symbol"
+      >{</a
+      ><a name="1249" href="not-not.html#1249" class="Bound"
+      >X</a
+      ><a name="1250"
+      > </a
+      ><a name="1251" class="Symbol"
+      >:</a
+      ><a name="1252"
+      > </a
+      ><a name="1253" class="PrimitiveType"
+      >Set</a
+      ><a name="1256" class="Symbol"
+      >}{</a
+      ><a name="1258" href="not-not.html#1258" class="Bound"
+      >x&#8320;</a
+      ><a name="1260"
+      > </a
+      ><a name="1261" href="not-not.html#1261" class="Bound"
+      >x&#8321;</a
+      ><a name="1263"
+      > </a
+      ><a name="1264" href="not-not.html#1264" class="Bound"
+      >x&#8322;</a
+      ><a name="1266"
+      > </a
+      ><a name="1267" class="Symbol"
+      >:</a
+      ><a name="1268"
+      > </a
+      ><a name="1269" href="not-not.html#1249" class="Bound"
+      >X</a
+      ><a name="1270" class="Symbol"
+      >}</a
+      ><a name="1271"
+      > </a
+      ><a name="1272" class="Symbol"
+      >&#8594;</a
+      ><a name="1273"
+      > </a
+      ><a name="1274" href="not-not.html#113" class="Function Operator"
+      >[</a
+      ><a name="1275"
+      > </a
+      ><a name="1276" href="not-not.html#1258" class="Bound"
+      >x&#8320;</a
+      ><a name="1278"
+      > </a
+      ><a name="1279" href="MiniLibrary.html#1706" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="1280"
+      > </a
+      ><a name="1281" href="not-not.html#1261" class="Bound"
+      >x&#8321;</a
+      ><a name="1283"
+      > </a
+      ><a name="1284" href="not-not.html#113" class="Function Operator"
+      >]</a
+      ><a name="1285"
+      > </a
+      ><a name="1286" class="Symbol"
+      >&#8594;</a
+      ><a name="1287"
+      > </a
+      ><a name="1288" href="not-not.html#113" class="Function Operator"
+      >[</a
+      ><a name="1289"
+      > </a
+      ><a name="1290" href="not-not.html#1261" class="Bound"
+      >x&#8321;</a
+      ><a name="1292"
+      > </a
+      ><a name="1293" href="MiniLibrary.html#1706" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="1294"
+      > </a
+      ><a name="1295" href="not-not.html#1264" class="Bound"
+      >x&#8322;</a
+      ><a name="1297"
+      > </a
+      ><a name="1298" href="not-not.html#113" class="Function Operator"
+      >]</a
+      ><a name="1299"
+      > </a
+      ><a name="1300" class="Symbol"
+      >&#8594;</a
+      ><a name="1301"
+      > </a
+      ><a name="1302" href="not-not.html#113" class="Function Operator"
+      >[</a
+      ><a name="1303"
+      > </a
+      ><a name="1304" href="not-not.html#1258" class="Bound"
+      >x&#8320;</a
+      ><a name="1306"
+      > </a
+      ><a name="1307" href="MiniLibrary.html#1706" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="1308"
+      > </a
+      ><a name="1309" href="not-not.html#1264" class="Bound"
+      >x&#8322;</a
+      ><a name="1311"
+      > </a
+      ><a name="1312" href="not-not.html#113" class="Function Operator"
+      >]</a
+      ><a name="1313"
+      >
+</a
+      ><a name="1314" href="not-not.html#1238" class="Function"
+      >[trans]</a
+      ><a name="1321"
+      > </a
+      ><a name="1322" class="Symbol"
+      >=</a
+      ><a name="1323"
+      > </a
+      ><a name="1324" href="not-not.html#633" class="Function"
+      >functor&#8322;</a
+      ><a name="1332"
+      > </a
+      ><a name="1333" href="MiniLibrary.html#1855" class="Function"
+      >trans</a
+      ><a name="1338"
+      >
+
+</a
+      ><a name="1340" href="not-not.html#1340" class="Function"
+      >[transport]</a
+      ><a name="1351"
+      > </a
+      ><a name="1352" class="Symbol"
+      >:</a
+      ><a name="1353"
+      > </a
+      ><a name="1354" class="Symbol"
+      >{</a
+      ><a name="1355" href="not-not.html#1355" class="Bound"
+      >X</a
+      ><a name="1356"
+      > </a
+      ><a name="1357" class="Symbol"
+      >:</a
+      ><a name="1358"
+      > </a
+      ><a name="1359" class="PrimitiveType"
+      >Set</a
+      ><a name="1362" class="Symbol"
+      >}{</a
+      ><a name="1364" href="not-not.html#1364" class="Bound"
+      >Y</a
+      ><a name="1365"
+      > </a
+      ><a name="1366" class="Symbol"
+      >:</a
+      ><a name="1367"
+      > </a
+      ><a name="1368" href="not-not.html#1355" class="Bound"
+      >X</a
+      ><a name="1369"
+      > </a
+      ><a name="1370" class="Symbol"
+      >&#8594;</a
+      ><a name="1371"
+      > </a
+      ><a name="1372" class="PrimitiveType"
+      >Set</a
+      ><a name="1375" class="Symbol"
+      >}{</a
+      ><a name="1377" href="not-not.html#1377" class="Bound"
+      >x</a
+      ><a name="1378"
+      > </a
+      ><a name="1379" href="not-not.html#1379" class="Bound"
+      >x'</a
+      ><a name="1381"
+      > </a
+      ><a name="1382" class="Symbol"
+      >:</a
+      ><a name="1383"
+      > </a
+      ><a name="1384" href="not-not.html#1355" class="Bound"
+      >X</a
+      ><a name="1385" class="Symbol"
+      >}</a
+      ><a name="1386"
+      > </a
+      ><a name="1387" class="Symbol"
+      >&#8594;</a
+      ><a name="1388"
+      > </a
+      ><a name="1389" href="not-not.html#113" class="Function Operator"
+      >[</a
+      ><a name="1390"
+      > </a
+      ><a name="1391" href="not-not.html#1377" class="Bound"
+      >x</a
+      ><a name="1392"
+      > </a
+      ><a name="1393" href="MiniLibrary.html#1706" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="1394"
+      > </a
+      ><a name="1395" href="not-not.html#1379" class="Bound"
+      >x'</a
+      ><a name="1397"
+      > </a
+      ><a name="1398" href="not-not.html#113" class="Function Operator"
+      >]</a
+      ><a name="1399"
+      > </a
+      ><a name="1400" class="Symbol"
+      >&#8594;</a
+      ><a name="1401"
+      > </a
+      ><a name="1402" href="not-not.html#113" class="Function Operator"
+      >[</a
+      ><a name="1403"
+      > </a
+      ><a name="1404" href="not-not.html#1364" class="Bound"
+      >Y</a
+      ><a name="1405"
+      > </a
+      ><a name="1406" href="not-not.html#1377" class="Bound"
+      >x</a
+      ><a name="1407"
+      > </a
+      ><a name="1408" href="not-not.html#113" class="Function Operator"
+      >]</a
+      ><a name="1409"
+      > </a
+      ><a name="1410" class="Symbol"
+      >&#8594;</a
+      ><a name="1411"
+      > </a
+      ><a name="1412" href="not-not.html#113" class="Function Operator"
+      >[</a
+      ><a name="1413"
+      > </a
+      ><a name="1414" href="not-not.html#1364" class="Bound"
+      >Y</a
+      ><a name="1415"
+      > </a
+      ><a name="1416" href="not-not.html#1379" class="Bound"
+      >x'</a
+      ><a name="1418"
+      > </a
+      ><a name="1419" href="not-not.html#113" class="Function Operator"
+      >]</a
+      ><a name="1420"
+      >
+</a
+      ><a name="1421" href="not-not.html#1340" class="Function"
+      >[transport]</a
+      ><a name="1432"
+      > </a
+      ><a name="1433" class="Symbol"
+      >=</a
+      ><a name="1434"
+      > </a
+      ><a name="1435" href="not-not.html#633" class="Function"
+      >functor&#8322;</a
+      ><a name="1443"
+      > </a
+      ><a name="1444" href="MiniLibrary.html#1766" class="Function"
+      >transport</a
+      ><a name="1453"
+      >
+
+</a
+      ><a name="1455" href="not-not.html#1455" class="Function"
+      >[ap]</a
+      ><a name="1459"
+      > </a
+      ><a name="1460" class="Symbol"
+      >:</a
+      ><a name="1461"
+      > </a
+      ><a name="1462" class="Symbol"
+      >{</a
+      ><a name="1463" href="not-not.html#1463" class="Bound"
+      >X</a
+      ><a name="1464"
+      > </a
+      ><a name="1465" href="not-not.html#1465" class="Bound"
+      >Y</a
+      ><a name="1466"
+      > </a
+      ><a name="1467" class="Symbol"
+      >:</a
+      ><a name="1468"
+      > </a
+      ><a name="1469" class="PrimitiveType"
+      >Set</a
+      ><a name="1472" class="Symbol"
+      >}</a
+      ><a name="1473"
+      > </a
+      ><a name="1474" class="Symbol"
+      >&#8594;</a
+      ><a name="1475"
+      > </a
+      ><a name="1476" class="Symbol"
+      >(</a
+      ><a name="1477" href="not-not.html#1477" class="Bound"
+      >f</a
+      ><a name="1478"
+      > </a
+      ><a name="1479" class="Symbol"
+      >:</a
+      ><a name="1480"
+      > </a
+      ><a name="1481" href="not-not.html#1463" class="Bound"
+      >X</a
+      ><a name="1482"
+      > </a
+      ><a name="1483" class="Symbol"
+      >&#8594;</a
+      ><a name="1484"
+      > </a
+      ><a name="1485" href="not-not.html#1465" class="Bound"
+      >Y</a
+      ><a name="1486" class="Symbol"
+      >)</a
+      ><a name="1487"
+      > </a
+      ><a name="1488" class="Symbol"
+      >&#8594;</a
+      ><a name="1489"
+      > </a
+      ><a name="1490" class="Symbol"
+      >{</a
+      ><a name="1491" href="not-not.html#1491" class="Bound"
+      >x&#8320;</a
+      ><a name="1493"
+      > </a
+      ><a name="1494" href="not-not.html#1494" class="Bound"
+      >x&#8321;</a
+      ><a name="1496"
+      > </a
+      ><a name="1497" class="Symbol"
+      >:</a
+      ><a name="1498"
+      > </a
+      ><a name="1499" href="not-not.html#1463" class="Bound"
+      >X</a
+      ><a name="1500" class="Symbol"
+      >}</a
+      ><a name="1501"
+      > </a
+      ><a name="1502" class="Symbol"
+      >&#8594;</a
+      ><a name="1503"
+      > </a
+      ><a name="1504" href="not-not.html#113" class="Function Operator"
+      >[</a
+      ><a name="1505"
+      > </a
+      ><a name="1506" href="not-not.html#1491" class="Bound"
+      >x&#8320;</a
+      ><a name="1508"
+      > </a
+      ><a name="1509" href="MiniLibrary.html#1706" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="1510"
+      > </a
+      ><a name="1511" href="not-not.html#1494" class="Bound"
+      >x&#8321;</a
+      ><a name="1513"
+      > </a
+      ><a name="1514" href="not-not.html#113" class="Function Operator"
+      >]</a
+      ><a name="1515"
+      > </a
+      ><a name="1516" class="Symbol"
+      >&#8594;</a
+      ><a name="1517"
+      > </a
+      ><a name="1518" href="not-not.html#113" class="Function Operator"
+      >[</a
+      ><a name="1519"
+      > </a
+      ><a name="1520" href="not-not.html#1477" class="Bound"
+      >f</a
+      ><a name="1521"
+      > </a
+      ><a name="1522" href="not-not.html#1491" class="Bound"
+      >x&#8320;</a
+      ><a name="1524"
+      > </a
+      ><a name="1525" href="MiniLibrary.html#1706" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="1526"
+      > </a
+      ><a name="1527" href="not-not.html#1477" class="Bound"
+      >f</a
+      ><a name="1528"
+      > </a
+      ><a name="1529" href="not-not.html#1494" class="Bound"
+      >x&#8321;</a
+      ><a name="1531"
+      > </a
+      ><a name="1532" href="not-not.html#113" class="Function Operator"
+      >]</a
+      ><a name="1533"
+      >
+</a
+      ><a name="1534" href="not-not.html#1455" class="Function"
+      >[ap]</a
+      ><a name="1538"
+      > </a
+      ><a name="1539" href="not-not.html#1539" class="Bound"
+      >f</a
+      ><a name="1540"
+      > </a
+      ><a name="1541" class="Symbol"
+      >=</a
+      ><a name="1542"
+      > </a
+      ><a name="1543" href="not-not.html#551" class="Function"
+      >functor</a
+      ><a name="1550"
+      > </a
+      ><a name="1551" class="Symbol"
+      >(</a
+      ><a name="1552" href="MiniLibrary.html#2001" class="Function"
+      >ap</a
+      ><a name="1554"
+      > </a
+      ><a name="1555" href="not-not.html#1539" class="Bound"
+      >f</a
+      ><a name="1556" class="Symbol"
+      >)</a
+      ><a name="1557"
+      >
+
+</a
+      ><a name="1559" href="not-not.html#1559" class="Function"
+      >[fun-ap]</a
+      ><a name="1567"
+      > </a
+      ><a name="1568" class="Symbol"
+      >:</a
+      ><a name="1569"
+      > </a
+      ><a name="1570" class="Symbol"
+      >{</a
+      ><a name="1571" href="not-not.html#1571" class="Bound"
+      >X</a
+      ><a name="1572"
+      > </a
+      ><a name="1573" href="not-not.html#1573" class="Bound"
+      >Y</a
+      ><a name="1574"
+      > </a
+      ><a name="1575" class="Symbol"
+      >:</a
+      ><a name="1576"
+      > </a
+      ><a name="1577" class="PrimitiveType"
+      >Set</a
+      ><a name="1580" class="Symbol"
+      >}</a
+      ><a name="1581"
+      > </a
+      ><a name="1582" class="Symbol"
+      >&#8594;</a
+      ><a name="1583"
+      > </a
+      ><a name="1584" class="Symbol"
+      >&#8704;{</a
+      ><a name="1586" href="not-not.html#1586" class="Bound"
+      >f</a
+      ><a name="1587"
+      > </a
+      ><a name="1588" href="not-not.html#1588" class="Bound"
+      >g</a
+      ><a name="1589"
+      > </a
+      ><a name="1590" class="Symbol"
+      >:</a
+      ><a name="1591"
+      > </a
+      ><a name="1592" href="not-not.html#1571" class="Bound"
+      >X</a
+      ><a name="1593"
+      > </a
+      ><a name="1594" class="Symbol"
+      >&#8594;</a
+      ><a name="1595"
+      > </a
+      ><a name="1596" href="not-not.html#1573" class="Bound"
+      >Y</a
+      ><a name="1597" class="Symbol"
+      >}</a
+      ><a name="1598"
+      > </a
+      ><a name="1599" class="Symbol"
+      >&#8594;</a
+      ><a name="1600"
+      > </a
+      ><a name="1601" href="not-not.html#113" class="Function Operator"
+      >[</a
+      ><a name="1602"
+      > </a
+      ><a name="1603" href="not-not.html#1586" class="Bound"
+      >f</a
+      ><a name="1604"
+      > </a
+      ><a name="1605" href="MiniLibrary.html#1706" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="1606"
+      > </a
+      ><a name="1607" href="not-not.html#1588" class="Bound"
+      >g</a
+      ><a name="1608"
+      > </a
+      ><a name="1609" href="not-not.html#113" class="Function Operator"
+      >]</a
+      ><a name="1610"
+      > </a
+      ><a name="1611" class="Symbol"
+      >&#8594;</a
+      ><a name="1612"
+      > </a
+      ><a name="1613" class="Symbol"
+      >&#8704;(</a
+      ><a name="1615" href="not-not.html#1615" class="Bound"
+      >x</a
+      ><a name="1616"
+      > </a
+      ><a name="1617" class="Symbol"
+      >:</a
+      ><a name="1618"
+      > </a
+      ><a name="1619" href="not-not.html#1571" class="Bound"
+      >X</a
+      ><a name="1620" class="Symbol"
+      >)</a
+      ><a name="1621"
+      > </a
+      ><a name="1622" class="Symbol"
+      >&#8594;</a
+      ><a name="1623"
+      > </a
+      ><a name="1624" href="not-not.html#113" class="Function Operator"
+      >[</a
+      ><a name="1625"
+      > </a
+      ><a name="1626" href="not-not.html#1586" class="Bound"
+      >f</a
+      ><a name="1627"
+      > </a
+      ><a name="1628" href="not-not.html#1615" class="Bound"
+      >x</a
+      ><a name="1629"
+      > </a
+      ><a name="1630" href="MiniLibrary.html#1706" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="1631"
+      > </a
+      ><a name="1632" href="not-not.html#1588" class="Bound"
+      >g</a
+      ><a name="1633"
+      > </a
+      ><a name="1634" href="not-not.html#1615" class="Bound"
+      >x</a
+      ><a name="1635"
+      > </a
+      ><a name="1636" href="not-not.html#113" class="Function Operator"
+      >]</a
+      ><a name="1637"
+      >
+</a
+      ><a name="1638" href="not-not.html#1559" class="Function"
+      >[fun-ap]</a
+      ><a name="1646"
+      > </a
+      ><a name="1647" href="not-not.html#1647" class="Bound"
+      >eh</a
+      ><a name="1649"
+      > </a
+      ><a name="1650" href="not-not.html#1650" class="Bound"
+      >x</a
+      ><a name="1651"
+      > </a
+      ><a name="1652" class="Symbol"
+      >=</a
+      ><a name="1653"
+      > </a
+      ><a name="1654" href="not-not.html#551" class="Function"
+      >functor</a
+      ><a name="1661" class="Symbol"
+      >(&#955;</a
+      ><a name="1663"
+      > </a
+      ><a name="1664" href="not-not.html#1664" class="Bound"
+      >e</a
+      ><a name="1665"
+      > </a
+      ><a name="1666" class="Symbol"
+      >&#8594;</a
+      ><a name="1667"
+      > </a
+      ><a name="1668" href="MiniLibrary.html#2089" class="Function"
+      >fun-ap</a
+      ><a name="1674"
+      > </a
+      ><a name="1675" href="not-not.html#1664" class="Bound"
+      >e</a
+      ><a name="1676"
+      > </a
+      ><a name="1677" href="not-not.html#1650" class="Bound"
+      >x</a
+      ><a name="1678" class="Symbol"
+      >)</a
+      ><a name="1679"
+      > </a
+      ><a name="1680" href="not-not.html#1647" class="Bound"
+      >eh</a
+      ><a name="1682"
+      >
+
+</a
+      ><a name="1684" href="not-not.html#1684" class="Function"
+      >Lemma[[&#8801;]-&#931;]</a
+      ><a name="1696"
+      > </a
+      ><a name="1697" class="Symbol"
+      >:</a
+      ><a name="1698"
+      > </a
+      ><a name="1699" class="Symbol"
+      >{</a
+      ><a name="1700" href="not-not.html#1700" class="Bound"
+      >X</a
+      ><a name="1701"
+      > </a
+      ><a name="1702" class="Symbol"
+      >:</a
+      ><a name="1703"
+      > </a
+      ><a name="1704" class="PrimitiveType"
+      >Set</a
+      ><a name="1707" class="Symbol"
+      >}{</a
+      ><a name="1709" href="not-not.html#1709" class="Bound"
+      >P</a
+      ><a name="1710"
+      > </a
+      ><a name="1711" class="Symbol"
+      >:</a
+      ><a name="1712"
+      > </a
+      ><a name="1713" href="not-not.html#1700" class="Bound"
+      >X</a
+      ><a name="1714"
+      > </a
+      ><a name="1715" class="Symbol"
+      >&#8594;</a
+      ><a name="1716"
+      > </a
+      ><a name="1717" class="PrimitiveType"
+      >Set</a
+      ><a name="1720" class="Symbol"
+      >}{</a
+      ><a name="1722" href="not-not.html#1722" class="Bound"
+      >x</a
+      ><a name="1723"
+      > </a
+      ><a name="1724" href="not-not.html#1724" class="Bound"
+      >x'</a
+      ><a name="1726"
+      > </a
+      ><a name="1727" class="Symbol"
+      >:</a
+      ><a name="1728"
+      > </a
+      ><a name="1729" href="not-not.html#1700" class="Bound"
+      >X</a
+      ><a name="1730" class="Symbol"
+      >}{</a
+      ><a name="1732" href="not-not.html#1732" class="Bound"
+      >p</a
+      ><a name="1733"
+      > </a
+      ><a name="1734" class="Symbol"
+      >:</a
+      ><a name="1735"
+      > </a
+      ><a name="1736" href="not-not.html#1709" class="Bound"
+      >P</a
+      ><a name="1737"
+      > </a
+      ><a name="1738" href="not-not.html#1722" class="Bound"
+      >x</a
+      ><a name="1739" class="Symbol"
+      >}{</a
+      ><a name="1741" href="not-not.html#1741" class="Bound"
+      >p'</a
+      ><a name="1743"
+      > </a
+      ><a name="1744" class="Symbol"
+      >:</a
+      ><a name="1745"
+      > </a
+      ><a name="1746" href="not-not.html#1709" class="Bound"
+      >P</a
+      ><a name="1747"
+      > </a
+      ><a name="1748" href="not-not.html#1724" class="Bound"
+      >x'</a
+      ><a name="1750" class="Symbol"
+      >}</a
+      ><a name="1751"
+      > </a
+      ><a name="1752" class="Symbol"
+      >&#8594;</a
+      ><a name="1753"
+      >
+              </a
+      ><a name="1768" class="Symbol"
+      >(</a
+      ><a name="1769" href="not-not.html#1769" class="Bound"
+      >e</a
+      ><a name="1770"
+      > </a
+      ><a name="1771" class="Symbol"
+      >:</a
+      ><a name="1772"
+      > </a
+      ><a name="1773" href="not-not.html#1722" class="Bound"
+      >x</a
+      ><a name="1774"
+      > </a
+      ><a name="1775" href="MiniLibrary.html#1706" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="1776"
+      > </a
+      ><a name="1777" href="not-not.html#1724" class="Bound"
+      >x'</a
+      ><a name="1779" class="Symbol"
+      >)</a
+      ><a name="1780"
+      > </a
+      ><a name="1781" class="Symbol"
+      >&#8594;</a
+      ><a name="1782"
+      > </a
+      ><a name="1783" href="not-not.html#113" class="Function Operator"
+      >[</a
+      ><a name="1784"
+      > </a
+      ><a name="1785" href="MiniLibrary.html#1766" class="Function"
+      >transport</a
+      ><a name="1794"
+      > </a
+      ><a name="1795" class="Symbol"
+      >{</a
+      ><a name="1796" href="not-not.html#1700" class="Bound"
+      >X</a
+      ><a name="1797" class="Symbol"
+      >}</a
+      ><a name="1798"
+      > </a
+      ><a name="1799" class="Symbol"
+      >{</a
+      ><a name="1800" href="not-not.html#1709" class="Bound"
+      >P</a
+      ><a name="1801" class="Symbol"
+      >}</a
+      ><a name="1802"
+      > </a
+      ><a name="1803" href="not-not.html#1769" class="Bound"
+      >e</a
+      ><a name="1804"
+      > </a
+      ><a name="1805" href="not-not.html#1732" class="Bound"
+      >p</a
+      ><a name="1806"
+      > </a
+      ><a name="1807" href="MiniLibrary.html#1706" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="1808"
+      > </a
+      ><a name="1809" href="not-not.html#1741" class="Bound"
+      >p'</a
+      ><a name="1811"
+      > </a
+      ><a name="1812" href="not-not.html#113" class="Function Operator"
+      >]</a
+      ><a name="1813"
+      > </a
+      ><a name="1814" class="Symbol"
+      >&#8594;</a
+      ><a name="1815"
+      > </a
+      ><a name="1816" href="not-not.html#113" class="Function Operator"
+      >[</a
+      ><a name="1817"
+      > </a
+      ><a name="1818" class="Symbol"
+      >(</a
+      ><a name="1819" href="not-not.html#1722" class="Bound"
+      >x</a
+      ><a name="1820"
+      > </a
+      ><a name="1821" href="MiniLibrary.html#825" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="1822"
+      > </a
+      ><a name="1823" href="not-not.html#1732" class="Bound"
+      >p</a
+      ><a name="1824" class="Symbol"
+      >)</a
+      ><a name="1825"
+      > </a
+      ><a name="1826" href="MiniLibrary.html#1706" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="1827"
+      > </a
+      ><a name="1828" class="Symbol"
+      >(</a
+      ><a name="1829" href="not-not.html#1724" class="Bound"
+      >x'</a
+      ><a name="1831"
+      > </a
+      ><a name="1832" href="MiniLibrary.html#825" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="1833"
+      > </a
+      ><a name="1834" href="not-not.html#1741" class="Bound"
+      >p'</a
+      ><a name="1836" class="Symbol"
+      >)</a
+      ><a name="1837"
+      > </a
+      ><a name="1838" href="not-not.html#113" class="Function Operator"
+      >]</a
+      ><a name="1839"
+      >
+</a
+      ><a name="1840" href="not-not.html#1684" class="Function"
+      >Lemma[[&#8801;]-&#931;]</a
+      ><a name="1852"
+      > </a
+      ><a name="1853" href="not-not.html#1853" class="Bound"
+      >e&#8320;</a
+      ><a name="1855"
+      > </a
+      ><a name="1856" class="Symbol"
+      >=</a
+      ><a name="1857"
+      > </a
+      ><a name="1858" href="not-not.html#551" class="Function"
+      >functor</a
+      ><a name="1865"
+      > </a
+      ><a name="1866" class="Symbol"
+      >(</a
+      ><a name="1867" href="MiniLibrary.html#2563" class="Function"
+      >Lemma[&#8801;-&#931;]</a
+      ><a name="1877"
+      > </a
+      ><a name="1878" href="not-not.html#1853" class="Bound"
+      >e&#8320;</a
+      ><a name="1880" class="Symbol"
+      >)</a
+      ><a name="1881"
+      >
+
+</a
+      ><a name="1883" href="not-not.html#1883" class="Function"
+      >Lemma[[&#8801;]-&#8743;]</a
+      ><a name="1895"
+      > </a
+      ><a name="1896" class="Symbol"
+      >:</a
+      ><a name="1897"
+      > </a
+      ><a name="1898" class="Symbol"
+      >{</a
+      ><a name="1899" href="not-not.html#1899" class="Bound"
+      >A&#8320;</a
+      ><a name="1901"
+      > </a
+      ><a name="1902" href="not-not.html#1902" class="Bound"
+      >A&#8321;</a
+      ><a name="1904"
+      > </a
+      ><a name="1905" class="Symbol"
+      >:</a
+      ><a name="1906"
+      > </a
+      ><a name="1907" class="PrimitiveType"
+      >Set</a
+      ><a name="1910" class="Symbol"
+      >}{</a
+      ><a name="1912" href="not-not.html#1912" class="Bound"
+      >a&#8320;</a
+      ><a name="1914"
+      > </a
+      ><a name="1915" href="not-not.html#1915" class="Bound"
+      >a&#8320;'</a
+      ><a name="1918"
+      > </a
+      ><a name="1919" class="Symbol"
+      >:</a
+      ><a name="1920"
+      > </a
+      ><a name="1921" href="not-not.html#1899" class="Bound"
+      >A&#8320;</a
+      ><a name="1923" class="Symbol"
+      >}{</a
+      ><a name="1925" href="not-not.html#1925" class="Bound"
+      >a&#8321;</a
+      ><a name="1927"
+      > </a
+      ><a name="1928" href="not-not.html#1928" class="Bound"
+      >a&#8321;'</a
+      ><a name="1931"
+      > </a
+      ><a name="1932" class="Symbol"
+      >:</a
+      ><a name="1933"
+      > </a
+      ><a name="1934" href="not-not.html#1902" class="Bound"
+      >A&#8321;</a
+      ><a name="1936" class="Symbol"
+      >}</a
+      ><a name="1937"
+      > </a
+      ><a name="1938" class="Symbol"
+      >&#8594;</a
+      ><a name="1939"
+      >
+                </a
+      ><a name="1956" href="not-not.html#113" class="Function Operator"
+      >[</a
+      ><a name="1957"
+      > </a
+      ><a name="1958" href="not-not.html#1912" class="Bound"
+      >a&#8320;</a
+      ><a name="1960"
+      > </a
+      ><a name="1961" href="MiniLibrary.html#1706" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="1962"
+      > </a
+      ><a name="1963" href="not-not.html#1915" class="Bound"
+      >a&#8320;'</a
+      ><a name="1966"
+      > </a
+      ><a name="1967" href="not-not.html#113" class="Function Operator"
+      >]</a
+      ><a name="1968"
+      > </a
+      ><a name="1969" class="Symbol"
+      >&#8594;</a
+      ><a name="1970"
+      > </a
+      ><a name="1971" href="not-not.html#113" class="Function Operator"
+      >[</a
+      ><a name="1972"
+      > </a
+      ><a name="1973" href="not-not.html#1925" class="Bound"
+      >a&#8321;</a
+      ><a name="1975"
+      > </a
+      ><a name="1976" href="MiniLibrary.html#1706" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="1977"
+      > </a
+      ><a name="1978" href="not-not.html#1928" class="Bound"
+      >a&#8321;'</a
+      ><a name="1981"
+      > </a
+      ><a name="1982" href="not-not.html#113" class="Function Operator"
+      >]</a
+      ><a name="1983"
+      > </a
+      ><a name="1984" class="Symbol"
+      >&#8594;</a
+      ><a name="1985"
+      > </a
+      ><a name="1986" href="not-not.html#113" class="Function Operator"
+      >[</a
+      ><a name="1987"
+      > </a
+      ><a name="1988" href="MiniLibrary.html#1194" class="Function"
+      >&#8743;-intro</a
+      ><a name="1995"
+      > </a
+      ><a name="1996" href="not-not.html#1912" class="Bound"
+      >a&#8320;</a
+      ><a name="1998"
+      > </a
+      ><a name="1999" href="not-not.html#1925" class="Bound"
+      >a&#8321;</a
+      ><a name="2001"
+      > </a
+      ><a name="2002" href="MiniLibrary.html#1706" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="2003"
+      > </a
+      ><a name="2004" href="MiniLibrary.html#1194" class="Function"
+      >&#8743;-intro</a
+      ><a name="2011"
+      > </a
+      ><a name="2012" href="not-not.html#1915" class="Bound"
+      >a&#8320;'</a
+      ><a name="2015"
+      > </a
+      ><a name="2016" href="not-not.html#1928" class="Bound"
+      >a&#8321;'</a
+      ><a name="2019"
+      > </a
+      ><a name="2020" href="not-not.html#113" class="Function Operator"
+      >]</a
+      ><a name="2021"
+      >
+</a
+      ><a name="2022" href="not-not.html#1883" class="Function"
+      >Lemma[[&#8801;]-&#8743;]</a
+      ><a name="2034"
+      > </a
+      ><a name="2035" class="Symbol"
+      >=</a
+      ><a name="2036"
+      > </a
+      ><a name="2037" href="not-not.html#633" class="Function"
+      >functor&#8322;</a
+      ><a name="2045"
+      > </a
+      ><a name="2046" href="MiniLibrary.html#2738" class="Function"
+      >Lemma[&#8801;-&#8743;]</a
+      ><a name="2056"
+      >
+
+\end{code}
+
+</a
+      ><a name="2070" class="Comment"
+      >The double negations of the &quot;agree with&quot; relation _&#8803;[_]_, and related</a
+      ><a name="2139"
+      >
+</a
+      ><a name="2140" class="Comment"
+      >properties:</a
+      ><a name="2151"
+      >
+
+\begin{code}
+
+</a
+      ><a name="2167" class="Keyword"
+      >open</a
+      ><a name="2171"
+      > </a
+      ><a name="2172" class="Keyword"
+      >import</a
+      ><a name="2178"
+      > </a
+      ><a name="2179" href="Sequence.html#1" class="Module"
+      >Sequence</a
+      ><a name="2187"
+      >
+
+</a
+      ><a name="2189" href="not-not.html#2189" class="Function"
+      >[sym-&#8803;[]]</a
+      ><a name="2198"
+      > </a
+      ><a name="2199" class="Symbol"
+      >:</a
+      ><a name="2200"
+      > </a
+      ><a name="2201" class="Symbol"
+      >{</a
+      ><a name="2202" href="not-not.html#2202" class="Bound"
+      >n</a
+      ><a name="2203"
+      > </a
+      ><a name="2204" class="Symbol"
+      >:</a
+      ><a name="2205"
+      > </a
+      ><a name="2206" href="MiniLibrary.html#3902" class="Datatype"
+      >&#8469;</a
+      ><a name="2207" class="Symbol"
+      >}{</a
+      ><a name="2209" href="not-not.html#2209" class="Bound"
+      >&#945;</a
+      ><a name="2210"
+      > </a
+      ><a name="2211" href="not-not.html#2211" class="Bound"
+      >&#946;</a
+      ><a name="2212"
+      > </a
+      ><a name="2213" class="Symbol"
+      >:</a
+      ><a name="2214"
+      > </a
+      ><a name="2215" href="Sequence.html#238" class="Function"
+      >&#8322;&#8469;</a
+      ><a name="2217" class="Symbol"
+      >}</a
+      ><a name="2218"
+      > </a
+      ><a name="2219" class="Symbol"
+      >&#8594;</a
+      ><a name="2220"
+      > </a
+      ><a name="2221" href="not-not.html#113" class="Function Operator"
+      >[</a
+      ><a name="2222"
+      > </a
+      ><a name="2223" href="not-not.html#2209" class="Bound"
+      >&#945;</a
+      ><a name="2224"
+      > </a
+      ><a name="2225" href="Sequence.html#2542" class="Datatype Operator"
+      >&#8803;[</a
+      ><a name="2227"
+      > </a
+      ><a name="2228" href="not-not.html#2202" class="Bound"
+      >n</a
+      ><a name="2229"
+      > </a
+      ><a name="2230" href="Sequence.html#2542" class="Datatype Operator"
+      >]</a
+      ><a name="2231"
+      > </a
+      ><a name="2232" href="not-not.html#2211" class="Bound"
+      >&#946;</a
+      ><a name="2233"
+      > </a
+      ><a name="2234" href="not-not.html#113" class="Function Operator"
+      >]</a
+      ><a name="2235"
+      > </a
+      ><a name="2236" class="Symbol"
+      >&#8594;</a
+      ><a name="2237"
+      > </a
+      ><a name="2238" href="not-not.html#113" class="Function Operator"
+      >[</a
+      ><a name="2239"
+      > </a
+      ><a name="2240" href="not-not.html#2211" class="Bound"
+      >&#946;</a
+      ><a name="2241"
+      > </a
+      ><a name="2242" href="Sequence.html#2542" class="Datatype Operator"
+      >&#8803;[</a
+      ><a name="2244"
+      > </a
+      ><a name="2245" href="not-not.html#2202" class="Bound"
+      >n</a
+      ><a name="2246"
+      > </a
+      ><a name="2247" href="Sequence.html#2542" class="Datatype Operator"
+      >]</a
+      ><a name="2248"
+      > </a
+      ><a name="2249" href="not-not.html#2209" class="Bound"
+      >&#945;</a
+      ><a name="2250"
+      > </a
+      ><a name="2251" href="not-not.html#113" class="Function Operator"
+      >]</a
+      ><a name="2252"
+      >
+</a
+      ><a name="2253" href="not-not.html#2189" class="Function"
+      >[sym-&#8803;[]]</a
+      ><a name="2262"
+      > </a
+      ><a name="2263" class="Symbol"
+      >=</a
+      ><a name="2264"
+      > </a
+      ><a name="2265" href="not-not.html#551" class="Function"
+      >functor</a
+      ><a name="2272"
+      > </a
+      ><a name="2273" href="Sequence.html#2794" class="Function"
+      >sym-&#8803;[]</a
+      ><a name="2280"
+      >
+
+</a
+      ><a name="2282" href="not-not.html#2282" class="Function"
+      >[trans-&#8803;[]]</a
+      ><a name="2293"
+      > </a
+      ><a name="2294" class="Symbol"
+      >:</a
+      ><a name="2295"
+      > </a
+      ><a name="2296" class="Symbol"
+      >{</a
+      ><a name="2297" href="not-not.html#2297" class="Bound"
+      >n</a
+      ><a name="2298"
+      > </a
+      ><a name="2299" class="Symbol"
+      >:</a
+      ><a name="2300"
+      > </a
+      ><a name="2301" href="MiniLibrary.html#3902" class="Datatype"
+      >&#8469;</a
+      ><a name="2302" class="Symbol"
+      >}{</a
+      ><a name="2304" href="not-not.html#2304" class="Bound"
+      >&#945;&#8320;</a
+      ><a name="2306"
+      > </a
+      ><a name="2307" href="not-not.html#2307" class="Bound"
+      >&#945;&#8321;</a
+      ><a name="2309"
+      > </a
+      ><a name="2310" href="not-not.html#2310" class="Bound"
+      >&#945;&#8322;</a
+      ><a name="2312"
+      > </a
+      ><a name="2313" class="Symbol"
+      >:</a
+      ><a name="2314"
+      > </a
+      ><a name="2315" href="Sequence.html#238" class="Function"
+      >&#8322;&#8469;</a
+      ><a name="2317" class="Symbol"
+      >}</a
+      ><a name="2318"
+      > </a
+      ><a name="2319" class="Symbol"
+      >&#8594;</a
+      ><a name="2320"
+      > </a
+      ><a name="2321" href="not-not.html#113" class="Function Operator"
+      >[</a
+      ><a name="2322"
+      > </a
+      ><a name="2323" href="not-not.html#2304" class="Bound"
+      >&#945;&#8320;</a
+      ><a name="2325"
+      > </a
+      ><a name="2326" href="Sequence.html#2542" class="Datatype Operator"
+      >&#8803;[</a
+      ><a name="2328"
+      > </a
+      ><a name="2329" href="not-not.html#2297" class="Bound"
+      >n</a
+      ><a name="2330"
+      > </a
+      ><a name="2331" href="Sequence.html#2542" class="Datatype Operator"
+      >]</a
+      ><a name="2332"
+      > </a
+      ><a name="2333" href="not-not.html#2307" class="Bound"
+      >&#945;&#8321;</a
+      ><a name="2335"
+      > </a
+      ><a name="2336" href="not-not.html#113" class="Function Operator"
+      >]</a
+      ><a name="2337"
+      > </a
+      ><a name="2338" class="Symbol"
+      >&#8594;</a
+      ><a name="2339"
+      > </a
+      ><a name="2340" href="not-not.html#113" class="Function Operator"
+      >[</a
+      ><a name="2341"
+      > </a
+      ><a name="2342" href="not-not.html#2307" class="Bound"
+      >&#945;&#8321;</a
+      ><a name="2344"
+      > </a
+      ><a name="2345" href="Sequence.html#2542" class="Datatype Operator"
+      >&#8803;[</a
+      ><a name="2347"
+      > </a
+      ><a name="2348" href="not-not.html#2297" class="Bound"
+      >n</a
+      ><a name="2349"
+      > </a
+      ><a name="2350" href="Sequence.html#2542" class="Datatype Operator"
+      >]</a
+      ><a name="2351"
+      > </a
+      ><a name="2352" href="not-not.html#2310" class="Bound"
+      >&#945;&#8322;</a
+      ><a name="2354"
+      > </a
+      ><a name="2355" href="not-not.html#113" class="Function Operator"
+      >]</a
+      ><a name="2356"
+      > </a
+      ><a name="2357" class="Symbol"
+      >&#8594;</a
+      ><a name="2358"
+      > </a
+      ><a name="2359" href="not-not.html#113" class="Function Operator"
+      >[</a
+      ><a name="2360"
+      > </a
+      ><a name="2361" href="not-not.html#2304" class="Bound"
+      >&#945;&#8320;</a
+      ><a name="2363"
+      > </a
+      ><a name="2364" href="Sequence.html#2542" class="Datatype Operator"
+      >&#8803;[</a
+      ><a name="2366"
+      > </a
+      ><a name="2367" href="not-not.html#2297" class="Bound"
+      >n</a
+      ><a name="2368"
+      > </a
+      ><a name="2369" href="Sequence.html#2542" class="Datatype Operator"
+      >]</a
+      ><a name="2370"
+      > </a
+      ><a name="2371" href="not-not.html#2310" class="Bound"
+      >&#945;&#8322;</a
+      ><a name="2373"
+      > </a
+      ><a name="2374" href="not-not.html#113" class="Function Operator"
+      >]</a
+      ><a name="2375"
+      >
+</a
+      ><a name="2376" href="not-not.html#2282" class="Function"
+      >[trans-&#8803;[]]</a
+      ><a name="2387"
+      > </a
+      ><a name="2388" class="Symbol"
+      >=</a
+      ><a name="2389"
+      > </a
+      ><a name="2390" href="not-not.html#633" class="Function"
+      >functor&#8322;</a
+      ><a name="2398"
+      > </a
+      ><a name="2399" href="Sequence.html#2954" class="Function"
+      >trans-&#8803;[]</a
+      ><a name="2408"
+      >
+
+\end{code}
+
+</a
+      ><a name="2422" class="Comment"
+      >If a type X is decidable, then we have &#172;&#172; X &#8594; X.</a
+      ><a name="2470"
+      >
+
+\begin{code}
+
+</a
+      ><a name="2486" href="not-not.html#2486" class="Function"
+      >decidable-structure</a
+      ><a name="2505"
+      > </a
+      ><a name="2506" class="Symbol"
+      >:</a
+      ><a name="2507"
+      > </a
+      ><a name="2508" class="Symbol"
+      >{</a
+      ><a name="2509" href="not-not.html#2509" class="Bound"
+      >X</a
+      ><a name="2510"
+      > </a
+      ><a name="2511" class="Symbol"
+      >:</a
+      ><a name="2512"
+      > </a
+      ><a name="2513" class="PrimitiveType"
+      >Set</a
+      ><a name="2516" class="Symbol"
+      >}</a
+      ><a name="2517"
+      > </a
+      ><a name="2518" class="Symbol"
+      >&#8594;</a
+      ><a name="2519"
+      > </a
+      ><a name="2520" href="MiniLibrary.html#6566" class="Function"
+      >decidable</a
+      ><a name="2529"
+      > </a
+      ><a name="2530" href="not-not.html#2509" class="Bound"
+      >X</a
+      ><a name="2531"
+      > </a
+      ><a name="2532" class="Symbol"
+      >&#8594;</a
+      ><a name="2533"
+      > </a
+      ><a name="2534" href="not-not.html#113" class="Function Operator"
+      >[</a
+      ><a name="2535"
+      > </a
+      ><a name="2536" href="not-not.html#2509" class="Bound"
+      >X</a
+      ><a name="2537"
+      > </a
+      ><a name="2538" href="not-not.html#113" class="Function Operator"
+      >]</a
+      ><a name="2539"
+      > </a
+      ><a name="2540" class="Symbol"
+      >&#8594;</a
+      ><a name="2541"
+      > </a
+      ><a name="2542" href="not-not.html#2509" class="Bound"
+      >X</a
+      ><a name="2543"
+      >
+</a
+      ><a name="2544" href="not-not.html#2486" class="Function"
+      >decidable-structure</a
+      ><a name="2563"
+      > </a
+      ><a name="2564" class="Symbol"
+      >(</a
+      ><a name="2565" href="MiniLibrary.html#5747" class="InductiveConstructor"
+      >in&#8320;</a
+      ><a name="2568"
+      > </a
+      ><a name="2569" href="not-not.html#2569" class="Bound"
+      >x</a
+      ><a name="2570" class="Symbol"
+      >)</a
+      ><a name="2571"
+      > </a
+      ><a name="2572" href="not-not.html#2572" class="Bound"
+      >xh</a
+      ><a name="2574"
+      > </a
+      ><a name="2575" class="Symbol"
+      >=</a
+      ><a name="2576"
+      > </a
+      ><a name="2577" href="not-not.html#2569" class="Bound"
+      >x</a
+      ><a name="2578"
+      >
+</a
+      ><a name="2579" href="not-not.html#2486" class="Function"
+      >decidable-structure</a
+      ><a name="2598"
+      > </a
+      ><a name="2599" class="Symbol"
+      >(</a
+      ><a name="2600" href="MiniLibrary.html#5768" class="InductiveConstructor"
+      >in&#8321;</a
+      ><a name="2603"
+      > </a
+      ><a name="2604" href="not-not.html#2604" class="Bound"
+      >u</a
+      ><a name="2605" class="Symbol"
+      >)</a
+      ><a name="2606"
+      > </a
+      ><a name="2607" href="not-not.html#2607" class="Bound"
+      >xh</a
+      ><a name="2609"
+      > </a
+      ><a name="2610" class="Symbol"
+      >=</a
+      ><a name="2611"
+      > </a
+      ><a name="2612" href="not-not.html#487" class="Function"
+      >[&#8709;]-elim</a
+      ><a name="2620"
+      > </a
+      ><a name="2621" class="Symbol"
+      >(</a
+      ><a name="2622" href="not-not.html#551" class="Function"
+      >functor</a
+      ><a name="2629"
+      > </a
+      ><a name="2630" href="not-not.html#2604" class="Bound"
+      >u</a
+      ><a name="2631"
+      > </a
+      ><a name="2632" href="not-not.html#2607" class="Bound"
+      >xh</a
+      ><a name="2634" class="Symbol"
+      >)</a
+      ><a name="2635"
+      >
+
+</a
+      ><a name="2637" href="not-not.html#2637" class="Function"
+      >Lemma[[&#8803;[]]&#8594;&#8803;[]]</a
+      ><a name="2653"
+      > </a
+      ><a name="2654" class="Symbol"
+      >:</a
+      ><a name="2655"
+      > </a
+      ><a name="2656" class="Symbol"
+      >{</a
+      ><a name="2657" href="not-not.html#2657" class="Bound"
+      >n</a
+      ><a name="2658"
+      > </a
+      ><a name="2659" class="Symbol"
+      >:</a
+      ><a name="2660"
+      > </a
+      ><a name="2661" href="MiniLibrary.html#3902" class="Datatype"
+      >&#8469;</a
+      ><a name="2662" class="Symbol"
+      >}{</a
+      ><a name="2664" href="not-not.html#2664" class="Bound"
+      >&#945;</a
+      ><a name="2665"
+      > </a
+      ><a name="2666" href="not-not.html#2666" class="Bound"
+      >&#946;</a
+      ><a name="2667"
+      > </a
+      ><a name="2668" class="Symbol"
+      >:</a
+      ><a name="2669"
+      > </a
+      ><a name="2670" href="Sequence.html#238" class="Function"
+      >&#8322;&#8469;</a
+      ><a name="2672" class="Symbol"
+      >}</a
+      ><a name="2673"
+      > </a
+      ><a name="2674" class="Symbol"
+      >&#8594;</a
+      ><a name="2675"
+      > </a
+      ><a name="2676" href="not-not.html#113" class="Function Operator"
+      >[</a
+      ><a name="2677"
+      > </a
+      ><a name="2678" href="not-not.html#2664" class="Bound"
+      >&#945;</a
+      ><a name="2679"
+      > </a
+      ><a name="2680" href="Sequence.html#2542" class="Datatype Operator"
+      >&#8803;[</a
+      ><a name="2682"
+      > </a
+      ><a name="2683" href="not-not.html#2657" class="Bound"
+      >n</a
+      ><a name="2684"
+      > </a
+      ><a name="2685" href="Sequence.html#2542" class="Datatype Operator"
+      >]</a
+      ><a name="2686"
+      > </a
+      ><a name="2687" href="not-not.html#2666" class="Bound"
+      >&#946;</a
+      ><a name="2688"
+      > </a
+      ><a name="2689" href="not-not.html#113" class="Function Operator"
+      >]</a
+      ><a name="2690"
+      > </a
+      ><a name="2691" class="Symbol"
+      >&#8594;</a
+      ><a name="2692"
+      > </a
+      ><a name="2693" href="not-not.html#2664" class="Bound"
+      >&#945;</a
+      ><a name="2694"
+      > </a
+      ><a name="2695" href="Sequence.html#2542" class="Datatype Operator"
+      >&#8803;[</a
+      ><a name="2697"
+      > </a
+      ><a name="2698" href="not-not.html#2657" class="Bound"
+      >n</a
+      ><a name="2699"
+      > </a
+      ><a name="2700" href="Sequence.html#2542" class="Datatype Operator"
+      >]</a
+      ><a name="2701"
+      > </a
+      ><a name="2702" href="not-not.html#2666" class="Bound"
+      >&#946;</a
+      ><a name="2703"
+      >
+</a
+      ><a name="2704" href="not-not.html#2637" class="Function"
+      >Lemma[[&#8803;[]]&#8594;&#8803;[]]</a
+      ><a name="2720"
+      > </a
+      ><a name="2721" class="Symbol"
+      >{</a
+      ><a name="2722" href="not-not.html#2722" class="Bound"
+      >n</a
+      ><a name="2723" class="Symbol"
+      >}</a
+      ><a name="2724"
+      > </a
+      ><a name="2725" class="Symbol"
+      >{</a
+      ><a name="2726" href="not-not.html#2726" class="Bound"
+      >&#945;</a
+      ><a name="2727" class="Symbol"
+      >}</a
+      ><a name="2728"
+      > </a
+      ><a name="2729" class="Symbol"
+      >{</a
+      ><a name="2730" href="not-not.html#2730" class="Bound"
+      >&#946;</a
+      ><a name="2731" class="Symbol"
+      >}</a
+      ><a name="2732"
+      > </a
+      ><a name="2733" class="Symbol"
+      >=</a
+      ><a name="2734"
+      > </a
+      ><a name="2735" href="not-not.html#2486" class="Function"
+      >decidable-structure</a
+      ><a name="2754"
+      > </a
+      ><a name="2755" class="Symbol"
+      >(</a
+      ><a name="2756" href="Sequence.html#3394" class="Function"
+      >Lemma[&#8803;[]-decidable]</a
+      ><a name="2776"
+      > </a
+      ><a name="2777" href="not-not.html#2726" class="Bound"
+      >&#945;</a
+      ><a name="2778"
+      > </a
+      ><a name="2779" href="not-not.html#2730" class="Bound"
+      >&#946;</a
+      ><a name="2780" class="Symbol"
+      >)</a
+      ><a name="2781"
+      >
+
+</a
+      ><a name="2783" href="not-not.html#2783" class="Function"
+      >Lemma[[&#8801;]&#8594;&#8801;]-&#8322;</a
+      ><a name="2797"
+      > </a
+      ><a name="2798" class="Symbol"
+      >:</a
+      ><a name="2799"
+      > </a
+      ><a name="2800" class="Symbol"
+      >{</a
+      ><a name="2801" href="not-not.html#2801" class="Bound"
+      >b</a
+      ><a name="2802"
+      > </a
+      ><a name="2803" href="not-not.html#2803" class="Bound"
+      >b'</a
+      ><a name="2805"
+      > </a
+      ><a name="2806" class="Symbol"
+      >:</a
+      ><a name="2807"
+      > </a
+      ><a name="2808" href="MiniLibrary.html#3618" class="Datatype"
+      >&#8322;</a
+      ><a name="2809" class="Symbol"
+      >}</a
+      ><a name="2810"
+      > </a
+      ><a name="2811" class="Symbol"
+      >&#8594;</a
+      ><a name="2812"
+      > </a
+      ><a name="2813" href="not-not.html#113" class="Function Operator"
+      >[</a
+      ><a name="2814"
+      > </a
+      ><a name="2815" href="not-not.html#2801" class="Bound"
+      >b</a
+      ><a name="2816"
+      > </a
+      ><a name="2817" href="MiniLibrary.html#1706" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="2818"
+      > </a
+      ><a name="2819" href="not-not.html#2803" class="Bound"
+      >b'</a
+      ><a name="2821"
+      > </a
+      ><a name="2822" href="not-not.html#113" class="Function Operator"
+      >]</a
+      ><a name="2823"
+      > </a
+      ><a name="2824" class="Symbol"
+      >&#8594;</a
+      ><a name="2825"
+      > </a
+      ><a name="2826" href="not-not.html#2801" class="Bound"
+      >b</a
+      ><a name="2827"
+      > </a
+      ><a name="2828" href="MiniLibrary.html#1706" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="2829"
+      > </a
+      ><a name="2830" href="not-not.html#2803" class="Bound"
+      >b'</a
+      ><a name="2832"
+      >
+</a
+      ><a name="2833" href="not-not.html#2783" class="Function"
+      >Lemma[[&#8801;]&#8594;&#8801;]-&#8322;</a
+      ><a name="2847"
+      > </a
+      ><a name="2848" class="Symbol"
+      >{</a
+      ><a name="2849" href="not-not.html#2849" class="Bound"
+      >b</a
+      ><a name="2850" class="Symbol"
+      >}</a
+      ><a name="2851"
+      > </a
+      ><a name="2852" class="Symbol"
+      >{</a
+      ><a name="2853" href="not-not.html#2853" class="Bound"
+      >b'</a
+      ><a name="2855" class="Symbol"
+      >}</a
+      ><a name="2856"
+      > </a
+      ><a name="2857" class="Symbol"
+      >=</a
+      ><a name="2858"
+      > </a
+      ><a name="2859" href="not-not.html#2486" class="Function"
+      >decidable-structure</a
+      ><a name="2878"
+      > </a
+      ><a name="2879" class="Symbol"
+      >(</a
+      ><a name="2880" href="MiniLibrary.html#7435" class="Function"
+      >&#8322;-discrete</a
+      ><a name="2890"
+      > </a
+      ><a name="2891" href="not-not.html#2849" class="Bound"
+      >b</a
+      ><a name="2892"
+      > </a
+      ><a name="2893" href="not-not.html#2853" class="Bound"
+      >b'</a
+      ><a name="2895" class="Symbol"
+      >)</a
+      ><a name="2896"
+      >
+
+</a
+      ><a name="2898" href="not-not.html#2898" class="Function"
+      >Lemma[[&#8801;]&#8594;&#8801;]-&#8469;</a
+      ><a name="2912"
+      > </a
+      ><a name="2913" class="Symbol"
+      >:</a
+      ><a name="2914"
+      > </a
+      ><a name="2915" class="Symbol"
+      >{</a
+      ><a name="2916" href="not-not.html#2916" class="Bound"
+      >m</a
+      ><a name="2917"
+      > </a
+      ><a name="2918" href="not-not.html#2918" class="Bound"
+      >n</a
+      ><a name="2919"
+      > </a
+      ><a name="2920" class="Symbol"
+      >:</a
+      ><a name="2921"
+      > </a
+      ><a name="2922" href="MiniLibrary.html#3902" class="Datatype"
+      >&#8469;</a
+      ><a name="2923" class="Symbol"
+      >}</a
+      ><a name="2924"
+      > </a
+      ><a name="2925" class="Symbol"
+      >&#8594;</a
+      ><a name="2926"
+      > </a
+      ><a name="2927" href="not-not.html#113" class="Function Operator"
+      >[</a
+      ><a name="2928"
+      > </a
+      ><a name="2929" href="not-not.html#2916" class="Bound"
+      >m</a
+      ><a name="2930"
+      > </a
+      ><a name="2931" href="MiniLibrary.html#1706" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="2932"
+      > </a
+      ><a name="2933" href="not-not.html#2918" class="Bound"
+      >n</a
+      ><a name="2934"
+      > </a
+      ><a name="2935" href="not-not.html#113" class="Function Operator"
+      >]</a
+      ><a name="2936"
+      > </a
+      ><a name="2937" class="Symbol"
+      >&#8594;</a
+      ><a name="2938"
+      > </a
+      ><a name="2939" href="not-not.html#2916" class="Bound"
+      >m</a
+      ><a name="2940"
+      > </a
+      ><a name="2941" href="MiniLibrary.html#1706" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="2942"
+      > </a
+      ><a name="2943" href="not-not.html#2918" class="Bound"
+      >n</a
+      ><a name="2944"
+      >
+</a
+      ><a name="2945" href="not-not.html#2898" class="Function"
+      >Lemma[[&#8801;]&#8594;&#8801;]-&#8469;</a
+      ><a name="2959"
+      > </a
+      ><a name="2960" class="Symbol"
+      >{</a
+      ><a name="2961" href="not-not.html#2961" class="Bound"
+      >m</a
+      ><a name="2962" class="Symbol"
+      >}</a
+      ><a name="2963"
+      > </a
+      ><a name="2964" class="Symbol"
+      >{</a
+      ><a name="2965" href="not-not.html#2965" class="Bound"
+      >n</a
+      ><a name="2966" class="Symbol"
+      >}</a
+      ><a name="2967"
+      > </a
+      ><a name="2968" class="Symbol"
+      >=</a
+      ><a name="2969"
+      > </a
+      ><a name="2970" href="not-not.html#2486" class="Function"
+      >decidable-structure</a
+      ><a name="2989"
+      > </a
+      ><a name="2990" class="Symbol"
+      >(</a
+      ><a name="2991" href="MiniLibrary.html#6845" class="Function"
+      >&#8469;-discrete</a
+      ><a name="3001"
+      > </a
+      ><a name="3002" href="not-not.html#2961" class="Bound"
+      >m</a
+      ><a name="3003"
+      > </a
+      ><a name="3004" href="not-not.html#2965" class="Bound"
+      >n</a
+      ><a name="3005" class="Symbol"
+      >)</a
+      ><a name="3006"
+      >
+
+</a
+      ><a name="3008" class="Keyword"
+      >open</a
+      ><a name="3012"
+      > </a
+      ><a name="3013" class="Keyword"
+      >import</a
+      ><a name="3019"
+      > </a
+      ><a name="3020" href="Inequality.html#1" class="Module"
+      >Inequality</a
+      ><a name="3030"
+      >
+
+</a
+      ><a name="3032" href="not-not.html#3032" class="Function"
+      >Lemma[[&#8804;]&#8594;&#8804;]</a
+      ><a name="3044"
+      > </a
+      ><a name="3045" class="Symbol"
+      >:</a
+      ><a name="3046"
+      > </a
+      ><a name="3047" class="Symbol"
+      >{</a
+      ><a name="3048" href="not-not.html#3048" class="Bound"
+      >n</a
+      ><a name="3049"
+      > </a
+      ><a name="3050" href="not-not.html#3050" class="Bound"
+      >m</a
+      ><a name="3051"
+      > </a
+      ><a name="3052" class="Symbol"
+      >:</a
+      ><a name="3053"
+      > </a
+      ><a name="3054" href="MiniLibrary.html#3902" class="Datatype"
+      >&#8469;</a
+      ><a name="3055" class="Symbol"
+      >}</a
+      ><a name="3056"
+      > </a
+      ><a name="3057" class="Symbol"
+      >&#8594;</a
+      ><a name="3058"
+      > </a
+      ><a name="3059" href="not-not.html#113" class="Function Operator"
+      >[</a
+      ><a name="3060"
+      > </a
+      ><a name="3061" href="not-not.html#3048" class="Bound"
+      >n</a
+      ><a name="3062"
+      > </a
+      ><a name="3063" href="Inequality.html#144" class="Datatype Operator"
+      >&#8804;</a
+      ><a name="3064"
+      > </a
+      ><a name="3065" href="not-not.html#3050" class="Bound"
+      >m</a
+      ><a name="3066"
+      > </a
+      ><a name="3067" href="not-not.html#113" class="Function Operator"
+      >]</a
+      ><a name="3068"
+      > </a
+      ><a name="3069" class="Symbol"
+      >&#8594;</a
+      ><a name="3070"
+      > </a
+      ><a name="3071" href="not-not.html#3048" class="Bound"
+      >n</a
+      ><a name="3072"
+      > </a
+      ><a name="3073" href="Inequality.html#144" class="Datatype Operator"
+      >&#8804;</a
+      ><a name="3074"
+      > </a
+      ><a name="3075" href="not-not.html#3050" class="Bound"
+      >m</a
+      ><a name="3076"
+      >
+</a
+      ><a name="3077" href="not-not.html#3032" class="Function"
+      >Lemma[[&#8804;]&#8594;&#8804;]</a
+      ><a name="3089"
+      > </a
+      ><a name="3090" class="Symbol"
+      >=</a
+      ><a name="3091"
+      > </a
+      ><a name="3092" href="not-not.html#2486" class="Function"
+      >decidable-structure</a
+      ><a name="3111"
+      > </a
+      ><a name="3112" href="Inequality.html#423" class="Function"
+      >Lemma[a&#8804;b-decidable]</a
+      ><a name="3132"
+      >
+
+\end{code}
+</a
+      ></pre
+    ></body
+  ></html
+>

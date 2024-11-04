@@ -1,0 +1,225 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+><head
+  ><title
+    >Extensionality</title
+    ><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"
+     /><meta http-equiv="Content-Style-Type" content="text/css"
+     /><link href="Agda.css" rel="stylesheet" type="text/css"
+     /></head
+  ><body
+  ><pre
+    ><a name="1" class="Comment"
+      >Martin Escardo 2012.</a
+      ><a name="21"
+      >
+
+\begin{code}
+
+</a
+      ><a name="37" class="Keyword"
+      >module</a
+      ><a name="43"
+      > </a
+      ><a name="44" href="Extensionality.html#1" class="Module"
+      >Extensionality</a
+      ><a name="58"
+      > </a
+      ><a name="59" class="Keyword"
+      >where</a
+      ><a name="64"
+      >
+
+
+</a
+      ><a name="67" class="Keyword"
+      >open</a
+      ><a name="71"
+      > </a
+      ><a name="72" class="Keyword"
+      >import</a
+      ><a name="78"
+      > </a
+      ><a name="79" href="Mini-library.html#1" class="Module"
+      >Mini-library</a
+      ><a name="91"
+      >
+
+</a
+      ><a name="93" class="Keyword"
+      >postulate</a
+      ><a name="102"
+      > 
+ </a
+      ><a name="105" href="Extensionality.html#105" class="Postulate"
+      >extensionality</a
+      ><a name="119"
+      > </a
+      ><a name="120" class="Symbol"
+      >:</a
+      ><a name="121"
+      > </a
+      ><a name="122" class="Symbol"
+      >{</a
+      ><a name="123" href="Extensionality.html#123" class="Bound"
+      >X</a
+      ><a name="124"
+      > </a
+      ><a name="125" class="Symbol"
+      >:</a
+      ><a name="126"
+      > </a
+      ><a name="127" class="PrimitiveType"
+      >Set</a
+      ><a name="130" class="Symbol"
+      >}</a
+      ><a name="131"
+      > </a
+      ><a name="132" class="Symbol"
+      >&#8594;</a
+      ><a name="133"
+      > </a
+      ><a name="134" class="Symbol"
+      >{</a
+      ><a name="135" href="Extensionality.html#135" class="Bound"
+      >Y</a
+      ><a name="136"
+      > </a
+      ><a name="137" class="Symbol"
+      >:</a
+      ><a name="138"
+      > </a
+      ><a name="139" href="Extensionality.html#123" class="Bound"
+      >X</a
+      ><a name="140"
+      > </a
+      ><a name="141" class="Symbol"
+      >-&gt;</a
+      ><a name="143"
+      > </a
+      ><a name="144" class="PrimitiveType"
+      >Set</a
+      ><a name="147" class="Symbol"
+      >}</a
+      ><a name="148"
+      > </a
+      ><a name="149" class="Symbol"
+      >&#8594;</a
+      ><a name="150"
+      > </a
+      ><a name="151" class="Symbol"
+      >&#8704;{</a
+      ><a name="153" href="Extensionality.html#153" class="Bound"
+      >f</a
+      ><a name="154"
+      > </a
+      ><a name="155" href="Extensionality.html#155" class="Bound"
+      >g</a
+      ><a name="156"
+      > </a
+      ><a name="157" class="Symbol"
+      >:</a
+      ><a name="158"
+      > </a
+      ><a name="159" class="Symbol"
+      >(</a
+      ><a name="160" href="Extensionality.html#160" class="Bound"
+      >x</a
+      ><a name="161"
+      > </a
+      ><a name="162" class="Symbol"
+      >:</a
+      ><a name="163"
+      > </a
+      ><a name="164" href="Extensionality.html#123" class="Bound"
+      >X</a
+      ><a name="165" class="Symbol"
+      >)</a
+      ><a name="166"
+      > </a
+      ><a name="167" class="Symbol"
+      >&#8594;</a
+      ><a name="168"
+      > </a
+      ><a name="169" href="Extensionality.html#135" class="Bound"
+      >Y</a
+      ><a name="170"
+      > </a
+      ><a name="171" href="Extensionality.html#160" class="Bound"
+      >x</a
+      ><a name="172" class="Symbol"
+      >}</a
+      ><a name="173"
+      > </a
+      ><a name="174" class="Symbol"
+      >&#8594;</a
+      ><a name="175"
+      >
+                   </a
+      ><a name="195" href="Mini-library.html#9124" class="Record Operator"
+      >[</a
+      ><a name="196"
+      > </a
+      ><a name="197" class="Symbol"
+      >((&#8704;</a
+      ><a name="200"
+      > </a
+      ><a name="201" href="Extensionality.html#201" class="Bound"
+      >x</a
+      ><a name="202"
+      > </a
+      ><a name="203" class="Symbol"
+      >&#8594;</a
+      ><a name="204"
+      > </a
+      ><a name="205" href="Extensionality.html#153" class="Bound"
+      >f</a
+      ><a name="206"
+      > </a
+      ><a name="207" href="Extensionality.html#201" class="Bound"
+      >x</a
+      ><a name="208"
+      > </a
+      ><a name="209" href="Mini-library.html#1588" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="210"
+      > </a
+      ><a name="211" href="Extensionality.html#155" class="Bound"
+      >g</a
+      ><a name="212"
+      > </a
+      ><a name="213" href="Extensionality.html#201" class="Bound"
+      >x</a
+      ><a name="214" class="Symbol"
+      >)</a
+      ><a name="215"
+      > </a
+      ><a name="216" class="Symbol"
+      >&#8594;</a
+      ><a name="217"
+      > </a
+      ><a name="218" href="Extensionality.html#153" class="Bound"
+      >f</a
+      ><a name="219"
+      > </a
+      ><a name="220" href="Mini-library.html#1588" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="221"
+      > </a
+      ><a name="222" href="Extensionality.html#155" class="Bound"
+      >g</a
+      ><a name="223" class="Symbol"
+      >)</a
+      ><a name="224"
+      > </a
+      ><a name="225" href="Mini-library.html#9124" class="Record Operator"
+      >]</a
+      ><a name="226"
+      >
+
+\end{code}
+</a
+      ></pre
+    ></body
+  ></html
+>

@@ -1,0 +1,4361 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+><head
+  ><title
+    >SetsAndFunctions</title
+    ><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"
+     /><meta http-equiv="Content-Style-Type" content="text/css"
+     /><link href="Agda.css" rel="stylesheet" type="text/css"
+     /></head
+  ><body
+  ><pre
+    ><a name="1" class="Comment"
+      >Martin Escardo 2011.</a
+      ><a name="21"
+      >
+
+\begin{code}
+
+</a
+      ><a name="37" class="Keyword"
+      >module</a
+      ><a name="43"
+      > </a
+      ><a name="44" href="SetsAndFunctions.html#1" class="Module"
+      >SetsAndFunctions</a
+      ><a name="60"
+      > </a
+      ><a name="61" class="Keyword"
+      >where</a
+      ><a name="66"
+      >
+
+\end{code}
+
+</a
+      ><a name="80" class="Comment"
+      >The empty set us defined by induction by an empty set of</a
+      ><a name="136"
+      >
+</a
+      ><a name="137" class="Comment"
+      >clauses: </a
+      ><a name="146"
+      >
+
+\begin{code}
+
+</a
+      ><a name="162" class="Keyword"
+      >data</a
+      ><a name="166"
+      > </a
+      ><a name="167" href="SetsAndFunctions.html#167" class="Datatype"
+      >&#8709;</a
+      ><a name="168"
+      > </a
+      ><a name="169" class="Symbol"
+      >:</a
+      ><a name="170"
+      > </a
+      ><a name="171" class="PrimitiveType"
+      >Set</a
+      ><a name="174"
+      > </a
+      ><a name="175" class="Keyword"
+      >where</a
+      ><a name="180"
+      >
+
+</a
+      ><a name="182" href="SetsAndFunctions.html#182" class="Function"
+      >unique-from-&#8709;</a
+      ><a name="195"
+      > </a
+      ><a name="196" class="Symbol"
+      >:</a
+      ><a name="197"
+      > </a
+      ><a name="198" class="Symbol"
+      >{</a
+      ><a name="199" href="SetsAndFunctions.html#199" class="Bound"
+      >A</a
+      ><a name="200"
+      > </a
+      ><a name="201" class="Symbol"
+      >:</a
+      ><a name="202"
+      > </a
+      ><a name="203" class="PrimitiveType"
+      >Set</a
+      ><a name="206" class="Symbol"
+      >}</a
+      ><a name="207"
+      > </a
+      ><a name="208" class="Symbol"
+      >&#8594;</a
+      ><a name="209"
+      > </a
+      ><a name="210" href="SetsAndFunctions.html#167" class="Datatype"
+      >&#8709;</a
+      ><a name="211"
+      > </a
+      ><a name="212" class="Symbol"
+      >&#8594;</a
+      ><a name="213"
+      > </a
+      ><a name="214" href="SetsAndFunctions.html#199" class="Bound"
+      >A</a
+      ><a name="215"
+      >
+</a
+      ><a name="216" href="SetsAndFunctions.html#182" class="Function"
+      >unique-from-&#8709;</a
+      ><a name="229"
+      > </a
+      ><a name="230" class="Symbol"
+      >=</a
+      ><a name="231"
+      > </a
+      ><a name="232" class="Symbol"
+      >&#955;</a
+      ><a name="233"
+      > </a
+      ><a name="234" class="Symbol"
+      >()</a
+      ><a name="236"
+      >
+
+\end{code}
+
+</a
+      ><a name="250" class="Comment"
+      >The one-element set is defined by induction with one case:</a
+      ><a name="308"
+      >
+\begin{code}
+
+</a
+      ><a name="323" class="Keyword"
+      >data</a
+      ><a name="327"
+      > </a
+      ><a name="328" href="SetsAndFunctions.html#328" class="Datatype"
+      >One</a
+      ><a name="331"
+      > </a
+      ><a name="332" class="Symbol"
+      >:</a
+      ><a name="333"
+      > </a
+      ><a name="334" class="PrimitiveType"
+      >Set</a
+      ><a name="337"
+      > </a
+      ><a name="338" class="Keyword"
+      >where</a
+      ><a name="343"
+      >
+ </a
+      ><a name="345" href="SetsAndFunctions.html#345" class="InductiveConstructor"
+      >*</a
+      ><a name="346"
+      > </a
+      ><a name="347" class="Symbol"
+      >:</a
+      ><a name="348"
+      > </a
+      ><a name="349" href="SetsAndFunctions.html#328" class="Datatype"
+      >One</a
+      ><a name="352"
+      >
+
+</a
+      ><a name="354" href="SetsAndFunctions.html#354" class="Function"
+      >unique-to-one</a
+      ><a name="367"
+      > </a
+      ><a name="368" class="Symbol"
+      >:</a
+      ><a name="369"
+      > </a
+      ><a name="370" class="Symbol"
+      >{</a
+      ><a name="371" href="SetsAndFunctions.html#371" class="Bound"
+      >A</a
+      ><a name="372"
+      > </a
+      ><a name="373" class="Symbol"
+      >:</a
+      ><a name="374"
+      > </a
+      ><a name="375" class="PrimitiveType"
+      >Set</a
+      ><a name="378" class="Symbol"
+      >}</a
+      ><a name="379"
+      > </a
+      ><a name="380" class="Symbol"
+      >&#8594;</a
+      ><a name="381"
+      > </a
+      ><a name="382" href="SetsAndFunctions.html#371" class="Bound"
+      >A</a
+      ><a name="383"
+      > </a
+      ><a name="384" class="Symbol"
+      >&#8594;</a
+      ><a name="385"
+      > </a
+      ><a name="386" href="SetsAndFunctions.html#328" class="Datatype"
+      >One</a
+      ><a name="389"
+      >
+</a
+      ><a name="390" href="SetsAndFunctions.html#354" class="Function"
+      >unique-to-one</a
+      ><a name="403"
+      > </a
+      ><a name="404" href="SetsAndFunctions.html#404" class="Bound"
+      >a</a
+      ><a name="405"
+      > </a
+      ><a name="406" class="Symbol"
+      >=</a
+      ><a name="407"
+      > </a
+      ><a name="408" href="SetsAndFunctions.html#345" class="InductiveConstructor"
+      >*</a
+      ><a name="409"
+      >
+
+\end{code}
+
+</a
+      ><a name="423" class="Comment"
+      >Product types are built-in, but I prefer to introduce the standard notation:</a
+      ><a name="499"
+      >
+
+\begin{code}
+
+</a
+      ><a name="515" href="SetsAndFunctions.html#515" class="Function"
+      >&#928;</a
+      ><a name="516"
+      > </a
+      ><a name="517" class="Symbol"
+      >:</a
+      ><a name="518"
+      > </a
+      ><a name="519" class="Symbol"
+      >{</a
+      ><a name="520" href="SetsAndFunctions.html#520" class="Bound"
+      >X</a
+      ><a name="521"
+      > </a
+      ><a name="522" class="Symbol"
+      >:</a
+      ><a name="523"
+      > </a
+      ><a name="524" class="PrimitiveType"
+      >Set</a
+      ><a name="527" class="Symbol"
+      >}</a
+      ><a name="528"
+      > </a
+      ><a name="529" class="Symbol"
+      >&#8594;</a
+      ><a name="530"
+      > </a
+      ><a name="531" class="Symbol"
+      >(</a
+      ><a name="532" href="SetsAndFunctions.html#532" class="Bound"
+      >Y</a
+      ><a name="533"
+      > </a
+      ><a name="534" class="Symbol"
+      >:</a
+      ><a name="535"
+      > </a
+      ><a name="536" href="SetsAndFunctions.html#520" class="Bound"
+      >X</a
+      ><a name="537"
+      > </a
+      ><a name="538" class="Symbol"
+      >&#8594;</a
+      ><a name="539"
+      > </a
+      ><a name="540" class="PrimitiveType"
+      >Set</a
+      ><a name="543" class="Symbol"
+      >)</a
+      ><a name="544"
+      > </a
+      ><a name="545" class="Symbol"
+      >&#8594;</a
+      ><a name="546"
+      > </a
+      ><a name="547" class="PrimitiveType"
+      >Set</a
+      ><a name="550"
+      >
+</a
+      ><a name="551" href="SetsAndFunctions.html#515" class="Function"
+      >&#928;</a
+      ><a name="552"
+      > </a
+      ><a name="553" class="Symbol"
+      >{</a
+      ><a name="554" href="SetsAndFunctions.html#554" class="Bound"
+      >X</a
+      ><a name="555" class="Symbol"
+      >}</a
+      ><a name="556"
+      > </a
+      ><a name="557" href="SetsAndFunctions.html#557" class="Bound"
+      >Y</a
+      ><a name="558"
+      > </a
+      ><a name="559" class="Symbol"
+      >=</a
+      ><a name="560"
+      > </a
+      ><a name="561" class="Symbol"
+      >(</a
+      ><a name="562" href="SetsAndFunctions.html#562" class="Bound"
+      >x</a
+      ><a name="563"
+      > </a
+      ><a name="564" class="Symbol"
+      >:</a
+      ><a name="565"
+      > </a
+      ><a name="566" href="SetsAndFunctions.html#554" class="Bound"
+      >X</a
+      ><a name="567" class="Symbol"
+      >)</a
+      ><a name="568"
+      > </a
+      ><a name="569" class="Symbol"
+      >&#8594;</a
+      ><a name="570"
+      > </a
+      ><a name="571" href="SetsAndFunctions.html#557" class="Bound"
+      >Y</a
+      ><a name="572"
+      > </a
+      ><a name="573" href="SetsAndFunctions.html#562" class="Bound"
+      >x</a
+      ><a name="574"
+      >
+
+\end{code}
+
+</a
+      ><a name="589" class="Comment"
+      >Using our conventions below, a sum can be written &#931; {I} X or</a
+      ><a name="649"
+      >
+</a
+      ><a name="650" class="Comment"
+      >as &#931; \(i : I) &#8594; X i, or even &#931; \i &#8594; X i when Agda can infer</a
+      ><a name="709"
+      >
+</a
+      ><a name="710" class="Comment"
+      >i from the context. I prefer to use \ rather than &#955; in such</a
+      ><a name="769"
+      >
+</a
+      ><a name="770" class="Comment"
+      >cases.</a
+      ><a name="776"
+      >
+
+\begin{code}
+
+</a
+      ><a name="792" class="Keyword"
+      >infixr</a
+      ><a name="798"
+      > </a
+      ><a name="799" class="Number"
+      >3</a
+      ><a name="800"
+      > _,_
+
+</a
+      ><a name="806" class="Keyword"
+      >record</a
+      ><a name="812"
+      > </a
+      ><a name="813" href="SetsAndFunctions.html#813" class="Record"
+      >&#931;</a
+      ><a name="814"
+      > </a
+      ><a name="815" class="Symbol"
+      >{</a
+      ><a name="816" href="SetsAndFunctions.html#816" class="Bound"
+      >I</a
+      ><a name="817"
+      > </a
+      ><a name="818" class="Symbol"
+      >:</a
+      ><a name="819"
+      > </a
+      ><a name="820" class="PrimitiveType"
+      >Set</a
+      ><a name="823" class="Symbol"
+      >}</a
+      ><a name="824"
+      > </a
+      ><a name="825" class="Symbol"
+      >(</a
+      ><a name="826" href="SetsAndFunctions.html#826" class="Bound"
+      >X</a
+      ><a name="827"
+      > </a
+      ><a name="828" class="Symbol"
+      >:</a
+      ><a name="829"
+      > </a
+      ><a name="830" href="SetsAndFunctions.html#816" class="Bound"
+      >I</a
+      ><a name="831"
+      > </a
+      ><a name="832" class="Symbol"
+      >&#8594;</a
+      ><a name="833"
+      > </a
+      ><a name="834" class="PrimitiveType"
+      >Set</a
+      ><a name="837" class="Symbol"
+      >)</a
+      ><a name="838"
+      > </a
+      ><a name="839" class="Symbol"
+      >:</a
+      ><a name="840"
+      > </a
+      ><a name="841" class="PrimitiveType"
+      >Set</a
+      ><a name="844"
+      > </a
+      ><a name="845" class="Keyword"
+      >where</a
+      ><a name="850"
+      >
+  </a
+      ><a name="853" class="Keyword"
+      >constructor</a
+      ><a name="864"
+      > </a
+      ><a name="865" href="SetsAndFunctions.html#865" class="InductiveConstructor Operator"
+      >_,_</a
+      ><a name="868"
+      >
+  </a
+      ><a name="871" class="Keyword"
+      >field</a
+      ><a name="876"
+      >
+   </a
+      ><a name="880" href="SetsAndFunctions.html#880" class="Field"
+      >&#960;&#8320;</a
+      ><a name="882"
+      > </a
+      ><a name="883" class="Symbol"
+      >:</a
+      ><a name="884"
+      > </a
+      ><a name="885" href="SetsAndFunctions.html#816" class="Bound"
+      >I</a
+      ><a name="886"
+      >
+   </a
+      ><a name="890" href="SetsAndFunctions.html#890" class="Field"
+      >&#960;&#8321;</a
+      ><a name="892"
+      > </a
+      ><a name="893" class="Symbol"
+      >:</a
+      ><a name="894"
+      > </a
+      ><a name="895" href="SetsAndFunctions.html#826" class="Bound"
+      >X</a
+      ><a name="896"
+      > </a
+      ><a name="897" href="SetsAndFunctions.html#880" class="Bound"
+      >&#960;&#8320;</a
+      ><a name="899"
+      >
+
+
+</a
+      ><a name="902" href="SetsAndFunctions.html#902" class="Function"
+      >&#960;&#8320;</a
+      ><a name="904"
+      > </a
+      ><a name="905" class="Symbol"
+      >:</a
+      ><a name="906"
+      > </a
+      ><a name="907" class="Symbol"
+      >{</a
+      ><a name="908" href="SetsAndFunctions.html#908" class="Bound"
+      >I</a
+      ><a name="909"
+      > </a
+      ><a name="910" class="Symbol"
+      >:</a
+      ><a name="911"
+      > </a
+      ><a name="912" class="PrimitiveType"
+      >Set</a
+      ><a name="915" class="Symbol"
+      >}</a
+      ><a name="916"
+      > </a
+      ><a name="917" class="Symbol"
+      >{</a
+      ><a name="918" href="SetsAndFunctions.html#918" class="Bound"
+      >X</a
+      ><a name="919"
+      > </a
+      ><a name="920" class="Symbol"
+      >:</a
+      ><a name="921"
+      > </a
+      ><a name="922" href="SetsAndFunctions.html#908" class="Bound"
+      >I</a
+      ><a name="923"
+      > </a
+      ><a name="924" class="Symbol"
+      >&#8594;</a
+      ><a name="925"
+      > </a
+      ><a name="926" class="PrimitiveType"
+      >Set</a
+      ><a name="929" class="Symbol"
+      >}</a
+      ><a name="930"
+      > </a
+      ><a name="931" class="Symbol"
+      >&#8594;</a
+      ><a name="932"
+      >
+
+  </a
+      ><a name="937" class="Symbol"
+      >(</a
+      ><a name="938" href="SetsAndFunctions.html#813" class="Record"
+      >&#931;</a
+      ><a name="939"
+      > </a
+      ><a name="940" class="Symbol"
+      >\(</a
+      ><a name="942" href="SetsAndFunctions.html#942" class="Bound"
+      >i</a
+      ><a name="943"
+      > </a
+      ><a name="944" class="Symbol"
+      >:</a
+      ><a name="945"
+      > </a
+      ><a name="946" href="SetsAndFunctions.html#908" class="Bound"
+      >I</a
+      ><a name="947" class="Symbol"
+      >)</a
+      ><a name="948"
+      > </a
+      ><a name="949" class="Symbol"
+      >&#8594;</a
+      ><a name="950"
+      > </a
+      ><a name="951" href="SetsAndFunctions.html#918" class="Bound"
+      >X</a
+      ><a name="952"
+      > </a
+      ><a name="953" href="SetsAndFunctions.html#942" class="Bound"
+      >i</a
+      ><a name="954" class="Symbol"
+      >)</a
+      ><a name="955"
+      > </a
+      ><a name="956" class="Symbol"
+      >&#8594;</a
+      ><a name="957"
+      > </a
+      ><a name="958" href="SetsAndFunctions.html#908" class="Bound"
+      >I</a
+      ><a name="959"
+      >
+
+</a
+      ><a name="961" href="SetsAndFunctions.html#902" class="Function"
+      >&#960;&#8320;</a
+      ><a name="963" class="Symbol"
+      >(</a
+      ><a name="964" href="SetsAndFunctions.html#964" class="Bound"
+      >i</a
+      ><a name="965"
+      > </a
+      ><a name="966" href="SetsAndFunctions.html#865" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="967"
+      > </a
+      ><a name="968" href="SetsAndFunctions.html#968" class="Bound"
+      >x</a
+      ><a name="969" class="Symbol"
+      >)</a
+      ><a name="970"
+      > </a
+      ><a name="971" class="Symbol"
+      >=</a
+      ><a name="972"
+      > </a
+      ><a name="973" href="SetsAndFunctions.html#964" class="Bound"
+      >i</a
+      ><a name="974"
+      >
+
+
+</a
+      ><a name="977" href="SetsAndFunctions.html#977" class="Function"
+      >&#960;&#8321;</a
+      ><a name="979"
+      > </a
+      ><a name="980" class="Symbol"
+      >:</a
+      ><a name="981"
+      > </a
+      ><a name="982" class="Symbol"
+      >{</a
+      ><a name="983" href="SetsAndFunctions.html#983" class="Bound"
+      >I</a
+      ><a name="984"
+      > </a
+      ><a name="985" class="Symbol"
+      >:</a
+      ><a name="986"
+      > </a
+      ><a name="987" class="PrimitiveType"
+      >Set</a
+      ><a name="990" class="Symbol"
+      >}</a
+      ><a name="991"
+      > </a
+      ><a name="992" class="Symbol"
+      >{</a
+      ><a name="993" href="SetsAndFunctions.html#993" class="Bound"
+      >X</a
+      ><a name="994"
+      > </a
+      ><a name="995" class="Symbol"
+      >:</a
+      ><a name="996"
+      > </a
+      ><a name="997" href="SetsAndFunctions.html#983" class="Bound"
+      >I</a
+      ><a name="998"
+      > </a
+      ><a name="999" class="Symbol"
+      >&#8594;</a
+      ><a name="1000"
+      > </a
+      ><a name="1001" class="PrimitiveType"
+      >Set</a
+      ><a name="1004" class="Symbol"
+      >}</a
+      ><a name="1005"
+      > </a
+      ><a name="1006" class="Symbol"
+      >&#8594;</a
+      ><a name="1007"
+      >
+
+  </a
+      ><a name="1012" class="Symbol"
+      >(</a
+      ><a name="1013" href="SetsAndFunctions.html#1013" class="Bound"
+      >pair</a
+      ><a name="1017"
+      > </a
+      ><a name="1018" class="Symbol"
+      >:</a
+      ><a name="1019"
+      > </a
+      ><a name="1020" href="SetsAndFunctions.html#813" class="Record"
+      >&#931;</a
+      ><a name="1021"
+      > </a
+      ><a name="1022" class="Symbol"
+      >\(</a
+      ><a name="1024" href="SetsAndFunctions.html#1024" class="Bound"
+      >i</a
+      ><a name="1025"
+      > </a
+      ><a name="1026" class="Symbol"
+      >:</a
+      ><a name="1027"
+      > </a
+      ><a name="1028" href="SetsAndFunctions.html#983" class="Bound"
+      >I</a
+      ><a name="1029" class="Symbol"
+      >)</a
+      ><a name="1030"
+      > </a
+      ><a name="1031" class="Symbol"
+      >&#8594;</a
+      ><a name="1032"
+      > </a
+      ><a name="1033" href="SetsAndFunctions.html#993" class="Bound"
+      >X</a
+      ><a name="1034"
+      > </a
+      ><a name="1035" href="SetsAndFunctions.html#1024" class="Bound"
+      >i</a
+      ><a name="1036" class="Symbol"
+      >)</a
+      ><a name="1037"
+      > </a
+      ><a name="1038" class="Symbol"
+      >&#8594;</a
+      ><a name="1039"
+      > </a
+      ><a name="1040" href="SetsAndFunctions.html#993" class="Bound"
+      >X</a
+      ><a name="1041" class="Symbol"
+      >(</a
+      ><a name="1042" href="SetsAndFunctions.html#902" class="Function"
+      >&#960;&#8320;</a
+      ><a name="1044"
+      > </a
+      ><a name="1045" href="SetsAndFunctions.html#1013" class="Bound"
+      >pair</a
+      ><a name="1049" class="Symbol"
+      >)</a
+      ><a name="1050"
+      >
+
+</a
+      ><a name="1052" href="SetsAndFunctions.html#977" class="Function"
+      >&#960;&#8321;</a
+      ><a name="1054" class="Symbol"
+      >(</a
+      ><a name="1055" href="SetsAndFunctions.html#1055" class="Bound"
+      >i</a
+      ><a name="1056"
+      > </a
+      ><a name="1057" href="SetsAndFunctions.html#865" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="1058"
+      > </a
+      ><a name="1059" href="SetsAndFunctions.html#1059" class="Bound"
+      >x</a
+      ><a name="1060" class="Symbol"
+      >)</a
+      ><a name="1061"
+      > </a
+      ><a name="1062" class="Symbol"
+      >=</a
+      ><a name="1063"
+      > </a
+      ><a name="1064" href="SetsAndFunctions.html#1059" class="Bound"
+      >x</a
+      ><a name="1065"
+      >
+
+
+</a
+      ><a name="1068" href="SetsAndFunctions.html#1068" class="Function"
+      >&#931;-elim</a
+      ><a name="1074"
+      > </a
+      ><a name="1075" class="Symbol"
+      >:</a
+      ><a name="1076"
+      > </a
+      ><a name="1077" class="Symbol"
+      >{</a
+      ><a name="1078" href="SetsAndFunctions.html#1078" class="Bound"
+      >X</a
+      ><a name="1079"
+      > </a
+      ><a name="1080" class="Symbol"
+      >:</a
+      ><a name="1081"
+      > </a
+      ><a name="1082" class="PrimitiveType"
+      >Set</a
+      ><a name="1085" class="Symbol"
+      >}</a
+      ><a name="1086"
+      > </a
+      ><a name="1087" class="Symbol"
+      >&#8594;</a
+      ><a name="1088"
+      > </a
+      ><a name="1089" class="Symbol"
+      >{</a
+      ><a name="1090" href="SetsAndFunctions.html#1090" class="Bound"
+      >Y</a
+      ><a name="1091"
+      > </a
+      ><a name="1092" class="Symbol"
+      >:</a
+      ><a name="1093"
+      > </a
+      ><a name="1094" href="SetsAndFunctions.html#1078" class="Bound"
+      >X</a
+      ><a name="1095"
+      > </a
+      ><a name="1096" class="Symbol"
+      >&#8594;</a
+      ><a name="1097"
+      > </a
+      ><a name="1098" class="PrimitiveType"
+      >Set</a
+      ><a name="1101" class="Symbol"
+      >}</a
+      ><a name="1102"
+      > </a
+      ><a name="1103" class="Symbol"
+      >&#8594;</a
+      ><a name="1104"
+      >
+         </a
+      ><a name="1115" class="Symbol"
+      >{</a
+      ><a name="1116" href="SetsAndFunctions.html#1116" class="Bound"
+      >A</a
+      ><a name="1117"
+      > </a
+      ><a name="1118" class="Symbol"
+      >:</a
+      ><a name="1119"
+      > </a
+      ><a name="1120" class="Symbol"
+      >(</a
+      ><a name="1121" href="SetsAndFunctions.html#813" class="Record"
+      >&#931;</a
+      ><a name="1122"
+      > </a
+      ><a name="1123" class="Symbol"
+      >\(</a
+      ><a name="1125" href="SetsAndFunctions.html#1125" class="Bound"
+      >x</a
+      ><a name="1126"
+      > </a
+      ><a name="1127" class="Symbol"
+      >:</a
+      ><a name="1128"
+      > </a
+      ><a name="1129" href="SetsAndFunctions.html#1078" class="Bound"
+      >X</a
+      ><a name="1130" class="Symbol"
+      >)</a
+      ><a name="1131"
+      > </a
+      ><a name="1132" class="Symbol"
+      >&#8594;</a
+      ><a name="1133"
+      > </a
+      ><a name="1134" href="SetsAndFunctions.html#1090" class="Bound"
+      >Y</a
+      ><a name="1135"
+      > </a
+      ><a name="1136" href="SetsAndFunctions.html#1125" class="Bound"
+      >x</a
+      ><a name="1137" class="Symbol"
+      >)</a
+      ><a name="1138"
+      > </a
+      ><a name="1139" class="Symbol"
+      >&#8594;</a
+      ><a name="1140"
+      > </a
+      ><a name="1141" class="PrimitiveType"
+      >Set</a
+      ><a name="1144" class="Symbol"
+      >}</a
+      ><a name="1145"
+      >
+
+   </a
+      ><a name="1150" class="Symbol"
+      >&#8594;</a
+      ><a name="1151"
+      > </a
+      ><a name="1152" class="Symbol"
+      >(&#8704;(</a
+      ><a name="1155" href="SetsAndFunctions.html#1155" class="Bound"
+      >x</a
+      ><a name="1156"
+      > </a
+      ><a name="1157" class="Symbol"
+      >:</a
+      ><a name="1158"
+      > </a
+      ><a name="1159" href="SetsAndFunctions.html#1078" class="Bound"
+      >X</a
+      ><a name="1160" class="Symbol"
+      >)</a
+      ><a name="1161"
+      > </a
+      ><a name="1162" class="Symbol"
+      >&#8594;</a
+      ><a name="1163"
+      > </a
+      ><a name="1164" class="Symbol"
+      >&#8704;(</a
+      ><a name="1166" href="SetsAndFunctions.html#1166" class="Bound"
+      >y</a
+      ><a name="1167"
+      > </a
+      ><a name="1168" class="Symbol"
+      >:</a
+      ><a name="1169"
+      > </a
+      ><a name="1170" href="SetsAndFunctions.html#1090" class="Bound"
+      >Y</a
+      ><a name="1171"
+      > </a
+      ><a name="1172" href="SetsAndFunctions.html#1155" class="Bound"
+      >x</a
+      ><a name="1173" class="Symbol"
+      >)</a
+      ><a name="1174"
+      > </a
+      ><a name="1175" class="Symbol"
+      >&#8594;</a
+      ><a name="1176"
+      > </a
+      ><a name="1177" href="SetsAndFunctions.html#1116" class="Bound"
+      >A</a
+      ><a name="1178" class="Symbol"
+      >(</a
+      ><a name="1179" href="SetsAndFunctions.html#1155" class="Bound"
+      >x</a
+      ><a name="1180"
+      > </a
+      ><a name="1181" href="SetsAndFunctions.html#865" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="1182"
+      > </a
+      ><a name="1183" href="SetsAndFunctions.html#1166" class="Bound"
+      >y</a
+      ><a name="1184" class="Symbol"
+      >))</a
+      ><a name="1186"
+      >
+   </a
+      ><a name="1190" class="Symbol"
+      >&#8594;</a
+      ><a name="1191"
+      > </a
+      ><a name="1192" class="Symbol"
+      >&#8704;(</a
+      ><a name="1194" href="SetsAndFunctions.html#1194" class="Bound"
+      >t</a
+      ><a name="1195"
+      > </a
+      ><a name="1196" class="Symbol"
+      >:</a
+      ><a name="1197"
+      > </a
+      ><a name="1198" class="Symbol"
+      >(</a
+      ><a name="1199" href="SetsAndFunctions.html#813" class="Record"
+      >&#931;</a
+      ><a name="1200"
+      > </a
+      ><a name="1201" class="Symbol"
+      >\(</a
+      ><a name="1203" href="SetsAndFunctions.html#1203" class="Bound"
+      >x</a
+      ><a name="1204"
+      > </a
+      ><a name="1205" class="Symbol"
+      >:</a
+      ><a name="1206"
+      > </a
+      ><a name="1207" href="SetsAndFunctions.html#1078" class="Bound"
+      >X</a
+      ><a name="1208" class="Symbol"
+      >)</a
+      ><a name="1209"
+      > </a
+      ><a name="1210" class="Symbol"
+      >&#8594;</a
+      ><a name="1211"
+      > </a
+      ><a name="1212" href="SetsAndFunctions.html#1090" class="Bound"
+      >Y</a
+      ><a name="1213"
+      > </a
+      ><a name="1214" href="SetsAndFunctions.html#1203" class="Bound"
+      >x</a
+      ><a name="1215" class="Symbol"
+      >))</a
+      ><a name="1217"
+      > </a
+      ><a name="1218" class="Symbol"
+      >&#8594;</a
+      ><a name="1219"
+      > </a
+      ><a name="1220" href="SetsAndFunctions.html#1116" class="Bound"
+      >A</a
+      ><a name="1221"
+      > </a
+      ><a name="1222" href="SetsAndFunctions.html#1194" class="Bound"
+      >t</a
+      ><a name="1223"
+      >
+
+</a
+      ><a name="1225" href="SetsAndFunctions.html#1068" class="Function"
+      >&#931;-elim</a
+      ><a name="1231"
+      > </a
+      ><a name="1232" href="SetsAndFunctions.html#1232" class="Bound"
+      >f</a
+      ><a name="1233"
+      > </a
+      ><a name="1234" class="Symbol"
+      >(</a
+      ><a name="1235" href="SetsAndFunctions.html#1235" class="Bound"
+      >x</a
+      ><a name="1236"
+      > </a
+      ><a name="1237" href="SetsAndFunctions.html#865" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="1238"
+      > </a
+      ><a name="1239" href="SetsAndFunctions.html#1239" class="Bound"
+      >y</a
+      ><a name="1240" class="Symbol"
+      >)</a
+      ><a name="1241"
+      > </a
+      ><a name="1242" class="Symbol"
+      >=</a
+      ><a name="1243"
+      > </a
+      ><a name="1244" href="SetsAndFunctions.html#1232" class="Bound"
+      >f</a
+      ><a name="1245"
+      > </a
+      ><a name="1246" href="SetsAndFunctions.html#1235" class="Bound"
+      >x</a
+      ><a name="1247"
+      > </a
+      ><a name="1248" href="SetsAndFunctions.html#1239" class="Bound"
+      >y</a
+      ><a name="1249"
+      >
+
+
+</a
+      ><a name="1252" href="SetsAndFunctions.html#1252" class="Function"
+      >uncurry</a
+      ><a name="1259"
+      > </a
+      ><a name="1260" class="Symbol"
+      >:</a
+      ><a name="1261"
+      > </a
+      ><a name="1262" class="Symbol"
+      >{</a
+      ><a name="1263" href="SetsAndFunctions.html#1263" class="Bound"
+      >X</a
+      ><a name="1264"
+      > </a
+      ><a name="1265" href="SetsAndFunctions.html#1265" class="Bound"
+      >Z</a
+      ><a name="1266"
+      > </a
+      ><a name="1267" class="Symbol"
+      >:</a
+      ><a name="1268"
+      > </a
+      ><a name="1269" class="PrimitiveType"
+      >Set</a
+      ><a name="1272" class="Symbol"
+      >}</a
+      ><a name="1273"
+      > </a
+      ><a name="1274" class="Symbol"
+      >&#8594;</a
+      ><a name="1275"
+      > </a
+      ><a name="1276" class="Symbol"
+      >{</a
+      ><a name="1277" href="SetsAndFunctions.html#1277" class="Bound"
+      >Y</a
+      ><a name="1278"
+      > </a
+      ><a name="1279" class="Symbol"
+      >:</a
+      ><a name="1280"
+      > </a
+      ><a name="1281" href="SetsAndFunctions.html#1263" class="Bound"
+      >X</a
+      ><a name="1282"
+      > </a
+      ><a name="1283" class="Symbol"
+      >&#8594;</a
+      ><a name="1284"
+      > </a
+      ><a name="1285" class="PrimitiveType"
+      >Set</a
+      ><a name="1288" class="Symbol"
+      >}</a
+      ><a name="1289"
+      > </a
+      ><a name="1290" class="Symbol"
+      >&#8594;</a
+      ><a name="1291"
+      >
+
+  </a
+      ><a name="1296" class="Symbol"
+      >((</a
+      ><a name="1298" href="SetsAndFunctions.html#1298" class="Bound"
+      >x</a
+      ><a name="1299"
+      > </a
+      ><a name="1300" class="Symbol"
+      >:</a
+      ><a name="1301"
+      > </a
+      ><a name="1302" href="SetsAndFunctions.html#1263" class="Bound"
+      >X</a
+      ><a name="1303" class="Symbol"
+      >)</a
+      ><a name="1304"
+      > </a
+      ><a name="1305" class="Symbol"
+      >&#8594;</a
+      ><a name="1306"
+      > </a
+      ><a name="1307" href="SetsAndFunctions.html#1277" class="Bound"
+      >Y</a
+      ><a name="1308"
+      > </a
+      ><a name="1309" href="SetsAndFunctions.html#1298" class="Bound"
+      >x</a
+      ><a name="1310"
+      > </a
+      ><a name="1311" class="Symbol"
+      >&#8594;</a
+      ><a name="1312"
+      > </a
+      ><a name="1313" href="SetsAndFunctions.html#1265" class="Bound"
+      >Z</a
+      ><a name="1314" class="Symbol"
+      >)</a
+      ><a name="1315"
+      > </a
+      ><a name="1316" class="Symbol"
+      >&#8594;</a
+      ><a name="1317"
+      > </a
+      ><a name="1318" class="Symbol"
+      >(</a
+      ><a name="1319" href="SetsAndFunctions.html#813" class="Record"
+      >&#931;</a
+      ><a name="1320"
+      > </a
+      ><a name="1321" class="Symbol"
+      >\(</a
+      ><a name="1323" href="SetsAndFunctions.html#1323" class="Bound"
+      >x</a
+      ><a name="1324"
+      > </a
+      ><a name="1325" class="Symbol"
+      >:</a
+      ><a name="1326"
+      > </a
+      ><a name="1327" href="SetsAndFunctions.html#1263" class="Bound"
+      >X</a
+      ><a name="1328" class="Symbol"
+      >)</a
+      ><a name="1329"
+      > </a
+      ><a name="1330" class="Symbol"
+      >&#8594;</a
+      ><a name="1331"
+      > </a
+      ><a name="1332" href="SetsAndFunctions.html#1277" class="Bound"
+      >Y</a
+      ><a name="1333"
+      > </a
+      ><a name="1334" href="SetsAndFunctions.html#1323" class="Bound"
+      >x</a
+      ><a name="1335" class="Symbol"
+      >)</a
+      ><a name="1336"
+      > </a
+      ><a name="1337" class="Symbol"
+      >&#8594;</a
+      ><a name="1338"
+      > </a
+      ><a name="1339" href="SetsAndFunctions.html#1265" class="Bound"
+      >Z</a
+      ><a name="1340"
+      >
+
+</a
+      ><a name="1342" href="SetsAndFunctions.html#1252" class="Function"
+      >uncurry</a
+      ><a name="1349"
+      > </a
+      ><a name="1350" href="SetsAndFunctions.html#1350" class="Bound"
+      >f</a
+      ><a name="1351"
+      > </a
+      ><a name="1352" class="Symbol"
+      >(</a
+      ><a name="1353" href="SetsAndFunctions.html#1353" class="Bound"
+      >x</a
+      ><a name="1354"
+      > </a
+      ><a name="1355" href="SetsAndFunctions.html#865" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="1356"
+      > </a
+      ><a name="1357" href="SetsAndFunctions.html#1357" class="Bound"
+      >y</a
+      ><a name="1358" class="Symbol"
+      >)</a
+      ><a name="1359"
+      > </a
+      ><a name="1360" class="Symbol"
+      >=</a
+      ><a name="1361"
+      > </a
+      ><a name="1362" href="SetsAndFunctions.html#1350" class="Bound"
+      >f</a
+      ><a name="1363"
+      > </a
+      ><a name="1364" href="SetsAndFunctions.html#1353" class="Bound"
+      >x</a
+      ><a name="1365"
+      > </a
+      ><a name="1366" href="SetsAndFunctions.html#1357" class="Bound"
+      >y</a
+      ><a name="1367"
+      >
+
+
+</a
+      ><a name="1370" href="SetsAndFunctions.html#1370" class="Function"
+      >curry</a
+      ><a name="1375"
+      > </a
+      ><a name="1376" class="Symbol"
+      >:</a
+      ><a name="1377"
+      > </a
+      ><a name="1378" class="Symbol"
+      >{</a
+      ><a name="1379" href="SetsAndFunctions.html#1379" class="Bound"
+      >X</a
+      ><a name="1380"
+      > </a
+      ><a name="1381" href="SetsAndFunctions.html#1381" class="Bound"
+      >Z</a
+      ><a name="1382"
+      > </a
+      ><a name="1383" class="Symbol"
+      >:</a
+      ><a name="1384"
+      > </a
+      ><a name="1385" class="PrimitiveType"
+      >Set</a
+      ><a name="1388" class="Symbol"
+      >}</a
+      ><a name="1389"
+      > </a
+      ><a name="1390" class="Symbol"
+      >&#8594;</a
+      ><a name="1391"
+      > </a
+      ><a name="1392" class="Symbol"
+      >{</a
+      ><a name="1393" href="SetsAndFunctions.html#1393" class="Bound"
+      >Y</a
+      ><a name="1394"
+      > </a
+      ><a name="1395" class="Symbol"
+      >:</a
+      ><a name="1396"
+      > </a
+      ><a name="1397" href="SetsAndFunctions.html#1379" class="Bound"
+      >X</a
+      ><a name="1398"
+      > </a
+      ><a name="1399" class="Symbol"
+      >&#8594;</a
+      ><a name="1400"
+      > </a
+      ><a name="1401" class="PrimitiveType"
+      >Set</a
+      ><a name="1404" class="Symbol"
+      >}</a
+      ><a name="1405"
+      > </a
+      ><a name="1406" class="Symbol"
+      >&#8594;</a
+      ><a name="1407"
+      >
+
+  </a
+      ><a name="1412" class="Symbol"
+      >((</a
+      ><a name="1414" href="SetsAndFunctions.html#813" class="Record"
+      >&#931;</a
+      ><a name="1415"
+      > </a
+      ><a name="1416" class="Symbol"
+      >\(</a
+      ><a name="1418" href="SetsAndFunctions.html#1418" class="Bound"
+      >x</a
+      ><a name="1419"
+      > </a
+      ><a name="1420" class="Symbol"
+      >:</a
+      ><a name="1421"
+      > </a
+      ><a name="1422" href="SetsAndFunctions.html#1379" class="Bound"
+      >X</a
+      ><a name="1423" class="Symbol"
+      >)</a
+      ><a name="1424"
+      > </a
+      ><a name="1425" class="Symbol"
+      >&#8594;</a
+      ><a name="1426"
+      > </a
+      ><a name="1427" href="SetsAndFunctions.html#1393" class="Bound"
+      >Y</a
+      ><a name="1428"
+      > </a
+      ><a name="1429" href="SetsAndFunctions.html#1418" class="Bound"
+      >x</a
+      ><a name="1430" class="Symbol"
+      >)</a
+      ><a name="1431"
+      > </a
+      ><a name="1432" class="Symbol"
+      >&#8594;</a
+      ><a name="1433"
+      > </a
+      ><a name="1434" href="SetsAndFunctions.html#1381" class="Bound"
+      >Z</a
+      ><a name="1435" class="Symbol"
+      >)</a
+      ><a name="1436"
+      > </a
+      ><a name="1437" class="Symbol"
+      >&#8594;</a
+      ><a name="1438"
+      > </a
+      ><a name="1439" class="Symbol"
+      >((</a
+      ><a name="1441" href="SetsAndFunctions.html#1441" class="Bound"
+      >x</a
+      ><a name="1442"
+      > </a
+      ><a name="1443" class="Symbol"
+      >:</a
+      ><a name="1444"
+      > </a
+      ><a name="1445" href="SetsAndFunctions.html#1379" class="Bound"
+      >X</a
+      ><a name="1446" class="Symbol"
+      >)</a
+      ><a name="1447"
+      > </a
+      ><a name="1448" class="Symbol"
+      >&#8594;</a
+      ><a name="1449"
+      > </a
+      ><a name="1450" href="SetsAndFunctions.html#1393" class="Bound"
+      >Y</a
+      ><a name="1451"
+      > </a
+      ><a name="1452" href="SetsAndFunctions.html#1441" class="Bound"
+      >x</a
+      ><a name="1453"
+      > </a
+      ><a name="1454" class="Symbol"
+      >&#8594;</a
+      ><a name="1455"
+      > </a
+      ><a name="1456" href="SetsAndFunctions.html#1381" class="Bound"
+      >Z</a
+      ><a name="1457" class="Symbol"
+      >)</a
+      ><a name="1458"
+      >
+
+</a
+      ><a name="1460" href="SetsAndFunctions.html#1370" class="Function"
+      >curry</a
+      ><a name="1465"
+      > </a
+      ><a name="1466" href="SetsAndFunctions.html#1466" class="Bound"
+      >f</a
+      ><a name="1467"
+      > </a
+      ><a name="1468" href="SetsAndFunctions.html#1468" class="Bound"
+      >x</a
+      ><a name="1469"
+      > </a
+      ><a name="1470" href="SetsAndFunctions.html#1470" class="Bound"
+      >y</a
+      ><a name="1471"
+      > </a
+      ><a name="1472" class="Symbol"
+      >=</a
+      ><a name="1473"
+      > </a
+      ><a name="1474" href="SetsAndFunctions.html#1466" class="Bound"
+      >f</a
+      ><a name="1475" class="Symbol"
+      >(</a
+      ><a name="1476" href="SetsAndFunctions.html#1468" class="Bound"
+      >x</a
+      ><a name="1477"
+      > </a
+      ><a name="1478" href="SetsAndFunctions.html#865" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="1479"
+      > </a
+      ><a name="1480" href="SetsAndFunctions.html#1470" class="Bound"
+      >y</a
+      ><a name="1481" class="Symbol"
+      >)</a
+      ><a name="1482"
+      >
+
+
+\end{code}
+
+</a
+      ><a name="1497" class="Comment"
+      >Equivalently, &#931;-elim f t = f (&#960;&#8320; t) (&#960;&#8321; t).</a
+      ><a name="1540"
+      >
+
+</a
+      ><a name="1542" class="Comment"
+      >As usual in type theory, binary products are particular</a
+      ><a name="1597"
+      >
+</a
+      ><a name="1598" class="Comment"
+      >cases of dependent sums.</a
+      ><a name="1622"
+      >
+
+\begin{code}
+
+</a
+      ><a name="1638" class="Keyword"
+      >infixr</a
+      ><a name="1644"
+      > </a
+      ><a name="1645" class="Number"
+      >20</a
+      ><a name="1647"
+      > _&#215;_
+
+</a
+      ><a name="1653" href="SetsAndFunctions.html#1653" class="Function Operator"
+      >_&#215;_</a
+      ><a name="1656"
+      > </a
+      ><a name="1657" class="Symbol"
+      >:</a
+      ><a name="1658"
+      > </a
+      ><a name="1659" class="PrimitiveType"
+      >Set</a
+      ><a name="1662"
+      > </a
+      ><a name="1663" class="Symbol"
+      >&#8594;</a
+      ><a name="1664"
+      > </a
+      ><a name="1665" class="PrimitiveType"
+      >Set</a
+      ><a name="1668"
+      > </a
+      ><a name="1669" class="Symbol"
+      >&#8594;</a
+      ><a name="1670"
+      > </a
+      ><a name="1671" class="PrimitiveType"
+      >Set</a
+      ><a name="1674"
+      >
+</a
+      ><a name="1675" href="SetsAndFunctions.html#1675" class="Bound"
+      >X</a
+      ><a name="1676"
+      > </a
+      ><a name="1677" href="SetsAndFunctions.html#1653" class="Function Operator"
+      >&#215;</a
+      ><a name="1678"
+      > </a
+      ><a name="1679" href="SetsAndFunctions.html#1679" class="Bound"
+      >Y</a
+      ><a name="1680"
+      > </a
+      ><a name="1681" class="Symbol"
+      >=</a
+      ><a name="1682"
+      > </a
+      ><a name="1683" href="SetsAndFunctions.html#813" class="Record"
+      >&#931;</a
+      ><a name="1684"
+      > </a
+      ><a name="1685" class="Symbol"
+      >\(</a
+      ><a name="1687" href="SetsAndFunctions.html#1687" class="Bound"
+      >x</a
+      ><a name="1688"
+      > </a
+      ><a name="1689" class="Symbol"
+      >:</a
+      ><a name="1690"
+      > </a
+      ><a name="1691" href="SetsAndFunctions.html#1675" class="Bound"
+      >X</a
+      ><a name="1692" class="Symbol"
+      >)</a
+      ><a name="1693"
+      > </a
+      ><a name="1694" class="Symbol"
+      >&#8594;</a
+      ><a name="1695"
+      > </a
+      ><a name="1696" href="SetsAndFunctions.html#1679" class="Bound"
+      >Y</a
+      ><a name="1697"
+      >
+
+\end{code}
+
+</a
+      ><a name="1711" class="Comment"
+      >This can also be considered as a special case, but I won't</a
+      ><a name="1769"
+      >
+</a
+      ><a name="1770" class="Comment"
+      >bother:</a
+      ><a name="1777"
+      >
+
+\begin{code}
+
+</a
+      ><a name="1793" class="Keyword"
+      >infixr</a
+      ><a name="1799"
+      > </a
+      ><a name="1800" class="Number"
+      >20</a
+      ><a name="1802"
+      > _+_
+
+</a
+      ><a name="1808" class="Keyword"
+      >data</a
+      ><a name="1812"
+      > </a
+      ><a name="1813" href="SetsAndFunctions.html#1813" class="Datatype Operator"
+      >_+_</a
+      ><a name="1816"
+      > </a
+      ><a name="1817" class="Symbol"
+      >(</a
+      ><a name="1818" href="SetsAndFunctions.html#1818" class="Bound"
+      >X&#8320;</a
+      ><a name="1820"
+      > </a
+      ><a name="1821" href="SetsAndFunctions.html#1821" class="Bound"
+      >X&#8321;</a
+      ><a name="1823"
+      > </a
+      ><a name="1824" class="Symbol"
+      >:</a
+      ><a name="1825"
+      > </a
+      ><a name="1826" class="PrimitiveType"
+      >Set</a
+      ><a name="1829" class="Symbol"
+      >)</a
+      ><a name="1830"
+      > </a
+      ><a name="1831" class="Symbol"
+      >:</a
+      ><a name="1832"
+      > </a
+      ><a name="1833" class="PrimitiveType"
+      >Set</a
+      ><a name="1836"
+      > </a
+      ><a name="1837" class="Keyword"
+      >where</a
+      ><a name="1842"
+      >
+  </a
+      ><a name="1845" href="SetsAndFunctions.html#1845" class="InductiveConstructor"
+      >in&#8320;</a
+      ><a name="1848"
+      > </a
+      ><a name="1849" class="Symbol"
+      >:</a
+      ><a name="1850"
+      > </a
+      ><a name="1851" href="SetsAndFunctions.html#1818" class="Bound"
+      >X&#8320;</a
+      ><a name="1853"
+      > </a
+      ><a name="1854" class="Symbol"
+      >&#8594;</a
+      ><a name="1855"
+      > </a
+      ><a name="1856" href="SetsAndFunctions.html#1818" class="Bound"
+      >X&#8320;</a
+      ><a name="1858"
+      > </a
+      ><a name="1859" href="SetsAndFunctions.html#1813" class="Datatype Operator"
+      >+</a
+      ><a name="1860"
+      > </a
+      ><a name="1861" href="SetsAndFunctions.html#1821" class="Bound"
+      >X&#8321;</a
+      ><a name="1863"
+      >
+  </a
+      ><a name="1866" href="SetsAndFunctions.html#1866" class="InductiveConstructor"
+      >in&#8321;</a
+      ><a name="1869"
+      > </a
+      ><a name="1870" class="Symbol"
+      >:</a
+      ><a name="1871"
+      > </a
+      ><a name="1872" href="SetsAndFunctions.html#1821" class="Bound"
+      >X&#8321;</a
+      ><a name="1874"
+      > </a
+      ><a name="1875" class="Symbol"
+      >&#8594;</a
+      ><a name="1876"
+      > </a
+      ><a name="1877" href="SetsAndFunctions.html#1818" class="Bound"
+      >X&#8320;</a
+      ><a name="1879"
+      > </a
+      ><a name="1880" href="SetsAndFunctions.html#1813" class="Datatype Operator"
+      >+</a
+      ><a name="1881"
+      > </a
+      ><a name="1882" href="SetsAndFunctions.html#1821" class="Bound"
+      >X&#8321;</a
+      ><a name="1884"
+      >
+
+
+</a
+      ><a name="1887" href="SetsAndFunctions.html#1887" class="Function"
+      >dep-cases</a
+      ><a name="1896"
+      > </a
+      ><a name="1897" class="Symbol"
+      >:</a
+      ><a name="1898"
+      > </a
+      ><a name="1899" class="Symbol"
+      >{</a
+      ><a name="1900" href="SetsAndFunctions.html#1900" class="Bound"
+      >X&#8320;</a
+      ><a name="1902"
+      > </a
+      ><a name="1903" href="SetsAndFunctions.html#1903" class="Bound"
+      >X&#8321;</a
+      ><a name="1905"
+      > </a
+      ><a name="1906" class="Symbol"
+      >:</a
+      ><a name="1907"
+      > </a
+      ><a name="1908" class="PrimitiveType"
+      >Set</a
+      ><a name="1911" class="Symbol"
+      >}</a
+      ><a name="1912"
+      > </a
+      ><a name="1913" class="Symbol"
+      >&#8594;</a
+      ><a name="1914"
+      > </a
+      ><a name="1915" class="Symbol"
+      >{</a
+      ><a name="1916" href="SetsAndFunctions.html#1916" class="Bound"
+      >Y</a
+      ><a name="1917"
+      > </a
+      ><a name="1918" class="Symbol"
+      >:</a
+      ><a name="1919"
+      > </a
+      ><a name="1920" href="SetsAndFunctions.html#1900" class="Bound"
+      >X&#8320;</a
+      ><a name="1922"
+      > </a
+      ><a name="1923" href="SetsAndFunctions.html#1813" class="Datatype Operator"
+      >+</a
+      ><a name="1924"
+      > </a
+      ><a name="1925" href="SetsAndFunctions.html#1903" class="Bound"
+      >X&#8321;</a
+      ><a name="1927"
+      > </a
+      ><a name="1928" class="Symbol"
+      >&#8594;</a
+      ><a name="1929"
+      > </a
+      ><a name="1930" class="PrimitiveType"
+      >Set</a
+      ><a name="1933" class="Symbol"
+      >}</a
+      ><a name="1934"
+      > </a
+      ><a name="1935" class="Symbol"
+      >&#8594;</a
+      ><a name="1936"
+      >
+
+ </a
+      ><a name="1940" class="Symbol"
+      >((</a
+      ><a name="1942" href="SetsAndFunctions.html#1942" class="Bound"
+      >x&#8320;</a
+      ><a name="1944"
+      > </a
+      ><a name="1945" class="Symbol"
+      >:</a
+      ><a name="1946"
+      > </a
+      ><a name="1947" href="SetsAndFunctions.html#1900" class="Bound"
+      >X&#8320;</a
+      ><a name="1949" class="Symbol"
+      >)</a
+      ><a name="1950"
+      > </a
+      ><a name="1951" class="Symbol"
+      >&#8594;</a
+      ><a name="1952"
+      > </a
+      ><a name="1953" href="SetsAndFunctions.html#1916" class="Bound"
+      >Y</a
+      ><a name="1954" class="Symbol"
+      >(</a
+      ><a name="1955" href="SetsAndFunctions.html#1845" class="InductiveConstructor"
+      >in&#8320;</a
+      ><a name="1958"
+      > </a
+      ><a name="1959" href="SetsAndFunctions.html#1942" class="Bound"
+      >x&#8320;</a
+      ><a name="1961" class="Symbol"
+      >))</a
+      ><a name="1963"
+      > </a
+      ><a name="1964" class="Symbol"
+      >&#8594;</a
+      ><a name="1965"
+      > </a
+      ><a name="1966" class="Symbol"
+      >((</a
+      ><a name="1968" href="SetsAndFunctions.html#1968" class="Bound"
+      >x&#8321;</a
+      ><a name="1970"
+      > </a
+      ><a name="1971" class="Symbol"
+      >:</a
+      ><a name="1972"
+      > </a
+      ><a name="1973" href="SetsAndFunctions.html#1903" class="Bound"
+      >X&#8321;</a
+      ><a name="1975" class="Symbol"
+      >)</a
+      ><a name="1976"
+      > </a
+      ><a name="1977" class="Symbol"
+      >&#8594;</a
+      ><a name="1978"
+      > </a
+      ><a name="1979" href="SetsAndFunctions.html#1916" class="Bound"
+      >Y</a
+      ><a name="1980" class="Symbol"
+      >(</a
+      ><a name="1981" href="SetsAndFunctions.html#1866" class="InductiveConstructor"
+      >in&#8321;</a
+      ><a name="1984"
+      > </a
+      ><a name="1985" href="SetsAndFunctions.html#1968" class="Bound"
+      >x&#8321;</a
+      ><a name="1987" class="Symbol"
+      >))</a
+      ><a name="1989"
+      >
+    </a
+      ><a name="1995" class="Symbol"
+      >&#8594;</a
+      ><a name="1996"
+      > </a
+      ><a name="1997" class="Symbol"
+      >((</a
+      ><a name="1999" href="SetsAndFunctions.html#1999" class="Bound"
+      >p</a
+      ><a name="2000"
+      > </a
+      ><a name="2001" class="Symbol"
+      >:</a
+      ><a name="2002"
+      > </a
+      ><a name="2003" href="SetsAndFunctions.html#1900" class="Bound"
+      >X&#8320;</a
+      ><a name="2005"
+      > </a
+      ><a name="2006" href="SetsAndFunctions.html#1813" class="Datatype Operator"
+      >+</a
+      ><a name="2007"
+      > </a
+      ><a name="2008" href="SetsAndFunctions.html#1903" class="Bound"
+      >X&#8321;</a
+      ><a name="2010" class="Symbol"
+      >)</a
+      ><a name="2011"
+      > </a
+      ><a name="2012" class="Symbol"
+      >&#8594;</a
+      ><a name="2013"
+      > </a
+      ><a name="2014" href="SetsAndFunctions.html#1916" class="Bound"
+      >Y</a
+      ><a name="2015"
+      > </a
+      ><a name="2016" href="SetsAndFunctions.html#1999" class="Bound"
+      >p</a
+      ><a name="2017" class="Symbol"
+      >)</a
+      ><a name="2018"
+      >
+
+</a
+      ><a name="2020" href="SetsAndFunctions.html#1887" class="Function"
+      >dep-cases</a
+      ><a name="2029"
+      > </a
+      ><a name="2030" href="SetsAndFunctions.html#2030" class="Bound"
+      >f&#8320;</a
+      ><a name="2032"
+      > </a
+      ><a name="2033" href="SetsAndFunctions.html#2033" class="Bound"
+      >f&#8321;</a
+      ><a name="2035"
+      > </a
+      ><a name="2036" class="Symbol"
+      >(</a
+      ><a name="2037" href="SetsAndFunctions.html#1845" class="InductiveConstructor"
+      >in&#8320;</a
+      ><a name="2040"
+      > </a
+      ><a name="2041" href="SetsAndFunctions.html#2041" class="Bound"
+      >x&#8320;</a
+      ><a name="2043" class="Symbol"
+      >)</a
+      ><a name="2044"
+      > </a
+      ><a name="2045" class="Symbol"
+      >=</a
+      ><a name="2046"
+      > </a
+      ><a name="2047" href="SetsAndFunctions.html#2030" class="Bound"
+      >f&#8320;</a
+      ><a name="2049"
+      > </a
+      ><a name="2050" href="SetsAndFunctions.html#2041" class="Bound"
+      >x&#8320;</a
+      ><a name="2052"
+      >
+</a
+      ><a name="2053" href="SetsAndFunctions.html#1887" class="Function"
+      >dep-cases</a
+      ><a name="2062"
+      > </a
+      ><a name="2063" href="SetsAndFunctions.html#2063" class="Bound"
+      >f&#8320;</a
+      ><a name="2065"
+      > </a
+      ><a name="2066" href="SetsAndFunctions.html#2066" class="Bound"
+      >f&#8321;</a
+      ><a name="2068"
+      > </a
+      ><a name="2069" class="Symbol"
+      >(</a
+      ><a name="2070" href="SetsAndFunctions.html#1866" class="InductiveConstructor"
+      >in&#8321;</a
+      ><a name="2073"
+      > </a
+      ><a name="2074" href="SetsAndFunctions.html#2074" class="Bound"
+      >x&#8321;</a
+      ><a name="2076" class="Symbol"
+      >)</a
+      ><a name="2077"
+      > </a
+      ><a name="2078" class="Symbol"
+      >=</a
+      ><a name="2079"
+      > </a
+      ><a name="2080" href="SetsAndFunctions.html#2066" class="Bound"
+      >f&#8321;</a
+      ><a name="2082"
+      > </a
+      ><a name="2083" href="SetsAndFunctions.html#2074" class="Bound"
+      >x&#8321;</a
+      ><a name="2085"
+      >
+
+
+</a
+      ><a name="2088" href="SetsAndFunctions.html#2088" class="Function"
+      >cases</a
+      ><a name="2093"
+      > </a
+      ><a name="2094" class="Symbol"
+      >:</a
+      ><a name="2095"
+      > </a
+      ><a name="2096" class="Symbol"
+      >{</a
+      ><a name="2097" href="SetsAndFunctions.html#2097" class="Bound"
+      >X&#8320;</a
+      ><a name="2099"
+      > </a
+      ><a name="2100" href="SetsAndFunctions.html#2100" class="Bound"
+      >X&#8321;</a
+      ><a name="2102"
+      > </a
+      ><a name="2103" href="SetsAndFunctions.html#2103" class="Bound"
+      >Y</a
+      ><a name="2104"
+      > </a
+      ><a name="2105" class="Symbol"
+      >:</a
+      ><a name="2106"
+      > </a
+      ><a name="2107" class="PrimitiveType"
+      >Set</a
+      ><a name="2110" class="Symbol"
+      >}</a
+      ><a name="2111"
+      > </a
+      ><a name="2112" class="Symbol"
+      >&#8594;</a
+      ><a name="2113"
+      > </a
+      ><a name="2114" class="Symbol"
+      >(</a
+      ><a name="2115" href="SetsAndFunctions.html#2097" class="Bound"
+      >X&#8320;</a
+      ><a name="2117"
+      > </a
+      ><a name="2118" class="Symbol"
+      >&#8594;</a
+      ><a name="2119"
+      > </a
+      ><a name="2120" href="SetsAndFunctions.html#2103" class="Bound"
+      >Y</a
+      ><a name="2121" class="Symbol"
+      >)</a
+      ><a name="2122"
+      > </a
+      ><a name="2123" class="Symbol"
+      >&#8594;</a
+      ><a name="2124"
+      > </a
+      ><a name="2125" class="Symbol"
+      >(</a
+      ><a name="2126" href="SetsAndFunctions.html#2100" class="Bound"
+      >X&#8321;</a
+      ><a name="2128"
+      > </a
+      ><a name="2129" class="Symbol"
+      >&#8594;</a
+      ><a name="2130"
+      > </a
+      ><a name="2131" href="SetsAndFunctions.html#2103" class="Bound"
+      >Y</a
+      ><a name="2132" class="Symbol"
+      >)</a
+      ><a name="2133"
+      > </a
+      ><a name="2134" class="Symbol"
+      >&#8594;</a
+      ><a name="2135"
+      > </a
+      ><a name="2136" href="SetsAndFunctions.html#2097" class="Bound"
+      >X&#8320;</a
+      ><a name="2138"
+      > </a
+      ><a name="2139" href="SetsAndFunctions.html#1813" class="Datatype Operator"
+      >+</a
+      ><a name="2140"
+      > </a
+      ><a name="2141" href="SetsAndFunctions.html#2100" class="Bound"
+      >X&#8321;</a
+      ><a name="2143"
+      > </a
+      ><a name="2144" class="Symbol"
+      >&#8594;</a
+      ><a name="2145"
+      > </a
+      ><a name="2146" href="SetsAndFunctions.html#2103" class="Bound"
+      >Y</a
+      ><a name="2147"
+      >
+</a
+      ><a name="2148" href="SetsAndFunctions.html#2088" class="Function"
+      >cases</a
+      ><a name="2153"
+      > </a
+      ><a name="2154" class="Symbol"
+      >=</a
+      ><a name="2155"
+      > </a
+      ><a name="2156" href="SetsAndFunctions.html#1887" class="Function"
+      >dep-cases</a
+      ><a name="2165"
+      >
+
+\end{code}
+
+</a
+      ><a name="2179" class="Comment"
+      >General constructions on functions:</a
+      ><a name="2214"
+      >
+
+\begin{code}
+
+</a
+      ><a name="2230" class="Keyword"
+      >infixl</a
+      ><a name="2236"
+      > </a
+      ><a name="2237" class="Number"
+      >30</a
+      ><a name="2239"
+      > _&#8728;_
+
+</a
+      ><a name="2246" href="SetsAndFunctions.html#2246" class="Function Operator"
+      >_&#8728;_</a
+      ><a name="2249"
+      > </a
+      ><a name="2250" class="Symbol"
+      >:</a
+      ><a name="2251"
+      > </a
+      ><a name="2252" class="Symbol"
+      >{</a
+      ><a name="2253" href="SetsAndFunctions.html#2253" class="Bound"
+      >X</a
+      ><a name="2254"
+      > </a
+      ><a name="2255" href="SetsAndFunctions.html#2255" class="Bound"
+      >Y</a
+      ><a name="2256"
+      > </a
+      ><a name="2257" class="Symbol"
+      >:</a
+      ><a name="2258"
+      > </a
+      ><a name="2259" class="PrimitiveType"
+      >Set</a
+      ><a name="2262" class="Symbol"
+      >}</a
+      ><a name="2263"
+      > </a
+      ><a name="2264" class="Symbol"
+      >{</a
+      ><a name="2265" href="SetsAndFunctions.html#2265" class="Bound"
+      >Z</a
+      ><a name="2266"
+      > </a
+      ><a name="2267" class="Symbol"
+      >:</a
+      ><a name="2268"
+      > </a
+      ><a name="2269" href="SetsAndFunctions.html#2255" class="Bound"
+      >Y</a
+      ><a name="2270"
+      > </a
+      ><a name="2271" class="Symbol"
+      >&#8594;</a
+      ><a name="2272"
+      > </a
+      ><a name="2273" class="PrimitiveType"
+      >Set</a
+      ><a name="2276" class="Symbol"
+      >}</a
+      ><a name="2277"
+      > </a
+      ><a name="2278" class="Symbol"
+      >&#8594;</a
+      ><a name="2279"
+      >
+
+ </a
+      ><a name="2282" class="Symbol"
+      >((</a
+      ><a name="2284" href="SetsAndFunctions.html#2284" class="Bound"
+      >y</a
+      ><a name="2285"
+      > </a
+      ><a name="2286" class="Symbol"
+      >:</a
+      ><a name="2287"
+      > </a
+      ><a name="2288" href="SetsAndFunctions.html#2255" class="Bound"
+      >Y</a
+      ><a name="2289" class="Symbol"
+      >)</a
+      ><a name="2290"
+      > </a
+      ><a name="2291" class="Symbol"
+      >&#8594;</a
+      ><a name="2292"
+      > </a
+      ><a name="2293" href="SetsAndFunctions.html#2265" class="Bound"
+      >Z</a
+      ><a name="2294"
+      > </a
+      ><a name="2295" href="SetsAndFunctions.html#2284" class="Bound"
+      >y</a
+      ><a name="2296" class="Symbol"
+      >)</a
+      ><a name="2297"
+      > </a
+      ><a name="2298" class="Symbol"
+      >&#8594;</a
+      ><a name="2299"
+      > </a
+      ><a name="2300" class="Symbol"
+      >(</a
+      ><a name="2301" href="SetsAndFunctions.html#2301" class="Bound"
+      >f</a
+      ><a name="2302"
+      > </a
+      ><a name="2303" class="Symbol"
+      >:</a
+      ><a name="2304"
+      > </a
+      ><a name="2305" href="SetsAndFunctions.html#2253" class="Bound"
+      >X</a
+      ><a name="2306"
+      > </a
+      ><a name="2307" class="Symbol"
+      >&#8594;</a
+      ><a name="2308"
+      > </a
+      ><a name="2309" href="SetsAndFunctions.html#2255" class="Bound"
+      >Y</a
+      ><a name="2310" class="Symbol"
+      >)</a
+      ><a name="2311"
+      > </a
+      ><a name="2312" class="Symbol"
+      >&#8594;</a
+      ><a name="2313"
+      > </a
+      ><a name="2314" class="Symbol"
+      >(</a
+      ><a name="2315" href="SetsAndFunctions.html#2315" class="Bound"
+      >x</a
+      ><a name="2316"
+      > </a
+      ><a name="2317" class="Symbol"
+      >:</a
+      ><a name="2318"
+      > </a
+      ><a name="2319" href="SetsAndFunctions.html#2253" class="Bound"
+      >X</a
+      ><a name="2320" class="Symbol"
+      >)</a
+      ><a name="2321"
+      > </a
+      ><a name="2322" class="Symbol"
+      >&#8594;</a
+      ><a name="2323"
+      > </a
+      ><a name="2324" href="SetsAndFunctions.html#2265" class="Bound"
+      >Z</a
+      ><a name="2325" class="Symbol"
+      >(</a
+      ><a name="2326" href="SetsAndFunctions.html#2301" class="Bound"
+      >f</a
+      ><a name="2327"
+      > </a
+      ><a name="2328" href="SetsAndFunctions.html#2315" class="Bound"
+      >x</a
+      ><a name="2329" class="Symbol"
+      >)</a
+      ><a name="2330"
+      >
+
+</a
+      ><a name="2332" href="SetsAndFunctions.html#2332" class="Bound"
+      >g</a
+      ><a name="2333"
+      > </a
+      ><a name="2334" href="SetsAndFunctions.html#2246" class="Function Operator"
+      >&#8728;</a
+      ><a name="2335"
+      > </a
+      ><a name="2336" href="SetsAndFunctions.html#2336" class="Bound"
+      >f</a
+      ><a name="2337"
+      > </a
+      ><a name="2338" class="Symbol"
+      >=</a
+      ><a name="2339"
+      > </a
+      ><a name="2340" class="Symbol"
+      >&#955;</a
+      ><a name="2341"
+      > </a
+      ><a name="2342" href="SetsAndFunctions.html#2342" class="Bound"
+      >x</a
+      ><a name="2343"
+      > </a
+      ><a name="2344" class="Symbol"
+      >&#8594;</a
+      ><a name="2345"
+      > </a
+      ><a name="2346" href="SetsAndFunctions.html#2332" class="Bound"
+      >g</a
+      ><a name="2347" class="Symbol"
+      >(</a
+      ><a name="2348" href="SetsAndFunctions.html#2336" class="Bound"
+      >f</a
+      ><a name="2349"
+      > </a
+      ><a name="2350" href="SetsAndFunctions.html#2342" class="Bound"
+      >x</a
+      ><a name="2351" class="Symbol"
+      >)</a
+      ><a name="2352"
+      >
+
+
+</a
+      ><a name="2355" href="SetsAndFunctions.html#2355" class="Function"
+      >id</a
+      ><a name="2357"
+      > </a
+      ><a name="2358" class="Symbol"
+      >:</a
+      ><a name="2359"
+      > </a
+      ><a name="2360" class="Symbol"
+      >{</a
+      ><a name="2361" href="SetsAndFunctions.html#2361" class="Bound"
+      >X</a
+      ><a name="2362"
+      > </a
+      ><a name="2363" class="Symbol"
+      >:</a
+      ><a name="2364"
+      > </a
+      ><a name="2365" class="PrimitiveType"
+      >Set</a
+      ><a name="2368" class="Symbol"
+      >}</a
+      ><a name="2369"
+      > </a
+      ><a name="2370" class="Symbol"
+      >&#8594;</a
+      ><a name="2371"
+      > </a
+      ><a name="2372" href="SetsAndFunctions.html#2361" class="Bound"
+      >X</a
+      ><a name="2373"
+      > </a
+      ><a name="2374" class="Symbol"
+      >&#8594;</a
+      ><a name="2375"
+      > </a
+      ><a name="2376" href="SetsAndFunctions.html#2361" class="Bound"
+      >X</a
+      ><a name="2377"
+      >
+</a
+      ><a name="2378" href="SetsAndFunctions.html#2355" class="Function"
+      >id</a
+      ><a name="2380"
+      > </a
+      ><a name="2381" href="SetsAndFunctions.html#2381" class="Bound"
+      >x</a
+      ><a name="2382"
+      > </a
+      ><a name="2383" class="Symbol"
+      >=</a
+      ><a name="2384"
+      > </a
+      ><a name="2385" href="SetsAndFunctions.html#2381" class="Bound"
+      >x</a
+      ><a name="2386"
+      >
+
+\end{code}
+
+</a
+      ><a name="2400" class="Comment"
+      >I use JJ and KK to avoid confusion with J and K for</a
+      ><a name="2451"
+      >
+</a
+      ><a name="2452" class="Comment"
+      >equality.</a
+      ><a name="2461"
+      >
+
+\begin{code}
+
+</a
+      ><a name="2477" href="SetsAndFunctions.html#2477" class="Function"
+      >KK</a
+      ><a name="2479"
+      > </a
+      ><a name="2480" class="Symbol"
+      >:</a
+      ><a name="2481"
+      > </a
+      ><a name="2482" class="PrimitiveType"
+      >Set</a
+      ><a name="2485"
+      > </a
+      ><a name="2486" class="Symbol"
+      >&#8594;</a
+      ><a name="2487"
+      > </a
+      ><a name="2488" class="PrimitiveType"
+      >Set</a
+      ><a name="2491"
+      > </a
+      ><a name="2492" class="Symbol"
+      >&#8594;</a
+      ><a name="2493"
+      > </a
+      ><a name="2494" class="PrimitiveType"
+      >Set</a
+      ><a name="2497"
+      >
+</a
+      ><a name="2498" href="SetsAndFunctions.html#2477" class="Function"
+      >KK</a
+      ><a name="2500"
+      > </a
+      ><a name="2501" href="SetsAndFunctions.html#2501" class="Bound"
+      >R</a
+      ><a name="2502"
+      > </a
+      ><a name="2503" href="SetsAndFunctions.html#2503" class="Bound"
+      >X</a
+      ><a name="2504"
+      > </a
+      ><a name="2505" class="Symbol"
+      >=</a
+      ><a name="2506"
+      > </a
+      ><a name="2507" class="Symbol"
+      >(</a
+      ><a name="2508" href="SetsAndFunctions.html#2503" class="Bound"
+      >X</a
+      ><a name="2509"
+      > </a
+      ><a name="2510" class="Symbol"
+      >&#8594;</a
+      ><a name="2511"
+      > </a
+      ><a name="2512" href="SetsAndFunctions.html#2501" class="Bound"
+      >R</a
+      ><a name="2513" class="Symbol"
+      >)</a
+      ><a name="2514"
+      > </a
+      ><a name="2515" class="Symbol"
+      >&#8594;</a
+      ><a name="2516"
+      > </a
+      ><a name="2517" href="SetsAndFunctions.html#2501" class="Bound"
+      >R</a
+      ><a name="2518"
+      >
+
+</a
+      ><a name="2520" href="SetsAndFunctions.html#2520" class="Function"
+      >contra-variant</a
+      ><a name="2534"
+      > </a
+      ><a name="2535" class="Symbol"
+      >:</a
+      ><a name="2536"
+      > </a
+      ><a name="2537" class="Symbol"
+      >{</a
+      ><a name="2538" href="SetsAndFunctions.html#2538" class="Bound"
+      >R</a
+      ><a name="2539"
+      > </a
+      ><a name="2540" href="SetsAndFunctions.html#2540" class="Bound"
+      >X</a
+      ><a name="2541"
+      > </a
+      ><a name="2542" href="SetsAndFunctions.html#2542" class="Bound"
+      >Y</a
+      ><a name="2543"
+      > </a
+      ><a name="2544" class="Symbol"
+      >:</a
+      ><a name="2545"
+      > </a
+      ><a name="2546" class="PrimitiveType"
+      >Set</a
+      ><a name="2549" class="Symbol"
+      >}</a
+      ><a name="2550"
+      > </a
+      ><a name="2551" class="Symbol"
+      >&#8594;</a
+      ><a name="2552"
+      > </a
+      ><a name="2553" class="Symbol"
+      >(</a
+      ><a name="2554" href="SetsAndFunctions.html#2540" class="Bound"
+      >X</a
+      ><a name="2555"
+      > </a
+      ><a name="2556" class="Symbol"
+      >&#8594;</a
+      ><a name="2557"
+      > </a
+      ><a name="2558" href="SetsAndFunctions.html#2542" class="Bound"
+      >Y</a
+      ><a name="2559" class="Symbol"
+      >)</a
+      ><a name="2560"
+      > </a
+      ><a name="2561" class="Symbol"
+      >&#8594;</a
+      ><a name="2562"
+      > </a
+      ><a name="2563" class="Symbol"
+      >(</a
+      ><a name="2564" href="SetsAndFunctions.html#2542" class="Bound"
+      >Y</a
+      ><a name="2565"
+      > </a
+      ><a name="2566" class="Symbol"
+      >&#8594;</a
+      ><a name="2567"
+      > </a
+      ><a name="2568" href="SetsAndFunctions.html#2538" class="Bound"
+      >R</a
+      ><a name="2569" class="Symbol"
+      >)</a
+      ><a name="2570"
+      > </a
+      ><a name="2571" class="Symbol"
+      >&#8594;</a
+      ><a name="2572"
+      > </a
+      ><a name="2573" class="Symbol"
+      >(</a
+      ><a name="2574" href="SetsAndFunctions.html#2540" class="Bound"
+      >X</a
+      ><a name="2575"
+      > </a
+      ><a name="2576" class="Symbol"
+      >&#8594;</a
+      ><a name="2577"
+      > </a
+      ><a name="2578" href="SetsAndFunctions.html#2538" class="Bound"
+      >R</a
+      ><a name="2579" class="Symbol"
+      >)</a
+      ><a name="2580"
+      >
+</a
+      ><a name="2581" href="SetsAndFunctions.html#2520" class="Function"
+      >contra-variant</a
+      ><a name="2595"
+      > </a
+      ><a name="2596" href="SetsAndFunctions.html#2596" class="Bound"
+      >f</a
+      ><a name="2597"
+      > </a
+      ><a name="2598" href="SetsAndFunctions.html#2598" class="Bound"
+      >p</a
+      ><a name="2599"
+      > </a
+      ><a name="2600" class="Symbol"
+      >=</a
+      ><a name="2601"
+      > </a
+      ><a name="2602" href="SetsAndFunctions.html#2598" class="Bound"
+      >p</a
+      ><a name="2603"
+      > </a
+      ><a name="2604" href="SetsAndFunctions.html#2246" class="Function Operator"
+      >&#8728;</a
+      ><a name="2605"
+      > </a
+      ><a name="2606" href="SetsAndFunctions.html#2596" class="Bound"
+      >f</a
+      ><a name="2607"
+      >
+
+</a
+      ><a name="2609" href="SetsAndFunctions.html#2609" class="Function"
+      >K-functor</a
+      ><a name="2618"
+      > </a
+      ><a name="2619" class="Symbol"
+      >:</a
+      ><a name="2620"
+      > </a
+      ><a name="2621" class="Symbol"
+      >{</a
+      ><a name="2622" href="SetsAndFunctions.html#2622" class="Bound"
+      >R</a
+      ><a name="2623"
+      > </a
+      ><a name="2624" href="SetsAndFunctions.html#2624" class="Bound"
+      >X</a
+      ><a name="2625"
+      > </a
+      ><a name="2626" href="SetsAndFunctions.html#2626" class="Bound"
+      >Y</a
+      ><a name="2627"
+      > </a
+      ><a name="2628" class="Symbol"
+      >:</a
+      ><a name="2629"
+      > </a
+      ><a name="2630" class="PrimitiveType"
+      >Set</a
+      ><a name="2633" class="Symbol"
+      >}</a
+      ><a name="2634"
+      > </a
+      ><a name="2635" class="Symbol"
+      >&#8594;</a
+      ><a name="2636"
+      > </a
+      ><a name="2637" class="Symbol"
+      >(</a
+      ><a name="2638" href="SetsAndFunctions.html#2624" class="Bound"
+      >X</a
+      ><a name="2639"
+      > </a
+      ><a name="2640" class="Symbol"
+      >&#8594;</a
+      ><a name="2641"
+      > </a
+      ><a name="2642" href="SetsAndFunctions.html#2626" class="Bound"
+      >Y</a
+      ><a name="2643" class="Symbol"
+      >)</a
+      ><a name="2644"
+      > </a
+      ><a name="2645" class="Symbol"
+      >&#8594;</a
+      ><a name="2646"
+      > </a
+      ><a name="2647" href="SetsAndFunctions.html#2477" class="Function"
+      >KK</a
+      ><a name="2649"
+      > </a
+      ><a name="2650" href="SetsAndFunctions.html#2622" class="Bound"
+      >R</a
+      ><a name="2651"
+      > </a
+      ><a name="2652" href="SetsAndFunctions.html#2624" class="Bound"
+      >X</a
+      ><a name="2653"
+      > </a
+      ><a name="2654" class="Symbol"
+      >&#8594;</a
+      ><a name="2655"
+      > </a
+      ><a name="2656" href="SetsAndFunctions.html#2477" class="Function"
+      >KK</a
+      ><a name="2658"
+      > </a
+      ><a name="2659" href="SetsAndFunctions.html#2622" class="Bound"
+      >R</a
+      ><a name="2660"
+      > </a
+      ><a name="2661" href="SetsAndFunctions.html#2626" class="Bound"
+      >Y</a
+      ><a name="2662"
+      >
+</a
+      ><a name="2663" href="SetsAndFunctions.html#2609" class="Function"
+      >K-functor</a
+      ><a name="2672"
+      > </a
+      ><a name="2673" class="Symbol"
+      >=</a
+      ><a name="2674"
+      > </a
+      ><a name="2675" href="SetsAndFunctions.html#2520" class="Function"
+      >contra-variant</a
+      ><a name="2689"
+      > </a
+      ><a name="2690" href="SetsAndFunctions.html#2246" class="Function Operator"
+      >&#8728;</a
+      ><a name="2691"
+      > </a
+      ><a name="2692" href="SetsAndFunctions.html#2520" class="Function"
+      >contra-variant</a
+      ><a name="2706"
+      >
+
+</a
+      ><a name="2708" href="SetsAndFunctions.html#2708" class="Function"
+      >&#951;K</a
+      ><a name="2710"
+      > </a
+      ><a name="2711" class="Symbol"
+      >:</a
+      ><a name="2712"
+      > </a
+      ><a name="2713" class="Symbol"
+      >{</a
+      ><a name="2714" href="SetsAndFunctions.html#2714" class="Bound"
+      >R</a
+      ><a name="2715"
+      > </a
+      ><a name="2716" href="SetsAndFunctions.html#2716" class="Bound"
+      >X</a
+      ><a name="2717"
+      > </a
+      ><a name="2718" class="Symbol"
+      >:</a
+      ><a name="2719"
+      > </a
+      ><a name="2720" class="PrimitiveType"
+      >Set</a
+      ><a name="2723" class="Symbol"
+      >}</a
+      ><a name="2724"
+      > </a
+      ><a name="2725" class="Symbol"
+      >&#8594;</a
+      ><a name="2726"
+      > </a
+      ><a name="2727" href="SetsAndFunctions.html#2716" class="Bound"
+      >X</a
+      ><a name="2728"
+      > </a
+      ><a name="2729" class="Symbol"
+      >&#8594;</a
+      ><a name="2730"
+      > </a
+      ><a name="2731" href="SetsAndFunctions.html#2477" class="Function"
+      >KK</a
+      ><a name="2733"
+      > </a
+      ><a name="2734" href="SetsAndFunctions.html#2714" class="Bound"
+      >R</a
+      ><a name="2735"
+      > </a
+      ><a name="2736" href="SetsAndFunctions.html#2716" class="Bound"
+      >X</a
+      ><a name="2737"
+      >
+</a
+      ><a name="2738" href="SetsAndFunctions.html#2708" class="Function"
+      >&#951;K</a
+      ><a name="2740"
+      > </a
+      ><a name="2741" href="SetsAndFunctions.html#2741" class="Bound"
+      >x</a
+      ><a name="2742"
+      > </a
+      ><a name="2743" href="SetsAndFunctions.html#2743" class="Bound"
+      >p</a
+      ><a name="2744"
+      > </a
+      ><a name="2745" class="Symbol"
+      >=</a
+      ><a name="2746"
+      > </a
+      ><a name="2747" href="SetsAndFunctions.html#2743" class="Bound"
+      >p</a
+      ><a name="2748"
+      > </a
+      ><a name="2749" href="SetsAndFunctions.html#2741" class="Bound"
+      >x</a
+      ><a name="2750"
+      >
+
+\end{code}
+
+</a
+      ><a name="2764" class="Comment"
+      >K-unshift:</a
+      ><a name="2774"
+      >
+
+\begin{code}
+
+</a
+      ><a name="2790" href="SetsAndFunctions.html#2790" class="Function"
+      >KU</a
+      ><a name="2792"
+      > </a
+      ><a name="2793" class="Symbol"
+      >:</a
+      ><a name="2794"
+      > </a
+      ><a name="2795" class="Symbol"
+      >{</a
+      ><a name="2796" href="SetsAndFunctions.html#2796" class="Bound"
+      >R</a
+      ><a name="2797"
+      > </a
+      ><a name="2798" href="SetsAndFunctions.html#2798" class="Bound"
+      >X</a
+      ><a name="2799"
+      > </a
+      ><a name="2800" class="Symbol"
+      >:</a
+      ><a name="2801"
+      > </a
+      ><a name="2802" class="PrimitiveType"
+      >Set</a
+      ><a name="2805" class="Symbol"
+      >}</a
+      ><a name="2806"
+      > </a
+      ><a name="2807" class="Symbol"
+      >{</a
+      ><a name="2808" href="SetsAndFunctions.html#2808" class="Bound"
+      >Y</a
+      ><a name="2809"
+      > </a
+      ><a name="2810" class="Symbol"
+      >:</a
+      ><a name="2811"
+      > </a
+      ><a name="2812" href="SetsAndFunctions.html#2798" class="Bound"
+      >X</a
+      ><a name="2813"
+      > </a
+      ><a name="2814" class="Symbol"
+      >&#8594;</a
+      ><a name="2815"
+      > </a
+      ><a name="2816" class="PrimitiveType"
+      >Set</a
+      ><a name="2819" class="Symbol"
+      >}</a
+      ><a name="2820"
+      > </a
+      ><a name="2821" class="Symbol"
+      >&#8594;</a
+      ><a name="2822"
+      >
+
+ </a
+      ><a name="2825" href="SetsAndFunctions.html#2477" class="Function"
+      >KK</a
+      ><a name="2827"
+      > </a
+      ><a name="2828" href="SetsAndFunctions.html#2796" class="Bound"
+      >R</a
+      ><a name="2829"
+      > </a
+      ><a name="2830" class="Symbol"
+      >((</a
+      ><a name="2832" href="SetsAndFunctions.html#2832" class="Bound"
+      >x</a
+      ><a name="2833"
+      > </a
+      ><a name="2834" class="Symbol"
+      >:</a
+      ><a name="2835"
+      > </a
+      ><a name="2836" href="SetsAndFunctions.html#2798" class="Bound"
+      >X</a
+      ><a name="2837" class="Symbol"
+      >)</a
+      ><a name="2838"
+      > </a
+      ><a name="2839" class="Symbol"
+      >&#8594;</a
+      ><a name="2840"
+      > </a
+      ><a name="2841" href="SetsAndFunctions.html#2808" class="Bound"
+      >Y</a
+      ><a name="2842"
+      > </a
+      ><a name="2843" href="SetsAndFunctions.html#2832" class="Bound"
+      >x</a
+      ><a name="2844" class="Symbol"
+      >)</a
+      ><a name="2845"
+      > </a
+      ><a name="2846" class="Symbol"
+      >&#8594;</a
+      ><a name="2847"
+      > </a
+      ><a name="2848" class="Symbol"
+      >(</a
+      ><a name="2849" href="SetsAndFunctions.html#2849" class="Bound"
+      >x</a
+      ><a name="2850"
+      > </a
+      ><a name="2851" class="Symbol"
+      >:</a
+      ><a name="2852"
+      > </a
+      ><a name="2853" href="SetsAndFunctions.html#2798" class="Bound"
+      >X</a
+      ><a name="2854" class="Symbol"
+      >)</a
+      ><a name="2855"
+      > </a
+      ><a name="2856" class="Symbol"
+      >&#8594;</a
+      ><a name="2857"
+      > </a
+      ><a name="2858" href="SetsAndFunctions.html#2477" class="Function"
+      >KK</a
+      ><a name="2860"
+      > </a
+      ><a name="2861" href="SetsAndFunctions.html#2796" class="Bound"
+      >R</a
+      ><a name="2862"
+      > </a
+      ><a name="2863" class="Symbol"
+      >(</a
+      ><a name="2864" href="SetsAndFunctions.html#2808" class="Bound"
+      >Y</a
+      ><a name="2865"
+      > </a
+      ><a name="2866" href="SetsAndFunctions.html#2849" class="Bound"
+      >x</a
+      ><a name="2867" class="Symbol"
+      >)</a
+      ><a name="2868"
+      >
+
+</a
+      ><a name="2870" href="SetsAndFunctions.html#2790" class="Function"
+      >KU</a
+      ><a name="2872"
+      > </a
+      ><a name="2873" class="Symbol"
+      >=</a
+      ><a name="2874"
+      > </a
+      ><a name="2875" class="Symbol"
+      >&#955;</a
+      ><a name="2876"
+      > </a
+      ><a name="2877" href="SetsAndFunctions.html#2877" class="Bound"
+      >f</a
+      ><a name="2878"
+      > </a
+      ><a name="2879" href="SetsAndFunctions.html#2879" class="Bound"
+      >x</a
+      ><a name="2880"
+      > </a
+      ><a name="2881" href="SetsAndFunctions.html#2881" class="Bound"
+      >g</a
+      ><a name="2882"
+      > </a
+      ><a name="2883" class="Symbol"
+      >&#8594;</a
+      ><a name="2884"
+      > </a
+      ><a name="2885" href="SetsAndFunctions.html#2877" class="Bound"
+      >f</a
+      ><a name="2886" class="Symbol"
+      >(&#955;</a
+      ><a name="2888"
+      > </a
+      ><a name="2889" href="SetsAndFunctions.html#2889" class="Bound"
+      >h</a
+      ><a name="2890"
+      > </a
+      ><a name="2891" class="Symbol"
+      >&#8594;</a
+      ><a name="2892"
+      > </a
+      ><a name="2893" href="SetsAndFunctions.html#2881" class="Bound"
+      >g</a
+      ><a name="2894" class="Symbol"
+      >(</a
+      ><a name="2895" href="SetsAndFunctions.html#2889" class="Bound"
+      >h</a
+      ><a name="2896"
+      > </a
+      ><a name="2897" href="SetsAndFunctions.html#2879" class="Bound"
+      >x</a
+      ><a name="2898" class="Symbol"
+      >))</a
+      ><a name="2900"
+      >
+
+\end{code}
+
+</a
+      ><a name="2914" class="Comment"
+      >Special case, if you like:</a
+      ><a name="2940"
+      >
+
+\begin{code}
+
+</a
+      ><a name="2956" href="SetsAndFunctions.html#2956" class="Function"
+      >ku</a
+      ><a name="2958"
+      > </a
+      ><a name="2959" class="Symbol"
+      >:</a
+      ><a name="2960"
+      > </a
+      ><a name="2961" class="Symbol"
+      >{</a
+      ><a name="2962" href="SetsAndFunctions.html#2962" class="Bound"
+      >R</a
+      ><a name="2963"
+      > </a
+      ><a name="2964" href="SetsAndFunctions.html#2964" class="Bound"
+      >X</a
+      ><a name="2965"
+      > </a
+      ><a name="2966" href="SetsAndFunctions.html#2966" class="Bound"
+      >Y</a
+      ><a name="2967"
+      > </a
+      ><a name="2968" class="Symbol"
+      >:</a
+      ><a name="2969"
+      > </a
+      ><a name="2970" class="PrimitiveType"
+      >Set</a
+      ><a name="2973" class="Symbol"
+      >}</a
+      ><a name="2974"
+      > </a
+      ><a name="2975" class="Symbol"
+      >&#8594;</a
+      ><a name="2976"
+      > </a
+      ><a name="2977" href="SetsAndFunctions.html#2477" class="Function"
+      >KK</a
+      ><a name="2979"
+      > </a
+      ><a name="2980" href="SetsAndFunctions.html#2962" class="Bound"
+      >R</a
+      ><a name="2981"
+      > </a
+      ><a name="2982" class="Symbol"
+      >(</a
+      ><a name="2983" href="SetsAndFunctions.html#2964" class="Bound"
+      >X</a
+      ><a name="2984"
+      > </a
+      ><a name="2985" href="SetsAndFunctions.html#1653" class="Function Operator"
+      >&#215;</a
+      ><a name="2986"
+      > </a
+      ><a name="2987" href="SetsAndFunctions.html#2966" class="Bound"
+      >Y</a
+      ><a name="2988" class="Symbol"
+      >)</a
+      ><a name="2989"
+      > </a
+      ><a name="2990" class="Symbol"
+      >&#8594;</a
+      ><a name="2991"
+      > </a
+      ><a name="2992" href="SetsAndFunctions.html#2477" class="Function"
+      >KK</a
+      ><a name="2994"
+      > </a
+      ><a name="2995" href="SetsAndFunctions.html#2962" class="Bound"
+      >R</a
+      ><a name="2996"
+      > </a
+      ><a name="2997" href="SetsAndFunctions.html#2964" class="Bound"
+      >X</a
+      ><a name="2998"
+      > </a
+      ><a name="2999" href="SetsAndFunctions.html#1653" class="Function Operator"
+      >&#215;</a
+      ><a name="3000"
+      > </a
+      ><a name="3001" href="SetsAndFunctions.html#2477" class="Function"
+      >KK</a
+      ><a name="3003"
+      > </a
+      ><a name="3004" href="SetsAndFunctions.html#2962" class="Bound"
+      >R</a
+      ><a name="3005"
+      > </a
+      ><a name="3006" href="SetsAndFunctions.html#2966" class="Bound"
+      >Y</a
+      ><a name="3007"
+      >
+</a
+      ><a name="3008" href="SetsAndFunctions.html#2956" class="Function"
+      >ku</a
+      ><a name="3010"
+      > </a
+      ><a name="3011" href="SetsAndFunctions.html#3011" class="Bound"
+      >&#966;</a
+      ><a name="3012"
+      > </a
+      ><a name="3013" class="Symbol"
+      >=</a
+      ><a name="3014"
+      > </a
+      ><a name="3015" class="Symbol"
+      >(</a
+      ><a name="3016" href="SetsAndFunctions.html#2609" class="Function"
+      >K-functor</a
+      ><a name="3025"
+      > </a
+      ><a name="3026" href="SetsAndFunctions.html#902" class="Function"
+      >&#960;&#8320;</a
+      ><a name="3028"
+      > </a
+      ><a name="3029" href="SetsAndFunctions.html#3011" class="Bound"
+      >&#966;</a
+      ><a name="3030"
+      > </a
+      ><a name="3031" href="SetsAndFunctions.html#865" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="3032"
+      > </a
+      ><a name="3033" href="SetsAndFunctions.html#2609" class="Function"
+      >K-functor</a
+      ><a name="3042"
+      > </a
+      ><a name="3043" href="SetsAndFunctions.html#977" class="Function"
+      >&#960;&#8321;</a
+      ><a name="3045"
+      > </a
+      ><a name="3046" href="SetsAndFunctions.html#3011" class="Bound"
+      >&#966;</a
+      ><a name="3047" class="Symbol"
+      >)</a
+      ><a name="3048"
+      >
+
+\end{code}
+
+</a
+      ><a name="3062" class="Comment"
+      >I am not sure were to put the following (product of</a
+      ><a name="3113"
+      >
+</a
+      ><a name="3114" class="Comment"
+      >quantifiers and selection functions). At the moment it goes</a
+      ><a name="3173"
+      >
+</a
+      ><a name="3174" class="Comment"
+      >in this module. It is not used, but it is included for the</a
+      ><a name="3232"
+      >
+</a
+      ><a name="3233" class="Comment"
+      >sake of comparison with similar patterns.</a
+      ><a name="3274"
+      >
+
+\begin{code}
+
+</a
+      ><a name="3290" href="SetsAndFunctions.html#3290" class="Function"
+      >quant-prod</a
+      ><a name="3300"
+      > </a
+      ><a name="3301" class="Symbol"
+      >:</a
+      ><a name="3302"
+      > </a
+      ><a name="3303" class="Symbol"
+      >{</a
+      ><a name="3304" href="SetsAndFunctions.html#3304" class="Bound"
+      >X</a
+      ><a name="3305"
+      > </a
+      ><a name="3306" href="SetsAndFunctions.html#3306" class="Bound"
+      >R</a
+      ><a name="3307"
+      > </a
+      ><a name="3308" class="Symbol"
+      >:</a
+      ><a name="3309"
+      > </a
+      ><a name="3310" class="PrimitiveType"
+      >Set</a
+      ><a name="3313" class="Symbol"
+      >}</a
+      ><a name="3314"
+      > </a
+      ><a name="3315" class="Symbol"
+      >{</a
+      ><a name="3316" href="SetsAndFunctions.html#3316" class="Bound"
+      >Y</a
+      ><a name="3317"
+      > </a
+      ><a name="3318" class="Symbol"
+      >:</a
+      ><a name="3319"
+      > </a
+      ><a name="3320" href="SetsAndFunctions.html#3304" class="Bound"
+      >X</a
+      ><a name="3321"
+      > </a
+      ><a name="3322" class="Symbol"
+      >&#8594;</a
+      ><a name="3323"
+      > </a
+      ><a name="3324" class="PrimitiveType"
+      >Set</a
+      ><a name="3327" class="Symbol"
+      >}</a
+      ><a name="3328"
+      > </a
+      ><a name="3329" class="Symbol"
+      >&#8594;</a
+      ><a name="3330"
+      >
+
+  </a
+      ><a name="3334" href="SetsAndFunctions.html#2477" class="Function"
+      >KK</a
+      ><a name="3336"
+      > </a
+      ><a name="3337" href="SetsAndFunctions.html#3306" class="Bound"
+      >R</a
+      ><a name="3338"
+      > </a
+      ><a name="3339" href="SetsAndFunctions.html#3304" class="Bound"
+      >X</a
+      ><a name="3340"
+      > </a
+      ><a name="3341" class="Symbol"
+      >&#8594;</a
+      ><a name="3342"
+      > </a
+      ><a name="3343" class="Symbol"
+      >((</a
+      ><a name="3345" href="SetsAndFunctions.html#3345" class="Bound"
+      >x</a
+      ><a name="3346"
+      > </a
+      ><a name="3347" class="Symbol"
+      >:</a
+      ><a name="3348"
+      > </a
+      ><a name="3349" href="SetsAndFunctions.html#3304" class="Bound"
+      >X</a
+      ><a name="3350" class="Symbol"
+      >)</a
+      ><a name="3351"
+      >  </a
+      ><a name="3353" class="Symbol"
+      >&#8594;</a
+      ><a name="3354"
+      > </a
+      ><a name="3355" href="SetsAndFunctions.html#2477" class="Function"
+      >KK</a
+      ><a name="3357"
+      > </a
+      ><a name="3358" href="SetsAndFunctions.html#3306" class="Bound"
+      >R</a
+      ><a name="3359"
+      > </a
+      ><a name="3360" class="Symbol"
+      >(</a
+      ><a name="3361" href="SetsAndFunctions.html#3316" class="Bound"
+      >Y</a
+      ><a name="3362"
+      > </a
+      ><a name="3363" href="SetsAndFunctions.html#3345" class="Bound"
+      >x</a
+      ><a name="3364" class="Symbol"
+      >))</a
+      ><a name="3366"
+      >
+  </a
+      ><a name="3369" class="Symbol"
+      >&#8594;</a
+      ><a name="3370"
+      > </a
+      ><a name="3371" href="SetsAndFunctions.html#2477" class="Function"
+      >KK</a
+      ><a name="3373"
+      > </a
+      ><a name="3374" href="SetsAndFunctions.html#3306" class="Bound"
+      >R</a
+      ><a name="3375"
+      > </a
+      ><a name="3376" class="Symbol"
+      >((</a
+      ><a name="3378" href="SetsAndFunctions.html#813" class="Record"
+      >&#931;</a
+      ><a name="3379"
+      > </a
+      ><a name="3380" class="Symbol"
+      >\(</a
+      ><a name="3382" href="SetsAndFunctions.html#3382" class="Bound"
+      >x</a
+      ><a name="3383"
+      > </a
+      ><a name="3384" class="Symbol"
+      >:</a
+      ><a name="3385"
+      > </a
+      ><a name="3386" href="SetsAndFunctions.html#3304" class="Bound"
+      >X</a
+      ><a name="3387" class="Symbol"
+      >)</a
+      ><a name="3388"
+      >  </a
+      ><a name="3390" class="Symbol"
+      >&#8594;</a
+      ><a name="3391"
+      > </a
+      ><a name="3392" href="SetsAndFunctions.html#3316" class="Bound"
+      >Y</a
+      ><a name="3393"
+      > </a
+      ><a name="3394" href="SetsAndFunctions.html#3382" class="Bound"
+      >x</a
+      ><a name="3395" class="Symbol"
+      >))</a
+      ><a name="3397"
+      >
+
+</a
+      ><a name="3399" href="SetsAndFunctions.html#3290" class="Function"
+      >quant-prod</a
+      ><a name="3409"
+      > </a
+      ><a name="3410" href="SetsAndFunctions.html#3410" class="Bound"
+      >&#966;</a
+      ><a name="3411"
+      > </a
+      ><a name="3412" href="SetsAndFunctions.html#3412" class="Bound"
+      >&#947;</a
+      ><a name="3413"
+      > </a
+      ><a name="3414" href="SetsAndFunctions.html#3414" class="Bound"
+      >p</a
+      ><a name="3415"
+      > </a
+      ><a name="3416" class="Symbol"
+      >=</a
+      ><a name="3417"
+      > </a
+      ><a name="3418" href="SetsAndFunctions.html#3410" class="Bound"
+      >&#966;</a
+      ><a name="3419" class="Symbol"
+      >(&#955;</a
+      ><a name="3421"
+      > </a
+      ><a name="3422" href="SetsAndFunctions.html#3422" class="Bound"
+      >x</a
+      ><a name="3423"
+      > </a
+      ><a name="3424" class="Symbol"
+      >&#8594;</a
+      ><a name="3425"
+      > </a
+      ><a name="3426" href="SetsAndFunctions.html#3412" class="Bound"
+      >&#947;</a
+      ><a name="3427"
+      > </a
+      ><a name="3428" href="SetsAndFunctions.html#3422" class="Bound"
+      >x</a
+      ><a name="3429"
+      > </a
+      ><a name="3430" class="Symbol"
+      >(&#955;</a
+      ><a name="3432"
+      > </a
+      ><a name="3433" href="SetsAndFunctions.html#3433" class="Bound"
+      >y</a
+      ><a name="3434"
+      > </a
+      ><a name="3435" class="Symbol"
+      >&#8594;</a
+      ><a name="3436"
+      > </a
+      ><a name="3437" href="SetsAndFunctions.html#3414" class="Bound"
+      >p</a
+      ><a name="3438" class="Symbol"
+      >(</a
+      ><a name="3439" href="SetsAndFunctions.html#3422" class="Bound"
+      >x</a
+      ><a name="3440"
+      > </a
+      ><a name="3441" href="SetsAndFunctions.html#865" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="3442"
+      > </a
+      ><a name="3443" href="SetsAndFunctions.html#3433" class="Bound"
+      >y</a
+      ><a name="3444" class="Symbol"
+      >)))</a
+      ><a name="3447"
+      >
+
+
+</a
+      ><a name="3450" href="SetsAndFunctions.html#3450" class="Function"
+      >JJ</a
+      ><a name="3452"
+      > </a
+      ><a name="3453" class="Symbol"
+      >:</a
+      ><a name="3454"
+      > </a
+      ><a name="3455" class="PrimitiveType"
+      >Set</a
+      ><a name="3458"
+      > </a
+      ><a name="3459" class="Symbol"
+      >&#8594;</a
+      ><a name="3460"
+      > </a
+      ><a name="3461" class="PrimitiveType"
+      >Set</a
+      ><a name="3464"
+      > </a
+      ><a name="3465" class="Symbol"
+      >&#8594;</a
+      ><a name="3466"
+      > </a
+      ><a name="3467" class="PrimitiveType"
+      >Set</a
+      ><a name="3470"
+      >
+</a
+      ><a name="3471" href="SetsAndFunctions.html#3450" class="Function"
+      >JJ</a
+      ><a name="3473"
+      > </a
+      ><a name="3474" href="SetsAndFunctions.html#3474" class="Bound"
+      >R</a
+      ><a name="3475"
+      > </a
+      ><a name="3476" href="SetsAndFunctions.html#3476" class="Bound"
+      >X</a
+      ><a name="3477"
+      > </a
+      ><a name="3478" class="Symbol"
+      >=</a
+      ><a name="3479"
+      > </a
+      ><a name="3480" class="Symbol"
+      >(</a
+      ><a name="3481" href="SetsAndFunctions.html#3476" class="Bound"
+      >X</a
+      ><a name="3482"
+      > </a
+      ><a name="3483" class="Symbol"
+      >&#8594;</a
+      ><a name="3484"
+      > </a
+      ><a name="3485" href="SetsAndFunctions.html#3474" class="Bound"
+      >R</a
+      ><a name="3486" class="Symbol"
+      >)</a
+      ><a name="3487"
+      > </a
+      ><a name="3488" class="Symbol"
+      >&#8594;</a
+      ><a name="3489"
+      > </a
+      ><a name="3490" href="SetsAndFunctions.html#3476" class="Bound"
+      >X</a
+      ><a name="3491"
+      >
+
+</a
+      ><a name="3493" href="SetsAndFunctions.html#3493" class="Function"
+      >sel-prod</a
+      ><a name="3501"
+      > </a
+      ><a name="3502" class="Symbol"
+      >:</a
+      ><a name="3503"
+      > </a
+      ><a name="3504" class="Symbol"
+      >{</a
+      ><a name="3505" href="SetsAndFunctions.html#3505" class="Bound"
+      >R</a
+      ><a name="3506"
+      > </a
+      ><a name="3507" class="Symbol"
+      >:</a
+      ><a name="3508"
+      > </a
+      ><a name="3509" class="PrimitiveType"
+      >Set</a
+      ><a name="3512" class="Symbol"
+      >}</a
+      ><a name="3513"
+      > </a
+      ><a name="3514" class="Symbol"
+      >&#8594;</a
+      ><a name="3515"
+      > </a
+      ><a name="3516" class="Symbol"
+      >{</a
+      ><a name="3517" href="SetsAndFunctions.html#3517" class="Bound"
+      >X</a
+      ><a name="3518"
+      > </a
+      ><a name="3519" class="Symbol"
+      >:</a
+      ><a name="3520"
+      > </a
+      ><a name="3521" class="PrimitiveType"
+      >Set</a
+      ><a name="3524" class="Symbol"
+      >}</a
+      ><a name="3525"
+      > </a
+      ><a name="3526" class="Symbol"
+      >&#8594;</a
+      ><a name="3527"
+      > </a
+      ><a name="3528" class="Symbol"
+      >{</a
+      ><a name="3529" href="SetsAndFunctions.html#3529" class="Bound"
+      >Y</a
+      ><a name="3530"
+      > </a
+      ><a name="3531" class="Symbol"
+      >:</a
+      ><a name="3532"
+      > </a
+      ><a name="3533" href="SetsAndFunctions.html#3517" class="Bound"
+      >X</a
+      ><a name="3534"
+      > </a
+      ><a name="3535" class="Symbol"
+      >&#8594;</a
+      ><a name="3536"
+      > </a
+      ><a name="3537" class="PrimitiveType"
+      >Set</a
+      ><a name="3540" class="Symbol"
+      >}</a
+      ><a name="3541"
+      > </a
+      ><a name="3542" class="Symbol"
+      >&#8594;</a
+      ><a name="3543"
+      >
+
+    </a
+      ><a name="3550" href="SetsAndFunctions.html#3450" class="Function"
+      >JJ</a
+      ><a name="3552"
+      > </a
+      ><a name="3553" href="SetsAndFunctions.html#3505" class="Bound"
+      >R</a
+      ><a name="3554"
+      > </a
+      ><a name="3555" href="SetsAndFunctions.html#3517" class="Bound"
+      >X</a
+      ><a name="3556"
+      > </a
+      ><a name="3557" class="Symbol"
+      >&#8594;</a
+      ><a name="3558"
+      > </a
+      ><a name="3559" class="Symbol"
+      >((</a
+      ><a name="3561" href="SetsAndFunctions.html#3561" class="Bound"
+      >x</a
+      ><a name="3562"
+      > </a
+      ><a name="3563" class="Symbol"
+      >:</a
+      ><a name="3564"
+      > </a
+      ><a name="3565" href="SetsAndFunctions.html#3517" class="Bound"
+      >X</a
+      ><a name="3566" class="Symbol"
+      >)</a
+      ><a name="3567"
+      > </a
+      ><a name="3568" class="Symbol"
+      >&#8594;</a
+      ><a name="3569"
+      > </a
+      ><a name="3570" href="SetsAndFunctions.html#3450" class="Function"
+      >JJ</a
+      ><a name="3572"
+      > </a
+      ><a name="3573" href="SetsAndFunctions.html#3505" class="Bound"
+      >R</a
+      ><a name="3574"
+      > </a
+      ><a name="3575" class="Symbol"
+      >(</a
+      ><a name="3576" href="SetsAndFunctions.html#3529" class="Bound"
+      >Y</a
+      ><a name="3577"
+      > </a
+      ><a name="3578" href="SetsAndFunctions.html#3561" class="Bound"
+      >x</a
+      ><a name="3579" class="Symbol"
+      >))</a
+      ><a name="3581"
+      >
+    </a
+      ><a name="3587" class="Symbol"
+      >&#8594;</a
+      ><a name="3588"
+      > </a
+      ><a name="3589" href="SetsAndFunctions.html#3450" class="Function"
+      >JJ</a
+      ><a name="3591"
+      > </a
+      ><a name="3592" href="SetsAndFunctions.html#3505" class="Bound"
+      >R</a
+      ><a name="3593"
+      > </a
+      ><a name="3594" class="Symbol"
+      >(</a
+      ><a name="3595" href="SetsAndFunctions.html#813" class="Record"
+      >&#931;</a
+      ><a name="3596"
+      > </a
+      ><a name="3597" class="Symbol"
+      >\(</a
+      ><a name="3599" href="SetsAndFunctions.html#3599" class="Bound"
+      >x</a
+      ><a name="3600"
+      > </a
+      ><a name="3601" class="Symbol"
+      >:</a
+      ><a name="3602"
+      > </a
+      ><a name="3603" href="SetsAndFunctions.html#3517" class="Bound"
+      >X</a
+      ><a name="3604" class="Symbol"
+      >)</a
+      ><a name="3605"
+      > </a
+      ><a name="3606" class="Symbol"
+      >&#8594;</a
+      ><a name="3607"
+      > </a
+      ><a name="3608" href="SetsAndFunctions.html#3529" class="Bound"
+      >Y</a
+      ><a name="3609"
+      > </a
+      ><a name="3610" href="SetsAndFunctions.html#3599" class="Bound"
+      >x</a
+      ><a name="3611" class="Symbol"
+      >)</a
+      ><a name="3612"
+      >
+
+</a
+      ><a name="3614" href="SetsAndFunctions.html#3493" class="Function"
+      >sel-prod</a
+      ><a name="3622"
+      > </a
+      ><a name="3623" class="Symbol"
+      >{</a
+      ><a name="3624" href="SetsAndFunctions.html#3624" class="Bound"
+      >R</a
+      ><a name="3625" class="Symbol"
+      >}</a
+      ><a name="3626"
+      > </a
+      ><a name="3627" class="Symbol"
+      >{</a
+      ><a name="3628" href="SetsAndFunctions.html#3628" class="Bound"
+      >X</a
+      ><a name="3629" class="Symbol"
+      >}</a
+      ><a name="3630"
+      > </a
+      ><a name="3631" class="Symbol"
+      >{</a
+      ><a name="3632" href="SetsAndFunctions.html#3632" class="Bound"
+      >Y</a
+      ><a name="3633" class="Symbol"
+      >}</a
+      ><a name="3634"
+      > </a
+      ><a name="3635" href="SetsAndFunctions.html#3635" class="Bound"
+      >&#949;</a
+      ><a name="3636"
+      > </a
+      ><a name="3637" href="SetsAndFunctions.html#3637" class="Bound"
+      >&#948;</a
+      ><a name="3638"
+      > </a
+      ><a name="3639" href="SetsAndFunctions.html#3639" class="Bound"
+      >p</a
+      ><a name="3640"
+      > </a
+      ><a name="3641" class="Symbol"
+      >=</a
+      ><a name="3642"
+      > </a
+      ><a name="3643" class="Symbol"
+      >(</a
+      ><a name="3644" href="SetsAndFunctions.html#3727" class="Function"
+      >x&#8320;</a
+      ><a name="3646"
+      > </a
+      ><a name="3647" href="SetsAndFunctions.html#865" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="3648"
+      > </a
+      ><a name="3649" href="SetsAndFunctions.html#3771" class="Function"
+      >y&#8320;</a
+      ><a name="3651" class="Symbol"
+      >)</a
+      ><a name="3652"
+      >
+   </a
+      ><a name="3656" class="Keyword"
+      >where</a
+      ><a name="3661"
+      >
+    </a
+      ><a name="3667" href="SetsAndFunctions.html#3667" class="Function"
+      >next</a
+      ><a name="3671"
+      > </a
+      ><a name="3672" class="Symbol"
+      >:</a
+      ><a name="3673"
+      > </a
+      ><a name="3674" class="Symbol"
+      >(</a
+      ><a name="3675" href="SetsAndFunctions.html#3675" class="Bound"
+      >x</a
+      ><a name="3676"
+      > </a
+      ><a name="3677" class="Symbol"
+      >:</a
+      ><a name="3678"
+      > </a
+      ><a name="3679" href="SetsAndFunctions.html#3628" class="Bound"
+      >X</a
+      ><a name="3680" class="Symbol"
+      >)</a
+      ><a name="3681"
+      > </a
+      ><a name="3682" class="Symbol"
+      >&#8594;</a
+      ><a name="3683"
+      > </a
+      ><a name="3684" href="SetsAndFunctions.html#3632" class="Bound"
+      >Y</a
+      ><a name="3685"
+      > </a
+      ><a name="3686" href="SetsAndFunctions.html#3675" class="Bound"
+      >x</a
+      ><a name="3687"
+      >
+    </a
+      ><a name="3692" href="SetsAndFunctions.html#3667" class="Function"
+      >next</a
+      ><a name="3696"
+      > </a
+      ><a name="3697" href="SetsAndFunctions.html#3697" class="Bound"
+      >x</a
+      ><a name="3698"
+      > </a
+      ><a name="3699" class="Symbol"
+      >=</a
+      ><a name="3700"
+      > </a
+      ><a name="3701" href="SetsAndFunctions.html#3637" class="Bound"
+      >&#948;</a
+      ><a name="3702"
+      > </a
+      ><a name="3703" href="SetsAndFunctions.html#3697" class="Bound"
+      >x</a
+      ><a name="3704"
+      > </a
+      ><a name="3705" class="Symbol"
+      >(&#955;</a
+      ><a name="3707"
+      > </a
+      ><a name="3708" href="SetsAndFunctions.html#3708" class="Bound"
+      >y</a
+      ><a name="3709"
+      > </a
+      ><a name="3710" class="Symbol"
+      >&#8594;</a
+      ><a name="3711"
+      > </a
+      ><a name="3712" href="SetsAndFunctions.html#3639" class="Bound"
+      >p</a
+      ><a name="3713" class="Symbol"
+      >(</a
+      ><a name="3714" href="SetsAndFunctions.html#3697" class="Bound"
+      >x</a
+      ><a name="3715"
+      > </a
+      ><a name="3716" href="SetsAndFunctions.html#865" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="3717"
+      > </a
+      ><a name="3718" href="SetsAndFunctions.html#3708" class="Bound"
+      >y</a
+      ><a name="3719" class="Symbol"
+      >))</a
+      ><a name="3721"
+      >
+
+    </a
+      ><a name="3727" href="SetsAndFunctions.html#3727" class="Function"
+      >x&#8320;</a
+      ><a name="3729"
+      > </a
+      ><a name="3730" class="Symbol"
+      >:</a
+      ><a name="3731"
+      > </a
+      ><a name="3732" href="SetsAndFunctions.html#3628" class="Bound"
+      >X</a
+      ><a name="3733"
+      >
+    </a
+      ><a name="3738" href="SetsAndFunctions.html#3727" class="Function"
+      >x&#8320;</a
+      ><a name="3740"
+      > </a
+      ><a name="3741" class="Symbol"
+      >=</a
+      ><a name="3742"
+      > </a
+      ><a name="3743" href="SetsAndFunctions.html#3635" class="Bound"
+      >&#949;</a
+      ><a name="3744" class="Symbol"
+      >(&#955;</a
+      ><a name="3746"
+      > </a
+      ><a name="3747" href="SetsAndFunctions.html#3747" class="Bound"
+      >x</a
+      ><a name="3748"
+      > </a
+      ><a name="3749" class="Symbol"
+      >&#8594;</a
+      ><a name="3750"
+      > </a
+      ><a name="3751" href="SetsAndFunctions.html#3639" class="Bound"
+      >p</a
+      ><a name="3752" class="Symbol"
+      >(</a
+      ><a name="3753" href="SetsAndFunctions.html#3747" class="Bound"
+      >x</a
+      ><a name="3754"
+      > </a
+      ><a name="3755" href="SetsAndFunctions.html#865" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="3756"
+      > </a
+      ><a name="3757" href="SetsAndFunctions.html#3667" class="Function"
+      >next</a
+      ><a name="3761"
+      > </a
+      ><a name="3762" href="SetsAndFunctions.html#3747" class="Bound"
+      >x</a
+      ><a name="3763" class="Symbol"
+      >))</a
+      ><a name="3765"
+      >
+
+    </a
+      ><a name="3771" href="SetsAndFunctions.html#3771" class="Function"
+      >y&#8320;</a
+      ><a name="3773"
+      > </a
+      ><a name="3774" class="Symbol"
+      >:</a
+      ><a name="3775"
+      > </a
+      ><a name="3776" href="SetsAndFunctions.html#3632" class="Bound"
+      >Y</a
+      ><a name="3777"
+      > </a
+      ><a name="3778" href="SetsAndFunctions.html#3727" class="Function"
+      >x&#8320;</a
+      ><a name="3780"
+      >
+    </a
+      ><a name="3785" href="SetsAndFunctions.html#3771" class="Function"
+      >y&#8320;</a
+      ><a name="3787"
+      > </a
+      ><a name="3788" class="Symbol"
+      >=</a
+      ><a name="3789"
+      > </a
+      ><a name="3790" href="SetsAndFunctions.html#3667" class="Function"
+      >next</a
+      ><a name="3794"
+      > </a
+      ><a name="3795" href="SetsAndFunctions.html#3727" class="Function"
+      >x&#8320;</a
+      ><a name="3797"
+      >
+
+\end{code}
+
+</a
+      ><a name="3812" class="Comment"
+      >Alternative, equivalent, construction:</a
+      ><a name="3850"
+      >
+
+\begin{code}
+
+</a
+      ><a name="3866" href="SetsAndFunctions.html#3866" class="Function"
+      >overline</a
+      ><a name="3874"
+      > </a
+      ><a name="3875" class="Symbol"
+      >:</a
+      ><a name="3876"
+      > </a
+      ><a name="3877" class="Symbol"
+      >{</a
+      ><a name="3878" href="SetsAndFunctions.html#3878" class="Bound"
+      >X</a
+      ><a name="3879"
+      > </a
+      ><a name="3880" href="SetsAndFunctions.html#3880" class="Bound"
+      >R</a
+      ><a name="3881"
+      > </a
+      ><a name="3882" class="Symbol"
+      >:</a
+      ><a name="3883"
+      > </a
+      ><a name="3884" class="PrimitiveType"
+      >Set</a
+      ><a name="3887" class="Symbol"
+      >}</a
+      ><a name="3888"
+      > </a
+      ><a name="3889" class="Symbol"
+      >&#8594;</a
+      ><a name="3890"
+      > </a
+      ><a name="3891" href="SetsAndFunctions.html#3450" class="Function"
+      >JJ</a
+      ><a name="3893"
+      > </a
+      ><a name="3894" href="SetsAndFunctions.html#3880" class="Bound"
+      >R</a
+      ><a name="3895"
+      > </a
+      ><a name="3896" href="SetsAndFunctions.html#3878" class="Bound"
+      >X</a
+      ><a name="3897"
+      > </a
+      ><a name="3898" class="Symbol"
+      >&#8594;</a
+      ><a name="3899"
+      > </a
+      ><a name="3900" href="SetsAndFunctions.html#2477" class="Function"
+      >KK</a
+      ><a name="3902"
+      > </a
+      ><a name="3903" href="SetsAndFunctions.html#3880" class="Bound"
+      >R</a
+      ><a name="3904"
+      > </a
+      ><a name="3905" href="SetsAndFunctions.html#3878" class="Bound"
+      >X</a
+      ><a name="3906"
+      >
+</a
+      ><a name="3907" href="SetsAndFunctions.html#3866" class="Function"
+      >overline</a
+      ><a name="3915"
+      > </a
+      ><a name="3916" href="SetsAndFunctions.html#3916" class="Bound"
+      >&#949;</a
+      ><a name="3917"
+      > </a
+      ><a name="3918" href="SetsAndFunctions.html#3918" class="Bound"
+      >p</a
+      ><a name="3919"
+      > </a
+      ><a name="3920" class="Symbol"
+      >=</a
+      ><a name="3921"
+      > </a
+      ><a name="3922" href="SetsAndFunctions.html#3918" class="Bound"
+      >p</a
+      ><a name="3923" class="Symbol"
+      >(</a
+      ><a name="3924" href="SetsAndFunctions.html#3916" class="Bound"
+      >&#949;</a
+      ><a name="3925"
+      > </a
+      ><a name="3926" href="SetsAndFunctions.html#3918" class="Bound"
+      >p</a
+      ><a name="3927" class="Symbol"
+      >)</a
+      ><a name="3928"
+      >
+
+
+</a
+      ><a name="3931" href="SetsAndFunctions.html#3931" class="Function"
+      >sel-prod'</a
+      ><a name="3940"
+      > </a
+      ><a name="3941" class="Symbol"
+      >:</a
+      ><a name="3942"
+      > </a
+      ><a name="3943" class="Symbol"
+      >{</a
+      ><a name="3944" href="SetsAndFunctions.html#3944" class="Bound"
+      >R</a
+      ><a name="3945"
+      > </a
+      ><a name="3946" class="Symbol"
+      >:</a
+      ><a name="3947"
+      > </a
+      ><a name="3948" class="PrimitiveType"
+      >Set</a
+      ><a name="3951" class="Symbol"
+      >}</a
+      ><a name="3952"
+      > </a
+      ><a name="3953" class="Symbol"
+      >&#8594;</a
+      ><a name="3954"
+      > </a
+      ><a name="3955" class="Symbol"
+      >{</a
+      ><a name="3956" href="SetsAndFunctions.html#3956" class="Bound"
+      >X</a
+      ><a name="3957"
+      > </a
+      ><a name="3958" class="Symbol"
+      >:</a
+      ><a name="3959"
+      > </a
+      ><a name="3960" class="PrimitiveType"
+      >Set</a
+      ><a name="3963" class="Symbol"
+      >}</a
+      ><a name="3964"
+      > </a
+      ><a name="3965" class="Symbol"
+      >&#8594;</a
+      ><a name="3966"
+      > </a
+      ><a name="3967" class="Symbol"
+      >{</a
+      ><a name="3968" href="SetsAndFunctions.html#3968" class="Bound"
+      >Y</a
+      ><a name="3969"
+      > </a
+      ><a name="3970" class="Symbol"
+      >:</a
+      ><a name="3971"
+      > </a
+      ><a name="3972" href="SetsAndFunctions.html#3956" class="Bound"
+      >X</a
+      ><a name="3973"
+      > </a
+      ><a name="3974" class="Symbol"
+      >&#8594;</a
+      ><a name="3975"
+      > </a
+      ><a name="3976" class="PrimitiveType"
+      >Set</a
+      ><a name="3979" class="Symbol"
+      >}</a
+      ><a name="3980"
+      > </a
+      ><a name="3981" class="Symbol"
+      >&#8594;</a
+      ><a name="3982"
+      >
+
+    </a
+      ><a name="3989" href="SetsAndFunctions.html#3450" class="Function"
+      >JJ</a
+      ><a name="3991"
+      > </a
+      ><a name="3992" href="SetsAndFunctions.html#3944" class="Bound"
+      >R</a
+      ><a name="3993"
+      > </a
+      ><a name="3994" href="SetsAndFunctions.html#3956" class="Bound"
+      >X</a
+      ><a name="3995"
+      > </a
+      ><a name="3996" class="Symbol"
+      >&#8594;</a
+      ><a name="3997"
+      > </a
+      ><a name="3998" class="Symbol"
+      >((</a
+      ><a name="4000" href="SetsAndFunctions.html#4000" class="Bound"
+      >x</a
+      ><a name="4001"
+      > </a
+      ><a name="4002" class="Symbol"
+      >:</a
+      ><a name="4003"
+      > </a
+      ><a name="4004" href="SetsAndFunctions.html#3956" class="Bound"
+      >X</a
+      ><a name="4005" class="Symbol"
+      >)</a
+      ><a name="4006"
+      > </a
+      ><a name="4007" class="Symbol"
+      >&#8594;</a
+      ><a name="4008"
+      > </a
+      ><a name="4009" href="SetsAndFunctions.html#3450" class="Function"
+      >JJ</a
+      ><a name="4011"
+      > </a
+      ><a name="4012" href="SetsAndFunctions.html#3944" class="Bound"
+      >R</a
+      ><a name="4013"
+      > </a
+      ><a name="4014" class="Symbol"
+      >(</a
+      ><a name="4015" href="SetsAndFunctions.html#3968" class="Bound"
+      >Y</a
+      ><a name="4016"
+      > </a
+      ><a name="4017" href="SetsAndFunctions.html#4000" class="Bound"
+      >x</a
+      ><a name="4018" class="Symbol"
+      >))</a
+      ><a name="4020"
+      > </a
+      ><a name="4021" class="Symbol"
+      >&#8594;</a
+      ><a name="4022"
+      > </a
+      ><a name="4023" href="SetsAndFunctions.html#3450" class="Function"
+      >JJ</a
+      ><a name="4025"
+      > </a
+      ><a name="4026" href="SetsAndFunctions.html#3944" class="Bound"
+      >R</a
+      ><a name="4027"
+      > </a
+      ><a name="4028" class="Symbol"
+      >(</a
+      ><a name="4029" href="SetsAndFunctions.html#813" class="Record"
+      >&#931;</a
+      ><a name="4030"
+      > </a
+      ><a name="4031" class="Symbol"
+      >\(</a
+      ><a name="4033" href="SetsAndFunctions.html#4033" class="Bound"
+      >x</a
+      ><a name="4034"
+      > </a
+      ><a name="4035" class="Symbol"
+      >:</a
+      ><a name="4036"
+      > </a
+      ><a name="4037" href="SetsAndFunctions.html#3956" class="Bound"
+      >X</a
+      ><a name="4038" class="Symbol"
+      >)</a
+      ><a name="4039"
+      > </a
+      ><a name="4040" class="Symbol"
+      >&#8594;</a
+      ><a name="4041"
+      > </a
+      ><a name="4042" href="SetsAndFunctions.html#3968" class="Bound"
+      >Y</a
+      ><a name="4043"
+      > </a
+      ><a name="4044" href="SetsAndFunctions.html#4033" class="Bound"
+      >x</a
+      ><a name="4045" class="Symbol"
+      >)</a
+      ><a name="4046"
+      >
+
+</a
+      ><a name="4048" href="SetsAndFunctions.html#3931" class="Function"
+      >sel-prod'</a
+      ><a name="4057"
+      > </a
+      ><a name="4058" class="Symbol"
+      >{</a
+      ><a name="4059" href="SetsAndFunctions.html#4059" class="Bound"
+      >R</a
+      ><a name="4060" class="Symbol"
+      >}</a
+      ><a name="4061"
+      > </a
+      ><a name="4062" class="Symbol"
+      >{</a
+      ><a name="4063" href="SetsAndFunctions.html#4063" class="Bound"
+      >X</a
+      ><a name="4064" class="Symbol"
+      >}</a
+      ><a name="4065"
+      > </a
+      ><a name="4066" class="Symbol"
+      >{</a
+      ><a name="4067" href="SetsAndFunctions.html#4067" class="Bound"
+      >Y</a
+      ><a name="4068" class="Symbol"
+      >}</a
+      ><a name="4069"
+      > </a
+      ><a name="4070" href="SetsAndFunctions.html#4070" class="Bound"
+      >&#949;</a
+      ><a name="4071"
+      > </a
+      ><a name="4072" href="SetsAndFunctions.html#4072" class="Bound"
+      >&#948;</a
+      ><a name="4073"
+      > </a
+      ><a name="4074" href="SetsAndFunctions.html#4074" class="Bound"
+      >p</a
+      ><a name="4075"
+      > </a
+      ><a name="4076" class="Symbol"
+      >=</a
+      ><a name="4077"
+      > </a
+      ><a name="4078" class="Symbol"
+      >(</a
+      ><a name="4079" href="SetsAndFunctions.html#4102" class="Function"
+      >x&#8320;</a
+      ><a name="4081"
+      > </a
+      ><a name="4082" href="SetsAndFunctions.html#865" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="4083"
+      > </a
+      ><a name="4084" href="SetsAndFunctions.html#4163" class="Function"
+      >y&#8320;</a
+      ><a name="4086" class="Symbol"
+      >)</a
+      ><a name="4087"
+      >
+   </a
+      ><a name="4091" class="Keyword"
+      >where</a
+      ><a name="4096"
+      >
+    </a
+      ><a name="4102" href="SetsAndFunctions.html#4102" class="Function"
+      >x&#8320;</a
+      ><a name="4104"
+      > </a
+      ><a name="4105" class="Symbol"
+      >:</a
+      ><a name="4106"
+      > </a
+      ><a name="4107" href="SetsAndFunctions.html#4063" class="Bound"
+      >X</a
+      ><a name="4108"
+      >
+    </a
+      ><a name="4113" href="SetsAndFunctions.html#4102" class="Function"
+      >x&#8320;</a
+      ><a name="4115"
+      > </a
+      ><a name="4116" class="Symbol"
+      >=</a
+      ><a name="4117"
+      > </a
+      ><a name="4118" href="SetsAndFunctions.html#4070" class="Bound"
+      >&#949;</a
+      ><a name="4119" class="Symbol"
+      >(&#955;</a
+      ><a name="4121"
+      > </a
+      ><a name="4122" href="SetsAndFunctions.html#4122" class="Bound"
+      >x</a
+      ><a name="4123"
+      > </a
+      ><a name="4124" class="Symbol"
+      >&#8594;</a
+      ><a name="4125"
+      > </a
+      ><a name="4126" href="SetsAndFunctions.html#3866" class="Function"
+      >overline</a
+      ><a name="4134" class="Symbol"
+      >(</a
+      ><a name="4135" href="SetsAndFunctions.html#4072" class="Bound"
+      >&#948;</a
+      ><a name="4136"
+      > </a
+      ><a name="4137" href="SetsAndFunctions.html#4122" class="Bound"
+      >x</a
+      ><a name="4138" class="Symbol"
+      >)</a
+      ><a name="4139"
+      > </a
+      ><a name="4140" class="Symbol"
+      >(&#955;</a
+      ><a name="4142"
+      > </a
+      ><a name="4143" href="SetsAndFunctions.html#4143" class="Bound"
+      >y</a
+      ><a name="4144"
+      > </a
+      ><a name="4145" class="Symbol"
+      >&#8594;</a
+      ><a name="4146"
+      > </a
+      ><a name="4147" href="SetsAndFunctions.html#4074" class="Bound"
+      >p</a
+      ><a name="4148" class="Symbol"
+      >(</a
+      ><a name="4149" href="SetsAndFunctions.html#4122" class="Bound"
+      >x</a
+      ><a name="4150"
+      > </a
+      ><a name="4151" href="SetsAndFunctions.html#865" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="4152"
+      > </a
+      ><a name="4153" href="SetsAndFunctions.html#4143" class="Bound"
+      >y</a
+      ><a name="4154" class="Symbol"
+      >)))</a
+      ><a name="4157"
+      >
+
+    </a
+      ><a name="4163" href="SetsAndFunctions.html#4163" class="Function"
+      >y&#8320;</a
+      ><a name="4165"
+      > </a
+      ><a name="4166" class="Symbol"
+      >:</a
+      ><a name="4167"
+      > </a
+      ><a name="4168" href="SetsAndFunctions.html#4067" class="Bound"
+      >Y</a
+      ><a name="4169"
+      > </a
+      ><a name="4170" href="SetsAndFunctions.html#4102" class="Function"
+      >x&#8320;</a
+      ><a name="4172"
+      >
+    </a
+      ><a name="4177" href="SetsAndFunctions.html#4163" class="Function"
+      >y&#8320;</a
+      ><a name="4179"
+      > </a
+      ><a name="4180" class="Symbol"
+      >=</a
+      ><a name="4181"
+      > </a
+      ><a name="4182" href="SetsAndFunctions.html#4072" class="Bound"
+      >&#948;</a
+      ><a name="4183"
+      > </a
+      ><a name="4184" href="SetsAndFunctions.html#4102" class="Function"
+      >x&#8320;</a
+      ><a name="4186"
+      > </a
+      ><a name="4187" class="Symbol"
+      >(&#955;</a
+      ><a name="4189"
+      > </a
+      ><a name="4190" href="SetsAndFunctions.html#4190" class="Bound"
+      >y</a
+      ><a name="4191"
+      > </a
+      ><a name="4192" class="Symbol"
+      >&#8594;</a
+      ><a name="4193"
+      > </a
+      ><a name="4194" href="SetsAndFunctions.html#4074" class="Bound"
+      >p</a
+      ><a name="4195" class="Symbol"
+      >(</a
+      ><a name="4196" href="SetsAndFunctions.html#4102" class="Function"
+      >x&#8320;</a
+      ><a name="4198"
+      > </a
+      ><a name="4199" href="SetsAndFunctions.html#865" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="4200"
+      > </a
+      ><a name="4201" href="SetsAndFunctions.html#4190" class="Bound"
+      >y</a
+      ><a name="4202" class="Symbol"
+      >))</a
+      ><a name="4204"
+      >
+
+\end{code}
+</a
+      ></pre
+    ></body
+  ></html
+>

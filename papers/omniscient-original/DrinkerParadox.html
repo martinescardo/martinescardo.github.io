@@ -1,0 +1,1969 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+><head
+  ><title
+    >DrinkerParadox</title
+    ><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"
+     /><meta http-equiv="Content-Style-Type" content="text/css"
+     /><link href="Agda.css" rel="stylesheet" type="text/css"
+     /></head
+  ><body
+  ><pre
+    ><a name="1" class="Keyword"
+      >module</a
+      ><a name="7"
+      > </a
+      ><a name="8" href="DrinkerParadox.html#8" class="Module"
+      >DrinkerParadox</a
+      ><a name="22"
+      > </a
+      ><a name="23" class="Keyword"
+      >where</a
+      ><a name="28"
+      >
+
+</a
+      ><a name="30" class="Comment"
+      >-- By Martin Escardo, 2 September 2011.</a
+      ><a name="69"
+      >
+</a
+      ><a name="70" class="Comment"
+      >---</a
+      ><a name="73"
+      >
+</a
+      ><a name="74" class="Comment"
+      >-- We prove Theorem-3&#183;6 of the paper</a
+      ><a name="110"
+      >
+</a
+      ><a name="111" class="Comment"
+      >-- http://www.cs.bham.ac.uk/~mhe/papers/omniscient.pdf</a
+      ><a name="165"
+      >
+
+</a
+      ><a name="167" class="Keyword"
+      >open</a
+      ><a name="171"
+      > </a
+      ><a name="172" class="Keyword"
+      >import</a
+      ><a name="178"
+      > </a
+      ><a name="179" href="Logic.html#8" class="Module"
+      >Logic</a
+      ><a name="184"
+      >
+</a
+      ><a name="185" class="Keyword"
+      >open</a
+      ><a name="189"
+      > </a
+      ><a name="190" class="Keyword"
+      >import</a
+      ><a name="196"
+      > </a
+      ><a name="197" href="Equality.html#8" class="Module"
+      >Equality</a
+      ><a name="205"
+      >
+</a
+      ><a name="206" class="Keyword"
+      >open</a
+      ><a name="210"
+      > </a
+      ><a name="211" class="Keyword"
+      >import</a
+      ><a name="217"
+      > </a
+      ><a name="218" href="Naturals.html#8" class="Module"
+      >Naturals</a
+      ><a name="226"
+      >
+</a
+      ><a name="227" class="Keyword"
+      >open</a
+      ><a name="231"
+      > </a
+      ><a name="232" class="Keyword"
+      >import</a
+      ><a name="238"
+      > </a
+      ><a name="239" href="Two.html#8" class="Module"
+      >Two</a
+      ><a name="242"
+      >
+</a
+      ><a name="244" class="Keyword"
+      >open</a
+      ><a name="248"
+      > </a
+      ><a name="249" class="Keyword"
+      >import</a
+      ><a name="255"
+      > </a
+      ><a name="256" href="Cantor.html#8" class="Module"
+      >Cantor</a
+      ><a name="262"
+      >
+</a
+      ><a name="263" class="Keyword"
+      >open</a
+      ><a name="267"
+      > </a
+      ><a name="268" class="Keyword"
+      >import</a
+      ><a name="274"
+      > </a
+      ><a name="275" href="GenericConvergentSequence.html#8" class="Module"
+      >GenericConvergentSequence</a
+      ><a name="300"
+      >
+
+
+</a
+      ><a name="303" class="Comment"
+      >-- The following is the Drinker paradox for the set &#8469;&#8734; defined in the</a
+      ><a name="372"
+      >
+</a
+      ><a name="373" class="Comment"
+      >-- module GenericConvergentSequence: In every pub there is a person x</a
+      ><a name="442"
+      >
+</a
+      ><a name="443" class="Comment"
+      >-- such that if x drinks then everybody drinks.</a
+      ><a name="490"
+      >
+</a
+      ><a name="491" class="Comment"
+      >-- </a
+      ><a name="494"
+      >
+</a
+      ><a name="495" class="Comment"
+      >-- Here p x &#8801; &#8321; means that x drinks, and the people in the pub are the</a
+      ><a name="565"
+      >
+</a
+      ><a name="566" class="Comment"
+      >-- members of the set &#8469;&#8734;. In general the DP is non-constructive, as</a
+      ><a name="633"
+      >
+</a
+      ><a name="634" class="Comment"
+      >-- for example for the pub with set of costumers &#8469;, this would amount</a
+      ><a name="703"
+      >
+</a
+      ><a name="704" class="Comment"
+      >-- to LPO (limited principle of omniscience).  But it is constructive</a
+      ><a name="773"
+      >
+</a
+      ><a name="774" class="Comment"
+      >-- for the larger pub with set of costumers &#8469;&#8734;, which is what we show</a
+      ><a name="843"
+      >
+</a
+      ><a name="844" class="Comment"
+      >-- in this module.</a
+      ><a name="862"
+      >
+</a
+      ><a name="863" class="Comment"
+      >--</a
+      ><a name="865"
+      >
+</a
+      ><a name="866" class="Comment"
+      >-- (Continuity axioms and the fan principle are not assumed.)</a
+      ><a name="927"
+      >
+
+
+</a
+      ><a name="930" href="DrinkerParadox.html#930" class="Function"
+      >Theorem-3&#183;6</a
+      ><a name="941"
+      > </a
+      ><a name="942" class="Symbol"
+      >:</a
+      ><a name="943"
+      >
+</a
+      ><a name="945" class="Comment"
+      >-----------------------------------------------</a
+      ><a name="992"
+      >
+  </a
+      ><a name="995" class="Symbol"
+      >&#8704;(</a
+      ><a name="997" href="DrinkerParadox.html#997" class="Bound"
+      >p</a
+      ><a name="998"
+      > </a
+      ><a name="999" class="Symbol"
+      >:</a
+      ><a name="1000"
+      > </a
+      ><a name="1001" href="Cantor.html#133" class="Function"
+      >&#8322;&#8469;</a
+      ><a name="1003"
+      > </a
+      ><a name="1004" class="Symbol"
+      >&#8594;</a
+      ><a name="1005"
+      > </a
+      ><a name="1006" href="Two.html#110" class="Datatype"
+      >&#8322;</a
+      ><a name="1007" class="Symbol"
+      >)</a
+      ><a name="1008"
+      > </a
+      ><a name="1009" class="Symbol"
+      >&#8594;</a
+      ><a name="1010"
+      > </a
+      ><a name="1011" href="Cantor.html#762" class="Function"
+      >extensional</a
+      ><a name="1022"
+      > </a
+      ><a name="1023" href="DrinkerParadox.html#997" class="Bound"
+      >p</a
+      ><a name="1024"
+      > </a
+      ><a name="1025" class="Symbol"
+      >&#8594;</a
+      ><a name="1026"
+      >
+  </a
+      ><a name="1030" href="Logic.html#987" class="Datatype"
+      >&#8707;</a
+      ><a name="1031"
+      > </a
+      ><a name="1032" class="Symbol"
+      >\(</a
+      ><a name="1034" href="DrinkerParadox.html#1034" class="Bound"
+      >x</a
+      ><a name="1035"
+      > </a
+      ><a name="1036" class="Symbol"
+      >:</a
+      ><a name="1037"
+      > </a
+      ><a name="1038" href="Cantor.html#133" class="Function"
+      >&#8322;&#8469;</a
+      ><a name="1040" class="Symbol"
+      >)</a
+      ><a name="1041"
+      > </a
+      ><a name="1042" class="Symbol"
+      >&#8594;</a
+      ><a name="1043"
+      > </a
+      ><a name="1044" href="DrinkerParadox.html#1034" class="Bound"
+      >x</a
+      ><a name="1045"
+      > </a
+      ><a name="1046" href="GenericConvergentSequence.html#326" class="Function Operator"
+      >&#8712;</a
+      ><a name="1047"
+      > </a
+      ><a name="1048" href="GenericConvergentSequence.html#186" class="Function"
+      >&#8469;&#8734;</a
+      ><a name="1050"
+      > </a
+      ><a name="1051" href="Logic.html#410" class="Datatype Operator"
+      >&#8743;</a
+      ><a name="1052"
+      >
+     </a
+      ><a name="1059" class="Symbol"
+      >(</a
+      ><a name="1060" href="DrinkerParadox.html#997" class="Bound"
+      >p</a
+      ><a name="1061"
+      > </a
+      ><a name="1062" href="DrinkerParadox.html#1034" class="Bound"
+      >x</a
+      ><a name="1063"
+      > </a
+      ><a name="1064" href="Equality.html#48" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="1065"
+      > </a
+      ><a name="1066" href="Two.html#132" class="InductiveConstructor"
+      >&#8321;</a
+      ><a name="1067"
+      > </a
+      ><a name="1068" class="Symbol"
+      >&#8594;</a
+      ><a name="1069"
+      > </a
+      ><a name="1070" class="Symbol"
+      >&#8704;(</a
+      ><a name="1072" href="DrinkerParadox.html#1072" class="Bound"
+      >y</a
+      ><a name="1073"
+      > </a
+      ><a name="1074" class="Symbol"
+      >:</a
+      ><a name="1075"
+      > </a
+      ><a name="1076" href="Cantor.html#133" class="Function"
+      >&#8322;&#8469;</a
+      ><a name="1078" class="Symbol"
+      >)</a
+      ><a name="1079"
+      > </a
+      ><a name="1080" class="Symbol"
+      >&#8594;</a
+      ><a name="1081"
+      > </a
+      ><a name="1082" href="DrinkerParadox.html#1072" class="Bound"
+      >y</a
+      ><a name="1083"
+      > </a
+      ><a name="1084" href="GenericConvergentSequence.html#326" class="Function Operator"
+      >&#8712;</a
+      ><a name="1085"
+      > </a
+      ><a name="1086" href="GenericConvergentSequence.html#186" class="Function"
+      >&#8469;&#8734;</a
+      ><a name="1088"
+      > </a
+      ><a name="1089" class="Symbol"
+      >&#8594;</a
+      ><a name="1090"
+      > </a
+      ><a name="1091" href="DrinkerParadox.html#997" class="Bound"
+      >p</a
+      ><a name="1092"
+      > </a
+      ><a name="1093" href="DrinkerParadox.html#1072" class="Bound"
+      >y</a
+      ><a name="1094"
+      > </a
+      ><a name="1095" href="Equality.html#48" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="1096"
+      > </a
+      ><a name="1097" href="Two.html#132" class="InductiveConstructor"
+      >&#8321;</a
+      ><a name="1098" class="Symbol"
+      >)</a
+      ><a name="1099"
+      >
+</a
+      ><a name="1100" class="Comment"
+      >-----------------------------------------------</a
+      ><a name="1147"
+      >
+</a
+      ><a name="1148" href="DrinkerParadox.html#930" class="Function"
+      >Theorem-3&#183;6</a
+      ><a name="1159"
+      > </a
+      ><a name="1160" href="DrinkerParadox.html#1160" class="Bound"
+      >p</a
+      ><a name="1161"
+      > </a
+      ><a name="1162" href="DrinkerParadox.html#1162" class="Bound"
+      >extensionality-of-p</a
+      ><a name="1181"
+      > </a
+      ><a name="1182" class="Symbol"
+      >=</a
+      ><a name="1183"
+      > </a
+      ><a name="1184" href="Logic.html#1026" class="InductiveConstructor"
+      >&#8707;-intro</a
+      ><a name="1191"
+      > </a
+      ><a name="1192" href="DrinkerParadox.html#1228" class="Function"
+      >x</a
+      ><a name="1193"
+      > </a
+      ><a name="1194" class="Symbol"
+      >(</a
+      ><a name="1195" href="Logic.html#438" class="InductiveConstructor"
+      >&#8743;-intro</a
+      ><a name="1202"
+      > </a
+      ><a name="1203" href="DrinkerParadox.html#1315" class="Function"
+      >Lemma&#8320;</a
+      ><a name="1209"
+      > </a
+      ><a name="1210" href="DrinkerParadox.html#2640" class="Function"
+      >Lemma&#8321;</a
+      ><a name="1216" class="Symbol"
+      >)</a
+      ><a name="1217"
+      >
+ </a
+      ><a name="1219" class="Keyword"
+      >where</a
+      ><a name="1224"
+      >
+  </a
+      ><a name="1228" href="DrinkerParadox.html#1228" class="Function"
+      >x</a
+      ><a name="1229"
+      > </a
+      ><a name="1230" class="Symbol"
+      >:</a
+      ><a name="1231"
+      > </a
+      ><a name="1232" href="Cantor.html#133" class="Function"
+      >&#8322;&#8469;</a
+      ><a name="1234"
+      >
+  </a
+      ><a name="1238" href="DrinkerParadox.html#1228" class="Function"
+      >x</a
+      ><a name="1239"
+      > </a
+      ><a name="1240" href="Naturals.html#68" class="InductiveConstructor"
+      >0</a
+      ><a name="1241"
+      >       </a
+      ><a name="1248" class="Symbol"
+      >=</a
+      ><a name="1249"
+      > </a
+      ><a name="1250" href="DrinkerParadox.html#1160" class="Bound"
+      >p</a
+      ><a name="1251" class="Symbol"
+      >(</a
+      ><a name="1252" href="GenericConvergentSequence.html#574" class="Function"
+      >underline</a
+      ><a name="1261"
+      > </a
+      ><a name="1262" class="Number"
+      >0</a
+      ><a name="1263" class="Symbol"
+      >)</a
+      ><a name="1264"
+      >
+  </a
+      ><a name="1267" href="DrinkerParadox.html#1228" class="Function"
+      >x</a
+      ><a name="1268" class="Symbol"
+      >(</a
+      ><a name="1269" href="Naturals.html#93" class="InductiveConstructor"
+      >succ</a
+      ><a name="1273"
+      > </a
+      ><a name="1274" href="DrinkerParadox.html#1274" class="Bound"
+      >n</a
+      ><a name="1275" class="Symbol"
+      >)</a
+      ><a name="1276"
+      > </a
+      ><a name="1277" class="Symbol"
+      >=</a
+      ><a name="1278"
+      > </a
+      ><a name="1279" href="Two.html#1716" class="Function"
+      >min</a
+      ><a name="1282"
+      > </a
+      ><a name="1283" class="Symbol"
+      >(</a
+      ><a name="1284" href="DrinkerParadox.html#1228" class="Function"
+      >x</a
+      ><a name="1285"
+      > </a
+      ><a name="1286" href="DrinkerParadox.html#1274" class="Bound"
+      >n</a
+      ><a name="1287" class="Symbol"
+      >)</a
+      ><a name="1288"
+      > </a
+      ><a name="1289" class="Symbol"
+      >(</a
+      ><a name="1290" href="DrinkerParadox.html#1160" class="Bound"
+      >p</a
+      ><a name="1291" class="Symbol"
+      >(</a
+      ><a name="1292" href="GenericConvergentSequence.html#574" class="Function"
+      >underline</a
+      ><a name="1301" class="Symbol"
+      >(</a
+      ><a name="1302" href="Naturals.html#93" class="InductiveConstructor"
+      >succ</a
+      ><a name="1306"
+      > </a
+      ><a name="1307" href="DrinkerParadox.html#1274" class="Bound"
+      >n</a
+      ><a name="1308" class="Symbol"
+      >)))</a
+      ><a name="1311"
+      >
+
+  </a
+      ><a name="1315" href="DrinkerParadox.html#1315" class="Function"
+      >Lemma&#8320;</a
+      ><a name="1321"
+      > </a
+      ><a name="1322" class="Symbol"
+      >:</a
+      ><a name="1323"
+      > </a
+      ><a name="1324" href="DrinkerParadox.html#1228" class="Function"
+      >x</a
+      ><a name="1325"
+      > </a
+      ><a name="1326" href="GenericConvergentSequence.html#326" class="Function Operator"
+      >&#8712;</a
+      ><a name="1327"
+      > </a
+      ><a name="1328" href="GenericConvergentSequence.html#186" class="Function"
+      >&#8469;&#8734;</a
+      ><a name="1330"
+      >
+  </a
+      ><a name="1333" href="DrinkerParadox.html#1315" class="Function"
+      >Lemma&#8320;</a
+      ><a name="1339"
+      > </a
+      ><a name="1340" href="DrinkerParadox.html#1340" class="Bound"
+      >i</a
+      ><a name="1341"
+      > </a
+      ><a name="1342" class="Symbol"
+      >=</a
+      ><a name="1343"
+      > </a
+      ><a name="1344" href="Two.html#1758" class="Function"
+      >Lemma[minab&#8804;a]</a
+      ><a name="1358"
+      >
+
+  </a
+      ><a name="1362" href="DrinkerParadox.html#1362" class="Function"
+      >Dagger&#8320;</a
+      ><a name="1369"
+      > </a
+      ><a name="1370" class="Symbol"
+      >:</a
+      ><a name="1371"
+      > </a
+      ><a name="1372" class="Symbol"
+      >&#8704;(</a
+      ><a name="1374" href="DrinkerParadox.html#1374" class="Bound"
+      >n</a
+      ><a name="1375"
+      > </a
+      ><a name="1376" class="Symbol"
+      >:</a
+      ><a name="1377"
+      > </a
+      ><a name="1378" href="Naturals.html#48" class="Datatype"
+      >&#8469;</a
+      ><a name="1379" class="Symbol"
+      >)</a
+      ><a name="1380"
+      > </a
+      ><a name="1381" class="Symbol"
+      >&#8594;</a
+      ><a name="1382"
+      > </a
+      ><a name="1383" href="DrinkerParadox.html#1228" class="Function"
+      >x</a
+      ><a name="1384"
+      > </a
+      ><a name="1385" href="Cantor.html#212" class="Function Operator"
+      >&#8803;</a
+      ><a name="1386"
+      > </a
+      ><a name="1387" href="GenericConvergentSequence.html#574" class="Function"
+      >underline</a
+      ><a name="1396"
+      > </a
+      ><a name="1397" href="DrinkerParadox.html#1374" class="Bound"
+      >n</a
+      ><a name="1398"
+      > </a
+      ><a name="1399" class="Symbol"
+      >&#8594;</a
+      ><a name="1400"
+      > </a
+      ><a name="1401" href="DrinkerParadox.html#1160" class="Bound"
+      >p</a
+      ><a name="1402" class="Symbol"
+      >(</a
+      ><a name="1403" href="GenericConvergentSequence.html#574" class="Function"
+      >underline</a
+      ><a name="1412"
+      > </a
+      ><a name="1413" href="DrinkerParadox.html#1374" class="Bound"
+      >n</a
+      ><a name="1414" class="Symbol"
+      >)</a
+      ><a name="1415"
+      > </a
+      ><a name="1416" href="Equality.html#48" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="1417"
+      > </a
+      ><a name="1418" href="Two.html#125" class="InductiveConstructor"
+      >&#8320;</a
+      ><a name="1419"
+      >
+  </a
+      ><a name="1422" href="DrinkerParadox.html#1362" class="Function"
+      >Dagger&#8320;</a
+      ><a name="1429"
+      > </a
+      ><a name="1430" href="Naturals.html#68" class="InductiveConstructor"
+      >0</a
+      ><a name="1431"
+      > </a
+      ><a name="1432" href="DrinkerParadox.html#1432" class="Bound"
+      >r</a
+      ><a name="1433"
+      > </a
+      ><a name="1434" class="Symbol"
+      >=</a
+      ><a name="1435"
+      > </a
+      ><a name="1436" href="DrinkerParadox.html#1432" class="Bound"
+      >r</a
+      ><a name="1437"
+      > </a
+      ><a name="1438" class="Number"
+      >0</a
+      ><a name="1439"
+      >
+  </a
+      ><a name="1442" href="DrinkerParadox.html#1362" class="Function"
+      >Dagger&#8320;</a
+      ><a name="1449"
+      > </a
+      ><a name="1450" class="Symbol"
+      >(</a
+      ><a name="1451" href="Naturals.html#93" class="InductiveConstructor"
+      >succ</a
+      ><a name="1455"
+      > </a
+      ><a name="1456" href="DrinkerParadox.html#1456" class="Bound"
+      >n</a
+      ><a name="1457" class="Symbol"
+      >)</a
+      ><a name="1458"
+      > </a
+      ><a name="1459" href="DrinkerParadox.html#1459" class="Bound"
+      >r</a
+      ><a name="1460"
+      > </a
+      ><a name="1461" class="Symbol"
+      >=</a
+      ><a name="1462"
+      > </a
+      ><a name="1463" href="Equality.html#332" class="Function"
+      >transitivity</a
+      ><a name="1475"
+      > </a
+      ><a name="1476" href="DrinkerParadox.html#1655" class="Function"
+      >u</a
+      ><a name="1477"
+      > </a
+      ><a name="1478" href="DrinkerParadox.html#1566" class="Function"
+      >t</a
+      ><a name="1479"
+      >
+   </a
+      ><a name="1483" class="Keyword"
+      >where</a
+      ><a name="1488"
+      > </a
+      ><a name="1489" href="DrinkerParadox.html#1489" class="Function"
+      >s</a
+      ><a name="1490"
+      > </a
+      ><a name="1491" class="Symbol"
+      >:</a
+      ><a name="1492"
+      > </a
+      ><a name="1493" href="DrinkerParadox.html#1228" class="Function"
+      >x</a
+      ><a name="1494"
+      > </a
+      ><a name="1495" href="DrinkerParadox.html#1456" class="Bound"
+      >n</a
+      ><a name="1496"
+      > </a
+      ><a name="1497" href="Equality.html#48" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="1498"
+      > </a
+      ><a name="1499" href="Two.html#132" class="InductiveConstructor"
+      >&#8321;</a
+      ><a name="1500"
+      >
+         </a
+      ><a name="1510" href="DrinkerParadox.html#1489" class="Function"
+      >s</a
+      ><a name="1511"
+      > </a
+      ><a name="1512" class="Symbol"
+      >=</a
+      ><a name="1513"
+      > </a
+      ><a name="1514" href="Equality.html#332" class="Function"
+      >transitivity</a
+      ><a name="1526"
+      > </a
+      ><a name="1527" class="Symbol"
+      >(</a
+      ><a name="1528" href="DrinkerParadox.html#1459" class="Bound"
+      >r</a
+      ><a name="1529"
+      > </a
+      ><a name="1530" href="DrinkerParadox.html#1456" class="Bound"
+      >n</a
+      ><a name="1531" class="Symbol"
+      >)</a
+      ><a name="1532"
+      > </a
+      ><a name="1533" class="Symbol"
+      >(</a
+      ><a name="1534" href="GenericConvergentSequence.html#884" class="Function"
+      >Lemma[underline-1]</a
+      ><a name="1552"
+      > </a
+      ><a name="1553" href="DrinkerParadox.html#1456" class="Bound"
+      >n</a
+      ><a name="1554" class="Symbol"
+      >)</a
+      ><a name="1555"
+      >
+
+         </a
+      ><a name="1566" href="DrinkerParadox.html#1566" class="Function"
+      >t</a
+      ><a name="1567"
+      > </a
+      ><a name="1568" class="Symbol"
+      >:</a
+      ><a name="1569"
+      > </a
+      ><a name="1570" href="DrinkerParadox.html#1228" class="Function"
+      >x</a
+      ><a name="1571" class="Symbol"
+      >(</a
+      ><a name="1572" href="Naturals.html#93" class="InductiveConstructor"
+      >succ</a
+      ><a name="1576"
+      > </a
+      ><a name="1577" href="DrinkerParadox.html#1456" class="Bound"
+      >n</a
+      ><a name="1578" class="Symbol"
+      >)</a
+      ><a name="1579"
+      > </a
+      ><a name="1580" href="Equality.html#48" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="1581"
+      > </a
+      ><a name="1582" href="Two.html#125" class="InductiveConstructor"
+      >&#8320;</a
+      ><a name="1583"
+      >
+         </a
+      ><a name="1593" href="DrinkerParadox.html#1566" class="Function"
+      >t</a
+      ><a name="1594"
+      > </a
+      ><a name="1595" class="Symbol"
+      >=</a
+      ><a name="1596"
+      > </a
+      ><a name="1597" href="Equality.html#332" class="Function"
+      >transitivity</a
+      ><a name="1609"
+      > </a
+      ><a name="1610" class="Symbol"
+      >(</a
+      ><a name="1611" href="DrinkerParadox.html#1459" class="Bound"
+      >r</a
+      ><a name="1612" class="Symbol"
+      >(</a
+      ><a name="1613" href="Naturals.html#93" class="InductiveConstructor"
+      >succ</a
+      ><a name="1617"
+      > </a
+      ><a name="1618" href="DrinkerParadox.html#1456" class="Bound"
+      >n</a
+      ><a name="1619" class="Symbol"
+      >))</a
+      ><a name="1621"
+      > </a
+      ><a name="1622" class="Symbol"
+      >(</a
+      ><a name="1623" href="GenericConvergentSequence.html#683" class="Function"
+      >Lemma[underline-0]</a
+      ><a name="1641"
+      > </a
+      ><a name="1642" href="DrinkerParadox.html#1456" class="Bound"
+      >n</a
+      ><a name="1643" class="Symbol"
+      >)</a
+      ><a name="1644"
+      >
+
+         </a
+      ><a name="1655" href="DrinkerParadox.html#1655" class="Function"
+      >u</a
+      ><a name="1656"
+      > </a
+      ><a name="1657" class="Symbol"
+      >:</a
+      ><a name="1658"
+      > </a
+      ><a name="1659" href="DrinkerParadox.html#1160" class="Bound"
+      >p</a
+      ><a name="1660" class="Symbol"
+      >(</a
+      ><a name="1661" href="GenericConvergentSequence.html#574" class="Function"
+      >underline</a
+      ><a name="1670" class="Symbol"
+      >(</a
+      ><a name="1671" href="Naturals.html#93" class="InductiveConstructor"
+      >succ</a
+      ><a name="1675"
+      > </a
+      ><a name="1676" href="DrinkerParadox.html#1456" class="Bound"
+      >n</a
+      ><a name="1677" class="Symbol"
+      >))</a
+      ><a name="1679"
+      > </a
+      ><a name="1680" href="Equality.html#48" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="1681"
+      > </a
+      ><a name="1682" href="DrinkerParadox.html#1228" class="Function"
+      >x</a
+      ><a name="1683" class="Symbol"
+      >(</a
+      ><a name="1684" href="Naturals.html#93" class="InductiveConstructor"
+      >succ</a
+      ><a name="1688"
+      > </a
+      ><a name="1689" href="DrinkerParadox.html#1456" class="Bound"
+      >n</a
+      ><a name="1690" class="Symbol"
+      >)</a
+      ><a name="1691"
+      >
+         </a
+      ><a name="1701" href="DrinkerParadox.html#1655" class="Function"
+      >u</a
+      ><a name="1702"
+      > </a
+      ><a name="1703" class="Symbol"
+      >=</a
+      ><a name="1704"
+      > </a
+      ><a name="1705" href="Equality.html#432" class="Function"
+      >symmetry</a
+      ><a name="1713" class="Symbol"
+      >(</a
+      ><a name="1714" href="Equality.html#504" class="Function"
+      >extensionality</a
+      ><a name="1728" class="Symbol"
+      >(&#955;</a
+      ><a name="1730"
+      > </a
+      ><a name="1731" href="DrinkerParadox.html#1731" class="Bound"
+      >a</a
+      ><a name="1732"
+      > </a
+      ><a name="1733" class="Symbol"
+      >&#8594;</a
+      ><a name="1734"
+      > </a
+      ><a name="1735" href="Two.html#1716" class="Function"
+      >min</a
+      ><a name="1738"
+      > </a
+      ><a name="1739" href="DrinkerParadox.html#1731" class="Bound"
+      >a</a
+      ><a name="1740"
+      > </a
+      ><a name="1741" class="Symbol"
+      >(</a
+      ><a name="1742" href="DrinkerParadox.html#1160" class="Bound"
+      >p</a
+      ><a name="1743" class="Symbol"
+      >(</a
+      ><a name="1744" href="GenericConvergentSequence.html#574" class="Function"
+      >underline</a
+      ><a name="1753" class="Symbol"
+      >(</a
+      ><a name="1754" href="Naturals.html#93" class="InductiveConstructor"
+      >succ</a
+      ><a name="1758"
+      > </a
+      ><a name="1759" href="DrinkerParadox.html#1456" class="Bound"
+      >n</a
+      ><a name="1760" class="Symbol"
+      >))))</a
+      ><a name="1764"
+      > </a
+      ><a name="1765" href="DrinkerParadox.html#1489" class="Function"
+      >s</a
+      ><a name="1766" class="Symbol"
+      >)</a
+      ><a name="1767"
+      >
+
+  </a
+      ><a name="1771" href="DrinkerParadox.html#1771" class="Function"
+      >Dagger&#8321;</a
+      ><a name="1778"
+      > </a
+      ><a name="1779" class="Symbol"
+      >:</a
+      ><a name="1780"
+      > </a
+      ><a name="1781" href="DrinkerParadox.html#1228" class="Function"
+      >x</a
+      ><a name="1782"
+      > </a
+      ><a name="1783" href="Cantor.html#212" class="Function Operator"
+      >&#8803;</a
+      ><a name="1784"
+      > </a
+      ><a name="1785" href="GenericConvergentSequence.html#1427" class="Function"
+      >&#8734;</a
+      ><a name="1786"
+      > </a
+      ><a name="1787" class="Symbol"
+      >&#8594;</a
+      ><a name="1788"
+      > </a
+      ><a name="1789" class="Symbol"
+      >&#8704;(</a
+      ><a name="1791" href="DrinkerParadox.html#1791" class="Bound"
+      >n</a
+      ><a name="1792"
+      > </a
+      ><a name="1793" class="Symbol"
+      >:</a
+      ><a name="1794"
+      > </a
+      ><a name="1795" href="Naturals.html#48" class="Datatype"
+      >&#8469;</a
+      ><a name="1796" class="Symbol"
+      >)</a
+      ><a name="1797"
+      > </a
+      ><a name="1798" class="Symbol"
+      >&#8594;</a
+      ><a name="1799"
+      > </a
+      ><a name="1800" href="DrinkerParadox.html#1160" class="Bound"
+      >p</a
+      ><a name="1801" class="Symbol"
+      >(</a
+      ><a name="1802" href="GenericConvergentSequence.html#574" class="Function"
+      >underline</a
+      ><a name="1811"
+      > </a
+      ><a name="1812" href="DrinkerParadox.html#1791" class="Bound"
+      >n</a
+      ><a name="1813" class="Symbol"
+      >)</a
+      ><a name="1814"
+      > </a
+      ><a name="1815" href="Equality.html#48" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="1816"
+      > </a
+      ><a name="1817" href="Two.html#132" class="InductiveConstructor"
+      >&#8321;</a
+      ><a name="1818"
+      >
+  </a
+      ><a name="1821" href="DrinkerParadox.html#1771" class="Function"
+      >Dagger&#8321;</a
+      ><a name="1828"
+      > </a
+      ><a name="1829" href="DrinkerParadox.html#1829" class="Bound"
+      >r</a
+      ><a name="1830"
+      > </a
+      ><a name="1831" href="Naturals.html#68" class="InductiveConstructor"
+      >0</a
+      ><a name="1832"
+      > </a
+      ><a name="1833" class="Symbol"
+      >=</a
+      ><a name="1834"
+      > </a
+      ><a name="1835" href="DrinkerParadox.html#1829" class="Bound"
+      >r</a
+      ><a name="1836"
+      > </a
+      ><a name="1837" class="Number"
+      >0</a
+      ><a name="1838"
+      >
+  </a
+      ><a name="1841" href="DrinkerParadox.html#1771" class="Function"
+      >Dagger&#8321;</a
+      ><a name="1848"
+      > </a
+      ><a name="1849" href="DrinkerParadox.html#1849" class="Bound"
+      >r</a
+      ><a name="1850"
+      > </a
+      ><a name="1851" class="Symbol"
+      >(</a
+      ><a name="1852" href="Naturals.html#93" class="InductiveConstructor"
+      >succ</a
+      ><a name="1856"
+      > </a
+      ><a name="1857" href="DrinkerParadox.html#1857" class="Bound"
+      >n</a
+      ><a name="1858" class="Symbol"
+      >)</a
+      ><a name="1859"
+      > </a
+      ><a name="1860" class="Symbol"
+      >=</a
+      ><a name="1861"
+      > </a
+      ><a name="1862" href="Equality.html#332" class="Function"
+      >transitivity</a
+      ><a name="1874"
+      > </a
+      ><a name="1875" href="DrinkerParadox.html#1978" class="Function"
+      >u</a
+      ><a name="1876"
+      > </a
+      ><a name="1877" href="DrinkerParadox.html#1927" class="Function"
+      >t</a
+      ><a name="1878"
+      >
+   </a
+      ><a name="1882" class="Keyword"
+      >where</a
+      ><a name="1887"
+      > </a
+      ><a name="1888" href="DrinkerParadox.html#1888" class="Function"
+      >s</a
+      ><a name="1889"
+      > </a
+      ><a name="1890" class="Symbol"
+      >:</a
+      ><a name="1891"
+      > </a
+      ><a name="1892" href="DrinkerParadox.html#1228" class="Function"
+      >x</a
+      ><a name="1893"
+      > </a
+      ><a name="1894" href="DrinkerParadox.html#1857" class="Bound"
+      >n</a
+      ><a name="1895"
+      > </a
+      ><a name="1896" href="Equality.html#48" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="1897"
+      > </a
+      ><a name="1898" href="Two.html#132" class="InductiveConstructor"
+      >&#8321;</a
+      ><a name="1899"
+      >
+         </a
+      ><a name="1909" href="DrinkerParadox.html#1888" class="Function"
+      >s</a
+      ><a name="1910"
+      > </a
+      ><a name="1911" class="Symbol"
+      >=</a
+      ><a name="1912"
+      > </a
+      ><a name="1913" href="DrinkerParadox.html#1849" class="Bound"
+      >r</a
+      ><a name="1914"
+      > </a
+      ><a name="1915" href="DrinkerParadox.html#1857" class="Bound"
+      >n</a
+      ><a name="1916"
+      >
+
+         </a
+      ><a name="1927" href="DrinkerParadox.html#1927" class="Function"
+      >t</a
+      ><a name="1928"
+      > </a
+      ><a name="1929" class="Symbol"
+      >:</a
+      ><a name="1930"
+      > </a
+      ><a name="1931" href="DrinkerParadox.html#1228" class="Function"
+      >x</a
+      ><a name="1932" class="Symbol"
+      >(</a
+      ><a name="1933" href="Naturals.html#93" class="InductiveConstructor"
+      >succ</a
+      ><a name="1937"
+      > </a
+      ><a name="1938" href="DrinkerParadox.html#1857" class="Bound"
+      >n</a
+      ><a name="1939" class="Symbol"
+      >)</a
+      ><a name="1940"
+      > </a
+      ><a name="1941" href="Equality.html#48" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="1942"
+      > </a
+      ><a name="1943" href="Two.html#132" class="InductiveConstructor"
+      >&#8321;</a
+      ><a name="1944"
+      >
+         </a
+      ><a name="1954" href="DrinkerParadox.html#1927" class="Function"
+      >t</a
+      ><a name="1955"
+      > </a
+      ><a name="1956" class="Symbol"
+      >=</a
+      ><a name="1957"
+      > </a
+      ><a name="1958" href="DrinkerParadox.html#1849" class="Bound"
+      >r</a
+      ><a name="1959" class="Symbol"
+      >(</a
+      ><a name="1960" href="Naturals.html#93" class="InductiveConstructor"
+      >succ</a
+      ><a name="1964"
+      > </a
+      ><a name="1965" href="DrinkerParadox.html#1857" class="Bound"
+      >n</a
+      ><a name="1966" class="Symbol"
+      >)</a
+      ><a name="1967"
+      >
+
+         </a
+      ><a name="1978" href="DrinkerParadox.html#1978" class="Function"
+      >u</a
+      ><a name="1979"
+      > </a
+      ><a name="1980" class="Symbol"
+      >:</a
+      ><a name="1981"
+      > </a
+      ><a name="1982" href="DrinkerParadox.html#1160" class="Bound"
+      >p</a
+      ><a name="1983" class="Symbol"
+      >(</a
+      ><a name="1984" href="GenericConvergentSequence.html#574" class="Function"
+      >underline</a
+      ><a name="1993" class="Symbol"
+      >(</a
+      ><a name="1994" href="Naturals.html#93" class="InductiveConstructor"
+      >succ</a
+      ><a name="1998"
+      > </a
+      ><a name="1999" href="DrinkerParadox.html#1857" class="Bound"
+      >n</a
+      ><a name="2000" class="Symbol"
+      >))</a
+      ><a name="2002"
+      > </a
+      ><a name="2003" href="Equality.html#48" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="2004"
+      > </a
+      ><a name="2005" href="DrinkerParadox.html#1228" class="Function"
+      >x</a
+      ><a name="2006" class="Symbol"
+      >(</a
+      ><a name="2007" href="Naturals.html#93" class="InductiveConstructor"
+      >succ</a
+      ><a name="2011"
+      > </a
+      ><a name="2012" href="DrinkerParadox.html#1857" class="Bound"
+      >n</a
+      ><a name="2013" class="Symbol"
+      >)</a
+      ><a name="2014"
+      >
+         </a
+      ><a name="2024" href="DrinkerParadox.html#1978" class="Function"
+      >u</a
+      ><a name="2025"
+      > </a
+      ><a name="2026" class="Symbol"
+      >=</a
+      ><a name="2027"
+      > </a
+      ><a name="2028" href="Equality.html#432" class="Function"
+      >symmetry</a
+      ><a name="2036" class="Symbol"
+      >(</a
+      ><a name="2037" href="Equality.html#504" class="Function"
+      >extensionality</a
+      ><a name="2051" class="Symbol"
+      >(&#955;</a
+      ><a name="2053"
+      > </a
+      ><a name="2054" href="DrinkerParadox.html#2054" class="Bound"
+      >a</a
+      ><a name="2055"
+      > </a
+      ><a name="2056" class="Symbol"
+      >&#8594;</a
+      ><a name="2057"
+      > </a
+      ><a name="2058" href="Two.html#1716" class="Function"
+      >min</a
+      ><a name="2061"
+      > </a
+      ><a name="2062" href="DrinkerParadox.html#2054" class="Bound"
+      >a</a
+      ><a name="2063"
+      > </a
+      ><a name="2064" class="Symbol"
+      >(</a
+      ><a name="2065" href="DrinkerParadox.html#1160" class="Bound"
+      >p</a
+      ><a name="2066" class="Symbol"
+      >(</a
+      ><a name="2067" href="GenericConvergentSequence.html#574" class="Function"
+      >underline</a
+      ><a name="2076" class="Symbol"
+      >(</a
+      ><a name="2077" href="Naturals.html#93" class="InductiveConstructor"
+      >succ</a
+      ><a name="2081"
+      > </a
+      ><a name="2082" href="DrinkerParadox.html#1857" class="Bound"
+      >n</a
+      ><a name="2083" class="Symbol"
+      >))))</a
+      ><a name="2087"
+      > </a
+      ><a name="2088" href="DrinkerParadox.html#1888" class="Function"
+      >s</a
+      ><a name="2089" class="Symbol"
+      >)</a
+      ><a name="2090"
+      >
+
+  </a
+      ><a name="2094" href="DrinkerParadox.html#2094" class="Function"
+      >Claim&#8320;</a
+      ><a name="2100"
+      > </a
+      ><a name="2101" class="Symbol"
+      >:</a
+      ><a name="2102"
+      > </a
+      ><a name="2103" href="DrinkerParadox.html#1160" class="Bound"
+      >p</a
+      ><a name="2104"
+      > </a
+      ><a name="2105" href="DrinkerParadox.html#1228" class="Function"
+      >x</a
+      ><a name="2106"
+      > </a
+      ><a name="2107" href="Equality.html#48" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="2108"
+      > </a
+      ><a name="2109" href="Two.html#132" class="InductiveConstructor"
+      >&#8321;</a
+      ><a name="2110"
+      > </a
+      ><a name="2111" class="Symbol"
+      >&#8594;</a
+      ><a name="2112"
+      > </a
+      ><a name="2113" class="Symbol"
+      >&#8704;(</a
+      ><a name="2115" href="DrinkerParadox.html#2115" class="Bound"
+      >n</a
+      ><a name="2116"
+      > </a
+      ><a name="2117" class="Symbol"
+      >:</a
+      ><a name="2118"
+      > </a
+      ><a name="2119" href="Naturals.html#48" class="Datatype"
+      >&#8469;</a
+      ><a name="2120" class="Symbol"
+      >)</a
+      ><a name="2121"
+      > </a
+      ><a name="2122" class="Symbol"
+      >&#8594;</a
+      ><a name="2123"
+      > </a
+      ><a name="2124" href="Logic.html#315" class="Function Operator"
+      >&#172;</a
+      ><a name="2125" class="Symbol"
+      >(</a
+      ><a name="2126" href="DrinkerParadox.html#1228" class="Function"
+      >x</a
+      ><a name="2127"
+      > </a
+      ><a name="2128" href="Cantor.html#212" class="Function Operator"
+      >&#8803;</a
+      ><a name="2129"
+      > </a
+      ><a name="2130" href="GenericConvergentSequence.html#574" class="Function"
+      >underline</a
+      ><a name="2139"
+      > </a
+      ><a name="2140" href="DrinkerParadox.html#2115" class="Bound"
+      >n</a
+      ><a name="2141" class="Symbol"
+      >)</a
+      ><a name="2142"
+      >
+  </a
+      ><a name="2146" href="DrinkerParadox.html#2094" class="Function"
+      >Claim&#8320;</a
+      ><a name="2152"
+      > </a
+      ><a name="2153" href="DrinkerParadox.html#2153" class="Bound"
+      >r</a
+      ><a name="2154"
+      > </a
+      ><a name="2155" href="DrinkerParadox.html#2155" class="Bound"
+      >n</a
+      ><a name="2156"
+      > </a
+      ><a name="2157" href="DrinkerParadox.html#2157" class="Bound"
+      >s</a
+      ><a name="2158"
+      > </a
+      ><a name="2159" class="Symbol"
+      >=</a
+      ><a name="2160"
+      > </a
+      ><a name="2161" href="Two.html#390" class="Function"
+      >Lemma[b&#8801;&#8321;&#8594;b&#8800;&#8320;]</a
+      ><a name="2175"
+      > </a
+      ><a name="2176" href="DrinkerParadox.html#2153" class="Bound"
+      >r</a
+      ><a name="2177"
+      > </a
+      ><a name="2178" class="Symbol"
+      >(</a
+      ><a name="2179" href="DrinkerParadox.html#2197" class="Function"
+      >Lemma</a
+      ><a name="2184"
+      > </a
+      ><a name="2185" href="DrinkerParadox.html#2157" class="Bound"
+      >s</a
+      ><a name="2186" class="Symbol"
+      >)</a
+      ><a name="2187"
+      >
+   </a
+      ><a name="2191" class="Keyword"
+      >where</a
+      ><a name="2196"
+      > </a
+      ><a name="2197" href="DrinkerParadox.html#2197" class="Function"
+      >Lemma</a
+      ><a name="2202"
+      > </a
+      ><a name="2203" class="Symbol"
+      >:</a
+      ><a name="2204"
+      > </a
+      ><a name="2205" href="DrinkerParadox.html#1228" class="Function"
+      >x</a
+      ><a name="2206"
+      > </a
+      ><a name="2207" href="Cantor.html#212" class="Function Operator"
+      >&#8803;</a
+      ><a name="2208"
+      > </a
+      ><a name="2209" href="GenericConvergentSequence.html#574" class="Function"
+      >underline</a
+      ><a name="2218"
+      > </a
+      ><a name="2219" href="DrinkerParadox.html#2155" class="Bound"
+      >n</a
+      ><a name="2220"
+      > </a
+      ><a name="2221" class="Symbol"
+      >&#8594;</a
+      ><a name="2222"
+      > </a
+      ><a name="2223" href="DrinkerParadox.html#1160" class="Bound"
+      >p</a
+      ><a name="2224"
+      > </a
+      ><a name="2225" href="DrinkerParadox.html#1228" class="Function"
+      >x</a
+      ><a name="2226"
+      > </a
+      ><a name="2227" href="Equality.html#48" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="2228"
+      > </a
+      ><a name="2229" href="Two.html#125" class="InductiveConstructor"
+      >&#8320;</a
+      ><a name="2230"
+      >
+         </a
+      ><a name="2240" href="DrinkerParadox.html#2197" class="Function"
+      >Lemma</a
+      ><a name="2245"
+      > </a
+      ><a name="2246" href="DrinkerParadox.html#2246" class="Bound"
+      >r</a
+      ><a name="2247"
+      > </a
+      ><a name="2248" class="Symbol"
+      >=</a
+      ><a name="2249"
+      > </a
+      ><a name="2250" href="Equality.html#332" class="Function"
+      >transitivity</a
+      ><a name="2262"
+      > </a
+      ><a name="2263" class="Symbol"
+      >(</a
+      ><a name="2264" href="DrinkerParadox.html#1162" class="Bound"
+      >extensionality-of-p</a
+      ><a name="2283"
+      > </a
+      ><a name="2284" href="DrinkerParadox.html#2246" class="Bound"
+      >r</a
+      ><a name="2285" class="Symbol"
+      >)</a
+      ><a name="2286"
+      > </a
+      ><a name="2287" class="Symbol"
+      >(</a
+      ><a name="2288" href="DrinkerParadox.html#1362" class="Function"
+      >Dagger&#8320;</a
+      ><a name="2295"
+      > </a
+      ><a name="2296" href="DrinkerParadox.html#2155" class="Bound"
+      >n</a
+      ><a name="2297"
+      > </a
+      ><a name="2298" href="DrinkerParadox.html#2246" class="Bound"
+      >r</a
+      ><a name="2299" class="Symbol"
+      >)</a
+      ><a name="2300"
+      >
+
+  </a
+      ><a name="2304" href="DrinkerParadox.html#2304" class="Function"
+      >Claim&#8321;</a
+      ><a name="2310"
+      > </a
+      ><a name="2311" class="Symbol"
+      >:</a
+      ><a name="2312"
+      > </a
+      ><a name="2313" href="DrinkerParadox.html#1160" class="Bound"
+      >p</a
+      ><a name="2314"
+      > </a
+      ><a name="2315" href="DrinkerParadox.html#1228" class="Function"
+      >x</a
+      ><a name="2316"
+      > </a
+      ><a name="2317" href="Equality.html#48" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="2318"
+      > </a
+      ><a name="2319" href="Two.html#132" class="InductiveConstructor"
+      >&#8321;</a
+      ><a name="2320"
+      > </a
+      ><a name="2321" class="Symbol"
+      >&#8594;</a
+      ><a name="2322"
+      > </a
+      ><a name="2323" href="DrinkerParadox.html#1228" class="Function"
+      >x</a
+      ><a name="2324"
+      > </a
+      ><a name="2325" href="Cantor.html#212" class="Function Operator"
+      >&#8803;</a
+      ><a name="2326"
+      > </a
+      ><a name="2327" href="GenericConvergentSequence.html#1427" class="Function"
+      >&#8734;</a
+      ><a name="2328"
+      >
+  </a
+      ><a name="2331" href="DrinkerParadox.html#2304" class="Function"
+      >Claim&#8321;</a
+      ><a name="2337"
+      > </a
+      ><a name="2338" href="DrinkerParadox.html#2338" class="Bound"
+      >r</a
+      ><a name="2339"
+      > </a
+      ><a name="2340" class="Symbol"
+      >=</a
+      ><a name="2341"
+      > </a
+      ><a name="2342" href="GenericConvergentSequence.html#3867" class="Function"
+      >Lemma[&#8469;&#8734;&#8726;underline[&#8469;]&#8838;[&#8734;]]</a
+      ><a name="2368"
+      > </a
+      ><a name="2369" href="DrinkerParadox.html#1228" class="Function"
+      >x</a
+      ><a name="2370"
+      > </a
+      ><a name="2371" href="DrinkerParadox.html#1315" class="Function"
+      >Lemma&#8320;</a
+      ><a name="2377"
+      > </a
+      ><a name="2378" class="Symbol"
+      >(</a
+      ><a name="2379" href="DrinkerParadox.html#2094" class="Function"
+      >Claim&#8320;</a
+      ><a name="2385"
+      > </a
+      ><a name="2386" href="DrinkerParadox.html#2338" class="Bound"
+      >r</a
+      ><a name="2387" class="Symbol"
+      >)</a
+      ><a name="2388"
+      >
+
+  </a
+      ><a name="2393" href="DrinkerParadox.html#2393" class="Function"
+      >Claim&#8322;</a
+      ><a name="2399"
+      > </a
+      ><a name="2400" class="Symbol"
+      >:</a
+      ><a name="2401"
+      > </a
+      ><a name="2402" href="DrinkerParadox.html#1160" class="Bound"
+      >p</a
+      ><a name="2403"
+      > </a
+      ><a name="2404" href="DrinkerParadox.html#1228" class="Function"
+      >x</a
+      ><a name="2405"
+      > </a
+      ><a name="2406" href="Equality.html#48" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="2407"
+      > </a
+      ><a name="2408" href="Two.html#132" class="InductiveConstructor"
+      >&#8321;</a
+      ><a name="2409"
+      > </a
+      ><a name="2410" class="Symbol"
+      >&#8594;</a
+      ><a name="2411"
+      > </a
+      ><a name="2412" class="Symbol"
+      >&#8704;(</a
+      ><a name="2414" href="DrinkerParadox.html#2414" class="Bound"
+      >n</a
+      ><a name="2415"
+      > </a
+      ><a name="2416" class="Symbol"
+      >:</a
+      ><a name="2417"
+      > </a
+      ><a name="2418" href="Naturals.html#48" class="Datatype"
+      >&#8469;</a
+      ><a name="2419" class="Symbol"
+      >)</a
+      ><a name="2420"
+      > </a
+      ><a name="2421" class="Symbol"
+      >&#8594;</a
+      ><a name="2422"
+      > </a
+      ><a name="2423" href="DrinkerParadox.html#1160" class="Bound"
+      >p</a
+      ><a name="2424" class="Symbol"
+      >(</a
+      ><a name="2425" href="GenericConvergentSequence.html#574" class="Function"
+      >underline</a
+      ><a name="2434"
+      > </a
+      ><a name="2435" href="DrinkerParadox.html#2414" class="Bound"
+      >n</a
+      ><a name="2436" class="Symbol"
+      >)</a
+      ><a name="2437"
+      > </a
+      ><a name="2438" href="Equality.html#48" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="2439"
+      > </a
+      ><a name="2440" href="Two.html#132" class="InductiveConstructor"
+      >&#8321;</a
+      ><a name="2441"
+      >
+  </a
+      ><a name="2444" href="DrinkerParadox.html#2393" class="Function"
+      >Claim&#8322;</a
+      ><a name="2450"
+      > </a
+      ><a name="2451" href="DrinkerParadox.html#2451" class="Bound"
+      >r</a
+      ><a name="2452"
+      > </a
+      ><a name="2453" class="Symbol"
+      >=</a
+      ><a name="2454"
+      > </a
+      ><a name="2455" href="DrinkerParadox.html#1771" class="Function"
+      >Dagger&#8321;</a
+      ><a name="2462" class="Symbol"
+      >(</a
+      ><a name="2463" href="DrinkerParadox.html#2304" class="Function"
+      >Claim&#8321;</a
+      ><a name="2469"
+      > </a
+      ><a name="2470" href="DrinkerParadox.html#2451" class="Bound"
+      >r</a
+      ><a name="2471" class="Symbol"
+      >)</a
+      ><a name="2472"
+      >
+
+  </a
+      ><a name="2476" href="DrinkerParadox.html#2476" class="Function"
+      >Claim&#8323;</a
+      ><a name="2482"
+      > </a
+      ><a name="2483" class="Symbol"
+      >:</a
+      ><a name="2484"
+      > </a
+      ><a name="2485" href="DrinkerParadox.html#1160" class="Bound"
+      >p</a
+      ><a name="2486"
+      > </a
+      ><a name="2487" href="DrinkerParadox.html#1228" class="Function"
+      >x</a
+      ><a name="2488"
+      > </a
+      ><a name="2489" href="Equality.html#48" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="2490"
+      > </a
+      ><a name="2491" href="Two.html#132" class="InductiveConstructor"
+      >&#8321;</a
+      ><a name="2492"
+      > </a
+      ><a name="2493" class="Symbol"
+      >&#8594;</a
+      ><a name="2494"
+      > </a
+      ><a name="2495" href="DrinkerParadox.html#1160" class="Bound"
+      >p</a
+      ><a name="2496"
+      > </a
+      ><a name="2497" href="GenericConvergentSequence.html#1427" class="Function"
+      >&#8734;</a
+      ><a name="2498"
+      > </a
+      ><a name="2499" href="Equality.html#48" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="2500"
+      > </a
+      ><a name="2501" href="Two.html#132" class="InductiveConstructor"
+      >&#8321;</a
+      ><a name="2502"
+      >
+  </a
+      ><a name="2505" href="DrinkerParadox.html#2476" class="Function"
+      >Claim&#8323;</a
+      ><a name="2511"
+      > </a
+      ><a name="2512" href="DrinkerParadox.html#2512" class="Bound"
+      >r</a
+      ><a name="2513"
+      > </a
+      ><a name="2514" class="Symbol"
+      >=</a
+      ><a name="2515"
+      > </a
+      ><a name="2516" href="DrinkerParadox.html#2564" class="Function"
+      >fact</a
+      ><a name="2520"
+      > </a
+      ><a name="2521" href="DrinkerParadox.html#2512" class="Bound"
+      >r</a
+      ><a name="2522"
+      > </a
+      ><a name="2523" class="Symbol"
+      >(</a
+      ><a name="2524" href="DrinkerParadox.html#1162" class="Bound"
+      >extensionality-of-p</a
+      ><a name="2543" class="Symbol"
+      >(</a
+      ><a name="2544" href="DrinkerParadox.html#2304" class="Function"
+      >Claim&#8321;</a
+      ><a name="2550"
+      > </a
+      ><a name="2551" href="DrinkerParadox.html#2512" class="Bound"
+      >r</a
+      ><a name="2552" class="Symbol"
+      >))</a
+      ><a name="2554"
+      >
+   </a
+      ><a name="2558" class="Keyword"
+      >where</a
+      ><a name="2563"
+      > </a
+      ><a name="2564" href="DrinkerParadox.html#2564" class="Function"
+      >fact</a
+      ><a name="2568"
+      > </a
+      ><a name="2569" class="Symbol"
+      >:</a
+      ><a name="2570"
+      > </a
+      ><a name="2571" class="Symbol"
+      >&#8704;{</a
+      ><a name="2573" href="DrinkerParadox.html#2573" class="Bound"
+      >a</a
+      ><a name="2574"
+      > </a
+      ><a name="2575" href="DrinkerParadox.html#2575" class="Bound"
+      >b</a
+      ><a name="2576"
+      > </a
+      ><a name="2577" class="Symbol"
+      >:</a
+      ><a name="2578"
+      > </a
+      ><a name="2579" href="Two.html#110" class="Datatype"
+      >&#8322;</a
+      ><a name="2580" class="Symbol"
+      >}</a
+      ><a name="2581"
+      > </a
+      ><a name="2582" class="Symbol"
+      >&#8594;</a
+      ><a name="2583"
+      > </a
+      ><a name="2584" href="DrinkerParadox.html#2573" class="Bound"
+      >a</a
+      ><a name="2585"
+      > </a
+      ><a name="2586" href="Equality.html#48" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="2587"
+      > </a
+      ><a name="2588" href="Two.html#132" class="InductiveConstructor"
+      >&#8321;</a
+      ><a name="2589"
+      > </a
+      ><a name="2590" class="Symbol"
+      >&#8594;</a
+      ><a name="2591"
+      > </a
+      ><a name="2592" href="DrinkerParadox.html#2573" class="Bound"
+      >a</a
+      ><a name="2593"
+      > </a
+      ><a name="2594" href="Equality.html#48" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="2595"
+      > </a
+      ><a name="2596" href="DrinkerParadox.html#2575" class="Bound"
+      >b</a
+      ><a name="2597"
+      > </a
+      ><a name="2598" class="Symbol"
+      >&#8594;</a
+      ><a name="2599"
+      > </a
+      ><a name="2600" href="DrinkerParadox.html#2575" class="Bound"
+      >b</a
+      ><a name="2601"
+      > </a
+      ><a name="2602" href="Equality.html#48" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="2603"
+      > </a
+      ><a name="2604" href="Two.html#132" class="InductiveConstructor"
+      >&#8321;</a
+      ><a name="2605"
+      >
+         </a
+      ><a name="2615" href="DrinkerParadox.html#2564" class="Function"
+      >fact</a
+      ><a name="2619"
+      > </a
+      ><a name="2620" href="Equality.html#82" class="InductiveConstructor"
+      >refl</a
+      ><a name="2624"
+      > </a
+      ><a name="2625" href="Equality.html#82" class="InductiveConstructor"
+      >refl</a
+      ><a name="2629"
+      > </a
+      ><a name="2630" class="Symbol"
+      >=</a
+      ><a name="2631"
+      > </a
+      ><a name="2632" href="Equality.html#82" class="InductiveConstructor"
+      >refl</a
+      ><a name="2636"
+      >
+
+  </a
+      ><a name="2640" href="DrinkerParadox.html#2640" class="Function"
+      >Lemma&#8321;</a
+      ><a name="2646"
+      > </a
+      ><a name="2647" class="Symbol"
+      >:</a
+      ><a name="2648"
+      > </a
+      ><a name="2649" href="DrinkerParadox.html#1160" class="Bound"
+      >p</a
+      ><a name="2650"
+      > </a
+      ><a name="2651" href="DrinkerParadox.html#1228" class="Function"
+      >x</a
+      ><a name="2652"
+      > </a
+      ><a name="2653" href="Equality.html#48" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="2654"
+      > </a
+      ><a name="2655" href="Two.html#132" class="InductiveConstructor"
+      >&#8321;</a
+      ><a name="2656"
+      > </a
+      ><a name="2657" class="Symbol"
+      >&#8594;</a
+      ><a name="2658"
+      >  </a
+      ><a name="2660" class="Symbol"
+      >&#8704;(</a
+      ><a name="2662" href="DrinkerParadox.html#2662" class="Bound"
+      >y</a
+      ><a name="2663"
+      > </a
+      ><a name="2664" class="Symbol"
+      >:</a
+      ><a name="2665"
+      > </a
+      ><a name="2666" href="Cantor.html#133" class="Function"
+      >&#8322;&#8469;</a
+      ><a name="2668" class="Symbol"
+      >)</a
+      ><a name="2669"
+      > </a
+      ><a name="2670" class="Symbol"
+      >&#8594;</a
+      ><a name="2671"
+      > </a
+      ><a name="2672" href="DrinkerParadox.html#2662" class="Bound"
+      >y</a
+      ><a name="2673"
+      > </a
+      ><a name="2674" href="GenericConvergentSequence.html#326" class="Function Operator"
+      >&#8712;</a
+      ><a name="2675"
+      > </a
+      ><a name="2676" href="GenericConvergentSequence.html#186" class="Function"
+      >&#8469;&#8734;</a
+      ><a name="2678"
+      > </a
+      ><a name="2679" class="Symbol"
+      >&#8594;</a
+      ><a name="2680"
+      > </a
+      ><a name="2681" href="DrinkerParadox.html#1160" class="Bound"
+      >p</a
+      ><a name="2682"
+      > </a
+      ><a name="2683" href="DrinkerParadox.html#2662" class="Bound"
+      >y</a
+      ><a name="2684"
+      > </a
+      ><a name="2685" href="Equality.html#48" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="2686"
+      > </a
+      ><a name="2687" href="Two.html#132" class="InductiveConstructor"
+      >&#8321;</a
+      ><a name="2688"
+      >
+  </a
+      ><a name="2691" href="DrinkerParadox.html#2640" class="Function"
+      >Lemma&#8321;</a
+      ><a name="2697"
+      > </a
+      ><a name="2698" href="DrinkerParadox.html#2698" class="Bound"
+      >r</a
+      ><a name="2699"
+      > </a
+      ><a name="2700" class="Symbol"
+      >=</a
+      ><a name="2701"
+      > </a
+      ><a name="2702" href="GenericConvergentSequence.html#4435" class="Function"
+      >Lemma[density]</a
+      ><a name="2716"
+      > </a
+      ><a name="2717" href="DrinkerParadox.html#1160" class="Bound"
+      >p</a
+      ><a name="2718"
+      > </a
+      ><a name="2719" href="DrinkerParadox.html#1162" class="Bound"
+      >extensionality-of-p</a
+      ><a name="2738"
+      > </a
+      ><a name="2739" class="Symbol"
+      >(</a
+      ><a name="2740" href="DrinkerParadox.html#2393" class="Function"
+      >Claim&#8322;</a
+      ><a name="2746"
+      > </a
+      ><a name="2747" href="DrinkerParadox.html#2698" class="Bound"
+      >r</a
+      ><a name="2748" class="Symbol"
+      >)</a
+      ><a name="2749"
+      > </a
+      ><a name="2750" class="Symbol"
+      >(</a
+      ><a name="2751" href="DrinkerParadox.html#2476" class="Function"
+      >Claim&#8323;</a
+      ><a name="2757"
+      > </a
+      ><a name="2758" href="DrinkerParadox.html#2698" class="Bound"
+      >r</a
+      ><a name="2759" class="Symbol"
+      >)</a
+      ><a name="2760"
+      >
+</a
+      ></pre
+    ></body
+  ></html
+>

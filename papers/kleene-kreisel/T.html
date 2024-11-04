@@ -1,0 +1,1988 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+><head
+  ><title
+    >T</title
+    ><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"
+     /><meta http-equiv="Content-Style-Type" content="text/css"
+     /><link href="Agda.css" rel="stylesheet" type="text/css"
+     /></head
+  ><body
+  ><pre
+    ><a name="1" class="Comment"
+      >Chuangjie Xu, 2013</a
+      ><a name="19"
+      >
+
+</a
+      ><a name="21" class="Comment"
+      >This corresponds to part of Section 4.2 of the paper</a
+      ><a name="73"
+      >
+</a
+      ><a name="74" class="Comment"
+      >http://www.cs.bham.ac.uk/~mhe/papers/kleene-kreisel.pdf</a
+      ><a name="129"
+      >
+
+</a
+      ><a name="131" class="Comment"
+      >We borrow the definition of the lambda calculus version of system T</a
+      ><a name="198"
+      >
+</a
+      ><a name="199" class="Comment"
+      >from Martin Escardo's Agda proof of Continuity of Godel's system T</a
+      ><a name="265"
+      >
+</a
+      ><a name="266" class="Comment"
+      >functionals via effectful forcing, which is available on</a
+      ><a name="322"
+      >
+
+</a
+      ><a name="324" class="Comment"
+      >http://www.cs.bham.ac.uk/~mhe/dialogue/dialogue-lambda.html.</a
+      ><a name="384"
+      >
+
+\begin{code}
+
+</a
+      ><a name="400" class="Keyword"
+      >module</a
+      ><a name="406"
+      > </a
+      ><a name="407" href="T.html#1" class="Module"
+      >T</a
+      ><a name="408"
+      > </a
+      ><a name="409" class="Keyword"
+      >where</a
+      ><a name="414"
+      >
+
+</a
+      ><a name="416" class="Keyword"
+      >open</a
+      ><a name="420"
+      > </a
+      ><a name="421" class="Keyword"
+      >import</a
+      ><a name="427"
+      > </a
+      ><a name="428" href="MiniLibrary.html#1" class="Module"
+      >MiniLibrary</a
+      ><a name="439"
+      >
+</a
+      ><a name="440" class="Keyword"
+      >open</a
+      ><a name="444"
+      > </a
+      ><a name="445" class="Keyword"
+      >import</a
+      ><a name="451"
+      > </a
+      ><a name="452" href="Sequence.html#1" class="Module"
+      >Sequence</a
+      ><a name="460"
+      >
+</a
+      ><a name="461" class="Keyword"
+      >open</a
+      ><a name="465"
+      > </a
+      ><a name="466" class="Keyword"
+      >import</a
+      ><a name="472"
+      > </a
+      ><a name="473" href="Space.html#1" class="Module"
+      >Space</a
+      ><a name="478"
+      >
+</a
+      ><a name="479" class="Keyword"
+      >open</a
+      ><a name="483"
+      > </a
+      ><a name="484" class="Keyword"
+      >import</a
+      ><a name="490"
+      > </a
+      ><a name="491" href="Space-product.html#1" class="Module"
+      >Space-product</a
+      ><a name="504"
+      >
+</a
+      ><a name="505" class="Keyword"
+      >open</a
+      ><a name="509"
+      > </a
+      ><a name="510" class="Keyword"
+      >import</a
+      ><a name="516"
+      > </a
+      ><a name="517" href="Space-exponential.html#1" class="Module"
+      >Space-exponential</a
+      ><a name="534"
+      >
+</a
+      ><a name="535" class="Keyword"
+      >open</a
+      ><a name="539"
+      > </a
+      ><a name="540" class="Keyword"
+      >import</a
+      ><a name="546"
+      > </a
+      ><a name="547" href="Space-discrete.html#1" class="Module"
+      >Space-discrete</a
+      ><a name="561"
+      >
+</a
+      ><a name="562" class="Keyword"
+      >open</a
+      ><a name="566"
+      > </a
+      ><a name="567" class="Keyword"
+      >import</a
+      ><a name="573"
+      > </a
+      ><a name="574" href="Inequality.html#1" class="Module"
+      >Inequality</a
+      ><a name="584"
+      >
+</a
+      ><a name="585" class="Keyword"
+      >open</a
+      ><a name="589"
+      > </a
+      ><a name="590" class="Keyword"
+      >import</a
+      ><a name="596"
+      > </a
+      ><a name="597" href="UniformContinuity.html#1" class="Module"
+      >UniformContinuity</a
+      ><a name="614"
+      >
+</a
+      ><a name="615" class="Keyword"
+      >open</a
+      ><a name="619"
+      > </a
+      ><a name="620" class="Keyword"
+      >import</a
+      ><a name="626"
+      > </a
+      ><a name="627" href="Fan.html#1" class="Module"
+      >Fan</a
+      ><a name="630"
+      >
+
+
+</a
+      ><a name="633" class="Keyword"
+      >infixl</a
+      ><a name="639"
+      > </a
+      ><a name="640" class="Number"
+      >10</a
+      ><a name="642"
+      > _&#8330;_
+
+\end{code}
+
+</a
+      ><a name="660" class="Comment"
+      >Vectors - to represent contexts:</a
+      ><a name="692"
+      >
+
+\begin{code}
+
+</a
+      ><a name="708" class="Keyword"
+      >data</a
+      ><a name="712"
+      > </a
+      ><a name="713" href="T.html#713" class="Datatype Operator"
+      >_^_</a
+      ><a name="716"
+      > </a
+      ><a name="717" class="Symbol"
+      >(</a
+      ><a name="718" href="T.html#718" class="Bound"
+      >X</a
+      ><a name="719"
+      > </a
+      ><a name="720" class="Symbol"
+      >:</a
+      ><a name="721"
+      > </a
+      ><a name="722" class="PrimitiveType"
+      >Set</a
+      ><a name="725" class="Symbol"
+      >)</a
+      ><a name="726"
+      > </a
+      ><a name="727" class="Symbol"
+      >:</a
+      ><a name="728"
+      > </a
+      ><a name="729" href="MiniLibrary.html#3902" class="Datatype"
+      >&#8469;</a
+      ><a name="730"
+      > </a
+      ><a name="731" class="Symbol"
+      >&#8594;</a
+      ><a name="732"
+      > </a
+      ><a name="733" class="PrimitiveType"
+      >Set</a
+      ><a name="736"
+      > </a
+      ><a name="737" class="Keyword"
+      >where</a
+      ><a name="742"
+      >
+ </a
+      ><a name="744" href="T.html#744" class="InductiveConstructor"
+      >&#949;</a
+      ><a name="745"
+      > </a
+      ><a name="746" class="Symbol"
+      >:</a
+      ><a name="747"
+      > </a
+      ><a name="748" href="T.html#718" class="Bound"
+      >X</a
+      ><a name="749"
+      > </a
+      ><a name="750" href="T.html#713" class="Datatype Operator"
+      >^</a
+      ><a name="751"
+      > </a
+      ><a name="752" class="Number"
+      >0</a
+      ><a name="753"
+      >
+ </a
+      ><a name="755" href="T.html#755" class="InductiveConstructor Operator"
+      >_&#8330;_</a
+      ><a name="758"
+      > </a
+      ><a name="759" class="Symbol"
+      >:</a
+      ><a name="760"
+      > </a
+      ><a name="761" class="Symbol"
+      >{</a
+      ><a name="762" href="T.html#762" class="Bound"
+      >n</a
+      ><a name="763"
+      > </a
+      ><a name="764" class="Symbol"
+      >:</a
+      ><a name="765"
+      > </a
+      ><a name="766" href="MiniLibrary.html#3902" class="Datatype"
+      >&#8469;</a
+      ><a name="767" class="Symbol"
+      >}</a
+      ><a name="768"
+      > </a
+      ><a name="769" class="Symbol"
+      >&#8594;</a
+      ><a name="770"
+      > </a
+      ><a name="771" href="T.html#718" class="Bound"
+      >X</a
+      ><a name="772"
+      > </a
+      ><a name="773" href="T.html#713" class="Datatype Operator"
+      >^</a
+      ><a name="774"
+      > </a
+      ><a name="775" href="T.html#762" class="Bound"
+      >n</a
+      ><a name="776"
+      > </a
+      ><a name="777" class="Symbol"
+      >&#8594;</a
+      ><a name="778"
+      > </a
+      ><a name="779" href="T.html#718" class="Bound"
+      >X</a
+      ><a name="780"
+      > </a
+      ><a name="781" class="Symbol"
+      >&#8594;</a
+      ><a name="782"
+      > </a
+      ><a name="783" href="T.html#718" class="Bound"
+      >X</a
+      ><a name="784"
+      > </a
+      ><a name="785" href="T.html#713" class="Datatype Operator"
+      >^</a
+      ><a name="786"
+      > </a
+      ><a name="787" class="Symbol"
+      >(</a
+      ><a name="788" href="MiniLibrary.html#3930" class="InductiveConstructor"
+      >succ</a
+      ><a name="792"
+      > </a
+      ><a name="793" href="T.html#762" class="Bound"
+      >n</a
+      ><a name="794" class="Symbol"
+      >)</a
+      ><a name="795"
+      >
+
+\end{code}
+
+</a
+      ><a name="809" class="Comment"
+      >Index function of vectors:</a
+      ><a name="835"
+      >
+
+\begin{code}
+
+</a
+      ><a name="851" href="T.html#851" class="Function Operator"
+      >_&#8333;_&#8334;</a
+      ><a name="855"
+      > </a
+      ><a name="856" class="Symbol"
+      >:</a
+      ><a name="857"
+      > </a
+      ><a name="858" class="Symbol"
+      >{</a
+      ><a name="859" href="T.html#859" class="Bound"
+      >X</a
+      ><a name="860"
+      > </a
+      ><a name="861" class="Symbol"
+      >:</a
+      ><a name="862"
+      > </a
+      ><a name="863" class="PrimitiveType"
+      >Set</a
+      ><a name="866" class="Symbol"
+      >}</a
+      ><a name="867"
+      > </a
+      ><a name="868" class="Symbol"
+      >{</a
+      ><a name="869" href="T.html#869" class="Bound"
+      >n</a
+      ><a name="870"
+      > </a
+      ><a name="871" class="Symbol"
+      >:</a
+      ><a name="872"
+      > </a
+      ><a name="873" href="MiniLibrary.html#3902" class="Datatype"
+      >&#8469;</a
+      ><a name="874" class="Symbol"
+      >}</a
+      ><a name="875"
+      > </a
+      ><a name="876" class="Symbol"
+      >&#8594;</a
+      ><a name="877"
+      > </a
+      ><a name="878" href="T.html#859" class="Bound"
+      >X</a
+      ><a name="879"
+      > </a
+      ><a name="880" href="T.html#713" class="Datatype Operator"
+      >^</a
+      ><a name="881"
+      > </a
+      ><a name="882" href="T.html#869" class="Bound"
+      >n</a
+      ><a name="883"
+      > </a
+      ><a name="884" class="Symbol"
+      >&#8594;</a
+      ><a name="885"
+      > </a
+      ><a name="886" href="MiniLibrary.html#7842" class="Datatype"
+      >Fin</a
+      ><a name="889"
+      > </a
+      ><a name="890" href="T.html#869" class="Bound"
+      >n</a
+      ><a name="891"
+      > </a
+      ><a name="892" class="Symbol"
+      >&#8594;</a
+      ><a name="893"
+      > </a
+      ><a name="894" href="T.html#859" class="Bound"
+      >X</a
+      ><a name="895"
+      >
+</a
+      ><a name="896" class="Symbol"
+      >(</a
+      ><a name="897" href="T.html#897" class="Bound"
+      >xs</a
+      ><a name="899"
+      > </a
+      ><a name="900" href="T.html#755" class="InductiveConstructor Operator"
+      >&#8330;</a
+      ><a name="901"
+      > </a
+      ><a name="902" href="T.html#902" class="Bound"
+      >x</a
+      ><a name="903" class="Symbol"
+      >)</a
+      ><a name="904"
+      > </a
+      ><a name="905" href="T.html#851" class="Function Operator"
+      >&#8333;</a
+      ><a name="906"
+      > </a
+      ><a name="907" href="MiniLibrary.html#7863" class="InductiveConstructor"
+      >zero</a
+      ><a name="911"
+      > </a
+      ><a name="912" href="T.html#851" class="Function Operator"
+      >&#8334;</a
+      ><a name="913"
+      >   </a
+      ><a name="916" class="Symbol"
+      >=</a
+      ><a name="917"
+      > </a
+      ><a name="918" href="T.html#902" class="Bound"
+      >x</a
+      ><a name="919"
+      >
+</a
+      ><a name="920" class="Symbol"
+      >(</a
+      ><a name="921" href="T.html#921" class="Bound"
+      >xs</a
+      ><a name="923"
+      > </a
+      ><a name="924" href="T.html#755" class="InductiveConstructor Operator"
+      >&#8330;</a
+      ><a name="925"
+      > </a
+      ><a name="926" href="T.html#926" class="Bound"
+      >x</a
+      ><a name="927" class="Symbol"
+      >)</a
+      ><a name="928"
+      > </a
+      ><a name="929" href="T.html#851" class="Function Operator"
+      >&#8333;</a
+      ><a name="930"
+      > </a
+      ><a name="931" href="MiniLibrary.html#7894" class="InductiveConstructor"
+      >succ</a
+      ><a name="935"
+      > </a
+      ><a name="936" href="T.html#936" class="Bound"
+      >i</a
+      ><a name="937"
+      > </a
+      ><a name="938" href="T.html#851" class="Function Operator"
+      >&#8334;</a
+      ><a name="939"
+      > </a
+      ><a name="940" class="Symbol"
+      >=</a
+      ><a name="941"
+      > </a
+      ><a name="942" href="T.html#921" class="Bound"
+      >xs</a
+      ><a name="944"
+      > </a
+      ><a name="945" href="T.html#851" class="Function Operator"
+      >&#8333;</a
+      ><a name="946"
+      > </a
+      ><a name="947" href="T.html#936" class="Bound"
+      >i</a
+      ><a name="948"
+      > </a
+      ><a name="949" href="T.html#851" class="Function Operator"
+      >&#8334;</a
+      ><a name="950"
+      >
+
+</a
+      ><a name="952" class="Keyword"
+      >infixr</a
+      ><a name="958"
+      > </a
+      ><a name="959" class="Number"
+      >10</a
+      ><a name="961"
+      > _&#8680;_
+
+\end{code}
+
+</a
+      ><a name="979" class="Comment"
+      >Types of system T:</a
+      ><a name="997"
+      >
+
+\begin{code}
+
+</a
+      ><a name="1013" class="Keyword"
+      >data</a
+      ><a name="1017"
+      > </a
+      ><a name="1018" href="T.html#1018" class="Datatype"
+      >Ty</a
+      ><a name="1020"
+      > </a
+      ><a name="1021" class="Symbol"
+      >:</a
+      ><a name="1022"
+      > </a
+      ><a name="1023" class="PrimitiveType"
+      >Set</a
+      ><a name="1026"
+      > </a
+      ><a name="1027" class="Keyword"
+      >where</a
+      ><a name="1032"
+      >
+ </a
+      ><a name="1034" href="T.html#1034" class="InductiveConstructor"
+      >&#9313;</a
+      ><a name="1035"
+      > </a
+      ><a name="1036" class="Symbol"
+      >:</a
+      ><a name="1037"
+      > </a
+      ><a name="1038" href="T.html#1018" class="Datatype"
+      >Ty</a
+      ><a name="1040"
+      >
+ </a
+      ><a name="1042" href="T.html#1042" class="InductiveConstructor"
+      >&#9411;</a
+      ><a name="1043"
+      > </a
+      ><a name="1044" class="Symbol"
+      >:</a
+      ><a name="1045"
+      > </a
+      ><a name="1046" href="T.html#1018" class="Datatype"
+      >Ty</a
+      ><a name="1048"
+      >
+ </a
+      ><a name="1050" href="T.html#1050" class="InductiveConstructor Operator"
+      >_&#8680;_</a
+      ><a name="1053"
+      > </a
+      ><a name="1054" class="Symbol"
+      >:</a
+      ><a name="1055"
+      > </a
+      ><a name="1056" href="T.html#1018" class="Datatype"
+      >Ty</a
+      ><a name="1058"
+      > </a
+      ><a name="1059" class="Symbol"
+      >&#8594;</a
+      ><a name="1060"
+      > </a
+      ><a name="1061" href="T.html#1018" class="Datatype"
+      >Ty</a
+      ><a name="1063"
+      > </a
+      ><a name="1064" class="Symbol"
+      >&#8594;</a
+      ><a name="1065"
+      > </a
+      ><a name="1066" href="T.html#1018" class="Datatype"
+      >Ty</a
+      ><a name="1068"
+      >
+
+\end{code}
+
+</a
+      ><a name="1082" class="Comment"
+      >Contexts of system T:</a
+      ><a name="1103"
+      >
+
+\begin{code}
+
+</a
+      ><a name="1119" href="T.html#1119" class="Function"
+      >Cxt</a
+      ><a name="1122"
+      > </a
+      ><a name="1123" class="Symbol"
+      >:</a
+      ><a name="1124"
+      > </a
+      ><a name="1125" href="MiniLibrary.html#3902" class="Datatype"
+      >&#8469;</a
+      ><a name="1126"
+      > </a
+      ><a name="1127" class="Symbol"
+      >&#8594;</a
+      ><a name="1128"
+      > </a
+      ><a name="1129" class="PrimitiveType"
+      >Set</a
+      ><a name="1132"
+      >
+</a
+      ><a name="1133" href="T.html#1119" class="Function"
+      >Cxt</a
+      ><a name="1136"
+      > </a
+      ><a name="1137" href="T.html#1137" class="Bound"
+      >n</a
+      ><a name="1138"
+      > </a
+      ><a name="1139" class="Symbol"
+      >=</a
+      ><a name="1140"
+      > </a
+      ><a name="1141" href="T.html#1018" class="Datatype"
+      >Ty</a
+      ><a name="1143"
+      > </a
+      ><a name="1144" href="T.html#713" class="Datatype Operator"
+      >^</a
+      ><a name="1145"
+      > </a
+      ><a name="1146" href="T.html#1137" class="Bound"
+      >n</a
+      ><a name="1147"
+      >
+
+</a
+      ><a name="1149" class="Keyword"
+      >infixl</a
+      ><a name="1155"
+      > </a
+      ><a name="1156" class="Number"
+      >10</a
+      ><a name="1158"
+      > _&#8729;_
+
+\end{code}
+
+</a
+      ><a name="1176" class="Comment"
+      >Terms in context of system T</a
+      ><a name="1204"
+      >
+</a
+      ><a name="1205" class="Comment"
+      >with an extended constant for the Fan functional.</a
+      ><a name="1254"
+      >
+
+\begin{code}
+
+</a
+      ><a name="1270" class="Keyword"
+      >data</a
+      ><a name="1274"
+      > </a
+      ><a name="1275" href="T.html#1275" class="Datatype"
+      >Tm</a
+      ><a name="1277"
+      > </a
+      ><a name="1278" class="Symbol"
+      >:</a
+      ><a name="1279"
+      > </a
+      ><a name="1280" class="Symbol"
+      >{</a
+      ><a name="1281" href="T.html#1281" class="Bound"
+      >n</a
+      ><a name="1282"
+      > </a
+      ><a name="1283" class="Symbol"
+      >:</a
+      ><a name="1284"
+      > </a
+      ><a name="1285" href="MiniLibrary.html#3902" class="Datatype"
+      >&#8469;</a
+      ><a name="1286" class="Symbol"
+      >}</a
+      ><a name="1287"
+      > </a
+      ><a name="1288" class="Symbol"
+      >&#8594;</a
+      ><a name="1289"
+      > </a
+      ><a name="1290" href="T.html#1119" class="Function"
+      >Cxt</a
+      ><a name="1293"
+      > </a
+      ><a name="1294" href="T.html#1281" class="Bound"
+      >n</a
+      ><a name="1295"
+      > </a
+      ><a name="1296" class="Symbol"
+      >&#8594;</a
+      ><a name="1297"
+      > </a
+      ><a name="1298" href="T.html#1018" class="Datatype"
+      >Ty</a
+      ><a name="1300"
+      > </a
+      ><a name="1301" class="Symbol"
+      >&#8594;</a
+      ><a name="1302"
+      > </a
+      ><a name="1303" class="PrimitiveType"
+      >Set</a
+      ><a name="1306"
+      > </a
+      ><a name="1307" class="Keyword"
+      >where</a
+      ><a name="1312"
+      >
+ </a
+      ><a name="1314" href="T.html#1314" class="InductiveConstructor"
+      >&#8869;</a
+      ><a name="1315"
+      >    </a
+      ><a name="1319" class="Symbol"
+      >:</a
+      ><a name="1320"
+      > </a
+      ><a name="1321" class="Symbol"
+      >{</a
+      ><a name="1322" href="T.html#1322" class="Bound"
+      >n</a
+      ><a name="1323"
+      > </a
+      ><a name="1324" class="Symbol"
+      >:</a
+      ><a name="1325"
+      > </a
+      ><a name="1326" href="MiniLibrary.html#3902" class="Datatype"
+      >&#8469;</a
+      ><a name="1327" class="Symbol"
+      >}{</a
+      ><a name="1329" href="T.html#1329" class="Bound"
+      >&#915;</a
+      ><a name="1330"
+      > </a
+      ><a name="1331" class="Symbol"
+      >:</a
+      ><a name="1332"
+      > </a
+      ><a name="1333" href="T.html#1119" class="Function"
+      >Cxt</a
+      ><a name="1336"
+      > </a
+      ><a name="1337" href="T.html#1322" class="Bound"
+      >n</a
+      ><a name="1338" class="Symbol"
+      >}</a
+      ><a name="1339"
+      >           </a
+      ><a name="1350" class="Symbol"
+      >&#8594;</a
+      ><a name="1351"
+      > </a
+      ><a name="1352" href="T.html#1275" class="Datatype"
+      >Tm</a
+      ><a name="1354"
+      > </a
+      ><a name="1355" href="T.html#1329" class="Bound"
+      >&#915;</a
+      ><a name="1356"
+      > </a
+      ><a name="1357" href="T.html#1034" class="InductiveConstructor"
+      >&#9313;</a
+      ><a name="1358"
+      >
+ </a
+      ><a name="1360" href="T.html#1360" class="InductiveConstructor"
+      >&#8868;</a
+      ><a name="1361"
+      >    </a
+      ><a name="1365" class="Symbol"
+      >:</a
+      ><a name="1366"
+      > </a
+      ><a name="1367" class="Symbol"
+      >{</a
+      ><a name="1368" href="T.html#1368" class="Bound"
+      >n</a
+      ><a name="1369"
+      > </a
+      ><a name="1370" class="Symbol"
+      >:</a
+      ><a name="1371"
+      > </a
+      ><a name="1372" href="MiniLibrary.html#3902" class="Datatype"
+      >&#8469;</a
+      ><a name="1373" class="Symbol"
+      >}{</a
+      ><a name="1375" href="T.html#1375" class="Bound"
+      >&#915;</a
+      ><a name="1376"
+      > </a
+      ><a name="1377" class="Symbol"
+      >:</a
+      ><a name="1378"
+      > </a
+      ><a name="1379" href="T.html#1119" class="Function"
+      >Cxt</a
+      ><a name="1382"
+      > </a
+      ><a name="1383" href="T.html#1368" class="Bound"
+      >n</a
+      ><a name="1384" class="Symbol"
+      >}</a
+      ><a name="1385"
+      >           </a
+      ><a name="1396" class="Symbol"
+      >&#8594;</a
+      ><a name="1397"
+      > </a
+      ><a name="1398" href="T.html#1275" class="Datatype"
+      >Tm</a
+      ><a name="1400"
+      > </a
+      ><a name="1401" href="T.html#1375" class="Bound"
+      >&#915;</a
+      ><a name="1402"
+      > </a
+      ><a name="1403" href="T.html#1034" class="InductiveConstructor"
+      >&#9313;</a
+      ><a name="1404"
+      >
+ </a
+      ><a name="1406" href="T.html#1406" class="InductiveConstructor"
+      >IF</a
+      ><a name="1408"
+      >   </a
+      ><a name="1411" class="Symbol"
+      >:</a
+      ><a name="1412"
+      > </a
+      ><a name="1413" class="Symbol"
+      >{</a
+      ><a name="1414" href="T.html#1414" class="Bound"
+      >n</a
+      ><a name="1415"
+      > </a
+      ><a name="1416" class="Symbol"
+      >:</a
+      ><a name="1417"
+      > </a
+      ><a name="1418" href="MiniLibrary.html#3902" class="Datatype"
+      >&#8469;</a
+      ><a name="1419" class="Symbol"
+      >}{</a
+      ><a name="1421" href="T.html#1421" class="Bound"
+      >&#915;</a
+      ><a name="1422"
+      > </a
+      ><a name="1423" class="Symbol"
+      >:</a
+      ><a name="1424"
+      > </a
+      ><a name="1425" href="T.html#1119" class="Function"
+      >Cxt</a
+      ><a name="1428"
+      > </a
+      ><a name="1429" href="T.html#1414" class="Bound"
+      >n</a
+      ><a name="1430" class="Symbol"
+      >}{</a
+      ><a name="1432" href="T.html#1432" class="Bound"
+      >&#963;</a
+      ><a name="1433"
+      > </a
+      ><a name="1434" class="Symbol"
+      >:</a
+      ><a name="1435"
+      > </a
+      ><a name="1436" href="T.html#1018" class="Datatype"
+      >Ty</a
+      ><a name="1438" class="Symbol"
+      >}</a
+      ><a name="1439"
+      >   </a
+      ><a name="1442" class="Symbol"
+      >&#8594;</a
+      ><a name="1443"
+      > </a
+      ><a name="1444" href="T.html#1275" class="Datatype"
+      >Tm</a
+      ><a name="1446"
+      > </a
+      ><a name="1447" href="T.html#1421" class="Bound"
+      >&#915;</a
+      ><a name="1448"
+      > </a
+      ><a name="1449" class="Symbol"
+      >(</a
+      ><a name="1450" href="T.html#1432" class="Bound"
+      >&#963;</a
+      ><a name="1451"
+      > </a
+      ><a name="1452" href="T.html#1050" class="InductiveConstructor Operator"
+      >&#8680;</a
+      ><a name="1453"
+      > </a
+      ><a name="1454" href="T.html#1432" class="Bound"
+      >&#963;</a
+      ><a name="1455"
+      > </a
+      ><a name="1456" href="T.html#1050" class="InductiveConstructor Operator"
+      >&#8680;</a
+      ><a name="1457"
+      > </a
+      ><a name="1458" href="T.html#1034" class="InductiveConstructor"
+      >&#9313;</a
+      ><a name="1459"
+      > </a
+      ><a name="1460" href="T.html#1050" class="InductiveConstructor Operator"
+      >&#8680;</a
+      ><a name="1461"
+      > </a
+      ><a name="1462" href="T.html#1432" class="Bound"
+      >&#963;</a
+      ><a name="1463" class="Symbol"
+      >)</a
+      ><a name="1464"
+      >
+ </a
+      ><a name="1466" href="T.html#1466" class="InductiveConstructor"
+      >ZERO</a
+      ><a name="1470"
+      > </a
+      ><a name="1471" class="Symbol"
+      >:</a
+      ><a name="1472"
+      > </a
+      ><a name="1473" class="Symbol"
+      >{</a
+      ><a name="1474" href="T.html#1474" class="Bound"
+      >n</a
+      ><a name="1475"
+      > </a
+      ><a name="1476" class="Symbol"
+      >:</a
+      ><a name="1477"
+      > </a
+      ><a name="1478" href="MiniLibrary.html#3902" class="Datatype"
+      >&#8469;</a
+      ><a name="1479" class="Symbol"
+      >}{</a
+      ><a name="1481" href="T.html#1481" class="Bound"
+      >&#915;</a
+      ><a name="1482"
+      > </a
+      ><a name="1483" class="Symbol"
+      >:</a
+      ><a name="1484"
+      > </a
+      ><a name="1485" href="T.html#1119" class="Function"
+      >Cxt</a
+      ><a name="1488"
+      > </a
+      ><a name="1489" href="T.html#1474" class="Bound"
+      >n</a
+      ><a name="1490" class="Symbol"
+      >}</a
+      ><a name="1491"
+      >           </a
+      ><a name="1502" class="Symbol"
+      >&#8594;</a
+      ><a name="1503"
+      > </a
+      ><a name="1504" href="T.html#1275" class="Datatype"
+      >Tm</a
+      ><a name="1506"
+      > </a
+      ><a name="1507" href="T.html#1481" class="Bound"
+      >&#915;</a
+      ><a name="1508"
+      > </a
+      ><a name="1509" href="T.html#1042" class="InductiveConstructor"
+      >&#9411;</a
+      ><a name="1510"
+      >
+ </a
+      ><a name="1512" href="T.html#1512" class="InductiveConstructor"
+      >SUCC</a
+      ><a name="1516"
+      > </a
+      ><a name="1517" class="Symbol"
+      >:</a
+      ><a name="1518"
+      > </a
+      ><a name="1519" class="Symbol"
+      >{</a
+      ><a name="1520" href="T.html#1520" class="Bound"
+      >n</a
+      ><a name="1521"
+      > </a
+      ><a name="1522" class="Symbol"
+      >:</a
+      ><a name="1523"
+      > </a
+      ><a name="1524" href="MiniLibrary.html#3902" class="Datatype"
+      >&#8469;</a
+      ><a name="1525" class="Symbol"
+      >}{</a
+      ><a name="1527" href="T.html#1527" class="Bound"
+      >&#915;</a
+      ><a name="1528"
+      > </a
+      ><a name="1529" class="Symbol"
+      >:</a
+      ><a name="1530"
+      > </a
+      ><a name="1531" href="T.html#1119" class="Function"
+      >Cxt</a
+      ><a name="1534"
+      > </a
+      ><a name="1535" href="T.html#1520" class="Bound"
+      >n</a
+      ><a name="1536" class="Symbol"
+      >}</a
+      ><a name="1537"
+      >           </a
+      ><a name="1548" class="Symbol"
+      >&#8594;</a
+      ><a name="1549"
+      > </a
+      ><a name="1550" href="T.html#1275" class="Datatype"
+      >Tm</a
+      ><a name="1552"
+      > </a
+      ><a name="1553" href="T.html#1527" class="Bound"
+      >&#915;</a
+      ><a name="1554"
+      > </a
+      ><a name="1555" class="Symbol"
+      >(</a
+      ><a name="1556" href="T.html#1042" class="InductiveConstructor"
+      >&#9411;</a
+      ><a name="1557"
+      > </a
+      ><a name="1558" href="T.html#1050" class="InductiveConstructor Operator"
+      >&#8680;</a
+      ><a name="1559"
+      > </a
+      ><a name="1560" href="T.html#1042" class="InductiveConstructor"
+      >&#9411;</a
+      ><a name="1561" class="Symbol"
+      >)</a
+      ><a name="1562"
+      >
+ </a
+      ><a name="1564" href="T.html#1564" class="InductiveConstructor"
+      >REC</a
+      ><a name="1567"
+      >  </a
+      ><a name="1569" class="Symbol"
+      >:</a
+      ><a name="1570"
+      > </a
+      ><a name="1571" class="Symbol"
+      >{</a
+      ><a name="1572" href="T.html#1572" class="Bound"
+      >n</a
+      ><a name="1573"
+      > </a
+      ><a name="1574" class="Symbol"
+      >:</a
+      ><a name="1575"
+      > </a
+      ><a name="1576" href="MiniLibrary.html#3902" class="Datatype"
+      >&#8469;</a
+      ><a name="1577" class="Symbol"
+      >}{</a
+      ><a name="1579" href="T.html#1579" class="Bound"
+      >&#915;</a
+      ><a name="1580"
+      > </a
+      ><a name="1581" class="Symbol"
+      >:</a
+      ><a name="1582"
+      > </a
+      ><a name="1583" href="T.html#1119" class="Function"
+      >Cxt</a
+      ><a name="1586"
+      > </a
+      ><a name="1587" href="T.html#1572" class="Bound"
+      >n</a
+      ><a name="1588" class="Symbol"
+      >}{</a
+      ><a name="1590" href="T.html#1590" class="Bound"
+      >&#963;</a
+      ><a name="1591"
+      > </a
+      ><a name="1592" class="Symbol"
+      >:</a
+      ><a name="1593"
+      > </a
+      ><a name="1594" href="T.html#1018" class="Datatype"
+      >Ty</a
+      ><a name="1596" class="Symbol"
+      >}</a
+      ><a name="1597"
+      >   </a
+      ><a name="1600" class="Symbol"
+      >&#8594;</a
+      ><a name="1601"
+      > </a
+      ><a name="1602" href="T.html#1275" class="Datatype"
+      >Tm</a
+      ><a name="1604"
+      > </a
+      ><a name="1605" href="T.html#1579" class="Bound"
+      >&#915;</a
+      ><a name="1606"
+      > </a
+      ><a name="1607" class="Symbol"
+      >(</a
+      ><a name="1608" href="T.html#1590" class="Bound"
+      >&#963;</a
+      ><a name="1609"
+      > </a
+      ><a name="1610" href="T.html#1050" class="InductiveConstructor Operator"
+      >&#8680;</a
+      ><a name="1611"
+      > </a
+      ><a name="1612" class="Symbol"
+      >(</a
+      ><a name="1613" href="T.html#1042" class="InductiveConstructor"
+      >&#9411;</a
+      ><a name="1614"
+      > </a
+      ><a name="1615" href="T.html#1050" class="InductiveConstructor Operator"
+      >&#8680;</a
+      ><a name="1616"
+      > </a
+      ><a name="1617" href="T.html#1590" class="Bound"
+      >&#963;</a
+      ><a name="1618"
+      > </a
+      ><a name="1619" href="T.html#1050" class="InductiveConstructor Operator"
+      >&#8680;</a
+      ><a name="1620"
+      > </a
+      ><a name="1621" href="T.html#1590" class="Bound"
+      >&#963;</a
+      ><a name="1622" class="Symbol"
+      >)</a
+      ><a name="1623"
+      > </a
+      ><a name="1624" href="T.html#1050" class="InductiveConstructor Operator"
+      >&#8680;</a
+      ><a name="1625"
+      > </a
+      ><a name="1626" href="T.html#1042" class="InductiveConstructor"
+      >&#9411;</a
+      ><a name="1627"
+      > </a
+      ><a name="1628" href="T.html#1050" class="InductiveConstructor Operator"
+      >&#8680;</a
+      ><a name="1629"
+      > </a
+      ><a name="1630" href="T.html#1590" class="Bound"
+      >&#963;</a
+      ><a name="1631" class="Symbol"
+      >)</a
+      ><a name="1632"
+      >
+ </a
+      ><a name="1634" href="T.html#1634" class="InductiveConstructor"
+      >VAR</a
+      ><a name="1637"
+      >  </a
+      ><a name="1639" class="Symbol"
+      >:</a
+      ><a name="1640"
+      > </a
+      ><a name="1641" class="Symbol"
+      >{</a
+      ><a name="1642" href="T.html#1642" class="Bound"
+      >n</a
+      ><a name="1643"
+      > </a
+      ><a name="1644" class="Symbol"
+      >:</a
+      ><a name="1645"
+      > </a
+      ><a name="1646" href="MiniLibrary.html#3902" class="Datatype"
+      >&#8469;</a
+      ><a name="1647" class="Symbol"
+      >}{</a
+      ><a name="1649" href="T.html#1649" class="Bound"
+      >&#915;</a
+      ><a name="1650"
+      > </a
+      ><a name="1651" class="Symbol"
+      >:</a
+      ><a name="1652"
+      > </a
+      ><a name="1653" href="T.html#1119" class="Function"
+      >Cxt</a
+      ><a name="1656"
+      > </a
+      ><a name="1657" href="T.html#1642" class="Bound"
+      >n</a
+      ><a name="1658" class="Symbol"
+      >}</a
+      ><a name="1659"
+      >           </a
+      ><a name="1670" class="Symbol"
+      >&#8594;</a
+      ><a name="1671"
+      > </a
+      ><a name="1672" class="Symbol"
+      >(</a
+      ><a name="1673" href="T.html#1673" class="Bound"
+      >i</a
+      ><a name="1674"
+      > </a
+      ><a name="1675" class="Symbol"
+      >:</a
+      ><a name="1676"
+      > </a
+      ><a name="1677" href="MiniLibrary.html#7842" class="Datatype"
+      >Fin</a
+      ><a name="1680"
+      > </a
+      ><a name="1681" href="T.html#1642" class="Bound"
+      >n</a
+      ><a name="1682" class="Symbol"
+      >)</a
+      ><a name="1683"
+      > </a
+      ><a name="1684" class="Symbol"
+      >&#8594;</a
+      ><a name="1685"
+      > </a
+      ><a name="1686" href="T.html#1275" class="Datatype"
+      >Tm</a
+      ><a name="1688"
+      > </a
+      ><a name="1689" href="T.html#1649" class="Bound"
+      >&#915;</a
+      ><a name="1690"
+      > </a
+      ><a name="1691" class="Symbol"
+      >(</a
+      ><a name="1692" href="T.html#1649" class="Bound"
+      >&#915;</a
+      ><a name="1693"
+      > </a
+      ><a name="1694" href="T.html#851" class="Function Operator"
+      >&#8333;</a
+      ><a name="1695"
+      > </a
+      ><a name="1696" href="T.html#1673" class="Bound"
+      >i</a
+      ><a name="1697"
+      > </a
+      ><a name="1698" href="T.html#851" class="Function Operator"
+      >&#8334;</a
+      ><a name="1699" class="Symbol"
+      >)</a
+      ><a name="1700"
+      >
+ </a
+      ><a name="1702" href="T.html#1702" class="InductiveConstructor"
+      >LAM</a
+      ><a name="1705"
+      >  </a
+      ><a name="1707" class="Symbol"
+      >:</a
+      ><a name="1708"
+      > </a
+      ><a name="1709" class="Symbol"
+      >{</a
+      ><a name="1710" href="T.html#1710" class="Bound"
+      >n</a
+      ><a name="1711"
+      > </a
+      ><a name="1712" class="Symbol"
+      >:</a
+      ><a name="1713"
+      > </a
+      ><a name="1714" href="MiniLibrary.html#3902" class="Datatype"
+      >&#8469;</a
+      ><a name="1715" class="Symbol"
+      >}{</a
+      ><a name="1717" href="T.html#1717" class="Bound"
+      >&#915;</a
+      ><a name="1718"
+      > </a
+      ><a name="1719" class="Symbol"
+      >:</a
+      ><a name="1720"
+      > </a
+      ><a name="1721" href="T.html#1119" class="Function"
+      >Cxt</a
+      ><a name="1724"
+      > </a
+      ><a name="1725" href="T.html#1710" class="Bound"
+      >n</a
+      ><a name="1726" class="Symbol"
+      >}{</a
+      ><a name="1728" href="T.html#1728" class="Bound"
+      >&#963;</a
+      ><a name="1729"
+      > </a
+      ><a name="1730" href="T.html#1730" class="Bound"
+      >&#964;</a
+      ><a name="1731"
+      > </a
+      ><a name="1732" class="Symbol"
+      >:</a
+      ><a name="1733"
+      > </a
+      ><a name="1734" href="T.html#1018" class="Datatype"
+      >Ty</a
+      ><a name="1736" class="Symbol"
+      >}</a
+      ><a name="1737"
+      > </a
+      ><a name="1738" class="Symbol"
+      >&#8594;</a
+      ><a name="1739"
+      > </a
+      ><a name="1740" href="T.html#1275" class="Datatype"
+      >Tm</a
+      ><a name="1742"
+      > </a
+      ><a name="1743" class="Symbol"
+      >(</a
+      ><a name="1744" href="T.html#1717" class="Bound"
+      >&#915;</a
+      ><a name="1745"
+      > </a
+      ><a name="1746" href="T.html#755" class="InductiveConstructor Operator"
+      >&#8330;</a
+      ><a name="1747"
+      > </a
+      ><a name="1748" href="T.html#1728" class="Bound"
+      >&#963;</a
+      ><a name="1749" class="Symbol"
+      >)</a
+      ><a name="1750"
+      > </a
+      ><a name="1751" href="T.html#1730" class="Bound"
+      >&#964;</a
+      ><a name="1752"
+      > </a
+      ><a name="1753" class="Symbol"
+      >&#8594;</a
+      ><a name="1754"
+      > </a
+      ><a name="1755" href="T.html#1275" class="Datatype"
+      >Tm</a
+      ><a name="1757"
+      > </a
+      ><a name="1758" href="T.html#1717" class="Bound"
+      >&#915;</a
+      ><a name="1759"
+      > </a
+      ><a name="1760" class="Symbol"
+      >(</a
+      ><a name="1761" href="T.html#1728" class="Bound"
+      >&#963;</a
+      ><a name="1762"
+      > </a
+      ><a name="1763" href="T.html#1050" class="InductiveConstructor Operator"
+      >&#8680;</a
+      ><a name="1764"
+      > </a
+      ><a name="1765" href="T.html#1730" class="Bound"
+      >&#964;</a
+      ><a name="1766" class="Symbol"
+      >)</a
+      ><a name="1767"
+      >
+ </a
+      ><a name="1769" href="T.html#1769" class="InductiveConstructor Operator"
+      >_&#8729;_</a
+      ><a name="1772"
+      >  </a
+      ><a name="1774" class="Symbol"
+      >:</a
+      ><a name="1775"
+      > </a
+      ><a name="1776" class="Symbol"
+      >{</a
+      ><a name="1777" href="T.html#1777" class="Bound"
+      >n</a
+      ><a name="1778"
+      > </a
+      ><a name="1779" class="Symbol"
+      >:</a
+      ><a name="1780"
+      > </a
+      ><a name="1781" href="MiniLibrary.html#3902" class="Datatype"
+      >&#8469;</a
+      ><a name="1782" class="Symbol"
+      >}{</a
+      ><a name="1784" href="T.html#1784" class="Bound"
+      >&#915;</a
+      ><a name="1785"
+      > </a
+      ><a name="1786" class="Symbol"
+      >:</a
+      ><a name="1787"
+      > </a
+      ><a name="1788" href="T.html#1119" class="Function"
+      >Cxt</a
+      ><a name="1791"
+      > </a
+      ><a name="1792" href="T.html#1777" class="Bound"
+      >n</a
+      ><a name="1793" class="Symbol"
+      >}{</a
+      ><a name="1795" href="T.html#1795" class="Bound"
+      >&#963;</a
+      ><a name="1796"
+      > </a
+      ><a name="1797" href="T.html#1797" class="Bound"
+      >&#964;</a
+      ><a name="1798"
+      > </a
+      ><a name="1799" class="Symbol"
+      >:</a
+      ><a name="1800"
+      > </a
+      ><a name="1801" href="T.html#1018" class="Datatype"
+      >Ty</a
+      ><a name="1803" class="Symbol"
+      >}</a
+      ><a name="1804"
+      > </a
+      ><a name="1805" class="Symbol"
+      >&#8594;</a
+      ><a name="1806"
+      > </a
+      ><a name="1807" href="T.html#1275" class="Datatype"
+      >Tm</a
+      ><a name="1809"
+      > </a
+      ><a name="1810" href="T.html#1784" class="Bound"
+      >&#915;</a
+      ><a name="1811"
+      > </a
+      ><a name="1812" class="Symbol"
+      >(</a
+      ><a name="1813" href="T.html#1795" class="Bound"
+      >&#963;</a
+      ><a name="1814"
+      > </a
+      ><a name="1815" href="T.html#1050" class="InductiveConstructor Operator"
+      >&#8680;</a
+      ><a name="1816"
+      > </a
+      ><a name="1817" href="T.html#1797" class="Bound"
+      >&#964;</a
+      ><a name="1818" class="Symbol"
+      >)</a
+      ><a name="1819"
+      > </a
+      ><a name="1820" class="Symbol"
+      >&#8594;</a
+      ><a name="1821"
+      > </a
+      ><a name="1822" href="T.html#1275" class="Datatype"
+      >Tm</a
+      ><a name="1824"
+      > </a
+      ><a name="1825" href="T.html#1784" class="Bound"
+      >&#915;</a
+      ><a name="1826"
+      > </a
+      ><a name="1827" href="T.html#1795" class="Bound"
+      >&#963;</a
+      ><a name="1828"
+      > </a
+      ><a name="1829" class="Symbol"
+      >&#8594;</a
+      ><a name="1830"
+      > </a
+      ><a name="1831" href="T.html#1275" class="Datatype"
+      >Tm</a
+      ><a name="1833"
+      > </a
+      ><a name="1834" href="T.html#1784" class="Bound"
+      >&#915;</a
+      ><a name="1835"
+      > </a
+      ><a name="1836" href="T.html#1797" class="Bound"
+      >&#964;</a
+      ><a name="1837"
+      >
+ </a
+      ><a name="1839" href="T.html#1839" class="InductiveConstructor"
+      >FAN</a
+      ><a name="1842"
+      >  </a
+      ><a name="1844" class="Symbol"
+      >:</a
+      ><a name="1845"
+      > </a
+      ><a name="1846" class="Symbol"
+      >{</a
+      ><a name="1847" href="T.html#1847" class="Bound"
+      >n</a
+      ><a name="1848"
+      > </a
+      ><a name="1849" class="Symbol"
+      >:</a
+      ><a name="1850"
+      > </a
+      ><a name="1851" href="MiniLibrary.html#3902" class="Datatype"
+      >&#8469;</a
+      ><a name="1852" class="Symbol"
+      >}{</a
+      ><a name="1854" href="T.html#1854" class="Bound"
+      >&#915;</a
+      ><a name="1855"
+      > </a
+      ><a name="1856" class="Symbol"
+      >:</a
+      ><a name="1857"
+      > </a
+      ><a name="1858" href="T.html#1119" class="Function"
+      >Cxt</a
+      ><a name="1861"
+      > </a
+      ><a name="1862" href="T.html#1847" class="Bound"
+      >n</a
+      ><a name="1863" class="Symbol"
+      >}</a
+      ><a name="1864"
+      >           </a
+      ><a name="1875" class="Symbol"
+      >&#8594;</a
+      ><a name="1876"
+      > </a
+      ><a name="1877" href="T.html#1275" class="Datatype"
+      >Tm</a
+      ><a name="1879"
+      > </a
+      ><a name="1880" href="T.html#1854" class="Bound"
+      >&#915;</a
+      ><a name="1881"
+      > </a
+      ><a name="1882" class="Symbol"
+      >(((</a
+      ><a name="1885" href="T.html#1042" class="InductiveConstructor"
+      >&#9411;</a
+      ><a name="1886"
+      > </a
+      ><a name="1887" href="T.html#1050" class="InductiveConstructor Operator"
+      >&#8680;</a
+      ><a name="1888"
+      > </a
+      ><a name="1889" href="T.html#1034" class="InductiveConstructor"
+      >&#9313;</a
+      ><a name="1890" class="Symbol"
+      >)</a
+      ><a name="1891"
+      > </a
+      ><a name="1892" href="T.html#1050" class="InductiveConstructor Operator"
+      >&#8680;</a
+      ><a name="1893"
+      > </a
+      ><a name="1894" href="T.html#1042" class="InductiveConstructor"
+      >&#9411;</a
+      ><a name="1895" class="Symbol"
+      >)</a
+      ><a name="1896"
+      > </a
+      ><a name="1897" href="T.html#1050" class="InductiveConstructor Operator"
+      >&#8680;</a
+      ><a name="1898"
+      > </a
+      ><a name="1899" href="T.html#1042" class="InductiveConstructor"
+      >&#9411;</a
+      ><a name="1900" class="Symbol"
+      >)</a
+      ><a name="1901"
+      >
+
+
+</a
+      ><a name="1904" class="Keyword"
+      >infix</a
+      ><a name="1909"
+      >  </a
+      ><a name="1911" class="Number"
+      >10</a
+      ><a name="1913"
+      > _==_
+</a
+      ><a name="1919" class="Keyword"
+      >infixr</a
+      ><a name="1925"
+      > </a
+      ><a name="1926" class="Number"
+      >10</a
+      ><a name="1928"
+      > _&#8594;&#8594;_
+</a
+      ><a name="1934" class="Keyword"
+      >infixl</a
+      ><a name="1940"
+      > </a
+      ><a name="1941" class="Number"
+      >10</a
+      ><a name="1943"
+      > _&#8743;&#8743;_
+
+\end{code}
+
+</a
+      ><a name="1962" class="Comment"
+      >Logic of system T.</a
+      ><a name="1980"
+      >
+</a
+      ><a name="1981" class="Comment"
+      >Atoms are equations over T terms.</a
+      ><a name="2014"
+      >
+
+\begin{code}
+
+</a
+      ><a name="2030" class="Keyword"
+      >data</a
+      ><a name="2034"
+      > </a
+      ><a name="2035" href="T.html#2035" class="Datatype"
+      >Fml</a
+      ><a name="2038"
+      > </a
+      ><a name="2039" class="Symbol"
+      >:</a
+      ><a name="2040"
+      > </a
+      ><a name="2041" class="Symbol"
+      >{</a
+      ><a name="2042" href="T.html#2042" class="Bound"
+      >n</a
+      ><a name="2043"
+      > </a
+      ><a name="2044" class="Symbol"
+      >:</a
+      ><a name="2045"
+      > </a
+      ><a name="2046" href="MiniLibrary.html#3902" class="Datatype"
+      >&#8469;</a
+      ><a name="2047" class="Symbol"
+      >}</a
+      ><a name="2048"
+      > </a
+      ><a name="2049" class="Symbol"
+      >&#8594;</a
+      ><a name="2050"
+      > </a
+      ><a name="2051" href="T.html#1119" class="Function"
+      >Cxt</a
+      ><a name="2054"
+      > </a
+      ><a name="2055" href="T.html#2042" class="Bound"
+      >n</a
+      ><a name="2056"
+      > </a
+      ><a name="2057" class="Symbol"
+      >&#8594;</a
+      ><a name="2058"
+      > </a
+      ><a name="2059" class="PrimitiveType"
+      >Set</a
+      ><a name="2062"
+      > </a
+      ><a name="2063" class="Keyword"
+      >where</a
+      ><a name="2068"
+      >
+ </a
+      ><a name="2070" href="T.html#2070" class="InductiveConstructor Operator"
+      >_==_</a
+      ><a name="2074"
+      > </a
+      ><a name="2075" class="Symbol"
+      >:</a
+      ><a name="2076"
+      > </a
+      ><a name="2077" class="Symbol"
+      >{</a
+      ><a name="2078" href="T.html#2078" class="Bound"
+      >n</a
+      ><a name="2079"
+      > </a
+      ><a name="2080" class="Symbol"
+      >:</a
+      ><a name="2081"
+      > </a
+      ><a name="2082" href="MiniLibrary.html#3902" class="Datatype"
+      >&#8469;</a
+      ><a name="2083" class="Symbol"
+      >}{</a
+      ><a name="2085" href="T.html#2085" class="Bound"
+      >&#915;</a
+      ><a name="2086"
+      > </a
+      ><a name="2087" class="Symbol"
+      >:</a
+      ><a name="2088"
+      > </a
+      ><a name="2089" href="T.html#1119" class="Function"
+      >Cxt</a
+      ><a name="2092"
+      > </a
+      ><a name="2093" href="T.html#2078" class="Bound"
+      >n</a
+      ><a name="2094" class="Symbol"
+      >}{</a
+      ><a name="2096" href="T.html#2096" class="Bound"
+      >&#963;</a
+      ><a name="2097"
+      > </a
+      ><a name="2098" class="Symbol"
+      >:</a
+      ><a name="2099"
+      > </a
+      ><a name="2100" href="T.html#1018" class="Datatype"
+      >Ty</a
+      ><a name="2102" class="Symbol"
+      >}</a
+      ><a name="2103"
+      > </a
+      ><a name="2104" class="Symbol"
+      >&#8594;</a
+      ><a name="2105"
+      > </a
+      ><a name="2106" href="T.html#1275" class="Datatype"
+      >Tm</a
+      ><a name="2108"
+      > </a
+      ><a name="2109" href="T.html#2085" class="Bound"
+      >&#915;</a
+      ><a name="2110"
+      > </a
+      ><a name="2111" href="T.html#2096" class="Bound"
+      >&#963;</a
+      ><a name="2112"
+      > </a
+      ><a name="2113" class="Symbol"
+      >&#8594;</a
+      ><a name="2114"
+      > </a
+      ><a name="2115" href="T.html#1275" class="Datatype"
+      >Tm</a
+      ><a name="2117"
+      > </a
+      ><a name="2118" href="T.html#2085" class="Bound"
+      >&#915;</a
+      ><a name="2119"
+      > </a
+      ><a name="2120" href="T.html#2096" class="Bound"
+      >&#963;</a
+      ><a name="2121"
+      > </a
+      ><a name="2122" class="Symbol"
+      >&#8594;</a
+      ><a name="2123"
+      > </a
+      ><a name="2124" href="T.html#2035" class="Datatype"
+      >Fml</a
+      ><a name="2127"
+      > </a
+      ><a name="2128" href="T.html#2085" class="Bound"
+      >&#915;</a
+      ><a name="2129"
+      >
+ </a
+      ><a name="2131" href="T.html#2131" class="InductiveConstructor Operator"
+      >_&#8743;&#8743;_</a
+      ><a name="2135"
+      > </a
+      ><a name="2136" class="Symbol"
+      >:</a
+      ><a name="2137"
+      > </a
+      ><a name="2138" class="Symbol"
+      >{</a
+      ><a name="2139" href="T.html#2139" class="Bound"
+      >n</a
+      ><a name="2140"
+      > </a
+      ><a name="2141" class="Symbol"
+      >:</a
+      ><a name="2142"
+      > </a
+      ><a name="2143" href="MiniLibrary.html#3902" class="Datatype"
+      >&#8469;</a
+      ><a name="2144" class="Symbol"
+      >}{</a
+      ><a name="2146" href="T.html#2146" class="Bound"
+      >&#915;</a
+      ><a name="2147"
+      > </a
+      ><a name="2148" class="Symbol"
+      >:</a
+      ><a name="2149"
+      > </a
+      ><a name="2150" href="T.html#1119" class="Function"
+      >Cxt</a
+      ><a name="2153"
+      > </a
+      ><a name="2154" href="T.html#2139" class="Bound"
+      >n</a
+      ><a name="2155" class="Symbol"
+      >}</a
+      ><a name="2156"
+      >         </a
+      ><a name="2165" class="Symbol"
+      >&#8594;</a
+      ><a name="2166"
+      > </a
+      ><a name="2167" href="T.html#2035" class="Datatype"
+      >Fml</a
+      ><a name="2170"
+      > </a
+      ><a name="2171" href="T.html#2146" class="Bound"
+      >&#915;</a
+      ><a name="2172"
+      >  </a
+      ><a name="2174" class="Symbol"
+      >&#8594;</a
+      ><a name="2175"
+      > </a
+      ><a name="2176" href="T.html#2035" class="Datatype"
+      >Fml</a
+      ><a name="2179"
+      > </a
+      ><a name="2180" href="T.html#2146" class="Bound"
+      >&#915;</a
+      ><a name="2181"
+      >  </a
+      ><a name="2183" class="Symbol"
+      >&#8594;</a
+      ><a name="2184"
+      > </a
+      ><a name="2185" href="T.html#2035" class="Datatype"
+      >Fml</a
+      ><a name="2188"
+      > </a
+      ><a name="2189" href="T.html#2146" class="Bound"
+      >&#915;</a
+      ><a name="2190"
+      >
+ </a
+      ><a name="2192" href="T.html#2192" class="InductiveConstructor Operator"
+      >_&#8594;&#8594;_</a
+      ><a name="2196"
+      > </a
+      ><a name="2197" class="Symbol"
+      >:</a
+      ><a name="2198"
+      > </a
+      ><a name="2199" class="Symbol"
+      >{</a
+      ><a name="2200" href="T.html#2200" class="Bound"
+      >n</a
+      ><a name="2201"
+      > </a
+      ><a name="2202" class="Symbol"
+      >:</a
+      ><a name="2203"
+      > </a
+      ><a name="2204" href="MiniLibrary.html#3902" class="Datatype"
+      >&#8469;</a
+      ><a name="2205" class="Symbol"
+      >}{</a
+      ><a name="2207" href="T.html#2207" class="Bound"
+      >&#915;</a
+      ><a name="2208"
+      > </a
+      ><a name="2209" class="Symbol"
+      >:</a
+      ><a name="2210"
+      > </a
+      ><a name="2211" href="T.html#1119" class="Function"
+      >Cxt</a
+      ><a name="2214"
+      > </a
+      ><a name="2215" href="T.html#2200" class="Bound"
+      >n</a
+      ><a name="2216" class="Symbol"
+      >}</a
+      ><a name="2217"
+      >         </a
+      ><a name="2226" class="Symbol"
+      >&#8594;</a
+      ><a name="2227"
+      > </a
+      ><a name="2228" href="T.html#2035" class="Datatype"
+      >Fml</a
+      ><a name="2231"
+      > </a
+      ><a name="2232" href="T.html#2207" class="Bound"
+      >&#915;</a
+      ><a name="2233"
+      >  </a
+      ><a name="2235" class="Symbol"
+      >&#8594;</a
+      ><a name="2236"
+      > </a
+      ><a name="2237" href="T.html#2035" class="Datatype"
+      >Fml</a
+      ><a name="2240"
+      > </a
+      ><a name="2241" href="T.html#2207" class="Bound"
+      >&#915;</a
+      ><a name="2242"
+      >  </a
+      ><a name="2244" class="Symbol"
+      >&#8594;</a
+      ><a name="2245"
+      > </a
+      ><a name="2246" href="T.html#2035" class="Datatype"
+      >Fml</a
+      ><a name="2249"
+      > </a
+      ><a name="2250" href="T.html#2207" class="Bound"
+      >&#915;</a
+      ><a name="2251"
+      >
+
+\end{code}
+</a
+      ></pre
+    ></body
+  ></html
+>

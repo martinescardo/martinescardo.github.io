@@ -1,0 +1,398 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+><head
+  ><title
+    >UIP</title
+    ><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"
+     /><meta http-equiv="Content-Style-Type" content="text/css"
+     /><link href="Agda.css" rel="stylesheet" type="text/css"
+     /></head
+  ><body
+  ><pre
+    ><a name="1" class="Comment"
+      >Martin Escardo 2012.</a
+      ><a name="21"
+      >
+
+</a
+      ><a name="23" class="Comment"
+      >We use the UIP (uniqueness of identity proofs) for definable types</a
+      ><a name="89"
+      >
+</a
+      ><a name="90" class="Comment"
+      >only, as opposed to universally quantified or hypothetical types,</a
+      ><a name="155"
+      >
+</a
+      ><a name="156" class="Comment"
+      >in fact for &#8322;, &#8469; and &#8469;&#8734; and no other type. </a
+      ><a name="199"
+      >
+
+</a
+      ><a name="201" class="Comment"
+      >It is known that the UIP is provable for definable types from the</a
+      ><a name="266"
+      >
+</a
+      ><a name="267" class="Comment"
+      >propositional axiom of extensionality, which we are assuming</a
+      ><a name="327"
+      >
+</a
+      ><a name="328" class="Comment"
+      >(cf. Hofmann &amp; Streicher's paper on the groupoid interpretation). It</a
+      ><a name="396"
+      >
+</a
+      ><a name="397" class="Comment"
+      >would be too painful and time consuming to actually define the UIP for</a
+      ><a name="467"
+      >
+</a
+      ><a name="468" class="Comment"
+      >each type we need it using extensionality.</a
+      ><a name="510"
+      >
+
+</a
+      ><a name="512" class="Comment"
+      >Hence in this module we prove the UIP with pattern matching, which</a
+      ><a name="578"
+      >
+</a
+      ><a name="579" class="Comment"
+      >amounts to the K axiom, but we promise to use it for definable</a
+      ><a name="641"
+      >
+</a
+      ><a name="642" class="Comment"
+      >types only. (grep all Agda files for UIP to make sure!)</a
+      ><a name="697"
+      >
+
+\begin{code}
+
+</a
+      ><a name="713" class="Keyword"
+      >module</a
+      ><a name="719"
+      > </a
+      ><a name="720" href="UIP.html#1" class="Module"
+      >UIP</a
+      ><a name="723"
+      > </a
+      ><a name="724" class="Keyword"
+      >where</a
+      ><a name="729"
+      >
+
+</a
+      ><a name="731" class="Keyword"
+      >open</a
+      ><a name="735"
+      > </a
+      ><a name="736" class="Keyword"
+      >import</a
+      ><a name="742"
+      > </a
+      ><a name="743" href="Equality.html#1" class="Module"
+      >Equality</a
+      ><a name="751"
+      >
+
+</a
+      ><a name="753" href="UIP.html#753" class="Function"
+      >UIP</a
+      ><a name="756"
+      > </a
+      ><a name="757" class="Symbol"
+      >:</a
+      ><a name="758"
+      > </a
+      ><a name="759" class="Symbol"
+      >(</a
+      ><a name="760" href="UIP.html#760" class="Bound"
+      >X</a
+      ><a name="761"
+      > </a
+      ><a name="762" class="Symbol"
+      >:</a
+      ><a name="763"
+      > </a
+      ><a name="764" class="PrimitiveType"
+      >Set</a
+      ><a name="767" class="Symbol"
+      >)</a
+      ><a name="768"
+      > </a
+      ><a name="769" class="Symbol"
+      >&#8594;</a
+      ><a name="770"
+      > </a
+      ><a name="771" class="Symbol"
+      >&#8704;{</a
+      ><a name="773" href="UIP.html#773" class="Bound"
+      >x</a
+      ><a name="774"
+      > </a
+      ><a name="775" href="UIP.html#775" class="Bound"
+      >x'</a
+      ><a name="777"
+      > </a
+      ><a name="778" class="Symbol"
+      >:</a
+      ><a name="779"
+      > </a
+      ><a name="780" href="UIP.html#760" class="Bound"
+      >X</a
+      ><a name="781" class="Symbol"
+      >}</a
+      ><a name="782"
+      > </a
+      ><a name="783" class="Symbol"
+      >&#8594;</a
+      ><a name="784"
+      > </a
+      ><a name="785" class="Symbol"
+      >&#8704;(</a
+      ><a name="787" href="UIP.html#787" class="Bound"
+      >r</a
+      ><a name="788"
+      > </a
+      ><a name="789" href="UIP.html#789" class="Bound"
+      >s</a
+      ><a name="790"
+      > </a
+      ><a name="791" class="Symbol"
+      >:</a
+      ><a name="792"
+      > </a
+      ><a name="793" href="UIP.html#773" class="Bound"
+      >x</a
+      ><a name="794"
+      > </a
+      ><a name="795" href="Equality.html#239" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="796"
+      > </a
+      ><a name="797" href="UIP.html#775" class="Bound"
+      >x'</a
+      ><a name="799" class="Symbol"
+      >)</a
+      ><a name="800"
+      > </a
+      ><a name="801" class="Symbol"
+      >&#8594;</a
+      ><a name="802"
+      > </a
+      ><a name="803" href="UIP.html#787" class="Bound"
+      >r</a
+      ><a name="804"
+      > </a
+      ><a name="805" href="Equality.html#239" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="806"
+      > </a
+      ><a name="807" href="UIP.html#789" class="Bound"
+      >s</a
+      ><a name="808"
+      >
+</a
+      ><a name="809" href="UIP.html#753" class="Function"
+      >UIP</a
+      ><a name="812"
+      > </a
+      ><a name="813" href="UIP.html#813" class="Bound"
+      >X</a
+      ><a name="814"
+      > </a
+      ><a name="815" class="Symbol"
+      >{</a
+      ><a name="816" href="UIP.html#816" class="Bound"
+      >x</a
+      ><a name="817" class="Symbol"
+      >}</a
+      ><a name="818"
+      > </a
+      ><a name="819" class="Symbol"
+      >{</a
+      ><a name="820" class="DottedPattern Symbol"
+      >.</a
+      ><a name="821" href="UIP.html#816" class="DottedPattern Bound"
+      >x</a
+      ><a name="822" class="Symbol"
+      >}</a
+      ><a name="823"
+      > </a
+      ><a name="824" href="Equality.html#275" class="InductiveConstructor"
+      >refl</a
+      ><a name="828"
+      > </a
+      ><a name="829" href="Equality.html#275" class="InductiveConstructor"
+      >refl</a
+      ><a name="833"
+      > </a
+      ><a name="834" class="Symbol"
+      >=</a
+      ><a name="835"
+      > </a
+      ><a name="836" href="Equality.html#275" class="InductiveConstructor"
+      >refl</a
+      ><a name="840"
+      >
+
+</a
+      ><a name="842" href="UIP.html#842" class="Function"
+      >UIP-refl</a
+      ><a name="850"
+      > </a
+      ><a name="851" class="Symbol"
+      >:</a
+      ><a name="852"
+      > </a
+      ><a name="853" class="Symbol"
+      >(</a
+      ><a name="854" href="UIP.html#854" class="Bound"
+      >X</a
+      ><a name="855"
+      > </a
+      ><a name="856" class="Symbol"
+      >:</a
+      ><a name="857"
+      > </a
+      ><a name="858" class="PrimitiveType"
+      >Set</a
+      ><a name="861" class="Symbol"
+      >)</a
+      ><a name="862"
+      > </a
+      ><a name="863" class="Symbol"
+      >&#8594;</a
+      ><a name="864"
+      > </a
+      ><a name="865" class="Symbol"
+      >&#8704;{</a
+      ><a name="867" href="UIP.html#867" class="Bound"
+      >x</a
+      ><a name="868"
+      > </a
+      ><a name="869" class="Symbol"
+      >:</a
+      ><a name="870"
+      > </a
+      ><a name="871" href="UIP.html#854" class="Bound"
+      >X</a
+      ><a name="872" class="Symbol"
+      >}</a
+      ><a name="873"
+      > </a
+      ><a name="874" class="Symbol"
+      >&#8594;</a
+      ><a name="875"
+      > </a
+      ><a name="876" class="Symbol"
+      >&#8704;(</a
+      ><a name="878" href="UIP.html#878" class="Bound"
+      >r</a
+      ><a name="879"
+      > </a
+      ><a name="880" class="Symbol"
+      >:</a
+      ><a name="881"
+      > </a
+      ><a name="882" href="UIP.html#867" class="Bound"
+      >x</a
+      ><a name="883"
+      > </a
+      ><a name="884" href="Equality.html#239" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="885"
+      > </a
+      ><a name="886" href="UIP.html#867" class="Bound"
+      >x</a
+      ><a name="887" class="Symbol"
+      >)</a
+      ><a name="888"
+      > </a
+      ><a name="889" class="Symbol"
+      >&#8594;</a
+      ><a name="890"
+      > </a
+      ><a name="891" href="UIP.html#878" class="Bound"
+      >r</a
+      ><a name="892"
+      > </a
+      ><a name="893" href="Equality.html#239" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="894"
+      > </a
+      ><a name="895" href="Equality.html#275" class="InductiveConstructor"
+      >refl</a
+      ><a name="899"
+      >
+</a
+      ><a name="900" href="UIP.html#842" class="Function"
+      >UIP-refl</a
+      ><a name="908"
+      > </a
+      ><a name="909" href="UIP.html#909" class="Bound"
+      >X</a
+      ><a name="910"
+      > </a
+      ><a name="911" class="Symbol"
+      >{</a
+      ><a name="912" href="UIP.html#912" class="Bound"
+      >x</a
+      ><a name="913" class="Symbol"
+      >}</a
+      ><a name="914"
+      > </a
+      ><a name="915" href="UIP.html#915" class="Bound"
+      >r</a
+      ><a name="916"
+      > </a
+      ><a name="917" class="Symbol"
+      >=</a
+      ><a name="918"
+      > </a
+      ><a name="919" href="UIP.html#753" class="Function"
+      >UIP</a
+      ><a name="922"
+      > </a
+      ><a name="923" href="UIP.html#909" class="Bound"
+      >X</a
+      ><a name="924"
+      > </a
+      ><a name="925" class="Symbol"
+      >{</a
+      ><a name="926" href="UIP.html#912" class="Bound"
+      >x</a
+      ><a name="927" class="Symbol"
+      >}</a
+      ><a name="928"
+      > </a
+      ><a name="929" class="Symbol"
+      >{</a
+      ><a name="930" href="UIP.html#912" class="Bound"
+      >x</a
+      ><a name="931" class="Symbol"
+      >}</a
+      ><a name="932"
+      > </a
+      ><a name="933" href="UIP.html#915" class="Bound"
+      >r</a
+      ><a name="934"
+      > </a
+      ><a name="935" href="Equality.html#275" class="InductiveConstructor"
+      >refl</a
+      ><a name="939"
+      >
+
+\end{code}
+</a
+      ></pre
+    ></body
+  ></html
+>

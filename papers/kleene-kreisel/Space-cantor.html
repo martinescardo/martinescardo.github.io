@@ -1,0 +1,2473 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+><head
+  ><title
+    >Space-cantor</title
+    ><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"
+     /><meta http-equiv="Content-Style-Type" content="text/css"
+     /><link href="Agda.css" rel="stylesheet" type="text/css"
+     /></head
+  ><body
+  ><pre
+    ><a name="1" class="Comment"
+      >Chuangjie Xu 2012</a
+      ><a name="18"
+      >
+
+</a
+      ><a name="20" class="Comment"
+      >This corresponds to part of Section 2 of the paper</a
+      ><a name="70"
+      >
+</a
+      ><a name="71" class="Comment"
+      >http://www.cs.bham.ac.uk/~mhe/papers/kleene-kreisel.pdf</a
+      ><a name="126"
+      >
+
+\begin{code}
+
+</a
+      ><a name="142" class="Keyword"
+      >module</a
+      ><a name="148"
+      > </a
+      ><a name="149" href="Space-cantor.html#1" class="Module"
+      >Space-cantor</a
+      ><a name="161"
+      > </a
+      ><a name="162" class="Keyword"
+      >where</a
+      ><a name="167"
+      >
+
+</a
+      ><a name="169" class="Keyword"
+      >open</a
+      ><a name="173"
+      > </a
+      ><a name="174" class="Keyword"
+      >import</a
+      ><a name="180"
+      > </a
+      ><a name="181" href="MiniLibrary.html#1" class="Module"
+      >MiniLibrary</a
+      ><a name="192"
+      >
+</a
+      ><a name="193" class="Keyword"
+      >open</a
+      ><a name="197"
+      > </a
+      ><a name="198" class="Keyword"
+      >import</a
+      ><a name="204"
+      > </a
+      ><a name="205" href="Sequence.html#1" class="Module"
+      >Sequence</a
+      ><a name="213"
+      >
+</a
+      ><a name="214" class="Keyword"
+      >open</a
+      ><a name="218"
+      > </a
+      ><a name="219" class="Keyword"
+      >import</a
+      ><a name="225"
+      > </a
+      ><a name="226" href="Inequality.html#1" class="Module"
+      >Inequality</a
+      ><a name="236"
+      >
+</a
+      ><a name="237" class="Keyword"
+      >open</a
+      ><a name="241"
+      > </a
+      ><a name="242" class="Keyword"
+      >import</a
+      ><a name="248"
+      > </a
+      ><a name="249" href="UniformContinuity.html#1" class="Module"
+      >UniformContinuity</a
+      ><a name="266"
+      >
+</a
+      ><a name="267" class="Keyword"
+      >open</a
+      ><a name="271"
+      > </a
+      ><a name="272" class="Keyword"
+      >import</a
+      ><a name="278"
+      > </a
+      ><a name="279" href="Space.html#1" class="Module"
+      >Space</a
+      ><a name="284"
+      >
+</a
+      ><a name="285" class="Keyword"
+      >open</a
+      ><a name="289"
+      > </a
+      ><a name="290" class="Keyword"
+      >import</a
+      ><a name="296"
+      > </a
+      ><a name="297" href="Space-discrete.html#1" class="Module"
+      >Space-discrete</a
+      ><a name="311"
+      >
+</a
+      ><a name="312" class="Keyword"
+      >open</a
+      ><a name="316"
+      > </a
+      ><a name="317" class="Keyword"
+      >import</a
+      ><a name="323"
+      > </a
+      ><a name="324" href="Space-exponential.html#1" class="Module"
+      >Space-exponential</a
+      ><a name="341"
+      >
+</a
+      ><a name="342" class="Keyword"
+      >open</a
+      ><a name="346"
+      > </a
+      ><a name="347" class="Keyword"
+      >import</a
+      ><a name="353"
+      > </a
+      ><a name="354" href="not-not.html#1" class="Module"
+      >not-not</a
+      ><a name="361"
+      >
+
+\end{code}
+
+</a
+      ><a name="375" class="Comment"
+      >The Cantor space &#8322;&#8469; with the monoid C form a C-space, which</a
+      ><a name="434"
+      >
+</a
+      ><a name="435" class="Comment"
+      >is isomorphic to the exponential &#8469;Space &#8658; &#8322;Space.</a
+      ><a name="484"
+      >
+
+\begin{code}
+
+</a
+      ><a name="500" href="Space-cantor.html#500" class="Function"
+      >Lemma[&#8322;&#8469;&#8594;&#8322;&#8469;-to-&#8322;&#8469;&#8594;&#8469;&#8658;&#8322;]</a
+      ><a name="522"
+      > </a
+      ><a name="523" class="Symbol"
+      >:</a
+      ><a name="524"
+      > </a
+      ><a name="525" class="Symbol"
+      >(</a
+      ><a name="526" href="Space-cantor.html#526" class="Bound"
+      >r</a
+      ><a name="527"
+      > </a
+      ><a name="528" class="Symbol"
+      >:</a
+      ><a name="529"
+      > </a
+      ><a name="530" href="Sequence.html#238" class="Function"
+      >&#8322;&#8469;</a
+      ><a name="532"
+      > </a
+      ><a name="533" class="Symbol"
+      >&#8594;</a
+      ><a name="534"
+      > </a
+      ><a name="535" href="Sequence.html#238" class="Function"
+      >&#8322;&#8469;</a
+      ><a name="537" class="Symbol"
+      >)</a
+      ><a name="538"
+      > </a
+      ><a name="539" class="Symbol"
+      >&#8594;</a
+      ><a name="540"
+      > </a
+      ><a name="541" href="Space-cantor.html#526" class="Bound"
+      >r</a
+      ><a name="542"
+      > </a
+      ><a name="543" href="MiniLibrary.html#615" class="Function Operator"
+      >&#8712;</a
+      ><a name="544"
+      > </a
+      ><a name="545" href="Space.html#649" class="Function"
+      >C</a
+      ><a name="546"
+      > </a
+      ><a name="547" class="Symbol"
+      >&#8594;</a
+      ><a name="548"
+      >
+     </a
+      ><a name="554" href="MiniLibrary.html#1316" class="Function"
+      >&#8707;</a
+      ><a name="555"
+      > </a
+      ><a name="556" class="Symbol"
+      >\(</a
+      ><a name="558" href="Space-cantor.html#558" class="Bound"
+      >&#966;</a
+      ><a name="559"
+      > </a
+      ><a name="560" class="Symbol"
+      >:</a
+      ><a name="561"
+      > </a
+      ><a name="562" href="Sequence.html#238" class="Function"
+      >&#8322;&#8469;</a
+      ><a name="564"
+      > </a
+      ><a name="565" class="Symbol"
+      >&#8594;</a
+      ><a name="566"
+      > </a
+      ><a name="567" href="Space.html#4275" class="Function"
+      >U</a
+      ><a name="568"
+      > </a
+      ><a name="569" class="Symbol"
+      >(</a
+      ><a name="570" href="Space-discrete.html#7899" class="Function"
+      >&#8469;Space</a
+      ><a name="576"
+      > </a
+      ><a name="577" href="Space-exponential.html#303" class="Function Operator"
+      >&#8658;</a
+      ><a name="578"
+      > </a
+      ><a name="579" href="Space-discrete.html#4712" class="Function"
+      >&#8322;Space</a
+      ><a name="585" class="Symbol"
+      >))</a
+      ><a name="587"
+      > </a
+      ><a name="588" class="Symbol"
+      >&#8594;</a
+      ><a name="589"
+      > </a
+      ><a name="590" href="Space-cantor.html#558" class="Bound"
+      >&#966;</a
+      ><a name="591"
+      > </a
+      ><a name="592" href="MiniLibrary.html#615" class="Function Operator"
+      >&#8712;</a
+      ><a name="593"
+      > </a
+      ><a name="594" href="Space.html#4299" class="Function"
+      >Probe</a
+      ><a name="599"
+      > </a
+      ><a name="600" class="Symbol"
+      >(</a
+      ><a name="601" href="Space-discrete.html#7899" class="Function"
+      >&#8469;Space</a
+      ><a name="607"
+      > </a
+      ><a name="608" href="Space-exponential.html#303" class="Function Operator"
+      >&#8658;</a
+      ><a name="609"
+      > </a
+      ><a name="610" href="Space-discrete.html#4712" class="Function"
+      >&#8322;Space</a
+      ><a name="616" class="Symbol"
+      >)</a
+      ><a name="617"
+      >
+</a
+      ><a name="618" href="Space-cantor.html#500" class="Function"
+      >Lemma[&#8322;&#8469;&#8594;&#8322;&#8469;-to-&#8322;&#8469;&#8594;&#8469;&#8658;&#8322;]</a
+      ><a name="640"
+      > </a
+      ><a name="641" href="Space-cantor.html#641" class="Bound"
+      >r</a
+      ><a name="642"
+      > </a
+      ><a name="643" href="Space-cantor.html#643" class="Bound"
+      >ucr</a
+      ><a name="646"
+      > </a
+      ><a name="647" class="Symbol"
+      >=</a
+      ><a name="648"
+      > </a
+      ><a name="649" href="MiniLibrary.html#1360" class="Function"
+      >&#8707;-intro</a
+      ><a name="656"
+      > </a
+      ><a name="657" href="Space-cantor.html#672" class="Function"
+      >&#966;</a
+      ><a name="658"
+      > </a
+      ><a name="659" href="Space-cantor.html#755" class="Function"
+      >prf</a
+      ><a name="662"
+      >
+ </a
+      ><a name="664" class="Keyword"
+      >where</a
+      ><a name="669"
+      >
+  </a
+      ><a name="672" href="Space-cantor.html#672" class="Function"
+      >&#966;</a
+      ><a name="673"
+      > </a
+      ><a name="674" class="Symbol"
+      >:</a
+      ><a name="675"
+      > </a
+      ><a name="676" href="Sequence.html#238" class="Function"
+      >&#8322;&#8469;</a
+      ><a name="678"
+      > </a
+      ><a name="679" class="Symbol"
+      >&#8594;</a
+      ><a name="680"
+      > </a
+      ><a name="681" href="Space.html#4275" class="Function"
+      >U</a
+      ><a name="682"
+      > </a
+      ><a name="683" class="Symbol"
+      >(</a
+      ><a name="684" href="Space-discrete.html#7899" class="Function"
+      >&#8469;Space</a
+      ><a name="690"
+      > </a
+      ><a name="691" href="Space-exponential.html#303" class="Function Operator"
+      >&#8658;</a
+      ><a name="692"
+      > </a
+      ><a name="693" href="Space-discrete.html#4712" class="Function"
+      >&#8322;Space</a
+      ><a name="699" class="Symbol"
+      >)</a
+      ><a name="700"
+      >
+  </a
+      ><a name="703" href="Space-cantor.html#672" class="Function"
+      >&#966;</a
+      ><a name="704"
+      > </a
+      ><a name="705" href="Space-cantor.html#705" class="Bound"
+      >&#945;</a
+      ><a name="706"
+      > </a
+      ><a name="707" class="Symbol"
+      >=</a
+      ><a name="708"
+      > </a
+      ><a name="709" href="Space-cantor.html#641" class="Bound"
+      >r</a
+      ><a name="710"
+      > </a
+      ><a name="711" href="Space-cantor.html#705" class="Bound"
+      >&#945;</a
+      ><a name="712"
+      > </a
+      ><a name="713" href="MiniLibrary.html#825" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="714"
+      > </a
+      ><a name="715" href="Space-discrete.html#7952" class="Function"
+      >Lemma[discrete-&#8469;Space]</a
+      ><a name="737"
+      > </a
+      ><a name="738" class="Symbol"
+      >{</a
+      ><a name="739" href="Space-discrete.html#4712" class="Function"
+      >&#8322;Space</a
+      ><a name="745" class="Symbol"
+      >}</a
+      ><a name="746"
+      > </a
+      ><a name="747" class="Symbol"
+      >(</a
+      ><a name="748" href="Space-cantor.html#641" class="Bound"
+      >r</a
+      ><a name="749"
+      > </a
+      ><a name="750" href="Space-cantor.html#705" class="Bound"
+      >&#945;</a
+      ><a name="751" class="Symbol"
+      >)</a
+      ><a name="752"
+      >
+  </a
+      ><a name="755" href="Space-cantor.html#755" class="Function"
+      >prf</a
+      ><a name="758"
+      > </a
+      ><a name="759" class="Symbol"
+      >:</a
+      ><a name="760"
+      > </a
+      ><a name="761" class="Symbol"
+      >&#8704;(</a
+      ><a name="763" href="Space-cantor.html#763" class="Bound"
+      >p</a
+      ><a name="764"
+      > </a
+      ><a name="765" class="Symbol"
+      >:</a
+      ><a name="766"
+      > </a
+      ><a name="767" href="Sequence.html#238" class="Function"
+      >&#8322;&#8469;</a
+      ><a name="769"
+      > </a
+      ><a name="770" class="Symbol"
+      >&#8594;</a
+      ><a name="771"
+      > </a
+      ><a name="772" href="MiniLibrary.html#3902" class="Datatype"
+      >&#8469;</a
+      ><a name="773" class="Symbol"
+      >)</a
+      ><a name="774"
+      > </a
+      ><a name="775" class="Symbol"
+      >&#8594;</a
+      ><a name="776"
+      > </a
+      ><a name="777" href="Space-cantor.html#763" class="Bound"
+      >p</a
+      ><a name="778"
+      > </a
+      ><a name="779" href="MiniLibrary.html#615" class="Function Operator"
+      >&#8712;</a
+      ><a name="780"
+      > </a
+      ><a name="781" href="Space-discrete.html#570" class="Function"
+      >LC</a
+      ><a name="783"
+      > </a
+      ><a name="784" class="Symbol"
+      >&#8594;</a
+      ><a name="785"
+      > </a
+      ><a name="786" class="Symbol"
+      >&#8704;(</a
+      ><a name="788" href="Space-cantor.html#788" class="Bound"
+      >t</a
+      ><a name="789"
+      > </a
+      ><a name="790" class="Symbol"
+      >:</a
+      ><a name="791"
+      > </a
+      ><a name="792" href="Sequence.html#238" class="Function"
+      >&#8322;&#8469;</a
+      ><a name="794"
+      > </a
+      ><a name="795" class="Symbol"
+      >&#8594;</a
+      ><a name="796"
+      > </a
+      ><a name="797" href="Sequence.html#238" class="Function"
+      >&#8322;&#8469;</a
+      ><a name="799" class="Symbol"
+      >)</a
+      ><a name="800"
+      > </a
+      ><a name="801" class="Symbol"
+      >&#8594;</a
+      ><a name="802"
+      > </a
+      ><a name="803" href="Space-cantor.html#788" class="Bound"
+      >t</a
+      ><a name="804"
+      > </a
+      ><a name="805" href="MiniLibrary.html#615" class="Function Operator"
+      >&#8712;</a
+      ><a name="806"
+      > </a
+      ><a name="807" href="Space.html#649" class="Function"
+      >C</a
+      ><a name="808"
+      > </a
+      ><a name="809" class="Symbol"
+      >&#8594;</a
+      ><a name="810"
+      >
+         </a
+      ><a name="820" class="Symbol"
+      >(&#955;</a
+      ><a name="822"
+      > </a
+      ><a name="823" href="Space-cantor.html#823" class="Bound"
+      >&#945;</a
+      ><a name="824"
+      > </a
+      ><a name="825" class="Symbol"
+      >&#8594;</a
+      ><a name="826"
+      > </a
+      ><a name="827" class="Symbol"
+      >(</a
+      ><a name="828" href="MiniLibrary.html#840" class="Function"
+      >&#960;&#8320;</a
+      ><a name="830"
+      > </a
+      ><a name="831" href="MiniLibrary.html#447" class="Function Operator"
+      >&#8728;</a
+      ><a name="832"
+      > </a
+      ><a name="833" href="Space-cantor.html#672" class="Function"
+      >&#966;</a
+      ><a name="834" class="Symbol"
+      >)(</a
+      ><a name="836" href="Space-cantor.html#788" class="Bound"
+      >t</a
+      ><a name="837"
+      > </a
+      ><a name="838" href="Space-cantor.html#823" class="Bound"
+      >&#945;</a
+      ><a name="839" class="Symbol"
+      >)(</a
+      ><a name="841" href="Space-cantor.html#763" class="Bound"
+      >p</a
+      ><a name="842"
+      > </a
+      ><a name="843" href="Space-cantor.html#823" class="Bound"
+      >&#945;</a
+      ><a name="844" class="Symbol"
+      >))</a
+      ><a name="846"
+      > </a
+      ><a name="847" href="MiniLibrary.html#615" class="Function Operator"
+      >&#8712;</a
+      ><a name="848"
+      > </a
+      ><a name="849" href="Space-discrete.html#570" class="Function"
+      >LC</a
+      ><a name="851"
+      >
+  </a
+      ><a name="854" href="Space-cantor.html#755" class="Function"
+      >prf</a
+      ><a name="857"
+      > </a
+      ><a name="858" href="Space-cantor.html#858" class="Bound"
+      >p</a
+      ><a name="859"
+      > </a
+      ><a name="860" href="Space-cantor.html#860" class="Bound"
+      >ucp</a
+      ><a name="863"
+      > </a
+      ><a name="864" href="Space-cantor.html#864" class="Bound"
+      >t</a
+      ><a name="865"
+      > </a
+      ><a name="866" href="Space-cantor.html#866" class="Bound"
+      >uct</a
+      ><a name="869"
+      > </a
+      ><a name="870" class="Symbol"
+      >=</a
+      ><a name="871"
+      > </a
+      ><a name="872" href="UniformContinuity.html#9720" class="Function"
+      >Lemma[LM-&#8322;-least-modulus]</a
+      ><a name="897"
+      > </a
+      ><a name="898" href="Space-cantor.html#918" class="Function"
+      >q</a
+      ><a name="899"
+      > </a
+      ><a name="900" href="Space-cantor.html#1532" class="Function"
+      >l</a
+      ><a name="901"
+      > </a
+      ><a name="902" href="Space-cantor.html#1668" class="Function"
+      >pr</a
+      ><a name="904"
+      >
+   </a
+      ><a name="908" class="Keyword"
+      >where</a
+      ><a name="913"
+      >
+    </a
+      ><a name="918" href="Space-cantor.html#918" class="Function"
+      >q</a
+      ><a name="919"
+      > </a
+      ><a name="920" class="Symbol"
+      >:</a
+      ><a name="921"
+      > </a
+      ><a name="922" href="Sequence.html#238" class="Function"
+      >&#8322;&#8469;</a
+      ><a name="924"
+      > </a
+      ><a name="925" class="Symbol"
+      >&#8594;</a
+      ><a name="926"
+      > </a
+      ><a name="927" href="MiniLibrary.html#3618" class="Datatype"
+      >&#8322;</a
+      ><a name="928"
+      >
+    </a
+      ><a name="933" href="Space-cantor.html#918" class="Function"
+      >q</a
+      ><a name="934"
+      > </a
+      ><a name="935" href="Space-cantor.html#935" class="Bound"
+      >&#945;</a
+      ><a name="936"
+      > </a
+      ><a name="937" class="Symbol"
+      >=</a
+      ><a name="938"
+      > </a
+      ><a name="939" class="Symbol"
+      >(</a
+      ><a name="940" href="MiniLibrary.html#840" class="Function"
+      >&#960;&#8320;</a
+      ><a name="942"
+      > </a
+      ><a name="943" href="MiniLibrary.html#447" class="Function Operator"
+      >&#8728;</a
+      ><a name="944"
+      > </a
+      ><a name="945" href="Space-cantor.html#672" class="Function"
+      >&#966;</a
+      ><a name="946" class="Symbol"
+      >)(</a
+      ><a name="948" href="Space-cantor.html#864" class="Bound"
+      >t</a
+      ><a name="949"
+      > </a
+      ><a name="950" href="Space-cantor.html#935" class="Bound"
+      >&#945;</a
+      ><a name="951" class="Symbol"
+      >)(</a
+      ><a name="953" href="Space-cantor.html#858" class="Bound"
+      >p</a
+      ><a name="954"
+      > </a
+      ><a name="955" href="Space-cantor.html#935" class="Bound"
+      >&#945;</a
+      ><a name="956" class="Symbol"
+      >)</a
+      ><a name="957"
+      >
+    </a
+      ><a name="962" href="Space-cantor.html#962" class="Function"
+      >m</a
+      ><a name="963"
+      > </a
+      ><a name="964" class="Symbol"
+      >:</a
+      ><a name="965"
+      > </a
+      ><a name="966" href="MiniLibrary.html#3902" class="Datatype"
+      >&#8469;</a
+      ><a name="967"
+      >
+    </a
+      ><a name="972" href="Space-cantor.html#962" class="Function"
+      >m</a
+      ><a name="973"
+      > </a
+      ><a name="974" class="Symbol"
+      >=</a
+      ><a name="975"
+      > </a
+      ><a name="976" href="MiniLibrary.html#1453" class="Function"
+      >&#8707;-witness</a
+      ><a name="985"
+      > </a
+      ><a name="986" href="Space-cantor.html#860" class="Bound"
+      >ucp</a
+      ><a name="989"
+      >
+    </a
+      ><a name="994" href="Space-cantor.html#994" class="Function"
+      >f</a
+      ><a name="995"
+      > </a
+      ><a name="996" class="Symbol"
+      >:</a
+      ><a name="997"
+      > </a
+      ><a name="998" href="Sequence.html#362" class="Function"
+      >&#8322;Fin</a
+      ><a name="1002"
+      > </a
+      ><a name="1003" href="Space-cantor.html#962" class="Function"
+      >m</a
+      ><a name="1004"
+      > </a
+      ><a name="1005" class="Symbol"
+      >&#8594;</a
+      ><a name="1006"
+      > </a
+      ><a name="1007" href="MiniLibrary.html#3902" class="Datatype"
+      >&#8469;</a
+      ><a name="1008"
+      >
+    </a
+      ><a name="1013" href="Space-cantor.html#994" class="Function"
+      >f</a
+      ><a name="1014"
+      > </a
+      ><a name="1015" href="Space-cantor.html#1015" class="Bound"
+      >s</a
+      ><a name="1016"
+      > </a
+      ><a name="1017" class="Symbol"
+      >=</a
+      ><a name="1018"
+      > </a
+      ><a name="1019" href="Space-cantor.html#858" class="Bound"
+      >p</a
+      ><a name="1020"
+      > </a
+      ><a name="1021" class="Symbol"
+      >(</a
+      ><a name="1022" href="Sequence.html#6491" class="Function"
+      >cons</a
+      ><a name="1026"
+      > </a
+      ><a name="1027" href="Space-cantor.html#1015" class="Bound"
+      >s</a
+      ><a name="1028"
+      > </a
+      ><a name="1029" href="Sequence.html#259" class="Function"
+      >0&#772;</a
+      ><a name="1031" class="Symbol"
+      >)</a
+      ><a name="1032"
+      >
+    </a
+      ><a name="1037" href="Space-cantor.html#1037" class="Function"
+      >eq</a
+      ><a name="1039"
+      > </a
+      ><a name="1040" class="Symbol"
+      >:</a
+      ><a name="1041"
+      > </a
+      ><a name="1042" class="Symbol"
+      >&#8704;(</a
+      ><a name="1044" href="Space-cantor.html#1044" class="Bound"
+      >&#945;</a
+      ><a name="1045"
+      > </a
+      ><a name="1046" class="Symbol"
+      >:</a
+      ><a name="1047"
+      > </a
+      ><a name="1048" href="Sequence.html#238" class="Function"
+      >&#8322;&#8469;</a
+      ><a name="1050" class="Symbol"
+      >)</a
+      ><a name="1051"
+      > </a
+      ><a name="1052" class="Symbol"
+      >&#8594;</a
+      ><a name="1053"
+      > </a
+      ><a name="1054" href="Space-cantor.html#858" class="Bound"
+      >p</a
+      ><a name="1055"
+      > </a
+      ><a name="1056" href="Space-cantor.html#1044" class="Bound"
+      >&#945;</a
+      ><a name="1057"
+      > </a
+      ><a name="1058" href="MiniLibrary.html#1706" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="1059"
+      > </a
+      ><a name="1060" href="Space-cantor.html#994" class="Function"
+      >f</a
+      ><a name="1061"
+      > </a
+      ><a name="1062" class="Symbol"
+      >(</a
+      ><a name="1063" href="Sequence.html#444" class="Function"
+      >take</a
+      ><a name="1067"
+      > </a
+      ><a name="1068" href="Space-cantor.html#962" class="Function"
+      >m</a
+      ><a name="1069"
+      > </a
+      ><a name="1070" href="Space-cantor.html#1044" class="Bound"
+      >&#945;</a
+      ><a name="1071" class="Symbol"
+      >)</a
+      ><a name="1072"
+      >
+    </a
+      ><a name="1077" href="Space-cantor.html#1037" class="Function"
+      >eq</a
+      ><a name="1079"
+      > </a
+      ><a name="1080" href="Space-cantor.html#1080" class="Bound"
+      >&#945;</a
+      ><a name="1081"
+      > </a
+      ><a name="1082" class="Symbol"
+      >=</a
+      ><a name="1083"
+      > </a
+      ><a name="1084" href="MiniLibrary.html#1088" class="Function"
+      >&#8743;-elim&#8320;</a
+      ><a name="1091"
+      > </a
+      ><a name="1092" class="Symbol"
+      >(</a
+      ><a name="1093" href="MiniLibrary.html#1529" class="Function"
+      >&#8707;-elim</a
+      ><a name="1099"
+      > </a
+      ><a name="1100" href="Space-cantor.html#860" class="Bound"
+      >ucp</a
+      ><a name="1103" class="Symbol"
+      >)</a
+      ><a name="1104"
+      > </a
+      ><a name="1105" href="Space-cantor.html#1080" class="Bound"
+      >&#945;</a
+      ><a name="1106"
+      > </a
+      ><a name="1107" class="Symbol"
+      >(</a
+      ><a name="1108" href="Sequence.html#6491" class="Function"
+      >cons</a
+      ><a name="1112"
+      > </a
+      ><a name="1113" class="Symbol"
+      >(</a
+      ><a name="1114" href="Sequence.html#444" class="Function"
+      >take</a
+      ><a name="1118"
+      > </a
+      ><a name="1119" href="Space-cantor.html#962" class="Function"
+      >m</a
+      ><a name="1120"
+      > </a
+      ><a name="1121" href="Space-cantor.html#1080" class="Bound"
+      >&#945;</a
+      ><a name="1122" class="Symbol"
+      >)</a
+      ><a name="1123"
+      > </a
+      ><a name="1124" href="Sequence.html#259" class="Function"
+      >0&#772;</a
+      ><a name="1126" class="Symbol"
+      >)</a
+      ><a name="1127"
+      > </a
+      ><a name="1128" class="Symbol"
+      >(</a
+      ><a name="1129" href="Sequence.html#7602" class="Function"
+      >Lemma[cons-take-&#8803;[]]</a
+      ><a name="1149"
+      > </a
+      ><a name="1150" href="Space-cantor.html#962" class="Function"
+      >m</a
+      ><a name="1151"
+      > </a
+      ><a name="1152" href="Space-cantor.html#1080" class="Bound"
+      >&#945;</a
+      ><a name="1153"
+      > </a
+      ><a name="1154" href="Sequence.html#259" class="Function"
+      >0&#772;</a
+      ><a name="1156" class="Symbol"
+      >)</a
+      ><a name="1157"
+      >
+    </a
+      ><a name="1162" href="Space-cantor.html#1162" class="Function"
+      >k'</a
+      ><a name="1164"
+      > </a
+      ><a name="1165" class="Symbol"
+      >:</a
+      ><a name="1166"
+      > </a
+      ><a name="1167" href="MiniLibrary.html#3902" class="Datatype"
+      >&#8469;</a
+      ><a name="1168"
+      >
+    </a
+      ><a name="1173" href="Space-cantor.html#1162" class="Function"
+      >k'</a
+      ><a name="1175"
+      > </a
+      ><a name="1176" class="Symbol"
+      >=</a
+      ><a name="1177"
+      > </a
+      ><a name="1178" href="MiniLibrary.html#1453" class="Function"
+      >&#8707;-witness</a
+      ><a name="1187"
+      > </a
+      ><a name="1188" class="Symbol"
+      >(</a
+      ><a name="1189" href="Sequence.html#1118" class="Function"
+      >max-fin</a
+      ><a name="1196"
+      > </a
+      ><a name="1197" href="Space-cantor.html#994" class="Function"
+      >f</a
+      ><a name="1198" class="Symbol"
+      >)</a
+      ><a name="1199"
+      >
+    </a
+      ><a name="1204" href="Space-cantor.html#1204" class="Function"
+      >k'-max</a
+      ><a name="1210"
+      > </a
+      ><a name="1211" class="Symbol"
+      >:</a
+      ><a name="1212"
+      > </a
+      ><a name="1213" class="Symbol"
+      >&#8704;(</a
+      ><a name="1215" href="Space-cantor.html#1215" class="Bound"
+      >&#945;</a
+      ><a name="1216"
+      > </a
+      ><a name="1217" class="Symbol"
+      >:</a
+      ><a name="1218"
+      > </a
+      ><a name="1219" href="Sequence.html#238" class="Function"
+      >&#8322;&#8469;</a
+      ><a name="1221" class="Symbol"
+      >)</a
+      ><a name="1222"
+      > </a
+      ><a name="1223" class="Symbol"
+      >&#8594;</a
+      ><a name="1224"
+      > </a
+      ><a name="1225" href="Space-cantor.html#858" class="Bound"
+      >p</a
+      ><a name="1226"
+      > </a
+      ><a name="1227" href="Space-cantor.html#1215" class="Bound"
+      >&#945;</a
+      ><a name="1228"
+      > </a
+      ><a name="1229" href="Inequality.html#144" class="Datatype Operator"
+      >&#8804;</a
+      ><a name="1230"
+      > </a
+      ><a name="1231" href="Space-cantor.html#1162" class="Function"
+      >k'</a
+      ><a name="1233"
+      >
+    </a
+      ><a name="1238" href="Space-cantor.html#1204" class="Function"
+      >k'-max</a
+      ><a name="1244"
+      > </a
+      ><a name="1245" href="Space-cantor.html#1245" class="Bound"
+      >&#945;</a
+      ><a name="1246"
+      > </a
+      ><a name="1247" class="Symbol"
+      >=</a
+      ><a name="1248"
+      > </a
+      ><a name="1249" href="MiniLibrary.html#1766" class="Function"
+      >transport</a
+      ><a name="1258"
+      > </a
+      ><a name="1259" class="Symbol"
+      >{</a
+      ><a name="1260" href="MiniLibrary.html#3902" class="Datatype"
+      >&#8469;</a
+      ><a name="1261" class="Symbol"
+      >}</a
+      ><a name="1262"
+      > </a
+      ><a name="1263" class="Symbol"
+      >{&#955;</a
+      ><a name="1265"
+      > </a
+      ><a name="1266" href="Space-cantor.html#1266" class="Bound"
+      >i</a
+      ><a name="1267"
+      > </a
+      ><a name="1268" class="Symbol"
+      >&#8594;</a
+      ><a name="1269"
+      > </a
+      ><a name="1270" href="Space-cantor.html#1266" class="Bound"
+      >i</a
+      ><a name="1271"
+      > </a
+      ><a name="1272" href="Inequality.html#144" class="Datatype Operator"
+      >&#8804;</a
+      ><a name="1273"
+      > </a
+      ><a name="1274" href="Space-cantor.html#1162" class="Function"
+      >k'</a
+      ><a name="1276" class="Symbol"
+      >}</a
+      ><a name="1277"
+      > </a
+      ><a name="1278" class="Symbol"
+      >(</a
+      ><a name="1279" href="MiniLibrary.html#1940" class="Function"
+      >sym</a
+      ><a name="1282"
+      > </a
+      ><a name="1283" class="Symbol"
+      >(</a
+      ><a name="1284" href="Space-cantor.html#1037" class="Function"
+      >eq</a
+      ><a name="1286"
+      > </a
+      ><a name="1287" href="Space-cantor.html#1245" class="Bound"
+      >&#945;</a
+      ><a name="1288" class="Symbol"
+      >))</a
+      ><a name="1290"
+      > </a
+      ><a name="1291" class="Symbol"
+      >(</a
+      ><a name="1292" href="MiniLibrary.html#1529" class="Function"
+      >&#8707;-elim</a
+      ><a name="1298"
+      > </a
+      ><a name="1299" class="Symbol"
+      >(</a
+      ><a name="1300" href="Sequence.html#1118" class="Function"
+      >max-fin</a
+      ><a name="1307"
+      > </a
+      ><a name="1308" href="Space-cantor.html#994" class="Function"
+      >f</a
+      ><a name="1309" class="Symbol"
+      >)</a
+      ><a name="1310"
+      > </a
+      ><a name="1311" class="Symbol"
+      >(</a
+      ><a name="1312" href="Sequence.html#444" class="Function"
+      >take</a
+      ><a name="1316"
+      > </a
+      ><a name="1317" href="Space-cantor.html#962" class="Function"
+      >m</a
+      ><a name="1318"
+      > </a
+      ><a name="1319" href="Space-cantor.html#1245" class="Bound"
+      >&#945;</a
+      ><a name="1320" class="Symbol"
+      >))</a
+      ><a name="1322"
+      >
+    </a
+      ><a name="1327" href="Space-cantor.html#1327" class="Function"
+      >k</a
+      ><a name="1328"
+      > </a
+      ><a name="1329" class="Symbol"
+      >:</a
+      ><a name="1330"
+      > </a
+      ><a name="1331" href="MiniLibrary.html#3902" class="Datatype"
+      >&#8469;</a
+      ><a name="1332"
+      >
+    </a
+      ><a name="1337" href="Space-cantor.html#1327" class="Function"
+      >k</a
+      ><a name="1338"
+      > </a
+      ><a name="1339" class="Symbol"
+      >=</a
+      ><a name="1340"
+      > </a
+      ><a name="1341" href="MiniLibrary.html#3930" class="InductiveConstructor"
+      >succ</a
+      ><a name="1345"
+      > </a
+      ><a name="1346" href="Space-cantor.html#1162" class="Function"
+      >k'</a
+      ><a name="1348"
+      >
+    </a
+      ><a name="1353" href="Space-cantor.html#1353" class="Function"
+      >k-max</a
+      ><a name="1358"
+      > </a
+      ><a name="1359" class="Symbol"
+      >:</a
+      ><a name="1360"
+      > </a
+      ><a name="1361" class="Symbol"
+      >&#8704;(</a
+      ><a name="1363" href="Space-cantor.html#1363" class="Bound"
+      >&#945;</a
+      ><a name="1364"
+      > </a
+      ><a name="1365" class="Symbol"
+      >:</a
+      ><a name="1366"
+      > </a
+      ><a name="1367" href="Sequence.html#238" class="Function"
+      >&#8322;&#8469;</a
+      ><a name="1369" class="Symbol"
+      >)</a
+      ><a name="1370"
+      > </a
+      ><a name="1371" class="Symbol"
+      >&#8594;</a
+      ><a name="1372"
+      > </a
+      ><a name="1373" href="Space-cantor.html#858" class="Bound"
+      >p</a
+      ><a name="1374"
+      > </a
+      ><a name="1375" href="Space-cantor.html#1363" class="Bound"
+      >&#945;</a
+      ><a name="1376"
+      > </a
+      ><a name="1377" href="Inequality.html#243" class="Function Operator"
+      >&lt;</a
+      ><a name="1378"
+      > </a
+      ><a name="1379" href="Space-cantor.html#1327" class="Function"
+      >k</a
+      ><a name="1380"
+      >
+    </a
+      ><a name="1385" href="Space-cantor.html#1353" class="Function"
+      >k-max</a
+      ><a name="1390"
+      > </a
+      ><a name="1391" href="Space-cantor.html#1391" class="Bound"
+      >&#945;</a
+      ><a name="1392"
+      > </a
+      ><a name="1393" class="Symbol"
+      >=</a
+      ><a name="1394"
+      > </a
+      ><a name="1395" href="Inequality.html#196" class="InductiveConstructor"
+      >&#8804;-succ</a
+      ><a name="1401"
+      > </a
+      ><a name="1402" class="Symbol"
+      >(</a
+      ><a name="1403" href="Space-cantor.html#1204" class="Function"
+      >k'-max</a
+      ><a name="1409"
+      > </a
+      ><a name="1410" href="Space-cantor.html#1391" class="Bound"
+      >&#945;</a
+      ><a name="1411" class="Symbol"
+      >)</a
+      ><a name="1412"
+      >
+    </a
+      ><a name="1417" href="Space-cantor.html#1417" class="Function"
+      >ucrt</a
+      ><a name="1421"
+      > </a
+      ><a name="1422" class="Symbol"
+      >:</a
+      ><a name="1423"
+      > </a
+      ><a name="1424" href="UniformContinuity.html#984" class="Function"
+      >uniformly-continuous-&#8322;&#8469;</a
+      ><a name="1447"
+      > </a
+      ><a name="1448" class="Symbol"
+      >(</a
+      ><a name="1449" href="Space-cantor.html#641" class="Bound"
+      >r</a
+      ><a name="1450"
+      > </a
+      ><a name="1451" href="MiniLibrary.html#447" class="Function Operator"
+      >&#8728;</a
+      ><a name="1452"
+      > </a
+      ><a name="1453" href="Space-cantor.html#864" class="Bound"
+      >t</a
+      ><a name="1454" class="Symbol"
+      >)</a
+      ><a name="1455"
+      >
+    </a
+      ><a name="1460" href="Space-cantor.html#1417" class="Function"
+      >ucrt</a
+      ><a name="1464"
+      > </a
+      ><a name="1465" class="Symbol"
+      >=</a
+      ><a name="1466"
+      > </a
+      ><a name="1467" href="UniformContinuity.html#10753" class="Function"
+      >Lemma[&#8728;-UC]</a
+      ><a name="1478"
+      > </a
+      ><a name="1479" href="Space-cantor.html#641" class="Bound"
+      >r</a
+      ><a name="1480"
+      > </a
+      ><a name="1481" href="Space-cantor.html#643" class="Bound"
+      >ucr</a
+      ><a name="1484"
+      > </a
+      ><a name="1485" href="Space-cantor.html#864" class="Bound"
+      >t</a
+      ><a name="1486"
+      > </a
+      ><a name="1487" href="Space-cantor.html#866" class="Bound"
+      >uct</a
+      ><a name="1490"
+      >
+    </a
+      ><a name="1495" href="Space-cantor.html#1495" class="Function"
+      >n</a
+      ><a name="1496"
+      > </a
+      ><a name="1497" class="Symbol"
+      >:</a
+      ><a name="1498"
+      > </a
+      ><a name="1499" href="MiniLibrary.html#3902" class="Datatype"
+      >&#8469;</a
+      ><a name="1500"
+      >
+    </a
+      ><a name="1505" href="Space-cantor.html#1495" class="Function"
+      >n</a
+      ><a name="1506"
+      > </a
+      ><a name="1507" class="Symbol"
+      >=</a
+      ><a name="1508"
+      > </a
+      ><a name="1509" href="MiniLibrary.html#1453" class="Function"
+      >&#8707;-witness</a
+      ><a name="1518"
+      > </a
+      ><a name="1519" class="Symbol"
+      >(</a
+      ><a name="1520" href="Space-cantor.html#1417" class="Function"
+      >ucrt</a
+      ><a name="1524"
+      > </a
+      ><a name="1525" href="Space-cantor.html#1327" class="Function"
+      >k</a
+      ><a name="1526" class="Symbol"
+      >)</a
+      ><a name="1527"
+      >
+    </a
+      ><a name="1532" href="Space-cantor.html#1532" class="Function"
+      >l</a
+      ><a name="1533"
+      > </a
+      ><a name="1534" class="Symbol"
+      >:</a
+      ><a name="1535"
+      > </a
+      ><a name="1536" href="MiniLibrary.html#3902" class="Datatype"
+      >&#8469;</a
+      ><a name="1537"
+      >
+    </a
+      ><a name="1542" href="Space-cantor.html#1532" class="Function"
+      >l</a
+      ><a name="1543"
+      > </a
+      ><a name="1544" class="Symbol"
+      >=</a
+      ><a name="1545"
+      > </a
+      ><a name="1546" href="MiniLibrary.html#4799" class="Function"
+      >maximum</a
+      ><a name="1553"
+      > </a
+      ><a name="1554" href="Space-cantor.html#962" class="Function"
+      >m</a
+      ><a name="1555"
+      > </a
+      ><a name="1556" href="Space-cantor.html#1495" class="Function"
+      >n</a
+      ><a name="1557"
+      >
+    </a
+      ><a name="1562" href="Space-cantor.html#1562" class="Function"
+      >m&#8804;l</a
+      ><a name="1565"
+      > </a
+      ><a name="1566" class="Symbol"
+      >:</a
+      ><a name="1567"
+      > </a
+      ><a name="1568" href="Space-cantor.html#962" class="Function"
+      >m</a
+      ><a name="1569"
+      > </a
+      ><a name="1570" href="Inequality.html#144" class="Datatype Operator"
+      >&#8804;</a
+      ><a name="1571"
+      > </a
+      ><a name="1572" href="Space-cantor.html#1532" class="Function"
+      >l</a
+      ><a name="1573"
+      >
+    </a
+      ><a name="1578" href="Space-cantor.html#1562" class="Function"
+      >m&#8804;l</a
+      ><a name="1581"
+      > </a
+      ><a name="1582" class="Symbol"
+      >=</a
+      ><a name="1583"
+      > </a
+      ><a name="1584" href="MiniLibrary.html#1088" class="Function"
+      >&#8743;-elim&#8320;</a
+      ><a name="1591"
+      > </a
+      ><a name="1592" class="Symbol"
+      >(</a
+      ><a name="1593" href="Inequality.html#1678" class="Function"
+      >Lemma[&#8804;-max]</a
+      ><a name="1605"
+      > </a
+      ><a name="1606" href="Space-cantor.html#962" class="Function"
+      >m</a
+      ><a name="1607"
+      > </a
+      ><a name="1608" href="Space-cantor.html#1495" class="Function"
+      >n</a
+      ><a name="1609" class="Symbol"
+      >)</a
+      ><a name="1610"
+      >
+    </a
+      ><a name="1615" href="Space-cantor.html#1615" class="Function"
+      >n&#8804;l</a
+      ><a name="1618"
+      > </a
+      ><a name="1619" class="Symbol"
+      >:</a
+      ><a name="1620"
+      > </a
+      ><a name="1621" href="Space-cantor.html#1495" class="Function"
+      >n</a
+      ><a name="1622"
+      > </a
+      ><a name="1623" href="Inequality.html#144" class="Datatype Operator"
+      >&#8804;</a
+      ><a name="1624"
+      > </a
+      ><a name="1625" href="Space-cantor.html#1532" class="Function"
+      >l</a
+      ><a name="1626"
+      >
+    </a
+      ><a name="1631" href="Space-cantor.html#1615" class="Function"
+      >n&#8804;l</a
+      ><a name="1634"
+      > </a
+      ><a name="1635" class="Symbol"
+      >=</a
+      ><a name="1636"
+      > </a
+      ><a name="1637" href="MiniLibrary.html#1141" class="Function"
+      >&#8743;-elim&#8321;</a
+      ><a name="1644"
+      > </a
+      ><a name="1645" class="Symbol"
+      >(</a
+      ><a name="1646" href="Inequality.html#1678" class="Function"
+      >Lemma[&#8804;-max]</a
+      ><a name="1658"
+      > </a
+      ><a name="1659" href="Space-cantor.html#962" class="Function"
+      >m</a
+      ><a name="1660"
+      > </a
+      ><a name="1661" href="Space-cantor.html#1495" class="Function"
+      >n</a
+      ><a name="1662" class="Symbol"
+      >)</a
+      ><a name="1663"
+      >
+    </a
+      ><a name="1668" href="Space-cantor.html#1668" class="Function"
+      >pr</a
+      ><a name="1670"
+      > </a
+      ><a name="1671" class="Symbol"
+      >:</a
+      ><a name="1672"
+      > </a
+      ><a name="1673" class="Symbol"
+      >&#8704;(</a
+      ><a name="1675" href="Space-cantor.html#1675" class="Bound"
+      >&#945;</a
+      ><a name="1676"
+      > </a
+      ><a name="1677" href="Space-cantor.html#1677" class="Bound"
+      >&#946;</a
+      ><a name="1678"
+      > </a
+      ><a name="1679" class="Symbol"
+      >:</a
+      ><a name="1680"
+      > </a
+      ><a name="1681" href="Sequence.html#238" class="Function"
+      >&#8322;&#8469;</a
+      ><a name="1683" class="Symbol"
+      >)</a
+      ><a name="1684"
+      > </a
+      ><a name="1685" class="Symbol"
+      >&#8594;</a
+      ><a name="1686"
+      > </a
+      ><a name="1687" href="Space-cantor.html#1675" class="Bound"
+      >&#945;</a
+      ><a name="1688"
+      > </a
+      ><a name="1689" href="Sequence.html#2542" class="Datatype Operator"
+      >&#8803;[</a
+      ><a name="1691"
+      > </a
+      ><a name="1692" href="Space-cantor.html#1532" class="Function"
+      >l</a
+      ><a name="1693"
+      > </a
+      ><a name="1694" href="Sequence.html#2542" class="Datatype Operator"
+      >]</a
+      ><a name="1695"
+      > </a
+      ><a name="1696" href="Space-cantor.html#1677" class="Bound"
+      >&#946;</a
+      ><a name="1697"
+      > </a
+      ><a name="1698" class="Symbol"
+      >&#8594;</a
+      ><a name="1699"
+      > </a
+      ><a name="1700" href="Space-cantor.html#641" class="Bound"
+      >r</a
+      ><a name="1701" class="Symbol"
+      >(</a
+      ><a name="1702" href="Space-cantor.html#864" class="Bound"
+      >t</a
+      ><a name="1703"
+      > </a
+      ><a name="1704" href="Space-cantor.html#1675" class="Bound"
+      >&#945;</a
+      ><a name="1705" class="Symbol"
+      >)(</a
+      ><a name="1707" href="Space-cantor.html#858" class="Bound"
+      >p</a
+      ><a name="1708"
+      > </a
+      ><a name="1709" href="Space-cantor.html#1675" class="Bound"
+      >&#945;</a
+      ><a name="1710" class="Symbol"
+      >)</a
+      ><a name="1711"
+      > </a
+      ><a name="1712" href="MiniLibrary.html#1706" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="1713"
+      > </a
+      ><a name="1714" href="Space-cantor.html#641" class="Bound"
+      >r</a
+      ><a name="1715" class="Symbol"
+      >(</a
+      ><a name="1716" href="Space-cantor.html#864" class="Bound"
+      >t</a
+      ><a name="1717"
+      > </a
+      ><a name="1718" href="Space-cantor.html#1677" class="Bound"
+      >&#946;</a
+      ><a name="1719" class="Symbol"
+      >)(</a
+      ><a name="1721" href="Space-cantor.html#858" class="Bound"
+      >p</a
+      ><a name="1722"
+      > </a
+      ><a name="1723" href="Space-cantor.html#1677" class="Bound"
+      >&#946;</a
+      ><a name="1724" class="Symbol"
+      >)</a
+      ><a name="1725"
+      >
+    </a
+      ><a name="1730" href="Space-cantor.html#1668" class="Function"
+      >pr</a
+      ><a name="1732"
+      > </a
+      ><a name="1733" href="Space-cantor.html#1733" class="Bound"
+      >&#945;</a
+      ><a name="1734"
+      > </a
+      ><a name="1735" href="Space-cantor.html#1735" class="Bound"
+      >&#946;</a
+      ><a name="1736"
+      > </a
+      ><a name="1737" href="Space-cantor.html#1737" class="Bound"
+      >awl</a
+      ><a name="1740"
+      > </a
+      ><a name="1741" class="Symbol"
+      >=</a
+      ><a name="1742"
+      > </a
+      ><a name="1743" href="MiniLibrary.html#1766" class="Function"
+      >transport</a
+      ><a name="1752"
+      > </a
+      ><a name="1753" class="Symbol"
+      >{</a
+      ><a name="1754" href="MiniLibrary.html#3902" class="Datatype"
+      >&#8469;</a
+      ><a name="1755" class="Symbol"
+      >}</a
+      ><a name="1756"
+      > </a
+      ><a name="1757" class="Symbol"
+      >{&#955;</a
+      ><a name="1759"
+      > </a
+      ><a name="1760" href="Space-cantor.html#1760" class="Bound"
+      >i</a
+      ><a name="1761"
+      > </a
+      ><a name="1762" class="Symbol"
+      >&#8594;</a
+      ><a name="1763"
+      > </a
+      ><a name="1764" href="Space-cantor.html#641" class="Bound"
+      >r</a
+      ><a name="1765" class="Symbol"
+      >(</a
+      ><a name="1766" href="Space-cantor.html#864" class="Bound"
+      >t</a
+      ><a name="1767"
+      > </a
+      ><a name="1768" href="Space-cantor.html#1733" class="Bound"
+      >&#945;</a
+      ><a name="1769" class="Symbol"
+      >)(</a
+      ><a name="1771" href="Space-cantor.html#858" class="Bound"
+      >p</a
+      ><a name="1772"
+      > </a
+      ><a name="1773" href="Space-cantor.html#1733" class="Bound"
+      >&#945;</a
+      ><a name="1774" class="Symbol"
+      >)</a
+      ><a name="1775"
+      > </a
+      ><a name="1776" href="MiniLibrary.html#1706" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="1777"
+      > </a
+      ><a name="1778" href="Space-cantor.html#641" class="Bound"
+      >r</a
+      ><a name="1779" class="Symbol"
+      >(</a
+      ><a name="1780" href="Space-cantor.html#864" class="Bound"
+      >t</a
+      ><a name="1781"
+      > </a
+      ><a name="1782" href="Space-cantor.html#1735" class="Bound"
+      >&#946;</a
+      ><a name="1783" class="Symbol"
+      >)</a
+      ><a name="1784"
+      > </a
+      ><a name="1785" href="Space-cantor.html#1760" class="Bound"
+      >i</a
+      ><a name="1786" class="Symbol"
+      >}</a
+      ><a name="1787"
+      > </a
+      ><a name="1788" href="Space-cantor.html#1873" class="Function"
+      >eqp</a
+      ><a name="1791"
+      > </a
+      ><a name="1792" href="Space-cantor.html#2073" class="Function"
+      >subgoal</a
+      ><a name="1799"
+      >
+     </a
+      ><a name="1805" class="Keyword"
+      >where</a
+      ><a name="1810"
+      >
+      </a
+      ><a name="1817" href="Space-cantor.html#1817" class="Function"
+      >awm</a
+      ><a name="1820"
+      > </a
+      ><a name="1821" class="Symbol"
+      >:</a
+      ><a name="1822"
+      > </a
+      ><a name="1823" href="Space-cantor.html#1733" class="Bound"
+      >&#945;</a
+      ><a name="1824"
+      > </a
+      ><a name="1825" href="Sequence.html#2542" class="Datatype Operator"
+      >&#8803;[</a
+      ><a name="1827"
+      > </a
+      ><a name="1828" href="Space-cantor.html#962" class="Function"
+      >m</a
+      ><a name="1829"
+      > </a
+      ><a name="1830" href="Sequence.html#2542" class="Datatype Operator"
+      >]</a
+      ><a name="1831"
+      > </a
+      ><a name="1832" href="Space-cantor.html#1735" class="Bound"
+      >&#946;</a
+      ><a name="1833"
+      >
+      </a
+      ><a name="1840" href="Space-cantor.html#1817" class="Function"
+      >awm</a
+      ><a name="1843"
+      > </a
+      ><a name="1844" class="Symbol"
+      >=</a
+      ><a name="1845"
+      > </a
+      ><a name="1846" href="Sequence.html#5220" class="Function"
+      >Lemma[&#8803;[]-&#8804;]</a
+      ><a name="1858"
+      > </a
+      ><a name="1859" href="Space-cantor.html#1737" class="Bound"
+      >awl</a
+      ><a name="1862"
+      > </a
+      ><a name="1863" href="Space-cantor.html#1562" class="Function"
+      >m&#8804;l</a
+      ><a name="1866"
+      >
+      </a
+      ><a name="1873" href="Space-cantor.html#1873" class="Function"
+      >eqp</a
+      ><a name="1876"
+      > </a
+      ><a name="1877" class="Symbol"
+      >:</a
+      ><a name="1878"
+      > </a
+      ><a name="1879" href="Space-cantor.html#858" class="Bound"
+      >p</a
+      ><a name="1880"
+      > </a
+      ><a name="1881" href="Space-cantor.html#1733" class="Bound"
+      >&#945;</a
+      ><a name="1882"
+      > </a
+      ><a name="1883" href="MiniLibrary.html#1706" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="1884"
+      > </a
+      ><a name="1885" href="Space-cantor.html#858" class="Bound"
+      >p</a
+      ><a name="1886"
+      > </a
+      ><a name="1887" href="Space-cantor.html#1735" class="Bound"
+      >&#946;</a
+      ><a name="1888"
+      >
+      </a
+      ><a name="1895" href="Space-cantor.html#1873" class="Function"
+      >eqp</a
+      ><a name="1898"
+      > </a
+      ><a name="1899" class="Symbol"
+      >=</a
+      ><a name="1900"
+      > </a
+      ><a name="1901" href="MiniLibrary.html#1088" class="Function"
+      >&#8743;-elim&#8320;</a
+      ><a name="1908"
+      > </a
+      ><a name="1909" class="Symbol"
+      >(</a
+      ><a name="1910" href="MiniLibrary.html#1529" class="Function"
+      >&#8707;-elim</a
+      ><a name="1916"
+      > </a
+      ><a name="1917" href="Space-cantor.html#860" class="Bound"
+      >ucp</a
+      ><a name="1920" class="Symbol"
+      >)</a
+      ><a name="1921"
+      > </a
+      ><a name="1922" href="Space-cantor.html#1733" class="Bound"
+      >&#945;</a
+      ><a name="1923"
+      > </a
+      ><a name="1924" href="Space-cantor.html#1735" class="Bound"
+      >&#946;</a
+      ><a name="1925"
+      > </a
+      ><a name="1926" href="Space-cantor.html#1817" class="Function"
+      >awm</a
+      ><a name="1929"
+      >
+      </a
+      ><a name="1936" href="Space-cantor.html#1936" class="Function"
+      >awn</a
+      ><a name="1939"
+      > </a
+      ><a name="1940" class="Symbol"
+      >:</a
+      ><a name="1941"
+      > </a
+      ><a name="1942" href="Space-cantor.html#1733" class="Bound"
+      >&#945;</a
+      ><a name="1943"
+      > </a
+      ><a name="1944" href="Sequence.html#2542" class="Datatype Operator"
+      >&#8803;[</a
+      ><a name="1946"
+      > </a
+      ><a name="1947" href="Space-cantor.html#1495" class="Function"
+      >n</a
+      ><a name="1948"
+      > </a
+      ><a name="1949" href="Sequence.html#2542" class="Datatype Operator"
+      >]</a
+      ><a name="1950"
+      > </a
+      ><a name="1951" href="Space-cantor.html#1735" class="Bound"
+      >&#946;</a
+      ><a name="1952"
+      >
+      </a
+      ><a name="1959" href="Space-cantor.html#1936" class="Function"
+      >awn</a
+      ><a name="1962"
+      > </a
+      ><a name="1963" class="Symbol"
+      >=</a
+      ><a name="1964"
+      > </a
+      ><a name="1965" href="Sequence.html#5220" class="Function"
+      >Lemma[&#8803;[]-&#8804;]</a
+      ><a name="1977"
+      > </a
+      ><a name="1978" href="Space-cantor.html#1737" class="Bound"
+      >awl</a
+      ><a name="1981"
+      > </a
+      ><a name="1982" href="Space-cantor.html#1615" class="Function"
+      >n&#8804;l</a
+      ><a name="1985"
+      >
+      </a
+      ><a name="1992" href="Space-cantor.html#1992" class="Function"
+      >awk</a
+      ><a name="1995"
+      > </a
+      ><a name="1996" class="Symbol"
+      >:</a
+      ><a name="1997"
+      > </a
+      ><a name="1998" href="Space-cantor.html#641" class="Bound"
+      >r</a
+      ><a name="1999"
+      > </a
+      ><a name="2000" class="Symbol"
+      >(</a
+      ><a name="2001" href="Space-cantor.html#864" class="Bound"
+      >t</a
+      ><a name="2002"
+      > </a
+      ><a name="2003" href="Space-cantor.html#1733" class="Bound"
+      >&#945;</a
+      ><a name="2004" class="Symbol"
+      >)</a
+      ><a name="2005"
+      > </a
+      ><a name="2006" href="Sequence.html#2542" class="Datatype Operator"
+      >&#8803;[</a
+      ><a name="2008"
+      > </a
+      ><a name="2009" href="Space-cantor.html#1327" class="Function"
+      >k</a
+      ><a name="2010"
+      > </a
+      ><a name="2011" href="Sequence.html#2542" class="Datatype Operator"
+      >]</a
+      ><a name="2012"
+      > </a
+      ><a name="2013" href="Space-cantor.html#641" class="Bound"
+      >r</a
+      ><a name="2014"
+      > </a
+      ><a name="2015" class="Symbol"
+      >(</a
+      ><a name="2016" href="Space-cantor.html#864" class="Bound"
+      >t</a
+      ><a name="2017"
+      > </a
+      ><a name="2018" href="Space-cantor.html#1735" class="Bound"
+      >&#946;</a
+      ><a name="2019" class="Symbol"
+      >)</a
+      ><a name="2020"
+      >
+      </a
+      ><a name="2027" href="Space-cantor.html#1992" class="Function"
+      >awk</a
+      ><a name="2030"
+      > </a
+      ><a name="2031" class="Symbol"
+      >=</a
+      ><a name="2032"
+      > </a
+      ><a name="2033" href="MiniLibrary.html#1088" class="Function"
+      >&#8743;-elim&#8320;</a
+      ><a name="2040"
+      > </a
+      ><a name="2041" class="Symbol"
+      >(</a
+      ><a name="2042" href="MiniLibrary.html#1529" class="Function"
+      >&#8707;-elim</a
+      ><a name="2048"
+      > </a
+      ><a name="2049" class="Symbol"
+      >(</a
+      ><a name="2050" href="Space-cantor.html#1417" class="Function"
+      >ucrt</a
+      ><a name="2054"
+      > </a
+      ><a name="2055" href="Space-cantor.html#1327" class="Function"
+      >k</a
+      ><a name="2056" class="Symbol"
+      >))</a
+      ><a name="2058"
+      > </a
+      ><a name="2059" href="Space-cantor.html#1733" class="Bound"
+      >&#945;</a
+      ><a name="2060"
+      > </a
+      ><a name="2061" href="Space-cantor.html#1735" class="Bound"
+      >&#946;</a
+      ><a name="2062"
+      > </a
+      ><a name="2063" href="Space-cantor.html#1936" class="Function"
+      >awn</a
+      ><a name="2066"
+      >
+      </a
+      ><a name="2073" href="Space-cantor.html#2073" class="Function"
+      >subgoal</a
+      ><a name="2080"
+      > </a
+      ><a name="2081" class="Symbol"
+      >:</a
+      ><a name="2082"
+      > </a
+      ><a name="2083" href="Space-cantor.html#641" class="Bound"
+      >r</a
+      ><a name="2084" class="Symbol"
+      >(</a
+      ><a name="2085" href="Space-cantor.html#864" class="Bound"
+      >t</a
+      ><a name="2086"
+      > </a
+      ><a name="2087" href="Space-cantor.html#1733" class="Bound"
+      >&#945;</a
+      ><a name="2088" class="Symbol"
+      >)(</a
+      ><a name="2090" href="Space-cantor.html#858" class="Bound"
+      >p</a
+      ><a name="2091"
+      > </a
+      ><a name="2092" href="Space-cantor.html#1733" class="Bound"
+      >&#945;</a
+      ><a name="2093" class="Symbol"
+      >)</a
+      ><a name="2094"
+      > </a
+      ><a name="2095" href="MiniLibrary.html#1706" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="2096"
+      > </a
+      ><a name="2097" href="Space-cantor.html#641" class="Bound"
+      >r</a
+      ><a name="2098" class="Symbol"
+      >(</a
+      ><a name="2099" href="Space-cantor.html#864" class="Bound"
+      >t</a
+      ><a name="2100"
+      > </a
+      ><a name="2101" href="Space-cantor.html#1735" class="Bound"
+      >&#946;</a
+      ><a name="2102" class="Symbol"
+      >)(</a
+      ><a name="2104" href="Space-cantor.html#858" class="Bound"
+      >p</a
+      ><a name="2105"
+      > </a
+      ><a name="2106" href="Space-cantor.html#1733" class="Bound"
+      >&#945;</a
+      ><a name="2107" class="Symbol"
+      >)</a
+      ><a name="2108"
+      >
+      </a
+      ><a name="2115" href="Space-cantor.html#2073" class="Function"
+      >subgoal</a
+      ><a name="2122"
+      > </a
+      ><a name="2123" class="Symbol"
+      >=</a
+      ><a name="2124"
+      > </a
+      ><a name="2125" href="Sequence.html#4898" class="Function"
+      >Lemma[&#8803;[]-&lt;]</a
+      ><a name="2137"
+      > </a
+      ><a name="2138" href="Space-cantor.html#1992" class="Function"
+      >awk</a
+      ><a name="2141"
+      > </a
+      ><a name="2142" class="Symbol"
+      >(</a
+      ><a name="2143" href="Space-cantor.html#858" class="Bound"
+      >p</a
+      ><a name="2144"
+      > </a
+      ><a name="2145" href="Space-cantor.html#1733" class="Bound"
+      >&#945;</a
+      ><a name="2146" class="Symbol"
+      >)</a
+      ><a name="2147"
+      > </a
+      ><a name="2148" class="Symbol"
+      >(</a
+      ><a name="2149" href="Space-cantor.html#1353" class="Function"
+      >k-max</a
+      ><a name="2154"
+      > </a
+      ><a name="2155" href="Space-cantor.html#1733" class="Bound"
+      >&#945;</a
+      ><a name="2156" class="Symbol"
+      >)</a
+      ><a name="2157"
+      >
+
+\end{code}
+
+</a
+      ><a name="2171" class="Comment"
+      >In particular, the identity map is also a probe.</a
+      ><a name="2219"
+      >
+
+\begin{code}
+
+</a
+      ><a name="2235" href="Space-cantor.html#2235" class="Function"
+      >ID</a
+      ><a name="2237"
+      > </a
+      ><a name="2238" class="Symbol"
+      >:</a
+      ><a name="2239"
+      > </a
+      ><a name="2240" href="Sequence.html#238" class="Function"
+      >&#8322;&#8469;</a
+      ><a name="2242"
+      > </a
+      ><a name="2243" class="Symbol"
+      >&#8594;</a
+      ><a name="2244"
+      > </a
+      ><a name="2245" href="Space.html#4275" class="Function"
+      >U</a
+      ><a name="2246" class="Symbol"
+      >(</a
+      ><a name="2247" href="Space-discrete.html#7899" class="Function"
+      >&#8469;Space</a
+      ><a name="2253"
+      > </a
+      ><a name="2254" href="Space-exponential.html#303" class="Function Operator"
+      >&#8658;</a
+      ><a name="2255"
+      > </a
+      ><a name="2256" href="Space-discrete.html#4712" class="Function"
+      >&#8322;Space</a
+      ><a name="2262" class="Symbol"
+      >)</a
+      ><a name="2263"
+      >
+</a
+      ><a name="2264" href="Space-cantor.html#2235" class="Function"
+      >ID</a
+      ><a name="2266"
+      > </a
+      ><a name="2267" class="Symbol"
+      >=</a
+      ><a name="2268"
+      > </a
+      ><a name="2269" href="MiniLibrary.html#1453" class="Function"
+      >&#8707;-witness</a
+      ><a name="2278"
+      > </a
+      ><a name="2279" class="Symbol"
+      >(</a
+      ><a name="2280" href="Space-cantor.html#500" class="Function"
+      >Lemma[&#8322;&#8469;&#8594;&#8322;&#8469;-to-&#8322;&#8469;&#8594;&#8469;&#8658;&#8322;]</a
+      ><a name="2302"
+      > </a
+      ><a name="2303" href="MiniLibrary.html#397" class="Function"
+      >id</a
+      ><a name="2305"
+      > </a
+      ><a name="2306" href="UniformContinuity.html#10074" class="Function"
+      >Lemma[id-UC]</a
+      ><a name="2318" class="Symbol"
+      >)</a
+      ><a name="2319"
+      >
+
+</a
+      ><a name="2321" href="Space-cantor.html#2321" class="Function"
+      >Lemma[ID-[&#8801;]]</a
+      ><a name="2334"
+      > </a
+      ><a name="2335" class="Symbol"
+      >:</a
+      ><a name="2336"
+      > </a
+      ><a name="2337" class="Symbol"
+      >&#8704;(</a
+      ><a name="2339" href="Space-cantor.html#2339" class="Bound"
+      >&#945;</a
+      ><a name="2340"
+      > </a
+      ><a name="2341" class="Symbol"
+      >:</a
+      ><a name="2342"
+      > </a
+      ><a name="2343" href="Space.html#4275" class="Function"
+      >U</a
+      ><a name="2344"
+      > </a
+      ><a name="2345" class="Symbol"
+      >(</a
+      ><a name="2346" href="Space-discrete.html#7899" class="Function"
+      >&#8469;Space</a
+      ><a name="2352"
+      > </a
+      ><a name="2353" href="Space-exponential.html#303" class="Function Operator"
+      >&#8658;</a
+      ><a name="2354"
+      > </a
+      ><a name="2355" href="Space-discrete.html#4712" class="Function"
+      >&#8322;Space</a
+      ><a name="2361" class="Symbol"
+      >))</a
+      ><a name="2363"
+      > </a
+      ><a name="2364" class="Symbol"
+      >&#8594;</a
+      ><a name="2365"
+      > </a
+      ><a name="2366" href="not-not.html#113" class="Function Operator"
+      >[</a
+      ><a name="2367"
+      > </a
+      ><a name="2368" href="Space-cantor.html#2339" class="Bound"
+      >&#945;</a
+      ><a name="2369"
+      > </a
+      ><a name="2370" href="MiniLibrary.html#1706" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="2371"
+      > </a
+      ><a name="2372" href="Space-cantor.html#2235" class="Function"
+      >ID</a
+      ><a name="2374"
+      > </a
+      ><a name="2375" class="Symbol"
+      >(</a
+      ><a name="2376" href="MiniLibrary.html#840" class="Function"
+      >&#960;&#8320;</a
+      ><a name="2378"
+      > </a
+      ><a name="2379" href="Space-cantor.html#2339" class="Bound"
+      >&#945;</a
+      ><a name="2380" class="Symbol"
+      >)</a
+      ><a name="2381"
+      > </a
+      ><a name="2382" href="not-not.html#113" class="Function Operator"
+      >]</a
+      ><a name="2383"
+      >
+</a
+      ><a name="2384" href="Space-cantor.html#2321" class="Function"
+      >Lemma[ID-[&#8801;]]</a
+      ><a name="2397"
+      > </a
+      ><a name="2398" href="Space-cantor.html#2398" class="Bound"
+      >&#945;</a
+      ><a name="2399"
+      > </a
+      ><a name="2400" class="Symbol"
+      >=</a
+      ><a name="2401"
+      > </a
+      ><a name="2402" href="Space-discrete.html#17157" class="Function"
+      >Lemma[Map-&#8322;]</a
+      ><a name="2414"
+      > </a
+      ><a name="2415" href="Space-discrete.html#7899" class="Function"
+      >&#8469;Space</a
+      ><a name="2421"
+      > </a
+      ><a name="2422" href="Space-cantor.html#2398" class="Bound"
+      >&#945;</a
+      ><a name="2423"
+      > </a
+      ><a name="2424" class="Symbol"
+      >(</a
+      ><a name="2425" href="Space-cantor.html#2235" class="Function"
+      >ID</a
+      ><a name="2427"
+      > </a
+      ><a name="2428" class="Symbol"
+      >(</a
+      ><a name="2429" href="MiniLibrary.html#840" class="Function"
+      >&#960;&#8320;</a
+      ><a name="2431"
+      > </a
+      ><a name="2432" href="Space-cantor.html#2398" class="Bound"
+      >&#945;</a
+      ><a name="2433" class="Symbol"
+      >))</a
+      ><a name="2435"
+      > </a
+      ><a name="2436" class="Symbol"
+      >(&#955;</a
+      ><a name="2438"
+      > </a
+      ><a name="2439" href="Space-cantor.html#2439" class="Bound"
+      >n</a
+      ><a name="2440"
+      > </a
+      ><a name="2441" class="Symbol"
+      >&#8594;</a
+      ><a name="2442"
+      > </a
+      ><a name="2443" href="MiniLibrary.html#1742" class="InductiveConstructor"
+      >refl</a
+      ><a name="2447" class="Symbol"
+      >)</a
+      ><a name="2448"
+      >
+
+</a
+      ><a name="2450" href="Space-cantor.html#2450" class="Function"
+      >ID-is-a-probe</a
+      ><a name="2463"
+      > </a
+      ><a name="2464" class="Symbol"
+      >:</a
+      ><a name="2465"
+      > </a
+      ><a name="2466" href="Space-cantor.html#2235" class="Function"
+      >ID</a
+      ><a name="2468"
+      > </a
+      ><a name="2469" href="MiniLibrary.html#615" class="Function Operator"
+      >&#8712;</a
+      ><a name="2470"
+      > </a
+      ><a name="2471" href="Space.html#4299" class="Function"
+      >Probe</a
+      ><a name="2476" class="Symbol"
+      >(</a
+      ><a name="2477" href="Space-discrete.html#7899" class="Function"
+      >&#8469;Space</a
+      ><a name="2483"
+      > </a
+      ><a name="2484" href="Space-exponential.html#303" class="Function Operator"
+      >&#8658;</a
+      ><a name="2485"
+      > </a
+      ><a name="2486" href="Space-discrete.html#4712" class="Function"
+      >&#8322;Space</a
+      ><a name="2492" class="Symbol"
+      >)</a
+      ><a name="2493"
+      >
+</a
+      ><a name="2494" href="Space-cantor.html#2450" class="Function"
+      >ID-is-a-probe</a
+      ><a name="2507"
+      > </a
+      ><a name="2508" class="Symbol"
+      >=</a
+      ><a name="2509"
+      > </a
+      ><a name="2510" href="MiniLibrary.html#1529" class="Function"
+      >&#8707;-elim</a
+      ><a name="2516"
+      > </a
+      ><a name="2517" class="Symbol"
+      >(</a
+      ><a name="2518" href="Space-cantor.html#500" class="Function"
+      >Lemma[&#8322;&#8469;&#8594;&#8322;&#8469;-to-&#8322;&#8469;&#8594;&#8469;&#8658;&#8322;]</a
+      ><a name="2540"
+      > </a
+      ><a name="2541" href="MiniLibrary.html#397" class="Function"
+      >id</a
+      ><a name="2543"
+      > </a
+      ><a name="2544" href="UniformContinuity.html#10074" class="Function"
+      >Lemma[id-UC]</a
+      ><a name="2556" class="Symbol"
+      >)</a
+      ><a name="2557"
+      >
+
+\end{code}
+
+</a
+      ><a name="2571" class="Comment"
+      >As the underlining category C contains only one object, the</a
+      ><a name="2630"
+      >
+</a
+      ><a name="2631" class="Comment"
+      >Yoneda lemma equivalently says that the set of continuous maps</a
+      ><a name="2693"
+      >
+</a
+      ><a name="2694" class="Comment"
+      >from the Yoneda embedding to any C-space is isomorphic to the</a
+      ><a name="2755"
+      >
+</a
+      ><a name="2756" class="Comment"
+      >C-topology of that space.</a
+      ><a name="2781"
+      >
+
+\begin{code}
+
+</a
+      ><a name="2797" href="Space-cantor.html#2797" class="Function"
+      >Lemma[Yoneda]</a
+      ><a name="2810"
+      > </a
+      ><a name="2811" class="Symbol"
+      >:</a
+      ><a name="2812"
+      > </a
+      ><a name="2813" class="Symbol"
+      >&#8704;{</a
+      ><a name="2815" href="Space-cantor.html#2815" class="Bound"
+      >X</a
+      ><a name="2816"
+      > </a
+      ><a name="2817" class="Symbol"
+      >:</a
+      ><a name="2818"
+      > </a
+      ><a name="2819" href="Space.html#4225" class="Function"
+      >Space</a
+      ><a name="2824" class="Symbol"
+      >}</a
+      ><a name="2825"
+      > </a
+      ><a name="2826" class="Symbol"
+      >&#8594;</a
+      ><a name="2827"
+      > </a
+      ><a name="2828" href="Space.html#5138" class="Function"
+      >Map</a
+      ><a name="2831"
+      > </a
+      ><a name="2832" class="Symbol"
+      >(</a
+      ><a name="2833" href="Space-discrete.html#7899" class="Function"
+      >&#8469;Space</a
+      ><a name="2839"
+      > </a
+      ><a name="2840" href="Space-exponential.html#303" class="Function Operator"
+      >&#8658;</a
+      ><a name="2841"
+      > </a
+      ><a name="2842" href="Space-discrete.html#4712" class="Function"
+      >&#8322;Space</a
+      ><a name="2848" class="Symbol"
+      >)</a
+      ><a name="2849"
+      > </a
+      ><a name="2850" href="Space-cantor.html#2815" class="Bound"
+      >X</a
+      ><a name="2851"
+      > </a
+      ><a name="2852" class="Symbol"
+      >&#8594;</a
+      ><a name="2853"
+      >
+                 </a
+      ><a name="2871" href="MiniLibrary.html#1316" class="Function"
+      >&#8707;</a
+      ><a name="2872"
+      > </a
+      ><a name="2873" class="Symbol"
+      >\(</a
+      ><a name="2875" href="Space-cantor.html#2875" class="Bound"
+      >p</a
+      ><a name="2876"
+      > </a
+      ><a name="2877" class="Symbol"
+      >:</a
+      ><a name="2878"
+      > </a
+      ><a name="2879" href="Sequence.html#238" class="Function"
+      >&#8322;&#8469;</a
+      ><a name="2881"
+      > </a
+      ><a name="2882" class="Symbol"
+      >&#8594;</a
+      ><a name="2883"
+      > </a
+      ><a name="2884" href="Space.html#4275" class="Function"
+      >U</a
+      ><a name="2885"
+      > </a
+      ><a name="2886" href="Space-cantor.html#2815" class="Bound"
+      >X</a
+      ><a name="2887" class="Symbol"
+      >)</a
+      ><a name="2888"
+      > </a
+      ><a name="2889" class="Symbol"
+      >&#8594;</a
+      ><a name="2890"
+      > </a
+      ><a name="2891" href="Space-cantor.html#2875" class="Bound"
+      >p</a
+      ><a name="2892"
+      > </a
+      ><a name="2893" href="MiniLibrary.html#615" class="Function Operator"
+      >&#8712;</a
+      ><a name="2894"
+      > </a
+      ><a name="2895" href="Space.html#4299" class="Function"
+      >Probe</a
+      ><a name="2900"
+      > </a
+      ><a name="2901" href="Space-cantor.html#2815" class="Bound"
+      >X</a
+      ><a name="2902"
+      >
+</a
+      ><a name="2903" href="Space-cantor.html#2797" class="Function"
+      >Lemma[Yoneda]</a
+      ><a name="2916"
+      > </a
+      ><a name="2917" class="Symbol"
+      >(</a
+      ><a name="2918" href="Space-cantor.html#2918" class="Bound"
+      >f</a
+      ><a name="2919"
+      > </a
+      ><a name="2920" href="MiniLibrary.html#825" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="2921"
+      > </a
+      ><a name="2922" href="Space-cantor.html#2922" class="Bound"
+      >cts</a
+      ><a name="2925" class="Symbol"
+      >)</a
+      ><a name="2926"
+      > </a
+      ><a name="2927" class="Symbol"
+      >=</a
+      ><a name="2928"
+      > </a
+      ><a name="2929" class="Symbol"
+      >(</a
+      ><a name="2930" href="Space-cantor.html#2918" class="Bound"
+      >f</a
+      ><a name="2931"
+      > </a
+      ><a name="2932" href="MiniLibrary.html#447" class="Function Operator"
+      >&#8728;</a
+      ><a name="2933"
+      > </a
+      ><a name="2934" href="Space-cantor.html#2235" class="Function"
+      >ID</a
+      ><a name="2936" class="Symbol"
+      >)</a
+      ><a name="2937"
+      > </a
+      ><a name="2938" href="MiniLibrary.html#825" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="2939"
+      > </a
+      ><a name="2940" class="Symbol"
+      >(</a
+      ><a name="2941" href="Space-cantor.html#2922" class="Bound"
+      >cts</a
+      ><a name="2944"
+      > </a
+      ><a name="2945" href="Space-cantor.html#2235" class="Function"
+      >ID</a
+      ><a name="2947"
+      > </a
+      ><a name="2948" href="Space-cantor.html#2450" class="Function"
+      >ID-is-a-probe</a
+      ><a name="2961" class="Symbol"
+      >)</a
+      ><a name="2962"
+      >
+
+\end{code}
+</a
+      ></pre
+    ></body
+  ></html
+>

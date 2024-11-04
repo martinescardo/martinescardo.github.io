@@ -1,0 +1,2177 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+><head
+  ><title
+    >RicesTheoremForTheUniverse</title
+    ><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"
+     /><meta http-equiv="Content-Style-Type" content="text/css"
+     /><link href="Agda.css" rel="stylesheet" type="text/css"
+     /></head
+  ><body
+  ><pre
+    ><a name="1"
+      >
+
+</a
+      ><a name="3" class="Comment"
+      >  R i c e ' s   T h e o r e m   f o r   t h e   </a
+      ><a name="51"
+      >
+
+</a
+      ><a name="53" class="Comment"
+      >  M a r t i n - L o f   u n i v e r s e</a
+      ><a name="92"
+      >
+
+
+</a
+      ><a name="95" class="Comment"
+      >    Martin Escardo, University of Birmingham, UK.</a
+      ><a name="144"
+      >
+</a
+      ><a name="145" class="Comment"
+      >    February 2012. </a
+      ><a name="164"
+      >
+</a
+      ><a name="165" class="Comment"
+      >    </a
+      ><a name="169"
+      >
+</a
+      ><a name="170" class="Comment"
+      >    This is a proof in intensional Martin-Lof type theory,</a
+      ><a name="228"
+      >
+</a
+      ><a name="229" class="Comment"
+      >    extended with the propositional axiom of extensionality as a</a
+      ><a name="293"
+      >
+</a
+      ><a name="294" class="Comment"
+      >    postulate, written in Agda notation. The K-rule or UIP axiom</a
+      ><a name="358"
+      >
+</a
+      ><a name="359" class="Comment"
+      >    are not used, except in instances where they can be</a
+      ><a name="414"
+      >
+</a
+      ><a name="415" class="Comment"
+      >    proved. The proof type-checks in Agda 2.3.0.</a
+      ><a name="463"
+      >
+
+
+</a
+      ><a name="466" class="Comment"
+      >A b s t r a c t. We show that a Martin-Lof universe `a la Russell</a
+      ><a name="531"
+      >
+</a
+      ><a name="532" class="Comment"
+      >satisfies the conclusion of Rice's Theorem: it has no non-trivial,</a
+      ><a name="598"
+      >
+</a
+      ><a name="599" class="Comment"
+      >decidable, extensional properties. We derive this as a corollary</a
+      ><a name="663"
+      >
+</a
+      ><a name="664" class="Comment"
+      >of more general topological facts in type theory, which don't rely</a
+      ><a name="730"
+      >
+</a
+      ><a name="731" class="Comment"
+      >on Brouwerian continuity axioms.</a
+      ><a name="763"
+      >
+
+
+</a
+      ><a name="766" class="Comment"
+      >I n t r o d u c t i o n</a
+      ><a name="789"
+      >
+
+</a
+      ><a name="791" class="Comment"
+      >We don't manipulate syntax or Turing machines to prove this</a
+      ><a name="850"
+      >
+</a
+      ><a name="851" class="Comment"
+      >claim. We show, within type theory, that the hypothetical</a
+      ><a name="908"
+      >
+</a
+      ><a name="909" class="Comment"
+      >existence of a non-trivial, decidable extensional property of the</a
+      ><a name="974"
+      >
+</a
+      ><a name="975" class="Comment"
+      >universe leads to a construction that is known to be impossible,</a
+      ><a name="1039"
+      >
+</a
+      ><a name="1040" class="Comment"
+      >namely WLPO, defined and discussed below.</a
+      ><a name="1081"
+      >
+
+</a
+      ><a name="1083" class="Comment"
+      >Hence this version of Rice's Theorem for the universe remains true</a
+      ><a name="1149"
+      >
+</a
+      ><a name="1150" class="Comment"
+      >when type theory is extended with any kind of postulated axiom</a
+      ><a name="1212"
+      >
+</a
+      ><a name="1213" class="Comment"
+      >(e.g. univalence, Church's thesis, Brouwerian continuity axioms,</a
+      ><a name="1277"
+      >
+</a
+      ><a name="1278" class="Comment"
+      >Markov principle, to name a few of the contentious axioms that one may</a
+      ><a name="1348"
+      >
+</a
+      ><a name="1349" class="Comment"
+      >wish to consider in constructive mathematics). One possible reaction</a
+      ><a name="1417"
+      >
+</a
+      ><a name="1418" class="Comment"
+      >to our result is that this is to be expected: after all, there are no</a
+      ><a name="1487"
+      >
+</a
+      ><a name="1488" class="Comment"
+      >elimination rules for the universe. But our arguments show that, even</a
+      ><a name="1557"
+      >
+</a
+      ><a name="1558" class="Comment"
+      >if there were, Rice's Theorem for the universe would still hold, which</a
+      ><a name="1628"
+      >
+</a
+      ><a name="1629" class="Comment"
+      >justifies the lack of elimination rules.</a
+      ><a name="1669"
+      >
+
+</a
+      ><a name="1671" class="Comment"
+      >Of course, if we postulate classical logic, for example in its extreme</a
+      ><a name="1741"
+      >
+</a
+      ><a name="1742" class="Comment"
+      >version given by the principle of excluded middle, then there are</a
+      ><a name="1807"
+      >
+</a
+      ><a name="1808" class="Comment"
+      >decidable properties of the universe. Our theorem is compatible with</a
+      ><a name="1876"
+      >
+</a
+      ><a name="1877" class="Comment"
+      >that. In fact, what our construction does is to produce a classical</a
+      ><a name="1944"
+      >
+</a
+      ><a name="1945" class="Comment"
+      >conclusion from the hypothetical premise.</a
+      ><a name="1986"
+      >
+
+</a
+      ><a name="1988" class="Comment"
+      >Our assumption of the axiom of extensionality may seem dubious. In</a
+      ><a name="2054"
+      >
+</a
+      ><a name="2055" class="Comment"
+      >any case, we do get a meta-theorem that does not rely on</a
+      ><a name="2111"
+      >
+</a
+      ><a name="2112" class="Comment"
+      >extensionality: For all closed terms p: Set &#8594; &#8322; with p extensional</a
+      ><a name="2178"
+      >
+</a
+      ><a name="2179" class="Comment"
+      >and X,Y: Set, there is no closed term of type p(X) &#8801; &#8320; &#8743; P(Y) &#8801; &#8321;,</a
+      ><a name="2245"
+      >
+</a
+      ><a name="2246" class="Comment"
+      >where Set is the universe of types and where &#8322; is a type with two</a
+      ><a name="2311"
+      >
+</a
+      ><a name="2312" class="Comment"
+      >distinct elements &#8320; and &#8321;, and with decidable equality.</a
+      ><a name="2367"
+      >
+
+</a
+      ><a name="2369" class="Comment"
+      >We derive this claim as a corollary or more general topological</a
+      ><a name="2432"
+      >
+</a
+      ><a name="2433" class="Comment"
+      >constructions developed in the module TheTopologyOfTheUniverse,</a
+      ><a name="2496"
+      >
+</a
+      ><a name="2497" class="Comment"
+      >which is the interesting and non-trivial technical aspect of this</a
+      ><a name="2562"
+      >
+</a
+      ><a name="2563" class="Comment"
+      >work. We emphasize that we don't postulate any continuity axiom in</a
+      ><a name="2629"
+      >
+</a
+      ><a name="2630" class="Comment"
+      >that module (or in fact any axiom other than extensionality).</a
+      ><a name="2691"
+      >
+
+\begin{code}
+
+</a
+      ><a name="2707" class="Keyword"
+      >module</a
+      ><a name="2713"
+      > </a
+      ><a name="2714" href="RicesTheoremForTheUniverse.html#1" class="Module"
+      >RicesTheoremForTheUniverse</a
+      ><a name="2740"
+      > </a
+      ><a name="2741" class="Keyword"
+      >where</a
+      ><a name="2746"
+      >
+
+</a
+      ><a name="2748" class="Keyword"
+      >open</a
+      ><a name="2752"
+      > </a
+      ><a name="2753" class="Keyword"
+      >import</a
+      ><a name="2759"
+      > </a
+      ><a name="2760" href="TheTopologyOfTheUniverse.html#1" class="Module"
+      >TheTopologyOfTheUniverse</a
+      ><a name="2784"
+      >
+
+</a
+      ><a name="2786" class="Keyword"
+      >open</a
+      ><a name="2790"
+      > </a
+      ><a name="2791" class="Keyword"
+      >import</a
+      ><a name="2797"
+      > </a
+      ><a name="2798" href="Cantor.html#1" class="Module"
+      >Cantor</a
+      ><a name="2804"
+      >
+</a
+      ><a name="2805" class="Keyword"
+      >open</a
+      ><a name="2809"
+      > </a
+      ><a name="2810" class="Keyword"
+      >import</a
+      ><a name="2816"
+      > </a
+      ><a name="2817" href="CurryHoward.html#1" class="Module"
+      >CurryHoward</a
+      ><a name="2828"
+      >
+</a
+      ><a name="2829" class="Keyword"
+      >open</a
+      ><a name="2833"
+      > </a
+      ><a name="2834" class="Keyword"
+      >import</a
+      ><a name="2840"
+      > </a
+      ><a name="2841" href="Equality.html#1" class="Module"
+      >Equality</a
+      ><a name="2849"
+      >
+</a
+      ><a name="2850" class="Keyword"
+      >open</a
+      ><a name="2854"
+      > </a
+      ><a name="2855" class="Keyword"
+      >import</a
+      ><a name="2861"
+      > </a
+      ><a name="2862" href="Extensionality.html#1" class="Module"
+      >Extensionality</a
+      ><a name="2876"
+      >
+</a
+      ><a name="2877" class="Keyword"
+      >open</a
+      ><a name="2881"
+      > </a
+      ><a name="2882" class="Keyword"
+      >import</a
+      ><a name="2888"
+      > </a
+      ><a name="2889" href="GenericConvergentSequence.html#1" class="Module"
+      >GenericConvergentSequence</a
+      ><a name="2914"
+      >
+</a
+      ><a name="2915" class="Keyword"
+      >open</a
+      ><a name="2919"
+      > </a
+      ><a name="2920" class="Keyword"
+      >import</a
+      ><a name="2926"
+      > </a
+      ><a name="2927" href="Isomorphism.html#1" class="Module"
+      >Isomorphism</a
+      ><a name="2938"
+      >
+</a
+      ><a name="2939" class="Keyword"
+      >open</a
+      ><a name="2943"
+      > </a
+      ><a name="2944" class="Keyword"
+      >import</a
+      ><a name="2950"
+      > </a
+      ><a name="2951" href="Naturals.html#1" class="Module"
+      >Naturals</a
+      ><a name="2959"
+      >
+</a
+      ><a name="2960" class="Keyword"
+      >open</a
+      ><a name="2964"
+      > </a
+      ><a name="2965" class="Keyword"
+      >import</a
+      ><a name="2971"
+      > </a
+      ><a name="2972" href="SetsAndFunctions.html#1" class="Module"
+      >SetsAndFunctions</a
+      ><a name="2988"
+      >
+</a
+      ><a name="2989" class="Keyword"
+      >open</a
+      ><a name="2993"
+      > </a
+      ><a name="2994" class="Keyword"
+      >import</a
+      ><a name="3000"
+      > </a
+      ><a name="3001" href="Two.html#1" class="Module"
+      >Two</a
+      ><a name="3004"
+      >
+
+</a
+      ><a name="3006" href="RicesTheoremForTheUniverse.html#3006" class="Function"
+      >WLPO</a
+      ><a name="3010"
+      > </a
+      ><a name="3011" class="Symbol"
+      >:</a
+      ><a name="3012"
+      > </a
+      ><a name="3013" href="CurryHoward.html#259" class="Function"
+      >Prp</a
+      ><a name="3016"
+      >
+</a
+      ><a name="3017" href="RicesTheoremForTheUniverse.html#3006" class="Function"
+      >WLPO</a
+      ><a name="3021"
+      > </a
+      ><a name="3022" class="Symbol"
+      >=</a
+      ><a name="3023"
+      > </a
+      ><a name="3024" class="Symbol"
+      >&#8704;(</a
+      ><a name="3026" href="RicesTheoremForTheUniverse.html#3026" class="Bound"
+      >u</a
+      ><a name="3027"
+      > </a
+      ><a name="3028" class="Symbol"
+      >:</a
+      ><a name="3029"
+      > </a
+      ><a name="3030" href="GenericConvergentSequence.html#889" class="Function"
+      >&#8469;&#8734;</a
+      ><a name="3032" class="Symbol"
+      >)</a
+      ><a name="3033"
+      > </a
+      ><a name="3034" class="Symbol"
+      >&#8594;</a
+      ><a name="3035"
+      > </a
+      ><a name="3036" href="RicesTheoremForTheUniverse.html#3026" class="Bound"
+      >u</a
+      ><a name="3037"
+      > </a
+      ><a name="3038" href="Equality.html#239" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="3039"
+      > </a
+      ><a name="3040" href="GenericConvergentSequence.html#2787" class="Function"
+      >&#8734;</a
+      ><a name="3041"
+      > </a
+      ><a name="3042" href="CurryHoward.html#815" class="Function Operator"
+      >&#8744;</a
+      ><a name="3043"
+      > </a
+      ><a name="3044" href="RicesTheoremForTheUniverse.html#3026" class="Bound"
+      >u</a
+      ><a name="3045"
+      > </a
+      ><a name="3046" href="Equality.html#300" class="Function Operator"
+      >&#8800;</a
+      ><a name="3047"
+      > </a
+      ><a name="3048" href="GenericConvergentSequence.html#2787" class="Function"
+      >&#8734;</a
+      ><a name="3049"
+      >
+
+\end{code}
+
+</a
+      ><a name="3063" class="Comment"
+      >Navigate to the module GenericConvergentSequence for the</a
+      ><a name="3119"
+      >
+</a
+      ><a name="3120" class="Comment"
+      >definition of the type &#8469;&#8734; and its role. More discussion is</a
+      ><a name="3178"
+      >
+</a
+      ><a name="3179" class="Comment"
+      >included in the module GenericConvergentSequence</a
+      ><a name="3227"
+      >
+
+</a
+      ><a name="3229" class="Comment"
+      >The weak principle of omniscience WLPO is independent of type</a
+      ><a name="3290"
+      >
+</a
+      ><a name="3291" class="Comment"
+      >theory: it holds in the model of classical sets, and it fails in</a
+      ><a name="3355"
+      >
+</a
+      ><a name="3356" class="Comment"
+      >recursive models, because it amounts to a solution of the Halting</a
+      ><a name="3421"
+      >
+</a
+      ><a name="3422" class="Comment"
+      >Problem. But we want to keep it undecided, for the sake of being</a
+      ><a name="3486"
+      >
+</a
+      ><a name="3487" class="Comment"
+      >compatible with classical mathematics, following the wishes of</a
+      ><a name="3549"
+      >
+</a
+      ><a name="3550" class="Comment"
+      >Bishop, and perhaps upsetting those of Brouwer who was happy to</a
+      ><a name="3613"
+      >
+</a
+      ><a name="3614" class="Comment"
+      >accept continuity principles that falsify WLPO. In the words of</a
+      ><a name="3677"
+      >
+</a
+      ><a name="3678" class="Comment"
+      >Aczel, WLPO is a taboo.  More generally, anything that implies a</a
+      ><a name="3742"
+      >
+</a
+      ><a name="3743" class="Comment"
+      >taboo is a taboo, and any taboo is undecided. Taboos are boundary</a
+      ><a name="3808"
+      >
+</a
+      ><a name="3809" class="Comment"
+      >propositions: they are classically true, recursively false, and</a
+      ><a name="3872"
+      >
+</a
+      ><a name="3873" class="Comment"
+      >constructively, well, taboos!</a
+      ><a name="3902"
+      >
+
+</a
+      ><a name="3904" class="Comment"
+      >The following says that a particular kind of discontinuity for</a
+      ><a name="3966"
+      >
+</a
+      ><a name="3967" class="Comment"
+      >functions p : &#8469;&#8734; &#8594; &#8322; is a taboo. Equivalently, it says that the</a
+      ><a name="4030"
+      >
+</a
+      ><a name="4031" class="Comment"
+      >convergence of the constant sequence &#8320; to the number &#8321; in the type of</a
+      ><a name="4100"
+      >
+</a
+      ><a name="4101" class="Comment"
+      >binary numbers is a taboo. A Brouwerian continuity axiom is that any</a
+      ><a name="4169"
+      >
+</a
+      ><a name="4170" class="Comment"
+      >convergent sequence in the type &#8322; of binary numbers must be eventually</a
+      ><a name="4240"
+      >
+</a
+      ><a name="4241" class="Comment"
+      >constant (which we don't postulate).</a
+      ><a name="4277"
+      >
+
+\begin{code}
+
+</a
+      ><a name="4293" href="RicesTheoremForTheUniverse.html#4293" class="Function"
+      >basic-discontinuity</a
+      ><a name="4312"
+      > </a
+      ><a name="4313" class="Symbol"
+      >:</a
+      ><a name="4314"
+      > </a
+      ><a name="4315" class="Symbol"
+      >(</a
+      ><a name="4316" href="GenericConvergentSequence.html#889" class="Function"
+      >&#8469;&#8734;</a
+      ><a name="4318"
+      > </a
+      ><a name="4319" class="Symbol"
+      >&#8594;</a
+      ><a name="4320"
+      > </a
+      ><a name="4321" href="Two.html#233" class="Datatype"
+      >&#8322;</a
+      ><a name="4322" class="Symbol"
+      >)</a
+      ><a name="4323"
+      > </a
+      ><a name="4324" class="Symbol"
+      >&#8594;</a
+      ><a name="4325"
+      > </a
+      ><a name="4326" href="CurryHoward.html#259" class="Function"
+      >Prp</a
+      ><a name="4329"
+      >
+</a
+      ><a name="4330" href="RicesTheoremForTheUniverse.html#4293" class="Function"
+      >basic-discontinuity</a
+      ><a name="4349"
+      > </a
+      ><a name="4350" href="RicesTheoremForTheUniverse.html#4350" class="Bound"
+      >p</a
+      ><a name="4351"
+      > </a
+      ><a name="4352" class="Symbol"
+      >=</a
+      ><a name="4353"
+      > </a
+      ><a name="4354" class="Symbol"
+      >(&#8704;</a
+      ><a name="4356"
+      > </a
+      ><a name="4357" href="RicesTheoremForTheUniverse.html#4357" class="Bound"
+      >n</a
+      ><a name="4358"
+      > </a
+      ><a name="4359" class="Symbol"
+      >&#8594;</a
+      ><a name="4360"
+      > </a
+      ><a name="4361" href="RicesTheoremForTheUniverse.html#4350" class="Bound"
+      >p</a
+      ><a name="4362" class="Symbol"
+      >(</a
+      ><a name="4363" href="GenericConvergentSequence.html#2724" class="Function"
+      >under</a
+      ><a name="4368"
+      > </a
+      ><a name="4369" href="RicesTheoremForTheUniverse.html#4357" class="Bound"
+      >n</a
+      ><a name="4370" class="Symbol"
+      >)</a
+      ><a name="4371"
+      > </a
+      ><a name="4372" href="Equality.html#239" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="4373"
+      > </a
+      ><a name="4374" href="Two.html#248" class="InductiveConstructor"
+      >&#8320;</a
+      ><a name="4375" class="Symbol"
+      >)</a
+      ><a name="4376"
+      > </a
+      ><a name="4377" href="CurryHoward.html#601" class="Function Operator"
+      >&#8743;</a
+      ><a name="4378"
+      > </a
+      ><a name="4379" href="RicesTheoremForTheUniverse.html#4350" class="Bound"
+      >p</a
+      ><a name="4380"
+      > </a
+      ><a name="4381" href="GenericConvergentSequence.html#2787" class="Function"
+      >&#8734;</a
+      ><a name="4382"
+      > </a
+      ><a name="4383" href="Equality.html#239" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="4384"
+      > </a
+      ><a name="4385" href="Two.html#255" class="InductiveConstructor"
+      >&#8321;</a
+      ><a name="4386"
+      >
+
+
+</a
+      ><a name="4389" href="RicesTheoremForTheUniverse.html#4389" class="Function"
+      >basic-discontinuity-taboo</a
+      ><a name="4414"
+      > </a
+      ><a name="4415" class="Symbol"
+      >:</a
+      ><a name="4416"
+      >
+
+ </a
+      ><a name="4420" class="Symbol"
+      >&#8704;(</a
+      ><a name="4422" href="RicesTheoremForTheUniverse.html#4422" class="Bound"
+      >p</a
+      ><a name="4423"
+      > </a
+      ><a name="4424" class="Symbol"
+      >:</a
+      ><a name="4425"
+      > </a
+      ><a name="4426" href="GenericConvergentSequence.html#889" class="Function"
+      >&#8469;&#8734;</a
+      ><a name="4428"
+      > </a
+      ><a name="4429" class="Symbol"
+      >&#8594;</a
+      ><a name="4430"
+      > </a
+      ><a name="4431" href="Two.html#233" class="Datatype"
+      >&#8322;</a
+      ><a name="4432" class="Symbol"
+      >)</a
+      ><a name="4433"
+      > </a
+      ><a name="4434" class="Symbol"
+      >&#8594;</a
+      ><a name="4435"
+      > </a
+      ><a name="4436" href="RicesTheoremForTheUniverse.html#4293" class="Function"
+      >basic-discontinuity</a
+      ><a name="4455"
+      > </a
+      ><a name="4456" href="RicesTheoremForTheUniverse.html#4422" class="Bound"
+      >p</a
+      ><a name="4457"
+      > </a
+      ><a name="4458" class="Symbol"
+      >&#8594;</a
+      ><a name="4459"
+      > </a
+      ><a name="4460" href="RicesTheoremForTheUniverse.html#3006" class="Function"
+      >WLPO</a
+      ><a name="4464"
+      >
+
+</a
+      ><a name="4466" href="RicesTheoremForTheUniverse.html#4389" class="Function"
+      >basic-discontinuity-taboo</a
+      ><a name="4491"
+      > </a
+      ><a name="4492" href="RicesTheoremForTheUniverse.html#4492" class="Bound"
+      >p</a
+      ><a name="4493"
+      > </a
+      ><a name="4494" class="Symbol"
+      >(</a
+      ><a name="4495" href="RicesTheoremForTheUniverse.html#4495" class="Bound"
+      >f</a
+      ><a name="4496"
+      > </a
+      ><a name="4497" href="SetsAndFunctions.html#865" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="4498"
+      > </a
+      ><a name="4499" href="RicesTheoremForTheUniverse.html#4499" class="Bound"
+      >r</a
+      ><a name="4500" class="Symbol"
+      >)</a
+      ><a name="4501"
+      > </a
+      ><a name="4502" href="RicesTheoremForTheUniverse.html#4502" class="Bound"
+      >u</a
+      ><a name="4503"
+      > </a
+      ><a name="4504" class="Symbol"
+      >=</a
+      ><a name="4505"
+      >
+ </a
+      ><a name="4508" href="Two.html#641" class="Function"
+      >two-equality-cases</a
+      ><a name="4526"
+      > </a
+      ><a name="4527" href="RicesTheoremForTheUniverse.html#4728" class="Function"
+      >lemma&#8320;</a
+      ><a name="4533"
+      > </a
+      ><a name="4534" href="RicesTheoremForTheUniverse.html#4924" class="Function"
+      >lemma&#8321;</a
+      ><a name="4540"
+      >
+ </a
+      ><a name="4542" class="Keyword"
+      >where</a
+      ><a name="4547"
+      >
+  </a
+      ><a name="4551" href="RicesTheoremForTheUniverse.html#4551" class="Function"
+      >fact&#8320;</a
+      ><a name="4556"
+      > </a
+      ><a name="4557" class="Symbol"
+      >:</a
+      ><a name="4558"
+      > </a
+      ><a name="4559" href="RicesTheoremForTheUniverse.html#4502" class="Bound"
+      >u</a
+      ><a name="4560"
+      > </a
+      ><a name="4561" href="Equality.html#239" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="4562"
+      > </a
+      ><a name="4563" href="GenericConvergentSequence.html#2787" class="Function"
+      >&#8734;</a
+      ><a name="4564"
+      > </a
+      ><a name="4565" class="Symbol"
+      >&#8594;</a
+      ><a name="4566"
+      > </a
+      ><a name="4567" href="RicesTheoremForTheUniverse.html#4492" class="Bound"
+      >p</a
+      ><a name="4568"
+      > </a
+      ><a name="4569" href="RicesTheoremForTheUniverse.html#4502" class="Bound"
+      >u</a
+      ><a name="4570"
+      > </a
+      ><a name="4571" href="Equality.html#239" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="4572"
+      > </a
+      ><a name="4573" href="Two.html#255" class="InductiveConstructor"
+      >&#8321;</a
+      ><a name="4574"
+      >
+  </a
+      ><a name="4577" href="RicesTheoremForTheUniverse.html#4551" class="Function"
+      >fact&#8320;</a
+      ><a name="4582"
+      > </a
+      ><a name="4583" href="RicesTheoremForTheUniverse.html#4583" class="Bound"
+      >t</a
+      ><a name="4584"
+      > </a
+      ><a name="4585" class="Symbol"
+      >=</a
+      ><a name="4586"
+      > </a
+      ><a name="4587" href="Equality.html#987" class="Function"
+      >trans</a
+      ><a name="4592"
+      > </a
+      ><a name="4593" class="Symbol"
+      >(</a
+      ><a name="4594" href="Equality.html#1145" class="Function"
+      >cong</a
+      ><a name="4598"
+      > </a
+      ><a name="4599" href="RicesTheoremForTheUniverse.html#4492" class="Bound"
+      >p</a
+      ><a name="4600"
+      > </a
+      ><a name="4601" href="RicesTheoremForTheUniverse.html#4583" class="Bound"
+      >t</a
+      ><a name="4602" class="Symbol"
+      >)</a
+      ><a name="4603"
+      > </a
+      ><a name="4604" href="RicesTheoremForTheUniverse.html#4499" class="Bound"
+      >r</a
+      ><a name="4605"
+      >
+
+  </a
+      ><a name="4609" href="RicesTheoremForTheUniverse.html#4609" class="Function"
+      >fact&#8321;</a
+      ><a name="4614"
+      > </a
+      ><a name="4615" class="Symbol"
+      >:</a
+      ><a name="4616"
+      > </a
+      ><a name="4617" href="RicesTheoremForTheUniverse.html#4492" class="Bound"
+      >p</a
+      ><a name="4618"
+      > </a
+      ><a name="4619" href="RicesTheoremForTheUniverse.html#4502" class="Bound"
+      >u</a
+      ><a name="4620"
+      > </a
+      ><a name="4621" href="Equality.html#300" class="Function Operator"
+      >&#8800;</a
+      ><a name="4622"
+      > </a
+      ><a name="4623" href="Two.html#255" class="InductiveConstructor"
+      >&#8321;</a
+      ><a name="4624"
+      > </a
+      ><a name="4625" class="Symbol"
+      >&#8594;</a
+      ><a name="4626"
+      > </a
+      ><a name="4627" href="RicesTheoremForTheUniverse.html#4502" class="Bound"
+      >u</a
+      ><a name="4628"
+      > </a
+      ><a name="4629" href="Equality.html#300" class="Function Operator"
+      >&#8800;</a
+      ><a name="4630"
+      > </a
+      ><a name="4631" href="GenericConvergentSequence.html#2787" class="Function"
+      >&#8734;</a
+      ><a name="4632"
+      >
+  </a
+      ><a name="4635" href="RicesTheoremForTheUniverse.html#4609" class="Function"
+      >fact&#8321;</a
+      ><a name="4640"
+      > </a
+      ><a name="4641" class="Symbol"
+      >=</a
+      ><a name="4642"
+      > </a
+      ><a name="4643" href="CurryHoward.html#1927" class="Function"
+      >contra-positive</a
+      ><a name="4658"
+      > </a
+      ><a name="4659" href="RicesTheoremForTheUniverse.html#4551" class="Function"
+      >fact&#8320;</a
+      ><a name="4664"
+      >
+
+  </a
+      ><a name="4668" href="RicesTheoremForTheUniverse.html#4668" class="Function"
+      >fact&#8322;</a
+      ><a name="4673"
+      > </a
+      ><a name="4674" class="Symbol"
+      >:</a
+      ><a name="4675"
+      > </a
+      ><a name="4676" href="RicesTheoremForTheUniverse.html#4492" class="Bound"
+      >p</a
+      ><a name="4677"
+      > </a
+      ><a name="4678" href="RicesTheoremForTheUniverse.html#4502" class="Bound"
+      >u</a
+      ><a name="4679"
+      > </a
+      ><a name="4680" href="Equality.html#239" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="4681"
+      > </a
+      ><a name="4682" href="Two.html#248" class="InductiveConstructor"
+      >&#8320;</a
+      ><a name="4683"
+      > </a
+      ><a name="4684" class="Symbol"
+      >&#8594;</a
+      ><a name="4685"
+      > </a
+      ><a name="4686" href="RicesTheoremForTheUniverse.html#4502" class="Bound"
+      >u</a
+      ><a name="4687"
+      > </a
+      ><a name="4688" href="Equality.html#300" class="Function Operator"
+      >&#8800;</a
+      ><a name="4689"
+      > </a
+      ><a name="4690" href="GenericConvergentSequence.html#2787" class="Function"
+      >&#8734;</a
+      ><a name="4691"
+      >
+  </a
+      ><a name="4694" href="RicesTheoremForTheUniverse.html#4668" class="Function"
+      >fact&#8322;</a
+      ><a name="4699"
+      > </a
+      ><a name="4700" class="Symbol"
+      >=</a
+      ><a name="4701"
+      > </a
+      ><a name="4702" href="RicesTheoremForTheUniverse.html#4609" class="Function"
+      >fact&#8321;</a
+      ><a name="4707"
+      > </a
+      ><a name="4708" href="SetsAndFunctions.html#2246" class="Function Operator"
+      >&#8728;</a
+      ><a name="4709"
+      > </a
+      ><a name="4710" href="Two.html#1196" class="Function"
+      >Lemma[b&#8801;&#8320;&#8594;b&#8800;&#8321;]</a
+      ><a name="4724"
+      >
+
+  </a
+      ><a name="4728" href="RicesTheoremForTheUniverse.html#4728" class="Function"
+      >lemma&#8320;</a
+      ><a name="4734"
+      > </a
+      ><a name="4735" class="Symbol"
+      >:</a
+      ><a name="4736"
+      > </a
+      ><a name="4737" href="RicesTheoremForTheUniverse.html#4492" class="Bound"
+      >p</a
+      ><a name="4738"
+      > </a
+      ><a name="4739" href="RicesTheoremForTheUniverse.html#4502" class="Bound"
+      >u</a
+      ><a name="4740"
+      > </a
+      ><a name="4741" href="Equality.html#239" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="4742"
+      > </a
+      ><a name="4743" href="Two.html#248" class="InductiveConstructor"
+      >&#8320;</a
+      ><a name="4744"
+      > </a
+      ><a name="4745" class="Symbol"
+      >&#8594;</a
+      ><a name="4746"
+      > </a
+      ><a name="4747" href="RicesTheoremForTheUniverse.html#4502" class="Bound"
+      >u</a
+      ><a name="4748"
+      > </a
+      ><a name="4749" href="Equality.html#239" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="4750"
+      > </a
+      ><a name="4751" href="GenericConvergentSequence.html#2787" class="Function"
+      >&#8734;</a
+      ><a name="4752"
+      > </a
+      ><a name="4753" href="CurryHoward.html#815" class="Function Operator"
+      >&#8744;</a
+      ><a name="4754"
+      > </a
+      ><a name="4755" href="RicesTheoremForTheUniverse.html#4502" class="Bound"
+      >u</a
+      ><a name="4756"
+      > </a
+      ><a name="4757" href="Equality.html#300" class="Function Operator"
+      >&#8800;</a
+      ><a name="4758"
+      > </a
+      ><a name="4759" href="GenericConvergentSequence.html#2787" class="Function"
+      >&#8734;</a
+      ><a name="4760"
+      >
+  </a
+      ><a name="4763" href="RicesTheoremForTheUniverse.html#4728" class="Function"
+      >lemma&#8320;</a
+      ><a name="4769"
+      > </a
+      ><a name="4770" href="RicesTheoremForTheUniverse.html#4770" class="Bound"
+      >s</a
+      ><a name="4771"
+      > </a
+      ><a name="4772" class="Symbol"
+      >=</a
+      ><a name="4773"
+      > </a
+      ><a name="4774" href="SetsAndFunctions.html#1866" class="InductiveConstructor"
+      >in&#8321;</a
+      ><a name="4777" class="Symbol"
+      >(</a
+      ><a name="4778" href="RicesTheoremForTheUniverse.html#4668" class="Function"
+      >fact&#8322;</a
+      ><a name="4783"
+      > </a
+      ><a name="4784" href="RicesTheoremForTheUniverse.html#4770" class="Bound"
+      >s</a
+      ><a name="4785" class="Symbol"
+      >)</a
+      ><a name="4786"
+      >
+
+  </a
+      ><a name="4790" href="RicesTheoremForTheUniverse.html#4790" class="Function"
+      >fact&#8323;</a
+      ><a name="4795"
+      > </a
+      ><a name="4796" class="Symbol"
+      >:</a
+      ><a name="4797"
+      > </a
+      ><a name="4798" href="RicesTheoremForTheUniverse.html#4492" class="Bound"
+      >p</a
+      ><a name="4799"
+      > </a
+      ><a name="4800" href="RicesTheoremForTheUniverse.html#4502" class="Bound"
+      >u</a
+      ><a name="4801"
+      > </a
+      ><a name="4802" href="Equality.html#239" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="4803"
+      > </a
+      ><a name="4804" href="Two.html#255" class="InductiveConstructor"
+      >&#8321;</a
+      ><a name="4805"
+      > </a
+      ><a name="4806" class="Symbol"
+      >&#8594;</a
+      ><a name="4807"
+      > </a
+      ><a name="4808" class="Symbol"
+      >(&#8704;</a
+      ><a name="4810"
+      > </a
+      ><a name="4811" href="RicesTheoremForTheUniverse.html#4811" class="Bound"
+      >n</a
+      ><a name="4812"
+      > </a
+      ><a name="4813" class="Symbol"
+      >&#8594;</a
+      ><a name="4814"
+      > </a
+      ><a name="4815" href="RicesTheoremForTheUniverse.html#4502" class="Bound"
+      >u</a
+      ><a name="4816"
+      > </a
+      ><a name="4817" href="Equality.html#300" class="Function Operator"
+      >&#8800;</a
+      ><a name="4818"
+      > </a
+      ><a name="4819" href="GenericConvergentSequence.html#2724" class="Function"
+      >under</a
+      ><a name="4824"
+      > </a
+      ><a name="4825" href="RicesTheoremForTheUniverse.html#4811" class="Bound"
+      >n</a
+      ><a name="4826" class="Symbol"
+      >)</a
+      ><a name="4827"
+      >
+  </a
+      ><a name="4830" href="RicesTheoremForTheUniverse.html#4790" class="Function"
+      >fact&#8323;</a
+      ><a name="4835"
+      > </a
+      ><a name="4836" href="RicesTheoremForTheUniverse.html#4836" class="Bound"
+      >t</a
+      ><a name="4837"
+      > </a
+      ><a name="4838" href="RicesTheoremForTheUniverse.html#4838" class="Bound"
+      >n</a
+      ><a name="4839"
+      > </a
+      ><a name="4840" href="RicesTheoremForTheUniverse.html#4840" class="Bound"
+      >s</a
+      ><a name="4841"
+      > </a
+      ><a name="4842" class="Symbol"
+      >=</a
+      ><a name="4843"
+      >
+   </a
+      ><a name="4848" href="Two.html#484" class="Function"
+      >zero-is-not-one</a
+      ><a name="4863" class="Symbol"
+      >(</a
+      ><a name="4864" href="Equality.html#1734" class="Function"
+      >Lemma[x&#8801;y&#8594;x&#8801;z&#8594;y&#8801;z]</a
+      ><a name="4882" class="Symbol"
+      >(</a
+      ><a name="4883" href="RicesTheoremForTheUniverse.html#4495" class="Bound"
+      >f</a
+      ><a name="4884"
+      > </a
+      ><a name="4885" href="RicesTheoremForTheUniverse.html#4838" class="Bound"
+      >n</a
+      ><a name="4886" class="Symbol"
+      >)(</a
+      ><a name="4888" href="Equality.html#1734" class="Function"
+      >Lemma[x&#8801;y&#8594;x&#8801;z&#8594;y&#8801;z]</a
+      ><a name="4906" class="Symbol"
+      >(</a
+      ><a name="4907" href="Equality.html#1145" class="Function"
+      >cong</a
+      ><a name="4911"
+      > </a
+      ><a name="4912" href="RicesTheoremForTheUniverse.html#4492" class="Bound"
+      >p</a
+      ><a name="4913"
+      > </a
+      ><a name="4914" href="RicesTheoremForTheUniverse.html#4840" class="Bound"
+      >s</a
+      ><a name="4915" class="Symbol"
+      >)</a
+      ><a name="4916"
+      > </a
+      ><a name="4917" href="RicesTheoremForTheUniverse.html#4836" class="Bound"
+      >t</a
+      ><a name="4918" class="Symbol"
+      >))</a
+      ><a name="4920"
+      >
+
+  </a
+      ><a name="4924" href="RicesTheoremForTheUniverse.html#4924" class="Function"
+      >lemma&#8321;</a
+      ><a name="4930"
+      > </a
+      ><a name="4931" class="Symbol"
+      >:</a
+      ><a name="4932"
+      > </a
+      ><a name="4933" href="RicesTheoremForTheUniverse.html#4492" class="Bound"
+      >p</a
+      ><a name="4934"
+      > </a
+      ><a name="4935" href="RicesTheoremForTheUniverse.html#4502" class="Bound"
+      >u</a
+      ><a name="4936"
+      > </a
+      ><a name="4937" href="Equality.html#239" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="4938"
+      > </a
+      ><a name="4939" href="Two.html#255" class="InductiveConstructor"
+      >&#8321;</a
+      ><a name="4940"
+      > </a
+      ><a name="4941" class="Symbol"
+      >&#8594;</a
+      ><a name="4942"
+      > </a
+      ><a name="4943" href="RicesTheoremForTheUniverse.html#4502" class="Bound"
+      >u</a
+      ><a name="4944"
+      > </a
+      ><a name="4945" href="Equality.html#239" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="4946"
+      > </a
+      ><a name="4947" href="GenericConvergentSequence.html#2787" class="Function"
+      >&#8734;</a
+      ><a name="4948"
+      > </a
+      ><a name="4949" href="CurryHoward.html#815" class="Function Operator"
+      >&#8744;</a
+      ><a name="4950"
+      > </a
+      ><a name="4951" href="RicesTheoremForTheUniverse.html#4502" class="Bound"
+      >u</a
+      ><a name="4952"
+      > </a
+      ><a name="4953" href="Equality.html#300" class="Function Operator"
+      >&#8800;</a
+      ><a name="4954"
+      > </a
+      ><a name="4955" href="GenericConvergentSequence.html#2787" class="Function"
+      >&#8734;</a
+      ><a name="4956"
+      >
+  </a
+      ><a name="4959" href="RicesTheoremForTheUniverse.html#4924" class="Function"
+      >lemma&#8321;</a
+      ><a name="4965"
+      > </a
+      ><a name="4966" href="RicesTheoremForTheUniverse.html#4966" class="Bound"
+      >t</a
+      ><a name="4967"
+      > </a
+      ><a name="4968" class="Symbol"
+      >=</a
+      ><a name="4969"
+      > </a
+      ><a name="4970" href="SetsAndFunctions.html#1845" class="InductiveConstructor"
+      >in&#8320;</a
+      ><a name="4973" class="Symbol"
+      >(</a
+      ><a name="4974" href="GenericConvergentSequence.html#3951" class="Function"
+      >not-&#8469;-is-&#8734;</a
+      ><a name="4984"
+      > </a
+      ><a name="4985" href="RicesTheoremForTheUniverse.html#4502" class="Bound"
+      >u</a
+      ><a name="4986"
+      > </a
+      ><a name="4987" class="Symbol"
+      >(</a
+      ><a name="4988" href="RicesTheoremForTheUniverse.html#4790" class="Function"
+      >fact&#8323;</a
+      ><a name="4993"
+      > </a
+      ><a name="4994" href="RicesTheoremForTheUniverse.html#4966" class="Bound"
+      >t</a
+      ><a name="4995" class="Symbol"
+      >))</a
+      ><a name="4997"
+      >
+
+\end{code}
+
+</a
+      ><a name="5011" class="Comment"
+      >Our promised corollary of the universe indiscreteness theorem is that</a
+      ><a name="5080"
+      >
+</a
+      ><a name="5081" class="Comment"
+      >the hypothetical existence of an extensional P : Set &#8594; &#8322; with two</a
+      ><a name="5146"
+      >
+</a
+      ><a name="5147" class="Comment"
+      >different values is a taboo.</a
+      ><a name="5175"
+      >
+
+</a
+      ><a name="5177" class="Comment"
+      >Notice that although the proof uses topological techniques, the</a
+      ><a name="5240"
+      >
+</a
+      ><a name="5241" class="Comment"
+      >formulation of the theorem doesn't mention topology.</a
+      ><a name="5293"
+      >
+
+\begin{code}
+
+</a
+      ><a name="5309" href="RicesTheoremForTheUniverse.html#5309" class="Function"
+      >extensional</a
+      ><a name="5320"
+      > </a
+      ><a name="5321" class="Symbol"
+      >:</a
+      ><a name="5322"
+      > </a
+      ><a name="5323" class="Symbol"
+      >(</a
+      ><a name="5324" class="PrimitiveType"
+      >Set</a
+      ><a name="5327"
+      > </a
+      ><a name="5328" class="Symbol"
+      >&#8594;</a
+      ><a name="5329"
+      > </a
+      ><a name="5330" href="Two.html#233" class="Datatype"
+      >&#8322;</a
+      ><a name="5331" class="Symbol"
+      >)</a
+      ><a name="5332"
+      > </a
+      ><a name="5333" class="Symbol"
+      >&#8594;</a
+      ><a name="5334"
+      > </a
+      ><a name="5335" href="CurryHoward.html#351" class="Function"
+      >Prp&#8321;</a
+      ><a name="5339"
+      >
+</a
+      ><a name="5340" href="RicesTheoremForTheUniverse.html#5309" class="Function"
+      >extensional</a
+      ><a name="5351"
+      > </a
+      ><a name="5352" href="RicesTheoremForTheUniverse.html#5352" class="Bound"
+      >P</a
+      ><a name="5353"
+      > </a
+      ><a name="5354" class="Symbol"
+      >=</a
+      ><a name="5355"
+      > </a
+      ><a name="5356" class="Symbol"
+      >&#8704;(</a
+      ><a name="5358" href="RicesTheoremForTheUniverse.html#5358" class="Bound"
+      >X</a
+      ><a name="5359"
+      > </a
+      ><a name="5360" href="RicesTheoremForTheUniverse.html#5360" class="Bound"
+      >Y</a
+      ><a name="5361"
+      > </a
+      ><a name="5362" class="Symbol"
+      >:</a
+      ><a name="5363"
+      > </a
+      ><a name="5364" class="PrimitiveType"
+      >Set</a
+      ><a name="5367" class="Symbol"
+      >)</a
+      ><a name="5368"
+      > </a
+      ><a name="5369" class="Symbol"
+      >&#8594;</a
+      ><a name="5370"
+      > </a
+      ><a name="5371" href="RicesTheoremForTheUniverse.html#5358" class="Bound"
+      >X</a
+      ><a name="5372"
+      > </a
+      ><a name="5373" href="Isomorphism.html#239" class="Function Operator"
+      >&#8773;</a
+      ><a name="5374"
+      > </a
+      ><a name="5375" href="RicesTheoremForTheUniverse.html#5360" class="Bound"
+      >Y</a
+      ><a name="5376"
+      > </a
+      ><a name="5377" class="Symbol"
+      >&#8594;</a
+      ><a name="5378"
+      > </a
+      ><a name="5379" href="RicesTheoremForTheUniverse.html#5352" class="Bound"
+      >P</a
+      ><a name="5380"
+      > </a
+      ><a name="5381" href="RicesTheoremForTheUniverse.html#5358" class="Bound"
+      >X</a
+      ><a name="5382"
+      > </a
+      ><a name="5383" href="Equality.html#239" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="5384"
+      > </a
+      ><a name="5385" href="RicesTheoremForTheUniverse.html#5352" class="Bound"
+      >P</a
+      ><a name="5386"
+      > </a
+      ><a name="5387" href="RicesTheoremForTheUniverse.html#5360" class="Bound"
+      >Y</a
+      ><a name="5388"
+      >
+
+
+</a
+      ><a name="5391" href="RicesTheoremForTheUniverse.html#5391" class="Function"
+      >Rice's-Theorem-for-Set</a
+      ><a name="5413"
+      > </a
+      ><a name="5414" class="Symbol"
+      >:</a
+      ><a name="5415"
+      >
+
+    </a
+      ><a name="5422" class="Symbol"
+      >&#8704;(</a
+      ><a name="5424" href="RicesTheoremForTheUniverse.html#5424" class="Bound"
+      >P</a
+      ><a name="5425"
+      > </a
+      ><a name="5426" class="Symbol"
+      >:</a
+      ><a name="5427"
+      > </a
+      ><a name="5428" class="PrimitiveType"
+      >Set</a
+      ><a name="5431"
+      > </a
+      ><a name="5432" class="Symbol"
+      >&#8594;</a
+      ><a name="5433"
+      > </a
+      ><a name="5434" href="Two.html#233" class="Datatype"
+      >&#8322;</a
+      ><a name="5435" class="Symbol"
+      >)</a
+      ><a name="5436"
+      > </a
+      ><a name="5437" class="Symbol"
+      >&#8594;</a
+      ><a name="5438"
+      > </a
+      ><a name="5439" href="RicesTheoremForTheUniverse.html#5309" class="Function"
+      >extensional</a
+      ><a name="5450"
+      > </a
+      ><a name="5451" href="RicesTheoremForTheUniverse.html#5424" class="Bound"
+      >P</a
+      ><a name="5452"
+      >
+  </a
+      ><a name="5455" class="Symbol"
+      >&#8594;</a
+      ><a name="5456"
+      > </a
+      ><a name="5457" class="Symbol"
+      >&#8704;(</a
+      ><a name="5459" href="RicesTheoremForTheUniverse.html#5459" class="Bound"
+      >X</a
+      ><a name="5460"
+      > </a
+      ><a name="5461" href="RicesTheoremForTheUniverse.html#5461" class="Bound"
+      >Y</a
+      ><a name="5462"
+      > </a
+      ><a name="5463" class="Symbol"
+      >:</a
+      ><a name="5464"
+      > </a
+      ><a name="5465" class="PrimitiveType"
+      >Set</a
+      ><a name="5468" class="Symbol"
+      >)</a
+      ><a name="5469"
+      > </a
+      ><a name="5470" class="Symbol"
+      >&#8594;</a
+      ><a name="5471"
+      > </a
+      ><a name="5472" href="RicesTheoremForTheUniverse.html#5424" class="Bound"
+      >P</a
+      ><a name="5473"
+      > </a
+      ><a name="5474" href="RicesTheoremForTheUniverse.html#5459" class="Bound"
+      >X</a
+      ><a name="5475"
+      > </a
+      ><a name="5476" href="Equality.html#239" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="5477"
+      > </a
+      ><a name="5478" href="Two.html#248" class="InductiveConstructor"
+      >&#8320;</a
+      ><a name="5479"
+      > </a
+      ><a name="5480" class="Symbol"
+      >&#8594;</a
+      ><a name="5481"
+      > </a
+      ><a name="5482" href="RicesTheoremForTheUniverse.html#5424" class="Bound"
+      >P</a
+      ><a name="5483"
+      > </a
+      ><a name="5484" href="RicesTheoremForTheUniverse.html#5461" class="Bound"
+      >Y</a
+      ><a name="5485"
+      > </a
+      ><a name="5486" href="Equality.html#239" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="5487"
+      > </a
+      ><a name="5488" href="Two.html#255" class="InductiveConstructor"
+      >&#8321;</a
+      ><a name="5489"
+      > </a
+      ><a name="5490" class="Symbol"
+      >&#8594;</a
+      ><a name="5491"
+      > </a
+      ><a name="5492" href="RicesTheoremForTheUniverse.html#3006" class="Function"
+      >WLPO</a
+      ><a name="5496"
+      >
+
+</a
+      ><a name="5498" href="RicesTheoremForTheUniverse.html#5391" class="Function"
+      >Rice's-Theorem-for-Set</a
+      ><a name="5520"
+      > </a
+      ><a name="5521" href="RicesTheoremForTheUniverse.html#5521" class="Bound"
+      >P</a
+      ><a name="5522"
+      > </a
+      ><a name="5523" href="RicesTheoremForTheUniverse.html#5523" class="Bound"
+      >e</a
+      ><a name="5524"
+      > </a
+      ><a name="5525" href="RicesTheoremForTheUniverse.html#5525" class="Bound"
+      >X</a
+      ><a name="5526"
+      > </a
+      ><a name="5527" href="RicesTheoremForTheUniverse.html#5527" class="Bound"
+      >Y</a
+      ><a name="5528"
+      > </a
+      ><a name="5529" href="RicesTheoremForTheUniverse.html#5529" class="Bound"
+      >r</a
+      ><a name="5530"
+      > </a
+      ><a name="5531" href="RicesTheoremForTheUniverse.html#5531" class="Bound"
+      >s</a
+      ><a name="5532"
+      > </a
+      ><a name="5533" class="Symbol"
+      >=</a
+      ><a name="5534"
+      >
+ </a
+      ><a name="5537" href="RicesTheoremForTheUniverse.html#4389" class="Function"
+      >basic-discontinuity-taboo</a
+      ><a name="5562"
+      > </a
+      ><a name="5563" href="RicesTheoremForTheUniverse.html#5800" class="Function"
+      >p</a
+      ><a name="5564"
+      > </a
+      ><a name="5565" class="Symbol"
+      >(</a
+      ><a name="5566" href="RicesTheoremForTheUniverse.html#5829" class="Function"
+      >p-lemma</a
+      ><a name="5573"
+      > </a
+      ><a name="5574" href="SetsAndFunctions.html#865" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="5575"
+      > </a
+      ><a name="5576" href="RicesTheoremForTheUniverse.html#5917" class="Function"
+      >p-lemma&#8734;</a
+      ><a name="5584" class="Symbol"
+      >)</a
+      ><a name="5585"
+      >
+ </a
+      ><a name="5587" class="Keyword"
+      >where</a
+      ><a name="5592"
+      >
+  </a
+      ><a name="5596" href="RicesTheoremForTheUniverse.html#5596" class="Function"
+      >Q</a
+      ><a name="5597"
+      > </a
+      ><a name="5598" class="Symbol"
+      >:</a
+      ><a name="5599"
+      > </a
+      ><a name="5600" href="GenericConvergentSequence.html#889" class="Function"
+      >&#8469;&#8734;</a
+      ><a name="5602"
+      > </a
+      ><a name="5603" class="Symbol"
+      >&#8594;</a
+      ><a name="5604"
+      > </a
+      ><a name="5605" class="PrimitiveType"
+      >Set</a
+      ><a name="5608"
+      >
+  </a
+      ><a name="5612" href="RicesTheoremForTheUniverse.html#5596" class="Function"
+      >Q</a
+      ><a name="5613"
+      > </a
+      ><a name="5614" class="Symbol"
+      >=</a
+      ><a name="5615"
+      > </a
+      ><a name="5616" href="TheTopologyOfTheUniverse.html#11160" class="Function"
+      >attach-anything</a
+      ><a name="5631"
+      > </a
+      ><a name="5632" class="Symbol"
+      >(&#955;</a
+      ><a name="5634"
+      > </a
+      ><a name="5635" href="RicesTheoremForTheUniverse.html#5635" class="Bound"
+      >i</a
+      ><a name="5636"
+      > </a
+      ><a name="5637" class="Symbol"
+      >&#8594;</a
+      ><a name="5638"
+      > </a
+      ><a name="5639" href="RicesTheoremForTheUniverse.html#5525" class="Bound"
+      >X</a
+      ><a name="5640" class="Symbol"
+      >)</a
+      ><a name="5641"
+      > </a
+      ><a name="5642" href="RicesTheoremForTheUniverse.html#5527" class="Bound"
+      >Y</a
+      ><a name="5643"
+      >
+
+  </a
+      ><a name="5647" href="RicesTheoremForTheUniverse.html#5647" class="Function"
+      >Q-lemma</a
+      ><a name="5654"
+      > </a
+      ><a name="5655" class="Symbol"
+      >:</a
+      ><a name="5656"
+      > </a
+      ><a name="5657" class="Symbol"
+      >&#8704;</a
+      ><a name="5658"
+      > </a
+      ><a name="5659" href="RicesTheoremForTheUniverse.html#5659" class="Bound"
+      >i</a
+      ><a name="5660"
+      > </a
+      ><a name="5661" class="Symbol"
+      >&#8594;</a
+      ><a name="5662"
+      > </a
+      ><a name="5663" href="RicesTheoremForTheUniverse.html#5596" class="Function"
+      >Q</a
+      ><a name="5664"
+      > </a
+      ><a name="5665" href="TheTopologyOfTheUniverse.html#5023" class="Function Operator"
+      >[</a
+      ><a name="5666"
+      > </a
+      ><a name="5667" href="RicesTheoremForTheUniverse.html#5659" class="Bound"
+      >i</a
+      ><a name="5668"
+      > </a
+      ><a name="5669" href="TheTopologyOfTheUniverse.html#5023" class="Function Operator"
+      >]</a
+      ><a name="5670"
+      > </a
+      ><a name="5671" href="Isomorphism.html#239" class="Function Operator"
+      >&#8773;</a
+      ><a name="5672"
+      > </a
+      ><a name="5673" href="RicesTheoremForTheUniverse.html#5525" class="Bound"
+      >X</a
+      ><a name="5674"
+      >
+  </a
+      ><a name="5677" href="RicesTheoremForTheUniverse.html#5647" class="Function"
+      >Q-lemma</a
+      ><a name="5684"
+      > </a
+      ><a name="5685" href="RicesTheoremForTheUniverse.html#5685" class="Bound"
+      >i</a
+      ><a name="5686"
+      > </a
+      ><a name="5687" class="Symbol"
+      >=</a
+      ><a name="5688"
+      > </a
+      ><a name="5689" href="TheTopologyOfTheUniverse.html#11293" class="Function"
+      >attach-anything-lemma</a
+      ><a name="5710"
+      > </a
+      ><a name="5711" class="Symbol"
+      >(&#955;</a
+      ><a name="5713"
+      > </a
+      ><a name="5714" href="RicesTheoremForTheUniverse.html#5714" class="Bound"
+      >i</a
+      ><a name="5715"
+      > </a
+      ><a name="5716" class="Symbol"
+      >&#8594;</a
+      ><a name="5717"
+      > </a
+      ><a name="5718" href="RicesTheoremForTheUniverse.html#5525" class="Bound"
+      >X</a
+      ><a name="5719" class="Symbol"
+      >)</a
+      ><a name="5720"
+      > </a
+      ><a name="5721" href="RicesTheoremForTheUniverse.html#5527" class="Bound"
+      >Y</a
+      ><a name="5722"
+      > </a
+      ><a name="5723" href="RicesTheoremForTheUniverse.html#5685" class="Bound"
+      >i</a
+      ><a name="5724"
+      >
+
+  </a
+      ><a name="5729" href="RicesTheoremForTheUniverse.html#5729" class="Function"
+      >Q-lemma&#8734;</a
+      ><a name="5737"
+      > </a
+      ><a name="5738" class="Symbol"
+      >:</a
+      ><a name="5739"
+      > </a
+      ><a name="5740" href="RicesTheoremForTheUniverse.html#5596" class="Function"
+      >Q</a
+      ><a name="5741"
+      > </a
+      ><a name="5742" href="GenericConvergentSequence.html#2787" class="Function"
+      >&#8734;</a
+      ><a name="5743"
+      > </a
+      ><a name="5744" href="Isomorphism.html#239" class="Function Operator"
+      >&#8773;</a
+      ><a name="5745"
+      > </a
+      ><a name="5746" href="RicesTheoremForTheUniverse.html#5527" class="Bound"
+      >Y</a
+      ><a name="5747"
+      >
+  </a
+      ><a name="5750" href="RicesTheoremForTheUniverse.html#5729" class="Function"
+      >Q-lemma&#8734;</a
+      ><a name="5758"
+      > </a
+      ><a name="5759" class="Symbol"
+      >=</a
+      ><a name="5760"
+      > </a
+      ><a name="5761" href="TheTopologyOfTheUniverse.html#11589" class="Function"
+      >attach-anything-lemma&#8734;</a
+      ><a name="5783"
+      > </a
+      ><a name="5784" class="Symbol"
+      >(&#955;</a
+      ><a name="5786"
+      > </a
+      ><a name="5787" href="RicesTheoremForTheUniverse.html#5787" class="Bound"
+      >i</a
+      ><a name="5788"
+      > </a
+      ><a name="5789" class="Symbol"
+      >&#8594;</a
+      ><a name="5790"
+      > </a
+      ><a name="5791" href="RicesTheoremForTheUniverse.html#5525" class="Bound"
+      >X</a
+      ><a name="5792" class="Symbol"
+      >)</a
+      ><a name="5793"
+      > </a
+      ><a name="5794" href="RicesTheoremForTheUniverse.html#5527" class="Bound"
+      >Y</a
+      ><a name="5795"
+      >
+
+  </a
+      ><a name="5800" href="RicesTheoremForTheUniverse.html#5800" class="Function"
+      >p</a
+      ><a name="5801"
+      > </a
+      ><a name="5802" class="Symbol"
+      >:</a
+      ><a name="5803"
+      > </a
+      ><a name="5804" href="GenericConvergentSequence.html#889" class="Function"
+      >&#8469;&#8734;</a
+      ><a name="5806"
+      > </a
+      ><a name="5807" class="Symbol"
+      >&#8594;</a
+      ><a name="5808"
+      > </a
+      ><a name="5809" href="Two.html#233" class="Datatype"
+      >&#8322;</a
+      ><a name="5810"
+      >
+  </a
+      ><a name="5813" href="RicesTheoremForTheUniverse.html#5800" class="Function"
+      >p</a
+      ><a name="5814"
+      > </a
+      ><a name="5815" href="RicesTheoremForTheUniverse.html#5815" class="Bound"
+      >u</a
+      ><a name="5816"
+      > </a
+      ><a name="5817" class="Symbol"
+      >=</a
+      ><a name="5818"
+      > </a
+      ><a name="5819" href="RicesTheoremForTheUniverse.html#5521" class="Bound"
+      >P</a
+      ><a name="5820" class="Symbol"
+      >(</a
+      ><a name="5821" href="RicesTheoremForTheUniverse.html#5596" class="Function"
+      >Q</a
+      ><a name="5822"
+      > </a
+      ><a name="5823" href="RicesTheoremForTheUniverse.html#5815" class="Bound"
+      >u</a
+      ><a name="5824" class="Symbol"
+      >)</a
+      ><a name="5825"
+      >
+
+  </a
+      ><a name="5829" href="RicesTheoremForTheUniverse.html#5829" class="Function"
+      >p-lemma</a
+      ><a name="5836"
+      > </a
+      ><a name="5837" class="Symbol"
+      >:</a
+      ><a name="5838"
+      > </a
+      ><a name="5839" class="Symbol"
+      >&#8704;</a
+      ><a name="5840"
+      > </a
+      ><a name="5841" href="RicesTheoremForTheUniverse.html#5841" class="Bound"
+      >i</a
+      ><a name="5842"
+      > </a
+      ><a name="5843" class="Symbol"
+      >&#8594;</a
+      ><a name="5844"
+      > </a
+      ><a name="5845" href="RicesTheoremForTheUniverse.html#5800" class="Function"
+      >p</a
+      ><a name="5846" class="Symbol"
+      >(</a
+      ><a name="5847" href="GenericConvergentSequence.html#2724" class="Function"
+      >under</a
+      ><a name="5852"
+      > </a
+      ><a name="5853" href="RicesTheoremForTheUniverse.html#5841" class="Bound"
+      >i</a
+      ><a name="5854" class="Symbol"
+      >)</a
+      ><a name="5855"
+      > </a
+      ><a name="5856" href="Equality.html#239" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="5857"
+      > </a
+      ><a name="5858" href="Two.html#248" class="InductiveConstructor"
+      >&#8320;</a
+      ><a name="5859"
+      >
+  </a
+      ><a name="5862" href="RicesTheoremForTheUniverse.html#5829" class="Function"
+      >p-lemma</a
+      ><a name="5869"
+      > </a
+      ><a name="5870" href="RicesTheoremForTheUniverse.html#5870" class="Bound"
+      >i</a
+      ><a name="5871"
+      > </a
+      ><a name="5872" class="Symbol"
+      >=</a
+      ><a name="5873"
+      > </a
+      ><a name="5874" href="Equality.html#987" class="Function"
+      >trans</a
+      ><a name="5879"
+      > </a
+      ><a name="5880" class="Symbol"
+      >(</a
+      ><a name="5881" href="RicesTheoremForTheUniverse.html#5523" class="Bound"
+      >e</a
+      ><a name="5882"
+      > </a
+      ><a name="5883" class="Symbol"
+      >(</a
+      ><a name="5884" href="RicesTheoremForTheUniverse.html#5596" class="Function"
+      >Q</a
+      ><a name="5885" class="Symbol"
+      >(</a
+      ><a name="5886" href="GenericConvergentSequence.html#2724" class="Function"
+      >under</a
+      ><a name="5891"
+      > </a
+      ><a name="5892" href="RicesTheoremForTheUniverse.html#5870" class="Bound"
+      >i</a
+      ><a name="5893" class="Symbol"
+      >))</a
+      ><a name="5895"
+      > </a
+      ><a name="5896" href="RicesTheoremForTheUniverse.html#5525" class="Bound"
+      >X</a
+      ><a name="5897"
+      > </a
+      ><a name="5898" class="Symbol"
+      >(</a
+      ><a name="5899" href="RicesTheoremForTheUniverse.html#5647" class="Function"
+      >Q-lemma</a
+      ><a name="5906"
+      > </a
+      ><a name="5907" href="RicesTheoremForTheUniverse.html#5870" class="Bound"
+      >i</a
+      ><a name="5908" class="Symbol"
+      >))</a
+      ><a name="5910"
+      > </a
+      ><a name="5911" href="RicesTheoremForTheUniverse.html#5529" class="Bound"
+      >r</a
+      ><a name="5912"
+      >
+
+  </a
+      ><a name="5917" href="RicesTheoremForTheUniverse.html#5917" class="Function"
+      >p-lemma&#8734;</a
+      ><a name="5925"
+      > </a
+      ><a name="5926" class="Symbol"
+      >:</a
+      ><a name="5927"
+      > </a
+      ><a name="5928" href="RicesTheoremForTheUniverse.html#5800" class="Function"
+      >p</a
+      ><a name="5929"
+      > </a
+      ><a name="5930" href="GenericConvergentSequence.html#2787" class="Function"
+      >&#8734;</a
+      ><a name="5931"
+      > </a
+      ><a name="5932" href="Equality.html#239" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="5933"
+      > </a
+      ><a name="5934" href="Two.html#255" class="InductiveConstructor"
+      >&#8321;</a
+      ><a name="5935"
+      >
+  </a
+      ><a name="5938" href="RicesTheoremForTheUniverse.html#5917" class="Function"
+      >p-lemma&#8734;</a
+      ><a name="5946"
+      > </a
+      ><a name="5947" class="Symbol"
+      >=</a
+      ><a name="5948"
+      > </a
+      ><a name="5949" href="Equality.html#987" class="Function"
+      >trans</a
+      ><a name="5954"
+      > </a
+      ><a name="5955" class="Symbol"
+      >(</a
+      ><a name="5956" href="RicesTheoremForTheUniverse.html#5523" class="Bound"
+      >e</a
+      ><a name="5957"
+      > </a
+      ><a name="5958" class="Symbol"
+      >(</a
+      ><a name="5959" href="RicesTheoremForTheUniverse.html#5596" class="Function"
+      >Q</a
+      ><a name="5960"
+      > </a
+      ><a name="5961" href="GenericConvergentSequence.html#2787" class="Function"
+      >&#8734;</a
+      ><a name="5962" class="Symbol"
+      >)</a
+      ><a name="5963"
+      > </a
+      ><a name="5964" href="RicesTheoremForTheUniverse.html#5527" class="Bound"
+      >Y</a
+      ><a name="5965"
+      > </a
+      ><a name="5966" href="RicesTheoremForTheUniverse.html#5729" class="Function"
+      >Q-lemma&#8734;</a
+      ><a name="5974" class="Symbol"
+      >)</a
+      ><a name="5975"
+      > </a
+      ><a name="5976" href="RicesTheoremForTheUniverse.html#5531" class="Bound"
+      >s</a
+      ><a name="5977"
+      >
+
+\end{code}
+
+</a
+      ><a name="5992" class="Comment"
+      >One can get more milleage exploiting the fact that &#8469;&#8734; satisfies</a
+      ><a name="6055"
+      >
+</a
+      ><a name="6056" class="Comment"
+      >the principle of omniscience, which I showed in previous work,</a
+      ><a name="6118"
+      >
+</a
+      ><a name="6119" class="Comment"
+      >including Agda files available elsewhere. As a simple example, one</a
+      ><a name="6185"
+      >
+</a
+      ><a name="6186" class="Comment"
+      >can conclude LPO rather than WLPO.</a
+      ><a name="6220"
+      >
+
+</a
+      ><a name="6222" class="Comment"
+      >The type-inhabitedness predicate is clearly extensional. By the</a
+      ><a name="6285"
+      >
+</a
+      ><a name="6286" class="Comment"
+      >above theorem, this means that there is no algorithm within type</a
+      ><a name="6350"
+      >
+</a
+      ><a name="6351" class="Comment"
+      >theory that decides whether any given type is inhabited, that is,</a
+      ><a name="6416"
+      >
+</a
+      ><a name="6417" class="Comment"
+      >whether a proposition has a proof. Of course we already know this</a
+      ><a name="6482"
+      >
+</a
+      ><a name="6483" class="Comment"
+      >since the time of Godel, Turing and Church, in stronger forms</a
+      ><a name="6544"
+      >
+</a
+      ><a name="6545" class="Comment"
+      >(such as adding general recursion to type theory). But we</a
+      ><a name="6602"
+      >
+</a
+      ><a name="6603" class="Comment"
+      >emphasize again that our development is syntax-free (or</a
+      ><a name="6658"
+      >
+</a
+      ><a name="6659" class="Comment"
+      >Godel-number free), and hence make senses in any model of type</a
+      ><a name="6721"
+      >
+</a
+      ><a name="6722" class="Comment"
+      >theory.</a
+      ><a name="6729"
+      >
+
+</a
+      ><a name="6731" class="Comment"
+      >We have the following meta-theorem as a corollary, *without*</a
+      ><a name="6791"
+      >
+</a
+      ><a name="6792" class="Comment"
+      >assuming the propositional axiom of extensionality:</a
+      ><a name="6843"
+      >
+
+</a
+      ><a name="6845" class="Comment"
+      >  For all closed terms P: Set &#8594; &#8322; and X,Y: Set with a given proof of</a
+      ><a name="6913"
+      >
+</a
+      ><a name="6914" class="Comment"
+      >  extensionality of P, there is no closed term of type P(X) &#8800; P(Y).</a
+      ><a name="6981"
+      >
+
+</a
+      ><a name="6983" class="Comment"
+      >Proof. Assuming the axiom of extensionality, there can't be such</a
+      ><a name="7047"
+      >
+</a
+      ><a name="7048" class="Comment"
+      >closed terms, as there is a realizability interpretation, e.g.</a
+      ><a name="7110"
+      >
+</a
+      ><a name="7111" class="Comment"
+      >Hyland's effective topos, where WLPO solves the Halting</a
+      ><a name="7166"
+      >
+</a
+      ><a name="7167" class="Comment"
+      >Problem. Without postulating the axiom, fewer terms are definable</a
+      ><a name="7232"
+      >
+</a
+      ><a name="7233" class="Comment"
+      >in the language, and hence the omission of extensionality gives</a
+      ><a name="7296"
+      >
+</a
+      ><a name="7297" class="Comment"
+      >the same result. Q.E.D.</a
+      ><a name="7320"
+      >
+
+</a
+      ></pre
+    ></body
+  ></html
+>

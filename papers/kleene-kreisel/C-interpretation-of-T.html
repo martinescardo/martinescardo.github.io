@@ -1,0 +1,4475 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+><head
+  ><title
+    >C-interpretation-of-T</title
+    ><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"
+     /><meta http-equiv="Content-Style-Type" content="text/css"
+     /><link href="Agda.css" rel="stylesheet" type="text/css"
+     /></head
+  ><body
+  ><pre
+    ><a name="1" class="Comment"
+      >Chuangjie Xu, 2013</a
+      ><a name="19"
+      >
+
+</a
+      ><a name="21" class="Comment"
+      >This corresponds to part of Section 4.2 of the paper</a
+      ><a name="73"
+      >
+</a
+      ><a name="74" class="Comment"
+      >http://www.cs.bham.ac.uk/~mhe/papers/kleene-kreisel.pdf</a
+      ><a name="129"
+      >
+
+
+</a
+      ><a name="132" class="Comment"
+      >Now we interpret T in C-spaces.</a
+      ><a name="163"
+      >
+
+\begin{code}
+
+</a
+      ><a name="179" class="Keyword"
+      >module</a
+      ><a name="185"
+      > </a
+      ><a name="186" href="C-interpretation-of-T.html#1" class="Module"
+      >C-interpretation-of-T</a
+      ><a name="207"
+      > </a
+      ><a name="208" class="Keyword"
+      >where</a
+      ><a name="213"
+      >
+
+</a
+      ><a name="215" class="Keyword"
+      >open</a
+      ><a name="219"
+      > </a
+      ><a name="220" class="Keyword"
+      >import</a
+      ><a name="226"
+      > </a
+      ><a name="227" href="MiniLibrary.html#1" class="Module"
+      >MiniLibrary</a
+      ><a name="238"
+      >
+</a
+      ><a name="239" class="Keyword"
+      >open</a
+      ><a name="243"
+      > </a
+      ><a name="244" class="Keyword"
+      >import</a
+      ><a name="250"
+      > </a
+      ><a name="251" href="Sequence.html#1" class="Module"
+      >Sequence</a
+      ><a name="259"
+      >
+</a
+      ><a name="260" class="Keyword"
+      >open</a
+      ><a name="264"
+      > </a
+      ><a name="265" class="Keyword"
+      >import</a
+      ><a name="271"
+      > </a
+      ><a name="272" href="Space.html#1" class="Module"
+      >Space</a
+      ><a name="277"
+      >
+</a
+      ><a name="278" class="Keyword"
+      >open</a
+      ><a name="282"
+      > </a
+      ><a name="283" class="Keyword"
+      >import</a
+      ><a name="289"
+      > </a
+      ><a name="290" href="Space-product.html#1" class="Module"
+      >Space-product</a
+      ><a name="303"
+      >
+</a
+      ><a name="304" class="Keyword"
+      >open</a
+      ><a name="308"
+      > </a
+      ><a name="309" class="Keyword"
+      >import</a
+      ><a name="315"
+      > </a
+      ><a name="316" href="Space-exponential.html#1" class="Module"
+      >Space-exponential</a
+      ><a name="333"
+      >
+</a
+      ><a name="334" class="Keyword"
+      >open</a
+      ><a name="338"
+      > </a
+      ><a name="339" class="Keyword"
+      >import</a
+      ><a name="345"
+      > </a
+      ><a name="346" href="Space-discrete.html#1" class="Module"
+      >Space-discrete</a
+      ><a name="360"
+      >
+</a
+      ><a name="361" class="Keyword"
+      >open</a
+      ><a name="365"
+      > </a
+      ><a name="366" class="Keyword"
+      >import</a
+      ><a name="372"
+      > </a
+      ><a name="373" href="not-not.html#1" class="Module"
+      >not-not</a
+      ><a name="380"
+      >
+</a
+      ><a name="381" class="Keyword"
+      >open</a
+      ><a name="385"
+      > </a
+      ><a name="386" class="Keyword"
+      >import</a
+      ><a name="392"
+      > </a
+      ><a name="393" href="Inequality.html#1" class="Module"
+      >Inequality</a
+      ><a name="403"
+      >
+</a
+      ><a name="404" class="Keyword"
+      >open</a
+      ><a name="408"
+      > </a
+      ><a name="409" class="Keyword"
+      >import</a
+      ><a name="415"
+      > </a
+      ><a name="416" href="UniformContinuity.html#1" class="Module"
+      >UniformContinuity</a
+      ><a name="433"
+      >
+</a
+      ><a name="434" class="Keyword"
+      >open</a
+      ><a name="438"
+      > </a
+      ><a name="439" class="Keyword"
+      >import</a
+      ><a name="445"
+      > </a
+      ><a name="446" href="Fan.html#1" class="Module"
+      >Fan</a
+      ><a name="449"
+      >
+</a
+      ><a name="450" class="Keyword"
+      >open</a
+      ><a name="454"
+      > </a
+      ><a name="455" class="Keyword"
+      >import</a
+      ><a name="461"
+      > </a
+      ><a name="462" href="T.html#1" class="Module"
+      >T</a
+      ><a name="463"
+      >
+
+\end{code}
+
+</a
+      ><a name="477" class="Comment"
+      >Interpretation of types:</a
+      ><a name="501"
+      >
+
+\begin{code}
+
+</a
+      ><a name="517" href="C-interpretation-of-T.html#517" class="Function Operator"
+      >&#12304;_&#12305;</a
+      ><a name="520"
+      > </a
+      ><a name="521" class="Symbol"
+      >:</a
+      ><a name="522"
+      > </a
+      ><a name="523" href="T.html#1018" class="Datatype"
+      >Ty</a
+      ><a name="525"
+      > </a
+      ><a name="526" class="Symbol"
+      >&#8594;</a
+      ><a name="527"
+      > </a
+      ><a name="528" href="Space.html#4225" class="Function"
+      >Space</a
+      ><a name="533"
+      >
+</a
+      ><a name="534" href="C-interpretation-of-T.html#517" class="Function Operator"
+      >&#12304;</a
+      ><a name="535"
+      > </a
+      ><a name="536" href="T.html#1034" class="InductiveConstructor"
+      >&#9313;</a
+      ><a name="537"
+      > </a
+      ><a name="538" href="C-interpretation-of-T.html#517" class="Function Operator"
+      >&#12305;</a
+      ><a name="539"
+      > </a
+      ><a name="540" class="Symbol"
+      >=</a
+      ><a name="541"
+      > </a
+      ><a name="542" href="Space-discrete.html#4712" class="Function"
+      >&#8322;Space</a
+      ><a name="548"
+      >
+</a
+      ><a name="549" href="C-interpretation-of-T.html#517" class="Function Operator"
+      >&#12304;</a
+      ><a name="550"
+      > </a
+      ><a name="551" href="T.html#1042" class="InductiveConstructor"
+      >&#9411;</a
+      ><a name="552"
+      > </a
+      ><a name="553" href="C-interpretation-of-T.html#517" class="Function Operator"
+      >&#12305;</a
+      ><a name="554"
+      > </a
+      ><a name="555" class="Symbol"
+      >=</a
+      ><a name="556"
+      > </a
+      ><a name="557" href="Space-discrete.html#7899" class="Function"
+      >&#8469;Space</a
+      ><a name="563"
+      >
+</a
+      ><a name="564" href="C-interpretation-of-T.html#517" class="Function Operator"
+      >&#12304;</a
+      ><a name="565"
+      > </a
+      ><a name="566" href="C-interpretation-of-T.html#566" class="Bound"
+      >&#963;</a
+      ><a name="567"
+      > </a
+      ><a name="568" href="T.html#1050" class="InductiveConstructor Operator"
+      >&#8680;</a
+      ><a name="569"
+      > </a
+      ><a name="570" href="C-interpretation-of-T.html#570" class="Bound"
+      >&#964;</a
+      ><a name="571"
+      > </a
+      ><a name="572" href="C-interpretation-of-T.html#517" class="Function Operator"
+      >&#12305;</a
+      ><a name="573"
+      > </a
+      ><a name="574" class="Symbol"
+      >=</a
+      ><a name="575"
+      > </a
+      ><a name="576" href="C-interpretation-of-T.html#517" class="Function Operator"
+      >&#12304;</a
+      ><a name="577"
+      > </a
+      ><a name="578" href="C-interpretation-of-T.html#566" class="Bound"
+      >&#963;</a
+      ><a name="579"
+      > </a
+      ><a name="580" href="C-interpretation-of-T.html#517" class="Function Operator"
+      >&#12305;</a
+      ><a name="581"
+      > </a
+      ><a name="582" href="Space-exponential.html#303" class="Function Operator"
+      >&#8658;</a
+      ><a name="583"
+      > </a
+      ><a name="584" href="C-interpretation-of-T.html#517" class="Function Operator"
+      >&#12304;</a
+      ><a name="585"
+      > </a
+      ><a name="586" href="C-interpretation-of-T.html#570" class="Bound"
+      >&#964;</a
+      ><a name="587"
+      > </a
+      ><a name="588" href="C-interpretation-of-T.html#517" class="Function Operator"
+      >&#12305;</a
+      ><a name="589"
+      >
+
+\end{code}
+
+</a
+      ><a name="603" class="Comment"
+      >Interpretation of contexts:</a
+      ><a name="630"
+      >
+
+\begin{code}
+
+</a
+      ><a name="646" href="C-interpretation-of-T.html#646" class="Function Operator"
+      >&#12310;_&#12311;</a
+      ><a name="649"
+      > </a
+      ><a name="650" class="Symbol"
+      >:</a
+      ><a name="651"
+      > </a
+      ><a name="652" class="Symbol"
+      >{</a
+      ><a name="653" href="C-interpretation-of-T.html#653" class="Bound"
+      >n</a
+      ><a name="654"
+      > </a
+      ><a name="655" class="Symbol"
+      >:</a
+      ><a name="656"
+      > </a
+      ><a name="657" href="MiniLibrary.html#3902" class="Datatype"
+      >&#8469;</a
+      ><a name="658" class="Symbol"
+      >}</a
+      ><a name="659"
+      > </a
+      ><a name="660" class="Symbol"
+      >&#8594;</a
+      ><a name="661"
+      > </a
+      ><a name="662" href="T.html#1119" class="Function"
+      >Cxt</a
+      ><a name="665"
+      > </a
+      ><a name="666" href="C-interpretation-of-T.html#653" class="Bound"
+      >n</a
+      ><a name="667"
+      > </a
+      ><a name="668" class="Symbol"
+      >&#8594;</a
+      ><a name="669"
+      > </a
+      ><a name="670" href="Space.html#4225" class="Function"
+      >Space</a
+      ><a name="675"
+      >
+</a
+      ><a name="676" href="C-interpretation-of-T.html#646" class="Function Operator"
+      >&#12310;</a
+      ><a name="677"
+      > </a
+      ><a name="678" href="T.html#744" class="InductiveConstructor"
+      >&#949;</a
+      ><a name="679"
+      > </a
+      ><a name="680" href="C-interpretation-of-T.html#646" class="Function Operator"
+      >&#12311;</a
+      ><a name="681"
+      >      </a
+      ><a name="687" class="Symbol"
+      >=</a
+      ><a name="688"
+      > </a
+      ><a name="689" href="Space.html#7236" class="Function"
+      >&#9352;Space</a
+      ><a name="695"
+      >
+</a
+      ><a name="696" href="C-interpretation-of-T.html#646" class="Function Operator"
+      >&#12310;</a
+      ><a name="697"
+      > </a
+      ><a name="698" href="C-interpretation-of-T.html#698" class="Bound"
+      >&#963;s</a
+      ><a name="700"
+      > </a
+      ><a name="701" href="T.html#755" class="InductiveConstructor Operator"
+      >&#8330;</a
+      ><a name="702"
+      > </a
+      ><a name="703" href="C-interpretation-of-T.html#703" class="Bound"
+      >&#963;</a
+      ><a name="704"
+      > </a
+      ><a name="705" href="C-interpretation-of-T.html#646" class="Function Operator"
+      >&#12311;</a
+      ><a name="706"
+      > </a
+      ><a name="707" class="Symbol"
+      >=</a
+      ><a name="708"
+      > </a
+      ><a name="709" href="C-interpretation-of-T.html#646" class="Function Operator"
+      >&#12310;</a
+      ><a name="710"
+      > </a
+      ><a name="711" href="C-interpretation-of-T.html#698" class="Bound"
+      >&#963;s</a
+      ><a name="713"
+      > </a
+      ><a name="714" href="C-interpretation-of-T.html#646" class="Function Operator"
+      >&#12311;</a
+      ><a name="715"
+      > </a
+      ><a name="716" href="Space-product.html#299" class="Function Operator"
+      >&#8855;</a
+      ><a name="717"
+      > </a
+      ><a name="718" href="C-interpretation-of-T.html#517" class="Function Operator"
+      >&#12304;</a
+      ><a name="719"
+      > </a
+      ><a name="720" href="C-interpretation-of-T.html#703" class="Bound"
+      >&#963;</a
+      ><a name="721"
+      > </a
+      ><a name="722" href="C-interpretation-of-T.html#517" class="Function Operator"
+      >&#12305;</a
+      ><a name="723"
+      >
+
+\end{code}
+
+</a
+      ><a name="737" class="Comment"
+      >Interpretation of the index function, which is continuous:</a
+      ><a name="795"
+      >
+
+\begin{code}
+
+</a
+      ><a name="811" href="C-interpretation-of-T.html#811" class="Function Operator"
+      >_&#65117;_&#65118;</a
+      ><a name="815"
+      > </a
+      ><a name="816" class="Symbol"
+      >:</a
+      ><a name="817"
+      > </a
+      ><a name="818" class="Symbol"
+      >{</a
+      ><a name="819" href="C-interpretation-of-T.html#819" class="Bound"
+      >n</a
+      ><a name="820"
+      > </a
+      ><a name="821" class="Symbol"
+      >:</a
+      ><a name="822"
+      > </a
+      ><a name="823" href="MiniLibrary.html#3902" class="Datatype"
+      >&#8469;</a
+      ><a name="824" class="Symbol"
+      >}{</a
+      ><a name="826" href="C-interpretation-of-T.html#826" class="Bound"
+      >&#915;</a
+      ><a name="827"
+      > </a
+      ><a name="828" class="Symbol"
+      >:</a
+      ><a name="829"
+      > </a
+      ><a name="830" href="T.html#1119" class="Function"
+      >Cxt</a
+      ><a name="833"
+      > </a
+      ><a name="834" href="C-interpretation-of-T.html#819" class="Bound"
+      >n</a
+      ><a name="835" class="Symbol"
+      >}</a
+      ><a name="836"
+      > </a
+      ><a name="837" class="Symbol"
+      >&#8594;</a
+      ><a name="838"
+      > </a
+      ><a name="839" href="Space.html#4275" class="Function"
+      >U</a
+      ><a name="840"
+      > </a
+      ><a name="841" href="C-interpretation-of-T.html#646" class="Function Operator"
+      >&#12310;</a
+      ><a name="842"
+      > </a
+      ><a name="843" href="C-interpretation-of-T.html#826" class="Bound"
+      >&#915;</a
+      ><a name="844"
+      > </a
+      ><a name="845" href="C-interpretation-of-T.html#646" class="Function Operator"
+      >&#12311;</a
+      ><a name="846"
+      > </a
+      ><a name="847" class="Symbol"
+      >&#8594;</a
+      ><a name="848"
+      > </a
+      ><a name="849" class="Symbol"
+      >(</a
+      ><a name="850" href="C-interpretation-of-T.html#850" class="Bound"
+      >i</a
+      ><a name="851"
+      > </a
+      ><a name="852" class="Symbol"
+      >:</a
+      ><a name="853"
+      > </a
+      ><a name="854" href="MiniLibrary.html#7842" class="Datatype"
+      >Fin</a
+      ><a name="857"
+      > </a
+      ><a name="858" href="C-interpretation-of-T.html#819" class="Bound"
+      >n</a
+      ><a name="859" class="Symbol"
+      >)</a
+      ><a name="860"
+      > </a
+      ><a name="861" class="Symbol"
+      >&#8594;</a
+      ><a name="862"
+      > </a
+      ><a name="863" href="Space.html#4275" class="Function"
+      >U</a
+      ><a name="864"
+      > </a
+      ><a name="865" href="C-interpretation-of-T.html#517" class="Function Operator"
+      >&#12304;</a
+      ><a name="866"
+      > </a
+      ><a name="867" href="C-interpretation-of-T.html#826" class="Bound"
+      >&#915;</a
+      ><a name="868"
+      > </a
+      ><a name="869" href="T.html#851" class="Function Operator"
+      >&#8333;</a
+      ><a name="870"
+      > </a
+      ><a name="871" href="C-interpretation-of-T.html#850" class="Bound"
+      >i</a
+      ><a name="872"
+      > </a
+      ><a name="873" href="T.html#851" class="Function Operator"
+      >&#8334;</a
+      ><a name="874"
+      > </a
+      ><a name="875" href="C-interpretation-of-T.html#517" class="Function Operator"
+      >&#12305;</a
+      ><a name="876"
+      >
+</a
+      ><a name="877" href="C-interpretation-of-T.html#811" class="Function Operator"
+      >_&#65117;_&#65118;</a
+      ><a name="881"
+      > </a
+      ><a name="882" class="Symbol"
+      >{</a
+      ><a name="883" href="MiniLibrary.html#3919" class="InductiveConstructor"
+      >0</a
+      ><a name="884" class="Symbol"
+      >}</a
+      ><a name="885"
+      >      </a
+      ><a name="891" class="Symbol"
+      >{</a
+      ><a name="892" href="T.html#744" class="InductiveConstructor"
+      >&#949;</a
+      ><a name="893" class="Symbol"
+      >}</a
+      ><a name="894"
+      >      </a
+      ><a name="900" href="MiniLibrary.html#3436" class="InductiveConstructor"
+      >&#8902;</a
+      ><a name="901"
+      >        </a
+      ><a name="909" class="Symbol"
+      >()</a
+      ><a name="911"
+      >
+</a
+      ><a name="912" href="C-interpretation-of-T.html#811" class="Function Operator"
+      >_&#65117;_&#65118;</a
+      ><a name="916"
+      > </a
+      ><a name="917" class="Symbol"
+      >{</a
+      ><a name="918" href="MiniLibrary.html#3930" class="InductiveConstructor"
+      >succ</a
+      ><a name="922"
+      > </a
+      ><a name="923" href="C-interpretation-of-T.html#923" class="Bound"
+      >n</a
+      ><a name="924" class="Symbol"
+      >}</a
+      ><a name="925"
+      > </a
+      ><a name="926" class="Symbol"
+      >{</a
+      ><a name="927" href="C-interpretation-of-T.html#927" class="Bound"
+      >&#963;s</a
+      ><a name="929"
+      > </a
+      ><a name="930" href="T.html#755" class="InductiveConstructor Operator"
+      >&#8330;</a
+      ><a name="931"
+      > </a
+      ><a name="932" href="C-interpretation-of-T.html#932" class="Bound"
+      >&#963;</a
+      ><a name="933" class="Symbol"
+      >}</a
+      ><a name="934"
+      > </a
+      ><a name="935" class="Symbol"
+      >(</a
+      ><a name="936" href="C-interpretation-of-T.html#936" class="Bound"
+      >xs</a
+      ><a name="938"
+      > </a
+      ><a name="939" href="MiniLibrary.html#825" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="940"
+      > </a
+      ><a name="941" href="C-interpretation-of-T.html#941" class="Bound"
+      >x</a
+      ><a name="942" class="Symbol"
+      >)</a
+      ><a name="943"
+      > </a
+      ><a name="944" href="MiniLibrary.html#7863" class="InductiveConstructor"
+      >zero</a
+      ><a name="948"
+      >     </a
+      ><a name="953" class="Symbol"
+      >=</a
+      ><a name="954"
+      > </a
+      ><a name="955" href="C-interpretation-of-T.html#941" class="Bound"
+      >x</a
+      ><a name="956"
+      >
+</a
+      ><a name="957" href="C-interpretation-of-T.html#811" class="Function Operator"
+      >_&#65117;_&#65118;</a
+      ><a name="961"
+      > </a
+      ><a name="962" class="Symbol"
+      >{</a
+      ><a name="963" href="MiniLibrary.html#3930" class="InductiveConstructor"
+      >succ</a
+      ><a name="967"
+      > </a
+      ><a name="968" href="C-interpretation-of-T.html#968" class="Bound"
+      >n</a
+      ><a name="969" class="Symbol"
+      >}</a
+      ><a name="970"
+      > </a
+      ><a name="971" class="Symbol"
+      >{</a
+      ><a name="972" href="C-interpretation-of-T.html#972" class="Bound"
+      >&#963;s</a
+      ><a name="974"
+      > </a
+      ><a name="975" href="T.html#755" class="InductiveConstructor Operator"
+      >&#8330;</a
+      ><a name="976"
+      > </a
+      ><a name="977" href="C-interpretation-of-T.html#977" class="Bound"
+      >&#963;</a
+      ><a name="978" class="Symbol"
+      >}</a
+      ><a name="979"
+      > </a
+      ><a name="980" class="Symbol"
+      >(</a
+      ><a name="981" href="C-interpretation-of-T.html#981" class="Bound"
+      >xs</a
+      ><a name="983"
+      > </a
+      ><a name="984" href="MiniLibrary.html#825" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="985"
+      > </a
+      ><a name="986" href="C-interpretation-of-T.html#986" class="Bound"
+      >x</a
+      ><a name="987" class="Symbol"
+      >)</a
+      ><a name="988"
+      > </a
+      ><a name="989" class="Symbol"
+      >(</a
+      ><a name="990" href="MiniLibrary.html#7894" class="InductiveConstructor"
+      >succ</a
+      ><a name="994"
+      > </a
+      ><a name="995" href="C-interpretation-of-T.html#995" class="Bound"
+      >i</a
+      ><a name="996" class="Symbol"
+      >)</a
+      ><a name="997"
+      > </a
+      ><a name="998" class="Symbol"
+      >=</a
+      ><a name="999"
+      > </a
+      ><a name="1000" href="C-interpretation-of-T.html#981" class="Bound"
+      >xs</a
+      ><a name="1002"
+      > </a
+      ><a name="1003" href="C-interpretation-of-T.html#811" class="Function Operator"
+      >&#65117;</a
+      ><a name="1004"
+      > </a
+      ><a name="1005" href="C-interpretation-of-T.html#995" class="Bound"
+      >i</a
+      ><a name="1006"
+      > </a
+      ><a name="1007" href="C-interpretation-of-T.html#811" class="Function Operator"
+      >&#65118;</a
+      ><a name="1008"
+      >
+
+</a
+      ><a name="1010" href="C-interpretation-of-T.html#1010" class="Function"
+      >&#65117;&#65118;-is-continuous</a
+      ><a name="1026"
+      > </a
+      ><a name="1027" class="Symbol"
+      >:</a
+      ><a name="1028"
+      > </a
+      ><a name="1029" class="Symbol"
+      >{</a
+      ><a name="1030" href="C-interpretation-of-T.html#1030" class="Bound"
+      >n</a
+      ><a name="1031"
+      > </a
+      ><a name="1032" class="Symbol"
+      >:</a
+      ><a name="1033"
+      > </a
+      ><a name="1034" href="MiniLibrary.html#3902" class="Datatype"
+      >&#8469;</a
+      ><a name="1035" class="Symbol"
+      >}{</a
+      ><a name="1037" href="C-interpretation-of-T.html#1037" class="Bound"
+      >&#915;</a
+      ><a name="1038"
+      > </a
+      ><a name="1039" class="Symbol"
+      >:</a
+      ><a name="1040"
+      > </a
+      ><a name="1041" href="T.html#1119" class="Function"
+      >Cxt</a
+      ><a name="1044"
+      > </a
+      ><a name="1045" href="C-interpretation-of-T.html#1030" class="Bound"
+      >n</a
+      ><a name="1046" class="Symbol"
+      >}{</a
+      ><a name="1048" href="C-interpretation-of-T.html#1048" class="Bound"
+      >i</a
+      ><a name="1049"
+      > </a
+      ><a name="1050" class="Symbol"
+      >:</a
+      ><a name="1051"
+      > </a
+      ><a name="1052" href="MiniLibrary.html#7842" class="Datatype"
+      >Fin</a
+      ><a name="1055"
+      > </a
+      ><a name="1056" href="C-interpretation-of-T.html#1030" class="Bound"
+      >n</a
+      ><a name="1057" class="Symbol"
+      >}</a
+      ><a name="1058"
+      > </a
+      ><a name="1059" class="Symbol"
+      >&#8594;</a
+      ><a name="1060"
+      > </a
+      ><a name="1061" href="Space.html#5031" class="Function"
+      >continuous</a
+      ><a name="1071"
+      > </a
+      ><a name="1072" class="Symbol"
+      >{</a
+      ><a name="1073" href="C-interpretation-of-T.html#646" class="Function Operator"
+      >&#12310;</a
+      ><a name="1074"
+      > </a
+      ><a name="1075" href="C-interpretation-of-T.html#1037" class="Bound"
+      >&#915;</a
+      ><a name="1076"
+      > </a
+      ><a name="1077" href="C-interpretation-of-T.html#646" class="Function Operator"
+      >&#12311;</a
+      ><a name="1078" class="Symbol"
+      >}</a
+      ><a name="1079"
+      > </a
+      ><a name="1080" class="Symbol"
+      >{</a
+      ><a name="1081" href="C-interpretation-of-T.html#517" class="Function Operator"
+      >&#12304;</a
+      ><a name="1082"
+      > </a
+      ><a name="1083" href="C-interpretation-of-T.html#1037" class="Bound"
+      >&#915;</a
+      ><a name="1084"
+      > </a
+      ><a name="1085" href="T.html#851" class="Function Operator"
+      >&#8333;</a
+      ><a name="1086"
+      > </a
+      ><a name="1087" href="C-interpretation-of-T.html#1048" class="Bound"
+      >i</a
+      ><a name="1088"
+      > </a
+      ><a name="1089" href="T.html#851" class="Function Operator"
+      >&#8334;</a
+      ><a name="1090"
+      > </a
+      ><a name="1091" href="C-interpretation-of-T.html#517" class="Function Operator"
+      >&#12305;</a
+      ><a name="1092" class="Symbol"
+      >}</a
+      ><a name="1093"
+      > </a
+      ><a name="1094" class="Symbol"
+      >(&#955;</a
+      ><a name="1096"
+      > </a
+      ><a name="1097" href="C-interpretation-of-T.html#1097" class="Bound"
+      >xs</a
+      ><a name="1099"
+      > </a
+      ><a name="1100" class="Symbol"
+      >&#8594;</a
+      ><a name="1101"
+      > </a
+      ><a name="1102" href="C-interpretation-of-T.html#1097" class="Bound"
+      >xs</a
+      ><a name="1104"
+      > </a
+      ><a name="1105" href="C-interpretation-of-T.html#811" class="Function Operator"
+      >&#65117;</a
+      ><a name="1106"
+      > </a
+      ><a name="1107" href="C-interpretation-of-T.html#1048" class="Bound"
+      >i</a
+      ><a name="1108"
+      > </a
+      ><a name="1109" href="C-interpretation-of-T.html#811" class="Function Operator"
+      >&#65118;</a
+      ><a name="1110" class="Symbol"
+      >)</a
+      ><a name="1111"
+      >
+</a
+      ><a name="1112" href="C-interpretation-of-T.html#1010" class="Function"
+      >&#65117;&#65118;-is-continuous</a
+      ><a name="1128"
+      > </a
+      ><a name="1129" class="Symbol"
+      >{</a
+      ><a name="1130" href="MiniLibrary.html#3919" class="InductiveConstructor"
+      >0</a
+      ><a name="1131" class="Symbol"
+      >}</a
+      ><a name="1132"
+      >      </a
+      ><a name="1138" class="Symbol"
+      >{</a
+      ><a name="1139" href="T.html#744" class="InductiveConstructor"
+      >&#949;</a
+      ><a name="1140" class="Symbol"
+      >}</a
+      ><a name="1141"
+      >     </a
+      ><a name="1146" class="Symbol"
+      >{()}</a
+      ><a name="1150"
+      >
+</a
+      ><a name="1151" href="C-interpretation-of-T.html#1010" class="Function"
+      >&#65117;&#65118;-is-continuous</a
+      ><a name="1167"
+      > </a
+      ><a name="1168" class="Symbol"
+      >{</a
+      ><a name="1169" href="MiniLibrary.html#3930" class="InductiveConstructor"
+      >succ</a
+      ><a name="1173"
+      > </a
+      ><a name="1174" href="C-interpretation-of-T.html#1174" class="Bound"
+      >n</a
+      ><a name="1175" class="Symbol"
+      >}</a
+      ><a name="1176"
+      > </a
+      ><a name="1177" class="Symbol"
+      >{</a
+      ><a name="1178" href="C-interpretation-of-T.html#1178" class="Bound"
+      >&#915;</a
+      ><a name="1179"
+      > </a
+      ><a name="1180" href="T.html#755" class="InductiveConstructor Operator"
+      >&#8330;</a
+      ><a name="1181"
+      > </a
+      ><a name="1182" href="C-interpretation-of-T.html#1182" class="Bound"
+      >&#963;</a
+      ><a name="1183" class="Symbol"
+      >}</a
+      ><a name="1184"
+      > </a
+      ><a name="1185" class="Symbol"
+      >{</a
+      ><a name="1186" href="MiniLibrary.html#7863" class="InductiveConstructor"
+      >zero</a
+      ><a name="1190" class="Symbol"
+      >}</a
+      ><a name="1191"
+      >   </a
+      ><a name="1194" class="Symbol"
+      >=</a
+      ><a name="1195"
+      > </a
+      ><a name="1196" class="Symbol"
+      >&#955;</a
+      ><a name="1197"
+      > </a
+      ><a name="1198" href="C-interpretation-of-T.html#1198" class="Bound"
+      >_</a
+      ><a name="1199"
+      > </a
+      ><a name="1200" class="Symbol"
+      >&#8594;</a
+      ><a name="1201"
+      > </a
+      ><a name="1202" href="MiniLibrary.html#1141" class="Function"
+      >&#8743;-elim&#8321;</a
+      ><a name="1209"
+      >
+</a
+      ><a name="1210" href="C-interpretation-of-T.html#1010" class="Function"
+      >&#65117;&#65118;-is-continuous</a
+      ><a name="1226"
+      > </a
+      ><a name="1227" class="Symbol"
+      >{</a
+      ><a name="1228" href="MiniLibrary.html#3930" class="InductiveConstructor"
+      >succ</a
+      ><a name="1232"
+      > </a
+      ><a name="1233" href="C-interpretation-of-T.html#1233" class="Bound"
+      >n</a
+      ><a name="1234" class="Symbol"
+      >}</a
+      ><a name="1235"
+      > </a
+      ><a name="1236" class="Symbol"
+      >{</a
+      ><a name="1237" href="C-interpretation-of-T.html#1237" class="Bound"
+      >&#915;</a
+      ><a name="1238"
+      > </a
+      ><a name="1239" href="T.html#755" class="InductiveConstructor Operator"
+      >&#8330;</a
+      ><a name="1240"
+      > </a
+      ><a name="1241" href="C-interpretation-of-T.html#1241" class="Bound"
+      >&#963;</a
+      ><a name="1242" class="Symbol"
+      >}</a
+      ><a name="1243"
+      > </a
+      ><a name="1244" class="Symbol"
+      >{</a
+      ><a name="1245" href="MiniLibrary.html#7894" class="InductiveConstructor"
+      >succ</a
+      ><a name="1249"
+      > </a
+      ><a name="1250" href="C-interpretation-of-T.html#1250" class="Bound"
+      >i</a
+      ><a name="1251" class="Symbol"
+      >}</a
+      ><a name="1252"
+      > </a
+      ><a name="1253" class="Symbol"
+      >=</a
+      ><a name="1254"
+      > </a
+      ><a name="1255" class="Symbol"
+      >&#955;</a
+      ><a name="1256"
+      > </a
+      ><a name="1257" href="C-interpretation-of-T.html#1257" class="Bound"
+      >p</a
+      ><a name="1258"
+      > </a
+      ><a name="1259" href="C-interpretation-of-T.html#1259" class="Bound"
+      >p&#915;&#963;</a
+      ><a name="1262"
+      > </a
+      ><a name="1263" class="Symbol"
+      >&#8594;</a
+      ><a name="1264"
+      > </a
+      ><a name="1265" href="C-interpretation-of-T.html#1300" class="Function"
+      >IH</a
+      ><a name="1267"
+      > </a
+      ><a name="1268" class="Symbol"
+      >(</a
+      ><a name="1269" href="MiniLibrary.html#840" class="Function"
+      >&#960;&#8320;</a
+      ><a name="1271"
+      > </a
+      ><a name="1272" href="MiniLibrary.html#447" class="Function Operator"
+      >&#8728;</a
+      ><a name="1273"
+      > </a
+      ><a name="1274" href="C-interpretation-of-T.html#1257" class="Bound"
+      >p</a
+      ><a name="1275" class="Symbol"
+      >)</a
+      ><a name="1276"
+      > </a
+      ><a name="1277" class="Symbol"
+      >(</a
+      ><a name="1278" href="MiniLibrary.html#1088" class="Function"
+      >&#8743;-elim&#8320;</a
+      ><a name="1285"
+      > </a
+      ><a name="1286" href="C-interpretation-of-T.html#1259" class="Bound"
+      >p&#915;&#963;</a
+      ><a name="1289" class="Symbol"
+      >)</a
+      ><a name="1290"
+      >
+ </a
+      ><a name="1292" class="Keyword"
+      >where</a
+      ><a name="1297"
+      >
+  </a
+      ><a name="1300" href="C-interpretation-of-T.html#1300" class="Function"
+      >IH</a
+      ><a name="1302"
+      > </a
+      ><a name="1303" class="Symbol"
+      >:</a
+      ><a name="1304"
+      > </a
+      ><a name="1305" href="Space.html#5031" class="Function"
+      >continuous</a
+      ><a name="1315"
+      > </a
+      ><a name="1316" class="Symbol"
+      >{</a
+      ><a name="1317" href="C-interpretation-of-T.html#646" class="Function Operator"
+      >&#12310;</a
+      ><a name="1318"
+      > </a
+      ><a name="1319" href="C-interpretation-of-T.html#1237" class="Bound"
+      >&#915;</a
+      ><a name="1320"
+      > </a
+      ><a name="1321" href="C-interpretation-of-T.html#646" class="Function Operator"
+      >&#12311;</a
+      ><a name="1322" class="Symbol"
+      >}</a
+      ><a name="1323"
+      > </a
+      ><a name="1324" class="Symbol"
+      >{</a
+      ><a name="1325" href="C-interpretation-of-T.html#517" class="Function Operator"
+      >&#12304;</a
+      ><a name="1326"
+      > </a
+      ><a name="1327" href="C-interpretation-of-T.html#1237" class="Bound"
+      >&#915;</a
+      ><a name="1328"
+      > </a
+      ><a name="1329" href="T.html#851" class="Function Operator"
+      >&#8333;</a
+      ><a name="1330"
+      > </a
+      ><a name="1331" href="C-interpretation-of-T.html#1250" class="Bound"
+      >i</a
+      ><a name="1332"
+      > </a
+      ><a name="1333" href="T.html#851" class="Function Operator"
+      >&#8334;</a
+      ><a name="1334"
+      > </a
+      ><a name="1335" href="C-interpretation-of-T.html#517" class="Function Operator"
+      >&#12305;</a
+      ><a name="1336" class="Symbol"
+      >}</a
+      ><a name="1337"
+      > </a
+      ><a name="1338" class="Symbol"
+      >(&#955;</a
+      ><a name="1340"
+      > </a
+      ><a name="1341" href="C-interpretation-of-T.html#1341" class="Bound"
+      >xs</a
+      ><a name="1343"
+      > </a
+      ><a name="1344" class="Symbol"
+      >&#8594;</a
+      ><a name="1345"
+      > </a
+      ><a name="1346" href="C-interpretation-of-T.html#1341" class="Bound"
+      >xs</a
+      ><a name="1348"
+      > </a
+      ><a name="1349" href="C-interpretation-of-T.html#811" class="Function Operator"
+      >&#65117;</a
+      ><a name="1350"
+      > </a
+      ><a name="1351" href="C-interpretation-of-T.html#1250" class="Bound"
+      >i</a
+      ><a name="1352"
+      > </a
+      ><a name="1353" href="C-interpretation-of-T.html#811" class="Function Operator"
+      >&#65118;</a
+      ><a name="1354" class="Symbol"
+      >)</a
+      ><a name="1355"
+      >
+  </a
+      ><a name="1358" href="C-interpretation-of-T.html#1300" class="Function"
+      >IH</a
+      ><a name="1360"
+      > </a
+      ><a name="1361" class="Symbol"
+      >=</a
+      ><a name="1362"
+      > </a
+      ><a name="1363" href="C-interpretation-of-T.html#1010" class="Function"
+      >&#65117;&#65118;-is-continuous</a
+      ><a name="1379"
+      > </a
+      ><a name="1380" class="Symbol"
+      >{</a
+      ><a name="1381" href="C-interpretation-of-T.html#1233" class="Bound"
+      >n</a
+      ><a name="1382" class="Symbol"
+      >}</a
+      ><a name="1383"
+      > </a
+      ><a name="1384" class="Symbol"
+      >{</a
+      ><a name="1385" href="C-interpretation-of-T.html#1237" class="Bound"
+      >&#915;</a
+      ><a name="1386" class="Symbol"
+      >}</a
+      ><a name="1387"
+      > </a
+      ><a name="1388" class="Symbol"
+      >{</a
+      ><a name="1389" href="C-interpretation-of-T.html#1250" class="Bound"
+      >i</a
+      ><a name="1390" class="Symbol"
+      >}</a
+      ><a name="1391"
+      >
+
+\end{code}
+
+</a
+      ><a name="1405" class="Comment"
+      >Interpretation of terms in context, which are continuous functions from the</a
+      ><a name="1480"
+      >
+</a
+      ><a name="1481" class="Comment"
+      >interpretations of contexts to the ones of types:</a
+      ><a name="1530"
+      >
+
+\begin{code}
+
+</a
+      ><a name="1546" href="C-interpretation-of-T.html#1546" class="Function Operator"
+      >&#10214;_&#10215;</a
+      ><a name="1549"
+      > </a
+      ><a name="1550" class="Symbol"
+      >:</a
+      ><a name="1551"
+      > </a
+      ><a name="1552" class="Symbol"
+      >{</a
+      ><a name="1553" href="C-interpretation-of-T.html#1553" class="Bound"
+      >n</a
+      ><a name="1554"
+      > </a
+      ><a name="1555" class="Symbol"
+      >:</a
+      ><a name="1556"
+      > </a
+      ><a name="1557" href="MiniLibrary.html#3902" class="Datatype"
+      >&#8469;</a
+      ><a name="1558" class="Symbol"
+      >}{</a
+      ><a name="1560" href="C-interpretation-of-T.html#1560" class="Bound"
+      >&#915;</a
+      ><a name="1561"
+      > </a
+      ><a name="1562" class="Symbol"
+      >:</a
+      ><a name="1563"
+      > </a
+      ><a name="1564" href="T.html#1119" class="Function"
+      >Cxt</a
+      ><a name="1567"
+      > </a
+      ><a name="1568" href="C-interpretation-of-T.html#1553" class="Bound"
+      >n</a
+      ><a name="1569" class="Symbol"
+      >}{</a
+      ><a name="1571" href="C-interpretation-of-T.html#1571" class="Bound"
+      >&#963;</a
+      ><a name="1572"
+      > </a
+      ><a name="1573" class="Symbol"
+      >:</a
+      ><a name="1574"
+      > </a
+      ><a name="1575" href="T.html#1018" class="Datatype"
+      >Ty</a
+      ><a name="1577" class="Symbol"
+      >}</a
+      ><a name="1578"
+      > </a
+      ><a name="1579" class="Symbol"
+      >&#8594;</a
+      ><a name="1580"
+      > </a
+      ><a name="1581" href="T.html#1275" class="Datatype"
+      >Tm</a
+      ><a name="1583"
+      > </a
+      ><a name="1584" href="C-interpretation-of-T.html#1560" class="Bound"
+      >&#915;</a
+      ><a name="1585"
+      > </a
+      ><a name="1586" href="C-interpretation-of-T.html#1571" class="Bound"
+      >&#963;</a
+      ><a name="1587"
+      > </a
+      ><a name="1588" class="Symbol"
+      >&#8594;</a
+      ><a name="1589"
+      > </a
+      ><a name="1590" href="Space.html#5138" class="Function"
+      >Map</a
+      ><a name="1593"
+      > </a
+      ><a name="1594" href="C-interpretation-of-T.html#646" class="Function Operator"
+      >&#12310;</a
+      ><a name="1595"
+      > </a
+      ><a name="1596" href="C-interpretation-of-T.html#1560" class="Bound"
+      >&#915;</a
+      ><a name="1597"
+      > </a
+      ><a name="1598" href="C-interpretation-of-T.html#646" class="Function Operator"
+      >&#12311;</a
+      ><a name="1599"
+      > </a
+      ><a name="1600" href="C-interpretation-of-T.html#517" class="Function Operator"
+      >&#12304;</a
+      ><a name="1601"
+      > </a
+      ><a name="1602" href="C-interpretation-of-T.html#1571" class="Bound"
+      >&#963;</a
+      ><a name="1603"
+      > </a
+      ><a name="1604" href="C-interpretation-of-T.html#517" class="Function Operator"
+      >&#12305;</a
+      ><a name="1605"
+      >
+</a
+      ><a name="1606" href="C-interpretation-of-T.html#1546" class="Function Operator"
+      >&#10214;</a
+      ><a name="1607"
+      > </a
+      ><a name="1608" href="T.html#1314" class="InductiveConstructor"
+      >&#8869;</a
+      ><a name="1609"
+      > </a
+      ><a name="1610" href="C-interpretation-of-T.html#1546" class="Function Operator"
+      >&#10215;</a
+      ><a name="1611"
+      >                      </a
+      ><a name="1633" class="Symbol"
+      >=</a
+      ><a name="1634"
+      > </a
+      ><a name="1635" class="Symbol"
+      >(&#955;</a
+      ><a name="1637"
+      > </a
+      ><a name="1638" href="C-interpretation-of-T.html#1638" class="Bound"
+      >_</a
+      ><a name="1639"
+      > </a
+      ><a name="1640" class="Symbol"
+      >&#8594;</a
+      ><a name="1641"
+      > </a
+      ><a name="1642" href="MiniLibrary.html#3633" class="InductiveConstructor"
+      >&#8320;</a
+      ><a name="1643" class="Symbol"
+      >)</a
+      ><a name="1644"
+      > </a
+      ><a name="1645" href="MiniLibrary.html#825" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="1646"
+      > </a
+      ><a name="1647" class="Symbol"
+      >(&#955;</a
+      ><a name="1649"
+      > </a
+      ><a name="1650" href="C-interpretation-of-T.html#1650" class="Bound"
+      >_</a
+      ><a name="1651"
+      > </a
+      ><a name="1652" href="C-interpretation-of-T.html#1652" class="Bound"
+      >_</a
+      ><a name="1653"
+      > </a
+      ><a name="1654" class="Symbol"
+      >&#8594;</a
+      ><a name="1655"
+      > </a
+      ><a name="1656" class="Number"
+      >0</a
+      ><a name="1657"
+      > </a
+      ><a name="1658" href="MiniLibrary.html#825" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="1659"
+      > </a
+      ><a name="1660" class="Symbol"
+      >(&#955;</a
+      ><a name="1662"
+      > </a
+      ><a name="1663" href="C-interpretation-of-T.html#1663" class="Bound"
+      >_</a
+      ><a name="1664"
+      > </a
+      ><a name="1665" href="C-interpretation-of-T.html#1665" class="Bound"
+      >_</a
+      ><a name="1666"
+      > </a
+      ><a name="1667" href="C-interpretation-of-T.html#1667" class="Bound"
+      >_</a
+      ><a name="1668"
+      > </a
+      ><a name="1669" class="Symbol"
+      >&#8594;</a
+      ><a name="1670"
+      > </a
+      ><a name="1671" href="MiniLibrary.html#1742" class="InductiveConstructor"
+      >refl</a
+      ><a name="1675" class="Symbol"
+      >)</a
+      ><a name="1676"
+      > </a
+      ><a name="1677" href="MiniLibrary.html#825" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="1678"
+      > </a
+      ><a name="1679" class="Symbol"
+      >(&#955;</a
+      ><a name="1681"
+      > </a
+      ><a name="1682" href="C-interpretation-of-T.html#1682" class="Bound"
+      >_</a
+      ><a name="1683"
+      > </a
+      ><a name="1684" href="C-interpretation-of-T.html#1684" class="Bound"
+      >_</a
+      ><a name="1685"
+      > </a
+      ><a name="1686" class="Symbol"
+      >&#8594;</a
+      ><a name="1687"
+      > </a
+      ><a name="1688" href="Inequality.html#169" class="InductiveConstructor"
+      >&#8804;-zero</a
+      ><a name="1694" class="Symbol"
+      >))</a
+      ><a name="1696"
+      >
+</a
+      ><a name="1697" href="C-interpretation-of-T.html#1546" class="Function Operator"
+      >&#10214;</a
+      ><a name="1698"
+      > </a
+      ><a name="1699" href="T.html#1360" class="InductiveConstructor"
+      >&#8868;</a
+      ><a name="1700"
+      > </a
+      ><a name="1701" href="C-interpretation-of-T.html#1546" class="Function Operator"
+      >&#10215;</a
+      ><a name="1702"
+      >                      </a
+      ><a name="1724" class="Symbol"
+      >=</a
+      ><a name="1725"
+      > </a
+      ><a name="1726" class="Symbol"
+      >(&#955;</a
+      ><a name="1728"
+      > </a
+      ><a name="1729" href="C-interpretation-of-T.html#1729" class="Bound"
+      >_</a
+      ><a name="1730"
+      > </a
+      ><a name="1731" class="Symbol"
+      >&#8594;</a
+      ><a name="1732"
+      > </a
+      ><a name="1733" href="MiniLibrary.html#3640" class="InductiveConstructor"
+      >&#8321;</a
+      ><a name="1734" class="Symbol"
+      >)</a
+      ><a name="1735"
+      > </a
+      ><a name="1736" href="MiniLibrary.html#825" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="1737"
+      > </a
+      ><a name="1738" class="Symbol"
+      >(&#955;</a
+      ><a name="1740"
+      > </a
+      ><a name="1741" href="C-interpretation-of-T.html#1741" class="Bound"
+      >_</a
+      ><a name="1742"
+      > </a
+      ><a name="1743" href="C-interpretation-of-T.html#1743" class="Bound"
+      >_</a
+      ><a name="1744"
+      > </a
+      ><a name="1745" class="Symbol"
+      >&#8594;</a
+      ><a name="1746"
+      > </a
+      ><a name="1747" class="Number"
+      >0</a
+      ><a name="1748"
+      > </a
+      ><a name="1749" href="MiniLibrary.html#825" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="1750"
+      > </a
+      ><a name="1751" class="Symbol"
+      >(&#955;</a
+      ><a name="1753"
+      > </a
+      ><a name="1754" href="C-interpretation-of-T.html#1754" class="Bound"
+      >_</a
+      ><a name="1755"
+      > </a
+      ><a name="1756" href="C-interpretation-of-T.html#1756" class="Bound"
+      >_</a
+      ><a name="1757"
+      > </a
+      ><a name="1758" href="C-interpretation-of-T.html#1758" class="Bound"
+      >_</a
+      ><a name="1759"
+      > </a
+      ><a name="1760" class="Symbol"
+      >&#8594;</a
+      ><a name="1761"
+      > </a
+      ><a name="1762" href="MiniLibrary.html#1742" class="InductiveConstructor"
+      >refl</a
+      ><a name="1766" class="Symbol"
+      >)</a
+      ><a name="1767"
+      > </a
+      ><a name="1768" href="MiniLibrary.html#825" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="1769"
+      > </a
+      ><a name="1770" class="Symbol"
+      >(&#955;</a
+      ><a name="1772"
+      > </a
+      ><a name="1773" href="C-interpretation-of-T.html#1773" class="Bound"
+      >_</a
+      ><a name="1774"
+      > </a
+      ><a name="1775" href="C-interpretation-of-T.html#1775" class="Bound"
+      >_</a
+      ><a name="1776"
+      > </a
+      ><a name="1777" class="Symbol"
+      >&#8594;</a
+      ><a name="1778"
+      > </a
+      ><a name="1779" href="Inequality.html#169" class="InductiveConstructor"
+      >&#8804;-zero</a
+      ><a name="1785" class="Symbol"
+      >))</a
+      ><a name="1787"
+      >
+</a
+      ><a name="1788" href="C-interpretation-of-T.html#1546" class="Function Operator"
+      >&#10214;</a
+      ><a name="1789"
+      > </a
+      ><a name="1790" href="T.html#1406" class="InductiveConstructor"
+      >IF</a
+      ><a name="1792"
+      > </a
+      ><a name="1793" class="Symbol"
+      >{</a
+      ><a name="1794" href="C-interpretation-of-T.html#1794" class="Bound"
+      >n</a
+      ><a name="1795" class="Symbol"
+      >}</a
+      ><a name="1796"
+      > </a
+      ><a name="1797" class="Symbol"
+      >{</a
+      ><a name="1798" href="C-interpretation-of-T.html#1798" class="Bound"
+      >&#915;</a
+      ><a name="1799" class="Symbol"
+      >}</a
+      ><a name="1800"
+      > </a
+      ><a name="1801" class="Symbol"
+      >{</a
+      ><a name="1802" href="C-interpretation-of-T.html#1802" class="Bound"
+      >&#963;</a
+      ><a name="1803" class="Symbol"
+      >}</a
+      ><a name="1804"
+      > </a
+      ><a name="1805" href="C-interpretation-of-T.html#1546" class="Function Operator"
+      >&#10215;</a
+      ><a name="1806"
+      >         </a
+      ><a name="1815" class="Symbol"
+      >=</a
+      ><a name="1816"
+      > </a
+      ><a name="1817" class="Symbol"
+      >(&#955;</a
+      ><a name="1819"
+      > </a
+      ><a name="1820" href="C-interpretation-of-T.html#1820" class="Bound"
+      >_</a
+      ><a name="1821"
+      > </a
+      ><a name="1822" class="Symbol"
+      >&#8594;</a
+      ><a name="1823"
+      > </a
+      ><a name="1824" href="Space-discrete.html#4922" class="Function"
+      >continuous-if</a
+      ><a name="1837"
+      > </a
+      ><a name="1838" class="Symbol"
+      >{</a
+      ><a name="1839" href="C-interpretation-of-T.html#517" class="Function Operator"
+      >&#12304;</a
+      ><a name="1840"
+      > </a
+      ><a name="1841" href="C-interpretation-of-T.html#1802" class="Bound"
+      >&#963;</a
+      ><a name="1842"
+      > </a
+      ><a name="1843" href="C-interpretation-of-T.html#517" class="Function Operator"
+      >&#12305;</a
+      ><a name="1844" class="Symbol"
+      >})</a
+      ><a name="1846"
+      > </a
+      ><a name="1847" href="MiniLibrary.html#825" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="1848"
+      > </a
+      ><a name="1849" class="Symbol"
+      >(&#955;</a
+      ><a name="1851"
+      > </a
+      ><a name="1852" href="C-interpretation-of-T.html#1852" class="Bound"
+      >_</a
+      ><a name="1853"
+      > </a
+      ><a name="1854" href="C-interpretation-of-T.html#1854" class="Bound"
+      >_</a
+      ><a name="1855"
+      > </a
+      ><a name="1856" href="C-interpretation-of-T.html#1856" class="Bound"
+      >p</a
+      ><a name="1857"
+      > </a
+      ><a name="1858" href="C-interpretation-of-T.html#1858" class="Bound"
+      >p&#963;</a
+      ><a name="1860"
+      > </a
+      ><a name="1861" href="C-interpretation-of-T.html#1861" class="Bound"
+      >_</a
+      ><a name="1862"
+      > </a
+      ><a name="1863" href="C-interpretation-of-T.html#1863" class="Bound"
+      >_</a
+      ><a name="1864"
+      > </a
+      ><a name="1865" class="Symbol"
+      >&#8594;</a
+      ><a name="1866"
+      > </a
+      ><a name="1867" href="MiniLibrary.html#850" class="Function"
+      >&#960;&#8321;</a
+      ><a name="1869"
+      > </a
+      ><a name="1870" class="Symbol"
+      >(</a
+      ><a name="1871" href="Space-discrete.html#4922" class="Function"
+      >continuous-if</a
+      ><a name="1884"
+      > </a
+      ><a name="1885" class="Symbol"
+      >{</a
+      ><a name="1886" href="C-interpretation-of-T.html#517" class="Function Operator"
+      >&#12304;</a
+      ><a name="1887"
+      > </a
+      ><a name="1888" href="C-interpretation-of-T.html#1802" class="Bound"
+      >&#963;</a
+      ><a name="1889"
+      > </a
+      ><a name="1890" href="C-interpretation-of-T.html#517" class="Function Operator"
+      >&#12305;</a
+      ><a name="1891" class="Symbol"
+      >})</a
+      ><a name="1893"
+      > </a
+      ><a name="1894" href="C-interpretation-of-T.html#1856" class="Bound"
+      >p</a
+      ><a name="1895"
+      > </a
+      ><a name="1896" href="C-interpretation-of-T.html#1858" class="Bound"
+      >p&#963;</a
+      ><a name="1898" class="Symbol"
+      >)</a
+      ><a name="1899"
+      >
+</a
+      ><a name="1900" href="C-interpretation-of-T.html#1546" class="Function Operator"
+      >&#10214;</a
+      ><a name="1901"
+      > </a
+      ><a name="1902" href="T.html#1466" class="InductiveConstructor"
+      >ZERO</a
+      ><a name="1906"
+      > </a
+      ><a name="1907" href="C-interpretation-of-T.html#1546" class="Function Operator"
+      >&#10215;</a
+      ><a name="1908"
+      >                   </a
+      ><a name="1927" class="Symbol"
+      >=</a
+      ><a name="1928"
+      > </a
+      ><a name="1929" class="Symbol"
+      >(&#955;</a
+      ><a name="1931"
+      > </a
+      ><a name="1932" href="C-interpretation-of-T.html#1932" class="Bound"
+      >_</a
+      ><a name="1933"
+      > </a
+      ><a name="1934" class="Symbol"
+      >&#8594;</a
+      ><a name="1935"
+      > </a
+      ><a name="1936" class="Number"
+      >0</a
+      ><a name="1937" class="Symbol"
+      >)</a
+      ><a name="1938"
+      > </a
+      ><a name="1939" href="MiniLibrary.html#825" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="1940"
+      > </a
+      ><a name="1941" class="Symbol"
+      >(&#955;</a
+      ><a name="1943"
+      > </a
+      ><a name="1944" href="C-interpretation-of-T.html#1944" class="Bound"
+      >_</a
+      ><a name="1945"
+      > </a
+      ><a name="1946" href="C-interpretation-of-T.html#1946" class="Bound"
+      >_</a
+      ><a name="1947"
+      > </a
+      ><a name="1948" class="Symbol"
+      >&#8594;</a
+      ><a name="1949"
+      > </a
+      ><a name="1950" class="Number"
+      >0</a
+      ><a name="1951"
+      > </a
+      ><a name="1952" href="MiniLibrary.html#825" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="1953"
+      > </a
+      ><a name="1954" class="Symbol"
+      >(&#955;</a
+      ><a name="1956"
+      > </a
+      ><a name="1957" href="C-interpretation-of-T.html#1957" class="Bound"
+      >_</a
+      ><a name="1958"
+      > </a
+      ><a name="1959" href="C-interpretation-of-T.html#1959" class="Bound"
+      >_</a
+      ><a name="1960"
+      > </a
+      ><a name="1961" href="C-interpretation-of-T.html#1961" class="Bound"
+      >_</a
+      ><a name="1962"
+      > </a
+      ><a name="1963" class="Symbol"
+      >&#8594;</a
+      ><a name="1964"
+      > </a
+      ><a name="1965" href="MiniLibrary.html#1742" class="InductiveConstructor"
+      >refl</a
+      ><a name="1969" class="Symbol"
+      >)</a
+      ><a name="1970"
+      > </a
+      ><a name="1971" href="MiniLibrary.html#825" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="1972"
+      > </a
+      ><a name="1973" class="Symbol"
+      >(&#955;</a
+      ><a name="1975"
+      > </a
+      ><a name="1976" href="C-interpretation-of-T.html#1976" class="Bound"
+      >_</a
+      ><a name="1977"
+      > </a
+      ><a name="1978" href="C-interpretation-of-T.html#1978" class="Bound"
+      >_</a
+      ><a name="1979"
+      > </a
+      ><a name="1980" class="Symbol"
+      >&#8594;</a
+      ><a name="1981"
+      > </a
+      ><a name="1982" href="Inequality.html#169" class="InductiveConstructor"
+      >&#8804;-zero</a
+      ><a name="1988" class="Symbol"
+      >))</a
+      ><a name="1990"
+      >
+</a
+      ><a name="1991" href="C-interpretation-of-T.html#1546" class="Function Operator"
+      >&#10214;</a
+      ><a name="1992"
+      > </a
+      ><a name="1993" href="T.html#1512" class="InductiveConstructor"
+      >SUCC</a
+      ><a name="1997"
+      > </a
+      ><a name="1998" href="C-interpretation-of-T.html#1546" class="Function Operator"
+      >&#10215;</a
+      ><a name="1999"
+      >                   </a
+      ><a name="2018" class="Symbol"
+      >=</a
+      ><a name="2019"
+      > </a
+      ><a name="2020" class="Symbol"
+      >(&#955;</a
+      ><a name="2022"
+      > </a
+      ><a name="2023" href="C-interpretation-of-T.html#2023" class="Bound"
+      >_</a
+      ><a name="2024"
+      > </a
+      ><a name="2025" class="Symbol"
+      >&#8594;</a
+      ><a name="2026"
+      > </a
+      ><a name="2027" href="Space-discrete.html#8109" class="Function"
+      >continuous-succ</a
+      ><a name="2042" class="Symbol"
+      >)</a
+      ><a name="2043"
+      > </a
+      ><a name="2044" href="MiniLibrary.html#825" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="2045"
+      > </a
+      ><a name="2046" class="Symbol"
+      >(&#955;</a
+      ><a name="2048"
+      > </a
+      ><a name="2049" href="C-interpretation-of-T.html#2049" class="Bound"
+      >_</a
+      ><a name="2050"
+      > </a
+      ><a name="2051" href="C-interpretation-of-T.html#2051" class="Bound"
+      >_</a
+      ><a name="2052"
+      > </a
+      ><a name="2053" href="C-interpretation-of-T.html#2053" class="Bound"
+      >p</a
+      ><a name="2054"
+      > </a
+      ><a name="2055" href="C-interpretation-of-T.html#2055" class="Bound"
+      >pN</a
+      ><a name="2057"
+      > </a
+      ><a name="2058" href="C-interpretation-of-T.html#2058" class="Bound"
+      >_</a
+      ><a name="2059"
+      > </a
+      ><a name="2060" href="C-interpretation-of-T.html#2060" class="Bound"
+      >_</a
+      ><a name="2061"
+      > </a
+      ><a name="2062" class="Symbol"
+      >&#8594;</a
+      ><a name="2063"
+      > </a
+      ><a name="2064" href="MiniLibrary.html#850" class="Function"
+      >&#960;&#8321;</a
+      ><a name="2066"
+      > </a
+      ><a name="2067" href="Space-discrete.html#8109" class="Function"
+      >continuous-succ</a
+      ><a name="2082"
+      > </a
+      ><a name="2083" href="C-interpretation-of-T.html#2053" class="Bound"
+      >p</a
+      ><a name="2084"
+      > </a
+      ><a name="2085" href="C-interpretation-of-T.html#2055" class="Bound"
+      >pN</a
+      ><a name="2087" class="Symbol"
+      >)</a
+      ><a name="2088"
+      >
+</a
+      ><a name="2089" href="C-interpretation-of-T.html#1546" class="Function Operator"
+      >&#10214;</a
+      ><a name="2090"
+      > </a
+      ><a name="2091" href="T.html#1564" class="InductiveConstructor"
+      >REC</a
+      ><a name="2094"
+      > </a
+      ><a name="2095" class="Symbol"
+      >{</a
+      ><a name="2096" href="C-interpretation-of-T.html#2096" class="Bound"
+      >n</a
+      ><a name="2097" class="Symbol"
+      >}</a
+      ><a name="2098"
+      > </a
+      ><a name="2099" class="Symbol"
+      >{</a
+      ><a name="2100" href="C-interpretation-of-T.html#2100" class="Bound"
+      >&#915;</a
+      ><a name="2101" class="Symbol"
+      >}</a
+      ><a name="2102"
+      > </a
+      ><a name="2103" class="Symbol"
+      >{</a
+      ><a name="2104" href="C-interpretation-of-T.html#2104" class="Bound"
+      >&#963;</a
+      ><a name="2105" class="Symbol"
+      >}</a
+      ><a name="2106"
+      > </a
+      ><a name="2107" href="C-interpretation-of-T.html#1546" class="Function Operator"
+      >&#10215;</a
+      ><a name="2108"
+      >        </a
+      ><a name="2116" class="Symbol"
+      >=</a
+      ><a name="2117"
+      > </a
+      ><a name="2118" class="Symbol"
+      >(&#955;</a
+      ><a name="2120"
+      > </a
+      ><a name="2121" href="C-interpretation-of-T.html#2121" class="Bound"
+      >_</a
+      ><a name="2122"
+      > </a
+      ><a name="2123" class="Symbol"
+      >&#8594;</a
+      ><a name="2124"
+      > </a
+      ><a name="2125" href="Space-discrete.html#8238" class="Function"
+      >continuous-rec</a
+      ><a name="2139"
+      > </a
+      ><a name="2140" class="Symbol"
+      >{</a
+      ><a name="2141" href="C-interpretation-of-T.html#517" class="Function Operator"
+      >&#12304;</a
+      ><a name="2142"
+      > </a
+      ><a name="2143" href="C-interpretation-of-T.html#2104" class="Bound"
+      >&#963;</a
+      ><a name="2144"
+      > </a
+      ><a name="2145" href="C-interpretation-of-T.html#517" class="Function Operator"
+      >&#12305;</a
+      ><a name="2146" class="Symbol"
+      >})</a
+      ><a name="2148"
+      > </a
+      ><a name="2149" href="MiniLibrary.html#825" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="2150"
+      > </a
+      ><a name="2151" class="Symbol"
+      >(&#955;</a
+      ><a name="2153"
+      > </a
+      ><a name="2154" href="C-interpretation-of-T.html#2154" class="Bound"
+      >_</a
+      ><a name="2155"
+      > </a
+      ><a name="2156" href="C-interpretation-of-T.html#2156" class="Bound"
+      >_</a
+      ><a name="2157"
+      > </a
+      ><a name="2158" href="C-interpretation-of-T.html#2158" class="Bound"
+      >p</a
+      ><a name="2159"
+      > </a
+      ><a name="2160" href="C-interpretation-of-T.html#2160" class="Bound"
+      >p&#963;</a
+      ><a name="2162"
+      > </a
+      ><a name="2163" href="C-interpretation-of-T.html#2163" class="Bound"
+      >_</a
+      ><a name="2164"
+      > </a
+      ><a name="2165" href="C-interpretation-of-T.html#2165" class="Bound"
+      >_</a
+      ><a name="2166"
+      > </a
+      ><a name="2167" class="Symbol"
+      >&#8594;</a
+      ><a name="2168"
+      > </a
+      ><a name="2169" href="MiniLibrary.html#850" class="Function"
+      >&#960;&#8321;</a
+      ><a name="2171"
+      > </a
+      ><a name="2172" class="Symbol"
+      >(</a
+      ><a name="2173" href="Space-discrete.html#8238" class="Function"
+      >continuous-rec</a
+      ><a name="2187"
+      > </a
+      ><a name="2188" class="Symbol"
+      >{</a
+      ><a name="2189" href="C-interpretation-of-T.html#517" class="Function Operator"
+      >&#12304;</a
+      ><a name="2190"
+      > </a
+      ><a name="2191" href="C-interpretation-of-T.html#2104" class="Bound"
+      >&#963;</a
+      ><a name="2192"
+      > </a
+      ><a name="2193" href="C-interpretation-of-T.html#517" class="Function Operator"
+      >&#12305;</a
+      ><a name="2194" class="Symbol"
+      >})</a
+      ><a name="2196"
+      > </a
+      ><a name="2197" href="C-interpretation-of-T.html#2158" class="Bound"
+      >p</a
+      ><a name="2198"
+      > </a
+      ><a name="2199" href="C-interpretation-of-T.html#2160" class="Bound"
+      >p&#963;</a
+      ><a name="2201" class="Symbol"
+      >)</a
+      ><a name="2202"
+      >
+</a
+      ><a name="2203" href="C-interpretation-of-T.html#1546" class="Function Operator"
+      >&#10214;</a
+      ><a name="2204"
+      > </a
+      ><a name="2205" href="T.html#1634" class="InductiveConstructor"
+      >VAR</a
+      ><a name="2208"
+      > </a
+      ><a name="2209" class="Symbol"
+      >{</a
+      ><a name="2210" href="C-interpretation-of-T.html#2210" class="Bound"
+      >n</a
+      ><a name="2211" class="Symbol"
+      >}</a
+      ><a name="2212"
+      > </a
+      ><a name="2213" class="Symbol"
+      >{</a
+      ><a name="2214" href="C-interpretation-of-T.html#2214" class="Bound"
+      >&#915;</a
+      ><a name="2215" class="Symbol"
+      >}</a
+      ><a name="2216"
+      > </a
+      ><a name="2217" href="C-interpretation-of-T.html#2217" class="Bound"
+      >i</a
+      ><a name="2218"
+      > </a
+      ><a name="2219" href="C-interpretation-of-T.html#1546" class="Function Operator"
+      >&#10215;</a
+      ><a name="2220"
+      >          </a
+      ><a name="2230" class="Symbol"
+      >=</a
+      ><a name="2231"
+      > </a
+      ><a name="2232" class="Symbol"
+      >(&#955;</a
+      ><a name="2234"
+      > </a
+      ><a name="2235" href="C-interpretation-of-T.html#2235" class="Bound"
+      >xs</a
+      ><a name="2237"
+      > </a
+      ><a name="2238" class="Symbol"
+      >&#8594;</a
+      ><a name="2239"
+      > </a
+      ><a name="2240" href="C-interpretation-of-T.html#2235" class="Bound"
+      >xs</a
+      ><a name="2242"
+      > </a
+      ><a name="2243" href="C-interpretation-of-T.html#811" class="Function Operator"
+      >&#65117;</a
+      ><a name="2244"
+      > </a
+      ><a name="2245" href="C-interpretation-of-T.html#2217" class="Bound"
+      >i</a
+      ><a name="2246"
+      > </a
+      ><a name="2247" href="C-interpretation-of-T.html#811" class="Function Operator"
+      >&#65118;</a
+      ><a name="2248" class="Symbol"
+      >)</a
+      ><a name="2249"
+      > </a
+      ><a name="2250" href="MiniLibrary.html#825" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="2251"
+      > </a
+      ><a name="2252" href="C-interpretation-of-T.html#1010" class="Function"
+      >&#65117;&#65118;-is-continuous</a
+      ><a name="2268"
+      > </a
+      ><a name="2269" class="Symbol"
+      >{</a
+      ><a name="2270" href="C-interpretation-of-T.html#2210" class="Bound"
+      >n</a
+      ><a name="2271" class="Symbol"
+      >}</a
+      ><a name="2272"
+      > </a
+      ><a name="2273" class="Symbol"
+      >{</a
+      ><a name="2274" href="C-interpretation-of-T.html#2214" class="Bound"
+      >&#915;</a
+      ><a name="2275" class="Symbol"
+      >}</a
+      ><a name="2276"
+      > </a
+      ><a name="2277" class="Symbol"
+      >{</a
+      ><a name="2278" href="C-interpretation-of-T.html#2217" class="Bound"
+      >i</a
+      ><a name="2279" class="Symbol"
+      >}</a
+      ><a name="2280"
+      >
+</a
+      ><a name="2281" href="C-interpretation-of-T.html#1546" class="Function Operator"
+      >&#10214;</a
+      ><a name="2282"
+      > </a
+      ><a name="2283" href="T.html#1702" class="InductiveConstructor"
+      >LAM</a
+      ><a name="2286"
+      > </a
+      ><a name="2287" class="Symbol"
+      >{</a
+      ><a name="2288" href="C-interpretation-of-T.html#2288" class="Bound"
+      >n</a
+      ><a name="2289" class="Symbol"
+      >}</a
+      ><a name="2290"
+      > </a
+      ><a name="2291" class="Symbol"
+      >{</a
+      ><a name="2292" href="C-interpretation-of-T.html#2292" class="Bound"
+      >&#915;</a
+      ><a name="2293" class="Symbol"
+      >}</a
+      ><a name="2294"
+      > </a
+      ><a name="2295" class="Symbol"
+      >{</a
+      ><a name="2296" href="C-interpretation-of-T.html#2296" class="Bound"
+      >&#963;</a
+      ><a name="2297" class="Symbol"
+      >}</a
+      ><a name="2298"
+      > </a
+      ><a name="2299" class="Symbol"
+      >{</a
+      ><a name="2300" href="C-interpretation-of-T.html#2300" class="Bound"
+      >&#964;</a
+      ><a name="2301" class="Symbol"
+      >}</a
+      ><a name="2302"
+      > </a
+      ><a name="2303" href="C-interpretation-of-T.html#2303" class="Bound"
+      >M</a
+      ><a name="2304"
+      > </a
+      ><a name="2305" href="C-interpretation-of-T.html#1546" class="Function Operator"
+      >&#10215;</a
+      ><a name="2306"
+      >  </a
+      ><a name="2308" class="Symbol"
+      >=</a
+      ><a name="2309"
+      > </a
+      ><a name="2310" href="C-interpretation-of-T.html#2329" class="Function"
+      >f</a
+      ><a name="2311"
+      > </a
+      ><a name="2312" href="MiniLibrary.html#825" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="2313"
+      > </a
+      ><a name="2314" href="C-interpretation-of-T.html#2660" class="Function"
+      >cts-f</a
+      ><a name="2319"
+      >
+ </a
+      ><a name="2321" class="Keyword"
+      >where</a
+      ><a name="2326"
+      >
+  </a
+      ><a name="2329" href="C-interpretation-of-T.html#2329" class="Function"
+      >f</a
+      ><a name="2330"
+      > </a
+      ><a name="2331" class="Symbol"
+      >:</a
+      ><a name="2332"
+      > </a
+      ><a name="2333" href="Space.html#4275" class="Function"
+      >U</a
+      ><a name="2334"
+      > </a
+      ><a name="2335" href="C-interpretation-of-T.html#646" class="Function Operator"
+      >&#12310;</a
+      ><a name="2336"
+      > </a
+      ><a name="2337" href="C-interpretation-of-T.html#2292" class="Bound"
+      >&#915;</a
+      ><a name="2338"
+      > </a
+      ><a name="2339" href="C-interpretation-of-T.html#646" class="Function Operator"
+      >&#12311;</a
+      ><a name="2340"
+      > </a
+      ><a name="2341" class="Symbol"
+      >&#8594;</a
+      ><a name="2342"
+      > </a
+      ><a name="2343" href="Space.html#4275" class="Function"
+      >U</a
+      ><a name="2344"
+      > </a
+      ><a name="2345" href="C-interpretation-of-T.html#517" class="Function Operator"
+      >&#12304;</a
+      ><a name="2346"
+      > </a
+      ><a name="2347" href="C-interpretation-of-T.html#2296" class="Bound"
+      >&#963;</a
+      ><a name="2348"
+      > </a
+      ><a name="2349" href="T.html#1050" class="InductiveConstructor Operator"
+      >&#8680;</a
+      ><a name="2350"
+      > </a
+      ><a name="2351" href="C-interpretation-of-T.html#2300" class="Bound"
+      >&#964;</a
+      ><a name="2352"
+      > </a
+      ><a name="2353" href="C-interpretation-of-T.html#517" class="Function Operator"
+      >&#12305;</a
+      ><a name="2354"
+      >
+  </a
+      ><a name="2357" href="C-interpretation-of-T.html#2329" class="Function"
+      >f</a
+      ><a name="2358"
+      > </a
+      ><a name="2359" href="C-interpretation-of-T.html#2359" class="Bound"
+      >xs</a
+      ><a name="2361"
+      > </a
+      ><a name="2362" class="Symbol"
+      >=</a
+      ><a name="2363"
+      > </a
+      ><a name="2364" href="C-interpretation-of-T.html#2387" class="Function"
+      >g</a
+      ><a name="2365"
+      > </a
+      ><a name="2366" href="MiniLibrary.html#825" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="2367"
+      > </a
+      ><a name="2368" href="C-interpretation-of-T.html#2441" class="Function"
+      >cts-g</a
+      ><a name="2373"
+      >
+   </a
+      ><a name="2377" class="Keyword"
+      >where</a
+      ><a name="2382"
+      >
+    </a
+      ><a name="2387" href="C-interpretation-of-T.html#2387" class="Function"
+      >g</a
+      ><a name="2388"
+      > </a
+      ><a name="2389" class="Symbol"
+      >:</a
+      ><a name="2390"
+      > </a
+      ><a name="2391" href="Space.html#4275" class="Function"
+      >U</a
+      ><a name="2392"
+      > </a
+      ><a name="2393" href="C-interpretation-of-T.html#517" class="Function Operator"
+      >&#12304;</a
+      ><a name="2394"
+      > </a
+      ><a name="2395" href="C-interpretation-of-T.html#2296" class="Bound"
+      >&#963;</a
+      ><a name="2396"
+      > </a
+      ><a name="2397" href="C-interpretation-of-T.html#517" class="Function Operator"
+      >&#12305;</a
+      ><a name="2398"
+      > </a
+      ><a name="2399" class="Symbol"
+      >&#8594;</a
+      ><a name="2400"
+      > </a
+      ><a name="2401" href="Space.html#4275" class="Function"
+      >U</a
+      ><a name="2402"
+      > </a
+      ><a name="2403" href="C-interpretation-of-T.html#517" class="Function Operator"
+      >&#12304;</a
+      ><a name="2404"
+      > </a
+      ><a name="2405" href="C-interpretation-of-T.html#2300" class="Bound"
+      >&#964;</a
+      ><a name="2406"
+      > </a
+      ><a name="2407" href="C-interpretation-of-T.html#517" class="Function Operator"
+      >&#12305;</a
+      ><a name="2408"
+      >
+    </a
+      ><a name="2413" href="C-interpretation-of-T.html#2387" class="Function"
+      >g</a
+      ><a name="2414"
+      > </a
+      ><a name="2415" href="C-interpretation-of-T.html#2415" class="Bound"
+      >x</a
+      ><a name="2416"
+      > </a
+      ><a name="2417" class="Symbol"
+      >=</a
+      ><a name="2418"
+      > </a
+      ><a name="2419" href="MiniLibrary.html#840" class="Function"
+      >&#960;&#8320;</a
+      ><a name="2421"
+      > </a
+      ><a name="2422" href="C-interpretation-of-T.html#1546" class="Function Operator"
+      >&#10214;</a
+      ><a name="2423"
+      > </a
+      ><a name="2424" href="C-interpretation-of-T.html#2303" class="Bound"
+      >M</a
+      ><a name="2425"
+      > </a
+      ><a name="2426" href="C-interpretation-of-T.html#1546" class="Function Operator"
+      >&#10215;</a
+      ><a name="2427"
+      > </a
+      ><a name="2428" class="Symbol"
+      >(</a
+      ><a name="2429" href="C-interpretation-of-T.html#2359" class="Bound"
+      >xs</a
+      ><a name="2431"
+      > </a
+      ><a name="2432" href="MiniLibrary.html#825" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="2433"
+      > </a
+      ><a name="2434" href="C-interpretation-of-T.html#2415" class="Bound"
+      >x</a
+      ><a name="2435" class="Symbol"
+      >)</a
+      ><a name="2436"
+      >
+    </a
+      ><a name="2441" href="C-interpretation-of-T.html#2441" class="Function"
+      >cts-g</a
+      ><a name="2446"
+      > </a
+      ><a name="2447" class="Symbol"
+      >:</a
+      ><a name="2448"
+      > </a
+      ><a name="2449" href="Space.html#5031" class="Function"
+      >continuous</a
+      ><a name="2459"
+      > </a
+      ><a name="2460" class="Symbol"
+      >{</a
+      ><a name="2461" href="C-interpretation-of-T.html#517" class="Function Operator"
+      >&#12304;</a
+      ><a name="2462"
+      > </a
+      ><a name="2463" href="C-interpretation-of-T.html#2296" class="Bound"
+      >&#963;</a
+      ><a name="2464"
+      > </a
+      ><a name="2465" href="C-interpretation-of-T.html#517" class="Function Operator"
+      >&#12305;</a
+      ><a name="2466" class="Symbol"
+      >}</a
+      ><a name="2467"
+      > </a
+      ><a name="2468" class="Symbol"
+      >{</a
+      ><a name="2469" href="C-interpretation-of-T.html#517" class="Function Operator"
+      >&#12304;</a
+      ><a name="2470"
+      > </a
+      ><a name="2471" href="C-interpretation-of-T.html#2300" class="Bound"
+      >&#964;</a
+      ><a name="2472"
+      > </a
+      ><a name="2473" href="C-interpretation-of-T.html#517" class="Function Operator"
+      >&#12305;</a
+      ><a name="2474" class="Symbol"
+      >}</a
+      ><a name="2475"
+      > </a
+      ><a name="2476" href="C-interpretation-of-T.html#2387" class="Function"
+      >g</a
+      ><a name="2477"
+      >
+    </a
+      ><a name="2482" href="C-interpretation-of-T.html#2441" class="Function"
+      >cts-g</a
+      ><a name="2487"
+      > </a
+      ><a name="2488" href="C-interpretation-of-T.html#2488" class="Bound"
+      >p</a
+      ><a name="2489"
+      > </a
+      ><a name="2490" href="C-interpretation-of-T.html#2490" class="Bound"
+      >p&#963;</a
+      ><a name="2492"
+      > </a
+      ><a name="2493" class="Symbol"
+      >=</a
+      ><a name="2494"
+      > </a
+      ><a name="2495" href="MiniLibrary.html#850" class="Function"
+      >&#960;&#8321;</a
+      ><a name="2497"
+      > </a
+      ><a name="2498" href="C-interpretation-of-T.html#1546" class="Function Operator"
+      >&#10214;</a
+      ><a name="2499"
+      > </a
+      ><a name="2500" href="C-interpretation-of-T.html#2303" class="Bound"
+      >M</a
+      ><a name="2501"
+      > </a
+      ><a name="2502" href="C-interpretation-of-T.html#1546" class="Function Operator"
+      >&#10215;</a
+      ><a name="2503"
+      > </a
+      ><a name="2504" href="C-interpretation-of-T.html#2527" class="Function"
+      >q</a
+      ><a name="2505"
+      > </a
+      ><a name="2506" href="C-interpretation-of-T.html#2577" class="Function"
+      >q&#915;&#963;</a
+      ><a name="2509"
+      >
+     </a
+      ><a name="2515" class="Keyword"
+      >where</a
+      ><a name="2520"
+      >
+      </a
+      ><a name="2527" href="C-interpretation-of-T.html#2527" class="Function"
+      >q</a
+      ><a name="2528"
+      > </a
+      ><a name="2529" class="Symbol"
+      >:</a
+      ><a name="2530"
+      > </a
+      ><a name="2531" href="Sequence.html#238" class="Function"
+      >&#8322;&#8469;</a
+      ><a name="2533"
+      > </a
+      ><a name="2534" class="Symbol"
+      >&#8594;</a
+      ><a name="2535"
+      > </a
+      ><a name="2536" href="Space.html#4275" class="Function"
+      >U</a
+      ><a name="2537"
+      > </a
+      ><a name="2538" href="C-interpretation-of-T.html#646" class="Function Operator"
+      >&#12310;</a
+      ><a name="2539"
+      > </a
+      ><a name="2540" href="C-interpretation-of-T.html#2292" class="Bound"
+      >&#915;</a
+      ><a name="2541"
+      > </a
+      ><a name="2542" href="T.html#755" class="InductiveConstructor Operator"
+      >&#8330;</a
+      ><a name="2543"
+      > </a
+      ><a name="2544" href="C-interpretation-of-T.html#2296" class="Bound"
+      >&#963;</a
+      ><a name="2545"
+      > </a
+      ><a name="2546" href="C-interpretation-of-T.html#646" class="Function Operator"
+      >&#12311;</a
+      ><a name="2547"
+      >
+      </a
+      ><a name="2554" href="C-interpretation-of-T.html#2527" class="Function"
+      >q</a
+      ><a name="2555"
+      > </a
+      ><a name="2556" href="C-interpretation-of-T.html#2556" class="Bound"
+      >&#945;</a
+      ><a name="2557"
+      > </a
+      ><a name="2558" class="Symbol"
+      >=</a
+      ><a name="2559"
+      > </a
+      ><a name="2560" class="Symbol"
+      >(</a
+      ><a name="2561" href="C-interpretation-of-T.html#2359" class="Bound"
+      >xs</a
+      ><a name="2563"
+      > </a
+      ><a name="2564" href="MiniLibrary.html#825" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="2565"
+      > </a
+      ><a name="2566" href="C-interpretation-of-T.html#2488" class="Bound"
+      >p</a
+      ><a name="2567"
+      > </a
+      ><a name="2568" href="C-interpretation-of-T.html#2556" class="Bound"
+      >&#945;</a
+      ><a name="2569" class="Symbol"
+      >)</a
+      ><a name="2570"
+      >
+      </a
+      ><a name="2577" href="C-interpretation-of-T.html#2577" class="Function"
+      >q&#915;&#963;</a
+      ><a name="2580"
+      > </a
+      ><a name="2581" class="Symbol"
+      >:</a
+      ><a name="2582"
+      > </a
+      ><a name="2583" href="C-interpretation-of-T.html#2527" class="Function"
+      >q</a
+      ><a name="2584"
+      > </a
+      ><a name="2585" href="MiniLibrary.html#615" class="Function Operator"
+      >&#8712;</a
+      ><a name="2586"
+      > </a
+      ><a name="2587" href="Space.html#4299" class="Function"
+      >Probe</a
+      ><a name="2592"
+      > </a
+      ><a name="2593" href="C-interpretation-of-T.html#646" class="Function Operator"
+      >&#12310;</a
+      ><a name="2594"
+      > </a
+      ><a name="2595" href="C-interpretation-of-T.html#2292" class="Bound"
+      >&#915;</a
+      ><a name="2596"
+      > </a
+      ><a name="2597" href="T.html#755" class="InductiveConstructor Operator"
+      >&#8330;</a
+      ><a name="2598"
+      > </a
+      ><a name="2599" href="C-interpretation-of-T.html#2296" class="Bound"
+      >&#963;</a
+      ><a name="2600"
+      > </a
+      ><a name="2601" href="C-interpretation-of-T.html#646" class="Function Operator"
+      >&#12311;</a
+      ><a name="2602"
+      >
+      </a
+      ><a name="2609" href="C-interpretation-of-T.html#2577" class="Function"
+      >q&#915;&#963;</a
+      ><a name="2612"
+      > </a
+      ><a name="2613" class="Symbol"
+      >=</a
+      ><a name="2614"
+      > </a
+      ><a name="2615" href="Space.html#4360" class="Function"
+      >cond&#8320;</a
+      ><a name="2620"
+      > </a
+      ><a name="2621" href="C-interpretation-of-T.html#646" class="Function Operator"
+      >&#12310;</a
+      ><a name="2622"
+      > </a
+      ><a name="2623" href="C-interpretation-of-T.html#2292" class="Bound"
+      >&#915;</a
+      ><a name="2624"
+      > </a
+      ><a name="2625" href="C-interpretation-of-T.html#646" class="Function Operator"
+      >&#12311;</a
+      ><a name="2626"
+      > </a
+      ><a name="2627" class="Symbol"
+      >(&#955;</a
+      ><a name="2629"
+      > </a
+      ><a name="2630" href="C-interpretation-of-T.html#2630" class="Bound"
+      >_</a
+      ><a name="2631"
+      > </a
+      ><a name="2632" class="Symbol"
+      >&#8594;</a
+      ><a name="2633"
+      > </a
+      ><a name="2634" href="C-interpretation-of-T.html#2359" class="Bound"
+      >xs</a
+      ><a name="2636" class="Symbol"
+      >)</a
+      ><a name="2637"
+      > </a
+      ><a name="2638" class="Symbol"
+      >(&#955;</a
+      ><a name="2640"
+      > </a
+      ><a name="2641" href="C-interpretation-of-T.html#2641" class="Bound"
+      >_</a
+      ><a name="2642"
+      > </a
+      ><a name="2643" href="C-interpretation-of-T.html#2643" class="Bound"
+      >_</a
+      ><a name="2644"
+      > </a
+      ><a name="2645" class="Symbol"
+      >&#8594;</a
+      ><a name="2646"
+      > </a
+      ><a name="2647" href="MiniLibrary.html#1742" class="InductiveConstructor"
+      >refl</a
+      ><a name="2651" class="Symbol"
+      >)</a
+      ><a name="2652"
+      > </a
+      ><a name="2653" href="MiniLibrary.html#825" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="2654"
+      > </a
+      ><a name="2655" href="C-interpretation-of-T.html#2490" class="Bound"
+      >p&#963;</a
+      ><a name="2657"
+      >
+  </a
+      ><a name="2660" href="C-interpretation-of-T.html#2660" class="Function"
+      >cts-f</a
+      ><a name="2665"
+      > </a
+      ><a name="2666" class="Symbol"
+      >:</a
+      ><a name="2667"
+      > </a
+      ><a name="2668" href="Space.html#5031" class="Function"
+      >continuous</a
+      ><a name="2678"
+      > </a
+      ><a name="2679" class="Symbol"
+      >{</a
+      ><a name="2680" href="C-interpretation-of-T.html#646" class="Function Operator"
+      >&#12310;</a
+      ><a name="2681"
+      > </a
+      ><a name="2682" href="C-interpretation-of-T.html#2292" class="Bound"
+      >&#915;</a
+      ><a name="2683"
+      > </a
+      ><a name="2684" href="C-interpretation-of-T.html#646" class="Function Operator"
+      >&#12311;</a
+      ><a name="2685" class="Symbol"
+      >}</a
+      ><a name="2686"
+      > </a
+      ><a name="2687" class="Symbol"
+      >{</a
+      ><a name="2688" href="C-interpretation-of-T.html#517" class="Function Operator"
+      >&#12304;</a
+      ><a name="2689"
+      > </a
+      ><a name="2690" href="C-interpretation-of-T.html#2296" class="Bound"
+      >&#963;</a
+      ><a name="2691"
+      > </a
+      ><a name="2692" href="T.html#1050" class="InductiveConstructor Operator"
+      >&#8680;</a
+      ><a name="2693"
+      > </a
+      ><a name="2694" href="C-interpretation-of-T.html#2300" class="Bound"
+      >&#964;</a
+      ><a name="2695"
+      > </a
+      ><a name="2696" href="C-interpretation-of-T.html#517" class="Function Operator"
+      >&#12305;</a
+      ><a name="2697" class="Symbol"
+      >}</a
+      ><a name="2698"
+      > </a
+      ><a name="2699" href="C-interpretation-of-T.html#2329" class="Function"
+      >f</a
+      ><a name="2700"
+      >
+  </a
+      ><a name="2703" href="C-interpretation-of-T.html#2660" class="Function"
+      >cts-f</a
+      ><a name="2708"
+      > </a
+      ><a name="2709" href="C-interpretation-of-T.html#2709" class="Bound"
+      >p</a
+      ><a name="2710"
+      > </a
+      ><a name="2711" href="C-interpretation-of-T.html#2711" class="Bound"
+      >p&#915;</a
+      ><a name="2713"
+      > </a
+      ><a name="2714" href="C-interpretation-of-T.html#2714" class="Bound"
+      >q</a
+      ><a name="2715"
+      > </a
+      ><a name="2716" href="C-interpretation-of-T.html#2716" class="Bound"
+      >q&#963;</a
+      ><a name="2718"
+      > </a
+      ><a name="2719" href="C-interpretation-of-T.html#2719" class="Bound"
+      >t</a
+      ><a name="2720"
+      > </a
+      ><a name="2721" href="C-interpretation-of-T.html#2721" class="Bound"
+      >uc</a
+      ><a name="2723"
+      > </a
+      ><a name="2724" class="Symbol"
+      >=</a
+      ><a name="2725"
+      > </a
+      ><a name="2726" href="MiniLibrary.html#850" class="Function"
+      >&#960;&#8321;</a
+      ><a name="2728"
+      > </a
+      ><a name="2729" href="C-interpretation-of-T.html#1546" class="Function Operator"
+      >&#10214;</a
+      ><a name="2730"
+      > </a
+      ><a name="2731" href="C-interpretation-of-T.html#2303" class="Bound"
+      >M</a
+      ><a name="2732"
+      > </a
+      ><a name="2733" href="C-interpretation-of-T.html#1546" class="Function Operator"
+      >&#10215;</a
+      ><a name="2734"
+      > </a
+      ><a name="2735" href="C-interpretation-of-T.html#2754" class="Function"
+      >r</a
+      ><a name="2736"
+      > </a
+      ><a name="2737" href="C-interpretation-of-T.html#2804" class="Function"
+      >r&#915;&#963;</a
+      ><a name="2740"
+      >
+   </a
+      ><a name="2744" class="Keyword"
+      >where</a
+      ><a name="2749"
+      >
+    </a
+      ><a name="2754" href="C-interpretation-of-T.html#2754" class="Function"
+      >r</a
+      ><a name="2755"
+      > </a
+      ><a name="2756" class="Symbol"
+      >:</a
+      ><a name="2757"
+      > </a
+      ><a name="2758" href="Sequence.html#238" class="Function"
+      >&#8322;&#8469;</a
+      ><a name="2760"
+      > </a
+      ><a name="2761" class="Symbol"
+      >&#8594;</a
+      ><a name="2762"
+      > </a
+      ><a name="2763" href="Space.html#4275" class="Function"
+      >U</a
+      ><a name="2764"
+      > </a
+      ><a name="2765" href="C-interpretation-of-T.html#646" class="Function Operator"
+      >&#12310;</a
+      ><a name="2766"
+      > </a
+      ><a name="2767" href="C-interpretation-of-T.html#2292" class="Bound"
+      >&#915;</a
+      ><a name="2768"
+      > </a
+      ><a name="2769" href="T.html#755" class="InductiveConstructor Operator"
+      >&#8330;</a
+      ><a name="2770"
+      > </a
+      ><a name="2771" href="C-interpretation-of-T.html#2296" class="Bound"
+      >&#963;</a
+      ><a name="2772"
+      > </a
+      ><a name="2773" href="C-interpretation-of-T.html#646" class="Function Operator"
+      >&#12311;</a
+      ><a name="2774"
+      >
+    </a
+      ><a name="2779" href="C-interpretation-of-T.html#2754" class="Function"
+      >r</a
+      ><a name="2780"
+      > </a
+      ><a name="2781" href="C-interpretation-of-T.html#2781" class="Bound"
+      >&#945;</a
+      ><a name="2782"
+      > </a
+      ><a name="2783" class="Symbol"
+      >=</a
+      ><a name="2784"
+      > </a
+      ><a name="2785" class="Symbol"
+      >(</a
+      ><a name="2786" href="C-interpretation-of-T.html#2709" class="Bound"
+      >p</a
+      ><a name="2787" class="Symbol"
+      >(</a
+      ><a name="2788" href="C-interpretation-of-T.html#2719" class="Bound"
+      >t</a
+      ><a name="2789"
+      > </a
+      ><a name="2790" href="C-interpretation-of-T.html#2781" class="Bound"
+      >&#945;</a
+      ><a name="2791" class="Symbol"
+      >)</a
+      ><a name="2792"
+      > </a
+      ><a name="2793" href="MiniLibrary.html#825" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="2794"
+      > </a
+      ><a name="2795" href="C-interpretation-of-T.html#2714" class="Bound"
+      >q</a
+      ><a name="2796"
+      > </a
+      ><a name="2797" href="C-interpretation-of-T.html#2781" class="Bound"
+      >&#945;</a
+      ><a name="2798" class="Symbol"
+      >)</a
+      ><a name="2799"
+      >
+    </a
+      ><a name="2804" href="C-interpretation-of-T.html#2804" class="Function"
+      >r&#915;&#963;</a
+      ><a name="2807"
+      > </a
+      ><a name="2808" class="Symbol"
+      >:</a
+      ><a name="2809"
+      > </a
+      ><a name="2810" href="C-interpretation-of-T.html#2754" class="Function"
+      >r</a
+      ><a name="2811"
+      > </a
+      ><a name="2812" href="MiniLibrary.html#615" class="Function Operator"
+      >&#8712;</a
+      ><a name="2813"
+      > </a
+      ><a name="2814" href="Space.html#4299" class="Function"
+      >Probe</a
+      ><a name="2819"
+      > </a
+      ><a name="2820" href="C-interpretation-of-T.html#646" class="Function Operator"
+      >&#12310;</a
+      ><a name="2821"
+      > </a
+      ><a name="2822" href="C-interpretation-of-T.html#2292" class="Bound"
+      >&#915;</a
+      ><a name="2823"
+      > </a
+      ><a name="2824" href="T.html#755" class="InductiveConstructor Operator"
+      >&#8330;</a
+      ><a name="2825"
+      > </a
+      ><a name="2826" href="C-interpretation-of-T.html#2296" class="Bound"
+      >&#963;</a
+      ><a name="2827"
+      > </a
+      ><a name="2828" href="C-interpretation-of-T.html#646" class="Function Operator"
+      >&#12311;</a
+      ><a name="2829"
+      >
+    </a
+      ><a name="2834" href="C-interpretation-of-T.html#2804" class="Function"
+      >r&#915;&#963;</a
+      ><a name="2837"
+      > </a
+      ><a name="2838" class="Symbol"
+      >=</a
+      ><a name="2839"
+      > </a
+      ><a name="2840" href="Space.html#4462" class="Function"
+      >cond&#8321;</a
+      ><a name="2845"
+      > </a
+      ><a name="2846" href="C-interpretation-of-T.html#646" class="Function Operator"
+      >&#12310;</a
+      ><a name="2847"
+      > </a
+      ><a name="2848" href="C-interpretation-of-T.html#2292" class="Bound"
+      >&#915;</a
+      ><a name="2849"
+      > </a
+      ><a name="2850" href="C-interpretation-of-T.html#646" class="Function Operator"
+      >&#12311;</a
+      ><a name="2851"
+      > </a
+      ><a name="2852" href="C-interpretation-of-T.html#2719" class="Bound"
+      >t</a
+      ><a name="2853"
+      > </a
+      ><a name="2854" href="C-interpretation-of-T.html#2721" class="Bound"
+      >uc</a
+      ><a name="2856"
+      > </a
+      ><a name="2857" href="C-interpretation-of-T.html#2709" class="Bound"
+      >p</a
+      ><a name="2858"
+      > </a
+      ><a name="2859" href="C-interpretation-of-T.html#2711" class="Bound"
+      >p&#915;</a
+      ><a name="2861"
+      > </a
+      ><a name="2862" href="MiniLibrary.html#825" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="2863"
+      > </a
+      ><a name="2864" href="C-interpretation-of-T.html#2716" class="Bound"
+      >q&#963;</a
+      ><a name="2866"
+      >
+</a
+      ><a name="2867" href="C-interpretation-of-T.html#1546" class="Function Operator"
+      >&#10214;</a
+      ><a name="2868"
+      > </a
+      ><a name="2869" href="T.html#1769" class="InductiveConstructor Operator"
+      >_&#8729;_</a
+      ><a name="2872"
+      > </a
+      ><a name="2873" class="Symbol"
+      >{</a
+      ><a name="2874" href="C-interpretation-of-T.html#2874" class="Bound"
+      >n</a
+      ><a name="2875" class="Symbol"
+      >}</a
+      ><a name="2876"
+      > </a
+      ><a name="2877" class="Symbol"
+      >{</a
+      ><a name="2878" href="C-interpretation-of-T.html#2878" class="Bound"
+      >&#915;</a
+      ><a name="2879" class="Symbol"
+      >}</a
+      ><a name="2880"
+      > </a
+      ><a name="2881" class="Symbol"
+      >{</a
+      ><a name="2882" href="C-interpretation-of-T.html#2882" class="Bound"
+      >&#963;</a
+      ><a name="2883" class="Symbol"
+      >}</a
+      ><a name="2884"
+      > </a
+      ><a name="2885" class="Symbol"
+      >{</a
+      ><a name="2886" href="C-interpretation-of-T.html#2886" class="Bound"
+      >&#964;</a
+      ><a name="2887" class="Symbol"
+      >}</a
+      ><a name="2888"
+      > </a
+      ><a name="2889" href="C-interpretation-of-T.html#2889" class="Bound"
+      >M</a
+      ><a name="2890"
+      > </a
+      ><a name="2891" href="C-interpretation-of-T.html#2891" class="Bound"
+      >N</a
+      ><a name="2892"
+      > </a
+      ><a name="2893" href="C-interpretation-of-T.html#1546" class="Function Operator"
+      >&#10215;</a
+      ><a name="2894"
+      > </a
+      ><a name="2895" class="Symbol"
+      >=</a
+      ><a name="2896"
+      > </a
+      ><a name="2897" href="C-interpretation-of-T.html#2916" class="Function"
+      >f</a
+      ><a name="2898"
+      > </a
+      ><a name="2899" href="MiniLibrary.html#825" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="2900"
+      > </a
+      ><a name="2901" href="C-interpretation-of-T.html#2980" class="Function"
+      >cts-f</a
+      ><a name="2906"
+      >
+ </a
+      ><a name="2908" class="Keyword"
+      >where</a
+      ><a name="2913"
+      >
+  </a
+      ><a name="2916" href="C-interpretation-of-T.html#2916" class="Function"
+      >f</a
+      ><a name="2917"
+      > </a
+      ><a name="2918" class="Symbol"
+      >:</a
+      ><a name="2919"
+      > </a
+      ><a name="2920" href="Space.html#4275" class="Function"
+      >U</a
+      ><a name="2921"
+      > </a
+      ><a name="2922" href="C-interpretation-of-T.html#646" class="Function Operator"
+      >&#12310;</a
+      ><a name="2923"
+      > </a
+      ><a name="2924" href="C-interpretation-of-T.html#2878" class="Bound"
+      >&#915;</a
+      ><a name="2925"
+      > </a
+      ><a name="2926" href="C-interpretation-of-T.html#646" class="Function Operator"
+      >&#12311;</a
+      ><a name="2927"
+      > </a
+      ><a name="2928" class="Symbol"
+      >&#8594;</a
+      ><a name="2929"
+      > </a
+      ><a name="2930" href="Space.html#4275" class="Function"
+      >U</a
+      ><a name="2931"
+      > </a
+      ><a name="2932" href="C-interpretation-of-T.html#517" class="Function Operator"
+      >&#12304;</a
+      ><a name="2933"
+      > </a
+      ><a name="2934" href="C-interpretation-of-T.html#2886" class="Bound"
+      >&#964;</a
+      ><a name="2935"
+      > </a
+      ><a name="2936" href="C-interpretation-of-T.html#517" class="Function Operator"
+      >&#12305;</a
+      ><a name="2937"
+      >
+  </a
+      ><a name="2940" href="C-interpretation-of-T.html#2916" class="Function"
+      >f</a
+      ><a name="2941"
+      > </a
+      ><a name="2942" href="C-interpretation-of-T.html#2942" class="Bound"
+      >xs</a
+      ><a name="2944"
+      > </a
+      ><a name="2945" class="Symbol"
+      >=</a
+      ><a name="2946"
+      > </a
+      ><a name="2947" href="MiniLibrary.html#840" class="Function"
+      >&#960;&#8320;</a
+      ><a name="2949"
+      > </a
+      ><a name="2950" class="Symbol"
+      >(</a
+      ><a name="2951" href="MiniLibrary.html#840" class="Function"
+      >&#960;&#8320;</a
+      ><a name="2953"
+      > </a
+      ><a name="2954" href="C-interpretation-of-T.html#1546" class="Function Operator"
+      >&#10214;</a
+      ><a name="2955"
+      > </a
+      ><a name="2956" href="C-interpretation-of-T.html#2889" class="Bound"
+      >M</a
+      ><a name="2957"
+      > </a
+      ><a name="2958" href="C-interpretation-of-T.html#1546" class="Function Operator"
+      >&#10215;</a
+      ><a name="2959"
+      > </a
+      ><a name="2960" href="C-interpretation-of-T.html#2942" class="Bound"
+      >xs</a
+      ><a name="2962" class="Symbol"
+      >)</a
+      ><a name="2963"
+      > </a
+      ><a name="2964" class="Symbol"
+      >(</a
+      ><a name="2965" href="MiniLibrary.html#840" class="Function"
+      >&#960;&#8320;</a
+      ><a name="2967"
+      > </a
+      ><a name="2968" href="C-interpretation-of-T.html#1546" class="Function Operator"
+      >&#10214;</a
+      ><a name="2969"
+      > </a
+      ><a name="2970" href="C-interpretation-of-T.html#2891" class="Bound"
+      >N</a
+      ><a name="2971"
+      > </a
+      ><a name="2972" href="C-interpretation-of-T.html#1546" class="Function Operator"
+      >&#10215;</a
+      ><a name="2973"
+      > </a
+      ><a name="2974" href="C-interpretation-of-T.html#2942" class="Bound"
+      >xs</a
+      ><a name="2976" class="Symbol"
+      >)</a
+      ><a name="2977"
+      >
+  </a
+      ><a name="2980" href="C-interpretation-of-T.html#2980" class="Function"
+      >cts-f</a
+      ><a name="2985"
+      > </a
+      ><a name="2986" class="Symbol"
+      >:</a
+      ><a name="2987"
+      > </a
+      ><a name="2988" href="Space.html#5031" class="Function"
+      >continuous</a
+      ><a name="2998"
+      > </a
+      ><a name="2999" class="Symbol"
+      >{</a
+      ><a name="3000" href="C-interpretation-of-T.html#646" class="Function Operator"
+      >&#12310;</a
+      ><a name="3001"
+      > </a
+      ><a name="3002" href="C-interpretation-of-T.html#2878" class="Bound"
+      >&#915;</a
+      ><a name="3003"
+      > </a
+      ><a name="3004" href="C-interpretation-of-T.html#646" class="Function Operator"
+      >&#12311;</a
+      ><a name="3005" class="Symbol"
+      >}</a
+      ><a name="3006"
+      > </a
+      ><a name="3007" class="Symbol"
+      >{</a
+      ><a name="3008" href="C-interpretation-of-T.html#517" class="Function Operator"
+      >&#12304;</a
+      ><a name="3009"
+      > </a
+      ><a name="3010" href="C-interpretation-of-T.html#2886" class="Bound"
+      >&#964;</a
+      ><a name="3011"
+      > </a
+      ><a name="3012" href="C-interpretation-of-T.html#517" class="Function Operator"
+      >&#12305;</a
+      ><a name="3013" class="Symbol"
+      >}</a
+      ><a name="3014"
+      > </a
+      ><a name="3015" href="C-interpretation-of-T.html#2916" class="Function"
+      >f</a
+      ><a name="3016"
+      >
+  </a
+      ><a name="3019" href="C-interpretation-of-T.html#2980" class="Function"
+      >cts-f</a
+      ><a name="3024"
+      > </a
+      ><a name="3025" href="C-interpretation-of-T.html#3025" class="Bound"
+      >p</a
+      ><a name="3026"
+      > </a
+      ><a name="3027" href="C-interpretation-of-T.html#3027" class="Bound"
+      >p&#915;</a
+      ><a name="3029"
+      > </a
+      ><a name="3030" class="Symbol"
+      >=</a
+      ><a name="3031"
+      > </a
+      ><a name="3032" href="MiniLibrary.html#850" class="Function"
+      >&#960;&#8321;</a
+      ><a name="3034"
+      > </a
+      ><a name="3035" href="C-interpretation-of-T.html#1546" class="Function Operator"
+      >&#10214;</a
+      ><a name="3036"
+      > </a
+      ><a name="3037" href="C-interpretation-of-T.html#2889" class="Bound"
+      >M</a
+      ><a name="3038"
+      > </a
+      ><a name="3039" href="C-interpretation-of-T.html#1546" class="Function Operator"
+      >&#10215;</a
+      ><a name="3040"
+      > </a
+      ><a name="3041" href="C-interpretation-of-T.html#3025" class="Bound"
+      >p</a
+      ><a name="3042"
+      > </a
+      ><a name="3043" href="C-interpretation-of-T.html#3027" class="Bound"
+      >p&#915;</a
+      ><a name="3045"
+      > </a
+      ><a name="3046" class="Symbol"
+      >((</a
+      ><a name="3048" href="MiniLibrary.html#840" class="Function"
+      >&#960;&#8320;</a
+      ><a name="3050"
+      > </a
+      ><a name="3051" href="C-interpretation-of-T.html#1546" class="Function Operator"
+      >&#10214;</a
+      ><a name="3052"
+      > </a
+      ><a name="3053" href="C-interpretation-of-T.html#2891" class="Bound"
+      >N</a
+      ><a name="3054"
+      > </a
+      ><a name="3055" href="C-interpretation-of-T.html#1546" class="Function Operator"
+      >&#10215;</a
+      ><a name="3056" class="Symbol"
+      >)</a
+      ><a name="3057"
+      > </a
+      ><a name="3058" href="MiniLibrary.html#447" class="Function Operator"
+      >&#8728;</a
+      ><a name="3059"
+      > </a
+      ><a name="3060" href="C-interpretation-of-T.html#3025" class="Bound"
+      >p</a
+      ><a name="3061" class="Symbol"
+      >)</a
+      ><a name="3062"
+      > </a
+      ><a name="3063" class="Symbol"
+      >(</a
+      ><a name="3064" href="MiniLibrary.html#850" class="Function"
+      >&#960;&#8321;</a
+      ><a name="3066"
+      > </a
+      ><a name="3067" href="C-interpretation-of-T.html#1546" class="Function Operator"
+      >&#10214;</a
+      ><a name="3068"
+      > </a
+      ><a name="3069" href="C-interpretation-of-T.html#2891" class="Bound"
+      >N</a
+      ><a name="3070"
+      > </a
+      ><a name="3071" href="C-interpretation-of-T.html#1546" class="Function Operator"
+      >&#10215;</a
+      ><a name="3072"
+      > </a
+      ><a name="3073" href="C-interpretation-of-T.html#3025" class="Bound"
+      >p</a
+      ><a name="3074"
+      > </a
+      ><a name="3075" href="C-interpretation-of-T.html#3027" class="Bound"
+      >p&#915;</a
+      ><a name="3077" class="Symbol"
+      >)</a
+      ><a name="3078"
+      > </a
+      ><a name="3079" href="MiniLibrary.html#397" class="Function"
+      >id</a
+      ><a name="3081"
+      > </a
+      ><a name="3082" href="UniformContinuity.html#10074" class="Function"
+      >Lemma[id-UC]</a
+      ><a name="3094"
+      >
+</a
+      ><a name="3095" href="C-interpretation-of-T.html#1546" class="Function Operator"
+      >&#10214;</a
+      ><a name="3096"
+      > </a
+      ><a name="3097" href="T.html#1839" class="InductiveConstructor"
+      >FAN</a
+      ><a name="3100"
+      > </a
+      ><a name="3101" href="C-interpretation-of-T.html#1546" class="Function Operator"
+      >&#10215;</a
+      ><a name="3102"
+      > </a
+      ><a name="3103" class="Symbol"
+      >=</a
+      ><a name="3104"
+      > </a
+      ><a name="3105" class="Symbol"
+      >(&#955;</a
+      ><a name="3107"
+      > </a
+      ><a name="3108" href="C-interpretation-of-T.html#3108" class="Bound"
+      >xs</a
+      ><a name="3110"
+      > </a
+      ><a name="3111" class="Symbol"
+      >&#8594;</a
+      ><a name="3112"
+      > </a
+      ><a name="3113" href="Fan.html#2058" class="Function"
+      >fan</a
+      ><a name="3116" class="Symbol"
+      >)</a
+      ><a name="3117"
+      > </a
+      ><a name="3118" href="MiniLibrary.html#825" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="3119"
+      > </a
+      ><a name="3120" class="Symbol"
+      >(&#955;</a
+      ><a name="3122"
+      > </a
+      ><a name="3123" href="C-interpretation-of-T.html#3123" class="Bound"
+      >_</a
+      ><a name="3124"
+      > </a
+      ><a name="3125" href="C-interpretation-of-T.html#3125" class="Bound"
+      >_</a
+      ><a name="3126"
+      > </a
+      ><a name="3127" class="Symbol"
+      >&#8594;</a
+      ><a name="3128"
+      > </a
+      ><a name="3129" class="Symbol"
+      >&#955;</a
+      ><a name="3130"
+      > </a
+      ><a name="3131" href="C-interpretation-of-T.html#3131" class="Bound"
+      >p</a
+      ><a name="3132"
+      > </a
+      ><a name="3133" href="C-interpretation-of-T.html#3133" class="Bound"
+      >pP</a
+      ><a name="3135"
+      > </a
+      ><a name="3136" href="C-interpretation-of-T.html#3136" class="Bound"
+      >_</a
+      ><a name="3137"
+      > </a
+      ><a name="3138" href="C-interpretation-of-T.html#3138" class="Bound"
+      >_</a
+      ><a name="3139"
+      > </a
+      ><a name="3140" class="Symbol"
+      >&#8594;</a
+      ><a name="3141"
+      > </a
+      ><a name="3142" href="MiniLibrary.html#850" class="Function"
+      >&#960;&#8321;</a
+      ><a name="3144"
+      > </a
+      ><a name="3145" href="Fan.html#2058" class="Function"
+      >fan</a
+      ><a name="3148"
+      > </a
+      ><a name="3149" href="C-interpretation-of-T.html#3131" class="Bound"
+      >p</a
+      ><a name="3150"
+      > </a
+      ><a name="3151" href="C-interpretation-of-T.html#3133" class="Bound"
+      >pP</a
+      ><a name="3153" class="Symbol"
+      >)</a
+      ><a name="3154"
+      >
+
+\end{code}
+
+</a
+      ><a name="3168" class="Comment"
+      >This extended system T can calculate the least moduli of uniform continuity of</a
+      ><a name="3246"
+      >
+</a
+      ><a name="3247" class="Comment"
+      >the system T definable maps &#8322;&#8469; &#8594; &#8469;. Here we provide some examples. Evaluating</a
+      ><a name="3324"
+      >
+</a
+      ><a name="3325" class="Comment"
+      >&quot;modu F&#8320;&quot;, for instance, gives you the least moduli of uniform continuity of the</a
+      ><a name="3405"
+      >
+</a
+      ><a name="3406" class="Comment"
+      >map F&#8320;.</a
+      ><a name="3413"
+      >
+
+\begin{code}
+
+</a
+      ><a name="3429" href="C-interpretation-of-T.html#3429" class="Function"
+      >modu</a
+      ><a name="3433"
+      > </a
+      ><a name="3434" class="Symbol"
+      >:</a
+      ><a name="3435"
+      > </a
+      ><a name="3436" href="T.html#1275" class="Datatype"
+      >Tm</a
+      ><a name="3438"
+      > </a
+      ><a name="3439" href="T.html#744" class="InductiveConstructor"
+      >&#949;</a
+      ><a name="3440"
+      > </a
+      ><a name="3441" class="Symbol"
+      >((</a
+      ><a name="3443" href="T.html#1042" class="InductiveConstructor"
+      >&#9411;</a
+      ><a name="3444"
+      > </a
+      ><a name="3445" href="T.html#1050" class="InductiveConstructor Operator"
+      >&#8680;</a
+      ><a name="3446"
+      > </a
+      ><a name="3447" href="T.html#1034" class="InductiveConstructor"
+      >&#9313;</a
+      ><a name="3448" class="Symbol"
+      >)</a
+      ><a name="3449"
+      > </a
+      ><a name="3450" href="T.html#1050" class="InductiveConstructor Operator"
+      >&#8680;</a
+      ><a name="3451"
+      > </a
+      ><a name="3452" href="T.html#1042" class="InductiveConstructor"
+      >&#9411;</a
+      ><a name="3453" class="Symbol"
+      >)</a
+      ><a name="3454"
+      > </a
+      ><a name="3455" class="Symbol"
+      >&#8594;</a
+      ><a name="3456"
+      > </a
+      ><a name="3457" href="MiniLibrary.html#3902" class="Datatype"
+      >&#8469;</a
+      ><a name="3458"
+      >
+</a
+      ><a name="3459" href="C-interpretation-of-T.html#3429" class="Function"
+      >modu</a
+      ><a name="3463"
+      > </a
+      ><a name="3464" href="C-interpretation-of-T.html#3464" class="Bound"
+      >F</a
+      ><a name="3465"
+      > </a
+      ><a name="3466" class="Symbol"
+      >=</a
+      ><a name="3467"
+      > </a
+      ><a name="3468" href="MiniLibrary.html#840" class="Function"
+      >&#960;&#8320;</a
+      ><a name="3470"
+      > </a
+      ><a name="3471" href="C-interpretation-of-T.html#1546" class="Function Operator"
+      >&#10214;</a
+      ><a name="3472"
+      > </a
+      ><a name="3473" href="T.html#1839" class="InductiveConstructor"
+      >FAN</a
+      ><a name="3476"
+      > </a
+      ><a name="3477" href="T.html#1769" class="InductiveConstructor Operator"
+      >&#8729;</a
+      ><a name="3478"
+      > </a
+      ><a name="3479" href="C-interpretation-of-T.html#3464" class="Bound"
+      >F</a
+      ><a name="3480"
+      > </a
+      ><a name="3481" href="C-interpretation-of-T.html#1546" class="Function Operator"
+      >&#10215;</a
+      ><a name="3482"
+      > </a
+      ><a name="3483" href="MiniLibrary.html#3436" class="InductiveConstructor"
+      >&#8902;</a
+      ><a name="3484"
+      >
+
+</a
+      ><a name="3486" href="C-interpretation-of-T.html#3486" class="Function"
+      >ONE</a
+      ><a name="3489"
+      > </a
+      ><a name="3490" href="C-interpretation-of-T.html#3490" class="Function"
+      >TWO</a
+      ><a name="3493"
+      > </a
+      ><a name="3494" href="C-interpretation-of-T.html#3494" class="Function"
+      >THREE</a
+      ><a name="3499"
+      > </a
+      ><a name="3500" href="C-interpretation-of-T.html#3500" class="Function"
+      >FOUR</a
+      ><a name="3504"
+      > </a
+      ><a name="3505" href="C-interpretation-of-T.html#3505" class="Function"
+      >FIVE</a
+      ><a name="3509"
+      > </a
+      ><a name="3510" class="Symbol"
+      >:</a
+      ><a name="3511"
+      > </a
+      ><a name="3512" class="Symbol"
+      >{</a
+      ><a name="3513" href="C-interpretation-of-T.html#3513" class="Bound"
+      >n</a
+      ><a name="3514"
+      > </a
+      ><a name="3515" class="Symbol"
+      >:</a
+      ><a name="3516"
+      > </a
+      ><a name="3517" href="MiniLibrary.html#3902" class="Datatype"
+      >&#8469;</a
+      ><a name="3518" class="Symbol"
+      >}{</a
+      ><a name="3520" href="C-interpretation-of-T.html#3520" class="Bound"
+      >&#915;</a
+      ><a name="3521"
+      > </a
+      ><a name="3522" class="Symbol"
+      >:</a
+      ><a name="3523"
+      > </a
+      ><a name="3524" href="T.html#1119" class="Function"
+      >Cxt</a
+      ><a name="3527"
+      > </a
+      ><a name="3528" href="C-interpretation-of-T.html#3513" class="Bound"
+      >n</a
+      ><a name="3529" class="Symbol"
+      >}</a
+      ><a name="3530"
+      > </a
+      ><a name="3531" class="Symbol"
+      >&#8594;</a
+      ><a name="3532"
+      > </a
+      ><a name="3533" href="T.html#1275" class="Datatype"
+      >Tm</a
+      ><a name="3535"
+      > </a
+      ><a name="3536" href="C-interpretation-of-T.html#3520" class="Bound"
+      >&#915;</a
+      ><a name="3537"
+      > </a
+      ><a name="3538" href="T.html#1042" class="InductiveConstructor"
+      >&#9411;</a
+      ><a name="3539"
+      >
+</a
+      ><a name="3540" href="C-interpretation-of-T.html#3486" class="Function"
+      >ONE</a
+      ><a name="3543"
+      >   </a
+      ><a name="3546" class="Symbol"
+      >=</a
+      ><a name="3547"
+      > </a
+      ><a name="3548" href="T.html#1512" class="InductiveConstructor"
+      >SUCC</a
+      ><a name="3552"
+      > </a
+      ><a name="3553" href="T.html#1769" class="InductiveConstructor Operator"
+      >&#8729;</a
+      ><a name="3554"
+      > </a
+      ><a name="3555" href="T.html#1466" class="InductiveConstructor"
+      >ZERO</a
+      ><a name="3559"
+      >
+</a
+      ><a name="3560" href="C-interpretation-of-T.html#3490" class="Function"
+      >TWO</a
+      ><a name="3563"
+      >   </a
+      ><a name="3566" class="Symbol"
+      >=</a
+      ><a name="3567"
+      > </a
+      ><a name="3568" href="T.html#1512" class="InductiveConstructor"
+      >SUCC</a
+      ><a name="3572"
+      > </a
+      ><a name="3573" href="T.html#1769" class="InductiveConstructor Operator"
+      >&#8729;</a
+      ><a name="3574"
+      > </a
+      ><a name="3575" href="C-interpretation-of-T.html#3486" class="Function"
+      >ONE</a
+      ><a name="3578"
+      >
+</a
+      ><a name="3579" href="C-interpretation-of-T.html#3494" class="Function"
+      >THREE</a
+      ><a name="3584"
+      > </a
+      ><a name="3585" class="Symbol"
+      >=</a
+      ><a name="3586"
+      > </a
+      ><a name="3587" href="T.html#1512" class="InductiveConstructor"
+      >SUCC</a
+      ><a name="3591"
+      > </a
+      ><a name="3592" href="T.html#1769" class="InductiveConstructor Operator"
+      >&#8729;</a
+      ><a name="3593"
+      > </a
+      ><a name="3594" href="C-interpretation-of-T.html#3490" class="Function"
+      >TWO</a
+      ><a name="3597"
+      >
+</a
+      ><a name="3598" href="C-interpretation-of-T.html#3500" class="Function"
+      >FOUR</a
+      ><a name="3602"
+      >  </a
+      ><a name="3604" class="Symbol"
+      >=</a
+      ><a name="3605"
+      > </a
+      ><a name="3606" href="T.html#1512" class="InductiveConstructor"
+      >SUCC</a
+      ><a name="3610"
+      > </a
+      ><a name="3611" href="T.html#1769" class="InductiveConstructor Operator"
+      >&#8729;</a
+      ><a name="3612"
+      > </a
+      ><a name="3613" href="C-interpretation-of-T.html#3494" class="Function"
+      >THREE</a
+      ><a name="3618"
+      >
+</a
+      ><a name="3619" href="C-interpretation-of-T.html#3505" class="Function"
+      >FIVE</a
+      ><a name="3623"
+      >  </a
+      ><a name="3625" class="Symbol"
+      >=</a
+      ><a name="3626"
+      > </a
+      ><a name="3627" href="T.html#1512" class="InductiveConstructor"
+      >SUCC</a
+      ><a name="3631"
+      > </a
+      ><a name="3632" href="T.html#1769" class="InductiveConstructor Operator"
+      >&#8729;</a
+      ><a name="3633"
+      > </a
+      ><a name="3634" href="C-interpretation-of-T.html#3500" class="Function"
+      >FOUR</a
+      ><a name="3638"
+      >
+
+</a
+      ><a name="3640" href="C-interpretation-of-T.html#3640" class="Function"
+      >F&#8320;</a
+      ><a name="3642"
+      > </a
+      ><a name="3643" href="C-interpretation-of-T.html#3643" class="Function"
+      >F&#8321;</a
+      ><a name="3645"
+      > </a
+      ><a name="3646" href="C-interpretation-of-T.html#3646" class="Function"
+      >F&#8322;</a
+      ><a name="3648"
+      > </a
+      ><a name="3649" href="C-interpretation-of-T.html#3649" class="Function"
+      >F&#8323;</a
+      ><a name="3651"
+      > </a
+      ><a name="3652" href="C-interpretation-of-T.html#3652" class="Function"
+      >F&#8324;</a
+      ><a name="3654"
+      > </a
+      ><a name="3655" href="C-interpretation-of-T.html#3655" class="Function"
+      >F&#8325;</a
+      ><a name="3657"
+      > </a
+      ><a name="3658" href="C-interpretation-of-T.html#3658" class="Function"
+      >F&#8326;</a
+      ><a name="3660"
+      > </a
+      ><a name="3661" class="Symbol"
+      >:</a
+      ><a name="3662"
+      > </a
+      ><a name="3663" href="T.html#1275" class="Datatype"
+      >Tm</a
+      ><a name="3665"
+      > </a
+      ><a name="3666" href="T.html#744" class="InductiveConstructor"
+      >&#949;</a
+      ><a name="3667"
+      > </a
+      ><a name="3668" class="Symbol"
+      >((</a
+      ><a name="3670" href="T.html#1042" class="InductiveConstructor"
+      >&#9411;</a
+      ><a name="3671"
+      > </a
+      ><a name="3672" href="T.html#1050" class="InductiveConstructor Operator"
+      >&#8680;</a
+      ><a name="3673"
+      > </a
+      ><a name="3674" href="T.html#1034" class="InductiveConstructor"
+      >&#9313;</a
+      ><a name="3675" class="Symbol"
+      >)</a
+      ><a name="3676"
+      > </a
+      ><a name="3677" href="T.html#1050" class="InductiveConstructor Operator"
+      >&#8680;</a
+      ><a name="3678"
+      > </a
+      ><a name="3679" href="T.html#1042" class="InductiveConstructor"
+      >&#9411;</a
+      ><a name="3680" class="Symbol"
+      >)</a
+      ><a name="3681"
+      >
+
+\end{code}
+
+</a
+      ><a name="3695" class="Comment"
+      >F&#8320; is constant.</a
+      ><a name="3710"
+      >
+
+\begin{code}
+
+</a
+      ><a name="3726" href="C-interpretation-of-T.html#3640" class="Function"
+      >F&#8320;</a
+      ><a name="3728"
+      > </a
+      ><a name="3729" class="Symbol"
+      >=</a
+      ><a name="3730"
+      > </a
+      ><a name="3731" href="T.html#1702" class="InductiveConstructor"
+      >LAM</a
+      ><a name="3734"
+      > </a
+      ><a name="3735" href="T.html#1466" class="InductiveConstructor"
+      >ZERO</a
+      ><a name="3739"
+      >
+
+\end{code}
+
+</a
+      ><a name="3753" class="Comment"
+      >F&#8321; looks at the 6th bit of input to decide output.</a
+      ><a name="3803"
+      >
+
+\begin{code}
+
+</a
+      ><a name="3819" href="C-interpretation-of-T.html#3643" class="Function"
+      >F&#8321;</a
+      ><a name="3821"
+      > </a
+      ><a name="3822" class="Symbol"
+      >=</a
+      ><a name="3823"
+      > </a
+      ><a name="3824" href="T.html#1702" class="InductiveConstructor"
+      >LAM</a
+      ><a name="3827"
+      > </a
+      ><a name="3828" class="Symbol"
+      >(</a
+      ><a name="3829" href="T.html#1406" class="InductiveConstructor"
+      >IF</a
+      ><a name="3831"
+      > </a
+      ><a name="3832" href="T.html#1769" class="InductiveConstructor Operator"
+      >&#8729;</a
+      ><a name="3833"
+      > </a
+      ><a name="3834" href="C-interpretation-of-T.html#3490" class="Function"
+      >TWO</a
+      ><a name="3837"
+      > </a
+      ><a name="3838" href="T.html#1769" class="InductiveConstructor Operator"
+      >&#8729;</a
+      ><a name="3839"
+      > </a
+      ><a name="3840" href="C-interpretation-of-T.html#3486" class="Function"
+      >ONE</a
+      ><a name="3843"
+      > </a
+      ><a name="3844" href="T.html#1769" class="InductiveConstructor Operator"
+      >&#8729;</a
+      ><a name="3845"
+      > </a
+      ><a name="3846" class="Symbol"
+      >(</a
+      ><a name="3847" href="T.html#1634" class="InductiveConstructor"
+      >VAR</a
+      ><a name="3850"
+      > </a
+      ><a name="3851" class="InductiveConstructor"
+      >zero</a
+      ><a name="3855"
+      > </a
+      ><a name="3856" href="T.html#1769" class="InductiveConstructor Operator"
+      >&#8729;</a
+      ><a name="3857"
+      > </a
+      ><a name="3858" href="C-interpretation-of-T.html#3505" class="Function"
+      >FIVE</a
+      ><a name="3862" class="Symbol"
+      >))</a
+      ><a name="3864"
+      >
+
+\end{code}
+
+</a
+      ><a name="3878" class="Comment"
+      >F&#8322; is constant, though it looks at the 6th bit of input.</a
+      ><a name="3934"
+      >
+
+\begin{code}
+
+</a
+      ><a name="3950" href="C-interpretation-of-T.html#3646" class="Function"
+      >F&#8322;</a
+      ><a name="3952"
+      > </a
+      ><a name="3953" class="Symbol"
+      >=</a
+      ><a name="3954"
+      > </a
+      ><a name="3955" href="T.html#1702" class="InductiveConstructor"
+      >LAM</a
+      ><a name="3958"
+      > </a
+      ><a name="3959" class="Symbol"
+      >(</a
+      ><a name="3960" href="T.html#1406" class="InductiveConstructor"
+      >IF</a
+      ><a name="3962"
+      > </a
+      ><a name="3963" href="T.html#1769" class="InductiveConstructor Operator"
+      >&#8729;</a
+      ><a name="3964"
+      > </a
+      ><a name="3965" href="C-interpretation-of-T.html#3486" class="Function"
+      >ONE</a
+      ><a name="3968"
+      > </a
+      ><a name="3969" href="T.html#1769" class="InductiveConstructor Operator"
+      >&#8729;</a
+      ><a name="3970"
+      > </a
+      ><a name="3971" href="C-interpretation-of-T.html#3486" class="Function"
+      >ONE</a
+      ><a name="3974"
+      > </a
+      ><a name="3975" href="T.html#1769" class="InductiveConstructor Operator"
+      >&#8729;</a
+      ><a name="3976"
+      > </a
+      ><a name="3977" class="Symbol"
+      >(</a
+      ><a name="3978" href="T.html#1634" class="InductiveConstructor"
+      >VAR</a
+      ><a name="3981"
+      > </a
+      ><a name="3982" class="InductiveConstructor"
+      >zero</a
+      ><a name="3986"
+      > </a
+      ><a name="3987" href="T.html#1769" class="InductiveConstructor Operator"
+      >&#8729;</a
+      ><a name="3988"
+      > </a
+      ><a name="3989" href="C-interpretation-of-T.html#3505" class="Function"
+      >FIVE</a
+      ><a name="3993" class="Symbol"
+      >))</a
+      ><a name="3995"
+      >
+
+\end{code}
+
+</a
+      ><a name="4009" class="Comment"
+      >F&#8323; returns 5, if the 4th bit is &#8869;.</a
+      ><a name="4043"
+      >
+</a
+      ><a name="4044" class="Comment"
+      >F&#8323; returns 1, if the 4th bit is &#8868; and the 5th one is &#8869;.</a
+      ><a name="4099"
+      >
+</a
+      ><a name="4100" class="Comment"
+      >F&#8323; returns 2, if both the 4th and 5th bits are &#8868;.</a
+      ><a name="4149"
+      >
+
+\begin{code}
+
+</a
+      ><a name="4165" href="C-interpretation-of-T.html#3649" class="Function"
+      >F&#8323;</a
+      ><a name="4167"
+      > </a
+      ><a name="4168" class="Symbol"
+      >=</a
+      ><a name="4169"
+      > </a
+      ><a name="4170" href="T.html#1702" class="InductiveConstructor"
+      >LAM</a
+      ><a name="4173"
+      > </a
+      ><a name="4174" class="Symbol"
+      >(</a
+      ><a name="4175" href="T.html#1406" class="InductiveConstructor"
+      >IF</a
+      ><a name="4177"
+      > </a
+      ><a name="4178" href="T.html#1769" class="InductiveConstructor Operator"
+      >&#8729;</a
+      ><a name="4179"
+      > </a
+      ><a name="4180" href="C-interpretation-of-T.html#3505" class="Function"
+      >FIVE</a
+      ><a name="4184"
+      > </a
+      ><a name="4185" href="T.html#1769" class="InductiveConstructor Operator"
+      >&#8729;</a
+      ><a name="4186"
+      > </a
+      ><a name="4187" class="Symbol"
+      >(</a
+      ><a name="4188" href="T.html#1406" class="InductiveConstructor"
+      >IF</a
+      ><a name="4190"
+      > </a
+      ><a name="4191" href="T.html#1769" class="InductiveConstructor Operator"
+      >&#8729;</a
+      ><a name="4192"
+      > </a
+      ><a name="4193" href="C-interpretation-of-T.html#3486" class="Function"
+      >ONE</a
+      ><a name="4196"
+      > </a
+      ><a name="4197" href="T.html#1769" class="InductiveConstructor Operator"
+      >&#8729;</a
+      ><a name="4198"
+      > </a
+      ><a name="4199" href="C-interpretation-of-T.html#3490" class="Function"
+      >TWO</a
+      ><a name="4202"
+      > </a
+      ><a name="4203" href="T.html#1769" class="InductiveConstructor Operator"
+      >&#8729;</a
+      ><a name="4204"
+      > </a
+      ><a name="4205" class="Symbol"
+      >(</a
+      ><a name="4206" href="T.html#1634" class="InductiveConstructor"
+      >VAR</a
+      ><a name="4209"
+      > </a
+      ><a name="4210" class="InductiveConstructor"
+      >zero</a
+      ><a name="4214"
+      > </a
+      ><a name="4215" href="T.html#1769" class="InductiveConstructor Operator"
+      >&#8729;</a
+      ><a name="4216"
+      > </a
+      ><a name="4217" href="C-interpretation-of-T.html#3500" class="Function"
+      >FOUR</a
+      ><a name="4221" class="Symbol"
+      >))</a
+      ><a name="4223"
+      > </a
+      ><a name="4224" href="T.html#1769" class="InductiveConstructor Operator"
+      >&#8729;</a
+      ><a name="4225"
+      > </a
+      ><a name="4226" class="Symbol"
+      >(</a
+      ><a name="4227" href="T.html#1634" class="InductiveConstructor"
+      >VAR</a
+      ><a name="4230"
+      > </a
+      ><a name="4231" class="InductiveConstructor"
+      >zero</a
+      ><a name="4235"
+      > </a
+      ><a name="4236" href="T.html#1769" class="InductiveConstructor Operator"
+      >&#8729;</a
+      ><a name="4237"
+      > </a
+      ><a name="4238" href="C-interpretation-of-T.html#3494" class="Function"
+      >THREE</a
+      ><a name="4243" class="Symbol"
+      >))</a
+      ><a name="4245"
+      >
+
+\end{code}
+
+</a
+      ><a name="4259" class="Comment"
+      >F&#8324; is constant. It looks at 3rd and 4th or 5th bits and then returns 5.</a
+      ><a name="4330"
+      >
+
+\begin{code}
+
+</a
+      ><a name="4346" href="C-interpretation-of-T.html#3652" class="Function"
+      >F&#8324;</a
+      ><a name="4348"
+      > </a
+      ><a name="4349" class="Symbol"
+      >=</a
+      ><a name="4350"
+      > </a
+      ><a name="4351" href="T.html#1702" class="InductiveConstructor"
+      >LAM</a
+      ><a name="4354"
+      > </a
+      ><a name="4355" class="Symbol"
+      >(</a
+      ><a name="4356" href="T.html#1406" class="InductiveConstructor"
+      >IF</a
+      ><a name="4358"
+      > </a
+      ><a name="4359" href="T.html#1769" class="InductiveConstructor Operator"
+      >&#8729;</a
+      ><a name="4360"
+      > </a
+      ><a name="4361" class="Symbol"
+      >(</a
+      ><a name="4362" href="T.html#1406" class="InductiveConstructor"
+      >IF</a
+      ><a name="4364"
+      > </a
+      ><a name="4365" href="T.html#1769" class="InductiveConstructor Operator"
+      >&#8729;</a
+      ><a name="4366"
+      > </a
+      ><a name="4367" href="C-interpretation-of-T.html#3505" class="Function"
+      >FIVE</a
+      ><a name="4371"
+      > </a
+      ><a name="4372" href="T.html#1769" class="InductiveConstructor Operator"
+      >&#8729;</a
+      ><a name="4373"
+      > </a
+      ><a name="4374" href="C-interpretation-of-T.html#3505" class="Function"
+      >FIVE</a
+      ><a name="4378"
+      > </a
+      ><a name="4379" href="T.html#1769" class="InductiveConstructor Operator"
+      >&#8729;</a
+      ><a name="4380"
+      > </a
+      ><a name="4381" class="Symbol"
+      >(</a
+      ><a name="4382" href="T.html#1634" class="InductiveConstructor"
+      >VAR</a
+      ><a name="4385"
+      > </a
+      ><a name="4386" class="InductiveConstructor"
+      >zero</a
+      ><a name="4390"
+      > </a
+      ><a name="4391" href="T.html#1769" class="InductiveConstructor Operator"
+      >&#8729;</a
+      ><a name="4392"
+      > </a
+      ><a name="4393" href="C-interpretation-of-T.html#3500" class="Function"
+      >FOUR</a
+      ><a name="4397" class="Symbol"
+      >))</a
+      ><a name="4399"
+      > </a
+      ><a name="4400" href="T.html#1769" class="InductiveConstructor Operator"
+      >&#8729;</a
+      ><a name="4401"
+      > </a
+      ><a name="4402" class="Symbol"
+      >(</a
+      ><a name="4403" href="T.html#1406" class="InductiveConstructor"
+      >IF</a
+      ><a name="4405"
+      > </a
+      ><a name="4406" href="T.html#1769" class="InductiveConstructor Operator"
+      >&#8729;</a
+      ><a name="4407"
+      > </a
+      ><a name="4408" href="C-interpretation-of-T.html#3505" class="Function"
+      >FIVE</a
+      ><a name="4412"
+      > </a
+      ><a name="4413" href="T.html#1769" class="InductiveConstructor Operator"
+      >&#8729;</a
+      ><a name="4414"
+      > </a
+      ><a name="4415" href="C-interpretation-of-T.html#3505" class="Function"
+      >FIVE</a
+      ><a name="4419"
+      > </a
+      ><a name="4420" href="T.html#1769" class="InductiveConstructor Operator"
+      >&#8729;</a
+      ><a name="4421"
+      > </a
+      ><a name="4422" class="Symbol"
+      >(</a
+      ><a name="4423" href="T.html#1634" class="InductiveConstructor"
+      >VAR</a
+      ><a name="4426"
+      > </a
+      ><a name="4427" class="InductiveConstructor"
+      >zero</a
+      ><a name="4431"
+      > </a
+      ><a name="4432" href="T.html#1769" class="InductiveConstructor Operator"
+      >&#8729;</a
+      ><a name="4433"
+      > </a
+      ><a name="4434" href="C-interpretation-of-T.html#3494" class="Function"
+      >THREE</a
+      ><a name="4439" class="Symbol"
+      >))</a
+      ><a name="4441"
+      > </a
+      ><a name="4442" href="T.html#1769" class="InductiveConstructor Operator"
+      >&#8729;</a
+      ><a name="4443"
+      > </a
+      ><a name="4444" class="Symbol"
+      >(</a
+      ><a name="4445" href="T.html#1634" class="InductiveConstructor"
+      >VAR</a
+      ><a name="4448"
+      > </a
+      ><a name="4449" class="InductiveConstructor"
+      >zero</a
+      ><a name="4453"
+      > </a
+      ><a name="4454" href="T.html#1769" class="InductiveConstructor Operator"
+      >&#8729;</a
+      ><a name="4455"
+      > </a
+      ><a name="4456" href="C-interpretation-of-T.html#3490" class="Function"
+      >TWO</a
+      ><a name="4459" class="Symbol"
+      >))</a
+      ><a name="4461"
+      >
+
+\end{code}
+
+</a
+      ><a name="4475" class="Comment"
+      >If the 4th bit is &#8869;, then F&#8325; applies SUCC to ZERO 5 times, i.e. returns 5.</a
+      ><a name="4549"
+      >
+</a
+      ><a name="4550" class="Comment"
+      >If the 4th bit is &#8868;, then F&#8325; applies SUCC to ZERO twice, i.e. returns 2.</a
+      ><a name="4622"
+      >
+
+\begin{code}
+
+</a
+      ><a name="4638" href="C-interpretation-of-T.html#3655" class="Function"
+      >F&#8325;</a
+      ><a name="4640"
+      > </a
+      ><a name="4641" class="Symbol"
+      >=</a
+      ><a name="4642"
+      > </a
+      ><a name="4643" href="T.html#1702" class="InductiveConstructor"
+      >LAM</a
+      ><a name="4646"
+      > </a
+      ><a name="4647" class="Symbol"
+      >(</a
+      ><a name="4648" href="T.html#1564" class="InductiveConstructor"
+      >REC</a
+      ><a name="4651"
+      > </a
+      ><a name="4652" href="T.html#1769" class="InductiveConstructor Operator"
+      >&#8729;</a
+      ><a name="4653"
+      > </a
+      ><a name="4654" href="T.html#1466" class="InductiveConstructor"
+      >ZERO</a
+      ><a name="4658"
+      > </a
+      ><a name="4659" href="T.html#1769" class="InductiveConstructor Operator"
+      >&#8729;</a
+      ><a name="4660"
+      > </a
+      ><a name="4661" href="T.html#1702" class="InductiveConstructor"
+      >LAM</a
+      ><a name="4664"
+      > </a
+      ><a name="4665" href="T.html#1512" class="InductiveConstructor"
+      >SUCC</a
+      ><a name="4669"
+      > </a
+      ><a name="4670" href="T.html#1769" class="InductiveConstructor Operator"
+      >&#8729;</a
+      ><a name="4671"
+      > </a
+      ><a name="4672" class="Symbol"
+      >(</a
+      ><a name="4673" href="T.html#1406" class="InductiveConstructor"
+      >IF</a
+      ><a name="4675"
+      > </a
+      ><a name="4676" href="T.html#1769" class="InductiveConstructor Operator"
+      >&#8729;</a
+      ><a name="4677"
+      > </a
+      ><a name="4678" href="C-interpretation-of-T.html#3505" class="Function"
+      >FIVE</a
+      ><a name="4682"
+      > </a
+      ><a name="4683" href="T.html#1769" class="InductiveConstructor Operator"
+      >&#8729;</a
+      ><a name="4684"
+      > </a
+      ><a name="4685" href="C-interpretation-of-T.html#3490" class="Function"
+      >TWO</a
+      ><a name="4688"
+      > </a
+      ><a name="4689" href="T.html#1769" class="InductiveConstructor Operator"
+      >&#8729;</a
+      ><a name="4690"
+      > </a
+      ><a name="4691" class="Symbol"
+      >(</a
+      ><a name="4692" href="T.html#1634" class="InductiveConstructor"
+      >VAR</a
+      ><a name="4695"
+      > </a
+      ><a name="4696" class="InductiveConstructor"
+      >zero</a
+      ><a name="4700"
+      > </a
+      ><a name="4701" href="T.html#1769" class="InductiveConstructor Operator"
+      >&#8729;</a
+      ><a name="4702"
+      > </a
+      ><a name="4703" href="C-interpretation-of-T.html#3494" class="Function"
+      >THREE</a
+      ><a name="4708" class="Symbol"
+      >)))</a
+      ><a name="4711"
+      >
+
+\end{code}
+
+</a
+      ><a name="4725" class="Comment"
+      >If both the 1st and 2nd bits are &#8869;, then F&#8326; applies SUCC to FIVE 3 times, i.e. returns 8.</a
+      ><a name="4814"
+      >
+</a
+      ><a name="4815" class="Comment"
+      >If 1st bit is &#8869; and the 2nd one is &#8868;, then F&#8326; applies SUCC to TWO 3 times, i.e. returns 5.</a
+      ><a name="4905"
+      >
+</a
+      ><a name="4906" class="Comment"
+      >If 1st bit is &#8868; and the 2nd one is &#8869;, then F&#8326; applies SUCC to FIVE twice, i.e. returns 7.</a
+      ><a name="4995"
+      >
+</a
+      ><a name="4996" class="Comment"
+      >If both the 1st and 2nd bits are &#8868;, then F&#8326; applies SUCC to TWO twice, i.e. returns 4.</a
+      ><a name="5082"
+      >
+
+\begin{code}
+
+</a
+      ><a name="5098" href="C-interpretation-of-T.html#3658" class="Function"
+      >F&#8326;</a
+      ><a name="5100"
+      > </a
+      ><a name="5101" class="Symbol"
+      >=</a
+      ><a name="5102"
+      > </a
+      ><a name="5103" href="T.html#1702" class="InductiveConstructor"
+      >LAM</a
+      ><a name="5106"
+      > </a
+      ><a name="5107" class="Symbol"
+      >(</a
+      ><a name="5108" href="T.html#1564" class="InductiveConstructor"
+      >REC</a
+      ><a name="5111"
+      > </a
+      ><a name="5112" href="T.html#1769" class="InductiveConstructor Operator"
+      >&#8729;</a
+      ><a name="5113"
+      > </a
+      ><a name="5114" class="Symbol"
+      >(</a
+      ><a name="5115" href="T.html#1406" class="InductiveConstructor"
+      >IF</a
+      ><a name="5117"
+      > </a
+      ><a name="5118" href="T.html#1769" class="InductiveConstructor Operator"
+      >&#8729;</a
+      ><a name="5119"
+      > </a
+      ><a name="5120" href="C-interpretation-of-T.html#3505" class="Function"
+      >FIVE</a
+      ><a name="5124"
+      > </a
+      ><a name="5125" href="T.html#1769" class="InductiveConstructor Operator"
+      >&#8729;</a
+      ><a name="5126"
+      > </a
+      ><a name="5127" href="C-interpretation-of-T.html#3490" class="Function"
+      >TWO</a
+      ><a name="5130"
+      > </a
+      ><a name="5131" href="T.html#1769" class="InductiveConstructor Operator"
+      >&#8729;</a
+      ><a name="5132"
+      > </a
+      ><a name="5133" class="Symbol"
+      >(</a
+      ><a name="5134" href="T.html#1634" class="InductiveConstructor"
+      >VAR</a
+      ><a name="5137"
+      > </a
+      ><a name="5138" class="InductiveConstructor"
+      >zero</a
+      ><a name="5142"
+      > </a
+      ><a name="5143" href="T.html#1769" class="InductiveConstructor Operator"
+      >&#8729;</a
+      ><a name="5144"
+      > </a
+      ><a name="5145" href="C-interpretation-of-T.html#3486" class="Function"
+      >ONE</a
+      ><a name="5148" class="Symbol"
+      >))</a
+      ><a name="5150"
+      > </a
+      ><a name="5151" href="T.html#1769" class="InductiveConstructor Operator"
+      >&#8729;</a
+      ><a name="5152"
+      > </a
+      ><a name="5153" href="T.html#1702" class="InductiveConstructor"
+      >LAM</a
+      ><a name="5156"
+      > </a
+      ><a name="5157" href="T.html#1512" class="InductiveConstructor"
+      >SUCC</a
+      ><a name="5161"
+      > </a
+      ><a name="5162" href="T.html#1769" class="InductiveConstructor Operator"
+      >&#8729;</a
+      ><a name="5163"
+      > </a
+      ><a name="5164" class="Symbol"
+      >(</a
+      ><a name="5165" href="T.html#1406" class="InductiveConstructor"
+      >IF</a
+      ><a name="5167"
+      > </a
+      ><a name="5168" href="T.html#1769" class="InductiveConstructor Operator"
+      >&#8729;</a
+      ><a name="5169"
+      > </a
+      ><a name="5170" href="C-interpretation-of-T.html#3494" class="Function"
+      >THREE</a
+      ><a name="5175"
+      > </a
+      ><a name="5176" href="T.html#1769" class="InductiveConstructor Operator"
+      >&#8729;</a
+      ><a name="5177"
+      > </a
+      ><a name="5178" href="C-interpretation-of-T.html#3490" class="Function"
+      >TWO</a
+      ><a name="5181"
+      > </a
+      ><a name="5182" href="T.html#1769" class="InductiveConstructor Operator"
+      >&#8729;</a
+      ><a name="5183"
+      > </a
+      ><a name="5184" class="Symbol"
+      >(</a
+      ><a name="5185" href="T.html#1634" class="InductiveConstructor"
+      >VAR</a
+      ><a name="5188"
+      > </a
+      ><a name="5189" class="InductiveConstructor"
+      >zero</a
+      ><a name="5193"
+      > </a
+      ><a name="5194" href="T.html#1769" class="InductiveConstructor Operator"
+      >&#8729;</a
+      ><a name="5195"
+      > </a
+      ><a name="5196" href="T.html#1466" class="InductiveConstructor"
+      >ZERO</a
+      ><a name="5200" class="Symbol"
+      >)))</a
+      ><a name="5203"
+      >
+
+\end{code}
+</a
+      ></pre
+    ></body
+  ></html
+>

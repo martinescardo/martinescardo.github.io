@@ -1,0 +1,6798 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+><head
+  ><title
+    >Fan</title
+    ><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"
+     /><meta http-equiv="Content-Style-Type" content="text/css"
+     /><link href="Agda.css" rel="stylesheet" type="text/css"
+     /></head
+  ><body
+  ><pre
+    ><a name="1" class="Comment"
+      >Chuangjie Xu, 2013</a
+      ><a name="19"
+      >
+
+</a
+      ><a name="21" class="Comment"
+      >This corresponds to section 4.1 of the paper</a
+      ><a name="65"
+      >
+</a
+      ><a name="66" class="Comment"
+      >http://www.cs.bham.ac.uk/~mhe/papers/kleene-kreisel.pdf</a
+      ><a name="121"
+      >
+
+</a
+      ><a name="123" class="Comment"
+      >The axiom of uniform continuity is not provable in system T or</a
+      ><a name="185"
+      >
+</a
+      ><a name="186" class="Comment"
+      >HA&#969;. But it can be realized in our model by the following Fan</a
+      ><a name="247"
+      >
+</a
+      ><a name="248" class="Comment"
+      >functional:</a
+      ><a name="259"
+      >
+
+</a
+      ><a name="261" class="Comment"
+      >       fan : Map ((&#8469;Space &#8658; &#8322;Space) &#8658; &#8469;Space) &#8469;Space</a
+      ><a name="313"
+      >
+
+</a
+      ><a name="315" class="Comment"
+      >which continuously computes the moduli of uniform continuity.</a
+      ><a name="376"
+      >
+
+\begin{code}
+
+
+</a
+      ><a name="393" class="Keyword"
+      >module</a
+      ><a name="399"
+      > </a
+      ><a name="400" href="Fan.html#1" class="Module"
+      >Fan</a
+      ><a name="403"
+      > </a
+      ><a name="404" class="Keyword"
+      >where</a
+      ><a name="409"
+      >
+
+</a
+      ><a name="411" class="Keyword"
+      >open</a
+      ><a name="415"
+      > </a
+      ><a name="416" class="Keyword"
+      >import</a
+      ><a name="422"
+      > </a
+      ><a name="423" href="MiniLibrary.html#1" class="Module"
+      >MiniLibrary</a
+      ><a name="434"
+      >
+</a
+      ><a name="435" class="Keyword"
+      >open</a
+      ><a name="439"
+      > </a
+      ><a name="440" class="Keyword"
+      >import</a
+      ><a name="446"
+      > </a
+      ><a name="447" href="Sequence.html#1" class="Module"
+      >Sequence</a
+      ><a name="455"
+      >
+</a
+      ><a name="456" class="Keyword"
+      >open</a
+      ><a name="460"
+      > </a
+      ><a name="461" class="Keyword"
+      >import</a
+      ><a name="467"
+      > </a
+      ><a name="468" href="Inequality.html#1" class="Module"
+      >Inequality</a
+      ><a name="478"
+      >
+</a
+      ><a name="479" class="Keyword"
+      >open</a
+      ><a name="483"
+      > </a
+      ><a name="484" class="Keyword"
+      >import</a
+      ><a name="490"
+      > </a
+      ><a name="491" href="UniformContinuity.html#1" class="Module"
+      >UniformContinuity</a
+      ><a name="508"
+      >
+</a
+      ><a name="509" class="Keyword"
+      >open</a
+      ><a name="513"
+      > </a
+      ><a name="514" class="Keyword"
+      >import</a
+      ><a name="520"
+      > </a
+      ><a name="521" href="Space.html#1" class="Module"
+      >Space</a
+      ><a name="526"
+      >
+</a
+      ><a name="527" class="Keyword"
+      >open</a
+      ><a name="531"
+      > </a
+      ><a name="532" class="Keyword"
+      >import</a
+      ><a name="538"
+      > </a
+      ><a name="539" href="Space-exponential.html#1" class="Module"
+      >Space-exponential</a
+      ><a name="556"
+      >
+</a
+      ><a name="557" class="Keyword"
+      >open</a
+      ><a name="561"
+      > </a
+      ><a name="562" class="Keyword"
+      >import</a
+      ><a name="568"
+      > </a
+      ><a name="569" href="Space-discrete.html#1" class="Module"
+      >Space-discrete</a
+      ><a name="583"
+      >
+</a
+      ><a name="584" class="Keyword"
+      >open</a
+      ><a name="588"
+      > </a
+      ><a name="589" class="Keyword"
+      >import</a
+      ><a name="595"
+      > </a
+      ><a name="596" href="Space-cantor.html#1" class="Module"
+      >Space-cantor</a
+      ><a name="608"
+      >
+</a
+      ><a name="609" class="Keyword"
+      >open</a
+      ><a name="613"
+      > </a
+      ><a name="614" class="Keyword"
+      >import</a
+      ><a name="620"
+      > </a
+      ><a name="621" href="not-not.html#1" class="Module"
+      >not-not</a
+      ><a name="628"
+      >
+</a
+      ><a name="629" class="Keyword"
+      >open</a
+      ><a name="633"
+      > </a
+      ><a name="634" class="Keyword"
+      >import</a
+      ><a name="640"
+      > </a
+      ><a name="641" href="not-not-funext.html#1" class="Module"
+      >not-not-funext</a
+      ><a name="655"
+      >
+
+\end{code}
+
+</a
+      ><a name="669" class="Comment"
+      >To show the continuity of the fan functional, we need the</a
+      ><a name="726"
+      >
+</a
+      ><a name="727" class="Comment"
+      >following auxiliaries.</a
+      ><a name="749"
+      >
+
+\begin{code}
+
+
+</a
+      ><a name="766" href="Fan.html#766" class="Function Operator"
+      >_&#215;2</a
+      ><a name="769"
+      > </a
+      ><a name="770" class="Symbol"
+      >:</a
+      ><a name="771"
+      > </a
+      ><a name="772" href="MiniLibrary.html#3902" class="Datatype"
+      >&#8469;</a
+      ><a name="773"
+      > </a
+      ><a name="774" class="Symbol"
+      >&#8594;</a
+      ><a name="775"
+      > </a
+      ><a name="776" href="MiniLibrary.html#3902" class="Datatype"
+      >&#8469;</a
+      ><a name="777"
+      >
+</a
+      ><a name="778" href="Fan.html#766" class="Function Operator"
+      >_&#215;2</a
+      ><a name="781"
+      > </a
+      ><a name="782" href="MiniLibrary.html#3919" class="InductiveConstructor"
+      >0</a
+      ><a name="783"
+      >        </a
+      ><a name="791" class="Symbol"
+      >=</a
+      ><a name="792"
+      > </a
+      ><a name="793" class="Number"
+      >0</a
+      ><a name="794"
+      >
+</a
+      ><a name="795" href="Fan.html#766" class="Function Operator"
+      >_&#215;2</a
+      ><a name="798"
+      > </a
+      ><a name="799" class="Symbol"
+      >(</a
+      ><a name="800" href="MiniLibrary.html#3930" class="InductiveConstructor"
+      >succ</a
+      ><a name="804"
+      > </a
+      ><a name="805" href="Fan.html#805" class="Bound"
+      >n</a
+      ><a name="806" class="Symbol"
+      >)</a
+      ><a name="807"
+      > </a
+      ><a name="808" class="Symbol"
+      >=</a
+      ><a name="809"
+      > </a
+      ><a name="810" href="MiniLibrary.html#3930" class="InductiveConstructor"
+      >succ</a
+      ><a name="814"
+      > </a
+      ><a name="815" class="Symbol"
+      >(</a
+      ><a name="816" href="MiniLibrary.html#3930" class="InductiveConstructor"
+      >succ</a
+      ><a name="820"
+      > </a
+      ><a name="821" class="Symbol"
+      >(</a
+      ><a name="822" href="Fan.html#805" class="Bound"
+      >n</a
+      ><a name="823"
+      > </a
+      ><a name="824" href="Fan.html#766" class="Function Operator"
+      >&#215;2</a
+      ><a name="826" class="Symbol"
+      >))</a
+      ><a name="828"
+      >
+
+</a
+      ><a name="830" href="Fan.html#830" class="Function"
+      >Lemma[n&#8804;2n]</a
+      ><a name="841"
+      > </a
+      ><a name="842" class="Symbol"
+      >:</a
+      ><a name="843"
+      > </a
+      ><a name="844" class="Symbol"
+      >&#8704;(</a
+      ><a name="846" href="Fan.html#846" class="Bound"
+      >n</a
+      ><a name="847"
+      > </a
+      ><a name="848" class="Symbol"
+      >:</a
+      ><a name="849"
+      > </a
+      ><a name="850" href="MiniLibrary.html#3902" class="Datatype"
+      >&#8469;</a
+      ><a name="851" class="Symbol"
+      >)</a
+      ><a name="852"
+      > </a
+      ><a name="853" class="Symbol"
+      >&#8594;</a
+      ><a name="854"
+      > </a
+      ><a name="855" href="Fan.html#846" class="Bound"
+      >n</a
+      ><a name="856"
+      > </a
+      ><a name="857" href="Inequality.html#144" class="Datatype Operator"
+      >&#8804;</a
+      ><a name="858"
+      > </a
+      ><a name="859" class="Symbol"
+      >(</a
+      ><a name="860" href="Fan.html#846" class="Bound"
+      >n</a
+      ><a name="861"
+      > </a
+      ><a name="862" href="Fan.html#766" class="Function Operator"
+      >&#215;2</a
+      ><a name="864" class="Symbol"
+      >)</a
+      ><a name="865"
+      >
+</a
+      ><a name="866" href="Fan.html#830" class="Function"
+      >Lemma[n&#8804;2n]</a
+      ><a name="877"
+      > </a
+      ><a name="878" href="MiniLibrary.html#3919" class="InductiveConstructor"
+      >0</a
+      ><a name="879"
+      >        </a
+      ><a name="887" class="Symbol"
+      >=</a
+      ><a name="888"
+      > </a
+      ><a name="889" href="Inequality.html#169" class="InductiveConstructor"
+      >&#8804;-zero</a
+      ><a name="895"
+      >
+</a
+      ><a name="896" href="Fan.html#830" class="Function"
+      >Lemma[n&#8804;2n]</a
+      ><a name="907"
+      > </a
+      ><a name="908" class="Symbol"
+      >(</a
+      ><a name="909" href="MiniLibrary.html#3930" class="InductiveConstructor"
+      >succ</a
+      ><a name="913"
+      > </a
+      ><a name="914" href="Fan.html#914" class="Bound"
+      >n</a
+      ><a name="915" class="Symbol"
+      >)</a
+      ><a name="916"
+      > </a
+      ><a name="917" class="Symbol"
+      >=</a
+      ><a name="918"
+      > </a
+      ><a name="919" href="Inequality.html#881" class="Function"
+      >Lemma[a&#8804;b&#8804;c&#8594;a&#8804;c]</a
+      ><a name="935"
+      > </a
+      ><a name="936" class="Symbol"
+      >(</a
+      ><a name="937" href="Inequality.html#196" class="InductiveConstructor"
+      >&#8804;-succ</a
+      ><a name="943"
+      > </a
+      ><a name="944" class="Symbol"
+      >(</a
+      ><a name="945" href="Fan.html#830" class="Function"
+      >Lemma[n&#8804;2n]</a
+      ><a name="956"
+      > </a
+      ><a name="957" href="Fan.html#914" class="Bound"
+      >n</a
+      ><a name="958" class="Symbol"
+      >))</a
+      ><a name="960"
+      >
+                                        </a
+      ><a name="1001" class="Symbol"
+      >(</a
+      ><a name="1002" href="Inequality.html#1241" class="Function"
+      >Lemma[n&#8804;n+1]</a
+      ><a name="1014"
+      > </a
+      ><a name="1015" class="Symbol"
+      >(</a
+      ><a name="1016" href="MiniLibrary.html#3930" class="InductiveConstructor"
+      >succ</a
+      ><a name="1020"
+      > </a
+      ><a name="1021" class="Symbol"
+      >(</a
+      ><a name="1022" href="Fan.html#914" class="Bound"
+      >n</a
+      ><a name="1023"
+      > </a
+      ><a name="1024" href="Fan.html#766" class="Function Operator"
+      >&#215;2</a
+      ><a name="1026" class="Symbol"
+      >)))</a
+      ><a name="1029"
+      >
+
+</a
+      ><a name="1031" href="Fan.html#1031" class="Function"
+      >Lemma[n&lt;m&#8594;2n&lt;2m]</a
+      ><a name="1047"
+      > </a
+      ><a name="1048" class="Symbol"
+      >:</a
+      ><a name="1049"
+      > </a
+      ><a name="1050" class="Symbol"
+      >&#8704;(</a
+      ><a name="1052" href="Fan.html#1052" class="Bound"
+      >n</a
+      ><a name="1053"
+      > </a
+      ><a name="1054" href="Fan.html#1054" class="Bound"
+      >m</a
+      ><a name="1055"
+      > </a
+      ><a name="1056" class="Symbol"
+      >:</a
+      ><a name="1057"
+      > </a
+      ><a name="1058" href="MiniLibrary.html#3902" class="Datatype"
+      >&#8469;</a
+      ><a name="1059" class="Symbol"
+      >)</a
+      ><a name="1060"
+      > </a
+      ><a name="1061" class="Symbol"
+      >&#8594;</a
+      ><a name="1062"
+      > </a
+      ><a name="1063" href="Fan.html#1052" class="Bound"
+      >n</a
+      ><a name="1064"
+      > </a
+      ><a name="1065" href="Inequality.html#243" class="Function Operator"
+      >&lt;</a
+      ><a name="1066"
+      > </a
+      ><a name="1067" href="Fan.html#1054" class="Bound"
+      >m</a
+      ><a name="1068"
+      > </a
+      ><a name="1069" class="Symbol"
+      >&#8594;</a
+      ><a name="1070"
+      > </a
+      ><a name="1071" class="Symbol"
+      >(</a
+      ><a name="1072" href="Fan.html#1052" class="Bound"
+      >n</a
+      ><a name="1073"
+      > </a
+      ><a name="1074" href="Fan.html#766" class="Function Operator"
+      >&#215;2</a
+      ><a name="1076" class="Symbol"
+      >)</a
+      ><a name="1077"
+      > </a
+      ><a name="1078" href="Inequality.html#243" class="Function Operator"
+      >&lt;</a
+      ><a name="1079"
+      > </a
+      ><a name="1080" class="Symbol"
+      >(</a
+      ><a name="1081" href="Fan.html#1054" class="Bound"
+      >m</a
+      ><a name="1082"
+      > </a
+      ><a name="1083" href="Fan.html#766" class="Function Operator"
+      >&#215;2</a
+      ><a name="1085" class="Symbol"
+      >)</a
+      ><a name="1086"
+      >
+</a
+      ><a name="1087" href="Fan.html#1031" class="Function"
+      >Lemma[n&lt;m&#8594;2n&lt;2m]</a
+      ><a name="1103"
+      > </a
+      ><a name="1104" href="MiniLibrary.html#3919" class="InductiveConstructor"
+      >0</a
+      ><a name="1105"
+      >        </a
+      ><a name="1113" href="MiniLibrary.html#3919" class="InductiveConstructor"
+      >0</a
+      ><a name="1114"
+      >        </a
+      ><a name="1122" class="Symbol"
+      >()</a
+      ><a name="1124"
+      >
+</a
+      ><a name="1125" href="Fan.html#1031" class="Function"
+      >Lemma[n&lt;m&#8594;2n&lt;2m]</a
+      ><a name="1141"
+      > </a
+      ><a name="1142" href="MiniLibrary.html#3919" class="InductiveConstructor"
+      >0</a
+      ><a name="1143"
+      >        </a
+      ><a name="1151" class="Symbol"
+      >(</a
+      ><a name="1152" href="MiniLibrary.html#3930" class="InductiveConstructor"
+      >succ</a
+      ><a name="1156"
+      > </a
+      ><a name="1157" href="Fan.html#1157" class="Bound"
+      >m</a
+      ><a name="1158" class="Symbol"
+      >)</a
+      ><a name="1159"
+      > </a
+      ><a name="1160" class="Symbol"
+      >_</a
+      ><a name="1161"
+      >          </a
+      ><a name="1171" class="Symbol"
+      >=</a
+      ><a name="1172"
+      > </a
+      ><a name="1173" href="Inequality.html#196" class="InductiveConstructor"
+      >&#8804;-succ</a
+      ><a name="1179"
+      > </a
+      ><a name="1180" href="Inequality.html#169" class="InductiveConstructor"
+      >&#8804;-zero</a
+      ><a name="1186"
+      >
+</a
+      ><a name="1187" href="Fan.html#1031" class="Function"
+      >Lemma[n&lt;m&#8594;2n&lt;2m]</a
+      ><a name="1203"
+      > </a
+      ><a name="1204" class="Symbol"
+      >(</a
+      ><a name="1205" href="MiniLibrary.html#3930" class="InductiveConstructor"
+      >succ</a
+      ><a name="1209"
+      > </a
+      ><a name="1210" href="Fan.html#1210" class="Bound"
+      >n</a
+      ><a name="1211" class="Symbol"
+      >)</a
+      ><a name="1212"
+      > </a
+      ><a name="1213" href="MiniLibrary.html#3919" class="InductiveConstructor"
+      >0</a
+      ><a name="1214"
+      >        </a
+      ><a name="1222" class="Symbol"
+      >()</a
+      ><a name="1224"
+      >
+</a
+      ><a name="1225" href="Fan.html#1031" class="Function"
+      >Lemma[n&lt;m&#8594;2n&lt;2m]</a
+      ><a name="1241"
+      > </a
+      ><a name="1242" class="Symbol"
+      >(</a
+      ><a name="1243" href="MiniLibrary.html#3930" class="InductiveConstructor"
+      >succ</a
+      ><a name="1247"
+      > </a
+      ><a name="1248" href="Fan.html#1248" class="Bound"
+      >n</a
+      ><a name="1249" class="Symbol"
+      >)</a
+      ><a name="1250"
+      > </a
+      ><a name="1251" class="Symbol"
+      >(</a
+      ><a name="1252" href="MiniLibrary.html#3930" class="InductiveConstructor"
+      >succ</a
+      ><a name="1256"
+      > </a
+      ><a name="1257" href="Fan.html#1257" class="Bound"
+      >m</a
+      ><a name="1258" class="Symbol"
+      >)</a
+      ><a name="1259"
+      > </a
+      ><a name="1260" class="Symbol"
+      >(</a
+      ><a name="1261" href="Inequality.html#196" class="InductiveConstructor"
+      >&#8804;-succ</a
+      ><a name="1267"
+      > </a
+      ><a name="1268" href="Fan.html#1268" class="Bound"
+      >r</a
+      ><a name="1269" class="Symbol"
+      >)</a
+      ><a name="1270"
+      > </a
+      ><a name="1271" class="Symbol"
+      >=</a
+      ><a name="1272"
+      > </a
+      ><a name="1273" href="Inequality.html#196" class="InductiveConstructor"
+      >&#8804;-succ</a
+      ><a name="1279"
+      > </a
+      ><a name="1280" class="Symbol"
+      >(</a
+      ><a name="1281" href="Inequality.html#196" class="InductiveConstructor"
+      >&#8804;-succ</a
+      ><a name="1287"
+      > </a
+      ><a name="1288" class="Symbol"
+      >(</a
+      ><a name="1289" href="Fan.html#1031" class="Function"
+      >Lemma[n&lt;m&#8594;2n&lt;2m]</a
+      ><a name="1305"
+      > </a
+      ><a name="1306" href="Fan.html#1248" class="Bound"
+      >n</a
+      ><a name="1307"
+      > </a
+      ><a name="1308" href="Fan.html#1257" class="Bound"
+      >m</a
+      ><a name="1309"
+      > </a
+      ><a name="1310" href="Fan.html#1268" class="Bound"
+      >r</a
+      ><a name="1311" class="Symbol"
+      >))</a
+      ><a name="1313"
+      >
+
+
+</a
+      ><a name="1316" href="Fan.html#1316" class="Function Operator"
+      >_&#215;2+1</a
+      ><a name="1321"
+      > </a
+      ><a name="1322" class="Symbol"
+      >:</a
+      ><a name="1323"
+      > </a
+      ><a name="1324" href="MiniLibrary.html#3902" class="Datatype"
+      >&#8469;</a
+      ><a name="1325"
+      > </a
+      ><a name="1326" class="Symbol"
+      >&#8594;</a
+      ><a name="1327"
+      > </a
+      ><a name="1328" href="MiniLibrary.html#3902" class="Datatype"
+      >&#8469;</a
+      ><a name="1329"
+      >
+</a
+      ><a name="1330" href="Fan.html#1316" class="Function Operator"
+      >_&#215;2+1</a
+      ><a name="1335"
+      > </a
+      ><a name="1336" href="MiniLibrary.html#3919" class="InductiveConstructor"
+      >0</a
+      ><a name="1337"
+      >        </a
+      ><a name="1345" class="Symbol"
+      >=</a
+      ><a name="1346"
+      > </a
+      ><a name="1347" class="Number"
+      >1</a
+      ><a name="1348"
+      >
+</a
+      ><a name="1349" href="Fan.html#1316" class="Function Operator"
+      >_&#215;2+1</a
+      ><a name="1354"
+      > </a
+      ><a name="1355" class="Symbol"
+      >(</a
+      ><a name="1356" href="MiniLibrary.html#3930" class="InductiveConstructor"
+      >succ</a
+      ><a name="1360"
+      > </a
+      ><a name="1361" href="Fan.html#1361" class="Bound"
+      >n</a
+      ><a name="1362" class="Symbol"
+      >)</a
+      ><a name="1363"
+      > </a
+      ><a name="1364" class="Symbol"
+      >=</a
+      ><a name="1365"
+      > </a
+      ><a name="1366" href="MiniLibrary.html#3930" class="InductiveConstructor"
+      >succ</a
+      ><a name="1370"
+      > </a
+      ><a name="1371" class="Symbol"
+      >(</a
+      ><a name="1372" href="MiniLibrary.html#3930" class="InductiveConstructor"
+      >succ</a
+      ><a name="1376"
+      > </a
+      ><a name="1377" class="Symbol"
+      >(</a
+      ><a name="1378" href="Fan.html#1361" class="Bound"
+      >n</a
+      ><a name="1379"
+      > </a
+      ><a name="1380" href="Fan.html#1316" class="Function Operator"
+      >&#215;2+1</a
+      ><a name="1384" class="Symbol"
+      >))</a
+      ><a name="1386"
+      >
+
+</a
+      ><a name="1388" href="Fan.html#1388" class="Function"
+      >Lemma[n&#8804;2n+1]</a
+      ><a name="1401"
+      > </a
+      ><a name="1402" class="Symbol"
+      >:</a
+      ><a name="1403"
+      > </a
+      ><a name="1404" class="Symbol"
+      >&#8704;(</a
+      ><a name="1406" href="Fan.html#1406" class="Bound"
+      >n</a
+      ><a name="1407"
+      > </a
+      ><a name="1408" class="Symbol"
+      >:</a
+      ><a name="1409"
+      > </a
+      ><a name="1410" href="MiniLibrary.html#3902" class="Datatype"
+      >&#8469;</a
+      ><a name="1411" class="Symbol"
+      >)</a
+      ><a name="1412"
+      > </a
+      ><a name="1413" class="Symbol"
+      >&#8594;</a
+      ><a name="1414"
+      > </a
+      ><a name="1415" href="Fan.html#1406" class="Bound"
+      >n</a
+      ><a name="1416"
+      > </a
+      ><a name="1417" href="Inequality.html#144" class="Datatype Operator"
+      >&#8804;</a
+      ><a name="1418"
+      > </a
+      ><a name="1419" class="Symbol"
+      >(</a
+      ><a name="1420" href="Fan.html#1406" class="Bound"
+      >n</a
+      ><a name="1421"
+      > </a
+      ><a name="1422" href="Fan.html#1316" class="Function Operator"
+      >&#215;2+1</a
+      ><a name="1426" class="Symbol"
+      >)</a
+      ><a name="1427"
+      >
+</a
+      ><a name="1428" href="Fan.html#1388" class="Function"
+      >Lemma[n&#8804;2n+1]</a
+      ><a name="1441"
+      > </a
+      ><a name="1442" href="MiniLibrary.html#3919" class="InductiveConstructor"
+      >0</a
+      ><a name="1443"
+      >        </a
+      ><a name="1451" class="Symbol"
+      >=</a
+      ><a name="1452"
+      > </a
+      ><a name="1453" href="Inequality.html#169" class="InductiveConstructor"
+      >&#8804;-zero</a
+      ><a name="1459"
+      >
+</a
+      ><a name="1460" href="Fan.html#1388" class="Function"
+      >Lemma[n&#8804;2n+1]</a
+      ><a name="1473"
+      > </a
+      ><a name="1474" class="Symbol"
+      >(</a
+      ><a name="1475" href="MiniLibrary.html#3930" class="InductiveConstructor"
+      >succ</a
+      ><a name="1479"
+      > </a
+      ><a name="1480" href="Fan.html#1480" class="Bound"
+      >n</a
+      ><a name="1481" class="Symbol"
+      >)</a
+      ><a name="1482"
+      > </a
+      ><a name="1483" class="Symbol"
+      >=</a
+      ><a name="1484"
+      > </a
+      ><a name="1485" href="Inequality.html#881" class="Function"
+      >Lemma[a&#8804;b&#8804;c&#8594;a&#8804;c]</a
+      ><a name="1501"
+      > </a
+      ><a name="1502" class="Symbol"
+      >(</a
+      ><a name="1503" href="Inequality.html#196" class="InductiveConstructor"
+      >&#8804;-succ</a
+      ><a name="1509"
+      > </a
+      ><a name="1510" class="Symbol"
+      >(</a
+      ><a name="1511" href="Fan.html#1388" class="Function"
+      >Lemma[n&#8804;2n+1]</a
+      ><a name="1524"
+      > </a
+      ><a name="1525" href="Fan.html#1480" class="Bound"
+      >n</a
+      ><a name="1526" class="Symbol"
+      >))</a
+      ><a name="1528"
+      >
+                                          </a
+      ><a name="1571" class="Symbol"
+      >(</a
+      ><a name="1572" href="Inequality.html#1241" class="Function"
+      >Lemma[n&#8804;n+1]</a
+      ><a name="1584"
+      > </a
+      ><a name="1585" class="Symbol"
+      >(</a
+      ><a name="1586" href="MiniLibrary.html#3930" class="InductiveConstructor"
+      >succ</a
+      ><a name="1590"
+      > </a
+      ><a name="1591" class="Symbol"
+      >(</a
+      ><a name="1592" href="Fan.html#1480" class="Bound"
+      >n</a
+      ><a name="1593"
+      > </a
+      ><a name="1594" href="Fan.html#1316" class="Function Operator"
+      >&#215;2+1</a
+      ><a name="1598" class="Symbol"
+      >)))</a
+      ><a name="1601"
+      >
+
+</a
+      ><a name="1603" href="Fan.html#1603" class="Function"
+      >Lemma[n&lt;m&#8594;2n+1&lt;2m+1]</a
+      ><a name="1623"
+      > </a
+      ><a name="1624" class="Symbol"
+      >:</a
+      ><a name="1625"
+      > </a
+      ><a name="1626" class="Symbol"
+      >&#8704;(</a
+      ><a name="1628" href="Fan.html#1628" class="Bound"
+      >n</a
+      ><a name="1629"
+      > </a
+      ><a name="1630" href="Fan.html#1630" class="Bound"
+      >m</a
+      ><a name="1631"
+      > </a
+      ><a name="1632" class="Symbol"
+      >:</a
+      ><a name="1633"
+      > </a
+      ><a name="1634" href="MiniLibrary.html#3902" class="Datatype"
+      >&#8469;</a
+      ><a name="1635" class="Symbol"
+      >)</a
+      ><a name="1636"
+      > </a
+      ><a name="1637" class="Symbol"
+      >&#8594;</a
+      ><a name="1638"
+      > </a
+      ><a name="1639" href="Fan.html#1628" class="Bound"
+      >n</a
+      ><a name="1640"
+      > </a
+      ><a name="1641" href="Inequality.html#243" class="Function Operator"
+      >&lt;</a
+      ><a name="1642"
+      > </a
+      ><a name="1643" href="Fan.html#1630" class="Bound"
+      >m</a
+      ><a name="1644"
+      > </a
+      ><a name="1645" class="Symbol"
+      >&#8594;</a
+      ><a name="1646"
+      > </a
+      ><a name="1647" class="Symbol"
+      >(</a
+      ><a name="1648" href="Fan.html#1628" class="Bound"
+      >n</a
+      ><a name="1649"
+      > </a
+      ><a name="1650" href="Fan.html#1316" class="Function Operator"
+      >&#215;2+1</a
+      ><a name="1654" class="Symbol"
+      >)</a
+      ><a name="1655"
+      > </a
+      ><a name="1656" href="Inequality.html#243" class="Function Operator"
+      >&lt;</a
+      ><a name="1657"
+      > </a
+      ><a name="1658" class="Symbol"
+      >(</a
+      ><a name="1659" href="Fan.html#1630" class="Bound"
+      >m</a
+      ><a name="1660"
+      > </a
+      ><a name="1661" href="Fan.html#1316" class="Function Operator"
+      >&#215;2+1</a
+      ><a name="1665" class="Symbol"
+      >)</a
+      ><a name="1666"
+      >
+</a
+      ><a name="1667" href="Fan.html#1603" class="Function"
+      >Lemma[n&lt;m&#8594;2n+1&lt;2m+1]</a
+      ><a name="1687"
+      > </a
+      ><a name="1688" href="MiniLibrary.html#3919" class="InductiveConstructor"
+      >0</a
+      ><a name="1689"
+      >        </a
+      ><a name="1697" href="MiniLibrary.html#3919" class="InductiveConstructor"
+      >0</a
+      ><a name="1698"
+      >        </a
+      ><a name="1706" class="Symbol"
+      >()</a
+      ><a name="1708"
+      >
+</a
+      ><a name="1709" href="Fan.html#1603" class="Function"
+      >Lemma[n&lt;m&#8594;2n+1&lt;2m+1]</a
+      ><a name="1729"
+      > </a
+      ><a name="1730" href="MiniLibrary.html#3919" class="InductiveConstructor"
+      >0</a
+      ><a name="1731"
+      >        </a
+      ><a name="1739" class="Symbol"
+      >(</a
+      ><a name="1740" href="MiniLibrary.html#3930" class="InductiveConstructor"
+      >succ</a
+      ><a name="1744"
+      > </a
+      ><a name="1745" href="Fan.html#1745" class="Bound"
+      >m</a
+      ><a name="1746" class="Symbol"
+      >)</a
+      ><a name="1747"
+      > </a
+      ><a name="1748" class="Symbol"
+      >_</a
+      ><a name="1749"
+      >          </a
+      ><a name="1759" class="Symbol"
+      >=</a
+      ><a name="1760"
+      > </a
+      ><a name="1761" href="Inequality.html#196" class="InductiveConstructor"
+      >&#8804;-succ</a
+      ><a name="1767"
+      > </a
+      ><a name="1768" class="Symbol"
+      >(</a
+      ><a name="1769" href="Inequality.html#196" class="InductiveConstructor"
+      >&#8804;-succ</a
+      ><a name="1775"
+      > </a
+      ><a name="1776" href="Inequality.html#169" class="InductiveConstructor"
+      >&#8804;-zero</a
+      ><a name="1782" class="Symbol"
+      >)</a
+      ><a name="1783"
+      >
+</a
+      ><a name="1784" href="Fan.html#1603" class="Function"
+      >Lemma[n&lt;m&#8594;2n+1&lt;2m+1]</a
+      ><a name="1804"
+      > </a
+      ><a name="1805" class="Symbol"
+      >(</a
+      ><a name="1806" href="MiniLibrary.html#3930" class="InductiveConstructor"
+      >succ</a
+      ><a name="1810"
+      > </a
+      ><a name="1811" href="Fan.html#1811" class="Bound"
+      >n</a
+      ><a name="1812" class="Symbol"
+      >)</a
+      ><a name="1813"
+      > </a
+      ><a name="1814" href="MiniLibrary.html#3919" class="InductiveConstructor"
+      >0</a
+      ><a name="1815"
+      >        </a
+      ><a name="1823" class="Symbol"
+      >()</a
+      ><a name="1825"
+      >
+</a
+      ><a name="1826" href="Fan.html#1603" class="Function"
+      >Lemma[n&lt;m&#8594;2n+1&lt;2m+1]</a
+      ><a name="1846"
+      > </a
+      ><a name="1847" class="Symbol"
+      >(</a
+      ><a name="1848" href="MiniLibrary.html#3930" class="InductiveConstructor"
+      >succ</a
+      ><a name="1852"
+      > </a
+      ><a name="1853" href="Fan.html#1853" class="Bound"
+      >n</a
+      ><a name="1854" class="Symbol"
+      >)</a
+      ><a name="1855"
+      > </a
+      ><a name="1856" class="Symbol"
+      >(</a
+      ><a name="1857" href="MiniLibrary.html#3930" class="InductiveConstructor"
+      >succ</a
+      ><a name="1861"
+      > </a
+      ><a name="1862" href="Fan.html#1862" class="Bound"
+      >m</a
+      ><a name="1863" class="Symbol"
+      >)</a
+      ><a name="1864"
+      > </a
+      ><a name="1865" class="Symbol"
+      >(</a
+      ><a name="1866" href="Inequality.html#196" class="InductiveConstructor"
+      >&#8804;-succ</a
+      ><a name="1872"
+      > </a
+      ><a name="1873" href="Fan.html#1873" class="Bound"
+      >r</a
+      ><a name="1874" class="Symbol"
+      >)</a
+      ><a name="1875"
+      > </a
+      ><a name="1876" class="Symbol"
+      >=</a
+      ><a name="1877"
+      > </a
+      ><a name="1878" href="Inequality.html#196" class="InductiveConstructor"
+      >&#8804;-succ</a
+      ><a name="1884"
+      > </a
+      ><a name="1885" class="Symbol"
+      >(</a
+      ><a name="1886" href="Inequality.html#196" class="InductiveConstructor"
+      >&#8804;-succ</a
+      ><a name="1892"
+      > </a
+      ><a name="1893" class="Symbol"
+      >(</a
+      ><a name="1894" href="Fan.html#1603" class="Function"
+      >Lemma[n&lt;m&#8594;2n+1&lt;2m+1]</a
+      ><a name="1914"
+      > </a
+      ><a name="1915" href="Fan.html#1853" class="Bound"
+      >n</a
+      ><a name="1916"
+      > </a
+      ><a name="1917" href="Fan.html#1862" class="Bound"
+      >m</a
+      ><a name="1918"
+      > </a
+      ><a name="1919" href="Fan.html#1873" class="Bound"
+      >r</a
+      ><a name="1920" class="Symbol"
+      >))</a
+      ><a name="1922"
+      >
+
+
+\end{code}
+
+</a
+      ><a name="1937" class="Comment"
+      >Here is the fan functional, which calculates smallest moduli, using</a
+      ><a name="2004"
+      >
+</a
+      ><a name="2005" class="Comment"
+      >the moduli obtained by Yoneda Lemma.</a
+      ><a name="2041"
+      >
+
+\begin{code}
+
+
+</a
+      ><a name="2058" href="Fan.html#2058" class="Function"
+      >fan</a
+      ><a name="2061"
+      > </a
+      ><a name="2062" class="Symbol"
+      >:</a
+      ><a name="2063"
+      > </a
+      ><a name="2064" href="Space.html#5138" class="Function"
+      >Map</a
+      ><a name="2067"
+      > </a
+      ><a name="2068" class="Symbol"
+      >((</a
+      ><a name="2070" href="Space-discrete.html#7899" class="Function"
+      >&#8469;Space</a
+      ><a name="2076"
+      > </a
+      ><a name="2077" href="Space-exponential.html#303" class="Function Operator"
+      >&#8658;</a
+      ><a name="2078"
+      > </a
+      ><a name="2079" href="Space-discrete.html#4712" class="Function"
+      >&#8322;Space</a
+      ><a name="2085" class="Symbol"
+      >)</a
+      ><a name="2086"
+      > </a
+      ><a name="2087" href="Space-exponential.html#303" class="Function Operator"
+      >&#8658;</a
+      ><a name="2088"
+      > </a
+      ><a name="2089" href="Space-discrete.html#7899" class="Function"
+      >&#8469;Space</a
+      ><a name="2095" class="Symbol"
+      >)</a
+      ><a name="2096"
+      > </a
+      ><a name="2097" href="Space-discrete.html#7899" class="Function"
+      >&#8469;Space</a
+      ><a name="2103"
+      >
+</a
+      ><a name="2104" href="Fan.html#2058" class="Function"
+      >fan</a
+      ><a name="2107"
+      > </a
+      ><a name="2108" class="Symbol"
+      >=</a
+      ><a name="2109"
+      > </a
+      ><a name="2110" href="Fan.html#2127" class="Function"
+      >f</a
+      ><a name="2111"
+      > </a
+      ><a name="2112" href="MiniLibrary.html#825" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="2113"
+      > </a
+      ><a name="2114" href="Fan.html#2221" class="Function"
+      >cts</a
+      ><a name="2117"
+      >
+ </a
+      ><a name="2119" class="Keyword"
+      >where</a
+      ><a name="2124"
+      >
+  </a
+      ><a name="2127" href="Fan.html#2127" class="Function"
+      >f</a
+      ><a name="2128"
+      > </a
+      ><a name="2129" class="Symbol"
+      >:</a
+      ><a name="2130"
+      > </a
+      ><a name="2131" href="Space.html#4275" class="Function"
+      >U</a
+      ><a name="2132" class="Symbol"
+      >((</a
+      ><a name="2134" href="Space-discrete.html#7899" class="Function"
+      >&#8469;Space</a
+      ><a name="2140"
+      > </a
+      ><a name="2141" href="Space-exponential.html#303" class="Function Operator"
+      >&#8658;</a
+      ><a name="2142"
+      > </a
+      ><a name="2143" href="Space-discrete.html#4712" class="Function"
+      >&#8322;Space</a
+      ><a name="2149" class="Symbol"
+      >)</a
+      ><a name="2150"
+      > </a
+      ><a name="2151" href="Space-exponential.html#303" class="Function Operator"
+      >&#8658;</a
+      ><a name="2152"
+      > </a
+      ><a name="2153" href="Space-discrete.html#7899" class="Function"
+      >&#8469;Space</a
+      ><a name="2159" class="Symbol"
+      >)</a
+      ><a name="2160"
+      > </a
+      ><a name="2161" class="Symbol"
+      >&#8594;</a
+      ><a name="2162"
+      > </a
+      ><a name="2163" href="MiniLibrary.html#3902" class="Datatype"
+      >&#8469;</a
+      ><a name="2164"
+      >
+  </a
+      ><a name="2167" href="Fan.html#2127" class="Function"
+      >f</a
+      ><a name="2168"
+      > </a
+      ><a name="2169" href="Fan.html#2169" class="Bound"
+      >&#966;</a
+      ><a name="2170"
+      > </a
+      ><a name="2171" class="Symbol"
+      >=</a
+      ><a name="2172"
+      > </a
+      ><a name="2173" href="MiniLibrary.html#1453" class="Function"
+      >&#8707;-witness</a
+      ><a name="2182"
+      > </a
+      ><a name="2183" class="Symbol"
+      >(</a
+      ><a name="2184" href="MiniLibrary.html#1529" class="Function"
+      >&#8707;-elim</a
+      ><a name="2190"
+      > </a
+      ><a name="2191" class="Symbol"
+      >(</a
+      ><a name="2192" href="Space-cantor.html#2797" class="Function"
+      >Lemma[Yoneda]</a
+      ><a name="2205"
+      > </a
+      ><a name="2206" class="Symbol"
+      >{</a
+      ><a name="2207" href="Space-discrete.html#7899" class="Function"
+      >&#8469;Space</a
+      ><a name="2213" class="Symbol"
+      >}</a
+      ><a name="2214"
+      > </a
+      ><a name="2215" href="Fan.html#2169" class="Bound"
+      >&#966;</a
+      ><a name="2216" class="Symbol"
+      >))</a
+      ><a name="2218"
+      >
+  </a
+      ><a name="2221" href="Fan.html#2221" class="Function"
+      >cts</a
+      ><a name="2224"
+      > </a
+      ><a name="2225" class="Symbol"
+      >:</a
+      ><a name="2226"
+      > </a
+      ><a name="2227" href="Space.html#5031" class="Function"
+      >continuous</a
+      ><a name="2237"
+      > </a
+      ><a name="2238" class="Symbol"
+      >{(</a
+      ><a name="2240" href="Space-discrete.html#7899" class="Function"
+      >&#8469;Space</a
+      ><a name="2246"
+      > </a
+      ><a name="2247" href="Space-exponential.html#303" class="Function Operator"
+      >&#8658;</a
+      ><a name="2248"
+      > </a
+      ><a name="2249" href="Space-discrete.html#4712" class="Function"
+      >&#8322;Space</a
+      ><a name="2255" class="Symbol"
+      >)</a
+      ><a name="2256"
+      > </a
+      ><a name="2257" href="Space-exponential.html#303" class="Function Operator"
+      >&#8658;</a
+      ><a name="2258"
+      > </a
+      ><a name="2259" href="Space-discrete.html#7899" class="Function"
+      >&#8469;Space</a
+      ><a name="2265" class="Symbol"
+      >}</a
+      ><a name="2266"
+      > </a
+      ><a name="2267" class="Symbol"
+      >{</a
+      ><a name="2268" href="Space-discrete.html#7899" class="Function"
+      >&#8469;Space</a
+      ><a name="2274" class="Symbol"
+      >}</a
+      ><a name="2275"
+      > </a
+      ><a name="2276" href="Fan.html#2127" class="Function"
+      >f</a
+      ><a name="2277"
+      >
+  </a
+      ><a name="2280" href="Fan.html#2221" class="Function"
+      >cts</a
+      ><a name="2283"
+      > </a
+      ><a name="2284" href="Fan.html#2284" class="Bound"
+      >p</a
+      ><a name="2285"
+      > </a
+      ><a name="2286" href="Fan.html#2286" class="Bound"
+      >pr</a
+      ><a name="2288"
+      > </a
+      ><a name="2289" class="Symbol"
+      >=</a
+      ><a name="2290"
+      > </a
+      ><a name="2291" href="UniformContinuity.html#9483" class="Function"
+      >Lemma[LM-&#8469;-least-modulus]</a
+      ><a name="2316"
+      > </a
+      ><a name="2317" class="Symbol"
+      >(</a
+      ><a name="2318" href="Fan.html#2127" class="Function"
+      >f</a
+      ><a name="2319"
+      > </a
+      ><a name="2320" href="MiniLibrary.html#447" class="Function Operator"
+      >&#8728;</a
+      ><a name="2321"
+      > </a
+      ><a name="2322" href="Fan.html#2284" class="Bound"
+      >p</a
+      ><a name="2323" class="Symbol"
+      >)</a
+      ><a name="2324"
+      > </a
+      ><a name="2325" href="Fan.html#4877" class="Function"
+      >n</a
+      ><a name="2326"
+      > </a
+      ><a name="2327" href="Fan.html#6709" class="Function"
+      >prf</a
+      ><a name="2330"
+      >
+   </a
+      ><a name="2334" class="Keyword"
+      >where</a
+      ><a name="2339"
+      >
+    </a
+      ><a name="2344" href="Fan.html#2344" class="Function"
+      >t&#8320;</a
+      ><a name="2346"
+      > </a
+      ><a name="2347" class="Symbol"
+      >:</a
+      ><a name="2348"
+      > </a
+      ><a name="2349" href="Sequence.html#238" class="Function"
+      >&#8322;&#8469;</a
+      ><a name="2351"
+      > </a
+      ><a name="2352" class="Symbol"
+      >&#8594;</a
+      ><a name="2353"
+      > </a
+      ><a name="2354" href="Sequence.html#238" class="Function"
+      >&#8322;&#8469;</a
+      ><a name="2356"
+      >
+    </a
+      ><a name="2361" href="Fan.html#2344" class="Function"
+      >t&#8320;</a
+      ><a name="2363"
+      > </a
+      ><a name="2364" href="Fan.html#2364" class="Bound"
+      >&#945;</a
+      ><a name="2365"
+      > </a
+      ><a name="2366" class="Symbol"
+      >=</a
+      ><a name="2367"
+      > </a
+      ><a name="2368" href="Fan.html#2364" class="Bound"
+      >&#945;</a
+      ><a name="2369"
+      > </a
+      ><a name="2370" href="MiniLibrary.html#447" class="Function Operator"
+      >&#8728;</a
+      ><a name="2371"
+      > </a
+      ><a name="2372" href="Fan.html#766" class="Function Operator"
+      >_&#215;2</a
+      ><a name="2375"
+      >
+    </a
+      ><a name="2380" href="Fan.html#2380" class="Function"
+      >uct&#8320;</a
+      ><a name="2384"
+      > </a
+      ><a name="2385" class="Symbol"
+      >:</a
+      ><a name="2386"
+      > </a
+      ><a name="2387" href="Fan.html#2344" class="Function"
+      >t&#8320;</a
+      ><a name="2389"
+      > </a
+      ><a name="2390" href="MiniLibrary.html#615" class="Function Operator"
+      >&#8712;</a
+      ><a name="2391"
+      > </a
+      ><a name="2392" href="Space.html#649" class="Function"
+      >C</a
+      ><a name="2393"
+      >
+    </a
+      ><a name="2398" href="Fan.html#2380" class="Function"
+      >uct&#8320;</a
+      ><a name="2402"
+      > </a
+      ><a name="2403" href="Fan.html#2403" class="Bound"
+      >m</a
+      ><a name="2404"
+      > </a
+      ><a name="2405" class="Symbol"
+      >=</a
+      ><a name="2406"
+      > </a
+      ><a name="2407" href="UniformContinuity.html#9184" class="Function"
+      >Lemma[LM-&#8322;&#8469;-least-modulus]</a
+      ><a name="2433"
+      > </a
+      ><a name="2434" href="Fan.html#2344" class="Function"
+      >t&#8320;</a
+      ><a name="2436"
+      > </a
+      ><a name="2437" class="Symbol"
+      >(</a
+      ><a name="2438" href="Fan.html#2403" class="Bound"
+      >m</a
+      ><a name="2439"
+      > </a
+      ><a name="2440" href="Fan.html#766" class="Function Operator"
+      >&#215;2</a
+      ><a name="2442" class="Symbol"
+      >)</a
+      ><a name="2443"
+      > </a
+      ><a name="2444" href="Fan.html#2620" class="Function"
+      >prf&#8321;</a
+      ><a name="2448"
+      >
+     </a
+      ><a name="2454" class="Keyword"
+      >where</a
+      ><a name="2459"
+      >
+      </a
+      ><a name="2466" href="Fan.html#2466" class="Function"
+      >prf&#8320;</a
+      ><a name="2470"
+      > </a
+      ><a name="2471" class="Symbol"
+      >:</a
+      ><a name="2472"
+      > </a
+      ><a name="2473" class="Symbol"
+      >&#8704;(</a
+      ><a name="2475" href="Fan.html#2475" class="Bound"
+      >&#945;</a
+      ><a name="2476"
+      > </a
+      ><a name="2477" href="Fan.html#2477" class="Bound"
+      >&#946;</a
+      ><a name="2478"
+      > </a
+      ><a name="2479" class="Symbol"
+      >:</a
+      ><a name="2480"
+      > </a
+      ><a name="2481" href="Sequence.html#238" class="Function"
+      >&#8322;&#8469;</a
+      ><a name="2483" class="Symbol"
+      >)</a
+      ><a name="2484"
+      > </a
+      ><a name="2485" class="Symbol"
+      >&#8594;</a
+      ><a name="2486"
+      > </a
+      ><a name="2487" href="Fan.html#2475" class="Bound"
+      >&#945;</a
+      ><a name="2488"
+      > </a
+      ><a name="2489" href="Sequence.html#2542" class="Datatype Operator"
+      >&#8803;[</a
+      ><a name="2491"
+      > </a
+      ><a name="2492" href="Fan.html#2403" class="Bound"
+      >m</a
+      ><a name="2493"
+      > </a
+      ><a name="2494" href="Fan.html#766" class="Function Operator"
+      >&#215;2</a
+      ><a name="2496"
+      > </a
+      ><a name="2497" href="Sequence.html#2542" class="Datatype Operator"
+      >]</a
+      ><a name="2498"
+      > </a
+      ><a name="2499" href="Fan.html#2477" class="Bound"
+      >&#946;</a
+      ><a name="2500"
+      > </a
+      ><a name="2501" class="Symbol"
+      >&#8594;</a
+      ><a name="2502"
+      > </a
+      ><a name="2503" class="Symbol"
+      >&#8704;(</a
+      ><a name="2505" href="Fan.html#2505" class="Bound"
+      >i</a
+      ><a name="2506"
+      > </a
+      ><a name="2507" class="Symbol"
+      >:</a
+      ><a name="2508"
+      > </a
+      ><a name="2509" href="MiniLibrary.html#3902" class="Datatype"
+      >&#8469;</a
+      ><a name="2510" class="Symbol"
+      >)</a
+      ><a name="2511"
+      > </a
+      ><a name="2512" class="Symbol"
+      >&#8594;</a
+      ><a name="2513"
+      > </a
+      ><a name="2514" href="Fan.html#2505" class="Bound"
+      >i</a
+      ><a name="2515"
+      > </a
+      ><a name="2516" href="Inequality.html#243" class="Function Operator"
+      >&lt;</a
+      ><a name="2517"
+      > </a
+      ><a name="2518" href="Fan.html#2403" class="Bound"
+      >m</a
+      ><a name="2519"
+      > </a
+      ><a name="2520" class="Symbol"
+      >&#8594;</a
+      ><a name="2521"
+      > </a
+      ><a name="2522" href="Fan.html#2344" class="Function"
+      >t&#8320;</a
+      ><a name="2524"
+      > </a
+      ><a name="2525" href="Fan.html#2475" class="Bound"
+      >&#945;</a
+      ><a name="2526"
+      > </a
+      ><a name="2527" href="Fan.html#2505" class="Bound"
+      >i</a
+      ><a name="2528"
+      > </a
+      ><a name="2529" href="MiniLibrary.html#1706" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="2530"
+      > </a
+      ><a name="2531" href="Fan.html#2344" class="Function"
+      >t&#8320;</a
+      ><a name="2533"
+      > </a
+      ><a name="2534" href="Fan.html#2477" class="Bound"
+      >&#946;</a
+      ><a name="2535"
+      > </a
+      ><a name="2536" href="Fan.html#2505" class="Bound"
+      >i</a
+      ><a name="2537"
+      >
+      </a
+      ><a name="2544" href="Fan.html#2466" class="Function"
+      >prf&#8320;</a
+      ><a name="2548"
+      > </a
+      ><a name="2549" href="Fan.html#2549" class="Bound"
+      >&#945;</a
+      ><a name="2550"
+      > </a
+      ><a name="2551" href="Fan.html#2551" class="Bound"
+      >&#946;</a
+      ><a name="2552"
+      > </a
+      ><a name="2553" href="Fan.html#2553" class="Bound"
+      >aw</a
+      ><a name="2555"
+      > </a
+      ><a name="2556" href="Fan.html#2556" class="Bound"
+      >i</a
+      ><a name="2557"
+      > </a
+      ><a name="2558" href="Fan.html#2558" class="Bound"
+      >i&lt;m</a
+      ><a name="2561"
+      > </a
+      ><a name="2562" class="Symbol"
+      >=</a
+      ><a name="2563"
+      > </a
+      ><a name="2564" href="Sequence.html#4898" class="Function"
+      >Lemma[&#8803;[]-&lt;]</a
+      ><a name="2576"
+      > </a
+      ><a name="2577" href="Fan.html#2553" class="Bound"
+      >aw</a
+      ><a name="2579"
+      > </a
+      ><a name="2580" class="Symbol"
+      >(</a
+      ><a name="2581" href="Fan.html#2556" class="Bound"
+      >i</a
+      ><a name="2582"
+      > </a
+      ><a name="2583" href="Fan.html#766" class="Function Operator"
+      >&#215;2</a
+      ><a name="2585" class="Symbol"
+      >)</a
+      ><a name="2586"
+      > </a
+      ><a name="2587" class="Symbol"
+      >(</a
+      ><a name="2588" href="Fan.html#1031" class="Function"
+      >Lemma[n&lt;m&#8594;2n&lt;2m]</a
+      ><a name="2604"
+      > </a
+      ><a name="2605" href="Fan.html#2556" class="Bound"
+      >i</a
+      ><a name="2606"
+      > </a
+      ><a name="2607" href="Fan.html#2403" class="Bound"
+      >m</a
+      ><a name="2608"
+      > </a
+      ><a name="2609" href="Fan.html#2558" class="Bound"
+      >i&lt;m</a
+      ><a name="2612" class="Symbol"
+      >)</a
+      ><a name="2613"
+      >
+      </a
+      ><a name="2620" href="Fan.html#2620" class="Function"
+      >prf&#8321;</a
+      ><a name="2624"
+      > </a
+      ><a name="2625" class="Symbol"
+      >:</a
+      ><a name="2626"
+      > </a
+      ><a name="2627" class="Symbol"
+      >&#8704;(</a
+      ><a name="2629" href="Fan.html#2629" class="Bound"
+      >&#945;</a
+      ><a name="2630"
+      > </a
+      ><a name="2631" href="Fan.html#2631" class="Bound"
+      >&#946;</a
+      ><a name="2632"
+      > </a
+      ><a name="2633" class="Symbol"
+      >:</a
+      ><a name="2634"
+      > </a
+      ><a name="2635" href="Sequence.html#238" class="Function"
+      >&#8322;&#8469;</a
+      ><a name="2637" class="Symbol"
+      >)</a
+      ><a name="2638"
+      > </a
+      ><a name="2639" class="Symbol"
+      >&#8594;</a
+      ><a name="2640"
+      > </a
+      ><a name="2641" href="Fan.html#2629" class="Bound"
+      >&#945;</a
+      ><a name="2642"
+      > </a
+      ><a name="2643" href="Sequence.html#2542" class="Datatype Operator"
+      >&#8803;[</a
+      ><a name="2645"
+      > </a
+      ><a name="2646" href="Fan.html#2403" class="Bound"
+      >m</a
+      ><a name="2647"
+      > </a
+      ><a name="2648" href="Fan.html#766" class="Function Operator"
+      >&#215;2</a
+      ><a name="2650"
+      > </a
+      ><a name="2651" href="Sequence.html#2542" class="Datatype Operator"
+      >]</a
+      ><a name="2652"
+      > </a
+      ><a name="2653" href="Fan.html#2631" class="Bound"
+      >&#946;</a
+      ><a name="2654"
+      > </a
+      ><a name="2655" class="Symbol"
+      >&#8594;</a
+      ><a name="2656"
+      > </a
+      ><a name="2657" href="Fan.html#2344" class="Function"
+      >t&#8320;</a
+      ><a name="2659"
+      > </a
+      ><a name="2660" href="Fan.html#2629" class="Bound"
+      >&#945;</a
+      ><a name="2661"
+      > </a
+      ><a name="2662" href="Sequence.html#2542" class="Datatype Operator"
+      >&#8803;[</a
+      ><a name="2664"
+      > </a
+      ><a name="2665" href="Fan.html#2403" class="Bound"
+      >m</a
+      ><a name="2666"
+      > </a
+      ><a name="2667" href="Sequence.html#2542" class="Datatype Operator"
+      >]</a
+      ><a name="2668"
+      > </a
+      ><a name="2669" href="Fan.html#2344" class="Function"
+      >t&#8320;</a
+      ><a name="2671"
+      > </a
+      ><a name="2672" href="Fan.html#2631" class="Bound"
+      >&#946;</a
+      ><a name="2673"
+      >
+      </a
+      ><a name="2680" href="Fan.html#2620" class="Function"
+      >prf&#8321;</a
+      ><a name="2684"
+      > </a
+      ><a name="2685" href="Fan.html#2685" class="Bound"
+      >&#945;</a
+      ><a name="2686"
+      > </a
+      ><a name="2687" href="Fan.html#2687" class="Bound"
+      >&#946;</a
+      ><a name="2688"
+      > </a
+      ><a name="2689" href="Fan.html#2689" class="Bound"
+      >aw</a
+      ><a name="2691"
+      > </a
+      ><a name="2692" class="Symbol"
+      >=</a
+      ><a name="2693"
+      > </a
+      ><a name="2694" href="Sequence.html#4515" class="Function"
+      >Lemma[&lt;-&#8803;[]]</a
+      ><a name="2706"
+      > </a
+      ><a name="2707" class="Symbol"
+      >(</a
+      ><a name="2708" href="Fan.html#2466" class="Function"
+      >prf&#8320;</a
+      ><a name="2712"
+      > </a
+      ><a name="2713" href="Fan.html#2685" class="Bound"
+      >&#945;</a
+      ><a name="2714"
+      > </a
+      ><a name="2715" href="Fan.html#2687" class="Bound"
+      >&#946;</a
+      ><a name="2716"
+      > </a
+      ><a name="2717" href="Fan.html#2689" class="Bound"
+      >aw</a
+      ><a name="2719" class="Symbol"
+      >)</a
+      ><a name="2720"
+      >
+
+    </a
+      ><a name="2726" href="Fan.html#2726" class="Function"
+      >t&#8321;</a
+      ><a name="2728"
+      > </a
+      ><a name="2729" class="Symbol"
+      >:</a
+      ><a name="2730"
+      > </a
+      ><a name="2731" href="Sequence.html#238" class="Function"
+      >&#8322;&#8469;</a
+      ><a name="2733"
+      > </a
+      ><a name="2734" class="Symbol"
+      >&#8594;</a
+      ><a name="2735"
+      > </a
+      ><a name="2736" href="Sequence.html#238" class="Function"
+      >&#8322;&#8469;</a
+      ><a name="2738"
+      >
+    </a
+      ><a name="2743" href="Fan.html#2726" class="Function"
+      >t&#8321;</a
+      ><a name="2745"
+      > </a
+      ><a name="2746" href="Fan.html#2746" class="Bound"
+      >&#945;</a
+      ><a name="2747"
+      > </a
+      ><a name="2748" class="Symbol"
+      >=</a
+      ><a name="2749"
+      > </a
+      ><a name="2750" href="Fan.html#2746" class="Bound"
+      >&#945;</a
+      ><a name="2751"
+      > </a
+      ><a name="2752" href="MiniLibrary.html#447" class="Function Operator"
+      >&#8728;</a
+      ><a name="2753"
+      > </a
+      ><a name="2754" href="Fan.html#1316" class="Function Operator"
+      >_&#215;2+1</a
+      ><a name="2759"
+      >
+    </a
+      ><a name="2764" href="Fan.html#2764" class="Function"
+      >uct&#8321;</a
+      ><a name="2768"
+      > </a
+      ><a name="2769" class="Symbol"
+      >:</a
+      ><a name="2770"
+      > </a
+      ><a name="2771" href="Fan.html#2726" class="Function"
+      >t&#8321;</a
+      ><a name="2773"
+      > </a
+      ><a name="2774" href="MiniLibrary.html#615" class="Function Operator"
+      >&#8712;</a
+      ><a name="2775"
+      > </a
+      ><a name="2776" href="Space.html#649" class="Function"
+      >C</a
+      ><a name="2777"
+      >
+    </a
+      ><a name="2782" href="Fan.html#2764" class="Function"
+      >uct&#8321;</a
+      ><a name="2786"
+      > </a
+      ><a name="2787" href="Fan.html#2787" class="Bound"
+      >m</a
+      ><a name="2788"
+      > </a
+      ><a name="2789" class="Symbol"
+      >=</a
+      ><a name="2790"
+      > </a
+      ><a name="2791" href="UniformContinuity.html#9184" class="Function"
+      >Lemma[LM-&#8322;&#8469;-least-modulus]</a
+      ><a name="2817"
+      > </a
+      ><a name="2818" href="Fan.html#2726" class="Function"
+      >t&#8321;</a
+      ><a name="2820"
+      > </a
+      ><a name="2821" class="Symbol"
+      >(</a
+      ><a name="2822" href="Fan.html#2787" class="Bound"
+      >m</a
+      ><a name="2823"
+      > </a
+      ><a name="2824" href="Fan.html#1316" class="Function Operator"
+      >&#215;2+1</a
+      ><a name="2828" class="Symbol"
+      >)</a
+      ><a name="2829"
+      > </a
+      ><a name="2830" href="Fan.html#3015" class="Function"
+      >prf&#8321;</a
+      ><a name="2834"
+      >
+     </a
+      ><a name="2841" class="Keyword"
+      >where</a
+      ><a name="2846"
+      >
+      </a
+      ><a name="2853" href="Fan.html#2853" class="Function"
+      >prf&#8320;</a
+      ><a name="2857"
+      > </a
+      ><a name="2858" class="Symbol"
+      >:</a
+      ><a name="2859"
+      > </a
+      ><a name="2860" class="Symbol"
+      >&#8704;(</a
+      ><a name="2862" href="Fan.html#2862" class="Bound"
+      >&#945;</a
+      ><a name="2863"
+      > </a
+      ><a name="2864" href="Fan.html#2864" class="Bound"
+      >&#946;</a
+      ><a name="2865"
+      > </a
+      ><a name="2866" class="Symbol"
+      >:</a
+      ><a name="2867"
+      > </a
+      ><a name="2868" href="Sequence.html#238" class="Function"
+      >&#8322;&#8469;</a
+      ><a name="2870" class="Symbol"
+      >)</a
+      ><a name="2871"
+      > </a
+      ><a name="2872" class="Symbol"
+      >&#8594;</a
+      ><a name="2873"
+      > </a
+      ><a name="2874" href="Fan.html#2862" class="Bound"
+      >&#945;</a
+      ><a name="2875"
+      > </a
+      ><a name="2876" href="Sequence.html#2542" class="Datatype Operator"
+      >&#8803;[</a
+      ><a name="2878"
+      > </a
+      ><a name="2879" href="Fan.html#2787" class="Bound"
+      >m</a
+      ><a name="2880"
+      > </a
+      ><a name="2881" href="Fan.html#1316" class="Function Operator"
+      >&#215;2+1</a
+      ><a name="2885"
+      > </a
+      ><a name="2886" href="Sequence.html#2542" class="Datatype Operator"
+      >]</a
+      ><a name="2887"
+      > </a
+      ><a name="2888" href="Fan.html#2864" class="Bound"
+      >&#946;</a
+      ><a name="2889"
+      > </a
+      ><a name="2890" class="Symbol"
+      >&#8594;</a
+      ><a name="2891"
+      > </a
+      ><a name="2892" class="Symbol"
+      >&#8704;(</a
+      ><a name="2894" href="Fan.html#2894" class="Bound"
+      >i</a
+      ><a name="2895"
+      > </a
+      ><a name="2896" class="Symbol"
+      >:</a
+      ><a name="2897"
+      > </a
+      ><a name="2898" href="MiniLibrary.html#3902" class="Datatype"
+      >&#8469;</a
+      ><a name="2899" class="Symbol"
+      >)</a
+      ><a name="2900"
+      > </a
+      ><a name="2901" class="Symbol"
+      >&#8594;</a
+      ><a name="2902"
+      > </a
+      ><a name="2903" href="Fan.html#2894" class="Bound"
+      >i</a
+      ><a name="2904"
+      > </a
+      ><a name="2905" href="Inequality.html#243" class="Function Operator"
+      >&lt;</a
+      ><a name="2906"
+      > </a
+      ><a name="2907" href="Fan.html#2787" class="Bound"
+      >m</a
+      ><a name="2908"
+      > </a
+      ><a name="2909" class="Symbol"
+      >&#8594;</a
+      ><a name="2910"
+      > </a
+      ><a name="2911" href="Fan.html#2726" class="Function"
+      >t&#8321;</a
+      ><a name="2913"
+      > </a
+      ><a name="2914" href="Fan.html#2862" class="Bound"
+      >&#945;</a
+      ><a name="2915"
+      > </a
+      ><a name="2916" href="Fan.html#2894" class="Bound"
+      >i</a
+      ><a name="2917"
+      > </a
+      ><a name="2918" href="MiniLibrary.html#1706" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="2919"
+      > </a
+      ><a name="2920" href="Fan.html#2726" class="Function"
+      >t&#8321;</a
+      ><a name="2922"
+      > </a
+      ><a name="2923" href="Fan.html#2864" class="Bound"
+      >&#946;</a
+      ><a name="2924"
+      > </a
+      ><a name="2925" href="Fan.html#2894" class="Bound"
+      >i</a
+      ><a name="2926"
+      >
+      </a
+      ><a name="2933" href="Fan.html#2853" class="Function"
+      >prf&#8320;</a
+      ><a name="2937"
+      > </a
+      ><a name="2938" href="Fan.html#2938" class="Bound"
+      >&#945;</a
+      ><a name="2939"
+      > </a
+      ><a name="2940" href="Fan.html#2940" class="Bound"
+      >&#946;</a
+      ><a name="2941"
+      > </a
+      ><a name="2942" href="Fan.html#2942" class="Bound"
+      >aw</a
+      ><a name="2944"
+      > </a
+      ><a name="2945" href="Fan.html#2945" class="Bound"
+      >i</a
+      ><a name="2946"
+      > </a
+      ><a name="2947" href="Fan.html#2947" class="Bound"
+      >i&lt;m</a
+      ><a name="2950"
+      > </a
+      ><a name="2951" class="Symbol"
+      >=</a
+      ><a name="2952"
+      > </a
+      ><a name="2953" href="Sequence.html#4898" class="Function"
+      >Lemma[&#8803;[]-&lt;]</a
+      ><a name="2965"
+      > </a
+      ><a name="2966" href="Fan.html#2942" class="Bound"
+      >aw</a
+      ><a name="2968"
+      > </a
+      ><a name="2969" class="Symbol"
+      >(</a
+      ><a name="2970" href="Fan.html#2945" class="Bound"
+      >i</a
+      ><a name="2971"
+      > </a
+      ><a name="2972" href="Fan.html#1316" class="Function Operator"
+      >&#215;2+1</a
+      ><a name="2976" class="Symbol"
+      >)</a
+      ><a name="2977"
+      > </a
+      ><a name="2978" class="Symbol"
+      >(</a
+      ><a name="2979" href="Fan.html#1603" class="Function"
+      >Lemma[n&lt;m&#8594;2n+1&lt;2m+1]</a
+      ><a name="2999"
+      > </a
+      ><a name="3000" href="Fan.html#2945" class="Bound"
+      >i</a
+      ><a name="3001"
+      > </a
+      ><a name="3002" href="Fan.html#2787" class="Bound"
+      >m</a
+      ><a name="3003"
+      > </a
+      ><a name="3004" href="Fan.html#2947" class="Bound"
+      >i&lt;m</a
+      ><a name="3007" class="Symbol"
+      >)</a
+      ><a name="3008"
+      >
+      </a
+      ><a name="3015" href="Fan.html#3015" class="Function"
+      >prf&#8321;</a
+      ><a name="3019"
+      > </a
+      ><a name="3020" class="Symbol"
+      >:</a
+      ><a name="3021"
+      > </a
+      ><a name="3022" class="Symbol"
+      >&#8704;(</a
+      ><a name="3024" href="Fan.html#3024" class="Bound"
+      >&#945;</a
+      ><a name="3025"
+      > </a
+      ><a name="3026" href="Fan.html#3026" class="Bound"
+      >&#946;</a
+      ><a name="3027"
+      > </a
+      ><a name="3028" class="Symbol"
+      >:</a
+      ><a name="3029"
+      > </a
+      ><a name="3030" href="Sequence.html#238" class="Function"
+      >&#8322;&#8469;</a
+      ><a name="3032" class="Symbol"
+      >)</a
+      ><a name="3033"
+      > </a
+      ><a name="3034" class="Symbol"
+      >&#8594;</a
+      ><a name="3035"
+      > </a
+      ><a name="3036" href="Fan.html#3024" class="Bound"
+      >&#945;</a
+      ><a name="3037"
+      > </a
+      ><a name="3038" href="Sequence.html#2542" class="Datatype Operator"
+      >&#8803;[</a
+      ><a name="3040"
+      > </a
+      ><a name="3041" href="Fan.html#2787" class="Bound"
+      >m</a
+      ><a name="3042"
+      > </a
+      ><a name="3043" href="Fan.html#1316" class="Function Operator"
+      >&#215;2+1</a
+      ><a name="3047"
+      > </a
+      ><a name="3048" href="Sequence.html#2542" class="Datatype Operator"
+      >]</a
+      ><a name="3049"
+      > </a
+      ><a name="3050" href="Fan.html#3026" class="Bound"
+      >&#946;</a
+      ><a name="3051"
+      > </a
+      ><a name="3052" class="Symbol"
+      >&#8594;</a
+      ><a name="3053"
+      > </a
+      ><a name="3054" href="Fan.html#2726" class="Function"
+      >t&#8321;</a
+      ><a name="3056"
+      > </a
+      ><a name="3057" href="Fan.html#3024" class="Bound"
+      >&#945;</a
+      ><a name="3058"
+      > </a
+      ><a name="3059" href="Sequence.html#2542" class="Datatype Operator"
+      >&#8803;[</a
+      ><a name="3061"
+      > </a
+      ><a name="3062" href="Fan.html#2787" class="Bound"
+      >m</a
+      ><a name="3063"
+      > </a
+      ><a name="3064" href="Sequence.html#2542" class="Datatype Operator"
+      >]</a
+      ><a name="3065"
+      > </a
+      ><a name="3066" href="Fan.html#2726" class="Function"
+      >t&#8321;</a
+      ><a name="3068"
+      > </a
+      ><a name="3069" href="Fan.html#3026" class="Bound"
+      >&#946;</a
+      ><a name="3070"
+      >
+      </a
+      ><a name="3077" href="Fan.html#3015" class="Function"
+      >prf&#8321;</a
+      ><a name="3081"
+      > </a
+      ><a name="3082" href="Fan.html#3082" class="Bound"
+      >&#945;</a
+      ><a name="3083"
+      > </a
+      ><a name="3084" href="Fan.html#3084" class="Bound"
+      >&#946;</a
+      ><a name="3085"
+      > </a
+      ><a name="3086" href="Fan.html#3086" class="Bound"
+      >aw</a
+      ><a name="3088"
+      > </a
+      ><a name="3089" class="Symbol"
+      >=</a
+      ><a name="3090"
+      > </a
+      ><a name="3091" href="Sequence.html#4515" class="Function"
+      >Lemma[&lt;-&#8803;[]]</a
+      ><a name="3103"
+      > </a
+      ><a name="3104" class="Symbol"
+      >(</a
+      ><a name="3105" href="Fan.html#2853" class="Function"
+      >prf&#8320;</a
+      ><a name="3109"
+      > </a
+      ><a name="3110" href="Fan.html#3082" class="Bound"
+      >&#945;</a
+      ><a name="3111"
+      > </a
+      ><a name="3112" href="Fan.html#3084" class="Bound"
+      >&#946;</a
+      ><a name="3113"
+      > </a
+      ><a name="3114" href="Fan.html#3086" class="Bound"
+      >aw</a
+      ><a name="3116" class="Symbol"
+      >)</a
+      ><a name="3117"
+      >
+
+    </a
+      ><a name="3123" href="Fan.html#3123" class="Function"
+      >t&#8321;'</a
+      ><a name="3126"
+      > </a
+      ><a name="3127" class="Symbol"
+      >:</a
+      ><a name="3128"
+      > </a
+      ><a name="3129" href="Sequence.html#238" class="Function"
+      >&#8322;&#8469;</a
+      ><a name="3131"
+      > </a
+      ><a name="3132" class="Symbol"
+      >&#8594;</a
+      ><a name="3133"
+      > </a
+      ><a name="3134" href="Space.html#4275" class="Function"
+      >U</a
+      ><a name="3135" class="Symbol"
+      >(</a
+      ><a name="3136" href="Space-discrete.html#7899" class="Function"
+      >&#8469;Space</a
+      ><a name="3142"
+      > </a
+      ><a name="3143" href="Space-exponential.html#303" class="Function Operator"
+      >&#8658;</a
+      ><a name="3144"
+      > </a
+      ><a name="3145" href="Space-discrete.html#4712" class="Function"
+      >&#8322;Space</a
+      ><a name="3151" class="Symbol"
+      >)</a
+      ><a name="3152"
+      >
+    </a
+      ><a name="3157" href="Fan.html#3123" class="Function"
+      >t&#8321;'</a
+      ><a name="3160"
+      > </a
+      ><a name="3161" class="Symbol"
+      >=</a
+      ><a name="3162"
+      > </a
+      ><a name="3163" href="MiniLibrary.html#1453" class="Function"
+      >&#8707;-witness</a
+      ><a name="3172"
+      > </a
+      ><a name="3173" class="Symbol"
+      >(</a
+      ><a name="3174" href="Space-cantor.html#500" class="Function"
+      >Lemma[&#8322;&#8469;&#8594;&#8322;&#8469;-to-&#8322;&#8469;&#8594;&#8469;&#8658;&#8322;]</a
+      ><a name="3196"
+      > </a
+      ><a name="3197" href="Fan.html#2726" class="Function"
+      >t&#8321;</a
+      ><a name="3199"
+      > </a
+      ><a name="3200" href="Fan.html#2764" class="Function"
+      >uct&#8321;</a
+      ><a name="3204" class="Symbol"
+      >)</a
+      ><a name="3205"
+      >
+    </a
+      ><a name="3210" href="Fan.html#3210" class="Function"
+      >pr&#8321;</a
+      ><a name="3213"
+      > </a
+      ><a name="3214" class="Symbol"
+      >:</a
+      ><a name="3215"
+      > </a
+      ><a name="3216" href="Fan.html#3123" class="Function"
+      >t&#8321;'</a
+      ><a name="3219"
+      > </a
+      ><a name="3220" href="MiniLibrary.html#615" class="Function Operator"
+      >&#8712;</a
+      ><a name="3221"
+      > </a
+      ><a name="3222" href="Space.html#4299" class="Function"
+      >Probe</a
+      ><a name="3227"
+      > </a
+      ><a name="3228" class="Symbol"
+      >(</a
+      ><a name="3229" href="Space-discrete.html#7899" class="Function"
+      >&#8469;Space</a
+      ><a name="3235"
+      > </a
+      ><a name="3236" href="Space-exponential.html#303" class="Function Operator"
+      >&#8658;</a
+      ><a name="3237"
+      > </a
+      ><a name="3238" href="Space-discrete.html#4712" class="Function"
+      >&#8322;Space</a
+      ><a name="3244" class="Symbol"
+      >)</a
+      ><a name="3245"
+      >
+    </a
+      ><a name="3250" href="Fan.html#3210" class="Function"
+      >pr&#8321;</a
+      ><a name="3253"
+      > </a
+      ><a name="3254" class="Symbol"
+      >=</a
+      ><a name="3255"
+      > </a
+      ><a name="3256" href="MiniLibrary.html#1529" class="Function"
+      >&#8707;-elim</a
+      ><a name="3262"
+      > </a
+      ><a name="3263" class="Symbol"
+      >(</a
+      ><a name="3264" href="Space-cantor.html#500" class="Function"
+      >Lemma[&#8322;&#8469;&#8594;&#8322;&#8469;-to-&#8322;&#8469;&#8594;&#8469;&#8658;&#8322;]</a
+      ><a name="3286"
+      > </a
+      ><a name="3287" href="Fan.html#2726" class="Function"
+      >t&#8321;</a
+      ><a name="3289"
+      > </a
+      ><a name="3290" href="Fan.html#2764" class="Function"
+      >uct&#8321;</a
+      ><a name="3294" class="Symbol"
+      >)</a
+      ><a name="3295"
+      >
+
+    </a
+      ><a name="3301" href="Fan.html#3301" class="Function"
+      >merge</a
+      ><a name="3306"
+      > </a
+      ><a name="3307" class="Symbol"
+      >:</a
+      ><a name="3308"
+      > </a
+      ><a name="3309" href="Sequence.html#238" class="Function"
+      >&#8322;&#8469;</a
+      ><a name="3311"
+      > </a
+      ><a name="3312" class="Symbol"
+      >&#8594;</a
+      ><a name="3313"
+      > </a
+      ><a name="3314" href="Sequence.html#238" class="Function"
+      >&#8322;&#8469;</a
+      ><a name="3316"
+      > </a
+      ><a name="3317" class="Symbol"
+      >&#8594;</a
+      ><a name="3318"
+      > </a
+      ><a name="3319" href="Sequence.html#238" class="Function"
+      >&#8322;&#8469;</a
+      ><a name="3321"
+      >
+    </a
+      ><a name="3326" href="Fan.html#3301" class="Function"
+      >merge</a
+      ><a name="3331"
+      > </a
+      ><a name="3332" href="Fan.html#3332" class="Bound"
+      >&#945;</a
+      ><a name="3333"
+      > </a
+      ><a name="3334" href="Fan.html#3334" class="Bound"
+      >&#946;</a
+      ><a name="3335"
+      > </a
+      ><a name="3336" href="MiniLibrary.html#3919" class="InductiveConstructor"
+      >0</a
+      ><a name="3337"
+      >               </a
+      ><a name="3352" class="Symbol"
+      >=</a
+      ><a name="3353"
+      > </a
+      ><a name="3354" href="Fan.html#3332" class="Bound"
+      >&#945;</a
+      ><a name="3355"
+      > </a
+      ><a name="3356" class="Number"
+      >0</a
+      ><a name="3357"
+      >
+    </a
+      ><a name="3362" href="Fan.html#3301" class="Function"
+      >merge</a
+      ><a name="3367"
+      > </a
+      ><a name="3368" href="Fan.html#3368" class="Bound"
+      >&#945;</a
+      ><a name="3369"
+      > </a
+      ><a name="3370" href="Fan.html#3370" class="Bound"
+      >&#946;</a
+      ><a name="3371"
+      > </a
+      ><a name="3372" href="MiniLibrary.html#3930" class="InductiveConstructor"
+      >1</a
+      ><a name="3373"
+      >               </a
+      ><a name="3388" class="Symbol"
+      >=</a
+      ><a name="3389"
+      > </a
+      ><a name="3390" href="Fan.html#3370" class="Bound"
+      >&#946;</a
+      ><a name="3391"
+      > </a
+      ><a name="3392" class="Number"
+      >0</a
+      ><a name="3393"
+      >
+    </a
+      ><a name="3398" href="Fan.html#3301" class="Function"
+      >merge</a
+      ><a name="3403"
+      > </a
+      ><a name="3404" href="Fan.html#3404" class="Bound"
+      >&#945;</a
+      ><a name="3405"
+      > </a
+      ><a name="3406" href="Fan.html#3406" class="Bound"
+      >&#946;</a
+      ><a name="3407"
+      > </a
+      ><a name="3408" class="Symbol"
+      >(</a
+      ><a name="3409" href="MiniLibrary.html#3930" class="InductiveConstructor"
+      >succ</a
+      ><a name="3413"
+      > </a
+      ><a name="3414" class="Symbol"
+      >(</a
+      ><a name="3415" href="MiniLibrary.html#3930" class="InductiveConstructor"
+      >succ</a
+      ><a name="3419"
+      > </a
+      ><a name="3420" href="Fan.html#3420" class="Bound"
+      >i</a
+      ><a name="3421" class="Symbol"
+      >))</a
+      ><a name="3423"
+      > </a
+      ><a name="3424" class="Symbol"
+      >=</a
+      ><a name="3425"
+      > </a
+      ><a name="3426" href="Fan.html#3301" class="Function"
+      >merge</a
+      ><a name="3431"
+      > </a
+      ><a name="3432" class="Symbol"
+      >(</a
+      ><a name="3433" href="Fan.html#3404" class="Bound"
+      >&#945;</a
+      ><a name="3434"
+      > </a
+      ><a name="3435" href="MiniLibrary.html#447" class="Function Operator"
+      >&#8728;</a
+      ><a name="3436"
+      > </a
+      ><a name="3437" href="MiniLibrary.html#3930" class="InductiveConstructor"
+      >succ</a
+      ><a name="3441" class="Symbol"
+      >)</a
+      ><a name="3442"
+      > </a
+      ><a name="3443" class="Symbol"
+      >(</a
+      ><a name="3444" href="Fan.html#3406" class="Bound"
+      >&#946;</a
+      ><a name="3445"
+      > </a
+      ><a name="3446" href="MiniLibrary.html#447" class="Function Operator"
+      >&#8728;</a
+      ><a name="3447"
+      > </a
+      ><a name="3448" href="MiniLibrary.html#3930" class="InductiveConstructor"
+      >succ</a
+      ><a name="3452" class="Symbol"
+      >)</a
+      ><a name="3453"
+      > </a
+      ><a name="3454" href="Fan.html#3420" class="Bound"
+      >i</a
+      ><a name="3455"
+      >
+
+    </a
+      ><a name="3461" href="Fan.html#3461" class="Function"
+      >lemma'</a
+      ><a name="3467"
+      > </a
+      ><a name="3468" class="Symbol"
+      >:</a
+      ><a name="3469"
+      > </a
+      ><a name="3470" class="Symbol"
+      >&#8704;(</a
+      ><a name="3472" href="Fan.html#3472" class="Bound"
+      >&#945;</a
+      ><a name="3473"
+      > </a
+      ><a name="3474" href="Fan.html#3474" class="Bound"
+      >&#946;</a
+      ><a name="3475"
+      > </a
+      ><a name="3476" href="Fan.html#3476" class="Bound"
+      >&#947;</a
+      ><a name="3477"
+      > </a
+      ><a name="3478" class="Symbol"
+      >:</a
+      ><a name="3479"
+      > </a
+      ><a name="3480" href="Sequence.html#238" class="Function"
+      >&#8322;&#8469;</a
+      ><a name="3482" class="Symbol"
+      >)</a
+      ><a name="3483"
+      > </a
+      ><a name="3484" class="Symbol"
+      >&#8594;</a
+      ><a name="3485"
+      > </a
+      ><a name="3486" class="Symbol"
+      >&#8704;(</a
+      ><a name="3488" href="Fan.html#3488" class="Bound"
+      >k</a
+      ><a name="3489"
+      > </a
+      ><a name="3490" class="Symbol"
+      >:</a
+      ><a name="3491"
+      > </a
+      ><a name="3492" href="MiniLibrary.html#3902" class="Datatype"
+      >&#8469;</a
+      ><a name="3493" class="Symbol"
+      >)</a
+      ><a name="3494"
+      > </a
+      ><a name="3495" class="Symbol"
+      >&#8594;</a
+      ><a name="3496"
+      > </a
+      ><a name="3497" href="Fan.html#3472" class="Bound"
+      >&#945;</a
+      ><a name="3498"
+      > </a
+      ><a name="3499" href="Sequence.html#2542" class="Datatype Operator"
+      >&#8803;[</a
+      ><a name="3501"
+      > </a
+      ><a name="3502" href="Fan.html#3488" class="Bound"
+      >k</a
+      ><a name="3503"
+      > </a
+      ><a name="3504" href="Sequence.html#2542" class="Datatype Operator"
+      >]</a
+      ><a name="3505"
+      > </a
+      ><a name="3506" href="Fan.html#3474" class="Bound"
+      >&#946;</a
+      ><a name="3507"
+      > </a
+      ><a name="3508" class="Symbol"
+      >&#8594;</a
+      ><a name="3509"
+      > </a
+      ><a name="3510" class="Symbol"
+      >&#8704;(</a
+      ><a name="3512" href="Fan.html#3512" class="Bound"
+      >i</a
+      ><a name="3513"
+      > </a
+      ><a name="3514" class="Symbol"
+      >:</a
+      ><a name="3515"
+      > </a
+      ><a name="3516" href="MiniLibrary.html#3902" class="Datatype"
+      >&#8469;</a
+      ><a name="3517" class="Symbol"
+      >)</a
+      ><a name="3518"
+      > </a
+      ><a name="3519" class="Symbol"
+      >&#8594;</a
+      ><a name="3520"
+      > </a
+      ><a name="3521" href="Fan.html#3512" class="Bound"
+      >i</a
+      ><a name="3522"
+      > </a
+      ><a name="3523" href="Inequality.html#243" class="Function Operator"
+      >&lt;</a
+      ><a name="3524"
+      > </a
+      ><a name="3525" class="Symbol"
+      >(</a
+      ><a name="3526" href="Fan.html#3488" class="Bound"
+      >k</a
+      ><a name="3527"
+      > </a
+      ><a name="3528" href="Fan.html#766" class="Function Operator"
+      >&#215;2</a
+      ><a name="3530" class="Symbol"
+      >)</a
+      ><a name="3531"
+      > </a
+      ><a name="3532" class="Symbol"
+      >&#8594;</a
+      ><a name="3533"
+      > </a
+      ><a name="3534" href="Fan.html#3301" class="Function"
+      >merge</a
+      ><a name="3539"
+      > </a
+      ><a name="3540" href="Fan.html#3472" class="Bound"
+      >&#945;</a
+      ><a name="3541"
+      > </a
+      ><a name="3542" href="Fan.html#3476" class="Bound"
+      >&#947;</a
+      ><a name="3543"
+      > </a
+      ><a name="3544" href="Fan.html#3512" class="Bound"
+      >i</a
+      ><a name="3545"
+      > </a
+      ><a name="3546" href="MiniLibrary.html#1706" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="3547"
+      > </a
+      ><a name="3548" href="Fan.html#3301" class="Function"
+      >merge</a
+      ><a name="3553"
+      > </a
+      ><a name="3554" href="Fan.html#3474" class="Bound"
+      >&#946;</a
+      ><a name="3555"
+      > </a
+      ><a name="3556" href="Fan.html#3476" class="Bound"
+      >&#947;</a
+      ><a name="3557"
+      > </a
+      ><a name="3558" href="Fan.html#3512" class="Bound"
+      >i</a
+      ><a name="3559"
+      >
+    </a
+      ><a name="3564" href="Fan.html#3461" class="Function"
+      >lemma'</a
+      ><a name="3570"
+      > </a
+      ><a name="3571" href="Fan.html#3571" class="Bound"
+      >&#945;</a
+      ><a name="3572"
+      > </a
+      ><a name="3573" href="Fan.html#3573" class="Bound"
+      >&#946;</a
+      ><a name="3574"
+      > </a
+      ><a name="3575" href="Fan.html#3575" class="Bound"
+      >&#947;</a
+      ><a name="3576"
+      > </a
+      ><a name="3577" href="MiniLibrary.html#3919" class="InductiveConstructor"
+      >0</a
+      ><a name="3578"
+      >        </a
+      ><a name="3586" href="Fan.html#3586" class="Bound"
+      >aw</a
+      ><a name="3588"
+      > </a
+      ><a name="3589" href="Fan.html#3589" class="Bound"
+      >i</a
+      ><a name="3590"
+      > </a
+      ><a name="3591" class="Symbol"
+      >()</a
+      ><a name="3593"
+      >
+    </a
+      ><a name="3598" href="Fan.html#3461" class="Function"
+      >lemma'</a
+      ><a name="3604"
+      > </a
+      ><a name="3605" href="Fan.html#3605" class="Bound"
+      >&#945;</a
+      ><a name="3606"
+      > </a
+      ><a name="3607" href="Fan.html#3607" class="Bound"
+      >&#946;</a
+      ><a name="3608"
+      > </a
+      ><a name="3609" href="Fan.html#3609" class="Bound"
+      >&#947;</a
+      ><a name="3610"
+      > </a
+      ><a name="3611" class="Symbol"
+      >(</a
+      ><a name="3612" href="MiniLibrary.html#3930" class="InductiveConstructor"
+      >succ</a
+      ><a name="3616"
+      > </a
+      ><a name="3617" href="Fan.html#3617" class="Bound"
+      >k</a
+      ><a name="3618" class="Symbol"
+      >)</a
+      ><a name="3619"
+      > </a
+      ><a name="3620" href="Fan.html#3620" class="Bound"
+      >aw</a
+      ><a name="3622"
+      > </a
+      ><a name="3623" href="MiniLibrary.html#3919" class="InductiveConstructor"
+      >0</a
+      ><a name="3624"
+      > </a
+      ><a name="3625" href="Fan.html#3625" class="Bound"
+      >r</a
+      ><a name="3626"
+      > </a
+      ><a name="3627" class="Symbol"
+      >=</a
+      ><a name="3628"
+      > </a
+      ><a name="3629" href="Sequence.html#4898" class="Function"
+      >Lemma[&#8803;[]-&lt;]</a
+      ><a name="3641"
+      > </a
+      ><a name="3642" href="Fan.html#3620" class="Bound"
+      >aw</a
+      ><a name="3644"
+      > </a
+      ><a name="3645" href="MiniLibrary.html#3919" class="InductiveConstructor"
+      >zero</a
+      ><a name="3649"
+      > </a
+      ><a name="3650" class="Symbol"
+      >(</a
+      ><a name="3651" href="Inequality.html#196" class="InductiveConstructor"
+      >&#8804;-succ</a
+      ><a name="3657"
+      > </a
+      ><a name="3658" href="Inequality.html#169" class="InductiveConstructor"
+      >&#8804;-zero</a
+      ><a name="3664" class="Symbol"
+      >)</a
+      ><a name="3665"
+      >
+    </a
+      ><a name="3670" href="Fan.html#3461" class="Function"
+      >lemma'</a
+      ><a name="3676"
+      > </a
+      ><a name="3677" href="Fan.html#3677" class="Bound"
+      >&#945;</a
+      ><a name="3678"
+      > </a
+      ><a name="3679" href="Fan.html#3679" class="Bound"
+      >&#946;</a
+      ><a name="3680"
+      > </a
+      ><a name="3681" href="Fan.html#3681" class="Bound"
+      >&#947;</a
+      ><a name="3682"
+      > </a
+      ><a name="3683" class="Symbol"
+      >(</a
+      ><a name="3684" href="MiniLibrary.html#3930" class="InductiveConstructor"
+      >succ</a
+      ><a name="3688"
+      > </a
+      ><a name="3689" href="Fan.html#3689" class="Bound"
+      >k</a
+      ><a name="3690" class="Symbol"
+      >)</a
+      ><a name="3691"
+      > </a
+      ><a name="3692" href="Fan.html#3692" class="Bound"
+      >aw</a
+      ><a name="3694"
+      > </a
+      ><a name="3695" href="MiniLibrary.html#3930" class="InductiveConstructor"
+      >1</a
+      ><a name="3696"
+      > </a
+      ><a name="3697" href="Fan.html#3697" class="Bound"
+      >r</a
+      ><a name="3698"
+      > </a
+      ><a name="3699" class="Symbol"
+      >=</a
+      ><a name="3700"
+      > </a
+      ><a name="3701" href="MiniLibrary.html#1742" class="InductiveConstructor"
+      >refl</a
+      ><a name="3705"
+      >
+    </a
+      ><a name="3710" href="Fan.html#3461" class="Function"
+      >lemma'</a
+      ><a name="3716"
+      > </a
+      ><a name="3717" href="Fan.html#3717" class="Bound"
+      >&#945;</a
+      ><a name="3718"
+      > </a
+      ><a name="3719" href="Fan.html#3719" class="Bound"
+      >&#946;</a
+      ><a name="3720"
+      > </a
+      ><a name="3721" href="Fan.html#3721" class="Bound"
+      >&#947;</a
+      ><a name="3722"
+      > </a
+      ><a name="3723" class="Symbol"
+      >(</a
+      ><a name="3724" href="MiniLibrary.html#3930" class="InductiveConstructor"
+      >succ</a
+      ><a name="3728"
+      > </a
+      ><a name="3729" href="Fan.html#3729" class="Bound"
+      >k</a
+      ><a name="3730" class="Symbol"
+      >)</a
+      ><a name="3731"
+      > </a
+      ><a name="3732" href="Fan.html#3732" class="Bound"
+      >aw</a
+      ><a name="3734"
+      > </a
+      ><a name="3735" class="Symbol"
+      >(</a
+      ><a name="3736" href="MiniLibrary.html#3930" class="InductiveConstructor"
+      >succ</a
+      ><a name="3740"
+      > </a
+      ><a name="3741" class="Symbol"
+      >(</a
+      ><a name="3742" href="MiniLibrary.html#3930" class="InductiveConstructor"
+      >succ</a
+      ><a name="3746"
+      > </a
+      ><a name="3747" href="Fan.html#3747" class="Bound"
+      >i</a
+      ><a name="3748" class="Symbol"
+      >))</a
+      ><a name="3750"
+      > </a
+      ><a name="3751" class="Symbol"
+      >(</a
+      ><a name="3752" href="Inequality.html#196" class="InductiveConstructor"
+      >&#8804;-succ</a
+      ><a name="3758"
+      > </a
+      ><a name="3759" class="Symbol"
+      >(</a
+      ><a name="3760" href="Inequality.html#196" class="InductiveConstructor"
+      >&#8804;-succ</a
+      ><a name="3766"
+      > </a
+      ><a name="3767" href="Fan.html#3767" class="Bound"
+      >r</a
+      ><a name="3768" class="Symbol"
+      >))</a
+      ><a name="3770"
+      > </a
+      ><a name="3771" class="Symbol"
+      >=</a
+      ><a name="3772"
+      >
+          </a
+      ><a name="3783" href="Fan.html#3461" class="Function"
+      >lemma'</a
+      ><a name="3789"
+      > </a
+      ><a name="3790" class="Symbol"
+      >(</a
+      ><a name="3791" href="Fan.html#3717" class="Bound"
+      >&#945;</a
+      ><a name="3792"
+      > </a
+      ><a name="3793" href="MiniLibrary.html#447" class="Function Operator"
+      >&#8728;</a
+      ><a name="3794"
+      > </a
+      ><a name="3795" href="MiniLibrary.html#3930" class="InductiveConstructor"
+      >succ</a
+      ><a name="3799" class="Symbol"
+      >)</a
+      ><a name="3800"
+      > </a
+      ><a name="3801" class="Symbol"
+      >(</a
+      ><a name="3802" href="Fan.html#3719" class="Bound"
+      >&#946;</a
+      ><a name="3803"
+      > </a
+      ><a name="3804" href="MiniLibrary.html#447" class="Function Operator"
+      >&#8728;</a
+      ><a name="3805"
+      > </a
+      ><a name="3806" href="MiniLibrary.html#3930" class="InductiveConstructor"
+      >succ</a
+      ><a name="3810" class="Symbol"
+      >)</a
+      ><a name="3811"
+      > </a
+      ><a name="3812" class="Symbol"
+      >(</a
+      ><a name="3813" href="Fan.html#3721" class="Bound"
+      >&#947;</a
+      ><a name="3814"
+      > </a
+      ><a name="3815" href="MiniLibrary.html#447" class="Function Operator"
+      >&#8728;</a
+      ><a name="3816"
+      > </a
+      ><a name="3817" href="MiniLibrary.html#3930" class="InductiveConstructor"
+      >succ</a
+      ><a name="3821" class="Symbol"
+      >)</a
+      ><a name="3822"
+      > </a
+      ><a name="3823" href="Fan.html#3729" class="Bound"
+      >k</a
+      ><a name="3824"
+      > </a
+      ><a name="3825" class="Symbol"
+      >(</a
+      ><a name="3826" href="Sequence.html#4217" class="Function"
+      >Lemma[&#8803;[]-succ]</a
+      ><a name="3841"
+      > </a
+      ><a name="3842" href="Fan.html#3732" class="Bound"
+      >aw</a
+      ><a name="3844" class="Symbol"
+      >)</a
+      ><a name="3845"
+      > </a
+      ><a name="3846" href="Fan.html#3747" class="Bound"
+      >i</a
+      ><a name="3847"
+      > </a
+      ><a name="3848" href="Fan.html#3767" class="Bound"
+      >r</a
+      ><a name="3849"
+      >
+
+    </a
+      ><a name="3855" href="Fan.html#3855" class="Function"
+      >lemma</a
+      ><a name="3860"
+      > </a
+      ><a name="3861" class="Symbol"
+      >:</a
+      ><a name="3862"
+      > </a
+      ><a name="3863" class="Symbol"
+      >&#8704;(</a
+      ><a name="3865" href="Fan.html#3865" class="Bound"
+      >&#945;</a
+      ><a name="3866"
+      > </a
+      ><a name="3867" href="Fan.html#3867" class="Bound"
+      >&#946;</a
+      ><a name="3868"
+      > </a
+      ><a name="3869" href="Fan.html#3869" class="Bound"
+      >&#947;</a
+      ><a name="3870"
+      > </a
+      ><a name="3871" class="Symbol"
+      >:</a
+      ><a name="3872"
+      > </a
+      ><a name="3873" href="Sequence.html#238" class="Function"
+      >&#8322;&#8469;</a
+      ><a name="3875" class="Symbol"
+      >)</a
+      ><a name="3876"
+      > </a
+      ><a name="3877" class="Symbol"
+      >&#8594;</a
+      ><a name="3878"
+      > </a
+      ><a name="3879" class="Symbol"
+      >&#8704;(</a
+      ><a name="3881" href="Fan.html#3881" class="Bound"
+      >k</a
+      ><a name="3882"
+      > </a
+      ><a name="3883" class="Symbol"
+      >:</a
+      ><a name="3884"
+      > </a
+      ><a name="3885" href="MiniLibrary.html#3902" class="Datatype"
+      >&#8469;</a
+      ><a name="3886" class="Symbol"
+      >)</a
+      ><a name="3887"
+      > </a
+      ><a name="3888" class="Symbol"
+      >&#8594;</a
+      ><a name="3889"
+      > </a
+      ><a name="3890" href="Fan.html#3865" class="Bound"
+      >&#945;</a
+      ><a name="3891"
+      > </a
+      ><a name="3892" href="Sequence.html#2542" class="Datatype Operator"
+      >&#8803;[</a
+      ><a name="3894"
+      > </a
+      ><a name="3895" href="Fan.html#3881" class="Bound"
+      >k</a
+      ><a name="3896"
+      > </a
+      ><a name="3897" href="Sequence.html#2542" class="Datatype Operator"
+      >]</a
+      ><a name="3898"
+      > </a
+      ><a name="3899" href="Fan.html#3867" class="Bound"
+      >&#946;</a
+      ><a name="3900"
+      > </a
+      ><a name="3901" class="Symbol"
+      >&#8594;</a
+      ><a name="3902"
+      > </a
+      ><a name="3903" href="Fan.html#3301" class="Function"
+      >merge</a
+      ><a name="3908"
+      > </a
+      ><a name="3909" href="Fan.html#3865" class="Bound"
+      >&#945;</a
+      ><a name="3910"
+      > </a
+      ><a name="3911" href="Fan.html#3869" class="Bound"
+      >&#947;</a
+      ><a name="3912"
+      > </a
+      ><a name="3913" href="Sequence.html#2542" class="Datatype Operator"
+      >&#8803;[</a
+      ><a name="3915"
+      > </a
+      ><a name="3916" href="Fan.html#3881" class="Bound"
+      >k</a
+      ><a name="3917"
+      > </a
+      ><a name="3918" href="Fan.html#766" class="Function Operator"
+      >&#215;2</a
+      ><a name="3920"
+      > </a
+      ><a name="3921" href="Sequence.html#2542" class="Datatype Operator"
+      >]</a
+      ><a name="3922"
+      > </a
+      ><a name="3923" href="Fan.html#3301" class="Function"
+      >merge</a
+      ><a name="3928"
+      > </a
+      ><a name="3929" href="Fan.html#3867" class="Bound"
+      >&#946;</a
+      ><a name="3930"
+      > </a
+      ><a name="3931" href="Fan.html#3869" class="Bound"
+      >&#947;</a
+      ><a name="3932"
+      >
+    </a
+      ><a name="3937" href="Fan.html#3855" class="Function"
+      >lemma</a
+      ><a name="3942"
+      > </a
+      ><a name="3943" href="Fan.html#3943" class="Bound"
+      >&#945;</a
+      ><a name="3944"
+      > </a
+      ><a name="3945" href="Fan.html#3945" class="Bound"
+      >&#946;</a
+      ><a name="3946"
+      > </a
+      ><a name="3947" href="Fan.html#3947" class="Bound"
+      >&#947;</a
+      ><a name="3948"
+      > </a
+      ><a name="3949" href="Fan.html#3949" class="Bound"
+      >k</a
+      ><a name="3950"
+      > </a
+      ><a name="3951" href="Fan.html#3951" class="Bound"
+      >ek</a
+      ><a name="3953"
+      > </a
+      ><a name="3954" class="Symbol"
+      >=</a
+      ><a name="3955"
+      > </a
+      ><a name="3956" href="Sequence.html#4515" class="Function"
+      >Lemma[&lt;-&#8803;[]]</a
+      ><a name="3968"
+      > </a
+      ><a name="3969" class="Symbol"
+      >(</a
+      ><a name="3970" href="Fan.html#3461" class="Function"
+      >lemma'</a
+      ><a name="3976"
+      > </a
+      ><a name="3977" href="Fan.html#3943" class="Bound"
+      >&#945;</a
+      ><a name="3978"
+      > </a
+      ><a name="3979" href="Fan.html#3945" class="Bound"
+      >&#946;</a
+      ><a name="3980"
+      > </a
+      ><a name="3981" href="Fan.html#3947" class="Bound"
+      >&#947;</a
+      ><a name="3982"
+      > </a
+      ><a name="3983" href="Fan.html#3949" class="Bound"
+      >k</a
+      ><a name="3984"
+      > </a
+      ><a name="3985" href="Fan.html#3951" class="Bound"
+      >ek</a
+      ><a name="3987" class="Symbol"
+      >)</a
+      ><a name="3988"
+      >
+
+    </a
+      ><a name="3994" href="Fan.html#3994" class="Function"
+      >lemma&#8320;</a
+      ><a name="4000"
+      > </a
+      ><a name="4001" class="Symbol"
+      >:</a
+      ><a name="4002"
+      > </a
+      ><a name="4003" class="Symbol"
+      >&#8704;(</a
+      ><a name="4005" href="Fan.html#4005" class="Bound"
+      >&#945;</a
+      ><a name="4006"
+      > </a
+      ><a name="4007" href="Fan.html#4007" class="Bound"
+      >&#946;</a
+      ><a name="4008"
+      > </a
+      ><a name="4009" class="Symbol"
+      >:</a
+      ><a name="4010"
+      > </a
+      ><a name="4011" href="Sequence.html#238" class="Function"
+      >&#8322;&#8469;</a
+      ><a name="4013" class="Symbol"
+      >)</a
+      ><a name="4014"
+      > </a
+      ><a name="4015" class="Symbol"
+      >&#8594;</a
+      ><a name="4016"
+      > </a
+      ><a name="4017" href="not-not.html#113" class="Function Operator"
+      >[</a
+      ><a name="4018"
+      > </a
+      ><a name="4019" href="Fan.html#2344" class="Function"
+      >t&#8320;</a
+      ><a name="4021"
+      > </a
+      ><a name="4022" class="Symbol"
+      >(</a
+      ><a name="4023" href="Fan.html#3301" class="Function"
+      >merge</a
+      ><a name="4028"
+      > </a
+      ><a name="4029" href="Fan.html#4005" class="Bound"
+      >&#945;</a
+      ><a name="4030"
+      > </a
+      ><a name="4031" href="Fan.html#4007" class="Bound"
+      >&#946;</a
+      ><a name="4032" class="Symbol"
+      >)</a
+      ><a name="4033"
+      > </a
+      ><a name="4034" href="MiniLibrary.html#1706" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="4035"
+      > </a
+      ><a name="4036" href="Fan.html#4005" class="Bound"
+      >&#945;</a
+      ><a name="4037"
+      > </a
+      ><a name="4038" href="not-not.html#113" class="Function Operator"
+      >]</a
+      ><a name="4039"
+      >
+    </a
+      ><a name="4044" href="Fan.html#3994" class="Function"
+      >lemma&#8320;</a
+      ><a name="4050"
+      > </a
+      ><a name="4051" href="Fan.html#4051" class="Bound"
+      >&#945;</a
+      ><a name="4052"
+      > </a
+      ><a name="4053" href="Fan.html#4053" class="Bound"
+      >&#946;</a
+      ><a name="4054"
+      > </a
+      ><a name="4055" class="Symbol"
+      >=</a
+      ><a name="4056"
+      > </a
+      ><a name="4057" href="not-not-funext.html#676" class="Function"
+      >funext&#185;</a
+      ><a name="4064"
+      > </a
+      ><a name="4065" class="Symbol"
+      >(</a
+      ><a name="4066" href="Fan.html#4115" class="Function"
+      >le</a
+      ><a name="4068"
+      > </a
+      ><a name="4069" href="Fan.html#4051" class="Bound"
+      >&#945;</a
+      ><a name="4070"
+      > </a
+      ><a name="4071" href="Fan.html#4053" class="Bound"
+      >&#946;</a
+      ><a name="4072" class="Symbol"
+      >)</a
+      ><a name="4073"
+      >
+                 </a
+      ><a name="4091" class="Comment"
+      >------</a
+      ><a name="4097"
+      >
+     </a
+      ><a name="4103" class="Keyword"
+      >where</a
+      ><a name="4108"
+      >
+      </a
+      ><a name="4115" href="Fan.html#4115" class="Function"
+      >le</a
+      ><a name="4117"
+      > </a
+      ><a name="4118" class="Symbol"
+      >:</a
+      ><a name="4119"
+      > </a
+      ><a name="4120" class="Symbol"
+      >&#8704;(</a
+      ><a name="4122" href="Fan.html#4122" class="Bound"
+      >&#945;</a
+      ><a name="4123"
+      > </a
+      ><a name="4124" href="Fan.html#4124" class="Bound"
+      >&#946;</a
+      ><a name="4125"
+      > </a
+      ><a name="4126" class="Symbol"
+      >:</a
+      ><a name="4127"
+      > </a
+      ><a name="4128" href="Sequence.html#238" class="Function"
+      >&#8322;&#8469;</a
+      ><a name="4130" class="Symbol"
+      >)</a
+      ><a name="4131"
+      > </a
+      ><a name="4132" class="Symbol"
+      >&#8594;</a
+      ><a name="4133"
+      > </a
+      ><a name="4134" class="Symbol"
+      >&#8704;(</a
+      ><a name="4136" href="Fan.html#4136" class="Bound"
+      >i</a
+      ><a name="4137"
+      > </a
+      ><a name="4138" class="Symbol"
+      >:</a
+      ><a name="4139"
+      > </a
+      ><a name="4140" href="MiniLibrary.html#3902" class="Datatype"
+      >&#8469;</a
+      ><a name="4141" class="Symbol"
+      >)</a
+      ><a name="4142"
+      > </a
+      ><a name="4143" class="Symbol"
+      >&#8594;</a
+      ><a name="4144"
+      > </a
+      ><a name="4145" href="Fan.html#2344" class="Function"
+      >t&#8320;</a
+      ><a name="4147"
+      > </a
+      ><a name="4148" class="Symbol"
+      >(</a
+      ><a name="4149" href="Fan.html#3301" class="Function"
+      >merge</a
+      ><a name="4154"
+      > </a
+      ><a name="4155" href="Fan.html#4122" class="Bound"
+      >&#945;</a
+      ><a name="4156"
+      > </a
+      ><a name="4157" href="Fan.html#4124" class="Bound"
+      >&#946;</a
+      ><a name="4158" class="Symbol"
+      >)</a
+      ><a name="4159"
+      > </a
+      ><a name="4160" href="Fan.html#4136" class="Bound"
+      >i</a
+      ><a name="4161"
+      > </a
+      ><a name="4162" href="MiniLibrary.html#1706" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="4163"
+      > </a
+      ><a name="4164" href="Fan.html#4122" class="Bound"
+      >&#945;</a
+      ><a name="4165"
+      > </a
+      ><a name="4166" href="Fan.html#4136" class="Bound"
+      >i</a
+      ><a name="4167"
+      >
+      </a
+      ><a name="4174" href="Fan.html#4115" class="Function"
+      >le</a
+      ><a name="4176"
+      > </a
+      ><a name="4177" href="Fan.html#4177" class="Bound"
+      >&#945;</a
+      ><a name="4178"
+      > </a
+      ><a name="4179" href="Fan.html#4179" class="Bound"
+      >&#946;</a
+      ><a name="4180"
+      > </a
+      ><a name="4181" href="MiniLibrary.html#3919" class="InductiveConstructor"
+      >0</a
+      ><a name="4182"
+      >        </a
+      ><a name="4190" class="Symbol"
+      >=</a
+      ><a name="4191"
+      > </a
+      ><a name="4192" href="MiniLibrary.html#1742" class="InductiveConstructor"
+      >refl</a
+      ><a name="4196"
+      >
+      </a
+      ><a name="4203" href="Fan.html#4115" class="Function"
+      >le</a
+      ><a name="4205"
+      > </a
+      ><a name="4206" href="Fan.html#4206" class="Bound"
+      >&#945;</a
+      ><a name="4207"
+      > </a
+      ><a name="4208" href="Fan.html#4208" class="Bound"
+      >&#946;</a
+      ><a name="4209"
+      > </a
+      ><a name="4210" class="Symbol"
+      >(</a
+      ><a name="4211" href="MiniLibrary.html#3930" class="InductiveConstructor"
+      >succ</a
+      ><a name="4215"
+      > </a
+      ><a name="4216" href="Fan.html#4216" class="Bound"
+      >i</a
+      ><a name="4217" class="Symbol"
+      >)</a
+      ><a name="4218"
+      > </a
+      ><a name="4219" class="Symbol"
+      >=</a
+      ><a name="4220"
+      > </a
+      ><a name="4221" href="Fan.html#4115" class="Function"
+      >le</a
+      ><a name="4223"
+      > </a
+      ><a name="4224" class="Symbol"
+      >(</a
+      ><a name="4225" href="Fan.html#4206" class="Bound"
+      >&#945;</a
+      ><a name="4226"
+      > </a
+      ><a name="4227" href="MiniLibrary.html#447" class="Function Operator"
+      >&#8728;</a
+      ><a name="4228"
+      > </a
+      ><a name="4229" href="MiniLibrary.html#3930" class="InductiveConstructor"
+      >succ</a
+      ><a name="4233" class="Symbol"
+      >)</a
+      ><a name="4234"
+      > </a
+      ><a name="4235" class="Symbol"
+      >(</a
+      ><a name="4236" href="Fan.html#4208" class="Bound"
+      >&#946;</a
+      ><a name="4237"
+      > </a
+      ><a name="4238" href="MiniLibrary.html#447" class="Function Operator"
+      >&#8728;</a
+      ><a name="4239"
+      > </a
+      ><a name="4240" href="MiniLibrary.html#3930" class="InductiveConstructor"
+      >succ</a
+      ><a name="4244" class="Symbol"
+      >)</a
+      ><a name="4245"
+      > </a
+      ><a name="4246" href="Fan.html#4216" class="Bound"
+      >i</a
+      ><a name="4247"
+      >
+
+    </a
+      ><a name="4253" href="Fan.html#4253" class="Function"
+      >lemma&#8321;</a
+      ><a name="4259"
+      > </a
+      ><a name="4260" class="Symbol"
+      >:</a
+      ><a name="4261"
+      > </a
+      ><a name="4262" class="Symbol"
+      >&#8704;(</a
+      ><a name="4264" href="Fan.html#4264" class="Bound"
+      >&#945;</a
+      ><a name="4265"
+      > </a
+      ><a name="4266" href="Fan.html#4266" class="Bound"
+      >&#946;</a
+      ><a name="4267"
+      > </a
+      ><a name="4268" class="Symbol"
+      >:</a
+      ><a name="4269"
+      > </a
+      ><a name="4270" href="Sequence.html#238" class="Function"
+      >&#8322;&#8469;</a
+      ><a name="4272" class="Symbol"
+      >)</a
+      ><a name="4273"
+      > </a
+      ><a name="4274" class="Symbol"
+      >&#8594;</a
+      ><a name="4275"
+      > </a
+      ><a name="4276" class="Symbol"
+      >&#8704;(</a
+      ><a name="4278" href="Fan.html#4278" class="Bound"
+      >i</a
+      ><a name="4279"
+      > </a
+      ><a name="4280" class="Symbol"
+      >:</a
+      ><a name="4281"
+      > </a
+      ><a name="4282" href="MiniLibrary.html#3902" class="Datatype"
+      >&#8469;</a
+      ><a name="4283" class="Symbol"
+      >)</a
+      ><a name="4284"
+      > </a
+      ><a name="4285" class="Symbol"
+      >&#8594;</a
+      ><a name="4286"
+      > </a
+      ><a name="4287" href="Fan.html#2726" class="Function"
+      >t&#8321;</a
+      ><a name="4289"
+      > </a
+      ><a name="4290" class="Symbol"
+      >(</a
+      ><a name="4291" href="Fan.html#3301" class="Function"
+      >merge</a
+      ><a name="4296"
+      > </a
+      ><a name="4297" href="Fan.html#4264" class="Bound"
+      >&#945;</a
+      ><a name="4298"
+      > </a
+      ><a name="4299" href="Fan.html#4266" class="Bound"
+      >&#946;</a
+      ><a name="4300" class="Symbol"
+      >)</a
+      ><a name="4301"
+      > </a
+      ><a name="4302" href="Fan.html#4278" class="Bound"
+      >i</a
+      ><a name="4303"
+      > </a
+      ><a name="4304" href="MiniLibrary.html#1706" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="4305"
+      > </a
+      ><a name="4306" href="Fan.html#4266" class="Bound"
+      >&#946;</a
+      ><a name="4307"
+      > </a
+      ><a name="4308" href="Fan.html#4278" class="Bound"
+      >i</a
+      ><a name="4309"
+      >
+    </a
+      ><a name="4314" href="Fan.html#4253" class="Function"
+      >lemma&#8321;</a
+      ><a name="4320"
+      > </a
+      ><a name="4321" href="Fan.html#4321" class="Bound"
+      >&#945;</a
+      ><a name="4322"
+      > </a
+      ><a name="4323" href="Fan.html#4323" class="Bound"
+      >&#946;</a
+      ><a name="4324"
+      > </a
+      ><a name="4325" href="MiniLibrary.html#3919" class="InductiveConstructor"
+      >0</a
+      ><a name="4326"
+      >        </a
+      ><a name="4334" class="Symbol"
+      >=</a
+      ><a name="4335"
+      > </a
+      ><a name="4336" href="MiniLibrary.html#1742" class="InductiveConstructor"
+      >refl</a
+      ><a name="4340"
+      >
+    </a
+      ><a name="4345" href="Fan.html#4253" class="Function"
+      >lemma&#8321;</a
+      ><a name="4351"
+      > </a
+      ><a name="4352" href="Fan.html#4352" class="Bound"
+      >&#945;</a
+      ><a name="4353"
+      > </a
+      ><a name="4354" href="Fan.html#4354" class="Bound"
+      >&#946;</a
+      ><a name="4355"
+      > </a
+      ><a name="4356" class="Symbol"
+      >(</a
+      ><a name="4357" href="MiniLibrary.html#3930" class="InductiveConstructor"
+      >succ</a
+      ><a name="4361"
+      > </a
+      ><a name="4362" href="Fan.html#4362" class="Bound"
+      >i</a
+      ><a name="4363" class="Symbol"
+      >)</a
+      ><a name="4364"
+      > </a
+      ><a name="4365" class="Symbol"
+      >=</a
+      ><a name="4366"
+      > </a
+      ><a name="4367" href="Fan.html#4253" class="Function"
+      >lemma&#8321;</a
+      ><a name="4373"
+      > </a
+      ><a name="4374" class="Symbol"
+      >(</a
+      ><a name="4375" href="Fan.html#4352" class="Bound"
+      >&#945;</a
+      ><a name="4376"
+      > </a
+      ><a name="4377" href="MiniLibrary.html#447" class="Function Operator"
+      >&#8728;</a
+      ><a name="4378"
+      > </a
+      ><a name="4379" href="MiniLibrary.html#3930" class="InductiveConstructor"
+      >succ</a
+      ><a name="4383" class="Symbol"
+      >)</a
+      ><a name="4384"
+      > </a
+      ><a name="4385" class="Symbol"
+      >(</a
+      ><a name="4386" href="Fan.html#4354" class="Bound"
+      >&#946;</a
+      ><a name="4387"
+      > </a
+      ><a name="4388" href="MiniLibrary.html#447" class="Function Operator"
+      >&#8728;</a
+      ><a name="4389"
+      > </a
+      ><a name="4390" href="MiniLibrary.html#3930" class="InductiveConstructor"
+      >succ</a
+      ><a name="4394" class="Symbol"
+      >)</a
+      ><a name="4395"
+      > </a
+      ><a name="4396" href="Fan.html#4362" class="Bound"
+      >i</a
+      ><a name="4397"
+      >
+
+    </a
+      ><a name="4403" href="Fan.html#4403" class="Function"
+      >lemma&#8321;'</a
+      ><a name="4410"
+      > </a
+      ><a name="4411" class="Symbol"
+      >:</a
+      ><a name="4412"
+      > </a
+      ><a name="4413" class="Symbol"
+      >&#8704;(</a
+      ><a name="4415" href="Fan.html#4415" class="Bound"
+      >&#945;</a
+      ><a name="4416"
+      > </a
+      ><a name="4417" class="Symbol"
+      >:</a
+      ><a name="4418"
+      > </a
+      ><a name="4419" href="Sequence.html#238" class="Function"
+      >&#8322;&#8469;</a
+      ><a name="4421" class="Symbol"
+      >)</a
+      ><a name="4422"
+      > </a
+      ><a name="4423" class="Symbol"
+      >&#8594;</a
+      ><a name="4424"
+      > </a
+      ><a name="4425" class="Symbol"
+      >&#8704;(</a
+      ><a name="4427" href="Fan.html#4427" class="Bound"
+      >&#966;</a
+      ><a name="4428"
+      > </a
+      ><a name="4429" class="Symbol"
+      >:</a
+      ><a name="4430"
+      > </a
+      ><a name="4431" href="Space.html#5138" class="Function"
+      >Map</a
+      ><a name="4434"
+      > </a
+      ><a name="4435" href="Space-discrete.html#7899" class="Function"
+      >&#8469;Space</a
+      ><a name="4441"
+      > </a
+      ><a name="4442" href="Space-discrete.html#4712" class="Function"
+      >&#8322;Space</a
+      ><a name="4448" class="Symbol"
+      >)</a
+      ><a name="4449"
+      > </a
+      ><a name="4450" class="Symbol"
+      >&#8594;</a
+      ><a name="4451"
+      >
+               </a
+      ><a name="4467" href="not-not.html#113" class="Function Operator"
+      >[</a
+      ><a name="4468"
+      > </a
+      ><a name="4469" href="Fan.html#3123" class="Function"
+      >t&#8321;'</a
+      ><a name="4472"
+      > </a
+      ><a name="4473" class="Symbol"
+      >(</a
+      ><a name="4474" href="Fan.html#3301" class="Function"
+      >merge</a
+      ><a name="4479"
+      > </a
+      ><a name="4480" href="Fan.html#4415" class="Bound"
+      >&#945;</a
+      ><a name="4481"
+      > </a
+      ><a name="4482" class="Symbol"
+      >(</a
+      ><a name="4483" href="MiniLibrary.html#840" class="Function"
+      >&#960;&#8320;</a
+      ><a name="4485"
+      >  </a
+      ><a name="4487" href="Fan.html#4427" class="Bound"
+      >&#966;</a
+      ><a name="4488" class="Symbol"
+      >))</a
+      ><a name="4490"
+      > </a
+      ><a name="4491" href="MiniLibrary.html#1706" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="4492"
+      > </a
+      ><a name="4493" href="Fan.html#4427" class="Bound"
+      >&#966;</a
+      ><a name="4494"
+      > </a
+      ><a name="4495" href="not-not.html#113" class="Function Operator"
+      >]</a
+      ><a name="4496"
+      >
+    </a
+      ><a name="4501" href="Fan.html#4403" class="Function"
+      >lemma&#8321;'</a
+      ><a name="4508"
+      > </a
+      ><a name="4509" href="Fan.html#4509" class="Bound"
+      >&#945;</a
+      ><a name="4510"
+      > </a
+      ><a name="4511" class="Symbol"
+      >(</a
+      ><a name="4512" href="Fan.html#4512" class="Bound"
+      >&#947;</a
+      ><a name="4513"
+      > </a
+      ><a name="4514" href="MiniLibrary.html#825" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="4515"
+      > </a
+      ><a name="4516" href="Fan.html#4516" class="Bound"
+      >cts&#947;</a
+      ><a name="4520" class="Symbol"
+      >)</a
+      ><a name="4521"
+      > </a
+      ><a name="4522" class="Symbol"
+      >=</a
+      ><a name="4523"
+      > </a
+      ><a name="4524" href="Space-discrete.html#17157" class="Function"
+      >Lemma[Map-&#8322;]</a
+      ><a name="4536"
+      > </a
+      ><a name="4537" href="Space-discrete.html#7899" class="Function"
+      >&#8469;Space</a
+      ><a name="4543"
+      > </a
+      ><a name="4544" class="Symbol"
+      >(</a
+      ><a name="4545" href="Fan.html#4589" class="Function"
+      >&#946;</a
+      ><a name="4546"
+      > </a
+      ><a name="4547" href="MiniLibrary.html#825" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="4548"
+      > </a
+      ><a name="4549" href="Fan.html#4633" class="Function"
+      >cts&#946;</a
+      ><a name="4553" class="Symbol"
+      >)</a
+      ><a name="4554"
+      > </a
+      ><a name="4555" class="Symbol"
+      >(</a
+      ><a name="4556" href="Fan.html#4512" class="Bound"
+      >&#947;</a
+      ><a name="4557"
+      > </a
+      ><a name="4558" href="MiniLibrary.html#825" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="4559"
+      > </a
+      ><a name="4560" href="Fan.html#4516" class="Bound"
+      >cts&#947;</a
+      ><a name="4564" class="Symbol"
+      >)</a
+      ><a name="4565"
+      > </a
+      ><a name="4566" href="Fan.html#4711" class="Function"
+      >claim</a
+      ><a name="4571"
+      >
+     </a
+      ><a name="4577" class="Keyword"
+      >where</a
+      ><a name="4582"
+      >
+      </a
+      ><a name="4589" href="Fan.html#4589" class="Function"
+      >&#946;</a
+      ><a name="4590"
+      > </a
+      ><a name="4591" class="Symbol"
+      >:</a
+      ><a name="4592"
+      > </a
+      ><a name="4593" href="Sequence.html#238" class="Function"
+      >&#8322;&#8469;</a
+      ><a name="4595"
+      >
+      </a
+      ><a name="4602" href="Fan.html#4589" class="Function"
+      >&#946;</a
+      ><a name="4603"
+      > </a
+      ><a name="4604" class="Symbol"
+      >=</a
+      ><a name="4605"
+      > </a
+      ><a name="4606" href="MiniLibrary.html#840" class="Function"
+      >&#960;&#8320;</a
+      ><a name="4608"
+      > </a
+      ><a name="4609" class="Symbol"
+      >(</a
+      ><a name="4610" href="Fan.html#3123" class="Function"
+      >t&#8321;'</a
+      ><a name="4613"
+      > </a
+      ><a name="4614" class="Symbol"
+      >(</a
+      ><a name="4615" href="Fan.html#3301" class="Function"
+      >merge</a
+      ><a name="4620"
+      > </a
+      ><a name="4621" href="Fan.html#4509" class="Bound"
+      >&#945;</a
+      ><a name="4622"
+      > </a
+      ><a name="4623" href="Fan.html#4512" class="Bound"
+      >&#947;</a
+      ><a name="4624" class="Symbol"
+      >))</a
+      ><a name="4626"
+      >
+      </a
+      ><a name="4633" href="Fan.html#4633" class="Function"
+      >cts&#946;</a
+      ><a name="4637"
+      > </a
+      ><a name="4638" class="Symbol"
+      >:</a
+      ><a name="4639"
+      > </a
+      ><a name="4640" href="Space.html#5031" class="Function"
+      >continuous</a
+      ><a name="4650"
+      > </a
+      ><a name="4651" class="Symbol"
+      >{</a
+      ><a name="4652" href="Space-discrete.html#7899" class="Function"
+      >&#8469;Space</a
+      ><a name="4658" class="Symbol"
+      >}</a
+      ><a name="4659"
+      > </a
+      ><a name="4660" class="Symbol"
+      >{</a
+      ><a name="4661" href="Space-discrete.html#4712" class="Function"
+      >&#8322;Space</a
+      ><a name="4667" class="Symbol"
+      >}</a
+      ><a name="4668"
+      > </a
+      ><a name="4669" href="Fan.html#4589" class="Function"
+      >&#946;</a
+      ><a name="4670"
+      >
+      </a
+      ><a name="4677" href="Fan.html#4633" class="Function"
+      >cts&#946;</a
+      ><a name="4681"
+      > </a
+      ><a name="4682" class="Symbol"
+      >=</a
+      ><a name="4683"
+      > </a
+      ><a name="4684" href="MiniLibrary.html#850" class="Function"
+      >&#960;&#8321;</a
+      ><a name="4686"
+      > </a
+      ><a name="4687" class="Symbol"
+      >(</a
+      ><a name="4688" href="Fan.html#3123" class="Function"
+      >t&#8321;'</a
+      ><a name="4691"
+      > </a
+      ><a name="4692" class="Symbol"
+      >(</a
+      ><a name="4693" href="Fan.html#3301" class="Function"
+      >merge</a
+      ><a name="4698"
+      > </a
+      ><a name="4699" href="Fan.html#4509" class="Bound"
+      >&#945;</a
+      ><a name="4700"
+      > </a
+      ><a name="4701" href="Fan.html#4512" class="Bound"
+      >&#947;</a
+      ><a name="4702" class="Symbol"
+      >))</a
+      ><a name="4704"
+      >
+      </a
+      ><a name="4711" href="Fan.html#4711" class="Function"
+      >claim</a
+      ><a name="4716"
+      > </a
+      ><a name="4717" class="Symbol"
+      >:</a
+      ><a name="4718"
+      > </a
+      ><a name="4719" class="Symbol"
+      >&#8704;(</a
+      ><a name="4721" href="Fan.html#4721" class="Bound"
+      >i</a
+      ><a name="4722"
+      > </a
+      ><a name="4723" class="Symbol"
+      >:</a
+      ><a name="4724"
+      > </a
+      ><a name="4725" href="MiniLibrary.html#3902" class="Datatype"
+      >&#8469;</a
+      ><a name="4726" class="Symbol"
+      >)</a
+      ><a name="4727"
+      > </a
+      ><a name="4728" class="Symbol"
+      >&#8594;</a
+      ><a name="4729"
+      > </a
+      ><a name="4730" href="Fan.html#4589" class="Function"
+      >&#946;</a
+      ><a name="4731"
+      > </a
+      ><a name="4732" href="Fan.html#4721" class="Bound"
+      >i</a
+      ><a name="4733"
+      > </a
+      ><a name="4734" href="MiniLibrary.html#1706" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="4735"
+      > </a
+      ><a name="4736" href="Fan.html#4512" class="Bound"
+      >&#947;</a
+      ><a name="4737"
+      > </a
+      ><a name="4738" href="Fan.html#4721" class="Bound"
+      >i</a
+      ><a name="4739"
+      >
+      </a
+      ><a name="4746" href="Fan.html#4711" class="Function"
+      >claim</a
+      ><a name="4751"
+      > </a
+      ><a name="4752" class="Symbol"
+      >=</a
+      ><a name="4753"
+      > </a
+      ><a name="4754" href="Fan.html#4253" class="Function"
+      >lemma&#8321;</a
+      ><a name="4760"
+      > </a
+      ><a name="4761" href="Fan.html#4509" class="Bound"
+      >&#945;</a
+      ><a name="4762"
+      > </a
+      ><a name="4763" href="Fan.html#4512" class="Bound"
+      >&#947;</a
+      ><a name="4764"
+      >
+
+    </a
+      ><a name="4771" href="Fan.html#4771" class="Function"
+      >q</a
+      ><a name="4772"
+      > </a
+      ><a name="4773" class="Symbol"
+      >:</a
+      ><a name="4774"
+      > </a
+      ><a name="4775" href="Sequence.html#238" class="Function"
+      >&#8322;&#8469;</a
+      ><a name="4777"
+      > </a
+      ><a name="4778" class="Symbol"
+      >&#8594;</a
+      ><a name="4779"
+      > </a
+      ><a name="4780" href="MiniLibrary.html#3902" class="Datatype"
+      >&#8469;</a
+      ><a name="4781"
+      >
+    </a
+      ><a name="4786" href="Fan.html#4771" class="Function"
+      >q</a
+      ><a name="4787"
+      > </a
+      ><a name="4788" href="Fan.html#4788" class="Bound"
+      >&#945;</a
+      ><a name="4789"
+      > </a
+      ><a name="4790" class="Symbol"
+      >=</a
+      ><a name="4791"
+      > </a
+      ><a name="4792" class="Symbol"
+      >(</a
+      ><a name="4793" href="MiniLibrary.html#840" class="Function"
+      >&#960;&#8320;</a
+      ><a name="4795"
+      > </a
+      ><a name="4796" href="MiniLibrary.html#447" class="Function Operator"
+      >&#8728;</a
+      ><a name="4797"
+      > </a
+      ><a name="4798" href="Fan.html#2284" class="Bound"
+      >p</a
+      ><a name="4799" class="Symbol"
+      >)(</a
+      ><a name="4801" href="Fan.html#2344" class="Function"
+      >t&#8320;</a
+      ><a name="4803"
+      > </a
+      ><a name="4804" href="Fan.html#4788" class="Bound"
+      >&#945;</a
+      ><a name="4805" class="Symbol"
+      >)(</a
+      ><a name="4807" href="Fan.html#3123" class="Function"
+      >t&#8321;'</a
+      ><a name="4810"
+      > </a
+      ><a name="4811" href="Fan.html#4788" class="Bound"
+      >&#945;</a
+      ><a name="4812" class="Symbol"
+      >)</a
+      ><a name="4813"
+      >
+    </a
+      ><a name="4818" href="Fan.html#4818" class="Function"
+      >ucq</a
+      ><a name="4821"
+      > </a
+      ><a name="4822" class="Symbol"
+      >:</a
+      ><a name="4823"
+      > </a
+      ><a name="4824" href="UniformContinuity.html#759" class="Function"
+      >locally-constant</a
+      ><a name="4840"
+      > </a
+      ><a name="4841" href="Fan.html#4771" class="Function"
+      >q</a
+      ><a name="4842"
+      >
+    </a
+      ><a name="4847" href="Fan.html#4818" class="Function"
+      >ucq</a
+      ><a name="4850"
+      > </a
+      ><a name="4851" class="Symbol"
+      >=</a
+      ><a name="4852"
+      > </a
+      ><a name="4853" href="Fan.html#2286" class="Bound"
+      >pr</a
+      ><a name="4855"
+      > </a
+      ><a name="4856" href="Fan.html#3123" class="Function"
+      >t&#8321;'</a
+      ><a name="4859"
+      > </a
+      ><a name="4860" href="Fan.html#3210" class="Function"
+      >pr&#8321;</a
+      ><a name="4863"
+      > </a
+      ><a name="4864" href="Fan.html#2344" class="Function"
+      >t&#8320;</a
+      ><a name="4866"
+      > </a
+      ><a name="4867" href="Fan.html#2380" class="Function"
+      >uct&#8320;</a
+      ><a name="4871"
+      >
+
+    </a
+      ><a name="4877" href="Fan.html#4877" class="Function"
+      >n</a
+      ><a name="4878"
+      > </a
+      ><a name="4879" class="Symbol"
+      >:</a
+      ><a name="4880"
+      > </a
+      ><a name="4881" href="MiniLibrary.html#3902" class="Datatype"
+      >&#8469;</a
+      ><a name="4882"
+      >
+    </a
+      ><a name="4887" href="Fan.html#4877" class="Function"
+      >n</a
+      ><a name="4888"
+      > </a
+      ><a name="4889" class="Symbol"
+      >=</a
+      ><a name="4890"
+      > </a
+      ><a name="4891" href="MiniLibrary.html#1453" class="Function"
+      >&#8707;-witness</a
+      ><a name="4900"
+      > </a
+      ><a name="4901" href="Fan.html#4818" class="Function"
+      >ucq</a
+      ><a name="4904"
+      >
+
+    </a
+      ><a name="4910" href="Fan.html#4910" class="Function"
+      >claim</a
+      ><a name="4915"
+      > </a
+      ><a name="4916" class="Symbol"
+      >:</a
+      ><a name="4917"
+      > </a
+      ><a name="4918" class="Symbol"
+      >&#8704;(</a
+      ><a name="4920" href="Fan.html#4920" class="Bound"
+      >&#945;</a
+      ><a name="4921"
+      > </a
+      ><a name="4922" href="Fan.html#4922" class="Bound"
+      >&#946;</a
+      ><a name="4923"
+      > </a
+      ><a name="4924" class="Symbol"
+      >:</a
+      ><a name="4925"
+      > </a
+      ><a name="4926" href="Sequence.html#238" class="Function"
+      >&#8322;&#8469;</a
+      ><a name="4928" class="Symbol"
+      >)</a
+      ><a name="4929"
+      > </a
+      ><a name="4930" class="Symbol"
+      >&#8594;</a
+      ><a name="4931"
+      > </a
+      ><a name="4932" href="Fan.html#4920" class="Bound"
+      >&#945;</a
+      ><a name="4933"
+      > </a
+      ><a name="4934" href="Sequence.html#2542" class="Datatype Operator"
+      >&#8803;[</a
+      ><a name="4936"
+      > </a
+      ><a name="4937" href="Fan.html#4877" class="Function"
+      >n</a
+      ><a name="4938"
+      > </a
+      ><a name="4939" href="Sequence.html#2542" class="Datatype Operator"
+      >]</a
+      ><a name="4940"
+      > </a
+      ><a name="4941" href="Fan.html#4922" class="Bound"
+      >&#946;</a
+      ><a name="4942"
+      > </a
+      ><a name="4943" class="Symbol"
+      >&#8594;</a
+      ><a name="4944"
+      > </a
+      ><a name="4945" href="not-not.html#113" class="Function Operator"
+      >[</a
+      ><a name="4946"
+      > </a
+      ><a name="4947" href="Fan.html#2284" class="Bound"
+      >p</a
+      ><a name="4948"
+      > </a
+      ><a name="4949" href="Fan.html#4920" class="Bound"
+      >&#945;</a
+      ><a name="4950"
+      > </a
+      ><a name="4951" href="MiniLibrary.html#1706" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="4952"
+      > </a
+      ><a name="4953" href="Fan.html#2284" class="Bound"
+      >p</a
+      ><a name="4954"
+      > </a
+      ><a name="4955" href="Fan.html#4922" class="Bound"
+      >&#946;</a
+      ><a name="4956"
+      > </a
+      ><a name="4957" href="not-not.html#113" class="Function Operator"
+      >]</a
+      ><a name="4958"
+      >
+    </a
+      ><a name="4963" href="Fan.html#4910" class="Function"
+      >claim</a
+      ><a name="4968"
+      > </a
+      ><a name="4969" href="Fan.html#4969" class="Bound"
+      >&#945;</a
+      ><a name="4970"
+      > </a
+      ><a name="4971" href="Fan.html#4971" class="Bound"
+      >&#946;</a
+      ><a name="4972"
+      > </a
+      ><a name="4973" href="Fan.html#4973" class="Bound"
+      >en</a
+      ><a name="4975"
+      > </a
+      ><a name="4976" class="Symbol"
+      >=</a
+      ><a name="4977"
+      > </a
+      ><a name="4978" href="Space-discrete.html#17327" class="Function"
+      >Lemma[Map-&#8469;]</a
+      ><a name="4990"
+      > </a
+      ><a name="4991" class="Symbol"
+      >(</a
+      ><a name="4992" href="Space-discrete.html#7899" class="Function"
+      >&#8469;Space</a
+      ><a name="4998"
+      > </a
+      ><a name="4999" href="Space-exponential.html#303" class="Function Operator"
+      >&#8658;</a
+      ><a name="5000"
+      > </a
+      ><a name="5001" href="Space-discrete.html#4712" class="Function"
+      >&#8322;Space</a
+      ><a name="5007" class="Symbol"
+      >)</a
+      ><a name="5008"
+      > </a
+      ><a name="5009" class="Symbol"
+      >(</a
+      ><a name="5010" href="Fan.html#5057" class="Function"
+      >p&#945;</a
+      ><a name="5012"
+      > </a
+      ><a name="5013" href="MiniLibrary.html#825" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="5014"
+      > </a
+      ><a name="5015" href="Fan.html#5110" class="Function"
+      >cts&#945;</a
+      ><a name="5019" class="Symbol"
+      >)</a
+      ><a name="5020"
+      > </a
+      ><a name="5021" class="Symbol"
+      >(</a
+      ><a name="5022" href="Fan.html#5186" class="Function"
+      >p&#946;</a
+      ><a name="5024"
+      > </a
+      ><a name="5025" href="MiniLibrary.html#825" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="5026"
+      > </a
+      ><a name="5027" href="Fan.html#5239" class="Function"
+      >cts&#946;</a
+      ><a name="5031" class="Symbol"
+      >)</a
+      ><a name="5032"
+      > </a
+      ><a name="5033" href="Fan.html#5315" class="Function"
+      >sclaim</a
+      ><a name="5039"
+      >
+     </a
+      ><a name="5045" class="Keyword"
+      >where</a
+      ><a name="5050"
+      >
+      </a
+      ><a name="5057" href="Fan.html#5057" class="Function"
+      >p&#945;</a
+      ><a name="5059"
+      > </a
+      ><a name="5060" class="Symbol"
+      >:</a
+      ><a name="5061"
+      > </a
+      ><a name="5062" href="Space.html#5138" class="Function"
+      >Map</a
+      ><a name="5065"
+      > </a
+      ><a name="5066" href="Space-discrete.html#7899" class="Function"
+      >&#8469;Space</a
+      ><a name="5072"
+      > </a
+      ><a name="5073" href="Space-discrete.html#4712" class="Function"
+      >&#8322;Space</a
+      ><a name="5079"
+      > </a
+      ><a name="5080" class="Symbol"
+      >&#8594;</a
+      ><a name="5081"
+      > </a
+      ><a name="5082" href="MiniLibrary.html#3902" class="Datatype"
+      >&#8469;</a
+      ><a name="5083"
+      >
+      </a
+      ><a name="5090" href="Fan.html#5057" class="Function"
+      >p&#945;</a
+      ><a name="5092"
+      > </a
+      ><a name="5093" class="Symbol"
+      >=</a
+      ><a name="5094"
+      > </a
+      ><a name="5095" href="MiniLibrary.html#840" class="Function"
+      >&#960;&#8320;</a
+      ><a name="5097"
+      > </a
+      ><a name="5098" class="Symbol"
+      >(</a
+      ><a name="5099" href="Fan.html#2284" class="Bound"
+      >p</a
+      ><a name="5100"
+      > </a
+      ><a name="5101" href="Fan.html#4969" class="Bound"
+      >&#945;</a
+      ><a name="5102" class="Symbol"
+      >)</a
+      ><a name="5103"
+      >
+      </a
+      ><a name="5110" href="Fan.html#5110" class="Function"
+      >cts&#945;</a
+      ><a name="5114"
+      > </a
+      ><a name="5115" class="Symbol"
+      >:</a
+      ><a name="5116"
+      > </a
+      ><a name="5117" href="Space.html#5031" class="Function"
+      >continuous</a
+      ><a name="5127"
+      > </a
+      ><a name="5128" class="Symbol"
+      >{</a
+      ><a name="5129" href="Space-discrete.html#7899" class="Function"
+      >&#8469;Space</a
+      ><a name="5135"
+      > </a
+      ><a name="5136" href="Space-exponential.html#303" class="Function Operator"
+      >&#8658;</a
+      ><a name="5137"
+      > </a
+      ><a name="5138" href="Space-discrete.html#4712" class="Function"
+      >&#8322;Space</a
+      ><a name="5144" class="Symbol"
+      >}</a
+      ><a name="5145"
+      > </a
+      ><a name="5146" class="Symbol"
+      >{</a
+      ><a name="5147" href="Space-discrete.html#7899" class="Function"
+      >&#8469;Space</a
+      ><a name="5153" class="Symbol"
+      >}</a
+      ><a name="5154"
+      > </a
+      ><a name="5155" href="Fan.html#5057" class="Function"
+      >p&#945;</a
+      ><a name="5157"
+      >
+      </a
+      ><a name="5164" href="Fan.html#5110" class="Function"
+      >cts&#945;</a
+      ><a name="5168"
+      > </a
+      ><a name="5169" class="Symbol"
+      >=</a
+      ><a name="5170"
+      > </a
+      ><a name="5171" href="MiniLibrary.html#850" class="Function"
+      >&#960;&#8321;</a
+      ><a name="5173"
+      > </a
+      ><a name="5174" class="Symbol"
+      >(</a
+      ><a name="5175" href="Fan.html#2284" class="Bound"
+      >p</a
+      ><a name="5176"
+      > </a
+      ><a name="5177" href="Fan.html#4969" class="Bound"
+      >&#945;</a
+      ><a name="5178" class="Symbol"
+      >)</a
+      ><a name="5179"
+      >
+      </a
+      ><a name="5186" href="Fan.html#5186" class="Function"
+      >p&#946;</a
+      ><a name="5188"
+      > </a
+      ><a name="5189" class="Symbol"
+      >:</a
+      ><a name="5190"
+      > </a
+      ><a name="5191" href="Space.html#5138" class="Function"
+      >Map</a
+      ><a name="5194"
+      > </a
+      ><a name="5195" href="Space-discrete.html#7899" class="Function"
+      >&#8469;Space</a
+      ><a name="5201"
+      > </a
+      ><a name="5202" href="Space-discrete.html#4712" class="Function"
+      >&#8322;Space</a
+      ><a name="5208"
+      > </a
+      ><a name="5209" class="Symbol"
+      >&#8594;</a
+      ><a name="5210"
+      > </a
+      ><a name="5211" href="MiniLibrary.html#3902" class="Datatype"
+      >&#8469;</a
+      ><a name="5212"
+      >
+      </a
+      ><a name="5219" href="Fan.html#5186" class="Function"
+      >p&#946;</a
+      ><a name="5221"
+      > </a
+      ><a name="5222" class="Symbol"
+      >=</a
+      ><a name="5223"
+      > </a
+      ><a name="5224" href="MiniLibrary.html#840" class="Function"
+      >&#960;&#8320;</a
+      ><a name="5226"
+      > </a
+      ><a name="5227" class="Symbol"
+      >(</a
+      ><a name="5228" href="Fan.html#2284" class="Bound"
+      >p</a
+      ><a name="5229"
+      > </a
+      ><a name="5230" href="Fan.html#4971" class="Bound"
+      >&#946;</a
+      ><a name="5231" class="Symbol"
+      >)</a
+      ><a name="5232"
+      >
+      </a
+      ><a name="5239" href="Fan.html#5239" class="Function"
+      >cts&#946;</a
+      ><a name="5243"
+      > </a
+      ><a name="5244" class="Symbol"
+      >:</a
+      ><a name="5245"
+      > </a
+      ><a name="5246" href="Space.html#5031" class="Function"
+      >continuous</a
+      ><a name="5256"
+      > </a
+      ><a name="5257" class="Symbol"
+      >{</a
+      ><a name="5258" href="Space-discrete.html#7899" class="Function"
+      >&#8469;Space</a
+      ><a name="5264"
+      > </a
+      ><a name="5265" href="Space-exponential.html#303" class="Function Operator"
+      >&#8658;</a
+      ><a name="5266"
+      > </a
+      ><a name="5267" href="Space-discrete.html#4712" class="Function"
+      >&#8322;Space</a
+      ><a name="5273" class="Symbol"
+      >}</a
+      ><a name="5274"
+      > </a
+      ><a name="5275" class="Symbol"
+      >{</a
+      ><a name="5276" href="Space-discrete.html#7899" class="Function"
+      >&#8469;Space</a
+      ><a name="5282" class="Symbol"
+      >}</a
+      ><a name="5283"
+      > </a
+      ><a name="5284" href="Fan.html#5186" class="Function"
+      >p&#946;</a
+      ><a name="5286"
+      >
+      </a
+      ><a name="5293" href="Fan.html#5239" class="Function"
+      >cts&#946;</a
+      ><a name="5297"
+      > </a
+      ><a name="5298" class="Symbol"
+      >=</a
+      ><a name="5299"
+      > </a
+      ><a name="5300" href="MiniLibrary.html#850" class="Function"
+      >&#960;&#8321;</a
+      ><a name="5302"
+      > </a
+      ><a name="5303" class="Symbol"
+      >(</a
+      ><a name="5304" href="Fan.html#2284" class="Bound"
+      >p</a
+      ><a name="5305"
+      > </a
+      ><a name="5306" href="Fan.html#4971" class="Bound"
+      >&#946;</a
+      ><a name="5307" class="Symbol"
+      >)</a
+      ><a name="5308"
+      >
+      </a
+      ><a name="5315" href="Fan.html#5315" class="Function"
+      >sclaim</a
+      ><a name="5321"
+      > </a
+      ><a name="5322" class="Symbol"
+      >:</a
+      ><a name="5323"
+      > </a
+      ><a name="5324" class="Symbol"
+      >&#8704;(</a
+      ><a name="5326" href="Fan.html#5326" class="Bound"
+      >&#947;</a
+      ><a name="5327"
+      > </a
+      ><a name="5328" class="Symbol"
+      >:</a
+      ><a name="5329"
+      > </a
+      ><a name="5330" href="Space.html#5138" class="Function"
+      >Map</a
+      ><a name="5333"
+      > </a
+      ><a name="5334" href="Space-discrete.html#7899" class="Function"
+      >&#8469;Space</a
+      ><a name="5340"
+      > </a
+      ><a name="5341" href="Space-discrete.html#4712" class="Function"
+      >&#8322;Space</a
+      ><a name="5347" class="Symbol"
+      >)</a
+      ><a name="5348"
+      > </a
+      ><a name="5349" class="Symbol"
+      >&#8594;</a
+      ><a name="5350"
+      > </a
+      ><a name="5351" href="Fan.html#5057" class="Function"
+      >p&#945;</a
+      ><a name="5353"
+      > </a
+      ><a name="5354" href="Fan.html#5326" class="Bound"
+      >&#947;</a
+      ><a name="5355"
+      > </a
+      ><a name="5356" href="MiniLibrary.html#1706" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="5357"
+      > </a
+      ><a name="5358" href="Fan.html#5186" class="Function"
+      >p&#946;</a
+      ><a name="5360"
+      > </a
+      ><a name="5361" href="Fan.html#5326" class="Bound"
+      >&#947;</a
+      ><a name="5362"
+      >
+      </a
+      ><a name="5369" href="Fan.html#5315" class="Function"
+      >sclaim</a
+      ><a name="5375"
+      > </a
+      ><a name="5376" class="Symbol"
+      >(</a
+      ><a name="5377" href="Fan.html#5377" class="Bound"
+      >&#947;</a
+      ><a name="5378"
+      > </a
+      ><a name="5379" href="MiniLibrary.html#825" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="5380"
+      > </a
+      ><a name="5381" href="Fan.html#5381" class="Bound"
+      >cts&#947;</a
+      ><a name="5385" class="Symbol"
+      >)</a
+      ><a name="5386"
+      > </a
+      ><a name="5387" class="Symbol"
+      >=</a
+      ><a name="5388"
+      > </a
+      ><a name="5389" href="not-not.html#2486" class="Function"
+      >decidable-structure</a
+      ><a name="5408"
+      > </a
+      ><a name="5409" class="Symbol"
+      >(</a
+      ><a name="5410" href="MiniLibrary.html#6845" class="Function"
+      >&#8469;-discrete</a
+      ><a name="5420"
+      > </a
+      ><a name="5421" class="Symbol"
+      >(</a
+      ><a name="5422" href="Fan.html#5057" class="Function"
+      >p&#945;</a
+      ><a name="5424"
+      > </a
+      ><a name="5425" class="Symbol"
+      >(</a
+      ><a name="5426" href="Fan.html#5377" class="Bound"
+      >&#947;</a
+      ><a name="5427"
+      > </a
+      ><a name="5428" href="MiniLibrary.html#825" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="5429"
+      > </a
+      ><a name="5430" href="Fan.html#5381" class="Bound"
+      >cts&#947;</a
+      ><a name="5434" class="Symbol"
+      >))</a
+      ><a name="5436"
+      > </a
+      ><a name="5437" class="Symbol"
+      >(</a
+      ><a name="5438" href="Fan.html#5186" class="Function"
+      >p&#946;</a
+      ><a name="5440"
+      > </a
+      ><a name="5441" class="Symbol"
+      >(</a
+      ><a name="5442" href="Fan.html#5377" class="Bound"
+      >&#947;</a
+      ><a name="5443"
+      > </a
+      ><a name="5444" href="MiniLibrary.html#825" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="5445"
+      > </a
+      ><a name="5446" href="Fan.html#5381" class="Bound"
+      >cts&#947;</a
+      ><a name="5450" class="Symbol"
+      >)))</a
+      ><a name="5453"
+      > </a
+      ><a name="5454" href="Fan.html#6494" class="Function"
+      >ssclaim&#8324;</a
+      ><a name="5462"
+      >
+       </a
+      ><a name="5470" class="Keyword"
+      >where</a
+      ><a name="5475"
+      >
+        </a
+      ><a name="5484" href="Fan.html#5484" class="Function"
+      >e&#947;</a
+      ><a name="5486"
+      > </a
+      ><a name="5487" class="Symbol"
+      >:</a
+      ><a name="5488"
+      > </a
+      ><a name="5489" href="Fan.html#3301" class="Function"
+      >merge</a
+      ><a name="5494"
+      > </a
+      ><a name="5495" href="Fan.html#4969" class="Bound"
+      >&#945;</a
+      ><a name="5496"
+      > </a
+      ><a name="5497" href="Fan.html#5377" class="Bound"
+      >&#947;</a
+      ><a name="5498"
+      > </a
+      ><a name="5499" href="Sequence.html#2542" class="Datatype Operator"
+      >&#8803;[</a
+      ><a name="5501"
+      > </a
+      ><a name="5502" href="Fan.html#4877" class="Function"
+      >n</a
+      ><a name="5503"
+      > </a
+      ><a name="5504" href="Sequence.html#2542" class="Datatype Operator"
+      >]</a
+      ><a name="5505"
+      > </a
+      ><a name="5506" href="Fan.html#3301" class="Function"
+      >merge</a
+      ><a name="5511"
+      > </a
+      ><a name="5512" href="Fan.html#4971" class="Bound"
+      >&#946;</a
+      ><a name="5513"
+      > </a
+      ><a name="5514" href="Fan.html#5377" class="Bound"
+      >&#947;</a
+      ><a name="5515"
+      >
+        </a
+      ><a name="5524" href="Fan.html#5484" class="Function"
+      >e&#947;</a
+      ><a name="5526"
+      > </a
+      ><a name="5527" class="Symbol"
+      >=</a
+      ><a name="5528"
+      > </a
+      ><a name="5529" href="Sequence.html#5220" class="Function"
+      >Lemma[&#8803;[]-&#8804;]</a
+      ><a name="5541"
+      > </a
+      ><a name="5542" class="Symbol"
+      >(</a
+      ><a name="5543" href="Fan.html#3855" class="Function"
+      >lemma</a
+      ><a name="5548"
+      > </a
+      ><a name="5549" href="Fan.html#4969" class="Bound"
+      >&#945;</a
+      ><a name="5550"
+      > </a
+      ><a name="5551" href="Fan.html#4971" class="Bound"
+      >&#946;</a
+      ><a name="5552"
+      > </a
+      ><a name="5553" href="Fan.html#5377" class="Bound"
+      >&#947;</a
+      ><a name="5554"
+      > </a
+      ><a name="5555" href="Fan.html#4877" class="Function"
+      >n</a
+      ><a name="5556"
+      > </a
+      ><a name="5557" href="Fan.html#4973" class="Bound"
+      >en</a
+      ><a name="5559" class="Symbol"
+      >)</a
+      ><a name="5560"
+      > </a
+      ><a name="5561" class="Symbol"
+      >(</a
+      ><a name="5562" href="Fan.html#830" class="Function"
+      >Lemma[n&#8804;2n]</a
+      ><a name="5573"
+      > </a
+      ><a name="5574" href="Fan.html#4877" class="Function"
+      >n</a
+      ><a name="5575" class="Symbol"
+      >)</a
+      ><a name="5576"
+      >
+        </a
+      ><a name="5585" href="Fan.html#5585" class="Function"
+      >ssclaim&#8320;</a
+      ><a name="5593"
+      > </a
+      ><a name="5594" class="Symbol"
+      >:</a
+      ><a name="5595"
+      > </a
+      ><a name="5596" href="not-not.html#113" class="Function Operator"
+      >[</a
+      ><a name="5597"
+      > </a
+      ><a name="5598" class="Symbol"
+      >(</a
+      ><a name="5599" href="MiniLibrary.html#840" class="Function"
+      >&#960;&#8320;</a
+      ><a name="5601"
+      > </a
+      ><a name="5602" href="MiniLibrary.html#447" class="Function Operator"
+      >&#8728;</a
+      ><a name="5603"
+      > </a
+      ><a name="5604" href="Fan.html#2284" class="Bound"
+      >p</a
+      ><a name="5605" class="Symbol"
+      >)(</a
+      ><a name="5607" href="Fan.html#2344" class="Function"
+      >t&#8320;</a
+      ><a name="5609"
+      > </a
+      ><a name="5610" class="Symbol"
+      >(</a
+      ><a name="5611" href="Fan.html#3301" class="Function"
+      >merge</a
+      ><a name="5616"
+      > </a
+      ><a name="5617" href="Fan.html#4969" class="Bound"
+      >&#945;</a
+      ><a name="5618"
+      > </a
+      ><a name="5619" href="Fan.html#5377" class="Bound"
+      >&#947;</a
+      ><a name="5620" class="Symbol"
+      >))(</a
+      ><a name="5623" href="Fan.html#3123" class="Function"
+      >t&#8321;'</a
+      ><a name="5626"
+      > </a
+      ><a name="5627" class="Symbol"
+      >(</a
+      ><a name="5628" href="Fan.html#3301" class="Function"
+      >merge</a
+      ><a name="5633"
+      > </a
+      ><a name="5634" href="Fan.html#4969" class="Bound"
+      >&#945;</a
+      ><a name="5635"
+      > </a
+      ><a name="5636" href="Fan.html#5377" class="Bound"
+      >&#947;</a
+      ><a name="5637" class="Symbol"
+      >))</a
+      ><a name="5639"
+      > </a
+      ><a name="5640" href="MiniLibrary.html#1706" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="5641"
+      > </a
+      ><a name="5642" class="Symbol"
+      >(</a
+      ><a name="5643" href="MiniLibrary.html#840" class="Function"
+      >&#960;&#8320;</a
+      ><a name="5645"
+      > </a
+      ><a name="5646" href="MiniLibrary.html#447" class="Function Operator"
+      >&#8728;</a
+      ><a name="5647"
+      > </a
+      ><a name="5648" href="Fan.html#2284" class="Bound"
+      >p</a
+      ><a name="5649" class="Symbol"
+      >)(</a
+      ><a name="5651" href="Fan.html#2344" class="Function"
+      >t&#8320;</a
+      ><a name="5653"
+      > </a
+      ><a name="5654" class="Symbol"
+      >(</a
+      ><a name="5655" href="Fan.html#3301" class="Function"
+      >merge</a
+      ><a name="5660"
+      > </a
+      ><a name="5661" href="Fan.html#4971" class="Bound"
+      >&#946;</a
+      ><a name="5662"
+      > </a
+      ><a name="5663" href="Fan.html#5377" class="Bound"
+      >&#947;</a
+      ><a name="5664" class="Symbol"
+      >))(</a
+      ><a name="5667" href="Fan.html#3123" class="Function"
+      >t&#8321;'</a
+      ><a name="5670"
+      > </a
+      ><a name="5671" class="Symbol"
+      >(</a
+      ><a name="5672" href="Fan.html#3301" class="Function"
+      >merge</a
+      ><a name="5677"
+      > </a
+      ><a name="5678" href="Fan.html#4971" class="Bound"
+      >&#946;</a
+      ><a name="5679"
+      > </a
+      ><a name="5680" href="Fan.html#5377" class="Bound"
+      >&#947;</a
+      ><a name="5681" class="Symbol"
+      >))</a
+      ><a name="5683"
+      > </a
+      ><a name="5684" href="not-not.html#113" class="Function Operator"
+      >]</a
+      ><a name="5685"
+      >
+        </a
+      ><a name="5694" href="Fan.html#5585" class="Function"
+      >ssclaim&#8320;</a
+      ><a name="5702"
+      > </a
+      ><a name="5703" class="Symbol"
+      >=</a
+      ><a name="5704"
+      > </a
+      ><a name="5705" href="not-not.html#161" class="Function"
+      >hide</a
+      ><a name="5709"
+      > </a
+      ><a name="5710" class="Symbol"
+      >(</a
+      ><a name="5711" href="MiniLibrary.html#1088" class="Function"
+      >&#8743;-elim&#8320;</a
+      ><a name="5718"
+      > </a
+      ><a name="5719" class="Symbol"
+      >(</a
+      ><a name="5720" href="MiniLibrary.html#1529" class="Function"
+      >&#8707;-elim</a
+      ><a name="5726"
+      > </a
+      ><a name="5727" href="Fan.html#4818" class="Function"
+      >ucq</a
+      ><a name="5730" class="Symbol"
+      >)</a
+      ><a name="5731"
+      > </a
+      ><a name="5732" class="Symbol"
+      >(</a
+      ><a name="5733" href="Fan.html#3301" class="Function"
+      >merge</a
+      ><a name="5738"
+      > </a
+      ><a name="5739" href="Fan.html#4969" class="Bound"
+      >&#945;</a
+      ><a name="5740"
+      > </a
+      ><a name="5741" href="Fan.html#5377" class="Bound"
+      >&#947;</a
+      ><a name="5742" class="Symbol"
+      >)</a
+      ><a name="5743"
+      > </a
+      ><a name="5744" class="Symbol"
+      >(</a
+      ><a name="5745" href="Fan.html#3301" class="Function"
+      >merge</a
+      ><a name="5750"
+      > </a
+      ><a name="5751" href="Fan.html#4971" class="Bound"
+      >&#946;</a
+      ><a name="5752"
+      > </a
+      ><a name="5753" href="Fan.html#5377" class="Bound"
+      >&#947;</a
+      ><a name="5754" class="Symbol"
+      >)</a
+      ><a name="5755"
+      > </a
+      ><a name="5756" href="Fan.html#5484" class="Function"
+      >e&#947;</a
+      ><a name="5758" class="Symbol"
+      >)</a
+      ><a name="5759"
+      >
+        </a
+      ><a name="5768" href="Fan.html#5768" class="Function"
+      >ssclaim&#8321;</a
+      ><a name="5776"
+      > </a
+      ><a name="5777" class="Symbol"
+      >:</a
+      ><a name="5778"
+      > </a
+      ><a name="5779" href="not-not.html#113" class="Function Operator"
+      >[</a
+      ><a name="5780"
+      > </a
+      ><a name="5781" class="Symbol"
+      >(</a
+      ><a name="5782" href="MiniLibrary.html#840" class="Function"
+      >&#960;&#8320;</a
+      ><a name="5784"
+      > </a
+      ><a name="5785" href="MiniLibrary.html#447" class="Function Operator"
+      >&#8728;</a
+      ><a name="5786"
+      > </a
+      ><a name="5787" href="Fan.html#2284" class="Bound"
+      >p</a
+      ><a name="5788" class="Symbol"
+      >)(</a
+      ><a name="5790" href="Fan.html#4969" class="Bound"
+      >&#945;</a
+      ><a name="5791" class="Symbol"
+      >)(</a
+      ><a name="5793" href="Fan.html#3123" class="Function"
+      >t&#8321;'</a
+      ><a name="5796"
+      > </a
+      ><a name="5797" class="Symbol"
+      >(</a
+      ><a name="5798" href="Fan.html#3301" class="Function"
+      >merge</a
+      ><a name="5803"
+      > </a
+      ><a name="5804" href="Fan.html#4969" class="Bound"
+      >&#945;</a
+      ><a name="5805"
+      > </a
+      ><a name="5806" href="Fan.html#5377" class="Bound"
+      >&#947;</a
+      ><a name="5807" class="Symbol"
+      >))</a
+      ><a name="5809"
+      > </a
+      ><a name="5810" href="MiniLibrary.html#1706" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="5811"
+      > </a
+      ><a name="5812" class="Symbol"
+      >(</a
+      ><a name="5813" href="MiniLibrary.html#840" class="Function"
+      >&#960;&#8320;</a
+      ><a name="5815"
+      > </a
+      ><a name="5816" href="MiniLibrary.html#447" class="Function Operator"
+      >&#8728;</a
+      ><a name="5817"
+      > </a
+      ><a name="5818" href="Fan.html#2284" class="Bound"
+      >p</a
+      ><a name="5819" class="Symbol"
+      >)(</a
+      ><a name="5821" href="Fan.html#2344" class="Function"
+      >t&#8320;</a
+      ><a name="5823"
+      > </a
+      ><a name="5824" class="Symbol"
+      >(</a
+      ><a name="5825" href="Fan.html#3301" class="Function"
+      >merge</a
+      ><a name="5830"
+      > </a
+      ><a name="5831" href="Fan.html#4971" class="Bound"
+      >&#946;</a
+      ><a name="5832"
+      > </a
+      ><a name="5833" href="Fan.html#5377" class="Bound"
+      >&#947;</a
+      ><a name="5834" class="Symbol"
+      >))(</a
+      ><a name="5837" href="Fan.html#3123" class="Function"
+      >t&#8321;'</a
+      ><a name="5840"
+      > </a
+      ><a name="5841" class="Symbol"
+      >(</a
+      ><a name="5842" href="Fan.html#3301" class="Function"
+      >merge</a
+      ><a name="5847"
+      > </a
+      ><a name="5848" href="Fan.html#4971" class="Bound"
+      >&#946;</a
+      ><a name="5849"
+      > </a
+      ><a name="5850" href="Fan.html#5377" class="Bound"
+      >&#947;</a
+      ><a name="5851" class="Symbol"
+      >))</a
+      ><a name="5853"
+      > </a
+      ><a name="5854" href="not-not.html#113" class="Function Operator"
+      >]</a
+      ><a name="5855"
+      >
+        </a
+      ><a name="5864" href="Fan.html#5768" class="Function"
+      >ssclaim&#8321;</a
+      ><a name="5872"
+      > </a
+      ><a name="5873" class="Symbol"
+      >=</a
+      ><a name="5874"
+      > </a
+      ><a name="5875" href="not-not.html#1340" class="Function"
+      >[transport]</a
+      ><a name="5886"
+      > </a
+      ><a name="5887" class="Symbol"
+      >{</a
+      ><a name="5888" href="Sequence.html#238" class="Function"
+      >&#8322;&#8469;</a
+      ><a name="5890" class="Symbol"
+      >}</a
+      ><a name="5891"
+      > </a
+      ><a name="5892" class="Symbol"
+      >{&#955;</a
+      ><a name="5894"
+      > </a
+      ><a name="5895" href="Fan.html#5895" class="Bound"
+      >x</a
+      ><a name="5896"
+      > </a
+      ><a name="5897" class="Symbol"
+      >&#8594;</a
+      ><a name="5898"
+      > </a
+      ><a name="5899" class="Symbol"
+      >(</a
+      ><a name="5900" href="MiniLibrary.html#840" class="Function"
+      >&#960;&#8320;</a
+      ><a name="5902"
+      > </a
+      ><a name="5903" href="MiniLibrary.html#447" class="Function Operator"
+      >&#8728;</a
+      ><a name="5904"
+      > </a
+      ><a name="5905" href="Fan.html#2284" class="Bound"
+      >p</a
+      ><a name="5906" class="Symbol"
+      >)(</a
+      ><a name="5908" href="Fan.html#5895" class="Bound"
+      >x</a
+      ><a name="5909" class="Symbol"
+      >)(</a
+      ><a name="5911" href="Fan.html#3123" class="Function"
+      >t&#8321;'</a
+      ><a name="5914"
+      > </a
+      ><a name="5915" class="Symbol"
+      >(</a
+      ><a name="5916" href="Fan.html#3301" class="Function"
+      >merge</a
+      ><a name="5921"
+      > </a
+      ><a name="5922" href="Fan.html#4969" class="Bound"
+      >&#945;</a
+      ><a name="5923"
+      > </a
+      ><a name="5924" href="Fan.html#5377" class="Bound"
+      >&#947;</a
+      ><a name="5925" class="Symbol"
+      >))</a
+      ><a name="5927"
+      > </a
+      ><a name="5928" href="MiniLibrary.html#1706" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="5929"
+      > </a
+      ><a name="5930" class="Symbol"
+      >(</a
+      ><a name="5931" href="MiniLibrary.html#840" class="Function"
+      >&#960;&#8320;</a
+      ><a name="5933"
+      > </a
+      ><a name="5934" href="MiniLibrary.html#447" class="Function Operator"
+      >&#8728;</a
+      ><a name="5935"
+      > </a
+      ><a name="5936" href="Fan.html#2284" class="Bound"
+      >p</a
+      ><a name="5937" class="Symbol"
+      >)(</a
+      ><a name="5939" href="Fan.html#2344" class="Function"
+      >t&#8320;</a
+      ><a name="5941"
+      > </a
+      ><a name="5942" class="Symbol"
+      >(</a
+      ><a name="5943" href="Fan.html#3301" class="Function"
+      >merge</a
+      ><a name="5948"
+      > </a
+      ><a name="5949" href="Fan.html#4971" class="Bound"
+      >&#946;</a
+      ><a name="5950"
+      > </a
+      ><a name="5951" href="Fan.html#5377" class="Bound"
+      >&#947;</a
+      ><a name="5952" class="Symbol"
+      >))(</a
+      ><a name="5955" href="Fan.html#3123" class="Function"
+      >t&#8321;'</a
+      ><a name="5958"
+      > </a
+      ><a name="5959" class="Symbol"
+      >(</a
+      ><a name="5960" href="Fan.html#3301" class="Function"
+      >merge</a
+      ><a name="5965"
+      > </a
+      ><a name="5966" href="Fan.html#4971" class="Bound"
+      >&#946;</a
+      ><a name="5967"
+      > </a
+      ><a name="5968" href="Fan.html#5377" class="Bound"
+      >&#947;</a
+      ><a name="5969" class="Symbol"
+      >))}</a
+      ><a name="5972"
+      >
+                           </a
+      ><a name="6000" class="Symbol"
+      >(</a
+      ><a name="6001" href="Fan.html#3994" class="Function"
+      >lemma&#8320;</a
+      ><a name="6007"
+      > </a
+      ><a name="6008" href="Fan.html#4969" class="Bound"
+      >&#945;</a
+      ><a name="6009"
+      > </a
+      ><a name="6010" href="Fan.html#5377" class="Bound"
+      >&#947;</a
+      ><a name="6011" class="Symbol"
+      >)</a
+      ><a name="6012"
+      > </a
+      ><a name="6013" href="Fan.html#5585" class="Function"
+      >ssclaim&#8320;</a
+      ><a name="6021"
+      >
+        </a
+      ><a name="6030" href="Fan.html#6030" class="Function"
+      >ssclaim&#8322;</a
+      ><a name="6038"
+      > </a
+      ><a name="6039" class="Symbol"
+      >:</a
+      ><a name="6040"
+      > </a
+      ><a name="6041" href="not-not.html#113" class="Function Operator"
+      >[</a
+      ><a name="6042"
+      > </a
+      ><a name="6043" href="MiniLibrary.html#840" class="Function"
+      >&#960;&#8320;</a
+      ><a name="6045"
+      > </a
+      ><a name="6046" class="Symbol"
+      >(</a
+      ><a name="6047" href="Fan.html#2284" class="Bound"
+      >p</a
+      ><a name="6048"
+      > </a
+      ><a name="6049" href="Fan.html#4969" class="Bound"
+      >&#945;</a
+      ><a name="6050" class="Symbol"
+      >)</a
+      ><a name="6051"
+      > </a
+      ><a name="6052" class="Symbol"
+      >(</a
+      ><a name="6053" href="Fan.html#3123" class="Function"
+      >t&#8321;'</a
+      ><a name="6056"
+      > </a
+      ><a name="6057" class="Symbol"
+      >(</a
+      ><a name="6058" href="Fan.html#3301" class="Function"
+      >merge</a
+      ><a name="6063"
+      > </a
+      ><a name="6064" href="Fan.html#4969" class="Bound"
+      >&#945;</a
+      ><a name="6065"
+      > </a
+      ><a name="6066" href="Fan.html#5377" class="Bound"
+      >&#947;</a
+      ><a name="6067" class="Symbol"
+      >))</a
+      ><a name="6069"
+      > </a
+      ><a name="6070" href="MiniLibrary.html#1706" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="6071"
+      > </a
+      ><a name="6072" href="MiniLibrary.html#840" class="Function"
+      >&#960;&#8320;</a
+      ><a name="6074"
+      > </a
+      ><a name="6075" class="Symbol"
+      >(</a
+      ><a name="6076" href="Fan.html#2284" class="Bound"
+      >p</a
+      ><a name="6077"
+      > </a
+      ><a name="6078" href="Fan.html#4971" class="Bound"
+      >&#946;</a
+      ><a name="6079" class="Symbol"
+      >)</a
+      ><a name="6080"
+      > </a
+      ><a name="6081" class="Symbol"
+      >(</a
+      ><a name="6082" href="Fan.html#3123" class="Function"
+      >t&#8321;'</a
+      ><a name="6085"
+      > </a
+      ><a name="6086" class="Symbol"
+      >(</a
+      ><a name="6087" href="Fan.html#3301" class="Function"
+      >merge</a
+      ><a name="6092"
+      > </a
+      ><a name="6093" href="Fan.html#4971" class="Bound"
+      >&#946;</a
+      ><a name="6094"
+      > </a
+      ><a name="6095" href="Fan.html#5377" class="Bound"
+      >&#947;</a
+      ><a name="6096" class="Symbol"
+      >))</a
+      ><a name="6098"
+      > </a
+      ><a name="6099" href="not-not.html#113" class="Function Operator"
+      >]</a
+      ><a name="6100"
+      >
+        </a
+      ><a name="6109" href="Fan.html#6030" class="Function"
+      >ssclaim&#8322;</a
+      ><a name="6117"
+      > </a
+      ><a name="6118" class="Symbol"
+      >=</a
+      ><a name="6119"
+      > </a
+      ><a name="6120" href="not-not.html#1340" class="Function"
+      >[transport]</a
+      ><a name="6131"
+      > </a
+      ><a name="6132" class="Symbol"
+      >{</a
+      ><a name="6133" href="Sequence.html#238" class="Function"
+      >&#8322;&#8469;</a
+      ><a name="6135" class="Symbol"
+      >}</a
+      ><a name="6136"
+      > </a
+      ><a name="6137" class="Symbol"
+      >{&#955;</a
+      ><a name="6139"
+      > </a
+      ><a name="6140" href="Fan.html#6140" class="Bound"
+      >x</a
+      ><a name="6141"
+      > </a
+      ><a name="6142" class="Symbol"
+      >&#8594;</a
+      ><a name="6143"
+      > </a
+      ><a name="6144" class="Symbol"
+      >(</a
+      ><a name="6145" href="MiniLibrary.html#840" class="Function"
+      >&#960;&#8320;</a
+      ><a name="6147"
+      > </a
+      ><a name="6148" href="MiniLibrary.html#447" class="Function Operator"
+      >&#8728;</a
+      ><a name="6149"
+      > </a
+      ><a name="6150" href="Fan.html#2284" class="Bound"
+      >p</a
+      ><a name="6151" class="Symbol"
+      >)(</a
+      ><a name="6153" href="Fan.html#4969" class="Bound"
+      >&#945;</a
+      ><a name="6154" class="Symbol"
+      >)(</a
+      ><a name="6156" href="Fan.html#3123" class="Function"
+      >t&#8321;'</a
+      ><a name="6159"
+      > </a
+      ><a name="6160" class="Symbol"
+      >(</a
+      ><a name="6161" href="Fan.html#3301" class="Function"
+      >merge</a
+      ><a name="6166"
+      > </a
+      ><a name="6167" href="Fan.html#4969" class="Bound"
+      >&#945;</a
+      ><a name="6168"
+      > </a
+      ><a name="6169" href="Fan.html#5377" class="Bound"
+      >&#947;</a
+      ><a name="6170" class="Symbol"
+      >))</a
+      ><a name="6172"
+      > </a
+      ><a name="6173" href="MiniLibrary.html#1706" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="6174"
+      > </a
+      ><a name="6175" class="Symbol"
+      >(</a
+      ><a name="6176" href="MiniLibrary.html#840" class="Function"
+      >&#960;&#8320;</a
+      ><a name="6178"
+      > </a
+      ><a name="6179" href="MiniLibrary.html#447" class="Function Operator"
+      >&#8728;</a
+      ><a name="6180"
+      > </a
+      ><a name="6181" href="Fan.html#2284" class="Bound"
+      >p</a
+      ><a name="6182" class="Symbol"
+      >)(</a
+      ><a name="6184" href="Fan.html#6140" class="Bound"
+      >x</a
+      ><a name="6185" class="Symbol"
+      >)(</a
+      ><a name="6187" href="Fan.html#3123" class="Function"
+      >t&#8321;'</a
+      ><a name="6190"
+      > </a
+      ><a name="6191" class="Symbol"
+      >(</a
+      ><a name="6192" href="Fan.html#3301" class="Function"
+      >merge</a
+      ><a name="6197"
+      > </a
+      ><a name="6198" href="Fan.html#4971" class="Bound"
+      >&#946;</a
+      ><a name="6199"
+      > </a
+      ><a name="6200" href="Fan.html#5377" class="Bound"
+      >&#947;</a
+      ><a name="6201" class="Symbol"
+      >))}</a
+      ><a name="6204"
+      >
+                           </a
+      ><a name="6232" class="Symbol"
+      >(</a
+      ><a name="6233" href="Fan.html#3994" class="Function"
+      >lemma&#8320;</a
+      ><a name="6239"
+      > </a
+      ><a name="6240" href="Fan.html#4971" class="Bound"
+      >&#946;</a
+      ><a name="6241"
+      > </a
+      ><a name="6242" href="Fan.html#5377" class="Bound"
+      >&#947;</a
+      ><a name="6243" class="Symbol"
+      >)</a
+      ><a name="6244"
+      > </a
+      ><a name="6245" href="Fan.html#5768" class="Function"
+      >ssclaim&#8321;</a
+      ><a name="6253"
+      >
+        </a
+      ><a name="6262" href="Fan.html#6262" class="Function"
+      >ssclaim&#8323;</a
+      ><a name="6270"
+      > </a
+      ><a name="6271" class="Symbol"
+      >:</a
+      ><a name="6272"
+      > </a
+      ><a name="6273" href="not-not.html#113" class="Function Operator"
+      >[</a
+      ><a name="6274"
+      > </a
+      ><a name="6275" href="MiniLibrary.html#840" class="Function"
+      >&#960;&#8320;</a
+      ><a name="6277"
+      > </a
+      ><a name="6278" class="Symbol"
+      >(</a
+      ><a name="6279" href="Fan.html#2284" class="Bound"
+      >p</a
+      ><a name="6280"
+      > </a
+      ><a name="6281" href="Fan.html#4969" class="Bound"
+      >&#945;</a
+      ><a name="6282" class="Symbol"
+      >)</a
+      ><a name="6283"
+      > </a
+      ><a name="6284" class="Symbol"
+      >(</a
+      ><a name="6285" href="Fan.html#5377" class="Bound"
+      >&#947;</a
+      ><a name="6286"
+      > </a
+      ><a name="6287" href="MiniLibrary.html#825" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="6288"
+      > </a
+      ><a name="6289" href="Fan.html#5381" class="Bound"
+      >cts&#947;</a
+      ><a name="6293" class="Symbol"
+      >)</a
+      ><a name="6294"
+      > </a
+      ><a name="6295" href="MiniLibrary.html#1706" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="6296"
+      > </a
+      ><a name="6297" href="MiniLibrary.html#840" class="Function"
+      >&#960;&#8320;</a
+      ><a name="6299"
+      > </a
+      ><a name="6300" class="Symbol"
+      >(</a
+      ><a name="6301" href="Fan.html#2284" class="Bound"
+      >p</a
+      ><a name="6302"
+      > </a
+      ><a name="6303" href="Fan.html#4971" class="Bound"
+      >&#946;</a
+      ><a name="6304" class="Symbol"
+      >)</a
+      ><a name="6305"
+      > </a
+      ><a name="6306" class="Symbol"
+      >(</a
+      ><a name="6307" href="Fan.html#3123" class="Function"
+      >t&#8321;'</a
+      ><a name="6310"
+      > </a
+      ><a name="6311" class="Symbol"
+      >(</a
+      ><a name="6312" href="Fan.html#3301" class="Function"
+      >merge</a
+      ><a name="6317"
+      > </a
+      ><a name="6318" href="Fan.html#4971" class="Bound"
+      >&#946;</a
+      ><a name="6319"
+      > </a
+      ><a name="6320" href="Fan.html#5377" class="Bound"
+      >&#947;</a
+      ><a name="6321" class="Symbol"
+      >))</a
+      ><a name="6323"
+      > </a
+      ><a name="6324" href="not-not.html#113" class="Function Operator"
+      >]</a
+      ><a name="6325"
+      >
+        </a
+      ><a name="6334" href="Fan.html#6262" class="Function"
+      >ssclaim&#8323;</a
+      ><a name="6342"
+      > </a
+      ><a name="6343" class="Symbol"
+      >=</a
+      ><a name="6344"
+      > </a
+      ><a name="6345" href="not-not.html#1340" class="Function"
+      >[transport]</a
+      ><a name="6356"
+      > </a
+      ><a name="6357" class="Symbol"
+      >{</a
+      ><a name="6358" href="Space.html#5138" class="Function"
+      >Map</a
+      ><a name="6361"
+      > </a
+      ><a name="6362" href="Space-discrete.html#7899" class="Function"
+      >&#8469;Space</a
+      ><a name="6368"
+      > </a
+      ><a name="6369" href="Space-discrete.html#4712" class="Function"
+      >&#8322;Space</a
+      ><a name="6375" class="Symbol"
+      >}</a
+      ><a name="6376"
+      > </a
+      ><a name="6377" class="Symbol"
+      >{&#955;</a
+      ><a name="6379"
+      > </a
+      ><a name="6380" href="Fan.html#6380" class="Bound"
+      >x</a
+      ><a name="6381"
+      > </a
+      ><a name="6382" class="Symbol"
+      >&#8594;</a
+      ><a name="6383"
+      > </a
+      ><a name="6384" href="MiniLibrary.html#840" class="Function"
+      >&#960;&#8320;</a
+      ><a name="6386"
+      > </a
+      ><a name="6387" class="Symbol"
+      >(</a
+      ><a name="6388" href="Fan.html#2284" class="Bound"
+      >p</a
+      ><a name="6389"
+      > </a
+      ><a name="6390" href="Fan.html#4969" class="Bound"
+      >&#945;</a
+      ><a name="6391" class="Symbol"
+      >)</a
+      ><a name="6392"
+      > </a
+      ><a name="6393" class="Symbol"
+      >(</a
+      ><a name="6394" href="Fan.html#6380" class="Bound"
+      >x</a
+      ><a name="6395" class="Symbol"
+      >)</a
+      ><a name="6396"
+      > </a
+      ><a name="6397" href="MiniLibrary.html#1706" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="6398"
+      > </a
+      ><a name="6399" href="MiniLibrary.html#840" class="Function"
+      >&#960;&#8320;</a
+      ><a name="6401"
+      > </a
+      ><a name="6402" class="Symbol"
+      >(</a
+      ><a name="6403" href="Fan.html#2284" class="Bound"
+      >p</a
+      ><a name="6404"
+      > </a
+      ><a name="6405" href="Fan.html#4971" class="Bound"
+      >&#946;</a
+      ><a name="6406" class="Symbol"
+      >)</a
+      ><a name="6407"
+      > </a
+      ><a name="6408" class="Symbol"
+      >(</a
+      ><a name="6409" href="Fan.html#3123" class="Function"
+      >t&#8321;'</a
+      ><a name="6412"
+      > </a
+      ><a name="6413" class="Symbol"
+      >(</a
+      ><a name="6414" href="Fan.html#3301" class="Function"
+      >merge</a
+      ><a name="6419"
+      > </a
+      ><a name="6420" href="Fan.html#4971" class="Bound"
+      >&#946;</a
+      ><a name="6421"
+      > </a
+      ><a name="6422" href="Fan.html#5377" class="Bound"
+      >&#947;</a
+      ><a name="6423" class="Symbol"
+      >))}</a
+      ><a name="6426"
+      >
+                           </a
+      ><a name="6454" class="Symbol"
+      >(</a
+      ><a name="6455" href="Fan.html#4403" class="Function"
+      >lemma&#8321;'</a
+      ><a name="6462"
+      > </a
+      ><a name="6463" href="Fan.html#4969" class="Bound"
+      >&#945;</a
+      ><a name="6464"
+      > </a
+      ><a name="6465" class="Symbol"
+      >(</a
+      ><a name="6466" href="Fan.html#5377" class="Bound"
+      >&#947;</a
+      ><a name="6467"
+      > </a
+      ><a name="6468" href="MiniLibrary.html#825" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="6469"
+      > </a
+      ><a name="6470" href="Fan.html#5381" class="Bound"
+      >cts&#947;</a
+      ><a name="6474" class="Symbol"
+      >))</a
+      ><a name="6476"
+      > </a
+      ><a name="6477" href="Fan.html#6030" class="Function"
+      >ssclaim&#8322;</a
+      ><a name="6485"
+      >
+        </a
+      ><a name="6494" href="Fan.html#6494" class="Function"
+      >ssclaim&#8324;</a
+      ><a name="6502"
+      > </a
+      ><a name="6503" class="Symbol"
+      >:</a
+      ><a name="6504"
+      > </a
+      ><a name="6505" href="not-not.html#113" class="Function Operator"
+      >[</a
+      ><a name="6506"
+      > </a
+      ><a name="6507" href="MiniLibrary.html#840" class="Function"
+      >&#960;&#8320;</a
+      ><a name="6509"
+      > </a
+      ><a name="6510" class="Symbol"
+      >(</a
+      ><a name="6511" href="Fan.html#2284" class="Bound"
+      >p</a
+      ><a name="6512"
+      > </a
+      ><a name="6513" href="Fan.html#4969" class="Bound"
+      >&#945;</a
+      ><a name="6514" class="Symbol"
+      >)</a
+      ><a name="6515"
+      > </a
+      ><a name="6516" class="Symbol"
+      >(</a
+      ><a name="6517" href="Fan.html#5377" class="Bound"
+      >&#947;</a
+      ><a name="6518"
+      > </a
+      ><a name="6519" href="MiniLibrary.html#825" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="6520"
+      > </a
+      ><a name="6521" href="Fan.html#5381" class="Bound"
+      >cts&#947;</a
+      ><a name="6525" class="Symbol"
+      >)</a
+      ><a name="6526"
+      > </a
+      ><a name="6527" href="MiniLibrary.html#1706" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="6528"
+      > </a
+      ><a name="6529" href="MiniLibrary.html#840" class="Function"
+      >&#960;&#8320;</a
+      ><a name="6531"
+      > </a
+      ><a name="6532" class="Symbol"
+      >(</a
+      ><a name="6533" href="Fan.html#2284" class="Bound"
+      >p</a
+      ><a name="6534"
+      > </a
+      ><a name="6535" href="Fan.html#4971" class="Bound"
+      >&#946;</a
+      ><a name="6536" class="Symbol"
+      >)</a
+      ><a name="6537"
+      > </a
+      ><a name="6538" class="Symbol"
+      >(</a
+      ><a name="6539" href="Fan.html#5377" class="Bound"
+      >&#947;</a
+      ><a name="6540"
+      > </a
+      ><a name="6541" href="MiniLibrary.html#825" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="6542"
+      > </a
+      ><a name="6543" href="Fan.html#5381" class="Bound"
+      >cts&#947;</a
+      ><a name="6547" class="Symbol"
+      >)</a
+      ><a name="6548"
+      > </a
+      ><a name="6549" href="not-not.html#113" class="Function Operator"
+      >]</a
+      ><a name="6550"
+      >
+        </a
+      ><a name="6559" href="Fan.html#6494" class="Function"
+      >ssclaim&#8324;</a
+      ><a name="6567"
+      > </a
+      ><a name="6568" class="Symbol"
+      >=</a
+      ><a name="6569"
+      > </a
+      ><a name="6570" href="not-not.html#1340" class="Function"
+      >[transport]</a
+      ><a name="6581"
+      > </a
+      ><a name="6582" class="Symbol"
+      >{</a
+      ><a name="6583" href="Space.html#5138" class="Function"
+      >Map</a
+      ><a name="6586"
+      > </a
+      ><a name="6587" href="Space-discrete.html#7899" class="Function"
+      >&#8469;Space</a
+      ><a name="6593"
+      > </a
+      ><a name="6594" href="Space-discrete.html#4712" class="Function"
+      >&#8322;Space</a
+      ><a name="6600" class="Symbol"
+      >}</a
+      ><a name="6601"
+      > </a
+      ><a name="6602" class="Symbol"
+      >{&#955;</a
+      ><a name="6604"
+      > </a
+      ><a name="6605" href="Fan.html#6605" class="Bound"
+      >x</a
+      ><a name="6606"
+      > </a
+      ><a name="6607" class="Symbol"
+      >&#8594;</a
+      ><a name="6608"
+      > </a
+      ><a name="6609" href="MiniLibrary.html#840" class="Function"
+      >&#960;&#8320;</a
+      ><a name="6611"
+      > </a
+      ><a name="6612" class="Symbol"
+      >(</a
+      ><a name="6613" href="Fan.html#2284" class="Bound"
+      >p</a
+      ><a name="6614"
+      > </a
+      ><a name="6615" href="Fan.html#4969" class="Bound"
+      >&#945;</a
+      ><a name="6616" class="Symbol"
+      >)</a
+      ><a name="6617"
+      > </a
+      ><a name="6618" class="Symbol"
+      >(</a
+      ><a name="6619" href="Fan.html#5377" class="Bound"
+      >&#947;</a
+      ><a name="6620"
+      > </a
+      ><a name="6621" href="MiniLibrary.html#825" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="6622"
+      > </a
+      ><a name="6623" href="Fan.html#5381" class="Bound"
+      >cts&#947;</a
+      ><a name="6627" class="Symbol"
+      >)</a
+      ><a name="6628"
+      > </a
+      ><a name="6629" href="MiniLibrary.html#1706" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="6630"
+      > </a
+      ><a name="6631" href="MiniLibrary.html#840" class="Function"
+      >&#960;&#8320;</a
+      ><a name="6633"
+      > </a
+      ><a name="6634" class="Symbol"
+      >(</a
+      ><a name="6635" href="Fan.html#2284" class="Bound"
+      >p</a
+      ><a name="6636"
+      > </a
+      ><a name="6637" href="Fan.html#4971" class="Bound"
+      >&#946;</a
+      ><a name="6638" class="Symbol"
+      >)</a
+      ><a name="6639"
+      > </a
+      ><a name="6640" class="Symbol"
+      >(</a
+      ><a name="6641" href="Fan.html#6605" class="Bound"
+      >x</a
+      ><a name="6642" class="Symbol"
+      >)}</a
+      ><a name="6644"
+      >
+                           </a
+      ><a name="6672" class="Symbol"
+      >(</a
+      ><a name="6673" href="Fan.html#4403" class="Function"
+      >lemma&#8321;'</a
+      ><a name="6680"
+      > </a
+      ><a name="6681" href="Fan.html#4971" class="Bound"
+      >&#946;</a
+      ><a name="6682"
+      > </a
+      ><a name="6683" class="Symbol"
+      >(</a
+      ><a name="6684" href="Fan.html#5377" class="Bound"
+      >&#947;</a
+      ><a name="6685"
+      > </a
+      ><a name="6686" href="MiniLibrary.html#825" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="6687"
+      > </a
+      ><a name="6688" href="Fan.html#5381" class="Bound"
+      >cts&#947;</a
+      ><a name="6692" class="Symbol"
+      >))</a
+      ><a name="6694"
+      > </a
+      ><a name="6695" href="Fan.html#6262" class="Function"
+      >ssclaim&#8323;</a
+      ><a name="6703"
+      >
+
+    </a
+      ><a name="6709" href="Fan.html#6709" class="Function"
+      >prf</a
+      ><a name="6712"
+      > </a
+      ><a name="6713" class="Symbol"
+      >:</a
+      ><a name="6714"
+      > </a
+      ><a name="6715" class="Symbol"
+      >&#8704;(</a
+      ><a name="6717" href="Fan.html#6717" class="Bound"
+      >&#945;</a
+      ><a name="6718"
+      > </a
+      ><a name="6719" href="Fan.html#6719" class="Bound"
+      >&#946;</a
+      ><a name="6720"
+      > </a
+      ><a name="6721" class="Symbol"
+      >:</a
+      ><a name="6722"
+      > </a
+      ><a name="6723" href="Sequence.html#238" class="Function"
+      >&#8322;&#8469;</a
+      ><a name="6725" class="Symbol"
+      >)</a
+      ><a name="6726"
+      > </a
+      ><a name="6727" class="Symbol"
+      >&#8594;</a
+      ><a name="6728"
+      > </a
+      ><a name="6729" href="Fan.html#6717" class="Bound"
+      >&#945;</a
+      ><a name="6730"
+      > </a
+      ><a name="6731" href="Sequence.html#2542" class="Datatype Operator"
+      >&#8803;[</a
+      ><a name="6733"
+      > </a
+      ><a name="6734" href="Fan.html#4877" class="Function"
+      >n</a
+      ><a name="6735"
+      > </a
+      ><a name="6736" href="Sequence.html#2542" class="Datatype Operator"
+      >]</a
+      ><a name="6737"
+      > </a
+      ><a name="6738" href="Fan.html#6719" class="Bound"
+      >&#946;</a
+      ><a name="6739"
+      > </a
+      ><a name="6740" class="Symbol"
+      >&#8594;</a
+      ><a name="6741"
+      > </a
+      ><a name="6742" class="Symbol"
+      >(</a
+      ><a name="6743" href="Fan.html#2127" class="Function"
+      >f</a
+      ><a name="6744"
+      > </a
+      ><a name="6745" href="MiniLibrary.html#447" class="Function Operator"
+      >&#8728;</a
+      ><a name="6746"
+      > </a
+      ><a name="6747" href="Fan.html#2284" class="Bound"
+      >p</a
+      ><a name="6748" class="Symbol"
+      >)</a
+      ><a name="6749"
+      > </a
+      ><a name="6750" href="Fan.html#6717" class="Bound"
+      >&#945;</a
+      ><a name="6751"
+      > </a
+      ><a name="6752" href="MiniLibrary.html#1706" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="6753"
+      > </a
+      ><a name="6754" class="Symbol"
+      >(</a
+      ><a name="6755" href="Fan.html#2127" class="Function"
+      >f</a
+      ><a name="6756"
+      > </a
+      ><a name="6757" href="MiniLibrary.html#447" class="Function Operator"
+      >&#8728;</a
+      ><a name="6758"
+      > </a
+      ><a name="6759" href="Fan.html#2284" class="Bound"
+      >p</a
+      ><a name="6760" class="Symbol"
+      >)</a
+      ><a name="6761"
+      > </a
+      ><a name="6762" href="Fan.html#6719" class="Bound"
+      >&#946;</a
+      ><a name="6763"
+      >
+    </a
+      ><a name="6768" href="Fan.html#6709" class="Function"
+      >prf</a
+      ><a name="6771"
+      > </a
+      ><a name="6772" href="Fan.html#6772" class="Bound"
+      >&#945;</a
+      ><a name="6773"
+      > </a
+      ><a name="6774" href="Fan.html#6774" class="Bound"
+      >&#946;</a
+      ><a name="6775"
+      > </a
+      ><a name="6776" href="Fan.html#6776" class="Bound"
+      >en</a
+      ><a name="6778"
+      > </a
+      ><a name="6779" class="Symbol"
+      >=</a
+      ><a name="6780"
+      > </a
+      ><a name="6781" href="not-not.html#2898" class="Function"
+      >Lemma[[&#8801;]&#8594;&#8801;]-&#8469;</a
+      ><a name="6795"
+      > </a
+      ><a name="6796" class="Symbol"
+      >(</a
+      ><a name="6797" href="not-not.html#1455" class="Function"
+      >[ap]</a
+      ><a name="6801"
+      > </a
+      ><a name="6802" href="Fan.html#2127" class="Function"
+      >f</a
+      ><a name="6803"
+      > </a
+      ><a name="6804" class="Symbol"
+      >(</a
+      ><a name="6805" href="Fan.html#4910" class="Function"
+      >claim</a
+      ><a name="6810"
+      > </a
+      ><a name="6811" href="Fan.html#6772" class="Bound"
+      >&#945;</a
+      ><a name="6812"
+      > </a
+      ><a name="6813" href="Fan.html#6774" class="Bound"
+      >&#946;</a
+      ><a name="6814"
+      > </a
+      ><a name="6815" href="Fan.html#6776" class="Bound"
+      >en</a
+      ><a name="6817" class="Symbol"
+      >))</a
+      ><a name="6819"
+      >
+
+
+</a
+      ><a name="6822" href="Fan.html#6822" class="Function"
+      >fan-behaviour</a
+      ><a name="6835"
+      > </a
+      ><a name="6836" class="Symbol"
+      >:</a
+      ><a name="6837"
+      > </a
+      ><a name="6838" class="Symbol"
+      >&#8704;(</a
+      ><a name="6840" href="Fan.html#6840" class="Bound"
+      >f</a
+      ><a name="6841"
+      > </a
+      ><a name="6842" class="Symbol"
+      >:</a
+      ><a name="6843"
+      > </a
+      ><a name="6844" href="Space.html#4275" class="Function"
+      >U</a
+      ><a name="6845"
+      > </a
+      ><a name="6846" class="Symbol"
+      >((</a
+      ><a name="6848" href="Space-discrete.html#7899" class="Function"
+      >&#8469;Space</a
+      ><a name="6854"
+      > </a
+      ><a name="6855" href="Space-exponential.html#303" class="Function Operator"
+      >&#8658;</a
+      ><a name="6856"
+      > </a
+      ><a name="6857" href="Space-discrete.html#4712" class="Function"
+      >&#8322;Space</a
+      ><a name="6863" class="Symbol"
+      >)</a
+      ><a name="6864"
+      > </a
+      ><a name="6865" href="Space-exponential.html#303" class="Function Operator"
+      >&#8658;</a
+      ><a name="6866"
+      > </a
+      ><a name="6867" href="Space-discrete.html#7899" class="Function"
+      >&#8469;Space</a
+      ><a name="6873" class="Symbol"
+      >))</a
+      ><a name="6875"
+      > </a
+      ><a name="6876" class="Symbol"
+      >&#8594;</a
+      ><a name="6877"
+      >
+                </a
+      ><a name="6894" class="Symbol"
+      >&#8704;(</a
+      ><a name="6896" href="Fan.html#6896" class="Bound"
+      >&#945;</a
+      ><a name="6897"
+      > </a
+      ><a name="6898" href="Fan.html#6898" class="Bound"
+      >&#946;</a
+      ><a name="6899"
+      > </a
+      ><a name="6900" class="Symbol"
+      >:</a
+      ><a name="6901"
+      > </a
+      ><a name="6902" href="Space.html#4275" class="Function"
+      >U</a
+      ><a name="6903"
+      > </a
+      ><a name="6904" class="Symbol"
+      >(</a
+      ><a name="6905" href="Space-discrete.html#7899" class="Function"
+      >&#8469;Space</a
+      ><a name="6911"
+      > </a
+      ><a name="6912" href="Space-exponential.html#303" class="Function Operator"
+      >&#8658;</a
+      ><a name="6913"
+      > </a
+      ><a name="6914" href="Space-discrete.html#4712" class="Function"
+      >&#8322;Space</a
+      ><a name="6920" class="Symbol"
+      >))</a
+      ><a name="6922"
+      > </a
+      ><a name="6923" class="Symbol"
+      >&#8594;</a
+      ><a name="6924"
+      > </a
+      ><a name="6925" href="MiniLibrary.html#840" class="Function"
+      >&#960;&#8320;</a
+      ><a name="6927"
+      > </a
+      ><a name="6928" href="Fan.html#6896" class="Bound"
+      >&#945;</a
+      ><a name="6929"
+      > </a
+      ><a name="6930" href="Sequence.html#2542" class="Datatype Operator"
+      >&#8803;[</a
+      ><a name="6932"
+      > </a
+      ><a name="6933" href="MiniLibrary.html#840" class="Function"
+      >&#960;&#8320;</a
+      ><a name="6935"
+      > </a
+      ><a name="6936" href="Fan.html#2058" class="Function"
+      >fan</a
+      ><a name="6939"
+      > </a
+      ><a name="6940" href="Fan.html#6840" class="Bound"
+      >f</a
+      ><a name="6941"
+      > </a
+      ><a name="6942" href="Sequence.html#2542" class="Datatype Operator"
+      >]</a
+      ><a name="6943"
+      > </a
+      ><a name="6944" href="MiniLibrary.html#840" class="Function"
+      >&#960;&#8320;</a
+      ><a name="6946"
+      > </a
+      ><a name="6947" href="Fan.html#6898" class="Bound"
+      >&#946;</a
+      ><a name="6948"
+      > </a
+      ><a name="6949" class="Symbol"
+      >&#8594;</a
+      ><a name="6950"
+      > </a
+      ><a name="6951" href="MiniLibrary.html#840" class="Function"
+      >&#960;&#8320;</a
+      ><a name="6953"
+      > </a
+      ><a name="6954" href="Fan.html#6840" class="Bound"
+      >f</a
+      ><a name="6955"
+      > </a
+      ><a name="6956" href="Fan.html#6896" class="Bound"
+      >&#945;</a
+      ><a name="6957"
+      > </a
+      ><a name="6958" href="MiniLibrary.html#1706" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="6959"
+      > </a
+      ><a name="6960" href="MiniLibrary.html#840" class="Function"
+      >&#960;&#8320;</a
+      ><a name="6962"
+      > </a
+      ><a name="6963" href="Fan.html#6840" class="Bound"
+      >f</a
+      ><a name="6964"
+      > </a
+      ><a name="6965" href="Fan.html#6898" class="Bound"
+      >&#946;</a
+      ><a name="6966"
+      >
+</a
+      ><a name="6967" href="Fan.html#6822" class="Function"
+      >fan-behaviour</a
+      ><a name="6980"
+      > </a
+      ><a name="6981" href="Fan.html#6981" class="Bound"
+      >f</a
+      ><a name="6982"
+      > </a
+      ><a name="6983" href="Fan.html#6983" class="Bound"
+      >&#945;</a
+      ><a name="6984"
+      > </a
+      ><a name="6985" href="Fan.html#6985" class="Bound"
+      >&#946;</a
+      ><a name="6986"
+      > </a
+      ><a name="6987" href="Fan.html#6987" class="Bound"
+      >r</a
+      ><a name="6988"
+      > </a
+      ><a name="6989" class="Symbol"
+      >=</a
+      ><a name="6990"
+      > </a
+      ><a name="6991" href="not-not.html#2898" class="Function"
+      >Lemma[[&#8801;]&#8594;&#8801;]-&#8469;</a
+      ><a name="7005"
+      > </a
+      ><a name="7006" href="Fan.html#7339" class="Function"
+      >[goal]</a
+      ><a name="7012"
+      >
+ </a
+      ><a name="7014" class="Keyword"
+      >where</a
+      ><a name="7019"
+      >
+  </a
+      ><a name="7022" href="Fan.html#7022" class="Function"
+      >f'</a
+      ><a name="7024"
+      > </a
+      ><a name="7025" class="Symbol"
+      >:</a
+      ><a name="7026"
+      > </a
+      ><a name="7027" href="Sequence.html#238" class="Function"
+      >&#8322;&#8469;</a
+      ><a name="7029"
+      > </a
+      ><a name="7030" class="Symbol"
+      >&#8594;</a
+      ><a name="7031"
+      > </a
+      ><a name="7032" href="MiniLibrary.html#3902" class="Datatype"
+      >&#8469;</a
+      ><a name="7033"
+      >
+  </a
+      ><a name="7036" href="Fan.html#7022" class="Function"
+      >f'</a
+      ><a name="7038"
+      > </a
+      ><a name="7039" class="Symbol"
+      >=</a
+      ><a name="7040"
+      > </a
+      ><a name="7041" href="MiniLibrary.html#1453" class="Function"
+      >&#8707;-witness</a
+      ><a name="7050"
+      > </a
+      ><a name="7051" class="Symbol"
+      >(</a
+      ><a name="7052" href="Space-cantor.html#2797" class="Function"
+      >Lemma[Yoneda]</a
+      ><a name="7065"
+      > </a
+      ><a name="7066" class="Symbol"
+      >{</a
+      ><a name="7067" href="Space-discrete.html#7899" class="Function"
+      >&#8469;Space</a
+      ><a name="7073" class="Symbol"
+      >}</a
+      ><a name="7074"
+      > </a
+      ><a name="7075" href="Fan.html#6981" class="Bound"
+      >f</a
+      ><a name="7076" class="Symbol"
+      >)</a
+      ><a name="7077"
+      >
+  </a
+      ><a name="7080" href="Fan.html#7080" class="Function"
+      >claim</a
+      ><a name="7085"
+      > </a
+      ><a name="7086" class="Symbol"
+      >:</a
+      ><a name="7087"
+      > </a
+      ><a name="7088" href="not-not.html#113" class="Function Operator"
+      >[</a
+      ><a name="7089"
+      > </a
+      ><a name="7090" href="Fan.html#7022" class="Function"
+      >f'</a
+      ><a name="7092"
+      > </a
+      ><a name="7093" class="Symbol"
+      >(</a
+      ><a name="7094" href="MiniLibrary.html#840" class="Function"
+      >&#960;&#8320;</a
+      ><a name="7096"
+      > </a
+      ><a name="7097" href="Fan.html#6983" class="Bound"
+      >&#945;</a
+      ><a name="7098" class="Symbol"
+      >)</a
+      ><a name="7099"
+      > </a
+      ><a name="7100" href="MiniLibrary.html#1706" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="7101"
+      > </a
+      ><a name="7102" href="Fan.html#7022" class="Function"
+      >f'</a
+      ><a name="7104"
+      > </a
+      ><a name="7105" class="Symbol"
+      >(</a
+      ><a name="7106" href="MiniLibrary.html#840" class="Function"
+      >&#960;&#8320;</a
+      ><a name="7108"
+      > </a
+      ><a name="7109" href="Fan.html#6985" class="Bound"
+      >&#946;</a
+      ><a name="7110" class="Symbol"
+      >)</a
+      ><a name="7111"
+      > </a
+      ><a name="7112" href="not-not.html#113" class="Function Operator"
+      >]</a
+      ><a name="7113"
+      >
+  </a
+      ><a name="7116" href="Fan.html#7080" class="Function"
+      >claim</a
+      ><a name="7121"
+      > </a
+      ><a name="7122" class="Symbol"
+      >=</a
+      ><a name="7123"
+      > </a
+      ><a name="7124" href="not-not.html#161" class="Function"
+      >hide</a
+      ><a name="7128"
+      > </a
+      ><a name="7129" class="Symbol"
+      >(</a
+      ><a name="7130" href="MiniLibrary.html#1088" class="Function"
+      >&#8743;-elim&#8320;</a
+      ><a name="7137" class="Symbol"
+      >(</a
+      ><a name="7138" href="MiniLibrary.html#1529" class="Function"
+      >&#8707;-elim</a
+      ><a name="7144"
+      > </a
+      ><a name="7145" class="Symbol"
+      >(</a
+      ><a name="7146" href="MiniLibrary.html#1529" class="Function"
+      >&#8707;-elim</a
+      ><a name="7152"
+      > </a
+      ><a name="7153" class="Symbol"
+      >(</a
+      ><a name="7154" href="Space-cantor.html#2797" class="Function"
+      >Lemma[Yoneda]</a
+      ><a name="7167"
+      > </a
+      ><a name="7168" class="Symbol"
+      >{</a
+      ><a name="7169" href="Space-discrete.html#7899" class="Function"
+      >&#8469;Space</a
+      ><a name="7175" class="Symbol"
+      >}</a
+      ><a name="7176"
+      > </a
+      ><a name="7177" href="Fan.html#6981" class="Bound"
+      >f</a
+      ><a name="7178" class="Symbol"
+      >)))</a
+      ><a name="7181"
+      > </a
+      ><a name="7182" class="Symbol"
+      >(</a
+      ><a name="7183" href="MiniLibrary.html#840" class="Function"
+      >&#960;&#8320;</a
+      ><a name="7185"
+      > </a
+      ><a name="7186" href="Fan.html#6983" class="Bound"
+      >&#945;</a
+      ><a name="7187" class="Symbol"
+      >)</a
+      ><a name="7188"
+      > </a
+      ><a name="7189" class="Symbol"
+      >(</a
+      ><a name="7190" href="MiniLibrary.html#840" class="Function"
+      >&#960;&#8320;</a
+      ><a name="7192"
+      > </a
+      ><a name="7193" href="Fan.html#6985" class="Bound"
+      >&#946;</a
+      ><a name="7194" class="Symbol"
+      >)</a
+      ><a name="7195"
+      > </a
+      ><a name="7196" href="Fan.html#6987" class="Bound"
+      >r</a
+      ><a name="7197" class="Symbol"
+      >)</a
+      ><a name="7198"
+      >
+  </a
+      ><a name="7201" href="Fan.html#7201" class="Function"
+      >eq&#945;</a
+      ><a name="7204"
+      > </a
+      ><a name="7205" class="Symbol"
+      >:</a
+      ><a name="7206"
+      > </a
+      ><a name="7207" href="not-not.html#113" class="Function Operator"
+      >[</a
+      ><a name="7208"
+      > </a
+      ><a name="7209" href="MiniLibrary.html#840" class="Function"
+      >&#960;&#8320;</a
+      ><a name="7211"
+      > </a
+      ><a name="7212" href="Fan.html#6981" class="Bound"
+      >f</a
+      ><a name="7213"
+      > </a
+      ><a name="7214" href="Fan.html#6983" class="Bound"
+      >&#945;</a
+      ><a name="7215"
+      > </a
+      ><a name="7216" href="MiniLibrary.html#1706" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="7217"
+      > </a
+      ><a name="7218" href="Fan.html#7022" class="Function"
+      >f'</a
+      ><a name="7220"
+      > </a
+      ><a name="7221" class="Symbol"
+      >(</a
+      ><a name="7222" href="MiniLibrary.html#840" class="Function"
+      >&#960;&#8320;</a
+      ><a name="7224"
+      > </a
+      ><a name="7225" href="Fan.html#6983" class="Bound"
+      >&#945;</a
+      ><a name="7226" class="Symbol"
+      >)</a
+      ><a name="7227"
+      > </a
+      ><a name="7228" href="not-not.html#113" class="Function Operator"
+      >]</a
+      ><a name="7229"
+      >
+  </a
+      ><a name="7232" href="Fan.html#7201" class="Function"
+      >eq&#945;</a
+      ><a name="7235"
+      > </a
+      ><a name="7236" class="Symbol"
+      >=</a
+      ><a name="7237"
+      > </a
+      ><a name="7238" href="not-not.html#1455" class="Function"
+      >[ap]</a
+      ><a name="7242"
+      > </a
+      ><a name="7243" class="Symbol"
+      >(</a
+      ><a name="7244" href="MiniLibrary.html#840" class="Function"
+      >&#960;&#8320;</a
+      ><a name="7246"
+      > </a
+      ><a name="7247" href="Fan.html#6981" class="Bound"
+      >f</a
+      ><a name="7248" class="Symbol"
+      >)</a
+      ><a name="7249"
+      > </a
+      ><a name="7250" class="Symbol"
+      >(</a
+      ><a name="7251" href="Space-cantor.html#2321" class="Function"
+      >Lemma[ID-[&#8801;]]</a
+      ><a name="7264"
+      > </a
+      ><a name="7265" href="Fan.html#6983" class="Bound"
+      >&#945;</a
+      ><a name="7266" class="Symbol"
+      >)</a
+      ><a name="7267"
+      >
+  </a
+      ><a name="7270" href="Fan.html#7270" class="Function"
+      >eq&#946;</a
+      ><a name="7273"
+      > </a
+      ><a name="7274" class="Symbol"
+      >:</a
+      ><a name="7275"
+      > </a
+      ><a name="7276" href="not-not.html#113" class="Function Operator"
+      >[</a
+      ><a name="7277"
+      > </a
+      ><a name="7278" href="MiniLibrary.html#840" class="Function"
+      >&#960;&#8320;</a
+      ><a name="7280"
+      > </a
+      ><a name="7281" href="Fan.html#6981" class="Bound"
+      >f</a
+      ><a name="7282"
+      > </a
+      ><a name="7283" href="Fan.html#6985" class="Bound"
+      >&#946;</a
+      ><a name="7284"
+      > </a
+      ><a name="7285" href="MiniLibrary.html#1706" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="7286"
+      > </a
+      ><a name="7287" href="Fan.html#7022" class="Function"
+      >f'</a
+      ><a name="7289"
+      > </a
+      ><a name="7290" class="Symbol"
+      >(</a
+      ><a name="7291" href="MiniLibrary.html#840" class="Function"
+      >&#960;&#8320;</a
+      ><a name="7293"
+      > </a
+      ><a name="7294" href="Fan.html#6985" class="Bound"
+      >&#946;</a
+      ><a name="7295" class="Symbol"
+      >)</a
+      ><a name="7296"
+      > </a
+      ><a name="7297" href="not-not.html#113" class="Function Operator"
+      >]</a
+      ><a name="7298"
+      >
+  </a
+      ><a name="7301" href="Fan.html#7270" class="Function"
+      >eq&#946;</a
+      ><a name="7304"
+      > </a
+      ><a name="7305" class="Symbol"
+      >=</a
+      ><a name="7306"
+      > </a
+      ><a name="7307" href="not-not.html#1455" class="Function"
+      >[ap]</a
+      ><a name="7311"
+      > </a
+      ><a name="7312" class="Symbol"
+      >(</a
+      ><a name="7313" href="MiniLibrary.html#840" class="Function"
+      >&#960;&#8320;</a
+      ><a name="7315"
+      > </a
+      ><a name="7316" href="Fan.html#6981" class="Bound"
+      >f</a
+      ><a name="7317" class="Symbol"
+      >)</a
+      ><a name="7318"
+      > </a
+      ><a name="7319" class="Symbol"
+      >(</a
+      ><a name="7320" href="Space-cantor.html#2321" class="Function"
+      >Lemma[ID-[&#8801;]]</a
+      ><a name="7333"
+      > </a
+      ><a name="7334" href="Fan.html#6985" class="Bound"
+      >&#946;</a
+      ><a name="7335" class="Symbol"
+      >)</a
+      ><a name="7336"
+      >
+  </a
+      ><a name="7339" href="Fan.html#7339" class="Function"
+      >[goal]</a
+      ><a name="7345"
+      > </a
+      ><a name="7346" class="Symbol"
+      >:</a
+      ><a name="7347"
+      > </a
+      ><a name="7348" href="not-not.html#113" class="Function Operator"
+      >[</a
+      ><a name="7349"
+      > </a
+      ><a name="7350" href="MiniLibrary.html#840" class="Function"
+      >&#960;&#8320;</a
+      ><a name="7352"
+      > </a
+      ><a name="7353" href="Fan.html#6981" class="Bound"
+      >f</a
+      ><a name="7354"
+      > </a
+      ><a name="7355" href="Fan.html#6983" class="Bound"
+      >&#945;</a
+      ><a name="7356"
+      > </a
+      ><a name="7357" href="MiniLibrary.html#1706" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="7358"
+      > </a
+      ><a name="7359" href="MiniLibrary.html#840" class="Function"
+      >&#960;&#8320;</a
+      ><a name="7361"
+      > </a
+      ><a name="7362" href="Fan.html#6981" class="Bound"
+      >f</a
+      ><a name="7363"
+      > </a
+      ><a name="7364" href="Fan.html#6985" class="Bound"
+      >&#946;</a
+      ><a name="7365"
+      > </a
+      ><a name="7366" href="not-not.html#113" class="Function Operator"
+      >]</a
+      ><a name="7367"
+      >
+  </a
+      ><a name="7370" href="Fan.html#7339" class="Function"
+      >[goal]</a
+      ><a name="7376"
+      > </a
+      ><a name="7377" class="Symbol"
+      >=</a
+      ><a name="7378"
+      > </a
+      ><a name="7379" href="not-not.html#1238" class="Function"
+      >[trans]</a
+      ><a name="7386"
+      > </a
+      ><a name="7387" class="Symbol"
+      >(</a
+      ><a name="7388" href="not-not.html#1238" class="Function"
+      >[trans]</a
+      ><a name="7395"
+      > </a
+      ><a name="7396" href="Fan.html#7201" class="Function"
+      >eq&#945;</a
+      ><a name="7399"
+      > </a
+      ><a name="7400" href="Fan.html#7080" class="Function"
+      >claim</a
+      ><a name="7405" class="Symbol"
+      >)</a
+      ><a name="7406"
+      > </a
+      ><a name="7407" class="Symbol"
+      >(</a
+      ><a name="7408" href="not-not.html#1160" class="Function"
+      >[sym]</a
+      ><a name="7413"
+      > </a
+      ><a name="7414" href="Fan.html#7270" class="Function"
+      >eq&#946;</a
+      ><a name="7417" class="Symbol"
+      >)</a
+      ><a name="7418"
+      >
+
+\end{code}
+</a
+      ></pre
+    ></body
+  ></html
+>

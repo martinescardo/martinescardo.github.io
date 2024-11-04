@@ -1,0 +1,3650 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+><head
+  ><title
+    >FunctionGraphsInIMLTT</title
+    ><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"
+     /><meta http-equiv="Content-Style-Type" content="text/css"
+     /><link href="Agda.css" rel="stylesheet" type="text/css"
+     /></head
+  ><body
+  ><pre
+    ><a name="1" class="Comment"
+      >Martin Escardo, May 2012. Compiles in Agda 2.3.0.</a
+      ><a name="50"
+      >
+
+</a
+      ><a name="52" class="Comment"
+      >A remark on</a
+      ><a name="63"
+      >
+</a
+      ><a name="64" class="Comment"
+      >-------------------------------------------------------</a
+      ><a name="119"
+      >
+</a
+      ><a name="120" class="Comment"
+      > Function graphs in intensional Martin-L&#246;f type theory</a
+      ><a name="174"
+      >
+</a
+      ><a name="175" class="Comment"
+      >-------------------------------------------------------</a
+      ><a name="230"
+      >
+
+</a
+      ><a name="232" class="Comment"
+      >For f, g : X &#8594; Y, define</a
+      ><a name="256"
+      >
+
+</a
+      ><a name="258" class="Comment"
+      >      graph f = &#931; \x &#8594; &#931; \y &#8594; f x &#8801; y,</a
+      ><a name="296"
+      >
+
+</a
+      ><a name="298" class="Comment"
+      >where &quot;&#8801;&quot; is propositional equality (identity type). It may be </a
+      ><a name="361"
+      >
+</a
+      ><a name="362" class="Comment"
+      >natural to suppose that, in IMLTT,</a
+      ><a name="396"
+      >
+
+</a
+      ><a name="398" class="Comment"
+      >  (*) graph f &#8801; graph g &#8594; &#8704;(x : X) &#8594; f x &#8801; g x. </a
+      ><a name="446"
+      >
+
+</a
+      ><a name="448" class="Comment"
+      >However, one can show</a
+      ><a name="469"
+      >
+
+</a
+      ><a name="471" class="Comment"
+      >  (**) univalence &#8594; &#8704;(f g : X &#8594; Y) &#8594; graph f &#8801; graph g.</a
+      ><a name="526"
+      >
+
+</a
+      ><a name="528" class="Comment"
+      >Because univalence is consistent, and (*) together with (**) proves an</a
+      ><a name="598"
+      >
+</a
+      ><a name="599" class="Comment"
+      >inconsistency (all functions are pointwise equal), we conclude that (*) </a
+      ><a name="671"
+      >
+</a
+      ><a name="672" class="Comment"
+      >is not provable in MLTT.</a
+      ><a name="696"
+      >
+
+</a
+      ><a name="698" class="Comment"
+      >This file is self-contained. After a short prelude of standard</a
+      ><a name="760"
+      >
+</a
+      ><a name="761" class="Comment"
+      >definitions, we give the easy proof of (**).</a
+      ><a name="805"
+      >
+
+\begin{code}
+
+</a
+      ><a name="821" class="Symbol"
+      >{-#</a
+      ><a name="824"
+      > </a
+      ><a name="825" class="Keyword"
+      >OPTIONS</a
+      ><a name="832"
+      > --without-K </a
+      ><a name="845" class="Symbol"
+      >#-}</a
+      ><a name="848"
+      >
+
+</a
+      ><a name="850" class="Keyword"
+      >module</a
+      ><a name="856"
+      > </a
+      ><a name="857" href="FunctionGraphsInIMLTT.html#1" class="Module"
+      >FunctionGraphsInIMLTT</a
+      ><a name="878"
+      > </a
+      ><a name="879" class="Keyword"
+      >where</a
+      ><a name="884"
+      >
+
+</a
+      ><a name="887" class="Keyword"
+      >infixr</a
+      ><a name="893"
+      > </a
+      ><a name="894" class="Number"
+      >20</a
+      ><a name="896"
+      > _&#215;_     </a
+      ><a name="905" class="Comment"
+      >-- cartesian product</a
+      ><a name="925"
+      >
+</a
+      ><a name="926" class="Keyword"
+      >infixr</a
+      ><a name="932"
+      >  </a
+      ><a name="934" class="Number"
+      >3</a
+      ><a name="935"
+      > _,_     </a
+      ><a name="944" class="Comment"
+      >-- pairing</a
+      ><a name="954"
+      >
+</a
+      ><a name="955" class="Keyword"
+      >infix</a
+      ><a name="960"
+      >  </a
+      ><a name="962" class="Number"
+      >11</a
+      ><a name="964"
+      > _~_     </a
+      ><a name="973" class="Comment"
+      >-- pointwise function equality</a
+      ><a name="1003"
+      >
+</a
+      ><a name="1004" class="Keyword"
+      >infix</a
+      ><a name="1009"
+      >  </a
+      ><a name="1011" class="Number"
+      >11</a
+      ><a name="1013"
+      > _&#8776;_     </a
+      ><a name="1022" class="Comment"
+      >-- pointwise isomorphism</a
+      ><a name="1046"
+      >
+</a
+      ><a name="1047" class="Keyword"
+      >infixl</a
+      ><a name="1053"
+      > </a
+      ><a name="1054" class="Number"
+      >30</a
+      ><a name="1056"
+      > _&#8728;_     </a
+      ><a name="1065" class="Comment"
+      >-- function composition</a
+      ><a name="1088"
+      >
+</a
+      ><a name="1089" class="Keyword"
+      >infix</a
+      ><a name="1094"
+      >  </a
+      ><a name="1096" class="Number"
+      >30</a
+      ><a name="1098"
+      > _&#8801;_     </a
+      ><a name="1107" class="Comment"
+      >-- identity type for small types</a
+      ><a name="1139"
+      >
+</a
+      ><a name="1140" class="Keyword"
+      >infix</a
+      ><a name="1145"
+      >  </a
+      ><a name="1147" class="Number"
+      >30</a
+      ><a name="1149"
+      > _&#8801;&#8321;_    </a
+      ><a name="1158" class="Comment"
+      >-- identity type for large types</a
+      ><a name="1190"
+      >
+
+</a
+      ><a name="1192" class="Keyword"
+      >record</a
+      ><a name="1198"
+      > </a
+      ><a name="1199" href="FunctionGraphsInIMLTT.html#1199" class="Record"
+      >&#931;</a
+      ><a name="1200"
+      > </a
+      ><a name="1201" class="Symbol"
+      >{</a
+      ><a name="1202" href="FunctionGraphsInIMLTT.html#1202" class="Bound"
+      >X</a
+      ><a name="1203"
+      > </a
+      ><a name="1204" class="Symbol"
+      >:</a
+      ><a name="1205"
+      > </a
+      ><a name="1206" class="PrimitiveType"
+      >Set</a
+      ><a name="1209" class="Symbol"
+      >}</a
+      ><a name="1210"
+      > </a
+      ><a name="1211" class="Symbol"
+      >(</a
+      ><a name="1212" href="FunctionGraphsInIMLTT.html#1212" class="Bound"
+      >Y</a
+      ><a name="1213"
+      > </a
+      ><a name="1214" class="Symbol"
+      >:</a
+      ><a name="1215"
+      > </a
+      ><a name="1216" href="FunctionGraphsInIMLTT.html#1202" class="Bound"
+      >X</a
+      ><a name="1217"
+      > </a
+      ><a name="1218" class="Symbol"
+      >&#8594;</a
+      ><a name="1219"
+      > </a
+      ><a name="1220" class="PrimitiveType"
+      >Set</a
+      ><a name="1223" class="Symbol"
+      >)</a
+      ><a name="1224"
+      > </a
+      ><a name="1225" class="Symbol"
+      >:</a
+      ><a name="1226"
+      > </a
+      ><a name="1227" class="PrimitiveType"
+      >Set</a
+      ><a name="1230"
+      > </a
+      ><a name="1231" class="Keyword"
+      >where</a
+      ><a name="1236"
+      >
+ </a
+      ><a name="1238" class="Keyword"
+      >constructor</a
+      ><a name="1249"
+      > </a
+      ><a name="1250" href="FunctionGraphsInIMLTT.html#1250" class="InductiveConstructor Operator"
+      >_,_</a
+      ><a name="1253"
+      >
+ </a
+      ><a name="1255" class="Keyword"
+      >field</a
+      ><a name="1260"
+      >
+  </a
+      ><a name="1263" href="FunctionGraphsInIMLTT.html#1263" class="Field"
+      >&#960;&#8320;</a
+      ><a name="1265"
+      > </a
+      ><a name="1266" class="Symbol"
+      >:</a
+      ><a name="1267"
+      > </a
+      ><a name="1268" href="FunctionGraphsInIMLTT.html#1202" class="Bound"
+      >X</a
+      ><a name="1269"
+      >
+  </a
+      ><a name="1272" href="FunctionGraphsInIMLTT.html#1272" class="Field"
+      >&#960;&#8321;</a
+      ><a name="1274"
+      > </a
+      ><a name="1275" class="Symbol"
+      >:</a
+      ><a name="1276"
+      > </a
+      ><a name="1277" href="FunctionGraphsInIMLTT.html#1212" class="Bound"
+      >Y</a
+      ><a name="1278"
+      > </a
+      ><a name="1279" href="FunctionGraphsInIMLTT.html#1263" class="Bound"
+      >&#960;&#8320;</a
+      ><a name="1281"
+      >
+
+</a
+      ><a name="1283" href="FunctionGraphsInIMLTT.html#1283" class="Function Operator"
+      >_&#215;_</a
+      ><a name="1286"
+      > </a
+      ><a name="1287" class="Symbol"
+      >:</a
+      ><a name="1288"
+      > </a
+      ><a name="1289" class="PrimitiveType"
+      >Set</a
+      ><a name="1292"
+      > </a
+      ><a name="1293" class="Symbol"
+      >&#8594;</a
+      ><a name="1294"
+      > </a
+      ><a name="1295" class="PrimitiveType"
+      >Set</a
+      ><a name="1298"
+      > </a
+      ><a name="1299" class="Symbol"
+      >&#8594;</a
+      ><a name="1300"
+      > </a
+      ><a name="1301" class="PrimitiveType"
+      >Set</a
+      ><a name="1304"
+      >
+</a
+      ><a name="1305" href="FunctionGraphsInIMLTT.html#1305" class="Bound"
+      >X</a
+      ><a name="1306"
+      > </a
+      ><a name="1307" href="FunctionGraphsInIMLTT.html#1283" class="Function Operator"
+      >&#215;</a
+      ><a name="1308"
+      > </a
+      ><a name="1309" href="FunctionGraphsInIMLTT.html#1309" class="Bound"
+      >Y</a
+      ><a name="1310"
+      > </a
+      ><a name="1311" class="Symbol"
+      >=</a
+      ><a name="1312"
+      > </a
+      ><a name="1313" href="FunctionGraphsInIMLTT.html#1199" class="Record"
+      >&#931;</a
+      ><a name="1314"
+      > </a
+      ><a name="1315" class="Symbol"
+      >\(</a
+      ><a name="1317" href="FunctionGraphsInIMLTT.html#1317" class="Bound"
+      >x</a
+      ><a name="1318"
+      > </a
+      ><a name="1319" class="Symbol"
+      >:</a
+      ><a name="1320"
+      > </a
+      ><a name="1321" href="FunctionGraphsInIMLTT.html#1305" class="Bound"
+      >X</a
+      ><a name="1322" class="Symbol"
+      >)</a
+      ><a name="1323"
+      > </a
+      ><a name="1324" class="Symbol"
+      >&#8594;</a
+      ><a name="1325"
+      > </a
+      ><a name="1326" href="FunctionGraphsInIMLTT.html#1309" class="Bound"
+      >Y</a
+      ><a name="1327"
+      >
+
+</a
+      ><a name="1329" class="Keyword"
+      >data</a
+      ><a name="1333"
+      > </a
+      ><a name="1334" href="FunctionGraphsInIMLTT.html#1334" class="Datatype Operator"
+      >_&#8801;_</a
+      ><a name="1337"
+      > </a
+      ><a name="1338" class="Symbol"
+      >{</a
+      ><a name="1339" href="FunctionGraphsInIMLTT.html#1339" class="Bound"
+      >X</a
+      ><a name="1340"
+      > </a
+      ><a name="1341" class="Symbol"
+      >:</a
+      ><a name="1342"
+      > </a
+      ><a name="1343" class="PrimitiveType"
+      >Set</a
+      ><a name="1346" class="Symbol"
+      >}</a
+      ><a name="1347"
+      > </a
+      ><a name="1348" class="Symbol"
+      >:</a
+      ><a name="1349"
+      > </a
+      ><a name="1350" href="FunctionGraphsInIMLTT.html#1339" class="Bound"
+      >X</a
+      ><a name="1351"
+      > </a
+      ><a name="1352" class="Symbol"
+      >&#8594;</a
+      ><a name="1353"
+      > </a
+      ><a name="1354" href="FunctionGraphsInIMLTT.html#1339" class="Bound"
+      >X</a
+      ><a name="1355"
+      > </a
+      ><a name="1356" class="Symbol"
+      >&#8594;</a
+      ><a name="1357"
+      > </a
+      ><a name="1358" class="PrimitiveType"
+      >Set</a
+      ><a name="1361"
+      > </a
+      ><a name="1362" class="Keyword"
+      >where</a
+      ><a name="1367"
+      >
+  </a
+      ><a name="1370" href="FunctionGraphsInIMLTT.html#1370" class="InductiveConstructor"
+      >refl</a
+      ><a name="1374"
+      > </a
+      ><a name="1375" class="Symbol"
+      >:</a
+      ><a name="1376"
+      > </a
+      ><a name="1377" class="Symbol"
+      >{</a
+      ><a name="1378" href="FunctionGraphsInIMLTT.html#1378" class="Bound"
+      >x</a
+      ><a name="1379"
+      > </a
+      ><a name="1380" class="Symbol"
+      >:</a
+      ><a name="1381"
+      > </a
+      ><a name="1382" href="FunctionGraphsInIMLTT.html#1339" class="Bound"
+      >X</a
+      ><a name="1383" class="Symbol"
+      >}</a
+      ><a name="1384"
+      > </a
+      ><a name="1385" class="Symbol"
+      >&#8594;</a
+      ><a name="1386"
+      > </a
+      ><a name="1387" href="FunctionGraphsInIMLTT.html#1378" class="Bound"
+      >x</a
+      ><a name="1388"
+      > </a
+      ><a name="1389" href="FunctionGraphsInIMLTT.html#1334" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="1390"
+      > </a
+      ><a name="1391" href="FunctionGraphsInIMLTT.html#1378" class="Bound"
+      >x</a
+      ><a name="1392"
+      >
+
+</a
+      ><a name="1394" href="FunctionGraphsInIMLTT.html#1394" class="Function"
+      >J</a
+      ><a name="1395"
+      > </a
+      ><a name="1396" class="Symbol"
+      >:</a
+      ><a name="1397"
+      > </a
+      ><a name="1398" class="Symbol"
+      >{</a
+      ><a name="1399" href="FunctionGraphsInIMLTT.html#1399" class="Bound"
+      >X</a
+      ><a name="1400"
+      > </a
+      ><a name="1401" class="Symbol"
+      >:</a
+      ><a name="1402"
+      > </a
+      ><a name="1403" class="PrimitiveType"
+      >Set</a
+      ><a name="1406" class="Symbol"
+      >}</a
+      ><a name="1407"
+      > </a
+      ><a name="1408" class="Symbol"
+      >&#8594;</a
+      ><a name="1409"
+      > </a
+      ><a name="1410" class="Symbol"
+      >(</a
+      ><a name="1411" href="FunctionGraphsInIMLTT.html#1411" class="Bound"
+      >A</a
+      ><a name="1412"
+      > </a
+      ><a name="1413" class="Symbol"
+      >:</a
+      ><a name="1414"
+      > </a
+      ><a name="1415" class="Symbol"
+      >&#8704;(</a
+      ><a name="1417" href="FunctionGraphsInIMLTT.html#1417" class="Bound"
+      >x</a
+      ><a name="1418"
+      > </a
+      ><a name="1419" href="FunctionGraphsInIMLTT.html#1419" class="Bound"
+      >x'</a
+      ><a name="1421"
+      > </a
+      ><a name="1422" class="Symbol"
+      >:</a
+      ><a name="1423"
+      > </a
+      ><a name="1424" href="FunctionGraphsInIMLTT.html#1399" class="Bound"
+      >X</a
+      ><a name="1425" class="Symbol"
+      >)</a
+      ><a name="1426"
+      > </a
+      ><a name="1427" class="Symbol"
+      >&#8594;</a
+      ><a name="1428"
+      > </a
+      ><a name="1429" href="FunctionGraphsInIMLTT.html#1417" class="Bound"
+      >x</a
+      ><a name="1430"
+      > </a
+      ><a name="1431" href="FunctionGraphsInIMLTT.html#1334" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="1432"
+      > </a
+      ><a name="1433" href="FunctionGraphsInIMLTT.html#1419" class="Bound"
+      >x'</a
+      ><a name="1435"
+      > </a
+      ><a name="1436" class="Symbol"
+      >&#8594;</a
+      ><a name="1437"
+      > </a
+      ><a name="1438" class="PrimitiveType"
+      >Set</a
+      ><a name="1441" class="Symbol"
+      >)</a
+      ><a name="1442"
+      >
+ </a
+      ><a name="1444" class="Symbol"
+      >&#8594;</a
+      ><a name="1445"
+      > </a
+      ><a name="1446" class="Symbol"
+      >(&#8704;(</a
+      ><a name="1449" href="FunctionGraphsInIMLTT.html#1449" class="Bound"
+      >x</a
+      ><a name="1450"
+      > </a
+      ><a name="1451" class="Symbol"
+      >:</a
+      ><a name="1452"
+      > </a
+      ><a name="1453" href="FunctionGraphsInIMLTT.html#1399" class="Bound"
+      >X</a
+      ><a name="1454" class="Symbol"
+      >)</a
+      ><a name="1455"
+      > </a
+      ><a name="1456" class="Symbol"
+      >&#8594;</a
+      ><a name="1457"
+      > </a
+      ><a name="1458" href="FunctionGraphsInIMLTT.html#1411" class="Bound"
+      >A</a
+      ><a name="1459"
+      > </a
+      ><a name="1460" href="FunctionGraphsInIMLTT.html#1449" class="Bound"
+      >x</a
+      ><a name="1461"
+      > </a
+      ><a name="1462" href="FunctionGraphsInIMLTT.html#1449" class="Bound"
+      >x</a
+      ><a name="1463"
+      > </a
+      ><a name="1464" href="FunctionGraphsInIMLTT.html#1370" class="InductiveConstructor"
+      >refl</a
+      ><a name="1468" class="Symbol"
+      >)</a
+      ><a name="1469"
+      > </a
+      ><a name="1470" class="Symbol"
+      >&#8594;</a
+      ><a name="1471"
+      >  </a
+      ><a name="1473" class="Symbol"
+      >&#8704;{</a
+      ><a name="1475" href="FunctionGraphsInIMLTT.html#1475" class="Bound"
+      >x</a
+      ><a name="1476"
+      > </a
+      ><a name="1477" href="FunctionGraphsInIMLTT.html#1477" class="Bound"
+      >x'</a
+      ><a name="1479"
+      > </a
+      ><a name="1480" class="Symbol"
+      >:</a
+      ><a name="1481"
+      > </a
+      ><a name="1482" href="FunctionGraphsInIMLTT.html#1399" class="Bound"
+      >X</a
+      ><a name="1483" class="Symbol"
+      >}</a
+      ><a name="1484"
+      > </a
+      ><a name="1485" class="Symbol"
+      >&#8594;</a
+      ><a name="1486"
+      > </a
+      ><a name="1487" class="Symbol"
+      >&#8704;(</a
+      ><a name="1489" href="FunctionGraphsInIMLTT.html#1489" class="Bound"
+      >r</a
+      ><a name="1490"
+      > </a
+      ><a name="1491" class="Symbol"
+      >:</a
+      ><a name="1492"
+      > </a
+      ><a name="1493" href="FunctionGraphsInIMLTT.html#1475" class="Bound"
+      >x</a
+      ><a name="1494"
+      > </a
+      ><a name="1495" href="FunctionGraphsInIMLTT.html#1334" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="1496"
+      > </a
+      ><a name="1497" href="FunctionGraphsInIMLTT.html#1477" class="Bound"
+      >x'</a
+      ><a name="1499" class="Symbol"
+      >)</a
+      ><a name="1500"
+      > </a
+      ><a name="1501" class="Symbol"
+      >&#8594;</a
+      ><a name="1502"
+      > </a
+      ><a name="1503" href="FunctionGraphsInIMLTT.html#1411" class="Bound"
+      >A</a
+      ><a name="1504"
+      > </a
+      ><a name="1505" href="FunctionGraphsInIMLTT.html#1475" class="Bound"
+      >x</a
+      ><a name="1506"
+      > </a
+      ><a name="1507" href="FunctionGraphsInIMLTT.html#1477" class="Bound"
+      >x'</a
+      ><a name="1509"
+      > </a
+      ><a name="1510" href="FunctionGraphsInIMLTT.html#1489" class="Bound"
+      >r</a
+      ><a name="1511"
+      >
+</a
+      ><a name="1512" href="FunctionGraphsInIMLTT.html#1394" class="Function"
+      >J</a
+      ><a name="1513"
+      > </a
+      ><a name="1514" href="FunctionGraphsInIMLTT.html#1514" class="Bound"
+      >A</a
+      ><a name="1515"
+      > </a
+      ><a name="1516" href="FunctionGraphsInIMLTT.html#1516" class="Bound"
+      >f</a
+      ><a name="1517"
+      > </a
+      ><a name="1518" class="Symbol"
+      >{</a
+      ><a name="1519" href="FunctionGraphsInIMLTT.html#1519" class="Bound"
+      >x</a
+      ><a name="1520" class="Symbol"
+      >}</a
+      ><a name="1521"
+      > </a
+      ><a name="1522" href="FunctionGraphsInIMLTT.html#1370" class="InductiveConstructor"
+      >refl</a
+      ><a name="1526"
+      > </a
+      ><a name="1527" class="Symbol"
+      >=</a
+      ><a name="1528"
+      > </a
+      ><a name="1529" href="FunctionGraphsInIMLTT.html#1516" class="Bound"
+      >f</a
+      ><a name="1530"
+      > </a
+      ><a name="1531" href="FunctionGraphsInIMLTT.html#1519" class="Bound"
+      >x</a
+      ><a name="1532"
+      >
+
+</a
+      ><a name="1534" href="FunctionGraphsInIMLTT.html#1534" class="Function"
+      >pseudo-uip</a
+      ><a name="1544"
+      > </a
+      ><a name="1545" class="Symbol"
+      >:</a
+      ><a name="1546"
+      > </a
+      ><a name="1547" class="Symbol"
+      >{</a
+      ><a name="1548" href="FunctionGraphsInIMLTT.html#1548" class="Bound"
+      >X</a
+      ><a name="1549"
+      > </a
+      ><a name="1550" class="Symbol"
+      >:</a
+      ><a name="1551"
+      > </a
+      ><a name="1552" class="PrimitiveType"
+      >Set</a
+      ><a name="1555" class="Symbol"
+      >}</a
+      ><a name="1556"
+      > </a
+      ><a name="1557" class="Symbol"
+      >&#8594;</a
+      ><a name="1558"
+      >
+ </a
+      ><a name="1560" class="Symbol"
+      >&#8704;{</a
+      ><a name="1562" href="FunctionGraphsInIMLTT.html#1562" class="Bound"
+      >x</a
+      ><a name="1563"
+      > </a
+      ><a name="1564" href="FunctionGraphsInIMLTT.html#1564" class="Bound"
+      >x'</a
+      ><a name="1566"
+      > </a
+      ><a name="1567" class="Symbol"
+      >:</a
+      ><a name="1568"
+      > </a
+      ><a name="1569" href="FunctionGraphsInIMLTT.html#1548" class="Bound"
+      >X</a
+      ><a name="1570" class="Symbol"
+      >}</a
+      ><a name="1571"
+      > </a
+      ><a name="1572" class="Symbol"
+      >&#8594;</a
+      ><a name="1573"
+      > </a
+      ><a name="1574" class="Symbol"
+      >&#8704;(</a
+      ><a name="1576" href="FunctionGraphsInIMLTT.html#1576" class="Bound"
+      >r</a
+      ><a name="1577"
+      > </a
+      ><a name="1578" class="Symbol"
+      >:</a
+      ><a name="1579"
+      > </a
+      ><a name="1580" href="FunctionGraphsInIMLTT.html#1562" class="Bound"
+      >x</a
+      ><a name="1581"
+      > </a
+      ><a name="1582" href="FunctionGraphsInIMLTT.html#1334" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="1583"
+      > </a
+      ><a name="1584" href="FunctionGraphsInIMLTT.html#1564" class="Bound"
+      >x'</a
+      ><a name="1586" class="Symbol"
+      >)</a
+      ><a name="1587"
+      > </a
+      ><a name="1588" class="Symbol"
+      >&#8594;</a
+      ><a name="1589"
+      > </a
+      ><a name="1590" class="Symbol"
+      >(</a
+      ><a name="1591" href="FunctionGraphsInIMLTT.html#1562" class="Bound"
+      >x</a
+      ><a name="1592"
+      > </a
+      ><a name="1593" href="FunctionGraphsInIMLTT.html#1250" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="1594"
+      > </a
+      ><a name="1595" href="FunctionGraphsInIMLTT.html#1370" class="InductiveConstructor"
+      >refl</a
+      ><a name="1599" class="Symbol"
+      >)</a
+      ><a name="1600"
+      > </a
+      ><a name="1601" href="FunctionGraphsInIMLTT.html#1334" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="1602"
+      > </a
+      ><a name="1603" class="Symbol"
+      >(</a
+      ><a name="1604" href="FunctionGraphsInIMLTT.html#1564" class="Bound"
+      >x'</a
+      ><a name="1606"
+      > </a
+      ><a name="1607" href="FunctionGraphsInIMLTT.html#1250" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="1608"
+      > </a
+      ><a name="1609" href="FunctionGraphsInIMLTT.html#1576" class="Bound"
+      >r</a
+      ><a name="1610" class="Symbol"
+      >)</a
+      ><a name="1611"
+      >
+</a
+      ><a name="1612" href="FunctionGraphsInIMLTT.html#1534" class="Function"
+      >pseudo-uip</a
+      ><a name="1622"
+      > </a
+      ><a name="1623" class="Symbol"
+      >{</a
+      ><a name="1624" href="FunctionGraphsInIMLTT.html#1624" class="Bound"
+      >X</a
+      ><a name="1625" class="Symbol"
+      >}</a
+      ><a name="1626"
+      > </a
+      ><a name="1627" class="Symbol"
+      >=</a
+      ><a name="1628"
+      > </a
+      ><a name="1629" href="FunctionGraphsInIMLTT.html#1394" class="Function"
+      >J</a
+      ><a name="1630"
+      > </a
+      ><a name="1631" class="Symbol"
+      >{</a
+      ><a name="1632" href="FunctionGraphsInIMLTT.html#1624" class="Bound"
+      >X</a
+      ><a name="1633" class="Symbol"
+      >}</a
+      ><a name="1634"
+      > </a
+      ><a name="1635" href="FunctionGraphsInIMLTT.html#1657" class="Function"
+      >A</a
+      ><a name="1636"
+      > </a
+      ><a name="1637" class="Symbol"
+      >(&#955;</a
+      ><a name="1639"
+      > </a
+      ><a name="1640" href="FunctionGraphsInIMLTT.html#1640" class="Bound"
+      >x</a
+      ><a name="1641"
+      > </a
+      ><a name="1642" class="Symbol"
+      >&#8594;</a
+      ><a name="1643"
+      > </a
+      ><a name="1644" href="FunctionGraphsInIMLTT.html#1370" class="InductiveConstructor"
+      >refl</a
+      ><a name="1648" class="Symbol"
+      >)</a
+      ><a name="1649"
+      >
+ </a
+      ><a name="1651" class="Keyword"
+      >where</a
+      ><a name="1656"
+      > </a
+      ><a name="1657" href="FunctionGraphsInIMLTT.html#1657" class="Function"
+      >A</a
+      ><a name="1658"
+      > </a
+      ><a name="1659" class="Symbol"
+      >:</a
+      ><a name="1660"
+      > </a
+      ><a name="1661" class="Symbol"
+      >&#8704;(</a
+      ><a name="1663" href="FunctionGraphsInIMLTT.html#1663" class="Bound"
+      >x</a
+      ><a name="1664"
+      > </a
+      ><a name="1665" href="FunctionGraphsInIMLTT.html#1665" class="Bound"
+      >x'</a
+      ><a name="1667"
+      > </a
+      ><a name="1668" class="Symbol"
+      >:</a
+      ><a name="1669"
+      > </a
+      ><a name="1670" href="FunctionGraphsInIMLTT.html#1624" class="Bound"
+      >X</a
+      ><a name="1671" class="Symbol"
+      >)</a
+      ><a name="1672"
+      > </a
+      ><a name="1673" class="Symbol"
+      >&#8594;</a
+      ><a name="1674"
+      > </a
+      ><a name="1675" href="FunctionGraphsInIMLTT.html#1663" class="Bound"
+      >x</a
+      ><a name="1676"
+      > </a
+      ><a name="1677" href="FunctionGraphsInIMLTT.html#1334" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="1678"
+      > </a
+      ><a name="1679" href="FunctionGraphsInIMLTT.html#1665" class="Bound"
+      >x'</a
+      ><a name="1681"
+      > </a
+      ><a name="1682" class="Symbol"
+      >&#8594;</a
+      ><a name="1683"
+      > </a
+      ><a name="1684" class="PrimitiveType"
+      >Set</a
+      ><a name="1687"
+      >
+       </a
+      ><a name="1695" href="FunctionGraphsInIMLTT.html#1657" class="Function"
+      >A</a
+      ><a name="1696"
+      > </a
+      ><a name="1697" href="FunctionGraphsInIMLTT.html#1697" class="Bound"
+      >x</a
+      ><a name="1698"
+      > </a
+      ><a name="1699" href="FunctionGraphsInIMLTT.html#1699" class="Bound"
+      >x'</a
+      ><a name="1701"
+      > </a
+      ><a name="1702" href="FunctionGraphsInIMLTT.html#1702" class="Bound"
+      >r</a
+      ><a name="1703"
+      > </a
+      ><a name="1704" class="Symbol"
+      >=</a
+      ><a name="1705"
+      > </a
+      ><a name="1706" href="FunctionGraphsInIMLTT.html#1334" class="Datatype Operator"
+      >_&#8801;_</a
+      ><a name="1709"
+      > </a
+      ><a name="1710" class="Symbol"
+      >{</a
+      ><a name="1711" href="FunctionGraphsInIMLTT.html#1199" class="Record"
+      >&#931;</a
+      ><a name="1712"
+      > </a
+      ><a name="1713" class="Symbol"
+      >\(</a
+      ><a name="1715" href="FunctionGraphsInIMLTT.html#1715" class="Bound"
+      >x'</a
+      ><a name="1717"
+      > </a
+      ><a name="1718" class="Symbol"
+      >:</a
+      ><a name="1719"
+      > </a
+      ><a name="1720" href="FunctionGraphsInIMLTT.html#1624" class="Bound"
+      >X</a
+      ><a name="1721" class="Symbol"
+      >)</a
+      ><a name="1722"
+      > </a
+      ><a name="1723" class="Symbol"
+      >&#8594;</a
+      ><a name="1724"
+      > </a
+      ><a name="1725" href="FunctionGraphsInIMLTT.html#1697" class="Bound"
+      >x</a
+      ><a name="1726"
+      > </a
+      ><a name="1727" href="FunctionGraphsInIMLTT.html#1334" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="1728"
+      > </a
+      ><a name="1729" href="FunctionGraphsInIMLTT.html#1715" class="Bound"
+      >x'</a
+      ><a name="1731" class="Symbol"
+      >}</a
+      ><a name="1732"
+      > </a
+      ><a name="1733" class="Symbol"
+      >(</a
+      ><a name="1734" href="FunctionGraphsInIMLTT.html#1697" class="Bound"
+      >x</a
+      ><a name="1735"
+      > </a
+      ><a name="1736" href="FunctionGraphsInIMLTT.html#1250" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="1737"
+      > </a
+      ><a name="1738" href="FunctionGraphsInIMLTT.html#1370" class="InductiveConstructor"
+      >refl</a
+      ><a name="1742" class="Symbol"
+      >)</a
+      ><a name="1743"
+      > </a
+      ><a name="1744" class="Symbol"
+      >(</a
+      ><a name="1745" href="FunctionGraphsInIMLTT.html#1699" class="Bound"
+      >x'</a
+      ><a name="1747"
+      > </a
+      ><a name="1748" href="FunctionGraphsInIMLTT.html#1250" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="1749"
+      > </a
+      ><a name="1750" href="FunctionGraphsInIMLTT.html#1702" class="Bound"
+      >r</a
+      ><a name="1751" class="Symbol"
+      >)</a
+      ><a name="1752"
+      >
+
+</a
+      ><a name="1754" href="FunctionGraphsInIMLTT.html#1754" class="Function"
+      >trans</a
+      ><a name="1759"
+      > </a
+      ><a name="1760" class="Symbol"
+      >:</a
+      ><a name="1761"
+      > </a
+      ><a name="1762" class="Symbol"
+      >{</a
+      ><a name="1763" href="FunctionGraphsInIMLTT.html#1763" class="Bound"
+      >X</a
+      ><a name="1764"
+      > </a
+      ><a name="1765" class="Symbol"
+      >:</a
+      ><a name="1766"
+      > </a
+      ><a name="1767" class="PrimitiveType"
+      >Set</a
+      ><a name="1770" class="Symbol"
+      >}</a
+      ><a name="1771"
+      > </a
+      ><a name="1772" class="Symbol"
+      >&#8594;</a
+      ><a name="1773"
+      > </a
+      ><a name="1774" class="Symbol"
+      >{</a
+      ><a name="1775" href="FunctionGraphsInIMLTT.html#1775" class="Bound"
+      >x</a
+      ><a name="1776"
+      > </a
+      ><a name="1777" href="FunctionGraphsInIMLTT.html#1777" class="Bound"
+      >y</a
+      ><a name="1778"
+      > </a
+      ><a name="1779" href="FunctionGraphsInIMLTT.html#1779" class="Bound"
+      >z</a
+      ><a name="1780"
+      > </a
+      ><a name="1781" class="Symbol"
+      >:</a
+      ><a name="1782"
+      > </a
+      ><a name="1783" href="FunctionGraphsInIMLTT.html#1763" class="Bound"
+      >X</a
+      ><a name="1784" class="Symbol"
+      >}</a
+      ><a name="1785"
+      > </a
+      ><a name="1786" class="Symbol"
+      >&#8594;</a
+      ><a name="1787"
+      >  </a
+      ><a name="1789" href="FunctionGraphsInIMLTT.html#1775" class="Bound"
+      >x</a
+      ><a name="1790"
+      > </a
+      ><a name="1791" href="FunctionGraphsInIMLTT.html#1334" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="1792"
+      > </a
+      ><a name="1793" href="FunctionGraphsInIMLTT.html#1777" class="Bound"
+      >y</a
+      ><a name="1794"
+      >  </a
+      ><a name="1796" class="Symbol"
+      >&#8594;</a
+      ><a name="1797"
+      >  </a
+      ><a name="1799" href="FunctionGraphsInIMLTT.html#1777" class="Bound"
+      >y</a
+      ><a name="1800"
+      > </a
+      ><a name="1801" href="FunctionGraphsInIMLTT.html#1334" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="1802"
+      > </a
+      ><a name="1803" href="FunctionGraphsInIMLTT.html#1779" class="Bound"
+      >z</a
+      ><a name="1804"
+      >  </a
+      ><a name="1806" class="Symbol"
+      >&#8594;</a
+      ><a name="1807"
+      >  </a
+      ><a name="1809" href="FunctionGraphsInIMLTT.html#1775" class="Bound"
+      >x</a
+      ><a name="1810"
+      > </a
+      ><a name="1811" href="FunctionGraphsInIMLTT.html#1334" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="1812"
+      > </a
+      ><a name="1813" href="FunctionGraphsInIMLTT.html#1779" class="Bound"
+      >z</a
+      ><a name="1814"
+      >
+</a
+      ><a name="1815" href="FunctionGraphsInIMLTT.html#1754" class="Function"
+      >trans</a
+      ><a name="1820"
+      > </a
+      ><a name="1821" href="FunctionGraphsInIMLTT.html#1370" class="InductiveConstructor"
+      >refl</a
+      ><a name="1825"
+      > </a
+      ><a name="1826" href="FunctionGraphsInIMLTT.html#1370" class="InductiveConstructor"
+      >refl</a
+      ><a name="1830"
+      > </a
+      ><a name="1831" class="Symbol"
+      >=</a
+      ><a name="1832"
+      > </a
+      ><a name="1833" href="FunctionGraphsInIMLTT.html#1370" class="InductiveConstructor"
+      >refl</a
+      ><a name="1837"
+      >
+
+</a
+      ><a name="1839" href="FunctionGraphsInIMLTT.html#1839" class="Function"
+      >cong</a
+      ><a name="1843"
+      > </a
+      ><a name="1844" class="Symbol"
+      >:</a
+      ><a name="1845"
+      > </a
+      ><a name="1846" class="Symbol"
+      >{</a
+      ><a name="1847" href="FunctionGraphsInIMLTT.html#1847" class="Bound"
+      >X</a
+      ><a name="1848"
+      > </a
+      ><a name="1849" href="FunctionGraphsInIMLTT.html#1849" class="Bound"
+      >Y</a
+      ><a name="1850"
+      > </a
+      ><a name="1851" class="Symbol"
+      >:</a
+      ><a name="1852"
+      > </a
+      ><a name="1853" class="PrimitiveType"
+      >Set</a
+      ><a name="1856" class="Symbol"
+      >}</a
+      ><a name="1857"
+      > </a
+      ><a name="1858" class="Symbol"
+      >&#8594;</a
+      ><a name="1859"
+      > </a
+      ><a name="1860" class="Symbol"
+      >&#8704;(</a
+      ><a name="1862" href="FunctionGraphsInIMLTT.html#1862" class="Bound"
+      >f</a
+      ><a name="1863"
+      > </a
+      ><a name="1864" class="Symbol"
+      >:</a
+      ><a name="1865"
+      > </a
+      ><a name="1866" href="FunctionGraphsInIMLTT.html#1847" class="Bound"
+      >X</a
+      ><a name="1867"
+      > </a
+      ><a name="1868" class="Symbol"
+      >&#8594;</a
+      ><a name="1869"
+      > </a
+      ><a name="1870" href="FunctionGraphsInIMLTT.html#1849" class="Bound"
+      >Y</a
+      ><a name="1871" class="Symbol"
+      >)</a
+      ><a name="1872"
+      > </a
+      ><a name="1873" class="Symbol"
+      >&#8594;</a
+      ><a name="1874"
+      > </a
+      ><a name="1875" class="Symbol"
+      >{</a
+      ><a name="1876" href="FunctionGraphsInIMLTT.html#1876" class="Bound"
+      >x&#8320;</a
+      ><a name="1878"
+      > </a
+      ><a name="1879" href="FunctionGraphsInIMLTT.html#1879" class="Bound"
+      >x&#8321;</a
+      ><a name="1881"
+      > </a
+      ><a name="1882" class="Symbol"
+      >:</a
+      ><a name="1883"
+      > </a
+      ><a name="1884" href="FunctionGraphsInIMLTT.html#1847" class="Bound"
+      >X</a
+      ><a name="1885" class="Symbol"
+      >}</a
+      ><a name="1886"
+      > </a
+      ><a name="1887" class="Symbol"
+      >&#8594;</a
+      ><a name="1888"
+      > </a
+      ><a name="1889" href="FunctionGraphsInIMLTT.html#1876" class="Bound"
+      >x&#8320;</a
+      ><a name="1891"
+      > </a
+      ><a name="1892" href="FunctionGraphsInIMLTT.html#1334" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="1893"
+      > </a
+      ><a name="1894" href="FunctionGraphsInIMLTT.html#1879" class="Bound"
+      >x&#8321;</a
+      ><a name="1896"
+      > </a
+      ><a name="1897" class="Symbol"
+      >&#8594;</a
+      ><a name="1898"
+      > </a
+      ><a name="1899" href="FunctionGraphsInIMLTT.html#1862" class="Bound"
+      >f</a
+      ><a name="1900"
+      > </a
+      ><a name="1901" href="FunctionGraphsInIMLTT.html#1876" class="Bound"
+      >x&#8320;</a
+      ><a name="1903"
+      > </a
+      ><a name="1904" href="FunctionGraphsInIMLTT.html#1334" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="1905"
+      > </a
+      ><a name="1906" href="FunctionGraphsInIMLTT.html#1862" class="Bound"
+      >f</a
+      ><a name="1907"
+      > </a
+      ><a name="1908" href="FunctionGraphsInIMLTT.html#1879" class="Bound"
+      >x&#8321;</a
+      ><a name="1910"
+      >
+</a
+      ><a name="1911" href="FunctionGraphsInIMLTT.html#1839" class="Function"
+      >cong</a
+      ><a name="1915"
+      > </a
+      ><a name="1916" href="FunctionGraphsInIMLTT.html#1916" class="Bound"
+      >f</a
+      ><a name="1917"
+      > </a
+      ><a name="1918" href="FunctionGraphsInIMLTT.html#1370" class="InductiveConstructor"
+      >refl</a
+      ><a name="1922"
+      > </a
+      ><a name="1923" class="Symbol"
+      >=</a
+      ><a name="1924"
+      > </a
+      ><a name="1925" href="FunctionGraphsInIMLTT.html#1370" class="InductiveConstructor"
+      >refl</a
+      ><a name="1929"
+      >
+
+</a
+      ><a name="1931" class="Keyword"
+      >data</a
+      ><a name="1935"
+      > </a
+      ><a name="1936" href="FunctionGraphsInIMLTT.html#1936" class="Datatype Operator"
+      >_&#8801;&#8321;_</a
+      ><a name="1940"
+      > </a
+      ><a name="1941" class="Symbol"
+      >{</a
+      ><a name="1942" href="FunctionGraphsInIMLTT.html#1942" class="Bound"
+      >X</a
+      ><a name="1943"
+      > </a
+      ><a name="1944" class="Symbol"
+      >:</a
+      ><a name="1945"
+      > </a
+      ><a name="1946" class="PrimitiveType"
+      >Set&#8321;</a
+      ><a name="1950" class="Symbol"
+      >}</a
+      ><a name="1951"
+      > </a
+      ><a name="1952" class="Symbol"
+      >:</a
+      ><a name="1953"
+      > </a
+      ><a name="1954" href="FunctionGraphsInIMLTT.html#1942" class="Bound"
+      >X</a
+      ><a name="1955"
+      > </a
+      ><a name="1956" class="Symbol"
+      >&#8594;</a
+      ><a name="1957"
+      > </a
+      ><a name="1958" href="FunctionGraphsInIMLTT.html#1942" class="Bound"
+      >X</a
+      ><a name="1959"
+      > </a
+      ><a name="1960" class="Symbol"
+      >&#8594;</a
+      ><a name="1961"
+      > </a
+      ><a name="1962" class="PrimitiveType"
+      >Set&#8321;</a
+      ><a name="1966"
+      > </a
+      ><a name="1967" class="Keyword"
+      >where</a
+      ><a name="1972"
+      >
+  </a
+      ><a name="1975" href="FunctionGraphsInIMLTT.html#1975" class="InductiveConstructor"
+      >refl&#8321;</a
+      ><a name="1980"
+      > </a
+      ><a name="1981" class="Symbol"
+      >:</a
+      ><a name="1982"
+      > </a
+      ><a name="1983" class="Symbol"
+      >{</a
+      ><a name="1984" href="FunctionGraphsInIMLTT.html#1984" class="Bound"
+      >x</a
+      ><a name="1985"
+      > </a
+      ><a name="1986" class="Symbol"
+      >:</a
+      ><a name="1987"
+      > </a
+      ><a name="1988" href="FunctionGraphsInIMLTT.html#1942" class="Bound"
+      >X</a
+      ><a name="1989" class="Symbol"
+      >}</a
+      ><a name="1990"
+      > </a
+      ><a name="1991" class="Symbol"
+      >&#8594;</a
+      ><a name="1992"
+      > </a
+      ><a name="1993" href="FunctionGraphsInIMLTT.html#1984" class="Bound"
+      >x</a
+      ><a name="1994"
+      > </a
+      ><a name="1995" href="FunctionGraphsInIMLTT.html#1936" class="Datatype Operator"
+      >&#8801;&#8321;</a
+      ><a name="1997"
+      > </a
+      ><a name="1998" href="FunctionGraphsInIMLTT.html#1984" class="Bound"
+      >x</a
+      ><a name="1999"
+      >
+
+</a
+      ><a name="2001" href="FunctionGraphsInIMLTT.html#2001" class="Function"
+      >graph</a
+      ><a name="2006"
+      > </a
+      ><a name="2007" class="Symbol"
+      >:</a
+      ><a name="2008"
+      > </a
+      ><a name="2009" class="Symbol"
+      >{</a
+      ><a name="2010" href="FunctionGraphsInIMLTT.html#2010" class="Bound"
+      >X</a
+      ><a name="2011"
+      > </a
+      ><a name="2012" href="FunctionGraphsInIMLTT.html#2012" class="Bound"
+      >Y</a
+      ><a name="2013"
+      > </a
+      ><a name="2014" class="Symbol"
+      >:</a
+      ><a name="2015"
+      > </a
+      ><a name="2016" class="PrimitiveType"
+      >Set</a
+      ><a name="2019" class="Symbol"
+      >}</a
+      ><a name="2020"
+      > </a
+      ><a name="2021" class="Symbol"
+      >&#8594;</a
+      ><a name="2022"
+      > </a
+      ><a name="2023" class="Symbol"
+      >(</a
+      ><a name="2024" href="FunctionGraphsInIMLTT.html#2010" class="Bound"
+      >X</a
+      ><a name="2025"
+      > </a
+      ><a name="2026" class="Symbol"
+      >&#8594;</a
+      ><a name="2027"
+      > </a
+      ><a name="2028" href="FunctionGraphsInIMLTT.html#2012" class="Bound"
+      >Y</a
+      ><a name="2029" class="Symbol"
+      >)</a
+      ><a name="2030"
+      > </a
+      ><a name="2031" class="Symbol"
+      >&#8594;</a
+      ><a name="2032"
+      > </a
+      ><a name="2033" class="PrimitiveType"
+      >Set</a
+      ><a name="2036"
+      >
+</a
+      ><a name="2037" href="FunctionGraphsInIMLTT.html#2001" class="Function"
+      >graph</a
+      ><a name="2042"
+      > </a
+      ><a name="2043" href="FunctionGraphsInIMLTT.html#2043" class="Bound"
+      >f</a
+      ><a name="2044"
+      > </a
+      ><a name="2045" class="Symbol"
+      >=</a
+      ><a name="2046"
+      > </a
+      ><a name="2047" href="FunctionGraphsInIMLTT.html#1199" class="Record"
+      >&#931;</a
+      ><a name="2048"
+      > </a
+      ><a name="2049" class="Symbol"
+      >\</a
+      ><a name="2050" href="FunctionGraphsInIMLTT.html#2050" class="Bound"
+      >x</a
+      ><a name="2051"
+      > </a
+      ><a name="2052" class="Symbol"
+      >&#8594;</a
+      ><a name="2053"
+      > </a
+      ><a name="2054" href="FunctionGraphsInIMLTT.html#1199" class="Record"
+      >&#931;</a
+      ><a name="2055"
+      > </a
+      ><a name="2056" class="Symbol"
+      >\</a
+      ><a name="2057" href="FunctionGraphsInIMLTT.html#2057" class="Bound"
+      >y</a
+      ><a name="2058"
+      > </a
+      ><a name="2059" class="Symbol"
+      >&#8594;</a
+      ><a name="2060"
+      > </a
+      ><a name="2061" href="FunctionGraphsInIMLTT.html#2043" class="Bound"
+      >f</a
+      ><a name="2062"
+      > </a
+      ><a name="2063" href="FunctionGraphsInIMLTT.html#2050" class="Bound"
+      >x</a
+      ><a name="2064"
+      > </a
+      ><a name="2065" href="FunctionGraphsInIMLTT.html#1334" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="2066"
+      > </a
+      ><a name="2067" href="FunctionGraphsInIMLTT.html#2057" class="Bound"
+      >y</a
+      ><a name="2068"
+      >
+
+</a
+      ><a name="2070" href="FunctionGraphsInIMLTT.html#2070" class="Function Operator"
+      >_~_</a
+      ><a name="2073"
+      > </a
+      ><a name="2074" class="Symbol"
+      >:</a
+      ><a name="2075"
+      > </a
+      ><a name="2076" class="Symbol"
+      >{</a
+      ><a name="2077" href="FunctionGraphsInIMLTT.html#2077" class="Bound"
+      >X</a
+      ><a name="2078"
+      > </a
+      ><a name="2079" href="FunctionGraphsInIMLTT.html#2079" class="Bound"
+      >Y</a
+      ><a name="2080"
+      > </a
+      ><a name="2081" class="Symbol"
+      >:</a
+      ><a name="2082"
+      > </a
+      ><a name="2083" class="PrimitiveType"
+      >Set</a
+      ><a name="2086" class="Symbol"
+      >}</a
+      ><a name="2087"
+      > </a
+      ><a name="2088" class="Symbol"
+      >&#8594;</a
+      ><a name="2089"
+      > </a
+      ><a name="2090" class="Symbol"
+      >(</a
+      ><a name="2091" href="FunctionGraphsInIMLTT.html#2077" class="Bound"
+      >X</a
+      ><a name="2092"
+      > </a
+      ><a name="2093" class="Symbol"
+      >&#8594;</a
+      ><a name="2094"
+      > </a
+      ><a name="2095" href="FunctionGraphsInIMLTT.html#2079" class="Bound"
+      >Y</a
+      ><a name="2096" class="Symbol"
+      >)</a
+      ><a name="2097"
+      > </a
+      ><a name="2098" class="Symbol"
+      >&#8594;</a
+      ><a name="2099"
+      > </a
+      ><a name="2100" class="Symbol"
+      >(</a
+      ><a name="2101" href="FunctionGraphsInIMLTT.html#2077" class="Bound"
+      >X</a
+      ><a name="2102"
+      > </a
+      ><a name="2103" class="Symbol"
+      >&#8594;</a
+      ><a name="2104"
+      > </a
+      ><a name="2105" href="FunctionGraphsInIMLTT.html#2079" class="Bound"
+      >Y</a
+      ><a name="2106" class="Symbol"
+      >)</a
+      ><a name="2107"
+      > </a
+      ><a name="2108" class="Symbol"
+      >&#8594;</a
+      ><a name="2109"
+      > </a
+      ><a name="2110" class="PrimitiveType"
+      >Set</a
+      ><a name="2113"
+      >
+</a
+      ><a name="2114" href="FunctionGraphsInIMLTT.html#2114" class="Bound"
+      >f</a
+      ><a name="2115"
+      > </a
+      ><a name="2116" href="FunctionGraphsInIMLTT.html#2070" class="Function Operator"
+      >~</a
+      ><a name="2117"
+      > </a
+      ><a name="2118" href="FunctionGraphsInIMLTT.html#2118" class="Bound"
+      >g</a
+      ><a name="2119"
+      > </a
+      ><a name="2120" class="Symbol"
+      >=</a
+      ><a name="2121"
+      > </a
+      ><a name="2122" class="Symbol"
+      >&#8704;</a
+      ><a name="2123"
+      > </a
+      ><a name="2124" href="FunctionGraphsInIMLTT.html#2124" class="Bound"
+      >x</a
+      ><a name="2125"
+      > </a
+      ><a name="2126" class="Symbol"
+      >&#8594;</a
+      ><a name="2127"
+      > </a
+      ><a name="2128" href="FunctionGraphsInIMLTT.html#2114" class="Bound"
+      >f</a
+      ><a name="2129"
+      > </a
+      ><a name="2130" href="FunctionGraphsInIMLTT.html#2124" class="Bound"
+      >x</a
+      ><a name="2131"
+      > </a
+      ><a name="2132" href="FunctionGraphsInIMLTT.html#1334" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="2133"
+      > </a
+      ><a name="2134" href="FunctionGraphsInIMLTT.html#2118" class="Bound"
+      >g</a
+      ><a name="2135"
+      > </a
+      ><a name="2136" href="FunctionGraphsInIMLTT.html#2124" class="Bound"
+      >x</a
+      ><a name="2137"
+      >
+
+</a
+      ><a name="2139" href="FunctionGraphsInIMLTT.html#2139" class="Function"
+      >id</a
+      ><a name="2141"
+      > </a
+      ><a name="2142" class="Symbol"
+      >:</a
+      ><a name="2143"
+      > </a
+      ><a name="2144" class="Symbol"
+      >{</a
+      ><a name="2145" href="FunctionGraphsInIMLTT.html#2145" class="Bound"
+      >X</a
+      ><a name="2146"
+      > </a
+      ><a name="2147" class="Symbol"
+      >:</a
+      ><a name="2148"
+      > </a
+      ><a name="2149" class="PrimitiveType"
+      >Set</a
+      ><a name="2152" class="Symbol"
+      >}</a
+      ><a name="2153"
+      > </a
+      ><a name="2154" class="Symbol"
+      >&#8594;</a
+      ><a name="2155"
+      > </a
+      ><a name="2156" href="FunctionGraphsInIMLTT.html#2145" class="Bound"
+      >X</a
+      ><a name="2157"
+      > </a
+      ><a name="2158" class="Symbol"
+      >&#8594;</a
+      ><a name="2159"
+      > </a
+      ><a name="2160" href="FunctionGraphsInIMLTT.html#2145" class="Bound"
+      >X</a
+      ><a name="2161"
+      >
+</a
+      ><a name="2162" href="FunctionGraphsInIMLTT.html#2139" class="Function"
+      >id</a
+      ><a name="2164"
+      > </a
+      ><a name="2165" href="FunctionGraphsInIMLTT.html#2165" class="Bound"
+      >x</a
+      ><a name="2166"
+      > </a
+      ><a name="2167" class="Symbol"
+      >=</a
+      ><a name="2168"
+      > </a
+      ><a name="2169" href="FunctionGraphsInIMLTT.html#2165" class="Bound"
+      >x</a
+      ><a name="2170"
+      >
+
+</a
+      ><a name="2172" href="FunctionGraphsInIMLTT.html#2172" class="Function Operator"
+      >_&#8728;_</a
+      ><a name="2175"
+      > </a
+      ><a name="2176" class="Symbol"
+      >:</a
+      ><a name="2177"
+      > </a
+      ><a name="2178" class="Symbol"
+      >{</a
+      ><a name="2179" href="FunctionGraphsInIMLTT.html#2179" class="Bound"
+      >X</a
+      ><a name="2180"
+      > </a
+      ><a name="2181" href="FunctionGraphsInIMLTT.html#2181" class="Bound"
+      >Y</a
+      ><a name="2182"
+      > </a
+      ><a name="2183" href="FunctionGraphsInIMLTT.html#2183" class="Bound"
+      >Z</a
+      ><a name="2184"
+      > </a
+      ><a name="2185" class="Symbol"
+      >:</a
+      ><a name="2186"
+      > </a
+      ><a name="2187" class="PrimitiveType"
+      >Set</a
+      ><a name="2190" class="Symbol"
+      >}</a
+      ><a name="2191"
+      > </a
+      ><a name="2192" class="Symbol"
+      >&#8594;</a
+      ><a name="2193"
+      > </a
+      ><a name="2194" class="Symbol"
+      >(</a
+      ><a name="2195" href="FunctionGraphsInIMLTT.html#2181" class="Bound"
+      >Y</a
+      ><a name="2196"
+      > </a
+      ><a name="2197" class="Symbol"
+      >&#8594;</a
+      ><a name="2198"
+      > </a
+      ><a name="2199" href="FunctionGraphsInIMLTT.html#2183" class="Bound"
+      >Z</a
+      ><a name="2200" class="Symbol"
+      >)</a
+      ><a name="2201"
+      > </a
+      ><a name="2202" class="Symbol"
+      >&#8594;</a
+      ><a name="2203"
+      > </a
+      ><a name="2204" class="Symbol"
+      >(</a
+      ><a name="2205" href="FunctionGraphsInIMLTT.html#2179" class="Bound"
+      >X</a
+      ><a name="2206"
+      > </a
+      ><a name="2207" class="Symbol"
+      >&#8594;</a
+      ><a name="2208"
+      > </a
+      ><a name="2209" href="FunctionGraphsInIMLTT.html#2181" class="Bound"
+      >Y</a
+      ><a name="2210" class="Symbol"
+      >)</a
+      ><a name="2211"
+      > </a
+      ><a name="2212" class="Symbol"
+      >&#8594;</a
+      ><a name="2213"
+      > </a
+      ><a name="2214" class="Symbol"
+      >(</a
+      ><a name="2215" href="FunctionGraphsInIMLTT.html#2179" class="Bound"
+      >X</a
+      ><a name="2216"
+      > </a
+      ><a name="2217" class="Symbol"
+      >&#8594;</a
+      ><a name="2218"
+      > </a
+      ><a name="2219" href="FunctionGraphsInIMLTT.html#2183" class="Bound"
+      >Z</a
+      ><a name="2220" class="Symbol"
+      >)</a
+      ><a name="2221"
+      >
+</a
+      ><a name="2222" href="FunctionGraphsInIMLTT.html#2222" class="Bound"
+      >g</a
+      ><a name="2223"
+      > </a
+      ><a name="2224" href="FunctionGraphsInIMLTT.html#2172" class="Function Operator"
+      >&#8728;</a
+      ><a name="2225"
+      > </a
+      ><a name="2226" href="FunctionGraphsInIMLTT.html#2226" class="Bound"
+      >f</a
+      ><a name="2227"
+      > </a
+      ><a name="2228" class="Symbol"
+      >=</a
+      ><a name="2229"
+      > </a
+      ><a name="2230" class="Symbol"
+      >&#955;</a
+      ><a name="2231"
+      > </a
+      ><a name="2232" href="FunctionGraphsInIMLTT.html#2232" class="Bound"
+      >x</a
+      ><a name="2233"
+      > </a
+      ><a name="2234" class="Symbol"
+      >&#8594;</a
+      ><a name="2235"
+      > </a
+      ><a name="2236" href="FunctionGraphsInIMLTT.html#2222" class="Bound"
+      >g</a
+      ><a name="2237" class="Symbol"
+      >(</a
+      ><a name="2238" href="FunctionGraphsInIMLTT.html#2226" class="Bound"
+      >f</a
+      ><a name="2239"
+      > </a
+      ><a name="2240" href="FunctionGraphsInIMLTT.html#2232" class="Bound"
+      >x</a
+      ><a name="2241" class="Symbol"
+      >)</a
+      ><a name="2242"
+      >
+
+</a
+      ><a name="2244" href="FunctionGraphsInIMLTT.html#2244" class="Function Operator"
+      >_&#8776;_</a
+      ><a name="2247"
+      > </a
+      ><a name="2248" class="Symbol"
+      >:</a
+      ><a name="2249"
+      > </a
+      ><a name="2250" class="PrimitiveType"
+      >Set</a
+      ><a name="2253"
+      > </a
+      ><a name="2254" class="Symbol"
+      >&#8594;</a
+      ><a name="2255"
+      > </a
+      ><a name="2256" class="PrimitiveType"
+      >Set</a
+      ><a name="2259"
+      > </a
+      ><a name="2260" class="Symbol"
+      >&#8594;</a
+      ><a name="2261"
+      > </a
+      ><a name="2262" class="PrimitiveType"
+      >Set</a
+      ><a name="2265"
+      >
+</a
+      ><a name="2266" href="FunctionGraphsInIMLTT.html#2266" class="Bound"
+      >X</a
+      ><a name="2267"
+      > </a
+      ><a name="2268" href="FunctionGraphsInIMLTT.html#2244" class="Function Operator"
+      >&#8776;</a
+      ><a name="2269"
+      > </a
+      ><a name="2270" href="FunctionGraphsInIMLTT.html#2270" class="Bound"
+      >Y</a
+      ><a name="2271"
+      > </a
+      ><a name="2272" class="Symbol"
+      >=</a
+      ><a name="2273"
+      > </a
+      ><a name="2274" href="FunctionGraphsInIMLTT.html#1199" class="Record"
+      >&#931;</a
+      ><a name="2275"
+      > </a
+      ><a name="2276" class="Symbol"
+      >\(</a
+      ><a name="2278" href="FunctionGraphsInIMLTT.html#2278" class="Bound"
+      >u</a
+      ><a name="2279"
+      > </a
+      ><a name="2280" class="Symbol"
+      >:</a
+      ><a name="2281"
+      > </a
+      ><a name="2282" href="FunctionGraphsInIMLTT.html#2266" class="Bound"
+      >X</a
+      ><a name="2283"
+      > </a
+      ><a name="2284" class="Symbol"
+      >&#8594;</a
+      ><a name="2285"
+      > </a
+      ><a name="2286" href="FunctionGraphsInIMLTT.html#2270" class="Bound"
+      >Y</a
+      ><a name="2287" class="Symbol"
+      >)</a
+      ><a name="2288"
+      > </a
+      ><a name="2289" class="Symbol"
+      >&#8594;</a
+      ><a name="2290"
+      > </a
+      ><a name="2291" href="FunctionGraphsInIMLTT.html#1199" class="Record"
+      >&#931;</a
+      ><a name="2292"
+      > </a
+      ><a name="2293" class="Symbol"
+      >\(</a
+      ><a name="2295" href="FunctionGraphsInIMLTT.html#2295" class="Bound"
+      >v</a
+      ><a name="2296"
+      > </a
+      ><a name="2297" class="Symbol"
+      >:</a
+      ><a name="2298"
+      > </a
+      ><a name="2299" href="FunctionGraphsInIMLTT.html#2270" class="Bound"
+      >Y</a
+      ><a name="2300"
+      > </a
+      ><a name="2301" class="Symbol"
+      >&#8594;</a
+      ><a name="2302"
+      > </a
+      ><a name="2303" href="FunctionGraphsInIMLTT.html#2266" class="Bound"
+      >X</a
+      ><a name="2304" class="Symbol"
+      >)</a
+      ><a name="2305"
+      > </a
+      ><a name="2306" class="Symbol"
+      >&#8594;</a
+      ><a name="2307"
+      > </a
+      ><a name="2308" class="Symbol"
+      >(</a
+      ><a name="2309" href="FunctionGraphsInIMLTT.html#2278" class="Bound"
+      >u</a
+      ><a name="2310"
+      > </a
+      ><a name="2311" href="FunctionGraphsInIMLTT.html#2172" class="Function Operator"
+      >&#8728;</a
+      ><a name="2312"
+      > </a
+      ><a name="2313" href="FunctionGraphsInIMLTT.html#2295" class="Bound"
+      >v</a
+      ><a name="2314"
+      > </a
+      ><a name="2315" href="FunctionGraphsInIMLTT.html#2070" class="Function Operator"
+      >~</a
+      ><a name="2316"
+      > </a
+      ><a name="2317" href="FunctionGraphsInIMLTT.html#2139" class="Function"
+      >id</a
+      ><a name="2319" class="Symbol"
+      >)</a
+      ><a name="2320"
+      >  </a
+      ><a name="2322" href="FunctionGraphsInIMLTT.html#1283" class="Function Operator"
+      >&#215;</a
+      ><a name="2323"
+      >  </a
+      ><a name="2325" class="Symbol"
+      >(</a
+      ><a name="2326" href="FunctionGraphsInIMLTT.html#2295" class="Bound"
+      >v</a
+      ><a name="2327"
+      > </a
+      ><a name="2328" href="FunctionGraphsInIMLTT.html#2172" class="Function Operator"
+      >&#8728;</a
+      ><a name="2329"
+      > </a
+      ><a name="2330" href="FunctionGraphsInIMLTT.html#2278" class="Bound"
+      >u</a
+      ><a name="2331"
+      > </a
+      ><a name="2332" href="FunctionGraphsInIMLTT.html#2070" class="Function Operator"
+      >~</a
+      ><a name="2333"
+      > </a
+      ><a name="2334" href="FunctionGraphsInIMLTT.html#2139" class="Function"
+      >id</a
+      ><a name="2336" class="Symbol"
+      >)</a
+      ><a name="2337"
+      >
+
+</a
+      ><a name="2339" href="FunctionGraphsInIMLTT.html#2339" class="Function"
+      >&#8776;-refl</a
+      ><a name="2345"
+      > </a
+      ><a name="2346" class="Symbol"
+      >:</a
+      ><a name="2347"
+      > </a
+      ><a name="2348" class="Symbol"
+      >{</a
+      ><a name="2349" href="FunctionGraphsInIMLTT.html#2349" class="Bound"
+      >X</a
+      ><a name="2350"
+      > </a
+      ><a name="2351" class="Symbol"
+      >:</a
+      ><a name="2352"
+      > </a
+      ><a name="2353" class="PrimitiveType"
+      >Set</a
+      ><a name="2356" class="Symbol"
+      >}</a
+      ><a name="2357"
+      > </a
+      ><a name="2358" class="Symbol"
+      >&#8594;</a
+      ><a name="2359"
+      > </a
+      ><a name="2360" href="FunctionGraphsInIMLTT.html#2349" class="Bound"
+      >X</a
+      ><a name="2361"
+      > </a
+      ><a name="2362" href="FunctionGraphsInIMLTT.html#2244" class="Function Operator"
+      >&#8776;</a
+      ><a name="2363"
+      > </a
+      ><a name="2364" href="FunctionGraphsInIMLTT.html#2349" class="Bound"
+      >X</a
+      ><a name="2365"
+      >
+</a
+      ><a name="2366" href="FunctionGraphsInIMLTT.html#2339" class="Function"
+      >&#8776;-refl</a
+      ><a name="2372"
+      > </a
+      ><a name="2373" class="Symbol"
+      >=</a
+      ><a name="2374"
+      > </a
+      ><a name="2375" class="Symbol"
+      >(</a
+      ><a name="2376" href="FunctionGraphsInIMLTT.html#2139" class="Function"
+      >id</a
+      ><a name="2378"
+      > </a
+      ><a name="2379" href="FunctionGraphsInIMLTT.html#1250" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="2380"
+      > </a
+      ><a name="2381" href="FunctionGraphsInIMLTT.html#2139" class="Function"
+      >id</a
+      ><a name="2383"
+      > </a
+      ><a name="2384" href="FunctionGraphsInIMLTT.html#1250" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="2385"
+      > </a
+      ><a name="2386" class="Symbol"
+      >(&#955;</a
+      ><a name="2388"
+      > </a
+      ><a name="2389" href="FunctionGraphsInIMLTT.html#2389" class="Bound"
+      >x</a
+      ><a name="2390"
+      > </a
+      ><a name="2391" class="Symbol"
+      >&#8594;</a
+      ><a name="2392"
+      > </a
+      ><a name="2393" href="FunctionGraphsInIMLTT.html#1370" class="InductiveConstructor"
+      >refl</a
+      ><a name="2397" class="Symbol"
+      >)</a
+      ><a name="2398"
+      > </a
+      ><a name="2399" href="FunctionGraphsInIMLTT.html#1250" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="2400"
+      > </a
+      ><a name="2401" class="Symbol"
+      >(&#955;</a
+      ><a name="2403"
+      > </a
+      ><a name="2404" href="FunctionGraphsInIMLTT.html#2404" class="Bound"
+      >x</a
+      ><a name="2405"
+      > </a
+      ><a name="2406" class="Symbol"
+      >&#8594;</a
+      ><a name="2407"
+      > </a
+      ><a name="2408" href="FunctionGraphsInIMLTT.html#1370" class="InductiveConstructor"
+      >refl</a
+      ><a name="2412" class="Symbol"
+      >))</a
+      ><a name="2414"
+      >
+
+</a
+      ><a name="2416" href="FunctionGraphsInIMLTT.html#2416" class="Function"
+      >&#8776;-sym</a
+      ><a name="2421"
+      > </a
+      ><a name="2422" class="Symbol"
+      >:</a
+      ><a name="2423"
+      > </a
+      ><a name="2424" class="Symbol"
+      >{</a
+      ><a name="2425" href="FunctionGraphsInIMLTT.html#2425" class="Bound"
+      >X</a
+      ><a name="2426"
+      > </a
+      ><a name="2427" href="FunctionGraphsInIMLTT.html#2427" class="Bound"
+      >Y</a
+      ><a name="2428"
+      > </a
+      ><a name="2429" class="Symbol"
+      >:</a
+      ><a name="2430"
+      > </a
+      ><a name="2431" class="PrimitiveType"
+      >Set</a
+      ><a name="2434" class="Symbol"
+      >}</a
+      ><a name="2435"
+      > </a
+      ><a name="2436" class="Symbol"
+      >&#8594;</a
+      ><a name="2437"
+      > </a
+      ><a name="2438" href="FunctionGraphsInIMLTT.html#2425" class="Bound"
+      >X</a
+      ><a name="2439"
+      > </a
+      ><a name="2440" href="FunctionGraphsInIMLTT.html#2244" class="Function Operator"
+      >&#8776;</a
+      ><a name="2441"
+      > </a
+      ><a name="2442" href="FunctionGraphsInIMLTT.html#2427" class="Bound"
+      >Y</a
+      ><a name="2443"
+      > </a
+      ><a name="2444" class="Symbol"
+      >&#8594;</a
+      ><a name="2445"
+      > </a
+      ><a name="2446" href="FunctionGraphsInIMLTT.html#2427" class="Bound"
+      >Y</a
+      ><a name="2447"
+      > </a
+      ><a name="2448" href="FunctionGraphsInIMLTT.html#2244" class="Function Operator"
+      >&#8776;</a
+      ><a name="2449"
+      > </a
+      ><a name="2450" href="FunctionGraphsInIMLTT.html#2425" class="Bound"
+      >X</a
+      ><a name="2451"
+      >
+</a
+      ><a name="2452" href="FunctionGraphsInIMLTT.html#2416" class="Function"
+      >&#8776;-sym</a
+      ><a name="2457"
+      > </a
+      ><a name="2458" class="Symbol"
+      >(</a
+      ><a name="2459" href="FunctionGraphsInIMLTT.html#2459" class="Bound"
+      >u</a
+      ><a name="2460"
+      > </a
+      ><a name="2461" href="FunctionGraphsInIMLTT.html#1250" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="2462"
+      > </a
+      ><a name="2463" href="FunctionGraphsInIMLTT.html#2463" class="Bound"
+      >v</a
+      ><a name="2464"
+      > </a
+      ><a name="2465" href="FunctionGraphsInIMLTT.html#1250" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="2466"
+      > </a
+      ><a name="2467" href="FunctionGraphsInIMLTT.html#2467" class="Bound"
+      >r</a
+      ><a name="2468"
+      > </a
+      ><a name="2469" href="FunctionGraphsInIMLTT.html#1250" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="2470"
+      > </a
+      ><a name="2471" href="FunctionGraphsInIMLTT.html#2471" class="Bound"
+      >s</a
+      ><a name="2472" class="Symbol"
+      >)</a
+      ><a name="2473"
+      > </a
+      ><a name="2474" class="Symbol"
+      >=</a
+      ><a name="2475"
+      > </a
+      ><a name="2476" class="Symbol"
+      >(</a
+      ><a name="2477" href="FunctionGraphsInIMLTT.html#2463" class="Bound"
+      >v</a
+      ><a name="2478"
+      > </a
+      ><a name="2479" href="FunctionGraphsInIMLTT.html#1250" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="2480"
+      > </a
+      ><a name="2481" href="FunctionGraphsInIMLTT.html#2459" class="Bound"
+      >u</a
+      ><a name="2482"
+      > </a
+      ><a name="2483" href="FunctionGraphsInIMLTT.html#1250" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="2484"
+      > </a
+      ><a name="2485" href="FunctionGraphsInIMLTT.html#2471" class="Bound"
+      >s</a
+      ><a name="2486"
+      > </a
+      ><a name="2487" href="FunctionGraphsInIMLTT.html#1250" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="2488"
+      > </a
+      ><a name="2489" href="FunctionGraphsInIMLTT.html#2467" class="Bound"
+      >r</a
+      ><a name="2490" class="Symbol"
+      >)</a
+      ><a name="2491"
+      >
+
+</a
+      ><a name="2493" href="FunctionGraphsInIMLTT.html#2493" class="Function"
+      >&#8776;-trans</a
+      ><a name="2500"
+      > </a
+      ><a name="2501" class="Symbol"
+      >:</a
+      ><a name="2502"
+      > </a
+      ><a name="2503" class="Symbol"
+      >{</a
+      ><a name="2504" href="FunctionGraphsInIMLTT.html#2504" class="Bound"
+      >X</a
+      ><a name="2505"
+      > </a
+      ><a name="2506" href="FunctionGraphsInIMLTT.html#2506" class="Bound"
+      >Y</a
+      ><a name="2507"
+      > </a
+      ><a name="2508" href="FunctionGraphsInIMLTT.html#2508" class="Bound"
+      >Z</a
+      ><a name="2509"
+      > </a
+      ><a name="2510" class="Symbol"
+      >:</a
+      ><a name="2511"
+      > </a
+      ><a name="2512" class="PrimitiveType"
+      >Set</a
+      ><a name="2515" class="Symbol"
+      >}</a
+      ><a name="2516"
+      > </a
+      ><a name="2517" class="Symbol"
+      >&#8594;</a
+      ><a name="2518"
+      > </a
+      ><a name="2519" href="FunctionGraphsInIMLTT.html#2504" class="Bound"
+      >X</a
+      ><a name="2520"
+      > </a
+      ><a name="2521" href="FunctionGraphsInIMLTT.html#2244" class="Function Operator"
+      >&#8776;</a
+      ><a name="2522"
+      > </a
+      ><a name="2523" href="FunctionGraphsInIMLTT.html#2506" class="Bound"
+      >Y</a
+      ><a name="2524"
+      > </a
+      ><a name="2525" class="Symbol"
+      >&#8594;</a
+      ><a name="2526"
+      > </a
+      ><a name="2527" href="FunctionGraphsInIMLTT.html#2506" class="Bound"
+      >Y</a
+      ><a name="2528"
+      > </a
+      ><a name="2529" href="FunctionGraphsInIMLTT.html#2244" class="Function Operator"
+      >&#8776;</a
+      ><a name="2530"
+      > </a
+      ><a name="2531" href="FunctionGraphsInIMLTT.html#2508" class="Bound"
+      >Z</a
+      ><a name="2532"
+      > </a
+      ><a name="2533" class="Symbol"
+      >&#8594;</a
+      ><a name="2534"
+      > </a
+      ><a name="2535" href="FunctionGraphsInIMLTT.html#2504" class="Bound"
+      >X</a
+      ><a name="2536"
+      > </a
+      ><a name="2537" href="FunctionGraphsInIMLTT.html#2244" class="Function Operator"
+      >&#8776;</a
+      ><a name="2538"
+      > </a
+      ><a name="2539" href="FunctionGraphsInIMLTT.html#2508" class="Bound"
+      >Z</a
+      ><a name="2540"
+      >
+</a
+      ><a name="2541" href="FunctionGraphsInIMLTT.html#2493" class="Function"
+      >&#8776;-trans</a
+      ><a name="2548"
+      > </a
+      ><a name="2549" class="Symbol"
+      >(</a
+      ><a name="2550" href="FunctionGraphsInIMLTT.html#2550" class="Bound"
+      >u</a
+      ><a name="2551"
+      > </a
+      ><a name="2552" href="FunctionGraphsInIMLTT.html#1250" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="2553"
+      > </a
+      ><a name="2554" href="FunctionGraphsInIMLTT.html#2554" class="Bound"
+      >v</a
+      ><a name="2555"
+      > </a
+      ><a name="2556" href="FunctionGraphsInIMLTT.html#1250" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="2557"
+      > </a
+      ><a name="2558" href="FunctionGraphsInIMLTT.html#2558" class="Bound"
+      >r</a
+      ><a name="2559"
+      > </a
+      ><a name="2560" href="FunctionGraphsInIMLTT.html#1250" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="2561"
+      > </a
+      ><a name="2562" href="FunctionGraphsInIMLTT.html#2562" class="Bound"
+      >s</a
+      ><a name="2563" class="Symbol"
+      >)</a
+      ><a name="2564"
+      > </a
+      ><a name="2565" class="Symbol"
+      >(</a
+      ><a name="2566" href="FunctionGraphsInIMLTT.html#2566" class="Bound"
+      >u'</a
+      ><a name="2568"
+      > </a
+      ><a name="2569" href="FunctionGraphsInIMLTT.html#1250" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="2570"
+      > </a
+      ><a name="2571" href="FunctionGraphsInIMLTT.html#2571" class="Bound"
+      >v'</a
+      ><a name="2573"
+      > </a
+      ><a name="2574" href="FunctionGraphsInIMLTT.html#1250" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="2575"
+      > </a
+      ><a name="2576" href="FunctionGraphsInIMLTT.html#2576" class="Bound"
+      >r'</a
+      ><a name="2578"
+      > </a
+      ><a name="2579" href="FunctionGraphsInIMLTT.html#1250" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="2580"
+      > </a
+      ><a name="2581" href="FunctionGraphsInIMLTT.html#2581" class="Bound"
+      >s'</a
+      ><a name="2583" class="Symbol"
+      >)</a
+      ><a name="2584"
+      > </a
+      ><a name="2585" class="Symbol"
+      >=</a
+      ><a name="2586"
+      > </a
+      ><a name="2587" class="Symbol"
+      >(</a
+      ><a name="2588" href="FunctionGraphsInIMLTT.html#2566" class="Bound"
+      >u'</a
+      ><a name="2590"
+      > </a
+      ><a name="2591" href="FunctionGraphsInIMLTT.html#2172" class="Function Operator"
+      >&#8728;</a
+      ><a name="2592"
+      > </a
+      ><a name="2593" href="FunctionGraphsInIMLTT.html#2550" class="Bound"
+      >u</a
+      ><a name="2594"
+      > </a
+      ><a name="2595" href="FunctionGraphsInIMLTT.html#1250" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="2596"
+      > </a
+      ><a name="2597" href="FunctionGraphsInIMLTT.html#2554" class="Bound"
+      >v</a
+      ><a name="2598"
+      > </a
+      ><a name="2599" href="FunctionGraphsInIMLTT.html#2172" class="Function Operator"
+      >&#8728;</a
+      ><a name="2600"
+      > </a
+      ><a name="2601" href="FunctionGraphsInIMLTT.html#2571" class="Bound"
+      >v'</a
+      ><a name="2603"
+      > </a
+      ><a name="2604" href="FunctionGraphsInIMLTT.html#1250" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="2605"
+      >  </a
+      ><a name="2607" href="FunctionGraphsInIMLTT.html#2628" class="Function"
+      >r''</a
+      ><a name="2610"
+      > </a
+      ><a name="2611" href="FunctionGraphsInIMLTT.html#1250" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="2612"
+      > </a
+      ><a name="2613" href="FunctionGraphsInIMLTT.html#2707" class="Function"
+      >s''</a
+      ><a name="2616" class="Symbol"
+      >)</a
+      ><a name="2617"
+      >
+ </a
+      ><a name="2619" class="Keyword"
+      >where</a
+      ><a name="2624"
+      >
+  </a
+      ><a name="2628" href="FunctionGraphsInIMLTT.html#2628" class="Function"
+      >r''</a
+      ><a name="2631"
+      > </a
+      ><a name="2632" class="Symbol"
+      >:</a
+      ><a name="2633"
+      > </a
+      ><a name="2634" class="Symbol"
+      >&#8704;</a
+      ><a name="2635"
+      > </a
+      ><a name="2636" href="FunctionGraphsInIMLTT.html#2636" class="Bound"
+      >z</a
+      ><a name="2637"
+      > </a
+      ><a name="2638" class="Symbol"
+      >&#8594;</a
+      ><a name="2639"
+      > </a
+      ><a name="2640" href="FunctionGraphsInIMLTT.html#2566" class="Bound"
+      >u'</a
+      ><a name="2642"
+      > </a
+      ><a name="2643" class="Symbol"
+      >(</a
+      ><a name="2644" href="FunctionGraphsInIMLTT.html#2550" class="Bound"
+      >u</a
+      ><a name="2645"
+      > </a
+      ><a name="2646" class="Symbol"
+      >(</a
+      ><a name="2647" href="FunctionGraphsInIMLTT.html#2554" class="Bound"
+      >v</a
+      ><a name="2648"
+      > </a
+      ><a name="2649" class="Symbol"
+      >(</a
+      ><a name="2650" href="FunctionGraphsInIMLTT.html#2571" class="Bound"
+      >v'</a
+      ><a name="2652"
+      > </a
+      ><a name="2653" href="FunctionGraphsInIMLTT.html#2636" class="Bound"
+      >z</a
+      ><a name="2654" class="Symbol"
+      >)))</a
+      ><a name="2657"
+      > </a
+      ><a name="2658" href="FunctionGraphsInIMLTT.html#1334" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="2659"
+      > </a
+      ><a name="2660" href="FunctionGraphsInIMLTT.html#2636" class="Bound"
+      >z</a
+      ><a name="2661"
+      >
+  </a
+      ><a name="2664" href="FunctionGraphsInIMLTT.html#2628" class="Function"
+      >r''</a
+      ><a name="2667"
+      > </a
+      ><a name="2668" href="FunctionGraphsInIMLTT.html#2668" class="Bound"
+      >z</a
+      ><a name="2669"
+      > </a
+      ><a name="2670" class="Symbol"
+      >=</a
+      ><a name="2671"
+      > </a
+      ><a name="2672" href="FunctionGraphsInIMLTT.html#1754" class="Function"
+      >trans</a
+      ><a name="2677"
+      > </a
+      ><a name="2678" class="Symbol"
+      >(</a
+      ><a name="2679" href="FunctionGraphsInIMLTT.html#1839" class="Function"
+      >cong</a
+      ><a name="2683"
+      > </a
+      ><a name="2684" href="FunctionGraphsInIMLTT.html#2566" class="Bound"
+      >u'</a
+      ><a name="2686"
+      > </a
+      ><a name="2687" class="Symbol"
+      >(</a
+      ><a name="2688" href="FunctionGraphsInIMLTT.html#2558" class="Bound"
+      >r</a
+      ><a name="2689" class="Symbol"
+      >(</a
+      ><a name="2690" href="FunctionGraphsInIMLTT.html#2571" class="Bound"
+      >v'</a
+      ><a name="2692"
+      > </a
+      ><a name="2693" href="FunctionGraphsInIMLTT.html#2668" class="Bound"
+      >z</a
+      ><a name="2694" class="Symbol"
+      >)))</a
+      ><a name="2697"
+      > </a
+      ><a name="2698" class="Symbol"
+      >(</a
+      ><a name="2699" href="FunctionGraphsInIMLTT.html#2576" class="Bound"
+      >r'</a
+      ><a name="2701"
+      > </a
+      ><a name="2702" href="FunctionGraphsInIMLTT.html#2668" class="Bound"
+      >z</a
+      ><a name="2703" class="Symbol"
+      >)</a
+      ><a name="2704"
+      >
+  </a
+      ><a name="2707" href="FunctionGraphsInIMLTT.html#2707" class="Function"
+      >s''</a
+      ><a name="2710"
+      > </a
+      ><a name="2711" class="Symbol"
+      >:</a
+      ><a name="2712"
+      > </a
+      ><a name="2713" class="Symbol"
+      >&#8704;</a
+      ><a name="2714"
+      > </a
+      ><a name="2715" href="FunctionGraphsInIMLTT.html#2715" class="Bound"
+      >x</a
+      ><a name="2716"
+      > </a
+      ><a name="2717" class="Symbol"
+      >&#8594;</a
+      ><a name="2718"
+      > </a
+      ><a name="2719" href="FunctionGraphsInIMLTT.html#2554" class="Bound"
+      >v</a
+      ><a name="2720"
+      > </a
+      ><a name="2721" class="Symbol"
+      >(</a
+      ><a name="2722" href="FunctionGraphsInIMLTT.html#2571" class="Bound"
+      >v'</a
+      ><a name="2724"
+      > </a
+      ><a name="2725" class="Symbol"
+      >(</a
+      ><a name="2726" href="FunctionGraphsInIMLTT.html#2566" class="Bound"
+      >u'</a
+      ><a name="2728"
+      > </a
+      ><a name="2729" class="Symbol"
+      >(</a
+      ><a name="2730" href="FunctionGraphsInIMLTT.html#2550" class="Bound"
+      >u</a
+      ><a name="2731"
+      > </a
+      ><a name="2732" href="FunctionGraphsInIMLTT.html#2715" class="Bound"
+      >x</a
+      ><a name="2733" class="Symbol"
+      >)))</a
+      ><a name="2736"
+      > </a
+      ><a name="2737" href="FunctionGraphsInIMLTT.html#1334" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="2738"
+      > </a
+      ><a name="2739" href="FunctionGraphsInIMLTT.html#2715" class="Bound"
+      >x</a
+      ><a name="2740"
+      >
+  </a
+      ><a name="2743" href="FunctionGraphsInIMLTT.html#2707" class="Function"
+      >s''</a
+      ><a name="2746"
+      > </a
+      ><a name="2747" href="FunctionGraphsInIMLTT.html#2747" class="Bound"
+      >x</a
+      ><a name="2748"
+      > </a
+      ><a name="2749" class="Symbol"
+      >=</a
+      ><a name="2750"
+      > </a
+      ><a name="2751" href="FunctionGraphsInIMLTT.html#1754" class="Function"
+      >trans</a
+      ><a name="2756"
+      > </a
+      ><a name="2757" class="Symbol"
+      >(</a
+      ><a name="2758" href="FunctionGraphsInIMLTT.html#1839" class="Function"
+      >cong</a
+      ><a name="2762"
+      > </a
+      ><a name="2763" href="FunctionGraphsInIMLTT.html#2554" class="Bound"
+      >v</a
+      ><a name="2764"
+      > </a
+      ><a name="2765" class="Symbol"
+      >(</a
+      ><a name="2766" href="FunctionGraphsInIMLTT.html#2581" class="Bound"
+      >s'</a
+      ><a name="2768" class="Symbol"
+      >(</a
+      ><a name="2769" href="FunctionGraphsInIMLTT.html#2550" class="Bound"
+      >u</a
+      ><a name="2770"
+      > </a
+      ><a name="2771" href="FunctionGraphsInIMLTT.html#2747" class="Bound"
+      >x</a
+      ><a name="2772" class="Symbol"
+      >)))</a
+      ><a name="2775"
+      > </a
+      ><a name="2776" class="Symbol"
+      >(</a
+      ><a name="2777" href="FunctionGraphsInIMLTT.html#2562" class="Bound"
+      >s</a
+      ><a name="2778"
+      > </a
+      ><a name="2779" href="FunctionGraphsInIMLTT.html#2747" class="Bound"
+      >x</a
+      ><a name="2780" class="Symbol"
+      >)</a
+      ><a name="2781"
+      >
+
+\end{code}
+
+</a
+      ><a name="2795" class="Comment"
+      >End of prelude. </a
+      ><a name="2811"
+      >
+
+</a
+      ><a name="2813" class="Comment"
+      >The remark starts here. In all varieties of mathematics (constructive</a
+      ><a name="2882"
+      >
+</a
+      ><a name="2883" class="Comment"
+      >or not), the graph {(x , y) | f x = y} of a function f: X &#8594; Y is</a
+      ><a name="2947"
+      >
+</a
+      ><a name="2948" class="Comment"
+      >isomorphic to X. In one direction, the isomorphism simply sends a pair</a
+      ><a name="3018"
+      >
+</a
+      ><a name="3019" class="Comment"
+      >(x,y) in the graph of f to x, and its inverse maps x to (x, f x). Type</a
+      ><a name="3089"
+      >
+</a
+      ><a name="3090" class="Comment"
+      >theory is no exception, but of course we have to be a little bit more</a
+      ><a name="3159"
+      >
+</a
+      ><a name="3160" class="Comment"
+      >careful with both the construction and argument. Moreover, in the</a
+      ><a name="3225"
+      >
+</a
+      ><a name="3226" class="Comment"
+      >absence of extensionality, we have to work with pointwise isomorphism</a
+      ><a name="3295"
+      >
+</a
+      ><a name="3296" class="Comment"
+      >(defined above). This means that the composition of the isomorphism</a
+      ><a name="3363"
+      >
+</a
+      ><a name="3364" class="Comment"
+      >with its inverse is not equal to the identity, but only pointwise</a
+      ><a name="3429"
+      >
+</a
+      ><a name="3430" class="Comment"
+      >equal to the identity.</a
+      ><a name="3452"
+      >
+
+\begin{code}
+
+</a
+      ><a name="3468" href="FunctionGraphsInIMLTT.html#3468" class="Function"
+      >fact</a
+      ><a name="3472"
+      > </a
+      ><a name="3473" class="Symbol"
+      >:</a
+      ><a name="3474"
+      > </a
+      ><a name="3475" class="Symbol"
+      >{</a
+      ><a name="3476" href="FunctionGraphsInIMLTT.html#3476" class="Bound"
+      >X</a
+      ><a name="3477"
+      > </a
+      ><a name="3478" href="FunctionGraphsInIMLTT.html#3478" class="Bound"
+      >Y</a
+      ><a name="3479"
+      > </a
+      ><a name="3480" class="Symbol"
+      >:</a
+      ><a name="3481"
+      > </a
+      ><a name="3482" class="PrimitiveType"
+      >Set</a
+      ><a name="3485" class="Symbol"
+      >}</a
+      ><a name="3486"
+      > </a
+      ><a name="3487" class="Symbol"
+      >&#8594;</a
+      ><a name="3488"
+      > </a
+      ><a name="3489" class="Symbol"
+      >&#8704;(</a
+      ><a name="3491" href="FunctionGraphsInIMLTT.html#3491" class="Bound"
+      >f</a
+      ><a name="3492"
+      > </a
+      ><a name="3493" class="Symbol"
+      >:</a
+      ><a name="3494"
+      > </a
+      ><a name="3495" href="FunctionGraphsInIMLTT.html#3476" class="Bound"
+      >X</a
+      ><a name="3496"
+      > </a
+      ><a name="3497" class="Symbol"
+      >&#8594;</a
+      ><a name="3498"
+      > </a
+      ><a name="3499" href="FunctionGraphsInIMLTT.html#3478" class="Bound"
+      >Y</a
+      ><a name="3500" class="Symbol"
+      >)</a
+      ><a name="3501"
+      > </a
+      ><a name="3502" class="Symbol"
+      >&#8594;</a
+      ><a name="3503"
+      > </a
+      ><a name="3504" href="FunctionGraphsInIMLTT.html#2001" class="Function"
+      >graph</a
+      ><a name="3509"
+      > </a
+      ><a name="3510" href="FunctionGraphsInIMLTT.html#3491" class="Bound"
+      >f</a
+      ><a name="3511"
+      > </a
+      ><a name="3512" href="FunctionGraphsInIMLTT.html#2244" class="Function Operator"
+      >&#8776;</a
+      ><a name="3513"
+      > </a
+      ><a name="3514" href="FunctionGraphsInIMLTT.html#3476" class="Bound"
+      >X</a
+      ><a name="3515"
+      >
+</a
+      ><a name="3516" href="FunctionGraphsInIMLTT.html#3468" class="Function"
+      >fact</a
+      ><a name="3520"
+      > </a
+      ><a name="3521" class="Symbol"
+      >{</a
+      ><a name="3522" href="FunctionGraphsInIMLTT.html#3522" class="Bound"
+      >X</a
+      ><a name="3523" class="Symbol"
+      >}</a
+      ><a name="3524"
+      > </a
+      ><a name="3525" href="FunctionGraphsInIMLTT.html#3525" class="Bound"
+      >f</a
+      ><a name="3526"
+      > </a
+      ><a name="3527" class="Symbol"
+      >=</a
+      ><a name="3528"
+      > </a
+      ><a name="3529" class="Symbol"
+      >(</a
+      ><a name="3530" href="FunctionGraphsInIMLTT.html#3554" class="Function"
+      >u</a
+      ><a name="3531"
+      > </a
+      ><a name="3532" href="FunctionGraphsInIMLTT.html#1250" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="3533"
+      > </a
+      ><a name="3534" href="FunctionGraphsInIMLTT.html#3592" class="Function"
+      >v</a
+      ><a name="3535"
+      > </a
+      ><a name="3536" href="FunctionGraphsInIMLTT.html#1250" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="3537"
+      > </a
+      ><a name="3538" href="FunctionGraphsInIMLTT.html#3635" class="Function"
+      >r</a
+      ><a name="3539"
+      > </a
+      ><a name="3540" href="FunctionGraphsInIMLTT.html#1250" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="3541"
+      > </a
+      ><a name="3542" href="FunctionGraphsInIMLTT.html#3665" class="Function"
+      >s</a
+      ><a name="3543" class="Symbol"
+      >)</a
+      ><a name="3544"
+      >
+ </a
+      ><a name="3546" class="Keyword"
+      >where</a
+      ><a name="3551"
+      >
+  </a
+      ><a name="3554" href="FunctionGraphsInIMLTT.html#3554" class="Function"
+      >u</a
+      ><a name="3555"
+      > </a
+      ><a name="3556" class="Symbol"
+      >:</a
+      ><a name="3557"
+      > </a
+      ><a name="3558" href="FunctionGraphsInIMLTT.html#2001" class="Function"
+      >graph</a
+      ><a name="3563"
+      > </a
+      ><a name="3564" href="FunctionGraphsInIMLTT.html#3525" class="Bound"
+      >f</a
+      ><a name="3565"
+      > </a
+      ><a name="3566" class="Symbol"
+      >&#8594;</a
+      ><a name="3567"
+      > </a
+      ><a name="3568" href="FunctionGraphsInIMLTT.html#3522" class="Bound"
+      >X</a
+      ><a name="3569"
+      >
+  </a
+      ><a name="3572" href="FunctionGraphsInIMLTT.html#3554" class="Function"
+      >u</a
+      ><a name="3573"
+      > </a
+      ><a name="3574" class="Symbol"
+      >(</a
+      ><a name="3575" href="FunctionGraphsInIMLTT.html#3575" class="Bound"
+      >x</a
+      ><a name="3576"
+      > </a
+      ><a name="3577" href="FunctionGraphsInIMLTT.html#1250" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="3578"
+      > </a
+      ><a name="3579" href="FunctionGraphsInIMLTT.html#3579" class="Bound"
+      >y</a
+      ><a name="3580"
+      > </a
+      ><a name="3581" href="FunctionGraphsInIMLTT.html#1250" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="3582"
+      > </a
+      ><a name="3583" href="FunctionGraphsInIMLTT.html#3583" class="Bound"
+      >r</a
+      ><a name="3584" class="Symbol"
+      >)</a
+      ><a name="3585"
+      > </a
+      ><a name="3586" class="Symbol"
+      >=</a
+      ><a name="3587"
+      > </a
+      ><a name="3588" href="FunctionGraphsInIMLTT.html#3575" class="Bound"
+      >x</a
+      ><a name="3589"
+      >
+  </a
+      ><a name="3592" href="FunctionGraphsInIMLTT.html#3592" class="Function"
+      >v</a
+      ><a name="3593"
+      > </a
+      ><a name="3594" class="Symbol"
+      >:</a
+      ><a name="3595"
+      > </a
+      ><a name="3596" href="FunctionGraphsInIMLTT.html#3522" class="Bound"
+      >X</a
+      ><a name="3597"
+      > </a
+      ><a name="3598" class="Symbol"
+      >&#8594;</a
+      ><a name="3599"
+      > </a
+      ><a name="3600" href="FunctionGraphsInIMLTT.html#2001" class="Function"
+      >graph</a
+      ><a name="3605"
+      > </a
+      ><a name="3606" href="FunctionGraphsInIMLTT.html#3525" class="Bound"
+      >f</a
+      ><a name="3607"
+      >
+  </a
+      ><a name="3610" href="FunctionGraphsInIMLTT.html#3592" class="Function"
+      >v</a
+      ><a name="3611"
+      > </a
+      ><a name="3612" href="FunctionGraphsInIMLTT.html#3612" class="Bound"
+      >x</a
+      ><a name="3613"
+      > </a
+      ><a name="3614" class="Symbol"
+      >=</a
+      ><a name="3615"
+      > </a
+      ><a name="3616" class="Symbol"
+      >(</a
+      ><a name="3617" href="FunctionGraphsInIMLTT.html#3612" class="Bound"
+      >x</a
+      ><a name="3618"
+      > </a
+      ><a name="3619" href="FunctionGraphsInIMLTT.html#1250" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="3620"
+      > </a
+      ><a name="3621" href="FunctionGraphsInIMLTT.html#3525" class="Bound"
+      >f</a
+      ><a name="3622"
+      > </a
+      ><a name="3623" href="FunctionGraphsInIMLTT.html#3612" class="Bound"
+      >x</a
+      ><a name="3624"
+      > </a
+      ><a name="3625" href="FunctionGraphsInIMLTT.html#1250" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="3626"
+      > </a
+      ><a name="3627" href="FunctionGraphsInIMLTT.html#1370" class="InductiveConstructor"
+      >refl</a
+      ><a name="3631" class="Symbol"
+      >)</a
+      ><a name="3632"
+      >
+  </a
+      ><a name="3635" href="FunctionGraphsInIMLTT.html#3635" class="Function"
+      >r</a
+      ><a name="3636"
+      > </a
+      ><a name="3637" class="Symbol"
+      >:</a
+      ><a name="3638"
+      > </a
+      ><a name="3639" href="FunctionGraphsInIMLTT.html#3554" class="Function"
+      >u</a
+      ><a name="3640"
+      > </a
+      ><a name="3641" href="FunctionGraphsInIMLTT.html#2172" class="Function Operator"
+      >&#8728;</a
+      ><a name="3642"
+      > </a
+      ><a name="3643" href="FunctionGraphsInIMLTT.html#3592" class="Function"
+      >v</a
+      ><a name="3644"
+      > </a
+      ><a name="3645" href="FunctionGraphsInIMLTT.html#2070" class="Function Operator"
+      >~</a
+      ><a name="3646"
+      > </a
+      ><a name="3647" href="FunctionGraphsInIMLTT.html#2139" class="Function"
+      >id</a
+      ><a name="3649"
+      >
+  </a
+      ><a name="3652" href="FunctionGraphsInIMLTT.html#3635" class="Function"
+      >r</a
+      ><a name="3653"
+      > </a
+      ><a name="3654" href="FunctionGraphsInIMLTT.html#3654" class="Bound"
+      >x</a
+      ><a name="3655"
+      > </a
+      ><a name="3656" class="Symbol"
+      >=</a
+      ><a name="3657"
+      > </a
+      ><a name="3658" href="FunctionGraphsInIMLTT.html#1370" class="InductiveConstructor"
+      >refl</a
+      ><a name="3662"
+      >
+  </a
+      ><a name="3665" href="FunctionGraphsInIMLTT.html#3665" class="Function"
+      >s</a
+      ><a name="3666"
+      > </a
+      ><a name="3667" class="Symbol"
+      >:</a
+      ><a name="3668"
+      > </a
+      ><a name="3669" href="FunctionGraphsInIMLTT.html#3592" class="Function"
+      >v</a
+      ><a name="3670"
+      > </a
+      ><a name="3671" href="FunctionGraphsInIMLTT.html#2172" class="Function Operator"
+      >&#8728;</a
+      ><a name="3672"
+      > </a
+      ><a name="3673" href="FunctionGraphsInIMLTT.html#3554" class="Function"
+      >u</a
+      ><a name="3674"
+      > </a
+      ><a name="3675" href="FunctionGraphsInIMLTT.html#2070" class="Function Operator"
+      >~</a
+      ><a name="3676"
+      > </a
+      ><a name="3677" href="FunctionGraphsInIMLTT.html#2139" class="Function"
+      >id</a
+      ><a name="3679"
+      >
+  </a
+      ><a name="3682" href="FunctionGraphsInIMLTT.html#3665" class="Function"
+      >s</a
+      ><a name="3683"
+      > </a
+      ><a name="3684" class="Symbol"
+      >(</a
+      ><a name="3685" href="FunctionGraphsInIMLTT.html#3685" class="Bound"
+      >x</a
+      ><a name="3686"
+      > </a
+      ><a name="3687" href="FunctionGraphsInIMLTT.html#1250" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="3688"
+      > </a
+      ><a name="3689" href="FunctionGraphsInIMLTT.html#3689" class="Bound"
+      >y</a
+      ><a name="3690"
+      > </a
+      ><a name="3691" href="FunctionGraphsInIMLTT.html#1250" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="3692"
+      > </a
+      ><a name="3693" href="FunctionGraphsInIMLTT.html#3693" class="Bound"
+      >r</a
+      ><a name="3694" class="Symbol"
+      >)</a
+      ><a name="3695"
+      > </a
+      ><a name="3696" class="Symbol"
+      >=</a
+      ><a name="3697"
+      > </a
+      ><a name="3698" href="FunctionGraphsInIMLTT.html#1839" class="Function"
+      >cong</a
+      ><a name="3702"
+      > </a
+      ><a name="3703" class="Symbol"
+      >(&#955;</a
+      ><a name="3705"
+      > </a
+      ><a name="3706" href="FunctionGraphsInIMLTT.html#3706" class="Bound"
+      >z</a
+      ><a name="3707"
+      > </a
+      ><a name="3708" class="Symbol"
+      >&#8594;</a
+      ><a name="3709"
+      > </a
+      ><a name="3710" class="Symbol"
+      >(</a
+      ><a name="3711" href="FunctionGraphsInIMLTT.html#3685" class="Bound"
+      >x</a
+      ><a name="3712"
+      > </a
+      ><a name="3713" href="FunctionGraphsInIMLTT.html#1250" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="3714"
+      > </a
+      ><a name="3715" href="FunctionGraphsInIMLTT.html#3706" class="Bound"
+      >z</a
+      ><a name="3716" class="Symbol"
+      >))</a
+      ><a name="3718"
+      > </a
+      ><a name="3719" class="Symbol"
+      >(</a
+      ><a name="3720" href="FunctionGraphsInIMLTT.html#1534" class="Function"
+      >pseudo-uip</a
+      ><a name="3730"
+      > </a
+      ><a name="3731" href="FunctionGraphsInIMLTT.html#3693" class="Bound"
+      >r</a
+      ><a name="3732" class="Symbol"
+      >)</a
+      ><a name="3733"
+      >
+
+</a
+      ><a name="3737" href="FunctionGraphsInIMLTT.html#3737" class="Function"
+      >lemma</a
+      ><a name="3742"
+      > </a
+      ><a name="3743" class="Symbol"
+      >:</a
+      ><a name="3744"
+      > </a
+      ><a name="3745" class="Symbol"
+      >{</a
+      ><a name="3746" href="FunctionGraphsInIMLTT.html#3746" class="Bound"
+      >X</a
+      ><a name="3747"
+      > </a
+      ><a name="3748" href="FunctionGraphsInIMLTT.html#3748" class="Bound"
+      >Y</a
+      ><a name="3749"
+      > </a
+      ><a name="3750" class="Symbol"
+      >:</a
+      ><a name="3751"
+      > </a
+      ><a name="3752" class="PrimitiveType"
+      >Set</a
+      ><a name="3755" class="Symbol"
+      >}</a
+      ><a name="3756"
+      > </a
+      ><a name="3757" class="Symbol"
+      >&#8594;</a
+      ><a name="3758"
+      > </a
+      ><a name="3759" class="Symbol"
+      >&#8704;(</a
+      ><a name="3761" href="FunctionGraphsInIMLTT.html#3761" class="Bound"
+      >f</a
+      ><a name="3762"
+      > </a
+      ><a name="3763" href="FunctionGraphsInIMLTT.html#3763" class="Bound"
+      >g</a
+      ><a name="3764"
+      > </a
+      ><a name="3765" class="Symbol"
+      >:</a
+      ><a name="3766"
+      > </a
+      ><a name="3767" href="FunctionGraphsInIMLTT.html#3746" class="Bound"
+      >X</a
+      ><a name="3768"
+      > </a
+      ><a name="3769" class="Symbol"
+      >&#8594;</a
+      ><a name="3770"
+      > </a
+      ><a name="3771" href="FunctionGraphsInIMLTT.html#3748" class="Bound"
+      >Y</a
+      ><a name="3772" class="Symbol"
+      >)</a
+      ><a name="3773"
+      > </a
+      ><a name="3774" class="Symbol"
+      >&#8594;</a
+      ><a name="3775"
+      > </a
+      ><a name="3776" href="FunctionGraphsInIMLTT.html#2001" class="Function"
+      >graph</a
+      ><a name="3781"
+      > </a
+      ><a name="3782" href="FunctionGraphsInIMLTT.html#3761" class="Bound"
+      >f</a
+      ><a name="3783"
+      > </a
+      ><a name="3784" href="FunctionGraphsInIMLTT.html#2244" class="Function Operator"
+      >&#8776;</a
+      ><a name="3785"
+      > </a
+      ><a name="3786" href="FunctionGraphsInIMLTT.html#2001" class="Function"
+      >graph</a
+      ><a name="3791"
+      > </a
+      ><a name="3792" href="FunctionGraphsInIMLTT.html#3763" class="Bound"
+      >g</a
+      ><a name="3793"
+      >
+</a
+      ><a name="3794" href="FunctionGraphsInIMLTT.html#3737" class="Function"
+      >lemma</a
+      ><a name="3799"
+      > </a
+      ><a name="3800" href="FunctionGraphsInIMLTT.html#3800" class="Bound"
+      >f</a
+      ><a name="3801"
+      > </a
+      ><a name="3802" href="FunctionGraphsInIMLTT.html#3802" class="Bound"
+      >g</a
+      ><a name="3803"
+      > </a
+      ><a name="3804" class="Symbol"
+      >=</a
+      ><a name="3805"
+      > </a
+      ><a name="3806" href="FunctionGraphsInIMLTT.html#2493" class="Function"
+      >&#8776;-trans</a
+      ><a name="3813"
+      > </a
+      ><a name="3814" class="Symbol"
+      >(</a
+      ><a name="3815" href="FunctionGraphsInIMLTT.html#3468" class="Function"
+      >fact</a
+      ><a name="3819"
+      > </a
+      ><a name="3820" href="FunctionGraphsInIMLTT.html#3800" class="Bound"
+      >f</a
+      ><a name="3821" class="Symbol"
+      >)</a
+      ><a name="3822"
+      > </a
+      ><a name="3823" class="Symbol"
+      >(</a
+      ><a name="3824" href="FunctionGraphsInIMLTT.html#2416" class="Function"
+      >&#8776;-sym</a
+      ><a name="3829" class="Symbol"
+      >(</a
+      ><a name="3830" href="FunctionGraphsInIMLTT.html#3468" class="Function"
+      >fact</a
+      ><a name="3834"
+      > </a
+      ><a name="3835" href="FunctionGraphsInIMLTT.html#3802" class="Bound"
+      >g</a
+      ><a name="3836" class="Symbol"
+      >))</a
+      ><a name="3838"
+      >
+
+\end{code}
+
+</a
+      ><a name="3852" class="Comment"
+      >There is nothing surprising or specific to type theory so far: in</a
+      ><a name="3917"
+      >
+</a
+      ><a name="3918" class="Comment"
+      >classical mathematics, any two functions X &#8594; Y have isomorphic graphs</a
+      ><a name="3987"
+      >
+</a
+      ><a name="3988" class="Comment"
+      >too. However, in classical mathematics any two functions with equal</a
+      ><a name="4055"
+      >
+</a
+      ><a name="4056" class="Comment"
+      >graphs must themselves be equal, and, in fact, the official definition</a
+      ><a name="4126"
+      >
+</a
+      ><a name="4127" class="Comment"
+      >of a function is that it is a graph. </a
+      ><a name="4164"
+      >
+
+</a
+      ><a name="4166" class="Comment"
+      >The following is a consequence of univalence, where &#8801;&#8321; is type</a
+      ><a name="4228"
+      >
+</a
+      ><a name="4229" class="Comment"
+      >identity (I am deliberately avoiding universe polymorphism). The</a
+      ><a name="4293"
+      >
+</a
+      ><a name="4294" class="Comment"
+      >reason is that univalence implies the axiom of extensionality (two</a
+      ><a name="4360"
+      >
+</a
+      ><a name="4361" class="Comment"
+      >pointwise equal functions are equal), and hence that pointwise</a
+      ><a name="4423"
+      >
+</a
+      ><a name="4424" class="Comment"
+      >isomorphic types are isomorphic, and also that isomorphic types are</a
+      ><a name="4491"
+      >
+</a
+      ><a name="4492" class="Comment"
+      >equal.</a
+      ><a name="4498"
+      >
+
+\begin{code}
+
+</a
+      ><a name="4514" href="FunctionGraphsInIMLTT.html#4514" class="Function"
+      >weak-univalence</a
+      ><a name="4529"
+      > </a
+      ><a name="4530" class="Symbol"
+      >:</a
+      ><a name="4531"
+      > </a
+      ><a name="4532" class="PrimitiveType"
+      >Set&#8321;</a
+      ><a name="4536"
+      >
+</a
+      ><a name="4537" href="FunctionGraphsInIMLTT.html#4514" class="Function"
+      >weak-univalence</a
+      ><a name="4552"
+      > </a
+      ><a name="4553" class="Symbol"
+      >=</a
+      ><a name="4554"
+      > </a
+      ><a name="4555" class="Symbol"
+      >&#8704;{</a
+      ><a name="4557" href="FunctionGraphsInIMLTT.html#4557" class="Bound"
+      >X</a
+      ><a name="4558"
+      > </a
+      ><a name="4559" href="FunctionGraphsInIMLTT.html#4559" class="Bound"
+      >Y</a
+      ><a name="4560"
+      > </a
+      ><a name="4561" class="Symbol"
+      >:</a
+      ><a name="4562"
+      > </a
+      ><a name="4563" class="PrimitiveType"
+      >Set</a
+      ><a name="4566" class="Symbol"
+      >}</a
+      ><a name="4567"
+      > </a
+      ><a name="4568" class="Symbol"
+      >&#8594;</a
+      ><a name="4569"
+      > </a
+      ><a name="4570" href="FunctionGraphsInIMLTT.html#4557" class="Bound"
+      >X</a
+      ><a name="4571"
+      > </a
+      ><a name="4572" href="FunctionGraphsInIMLTT.html#2244" class="Function Operator"
+      >&#8776;</a
+      ><a name="4573"
+      > </a
+      ><a name="4574" href="FunctionGraphsInIMLTT.html#4559" class="Bound"
+      >Y</a
+      ><a name="4575"
+      > </a
+      ><a name="4576" class="Symbol"
+      >&#8594;</a
+      ><a name="4577"
+      > </a
+      ><a name="4578" href="FunctionGraphsInIMLTT.html#4557" class="Bound"
+      >X</a
+      ><a name="4579"
+      > </a
+      ><a name="4580" href="FunctionGraphsInIMLTT.html#1936" class="Datatype Operator"
+      >&#8801;&#8321;</a
+      ><a name="4582"
+      > </a
+      ><a name="4583" href="FunctionGraphsInIMLTT.html#4559" class="Bound"
+      >Y</a
+      ><a name="4584"
+      >
+
+</a
+      ><a name="4586" href="FunctionGraphsInIMLTT.html#4586" class="Function"
+      >proposition</a
+      ><a name="4597"
+      > </a
+      ><a name="4598" class="Symbol"
+      >:</a
+      ><a name="4599"
+      >
+
+ </a
+      ><a name="4603" href="FunctionGraphsInIMLTT.html#4514" class="Function"
+      >weak-univalence</a
+      ><a name="4618"
+      > </a
+      ><a name="4619" class="Symbol"
+      >&#8594;</a
+      ><a name="4620"
+      > </a
+      ><a name="4621" class="Symbol"
+      >&#8704;{</a
+      ><a name="4623" href="FunctionGraphsInIMLTT.html#4623" class="Bound"
+      >X</a
+      ><a name="4624"
+      > </a
+      ><a name="4625" href="FunctionGraphsInIMLTT.html#4625" class="Bound"
+      >Y</a
+      ><a name="4626"
+      > </a
+      ><a name="4627" class="Symbol"
+      >:</a
+      ><a name="4628"
+      > </a
+      ><a name="4629" class="PrimitiveType"
+      >Set</a
+      ><a name="4632" class="Symbol"
+      >}</a
+      ><a name="4633"
+      > </a
+      ><a name="4634" class="Symbol"
+      >&#8594;</a
+      ><a name="4635"
+      > </a
+      ><a name="4636" class="Symbol"
+      >&#8704;(</a
+      ><a name="4638" href="FunctionGraphsInIMLTT.html#4638" class="Bound"
+      >f</a
+      ><a name="4639"
+      > </a
+      ><a name="4640" href="FunctionGraphsInIMLTT.html#4640" class="Bound"
+      >g</a
+      ><a name="4641"
+      > </a
+      ><a name="4642" class="Symbol"
+      >:</a
+      ><a name="4643"
+      > </a
+      ><a name="4644" href="FunctionGraphsInIMLTT.html#4623" class="Bound"
+      >X</a
+      ><a name="4645"
+      > </a
+      ><a name="4646" class="Symbol"
+      >&#8594;</a
+      ><a name="4647"
+      > </a
+      ><a name="4648" href="FunctionGraphsInIMLTT.html#4625" class="Bound"
+      >Y</a
+      ><a name="4649" class="Symbol"
+      >)</a
+      ><a name="4650"
+      > </a
+      ><a name="4651" class="Symbol"
+      >&#8594;</a
+      ><a name="4652"
+      > </a
+      ><a name="4653" href="FunctionGraphsInIMLTT.html#2001" class="Function"
+      >graph</a
+      ><a name="4658"
+      > </a
+      ><a name="4659" href="FunctionGraphsInIMLTT.html#4638" class="Bound"
+      >f</a
+      ><a name="4660"
+      > </a
+      ><a name="4661" href="FunctionGraphsInIMLTT.html#1936" class="Datatype Operator"
+      >&#8801;&#8321;</a
+      ><a name="4663"
+      > </a
+      ><a name="4664" href="FunctionGraphsInIMLTT.html#2001" class="Function"
+      >graph</a
+      ><a name="4669"
+      > </a
+      ><a name="4670" href="FunctionGraphsInIMLTT.html#4640" class="Bound"
+      >g</a
+      ><a name="4671"
+      >
+
+</a
+      ><a name="4673" href="FunctionGraphsInIMLTT.html#4586" class="Function"
+      >proposition</a
+      ><a name="4684"
+      > </a
+      ><a name="4685" href="FunctionGraphsInIMLTT.html#4685" class="Bound"
+      >uni</a
+      ><a name="4688"
+      > </a
+      ><a name="4689" href="FunctionGraphsInIMLTT.html#4689" class="Bound"
+      >f</a
+      ><a name="4690"
+      > </a
+      ><a name="4691" href="FunctionGraphsInIMLTT.html#4691" class="Bound"
+      >g</a
+      ><a name="4692"
+      > </a
+      ><a name="4693" class="Symbol"
+      >=</a
+      ><a name="4694"
+      > </a
+      ><a name="4695" href="FunctionGraphsInIMLTT.html#4685" class="Bound"
+      >uni</a
+      ><a name="4698" class="Symbol"
+      >(</a
+      ><a name="4699" href="FunctionGraphsInIMLTT.html#3737" class="Function"
+      >lemma</a
+      ><a name="4704"
+      > </a
+      ><a name="4705" href="FunctionGraphsInIMLTT.html#4689" class="Bound"
+      >f</a
+      ><a name="4706"
+      > </a
+      ><a name="4707" href="FunctionGraphsInIMLTT.html#4691" class="Bound"
+      >g</a
+      ><a name="4708" class="Symbol"
+      >)</a
+      ><a name="4709"
+      >
+
+\end{code}
+
+</a
+      ><a name="4723" class="Comment"
+      >By the consistency of univalence, it follows that IMLTT cannot prove</a
+      ><a name="4791"
+      >
+</a
+      ><a name="4792" class="Comment"
+      >that any two functions with equal graphs must be pointwise equal.</a
+      ><a name="4857"
+      >
+
+</a
+      ><a name="4859" class="Comment"
+      >Thus, the statement &quot;any two functions with equal graphs must be</a
+      ><a name="4923"
+      >
+</a
+      ><a name="4924" class="Comment"
+      >equal&quot; cannot be used to express extensionality in MLTT, because it is</a
+      ><a name="4994"
+      >
+</a
+      ><a name="4995" class="Comment"
+      >provably false in IMLTT+univalence, which proves extensionality.</a
+      ><a name="5059"
+      >
+
+</a
+      ><a name="5061" class="Comment"
+      >Idle thought: Is the statement </a
+      ><a name="5092"
+      >
+
+</a
+      ><a name="5094" class="Comment"
+      >  &#8704;(X Y : Set) &#8594; &#8704;(f g : X &#8594; Y) &#8594; graph f &#8801;&#8321; graph g </a
+      ><a name="5147"
+      >
+
+</a
+      ><a name="5149" class="Comment"
+      >equivalent to univalence? (Where &#8801;&#8321; is identity of small types.)</a
+      ><a name="5213"
+      >
+
+</a
+      ><a name="5215" class="Comment"
+      >The source file is available at </a
+      ><a name="5247"
+      >
+
+</a
+      ><a name="5249" class="Comment"
+      >  http://www.cs.bham.ac.uk/~mhe/papers/FunctionGraphsInIMLTT/FunctionGraphsInIMLTT.lagda</a
+      ><a name="5337"
+      >
+</a
+      ></pre
+    ></body
+  ></html
+>

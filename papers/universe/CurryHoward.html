@@ -1,0 +1,2522 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+><head
+  ><title
+    >CurryHoward</title
+    ><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"
+     /><meta http-equiv="Content-Style-Type" content="text/css"
+     /><link href="Agda.css" rel="stylesheet" type="text/css"
+     /></head
+  ><body
+  ><pre
+    ><a name="1" class="Comment"
+      >Martin Escardo 2011.</a
+      ><a name="21"
+      >
+
+\begin{code}
+</a
+      ><a name="36" class="Keyword"
+      >module</a
+      ><a name="42"
+      > </a
+      ><a name="43" href="CurryHoward.html#1" class="Module"
+      >CurryHoward</a
+      ><a name="54"
+      > </a
+      ><a name="55" class="Keyword"
+      >where</a
+      ><a name="60"
+      >
+\end{code}
+
+</a
+      ><a name="73" class="Comment"
+      >The universe of propositions is denoted by Prp. By the</a
+      ><a name="127"
+      >
+</a
+      ><a name="128" class="Comment"
+      >Curry-Howard isomorphism, it is the universe of types,</a
+      ><a name="182"
+      >
+</a
+      ><a name="183" class="Comment"
+      >sometimes called sets in Agda.</a
+      ><a name="213"
+      >
+
+\begin{code}
+
+</a
+      ><a name="229" class="Keyword"
+      >open</a
+      ><a name="233"
+      > </a
+      ><a name="234" class="Keyword"
+      >import</a
+      ><a name="240"
+      > </a
+      ><a name="241" href="SetsAndFunctions.html#1" class="Module"
+      >SetsAndFunctions</a
+      ><a name="257"
+      >
+
+</a
+      ><a name="259" href="CurryHoward.html#259" class="Function"
+      >Prp</a
+      ><a name="262"
+      > </a
+      ><a name="263" class="Symbol"
+      >=</a
+      ><a name="264"
+      > </a
+      ><a name="265" class="PrimitiveType"
+      >Set</a
+      ><a name="268"
+      >
+
+\end{code}
+
+</a
+      ><a name="282" class="Comment"
+      >We also need this, where Set&#8321; is the second universe:</a
+      ><a name="335"
+      >
+
+\begin{code}
+
+</a
+      ><a name="351" href="CurryHoward.html#351" class="Function"
+      >Prp&#8321;</a
+      ><a name="355"
+      > </a
+      ><a name="356" class="Symbol"
+      >=</a
+      ><a name="357"
+      > </a
+      ><a name="358" class="PrimitiveType"
+      >Set&#8321;</a
+      ><a name="362"
+      >
+
+\end{code}
+
+</a
+      ><a name="376" class="Comment"
+      >The false proposition (empty set) is inductively</a
+      ><a name="424"
+      >
+</a
+      ><a name="425" class="Comment"
+      >defined with no cases:</a
+      ><a name="447"
+      >
+
+\begin{code}
+
+</a
+      ><a name="463" href="CurryHoward.html#463" class="Function"
+      >&#8869;</a
+      ><a name="464"
+      > </a
+      ><a name="465" class="Symbol"
+      >:</a
+      ><a name="466"
+      > </a
+      ><a name="467" href="CurryHoward.html#259" class="Function"
+      >Prp</a
+      ><a name="470"
+      >
+</a
+      ><a name="471" href="CurryHoward.html#463" class="Function"
+      >&#8869;</a
+      ><a name="472"
+      > </a
+      ><a name="473" class="Symbol"
+      >=</a
+      ><a name="474"
+      > </a
+      ><a name="475" href="SetsAndFunctions.html#167" class="Datatype"
+      >&#8709;</a
+      ><a name="476"
+      >
+
+</a
+      ><a name="478" href="CurryHoward.html#478" class="Function"
+      >&#8869;-elim</a
+      ><a name="484"
+      > </a
+      ><a name="485" class="Symbol"
+      >:</a
+      ><a name="486"
+      > </a
+      ><a name="487" class="Symbol"
+      >{</a
+      ><a name="488" href="CurryHoward.html#488" class="Bound"
+      >A</a
+      ><a name="489"
+      > </a
+      ><a name="490" class="Symbol"
+      >:</a
+      ><a name="491"
+      > </a
+      ><a name="492" href="CurryHoward.html#259" class="Function"
+      >Prp</a
+      ><a name="495" class="Symbol"
+      >}</a
+      ><a name="496"
+      > </a
+      ><a name="497" class="Symbol"
+      >&#8594;</a
+      ><a name="498"
+      > </a
+      ><a name="499" href="CurryHoward.html#463" class="Function"
+      >&#8869;</a
+      ><a name="500"
+      > </a
+      ><a name="501" class="Symbol"
+      >&#8594;</a
+      ><a name="502"
+      > </a
+      ><a name="503" href="CurryHoward.html#488" class="Bound"
+      >A</a
+      ><a name="504"
+      >
+</a
+      ><a name="505" href="CurryHoward.html#478" class="Function"
+      >&#8869;-elim</a
+      ><a name="511"
+      > </a
+      ><a name="512" class="Symbol"
+      >=</a
+      ><a name="513"
+      > </a
+      ><a name="514" href="SetsAndFunctions.html#182" class="Function"
+      >unique-from-&#8709;</a
+      ><a name="527"
+      >
+
+</a
+      ><a name="529" class="Keyword"
+      >infix</a
+      ><a name="534"
+      >  </a
+      ><a name="536" class="Number"
+      >50</a
+      ><a name="538"
+      > &#172;_
+</a
+      ><a name="542" class="Keyword"
+      >infixr</a
+      ><a name="548"
+      > </a
+      ><a name="549" class="Number"
+      >10</a
+      ><a name="551"
+      > _&#8743;_
+</a
+      ><a name="556" class="Keyword"
+      >infixr</a
+      ><a name="562"
+      > </a
+      ><a name="563" class="Number"
+      >20</a
+      ><a name="565"
+      > _&#8744;_
+
+</a
+      ><a name="571" href="CurryHoward.html#571" class="Function Operator"
+      >&#172;_</a
+      ><a name="573"
+      > </a
+      ><a name="574" class="Symbol"
+      >:</a
+      ><a name="575"
+      > </a
+      ><a name="576" href="CurryHoward.html#259" class="Function"
+      >Prp</a
+      ><a name="579"
+      > </a
+      ><a name="580" class="Symbol"
+      >&#8594;</a
+      ><a name="581"
+      > </a
+      ><a name="582" href="CurryHoward.html#259" class="Function"
+      >Prp</a
+      ><a name="585"
+      >
+</a
+      ><a name="586" href="CurryHoward.html#571" class="Function Operator"
+      >&#172;</a
+      ><a name="587"
+      > </a
+      ><a name="588" href="CurryHoward.html#588" class="Bound"
+      >A</a
+      ><a name="589"
+      > </a
+      ><a name="590" class="Symbol"
+      >=</a
+      ><a name="591"
+      > </a
+      ><a name="592" class="Symbol"
+      >(</a
+      ><a name="593" href="CurryHoward.html#588" class="Bound"
+      >A</a
+      ><a name="594"
+      > </a
+      ><a name="595" class="Symbol"
+      >&#8594;</a
+      ><a name="596"
+      > </a
+      ><a name="597" href="CurryHoward.html#463" class="Function"
+      >&#8869;</a
+      ><a name="598" class="Symbol"
+      >)</a
+      ><a name="599"
+      >
+
+</a
+      ><a name="601" href="CurryHoward.html#601" class="Function Operator"
+      >_&#8743;_</a
+      ><a name="604"
+      > </a
+      ><a name="605" class="Symbol"
+      >:</a
+      ><a name="606"
+      > </a
+      ><a name="607" href="CurryHoward.html#259" class="Function"
+      >Prp</a
+      ><a name="610"
+      > </a
+      ><a name="611" class="Symbol"
+      >&#8594;</a
+      ><a name="612"
+      > </a
+      ><a name="613" href="CurryHoward.html#259" class="Function"
+      >Prp</a
+      ><a name="616"
+      > </a
+      ><a name="617" class="Symbol"
+      >&#8594;</a
+      ><a name="618"
+      > </a
+      ><a name="619" href="CurryHoward.html#259" class="Function"
+      >Prp</a
+      ><a name="622"
+      >
+</a
+      ><a name="623" href="CurryHoward.html#623" class="Bound"
+      >A</a
+      ><a name="624"
+      > </a
+      ><a name="625" href="CurryHoward.html#601" class="Function Operator"
+      >&#8743;</a
+      ><a name="626"
+      > </a
+      ><a name="627" href="CurryHoward.html#627" class="Bound"
+      >B</a
+      ><a name="628"
+      > </a
+      ><a name="629" class="Symbol"
+      >=</a
+      ><a name="630"
+      > </a
+      ><a name="631" href="CurryHoward.html#623" class="Bound"
+      >A</a
+      ><a name="632"
+      > </a
+      ><a name="633" href="SetsAndFunctions.html#1643" class="Function Operator"
+      >&#215;</a
+      ><a name="634"
+      > </a
+      ><a name="635" href="CurryHoward.html#627" class="Bound"
+      >B</a
+      ><a name="636"
+      >
+
+</a
+      ><a name="638" href="CurryHoward.html#638" class="Function"
+      >&#8743;-elim&#8320;</a
+      ><a name="645"
+      > </a
+      ><a name="646" class="Symbol"
+      >:</a
+      ><a name="647"
+      > </a
+      ><a name="648" class="Symbol"
+      >{</a
+      ><a name="649" href="CurryHoward.html#649" class="Bound"
+      >A&#8320;</a
+      ><a name="651"
+      > </a
+      ><a name="652" href="CurryHoward.html#652" class="Bound"
+      >A&#8321;</a
+      ><a name="654"
+      > </a
+      ><a name="655" class="Symbol"
+      >:</a
+      ><a name="656"
+      > </a
+      ><a name="657" href="CurryHoward.html#259" class="Function"
+      >Prp</a
+      ><a name="660" class="Symbol"
+      >}</a
+      ><a name="661"
+      > </a
+      ><a name="662" class="Symbol"
+      >&#8594;</a
+      ><a name="663"
+      > </a
+      ><a name="664" href="CurryHoward.html#649" class="Bound"
+      >A&#8320;</a
+      ><a name="666"
+      > </a
+      ><a name="667" href="CurryHoward.html#601" class="Function Operator"
+      >&#8743;</a
+      ><a name="668"
+      > </a
+      ><a name="669" href="CurryHoward.html#652" class="Bound"
+      >A&#8321;</a
+      ><a name="671"
+      > </a
+      ><a name="672" class="Symbol"
+      >&#8594;</a
+      ><a name="673"
+      > </a
+      ><a name="674" href="CurryHoward.html#649" class="Bound"
+      >A&#8320;</a
+      ><a name="676"
+      >
+</a
+      ><a name="677" href="CurryHoward.html#638" class="Function"
+      >&#8743;-elim&#8320;</a
+      ><a name="684"
+      > </a
+      ><a name="685" class="Symbol"
+      >=</a
+      ><a name="686"
+      > </a
+      ><a name="687" href="SetsAndFunctions.html#893" class="Function"
+      >&#960;&#8320;</a
+      ><a name="689"
+      >
+
+</a
+      ><a name="691" href="CurryHoward.html#691" class="Function"
+      >&#8743;-elim&#8321;</a
+      ><a name="698"
+      > </a
+      ><a name="699" class="Symbol"
+      >:</a
+      ><a name="700"
+      > </a
+      ><a name="701" class="Symbol"
+      >{</a
+      ><a name="702" href="CurryHoward.html#702" class="Bound"
+      >A&#8320;</a
+      ><a name="704"
+      > </a
+      ><a name="705" href="CurryHoward.html#705" class="Bound"
+      >A&#8321;</a
+      ><a name="707"
+      > </a
+      ><a name="708" class="Symbol"
+      >:</a
+      ><a name="709"
+      > </a
+      ><a name="710" href="CurryHoward.html#259" class="Function"
+      >Prp</a
+      ><a name="713" class="Symbol"
+      >}</a
+      ><a name="714"
+      > </a
+      ><a name="715" class="Symbol"
+      >&#8594;</a
+      ><a name="716"
+      > </a
+      ><a name="717" href="CurryHoward.html#702" class="Bound"
+      >A&#8320;</a
+      ><a name="719"
+      > </a
+      ><a name="720" href="CurryHoward.html#601" class="Function Operator"
+      >&#8743;</a
+      ><a name="721"
+      > </a
+      ><a name="722" href="CurryHoward.html#705" class="Bound"
+      >A&#8321;</a
+      ><a name="724"
+      > </a
+      ><a name="725" class="Symbol"
+      >&#8594;</a
+      ><a name="726"
+      > </a
+      ><a name="727" href="CurryHoward.html#705" class="Bound"
+      >A&#8321;</a
+      ><a name="729"
+      >
+</a
+      ><a name="730" href="CurryHoward.html#691" class="Function"
+      >&#8743;-elim&#8321;</a
+      ><a name="737"
+      > </a
+      ><a name="738" class="Symbol"
+      >=</a
+      ><a name="739"
+      > </a
+      ><a name="740" href="SetsAndFunctions.html#968" class="Function"
+      >&#960;&#8321;</a
+      ><a name="742"
+      >
+
+</a
+      ><a name="744" href="CurryHoward.html#744" class="Function"
+      >&#8743;-intro</a
+      ><a name="751"
+      > </a
+      ><a name="752" class="Symbol"
+      >:</a
+      ><a name="753"
+      > </a
+      ><a name="754" class="Symbol"
+      >{</a
+      ><a name="755" href="CurryHoward.html#755" class="Bound"
+      >A&#8320;</a
+      ><a name="757"
+      > </a
+      ><a name="758" href="CurryHoward.html#758" class="Bound"
+      >A&#8321;</a
+      ><a name="760"
+      > </a
+      ><a name="761" class="Symbol"
+      >:</a
+      ><a name="762"
+      > </a
+      ><a name="763" href="CurryHoward.html#259" class="Function"
+      >Prp</a
+      ><a name="766" class="Symbol"
+      >}</a
+      ><a name="767"
+      > </a
+      ><a name="768" class="Symbol"
+      >&#8594;</a
+      ><a name="769"
+      > </a
+      ><a name="770" href="CurryHoward.html#755" class="Bound"
+      >A&#8320;</a
+      ><a name="772"
+      > </a
+      ><a name="773" class="Symbol"
+      >&#8594;</a
+      ><a name="774"
+      > </a
+      ><a name="775" href="CurryHoward.html#758" class="Bound"
+      >A&#8321;</a
+      ><a name="777"
+      > </a
+      ><a name="778" class="Symbol"
+      >&#8594;</a
+      ><a name="779"
+      > </a
+      ><a name="780" href="CurryHoward.html#755" class="Bound"
+      >A&#8320;</a
+      ><a name="782"
+      > </a
+      ><a name="783" href="CurryHoward.html#601" class="Function Operator"
+      >&#8743;</a
+      ><a name="784"
+      > </a
+      ><a name="785" href="CurryHoward.html#758" class="Bound"
+      >A&#8321;</a
+      ><a name="787"
+      >
+</a
+      ><a name="788" href="CurryHoward.html#744" class="Function"
+      >&#8743;-intro</a
+      ><a name="795"
+      > </a
+      ><a name="796" href="CurryHoward.html#796" class="Bound"
+      >a&#8320;</a
+      ><a name="798"
+      > </a
+      ><a name="799" href="CurryHoward.html#799" class="Bound"
+      >a&#8321;</a
+      ><a name="801"
+      > </a
+      ><a name="802" class="Symbol"
+      >=</a
+      ><a name="803"
+      > </a
+      ><a name="804" class="Symbol"
+      >(</a
+      ><a name="805" href="CurryHoward.html#796" class="Bound"
+      >a&#8320;</a
+      ><a name="807"
+      > </a
+      ><a name="808" href="SetsAndFunctions.html#856" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="809"
+      > </a
+      ><a name="810" href="CurryHoward.html#799" class="Bound"
+      >a&#8321;</a
+      ><a name="812" class="Symbol"
+      >)</a
+      ><a name="813"
+      >
+
+</a
+      ><a name="815" href="CurryHoward.html#815" class="Function Operator"
+      >_&#8744;_</a
+      ><a name="818"
+      > </a
+      ><a name="819" class="Symbol"
+      >:</a
+      ><a name="820"
+      > </a
+      ><a name="821" href="CurryHoward.html#259" class="Function"
+      >Prp</a
+      ><a name="824"
+      > </a
+      ><a name="825" class="Symbol"
+      >&#8594;</a
+      ><a name="826"
+      > </a
+      ><a name="827" href="CurryHoward.html#259" class="Function"
+      >Prp</a
+      ><a name="830"
+      > </a
+      ><a name="831" class="Symbol"
+      >&#8594;</a
+      ><a name="832"
+      > </a
+      ><a name="833" href="CurryHoward.html#259" class="Function"
+      >Prp</a
+      ><a name="836"
+      >
+</a
+      ><a name="837" href="CurryHoward.html#837" class="Bound"
+      >A</a
+      ><a name="838"
+      > </a
+      ><a name="839" href="CurryHoward.html#815" class="Function Operator"
+      >&#8744;</a
+      ><a name="840"
+      > </a
+      ><a name="841" href="CurryHoward.html#841" class="Bound"
+      >B</a
+      ><a name="842"
+      > </a
+      ><a name="843" class="Symbol"
+      >=</a
+      ><a name="844"
+      > </a
+      ><a name="845" href="CurryHoward.html#837" class="Bound"
+      >A</a
+      ><a name="846"
+      > </a
+      ><a name="847" href="SetsAndFunctions.html#1803" class="Datatype Operator"
+      >+</a
+      ><a name="848"
+      > </a
+      ><a name="849" href="CurryHoward.html#841" class="Bound"
+      >B</a
+      ><a name="850"
+      >
+
+</a
+      ><a name="852" href="CurryHoward.html#852" class="Function"
+      >&#8744;-intro&#8320;</a
+      ><a name="860"
+      > </a
+      ><a name="861" class="Symbol"
+      >:</a
+      ><a name="862"
+      > </a
+      ><a name="863" class="Symbol"
+      >{</a
+      ><a name="864" href="CurryHoward.html#864" class="Bound"
+      >A&#8320;</a
+      ><a name="866"
+      > </a
+      ><a name="867" href="CurryHoward.html#867" class="Bound"
+      >A&#8321;</a
+      ><a name="869"
+      > </a
+      ><a name="870" class="Symbol"
+      >:</a
+      ><a name="871"
+      > </a
+      ><a name="872" href="CurryHoward.html#259" class="Function"
+      >Prp</a
+      ><a name="875" class="Symbol"
+      >}</a
+      ><a name="876"
+      > </a
+      ><a name="877" class="Symbol"
+      >&#8594;</a
+      ><a name="878"
+      > </a
+      ><a name="879" href="CurryHoward.html#864" class="Bound"
+      >A&#8320;</a
+      ><a name="881"
+      > </a
+      ><a name="882" class="Symbol"
+      >&#8594;</a
+      ><a name="883"
+      > </a
+      ><a name="884" href="CurryHoward.html#864" class="Bound"
+      >A&#8320;</a
+      ><a name="886"
+      > </a
+      ><a name="887" href="CurryHoward.html#815" class="Function Operator"
+      >&#8744;</a
+      ><a name="888"
+      > </a
+      ><a name="889" href="CurryHoward.html#867" class="Bound"
+      >A&#8321;</a
+      ><a name="891"
+      >
+</a
+      ><a name="892" href="CurryHoward.html#852" class="Function"
+      >&#8744;-intro&#8320;</a
+      ><a name="900"
+      > </a
+      ><a name="901" class="Symbol"
+      >=</a
+      ><a name="902"
+      > </a
+      ><a name="903" href="SetsAndFunctions.html#1835" class="InductiveConstructor"
+      >in&#8320;</a
+      ><a name="906"
+      >
+
+</a
+      ><a name="908" href="CurryHoward.html#908" class="Function"
+      >&#8744;-intro&#8321;</a
+      ><a name="916"
+      > </a
+      ><a name="917" class="Symbol"
+      >:</a
+      ><a name="918"
+      > </a
+      ><a name="919" class="Symbol"
+      >{</a
+      ><a name="920" href="CurryHoward.html#920" class="Bound"
+      >A&#8320;</a
+      ><a name="922"
+      > </a
+      ><a name="923" href="CurryHoward.html#923" class="Bound"
+      >A&#8321;</a
+      ><a name="925"
+      > </a
+      ><a name="926" class="Symbol"
+      >:</a
+      ><a name="927"
+      > </a
+      ><a name="928" href="CurryHoward.html#259" class="Function"
+      >Prp</a
+      ><a name="931" class="Symbol"
+      >}</a
+      ><a name="932"
+      > </a
+      ><a name="933" class="Symbol"
+      >&#8594;</a
+      ><a name="934"
+      > </a
+      ><a name="935" href="CurryHoward.html#923" class="Bound"
+      >A&#8321;</a
+      ><a name="937"
+      > </a
+      ><a name="938" class="Symbol"
+      >&#8594;</a
+      ><a name="939"
+      > </a
+      ><a name="940" href="CurryHoward.html#920" class="Bound"
+      >A&#8320;</a
+      ><a name="942"
+      > </a
+      ><a name="943" href="CurryHoward.html#815" class="Function Operator"
+      >&#8744;</a
+      ><a name="944"
+      > </a
+      ><a name="945" href="CurryHoward.html#923" class="Bound"
+      >A&#8321;</a
+      ><a name="947"
+      >
+</a
+      ><a name="948" href="CurryHoward.html#908" class="Function"
+      >&#8744;-intro&#8321;</a
+      ><a name="956"
+      > </a
+      ><a name="957" class="Symbol"
+      >=</a
+      ><a name="958"
+      > </a
+      ><a name="959" href="SetsAndFunctions.html#1856" class="InductiveConstructor"
+      >in&#8321;</a
+      ><a name="962"
+      >
+
+</a
+      ><a name="964" href="CurryHoward.html#964" class="Function"
+      >&#8744;-elim</a
+      ><a name="970"
+      > </a
+      ><a name="971" class="Symbol"
+      >:</a
+      ><a name="972"
+      > </a
+      ><a name="973" class="Symbol"
+      >{</a
+      ><a name="974" href="CurryHoward.html#974" class="Bound"
+      >A&#8320;</a
+      ><a name="976"
+      > </a
+      ><a name="977" href="CurryHoward.html#977" class="Bound"
+      >A&#8321;</a
+      ><a name="979"
+      > </a
+      ><a name="980" href="CurryHoward.html#980" class="Bound"
+      >B</a
+      ><a name="981"
+      > </a
+      ><a name="982" class="Symbol"
+      >:</a
+      ><a name="983"
+      > </a
+      ><a name="984" href="CurryHoward.html#259" class="Function"
+      >Prp</a
+      ><a name="987" class="Symbol"
+      >}</a
+      ><a name="988"
+      > </a
+      ><a name="989" class="Symbol"
+      >&#8594;</a
+      ><a name="990"
+      >
+
+  </a
+      ><a name="995" class="Symbol"
+      >(</a
+      ><a name="996" href="CurryHoward.html#974" class="Bound"
+      >A&#8320;</a
+      ><a name="998"
+      > </a
+      ><a name="999" class="Symbol"
+      >&#8594;</a
+      ><a name="1000"
+      > </a
+      ><a name="1001" href="CurryHoward.html#980" class="Bound"
+      >B</a
+      ><a name="1002" class="Symbol"
+      >)</a
+      ><a name="1003"
+      > </a
+      ><a name="1004" class="Symbol"
+      >&#8594;</a
+      ><a name="1005"
+      > </a
+      ><a name="1006" class="Symbol"
+      >(</a
+      ><a name="1007" href="CurryHoward.html#977" class="Bound"
+      >A&#8321;</a
+      ><a name="1009"
+      > </a
+      ><a name="1010" class="Symbol"
+      >&#8594;</a
+      ><a name="1011"
+      > </a
+      ><a name="1012" href="CurryHoward.html#980" class="Bound"
+      >B</a
+      ><a name="1013" class="Symbol"
+      >)</a
+      ><a name="1014"
+      > </a
+      ><a name="1015" class="Symbol"
+      >&#8594;</a
+      ><a name="1016"
+      > </a
+      ><a name="1017" href="CurryHoward.html#974" class="Bound"
+      >A&#8320;</a
+      ><a name="1019"
+      > </a
+      ><a name="1020" href="CurryHoward.html#815" class="Function Operator"
+      >&#8744;</a
+      ><a name="1021"
+      > </a
+      ><a name="1022" href="CurryHoward.html#977" class="Bound"
+      >A&#8321;</a
+      ><a name="1024"
+      > </a
+      ><a name="1025" class="Symbol"
+      >&#8594;</a
+      ><a name="1026"
+      > </a
+      ><a name="1027" href="CurryHoward.html#980" class="Bound"
+      >B</a
+      ><a name="1028"
+      >
+
+</a
+      ><a name="1030" href="CurryHoward.html#964" class="Function"
+      >&#8744;-elim</a
+      ><a name="1036"
+      > </a
+      ><a name="1037" class="Symbol"
+      >=</a
+      ><a name="1038"
+      > </a
+      ><a name="1039" href="SetsAndFunctions.html#2078" class="Function"
+      >cases</a
+      ><a name="1044"
+      >
+
+</a
+      ><a name="1046" href="CurryHoward.html#1046" class="Function"
+      >&#8744;-commutative</a
+      ><a name="1059"
+      > </a
+      ><a name="1060" class="Symbol"
+      >:</a
+      ><a name="1061"
+      > </a
+      ><a name="1062" class="Symbol"
+      >{</a
+      ><a name="1063" href="CurryHoward.html#1063" class="Bound"
+      >A</a
+      ><a name="1064"
+      > </a
+      ><a name="1065" href="CurryHoward.html#1065" class="Bound"
+      >B</a
+      ><a name="1066"
+      > </a
+      ><a name="1067" class="Symbol"
+      >:</a
+      ><a name="1068"
+      > </a
+      ><a name="1069" href="CurryHoward.html#259" class="Function"
+      >Prp</a
+      ><a name="1072" class="Symbol"
+      >}</a
+      ><a name="1073"
+      > </a
+      ><a name="1074" class="Symbol"
+      >&#8594;</a
+      ><a name="1075"
+      > </a
+      ><a name="1076" href="CurryHoward.html#1063" class="Bound"
+      >A</a
+      ><a name="1077"
+      > </a
+      ><a name="1078" href="CurryHoward.html#815" class="Function Operator"
+      >&#8744;</a
+      ><a name="1079"
+      > </a
+      ><a name="1080" href="CurryHoward.html#1065" class="Bound"
+      >B</a
+      ><a name="1081"
+      > </a
+      ><a name="1082" class="Symbol"
+      >&#8594;</a
+      ><a name="1083"
+      > </a
+      ><a name="1084" href="CurryHoward.html#1065" class="Bound"
+      >B</a
+      ><a name="1085"
+      > </a
+      ><a name="1086" href="CurryHoward.html#815" class="Function Operator"
+      >&#8744;</a
+      ><a name="1087"
+      > </a
+      ><a name="1088" href="CurryHoward.html#1063" class="Bound"
+      >A</a
+      ><a name="1089"
+      >
+</a
+      ><a name="1090" href="CurryHoward.html#1046" class="Function"
+      >&#8744;-commutative</a
+      ><a name="1103"
+      > </a
+      ><a name="1104" class="Symbol"
+      >=</a
+      ><a name="1105"
+      > </a
+      ><a name="1106" href="CurryHoward.html#964" class="Function"
+      >&#8744;-elim</a
+      ><a name="1112"
+      > </a
+      ><a name="1113" href="CurryHoward.html#908" class="Function"
+      >&#8744;-intro&#8321;</a
+      ><a name="1121"
+      > </a
+      ><a name="1122" href="CurryHoward.html#852" class="Function"
+      >&#8744;-intro&#8320;</a
+      ><a name="1130"
+      >
+
+
+</a
+      ><a name="1133" href="CurryHoward.html#1133" class="Function"
+      >&#8707;</a
+      ><a name="1134"
+      > </a
+      ><a name="1135" class="Symbol"
+      >:</a
+      ><a name="1136"
+      > </a
+      ><a name="1137" class="Symbol"
+      >{</a
+      ><a name="1138" href="CurryHoward.html#1138" class="Bound"
+      >X</a
+      ><a name="1139"
+      > </a
+      ><a name="1140" class="Symbol"
+      >:</a
+      ><a name="1141"
+      > </a
+      ><a name="1142" class="PrimitiveType"
+      >Set</a
+      ><a name="1145" class="Symbol"
+      >}</a
+      ><a name="1146"
+      > </a
+      ><a name="1147" class="Symbol"
+      >&#8594;</a
+      ><a name="1148"
+      > </a
+      ><a name="1149" class="Symbol"
+      >(</a
+      ><a name="1150" href="CurryHoward.html#1150" class="Bound"
+      >A</a
+      ><a name="1151"
+      > </a
+      ><a name="1152" class="Symbol"
+      >:</a
+      ><a name="1153"
+      > </a
+      ><a name="1154" href="CurryHoward.html#1138" class="Bound"
+      >X</a
+      ><a name="1155"
+      > </a
+      ><a name="1156" class="Symbol"
+      >&#8594;</a
+      ><a name="1157"
+      > </a
+      ><a name="1158" href="CurryHoward.html#259" class="Function"
+      >Prp</a
+      ><a name="1161" class="Symbol"
+      >)</a
+      ><a name="1162"
+      > </a
+      ><a name="1163" class="Symbol"
+      >&#8594;</a
+      ><a name="1164"
+      > </a
+      ><a name="1165" href="CurryHoward.html#259" class="Function"
+      >Prp</a
+      ><a name="1168"
+      >
+</a
+      ><a name="1170" href="CurryHoward.html#1133" class="Function"
+      >&#8707;</a
+      ><a name="1171"
+      > </a
+      ><a name="1172" class="Symbol"
+      >=</a
+      ><a name="1173"
+      > </a
+      ><a name="1174" href="SetsAndFunctions.html#804" class="Record"
+      >&#931;</a
+      ><a name="1175"
+      >
+
+
+</a
+      ><a name="1178" href="CurryHoward.html#1178" class="Function"
+      >&#8707;-intro</a
+      ><a name="1185"
+      > </a
+      ><a name="1186" class="Symbol"
+      >:</a
+      ><a name="1187"
+      > </a
+      ><a name="1188" class="Symbol"
+      >{</a
+      ><a name="1189" href="CurryHoward.html#1189" class="Bound"
+      >X</a
+      ><a name="1190"
+      > </a
+      ><a name="1191" class="Symbol"
+      >:</a
+      ><a name="1192"
+      > </a
+      ><a name="1193" class="PrimitiveType"
+      >Set</a
+      ><a name="1196" class="Symbol"
+      >}</a
+      ><a name="1197"
+      > </a
+      ><a name="1198" class="Symbol"
+      >&#8594;</a
+      ><a name="1199"
+      > </a
+      ><a name="1200" class="Symbol"
+      >{</a
+      ><a name="1201" href="CurryHoward.html#1201" class="Bound"
+      >A</a
+      ><a name="1202"
+      > </a
+      ><a name="1203" class="Symbol"
+      >:</a
+      ><a name="1204"
+      > </a
+      ><a name="1205" href="CurryHoward.html#1189" class="Bound"
+      >X</a
+      ><a name="1206"
+      > </a
+      ><a name="1207" class="Symbol"
+      >&#8594;</a
+      ><a name="1208"
+      > </a
+      ><a name="1209" href="CurryHoward.html#259" class="Function"
+      >Prp</a
+      ><a name="1212" class="Symbol"
+      >}</a
+      ><a name="1213"
+      > </a
+      ><a name="1214" class="Symbol"
+      >&#8594;</a
+      ><a name="1215"
+      >
+
+  </a
+      ><a name="1220" class="Symbol"
+      >(</a
+      ><a name="1221" href="CurryHoward.html#1221" class="Bound"
+      >x&#8320;</a
+      ><a name="1223"
+      > </a
+      ><a name="1224" class="Symbol"
+      >:</a
+      ><a name="1225"
+      > </a
+      ><a name="1226" href="CurryHoward.html#1189" class="Bound"
+      >X</a
+      ><a name="1227" class="Symbol"
+      >)</a
+      ><a name="1228"
+      > </a
+      ><a name="1229" class="Symbol"
+      >&#8594;</a
+      ><a name="1230"
+      > </a
+      ><a name="1231" href="CurryHoward.html#1201" class="Bound"
+      >A</a
+      ><a name="1232"
+      > </a
+      ><a name="1233" href="CurryHoward.html#1221" class="Bound"
+      >x&#8320;</a
+      ><a name="1235"
+      > </a
+      ><a name="1236" class="Symbol"
+      >&#8594;</a
+      ><a name="1237"
+      > </a
+      ><a name="1238" href="CurryHoward.html#1133" class="Function"
+      >&#8707;</a
+      ><a name="1239"
+      > </a
+      ><a name="1240" class="Symbol"
+      >\(</a
+      ><a name="1242" href="CurryHoward.html#1242" class="Bound"
+      >x</a
+      ><a name="1243"
+      > </a
+      ><a name="1244" class="Symbol"
+      >:</a
+      ><a name="1245"
+      > </a
+      ><a name="1246" href="CurryHoward.html#1189" class="Bound"
+      >X</a
+      ><a name="1247" class="Symbol"
+      >)</a
+      ><a name="1248"
+      > </a
+      ><a name="1249" class="Symbol"
+      >&#8594;</a
+      ><a name="1250"
+      > </a
+      ><a name="1251" href="CurryHoward.html#1201" class="Bound"
+      >A</a
+      ><a name="1252"
+      > </a
+      ><a name="1253" href="CurryHoward.html#1242" class="Bound"
+      >x</a
+      ><a name="1254"
+      >
+
+</a
+      ><a name="1256" href="CurryHoward.html#1178" class="Function"
+      >&#8707;-intro</a
+      ><a name="1263"
+      > </a
+      ><a name="1264" href="CurryHoward.html#1264" class="Bound"
+      >x</a
+      ><a name="1265"
+      > </a
+      ><a name="1266" href="CurryHoward.html#1266" class="Bound"
+      >a</a
+      ><a name="1267"
+      > </a
+      ><a name="1268" class="Symbol"
+      >=</a
+      ><a name="1269"
+      > </a
+      ><a name="1270" class="Symbol"
+      >(</a
+      ><a name="1271" href="CurryHoward.html#1264" class="Bound"
+      >x</a
+      ><a name="1272"
+      > </a
+      ><a name="1273" href="SetsAndFunctions.html#856" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="1274"
+      > </a
+      ><a name="1275" href="CurryHoward.html#1266" class="Bound"
+      >a</a
+      ><a name="1276" class="Symbol"
+      >)</a
+      ><a name="1277"
+      >
+
+
+</a
+      ><a name="1280" href="CurryHoward.html#1280" class="Function"
+      >&#8707;-witness</a
+      ><a name="1289"
+      > </a
+      ><a name="1290" class="Symbol"
+      >:</a
+      ><a name="1291"
+      > </a
+      ><a name="1292" class="Symbol"
+      >{</a
+      ><a name="1293" href="CurryHoward.html#1293" class="Bound"
+      >X</a
+      ><a name="1294"
+      > </a
+      ><a name="1295" class="Symbol"
+      >:</a
+      ><a name="1296"
+      > </a
+      ><a name="1297" class="PrimitiveType"
+      >Set</a
+      ><a name="1300" class="Symbol"
+      >}</a
+      ><a name="1301"
+      > </a
+      ><a name="1302" class="Symbol"
+      >{</a
+      ><a name="1303" href="CurryHoward.html#1303" class="Bound"
+      >A</a
+      ><a name="1304"
+      > </a
+      ><a name="1305" class="Symbol"
+      >:</a
+      ><a name="1306"
+      > </a
+      ><a name="1307" href="CurryHoward.html#1293" class="Bound"
+      >X</a
+      ><a name="1308"
+      > </a
+      ><a name="1309" class="Symbol"
+      >&#8594;</a
+      ><a name="1310"
+      > </a
+      ><a name="1311" href="CurryHoward.html#259" class="Function"
+      >Prp</a
+      ><a name="1314" class="Symbol"
+      >}</a
+      ><a name="1315"
+      > </a
+      ><a name="1316" class="Symbol"
+      >&#8594;</a
+      ><a name="1317"
+      >
+
+   </a
+      ><a name="1323" class="Symbol"
+      >(</a
+      ><a name="1324" href="CurryHoward.html#1133" class="Function"
+      >&#8707;</a
+      ><a name="1325"
+      > </a
+      ><a name="1326" class="Symbol"
+      >\(</a
+      ><a name="1328" href="CurryHoward.html#1328" class="Bound"
+      >x</a
+      ><a name="1329"
+      > </a
+      ><a name="1330" class="Symbol"
+      >:</a
+      ><a name="1331"
+      > </a
+      ><a name="1332" href="CurryHoward.html#1293" class="Bound"
+      >X</a
+      ><a name="1333" class="Symbol"
+      >)</a
+      ><a name="1334"
+      > </a
+      ><a name="1335" class="Symbol"
+      >&#8594;</a
+      ><a name="1336"
+      > </a
+      ><a name="1337" href="CurryHoward.html#1303" class="Bound"
+      >A</a
+      ><a name="1338"
+      > </a
+      ><a name="1339" href="CurryHoward.html#1328" class="Bound"
+      >x</a
+      ><a name="1340" class="Symbol"
+      >)</a
+      ><a name="1341"
+      > </a
+      ><a name="1342" class="Symbol"
+      >&#8594;</a
+      ><a name="1343"
+      > </a
+      ><a name="1344" href="CurryHoward.html#1293" class="Bound"
+      >X</a
+      ><a name="1345"
+      >
+
+</a
+      ><a name="1347" href="CurryHoward.html#1280" class="Function"
+      >&#8707;-witness</a
+      ><a name="1356"
+      > </a
+      ><a name="1357" class="Symbol"
+      >=</a
+      ><a name="1358"
+      > </a
+      ><a name="1359" href="SetsAndFunctions.html#893" class="Function"
+      >&#960;&#8320;</a
+      ><a name="1361"
+      >
+
+
+</a
+      ><a name="1364" href="CurryHoward.html#1364" class="Function"
+      >&#8707;-elim</a
+      ><a name="1370"
+      > </a
+      ><a name="1371" class="Symbol"
+      >:</a
+      ><a name="1372"
+      > </a
+      ><a name="1373" class="Symbol"
+      >{</a
+      ><a name="1374" href="CurryHoward.html#1374" class="Bound"
+      >X</a
+      ><a name="1375"
+      > </a
+      ><a name="1376" class="Symbol"
+      >:</a
+      ><a name="1377"
+      > </a
+      ><a name="1378" class="PrimitiveType"
+      >Set</a
+      ><a name="1381" class="Symbol"
+      >}</a
+      ><a name="1382"
+      > </a
+      ><a name="1383" class="Symbol"
+      >{</a
+      ><a name="1384" href="CurryHoward.html#1384" class="Bound"
+      >A</a
+      ><a name="1385"
+      > </a
+      ><a name="1386" class="Symbol"
+      >:</a
+      ><a name="1387"
+      > </a
+      ><a name="1388" href="CurryHoward.html#1374" class="Bound"
+      >X</a
+      ><a name="1389"
+      > </a
+      ><a name="1390" class="Symbol"
+      >&#8594;</a
+      ><a name="1391"
+      > </a
+      ><a name="1392" href="CurryHoward.html#259" class="Function"
+      >Prp</a
+      ><a name="1395" class="Symbol"
+      >}</a
+      ><a name="1396"
+      > </a
+      ><a name="1397" class="Symbol"
+      >&#8594;</a
+      ><a name="1398"
+      >
+
+   </a
+      ><a name="1404" class="Symbol"
+      >(</a
+      ><a name="1405" href="CurryHoward.html#1405" class="Bound"
+      >proof</a
+      ><a name="1410"
+      > </a
+      ><a name="1411" class="Symbol"
+      >:</a
+      ><a name="1412"
+      > </a
+      ><a name="1413" href="CurryHoward.html#1133" class="Function"
+      >&#8707;</a
+      ><a name="1414"
+      > </a
+      ><a name="1415" class="Symbol"
+      >\(</a
+      ><a name="1417" href="CurryHoward.html#1417" class="Bound"
+      >x</a
+      ><a name="1418"
+      > </a
+      ><a name="1419" class="Symbol"
+      >:</a
+      ><a name="1420"
+      > </a
+      ><a name="1421" href="CurryHoward.html#1374" class="Bound"
+      >X</a
+      ><a name="1422" class="Symbol"
+      >)</a
+      ><a name="1423"
+      > </a
+      ><a name="1424" class="Symbol"
+      >&#8594;</a
+      ><a name="1425"
+      > </a
+      ><a name="1426" href="CurryHoward.html#1384" class="Bound"
+      >A</a
+      ><a name="1427"
+      > </a
+      ><a name="1428" href="CurryHoward.html#1417" class="Bound"
+      >x</a
+      ><a name="1429" class="Symbol"
+      >)</a
+      ><a name="1430"
+      > </a
+      ><a name="1431" class="Symbol"
+      >&#8594;</a
+      ><a name="1432"
+      > </a
+      ><a name="1433" href="CurryHoward.html#1384" class="Bound"
+      >A</a
+      ><a name="1434"
+      > </a
+      ><a name="1435" class="Symbol"
+      >(</a
+      ><a name="1436" href="CurryHoward.html#1280" class="Function"
+      >&#8707;-witness</a
+      ><a name="1445"
+      > </a
+      ><a name="1446" href="CurryHoward.html#1405" class="Bound"
+      >proof</a
+      ><a name="1451" class="Symbol"
+      >)</a
+      ><a name="1452"
+      >
+
+</a
+      ><a name="1454" href="CurryHoward.html#1364" class="Function"
+      >&#8707;-elim</a
+      ><a name="1460"
+      > </a
+      ><a name="1461" class="Symbol"
+      >=</a
+      ><a name="1462"
+      > </a
+      ><a name="1463" href="SetsAndFunctions.html#968" class="Function"
+      >&#960;&#8321;</a
+      ><a name="1465"
+      >
+
+
+</a
+      ><a name="1468" class="Keyword"
+      >infixr</a
+      ><a name="1474"
+      > </a
+      ><a name="1475" class="Number"
+      >1</a
+      ><a name="1476"
+      > _&#8596;_
+
+</a
+      ><a name="1482" href="CurryHoward.html#1482" class="Function Operator"
+      >_&#8596;_</a
+      ><a name="1485"
+      > </a
+      ><a name="1486" class="Symbol"
+      >:</a
+      ><a name="1487"
+      > </a
+      ><a name="1488" href="CurryHoward.html#259" class="Function"
+      >Prp</a
+      ><a name="1491"
+      > </a
+      ><a name="1492" class="Symbol"
+      >&#8594;</a
+      ><a name="1493"
+      > </a
+      ><a name="1494" href="CurryHoward.html#259" class="Function"
+      >Prp</a
+      ><a name="1497"
+      > </a
+      ><a name="1498" class="Symbol"
+      >&#8594;</a
+      ><a name="1499"
+      > </a
+      ><a name="1500" href="CurryHoward.html#259" class="Function"
+      >Prp</a
+      ><a name="1503"
+      >
+</a
+      ><a name="1504" href="CurryHoward.html#1504" class="Bound"
+      >A</a
+      ><a name="1505"
+      > </a
+      ><a name="1506" href="CurryHoward.html#1482" class="Function Operator"
+      >&#8596;</a
+      ><a name="1507"
+      > </a
+      ><a name="1508" href="CurryHoward.html#1508" class="Bound"
+      >B</a
+      ><a name="1509"
+      > </a
+      ><a name="1510" class="Symbol"
+      >=</a
+      ><a name="1511"
+      > </a
+      ><a name="1512" class="Symbol"
+      >(</a
+      ><a name="1513" href="CurryHoward.html#1504" class="Bound"
+      >A</a
+      ><a name="1514"
+      > </a
+      ><a name="1515" class="Symbol"
+      >&#8594;</a
+      ><a name="1516"
+      > </a
+      ><a name="1517" href="CurryHoward.html#1508" class="Bound"
+      >B</a
+      ><a name="1518" class="Symbol"
+      >)</a
+      ><a name="1519"
+      > </a
+      ><a name="1520" href="CurryHoward.html#601" class="Function Operator"
+      >&#8743;</a
+      ><a name="1521"
+      > </a
+      ><a name="1522" class="Symbol"
+      >(</a
+      ><a name="1523" href="CurryHoward.html#1508" class="Bound"
+      >B</a
+      ><a name="1524"
+      > </a
+      ><a name="1525" class="Symbol"
+      >&#8594;</a
+      ><a name="1526"
+      > </a
+      ><a name="1527" href="CurryHoward.html#1504" class="Bound"
+      >A</a
+      ><a name="1528" class="Symbol"
+      >)</a
+      ><a name="1529"
+      >
+
+\end{code}
+
+</a
+      ><a name="1543" class="Comment"
+      >A set X is inhabited if it has an element, if and only if,</a
+      ><a name="1601"
+      >
+</a
+      ><a name="1602" class="Comment"
+      >when the set X, considered as a proposition, holds. So the</a
+      ><a name="1660"
+      >
+</a
+      ><a name="1661" class="Comment"
+      >statement that X is inhabited is X itself! In fact, notice</a
+      ><a name="1719"
+      >
+</a
+      ><a name="1720" class="Comment"
+      >that X is isomorphic to &#8707; \(x : X) &#8594; &#8868;, where &#8868; is the unit</a
+      ><a name="1779"
+      >
+</a
+      ><a name="1780" class="Comment"
+      >proposition (assuming extensionality).</a
+      ><a name="1818"
+      >
+
+\begin{code}
+
+</a
+      ><a name="1834" href="CurryHoward.html#1834" class="Function"
+      >inhabited</a
+      ><a name="1843"
+      > </a
+      ><a name="1844" class="Symbol"
+      >:</a
+      ><a name="1845"
+      > </a
+      ><a name="1846" class="PrimitiveType"
+      >Set</a
+      ><a name="1849"
+      > </a
+      ><a name="1850" class="Symbol"
+      >&#8594;</a
+      ><a name="1851"
+      > </a
+      ><a name="1852" href="CurryHoward.html#259" class="Function"
+      >Prp</a
+      ><a name="1855"
+      >
+</a
+      ><a name="1856" href="CurryHoward.html#1834" class="Function"
+      >inhabited</a
+      ><a name="1865"
+      > </a
+      ><a name="1866" href="CurryHoward.html#1866" class="Bound"
+      >X</a
+      ><a name="1867"
+      > </a
+      ><a name="1868" class="Symbol"
+      >=</a
+      ><a name="1869"
+      > </a
+      ><a name="1870" href="CurryHoward.html#1866" class="Bound"
+      >X</a
+      ><a name="1871"
+      >
+
+\end{code}
+
+</a
+      ><a name="1885" class="Comment"
+      >Some basic logical facts. </a
+      ><a name="1911"
+      >
+
+\begin{code}
+
+</a
+      ><a name="1927" href="CurryHoward.html#1927" class="Function"
+      >contra-positive</a
+      ><a name="1942"
+      > </a
+      ><a name="1943" class="Symbol"
+      >:</a
+      ><a name="1944"
+      > </a
+      ><a name="1945" class="Symbol"
+      >{</a
+      ><a name="1946" href="CurryHoward.html#1946" class="Bound"
+      >A</a
+      ><a name="1947"
+      > </a
+      ><a name="1948" href="CurryHoward.html#1948" class="Bound"
+      >B</a
+      ><a name="1949"
+      > </a
+      ><a name="1950" class="Symbol"
+      >:</a
+      ><a name="1951"
+      > </a
+      ><a name="1952" href="CurryHoward.html#259" class="Function"
+      >Prp</a
+      ><a name="1955" class="Symbol"
+      >}</a
+      ><a name="1956"
+      > </a
+      ><a name="1957" class="Symbol"
+      >&#8594;</a
+      ><a name="1958"
+      > </a
+      ><a name="1959" class="Symbol"
+      >(</a
+      ><a name="1960" href="CurryHoward.html#1946" class="Bound"
+      >A</a
+      ><a name="1961"
+      > </a
+      ><a name="1962" class="Symbol"
+      >&#8594;</a
+      ><a name="1963"
+      > </a
+      ><a name="1964" href="CurryHoward.html#1948" class="Bound"
+      >B</a
+      ><a name="1965" class="Symbol"
+      >)</a
+      ><a name="1966"
+      > </a
+      ><a name="1967" class="Symbol"
+      >&#8594;</a
+      ><a name="1968"
+      > </a
+      ><a name="1969" href="CurryHoward.html#571" class="Function Operator"
+      >&#172;</a
+      ><a name="1970"
+      > </a
+      ><a name="1971" href="CurryHoward.html#1948" class="Bound"
+      >B</a
+      ><a name="1972"
+      > </a
+      ><a name="1973" class="Symbol"
+      >&#8594;</a
+      ><a name="1974"
+      > </a
+      ><a name="1975" href="CurryHoward.html#571" class="Function Operator"
+      >&#172;</a
+      ><a name="1976"
+      > </a
+      ><a name="1977" href="CurryHoward.html#1946" class="Bound"
+      >A</a
+      ><a name="1978"
+      >
+</a
+      ><a name="1979" href="CurryHoward.html#1927" class="Function"
+      >contra-positive</a
+      ><a name="1994"
+      > </a
+      ><a name="1995" class="Symbol"
+      >=</a
+      ><a name="1996"
+      > </a
+      ><a name="1997" href="SetsAndFunctions.html#2510" class="Function"
+      >contra-variant</a
+      ><a name="2011"
+      >
+
+\end{code}
+
+</a
+      ><a name="2025" class="Comment"
+      >Double-negation monad:</a
+      ><a name="2047"
+      >
+
+\begin{code}
+
+</a
+      ><a name="2063" href="CurryHoward.html#2063" class="Function"
+      >&#172;&#172;</a
+      ><a name="2065"
+      > </a
+      ><a name="2066" class="Symbol"
+      >:</a
+      ><a name="2067"
+      > </a
+      ><a name="2068" href="CurryHoward.html#259" class="Function"
+      >Prp</a
+      ><a name="2071"
+      > </a
+      ><a name="2072" class="Symbol"
+      >&#8594;</a
+      ><a name="2073"
+      > </a
+      ><a name="2074" href="CurryHoward.html#259" class="Function"
+      >Prp</a
+      ><a name="2077"
+      >
+</a
+      ><a name="2078" href="CurryHoward.html#2063" class="Function"
+      >&#172;&#172;</a
+      ><a name="2080"
+      > </a
+      ><a name="2081" href="CurryHoward.html#2081" class="Bound"
+      >A</a
+      ><a name="2082"
+      > </a
+      ><a name="2083" class="Symbol"
+      >=</a
+      ><a name="2084"
+      > </a
+      ><a name="2085" href="CurryHoward.html#571" class="Function Operator"
+      >&#172;</a
+      ><a name="2086" class="Symbol"
+      >(</a
+      ><a name="2087" href="CurryHoward.html#571" class="Function Operator"
+      >&#172;</a
+      ><a name="2088"
+      > </a
+      ><a name="2089" href="CurryHoward.html#2081" class="Bound"
+      >A</a
+      ><a name="2090" class="Symbol"
+      >)</a
+      ><a name="2091"
+      >
+
+</a
+      ><a name="2093" href="CurryHoward.html#2093" class="Function"
+      >&#172;&#172;-functor</a
+      ><a name="2103"
+      > </a
+      ><a name="2104" class="Symbol"
+      >:</a
+      ><a name="2105"
+      > </a
+      ><a name="2106" class="Symbol"
+      >{</a
+      ><a name="2107" href="CurryHoward.html#2107" class="Bound"
+      >A</a
+      ><a name="2108"
+      > </a
+      ><a name="2109" href="CurryHoward.html#2109" class="Bound"
+      >B</a
+      ><a name="2110"
+      > </a
+      ><a name="2111" class="Symbol"
+      >:</a
+      ><a name="2112"
+      > </a
+      ><a name="2113" href="CurryHoward.html#259" class="Function"
+      >Prp</a
+      ><a name="2116" class="Symbol"
+      >}</a
+      ><a name="2117"
+      > </a
+      ><a name="2118" class="Symbol"
+      >&#8594;</a
+      ><a name="2119"
+      > </a
+      ><a name="2120" class="Symbol"
+      >(</a
+      ><a name="2121" href="CurryHoward.html#2107" class="Bound"
+      >A</a
+      ><a name="2122"
+      > </a
+      ><a name="2123" class="Symbol"
+      >&#8594;</a
+      ><a name="2124"
+      > </a
+      ><a name="2125" href="CurryHoward.html#2109" class="Bound"
+      >B</a
+      ><a name="2126" class="Symbol"
+      >)</a
+      ><a name="2127"
+      > </a
+      ><a name="2128" class="Symbol"
+      >&#8594;</a
+      ><a name="2129"
+      > </a
+      ><a name="2130" href="CurryHoward.html#2063" class="Function"
+      >&#172;&#172;</a
+      ><a name="2132"
+      > </a
+      ><a name="2133" href="CurryHoward.html#2107" class="Bound"
+      >A</a
+      ><a name="2134"
+      > </a
+      ><a name="2135" class="Symbol"
+      >&#8594;</a
+      ><a name="2136"
+      > </a
+      ><a name="2137" href="CurryHoward.html#2063" class="Function"
+      >&#172;&#172;</a
+      ><a name="2139"
+      > </a
+      ><a name="2140" href="CurryHoward.html#2109" class="Bound"
+      >B</a
+      ><a name="2141"
+      >
+</a
+      ><a name="2142" href="CurryHoward.html#2093" class="Function"
+      >&#172;&#172;-functor</a
+      ><a name="2152"
+      > </a
+      ><a name="2153" class="Symbol"
+      >=</a
+      ><a name="2154"
+      > </a
+      ><a name="2155" href="SetsAndFunctions.html#2599" class="Function"
+      >K-functor</a
+      ><a name="2164"
+      >
+
+</a
+      ><a name="2166" href="CurryHoward.html#2166" class="Function"
+      >double-negation-intro</a
+      ><a name="2187"
+      > </a
+      ><a name="2188" class="Symbol"
+      >:</a
+      ><a name="2189"
+      > </a
+      ><a name="2190" class="Symbol"
+      >{</a
+      ><a name="2191" href="CurryHoward.html#2191" class="Bound"
+      >A</a
+      ><a name="2192"
+      > </a
+      ><a name="2193" class="Symbol"
+      >:</a
+      ><a name="2194"
+      > </a
+      ><a name="2195" href="CurryHoward.html#259" class="Function"
+      >Prp</a
+      ><a name="2198" class="Symbol"
+      >}</a
+      ><a name="2199"
+      > </a
+      ><a name="2200" class="Symbol"
+      >&#8594;</a
+      ><a name="2201"
+      > </a
+      ><a name="2202" href="CurryHoward.html#2191" class="Bound"
+      >A</a
+      ><a name="2203"
+      > </a
+      ><a name="2204" class="Symbol"
+      >&#8594;</a
+      ><a name="2205"
+      > </a
+      ><a name="2206" href="CurryHoward.html#2063" class="Function"
+      >&#172;&#172;</a
+      ><a name="2208"
+      > </a
+      ><a name="2209" href="CurryHoward.html#2191" class="Bound"
+      >A</a
+      ><a name="2210"
+      >
+</a
+      ><a name="2211" href="CurryHoward.html#2166" class="Function"
+      >double-negation-intro</a
+      ><a name="2232"
+      > </a
+      ><a name="2233" class="Symbol"
+      >=</a
+      ><a name="2234"
+      > </a
+      ><a name="2235" href="SetsAndFunctions.html#2698" class="Function"
+      >&#951;K</a
+      ><a name="2237"
+      >
+
+
+</a
+      ><a name="2240" href="CurryHoward.html#2240" class="Function"
+      >three-negations-imply-one</a
+      ><a name="2265"
+      > </a
+      ><a name="2266" class="Symbol"
+      >:</a
+      ><a name="2267"
+      > </a
+      ><a name="2268" class="Symbol"
+      >{</a
+      ><a name="2269" href="CurryHoward.html#2269" class="Bound"
+      >A</a
+      ><a name="2270"
+      > </a
+      ><a name="2271" class="Symbol"
+      >:</a
+      ><a name="2272"
+      > </a
+      ><a name="2273" href="CurryHoward.html#259" class="Function"
+      >Prp</a
+      ><a name="2276" class="Symbol"
+      >}</a
+      ><a name="2277"
+      > </a
+      ><a name="2278" class="Symbol"
+      >&#8594;</a
+      ><a name="2279"
+      > </a
+      ><a name="2280" href="CurryHoward.html#571" class="Function Operator"
+      >&#172;</a
+      ><a name="2281" class="Symbol"
+      >(</a
+      ><a name="2282" href="CurryHoward.html#2063" class="Function"
+      >&#172;&#172;</a
+      ><a name="2284"
+      > </a
+      ><a name="2285" href="CurryHoward.html#2269" class="Bound"
+      >A</a
+      ><a name="2286" class="Symbol"
+      >)</a
+      ><a name="2287"
+      > </a
+      ><a name="2288" class="Symbol"
+      >&#8594;</a
+      ><a name="2289"
+      > </a
+      ><a name="2290" href="CurryHoward.html#571" class="Function Operator"
+      >&#172;</a
+      ><a name="2291"
+      > </a
+      ><a name="2292" href="CurryHoward.html#2269" class="Bound"
+      >A</a
+      ><a name="2293"
+      >
+</a
+      ><a name="2294" href="CurryHoward.html#2240" class="Function"
+      >three-negations-imply-one</a
+      ><a name="2319"
+      > </a
+      ><a name="2320" class="Symbol"
+      >=</a
+      ><a name="2321"
+      >
+  </a
+      ><a name="2325" href="CurryHoward.html#1927" class="Function"
+      >contra-positive</a
+      ><a name="2340"
+      > </a
+      ><a name="2341" href="CurryHoward.html#2166" class="Function"
+      >double-negation-intro</a
+      ><a name="2362"
+      >
+
+
+</a
+      ><a name="2365" href="CurryHoward.html#2365" class="Function"
+      >not-exists-implies-forall-not</a
+      ><a name="2394"
+      > </a
+      ><a name="2395" class="Symbol"
+      >:</a
+      ><a name="2396"
+      > </a
+      ><a name="2397" class="Symbol"
+      >{</a
+      ><a name="2398" href="CurryHoward.html#2398" class="Bound"
+      >X</a
+      ><a name="2399"
+      > </a
+      ><a name="2400" class="Symbol"
+      >:</a
+      ><a name="2401"
+      > </a
+      ><a name="2402" class="PrimitiveType"
+      >Set</a
+      ><a name="2405" class="Symbol"
+      >}</a
+      ><a name="2406"
+      > </a
+      ><a name="2407" class="Symbol"
+      >&#8594;</a
+      ><a name="2408"
+      > </a
+      ><a name="2409" class="Symbol"
+      >{</a
+      ><a name="2410" href="CurryHoward.html#2410" class="Bound"
+      >A</a
+      ><a name="2411"
+      > </a
+      ><a name="2412" class="Symbol"
+      >:</a
+      ><a name="2413"
+      > </a
+      ><a name="2414" href="CurryHoward.html#2398" class="Bound"
+      >X</a
+      ><a name="2415"
+      > </a
+      ><a name="2416" class="Symbol"
+      >&#8594;</a
+      ><a name="2417"
+      > </a
+      ><a name="2418" href="CurryHoward.html#259" class="Function"
+      >Prp</a
+      ><a name="2421" class="Symbol"
+      >}</a
+      ><a name="2422"
+      > </a
+      ><a name="2423" class="Symbol"
+      >&#8594;</a
+      ><a name="2424"
+      >
+
+ </a
+      ><a name="2428" href="CurryHoward.html#571" class="Function Operator"
+      >&#172;</a
+      ><a name="2429" class="Symbol"
+      >(</a
+      ><a name="2430" href="CurryHoward.html#1133" class="Function"
+      >&#8707;</a
+      ><a name="2431"
+      > </a
+      ><a name="2432" class="Symbol"
+      >\(</a
+      ><a name="2434" href="CurryHoward.html#2434" class="Bound"
+      >x</a
+      ><a name="2435"
+      > </a
+      ><a name="2436" class="Symbol"
+      >:</a
+      ><a name="2437"
+      > </a
+      ><a name="2438" href="CurryHoward.html#2398" class="Bound"
+      >X</a
+      ><a name="2439" class="Symbol"
+      >)</a
+      ><a name="2440"
+      > </a
+      ><a name="2441" class="Symbol"
+      >&#8594;</a
+      ><a name="2442"
+      > </a
+      ><a name="2443" href="CurryHoward.html#2410" class="Bound"
+      >A</a
+      ><a name="2444"
+      > </a
+      ><a name="2445" href="CurryHoward.html#2434" class="Bound"
+      >x</a
+      ><a name="2446" class="Symbol"
+      >)</a
+      ><a name="2447"
+      > </a
+      ><a name="2448" class="Symbol"
+      >&#8594;</a
+      ><a name="2449"
+      > </a
+      ><a name="2450" class="Symbol"
+      >&#8704;(</a
+      ><a name="2452" href="CurryHoward.html#2452" class="Bound"
+      >x</a
+      ><a name="2453"
+      > </a
+      ><a name="2454" class="Symbol"
+      >:</a
+      ><a name="2455"
+      > </a
+      ><a name="2456" href="CurryHoward.html#2398" class="Bound"
+      >X</a
+      ><a name="2457" class="Symbol"
+      >)</a
+      ><a name="2458"
+      > </a
+      ><a name="2459" class="Symbol"
+      >&#8594;</a
+      ><a name="2460"
+      > </a
+      ><a name="2461" href="CurryHoward.html#571" class="Function Operator"
+      >&#172;</a
+      ><a name="2462" class="Symbol"
+      >(</a
+      ><a name="2463" href="CurryHoward.html#2410" class="Bound"
+      >A</a
+      ><a name="2464"
+      > </a
+      ><a name="2465" href="CurryHoward.html#2452" class="Bound"
+      >x</a
+      ><a name="2466" class="Symbol"
+      >)</a
+      ><a name="2467"
+      >
+
+</a
+      ><a name="2469" href="CurryHoward.html#2365" class="Function"
+      >not-exists-implies-forall-not</a
+      ><a name="2498"
+      > </a
+      ><a name="2499" class="Symbol"
+      >=</a
+      ><a name="2500"
+      > </a
+      ><a name="2501" href="SetsAndFunctions.html#1361" class="Function"
+      >curry</a
+      ><a name="2506"
+      >
+
+
+</a
+      ><a name="2509" href="CurryHoward.html#2509" class="Function"
+      >forall-not-implies-not-exists</a
+      ><a name="2538"
+      > </a
+      ><a name="2539" class="Symbol"
+      >:</a
+      ><a name="2540"
+      > </a
+      ><a name="2541" class="Symbol"
+      >{</a
+      ><a name="2542" href="CurryHoward.html#2542" class="Bound"
+      >X</a
+      ><a name="2543"
+      > </a
+      ><a name="2544" class="Symbol"
+      >:</a
+      ><a name="2545"
+      > </a
+      ><a name="2546" class="PrimitiveType"
+      >Set</a
+      ><a name="2549" class="Symbol"
+      >}</a
+      ><a name="2550"
+      > </a
+      ><a name="2551" class="Symbol"
+      >&#8594;</a
+      ><a name="2552"
+      > </a
+      ><a name="2553" class="Symbol"
+      >{</a
+      ><a name="2554" href="CurryHoward.html#2554" class="Bound"
+      >A</a
+      ><a name="2555"
+      > </a
+      ><a name="2556" class="Symbol"
+      >:</a
+      ><a name="2557"
+      > </a
+      ><a name="2558" href="CurryHoward.html#2542" class="Bound"
+      >X</a
+      ><a name="2559"
+      > </a
+      ><a name="2560" class="Symbol"
+      >&#8594;</a
+      ><a name="2561"
+      > </a
+      ><a name="2562" href="CurryHoward.html#259" class="Function"
+      >Prp</a
+      ><a name="2565" class="Symbol"
+      >}</a
+      ><a name="2566"
+      > </a
+      ><a name="2567" class="Symbol"
+      >&#8594;</a
+      ><a name="2568"
+      >
+
+ </a
+      ><a name="2572" class="Symbol"
+      >(&#8704;(</a
+      ><a name="2575" href="CurryHoward.html#2575" class="Bound"
+      >x</a
+      ><a name="2576"
+      > </a
+      ><a name="2577" class="Symbol"
+      >:</a
+      ><a name="2578"
+      > </a
+      ><a name="2579" href="CurryHoward.html#2542" class="Bound"
+      >X</a
+      ><a name="2580" class="Symbol"
+      >)</a
+      ><a name="2581"
+      > </a
+      ><a name="2582" class="Symbol"
+      >&#8594;</a
+      ><a name="2583"
+      > </a
+      ><a name="2584" href="CurryHoward.html#571" class="Function Operator"
+      >&#172;</a
+      ><a name="2585" class="Symbol"
+      >(</a
+      ><a name="2586" href="CurryHoward.html#2554" class="Bound"
+      >A</a
+      ><a name="2587"
+      > </a
+      ><a name="2588" href="CurryHoward.html#2575" class="Bound"
+      >x</a
+      ><a name="2589" class="Symbol"
+      >))</a
+      ><a name="2591"
+      > </a
+      ><a name="2592" class="Symbol"
+      >&#8594;</a
+      ><a name="2593"
+      > </a
+      ><a name="2594" href="CurryHoward.html#571" class="Function Operator"
+      >&#172;</a
+      ><a name="2595" class="Symbol"
+      >(</a
+      ><a name="2596" href="CurryHoward.html#1133" class="Function"
+      >&#8707;</a
+      ><a name="2597"
+      > </a
+      ><a name="2598" class="Symbol"
+      >\(</a
+      ><a name="2600" href="CurryHoward.html#2600" class="Bound"
+      >x</a
+      ><a name="2601"
+      > </a
+      ><a name="2602" class="Symbol"
+      >:</a
+      ><a name="2603"
+      > </a
+      ><a name="2604" href="CurryHoward.html#2542" class="Bound"
+      >X</a
+      ><a name="2605" class="Symbol"
+      >)</a
+      ><a name="2606"
+      > </a
+      ><a name="2607" class="Symbol"
+      >&#8594;</a
+      ><a name="2608"
+      > </a
+      ><a name="2609" href="CurryHoward.html#2554" class="Bound"
+      >A</a
+      ><a name="2610"
+      > </a
+      ><a name="2611" href="CurryHoward.html#2600" class="Bound"
+      >x</a
+      ><a name="2612" class="Symbol"
+      >)</a
+      ><a name="2613"
+      >
+
+</a
+      ><a name="2615" href="CurryHoward.html#2509" class="Function"
+      >forall-not-implies-not-exists</a
+      ><a name="2644"
+      > </a
+      ><a name="2645" class="Symbol"
+      >=</a
+      ><a name="2646"
+      > </a
+      ><a name="2647" href="SetsAndFunctions.html#1243" class="Function"
+      >uncurry</a
+      ><a name="2654"
+      >
+
+\end{code}
+
+</a
+      ><a name="2668" class="Comment"
+      >Double-negation unshift:</a
+      ><a name="2692"
+      >
+
+\begin{code}
+
+</a
+      ><a name="2708" href="CurryHoward.html#2708" class="Function"
+      >DNU</a
+      ><a name="2711"
+      > </a
+      ><a name="2712" class="Symbol"
+      >:</a
+      ><a name="2713"
+      > </a
+      ><a name="2714" class="Symbol"
+      >{</a
+      ><a name="2715" href="CurryHoward.html#2715" class="Bound"
+      >X</a
+      ><a name="2716"
+      > </a
+      ><a name="2717" class="Symbol"
+      >:</a
+      ><a name="2718"
+      > </a
+      ><a name="2719" class="PrimitiveType"
+      >Set</a
+      ><a name="2722" class="Symbol"
+      >}</a
+      ><a name="2723"
+      > </a
+      ><a name="2724" class="Symbol"
+      >{</a
+      ><a name="2725" href="CurryHoward.html#2725" class="Bound"
+      >A</a
+      ><a name="2726"
+      > </a
+      ><a name="2727" class="Symbol"
+      >:</a
+      ><a name="2728"
+      > </a
+      ><a name="2729" href="CurryHoward.html#2715" class="Bound"
+      >X</a
+      ><a name="2730"
+      > </a
+      ><a name="2731" class="Symbol"
+      >&#8594;</a
+      ><a name="2732"
+      > </a
+      ><a name="2733" href="CurryHoward.html#259" class="Function"
+      >Prp</a
+      ><a name="2736" class="Symbol"
+      >}</a
+      ><a name="2737"
+      > </a
+      ><a name="2738" class="Symbol"
+      >&#8594;</a
+      ><a name="2739"
+      >
+
+ </a
+      ><a name="2742" href="CurryHoward.html#2063" class="Function"
+      >&#172;&#172;</a
+      ><a name="2744" class="Symbol"
+      >(&#8704;</a
+      ><a name="2746"
+      > </a
+      ><a name="2747" href="CurryHoward.html#2747" class="Bound"
+      >x</a
+      ><a name="2748"
+      > </a
+      ><a name="2749" class="Symbol"
+      >&#8594;</a
+      ><a name="2750"
+      > </a
+      ><a name="2751" href="CurryHoward.html#2725" class="Bound"
+      >A</a
+      ><a name="2752"
+      > </a
+      ><a name="2753" href="CurryHoward.html#2747" class="Bound"
+      >x</a
+      ><a name="2754" class="Symbol"
+      >)</a
+      ><a name="2755"
+      > </a
+      ><a name="2756" class="Symbol"
+      >&#8594;</a
+      ><a name="2757"
+      > </a
+      ><a name="2758" class="Symbol"
+      >&#8704;</a
+      ><a name="2759"
+      > </a
+      ><a name="2760" href="CurryHoward.html#2760" class="Bound"
+      >x</a
+      ><a name="2761"
+      > </a
+      ><a name="2762" class="Symbol"
+      >&#8594;</a
+      ><a name="2763"
+      > </a
+      ><a name="2764" href="CurryHoward.html#2063" class="Function"
+      >&#172;&#172;</a
+      ><a name="2766" class="Symbol"
+      >(</a
+      ><a name="2767" href="CurryHoward.html#2725" class="Bound"
+      >A</a
+      ><a name="2768"
+      > </a
+      ><a name="2769" href="CurryHoward.html#2760" class="Bound"
+      >x</a
+      ><a name="2770" class="Symbol"
+      >)</a
+      ><a name="2771"
+      >
+
+</a
+      ><a name="2773" href="CurryHoward.html#2708" class="Function"
+      >DNU</a
+      ><a name="2776"
+      > </a
+      ><a name="2777" class="Symbol"
+      >=</a
+      ><a name="2778"
+      > </a
+      ><a name="2779" href="SetsAndFunctions.html#2780" class="Function"
+      >KU</a
+      ><a name="2781"
+      >
+
+\end{code}
+
+</a
+      ><a name="2795" class="Comment"
+      >Special case, if you like:</a
+      ><a name="2821"
+      >
+
+\begin{code}
+
+</a
+      ><a name="2837" href="CurryHoward.html#2837" class="Function"
+      >dnu</a
+      ><a name="2840"
+      > </a
+      ><a name="2841" class="Symbol"
+      >:</a
+      ><a name="2842"
+      > </a
+      ><a name="2843" class="Symbol"
+      >{</a
+      ><a name="2844" href="CurryHoward.html#2844" class="Bound"
+      >A</a
+      ><a name="2845"
+      > </a
+      ><a name="2846" href="CurryHoward.html#2846" class="Bound"
+      >B</a
+      ><a name="2847"
+      > </a
+      ><a name="2848" class="Symbol"
+      >:</a
+      ><a name="2849"
+      > </a
+      ><a name="2850" href="CurryHoward.html#259" class="Function"
+      >Prp</a
+      ><a name="2853" class="Symbol"
+      >}</a
+      ><a name="2854"
+      > </a
+      ><a name="2855" class="Symbol"
+      >&#8594;</a
+      ><a name="2856"
+      > </a
+      ><a name="2857" href="CurryHoward.html#2063" class="Function"
+      >&#172;&#172;</a
+      ><a name="2859" class="Symbol"
+      >(</a
+      ><a name="2860" href="CurryHoward.html#2844" class="Bound"
+      >A</a
+      ><a name="2861"
+      > </a
+      ><a name="2862" href="CurryHoward.html#601" class="Function Operator"
+      >&#8743;</a
+      ><a name="2863"
+      > </a
+      ><a name="2864" href="CurryHoward.html#2846" class="Bound"
+      >B</a
+      ><a name="2865" class="Symbol"
+      >)</a
+      ><a name="2866"
+      > </a
+      ><a name="2867" class="Symbol"
+      >&#8594;</a
+      ><a name="2868"
+      > </a
+      ><a name="2869" href="CurryHoward.html#2063" class="Function"
+      >&#172;&#172;</a
+      ><a name="2871"
+      > </a
+      ><a name="2872" href="CurryHoward.html#2844" class="Bound"
+      >A</a
+      ><a name="2873"
+      > </a
+      ><a name="2874" href="CurryHoward.html#601" class="Function Operator"
+      >&#8743;</a
+      ><a name="2875"
+      > </a
+      ><a name="2876" href="CurryHoward.html#2063" class="Function"
+      >&#172;&#172;</a
+      ><a name="2878"
+      > </a
+      ><a name="2879" href="CurryHoward.html#2846" class="Bound"
+      >B</a
+      ><a name="2880"
+      >
+</a
+      ><a name="2881" href="CurryHoward.html#2837" class="Function"
+      >dnu</a
+      ><a name="2884"
+      > </a
+      ><a name="2885" class="Symbol"
+      >=</a
+      ><a name="2886"
+      > </a
+      ><a name="2887" href="SetsAndFunctions.html#2946" class="Function"
+      >ku</a
+      ><a name="2889"
+      >
+
+\end{code}
+</a
+      ></pre
+    ></body
+  ></html
+>

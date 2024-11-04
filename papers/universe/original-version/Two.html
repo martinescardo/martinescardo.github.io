@@ -1,0 +1,1754 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+><head
+  ><title
+    >Two</title
+    ><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"
+     /><meta http-equiv="Content-Style-Type" content="text/css"
+     /><link href="Agda.css" rel="stylesheet" type="text/css"
+     /></head
+  ><body
+  ><pre
+    ><a name="1" class="Comment"
+      >Martin Escardo 2011.</a
+      ><a name="21"
+      >
+
+\begin{code}
+
+</a
+      ><a name="37" class="Symbol"
+      >{-#</a
+      ><a name="40"
+      > </a
+      ><a name="41" class="Keyword"
+      >OPTIONS</a
+      ><a name="48"
+      > --without-K </a
+      ><a name="61" class="Symbol"
+      >#-}</a
+      ><a name="64"
+      >
+
+</a
+      ><a name="66" class="Keyword"
+      >module</a
+      ><a name="72"
+      > </a
+      ><a name="73" href="Two.html#1" class="Module"
+      >Two</a
+      ><a name="76"
+      > </a
+      ><a name="77" class="Keyword"
+      >where</a
+      ><a name="82"
+      >
+
+</a
+      ><a name="84" class="Keyword"
+      >open</a
+      ><a name="88"
+      > </a
+      ><a name="89" class="Keyword"
+      >import</a
+      ><a name="95"
+      > </a
+      ><a name="96" href="SetsAndFunctions.html#1" class="Module"
+      >SetsAndFunctions</a
+      ><a name="112"
+      >
+</a
+      ><a name="113" class="Keyword"
+      >open</a
+      ><a name="117"
+      > </a
+      ><a name="118" class="Keyword"
+      >import</a
+      ><a name="124"
+      > </a
+      ><a name="125" href="CurryHoward.html#1" class="Module"
+      >CurryHoward</a
+      ><a name="136"
+      >
+</a
+      ><a name="137" class="Keyword"
+      >open</a
+      ><a name="141"
+      > </a
+      ><a name="142" class="Keyword"
+      >import</a
+      ><a name="148"
+      > </a
+      ><a name="149" href="Equality.html#1" class="Module"
+      >Equality</a
+      ><a name="157"
+      >
+
+\end{code}
+
+</a
+      ><a name="171" class="Comment"
+      >Definition (The set &#8322; of binary numbers):</a
+      ><a name="212"
+      >
+
+\begin{code}
+
+</a
+      ><a name="228" class="Keyword"
+      >data</a
+      ><a name="232"
+      > </a
+      ><a name="233" href="Two.html#233" class="Datatype"
+      >&#8322;</a
+      ><a name="234"
+      > </a
+      ><a name="235" class="Symbol"
+      >:</a
+      ><a name="236"
+      > </a
+      ><a name="237" class="PrimitiveType"
+      >Set</a
+      ><a name="240"
+      > </a
+      ><a name="241" class="Keyword"
+      >where</a
+      ><a name="246"
+      >
+ </a
+      ><a name="248" href="Two.html#248" class="InductiveConstructor"
+      >&#8320;</a
+      ><a name="249"
+      > </a
+      ><a name="250" class="Symbol"
+      >:</a
+      ><a name="251"
+      > </a
+      ><a name="252" href="Two.html#233" class="Datatype"
+      >&#8322;</a
+      ><a name="253"
+      >
+ </a
+      ><a name="255" href="Two.html#255" class="InductiveConstructor"
+      >&#8321;</a
+      ><a name="256"
+      > </a
+      ><a name="257" class="Symbol"
+      >:</a
+      ><a name="258"
+      > </a
+      ><a name="259" href="Two.html#233" class="Datatype"
+      >&#8322;</a
+      ><a name="260"
+      >
+
+\end{code}
+
+</a
+      ><a name="274" class="Comment"
+      >The set &#8322; satisfies UIP without assuming UIP or extensionality (and so</a
+      ><a name="344"
+      >
+</a
+      ><a name="345" class="Comment"
+      >do many other sets):</a
+      ><a name="365"
+      >
+
+\begin{code}
+
+</a
+      ><a name="381" href="Two.html#381" class="Function"
+      >&#8322;-uip-refl</a
+      ><a name="391"
+      > </a
+      ><a name="392" class="Symbol"
+      >:</a
+      ><a name="393"
+      > </a
+      ><a name="394" class="Symbol"
+      >&#8704;{</a
+      ><a name="396" href="Two.html#396" class="Bound"
+      >x</a
+      ><a name="397"
+      > </a
+      ><a name="398" class="Symbol"
+      >:</a
+      ><a name="399"
+      > </a
+      ><a name="400" href="Two.html#233" class="Datatype"
+      >&#8322;</a
+      ><a name="401" class="Symbol"
+      >}</a
+      ><a name="402"
+      > </a
+      ><a name="403" class="Symbol"
+      >&#8594;</a
+      ><a name="404"
+      > </a
+      ><a name="405" class="Symbol"
+      >&#8704;(</a
+      ><a name="407" href="Two.html#407" class="Bound"
+      >m</a
+      ><a name="408"
+      > </a
+      ><a name="409" class="Symbol"
+      >:</a
+      ><a name="410"
+      > </a
+      ><a name="411" href="Two.html#396" class="Bound"
+      >x</a
+      ><a name="412"
+      > </a
+      ><a name="413" href="Equality.html#239" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="414"
+      > </a
+      ><a name="415" href="Two.html#396" class="Bound"
+      >x</a
+      ><a name="416" class="Symbol"
+      >)</a
+      ><a name="417"
+      > </a
+      ><a name="418" class="Symbol"
+      >&#8594;</a
+      ><a name="419"
+      > </a
+      ><a name="420" href="Two.html#407" class="Bound"
+      >m</a
+      ><a name="421"
+      > </a
+      ><a name="422" href="Equality.html#239" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="423"
+      > </a
+      ><a name="424" href="Equality.html#275" class="InductiveConstructor"
+      >refl</a
+      ><a name="428"
+      >
+</a
+      ><a name="429" href="Two.html#381" class="Function"
+      >&#8322;-uip-refl</a
+      ><a name="439"
+      > </a
+      ><a name="440" class="Symbol"
+      >{</a
+      ><a name="441" href="Two.html#248" class="InductiveConstructor"
+      >&#8320;</a
+      ><a name="442" class="Symbol"
+      >}</a
+      ><a name="443"
+      > </a
+      ><a name="444" href="Equality.html#275" class="InductiveConstructor"
+      >refl</a
+      ><a name="448"
+      > </a
+      ><a name="449" class="Symbol"
+      >=</a
+      ><a name="450"
+      > </a
+      ><a name="451" href="Equality.html#275" class="InductiveConstructor"
+      >refl</a
+      ><a name="455"
+      >
+</a
+      ><a name="456" href="Two.html#381" class="Function"
+      >&#8322;-uip-refl</a
+      ><a name="466"
+      > </a
+      ><a name="467" class="Symbol"
+      >{</a
+      ><a name="468" href="Two.html#255" class="InductiveConstructor"
+      >&#8321;</a
+      ><a name="469" class="Symbol"
+      >}</a
+      ><a name="470"
+      > </a
+      ><a name="471" href="Equality.html#275" class="InductiveConstructor"
+      >refl</a
+      ><a name="475"
+      > </a
+      ><a name="476" class="Symbol"
+      >=</a
+      ><a name="477"
+      > </a
+      ><a name="478" href="Equality.html#275" class="InductiveConstructor"
+      >refl</a
+      ><a name="482"
+      >
+
+</a
+      ><a name="484" href="Two.html#484" class="Function"
+      >zero-is-not-one</a
+      ><a name="499"
+      > </a
+      ><a name="500" class="Symbol"
+      >:</a
+      ><a name="501"
+      > </a
+      ><a name="502" href="Two.html#248" class="InductiveConstructor"
+      >&#8320;</a
+      ><a name="503"
+      > </a
+      ><a name="504" href="Equality.html#300" class="Function Operator"
+      >&#8800;</a
+      ><a name="505"
+      > </a
+      ><a name="506" href="Two.html#255" class="InductiveConstructor"
+      >&#8321;</a
+      ><a name="507"
+      >
+</a
+      ><a name="508" href="Two.html#484" class="Function"
+      >zero-is-not-one</a
+      ><a name="523"
+      > </a
+      ><a name="524" class="Symbol"
+      >()</a
+      ><a name="526"
+      >
+
+</a
+      ><a name="528" href="Two.html#528" class="Function"
+      >two-induction</a
+      ><a name="541"
+      > </a
+      ><a name="542" class="Symbol"
+      >:</a
+      ><a name="543"
+      > </a
+      ><a name="544" class="Symbol"
+      >{</a
+      ><a name="545" href="Two.html#545" class="Bound"
+      >A</a
+      ><a name="546"
+      > </a
+      ><a name="547" class="Symbol"
+      >:</a
+      ><a name="548"
+      > </a
+      ><a name="549" href="Two.html#233" class="Datatype"
+      >&#8322;</a
+      ><a name="550"
+      > </a
+      ><a name="551" class="Symbol"
+      >&#8594;</a
+      ><a name="552"
+      > </a
+      ><a name="553" href="CurryHoward.html#259" class="Function"
+      >Prp</a
+      ><a name="556" class="Symbol"
+      >}</a
+      ><a name="557"
+      > </a
+      ><a name="558" class="Symbol"
+      >&#8594;</a
+      ><a name="559"
+      >
+
+ </a
+      ><a name="563" href="Two.html#545" class="Bound"
+      >A</a
+      ><a name="564"
+      > </a
+      ><a name="565" href="Two.html#248" class="InductiveConstructor"
+      >&#8320;</a
+      ><a name="566"
+      > </a
+      ><a name="567" class="Symbol"
+      >&#8594;</a
+      ><a name="568"
+      > </a
+      ><a name="569" href="Two.html#545" class="Bound"
+      >A</a
+      ><a name="570"
+      > </a
+      ><a name="571" href="Two.html#255" class="InductiveConstructor"
+      >&#8321;</a
+      ><a name="572"
+      > </a
+      ><a name="573" class="Symbol"
+      >&#8594;</a
+      ><a name="574"
+      > </a
+      ><a name="575" class="Symbol"
+      >&#8704;(</a
+      ><a name="577" href="Two.html#577" class="Bound"
+      >x</a
+      ><a name="578"
+      > </a
+      ><a name="579" class="Symbol"
+      >:</a
+      ><a name="580"
+      > </a
+      ><a name="581" href="Two.html#233" class="Datatype"
+      >&#8322;</a
+      ><a name="582" class="Symbol"
+      >)</a
+      ><a name="583"
+      > </a
+      ><a name="584" class="Symbol"
+      >&#8594;</a
+      ><a name="585"
+      > </a
+      ><a name="586" href="Two.html#545" class="Bound"
+      >A</a
+      ><a name="587"
+      > </a
+      ><a name="588" href="Two.html#577" class="Bound"
+      >x</a
+      ><a name="589"
+      >
+
+</a
+      ><a name="591" href="Two.html#528" class="Function"
+      >two-induction</a
+      ><a name="604"
+      > </a
+      ><a name="605" href="Two.html#605" class="Bound"
+      >r</a
+      ><a name="606"
+      > </a
+      ><a name="607" href="Two.html#607" class="Bound"
+      >s</a
+      ><a name="608"
+      > </a
+      ><a name="609" href="Two.html#248" class="InductiveConstructor"
+      >&#8320;</a
+      ><a name="610"
+      > </a
+      ><a name="611" class="Symbol"
+      >=</a
+      ><a name="612"
+      > </a
+      ><a name="613" href="Two.html#605" class="Bound"
+      >r</a
+      ><a name="614"
+      >
+</a
+      ><a name="615" href="Two.html#528" class="Function"
+      >two-induction</a
+      ><a name="628"
+      > </a
+      ><a name="629" href="Two.html#629" class="Bound"
+      >r</a
+      ><a name="630"
+      > </a
+      ><a name="631" href="Two.html#631" class="Bound"
+      >s</a
+      ><a name="632"
+      > </a
+      ><a name="633" href="Two.html#255" class="InductiveConstructor"
+      >&#8321;</a
+      ><a name="634"
+      > </a
+      ><a name="635" class="Symbol"
+      >=</a
+      ><a name="636"
+      > </a
+      ><a name="637" href="Two.html#631" class="Bound"
+      >s</a
+      ><a name="638"
+      >
+
+
+</a
+      ><a name="641" href="Two.html#641" class="Function"
+      >two-equality-cases</a
+      ><a name="659"
+      > </a
+      ><a name="660" class="Symbol"
+      >:</a
+      ><a name="661"
+      > </a
+      ><a name="662" class="Symbol"
+      >{</a
+      ><a name="663" href="Two.html#663" class="Bound"
+      >A</a
+      ><a name="664"
+      > </a
+      ><a name="665" class="Symbol"
+      >:</a
+      ><a name="666"
+      > </a
+      ><a name="667" href="CurryHoward.html#259" class="Function"
+      >Prp</a
+      ><a name="670" class="Symbol"
+      >}</a
+      ><a name="671"
+      > </a
+      ><a name="672" class="Symbol"
+      >&#8594;</a
+      ><a name="673"
+      >
+
+ </a
+      ><a name="677" class="Symbol"
+      >&#8704;{</a
+      ><a name="679" href="Two.html#679" class="Bound"
+      >b</a
+      ><a name="680"
+      > </a
+      ><a name="681" class="Symbol"
+      >:</a
+      ><a name="682"
+      > </a
+      ><a name="683" href="Two.html#233" class="Datatype"
+      >&#8322;</a
+      ><a name="684" class="Symbol"
+      >}</a
+      ><a name="685"
+      > </a
+      ><a name="686" class="Symbol"
+      >&#8594;</a
+      ><a name="687"
+      > </a
+      ><a name="688" class="Symbol"
+      >(</a
+      ><a name="689" href="Two.html#679" class="Bound"
+      >b</a
+      ><a name="690"
+      > </a
+      ><a name="691" href="Equality.html#239" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="692"
+      > </a
+      ><a name="693" href="Two.html#248" class="InductiveConstructor"
+      >&#8320;</a
+      ><a name="694"
+      > </a
+      ><a name="695" class="Symbol"
+      >&#8594;</a
+      ><a name="696"
+      > </a
+      ><a name="697" href="Two.html#663" class="Bound"
+      >A</a
+      ><a name="698" class="Symbol"
+      >)</a
+      ><a name="699"
+      > </a
+      ><a name="700" class="Symbol"
+      >&#8594;</a
+      ><a name="701"
+      > </a
+      ><a name="702" class="Symbol"
+      >(</a
+      ><a name="703" href="Two.html#679" class="Bound"
+      >b</a
+      ><a name="704"
+      > </a
+      ><a name="705" href="Equality.html#239" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="706"
+      > </a
+      ><a name="707" href="Two.html#255" class="InductiveConstructor"
+      >&#8321;</a
+      ><a name="708"
+      > </a
+      ><a name="709" class="Symbol"
+      >&#8594;</a
+      ><a name="710"
+      > </a
+      ><a name="711" href="Two.html#663" class="Bound"
+      >A</a
+      ><a name="712" class="Symbol"
+      >)</a
+      ><a name="713"
+      > </a
+      ><a name="714" class="Symbol"
+      >&#8594;</a
+      ><a name="715"
+      > </a
+      ><a name="716" href="Two.html#663" class="Bound"
+      >A</a
+      ><a name="717"
+      >
+
+</a
+      ><a name="719" href="Two.html#641" class="Function"
+      >two-equality-cases</a
+      ><a name="737"
+      > </a
+      ><a name="738" class="Symbol"
+      >{</a
+      ><a name="739" href="Two.html#739" class="Bound"
+      >A</a
+      ><a name="740" class="Symbol"
+      >}</a
+      ><a name="741"
+      > </a
+      ><a name="742" class="Symbol"
+      >{</a
+      ><a name="743" href="Two.html#248" class="InductiveConstructor"
+      >&#8320;</a
+      ><a name="744" class="Symbol"
+      >}</a
+      ><a name="745"
+      > </a
+      ><a name="746" href="Two.html#746" class="Bound"
+      >f&#8320;</a
+      ><a name="748"
+      > </a
+      ><a name="749" href="Two.html#749" class="Bound"
+      >f&#8321;</a
+      ><a name="751"
+      > </a
+      ><a name="752" class="Symbol"
+      >=</a
+      ><a name="753"
+      > </a
+      ><a name="754" href="Two.html#746" class="Bound"
+      >f&#8320;</a
+      ><a name="756"
+      > </a
+      ><a name="757" href="Equality.html#275" class="InductiveConstructor"
+      >refl</a
+      ><a name="761"
+      >
+</a
+      ><a name="762" href="Two.html#641" class="Function"
+      >two-equality-cases</a
+      ><a name="780"
+      > </a
+      ><a name="781" class="Symbol"
+      >{</a
+      ><a name="782" href="Two.html#782" class="Bound"
+      >A</a
+      ><a name="783" class="Symbol"
+      >}</a
+      ><a name="784"
+      > </a
+      ><a name="785" class="Symbol"
+      >{</a
+      ><a name="786" href="Two.html#255" class="InductiveConstructor"
+      >&#8321;</a
+      ><a name="787" class="Symbol"
+      >}</a
+      ><a name="788"
+      > </a
+      ><a name="789" href="Two.html#789" class="Bound"
+      >f&#8320;</a
+      ><a name="791"
+      > </a
+      ><a name="792" href="Two.html#792" class="Bound"
+      >f&#8321;</a
+      ><a name="794"
+      > </a
+      ><a name="795" class="Symbol"
+      >=</a
+      ><a name="796"
+      > </a
+      ><a name="797" href="Two.html#792" class="Bound"
+      >f&#8321;</a
+      ><a name="799"
+      > </a
+      ><a name="800" href="Equality.html#275" class="InductiveConstructor"
+      >refl</a
+      ><a name="804"
+      >
+
+
+</a
+      ><a name="807" href="Two.html#807" class="Function"
+      >Lemma[b&#8801;&#8321;&#8594;b&#8800;&#8320;]</a
+      ><a name="821"
+      > </a
+      ><a name="822" class="Symbol"
+      >:</a
+      ><a name="823"
+      >
+</a
+      ><a name="826" class="Comment"
+      >--------------------------</a
+      ><a name="852"
+      >
+  </a
+      ><a name="855" class="Symbol"
+      >&#8704;{</a
+      ><a name="857" href="Two.html#857" class="Bound"
+      >b</a
+      ><a name="858"
+      > </a
+      ><a name="859" class="Symbol"
+      >:</a
+      ><a name="860"
+      > </a
+      ><a name="861" href="Two.html#233" class="Datatype"
+      >&#8322;</a
+      ><a name="862" class="Symbol"
+      >}</a
+      ><a name="863"
+      > </a
+      ><a name="864" class="Symbol"
+      >&#8594;</a
+      ><a name="865"
+      > </a
+      ><a name="866" href="Two.html#857" class="Bound"
+      >b</a
+      ><a name="867"
+      > </a
+      ><a name="868" href="Equality.html#239" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="869"
+      > </a
+      ><a name="870" href="Two.html#255" class="InductiveConstructor"
+      >&#8321;</a
+      ><a name="871"
+      > </a
+      ><a name="872" class="Symbol"
+      >&#8594;</a
+      ><a name="873"
+      > </a
+      ><a name="874" href="Two.html#857" class="Bound"
+      >b</a
+      ><a name="875"
+      > </a
+      ><a name="876" href="Equality.html#300" class="Function Operator"
+      >&#8800;</a
+      ><a name="877"
+      > </a
+      ><a name="878" href="Two.html#248" class="InductiveConstructor"
+      >&#8320;</a
+      ><a name="879"
+      >
+</a
+      ><a name="880" class="Comment"
+      >--------------------------</a
+      ><a name="906"
+      >
+</a
+      ><a name="907" href="Two.html#807" class="Function"
+      >Lemma[b&#8801;&#8321;&#8594;b&#8800;&#8320;]</a
+      ><a name="921"
+      > </a
+      ><a name="922" href="Two.html#922" class="Bound"
+      >r</a
+      ><a name="923"
+      > </a
+      ><a name="924" href="Two.html#924" class="Bound"
+      >s</a
+      ><a name="925"
+      > </a
+      ><a name="926" class="Symbol"
+      >=</a
+      ><a name="927"
+      >
+  </a
+      ><a name="931" href="Two.html#484" class="Function"
+      >zero-is-not-one</a
+      ><a name="946" class="Symbol"
+      >(</a
+      ><a name="947" href="Equality.html#1515" class="Function"
+      >Lemma[x&#8801;y&#8594;y&#8801;z&#8594;y&#8801;z]</a
+      ><a name="965"
+      > </a
+      ><a name="966" href="Two.html#924" class="Bound"
+      >s</a
+      ><a name="967"
+      > </a
+      ><a name="968" href="Two.html#922" class="Bound"
+      >r</a
+      ><a name="969" class="Symbol"
+      >)</a
+      ><a name="970"
+      >
+
+
+</a
+      ><a name="973" href="Two.html#973" class="Function"
+      >Lemma[b&#8800;&#8320;&#8594;b&#8801;&#8321;]</a
+      ><a name="987"
+      > </a
+      ><a name="988" class="Symbol"
+      >:</a
+      ><a name="989"
+      >
+
+  </a
+      ><a name="995" class="Symbol"
+      >&#8704;{</a
+      ><a name="997" href="Two.html#997" class="Bound"
+      >b</a
+      ><a name="998"
+      > </a
+      ><a name="999" class="Symbol"
+      >:</a
+      ><a name="1000"
+      > </a
+      ><a name="1001" href="Two.html#233" class="Datatype"
+      >&#8322;</a
+      ><a name="1002" class="Symbol"
+      >}</a
+      ><a name="1003"
+      > </a
+      ><a name="1004" class="Symbol"
+      >&#8594;</a
+      ><a name="1005"
+      > </a
+      ><a name="1006" href="Two.html#997" class="Bound"
+      >b</a
+      ><a name="1007"
+      > </a
+      ><a name="1008" href="Equality.html#300" class="Function Operator"
+      >&#8800;</a
+      ><a name="1009"
+      > </a
+      ><a name="1010" href="Two.html#248" class="InductiveConstructor"
+      >&#8320;</a
+      ><a name="1011"
+      > </a
+      ><a name="1012" class="Symbol"
+      >&#8594;</a
+      ><a name="1013"
+      > </a
+      ><a name="1014" href="Two.html#997" class="Bound"
+      >b</a
+      ><a name="1015"
+      > </a
+      ><a name="1016" href="Equality.html#239" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="1017"
+      > </a
+      ><a name="1018" href="Two.html#255" class="InductiveConstructor"
+      >&#8321;</a
+      ><a name="1019"
+      >
+
+</a
+      ><a name="1021" href="Two.html#973" class="Function"
+      >Lemma[b&#8800;&#8320;&#8594;b&#8801;&#8321;]</a
+      ><a name="1035"
+      > </a
+      ><a name="1036" href="Two.html#1036" class="Bound"
+      >f</a
+      ><a name="1037"
+      > </a
+      ><a name="1038" class="Symbol"
+      >=</a
+      ><a name="1039"
+      > </a
+      ><a name="1040" href="Two.html#641" class="Function"
+      >two-equality-cases</a
+      ><a name="1058"
+      > </a
+      ><a name="1059" class="Symbol"
+      >(</a
+      ><a name="1060" href="CurryHoward.html#478" class="Function"
+      >&#8869;-elim</a
+      ><a name="1066"
+      > </a
+      ><a name="1067" href="SetsAndFunctions.html#2246" class="Function Operator"
+      >&#8728;</a
+      ><a name="1068"
+      > </a
+      ><a name="1069" href="Two.html#1036" class="Bound"
+      >f</a
+      ><a name="1070" class="Symbol"
+      >)</a
+      ><a name="1071"
+      > </a
+      ><a name="1072" class="Symbol"
+      >(&#955;</a
+      ><a name="1074"
+      > </a
+      ><a name="1075" href="Two.html#1075" class="Bound"
+      >r</a
+      ><a name="1076"
+      > </a
+      ><a name="1077" class="Symbol"
+      >&#8594;</a
+      ><a name="1078"
+      > </a
+      ><a name="1079" href="Two.html#1075" class="Bound"
+      >r</a
+      ><a name="1080" class="Symbol"
+      >)</a
+      ><a name="1081"
+      >
+
+
+</a
+      ><a name="1085" href="Two.html#1085" class="Function"
+      >Lemma[b&#8800;&#8321;&#8594;b&#8801;&#8320;]</a
+      ><a name="1099"
+      > </a
+      ><a name="1100" class="Symbol"
+      >:</a
+      ><a name="1101"
+      >
+
+  </a
+      ><a name="1107" class="Symbol"
+      >&#8704;{</a
+      ><a name="1109" href="Two.html#1109" class="Bound"
+      >b</a
+      ><a name="1110"
+      > </a
+      ><a name="1111" class="Symbol"
+      >:</a
+      ><a name="1112"
+      > </a
+      ><a name="1113" href="Two.html#233" class="Datatype"
+      >&#8322;</a
+      ><a name="1114" class="Symbol"
+      >}</a
+      ><a name="1115"
+      > </a
+      ><a name="1116" class="Symbol"
+      >&#8594;</a
+      ><a name="1117"
+      > </a
+      ><a name="1118" href="Two.html#1109" class="Bound"
+      >b</a
+      ><a name="1119"
+      > </a
+      ><a name="1120" href="Equality.html#300" class="Function Operator"
+      >&#8800;</a
+      ><a name="1121"
+      > </a
+      ><a name="1122" href="Two.html#255" class="InductiveConstructor"
+      >&#8321;</a
+      ><a name="1123"
+      > </a
+      ><a name="1124" class="Symbol"
+      >&#8594;</a
+      ><a name="1125"
+      > </a
+      ><a name="1126" href="Two.html#1109" class="Bound"
+      >b</a
+      ><a name="1127"
+      > </a
+      ><a name="1128" href="Equality.html#239" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="1129"
+      > </a
+      ><a name="1130" href="Two.html#248" class="InductiveConstructor"
+      >&#8320;</a
+      ><a name="1131"
+      >
+
+</a
+      ><a name="1133" href="Two.html#1085" class="Function"
+      >Lemma[b&#8800;&#8321;&#8594;b&#8801;&#8320;]</a
+      ><a name="1147"
+      > </a
+      ><a name="1148" href="Two.html#1148" class="Bound"
+      >f</a
+      ><a name="1149"
+      > </a
+      ><a name="1150" class="Symbol"
+      >=</a
+      ><a name="1151"
+      > </a
+      ><a name="1152" href="Two.html#641" class="Function"
+      >two-equality-cases</a
+      ><a name="1170"
+      > </a
+      ><a name="1171" class="Symbol"
+      >(&#955;</a
+      ><a name="1173"
+      > </a
+      ><a name="1174" href="Two.html#1174" class="Bound"
+      >r</a
+      ><a name="1175"
+      > </a
+      ><a name="1176" class="Symbol"
+      >&#8594;</a
+      ><a name="1177"
+      > </a
+      ><a name="1178" href="Two.html#1174" class="Bound"
+      >r</a
+      ><a name="1179" class="Symbol"
+      >)</a
+      ><a name="1180"
+      > </a
+      ><a name="1181" class="Symbol"
+      >(</a
+      ><a name="1182" href="CurryHoward.html#478" class="Function"
+      >&#8869;-elim</a
+      ><a name="1188"
+      > </a
+      ><a name="1189" href="SetsAndFunctions.html#2246" class="Function Operator"
+      >&#8728;</a
+      ><a name="1190"
+      > </a
+      ><a name="1191" href="Two.html#1148" class="Bound"
+      >f</a
+      ><a name="1192" class="Symbol"
+      >)</a
+      ><a name="1193"
+      >
+
+
+</a
+      ><a name="1196" href="Two.html#1196" class="Function"
+      >Lemma[b&#8801;&#8320;&#8594;b&#8800;&#8321;]</a
+      ><a name="1210"
+      > </a
+      ><a name="1211" class="Symbol"
+      >:</a
+      ><a name="1212"
+      >
+
+  </a
+      ><a name="1218" class="Symbol"
+      >&#8704;{</a
+      ><a name="1220" href="Two.html#1220" class="Bound"
+      >b</a
+      ><a name="1221"
+      > </a
+      ><a name="1222" class="Symbol"
+      >:</a
+      ><a name="1223"
+      > </a
+      ><a name="1224" href="Two.html#233" class="Datatype"
+      >&#8322;</a
+      ><a name="1225" class="Symbol"
+      >}</a
+      ><a name="1226"
+      > </a
+      ><a name="1227" class="Symbol"
+      >&#8594;</a
+      ><a name="1228"
+      > </a
+      ><a name="1229" href="Two.html#1220" class="Bound"
+      >b</a
+      ><a name="1230"
+      > </a
+      ><a name="1231" href="Equality.html#239" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="1232"
+      > </a
+      ><a name="1233" href="Two.html#248" class="InductiveConstructor"
+      >&#8320;</a
+      ><a name="1234"
+      > </a
+      ><a name="1235" class="Symbol"
+      >&#8594;</a
+      ><a name="1236"
+      > </a
+      ><a name="1237" href="Two.html#1220" class="Bound"
+      >b</a
+      ><a name="1238"
+      > </a
+      ><a name="1239" href="Equality.html#300" class="Function Operator"
+      >&#8800;</a
+      ><a name="1240"
+      > </a
+      ><a name="1241" href="Two.html#255" class="InductiveConstructor"
+      >&#8321;</a
+      ><a name="1242"
+      >
+
+</a
+      ><a name="1244" href="Two.html#1196" class="Function"
+      >Lemma[b&#8801;&#8320;&#8594;b&#8800;&#8321;]</a
+      ><a name="1258"
+      > </a
+      ><a name="1259" href="Two.html#1259" class="Bound"
+      >r</a
+      ><a name="1260"
+      > </a
+      ><a name="1261" href="Two.html#1261" class="Bound"
+      >s</a
+      ><a name="1262"
+      > </a
+      ><a name="1263" class="Symbol"
+      >=</a
+      ><a name="1264"
+      >
+  </a
+      ><a name="1268" href="Two.html#484" class="Function"
+      >zero-is-not-one</a
+      ><a name="1283" class="Symbol"
+      >(</a
+      ><a name="1284" href="Equality.html#1515" class="Function"
+      >Lemma[x&#8801;y&#8594;y&#8801;z&#8594;y&#8801;z]</a
+      ><a name="1302"
+      > </a
+      ><a name="1303" href="Two.html#1259" class="Bound"
+      >r</a
+      ><a name="1304"
+      > </a
+      ><a name="1305" href="Two.html#1261" class="Bound"
+      >s</a
+      ><a name="1306" class="Symbol"
+      >)</a
+      ><a name="1307"
+      >
+
+
+</a
+      ><a name="1310" href="Two.html#1310" class="Function"
+      >Lemma[[a&#8801;&#8321;&#8594;b&#8801;&#8321;]&#8594;b&#8801;&#8320;&#8594;a&#8801;&#8320;]</a
+      ><a name="1334"
+      > </a
+      ><a name="1335" class="Symbol"
+      >:</a
+      ><a name="1336"
+      >
+
+  </a
+      ><a name="1341" class="Symbol"
+      >&#8704;{</a
+      ><a name="1343" href="Two.html#1343" class="Bound"
+      >a</a
+      ><a name="1344"
+      > </a
+      ><a name="1345" href="Two.html#1345" class="Bound"
+      >b</a
+      ><a name="1346"
+      > </a
+      ><a name="1347" class="Symbol"
+      >:</a
+      ><a name="1348"
+      > </a
+      ><a name="1349" href="Two.html#233" class="Datatype"
+      >&#8322;</a
+      ><a name="1350" class="Symbol"
+      >}</a
+      ><a name="1351"
+      > </a
+      ><a name="1352" class="Symbol"
+      >&#8594;</a
+      ><a name="1353"
+      > </a
+      ><a name="1354" class="Symbol"
+      >(</a
+      ><a name="1355" href="Two.html#1343" class="Bound"
+      >a</a
+      ><a name="1356"
+      > </a
+      ><a name="1357" href="Equality.html#239" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="1358"
+      > </a
+      ><a name="1359" href="Two.html#255" class="InductiveConstructor"
+      >&#8321;</a
+      ><a name="1360"
+      > </a
+      ><a name="1361" class="Symbol"
+      >&#8594;</a
+      ><a name="1362"
+      > </a
+      ><a name="1363" href="Two.html#1345" class="Bound"
+      >b</a
+      ><a name="1364"
+      > </a
+      ><a name="1365" href="Equality.html#239" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="1366"
+      > </a
+      ><a name="1367" href="Two.html#255" class="InductiveConstructor"
+      >&#8321;</a
+      ><a name="1368" class="Symbol"
+      >)</a
+      ><a name="1369"
+      > </a
+      ><a name="1370" class="Symbol"
+      >&#8594;</a
+      ><a name="1371"
+      > </a
+      ><a name="1372" href="Two.html#1345" class="Bound"
+      >b</a
+      ><a name="1373"
+      > </a
+      ><a name="1374" href="Equality.html#239" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="1375"
+      > </a
+      ><a name="1376" href="Two.html#248" class="InductiveConstructor"
+      >&#8320;</a
+      ><a name="1377"
+      > </a
+      ><a name="1378" class="Symbol"
+      >&#8594;</a
+      ><a name="1379"
+      > </a
+      ><a name="1380" href="Two.html#1343" class="Bound"
+      >a</a
+      ><a name="1381"
+      > </a
+      ><a name="1382" href="Equality.html#239" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="1383"
+      > </a
+      ><a name="1384" href="Two.html#248" class="InductiveConstructor"
+      >&#8320;</a
+      ><a name="1385"
+      >
+
+</a
+      ><a name="1387" href="Two.html#1310" class="Function"
+      >Lemma[[a&#8801;&#8321;&#8594;b&#8801;&#8321;]&#8594;b&#8801;&#8320;&#8594;a&#8801;&#8320;]</a
+      ><a name="1411"
+      > </a
+      ><a name="1412" href="Two.html#1412" class="Bound"
+      >f</a
+      ><a name="1413"
+      > </a
+      ><a name="1414" class="Symbol"
+      >=</a
+      ><a name="1415"
+      >
+  </a
+      ><a name="1419" href="Two.html#1085" class="Function"
+      >Lemma[b&#8800;&#8321;&#8594;b&#8801;&#8320;]</a
+      ><a name="1433"
+      > </a
+      ><a name="1434" href="SetsAndFunctions.html#2246" class="Function Operator"
+      >&#8728;</a
+      ><a name="1435"
+      > </a
+      ><a name="1436" class="Symbol"
+      >(</a
+      ><a name="1437" href="CurryHoward.html#1927" class="Function"
+      >contra-positive</a
+      ><a name="1452"
+      > </a
+      ><a name="1453" href="Two.html#1412" class="Bound"
+      >f</a
+      ><a name="1454" class="Symbol"
+      >)</a
+      ><a name="1455"
+      > </a
+      ><a name="1456" href="SetsAndFunctions.html#2246" class="Function Operator"
+      >&#8728;</a
+      ><a name="1457"
+      > </a
+      ><a name="1458" href="Two.html#1196" class="Function"
+      >Lemma[b&#8801;&#8320;&#8594;b&#8800;&#8321;]</a
+      ><a name="1472"
+      >
+
+
+</a
+      ><a name="1475" href="Two.html#1475" class="Function"
+      >Lemma[[a&#8801;&#8320;&#8594;b&#8801;&#8320;]&#8594;b&#8801;&#8321;&#8594;a&#8801;&#8321;]</a
+      ><a name="1499"
+      > </a
+      ><a name="1500" class="Symbol"
+      >:</a
+      ><a name="1501"
+      >
+
+  </a
+      ><a name="1506" class="Symbol"
+      >&#8704;{</a
+      ><a name="1508" href="Two.html#1508" class="Bound"
+      >a</a
+      ><a name="1509"
+      > </a
+      ><a name="1510" href="Two.html#1510" class="Bound"
+      >b</a
+      ><a name="1511"
+      > </a
+      ><a name="1512" class="Symbol"
+      >:</a
+      ><a name="1513"
+      > </a
+      ><a name="1514" href="Two.html#233" class="Datatype"
+      >&#8322;</a
+      ><a name="1515" class="Symbol"
+      >}</a
+      ><a name="1516"
+      > </a
+      ><a name="1517" class="Symbol"
+      >&#8594;</a
+      ><a name="1518"
+      > </a
+      ><a name="1519" class="Symbol"
+      >(</a
+      ><a name="1520" href="Two.html#1508" class="Bound"
+      >a</a
+      ><a name="1521"
+      > </a
+      ><a name="1522" href="Equality.html#239" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="1523"
+      > </a
+      ><a name="1524" href="Two.html#248" class="InductiveConstructor"
+      >&#8320;</a
+      ><a name="1525"
+      > </a
+      ><a name="1526" class="Symbol"
+      >&#8594;</a
+      ><a name="1527"
+      > </a
+      ><a name="1528" href="Two.html#1510" class="Bound"
+      >b</a
+      ><a name="1529"
+      > </a
+      ><a name="1530" href="Equality.html#239" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="1531"
+      > </a
+      ><a name="1532" href="Two.html#248" class="InductiveConstructor"
+      >&#8320;</a
+      ><a name="1533" class="Symbol"
+      >)</a
+      ><a name="1534"
+      > </a
+      ><a name="1535" class="Symbol"
+      >&#8594;</a
+      ><a name="1536"
+      > </a
+      ><a name="1537" href="Two.html#1510" class="Bound"
+      >b</a
+      ><a name="1538"
+      > </a
+      ><a name="1539" href="Equality.html#239" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="1540"
+      > </a
+      ><a name="1541" href="Two.html#255" class="InductiveConstructor"
+      >&#8321;</a
+      ><a name="1542"
+      > </a
+      ><a name="1543" class="Symbol"
+      >&#8594;</a
+      ><a name="1544"
+      > </a
+      ><a name="1545" href="Two.html#1508" class="Bound"
+      >a</a
+      ><a name="1546"
+      > </a
+      ><a name="1547" href="Equality.html#239" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="1548"
+      > </a
+      ><a name="1549" href="Two.html#255" class="InductiveConstructor"
+      >&#8321;</a
+      ><a name="1550"
+      >
+
+</a
+      ><a name="1552" href="Two.html#1475" class="Function"
+      >Lemma[[a&#8801;&#8320;&#8594;b&#8801;&#8320;]&#8594;b&#8801;&#8321;&#8594;a&#8801;&#8321;]</a
+      ><a name="1576"
+      > </a
+      ><a name="1577" href="Two.html#1577" class="Bound"
+      >f</a
+      ><a name="1578"
+      > </a
+      ><a name="1579" class="Symbol"
+      >=</a
+      ><a name="1580"
+      >
+  </a
+      ><a name="1584" href="Two.html#973" class="Function"
+      >Lemma[b&#8800;&#8320;&#8594;b&#8801;&#8321;]</a
+      ><a name="1598"
+      > </a
+      ><a name="1599" href="SetsAndFunctions.html#2246" class="Function Operator"
+      >&#8728;</a
+      ><a name="1600"
+      > </a
+      ><a name="1601" class="Symbol"
+      >(</a
+      ><a name="1602" href="CurryHoward.html#1927" class="Function"
+      >contra-positive</a
+      ><a name="1617"
+      > </a
+      ><a name="1618" href="Two.html#1577" class="Bound"
+      >f</a
+      ><a name="1619" class="Symbol"
+      >)</a
+      ><a name="1620"
+      > </a
+      ><a name="1621" href="SetsAndFunctions.html#2246" class="Function Operator"
+      >&#8728;</a
+      ><a name="1622"
+      > </a
+      ><a name="1623" href="Two.html#807" class="Function"
+      >Lemma[b&#8801;&#8321;&#8594;b&#8800;&#8320;]</a
+      ><a name="1637"
+      >
+
+\end{code}
+
+</a
+      ><a name="1651" class="Comment"
+      > Definition (Natural order of binary numbers):</a
+      ><a name="1697"
+      >
+
+\begin{code}
+
+</a
+      ><a name="1713" href="Two.html#1713" class="Function Operator"
+      >_&#8804;_</a
+      ><a name="1716"
+      > </a
+      ><a name="1717" class="Symbol"
+      >:</a
+      ><a name="1718"
+      > </a
+      ><a name="1719" class="Symbol"
+      >(</a
+      ><a name="1720" href="Two.html#1720" class="Bound"
+      >a</a
+      ><a name="1721"
+      > </a
+      ><a name="1722" href="Two.html#1722" class="Bound"
+      >b</a
+      ><a name="1723"
+      > </a
+      ><a name="1724" class="Symbol"
+      >:</a
+      ><a name="1725"
+      > </a
+      ><a name="1726" href="Two.html#233" class="Datatype"
+      >&#8322;</a
+      ><a name="1727" class="Symbol"
+      >)</a
+      ><a name="1728"
+      > </a
+      ><a name="1729" class="Symbol"
+      >&#8594;</a
+      ><a name="1730"
+      > </a
+      ><a name="1731" href="CurryHoward.html#259" class="Function"
+      >Prp</a
+      ><a name="1734"
+      >
+</a
+      ><a name="1735" href="Two.html#1735" class="Bound"
+      >a</a
+      ><a name="1736"
+      > </a
+      ><a name="1737" href="Two.html#1713" class="Function Operator"
+      >&#8804;</a
+      ><a name="1738"
+      > </a
+      ><a name="1739" href="Two.html#1739" class="Bound"
+      >b</a
+      ><a name="1740"
+      > </a
+      ><a name="1741" class="Symbol"
+      >=</a
+      ><a name="1742"
+      > </a
+      ><a name="1743" href="Two.html#1735" class="Bound"
+      >a</a
+      ><a name="1744"
+      > </a
+      ><a name="1745" href="Equality.html#239" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="1746"
+      > </a
+      ><a name="1747" href="Two.html#255" class="InductiveConstructor"
+      >&#8321;</a
+      ><a name="1748"
+      > </a
+      ><a name="1749" class="Symbol"
+      >&#8594;</a
+      ><a name="1750"
+      > </a
+      ><a name="1751" href="Two.html#1739" class="Bound"
+      >b</a
+      ><a name="1752"
+      > </a
+      ><a name="1753" href="Equality.html#239" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="1754"
+      > </a
+      ><a name="1755" href="Two.html#255" class="InductiveConstructor"
+      >&#8321;</a
+      ><a name="1756"
+      >
+
+</a
+      ><a name="1758" href="Two.html#1758" class="Function Operator"
+      >_&#8805;_</a
+      ><a name="1761"
+      > </a
+      ><a name="1762" class="Symbol"
+      >:</a
+      ><a name="1763"
+      > </a
+      ><a name="1764" class="Symbol"
+      >(</a
+      ><a name="1765" href="Two.html#1765" class="Bound"
+      >a</a
+      ><a name="1766"
+      > </a
+      ><a name="1767" href="Two.html#1767" class="Bound"
+      >b</a
+      ><a name="1768"
+      > </a
+      ><a name="1769" class="Symbol"
+      >:</a
+      ><a name="1770"
+      > </a
+      ><a name="1771" href="Two.html#233" class="Datatype"
+      >&#8322;</a
+      ><a name="1772" class="Symbol"
+      >)</a
+      ><a name="1773"
+      > </a
+      ><a name="1774" class="Symbol"
+      >&#8594;</a
+      ><a name="1775"
+      > </a
+      ><a name="1776" href="CurryHoward.html#259" class="Function"
+      >Prp</a
+      ><a name="1779"
+      >
+</a
+      ><a name="1780" href="Two.html#1780" class="Bound"
+      >a</a
+      ><a name="1781"
+      > </a
+      ><a name="1782" href="Two.html#1758" class="Function Operator"
+      >&#8805;</a
+      ><a name="1783"
+      > </a
+      ><a name="1784" href="Two.html#1784" class="Bound"
+      >b</a
+      ><a name="1785"
+      > </a
+      ><a name="1786" class="Symbol"
+      >=</a
+      ><a name="1787"
+      > </a
+      ><a name="1788" href="Two.html#1784" class="Bound"
+      >b</a
+      ><a name="1789"
+      > </a
+      ><a name="1790" href="Two.html#1713" class="Function Operator"
+      >&#8804;</a
+      ><a name="1791"
+      > </a
+      ><a name="1792" href="Two.html#1780" class="Bound"
+      >a</a
+      ><a name="1793"
+      >
+
+\end{code}
+
+</a
+      ><a name="1807" class="Comment"
+      >Definition (Minimum of binary numbers):</a
+      ><a name="1846"
+      >
+
+\begin{code}
+
+</a
+      ><a name="1862" href="Two.html#1862" class="Function"
+      >min</a
+      ><a name="1865"
+      > </a
+      ><a name="1866" class="Symbol"
+      >:</a
+      ><a name="1867"
+      > </a
+      ><a name="1868" href="Two.html#233" class="Datatype"
+      >&#8322;</a
+      ><a name="1869"
+      > </a
+      ><a name="1870" class="Symbol"
+      >&#8594;</a
+      ><a name="1871"
+      > </a
+      ><a name="1872" href="Two.html#233" class="Datatype"
+      >&#8322;</a
+      ><a name="1873"
+      > </a
+      ><a name="1874" class="Symbol"
+      >&#8594;</a
+      ><a name="1875"
+      > </a
+      ><a name="1876" href="Two.html#233" class="Datatype"
+      >&#8322;</a
+      ><a name="1877"
+      >
+</a
+      ><a name="1878" href="Two.html#1862" class="Function"
+      >min</a
+      ><a name="1881"
+      > </a
+      ><a name="1882" href="Two.html#248" class="InductiveConstructor"
+      >&#8320;</a
+      ><a name="1883"
+      > </a
+      ><a name="1884" href="Two.html#1884" class="Bound"
+      >b</a
+      ><a name="1885"
+      > </a
+      ><a name="1886" class="Symbol"
+      >=</a
+      ><a name="1887"
+      > </a
+      ><a name="1888" href="Two.html#248" class="InductiveConstructor"
+      >&#8320;</a
+      ><a name="1889"
+      >
+</a
+      ><a name="1890" href="Two.html#1862" class="Function"
+      >min</a
+      ><a name="1893"
+      > </a
+      ><a name="1894" href="Two.html#255" class="InductiveConstructor"
+      >&#8321;</a
+      ><a name="1895"
+      > </a
+      ><a name="1896" href="Two.html#1896" class="Bound"
+      >b</a
+      ><a name="1897"
+      > </a
+      ><a name="1898" class="Symbol"
+      >=</a
+      ><a name="1899"
+      > </a
+      ><a name="1900" href="Two.html#1896" class="Bound"
+      >b</a
+      ><a name="1901"
+      >
+
+
+</a
+      ><a name="1904" href="Two.html#1904" class="Function"
+      >Lemma[minab&#8804;a]</a
+      ><a name="1918"
+      > </a
+      ><a name="1919" class="Symbol"
+      >:</a
+      ><a name="1920"
+      >
+
+  </a
+      ><a name="1925" class="Symbol"
+      >&#8704;{</a
+      ><a name="1927" href="Two.html#1927" class="Bound"
+      >a</a
+      ><a name="1928"
+      > </a
+      ><a name="1929" href="Two.html#1929" class="Bound"
+      >b</a
+      ><a name="1930"
+      > </a
+      ><a name="1931" class="Symbol"
+      >:</a
+      ><a name="1932"
+      > </a
+      ><a name="1933" href="Two.html#233" class="Datatype"
+      >&#8322;</a
+      ><a name="1934" class="Symbol"
+      >}</a
+      ><a name="1935"
+      > </a
+      ><a name="1936" class="Symbol"
+      >&#8594;</a
+      ><a name="1937"
+      > </a
+      ><a name="1938" href="Two.html#1862" class="Function"
+      >min</a
+      ><a name="1941"
+      > </a
+      ><a name="1942" href="Two.html#1927" class="Bound"
+      >a</a
+      ><a name="1943"
+      > </a
+      ><a name="1944" href="Two.html#1929" class="Bound"
+      >b</a
+      ><a name="1945"
+      > </a
+      ><a name="1946" href="Two.html#1713" class="Function Operator"
+      >&#8804;</a
+      ><a name="1947"
+      >  </a
+      ><a name="1949" href="Two.html#1927" class="Bound"
+      >a</a
+      ><a name="1950"
+      >
+
+</a
+      ><a name="1952" href="Two.html#1904" class="Function"
+      >Lemma[minab&#8804;a]</a
+      ><a name="1966"
+      > </a
+      ><a name="1967" class="Symbol"
+      >{</a
+      ><a name="1968" href="Two.html#248" class="InductiveConstructor"
+      >&#8320;</a
+      ><a name="1969" class="Symbol"
+      >}</a
+      ><a name="1970"
+      > </a
+      ><a name="1971" class="Symbol"
+      >{</a
+      ><a name="1972" href="Two.html#1972" class="Bound"
+      >b</a
+      ><a name="1973" class="Symbol"
+      >}</a
+      ><a name="1974"
+      > </a
+      ><a name="1975" href="Two.html#1975" class="Bound"
+      >r</a
+      ><a name="1976"
+      > </a
+      ><a name="1977" class="Symbol"
+      >=</a
+      ><a name="1978"
+      > </a
+      ><a name="1979" href="CurryHoward.html#478" class="Function"
+      >&#8869;-elim</a
+      ><a name="1985" class="Symbol"
+      >(</a
+      ><a name="1986" href="Two.html#807" class="Function"
+      >Lemma[b&#8801;&#8321;&#8594;b&#8800;&#8320;]</a
+      ><a name="2000"
+      > </a
+      ><a name="2001" href="Two.html#1975" class="Bound"
+      >r</a
+      ><a name="2002"
+      > </a
+      ><a name="2003" href="Equality.html#275" class="InductiveConstructor"
+      >refl</a
+      ><a name="2007" class="Symbol"
+      >)</a
+      ><a name="2008"
+      >
+</a
+      ><a name="2009" href="Two.html#1904" class="Function"
+      >Lemma[minab&#8804;a]</a
+      ><a name="2023"
+      > </a
+      ><a name="2024" class="Symbol"
+      >{</a
+      ><a name="2025" href="Two.html#255" class="InductiveConstructor"
+      >&#8321;</a
+      ><a name="2026" class="Symbol"
+      >}</a
+      ><a name="2027"
+      > </a
+      ><a name="2028" class="Symbol"
+      >{</a
+      ><a name="2029" href="Two.html#2029" class="Bound"
+      >b</a
+      ><a name="2030" class="Symbol"
+      >}</a
+      ><a name="2031"
+      > </a
+      ><a name="2032" href="Two.html#2032" class="Bound"
+      >r</a
+      ><a name="2033"
+      > </a
+      ><a name="2034" class="Symbol"
+      >=</a
+      ><a name="2035"
+      > </a
+      ><a name="2036" href="Equality.html#275" class="InductiveConstructor"
+      >refl</a
+      ><a name="2040"
+      >
+
+\end{code}
+
+</a
+      ></pre
+    ></body
+  ></html
+>
