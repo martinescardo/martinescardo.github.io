@@ -1,0 +1,183 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<!--Converted with LaTeX2HTML 98.1p1 release (March 2nd, 1998)
+originally by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>Realizers</TITLE>
+<META NAME="description" CONTENT="Realizers">
+<META NAME="keywords" CONTENT="issac">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="STYLESHEET" HREF="issac.css">
+<LINK REL="previous" HREF="node23.html">
+<LINK REL="up" HREF="node22.html">
+<LINK REL="next" HREF="node25.html">
+</HEAD>
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html324"
+ HREF="node25.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="http://www.cs.bham.ac.uk/logos/latex2html/icons.gif/next_motif.gif"></A> 
+<A NAME="tex2html321"
+ HREF="node22.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="http://www.cs.bham.ac.uk/logos/latex2html/icons.gif/up_motif.gif"></A> 
+<A NAME="tex2html317"
+ HREF="node23.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="http://www.cs.bham.ac.uk/logos/latex2html/icons.gif/previous_motif.gif"></A> 
+<A NAME="tex2html323"
+ HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="http://www.cs.bham.ac.uk/logos/latex2html/icons.gif/contents_motif.gif"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html325"
+ HREF="node25.html">Alternative notations</A>
+<B> Up:</B> <A NAME="tex2html322"
+ HREF="node22.html">Computational inadequacy of decimal</A>
+<B> Previous:</B> <A NAME="tex2html318"
+ HREF="node23.html">The denotation map</A>
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H4><A NAME="SECTION00700020000000000000">
+Realizers</A>
+</H4>
+A function 
+<!-- MATH: $\phi:D^{\mathbb{N}}\rightarrow
+D^{\mathbb{N}}$ -->
+32#32
+<EM>realizes</EM> a function 
+<!-- MATH: $f:[0,1] \rightarrow[0,1]$ -->
+33#33
+if
+ <BR><P></P>
+<DIV ALIGN="CENTER">
+<!-- MATH: \begin{displaymath}
+f(\llbracket \alpha \rrbracket)=\llbracket \phi(\alpha) \rrbracket,
+\end{displaymath} -->
+
+
+34#34
+</DIV>
+<BR CLEAR="ALL">
+<P></P>
+as illustrated in the following diagram:
+<BR><P></P>
+<DIV ALIGN="CENTER">
+<!-- MATH: \begin{displaymath}
+\begin{CD}
+D^{\mathbb{N}}@>{\phi}>> D^{\mathbb{N}}\\
+@V{q}VV @VV{q}V \\
+[0,1] @>>{f}> [0,1].
+\end{CD}
+\end{displaymath} -->
+
+
+35#35
+</DIV>
+<BR CLEAR="ALL">
+<P></P>
+Of course, here we are interested in <EM>computable</EM> realizers.  The
+realizer lives at the operational level, whereas the function that it
+realizes lives at the denotational level.  As we discussed above, a
+necessary (but not sufficient) condition for a function
+
+<!-- MATH: $\phi:D^{\mathbb{N}}\rightarrowD^{\mathbb{N}}$ -->
+32#32
+being computable is that finite
+subsequences of 
+<!-- MATH: $\phi(\alpha)$ -->
+36#36
+depend only on finite subsequences of
+11#11.
+In this case we say that 22#22
+is of <EM>finite
+  character</EM>. We state as a proposition a fact that we already
+discussed in the previous chapter (where <I>D</I> is topologized as
+in Chapter&nbsp;<A HREF="node21.html#space">5</A>).<P>
+<DIV><B>Proposition  6.1</B> &nbsp; 
+A function 
+<!-- MATH: $\phi:D^{\mathbb{N}}\rightarrowD^{\mathbb{N}}$ -->
+32#32
+is of finite character
+  iff it is continuous.</DIV><P></P>
+This is the first link between computability and continuity, at an
+<EM>operational level</EM>. To get a link at the denotational level, we
+state the following.<P>
+<DIV><B>Proposition  6.2</B> &nbsp; 
+The surjection 
+<!-- MATH: $q:D^{\mathbb{N}}\twoheadrightarrow[0,1]$ -->
+37#37
+is a topological
+  quotient map.</DIV><P></P>
+<BR>
+38#38
+<BR>
+By a basic property of topological quotient maps, we get the
+following.<P>
+<DIV><A NAME="fincon"><B>Corollary  6.3</B></A> &nbsp; 
+A function 
+<!-- MATH: $f:[0,1] \to [0,1]$ -->
+2#2
+with a realizer 
+<!-- MATH: $\phi:D^{\mathbb{N}}
+\rightarrowD^{\mathbb{N}}$ -->
+32#32
+of finite character is necessarily continuous.</DIV><P></P>
+Unfortunately, the converse is not true. <P>
+<DIV><A NAME="failure"><B>Proposition  6.4</B></A> &nbsp; 
+There are continuous functions 
+<!-- MATH: $f:[0,1] \to [0,1]$ -->
+2#2
+with no realizer
+  of finite character, for example 
+<!-- MATH: $f(x)=3x/10$ -->
+<I>f</I>(<I>x</I>)=3<I>x</I>/10.</DIV><P></P>
+<BR>
+39#39
+<BR>
+This is of course independent of the choice of a base--but different
+counter-examples are needed for different bases.  The argument of
+Proposition&nbsp;<A HREF="node24.html#failure">6.4</A> is a topological version of the
+computational argument already given in Chapter&nbsp;<A HREF="node6.html#towards">3</A>.
+
+<P>
+<HR>
+<!--Navigation Panel-->
+<A NAME="tex2html324"
+ HREF="node25.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="http://www.cs.bham.ac.uk/logos/latex2html/icons.gif/next_motif.gif"></A> 
+<A NAME="tex2html321"
+ HREF="node22.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="http://www.cs.bham.ac.uk/logos/latex2html/icons.gif/up_motif.gif"></A> 
+<A NAME="tex2html317"
+ HREF="node23.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="http://www.cs.bham.ac.uk/logos/latex2html/icons.gif/previous_motif.gif"></A> 
+<A NAME="tex2html323"
+ HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="http://www.cs.bham.ac.uk/logos/latex2html/icons.gif/contents_motif.gif"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html325"
+ HREF="node25.html">Alternative notations</A>
+<B> Up:</B> <A NAME="tex2html322"
+ HREF="node22.html">Computational inadequacy of decimal</A>
+<B> Previous:</B> <A NAME="tex2html318"
+ HREF="node23.html">The denotation map</A>
+<!--End of Navigation Panel-->
+<ADDRESS>
+<I>Martin Escardo</I>
+<BR><I>2000-10-02</I>
+</ADDRESS>
+</BODY>
+</HTML>

@@ -1,0 +1,140 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<!--Converted with LaTeX2HTML 98.1p1 release (March 2nd, 1998)
+originally by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>Towards a third attempt</TITLE>
+<META NAME="description" CONTENT="Towards a third attempt">
+<META NAME="keywords" CONTENT="issac">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="STYLESHEET" HREF="issac.css">
+<LINK REL="next" HREF="node10.html">
+<LINK REL="previous" HREF="node8.html">
+<LINK REL="up" HREF="node6.html">
+<LINK REL="next" HREF="node10.html">
+</HEAD>
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html158"
+ HREF="node10.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="http://www.cs.bham.ac.uk/logos/latex2html/icons.gif/next_motif.gif"></A> 
+<A NAME="tex2html155"
+ HREF="node6.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="http://www.cs.bham.ac.uk/logos/latex2html/icons.gif/up_motif.gif"></A> 
+<A NAME="tex2html149"
+ HREF="node8.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="http://www.cs.bham.ac.uk/logos/latex2html/icons.gif/previous_motif.gif"></A> 
+<A NAME="tex2html157"
+ HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="http://www.cs.bham.ac.uk/logos/latex2html/icons.gif/contents_motif.gif"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html159"
+ HREF="node10.html">Third attempt</A>
+<B> Up:</B> <A NAME="tex2html156"
+ HREF="node6.html">Exact numerical computation</A>
+<B> Previous:</B> <A NAME="tex2html150"
+ HREF="node8.html">Second attempt</A>
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H4><A NAME="SECTION00400030000000000000">
+Towards a third attempt</A>
+</H4>
+In functional programming languages such as Haskell, a technique called
+<EM>lazy evaluation</EM> is used as the underlying computing
+machinery&nbsp;[<A
+ HREF="node38.html#bird">6</A>].  The idea is that if one wants to compute a
+small initial segment of a large sequence, it is not necessary, in
+general, to evaluate the whole sequence. In fact, in this way one can
+meaningfully compute with infinite sequences.  Here is an example.
+<PRE>
+    &gt; from n = n : from (n+1)
+    &gt; from 0
+      [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, ctrl-C
+    &gt; take 5 (from 11)
+      [11, 12, 13, 14,15]
+    &gt; take 6 (map square (from 1))
+      [1, 4, 9, 16, 25, 36]
+</PRE>The Haskell operator ``:'' (pronounced ``cons'') takes an
+element&nbsp;<I>x</I> and a sequence&nbsp;<I>s</I>, producing a sequence <I>x</I>:<I>s</I> whose first
+term is <I>x</I> and whose remaining terms are those of&nbsp;<I>s</I>. For example,
+
+<!-- MATH: $3:[4,5,6]=[3,4,5,6]$ -->
+3:[4,5,6]=[3,4,5,6].  Thus, from a denotational point of view, <TT>  from n</TT> is the sequence of all integers starting from&nbsp;<I>n</I>.
+Operationally, this works more or less as follows.  In order to
+evaluate a list expression <I>e</I>, the computing machinery tries to
+reduce the expression to the form&nbsp;[] (the empty sequence) or&nbsp;<I>x</I>:<I>e</I>'(a head-normal form).  Initially, <I>e</I>' is left unevaluated; if, and
+only when, more terms of the sequence are required, <I>e</I>' is further
+reduced (to either the empty sequence or a head-normal form). Thus, if
+one asks for the expression <TT>from 0</TT> to be evaluated, one gets the
+infinite sequence of natural numbers. In this case, the execution only
+stops when one explicitly interrupts it, because only finitely many
+states are needed to evaluate the expression. For other expressions,
+infinitely many states may be needed, in which case the execution is
+interrupted when the computer runs out of memory or the user runs out
+of patience, whichever happens first. But an infinite list can also be
+used as an intermediate step in the computation of a finite list.  For
+example, <TT>take 5 (from 11)</TT> takes the first five elements of the
+infinite list of natural numbers starting from&nbsp;11, and its computation
+successfully terminates after finitely many steps producing a finite
+list.
+
+<P>
+A slightly more interesting example is this (well-known)
+implementation of the sieve of Erasthotenes to compute the infinite
+list of prime numbers:
+<PRE>
+     &gt; notdivisibleby m n = (n `mod` m) /= 0
+     &gt; sieve (p:l) = p : sieve (filter (notdivisibleby p) l) 
+     &gt; prime = sieve (from 2)
+     &gt; prime 
+       [2,3,5,7,11,13,17,19,23,29,31,37,41,43,47,53,59,61,67,71,73,
+       79,83,89,97,101,103,107,109,113,127,131,137,139,149,151,157,
+       163,167,173,179, ctrl-C
+</PRE>Here the filter function takes a predicate and list, and produces a
+list containing the elements of the given list that satisfy the
+predicate. 
+
+<P>
+<HR>
+<!--Navigation Panel-->
+<A NAME="tex2html158"
+ HREF="node10.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="http://www.cs.bham.ac.uk/logos/latex2html/icons.gif/next_motif.gif"></A> 
+<A NAME="tex2html155"
+ HREF="node6.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="http://www.cs.bham.ac.uk/logos/latex2html/icons.gif/up_motif.gif"></A> 
+<A NAME="tex2html149"
+ HREF="node8.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="http://www.cs.bham.ac.uk/logos/latex2html/icons.gif/previous_motif.gif"></A> 
+<A NAME="tex2html157"
+ HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="http://www.cs.bham.ac.uk/logos/latex2html/icons.gif/contents_motif.gif"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html159"
+ HREF="node10.html">Third attempt</A>
+<B> Up:</B> <A NAME="tex2html156"
+ HREF="node6.html">Exact numerical computation</A>
+<B> Previous:</B> <A NAME="tex2html150"
+ HREF="node8.html">Second attempt</A>
+<!--End of Navigation Panel-->
+<ADDRESS>
+<I>Martin Escardo</I>
+<BR><I>2000-10-02</I>
+</ADDRESS>
+</BODY>
+</HTML>

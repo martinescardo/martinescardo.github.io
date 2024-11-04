@@ -1,0 +1,290 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<!--Converted with LaTeX2HTML 98.1p1 release (March 2nd, 1998)
+originally by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>Example--the logistic map</TITLE>
+<META NAME="description" CONTENT="Example--the logistic map">
+<META NAME="keywords" CONTENT="issac">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="STYLESHEET" HREF="issac.css">
+<LINK REL="previous" HREF="node4.html">
+<LINK REL="up" HREF="node4.html">
+<LINK REL="next" HREF="node6.html">
+</HEAD>
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html106"
+ HREF="node6.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="http://www.cs.bham.ac.uk/logos/latex2html/icons.gif/next_motif.gif"></A> 
+<A NAME="tex2html103"
+ HREF="node4.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="http://www.cs.bham.ac.uk/logos/latex2html/icons.gif/up_motif.gif"></A> 
+<A NAME="tex2html99"
+ HREF="node4.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="http://www.cs.bham.ac.uk/logos/latex2html/icons.gif/previous_motif.gif"></A> 
+<A NAME="tex2html105"
+ HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="http://www.cs.bham.ac.uk/logos/latex2html/icons.gif/contents_motif.gif"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html107"
+ HREF="node6.html">Exact numerical computation</A>
+<B> Up:</B> <A NAME="tex2html104"
+ HREF="node4.html">Floating-point computation</A>
+<B> Previous:</B> <A NAME="tex2html100"
+ HREF="node4.html">Floating-point computation</A>
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H4><A NAME="SECTION00300010000000000000">
+Example--the logistic map</A>
+</H4>
+This is the function 
+<!-- MATH: $f:[0,1] \to [0,1]$ -->
+2#2
+defined by 
+<BR><P></P>
+<DIV ALIGN="CENTER">
+<!-- MATH: \begin{displaymath}
+f(x)=ax(1-x),
+\end{displaymath} -->
+
+
+<I>f</I>(<I>x</I>)=<I>ax</I>(1-<I>x</I>),
+</DIV>
+<BR CLEAR="ALL">
+<P></P>
+for some constant&nbsp;<I>a</I>. According to Devaney&nbsp;[<A
+ HREF="node38.html#devaney">18</A>], this was
+first considered as a model of population growth by the Belgian
+mathematician Pierre Verhulstby in 1845.  For example, a value 0.45may represent 45% of the maximum population of fish in given lake.
+Our task is, given <I>x</I><SUB>0</SUB>, to compute the <EM>orbit</EM>
+<BLOCKQUOTE>
+
+<!-- MATH: $x_0, \, f(x_0),\,f(f(x_0)),\, \dots,\, f^n(x_0),\,\dots$ -->
+3#3,
+</BLOCKQUOTE>which collects the population values of successive generations. We
+wish to compute an initial segment of the orbit for a given initial
+population&nbsp;<I>x</I><SUB>0</SUB>. We choose <I>a</I>=4, as at this value of the constant
+the logistic map becomes chaotic, in a precise mathematical
+sense--see e.g. Devaney&nbsp;[<A
+ HREF="node38.html#devaney">18</A>]. For the purposes of our
+discussion, it suffices to say that its value is sensitive to small
+variations of its variable.
+
+<P>
+Let's compute orbits for the same initial value, in simple and double
+precision.  Here is a C program.
+<PRE>
+  #include &lt;stdio.h&gt;
+  #include &lt;math.h&gt;
+
+  void main(void)
+  {
+    float const  a = 4.0;
+    float const x0 = 0.671875; /* this is machine representable */
+    float        x = x0;
+    double       y = x0;
+    int i;
+
+    for (i = 0; i &lt;= 60; i++) {
+         printf("%d\t%f\t%f\n",i,x,y);
+
+         x = a * x * (1.0-x); 
+         y = a * y * (1.0-y); 
+        }
+  }
+</PRE>
+<P>
+
+<P>
+<BR>
+The last entry of the table produced by the program is<PRE>
+60      0.934518        0.928604
+</PRE>So 
+<!-- MATH: $f^{60}(x_0)$ -->
+<I>f</I><SUP>60</SUP>(<I>x</I><SUB>0</SUB>) seems to be approximately 0.93.  But, is it?
+Let's see. Here is the full table. 
+
+<P>
+
+<P>
+<BR>
+
+<P><PRE>
+0       0.671875        0.671875
+1       0.881836        0.881836
+2       0.416805        0.416805
+3       0.972315        0.972315
+4       0.107676        0.107676
+5       0.384327        0.384327
+6       0.946479        0.946479
+7       0.202625        0.202625
+8       0.646273        0.646274
+9       0.914417        0.914416
+10      0.313034        0.313037
+11      0.860174        0.860179
+12      0.481098        0.481084
+13      0.998571        0.998569
+14      0.005708        0.005717
+15      0.022702        0.022736
+16      0.088748        0.088876
+17      0.323486        0.323907
+18      0.875371        0.875965
+19      0.436387        0.434601
+20      0.983813        0.982892
+21      0.063698        0.067261
+22      0.238564        0.250949
+23      0.726604        0.751894
+24      0.794603        0.746197 &lt;-- The tables are similar up to here
+25      0.652837        0.757549
+26      0.906564        0.734675
+27      0.338824        0.779711
+28      0.896089        0.687047
+29      0.372453        0.860054
+30      0.934927        0.481445
+31      0.243355        0.998623
+32      0.736534        0.005501
+33      0.776207        0.021884
+34      0.694838        0.085621
+35      0.848153        0.313159
+36      0.515158        0.860362
+37      0.999081        0.480558
+38      0.003673        0.998488
+39      0.014638        0.006039
+40      0.057696        0.024009
+41      0.217467        0.093730
+42      0.680701        0.339779
+43      0.869388        0.897317
+44      0.454209        0.368558
+45      0.991613        0.930892
+46      0.033268        0.257328
+47      0.128646        0.764442
+48      0.448383        0.720282
+49      0.989343        0.805903
+50      0.042174        0.625693
+51      0.161581        0.936805
+52      0.541891        0.236806
+53      0.992980        0.722916
+54      0.027881        0.801234
+55      0.108415        0.637033
+56      0.386646        0.924888
+57      0.948604        0.277882
+58      0.195019        0.802655
+59      0.627947        0.633600
+60      0.934518        0.928604
+</PRE>
+<P>
+From the table, we can't conclude anything about the value of
+
+<!-- MATH: $f^{60}(x_0)$ -->
+<I>f</I><SUP>60</SUP>(<I>x</I><SUB>0</SUB>).  
+Thus, machine-number computation can be
+<DL COMPACT>
+<DT>1.
+<DD>ineffective (the answer may not be correct, so we don't
+get a solution),
+<DT>2.
+<DD>unreliable (we don't know whether the answer is correct). 
+</DL>This is of course well-known. Numerical analysis tries to predict
+these problems, and avoid them whenever possible. For example, we
+learn from numerical analysis that if a square matrix is
+ill-conditioned then floating-point inversion is unlikely to produce a
+result close to mathematical inversion.  Some proposed solutions to
+this problem include the following.
+<DL COMPACT>
+<DT>1.
+<DD>Interval arithmetic&nbsp;[<A
+ HREF="node38.html#MR37:7069">40</A>].
+<DL COMPACT>
+<DT>(a)
+<DD>Sometimes effective (the intervals may grow very large),
+<DT>(b)
+<DD>always reliable.
+</DL><DT>2.
+<DD>Stochastic arithmetic&nbsp;[<A
+ HREF="node38.html#MR94i:65061">58</A>,<A
+ HREF="node38.html#MR94e:65053">17</A>]. In this
+approach, results are computed a number of times in floating-point
+  arithmetic, usual two or three, with the intermediate results
+  randomly perturbed.  Then probability theory is used to estimate the
+  number of correct digits of the result.
+<DL COMPACT>
+<DT>(a)
+<DD>Sometimes effective,
+<DT>(b)
+<DD>probabilistically reliable.
+</DL><DT>3.
+<DD>Multiple-precision arithmetic (libraries, Mathematica, Maple).
+<DL COMPACT>
+<DT>(a)
+<DD>More effective, but still ineffective,
+<DT>(b)
+<DD>more reliable, but still unreliable,
+    <DT>(c)
+<DD>inefficient.
+</DL><DT>4.
+<DD>Exact arithmetic, which is the subject of this paper.
+<DL COMPACT>
+<DT>(a)
+<DD>Reliable,
+<DT>(b)
+<DD>often effective, 
+    <DT>(c)
+<DD>inefficient--but maybe not as multiple precision,
+    <DT>(d)
+<DD>sometimes requires different programming techniques. 
+</DL></DL>In principle, multiple-precision arithmetic is as good as exact
+arithmetic, because for any problem that can be solved using exact
+arithmetic there is a precision for which multiple-precision
+computation produces accurate results. There are two problems with
+this, however. Firstly, it may be difficult, or effectively
+impossible, to determine the necessary precision in advance. Secondly,
+the necessary precision may be excessively large, so that <EM>all</EM>
+intermediate results are computed with that precision when, in
+practice, only a few of them will actually need that precision to
+guarantee an accurate overall result.
+
+<P>
+<HR>
+<!--Navigation Panel-->
+<A NAME="tex2html106"
+ HREF="node6.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="http://www.cs.bham.ac.uk/logos/latex2html/icons.gif/next_motif.gif"></A> 
+<A NAME="tex2html103"
+ HREF="node4.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="http://www.cs.bham.ac.uk/logos/latex2html/icons.gif/up_motif.gif"></A> 
+<A NAME="tex2html99"
+ HREF="node4.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="http://www.cs.bham.ac.uk/logos/latex2html/icons.gif/previous_motif.gif"></A> 
+<A NAME="tex2html105"
+ HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="http://www.cs.bham.ac.uk/logos/latex2html/icons.gif/contents_motif.gif"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html107"
+ HREF="node6.html">Exact numerical computation</A>
+<B> Up:</B> <A NAME="tex2html104"
+ HREF="node4.html">Floating-point computation</A>
+<B> Previous:</B> <A NAME="tex2html100"
+ HREF="node4.html">Floating-point computation</A>
+<!--End of Navigation Panel-->
+<ADDRESS>
+<I>Martin Escardo</I>
+<BR><I>2000-10-02</I>
+</ADDRESS>
+</BODY>
+</HTML>

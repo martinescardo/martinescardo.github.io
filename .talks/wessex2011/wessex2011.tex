@@ -1,0 +1,1005 @@
+\documentclass%
+[%dvips,% for generating postscript printouts
+%25pt,%
+%a4paper,%
+%landscape
+Screen4to3,
+%Screen16to9
+]{foils}
+
+\input{preamble}
+
+%\usepackage{hyperref}
+
+\newcommand{\concat}{\operatorname{::}} %\hash}
+\newcommand{\arginf}{\operatorname{arginf}}
+\newcommand{\argsup}{\operatorname{argsup}}
+\newcommand{\argexists}{\operatorname{arg-\exists}}
+\newcommand{\false}{\operatorname{false}}
+\newcommand{\true}{\operatorname{true}}
+
+\newcommand{\next}{\operatorname{next}}
+\newcommand{\myitem}[1]{\item[\darkblue{#1}]}
+
+\newcommand{\Maybe}{\operatorname{Maybe}}
+
+\title{\darkblue{The ubiquitous selection monad}}
+
+\author{\darkblue{Mart\'{\i}n Escard\'o} \\
+University of Birmingham, UK\\[10ex]
+Joint work with \darkblue{Paulo Oliva}, Queen Mary, London, UK. \\[9ex] ~}
+
+\date{\sc Wessex Seminar, Swansea, 7th April 2011}
+
+\begin{document}
+
+\setlength{\parindent}{0in}
+
+\maketitle
+
+\overhead{Seemingly disparate constructions}
+
+\begin{enumerate}
+\item[\grey{1.}] \darkblue{Game theory.}
+
+Optimal plays of sequential games of unbounded length.
+
+\item[\grey{2.}]  \darkblue{Proof theory.} \grey{Double Negation Shift:}
+
+$\forall n \in \N(\blue{\neg \neg} A(n)) \implies \blue{\neg \neg} \forall n \in \N(A(n)).$
+
+
+\item[\grey{3.}]  \darkblue{Topology.} \grey{Tychonoff Theorem:}
+
+$X_i$ compact $\implies$ $\prod_i X_i$ also compact.  
+
+\item[\grey{4.}]  \darkblue{Higher-type computation.} \grey{Computational Tychonoff Theorem:}
+
+$X_n$ exhaustibly searchable $\implies$ $\prod_n X_n$ also exhaustibly searchable.  
+
+\grey{The point is that we get infinite exhaustively searchable sets.}
+\end{enumerate}
+
+\overhead{What do they have in common?}
+
+\vfill
+
+Implemented/realized by a certain \darkblue{infinite product of selection functions.}
+
+\vfill
+
+Explained by a certain \darkblue{selection monad}.
+
+\vfill
+
+\overhead{Countable-product functional}
+
+\vfill
+
+In a simply typed formalism:
+\[
+\darkblue{\left(\black{\N \to ((X \to R) \to X)}\right)} \to \darkblue{\left(\black{(\N \to X) \to R}\right)} \to \darkblue{\left(\black{\N \to X}\right)}.
+\]
+
+\vfill
+
+In a dependently typed formalism: %, where $n$ ranges over $\N$:
+\[
+\darkblue{\left(\black{\prod_{n  \in \N}(X_n \to R) \to X_n}\right)} \to
+\green{\left(\darkblue{\left(\black{\prod_{n \in \N} X_n}\right)} \black{\to R}\right)} \to
+\darkblue{\left(\black{\prod_{n \in \N} X_n}\right)}.
+\]
+
+\vfill
+
+\overhead{There is structure in the above types}
+
+Write \darkblue{$J X = ((X \to R) \to X)$} where \darkblue{$R$} is
+fixed in advance.
+
+\vfill
+
+In a simply typed formalism:
+\[
+(\N \to \darkblue{J} X) \to \darkblue{J}(\N\to X).
+\]
+
+In a dependently typed formalism:
+\[
+\prod_{n \in \N} \darkblue{J} X_n  \to \darkblue{J} \prod_{n \in \N} X_n.
+\]
+
+% \framebox{This is a \darkblue{$J$-shift}.}
+
+\overhead{Selection functions \black{$(X \to R) \to X$}}
+
+\blue{$X$} set of things.
+
+\quad \grey{\small Goods in a store; possible moves of a game;
+proofs of a proposition;
+points of a space.}
+
+\blue{$R$} set of values.
+
+\quad \grey{\small Prices; outcomes win, lose, draw; how much money you win;
+true or false;
+proofs again.}
+
+\blue{$X \stackrel{p}{\longrightarrow} R$} value judgement.
+
+\quad \grey{\small How you value it;
+how much it costs you;
+pay-off of a move;
+propositional function.}
+
+
+\blue{$(X \to R) \stackrel{\varepsilon}{\longrightarrow} X$} selects
+something according to some criterion.
+
+\quad \grey{\small The best, the cheapest, any, something odd.}
+
+\overhead{Example 1}
+
+\vspace{-2ex}
+
+\blue{$X$} set of goods.
+
+\blue{$R$} set of prices.
+
+\blue{$X \stackrel{p}{\longrightarrow} R$} table of prices.
+
+\blue{$(X \to R) \stackrel{\varepsilon}{\longrightarrow} X$} selects
+a \darkblue{cheapest good} in a given table.
+
+\blue{$(X \to R) \stackrel{\phi}{\longrightarrow} R$} 
+determines the \darkblue{lowest price} in a given table.
+
+\vfill
+
+\noindent\darkgreen{Fundamental equation:}
+\[
+\blue{p(\varepsilon(p)) = \phi(p).}
+\]
+This says that the price of a cheapest good is the lowest in the table.
+\begin{gather*}
+  \phi  =  \inf \qquad \varepsilon =  \arginf, \\
+  \blue{p(\arginf(p)) = \inf(p).}
+\end{gather*}
+
+\overhead{Example 2}
+
+\vspace{-2ex}
+
+\blue{$X$} set of individuals.
+
+\blue{$R$} set of booleans \blue{$\false = 0 < 1 = \true$}.
+
+\blue{$X \stackrel{p}{\longrightarrow} R$} property.
+
+\blue{$(X \to R) \stackrel{\varepsilon}{\longrightarrow} X$} selects
+an individual with the highest truth value. 
+
+\blue{$(X \to R) \stackrel{\phi}{\longrightarrow} R$} 
+determines the highest value of a given property. 
+
+\vfill
+
+\darkgreen{Fundamental equation:}
+\[
+\blue{p(\varepsilon(p)) = \phi(p)}
+\]
+\begin{eqnarray*}
+  \phi & = & \sup = \exists \\
+  \varepsilon & = & \argsup = \argexists = \text{Hilbert's choice operator}
+\end{eqnarray*}
+\[
+\blue{p(\varepsilon(p)) = \exists(p)} \qquad \grey{\text{Hilbert's definition of $\exists$ in his $\varepsilon$-calculus}}
+\]
+
+\overhead{Maximum-Value Theorem}
+
+Let \blue{$X$} be a compact non-empty topological space.
+
+\vfill
+
+\darkblue{\framebox{\black{Any continuous function \blue{$p \colon X \to \R$} attains its
+maximum value.}}}
+
+\vfill
+
+This means that there is \blue{$a \in X$} such that
+\[
+\blue{\sup p = p(a)}. 
+\]
+
+\vfill
+
+\grey{However, the proof is non-constructive when e.g.\ \blue{$X=[0,1]$}.}
+
+\grey{A maximizing argument \blue{$a$} cannot be algorithmically
+calculated from
+\blue{$p$}.} % with an algorithm that works for all~\blue{$p$}.
+
+\vfill
+
+Of course, there is a \darkblue{Minimum-Value Theorem} too.
+
+
+\overhead{Mean-Value Theorem}
+
+\darkblue{\framebox{\black{Any continuous function \blue{$p \colon
+        [0,1] \to \R$} attains its mean value.}}}
+
+\vfill
+
+There is \blue{$a \in [0,1]$} such that
+\[
+\blue{\int p = p(a)}.
+\]
+
+\vfill
+
+\grey{Again this \blue{$a$} cannot be found from \blue{$p$} using an algorithm.} 
+\overhead{Universal-Value Theorem}
+
+Let \blue{$X$} be a non-empty set and \blue{$2=\{0,1\}$} be the set of booleans.
+
+\darkblue{\framebox{\black{Any \blue{$p \colon
+        X \to 2$} attains its universal value.}}}
+
+\vfill
+
+There is \blue{$a \in X$} such that
+\[
+\blue{\forall p = p(a)}.
+\]
+
+\grey{This is again a classical statement if the set \darkblue{$X$} is infinite.}
+
+\vfill
+
+This is usually formulated as the \darkblue{Drinker Paradox}:
+
+\darkblue{\framebox{\black{In any inhabited pub there is a person \blue{$a$} s.t.\ if 
+\blue{$a$} drinks then everybody drinks.}}}
+
+We've also met the \darkblue{Existential-Value Theorem}.
+
+
+\overhead{General situation}
+
+%The general equation we are considering here is thus
+
+With \blue{$\phi$} among \blue{$\exists, \forall, \sup, \inf, \int, \dots$}, we have that
+\[
+\text{\framebox{$\blue{\phi(p) = p(a)}$}}
+\]
+for some \blue{$a$} depending on \blue{$p$}.
+
+\vfill
+
+In favourable circumstances, \blue{$a$} can be calculated as 
+\[ \blue{a =\varepsilon(p)},\] 
+so that
+\[ \text{\framebox{$\blue{\phi(p) = p(\varepsilon(p))}$}} \]
+
+\overhead{Selection function}
+
+\vfill
+
+\darkgreen{Definition.}
+
+A \darkblue{selection function} for a \grey{(logical, arithmetical, \dots)} {quantifier}
+\[
+\blue{\phi \colon (X \to R) \to R}
+\]
+
+is a functional 
+\[
+\blue{\varepsilon \colon (X \to R) \to X}
+\]
+
+such that 
+\[ 
+\blue{\phi(p) = p(\varepsilon(p))}.
+\]
+
+% \grey{NB.}
+
+% \grey{A quantifier may or may not have a selection function.}
+
+% \grey{A quantifier may have more than one selection function.}
+
+\overhead{Monad morphism}
+
+\darkblue{\black{\framebox{Every \blue{$\varepsilon \colon (X \to R) \to X$} is the selection function of some \blue{$\phi \colon (X \to R) \to R$.}}}}
+
+ Namely \blue{$\phi = \overline{\varepsilon}$} defined by
+\[
+\blue{\phi(p) = p(\varepsilon(p))}.
+\]
+
+%Also written $\blue{\phi = \overline{\varepsilon}}$.
+
+\vfill
+
+This construction defines a monad morphism \blue{$\theta \colon J \to K$}:
+\begin{eqnarray*}
+\blue{\overbrace{\black{(X \to R) \to X}}^{{JX}}} & \stackrel{\blue{\Theta}}{\longrightarrow} & \blue{\overbrace{\black{(X \to R) \to R}}^{{KX}}} \\
+\blue{\varepsilon} & \longmapsto & \blue{\overline{\varepsilon}} % \blue{\underbrace{\black{\lambda p.p(\varepsilon(p))}}_{\overline{\varepsilon}}}
+\end{eqnarray*}
+
+This is a morphism from the \darkblue{selection monad} to the \darkblue{quantifier monad}.
+
+\grey{Oh, I mean to the continuation monad.}
+
+\overhead{Units of the monads}
+
+\begin{eqnarray*}
+ X & \stackrel{\blue{\eta}}{\longrightarrow} & \blue{K} X \\
+ x & \longmapsto & \lambda p. p(x).
+\end{eqnarray*}
+\framebox{Quantifies over the singleton $\blue{\{x\}} \subseteq X$.}
+\[
+\blue{\eta(x) = \exists_{\{x\}} = \forall_{\{x\}}}.
+\]
+\begin{eqnarray*}
+ X & \stackrel{\blue{\eta}}{\longrightarrow} & \blue{J} X \\
+ x & \longmapsto & \lambda p. x.
+\end{eqnarray*}
+\framebox{Produces a selection function for the singleton quantifier.}
+
+\overhead{Functors of the monads}
+
+Let \blue{$f \colon X \to Y$}.
+\begin{eqnarray*}
+  \blue{K} X & \stackrel{\blue{K} f}{\longrightarrow} & \blue{K} Y \\
+  \phi & \longmapsto & \lambda p.\phi(\lambda x. p(f(x))).
+\end{eqnarray*}
+\framebox{If $\phi$ quantifies over a set $\darkblue{S} \subseteq X$, then $\blue{K}f(\phi)$ quantifies over the set $\blue{f(S)} \subseteq Y$.}
+
+\begin{eqnarray*}
+  \blue{J} X & \stackrel{\blue{J} f}{\longrightarrow} & \blue{J} Y \\
+  \varepsilon & \longmapsto & \lambda p.f(\varepsilon(\lambda x. p(f(x)))).
+\end{eqnarray*}
+
+\framebox{If $\varepsilon$ is a selection function for $\phi$, then $\blue{J} f(\varepsilon)$ is a selection function for $\blue{K} f(\phi)$.}
+
+\overhead{Multiplications}
+
+They can be explained in intuitive terms, but this takes some time.
+
+\begin{eqnarray*}
+  \blue{K K} X & \stackrel{\mu}{\longrightarrow} & \blue{K} X \\
+  \Phi & \longmapsto &  \lambda p.\Phi(\lambda \phi.\phi(p)).
+\end{eqnarray*}
+
+\begin{eqnarray*}
+  \blue{J J} X & \stackrel{\mu}{\longrightarrow} & \blue{J} X \\
+  E & \longmapsto &  \lambda p.E(\lambda \varepsilon.p(\varepsilon(p)))(p).
+\end{eqnarray*}
+\vfill
+
+Use the selection function \darkblue{$E$} to find a selection function
+\darkblue{$\varepsilon$} such that \darkblue{$p(\varepsilon(p))$}, and
+apply this resulting selection function to \darkblue{$p$} to find an
+element of \darkblue{$X$}.
+
+
+
+\overhead{Monad algebras}
+
+$\blue{K} A \to A$. 
+
+\qquad $((A \to R) \to R) \to A$.
+
+\qquad  \darkblue{Double-negation elimination.}
+
+\framebox{Explains the G\"odel--Gentzen translation of classical into intuitionistic logic.}
+
+\vfill
+
+$\blue{J} A \to A$. 
+
+\qquad $((A \to R) \to A) \to A$.
+
+\qquad \darkblue{Peirce's Law.}
+
+\vfill
+
+\framebox{Get different proof translation of classical into intuitionistic logic.}
+
+\overhead{\darkred{Aside:} we get a more conceptual explanation of call/cc}
+
+The \darkblue{type} of call/cc can be written as $\darkblue{J K X \to K X}$. \\
+\grey{(An instance of Peirce's Law, as discovered by Tim Griffin.)}
+
+\vfill
+
+Its \darkblue{$\lambda$-term} can be reconstructed as follows:
+\begin{enumerate}
+\item[\grey{1.}] \darkblue{$K X$} is a \darkblue{$K$}-algebra, with structure map
+  $\darkblue{\mu \colon K K X \to K X}$.
+\item[\grey{2.}] Because we have a morphism \darkblue{$J \stackrel{\theta}{\longrightarrow}  K$}, every
+  \darkblue{$K$}-algebra is a \darkblue{$J$}-algebra:
+\[
+\darkblue{J A \stackrel{\theta_A}{\longrightarrow} K A \stackrel{\alpha}{\longrightarrow} A}.
+\]
+\item[\grey{3.}] Call/cc is what results for \darkblue{$A = K X$} and \darkblue{$\alpha = \mu$}:
+\[
+\darkblue{J K X \stackrel{\theta_{K X}}{\longrightarrow} K K X \stackrel{\mu}{\longrightarrow} K X}.
+\]
+\end{enumerate}
+
+\overhead{Strengths}
+
+\begin{eqnarray*}
+  X \times  \blue{K} Y & \stackrel{t}{\longrightarrow} & \blue{K}(X \times Y) \\
+  (x, \phi) & \longmapsto & \lambda p.\phi(\lambda y.p(x,y)).
+\end{eqnarray*}
+
+\framebox{If \darkblue{$\phi$} quantifies over \darkblue{$S \subseteq Y$}, then
+\darkblue{$t(x,\phi)$} quantifies over \darkblue{$\{x\} \times S
+  \subseteq X \times Y$}.}
+
+\begin{eqnarray*}
+  X \times  \blue{J} Y & \stackrel{t}{\longrightarrow} & \blue{J}(X \times Y) \\
+  (x, \varepsilon) & \longmapsto & \lambda p.(x,\varepsilon(\lambda y.p(x,y))).
+\end{eqnarray*}
+
+\framebox{This produces a selection function for the above quantifier.}
+
+\overhead{We have monoidal-monad structures}
+
+Because we have strong monads \darkblue{$T=J$} and \darkblue{$T=K$} on
+a ccc.
+
+\begin{eqnarray*}
+\blue{T} X \times \blue{T} Y & \stackrel{\otimes}{\longrightarrow} & \blue{T} (X \times Y ) \\
+(u, v) & \longmapsto & (T (\lambda x.t_{X,Y}(x, v)))(u) \text{~~~\darkgreen{$\longleftarrow$ we want this one},}\\
+(u, v) & \longmapsto & (T (\lambda y.t_{Y,X}(u, x)))(v) \text{~~~\,\darkred{$\longleftarrow$ not this one}.} \\
+\end{eqnarray*}
+
+\framebox{The monads are not commutative.} 
+
+And this is good!
+
+% \overhead{Monoidal monad structure}
+
+% \begin{eqnarray*}
+% \blue{T} X \times \blue{T} Y & \stackrel{\otimes}{\longrightarrow} & \blue{T} (X \times Y ) \\
+% (u, v) & \longmapsto & (T (\lambda x.t(x, v)))(u).
+% \end{eqnarray*}
+
+
+% \begin{enumerate}
+% \item Sequential games of length two.
+% \item Binary Tychonoff Theorem.
+% \item Bekic's Lemma. \grey{When $X=R$ and hence $JR = KR$, an element of $KR=((R \to R) \to R)$ is a fixed point operator iff it is its own selection function. Then Bekic's Lemma follows. }
+% \end{enumerate}
+
+\overhead{Examples}
+
+\begin{eqnarray*}
+\darkblue{K} X \times \darkblue{K} Y & \stackrel{\otimes}{\longrightarrow} & \blue{K} (X \times Y ) \\
+(\exists_A, \exists_B) & \longmapsto & \exists_{A \times B}.
+\end{eqnarray*}
+
+\vfill
+
+\begin{eqnarray*}
+\darkblue{K} X \times \darkblue{K} Y & \stackrel{\otimes}{\longrightarrow} & \blue{K} (X \times Y ) \\
+(\forall_A, \exists_B) & \longmapsto & \lambda p.\forall x \in A.\exists y \in B.p(x,y).
+\end{eqnarray*}
+
+\vfill
+
+The other choice of $\otimes$ concatenates the quantifiers in
+reverse order.
+
+\overhead{Because we have a strong monad morphism:}
+
+\[
+\darkblue{\overline{\varepsilon \otimes \delta} = \overline{\varepsilon} \otimes \overline{\delta}.}
+\]
+In other words:
+
+\vfill
+
+\darkgreen{Theorem.}
+
+\quad \darkgreen{If}
+
+\qquad \darkblue{$\varepsilon \in J X$} is a selection function for
+the quantifier \darkblue{$\phi \in K X$},
+
+\qquad \darkblue{$\delta \in J Y$} is a selection function for the
+quantifier \darkblue{$\gamma \in K Y$},
+
+\quad \darkgreen{then}
+
+\qquad \darkblue{$\varepsilon \otimes \delta$} is a selection function
+for the quantifier \darkblue{$\phi \otimes \gamma$}.
+
+% \darkblue{This is good for optimally playing games, as we'll see.}
+
+\overhead{Binary product of quantifiers and selection functions}
+
+In every pub there are a man~\darkblue{$b$} and a
+woman~\darkblue{$c$} such that if~\darkblue{$b$} buys a drink
+to~\darkblue{$c$} then every man buys a drink to some woman.
+
+\vfill
+
+\overhead{Binary product of quantifiers and selection functions}
+
+In every pub there are a man~\darkblue{$b$} and a
+woman~\darkblue{$c$} such that if~\darkblue{$b$} buys a drink
+to~\darkblue{$c$} then every man buys a drink to some woman.
+
+\vfill
+
+
+If \darkblue{$X = \text{set of men}$} and \darkblue{$Y = \text{set
+    of women}$}, and if we define % the combined quantifier
+\darkblue{$\phi = \forall \otimes \exists$} by
+\[
+\darkblue{\phi(p) = \left(\forall x \in X \,\, \exists y \in Y \,\, p(x,y)\right)},
+\]
+then our claim amounts to
+\[
+\darkblue{\phi(p) = p(a)}
+\]
+for a suitable pair \darkblue{$a = (b,c) \in X \times Y$},
+
+\vfill
+
+This is calculated as \blue{$a = (\varepsilon \otimes \delta)(p)$} where
+\blue{$\overline{\varepsilon} = \forall_X$} and \blue{$\overline{\delta} =
+\exists_Y$}.
+
+\overhead{The infinite strength of the selection monad}
+
+\darkblue{In certain categories of interest}
+
+There is a countable monoidal-monad structure
+\[
+\darkblue{\bigotimes} \colon \prod_n \blue{J} X_n \to \blue{J} \prod_n X_n 
+\]
+
+\darkblue{uniquely} determined by the equation
+\[
+\darkblue{\bigotimes_n \varepsilon_n = \varepsilon_o \otimes \bigotimes_n \varepsilon_{n+1}}.
+\]
+
+\framebox{Turns out to be an instance of the \darkblue{bar recursion} scheme.}
+
+
+\overhead{The continuation monad lacks infinite strength}
+
+However, if a sequence of quantifiers \darkblue{$\phi_n$} have
+selection functions \darkblue{$\varepsilon_n$},
+
+then their product can be defined as
+\[
+\darkblue{\bigotimes_n \phi_n = \overline{\bigotimes_n \varepsilon_n}}
+\]
+
+and satisfies
+
+\[
+\darkblue{\bigotimes_n \phi_n = \phi_o \otimes \bigotimes_n \phi_{n+1}}.
+\]
+
+This is useful for various applications.
+
+
+
+\overhead{Playing games}
+
+Products of selection functions compute \darkblue{optimal
+plays} and \darkblue{strategies}. 
+
+\overhead{First example}
+
+\darkblue{Alternating, two-person game.}
+
+\vfill
+
+\grey{1.}~\darkblue{Eloise} plays first, against
+\darkblue{Abelard}. One of them wins (no draw).
+
+\vfill
+
+\grey{2.}~The \darkblue{$i$-th} move is an
+element of the set \darkblue{$X_i$}.
+
+\vfill
+
+\grey{3.}~The game is defined by
+a predicate \darkblue{$p \colon \prod_{i} X_i \to \mathtt{Bool}$}
+\\ \phantom{xx} that tells whether Eloise wins
+a given play \darkblue{$x = (x_0, \dots, x_{n-1})$}. 
+% \in \prod_{i<n} X_i$}. 
+
+\vfill
+
+\grey{4.}~Eloise has a winning strategy for the
+game \darkblue{$p$} if and only if
+\[
+\darkblue{\exists x_0 \!\in\! X \forall x_1 \!\in\! Y\exists x_{2} \!\in\! X_{2} \forall x_{3} \!\in\! X_{3} \cdots p(x_0, x_1, x_2, x_3, \ldots)}.
+\]
+
+\overhead{First example}
+
+\grey{4.}~Eloise has a winning strategy for the game \darkblue{$p$} if
+and only if
+\[
+\darkblue{\exists x_0 \!\in\! X \forall x_1 \!\in\! Y\exists x_{2} \!\in\! X_{2} \forall x_{3} \!\in\! X_{3} \cdots p(x_0, x_1, x_2, x_3, \ldots)}.
+\]
+If we define
+\[
+  \darkblue{\phi_i =  
+  \begin{cases}
+    \exists_{X_i} & \text{if $i$ is even,} \\
+    \forall_{X_i} & \text{if $i$ is odd,} 
+  \end{cases}}
+\]
+
+then this condition for Eloise
+having a winning strategy amounts to
+
+\[ \darkblue{\left(\bigotimes_{i} \phi_i\right)(p)}. \] 
+
+
+\overhead{Second example}
+    
+Choose \darkblue{$R = \{-1,0,1\}$}
+instead, with the convention that 
+\[
+\darkblue{\begin{cases}
+ -1 = \text{Abelard wins,} & \\
+ \phantom{-}0 = \text{draw}, & \\
+ \phantom{-}1 = \text{Eloise wins.} & 
+\end{cases}}
+\]
+The existential and universal quantifiers get
+replaced by \darkblue{$\sup$} and \darkblue{$\inf$}:
+\[
+  \darkblue{\phi_i =  
+  \begin{cases}
+    \sup_{X_i} & \text{if $i$ is even,} \\
+    \inf_{X_i} & \text{if $i$ is odd.} 
+  \end{cases}}
+\]
+The optimal outcome is calculated as \darkblue{$\bigotimes_{i}
+  \phi_i$}, which %in this case 
+amounts to
+\[\darkblue{\darkblue{\sup_{x_0 \!\in\! X_0} \inf_{x_1 \!\in\! Y}\sup_{x_{2} \!\in\! X_{2}} \inf_{x_{3} \!\in\! X_{3}} \cdots p(x_0, x_1, x_2, x_3, \ldots)}}.
+\]
+
+% \darkblue{$-1$} if Abelard has a winning strategy, \darkblue{0} if
+% the game is a draw, \darkblue{1} if Eloise has a winning strategy.
+
+\overhead{General non-history dependent case}
+
+A \darkblue{sequential game} is given by
+\begin{enumerate}
+\item[\grey{1.}] Sets of moves \darkblue{$X_0, X_1, X_2, \dots$}.
+\item[\grey{2.}] A set \darkblue{$R$} of possible outcomes.
+\item[\grey{3.}] An outcome function \darkblue{$p \colon \prod_i X_i \to R$},
+\item[\grey{4.}] A quantifier \darkblue{$\phi_i \in K X_i$} for each stage of the game.
+\item[\grey{5.}] Optionally a selection function
+  \darkblue{$\varepsilon_i$} for the quantifier \darkblue{$\phi_i$}.
+\end{enumerate}
+
+\vfill
+
+\framebox{These are games in \darkblue{normal form}.}
+
+For games in \darkblue{extensive form}, the outcome function is
+presented as a tree.
+
+
+\overhead{Calculating the optimal outcome of a game}
+
+The value
+\[ \darkblue{\left(\bigotimes_{i} \phi_i\right)(p)} \]
+
+gives the \darkblue{optimal outcome} of the game.
+
+\vfill
+
+\framebox{This takes place when all players play as best as they can.}
+
+\vfill
+
+In the first example, the optimal outcome is
+\darkblue{$\mathtt{True}$} if Eloise has a winning strategy, and
+\darkblue{$\mathtt{False}$} if Abelard has a winning strategy.
+
+\overhead{Calculating an optimal play}
+
+Suppose each quantifier \darkblue{$\phi_i$} has a selection function
+\darkblue{$\varepsilon_i$}.
+
+% (thought of as a policy function for the \darkblue{$i$-th} move).
+
+\vfill
+
+\darkgreen{Theorem.}
+The sequence \[ \darkblue{a = (a_0,a_1, \dots,a_{i},\dots) = \left(\bigotimes_{i}
+    \varepsilon_i\right)(p)}\] is an \darkblue{optimal play}. 
+
+\vfill
+
+\framebox{\parbox{60ex}{This means that for every stage
+    \darkblue{$i$} of the game, the move \darkblue{$a_i$} is optimal
+    given that the moves \darkblue{$a_0,\dots,a_{i-1}$} have been
+    played.}}
+
+\overhead{Calculating an optimal strategy}
+
+For a \darkgreen{partial play} \darkblue{$a \in \prod_{\darkgreen{i < k}} X_i$},
+we have a \darkgreen{subgame} \darkblue{$p_a \colon \prod_{\darkgreen{i \ge k}} X_i
+  \to R$},
+\[
+\darkblue{p_a(x) = p(a \cdot x).}
+\]
+
+\darkgreen{Corollary.}
+The function \darkblue{$f_k : \prod_{i < k} X_i
+\to X_k$} defined by %, for $k < n-1$,
+        \[
+        \darkblue{f_k(a) = \left(\left(\bigotimes_{i=k}^{n-1}
+    \varepsilon_i\right)(p_a )\right)_0}
+        \]
+
+    is an \darkblue{optimal strategy} for playing the game. 
+
+\vfill
+
+\framebox{\parbox{60ex}{This means that given that the sequence of moves
+\darkblue{$a_0,\dots,a_{k-1}$} have been played, the move
+\darkblue{$a_k=f_k(a_0,\dots,a_{k-1})$} is optimal.}}
+
+\overhead{Program extraction from classical proofs with choice}
+
+Start with intuitionistic choice
+\[
+\forall i \in I \left(\exists x \in X_i \left(A(i,x)\right)\right)
+\implies 
+\exists \vec{x} \in \prod_i X_i\left(\forall i \in I\left(A(i,x_i)\right) \right).
+\]
+
+\vfill
+
+Apply the \darkblue{$T$}-translation, say for \darkblue{$T=K$} or
+\darkblue{$T=J$}:
+\[
+\forall i \in I \left(\darkblue{T} \exists x \in X_i \left(A(i,x)\right)\right)
+\implies 
+\darkblue{T} \exists \vec{x} \in \prod_i X_i\left(\forall i \in I\left(A(i,x_i)\right) \right).
+\]
+\framebox{Is that realizable?}
+
+\overhead{The $J$-shift}
+
+Think of \darkblue{$JA = ((A \to R) \to A)$} as a logical \darkgreen{modality}.
+
+\vfill
+
+\darkgreen{Theorem}
+
+The product functional \darkblue{$\darkgreen{\bigotimes} \colon \prod_n J X_n \to
+J\left(\prod_n X_n\right)$} realizes the \darkgreen{$J$-shift} \\[2ex]
+\[
+\darkblue{\forall n (J(A(n)) \to
+J\left(\forall n(A(n))\right)}.
+\]
+
+\vfill
+
+\grey{To guess the theorem, apply Curry--Howard.}
+
+\grey{To prove it, use bar induction.}
+
+
+\overhead{Countable choice}
+
+\grey{1.} Start again with intuitionistic choice, but countable this time:
+\[
+\forall n \in \N \left(\exists x \in X_n \left(A(n,x)\right)\right)
+\implies 
+\exists \vec{x} \in \prod_n X_n\left(\forall n \in \N\left(A(n,x_n)\right) \right).
+\]
+\grey{2.} Apply the functor \darkgreen{$J$}:
+\[
+\darkgreen{J} \darkgreen{\left(\black{\forall n \in \N \left(\exists x \in X_n \left(A(n,x)\right)\right)}\right)}
+\implies 
+\darkgreen{J}
+\exists \vec{x} \in \prod_n X_n\left(\forall n \in \N\left(A(n,x_n)\right) \right).
+\]
+\grey{3.} Finally pre-compose with the instance of the \darkgreen{$J$-shift} 
+\[
+\forall n \in \N \left(\darkgreen{J} \exists x \in X_n \left(A(n,x)\right)\right)
+\implies
+\darkgreen{J} \left(\black{\forall n \in \N \left(\exists x \in X_n \left(A(n,x)\right)\right)}\right).
+\]
+% to get the \darkgreen{$J$}-translation of choice.
+
+\framebox{\darkgreen{Theorem.} The \darkgreen{$J$}-translation of countable choice is realizable.}
+
+\overhead{Countable choice}
+
+\grey{1.} Start again with intuitionistic choice, but countable this time:
+\[
+\forall n \in \N \left(\exists x \in X_n \left(A(n,x)\right)\right)
+\implies 
+\exists \vec{x} \in \prod_n X_n\left(\forall n \in \N\left(A(n,x_n)\right) \right).
+\]
+\grey{2.} Apply the functor \darkgreen{$J$}:
+\[
+\underline{\darkgreen{J} \darkgreen{\left(\black{\forall n \in \N \left(\exists x \in X_n \left(A(n,x)\right)\right)}\right)}}
+\implies 
+\darkgreen{J}
+\exists \vec{x} \in \prod_n X_n\left(\forall n \in \N\left(A(n,x_n)\right) \right).
+\]
+\grey{3.} Finally pre-compose with the instance of the \darkgreen{$J$-shift} 
+\[
+\forall n \in \N \left(\darkgreen{J} \exists x \in X_n \left(A(n,x)\right)\right)
+\implies
+\underline{\darkgreen{J} \left(\black{\forall n \in \N \left(\exists x \in X_n \left(A(n,x)\right)\right)}\right)}.
+\]
+% to get the \darkgreen{$J$}-translation of choice.
+
+\framebox{\darkgreen{Theorem.} The \darkgreen{$J$}-translation of countable choice is realizable.}
+
+
+\overhead{Topology and computation}
+
+\vfill
+
+\framebox{I need a large class of topological spaces to formulate a
+  computational theorem.}
+
+\vfill
+
+\darkgreen{Kleene--Kreisel spaces} are good for total higher-type
+computation.
+
+\vfill
+
+But perhaps a bit limited.
+
+\vfill
+
+\darkgreen{Enlarge} by closing under retracts. 
+
+\vfill
+
+Denote by \darkblue{$2=\{0,1\}$} the space of booleans.
+
+\overhead{Effective compactness}
+
+
+
+\vfill
+
+\grey{1.} \darkgreen{Theorem} (topological).
+
+~~~ A space \darkblue{$X$} is compact \darkgreen{$\iff$}
+has a continuous quantifier \darkblue{$(X \to 2)
+\to 2$}.
+
+\vfill
+
+\grey{2.} \darkgreen{Definition} (computational).
+
+~~~~ A space \darkblue{$X$} is \darkgreen{effectively compact} if it has a computable
+quantifier \darkblue{$(X \to 2) \to 2$}.
+
+\vfill
+
+\grey{3.} \darkgreen{Theorem} (computational).
+
+~~~ A space \darkblue{$X$} is effectively compact \darkgreen{$\iff$} \\
+\phantom{xxx}it has a computable selection function \darkblue{$(X \to 2) \to X$}.
+% for its existential quantifier.
+
+\vfill
+
+\framebox{This says that two different, common forms of exhaustive search are equivalent.}
+
+\overhead{Computational Tychonoff Theorem}
+
+\darkgreen{Theorem} 
+
+Effectively compact spaces are closed under the formation of countable products.
+
+\vfill
+
+\framebox{This is implemented again by the infinite product of selection functions.}
+
+\vfill
+
+\grey{We have a Haskell implementation that runs fast in counter-intuitive examples.}
+
+
+\overhead{Conclusion}
+
+\vfill
+
+\begin{center}
+\Huge Selection functions everywhere.
+\end{center}
+
+\vfill
+
+\overhead{\darkred{Appendix}}
+
+\overhead{The monads defined as Kleisli triples}
+
+Define the (internalized) extension operators:
+\begin{eqnarray*}
+  (X \to K Y) & \to & (KX \to KY) \\
+    f & \mapsto & f^\sharp \\
+    f & \mapsto & \lambda \phi.\lambda p.(\phi(\lambda x.p(f x))). 
+\end{eqnarray*}
+
+\vfill
+
+\darkblue{Example:} Take $\darkblue{X=Y=\N}$ and $\darkblue{f(k)(p) = \exists n < k(p(k))}$. 
+Then 
+\[
+\darkblue{f^\sharp(\forall_N)(p) = \forall k \in \N(\exists n < k(p(k)))}.
+\]
+
+\overhead{Kleisli extension for $J$}
+
+
+\begin{eqnarray*}
+  (X \to J Y) & \to & (JX \to JY) \\
+   g & \mapsto & g^\sharp. \\
+%   g & \mapsto & \lambda \varepsilon.\lambda p.(g(\varepsilon(\lambda x.p(g x p))) p.
+\end{eqnarray*}
+For a suitable \darkblue{$x \in X$} constructed from \darkblue{$\varepsilon$}, we will define:
+$
+\darkblue{g^\sharp(\varepsilon)(p) = g x p}.
+$
+
+Before such an \darkblue{$x \in X$} is available, we abstract it: 
+\darkblue{$\lambda x.g x p$}.
+
+But now we can apply \darkblue{$\varepsilon$} to this, to find
+\darkblue{$x_0 \stackrel{\text{def}}{=} \varepsilon(\lambda x.g x p) \in X$}, and define
+\[
+\darkblue{g^\sharp(\varepsilon)(p) = g x_0 p}.
+\]
+Expanding the definition, we get $\darkblue{g^\sharp(\varepsilon)(p) = g (\varepsilon(\lambda x.g x p)) p}$.
+
+
+\overhead{Extension operators related by the monad morphism}
+
+\[
+\darkblue{\overline{g^\sharp(\varepsilon)} = \left(\lambda x.\overline{g(x)}\right)^\sharp(\overline{\varepsilon})}.
+\]
+In other words:
+
+\vfill
+
+\darkgreen{Theorem.}
+Let \darkblue{$f \colon X \to KY$} and \darkblue{$g \colon X \to JY$}. 
+
+\darkgreen{If} \darkblue{$g(x) \in J Y$} is a selection function of the
+quantifier \darkblue{$f(x) \in KY$} for all \darkblue{$x \in X$},
+
+\darkgreen{and} \darkblue{$\varepsilon \in KY$} is a selection
+function for the quantifier \darkblue{$\phi \in KX$},
+
+\darkgreen{then} \darkblue{$g^\sharp(\varepsilon) \in J X$} is a
+selection function for the quantifier \darkblue{$f^\sharp(\phi) \in K
+  X$}.
+
+
+\end{document}

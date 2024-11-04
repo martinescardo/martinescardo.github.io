@@ -1,0 +1,4865 @@
+%!PS-Adobe-2.0
+%%Creator: dot version 2.8 (Wed Dec 20 14:50:18 UTC 2006)
+%%For: (mhe) Martin Escardo,,,
+%%Title: solution6
+%%Pages: (atend)
+%%BoundingBox: 36 36 1238 4544
+%%EndComments
+save
+%%BeginProlog
+/DotDict 200 dict def
+DotDict begin
+
+/setupLatin1 {
+mark
+/EncodingVector 256 array def
+ EncodingVector 0
+
+ISOLatin1Encoding 0 255 getinterval putinterval
+EncodingVector 45 /hyphen put
+
+% Set up ISO Latin 1 character encoding
+/starnetISO {
+        dup dup findfont dup length dict begin
+        { 1 index /FID ne { def }{ pop pop } ifelse
+        } forall
+        /Encoding EncodingVector def
+        currentdict end definefont
+} def
+/Times-Roman starnetISO def
+/Times-Italic starnetISO def
+/Times-Bold starnetISO def
+/Times-BoldItalic starnetISO def
+/Helvetica starnetISO def
+/Helvetica-Oblique starnetISO def
+/Helvetica-Bold starnetISO def
+/Helvetica-BoldOblique starnetISO def
+/Courier starnetISO def
+/Courier-Oblique starnetISO def
+/Courier-Bold starnetISO def
+/Courier-BoldOblique starnetISO def
+cleartomark
+} bind def
+
+%%BeginResource: procset graphviz 0 0
+/coord-font-family /Times-Roman def
+/default-font-family /Times-Roman def
+/coordfont coord-font-family findfont 8 scalefont def
+
+/InvScaleFactor 1.0 def
+/set_scale {
+	dup 1 exch div /InvScaleFactor exch def
+	dup scale
+} bind def
+
+% styles
+/solid { [] 0 setdash } bind def
+/dashed { [9 InvScaleFactor mul dup ] 0 setdash } bind def
+/dotted { [1 InvScaleFactor mul 6 InvScaleFactor mul] 0 setdash } bind def
+/invis {/fill {newpath} def /stroke {newpath} def /show {pop newpath} def} bind def
+/bold { 2 setlinewidth } bind def
+/filled { } bind def
+/unfilled { } bind def
+/rounded { } bind def
+/diagonals { } bind def
+
+% hooks for setting color 
+/nodecolor { sethsbcolor } bind def
+/edgecolor { sethsbcolor } bind def
+/graphcolor { sethsbcolor } bind def
+/nopcolor {pop pop pop} bind def
+
+/beginpage {	% i j npages
+	/npages exch def
+	/j exch def
+	/i exch def
+	/str 10 string def
+	npages 1 gt {
+		gsave
+			coordfont setfont
+			0 0 moveto
+			(\() show i str cvs show (,) show j str cvs show (\)) show
+		grestore
+	} if
+} bind def
+
+/set_font {
+	findfont exch
+	scalefont setfont
+} def
+
+% draw aligned label in bounding box aligned to current point
+/alignedtext {			% width adj text
+	/text exch def
+	/adj exch def
+	/width exch def
+	gsave
+		width 0 gt {
+			text stringwidth pop adj mul 0 rmoveto
+		} if
+		[] 0 setdash
+		text show
+	grestore
+} def
+
+/boxprim {				% xcorner ycorner xsize ysize
+		4 2 roll
+		moveto
+		2 copy
+		exch 0 rlineto
+		0 exch rlineto
+		pop neg 0 rlineto
+		closepath
+} bind def
+
+/ellipse_path {
+	/ry exch def
+	/rx exch def
+	/y exch def
+	/x exch def
+	matrix currentmatrix
+	newpath
+	x y translate
+	rx ry scale
+	0 0 1 0 360 arc
+	setmatrix
+} bind def
+
+/endpage { showpage } bind def
+/showpage { } def
+
+/layercolorseq
+	[	% layer color sequence - darkest to lightest
+		[0 0 0]
+		[.2 .8 .8]
+		[.4 .8 .8]
+		[.6 .8 .8]
+		[.8 .8 .8]
+	]
+def
+
+/layerlen layercolorseq length def
+
+/setlayer {/maxlayer exch def /curlayer exch def
+	layercolorseq curlayer 1 sub layerlen mod get
+	aload pop sethsbcolor
+	/nodecolor {nopcolor} def
+	/edgecolor {nopcolor} def
+	/graphcolor {nopcolor} def
+} bind def
+
+/onlayer { curlayer ne {invis} if } def
+
+/onlayers {
+	/myupper exch def
+	/mylower exch def
+	curlayer mylower lt
+	curlayer myupper gt
+	or
+	{invis} if
+} def
+
+/curlayer 0 def
+
+%%EndResource
+%%EndProlog
+%%BeginSetup
+14 default-font-family set_font
+1 setmiterlimit
+% /arrowlength 10 def
+% /arrowwidth 5 def
+
+% make sure pdfmark is harmless for PS-interpreters other than Distiller
+/pdfmark where {pop} {userdict /pdfmark /cleartomark load put} ifelse
+% make '<<' and '>>' safe on PS Level 1 devices
+/languagelevel where {pop languagelevel}{1} ifelse
+2 lt {
+    userdict (<<) cvn ([) cvn load put
+    userdict (>>) cvn ([) cvn load put
+} if
+
+%%EndSetup
+%%Page: 1 1
+%%PageBoundingBox: 36 36 1238 4544
+%%PageOrientation: Portrait
+gsave
+36 36 1202 4508 boxprim clip newpath
+36 36 translate
+0 0 1 beginpage
+1.0000 set_scale
+4 4 translate 0 rotate
+0.000 0.000 1.000 graphcolor
+0.000 0.000 1.000 graphcolor
+newpath -6 -6 moveto
+-6 4506 lineto
+1200 4506 lineto
+1200 -6 lineto
+closepath
+fill
+0.000 0.000 1.000 graphcolor
+newpath -6 -6 moveto
+-6 4506 lineto
+1200 4506 lineto
+1200 -6 lineto
+closepath
+stroke
+0.000 0.000 0.000 graphcolor
+14.00 /Times-Roman set_font
+% x0
+gsave 10 dict begin
+714 4482 27 18 ellipse_path
+stroke
+gsave 10 dict begin
+706 4477 moveto
+(x0)
+[6.96 6.96]
+xshow
+end grestore
+end grestore
+% x1
+gsave 10 dict begin
+714 4410 27 18 ellipse_path
+stroke
+gsave 10 dict begin
+706 4405 moveto
+(x1)
+[6.96 6.96]
+xshow
+end grestore
+end grestore
+% x0->x1
+newpath 714 4464 moveto
+714 4456 714 4447 714 4438 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.000 0.000 0.000 edgecolor
+newpath 718 4438 moveto
+714 4428 lineto
+711 4438 lineto
+closepath
+fill
+0.000 0.000 0.000 edgecolor
+newpath 718 4438 moveto
+714 4428 lineto
+711 4438 lineto
+closepath
+stroke
+end grestore
+% x2
+gsave 10 dict begin
+742 4338 27 18 ellipse_path
+stroke
+gsave 10 dict begin
+734 4333 moveto
+(x2)
+[6.96 6.96]
+xshow
+end grestore
+end grestore
+% x1->x2
+newpath 721 4393 moveto
+724 4384 728 4374 732 4365 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.000 0.000 0.000 edgecolor
+newpath 735 4366 moveto
+735 4355 lineto
+729 4364 lineto
+closepath
+fill
+0.000 0.000 0.000 edgecolor
+newpath 735 4366 moveto
+735 4355 lineto
+729 4364 lineto
+closepath
+stroke
+end grestore
+% x3
+gsave 10 dict begin
+714 4266 27 18 ellipse_path
+stroke
+gsave 10 dict begin
+706 4261 moveto
+(x3)
+[6.96 6.96]
+xshow
+end grestore
+end grestore
+% x1->x3
+newpath 710 4392 moveto
+709 4382 707 4368 706 4356 curveto
+704 4340 704 4335 706 4320 curveto
+706 4312 707 4302 708 4294 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.000 0.000 0.000 edgecolor
+newpath 711 4294 moveto
+710 4284 lineto
+705 4293 lineto
+closepath
+fill
+0.000 0.000 0.000 edgecolor
+newpath 711 4294 moveto
+710 4284 lineto
+705 4293 lineto
+closepath
+stroke
+end grestore
+% x2->x3
+newpath 735 4321 moveto
+732 4312 728 4302 724 4293 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.000 0.000 0.000 edgecolor
+newpath 727 4292 moveto
+721 4283 lineto
+721 4294 lineto
+closepath
+fill
+0.000 0.000 0.000 edgecolor
+newpath 727 4292 moveto
+721 4283 lineto
+721 4294 lineto
+closepath
+stroke
+end grestore
+% x4
+gsave 10 dict begin
+742 4194 27 18 ellipse_path
+stroke
+gsave 10 dict begin
+734 4189 moveto
+(x4)
+[6.96 6.96]
+xshow
+end grestore
+end grestore
+% x3->x4
+newpath 721 4249 moveto
+724 4240 728 4230 732 4221 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.000 0.000 0.000 edgecolor
+newpath 735 4222 moveto
+735 4211 lineto
+729 4220 lineto
+closepath
+fill
+0.000 0.000 0.000 edgecolor
+newpath 735 4222 moveto
+735 4211 lineto
+729 4220 lineto
+closepath
+stroke
+end grestore
+% x5
+gsave 10 dict begin
+723 4122 27 18 ellipse_path
+stroke
+gsave 10 dict begin
+715 4117 moveto
+(x5)
+[6.96 6.96]
+xshow
+end grestore
+end grestore
+% x3->x5
+newpath 710 4248 moveto
+706 4230 702 4201 706 4176 curveto
+707 4167 710 4158 713 4150 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.000 0.000 0.000 edgecolor
+newpath 716 4151 moveto
+716 4140 lineto
+710 4149 lineto
+closepath
+fill
+0.000 0.000 0.000 edgecolor
+newpath 716 4151 moveto
+716 4140 lineto
+710 4149 lineto
+closepath
+stroke
+end grestore
+% x6
+gsave 10 dict begin
+760 4050 27 18 ellipse_path
+stroke
+gsave 10 dict begin
+752 4045 moveto
+(x6)
+[6.96 6.96]
+xshow
+end grestore
+end grestore
+% x3->x6
+newpath 735 4254 moveto
+750 4245 769 4230 778 4212 curveto
+798 4168 783 4110 772 4077 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.000 0.000 0.000 edgecolor
+newpath 775 4075 moveto
+768 4067 lineto
+768 4078 lineto
+closepath
+fill
+0.000 0.000 0.000 edgecolor
+newpath 775 4075 moveto
+768 4067 lineto
+768 4078 lineto
+closepath
+stroke
+end grestore
+% x7
+gsave 10 dict begin
+705 3978 27 18 ellipse_path
+stroke
+gsave 10 dict begin
+697 3973 moveto
+(x7)
+[6.96 6.96]
+xshow
+end grestore
+end grestore
+% x3->x7
+newpath 708 4248 moveto
+705 4238 702 4224 699 4212 curveto
+688 4164 684 4152 687 4104 curveto
+690 4070 695 4031 700 4006 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.000 0.000 0.000 edgecolor
+newpath 703 4006 moveto
+702 3996 lineto
+697 4005 lineto
+closepath
+fill
+0.000 0.000 0.000 edgecolor
+newpath 703 4006 moveto
+702 3996 lineto
+697 4005 lineto
+closepath
+stroke
+end grestore
+% x4->x5
+newpath 737 4176 moveto
+735 4168 733 4159 731 4150 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.000 0.000 0.000 edgecolor
+newpath 734 4149 moveto
+728 4140 lineto
+728 4151 lineto
+closepath
+fill
+0.000 0.000 0.000 edgecolor
+newpath 734 4149 moveto
+728 4140 lineto
+728 4151 lineto
+closepath
+stroke
+end grestore
+% x5->x6
+newpath 732 4105 moveto
+737 4097 742 4086 747 4076 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.000 0.000 0.000 edgecolor
+newpath 750 4078 moveto
+751 4067 lineto
+744 4075 lineto
+closepath
+fill
+0.000 0.000 0.000 edgecolor
+newpath 750 4078 moveto
+751 4067 lineto
+744 4075 lineto
+closepath
+stroke
+end grestore
+% x5->x7
+newpath 721 4104 moveto
+717 4079 712 4035 708 4006 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.000 0.000 0.000 edgecolor
+newpath 711 4006 moveto
+707 3996 lineto
+705 4006 lineto
+closepath
+fill
+0.000 0.000 0.000 edgecolor
+newpath 711 4006 moveto
+707 3996 lineto
+705 4006 lineto
+closepath
+stroke
+end grestore
+% x6->x7
+newpath 748 4034 moveto
+741 4025 731 4013 723 4002 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.000 0.000 0.000 edgecolor
+newpath 726 4000 moveto
+717 3994 lineto
+720 4004 lineto
+closepath
+fill
+0.000 0.000 0.000 edgecolor
+newpath 726 4000 moveto
+717 3994 lineto
+720 4004 lineto
+closepath
+stroke
+end grestore
+% x8
+gsave 10 dict begin
+593 3906 27 18 ellipse_path
+stroke
+gsave 10 dict begin
+585 3901 moveto
+(x8)
+[6.96 6.96]
+xshow
+end grestore
+end grestore
+% x7->x8
+newpath 685 3965 moveto
+668 3954 641 3937 622 3925 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.000 0.000 0.000 edgecolor
+newpath 623 3922 moveto
+613 3919 lineto
+619 3927 lineto
+closepath
+fill
+0.000 0.000 0.000 edgecolor
+newpath 623 3922 moveto
+613 3919 lineto
+619 3927 lineto
+closepath
+stroke
+end grestore
+% x9
+gsave 10 dict begin
+623 3834 27 18 ellipse_path
+stroke
+gsave 10 dict begin
+615 3829 moveto
+(x9)
+[6.96 6.96]
+xshow
+end grestore
+end grestore
+% x7->x9
+newpath 695 3961 moveto
+688 3950 680 3936 672 3924 curveto
+660 3903 647 3878 637 3860 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.000 0.000 0.000 edgecolor
+newpath 640 3858 moveto
+632 3851 lineto
+634 3861 lineto
+closepath
+fill
+0.000 0.000 0.000 edgecolor
+newpath 640 3858 moveto
+632 3851 lineto
+634 3861 lineto
+closepath
+stroke
+end grestore
+% x10
+gsave 10 dict begin
+669 3762 27 18 ellipse_path
+stroke
+gsave 10 dict begin
+657 3757 moveto
+(x10)
+[6.96 6.96 6.96]
+xshow
+end grestore
+end grestore
+% x7->x10
+newpath 702 3960 moveto
+696 3922 681 3835 674 3790 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.000 0.000 0.000 edgecolor
+newpath 677 3789 moveto
+672 3780 lineto
+671 3790 lineto
+closepath
+fill
+0.000 0.000 0.000 edgecolor
+newpath 677 3789 moveto
+672 3780 lineto
+671 3790 lineto
+closepath
+stroke
+end grestore
+% x11
+gsave 10 dict begin
+669 3690 27 18 ellipse_path
+stroke
+gsave 10 dict begin
+657 3685 moveto
+(x11)
+[6.96 6.96 6.96]
+xshow
+end grestore
+end grestore
+% x7->x11
+newpath 708 3960 moveto
+715 3920 728 3821 705 3744 curveto
+701 3734 695 3723 689 3714 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.000 0.000 0.000 edgecolor
+newpath 692 3712 moveto
+683 3706 lineto
+686 3716 lineto
+closepath
+fill
+0.000 0.000 0.000 edgecolor
+newpath 692 3712 moveto
+683 3706 lineto
+686 3716 lineto
+closepath
+stroke
+end grestore
+% x12
+gsave 10 dict begin
+745 3618 27 18 ellipse_path
+stroke
+gsave 10 dict begin
+733 3613 moveto
+(x12)
+[6.96 6.96 6.96]
+xshow
+end grestore
+end grestore
+% x7->x12
+newpath 716 3961 moveto
+733 3935 762 3883 762 3834 curveto
+762 3834 762 3834 762 3762 curveto
+762 3721 756 3675 751 3646 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.000 0.000 0.000 edgecolor
+newpath 754 3645 moveto
+749 3636 lineto
+748 3646 lineto
+closepath
+fill
+0.000 0.000 0.000 edgecolor
+newpath 754 3645 moveto
+749 3636 lineto
+748 3646 lineto
+closepath
+stroke
+end grestore
+% x13
+gsave 10 dict begin
+724 3546 27 18 ellipse_path
+stroke
+gsave 10 dict begin
+712 3541 moveto
+(x13)
+[6.96 6.96 6.96]
+xshow
+end grestore
+end grestore
+% x7->x13
+newpath 722 3964 moveto
+750 3940 800 3889 800 3834 curveto
+800 3834 800 3834 800 3690 curveto
+800 3649 800 3635 781 3600 curveto
+773 3586 761 3575 751 3566 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.000 0.000 0.000 edgecolor
+newpath 753 3563 moveto
+743 3559 lineto
+748 3568 lineto
+closepath
+fill
+0.000 0.000 0.000 edgecolor
+newpath 753 3563 moveto
+743 3559 lineto
+748 3568 lineto
+closepath
+stroke
+end grestore
+% x14
+gsave 10 dict begin
+669 3474 27 18 ellipse_path
+stroke
+gsave 10 dict begin
+657 3469 moveto
+(x14)
+[6.96 6.96 6.96]
+xshow
+end grestore
+end grestore
+% x7->x14
+newpath 727 3967 moveto
+765 3947 838 3899 838 3834 curveto
+838 3834 838 3834 838 3618 curveto
+838 3548 752 3505 704 3486 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.000 0.000 0.000 edgecolor
+newpath 705 3482 moveto
+694 3482 lineto
+702 3489 lineto
+closepath
+fill
+0.000 0.000 0.000 edgecolor
+newpath 705 3482 moveto
+694 3482 lineto
+702 3489 lineto
+closepath
+stroke
+end grestore
+% x15
+gsave 10 dict begin
+641 3402 27 18 ellipse_path
+stroke
+gsave 10 dict begin
+629 3397 moveto
+(x15)
+[6.96 6.96 6.96]
+xshow
+end grestore
+end grestore
+% x7->x15
+newpath 678 3976 moveto
+644 3971 588 3959 557 3924 curveto
+531 3893 538 3874 538 3834 curveto
+538 3834 538 3834 538 3546 curveto
+538 3493 584 3447 615 3422 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.000 0.000 0.000 edgecolor
+newpath 618 3424 moveto
+623 3415 lineto
+613 3419 lineto
+closepath
+fill
+0.000 0.000 0.000 edgecolor
+newpath 618 3424 moveto
+623 3415 lineto
+613 3419 lineto
+closepath
+stroke
+end grestore
+% x8->x9
+newpath 600 3889 moveto
+604 3880 608 3870 612 3860 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.000 0.000 0.000 edgecolor
+newpath 615 3862 moveto
+616 3851 lineto
+609 3859 lineto
+closepath
+fill
+0.000 0.000 0.000 edgecolor
+newpath 615 3862 moveto
+616 3851 lineto
+609 3859 lineto
+closepath
+stroke
+end grestore
+% x9->x10
+newpath 634 3817 moveto
+639 3809 646 3797 652 3788 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.000 0.000 0.000 edgecolor
+newpath 655 3789 moveto
+658 3779 lineto
+650 3785 lineto
+closepath
+fill
+0.000 0.000 0.000 edgecolor
+newpath 655 3789 moveto
+658 3779 lineto
+650 3785 lineto
+closepath
+stroke
+end grestore
+% x9->x11
+newpath 623 3816 moveto
+623 3797 625 3767 633 3744 curveto
+637 3734 643 3723 649 3714 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.000 0.000 0.000 edgecolor
+newpath 652 3716 moveto
+655 3706 lineto
+646 3712 lineto
+closepath
+fill
+0.000 0.000 0.000 edgecolor
+newpath 652 3716 moveto
+655 3706 lineto
+646 3712 lineto
+closepath
+stroke
+end grestore
+% x10->x11
+newpath 669 3744 moveto
+669 3736 669 3727 669 3718 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.000 0.000 0.000 edgecolor
+newpath 673 3718 moveto
+669 3708 lineto
+666 3718 lineto
+closepath
+fill
+0.000 0.000 0.000 edgecolor
+newpath 673 3718 moveto
+669 3708 lineto
+666 3718 lineto
+closepath
+stroke
+end grestore
+% x11->x12
+newpath 685 3675 moveto
+696 3665 710 3651 722 3640 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.000 0.000 0.000 edgecolor
+newpath 724 3643 moveto
+729 3633 lineto
+719 3638 lineto
+closepath
+fill
+0.000 0.000 0.000 edgecolor
+newpath 724 3643 moveto
+729 3633 lineto
+719 3638 lineto
+closepath
+stroke
+end grestore
+% x11->x13
+newpath 676 3672 moveto
+685 3648 702 3603 713 3574 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.000 0.000 0.000 edgecolor
+newpath 717 3575 moveto
+717 3564 lineto
+710 3572 lineto
+closepath
+fill
+0.000 0.000 0.000 edgecolor
+newpath 717 3575 moveto
+717 3564 lineto
+710 3572 lineto
+closepath
+stroke
+end grestore
+% x11->x14
+newpath 669 3672 moveto
+669 3634 669 3547 669 3502 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.000 0.000 0.000 edgecolor
+newpath 673 3502 moveto
+669 3492 lineto
+666 3502 lineto
+closepath
+fill
+0.000 0.000 0.000 edgecolor
+newpath 673 3502 moveto
+669 3492 lineto
+666 3502 lineto
+closepath
+stroke
+end grestore
+% x11->x15
+newpath 664 3672 moveto
+652 3633 628 3537 633 3456 curveto
+634 3448 635 3438 636 3430 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.000 0.000 0.000 edgecolor
+newpath 639 3430 moveto
+638 3420 lineto
+633 3429 lineto
+closepath
+fill
+0.000 0.000 0.000 edgecolor
+newpath 639 3430 moveto
+638 3420 lineto
+633 3429 lineto
+closepath
+stroke
+end grestore
+% x12->x13
+newpath 740 3600 moveto
+738 3592 735 3582 732 3574 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.000 0.000 0.000 edgecolor
+newpath 735 3573 moveto
+729 3564 lineto
+729 3575 lineto
+closepath
+fill
+0.000 0.000 0.000 edgecolor
+newpath 735 3573 moveto
+729 3564 lineto
+729 3575 lineto
+closepath
+stroke
+end grestore
+% x13->x14
+newpath 712 3530 moveto
+705 3521 695 3509 687 3498 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.000 0.000 0.000 edgecolor
+newpath 690 3496 moveto
+681 3490 lineto
+684 3500 lineto
+closepath
+fill
+0.000 0.000 0.000 edgecolor
+newpath 690 3496 moveto
+681 3490 lineto
+684 3500 lineto
+closepath
+stroke
+end grestore
+% x13->x15
+newpath 723 3528 moveto
+722 3509 718 3478 705 3456 curveto
+696 3441 683 3429 670 3420 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.000 0.000 0.000 edgecolor
+newpath 672 3417 moveto
+662 3414 lineto
+668 3423 lineto
+closepath
+fill
+0.000 0.000 0.000 edgecolor
+newpath 672 3417 moveto
+662 3414 lineto
+668 3423 lineto
+closepath
+stroke
+end grestore
+% x14->x15
+newpath 662 3457 moveto
+659 3448 655 3438 651 3429 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.000 0.000 0.000 edgecolor
+newpath 654 3428 moveto
+648 3419 lineto
+648 3430 lineto
+closepath
+fill
+0.000 0.000 0.000 edgecolor
+newpath 654 3428 moveto
+648 3419 lineto
+648 3430 lineto
+closepath
+stroke
+end grestore
+% x16
+gsave 10 dict begin
+669 3330 27 18 ellipse_path
+stroke
+gsave 10 dict begin
+657 3325 moveto
+(x16)
+[6.96 6.96 6.96]
+xshow
+end grestore
+end grestore
+% x15->x16
+newpath 648 3385 moveto
+651 3376 655 3366 659 3357 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.000 0.000 0.000 edgecolor
+newpath 662 3358 moveto
+662 3347 lineto
+656 3356 lineto
+closepath
+fill
+0.000 0.000 0.000 edgecolor
+newpath 662 3358 moveto
+662 3347 lineto
+656 3356 lineto
+closepath
+stroke
+end grestore
+% x17
+gsave 10 dict begin
+650 3258 27 18 ellipse_path
+stroke
+gsave 10 dict begin
+638 3253 moveto
+(x17)
+[6.96 6.96 6.96]
+xshow
+end grestore
+end grestore
+% x15->x17
+newpath 637 3384 moveto
+633 3366 629 3337 633 3312 curveto
+634 3303 637 3294 640 3286 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.000 0.000 0.000 edgecolor
+newpath 643 3287 moveto
+643 3276 lineto
+637 3285 lineto
+closepath
+fill
+0.000 0.000 0.000 edgecolor
+newpath 643 3287 moveto
+643 3276 lineto
+637 3285 lineto
+closepath
+stroke
+end grestore
+% x18
+gsave 10 dict begin
+669 3186 27 18 ellipse_path
+stroke
+gsave 10 dict begin
+657 3181 moveto
+(x18)
+[6.96 6.96 6.96]
+xshow
+end grestore
+end grestore
+% x15->x18
+newpath 662 3390 moveto
+677 3381 696 3366 705 3348 curveto
+726 3302 702 3245 685 3212 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.000 0.000 0.000 edgecolor
+newpath 688 3210 moveto
+680 3203 lineto
+682 3213 lineto
+closepath
+fill
+0.000 0.000 0.000 edgecolor
+newpath 688 3210 moveto
+680 3203 lineto
+682 3213 lineto
+closepath
+stroke
+end grestore
+% x19
+gsave 10 dict begin
+614 3114 27 18 ellipse_path
+stroke
+gsave 10 dict begin
+602 3109 moveto
+(x19)
+[6.96 6.96 6.96]
+xshow
+end grestore
+end grestore
+% x15->x19
+newpath 637 3384 moveto
+634 3374 631 3360 628 3348 curveto
+622 3316 618 3308 614 3276 curveto
+610 3229 612 3175 613 3142 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.000 0.000 0.000 edgecolor
+newpath 617 3142 moveto
+613 3132 lineto
+610 3142 lineto
+closepath
+fill
+0.000 0.000 0.000 edgecolor
+newpath 617 3142 moveto
+613 3132 lineto
+610 3142 lineto
+closepath
+stroke
+end grestore
+% x20
+gsave 10 dict begin
+669 3042 27 18 ellipse_path
+stroke
+gsave 10 dict begin
+657 3037 moveto
+(x20)
+[6.96 6.96 6.96]
+xshow
+end grestore
+end grestore
+% x15->x20
+newpath 663 3391 moveto
+680 3382 704 3367 720 3348 curveto
+748 3314 762 3302 762 3258 curveto
+762 3258 762 3258 762 3186 curveto
+762 3135 721 3089 693 3063 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.000 0.000 0.000 edgecolor
+newpath 696 3061 moveto
+686 3056 lineto
+691 3066 lineto
+closepath
+fill
+0.000 0.000 0.000 edgecolor
+newpath 696 3061 moveto
+686 3056 lineto
+691 3066 lineto
+closepath
+stroke
+end grestore
+% x21
+gsave 10 dict begin
+614 2970 27 18 ellipse_path
+stroke
+gsave 10 dict begin
+602 2965 moveto
+(x21)
+[6.96 6.96 6.96]
+xshow
+end grestore
+end grestore
+% x15->x21
+newpath 632 3385 moveto
+627 3374 621 3361 617 3348 curveto
+584 3239 563 3208 578 3096 curveto
+583 3061 595 3023 604 2998 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.000 0.000 0.000 edgecolor
+newpath 607 2999 moveto
+607 2988 lineto
+601 2997 lineto
+closepath
+fill
+0.000 0.000 0.000 edgecolor
+newpath 607 2999 moveto
+607 2988 lineto
+601 2997 lineto
+closepath
+stroke
+end grestore
+% x22
+gsave 10 dict begin
+696 2898 27 18 ellipse_path
+stroke
+gsave 10 dict begin
+684 2893 moveto
+(x22)
+[6.96 6.96 6.96]
+xshow
+end grestore
+end grestore
+% x15->x22
+newpath 665 3393 moveto
+709 3375 800 3330 800 3258 curveto
+800 3258 800 3258 800 3042 curveto
+800 2989 754 2943 723 2918 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.000 0.000 0.000 edgecolor
+newpath 725 2915 moveto
+715 2911 lineto
+720 2920 lineto
+closepath
+fill
+0.000 0.000 0.000 edgecolor
+newpath 725 2915 moveto
+715 2911 lineto
+720 2920 lineto
+closepath
+stroke
+end grestore
+% x23
+gsave 10 dict begin
+611 2826 27 18 ellipse_path
+stroke
+gsave 10 dict begin
+599 2821 moveto
+(x23)
+[6.96 6.96 6.96]
+xshow
+end grestore
+end grestore
+% x15->x23
+newpath 619 3392 moveto
+579 3372 500 3325 500 3258 curveto
+500 3258 500 3258 500 2970 curveto
+500 2916 551 2869 583 2845 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.000 0.000 0.000 edgecolor
+newpath 585 2848 moveto
+591 2839 lineto
+581 2842 lineto
+closepath
+fill
+0.000 0.000 0.000 edgecolor
+newpath 585 2848 moveto
+591 2839 lineto
+581 2842 lineto
+closepath
+stroke
+end grestore
+% x24
+gsave 10 dict begin
+479 2754 27 18 ellipse_path
+stroke
+gsave 10 dict begin
+467 2749 moveto
+(x24)
+[6.96 6.96 6.96]
+xshow
+end grestore
+end grestore
+% x15->x24
+newpath 615 3397 moveto
+587 3391 544 3376 518 3348 curveto
+491 3317 462 3164 462 3114 curveto
+462 3114 462 3114 462 2898 curveto
+462 2857 468 2811 473 2782 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.000 0.000 0.000 edgecolor
+newpath 476 2782 moveto
+475 2772 lineto
+470 2781 lineto
+closepath
+fill
+0.000 0.000 0.000 edgecolor
+newpath 476 2782 moveto
+475 2772 lineto
+470 2781 lineto
+closepath
+stroke
+end grestore
+% x25
+gsave 10 dict begin
+517 2682 27 18 ellipse_path
+stroke
+gsave 10 dict begin
+505 2677 moveto
+(x25)
+[6.96 6.96 6.96]
+xshow
+end grestore
+end grestore
+% x15->x25
+newpath 615 3397 moveto
+588 3390 545 3375 518 3348 curveto
+441 3267 424 3226 424 3114 curveto
+424 3114 424 3114 424 2826 curveto
+424 2785 421 2770 443 2736 curveto
+454 2719 471 2706 486 2697 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.000 0.000 0.000 edgecolor
+newpath 488 2700 moveto
+495 2692 lineto
+485 2694 lineto
+closepath
+fill
+0.000 0.000 0.000 edgecolor
+newpath 488 2700 moveto
+495 2692 lineto
+485 2694 lineto
+closepath
+stroke
+end grestore
+% x26
+gsave 10 dict begin
+669 2610 27 18 ellipse_path
+stroke
+gsave 10 dict begin
+657 2605 moveto
+(x26)
+[6.96 6.96 6.96]
+xshow
+end grestore
+end grestore
+% x15->x26
+newpath 667 3396 moveto
+720 3382 838 3342 838 3258 curveto
+838 3258 838 3258 838 3042 curveto
+838 2876 729 2699 687 2634 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.000 0.000 0.000 edgecolor
+newpath 690 2632 moveto
+681 2626 lineto
+684 2636 lineto
+closepath
+fill
+0.000 0.000 0.000 edgecolor
+newpath 690 2632 moveto
+681 2626 lineto
+684 2636 lineto
+closepath
+stroke
+end grestore
+% x27
+gsave 10 dict begin
+669 2538 27 18 ellipse_path
+stroke
+gsave 10 dict begin
+657 2533 moveto
+(x27)
+[6.96 6.96 6.96]
+xshow
+end grestore
+end grestore
+% x15->x27
+newpath 668 3398 moveto
+729 3388 876 3355 876 3258 curveto
+876 3258 876 3258 876 2826 curveto
+876 2704 752 2599 696 2557 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.000 0.000 0.000 edgecolor
+newpath 698 2554 moveto
+688 2551 lineto
+694 2560 lineto
+closepath
+fill
+0.000 0.000 0.000 edgecolor
+newpath 698 2554 moveto
+688 2551 lineto
+694 2560 lineto
+closepath
+stroke
+end grestore
+% x28
+gsave 10 dict begin
+559 2466 27 18 ellipse_path
+stroke
+gsave 10 dict begin
+547 2461 moveto
+(x28)
+[6.96 6.96 6.96]
+xshow
+end grestore
+end grestore
+% x15->x28
+newpath 614 3399 moveto
+549 3392 386 3362 386 3258 curveto
+386 3258 386 3258 386 2826 curveto
+386 2686 493 2544 538 2490 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.000 0.000 0.000 edgecolor
+newpath 541 2492 moveto
+545 2482 lineto
+536 2487 lineto
+closepath
+fill
+0.000 0.000 0.000 edgecolor
+newpath 541 2492 moveto
+545 2482 lineto
+536 2487 lineto
+closepath
+stroke
+end grestore
+% x29
+gsave 10 dict begin
+669 2394 27 18 ellipse_path
+stroke
+gsave 10 dict begin
+657 2389 moveto
+(x29)
+[6.96 6.96 6.96]
+xshow
+end grestore
+end grestore
+% x15->x29
+newpath 668 3400 moveto
+737 3394 914 3368 914 3258 curveto
+914 3258 914 3258 914 2682 curveto
+914 2550 764 2449 699 2410 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.000 0.000 0.000 edgecolor
+newpath 700 2407 moveto
+690 2405 lineto
+697 2413 lineto
+closepath
+fill
+0.000 0.000 0.000 edgecolor
+newpath 700 2407 moveto
+690 2405 lineto
+697 2413 lineto
+closepath
+stroke
+end grestore
+% x30
+gsave 10 dict begin
+724 2322 27 18 ellipse_path
+stroke
+gsave 10 dict begin
+712 2317 moveto
+(x30)
+[6.96 6.96 6.96]
+xshow
+end grestore
+end grestore
+% x15->x30
+newpath 668 3399 moveto
+725 3391 854 3372 891 3348 curveto
+931 3320 952 3306 952 3258 curveto
+952 3258 952 3258 952 2466 curveto
+952 2377 825 2341 761 2328 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.000 0.000 0.000 edgecolor
+newpath 761 2325 moveto
+751 2326 lineto
+760 2331 lineto
+closepath
+fill
+0.000 0.000 0.000 edgecolor
+newpath 761 2325 moveto
+751 2326 lineto
+760 2331 lineto
+closepath
+stroke
+end grestore
+% x31
+gsave 10 dict begin
+614 2250 27 18 ellipse_path
+stroke
+gsave 10 dict begin
+602 2245 moveto
+(x31)
+[6.96 6.96 6.96]
+xshow
+end grestore
+end grestore
+% x15->x31
+newpath 614 3398 moveto
+560 3391 439 3372 405 3348 curveto
+367 3320 348 3305 348 3258 curveto
+348 3258 348 3258 348 2394 curveto
+348 2291 503 2261 577 2253 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.000 0.000 0.000 edgecolor
+newpath 577 2256 moveto
+587 2252 lineto
+577 2250 lineto
+closepath
+fill
+0.000 0.000 0.000 edgecolor
+newpath 577 2256 moveto
+587 2252 lineto
+577 2250 lineto
+closepath
+stroke
+end grestore
+% x16->x17
+newpath 664 3312 moveto
+662 3304 660 3295 658 3286 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.000 0.000 0.000 edgecolor
+newpath 661 3285 moveto
+655 3276 lineto
+655 3287 lineto
+closepath
+fill
+0.000 0.000 0.000 edgecolor
+newpath 661 3285 moveto
+655 3276 lineto
+655 3287 lineto
+closepath
+stroke
+end grestore
+% x17->x18
+newpath 655 3240 moveto
+657 3232 659 3223 661 3214 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.000 0.000 0.000 edgecolor
+newpath 664 3215 moveto
+664 3204 lineto
+658 3213 lineto
+closepath
+fill
+0.000 0.000 0.000 edgecolor
+newpath 664 3215 moveto
+664 3204 lineto
+658 3213 lineto
+closepath
+stroke
+end grestore
+% x17->x19
+newpath 644 3240 moveto
+641 3230 636 3216 633 3204 curveto
+628 3183 623 3160 619 3142 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.000 0.000 0.000 edgecolor
+newpath 622 3141 moveto
+617 3132 lineto
+616 3142 lineto
+closepath
+fill
+0.000 0.000 0.000 edgecolor
+newpath 622 3141 moveto
+617 3132 lineto
+616 3142 lineto
+closepath
+stroke
+end grestore
+% x18->x19
+newpath 657 3170 moveto
+650 3161 640 3149 632 3138 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.000 0.000 0.000 edgecolor
+newpath 635 3136 moveto
+626 3130 lineto
+629 3140 lineto
+closepath
+fill
+0.000 0.000 0.000 edgecolor
+newpath 635 3136 moveto
+626 3130 lineto
+629 3140 lineto
+closepath
+stroke
+end grestore
+% x19->x20
+newpath 626 3098 moveto
+633 3089 643 3077 651 3066 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.000 0.000 0.000 edgecolor
+newpath 654 3068 moveto
+657 3058 lineto
+648 3064 lineto
+closepath
+fill
+0.000 0.000 0.000 edgecolor
+newpath 654 3068 moveto
+657 3058 lineto
+648 3064 lineto
+closepath
+stroke
+end grestore
+% x19->x21
+newpath 614 3096 moveto
+614 3071 614 3027 614 2998 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.000 0.000 0.000 edgecolor
+newpath 618 2998 moveto
+614 2988 lineto
+611 2998 lineto
+closepath
+fill
+0.000 0.000 0.000 edgecolor
+newpath 618 2998 moveto
+614 2988 lineto
+611 2998 lineto
+closepath
+stroke
+end grestore
+% x19->x22
+newpath 639 3107 moveto
+661 3099 691 3084 705 3060 curveto
+729 3017 717 2959 706 2926 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.000 0.000 0.000 edgecolor
+newpath 709 2925 moveto
+703 2916 lineto
+703 2927 lineto
+closepath
+fill
+0.000 0.000 0.000 edgecolor
+newpath 709 2925 moveto
+703 2916 lineto
+703 2927 lineto
+closepath
+stroke
+end grestore
+% x19->x23
+newpath 607 3096 moveto
+599 3072 584 3027 578 2988 curveto
+572 2940 588 2885 600 2853 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.000 0.000 0.000 edgecolor
+newpath 604 2854 moveto
+604 2843 lineto
+597 2851 lineto
+closepath
+fill
+0.000 0.000 0.000 edgecolor
+newpath 604 2854 moveto
+604 2843 lineto
+597 2851 lineto
+closepath
+stroke
+end grestore
+% x20->x21
+newpath 657 3026 moveto
+650 3017 640 3005 632 2994 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.000 0.000 0.000 edgecolor
+newpath 635 2992 moveto
+626 2986 lineto
+629 2996 lineto
+closepath
+fill
+0.000 0.000 0.000 edgecolor
+newpath 635 2992 moveto
+626 2986 lineto
+629 2996 lineto
+closepath
+stroke
+end grestore
+% x21->x22
+newpath 631 2955 moveto
+643 2945 659 2931 672 2919 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.000 0.000 0.000 edgecolor
+newpath 675 2921 moveto
+680 2912 lineto
+670 2916 lineto
+closepath
+fill
+0.000 0.000 0.000 edgecolor
+newpath 675 2921 moveto
+680 2912 lineto
+670 2916 lineto
+closepath
+stroke
+end grestore
+% x21->x23
+newpath 614 2952 moveto
+613 2927 612 2883 611 2854 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.000 0.000 0.000 edgecolor
+newpath 615 2854 moveto
+611 2844 lineto
+608 2854 lineto
+closepath
+fill
+0.000 0.000 0.000 edgecolor
+newpath 615 2854 moveto
+611 2844 lineto
+608 2854 lineto
+closepath
+stroke
+end grestore
+% x22->x23
+newpath 679 2884 moveto
+666 2873 649 2859 635 2847 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.000 0.000 0.000 edgecolor
+newpath 638 2845 moveto
+628 2840 lineto
+633 2850 lineto
+closepath
+fill
+0.000 0.000 0.000 edgecolor
+newpath 638 2845 moveto
+628 2840 lineto
+633 2850 lineto
+closepath
+stroke
+end grestore
+% x23->x24
+newpath 590 2815 moveto
+569 2803 534 2784 509 2771 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.000 0.000 0.000 edgecolor
+newpath 510 2768 moveto
+500 2766 lineto
+507 2774 lineto
+closepath
+fill
+0.000 0.000 0.000 edgecolor
+newpath 510 2768 moveto
+500 2766 lineto
+507 2774 lineto
+closepath
+stroke
+end grestore
+% x23->x25
+newpath 594 2811 moveto
+583 2801 569 2787 558 2772 curveto
+545 2752 534 2727 527 2709 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.000 0.000 0.000 edgecolor
+newpath 530 2708 moveto
+523 2700 lineto
+524 2711 lineto
+closepath
+fill
+0.000 0.000 0.000 edgecolor
+newpath 530 2708 moveto
+523 2700 lineto
+524 2711 lineto
+closepath
+stroke
+end grestore
+% x23->x26
+newpath 616 2808 moveto
+626 2770 649 2682 661 2638 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.000 0.000 0.000 edgecolor
+newpath 664 2639 moveto
+664 2628 lineto
+658 2637 lineto
+closepath
+fill
+0.000 0.000 0.000 edgecolor
+newpath 664 2639 moveto
+664 2628 lineto
+658 2637 lineto
+closepath
+stroke
+end grestore
+% x23->x27
+newpath 622 2809 moveto
+644 2777 691 2700 705 2628 curveto
+708 2612 709 2607 705 2592 curveto
+701 2582 695 2571 689 2562 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.000 0.000 0.000 edgecolor
+newpath 692 2560 moveto
+683 2554 lineto
+686 2564 lineto
+closepath
+fill
+0.000 0.000 0.000 edgecolor
+newpath 692 2560 moveto
+683 2554 lineto
+686 2564 lineto
+closepath
+stroke
+end grestore
+% x23->x28
+newpath 608 2808 moveto
+600 2749 574 2565 563 2494 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.000 0.000 0.000 edgecolor
+newpath 566 2494 moveto
+562 2484 lineto
+560 2494 lineto
+closepath
+fill
+0.000 0.000 0.000 edgecolor
+newpath 566 2494 moveto
+562 2484 lineto
+560 2494 lineto
+closepath
+stroke
+end grestore
+% x23->x29
+newpath 634 2817 moveto
+677 2798 762 2751 762 2682 curveto
+762 2682 762 2682 762 2538 curveto
+762 2487 721 2441 693 2415 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.000 0.000 0.000 edgecolor
+newpath 696 2413 moveto
+686 2408 lineto
+691 2418 lineto
+closepath
+fill
+0.000 0.000 0.000 edgecolor
+newpath 696 2413 moveto
+686 2408 lineto
+691 2418 lineto
+closepath
+stroke
+end grestore
+% x23->x30
+newpath 636 2819 moveto
+702 2798 876 2732 876 2610 curveto
+876 2610 876 2610 876 2466 curveto
+876 2400 801 2356 756 2335 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.000 0.000 0.000 edgecolor
+newpath 758 2332 moveto
+747 2331 lineto
+755 2338 lineto
+closepath
+fill
+0.000 0.000 0.000 edgecolor
+newpath 758 2332 moveto
+747 2331 lineto
+755 2338 lineto
+closepath
+stroke
+end grestore
+% x23->x31
+newpath 605 2808 moveto
+582 2741 500 2501 500 2466 curveto
+500 2466 500 2466 500 2394 curveto
+500 2339 551 2292 585 2268 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.000 0.000 0.000 edgecolor
+newpath 588 2270 moveto
+594 2262 lineto
+584 2265 lineto
+closepath
+fill
+0.000 0.000 0.000 edgecolor
+newpath 588 2270 moveto
+594 2262 lineto
+584 2265 lineto
+closepath
+stroke
+end grestore
+% x24->x25
+newpath 488 2737 moveto
+493 2729 498 2718 503 2708 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.000 0.000 0.000 edgecolor
+newpath 506 2709 moveto
+508 2699 lineto
+500 2706 lineto
+closepath
+fill
+0.000 0.000 0.000 edgecolor
+newpath 506 2709 moveto
+508 2699 lineto
+500 2706 lineto
+closepath
+stroke
+end grestore
+% x25->x26
+newpath 539 2672 moveto
+565 2659 608 2639 638 2625 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.000 0.000 0.000 edgecolor
+newpath 639 2628 moveto
+647 2621 lineto
+636 2622 lineto
+closepath
+fill
+0.000 0.000 0.000 edgecolor
+newpath 639 2628 moveto
+647 2621 lineto
+636 2622 lineto
+closepath
+stroke
+end grestore
+% x25->x27
+newpath 533 2667 moveto
+560 2641 615 2590 646 2560 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.000 0.000 0.000 edgecolor
+newpath 648 2563 moveto
+653 2553 lineto
+643 2558 lineto
+closepath
+fill
+0.000 0.000 0.000 edgecolor
+newpath 648 2563 moveto
+653 2553 lineto
+643 2558 lineto
+closepath
+stroke
+end grestore
+% x26->x27
+newpath 669 2592 moveto
+669 2584 669 2575 669 2566 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.000 0.000 0.000 edgecolor
+newpath 673 2566 moveto
+669 2556 lineto
+666 2566 lineto
+closepath
+fill
+0.000 0.000 0.000 edgecolor
+newpath 673 2566 moveto
+669 2556 lineto
+666 2566 lineto
+closepath
+stroke
+end grestore
+% x27->x28
+newpath 650 2525 moveto
+633 2514 606 2497 587 2485 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.000 0.000 0.000 edgecolor
+newpath 588 2482 moveto
+578 2479 lineto
+584 2487 lineto
+closepath
+fill
+0.000 0.000 0.000 edgecolor
+newpath 588 2482 moveto
+578 2479 lineto
+584 2487 lineto
+closepath
+stroke
+end grestore
+% x27->x29
+newpath 669 2520 moveto
+669 2495 669 2451 669 2422 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.000 0.000 0.000 edgecolor
+newpath 673 2422 moveto
+669 2412 lineto
+666 2422 lineto
+closepath
+fill
+0.000 0.000 0.000 edgecolor
+newpath 673 2422 moveto
+669 2412 lineto
+666 2422 lineto
+closepath
+stroke
+end grestore
+% x27->x30
+newpath 674 2520 moveto
+682 2496 695 2451 705 2412 curveto
+710 2391 715 2368 718 2350 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.000 0.000 0.000 edgecolor
+newpath 721 2350 moveto
+720 2340 lineto
+715 2349 lineto
+closepath
+fill
+0.000 0.000 0.000 edgecolor
+newpath 721 2350 moveto
+720 2340 lineto
+715 2349 lineto
+closepath
+stroke
+end grestore
+% x27->x31
+newpath 663 2520 moveto
+655 2496 641 2451 633 2412 curveto
+624 2365 618 2311 616 2278 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.000 0.000 0.000 edgecolor
+newpath 619 2278 moveto
+615 2268 lineto
+613 2278 lineto
+closepath
+fill
+0.000 0.000 0.000 edgecolor
+newpath 619 2278 moveto
+615 2268 lineto
+613 2278 lineto
+closepath
+stroke
+end grestore
+% x28->x29
+newpath 578 2453 moveto
+595 2442 622 2425 641 2413 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.000 0.000 0.000 edgecolor
+newpath 644 2415 moveto
+650 2407 lineto
+640 2410 lineto
+closepath
+fill
+0.000 0.000 0.000 edgecolor
+newpath 644 2415 moveto
+650 2407 lineto
+640 2410 lineto
+closepath
+stroke
+end grestore
+% x29->x30
+newpath 681 2378 moveto
+688 2369 698 2357 706 2346 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.000 0.000 0.000 edgecolor
+newpath 709 2348 moveto
+712 2338 lineto
+703 2344 lineto
+closepath
+fill
+0.000 0.000 0.000 edgecolor
+newpath 709 2348 moveto
+712 2338 lineto
+703 2344 lineto
+closepath
+stroke
+end grestore
+% x29->x31
+newpath 662 2376 moveto
+653 2352 636 2307 625 2278 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.000 0.000 0.000 edgecolor
+newpath 628 2276 moveto
+621 2268 lineto
+621 2279 lineto
+closepath
+fill
+0.000 0.000 0.000 edgecolor
+newpath 628 2276 moveto
+621 2268 lineto
+621 2279 lineto
+closepath
+stroke
+end grestore
+% x30->x31
+newpath 705 2309 moveto
+688 2298 661 2281 642 2269 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.000 0.000 0.000 edgecolor
+newpath 643 2266 moveto
+633 2263 lineto
+639 2271 lineto
+closepath
+fill
+0.000 0.000 0.000 edgecolor
+newpath 643 2266 moveto
+633 2263 lineto
+639 2271 lineto
+closepath
+stroke
+end grestore
+% x32
+gsave 10 dict begin
+521 2178 27 18 ellipse_path
+stroke
+gsave 10 dict begin
+509 2173 moveto
+(x32)
+[6.96 6.96 6.96]
+xshow
+end grestore
+end grestore
+% x31->x32
+newpath 596 2236 moveto
+582 2225 563 2210 547 2198 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.000 0.000 0.000 edgecolor
+newpath 549 2195 moveto
+539 2192 lineto
+545 2201 lineto
+closepath
+fill
+0.000 0.000 0.000 edgecolor
+newpath 549 2195 moveto
+539 2192 lineto
+545 2201 lineto
+closepath
+stroke
+end grestore
+% x33
+gsave 10 dict begin
+549 2106 27 18 ellipse_path
+stroke
+gsave 10 dict begin
+537 2101 moveto
+(x33)
+[6.96 6.96 6.96]
+xshow
+end grestore
+end grestore
+% x31->x33
+newpath 606 2233 moveto
+595 2208 574 2162 561 2132 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.000 0.000 0.000 edgecolor
+newpath 564 2131 moveto
+557 2123 lineto
+558 2134 lineto
+closepath
+fill
+0.000 0.000 0.000 edgecolor
+newpath 564 2131 moveto
+557 2123 lineto
+558 2134 lineto
+closepath
+stroke
+end grestore
+% x34
+gsave 10 dict begin
+576 2034 27 18 ellipse_path
+stroke
+gsave 10 dict begin
+564 2029 moveto
+(x34)
+[6.96 6.96 6.96]
+xshow
+end grestore
+end grestore
+% x31->x34
+newpath 611 2232 moveto
+605 2194 589 2107 581 2062 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.000 0.000 0.000 edgecolor
+newpath 584 2061 moveto
+579 2052 lineto
+578 2062 lineto
+closepath
+fill
+0.000 0.000 0.000 edgecolor
+newpath 584 2061 moveto
+579 2052 lineto
+578 2062 lineto
+closepath
+stroke
+end grestore
+% x35
+gsave 10 dict begin
+521 1962 27 18 ellipse_path
+stroke
+gsave 10 dict begin
+509 1957 moveto
+(x35)
+[6.96 6.96 6.96]
+xshow
+end grestore
+end grestore
+% x31->x35
+newpath 587 2247 moveto
+557 2242 508 2230 485 2196 curveto
+442 2131 483 2034 506 1988 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.000 0.000 0.000 edgecolor
+newpath 509 1989 moveto
+511 1979 lineto
+503 1986 lineto
+closepath
+fill
+0.000 0.000 0.000 edgecolor
+newpath 509 1989 moveto
+511 1979 lineto
+503 1986 lineto
+closepath
+stroke
+end grestore
+% x36
+gsave 10 dict begin
+445 1890 27 18 ellipse_path
+stroke
+gsave 10 dict begin
+433 1885 moveto
+(x36)
+[6.96 6.96 6.96]
+xshow
+end grestore
+end grestore
+% x31->x36
+newpath 587 2246 moveto
+555 2241 502 2227 468 2196 curveto
+437 2166 428 2149 428 2106 curveto
+428 2106 428 2106 428 2034 curveto
+428 1993 434 1947 439 1918 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.000 0.000 0.000 edgecolor
+newpath 442 1918 moveto
+441 1908 lineto
+436 1917 lineto
+closepath
+fill
+0.000 0.000 0.000 edgecolor
+newpath 442 1918 moveto
+441 1908 lineto
+436 1917 lineto
+closepath
+stroke
+end grestore
+% x37
+gsave 10 dict begin
+483 1818 27 18 ellipse_path
+stroke
+gsave 10 dict begin
+471 1813 moveto
+(x37)
+[6.96 6.96 6.96]
+xshow
+end grestore
+end grestore
+% x31->x37
+newpath 587 2248 moveto
+550 2244 481 2232 437 2196 curveto
+403 2167 390 2151 390 2106 curveto
+390 2106 390 2106 390 1962 curveto
+390 1921 387 1906 409 1872 curveto
+420 1855 437 1842 452 1833 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.000 0.000 0.000 edgecolor
+newpath 454 1836 moveto
+461 1828 lineto
+451 1830 lineto
+closepath
+fill
+0.000 0.000 0.000 edgecolor
+newpath 454 1836 moveto
+461 1828 lineto
+451 1830 lineto
+closepath
+stroke
+end grestore
+% x38
+gsave 10 dict begin
+593 1746 27 18 ellipse_path
+stroke
+gsave 10 dict begin
+581 1741 moveto
+(x38)
+[6.96 6.96 6.96]
+xshow
+end grestore
+end grestore
+% x31->x38
+newpath 622 2233 moveto
+633 2206 653 2153 652 2106 curveto
+652 2106 652 2106 652 1890 curveto
+653 1845 628 1799 611 1771 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.000 0.000 0.000 edgecolor
+newpath 613 1768 moveto
+605 1762 lineto
+608 1772 lineto
+closepath
+fill
+0.000 0.000 0.000 edgecolor
+newpath 613 1768 moveto
+605 1762 lineto
+608 1772 lineto
+closepath
+stroke
+end grestore
+% x39
+gsave 10 dict begin
+521 1674 27 18 ellipse_path
+stroke
+gsave 10 dict begin
+509 1669 moveto
+(x39)
+[6.96 6.96 6.96]
+xshow
+end grestore
+end grestore
+% x31->x39
+newpath 587 2246 moveto
+537 2238 430 2218 401 2196 curveto
+366 2168 352 2151 352 2106 curveto
+352 2106 352 2106 352 1818 curveto
+352 1748 438 1705 486 1686 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.000 0.000 0.000 edgecolor
+newpath 488 1689 moveto
+496 1682 lineto
+485 1682 lineto
+closepath
+fill
+0.000 0.000 0.000 edgecolor
+newpath 488 1689 moveto
+496 1682 lineto
+485 1682 lineto
+closepath
+stroke
+end grestore
+% x40
+gsave 10 dict begin
+673 1602 27 18 ellipse_path
+stroke
+gsave 10 dict begin
+661 1597 moveto
+(x40)
+[6.96 6.96 6.96]
+xshow
+end grestore
+end grestore
+% x31->x40
+newpath 629 2235 moveto
+651 2210 690 2158 690 2106 curveto
+690 2106 690 2106 690 1746 curveto
+690 1705 684 1659 679 1630 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.000 0.000 0.000 edgecolor
+newpath 682 1629 moveto
+677 1620 lineto
+676 1630 lineto
+closepath
+fill
+0.000 0.000 0.000 edgecolor
+newpath 682 1629 moveto
+677 1620 lineto
+676 1630 lineto
+closepath
+stroke
+end grestore
+% x41
+gsave 10 dict begin
+635 1530 27 18 ellipse_path
+stroke
+gsave 10 dict begin
+623 1525 moveto
+(x41)
+[6.96 6.96 6.96]
+xshow
+end grestore
+end grestore
+% x31->x41
+newpath 634 2238 moveto
+667 2215 728 2165 728 2106 curveto
+728 2106 728 2106 728 1674 curveto
+728 1633 731 1618 709 1584 curveto
+698 1567 681 1554 666 1545 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.000 0.000 0.000 edgecolor
+newpath 667 1542 moveto
+657 1540 lineto
+664 1548 lineto
+closepath
+fill
+0.000 0.000 0.000 edgecolor
+newpath 667 1542 moveto
+657 1540 lineto
+664 1548 lineto
+closepath
+stroke
+end grestore
+% x42
+gsave 10 dict begin
+447 1458 27 18 ellipse_path
+stroke
+gsave 10 dict begin
+435 1453 moveto
+(x42)
+[6.96 6.96 6.96]
+xshow
+end grestore
+end grestore
+% x31->x42
+newpath 587 2247 moveto
+530 2240 399 2222 363 2196 curveto
+327 2168 314 2151 314 2106 curveto
+314 2106 314 2106 314 1818 curveto
+314 1748 402 1555 435 1484 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.000 0.000 0.000 edgecolor
+newpath 438 1486 moveto
+439 1475 lineto
+432 1483 lineto
+closepath
+fill
+0.000 0.000 0.000 edgecolor
+newpath 438 1486 moveto
+439 1475 lineto
+432 1483 lineto
+closepath
+stroke
+end grestore
+% x43
+gsave 10 dict begin
+497 1386 27 18 ellipse_path
+stroke
+gsave 10 dict begin
+485 1381 moveto
+(x43)
+[6.96 6.96 6.96]
+xshow
+end grestore
+end grestore
+% x31->x43
+newpath 587 2248 moveto
+523 2242 367 2226 325 2196 curveto
+289 2169 276 2151 276 2106 curveto
+276 2106 276 2106 276 1674 curveto
+276 1553 328 1526 411 1440 curveto
+427 1424 448 1410 466 1401 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.000 0.000 0.000 edgecolor
+newpath 468 1404 moveto
+475 1396 lineto
+465 1398 lineto
+closepath
+fill
+0.000 0.000 0.000 edgecolor
+newpath 468 1404 moveto
+475 1396 lineto
+465 1398 lineto
+closepath
+stroke
+end grestore
+% x44
+gsave 10 dict begin
+582 1314 27 18 ellipse_path
+stroke
+gsave 10 dict begin
+570 1309 moveto
+(x44)
+[6.96 6.96 6.96]
+xshow
+end grestore
+end grestore
+% x31->x44
+newpath 640 2245 moveto
+682 2236 760 2216 780 2196 curveto
+808 2165 804 2147 804 2106 curveto
+804 2106 804 2106 804 1962 curveto
+804 1864 766 1843 766 1746 curveto
+766 1746 766 1746 766 1674 curveto
+766 1532 652 1391 604 1337 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.000 0.000 0.000 edgecolor
+newpath 606 1334 moveto
+597 1329 lineto
+601 1339 lineto
+closepath
+fill
+0.000 0.000 0.000 edgecolor
+newpath 606 1334 moveto
+597 1329 lineto
+601 1339 lineto
+closepath
+stroke
+end grestore
+% x45
+gsave 10 dict begin
+573 1242 27 18 ellipse_path
+stroke
+gsave 10 dict begin
+561 1237 moveto
+(x45)
+[6.96 6.96 6.96]
+xshow
+end grestore
+end grestore
+% x31->x45
+newpath 640 2245 moveto
+686 2236 778 2217 802 2196 curveto
+835 2167 842 2149 842 2106 curveto
+842 2106 842 2106 842 1890 curveto
+842 1792 804 1771 804 1674 curveto
+804 1674 804 1674 804 1386 curveto
+804 1296 674 1260 609 1248 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.000 0.000 0.000 edgecolor
+newpath 609 1245 moveto
+599 1246 lineto
+608 1251 lineto
+closepath
+fill
+0.000 0.000 0.000 edgecolor
+newpath 609 1245 moveto
+599 1246 lineto
+608 1251 lineto
+closepath
+stroke
+end grestore
+% x46
+gsave 10 dict begin
+504 1170 27 18 ellipse_path
+stroke
+gsave 10 dict begin
+492 1165 moveto
+(x46)
+[6.96 6.96 6.96]
+xshow
+end grestore
+end grestore
+% x31->x46
+newpath 637 2241 moveto
+680 2222 766 2176 766 2106 curveto
+766 2106 766 2106 766 1962 curveto
+766 1829 842 1806 842 1674 curveto
+842 1674 842 1674 842 1314 curveto
+842 1249 627 1196 540 1177 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.000 0.000 0.000 edgecolor
+newpath 540 1174 moveto
+530 1175 lineto
+539 1180 lineto
+closepath
+fill
+0.000 0.000 0.000 edgecolor
+newpath 540 1174 moveto
+530 1175 lineto
+539 1180 lineto
+closepath
+stroke
+end grestore
+% x47
+gsave 10 dict begin
+504 1098 27 18 ellipse_path
+stroke
+gsave 10 dict begin
+492 1093 moveto
+(x47)
+[6.96 6.96 6.96]
+xshow
+end grestore
+end grestore
+% x31->x47
+newpath 587 2248 moveto
+518 2244 336 2230 287 2196 curveto
+250 2169 238 2151 238 2106 curveto
+238 2106 238 2106 238 1242 curveto
+238 1139 393 1109 467 1101 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.000 0.000 0.000 edgecolor
+newpath 467 1104 moveto
+477 1100 lineto
+467 1098 lineto
+closepath
+fill
+0.000 0.000 0.000 edgecolor
+newpath 467 1104 moveto
+477 1100 lineto
+467 1098 lineto
+closepath
+stroke
+end grestore
+% x48
+gsave 10 dict begin
+863 1026 27 18 ellipse_path
+stroke
+gsave 10 dict begin
+851 1021 moveto
+(x48)
+[6.96 6.96 6.96]
+xshow
+end grestore
+end grestore
+% x31->x48
+newpath 640 2246 moveto
+691 2238 799 2218 829 2196 curveto
+865 2168 880 2151 880 2106 curveto
+880 2106 880 2106 880 1170 curveto
+880 1129 874 1083 869 1054 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.000 0.000 0.000 edgecolor
+newpath 872 1053 moveto
+867 1044 lineto
+866 1054 lineto
+closepath
+fill
+0.000 0.000 0.000 edgecolor
+newpath 872 1053 moveto
+867 1044 lineto
+866 1054 lineto
+closepath
+stroke
+end grestore
+% x49
+gsave 10 dict begin
+859 954 27 18 ellipse_path
+stroke
+gsave 10 dict begin
+847 949 moveto
+(x49)
+[6.96 6.96 6.96]
+xshow
+end grestore
+end grestore
+% x31->x49
+newpath 641 2247 moveto
+696 2239 823 2220 859 2196 curveto
+898 2168 918 2153 918 2106 curveto
+918 2106 918 2106 918 1098 curveto
+918 1057 915 1045 899 1008 curveto
+894 997 887 987 880 978 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.000 0.000 0.000 edgecolor
+newpath 882 975 moveto
+873 970 lineto
+877 980 lineto
+closepath
+fill
+0.000 0.000 0.000 edgecolor
+newpath 882 975 moveto
+873 970 lineto
+877 980 lineto
+closepath
+stroke
+end grestore
+% x50
+gsave 10 dict begin
+804 882 27 18 ellipse_path
+stroke
+gsave 10 dict begin
+792 877 moveto
+(x50)
+[6.96 6.96 6.96]
+xshow
+end grestore
+end grestore
+% x31->x50
+newpath 641 2247 moveto
+702 2240 849 2222 891 2196 curveto
+932 2169 956 2155 956 2106 curveto
+956 2106 956 2106 956 1026 curveto
+956 960 881 916 836 895 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.000 0.000 0.000 edgecolor
+newpath 838 892 moveto
+827 891 lineto
+835 898 lineto
+closepath
+fill
+0.000 0.000 0.000 edgecolor
+newpath 838 892 moveto
+827 891 lineto
+835 898 lineto
+closepath
+stroke
+end grestore
+% x51
+gsave 10 dict begin
+804 810 27 18 ellipse_path
+stroke
+gsave 10 dict begin
+792 805 moveto
+(x51)
+[6.96 6.96 6.96]
+xshow
+end grestore
+end grestore
+% x31->x51
+newpath 641 2248 moveto
+708 2242 876 2225 924 2196 curveto
+967 2169 994 2156 994 2106 curveto
+994 2106 994 2106 994 954 curveto
+994 877 894 836 840 819 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.000 0.000 0.000 edgecolor
+newpath 841 816 moveto
+830 816 lineto
+839 822 lineto
+closepath
+fill
+0.000 0.000 0.000 edgecolor
+newpath 841 816 moveto
+830 816 lineto
+839 822 lineto
+closepath
+stroke
+end grestore
+% x52
+gsave 10 dict begin
+749 738 27 18 ellipse_path
+stroke
+gsave 10 dict begin
+737 733 moveto
+(x52)
+[6.96 6.96 6.96]
+xshow
+end grestore
+end grestore
+% x31->x52
+newpath 641 2248 moveto
+712 2243 904 2227 959 2196 curveto
+1003 2170 1032 2157 1032 2106 curveto
+1032 2106 1032 2106 1032 882 curveto
+1032 772 863 746 786 740 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.000 0.000 0.000 edgecolor
+newpath 786 737 moveto
+776 739 lineto
+786 743 lineto
+closepath
+fill
+0.000 0.000 0.000 edgecolor
+newpath 786 737 moveto
+776 739 lineto
+786 743 lineto
+closepath
+stroke
+end grestore
+% x53
+gsave 10 dict begin
+730 666 27 18 ellipse_path
+stroke
+gsave 10 dict begin
+718 661 moveto
+(x53)
+[6.96 6.96 6.96]
+xshow
+end grestore
+end grestore
+% x31->x53
+newpath 641 2249 moveto
+718 2244 935 2230 996 2196 curveto
+1041 2170 1070 2157 1070 2106 curveto
+1070 2106 1070 2106 1070 882 curveto
+1070 739 855 687 767 672 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.000 0.000 0.000 edgecolor
+newpath 767 669 moveto
+757 670 lineto
+766 675 lineto
+closepath
+fill
+0.000 0.000 0.000 edgecolor
+newpath 767 669 moveto
+757 670 lineto
+766 675 lineto
+closepath
+stroke
+end grestore
+% x54
+gsave 10 dict begin
+656 594 27 18 ellipse_path
+stroke
+gsave 10 dict begin
+644 589 moveto
+(x54)
+[6.96 6.96 6.96]
+xshow
+end grestore
+end grestore
+% x31->x54
+newpath 587 2249 moveto
+512 2246 303 2234 248 2196 curveto
+211 2169 200 2151 200 2106 curveto
+200 2106 200 2106 200 1242 curveto
+200 986 581 1065 580 810 curveto
+580 810 580 810 580 738 curveto
+580 691 612 644 634 617 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.000 0.000 0.000 edgecolor
+newpath 637 619 moveto
+641 609 lineto
+632 614 lineto
+closepath
+fill
+0.000 0.000 0.000 edgecolor
+newpath 637 619 moveto
+641 609 lineto
+632 614 lineto
+closepath
+stroke
+end grestore
+% x55
+gsave 10 dict begin
+673 522 27 18 ellipse_path
+stroke
+gsave 10 dict begin
+661 517 moveto
+(x55)
+[6.96 6.96 6.96]
+xshow
+end grestore
+end grestore
+% x31->x55
+newpath 641 2249 moveto
+723 2246 964 2233 1033 2196 curveto
+1078 2170 1108 2158 1108 2106 curveto
+1108 2106 1108 2106 1108 666 curveto
+1108 582 815 539 710 526 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.000 0.000 0.000 edgecolor
+newpath 710 523 moveto
+700 525 lineto
+710 529 lineto
+closepath
+fill
+0.000 0.000 0.000 edgecolor
+newpath 710 523 moveto
+700 525 lineto
+710 529 lineto
+closepath
+stroke
+end grestore
+% x56
+gsave 10 dict begin
+445 450 27 18 ellipse_path
+stroke
+gsave 10 dict begin
+433 445 moveto
+(x56)
+[6.96 6.96 6.96]
+xshow
+end grestore
+end grestore
+% x31->x56
+newpath 587 2250 moveto
+506 2248 271 2239 209 2196 curveto
+173 2170 162 2151 162 2106 curveto
+162 2106 162 2106 162 1098 curveto
+162 945 428 1034 428 882 curveto
+428 882 428 882 428 594 curveto
+428 553 434 507 439 478 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.000 0.000 0.000 edgecolor
+newpath 442 478 moveto
+441 468 lineto
+436 477 lineto
+closepath
+fill
+0.000 0.000 0.000 edgecolor
+newpath 442 478 moveto
+441 468 lineto
+436 477 lineto
+closepath
+stroke
+end grestore
+% x57
+gsave 10 dict begin
+390 378 27 18 ellipse_path
+stroke
+gsave 10 dict begin
+378 373 moveto
+(x57)
+[6.96 6.96 6.96]
+xshow
+end grestore
+end grestore
+% x31->x57
+newpath 587 2248 moveto
+496 2242 206 2220 171 2196 curveto
+134 2170 124 2151 124 2106 curveto
+124 2106 124 2106 124 1098 curveto
+124 934 352 973 352 810 curveto
+352 810 352 810 352 522 curveto
+352 480 367 434 378 405 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.000 0.000 0.000 edgecolor
+newpath 381 407 moveto
+382 396 lineto
+375 404 lineto
+closepath
+fill
+0.000 0.000 0.000 edgecolor
+newpath 381 407 moveto
+382 396 lineto
+375 404 lineto
+closepath
+stroke
+end grestore
+% x58
+gsave 10 dict begin
+335 306 27 18 ellipse_path
+stroke
+gsave 10 dict begin
+323 301 moveto
+(x58)
+[6.96 6.96 6.96]
+xshow
+end grestore
+end grestore
+% x31->x58
+newpath 587 2248 moveto
+491 2243 171 2221 133 2196 curveto
+96 2170 86 2151 86 2106 curveto
+86 2106 86 2106 86 1026 curveto
+86 845 276 846 276 666 curveto
+276 666 276 666 276 450 curveto
+276 405 300 359 317 331 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.000 0.000 0.000 edgecolor
+newpath 320 332 moveto
+323 322 lineto
+315 328 lineto
+closepath
+fill
+0.000 0.000 0.000 edgecolor
+newpath 320 332 moveto
+323 322 lineto
+315 328 lineto
+closepath
+stroke
+end grestore
+% x59
+gsave 10 dict begin
+363 234 27 18 ellipse_path
+stroke
+gsave 10 dict begin
+351 229 moveto
+(x59)
+[6.96 6.96 6.96]
+xshow
+end grestore
+end grestore
+% x31->x59
+newpath 641 2249 moveto
+728 2247 996 2236 1071 2196 curveto
+1116 2171 1146 2158 1146 2106 curveto
+1146 2106 1146 2106 1146 450 curveto
+1146 293 555 246 400 236 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.000 0.000 0.000 edgecolor
+newpath 400 233 moveto
+390 235 lineto
+400 239 lineto
+closepath
+fill
+0.000 0.000 0.000 edgecolor
+newpath 400 233 moveto
+390 235 lineto
+400 239 lineto
+closepath
+stroke
+end grestore
+% x60
+gsave 10 dict begin
+614 162 27 18 ellipse_path
+stroke
+gsave 10 dict begin
+602 157 moveto
+(x60)
+[6.96 6.96 6.96]
+xshow
+end grestore
+end grestore
+% x31->x60
+newpath 641 2250 moveto
+733 2248 1026 2239 1108 2196 curveto
+1154 2171 1184 2158 1184 2106 curveto
+1184 2106 1184 2106 1184 450 curveto
+1184 210 778 170 651 164 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.000 0.000 0.000 edgecolor
+newpath 651 161 moveto
+641 163 lineto
+651 167 lineto
+closepath
+fill
+0.000 0.000 0.000 edgecolor
+newpath 651 161 moveto
+641 163 lineto
+651 167 lineto
+closepath
+stroke
+end grestore
+% x61
+gsave 10 dict begin
+261 90 27 18 ellipse_path
+stroke
+gsave 10 dict begin
+249 85 moveto
+(x61)
+[6.96 6.96 6.96]
+xshow
+end grestore
+end grestore
+% x31->x61
+newpath 587 2249 moveto
+486 2243 136 2223 95 2196 curveto
+58 2170 48 2151 48 2106 curveto
+48 2106 48 2106 48 1026 curveto
+48 797 152 750 152 522 curveto
+152 522 152 522 152 234 curveto
+152 180 201 133 234 109 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.000 0.000 0.000 edgecolor
+newpath 236 112 moveto
+242 103 lineto
+232 106 lineto
+closepath
+fill
+0.000 0.000 0.000 edgecolor
+newpath 236 112 moveto
+242 103 lineto
+232 106 lineto
+closepath
+stroke
+end grestore
+% x62
+gsave 10 dict begin
+190 18 27 18 ellipse_path
+stroke
+gsave 10 dict begin
+178 13 moveto
+(x62)
+[6.96 6.96 6.96]
+xshow
+end grestore
+end grestore
+% x31->x62
+newpath 587 2249 moveto
+481 2244 102 2225 57 2196 curveto
+20 2170 10 2151 10 2106 curveto
+10 2106 10 2106 10 162 curveto
+10 88 104 46 156 28 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.000 0.000 0.000 edgecolor
+newpath 157 31 moveto
+165 25 lineto
+154 25 lineto
+closepath
+fill
+0.000 0.000 0.000 edgecolor
+newpath 157 31 moveto
+165 25 lineto
+154 25 lineto
+closepath
+stroke
+end grestore
+% x32->x33
+newpath 528 2161 moveto
+531 2152 535 2142 539 2133 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.000 0.000 0.000 edgecolor
+newpath 542 2134 moveto
+542 2123 lineto
+536 2132 lineto
+closepath
+fill
+0.000 0.000 0.000 edgecolor
+newpath 542 2134 moveto
+542 2123 lineto
+536 2132 lineto
+closepath
+stroke
+end grestore
+% x33->x34
+newpath 556 2088 moveto
+559 2080 562 2070 566 2061 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.000 0.000 0.000 edgecolor
+newpath 569 2063 moveto
+570 2052 lineto
+563 2060 lineto
+closepath
+fill
+0.000 0.000 0.000 edgecolor
+newpath 569 2063 moveto
+570 2052 lineto
+563 2060 lineto
+closepath
+stroke
+end grestore
+% x33->x35
+newpath 546 2088 moveto
+541 2063 532 2019 527 1990 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.000 0.000 0.000 edgecolor
+newpath 530 1989 moveto
+525 1980 lineto
+524 1990 lineto
+closepath
+fill
+0.000 0.000 0.000 edgecolor
+newpath 530 1989 moveto
+525 1980 lineto
+524 1990 lineto
+closepath
+stroke
+end grestore
+% x34->x35
+newpath 564 2018 moveto
+557 2009 547 1997 539 1986 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.000 0.000 0.000 edgecolor
+newpath 542 1984 moveto
+533 1978 lineto
+536 1988 lineto
+closepath
+fill
+0.000 0.000 0.000 edgecolor
+newpath 542 1984 moveto
+533 1978 lineto
+536 1988 lineto
+closepath
+stroke
+end grestore
+% x35->x36
+newpath 505 1947 moveto
+494 1937 480 1923 468 1912 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.000 0.000 0.000 edgecolor
+newpath 471 1910 moveto
+461 1905 lineto
+466 1915 lineto
+closepath
+fill
+0.000 0.000 0.000 edgecolor
+newpath 471 1910 moveto
+461 1905 lineto
+466 1915 lineto
+closepath
+stroke
+end grestore
+% x35->x37
+newpath 516 1944 moveto
+510 1919 498 1875 491 1846 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.000 0.000 0.000 edgecolor
+newpath 494 1845 moveto
+488 1836 lineto
+488 1847 lineto
+closepath
+fill
+0.000 0.000 0.000 edgecolor
+newpath 494 1845 moveto
+488 1836 lineto
+488 1847 lineto
+closepath
+stroke
+end grestore
+% x35->x38
+newpath 532 1945 moveto
+539 1935 547 1921 552 1908 curveto
+570 1863 582 1807 588 1774 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.000 0.000 0.000 edgecolor
+newpath 591 1774 moveto
+590 1764 lineto
+585 1773 lineto
+closepath
+fill
+0.000 0.000 0.000 edgecolor
+newpath 591 1774 moveto
+590 1764 lineto
+585 1773 lineto
+closepath
+stroke
+end grestore
+% x35->x39
+newpath 521 1944 moveto
+521 1895 521 1761 521 1702 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.000 0.000 0.000 edgecolor
+newpath 525 1702 moveto
+521 1692 lineto
+518 1702 lineto
+closepath
+fill
+0.000 0.000 0.000 edgecolor
+newpath 525 1702 moveto
+521 1692 lineto
+518 1702 lineto
+closepath
+stroke
+end grestore
+% x36->x37
+newpath 454 1873 moveto
+459 1865 464 1854 469 1844 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.000 0.000 0.000 edgecolor
+newpath 472 1845 moveto
+474 1835 lineto
+466 1842 lineto
+closepath
+fill
+0.000 0.000 0.000 edgecolor
+newpath 472 1845 moveto
+474 1835 lineto
+466 1842 lineto
+closepath
+stroke
+end grestore
+% x37->x38
+newpath 502 1805 moveto
+519 1794 546 1777 565 1765 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.000 0.000 0.000 edgecolor
+newpath 568 1767 moveto
+574 1759 lineto
+564 1762 lineto
+closepath
+fill
+0.000 0.000 0.000 edgecolor
+newpath 568 1767 moveto
+574 1759 lineto
+564 1762 lineto
+closepath
+stroke
+end grestore
+% x37->x39
+newpath 488 1800 moveto
+494 1775 506 1731 513 1702 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.000 0.000 0.000 edgecolor
+newpath 516 1703 moveto
+516 1692 lineto
+510 1701 lineto
+closepath
+fill
+0.000 0.000 0.000 edgecolor
+newpath 516 1703 moveto
+516 1692 lineto
+510 1701 lineto
+closepath
+stroke
+end grestore
+% x38->x39
+newpath 578 1731 moveto
+568 1721 555 1708 543 1696 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.000 0.000 0.000 edgecolor
+newpath 546 1694 moveto
+536 1689 lineto
+541 1699 lineto
+closepath
+fill
+0.000 0.000 0.000 edgecolor
+newpath 546 1694 moveto
+536 1689 lineto
+541 1699 lineto
+closepath
+stroke
+end grestore
+% x39->x40
+newpath 543 1664 moveto
+569 1651 612 1631 642 1617 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.000 0.000 0.000 edgecolor
+newpath 643 1620 moveto
+651 1613 lineto
+640 1614 lineto
+closepath
+fill
+0.000 0.000 0.000 edgecolor
+newpath 643 1620 moveto
+651 1613 lineto
+640 1614 lineto
+closepath
+stroke
+end grestore
+% x39->x41
+newpath 542 1662 moveto
+558 1653 580 1638 594 1620 curveto
+609 1601 620 1576 627 1558 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.000 0.000 0.000 edgecolor
+newpath 630 1559 moveto
+630 1548 lineto
+624 1557 lineto
+closepath
+fill
+0.000 0.000 0.000 edgecolor
+newpath 630 1559 moveto
+630 1548 lineto
+624 1557 lineto
+closepath
+stroke
+end grestore
+% x39->x42
+newpath 510 1657 moveto
+504 1647 496 1633 490 1620 curveto
+472 1575 459 1519 452 1486 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.000 0.000 0.000 edgecolor
+newpath 455 1485 moveto
+450 1476 lineto
+449 1486 lineto
+closepath
+fill
+0.000 0.000 0.000 edgecolor
+newpath 455 1485 moveto
+450 1476 lineto
+449 1486 lineto
+closepath
+stroke
+end grestore
+% x39->x43
+newpath 519 1656 moveto
+515 1607 504 1473 499 1414 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.000 0.000 0.000 edgecolor
+newpath 502 1414 moveto
+498 1404 lineto
+496 1414 lineto
+closepath
+fill
+0.000 0.000 0.000 edgecolor
+newpath 502 1414 moveto
+498 1404 lineto
+496 1414 lineto
+closepath
+stroke
+end grestore
+% x39->x44
+newpath 524 1656 moveto
+534 1597 566 1413 577 1342 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.000 0.000 0.000 edgecolor
+newpath 580 1342 moveto
+579 1332 lineto
+574 1341 lineto
+closepath
+fill
+0.000 0.000 0.000 edgecolor
+newpath 580 1342 moveto
+579 1332 lineto
+574 1341 lineto
+closepath
+stroke
+end grestore
+% x39->x45
+newpath 531 1657 moveto
+537 1646 543 1633 548 1620 curveto
+594 1496 603 1462 618 1332 curveto
+620 1316 624 1311 618 1296 curveto
+614 1284 606 1272 597 1263 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.000 0.000 0.000 edgecolor
+newpath 600 1261 moveto
+590 1256 lineto
+595 1266 lineto
+closepath
+fill
+0.000 0.000 0.000 edgecolor
+newpath 600 1261 moveto
+590 1256 lineto
+595 1266 lineto
+closepath
+stroke
+end grestore
+% x39->x46
+newpath 496 1666 moveto
+450 1649 352 1604 352 1530 curveto
+352 1530 352 1530 352 1386 curveto
+352 1300 434 1224 477 1189 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.000 0.000 0.000 edgecolor
+newpath 479 1192 moveto
+485 1183 lineto
+475 1186 lineto
+closepath
+fill
+0.000 0.000 0.000 edgecolor
+newpath 479 1192 moveto
+485 1183 lineto
+475 1186 lineto
+closepath
+stroke
+end grestore
+% x39->x47
+newpath 494 1670 moveto
+462 1664 407 1649 370 1620 curveto
+334 1590 314 1577 314 1530 curveto
+314 1530 314 1530 314 1242 curveto
+314 1165 414 1124 468 1107 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.000 0.000 0.000 edgecolor
+newpath 469 1110 moveto
+478 1104 lineto
+467 1104 lineto
+closepath
+fill
+0.000 0.000 0.000 edgecolor
+newpath 469 1110 moveto
+478 1104 lineto
+467 1104 lineto
+closepath
+stroke
+end grestore
+% x40->x41
+newpath 664 1585 moveto
+659 1577 654 1566 649 1556 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.000 0.000 0.000 edgecolor
+newpath 652 1554 moveto
+644 1547 lineto
+646 1557 lineto
+closepath
+fill
+0.000 0.000 0.000 edgecolor
+newpath 652 1554 moveto
+644 1547 lineto
+646 1557 lineto
+closepath
+stroke
+end grestore
+% x41->x42
+newpath 612 1521 moveto
+578 1508 518 1485 480 1471 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.000 0.000 0.000 edgecolor
+newpath 481 1467 moveto
+470 1467 lineto
+478 1474 lineto
+closepath
+fill
+0.000 0.000 0.000 edgecolor
+newpath 481 1467 moveto
+470 1467 lineto
+478 1474 lineto
+closepath
+stroke
+end grestore
+% x41->x43
+newpath 620 1515 moveto
+596 1489 547 1438 519 1408 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.000 0.000 0.000 edgecolor
+newpath 522 1406 moveto
+512 1401 lineto
+517 1411 lineto
+closepath
+fill
+0.000 0.000 0.000 edgecolor
+newpath 522 1406 moveto
+512 1401 lineto
+517 1411 lineto
+closepath
+stroke
+end grestore
+% x42->x43
+newpath 458 1442 moveto
+464 1433 472 1421 479 1411 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.000 0.000 0.000 edgecolor
+newpath 482 1413 moveto
+485 1403 lineto
+476 1409 lineto
+closepath
+fill
+0.000 0.000 0.000 edgecolor
+newpath 482 1413 moveto
+485 1403 lineto
+476 1409 lineto
+closepath
+stroke
+end grestore
+% x43->x44
+newpath 514 1372 moveto
+527 1361 544 1347 558 1335 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.000 0.000 0.000 edgecolor
+newpath 560 1338 moveto
+565 1328 lineto
+555 1333 lineto
+closepath
+fill
+0.000 0.000 0.000 edgecolor
+newpath 560 1338 moveto
+565 1328 lineto
+555 1333 lineto
+closepath
+stroke
+end grestore
+% x43->x45
+newpath 506 1369 moveto
+520 1344 544 1297 559 1268 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.000 0.000 0.000 edgecolor
+newpath 562 1269 moveto
+564 1259 lineto
+556 1266 lineto
+closepath
+fill
+0.000 0.000 0.000 edgecolor
+newpath 562 1269 moveto
+564 1259 lineto
+556 1266 lineto
+closepath
+stroke
+end grestore
+% x43->x46
+newpath 498 1368 moveto
+499 1330 502 1243 503 1198 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.000 0.000 0.000 edgecolor
+newpath 507 1198 moveto
+503 1188 lineto
+500 1198 lineto
+closepath
+fill
+0.000 0.000 0.000 edgecolor
+newpath 507 1198 moveto
+503 1188 lineto
+500 1198 lineto
+closepath
+stroke
+end grestore
+% x43->x47
+newpath 490 1369 moveto
+475 1329 445 1230 468 1152 curveto
+472 1142 478 1131 484 1122 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.000 0.000 0.000 edgecolor
+newpath 487 1124 moveto
+490 1114 lineto
+481 1120 lineto
+closepath
+fill
+0.000 0.000 0.000 edgecolor
+newpath 487 1124 moveto
+490 1114 lineto
+481 1120 lineto
+closepath
+stroke
+end grestore
+% x44->x45
+newpath 580 1296 moveto
+579 1288 578 1279 577 1270 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.000 0.000 0.000 edgecolor
+newpath 580 1269 moveto
+575 1260 lineto
+574 1270 lineto
+closepath
+fill
+0.000 0.000 0.000 edgecolor
+newpath 580 1269 moveto
+575 1260 lineto
+574 1270 lineto
+closepath
+stroke
+end grestore
+% x45->x46
+newpath 558 1227 moveto
+548 1217 536 1204 526 1193 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.000 0.000 0.000 edgecolor
+newpath 528 1190 moveto
+519 1185 lineto
+523 1195 lineto
+closepath
+fill
+0.000 0.000 0.000 edgecolor
+newpath 528 1190 moveto
+519 1185 lineto
+523 1195 lineto
+closepath
+stroke
+end grestore
+% x45->x47
+newpath 568 1224 moveto
+563 1205 553 1175 540 1152 curveto
+535 1142 528 1132 522 1122 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.000 0.000 0.000 edgecolor
+newpath 525 1120 moveto
+516 1114 lineto
+519 1124 lineto
+closepath
+fill
+0.000 0.000 0.000 edgecolor
+newpath 525 1120 moveto
+516 1114 lineto
+519 1124 lineto
+closepath
+stroke
+end grestore
+% x46->x47
+newpath 504 1152 moveto
+504 1144 504 1135 504 1126 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.000 0.000 0.000 edgecolor
+newpath 508 1126 moveto
+504 1116 lineto
+501 1126 lineto
+closepath
+fill
+0.000 0.000 0.000 edgecolor
+newpath 508 1126 moveto
+504 1116 lineto
+501 1126 lineto
+closepath
+stroke
+end grestore
+% x47->x48
+newpath 531 1096 moveto
+586 1090 717 1075 822 1044 curveto
+825 1043 828 1042 832 1041 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.000 0.000 0.000 edgecolor
+newpath 833 1044 moveto
+841 1037 lineto
+830 1038 lineto
+closepath
+fill
+0.000 0.000 0.000 edgecolor
+newpath 833 1044 moveto
+841 1037 lineto
+830 1038 lineto
+closepath
+stroke
+end grestore
+% x47->x49
+newpath 531 1095 moveto
+592 1088 741 1069 784 1044 curveto
+809 1028 831 1000 844 980 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.000 0.000 0.000 edgecolor
+newpath 847 981 moveto
+849 971 lineto
+841 978 lineto
+closepath
+fill
+0.000 0.000 0.000 edgecolor
+newpath 847 981 moveto
+849 971 lineto
+841 978 lineto
+closepath
+stroke
+end grestore
+% x47->x50
+newpath 531 1095 moveto
+587 1089 714 1072 746 1044 curveto
+785 1009 798 947 802 910 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.000 0.000 0.000 edgecolor
+newpath 805 910 moveto
+803 900 lineto
+799 910 lineto
+closepath
+fill
+0.000 0.000 0.000 edgecolor
+newpath 805 910 moveto
+803 900 lineto
+799 910 lineto
+closepath
+stroke
+end grestore
+% x47->x51
+newpath 531 1094 moveto
+580 1086 682 1068 708 1044 curveto
+769 986 730 939 768 864 curveto
+773 854 779 844 785 834 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.000 0.000 0.000 edgecolor
+newpath 788 836 moveto
+791 826 lineto
+782 832 lineto
+closepath
+fill
+0.000 0.000 0.000 edgecolor
+newpath 788 836 moveto
+791 826 lineto
+782 832 lineto
+closepath
+stroke
+end grestore
+% x47->x52
+newpath 530 1093 moveto
+572 1084 651 1064 670 1044 curveto
+698 1013 694 995 694 954 curveto
+694 954 694 954 694 882 curveto
+694 838 717 792 733 764 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.000 0.000 0.000 edgecolor
+newpath 736 765 moveto
+738 755 lineto
+730 762 lineto
+closepath
+fill
+0.000 0.000 0.000 edgecolor
+newpath 736 765 moveto
+738 755 lineto
+730 762 lineto
+closepath
+stroke
+end grestore
+% x47->x53
+newpath 530 1094 moveto
+560 1088 606 1074 632 1044 curveto
+660 1012 657 995 656 954 curveto
+656 954 656 954 656 882 curveto
+657 810 694 731 715 692 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.000 0.000 0.000 edgecolor
+newpath 718 693 moveto
+720 683 lineto
+712 690 lineto
+closepath
+fill
+0.000 0.000 0.000 edgecolor
+newpath 718 693 moveto
+720 683 lineto
+712 690 lineto
+closepath
+stroke
+end grestore
+% x47->x54
+newpath 528 1090 moveto
+548 1081 577 1066 594 1044 curveto
+619 1010 618 995 618 954 curveto
+618 954 618 954 618 738 curveto
+618 696 633 650 644 621 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.000 0.000 0.000 edgecolor
+newpath 647 623 moveto
+648 612 lineto
+641 620 lineto
+closepath
+fill
+0.000 0.000 0.000 edgecolor
+newpath 647 623 moveto
+648 612 lineto
+641 620 lineto
+closepath
+stroke
+end grestore
+% x47->x55
+newpath 508 1080 moveto
+518 1035 542 913 542 810 curveto
+542 810 542 810 542 666 curveto
+542 606 604 560 642 538 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.000 0.000 0.000 edgecolor
+newpath 644 541 moveto
+651 533 lineto
+641 535 lineto
+closepath
+fill
+0.000 0.000 0.000 edgecolor
+newpath 644 541 moveto
+651 533 lineto
+641 535 lineto
+closepath
+stroke
+end grestore
+% x47->x56
+newpath 496 1081 moveto
+485 1054 466 1001 466 954 curveto
+466 954 466 954 466 594 curveto
+466 553 458 507 451 478 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.000 0.000 0.000 edgecolor
+newpath 454 477 moveto
+449 468 lineto
+448 478 lineto
+closepath
+fill
+0.000 0.000 0.000 edgecolor
+newpath 454 477 moveto
+449 468 lineto
+448 478 lineto
+closepath
+stroke
+end grestore
+% x47->x57
+newpath 484 1086 moveto
+451 1063 390 1013 390 954 curveto
+390 954 390 954 390 522 curveto
+390 482 390 435 390 406 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.000 0.000 0.000 edgecolor
+newpath 394 406 moveto
+390 396 lineto
+387 406 lineto
+closepath
+fill
+0.000 0.000 0.000 edgecolor
+newpath 394 406 moveto
+390 396 lineto
+387 406 lineto
+closepath
+stroke
+end grestore
+% x47->x58
+newpath 477 1095 moveto
+427 1089 322 1072 300 1044 curveto
+291 1031 300 1023 300 1008 curveto
+304 887 314 858 314 738 curveto
+314 738 314 738 314 450 curveto
+314 409 322 363 329 334 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.000 0.000 0.000 edgecolor
+newpath 332 334 moveto
+331 324 lineto
+326 333 lineto
+closepath
+fill
+0.000 0.000 0.000 edgecolor
+newpath 332 334 moveto
+331 324 lineto
+326 333 lineto
+closepath
+stroke
+end grestore
+% x47->x59
+newpath 480 1090 moveto
+458 1081 427 1066 406 1044 curveto
+282 908 238 849 238 666 curveto
+238 666 238 666 238 378 curveto
+238 320 296 275 333 251 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.000 0.000 0.000 edgecolor
+newpath 335 254 moveto
+342 246 lineto
+332 248 lineto
+closepath
+fill
+0.000 0.000 0.000 edgecolor
+newpath 335 254 moveto
+342 246 lineto
+332 248 lineto
+closepath
+stroke
+end grestore
+% x47->x60
+newpath 504 1080 moveto
+504 1034 504 912 504 810 curveto
+504 810 504 810 504 666 curveto
+504 528 615 515 614 378 curveto
+614 378 614 378 614 306 curveto
+614 266 614 219 614 190 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.000 0.000 0.000 edgecolor
+newpath 618 190 moveto
+614 180 lineto
+611 190 lineto
+closepath
+fill
+0.000 0.000 0.000 edgecolor
+newpath 618 190 moveto
+614 180 lineto
+611 190 lineto
+closepath
+stroke
+end grestore
+% x47->x61
+newpath 478 1094 moveto
+427 1087 320 1069 293 1044 curveto
+191 945 200 880 200 738 curveto
+200 738 200 738 200 378 curveto
+200 280 234 168 252 117 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.000 0.000 0.000 edgecolor
+newpath 255 119 moveto
+255 108 lineto
+249 116 lineto
+closepath
+fill
+0.000 0.000 0.000 edgecolor
+newpath 255 119 moveto
+255 108 lineto
+249 116 lineto
+closepath
+stroke
+end grestore
+% x47->x62
+newpath 477 1095 moveto
+421 1088 294 1069 258 1044 curveto
+144 960 114 639 114 522 curveto
+114 522 114 522 114 162 curveto
+114 115 146 68 168 41 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.000 0.000 0.000 edgecolor
+newpath 171 43 moveto
+175 33 lineto
+166 38 lineto
+closepath
+fill
+0.000 0.000 0.000 edgecolor
+newpath 171 43 moveto
+175 33 lineto
+166 38 lineto
+closepath
+stroke
+end grestore
+% x48->x49
+newpath 862 1008 moveto
+861 1000 861 991 861 982 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.000 0.000 0.000 edgecolor
+newpath 864 982 moveto
+860 972 lineto
+858 982 lineto
+closepath
+fill
+0.000 0.000 0.000 edgecolor
+newpath 864 982 moveto
+860 972 lineto
+858 982 lineto
+closepath
+stroke
+end grestore
+% x49->x50
+newpath 847 938 moveto
+840 929 830 917 822 906 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.000 0.000 0.000 edgecolor
+newpath 825 904 moveto
+816 898 lineto
+819 908 lineto
+closepath
+fill
+0.000 0.000 0.000 edgecolor
+newpath 825 904 moveto
+816 898 lineto
+819 908 lineto
+closepath
+stroke
+end grestore
+% x49->x51
+newpath 857 936 moveto
+855 917 849 887 840 864 curveto
+836 854 829 843 823 834 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.000 0.000 0.000 edgecolor
+newpath 826 832 moveto
+817 826 lineto
+820 836 lineto
+closepath
+fill
+0.000 0.000 0.000 edgecolor
+newpath 826 832 moveto
+817 826 lineto
+820 836 lineto
+closepath
+stroke
+end grestore
+% x50->x51
+newpath 804 864 moveto
+804 856 804 847 804 838 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.000 0.000 0.000 edgecolor
+newpath 808 838 moveto
+804 828 lineto
+801 838 lineto
+closepath
+fill
+0.000 0.000 0.000 edgecolor
+newpath 808 838 moveto
+804 828 lineto
+801 838 lineto
+closepath
+stroke
+end grestore
+% x51->x52
+newpath 792 794 moveto
+785 785 775 773 767 762 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.000 0.000 0.000 edgecolor
+newpath 770 760 moveto
+761 754 lineto
+764 764 lineto
+closepath
+fill
+0.000 0.000 0.000 edgecolor
+newpath 770 760 moveto
+761 754 lineto
+764 764 lineto
+closepath
+stroke
+end grestore
+% x51->x53
+newpath 803 792 moveto
+801 773 797 742 785 720 curveto
+778 706 767 695 756 685 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.000 0.000 0.000 edgecolor
+newpath 758 682 moveto
+748 679 lineto
+754 688 lineto
+closepath
+fill
+0.000 0.000 0.000 edgecolor
+newpath 758 682 moveto
+748 679 lineto
+754 688 lineto
+closepath
+stroke
+end grestore
+% x51->x54
+newpath 780 801 moveto
+759 793 730 778 713 756 curveto
+680 716 666 657 660 622 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.000 0.000 0.000 edgecolor
+newpath 663 621 moveto
+658 612 lineto
+657 622 lineto
+closepath
+fill
+0.000 0.000 0.000 edgecolor
+newpath 663 621 moveto
+658 612 lineto
+657 622 lineto
+closepath
+stroke
+end grestore
+% x51->x55
+newpath 807 792 moveto
+809 773 811 744 805 720 curveto
+786 648 729 579 696 545 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.000 0.000 0.000 edgecolor
+newpath 698 542 moveto
+689 537 lineto
+693 547 lineto
+closepath
+fill
+0.000 0.000 0.000 edgecolor
+newpath 698 542 moveto
+689 537 lineto
+693 547 lineto
+closepath
+stroke
+end grestore
+% x52->x53
+newpath 744 720 moveto
+742 712 740 703 738 694 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.000 0.000 0.000 edgecolor
+newpath 741 693 moveto
+735 684 lineto
+735 695 lineto
+closepath
+fill
+0.000 0.000 0.000 edgecolor
+newpath 741 693 moveto
+735 684 lineto
+735 695 lineto
+closepath
+stroke
+end grestore
+% x53->x54
+newpath 715 651 moveto
+704 641 690 627 678 616 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.000 0.000 0.000 edgecolor
+newpath 681 614 moveto
+671 609 lineto
+676 619 lineto
+closepath
+fill
+0.000 0.000 0.000 edgecolor
+newpath 681 614 moveto
+671 609 lineto
+676 619 lineto
+closepath
+stroke
+end grestore
+% x53->x55
+newpath 723 648 moveto
+713 624 695 579 684 550 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.000 0.000 0.000 edgecolor
+newpath 687 548 moveto
+680 540 lineto
+680 551 lineto
+closepath
+fill
+0.000 0.000 0.000 edgecolor
+newpath 687 548 moveto
+680 540 lineto
+680 551 lineto
+closepath
+stroke
+end grestore
+% x54->x55
+newpath 660 576 moveto
+662 568 664 559 666 550 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.000 0.000 0.000 edgecolor
+newpath 669 551 moveto
+669 540 lineto
+663 549 lineto
+closepath
+fill
+0.000 0.000 0.000 edgecolor
+newpath 669 551 moveto
+669 540 lineto
+663 549 lineto
+closepath
+stroke
+end grestore
+% x55->x56
+newpath 648 516 moveto
+612 506 543 488 486 468 curveto
+483 467 480 466 477 464 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.000 0.000 0.000 edgecolor
+newpath 479 461 moveto
+468 460 lineto
+476 467 lineto
+closepath
+fill
+0.000 0.000 0.000 edgecolor
+newpath 479 461 moveto
+468 460 lineto
+476 467 lineto
+closepath
+stroke
+end grestore
+% x55->x57
+newpath 648 516 moveto
+617 507 565 491 524 468 curveto
+503 455 502 446 481 432 curveto
+461 418 438 404 420 394 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.000 0.000 0.000 edgecolor
+newpath 421 391 moveto
+411 389 lineto
+418 397 lineto
+closepath
+fill
+0.000 0.000 0.000 edgecolor
+newpath 421 391 moveto
+411 389 lineto
+418 397 lineto
+closepath
+stroke
+end grestore
+% x55->x58
+newpath 650 513 moveto
+626 503 591 487 562 468 curveto
+542 454 540 447 520 432 curveto
+480 398 470 389 426 360 curveto
+406 346 383 333 365 322 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.000 0.000 0.000 edgecolor
+newpath 366 319 moveto
+356 317 lineto
+363 325 lineto
+closepath
+fill
+0.000 0.000 0.000 edgecolor
+newpath 366 319 moveto
+356 317 lineto
+363 325 lineto
+closepath
+stroke
+end grestore
+% x55->x59
+newpath 657 507 moveto
+606 460 447 312 386 256 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.000 0.000 0.000 edgecolor
+newpath 389 254 moveto
+379 249 lineto
+384 259 lineto
+closepath
+fill
+0.000 0.000 0.000 edgecolor
+newpath 389 254 moveto
+379 249 lineto
+384 259 lineto
+closepath
+stroke
+end grestore
+% x55->x60
+newpath 677 504 moveto
+682 476 690 423 690 378 curveto
+690 378 690 378 690 306 curveto
+690 259 658 212 636 185 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.000 0.000 0.000 edgecolor
+newpath 638 182 moveto
+629 177 lineto
+633 187 lineto
+closepath
+fill
+0.000 0.000 0.000 edgecolor
+newpath 638 182 moveto
+629 177 lineto
+633 187 lineto
+closepath
+stroke
+end grestore
+% x55->x61
+newpath 684 505 moveto
+700 479 728 427 728 378 curveto
+728 378 728 378 728 234 curveto
+728 181 696 169 650 144 curveto
+590 111 384 96 298 92 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.000 0.000 0.000 edgecolor
+newpath 298 89 moveto
+288 91 lineto
+298 95 lineto
+closepath
+fill
+0.000 0.000 0.000 edgecolor
+newpath 298 89 moveto
+288 91 lineto
+298 95 lineto
+closepath
+stroke
+end grestore
+% x55->x62
+newpath 700 519 moveto
+795 508 1108 464 1108 378 curveto
+1108 378 1108 378 1108 162 curveto
+1108 71 399 29 227 20 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.000 0.000 0.000 edgecolor
+newpath 227 17 moveto
+217 19 lineto
+227 23 lineto
+closepath
+fill
+0.000 0.000 0.000 edgecolor
+newpath 227 17 moveto
+217 19 lineto
+227 23 lineto
+closepath
+stroke
+end grestore
+% x56->x57
+newpath 433 434 moveto
+426 425 416 413 408 402 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.000 0.000 0.000 edgecolor
+newpath 411 400 moveto
+402 394 lineto
+405 404 lineto
+closepath
+fill
+0.000 0.000 0.000 edgecolor
+newpath 411 400 moveto
+402 394 lineto
+405 404 lineto
+closepath
+stroke
+end grestore
+% x57->x58
+newpath 378 362 moveto
+371 353 361 341 353 330 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.000 0.000 0.000 edgecolor
+newpath 356 328 moveto
+347 322 lineto
+350 332 lineto
+closepath
+fill
+0.000 0.000 0.000 edgecolor
+newpath 356 328 moveto
+347 322 lineto
+350 332 lineto
+closepath
+stroke
+end grestore
+% x57->x59
+newpath 387 360 moveto
+382 335 373 291 368 262 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.000 0.000 0.000 edgecolor
+newpath 371 261 moveto
+366 252 lineto
+365 262 lineto
+closepath
+fill
+0.000 0.000 0.000 edgecolor
+newpath 371 261 moveto
+366 252 lineto
+365 262 lineto
+closepath
+stroke
+end grestore
+% x58->x59
+newpath 342 289 moveto
+345 280 349 270 353 261 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.000 0.000 0.000 edgecolor
+newpath 356 262 moveto
+356 251 lineto
+350 260 lineto
+closepath
+fill
+0.000 0.000 0.000 edgecolor
+newpath 356 262 moveto
+356 251 lineto
+350 260 lineto
+closepath
+stroke
+end grestore
+% x59->x60
+newpath 388 227 moveto
+433 214 528 187 579 172 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.000 0.000 0.000 edgecolor
+newpath 580 175 moveto
+589 169 lineto
+578 169 lineto
+closepath
+fill
+0.000 0.000 0.000 edgecolor
+newpath 580 175 moveto
+589 169 lineto
+578 169 lineto
+closepath
+stroke
+end grestore
+% x59->x61
+newpath 351 217 moveto
+334 193 299 144 279 115 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.000 0.000 0.000 edgecolor
+newpath 281 112 moveto
+273 106 lineto
+276 116 lineto
+closepath
+fill
+0.000 0.000 0.000 edgecolor
+newpath 281 112 moveto
+273 106 lineto
+276 116 lineto
+closepath
+stroke
+end grestore
+% x59->x62
+newpath 344 221 moveto
+314 201 258 157 225 108 curveto
+212 89 203 64 198 46 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.000 0.000 0.000 edgecolor
+newpath 201 45 moveto
+195 36 lineto
+195 47 lineto
+closepath
+fill
+0.000 0.000 0.000 edgecolor
+newpath 201 45 moveto
+195 36 lineto
+195 47 lineto
+closepath
+stroke
+end grestore
+% x60->x61
+newpath 588 157 moveto
+526 144 368 112 297 97 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.000 0.000 0.000 edgecolor
+newpath 297 94 moveto
+287 95 lineto
+296 100 lineto
+closepath
+fill
+0.000 0.000 0.000 edgecolor
+newpath 297 94 moveto
+287 95 lineto
+296 100 lineto
+closepath
+stroke
+end grestore
+% x61->x62
+newpath 246 75 moveto
+236 65 223 52 212 40 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.000 0.000 0.000 edgecolor
+newpath 215 38 moveto
+205 33 lineto
+210 43 lineto
+closepath
+fill
+0.000 0.000 0.000 edgecolor
+newpath 215 38 moveto
+205 33 lineto
+210 43 lineto
+closepath
+stroke
+end grestore
+endpage
+showpage
+grestore
+%%PageTrailer
+%%EndPage: 1
+%%Trailer
+%%Pages: 1
+end
+restore
+%%EOF

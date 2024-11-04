@@ -1,0 +1,60 @@
+module DependentBigotimesGrowing (otimes, bigotimes) where
+
+-- Tried to see whether the version with the growing s is faster. But
+-- it isn't! Even with in-lining and simplification. (Tested with
+-- tic-tac-toe.)
+
+type J r x = (x -> r) -> x
+
+prefix :: x -> ([x] -> r) -> ([x] -> r)
+prefix x p xs = p(x : xs)
+
+otimes :: J r x -> (x -> J r [x]) -> J r [x]
+(epsilon `otimes` delta) p = a : b a
+    where b x = delta x (prefix x p)
+          a = epsilon(\x -> p(x : b x))
+
+
+bigotimes :: [[x] -> J r x] -> J r [x]
+
+bigotimes = bigotimes4
+
+-- Expand the definition of otimes and use growing s for epsilon:
+
+bigotimes1 epsilons = ips [] epsilons
+  where ips s [] p = []
+        ips s (epsilon : epsilons) p = a : b a
+           where  delta x = ips (s ++ [x]) epsilons
+                  b x = delta x (prefix x p)
+                  a = epsilon s (\x -> p(x : b x))
+
+
+-- Use growing s for p too, so that p is not passed around, and expand
+-- a bit further:
+
+bigotimes2 epsilons p = ips [] epsilons
+  where ips s [] = []
+        ips s (epsilon : epsilons) = a : ips (s ++ [a]) epsilons
+           where a = epsilon s (\x -> p(s ++ [x] ++ ips (s ++ [x]) epsilons))
+
+
+-- Don't compute s ++ [x] twice, and put a at the beginning, not end
+-- of s, to avoid travelling throush s every time (but then have to
+-- reverse s when it is finally used (if it is used at all)).
+
+bigotimes3 epsilons p = ips [] epsilons
+  where ips s [] = []
+        ips s (epsilon : epsilons) = a : ips (a : s) epsilons
+           where a = epsilon (reverse s) (\x -> let s' = x : s 
+                                                in p((reverse s') ++ ips s' epsilons))
+
+-- Forget the reverse:
+
+bigotimes4 epsilons p = ips [] epsilons
+  where ips s [] = []
+        ips s (epsilon : epsilons) = a : ips (s ++ [a]) epsilons
+           where a = epsilon s (\x -> let s' = s ++ [x] 
+                                      in p(s' ++ ips s' epsilons))
+
+
+

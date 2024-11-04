@@ -1,0 +1,214 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<!--Converted with LaTeX2HTML 98.1p1 release (March 2nd, 1998)
+originally by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>The space of decimal expansions</TITLE>
+<META NAME="description" CONTENT="The space of decimal expansions">
+<META NAME="keywords" CONTENT="issac">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="STYLESHEET" HREF="issac.css">
+<LINK REL="next" HREF="node22.html">
+<LINK REL="previous" HREF="node15.html">
+<LINK REL="up" HREF="issac.html">
+<LINK REL="next" HREF="node22.html">
+</HEAD>
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html291"
+ HREF="node22.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="http://www.cs.bham.ac.uk/logos/latex2html/icons.gif/next_motif.gif"></A> 
+<A NAME="tex2html288"
+ HREF="issac.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="http://www.cs.bham.ac.uk/logos/latex2html/icons.gif/up_motif.gif"></A> 
+<A NAME="tex2html282"
+ HREF="node20.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="http://www.cs.bham.ac.uk/logos/latex2html/icons.gif/previous_motif.gif"></A> 
+<A NAME="tex2html290"
+ HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="http://www.cs.bham.ac.uk/logos/latex2html/icons.gif/contents_motif.gif"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html292"
+ HREF="node22.html">Computational inadequacy of decimal</A>
+<B> Up:</B> <A NAME="tex2html289"
+ HREF="issac.html">Introduction to EXACT NUMERICAL</A>
+<B> Previous:</B> <A NAME="tex2html283"
+ HREF="node20.html">Examples</A>
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION00600000000000000000">&#160;</A> <A NAME="space">&#160;</A>
+<BR>
+The space of decimal expansions
+</H1>
+
+<P>
+In analysis one is interested in
+approximation processes (limits) and functions that preserve the
+approximation processes (continuous functions).  A topology on a set
+consists of structure that allows one to define approximation
+processes in the set. For example, such a structure on the real
+numbers is induced by the usual notion of distance.
+
+<P>
+In this chapter we are interested in a topological structure on the
+set of decimal expansions of real numbers, and its relation to the
+topological structure on the set of real numbers. Notice the
+distinction; a decimal expansion is a concrete syntactic entity (a
+sequence of digits), but a real number is an abstract mathematical
+entity.
+
+<P>
+To motivate this, consider a program that runs forever, printing the
+decimal expansion of&nbsp;10#10.
+At any stage of the computation, only a
+finite prefix of the decimal expansion will be observed. However, a
+prefix as long as we are patient to wait for will be observed.
+Moreover, the collection of all such (finite) prefixes uniquely
+determines the entire (infinite) decimal expansion.  Thus, the
+computation can be thought as a sequence of approximations that
+converges to the entire decimal expansion.
+
+<P>
+Now consider a program that runs forever, sometimes reading decimal
+digits from the input, and sometimes printing decimal digits to the
+output, so that a function on decimal expansions is implemented. As
+before, both the input and the output are infinite.
+However, it is clear that finite amounts of output digits can depend
+only on finite amounts of input digits. In this sense, the program
+respects the approximation process describe above and hence is
+continuous with respect to this notion of approximation.
+
+<P>
+All this can be made mathematically precise in various ways. For
+instance, one can define a notion of distance between decimal
+expansions. For simplicity, we shall consider only fractional infinite
+decimal expansions in these notes; we therefore ignore the decimal
+point and the leading digit zero, so that a decimal expansion is just
+a sequence of decimal digits.  We can say, for example, that the
+distance between two distinct expansions 11#11
+and 12#12
+is
+2<SUP>-<I>n</I></SUP> where <I>n</I> is the first position at which they
+differ--admittedly, the number 2<SUP>-<I>n</I></SUP> is rather arbitrary, and other
+choices such as 1/<I>n</I> work equally well. With this, continuity in the
+above sense is formalized by the usual 
+<!-- MATH: $\epsilon-\delta$ -->
+13#13
+definition
+that occurs in real analysis.  In this way, the decimal expansions are
+made into a metric space.
+
+<P>
+If we abstract from the metric, whose numerical details are for the
+most part irrelevant, one gets a topological space. Let 
+<!-- MATH: $\alpha
+\equiv_n \beta$ -->
+14#14
+mean that the distance between&nbsp;11#11
+and 12#12
+is
+smaller than 2<SUP>-<I>n</I></SUP>, that is, that 
+<!-- MATH: $\alpha_i = \beta_i$ -->
+15#15
+for all <I>i</I> &lt;
+<I>n</I>. Then a set <I>U</I> of decimal expansions is open with respect to this
+notion of distance iff whenever 
+<!-- MATH: $\alpha \in U$ -->
+16#16
+there is an <I>n</I> such
+that 
+<!-- MATH: $\beta \in U$ -->
+17#17
+for all 
+<!-- MATH: $\beta \equiv_n \alpha$ -->
+18#18.
+A sequence
+19#19
+of decimal expansions converges to a decimal
+expansion&nbsp;12#12
+iff for every open set&nbsp;<I>U</I> with 
+<!-- MATH: $\beta \in U$ -->
+17#17,
+as
+small as we please, there is an <I>n</I> such that 
+<!-- MATH: $\alpha_i \in U$ -->
+20#20
+for all
+21#21.
+A function&nbsp;22#22
+of decimal expansions is continuous with
+respect to this topology iff for every&nbsp;11#11
+and every <I>n</I> there is
+a&nbsp;<I>k</I> such that 
+<!-- MATH: $\alpha \equiv_k \beta$ -->
+23#23
+implies 
+<!-- MATH: $\phi(\alpha) \equiv_n
+\phi(\beta)$ -->
+24#24
+for all&nbsp;12#12.
+The reader who is familiar with topology may have noticed that this
+way of topologizing decimal expansions is equivalent to endowing the
+digit set 
+<!-- MATH: $D= \{ 0,1,\dots,9 \}$ -->
+25#25
+with the discrete topology and
+then the set 
+<!-- MATH: $D^{\mathbb{N}}$ -->
+26#26
+of decimal expansions with the product
+topology.
+
+<P>
+In the following chapters we use topological arguments to prove
+computational propositions.  Unfortunately, we cannot include all the
+background details here, so refer the interested reader to
+Smyth&nbsp;[<A
+ HREF="node38.html#smyth:topology">54</A>] and Vickers&nbsp;[<A
+ HREF="node38.html#vickers:topology">57</A>] for
+introductions to topology for computer scientists.
+
+<P>
+<HR>
+<!--Navigation Panel-->
+<A NAME="tex2html291"
+ HREF="node22.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="http://www.cs.bham.ac.uk/logos/latex2html/icons.gif/next_motif.gif"></A> 
+<A NAME="tex2html288"
+ HREF="issac.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="http://www.cs.bham.ac.uk/logos/latex2html/icons.gif/up_motif.gif"></A> 
+<A NAME="tex2html282"
+ HREF="node20.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="http://www.cs.bham.ac.uk/logos/latex2html/icons.gif/previous_motif.gif"></A> 
+<A NAME="tex2html290"
+ HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="http://www.cs.bham.ac.uk/logos/latex2html/icons.gif/contents_motif.gif"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html292"
+ HREF="node22.html">Computational inadequacy of decimal</A>
+<B> Up:</B> <A NAME="tex2html289"
+ HREF="issac.html">Introduction to EXACT NUMERICAL</A>
+<B> Previous:</B> <A NAME="tex2html283"
+ HREF="node20.html">Examples</A>
+<!--End of Navigation Panel-->
+<ADDRESS>
+<I>Martin Escardo</I>
+<BR><I>2000-10-02</I>
+</ADDRESS>
+</BODY>
+</HTML>

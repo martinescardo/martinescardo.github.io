@@ -1,0 +1,110 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<!--Converted with LaTeX2HTML 98.1p1 release (March 2nd, 1998)
+originally by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>The denotation map</TITLE>
+<META NAME="description" CONTENT="The denotation map">
+<META NAME="keywords" CONTENT="issac">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="STYLESHEET" HREF="issac.css">
+<LINK REL="next" HREF="node24.html">
+<LINK REL="previous" HREF="node22.html">
+<LINK REL="up" HREF="node22.html">
+<LINK REL="next" HREF="node24.html">
+</HEAD>
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html315"
+ HREF="node24.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="http://www.cs.bham.ac.uk/logos/latex2html/icons.gif/next_motif.gif"></A> 
+<A NAME="tex2html312"
+ HREF="node22.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="http://www.cs.bham.ac.uk/logos/latex2html/icons.gif/up_motif.gif"></A> 
+<A NAME="tex2html306"
+ HREF="node22.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="http://www.cs.bham.ac.uk/logos/latex2html/icons.gif/previous_motif.gif"></A> 
+<A NAME="tex2html314"
+ HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="http://www.cs.bham.ac.uk/logos/latex2html/icons.gif/contents_motif.gif"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html316"
+ HREF="node24.html">Realizers</A>
+<B> Up:</B> <A NAME="tex2html313"
+ HREF="node22.html">Computational inadequacy of decimal</A>
+<B> Previous:</B> <A NAME="tex2html307"
+ HREF="node22.html">Computational inadequacy of decimal</A>
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H4><A NAME="SECTION00700010000000000000">
+The denotation map</A>
+</H4>
+As above, we only consider fractional numbers, ignoring the decimal
+point and the leading zero in decimal notation.  A <EM>numeral</EM> is
+an infinite sequence over the digit alphabet 
+<!-- MATH: $D=\{0,1,\dots,9\}$ -->
+25#25.
+A
+numeral 
+<!-- MATH: $\alpha \in D^{\mathbb{N}}$ -->
+27#27
+denotes the number
+<BR><P></P>
+<DIV ALIGN="CENTER">
+<!-- MATH: \begin{displaymath}
+\llbracket \alpha \rrbracket = \sum_{i \geqslant 0} \alpha_i \cdot 10^{-(i+1)} \in
+[0,1].
+\end{displaymath} -->
+
+
+28#28
+</DIV>
+<BR CLEAR="ALL">
+<P></P>
+The denotation map 
+<!-- MATH: $\alpha \mapsto \llbracket \alpha \rrbracket$ -->
+29#29
+is the
+fundamental link between the operational and denotational semantics of
+real number computation as discussed in Chapter&nbsp;<A HREF="node15.html#operden">4</A>--but
+notice that different operational semantics will use different
+notation spaces.  Our denotation map is a surjection
+<BR><P></P>
+<DIV ALIGN="CENTER">
+<!-- MATH: \begin{displaymath}
+q:D^{\mathbb{N}}\twoheadrightarrow[0,1].
+\end{displaymath} -->
+
+
+30#30
+</DIV>
+<BR CLEAR="ALL">
+<P></P>
+It is not an injection because the decimal rationals 
+<!-- MATH: $m/10^n \in
+(0,1)$ -->
+31#31
+have two decimal notations--the reason is that we consider
+infinitely long runs of digits&nbsp;9 as legitimate as infinitely long
+runs of digits&nbsp;0, because there is no way of ruling out the former
+by computational means.
+
+<P>
+<BR><HR>
+<ADDRESS>
+<I>Martin Escardo</I>
+<BR><I>2000-10-02</I>
+</ADDRESS>
+</BODY>
+</HTML>

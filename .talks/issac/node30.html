@@ -1,0 +1,209 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<!--Converted with LaTeX2HTML 98.1p1 release (March 2nd, 1998)
+originally by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>Order normalization</TITLE>
+<META NAME="description" CONTENT="Order normalization">
+<META NAME="keywords" CONTENT="issac">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="STYLESHEET" HREF="issac.css">
+<LINK REL="previous" HREF="node29.html">
+<LINK REL="up" HREF="node29.html">
+<LINK REL="next" HREF="node31.html">
+</HEAD>
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html389"
+ HREF="node31.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="http://www.cs.bham.ac.uk/logos/latex2html/icons.gif/next_motif.gif"></A> 
+<A NAME="tex2html386"
+ HREF="node29.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="http://www.cs.bham.ac.uk/logos/latex2html/icons.gif/up_motif.gif"></A> 
+<A NAME="tex2html382"
+ HREF="node29.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="http://www.cs.bham.ac.uk/logos/latex2html/icons.gif/previous_motif.gif"></A> 
+<A NAME="tex2html388"
+ HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="http://www.cs.bham.ac.uk/logos/latex2html/icons.gif/contents_motif.gif"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html390"
+ HREF="node31.html">Inequality tests in real</A>
+<B> Up:</B> <A NAME="tex2html387"
+ HREF="node29.html">Numerical order in signed-digit</A>
+<B> Previous:</B> <A NAME="tex2html383"
+ HREF="node29.html">Numerical order in signed-digit</A>
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H4><A NAME="SECTION001000010000000000000">
+Order normalization</A>
+</H4>
+A pair 
+<!-- MATH: $(\alpha,\beta)$ -->
+74#74
+of numerals is <EM>order-normal</EM> it its
+lexicographical order coincides with its numerical order, in the sense
+that
+<DL COMPACT>
+<DT>1.
+<DD>
+<!-- MATH: $\alpha < \beta$ -->
+57#57
+and 
+<!-- MATH: $\llbracket \alpha \rrbracket < \llbracket \beta \rrbracket$ -->
+75#75,
+or
+<DT>2.
+<DD>
+<!-- MATH: $\alpha = \beta$ -->
+76#76,
+or 
+<DT>3.
+<DD>
+<!-- MATH: $\alpha > \beta$ -->
+77#77
+and 
+<!-- MATH: $\llbracket \alpha \rrbracket > \llbracket \beta \rrbracket$ -->
+78#78.
+</DL>Thus, for order-normal pairs 
+<!-- MATH: $(\alpha,\beta)$ -->
+74#74,
+the condition
+
+<!-- MATH: $\llbracket \alpha \rrbracket=\llbracket \beta \rrbracket$ -->
+52#52
+implies 
+<!-- MATH: $\alpha=\beta$ -->
+76#76.
+In order
+to emphasize that order-normality is a property of <EM>pairs</EM> of
+numerals and not of <EM>single</EM> numerals, we observe that the pair
+
+<!-- MATH: $(\alpha,\alpha)$ -->
+79#79
+is always order-normal.<P>
+<DIV><A NAME="lexnormthm"><B>Theorem  9.1</B></A> &nbsp; 
+There is a computable, denotation-preserving idempotent map 
+  <BR><P></P>
+<DIV ALIGN="CENTER">
+<!-- MATH: \begin{displaymath}
+\operatorname{norm}:\mathbf{3}^{\mathbb{N}}\times \mathbf{3}^{\mathbb{N}}\rightarrow\mathbf{3}^{\mathbb{N}}\times \mathbf{3}^{\mathbb{N}}
+\end{displaymath} -->
+
+
+80#80
+</DIV>
+<BR CLEAR="ALL">
+<P></P>
+whose fixed-points are order-normal pairs.</DIV><P></P>
+That is, 
+<!-- MATH: $\operatorname{norm}(\alpha,\beta)=(\alpha',\beta')$ -->
+81#81
+implies that
+<DL COMPACT>
+<DT>1.
+<DD>
+<!-- MATH: $(\llbracket \alpha \rrbracket,\llbracket \beta \rrbracket)=(\llbracket \alpha' \rrbracket,\llbracket \beta' \rrbracket)$ -->
+82#82,
+<DT>2.
+<DD>
+<!-- MATH: $(\alpha',\beta')$ -->
+83#83
+is order-normal, and
+<DT>3.
+<DD><A NAME="idemp">&#160;</A> 
+<!-- MATH: $\operatorname{norm}(\alpha',\beta')=(\alpha',\beta')$ -->
+84#84.
+</DL>In particular, one can always assume w.l.o.g. that any two numerals
+that denote the same numbers are themselves the same, despite the fact
+that single numerals don't have effectively determinable canonical
+forms. Since one can effectively translate between the notation
+systems of real numbers discussed in Chapter&nbsp;<A HREF="node25.html#solutions">7</A>, all of
+them have the same property.
+
+<P>
+Lemma&nbsp;<A HREF="node28.html#identities">8.1</A> is the fundamental ingredient of the proof of
+the theorem, which is not included here.  Together with topology, the
+identities of the lemma actually capture all identities induced by the
+denotation function.  Let 85#85
+be the least equivalence relation
+such that
+<BLOCKQUOTE>
+
+<!-- MATH: $\alpha 0 \bar{1} \beta \sim \alpha \bar{1} 1 \beta$ -->
+86#86,
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  
+<!-- MATH: $\alpha 0 1 \beta \sim \alpha 1 \bar{1} \beta$ -->
+87#87.
+</BLOCKQUOTE>The relation&nbsp;85#85
+is strictly weaker than the relation&nbsp;50#50.
+For
+example, 
+<!-- MATH: $1\bar{1}^\omega \equiv \bar{1}1^\omega$ -->
+88#88,
+because both
+numerals denote the number&nbsp;0, but they are not related by&nbsp;85#85,
+because it is not possible to obtain one from the other by finitely
+many applications of the above identities.
+But if we add limits to 85#85
+then we get 50#50.
+<P>
+<DIV><B>Proposition  9.2</B> &nbsp; 
+The relation 50#50
+is the topological closure of the
+  relation&nbsp;85#85
+in the product space 
+<!-- MATH: $\mathbf{3}^{\mathbb{N}}\times \mathbf{3}^{\mathbb{N}}$ -->
+89#89.</DIV><P></P>
+(Notice that 50#50
+has to be closed because the denotation quotient
+map is continuous and 
+<!-- MATH: $D^{\mathbb{N}}$ -->
+26#26
+and [-1,1] are Hausdorff spaces.)
+
+<P>
+<HR>
+<!--Navigation Panel-->
+<A NAME="tex2html389"
+ HREF="node31.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="http://www.cs.bham.ac.uk/logos/latex2html/icons.gif/next_motif.gif"></A> 
+<A NAME="tex2html386"
+ HREF="node29.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="http://www.cs.bham.ac.uk/logos/latex2html/icons.gif/up_motif.gif"></A> 
+<A NAME="tex2html382"
+ HREF="node29.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="http://www.cs.bham.ac.uk/logos/latex2html/icons.gif/previous_motif.gif"></A> 
+<A NAME="tex2html388"
+ HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="http://www.cs.bham.ac.uk/logos/latex2html/icons.gif/contents_motif.gif"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html390"
+ HREF="node31.html">Inequality tests in real</A>
+<B> Up:</B> <A NAME="tex2html387"
+ HREF="node29.html">Numerical order in signed-digit</A>
+<B> Previous:</B> <A NAME="tex2html383"
+ HREF="node29.html">Numerical order in signed-digit</A>
+<!--End of Navigation Panel-->
+<ADDRESS>
+<I>Martin Escardo</I>
+<BR><I>2000-10-02</I>
+</ADDRESS>
+</BODY>
+</HTML>

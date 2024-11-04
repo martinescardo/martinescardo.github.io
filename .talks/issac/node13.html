@@ -1,0 +1,128 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<!--Converted with LaTeX2HTML 98.1p1 release (March 2nd, 1998)
+originally by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>Last attempt</TITLE>
+<META NAME="description" CONTENT="Last attempt">
+<META NAME="keywords" CONTENT="issac">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="STYLESHEET" HREF="issac.css">
+<LINK REL="next" HREF="node14.html">
+<LINK REL="previous" HREF="node12.html">
+<LINK REL="up" HREF="node6.html">
+<LINK REL="next" HREF="node14.html">
+</HEAD>
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html202"
+ HREF="node14.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="http://www.cs.bham.ac.uk/logos/latex2html/icons.gif/next_motif.gif"></A> 
+<A NAME="tex2html199"
+ HREF="node6.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="http://www.cs.bham.ac.uk/logos/latex2html/icons.gif/up_motif.gif"></A> 
+<A NAME="tex2html193"
+ HREF="node12.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="http://www.cs.bham.ac.uk/logos/latex2html/icons.gif/previous_motif.gif"></A> 
+<A NAME="tex2html201"
+ HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="http://www.cs.bham.ac.uk/logos/latex2html/icons.gif/contents_motif.gif"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html203"
+ HREF="node14.html">Other approaches</A>
+<B> Up:</B> <A NAME="tex2html200"
+ HREF="node6.html">Exact numerical computation</A>
+<B> Previous:</B> <A NAME="tex2html194"
+ HREF="node12.html">Fourth attempt</A>
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H4><A NAME="SECTION00400070000000000000">
+Last attempt</A>
+</H4>
+Ok, the above is fine, but how about functions such as 1/<I>x</I>?  One
+could of course truncate the infinite numeral representing a number
+such as 1/3 to a finite large numeral, but then the above
+problems would be reintroduced.  In our last, and successful, attempt,
+we use potentially <EM>infinite</EM> sequences of signed digits, rather
+than <EM>arbitrary large</EM> sequences. Because our previous algorithms
+process digit sequences from left to right, it turns out that they
+already work in this more general setting.
+
+<P>
+This is inefficient, compared to floating-point computation, but
+works. All sorts of improvements
+(empirically and/or theoretically justified) have been proposed, with
+good gains in performance, sometimes with more than one order of
+magnitude, for both time and space.  But, despite these advances and
+unforeseen advances, one is most likely to continue using
+floating-point approximations and live with round-off errors
+<EM>when this is possible</EM>.
+
+<P>
+The point is, however, as the logistic map illustrates, that sometimes
+floating-point computations don't produce correct answers.  In this
+case, as inefficient as it can be, exact numerical computation is of
+help. Of course, one can sometimes use symbolic methods, and this is
+the whole point of computer algebra. But it is often the case that
+computer algebra gives a symbolic solution to a problem, which then
+has to be numerically evaluated for some values of the variables.
+Then, even if the symbolic solution is mathematically correct, one
+tends to have little confidence on the numerical solution. It is very
+likely that computer algebra systems will include engines for exact
+numerical evaluation of symbolic expressions in the near future.
+
+<P>
+As we mentioned in the introduction, many (non-commercial) packages
+for exact real number computation have been implemented in a variety
+of programming languages.  In particular, David Plume&nbsp;[<A
+ HREF="node38.html#plume">46</A>]
+implemented a framework for exact real number computation as his BSc
+honour project in the functional programming languages Haskell. His
+project report, which is available from my home page, is a
+well-written introductory account to some technical aspects of the
+subject.
+
+<P>
+<HR>
+<!--Navigation Panel-->
+<A NAME="tex2html202"
+ HREF="node14.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="http://www.cs.bham.ac.uk/logos/latex2html/icons.gif/next_motif.gif"></A> 
+<A NAME="tex2html199"
+ HREF="node6.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="http://www.cs.bham.ac.uk/logos/latex2html/icons.gif/up_motif.gif"></A> 
+<A NAME="tex2html193"
+ HREF="node12.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="http://www.cs.bham.ac.uk/logos/latex2html/icons.gif/previous_motif.gif"></A> 
+<A NAME="tex2html201"
+ HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="http://www.cs.bham.ac.uk/logos/latex2html/icons.gif/contents_motif.gif"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html203"
+ HREF="node14.html">Other approaches</A>
+<B> Up:</B> <A NAME="tex2html200"
+ HREF="node6.html">Exact numerical computation</A>
+<B> Previous:</B> <A NAME="tex2html194"
+ HREF="node12.html">Fourth attempt</A>
+<!--End of Navigation Panel-->
+<ADDRESS>
+<I>Martin Escardo</I>
+<BR><I>2000-10-02</I>
+</ADDRESS>
+</BODY>
+</HTML>

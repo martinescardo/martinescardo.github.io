@@ -1,0 +1,165 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<!--Converted with LaTeX2HTML 98.1p1 release (March 2nd, 1998)
+originally by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>Real PCF</TITLE>
+<META NAME="description" CONTENT="Real PCF">
+<META NAME="keywords" CONTENT="issac">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="STYLESHEET" HREF="issac.css">
+<LINK REL="next" HREF="node36.html">
+<LINK REL="previous" HREF="node34.html">
+<LINK REL="up" HREF="node32.html">
+<LINK REL="next" HREF="node36.html">
+</HEAD>
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html449"
+ HREF="node36.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="http://www.cs.bham.ac.uk/logos/latex2html/icons.gif/next_motif.gif"></A> 
+<A NAME="tex2html446"
+ HREF="node32.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="http://www.cs.bham.ac.uk/logos/latex2html/icons.gif/up_motif.gif"></A> 
+<A NAME="tex2html440"
+ HREF="node34.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="http://www.cs.bham.ac.uk/logos/latex2html/icons.gif/previous_motif.gif"></A> 
+<A NAME="tex2html448"
+ HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="http://www.cs.bham.ac.uk/logos/latex2html/icons.gif/contents_motif.gif"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html450"
+ HREF="node36.html">Operational semantics of Real</A>
+<B> Up:</B> <A NAME="tex2html447"
+ HREF="node32.html">Functional approaches</A>
+<B> Previous:</B> <A NAME="tex2html441"
+ HREF="node34.html">Partial real numbers and</A>
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H4><A NAME="SECTION001200030000000000000">
+Real PCF</A>
+</H4>
+PCF is a paradigmatic functional programming language used for
+theoretical investigations&nbsp;[<A
+ HREF="node38.html#scott:lcf">51</A>] in programming-language
+semantics. It has operational and denotational semantics connected by
+an adequacy property&nbsp;[<A
+ HREF="node38.html#plotkin:lcf">44</A>].  Several extensions of PCF
+with data types for real numbers have been discussed in the
+literature&nbsp;[<A
+ HREF="node38.html#Gianantonio:thesis">19</A>,<A
+ HREF="node38.html#escardo:pcf">25</A>,<A
+ HREF="node38.html#potts:edalat:escardo">47</A>],
+and practical versions of these theoretical languages have been
+implemented by Edalat's group at Imperial College.
+
+<P>
+The idea is that one starts from a ground type&nbsp;<I>R</I> for real numbers,
+in addition to the usual ground types&nbsp;<I>N</I> and&nbsp;<I>B</I> for natural numbers
+and booleans, and that new types are obtained by iterating a function
+space construction.  Thus, the types include
+<DL COMPACT>
+<DT>1.
+<DD>functions of real numbers, 105#105,
+<DT>2.
+<DD>predicates defined on real numbers, 106#106,
+<DT>3.
+<DD>sequences of real numbers, 107#107,
+<DT>4.
+<DD>sequences of sequences of
+real numbers, 
+<!-- MATH: $N \to (N \to R)$ -->
+108#108,
+<DT>5.
+<DD>sequences of functions, 
+<!-- MATH: $N \to (R
+\to R)$ -->
+109#109,
+<DT>6.
+<DD>functionals mapping sequences to numbers (such as limit
+  operators), 
+<!-- MATH: $(N \to R) \to R$ -->
+110#110,
+<DT>7.
+<DD>functionals mapping functions to numbers (such as definite
+  integration and supremum operators and distributions), 
+<!-- MATH: $(R \to R)
+\to R$ -->
+111#111,
+<DT>8.
+<DD>functionals mapping predicates to truth-values (such as
+  quantification operators), 
+<!-- MATH: $(R \to B) \to B$ -->
+112#112.
+</DL>and so on.
+The syntactic framework is a simply typed lambda calculus with
+recursion&nbsp;[<A
+ HREF="node38.html#barendregt:handbook">4</A>]--in practice, this means that
+PCF is a functional programming language such as Haskell or
+ML&nbsp;[<A
+ HREF="node38.html#bird">6</A>,<A
+ HREF="node38.html#paulson:ml">43</A>], limited to the bare minimum level of
+sophistication, in order to simplify the theoretical investigations.
+The semantic framework is domain theory, already mentioned above, and
+one uses an interval domain proposed by Dana Scott as the
+interpretation of real numbers. The idea is that singletons give
+complete information or ``total real numbers'' and that other
+intervals give incomplete information or ``partial real numbers''.
+This is related to interval analysis, of course. But a term of the
+language denoting the number&nbsp;113#113
+doesn't produce a
+floating-point interval approximation of&nbsp;113#113
+under the
+operational semantics; rather, it produces better and better
+approximations of this value. In practice, this can be a signed-digit
+binary expansion of&nbsp;113#113,
+for example, and, for theoretical
+purposes, this is taken as a shrinking sequence of rational intervals
+whose intersection is the singleton interval&nbsp;
+<!-- MATH: $\{\sqrt{2}\}$ -->
+114#114.
+
+<P>
+<HR>
+<!--Navigation Panel-->
+<A NAME="tex2html449"
+ HREF="node36.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="http://www.cs.bham.ac.uk/logos/latex2html/icons.gif/next_motif.gif"></A> 
+<A NAME="tex2html446"
+ HREF="node32.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="http://www.cs.bham.ac.uk/logos/latex2html/icons.gif/up_motif.gif"></A> 
+<A NAME="tex2html440"
+ HREF="node34.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="http://www.cs.bham.ac.uk/logos/latex2html/icons.gif/previous_motif.gif"></A> 
+<A NAME="tex2html448"
+ HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="http://www.cs.bham.ac.uk/logos/latex2html/icons.gif/contents_motif.gif"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html450"
+ HREF="node36.html">Operational semantics of Real</A>
+<B> Up:</B> <A NAME="tex2html447"
+ HREF="node32.html">Functional approaches</A>
+<B> Previous:</B> <A NAME="tex2html441"
+ HREF="node34.html">Partial real numbers and</A>
+<!--End of Navigation Panel-->
+<ADDRESS>
+<I>Martin Escardo</I>
+<BR><I>2000-10-02</I>
+</ADDRESS>
+</BODY>
+</HTML>

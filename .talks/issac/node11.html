@@ -1,0 +1,133 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<!--Converted with LaTeX2HTML 98.1p1 release (March 2nd, 1998)
+originally by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>Towards a fourth attempt</TITLE>
+<META NAME="description" CONTENT="Towards a fourth attempt">
+<META NAME="keywords" CONTENT="issac">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="STYLESHEET" HREF="issac.css">
+<LINK REL="next" HREF="node12.html">
+<LINK REL="previous" HREF="node10.html">
+<LINK REL="up" HREF="node6.html">
+<LINK REL="next" HREF="node12.html">
+</HEAD>
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html180"
+ HREF="node12.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="http://www.cs.bham.ac.uk/logos/latex2html/icons.gif/next_motif.gif"></A> 
+<A NAME="tex2html177"
+ HREF="node6.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="http://www.cs.bham.ac.uk/logos/latex2html/icons.gif/up_motif.gif"></A> 
+<A NAME="tex2html171"
+ HREF="node10.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="http://www.cs.bham.ac.uk/logos/latex2html/icons.gif/previous_motif.gif"></A> 
+<A NAME="tex2html179"
+ HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="http://www.cs.bham.ac.uk/logos/latex2html/icons.gif/contents_motif.gif"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html181"
+ HREF="node12.html">Fourth attempt</A>
+<B> Up:</B> <A NAME="tex2html178"
+ HREF="node6.html">Exact numerical computation</A>
+<B> Previous:</B> <A NAME="tex2html172"
+ HREF="node10.html">Third attempt</A>
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H4><A NAME="SECTION00400050000000000000">
+Towards a fourth attempt</A>
+</H4>
+It is natural to wonder whether there exist algorithms that compute
+most significant digits first.  Let's begin by considering
+multiplication by three.  Assume that we want to multiply a decimal
+numeral by three, and suppose that, at some stage, the scanned part of
+the input is ``4#4''.  The first output digit can be
+either&nbsp;0 or&nbsp;1.  If we eventually scan an input digit&nbsp;&lt;3then it <EM>has</EM> to be&nbsp;0, and if we eventually scan a
+digit&nbsp;&gt;3 then it <EM>has</EM> to be&nbsp;1.  Thus, while the next
+scanned digit is&nbsp;3, we can't determine the first output digit.
+Therefore, to get the first digit of <BR><P></P>
+<DIV ALIGN="CENTER">
+<!-- MATH: \begin{displaymath}
+3 \times
+0.333333333333333333333333333333333333333333
+\end{displaymath} -->
+
+
+5#5
+</DIV>
+<BR CLEAR="ALL">
+<P></P>
+we are forced to compute
+all the 43 digits of the input.
+
+<P>
+A solution to this problem, first proposed by Cauchy&nbsp;[<A
+ HREF="node38.html#cauchy">16</A>] in
+1840, is the use of negative digits.  For example
+<BR><P></P>
+<DIV ALIGN="CENTER">
+6#6
+</DIV><P></P>
+<BR CLEAR="ALL">where we have written the negation symbol on the top of negative
+digits for clarity.  Intuitively, in order to compute a function,
+<DL COMPACT>
+<DT>1.
+<DD>we estimate an output digit (after reading some input digits),
+<DT>2.
+<DD>if it turns out to be not quite correct (after reading more
+input digits), we can use a negative digit to adjust the estimate.
+</DL>For example, let's consider multiplication by three again. Suppose
+that ``0.3'' is an initial prefix of the input. Then we can safely
+produce ``1.'' as an initial prefix of the output.  In fact, if we
+later read a digit 0, discovering that the numeral has ``0.30'' as
+an initial prefix, we can now output a negative digit 7#7,
+having produced ``8#8'' up to this point, which is the same as
+``0.9''. A mathematical discussion of these issues is the subject of
+Chapter&nbsp;<A HREF="node22.html#problems">6</A> below.
+
+<P>
+<HR>
+<!--Navigation Panel-->
+<A NAME="tex2html180"
+ HREF="node12.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="http://www.cs.bham.ac.uk/logos/latex2html/icons.gif/next_motif.gif"></A> 
+<A NAME="tex2html177"
+ HREF="node6.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="http://www.cs.bham.ac.uk/logos/latex2html/icons.gif/up_motif.gif"></A> 
+<A NAME="tex2html171"
+ HREF="node10.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="http://www.cs.bham.ac.uk/logos/latex2html/icons.gif/previous_motif.gif"></A> 
+<A NAME="tex2html179"
+ HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="http://www.cs.bham.ac.uk/logos/latex2html/icons.gif/contents_motif.gif"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html181"
+ HREF="node12.html">Fourth attempt</A>
+<B> Up:</B> <A NAME="tex2html178"
+ HREF="node6.html">Exact numerical computation</A>
+<B> Previous:</B> <A NAME="tex2html172"
+ HREF="node10.html">Third attempt</A>
+<!--End of Navigation Panel-->
+<ADDRESS>
+<I>Martin Escardo</I>
+<BR><I>2000-10-02</I>
+</ADDRESS>
+</BODY>
+</HTML>

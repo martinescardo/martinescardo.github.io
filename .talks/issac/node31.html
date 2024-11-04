@@ -1,0 +1,260 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<!--Converted with LaTeX2HTML 98.1p1 release (March 2nd, 1998)
+originally by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>Inequality tests in real number computation</TITLE>
+<META NAME="description" CONTENT="Inequality tests in real number computation">
+<META NAME="keywords" CONTENT="issac">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="STYLESHEET" HREF="issac.css">
+<LINK REL="next" HREF="node32.html">
+<LINK REL="previous" HREF="node29.html">
+<LINK REL="up" HREF="issac.html">
+<LINK REL="next" HREF="node32.html">
+</HEAD>
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html400"
+ HREF="node32.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="http://www.cs.bham.ac.uk/logos/latex2html/icons.gif/next_motif.gif"></A> 
+<A NAME="tex2html397"
+ HREF="issac.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="http://www.cs.bham.ac.uk/logos/latex2html/icons.gif/up_motif.gif"></A> 
+<A NAME="tex2html391"
+ HREF="node30.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="http://www.cs.bham.ac.uk/logos/latex2html/icons.gif/previous_motif.gif"></A> 
+<A NAME="tex2html399"
+ HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="http://www.cs.bham.ac.uk/logos/latex2html/icons.gif/contents_motif.gif"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html401"
+ HREF="node32.html">Functional approaches</A>
+<B> Up:</B> <A NAME="tex2html398"
+ HREF="issac.html">Introduction to EXACT NUMERICAL</A>
+<B> Previous:</B> <A NAME="tex2html392"
+ HREF="node30.html">Order normalization</A>
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION001100000000000000000">&#160;</A> <A NAME="tests">&#160;</A>
+<BR>
+Inequality tests in real number computation
+</H1>
+
+<P>
+In all effective approaches to exact real number computation via
+concrete representations, the (in)equality relations are undecidable.
+This is not surprising, because an infinite amount of information must
+be checked in order to decide that two given numbers are equal.  In
+particular, this means that it is not possible to obtain exact
+algorithms from finite-precision algorithms by simply changing the
+underlying representation of numbers. The reason is that (in)equality
+tests are the basic ingredient for branching and looping.
+
+<P>
+Nevertheless, many definitions by cases consisting of inequalities,
+such as
+<BR><P></P>
+<DIV ALIGN="CENTER">
+<!-- MATH: \begin{displaymath}
+\min(x,y)  =  \begin{cases}
+x & \text{if $x \leqslant y$ ,} \\
+                    y & \text{otherwise,}
+                    \end{cases}
+\end{displaymath} -->
+
+
+90#90
+</DIV>
+<BR CLEAR="ALL">
+<P></P>
+do produce computable functions--but they don't produce algorithms,
+because such functions cannot be computed by first evaluating the
+condition and then computing the corresponding branch.
+As an application of the order-normalization Theorem&nbsp;<A HREF="node30.html#lexnormthm">9.1</A>,
+we obtain.<P>
+<DIV><A NAME="casesthm"><B>Theorem  10.1</B></A> &nbsp; 
+There is a computable partial function
+<BR><P></P>
+<DIV ALIGN="CENTER">
+<!-- MATH: \begin{displaymath}
+\operatorname{cases}:[-1,1]^4 \rightharpoonup[-1,1]
+\end{displaymath} -->
+
+
+91#91
+</DIV>
+<BR CLEAR="ALL">
+<P></P>
+such that
+<BR><P></P>
+<DIV ALIGN="CENTER">
+<!-- MATH: \begin{displaymath}
+\operatorname{cases}(x,t,y,z) = \begin{cases}
+y & \text{if $x < t$\space or $y=z$ ,} \\
+                    z & \text{if $x > t$\space or $y=z$ ,}
+                    \end{cases}
+\end{displaymath} -->
+
+
+92#92
+</DIV>
+<BR CLEAR="ALL">
+<P></P>
+with domain of definition 
+<!-- MATH: $\{ (x,t,y,z) \mid \text{$x = t$\space implies $y=z$ }
+\}.$ -->
+93#93</DIV><P></P>
+Notice that, given this domain of definition, an equivalent
+specification is
+<BR><P></P>
+<DIV ALIGN="CENTER">
+<!-- MATH: \begin{displaymath}
+\operatorname{cases}(x,t,y,z) = \begin{cases}
+y & \text{if $x \leqslant t$ ,} \\
+                    z & \text{if $x \geqslant t$ .}
+                    \end{cases}
+\end{displaymath} -->
+
+
+94#94
+</DIV>
+<BR CLEAR="ALL">
+<P></P>
+<BR>
+95#95
+<BR>
+<P>
+Although the operator is partial, it can be used to define 
+total functions. For example,
+<BR><P></P>
+<DIV ALIGN="CENTER">
+<!-- MATH: \begin{displaymath}
+\min(x,y)= \operatorname{cases}(x,y,x,y),
+\end{displaymath} -->
+
+
+96#96
+</DIV>
+<BR CLEAR="ALL">
+<P></P>
+which shows that 97#97
+is indeed computable.  If 
+<!-- MATH: $f,g:\mathbb{R}\rightarrow
+\mathbb{R}$ -->
+98#98
+are computable functions that agree at a computable
+number&nbsp;<I>x</I><SUB>0</SUB>, then the function 
+<!-- MATH: $h:\mathbb{R}\rightarrow\mathbb{R}$ -->
+99#99
+defined by
+<BR><P></P>
+<DIV ALIGN="CENTER">
+<!-- MATH: \begin{displaymath}
+h(x)  =  \begin{cases}
+f(x) & \text{if $x \leqslant x_0$ ,} \\
+  g(x) & \text{if $x \geqslant x_0$ }
+  \end{cases}
+
+\end{displaymath} -->
+
+
+100#100
+</DIV>
+<BR CLEAR="ALL">
+<P></P>
+is also computable, because
+<BR><P></P>
+<DIV ALIGN="CENTER">
+<!-- MATH: \begin{displaymath}
+h(x)=\operatorname{cases}(x,x_0,f(x),g(x)).
+\end{displaymath} -->
+
+
+101#101
+</DIV>
+<BR CLEAR="ALL">
+<P></P>
+Also, some partial functions such as
+<BR><P></P>
+<DIV ALIGN="CENTER">
+<!-- MATH: \begin{displaymath}
+\operatorname{sgn}(x)  =  \begin{cases}
+-1 & \text{if $x < 0$ ,} \\
+                    1 & \text{if $x > 0$ }
+                    \end{cases}
+\end{displaymath} -->
+
+
+102#102
+</DIV>
+<BR CLEAR="ALL">
+<P></P>
+can be defined by
+<BR><P></P>
+<DIV ALIGN="CENTER">
+<!-- MATH: \begin{displaymath}
+\operatorname{sgn}(x) = \operatorname{cases}(x,0,-1,1)
+\end{displaymath} -->
+
+
+103#103
+</DIV>
+<BR CLEAR="ALL">
+<P></P>
+and hence are computable. 
+
+<P>
+Notice that the case-analysis operator is a continuous map,
+defined on a subset of [-1,1]<SUP>4</SUP>, which cannot be extended to a
+continuous map on any larger subset. In other words, the points
+(<I>x</I>,<I>t</I>,<I>y</I>,<I>z</I>) with <I>x</I> = <I>t</I> but 104#104
+are singularities of the
+case-analysis operator. This means that the partial character of the
+case-analysis operator is due to topological rather than
+recursion-theoretic reasons.
+
+<P>
+<HR>
+<!--Navigation Panel-->
+<A NAME="tex2html400"
+ HREF="node32.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="http://www.cs.bham.ac.uk/logos/latex2html/icons.gif/next_motif.gif"></A> 
+<A NAME="tex2html397"
+ HREF="issac.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="http://www.cs.bham.ac.uk/logos/latex2html/icons.gif/up_motif.gif"></A> 
+<A NAME="tex2html391"
+ HREF="node30.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="http://www.cs.bham.ac.uk/logos/latex2html/icons.gif/previous_motif.gif"></A> 
+<A NAME="tex2html399"
+ HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="http://www.cs.bham.ac.uk/logos/latex2html/icons.gif/contents_motif.gif"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html401"
+ HREF="node32.html">Functional approaches</A>
+<B> Up:</B> <A NAME="tex2html398"
+ HREF="issac.html">Introduction to EXACT NUMERICAL</A>
+<B> Previous:</B> <A NAME="tex2html392"
+ HREF="node30.html">Order normalization</A>
+<!--End of Navigation Panel-->
+<ADDRESS>
+<I>Martin Escardo</I>
+<BR><I>2000-10-02</I>
+</ADDRESS>
+</BODY>
+</HTML>

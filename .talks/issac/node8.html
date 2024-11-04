@@ -1,0 +1,77 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<!--Converted with LaTeX2HTML 98.1p1 release (March 2nd, 1998)
+originally by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>Second attempt</TITLE>
+<META NAME="description" CONTENT="Second attempt">
+<META NAME="keywords" CONTENT="issac">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="STYLESHEET" HREF="issac.css">
+<LINK REL="next" HREF="node9.html">
+<LINK REL="previous" HREF="node7.html">
+<LINK REL="up" HREF="node6.html">
+<LINK REL="next" HREF="node9.html">
+</HEAD>
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html147"
+ HREF="node9.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="http://www.cs.bham.ac.uk/logos/latex2html/icons.gif/next_motif.gif"></A> 
+<A NAME="tex2html144"
+ HREF="node6.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="http://www.cs.bham.ac.uk/logos/latex2html/icons.gif/up_motif.gif"></A> 
+<A NAME="tex2html138"
+ HREF="node7.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="http://www.cs.bham.ac.uk/logos/latex2html/icons.gif/previous_motif.gif"></A> 
+<A NAME="tex2html146"
+ HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="http://www.cs.bham.ac.uk/logos/latex2html/icons.gif/contents_motif.gif"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html148"
+ HREF="node9.html">Towards a third attempt</A>
+<B> Up:</B> <A NAME="tex2html145"
+ HREF="node6.html">Exact numerical computation</A>
+<B> Previous:</B> <A NAME="tex2html139"
+ HREF="node7.html">First attempt</A>
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H4><A NAME="SECTION00400020000000000000">
+Second attempt</A>
+</H4>
+We can compute the logistic map using <EM>finite</EM>, but
+<EM>arbitrarily large</EM> binary expansions. Notice that this is
+different from multiple precision, as the size of a multiple-precision
+number is fixed in advance. This is
+<DL COMPACT>
+<DT>1.
+<DD>reliable, but
+<DT>2.
+<DD>unfeasible in terms of time and space consumption.
+</DL>For <I>n</I> &gt; 10, the computation of <I>f</I><SUP><I>n</I></SUP>(<I>x</I><SUB>0</SUB>) takes more than I
+was patient to wait for.  Thus, this is even worse than rational
+arithmetic.  It is easy to see why this is the case. If <I>x</I> has a
+binary expansion with <I>n</I>&nbsp;digits, then 1-<I>x</I> has often <I>n</I> digits as
+well. But if <I>x</I> and <I>y</I> have <I>m</I> and <I>n</I> digits then <I>xy</I> has <I>mn</I>digits. Thus, 
+<!-- MATH: $f^{n}(x_0)$ -->
+<I>f</I><SUP><I>n</I></SUP>(<I>x</I><SUB>0</SUB>) has approximately 2<SUP><I>n</I></SUP> <I>m</I> digits if <I>x</I><SUB>0</SUB>has <I>m</I> digits.
+
+<P>
+<BR><HR>
+<ADDRESS>
+<I>Martin Escardo</I>
+<BR><I>2000-10-02</I>
+</ADDRESS>
+</BODY>
+</HTML>

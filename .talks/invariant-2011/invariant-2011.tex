@@ -1,0 +1,775 @@
+\documentclass%
+[%dvips,% for generating postscript printouts
+%25pt,%
+%a4paper,%
+%landscape
+Screen4to3,
+%Screen16to9
+]{foils}
+
+\input{preamble}
+
+%\usepackage{hyperref}
+
+\newcommand{\db}{\darkblue}
+\newcommand{\myquad}{\phantom{xxxx}}
+\newcommand{\mybox}[2]{\fbox{\parbox{#1\linewidth}{#2}}}
+\newcommand{\next}{\operatorname{next}}
+\newcommand{\myitem}[1]{\grey{#1}}
+
+\newcommand{\Maybe}{\operatorname{Maybe}}
+
+\usepackage{parskip}
+
+\title{\darkblue{Mathematics of computation with infinite objects}}
+
+\author{\darkblue{Mart\'{\i}n Escard\'o} \\ School of Computer Science, University of Birmingham}
+
+
+%  \\[10ex]
+% Part of this talk is joint work with \darkblue{Paulo Oliva} from Queen Mary, London. \\[8ex] ~}
+
+\date{\sc Invariants, Oxford, 25th Oct 2011}
+
+\begin{document}
+
+\setlength\textheight{\paperheight}
+\setlength\headheight{-7ex}
+\setlength\footskip{20ex}
+%\addtolength\foilheadskip{-20ex}
+%\addtolength\voffset{20ex}
+
+\maketitle
+
+\overhead{Let me start with six questions for you}
+
+Here is a hint:
+
+\vfill
+
+
+\begin{quote}
+2 questions have \darkblue{positive} answer.
+
+2 questions have \darkblue{negative} answer. 
+
+1 question has \darkblue{unknown} answer. 
+
+1 question \darkblue{doesn't fall in the above three categories}.
+\end{quote}
+
+\vfill
+
+\overhead{Question 1}
+
+Suppose you have written computer programs for calculating functions
+\[
+\darkblue{f, g \colon \Z \to \Z}.
+\]
+Can the computer decide, in finite time, whether or not \darkblue{$f = g$}?
+
+\vfill
+
+Here \darkblue{$\Z$} is the set of integers. 
+
+\vfill
+\darkblue{Input:} Two functions \darkblue{$f, g \colon \Z \to \Z$}.
+
+\darkblue{Output:} An element of the set \darkblue{$2 = \{0,1\}$}.
+
+\vfill
+
+\overhead{Question 2}
+
+Consider the set \darkblue{$S$} of infinite binary sequences \db{$x_0,x_1,x_2,\dots, x_n, \dots$} with \darkblue{$x_i \in 2$}.
+
+(For example we can use them for representing real numbers in binary.)
+
+\vfill
+
+Does it make sense to write programs for computing e.g. functions
+\begin{eqnarray*}
+  \darkblue{f  \colon} & \darkblue{S \to \Z,} & \qquad \text{(given a sequence, calculate an integer);}\\
+  \darkblue{g  \colon} & \darkblue{S \to S,} & \qquad \text{(given a real number, calculate another real number)}.
+\end{eqnarray*}
+
+\vfill
+
+\overhead{Question 3}
+
+Suppose you have written computer programs for calculating functions
+\[
+\darkblue{f, g \colon S \to \Z}.
+\]
+Can the computer decide, in finite time, whether or not \darkblue{$f = g$}?
+
+
+\vfill
+\darkblue{Input:} Two functions \darkblue{$f, g \colon S \to \Z$}.
+
+\darkblue{Output:} An element of the set \darkblue{$2 = \{0,1\}$}.
+
+\vfill
+
+\overhead{Question 4}
+
+Suppose you have written computer programs for calculating functions
+\[
+\darkblue{f, g \colon S \to S}
+\]
+Can the computer decide, in finite time, whether or not \darkblue{$f = g$}?
+
+
+\vfill
+\darkblue{Input:} Two functions \darkblue{$f, g \colon S \to S$}.
+
+\darkblue{Output:} An element of the set \darkblue{$2 = \{0,1\}$}.
+
+\vfill
+
+\overhead{Question 5}
+
+Can we plot the Mandelbrot set?
+
+Given a point that is not in the boundary, can the computer tell
+whether it is inside or outside the set?
+
+\overhead{Question 6}
+
+It is easy to write a program that systematically lists all provable
+statements.
+
+ (Let's say formally written in the language of set theory.)
+
+\vfill
+
+We can also write it so that it stops if it ever lists a statement \darkblue{$A$} and also its negation \darkblue{$\neg A$}. 
+
+\vfill
+
+Will this program stop? 
+
+\vfill
+
+\overhead{Answers}
+
+\begin{quote}
+2 questions have \darkblue{positive} answer.
+
+2 questions have \darkblue{negative} answer. 
+
+1 question has \darkblue{unknown} answer. 
+
+1 question \darkblue{doesn't fall in the above three categories}.
+
+\quad (But what else can we say apart from yes, no or don't know???)
+\end{quote}
+
+Let's leave the questions unanswered for the moment.
+
+\overhead{A simple computation}
+
+Fix a constant \darkblue{$a \in [0,4]$}.
+
+Given \darkblue{$x \in [0,1]$}, it is easy to see that \darkblue{$ax(1-x) \in [0,1]$}.
+
+\vfill
+
+Rudimentary model of population growth \grey{(Pierre Verhulst (1840s))}.
+\begin{quote}
+\darkblue{$x = 0$:} zero fish in a lake. \\
+\darkblue{$x = 1$:} the maximum capacity of fish in the lake. \\
+\darkblue{$x_n$} fish in the \darkblue{$n$th} generation
+$\implies$ \darkblue{$ax_n(1-x_n)$} fish in the next generation.
+\end{quote}
+
+\vfill
+
+\overhead{A simple computation}
+
+Given \darkblue{$x_0 \in [0,1]$}, define a sequence by the recurrence
+\[
+\darkblue{x_{n+1} = ax_n(1-x_n)}.
+\]
+We want to compute \darkblue{$x_{60}$}.
+
+\darkblue{How many fish will the lake have in the 60th generation?}
+
+\overhead{Let's calculate with a computer}
+
+Choose \darkblue{$a = 4$} and \darkblue{$x_0 = 43 / 64 = 0.671875$}.
+
+\grey{Many other choices will have a similar  effect.}
+
+\vfill
+
+Using \darkblue{7} decimal digits \grey{(simple precision)} and
+\darkblue{16} \grey{(double precision)} for the calculations, the
+computer claims that \darkblue{$x_{60}$} is
+
+\begin{verbatim}
+     0.934518     0.928604
+\end{verbatim}
+Rounding to two decimal digits, we get \darkblue{$x_{60} \approx 0.93$}.
+
+\vfill
+
+\darkblue{Is that correct?}
+
+\overhead{Let's show intermediate generation counts}
+
+This is what the computer claims:
+\begin{verbatim}
+ n      simple       double           
+-----------------------------
+ 0    0.671875      0.671875
+ 5    0.384327      0.384327
+10    0.313034      0.313037
+15    0.022702      0.022736
+20    0.983813      0.982892
+25    0.652837      0.757549 <------ start to differ
+30    0.934927      0.481445 <------ completely different
+35    0.848153      0.313159
+40    0.057696      0.024009
+45    0.991613      0.930892
+50    0.042174      0.625693
+55    0.108415      0.637033
+60    0.934518      0.928604 <------ similar by coincidence
+\end{verbatim}
+Both are completely wrong. The correct answer is \darkblue{$x_{60} = 0.315445$}.
+
+\overhead{How to get this right using a computer}
+
+Could use rational arithmetic, with arbitrary-size integers for the
+numerators and denominators, keeping then in lowest terms.
+
+\vfill
+
+\red{But:} The computation of \darkblue{$x_n$} runs out of memory for
+\darkblue{$n \ge 30$} or so.
+
+\vfill
+
+With 1Gb of memory. \grey{This is a lot of memory!}
+
+\vfill
+
+\grey{Pause to run something in the computer.}
+
+\vfill
+
+\overhead{How to get this right using a computer}
+
+Code numbers using infinitely many digits.
+
+\vfill
+
+\grey{Pause to run something in the computer.}
+
+\vfill
+
+
+\overhead{Computing with infinite sequences}
+
+\darkblue{$\Z^\N$} space of infinite sequences of natural numbers.
+
+Schematic model of computation for functions \darkblue{$f \colon \Z^\N \to \Z^\N$}:
+
+Given \darkblue{$\alpha \in \Z^\N$}, calculate \darkblue{$\beta = f(\alpha) \in \Z^\N$} as follows:
+
+\begin{diagram}
+  \text{\phantom{x}} & \rTo^{\darkblue{\dots \alpha_3, \alpha_2, \alpha_1, \alpha_0}} & \mybox{0.6}{In order to calculate \darkblue{$f$}, repeatedly do: \\
+\myquad\myitem{1.} read finitely many integers \\
+\myquad\myitem{2.} calculate for a finite amount of time \\
+\myquad\myitem{3.} write finitely many integers
+} & 
+ \rTo^{\darkblue{\dots \beta_3, \beta_2, \beta_1, \beta_0}}
+\end{diagram}
+
+\overhead{Example}
+
+Suppose \db{$f \colon \Z^\N \to \Z^\N$} codes the logistic map \db{$x \mapsto
+4x(1-x)$} in decimal notation. 
+
+Want to calculate \db{$f(f(f(f(x_0))))$}.
+
+We get the following pipeline:
+\[
+\db{\longrightarrow \text{\framebox{$f$}}\longrightarrow \text{\framebox{$f$}}\longrightarrow \text{\framebox{$f$}}\longrightarrow \text{\framebox{$f$}}\longrightarrow}
+\]
+Given a pipeline of digits for \db{$x_0$}, this will produce a pipeline for digits for \db{$x_4$}.
+
+\red{NB.} In the programming language I am using, you still write
+\[
+\darkblue{x_4 = f(f(f(f(x_0)))).}
+\]
+The pipeline is created by the internal mechanisms of the language.
+
+\overhead{First continuity theorem}
+
+If \db{$f \colon \Z^\N \to \Z^\N$} is computable in the above fashion,
+then finite segments of the output can only depend on finite segments
+of the input.
+
+\vfill
+
+To make this precise, for \db{$\alpha, \beta \in \Z^\N$} and \db{$p \in \N$}, define
+\begin{quote}
+  \db{$\alpha =_p \beta \iff \alpha_n = \beta_n$} for all \db{$i < p$}.
+\end{quote}
+We say that \db{$\alpha$} and \db{$\beta$} agree with precision \db{$p$}.
+
+\vfill
+
+\overhead{First continuity theorem}
+
+\darkgreen{Theorem.}  If \db{$f \colon \Z^\N \to \Z^\N$} is computable
+in the above fashion, then for every input \db{$\alpha \in \Z^\N$} and
+every desired output precision \db{$p \in \N$} 
+there is a sufficient input precision \db{$q \in \N$}
+such that
+\[
+\db{\alpha =_q \beta \implies f(\alpha) =_p f(\beta)}.
+\]
+
+\vfill
+
+To calculate \db{$f(\alpha)$} with precision \db{$p$}, it is enough to
+know \db{$\alpha$} with precision \db{$q$}.
+
+\vfill
+
+\overhead{First continuity theorem}
+
+\darkgreen{Theorem.}  If \db{$f \colon \Z^\N \to \Z^\N$} is computable
+in the above fashion, then for every input \db{$\alpha \in \Z^\N$} and
+every desired output precision \db{$p \in \N$} 
+there is a sufficient input precision \db{$q \in \N$}
+such that
+\[
+\db{\alpha =_q \beta \implies f(\alpha) =_p f(\beta)}.
+\]
+
+To calculate \db{$f(\alpha)$} with precision \db{$p$}, it is enough to
+know \db{$\alpha$} with precision \db{$q$}.
+
+\vfill
+
+\red{Compare with:}
+
+\darkgreen{Definition.}  A function \db{$f \colon \R \to \R$} is
+called continuous iff for every input
+\db{$x \in \R$} and every desired output precision \db{$\epsilon > 0$}
+there is a sufficient input precision
+\db{$\delta > 0$} such that
+\[
+\db{|x - y| < \delta \implies |f(x) - f(y)| < \epsilon}.
+\]
+
+\vfill
+
+
+
+
+
+\overhead{Computing with decimal notation}
+
+\newarrow{Mapsto}|--->
+\newarrow{Dotsto}....>
+
+
+\begin{diagram}
+ & \Z^\N & & \Z^\N \\
+ & \uInto^{\text{subspace}} & & \uInto_{\text{subspace}} \\
+\alpha & \text{decimal expansions} & \rDotsto^{\text{calculate here}} & \text{decimal expansions} & \beta \\
+\dMapsto^{\text{\small decoding map}} & \dTo &   & \dTo & \dMapsto_{\text{\small decoding map}}  \\
+\sum_{n \ge 0} \alpha_i 10^{-n} & \R & \rTo_{\text{given $f$}} & \R & \sum_{n \ge 0} \beta_i 10^{-n} \\
+\end{diagram}
+
+
+~
+
+Assume $\alpha_0 \in \Z$ and $\alpha_{i+1} \in \{ 0,\dots,9\}$.
+
+\overhead{Computing with decimal notation}
+
+\newarrow{Mapsto}|--->
+\newarrow{Dotsto}....>
+
+
+\begin{diagram}
+\text{decimal expansions} & \rDotsto^{\text{computer implementation of $f$}} & \text{decimal expansions}\\
+ \dTo^{\text{\small decoding map}} &   & \dTo_{\text{\small decoding map}}  \\
+ \R & \rTo_{\text{$f$}} & \R & 
+\end{diagram}
+
+\vfill
+
+\darkgreen{Second Continuity Theorem.}
+If \db{$f$} has a computer implementation, then it is continuous. 
+
+\overhead{But decimal notation isn't good for infinite computation}
+
+This was discovered by Brouwer in the 1920's.
+
+\vfill
+
+Not even multiplication by three can be computed.
+
+\vfill
+
+\overhead{But decimal notation isn't good for infinite computation}
+
+This was discovered by Brouwer in the 1920's.
+
+\begin{diagram}
+\text{decimal expansions} & \rDotsto^{\text{nothing continuous here}} & \text{decimal expansions}\\
+ \dTo^{\text{\small decoding map}} &   & \dTo_{\text{\small decoding map}}  \\
+ \R & \rTo_{\text{$f(x)=3x$}} & \R & 
+\end{diagram}
+
+Suppose the input starts \darkblue{$0.333333$}. 
+
+$\bullet$ The first digit of the output must be \darkblue{$0$} if we eventually
+read a digit \darkblue{$< 3$}.
+
+$\bullet$ The first digit of the output must be \darkblue{$1$} if we eventually
+read a digit \darkblue{$> 3$}.
+
+$\bullet$ While we read digits \darkblue{$=3$}, we cannot produce any output for
+lack of information.
+
+\darkblue{$\implies$} If the input is \darkblue{$1/3$}, the next
+output digit depends on \emph{all} input digits.
+
+\overhead{Other bases have the same problem}
+
+So changing to e.g.\ binary notation doesn't help.
+
+\overhead{Perhaps shocking, but no reason to abandon hope}
+
+Already discussed by Brouwer in the 1920's.
+
+\vfill
+
+Change the notation for real numbers.
+
+\vfill
+
+The problem is boundary cases. 
+
+\vfill
+
+There are many theoretical solutions, used in practice.
+
+\vfill
+
+I will discuss one of them (the one I used above in practice).
+
+\vfill
+
+\overhead{Use binary or decimal notation with negative digits}
+
+Actually Cauchy (1840) proposed this to simplify calculation by hand.
+
+\vfill
+
+\db{$1\overline{8}40 = 1000 - 800 + 40 = 240$}.
+
+\vfill
+
+\red{Intuition.} If we are stuck as above, make a reasonable guess, and adjust it later using a negative digit if necessary.
+
+\vfill
+
+\overhead{Computing with decimal notation with negative digits}
+
+\newarrow{Mapsto}|--->
+\newarrow{Dotsto}....>
+
+
+\begin{diagram}
+\text{decimal expansions} & \rDotsto^{\text{implementation of $f$}} & \text{decimal expansions}\\
+ \dTo^{\text{\small decoding map}} &   & \dTo_{\text{\small decoding map}}  \\
+ \R & \rTo_{\text{$f$}} & \R & 
+\end{diagram}
+
+\vfill
+
+\darkgreen{Second Continuity Theorem Still holds.}
+If \db{$f$} has a computer implementation, then it is continuous. 
+
+\darkgreen{Third Continuity Theorem.}
+If \db{$f$} is continuous, then it has a continuous implementation.
+
+\vfill
+
+\overhead{But is this just a hack?}
+
+A coding \db{$A \subseteq \Z^\N$} with decoding map
+ \[ \db{\text{decode}_A \colon A \to \R} \] 
+is called \red{admissible} if given any other
+coding \db{$B \subseteq \Z^\N$} with decoding map
+ \[ \db{\text{decode}_B \colon B \to \R}, \] 
+there is a computer program 
+\[
+\db{\text{translate}  \colon B \to A} 
+\]
+that translates from \db{$B$} codes to \db{$A$} codes.
+
+
+\db{Theorem.}
+\begin{enumerate}
+\item Decimal notation with negative digits is an admissible coding.
+\item Any two admissible codings can be translated to each other.
+\end{enumerate}
+
+
+\overhead{More general picture}
+
+\newarrow{Into}C--->
+
+\begin{diagram}
+  \Z^\N & & \Z^\N \\
+  \uInto^{\text{subspace}} & & \uInto_{\text{subspace}} \\
+  A & \rTo^{\text{concrete $f$}} & B & \text{\darkblue{concrete spaces}}\\ 
+  \dTo^{\text{decoding map}} &   & \dTo_{\text{decoding map}} \\
+  X & \rTo_{\text{mathematical $f$}} & Y & \text{\darkblue{abstract spaces}}\\
+\end{diagram}
+
+Similar continuity theorems.
+
+Notion of admissibility also defined for this more general situation.
+
+\overhead{Dictionary between topology and computation}
+
+\darkblue{Continuous map.} Computable function.
+
+\darkblue{Open set.} Semi-decidable set.
+
+\darkblue{Closed and open set.} Decidable set.
+
+\darkblue{Compact set.} Exhaustively searchable set.
+
+\darkblue{Discrete space.} Type with decidable equality.
+
+\darkblue{Hausdorff space.} Space with semi-decidable apartness.
+
+\vfill
+\noindent
+Take a theorem in topology, \\
+apply the dictionary, \\
+get a theorem in computability theory. 
+
+\vfill
+
+\grey{Unfortunately you have to come up with a new proof.}
+
+
+\overhead{Exhaustive search}
+
+Algorithmically check all possibilities in finite time.
+
+\qquad Either find something.
+
+\qquad Or else report that there is nothing to be found.
+
+\vfill
+
+\darkblue{Old theorem.}
+A set of natural numbers is exhaustively searchable iff it is finite.
+
+\vfill
+
+\red{Intuition:}
+How could one possibly check infinitely many cases in finite time?
+
+\darkgreen{Proof:} Removed from this intuition (Halting problem, diagonalization).
+
+
+\overhead{Computational common wisdom}
+
+A set of whatever-you-can-think-of is exhaustively searchable iff it is finite.
+
+
+\overhead{Can't always trust common wisdom}
+
+
+\darkblue{E.g.} The Cantor space \darkblue{$2^\N$} is
+exhaustively searchable.
+
+\vfill
+
+\db{Theorem}
+\begin{enumerate}
+\item Exhaustively searchable sets are topologically compact.
+\item They are precisely the computable images of the Cantor space.
+\end{enumerate}
+
+\vfill
+
+% \overhead{We could finish now}
+
+% And revisit the questions I posed to you.
+
+% \vfill
+
+% Or carry on for a little longer to show you a surprising program.
+
+% \vfill
+
+\overhead{Formal systems for computation}
+
+\darkblue{Example 1.} G\"odel's system T.
+
+\darkblue{Example 2.} Platek--Scott--Plotkin's PCF and FPC.
+
+\darkblue{Example 3.} Escard\'o's Real PCF and Real FPC.
+
+\darkblue{Example 4.} Practical programming languages based on (2).
+
+\quad ML, OCaml, Haskell, \dots
+
+\qquad Robin Milner is mainly responsible for making these
+
+\qquad theoretical tools available for practical use with many insights.
+
+\overhead{Some popularization references}
+
+\begin{enumerate}
+\item In Andrej Bauer's \emph{Mathematics and Computation} blog \url{http://math.andrej.com/}
+\begin{enumerate}
+\item Seemingly impossible functional programs
+\item A Haskell monad for infinite search in finite time
+\item Running a classical proof with choice in Agda
+\end{enumerate}
+\item Computing with real numbers represented as infinite sequences of digits in Haskell. \url{http://www.cs.bham.ac.uk/~mhe/papers/fun2011.lhs}
+\item With Paulo Oliva. What Sequential Games, the Tychonoff Theorem and the Double-Negation Shift have in Common. 
+\url{http://www.cs.bham.ac.uk/~mhe/papers/msfp2010/}
+\end{enumerate}
+
+
+\overhead{Let's quickly revisit the opening questions and then finish}
+
+\overhead{Question 1}
+
+Suppose you have written computer programs for calculating functions
+\[
+\darkblue{f, g \colon \Z \to \Z}
+\]
+Can the computer decide, in finite time, whether or not \darkblue{$f = g$}?
+
+\vfill
+
+Here \darkblue{$\Z$} is the set of integers. 
+
+\vfill
+\darkblue{Input:} Two functions \darkblue{$f, g \colon \Z \to \Z$}.
+
+\darkblue{Output:} An element of the set \darkblue{$2 = \{0,1\}$}.
+
+\vfill
+
+\overhead{Question 2}
+
+Consider the set \darkblue{$2^\N$} of infinite binary sequences \db{$x_0,x_1,x_2,\dots, x_n, \dots$} with \darkblue{$x_i \in 2$}.
+
+(For example we can use them for representing real numbers in binary.)
+
+\vfill
+
+Does it make sense to write programs for computing e.g. functions
+\begin{eqnarray*}
+  \darkblue{f  \colon} & \darkblue{2^\N \to \Z,} & \qquad \text{(given a sequence, calculate an integer);}\\
+  \darkblue{g  \colon} & \darkblue{2^\N \to 2^\N,} & \qquad \text{(given a real number, calculate another real number)}.
+\end{eqnarray*}
+
+\vfill
+
+\overhead{Question 3}
+
+Suppose you have written computer programs for calculating functions
+\[
+\darkblue{f, g \colon 2^\N \to \Z}
+\]
+Can the computer decide, in finite time, whether or not \darkblue{$f = g$}?
+
+
+\vfill
+\darkblue{Input:} Two functions \darkblue{$f, g \colon 2^\N \to \Z$}.
+
+\darkblue{Output:} An element of the set \darkblue{$2 = \{0,1\}$}.
+
+\vfill
+
+\overhead{Question 4}
+
+Suppose you have written computer programs for calculating functions
+\[
+\darkblue{f, g \colon 2^\N \to 2^\N}
+\]
+Can the computer decide, in finite time, whether or not \darkblue{$f = g$}?
+
+
+\vfill
+\darkblue{Input:} Two functions \darkblue{$f, g \colon 2^\N \to 2^\N$}.
+
+\darkblue{Output:} An element of the set \darkblue{$2 = \{0,1\}$}.
+
+\vfill
+
+\overhead{Question 5}
+
+Can we plot the Mandelbrot set?
+
+Given a point that is not in the boundary, can the computer tell
+whether it is inside or outside the set?
+
+\overhead{Question 6}
+
+It is easy to write a program that systematically lists all provable
+statements.
+
+ (Let's say formally written in the language of set theory.)
+
+\vfill
+
+We can also write it so that it stops if it ever lists a statement \darkblue{$A$} and also its negation \darkblue{$\neg A$}. 
+
+\vfill
+
+Will this program stop? 
+
+\vfill
+
+
+\overhead{Concluding discussion}
+
+\darkblue{I.} General topology is naturally linked with infinite computation because
+it is a theory of approximation.
+
+\darkblue{II.} Category theory is also very useful to understand and apply
+computation with infinite objects (e.g.\ final co-algebras, monads).
+
+\darkblue{III.} I had to abandon the ambitious plan to also discuss constructive
+mathematics. 
+\begin{quote}
+In a nutshell: 
+\begin{enumerate}
+\item 
+Give up some logical principles (e.g.\ excluded middle)
+and, \item
+ axioms (e.g.\ powerset), and \item
+develop proofs in the normal
+mathematical way. \item
+Automatically get programs, even if you were not
+thinking of them (BHK interpretation). 
+\item Linked to topology: any
+function you prove to exist will be continuous. \\ (But this is a contentious subject.)
+\end{enumerate}
+\end{quote}
+
+
+
+
+\end{document}

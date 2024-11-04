@@ -1,0 +1,988 @@
+\batchmode
+\documentclass[12pt]{report}
+\makeatletter
+
+\usepackage{amsmath,amscd,latexsym,amssymb,stmaryrd}
+\usepackage{../packages/QED}
+
+\usepackage{a4}
+
+\usepackage[english]{babel}
+
+\title{{\small Introduction to} \\{\sc exact numerical computation} \\[1ex]
+       {\small Notes for a tutorial at ISSAC 2000}}
+
+\author{Mart\'\i n Escard\'o \\
+        School of Computer Science \\
+        St Andrews University \\[1ex]
+        {\tt http://www.dcs.st-and.ac.uk/\~{}mhe/}}
+
+\providecommand{\on}{\operatorname}
+\providecommand{\Cases}{\operatorname{cases}}
+\providecommand{\LCases}{\operatorname{lexcases}}
+\providecommand{\qarrow}{\twoheadrightarrow}
+\providecommand{\sgn}{\operatorname{sgn}}
+\providecommand{\parrow}{\rightharpoonup}
+\providecommand{\arrow}{\rightarrow}
+\providecommand{\two}{\mathbf{2}}
+\providecommand{\ten}{D}
+\providecommand{\three}{\mathbf{3}}
+\providecommand{\twomega}{\mathbf{2}^{\mathbb{N}}}
+\providecommand{\tenomega}{D^{\mathbb{N}}}
+\providecommand{\twoinfty}{\mathbf{2}^{\infty}}
+\providecommand{\thomega}{\mathbf{3}^{\mathbb{N}}}
+\providecommand{\thinfty}{\mathbf{3}^{\infty}}
+\providecommand{\Real}{\mathbb{R}}
+\providecommand{\R}{\mathbb{R}}
+\providecommand{\myomega}{\mathbb{N}}
+\providecommand{\sscript}[1]{_{\empty_{#1}}}
+\providecommand{\id}{\operatorname{id}}
+\providecommand{\True}{\operatorname{true}}
+\providecommand{\False}{\operatorname{false}}
+\providecommand{\Meaning}[1]{\llbracket #1 \rrbracket}
+\providecommand{\norm}{\operatorname{norm}}
+
+\providecommand{\myemph}[1]{\emph{#1}}
+\providecommand{\smallemph}[1]{{\small\emph{#1}}}
+\providecommand{\df}[1]{\emph{#1}}%
+\providecommand{\sltitle}[1]{#1}%
+\providecommand{\warning}[1]{{\bf #1}}
+\providecommand{\mybf}[1]{{\bf #1}}
+\providecommand{\mytt}[1]{{\tt #1}}
+\providecommand{\cyanbf}[1]{{\bf {#1}}}
+\providecommand{\black}[1]{{#1}}
+\providecommand{\mathcolor}[1]{#1}%
+\providecommand{\mc}[1]{$#1$ }
+\providecommand{\md}[1]{\begin{displaymath}#1\end{displaymath}
+}
+\providecommand{\bitem}{\qquad $\bullet$ ~}
+\par\usepackage[dvips]{color}
+\pagecolor[gray]{.7}
+
+\AtBeginDocument{\input /home/staff/mhe/papers/issac/issac.aux }
+
+\makeatletter
+\count@=\the\catcode`\_ \catcode`\_=8 
+\newenvironment{tex2html_wrap}{}{} \catcode`\_=\count@
+\makeatother
+\let\mathon=$
+\let\mathoff=$
+\ifx\AtBeginDocument\undefined \newcommand{\AtBeginDocument}[1]{}\fi
+\newbox\sizebox
+\setlength{\hoffset}{0pt}\setlength{\voffset}{0pt}
+\addtolength{\textheight}{\footskip}\setlength{\footskip}{0pt}
+\addtolength{\textheight}{\topmargin}\setlength{\topmargin}{0pt}
+\addtolength{\textheight}{\headheight}\setlength{\headheight}{0pt}
+\addtolength{\textheight}{\headsep}\setlength{\headsep}{0pt}
+\setlength{\textwidth}{349pt}
+\newwrite\lthtmlwrite
+\makeatletter
+\let\realnormalsize=\normalsize
+\global\topskip=2sp
+\def\preveqno{}\let\real@float=\@float \let\realend@float=\end@float
+\def\@float{\let\@savefreelist\@freelist\real@float}
+\def\end@float{\realend@float\global\let\@freelist\@savefreelist}
+\let\real@dbflt=\@dbflt \let\end@dblfloat=\end@float
+\let\@largefloatcheck=\relax
+\def\@dbflt{\let\@savefreelist\@freelist\real@dbflt}
+\def\adjustnormalsize{\def\normalsize{\mathsurround=0pt \realnormalsize
+ \parindent=0pt\abovedisplayskip=0pt\belowdisplayskip=0pt}\normalsize}%
+\def\lthtmltypeout#1{{\let\protect\string\immediate\write\lthtmlwrite{#1}}}%
+\newcommand\lthtmlhboxmathA{\adjustnormalsize\setbox\sizebox=\hbox\bgroup}%
+\newcommand\lthtmlvboxmathA{\adjustnormalsize\setbox\sizebox=\vbox\bgroup%
+ \let\ifinner=\iffalse }%
+\newcommand\lthtmlboxmathZ{\@next\next\@currlist{}{\def\next{\voidb@x}}%
+ \expandafter\box\next\egroup}%
+\newcommand\lthtmlmathtype[1]{\def\lthtmlmathenv{#1}}%
+\newcommand\lthtmllogmath{\lthtmltypeout{l2hSize %
+:\lthtmlmathenv:\the\ht\sizebox::\the\dp\sizebox::\the\wd\sizebox.\preveqno}}%
+\newcommand\lthtmlfigureA[1]{\let\@savefreelist\@freelist
+       \lthtmlmathtype{#1}\lthtmlvboxmathA}%
+\newcommand\lthtmlfigureZ{\lthtmlboxmathZ\lthtmllogmath\copy\sizebox
+       \global\let\@freelist\@savefreelist}%
+\newcommand\lthtmldisplayA[1]{\lthtmlmathtype{#1}\lthtmlvboxmathA}%
+\newcommand\lthtmldisplayB[1]{\edef\preveqno{(\theequation)}%
+  \lthtmldisplayA{#1}\let\@eqnnum\relax}%
+\newcommand\lthtmldisplayZ{\lthtmlboxmathZ\lthtmllogmath\lthtmlsetmath}%
+\newcommand\lthtmlinlinemathA[1]{\lthtmlmathtype{#1}\lthtmlhboxmathA  \vrule height1.5ex width0pt }%
+\newcommand\lthtmlinlineA[1]{\lthtmlmathtype{#1}\lthtmlhboxmathA}%
+\newcommand\lthtmlinlineZ{\egroup\expandafter\ifdim\dp\sizebox>0pt %
+  \expandafter\centerinlinemath\fi\lthtmllogmath\lthtmlsetinline}
+\newcommand\lthtmlinlinemathZ{\egroup\expandafter\ifdim\dp\sizebox>0pt %
+  \expandafter\centerinlinemath\fi\lthtmllogmath\lthtmlsetmath}
+\def\lthtmlsetinline{\hbox{\vrule width.1em\vtop{\vbox{%
+  \kern.1em\copy\sizebox}\ifdim\dp\sizebox>0pt\kern.1em\else\kern.3pt\fi
+  \ifdim\hsize>\wd\sizebox \hrule depth1pt\fi}}}
+\def\lthtmlsetmath{\hbox{\vrule width.1em\vtop{\vbox{%
+  \kern.1em\kern0.8 pt\hbox{\hglue.17em\copy\sizebox\hglue0.8 pt}}\kern.3pt%
+  \ifdim\dp\sizebox>0pt\kern.1em\fi \kern0.8 pt%
+  \ifdim\hsize>\wd\sizebox \hrule depth1pt\fi}}}
+\def\centerinlinemath{%\dimen1=\ht\sizebox
+  \dimen1=\ifdim\ht\sizebox<\dp\sizebox \dp\sizebox\else\ht\sizebox\fi
+  \advance\dimen1by.5pt \vrule width0pt height\dimen1 depth\dimen1 
+ \dp\sizebox=\dimen1\ht\sizebox=\dimen1\relax}
+
+\def\lthtmlcheckvsize{\ifdim\ht\sizebox<\vsize\expandafter\vfill
+  \else\expandafter\vss\fi}%
+\makeatletter \tracingstats = 1 
+
+
+\begin{document}
+\pagestyle{empty}\thispagestyle{empty}%
+\lthtmltypeout{latex2htmlLength hsize=\the\hsize}%
+\lthtmltypeout{latex2htmlLength vsize=\the\vsize}%
+\lthtmltypeout{latex2htmlLength hoffset=\the\hoffset}%
+\lthtmltypeout{latex2htmlLength voffset=\the\voffset}%
+\lthtmltypeout{latex2htmlLength topmargin=\the\topmargin}%
+\lthtmltypeout{latex2htmlLength topskip=\the\topskip}%
+\lthtmltypeout{latex2htmlLength headheight=\the\headheight}%
+\lthtmltypeout{latex2htmlLength headsep=\the\headsep}%
+\lthtmltypeout{latex2htmlLength parskip=\the\parskip}%
+\lthtmltypeout{latex2htmlLength oddsidemargin=\the\oddsidemargin}%
+\makeatletter
+\if@twoside\lthtmltypeout{latex2htmlLength evensidemargin=\the\evensidemargin}%
+\else\lthtmltypeout{latex2htmlLength evensidemargin=\the\oddsidemargin}\fi%
+\makeatother
+\stepcounter{chapter}
+\stepcounter{paragraph}
+\stepcounter{chapter}
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline802}%
+$\mathbb{M} \subseteq \mathbb{R}$%
+\lthtmlinlinemathZ
+\hfill\lthtmlcheckvsize\clearpage}
+
+\stepcounter{paragraph}
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline812}%
+$f:[0,1] \to [0,1]$%
+\lthtmlinlinemathZ
+\hfill\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline820}%
+$x_0, \, f(x_0),\,f(f(x_0)),\, \dots,\, f^n(x_0),\,\dots$%
+\lthtmlinlinemathZ
+\hfill\lthtmlcheckvsize\clearpage}
+
+\stepcounter{chapter}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline898}%
+$0 \cdot 3$%
+\lthtmlinlinemathZ
+\hfill\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmldisplayA{displaymath762}%
+\begin{displaymath}3 \times
+0.333333333333333333333333333333333333333333 \end{displaymath}%
+\lthtmldisplayZ
+\hfill\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmldisplayA{eqnarraystar197}%
+\begin{eqnarray*}9\bar{1}{5}\bar{2} & = & 9 \times 10^3 - 1 \times 10^2 + 5 \times 2^1
+    - 2 \times 2^0 \\& = & 9000-100+50-2  \\& = & 8948,
+\end{eqnarray*}%
+\lthtmldisplayZ
+\hfill\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline922}%
+$\bar{1}$%
+\lthtmlinlinemathZ
+\hfill\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline924}%
+$1.\bar{1}$%
+\lthtmlinlinemathZ
+\hfill\lthtmlcheckvsize\clearpage}
+
+\stepcounter{paragraph}
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline944}%
+$\lceil (6+1) \log_2 10 \rceil = 24$%
+\lthtmlinlinemathZ
+\hfill\lthtmlcheckvsize\clearpage}
+
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{chapter}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{chapter}
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline960}%
+$\pi$%
+\lthtmlinlinemathZ
+\hfill\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline962}%
+$\alpha$%
+\lthtmlinlinemathZ
+\hfill\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline964}%
+$\beta$%
+\lthtmlinlinemathZ
+\hfill\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline974}%
+$\epsilon-\delta$%
+\lthtmlinlinemathZ
+\hfill\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline976}%
+$\alpha
+\equiv_n \beta$%
+\lthtmlinlinemathZ
+\hfill\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline984}%
+$\alpha_i = \beta_i$%
+\lthtmlinlinemathZ
+\hfill\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline990}%
+$\alpha \in U$%
+\lthtmlinlinemathZ
+\hfill\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline994}%
+$\beta \in U$%
+\lthtmlinlinemathZ
+\hfill\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline996}%
+$\beta \equiv_n \alpha$%
+\lthtmlinlinemathZ
+\hfill\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline998}%
+$\alpha_i$%
+\lthtmlinlinemathZ
+\hfill\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline1008}%
+$\alpha_i \in U$%
+\lthtmlinlinemathZ
+\hfill\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline1010}%
+$i \ge n$%
+\lthtmlinlinemathZ
+\hfill\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline1012}%
+$\phi$%
+\lthtmlinlinemathZ
+\hfill\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline1020}%
+$\alpha \equiv_k \beta$%
+\lthtmlinlinemathZ
+\hfill\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline1022}%
+$\phi(\alpha) \equiv_n
+\phi(\beta)$%
+\lthtmlinlinemathZ
+\hfill\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline1026}%
+$D= \{ 0,1,\dots,9 \}$%
+\lthtmlinlinemathZ
+\hfill\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline1028}%
+$D^{\mathbb{N}}$%
+\lthtmlinlinemathZ
+\hfill\lthtmlcheckvsize\clearpage}
+
+\stepcounter{chapter}
+\stepcounter{paragraph}
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline1032}%
+$\alpha \in D^{\mathbb{N}}$%
+\lthtmlinlinemathZ
+\hfill\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmldisplayA{displaymath763}%
+\begin{displaymath}\llbracket \alpha \rrbracket = \sum_{i \geqslant 0} \alpha_i \cdot 10^{-(i+1)} \in
+[0,1].
+\end{displaymath}%
+\lthtmldisplayZ
+\hfill\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline1034}%
+$\alpha \mapsto \llbracket \alpha \rrbracket$%
+\lthtmlinlinemathZ
+\hfill\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmldisplayA{displaymath764}%
+\begin{displaymath}q:D^{\mathbb{N}}\twoheadrightarrow[0,1]. 
+\end{displaymath}%
+\lthtmldisplayZ
+\hfill\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline1036}%
+$m/10^n \in
+(0,1)$%
+\lthtmlinlinemathZ
+\hfill\lthtmlcheckvsize\clearpage}
+
+\stepcounter{paragraph}
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline1042}%
+$\phi:D^{\mathbb{N}}\rightarrow
+D^{\mathbb{N}}$%
+\lthtmlinlinemathZ
+\hfill\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline1044}%
+$f:[0,1] \rightarrow[0,1]$%
+\lthtmlinlinemathZ
+\hfill\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmldisplayA{displaymath765}%
+\begin{displaymath}f(\llbracket \alpha \rrbracket)=\llbracket \phi(\alpha) \rrbracket, \end{displaymath}%
+\lthtmldisplayZ
+\hfill\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmldisplayA{displaymath766}%
+\begin{displaymath}\begin{CD}
+D^{\mathbb{N}}@>{\phi}>> D^{\mathbb{N}}\\
+@V{q}VV @VV{q}V \\
+[0,1] @>>{f}> [0,1].
+\end{CD} 
+\end{displaymath}%
+\lthtmldisplayZ
+\hfill\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline1048}%
+$\phi(\alpha)$%
+\lthtmlinlinemathZ
+\hfill\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline1058}%
+$q:D^{\mathbb{N}}\twoheadrightarrow[0,1]$%
+\lthtmlinlinemathZ
+\hfill\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlfigureA{proof285}%
+\begin{proof}Simply because it is continuous, and a continuous surjection of
+compact Hausdorff spaces is always a quotient map. 
+\end{proof}%
+\lthtmlfigureZ
+\hfill\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlfigureA{proof293}%
+\begin{proof}Let $\phi:D^{\mathbb{N}}\to D^{\mathbb{N}}$\space be a realizer of $f$ . Then, for
+  any $\alpha$\space and any $n \ge 0$ , the value of $\phi(3^n2\alpha)$\space is
+  of the form $0\beta$ . Thus, if $\phi$\space were continuous,
+  $\phi(3^\omega)$\space would be of the form $0\beta'$ . But, similarly, for
+  any $\alpha$\space and any $n \ge 0$ , the value of $\phi(3^n4\alpha)$\space is
+  of the form $1\beta$ , and continuity of $\phi$\space would imply that
+  $\phi(3^\omega)$\space would be of the form $1\beta''$ .  Thus,
+  $\phi(3^\omega)$\space would have to be of the forms $0\beta'$\space and
+  $1\beta''$\space at the same time.  Since this is impossible, we conclude
+  that $\phi$\space cannot be continuous.
+\end{proof}%
+\lthtmlfigureZ
+\hfill\lthtmlcheckvsize\clearpage}
+
+\stepcounter{chapter}
+\stepcounter{paragraph}
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline1118}%
+$\mathbf{3}=\{\bar{1},0,1\}$%
+\lthtmlinlinemathZ
+\hfill\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline1124}%
+$\alpha \in \mathbf{3}^{\mathbb{N}}$%
+\lthtmlinlinemathZ
+\hfill\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmldisplayA{displaymath767}%
+\begin{displaymath}\llbracket \alpha \rrbracket = \sum_{i \geqslant 0} \alpha_i \cdot 2^{-(i+1)} \in [-1,1],
+\end{displaymath}%
+\lthtmldisplayZ
+\hfill\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline1128}%
+$q:\mathbf{3}^{\mathbb{N}}\twoheadrightarrow[-1,1]$%
+\lthtmlinlinemathZ
+\hfill\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline1130}%
+$f:[-1,1]\rightarrow[-1,1]$%
+\lthtmlinlinemathZ
+\hfill\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline1132}%
+$\phi:\mathbf{3}^{\mathbb{N}}\rightarrow\mathbf{3}^{\mathbb{N}}$%
+\lthtmlinlinemathZ
+\hfill\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlfigureA{proof333}%
+\begin{proof}M{\"u}ller~\cite{Mue86a}, and Weihrauch and
+  Kreitz~\cite{weihrauch:kreitz,kreitz:weihrauch}, showed that the quotient map
+  $q:\mathbf{3}^{\mathbb{N}}\twoheadrightarrow[-1,1]$\space is \emph{admissible} (or maximal) in the
+  following sense.  For every quotient map $q':\mathbf{3}^{\mathbb{N}}\twoheadrightarrow
+  [-1,1]$ , there is a (far from unique) continuous map $t:\mathbf{3}^{\mathbb{N}}
+  \rightarrow\mathbf{3}^{\mathbb{N}}$\space which translates from $q'$ -notation to
+  $q$ -notation, meaning that $q' = q \circ t$ .  The same argument
+  shows that, more generally, for every continuous map $g:\mathbf{3}^{\mathbb{N}}
+  \rightarrow[-1,1]$\space there is a continuous map $\phi:\mathbf{3}^{\mathbb{N}}\rightarrow
+  \mathbf{3}^{\mathbb{N}}$\space such that $g = q \circ \phi$ .  (In other words, the space
+  $\mathbf{3}^{\mathbb{N}}$\space is projective over the quotient map $q$ .) Then the result
+  follows by taking $g=f \circ q$ .  \qed\end{proof}%
+\lthtmlfigureZ
+\hfill\lthtmlcheckvsize\clearpage}
+
+\stepcounter{paragraph}
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline1162}%
+$\mathbf{3}^{\mathbb{N}}$%
+\lthtmlinlinemathZ
+\hfill\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline1170}%
+$\mathbb{R}\setminus \{0\}$%
+\lthtmlinlinemathZ
+\hfill\lthtmlcheckvsize\clearpage}
+
+\stepcounter{chapter}
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline1178}%
+$m/2^n \in (0,1)$%
+\lthtmlinlinemathZ
+\hfill\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline1180}%
+$\equiv$%
+\lthtmlinlinemathZ
+\hfill\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline1182}%
+$\alpha \equiv \beta$%
+\lthtmlinlinemathZ
+\hfill\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline1184}%
+$\llbracket \alpha \rrbracket=\llbracket \beta \rrbracket$%
+\lthtmlinlinemathZ
+\hfill\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline1186}%
+$\alpha \in \mathbf{3}^{\star}$%
+\lthtmlinlinemathZ
+\hfill\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline1188}%
+$\beta \in \mathbf{3}^{\mathbb{N}}$%
+\lthtmlinlinemathZ
+\hfill\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline1190}%
+$\alpha 0 \bar{1} \beta \equiv \alpha \bar{1} 1 \beta$%
+\lthtmlinlinemathZ
+\hfill\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline1192}%
+$\alpha 0 1 \beta \equiv \alpha 1 \bar{1} \beta$%
+\lthtmlinlinemathZ
+\hfill\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline1194}%
+$\alpha < \beta$%
+\lthtmlinlinemathZ
+\hfill\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline1198}%
+$\alpha_k < \beta_k$%
+\lthtmlinlinemathZ
+\hfill\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlfigureA{proof362}%
+\begin{proof}The preimage of a point by the quotient map $q:\mathbf{3}^{\mathbb{N}}\rightarrow
+  [-1,1]$\space is a closed set because $q$\space is continuous. But topologically
+  closed subsets of~$\mathbf{3}^{\mathbb{N}}$\space are closed under non-empty infima and
+  suprema in the lexicographical order (in fact, this characterizes
+  topologically closed subsets).  \qed\end{proof}%
+\lthtmlfigureZ
+\hfill\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline1210}%
+$c:\mathbf{3}^{\mathbb{N}}\rightarrow\mathbf{3}^{\mathbb{N}}$%
+\lthtmlinlinemathZ
+\hfill\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline1212}%
+$c(q^{-1}(\{x\}))$%
+\lthtmlinlinemathZ
+\hfill\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline1214}%
+$x \in [-1,1]$%
+\lthtmlinlinemathZ
+\hfill\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlfigureA{proof368}%
+\begin{proof}If there were, $[-1,1]$\space would be a retract of $\mathbf{3}^{\mathbb{N}}$ . But
+  $\mathbf{3}^{\mathbb{N}}$\space is a totally disconnected space, and such spaces are
+  closed under retracts. On the other hand, $[-1,1]$\space is connected.
+\end{proof}%
+\lthtmlfigureZ
+\hfill\lthtmlcheckvsize\clearpage}
+
+\stepcounter{chapter}
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline1224}%
+$\alpha,\beta$%
+\lthtmlinlinemathZ
+\hfill\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline1226}%
+$\alpha \leqslant \beta$%
+\lthtmlinlinemathZ
+\hfill\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline1228}%
+$\llbracket \alpha \rrbracket \leqslant \llbracket \beta \rrbracket$%
+\lthtmlinlinemathZ
+\hfill\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline1230}%
+$\alpha=\bar{1}1^\omega$%
+\lthtmlinlinemathZ
+\hfill\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline1232}%
+$\beta=0\bar{1}^\omega$%
+\lthtmlinlinemathZ
+\hfill\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline1236}%
+$\llbracket \alpha \rrbracket=0 \not\leqslant -1/2 =
+\llbracket \beta \rrbracket$%
+\lthtmlinlinemathZ
+\hfill\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline1238}%
+$\alpha=10^{\omega}$%
+\lthtmlinlinemathZ
+\hfill\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline1240}%
+$\beta=01^{\omega}$%
+\lthtmlinlinemathZ
+\hfill\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline1242}%
+$\llbracket \alpha \rrbracket=\llbracket \beta \rrbracket=1/2$%
+\lthtmlinlinemathZ
+\hfill\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline1244}%
+$\alpha \not\leqslant
+\beta$%
+\lthtmlinlinemathZ
+\hfill\lthtmlcheckvsize\clearpage}
+
+\stepcounter{paragraph}
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline1246}%
+$(\alpha,\beta)$%
+\lthtmlinlinemathZ
+\hfill\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline1250}%
+$\llbracket \alpha \rrbracket < \llbracket \beta \rrbracket$%
+\lthtmlinlinemathZ
+\hfill\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline1252}%
+$\alpha = \beta$%
+\lthtmlinlinemathZ
+\hfill\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline1254}%
+$\alpha > \beta$%
+\lthtmlinlinemathZ
+\hfill\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline1256}%
+$\llbracket \alpha \rrbracket > \llbracket \beta \rrbracket$%
+\lthtmlinlinemathZ
+\hfill\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline1264}%
+$(\alpha,\alpha)$%
+\lthtmlinlinemathZ
+\hfill\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmldisplayA{displaymath768}%
+\begin{displaymath}\operatorname{norm}:\mathbf{3}^{\mathbb{N}}\times \mathbf{3}^{\mathbb{N}}\rightarrow\mathbf{3}^{\mathbb{N}}\times \mathbf{3}^{\mathbb{N}}
+  \end{displaymath}%
+\lthtmldisplayZ
+\hfill\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline1266}%
+$\operatorname{norm}(\alpha,\beta)=(\alpha',\beta')$%
+\lthtmlinlinemathZ
+\hfill\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline1268}%
+$(\llbracket \alpha \rrbracket,\llbracket \beta \rrbracket)=(\llbracket \alpha' \rrbracket,\llbracket \beta' \rrbracket)$%
+\lthtmlinlinemathZ
+\hfill\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline1270}%
+$(\alpha',\beta')$%
+\lthtmlinlinemathZ
+\hfill\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline1272}%
+$\operatorname{norm}(\alpha',\beta')=(\alpha',\beta')$%
+\lthtmlinlinemathZ
+\hfill\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline1274}%
+$\sim$%
+\lthtmlinlinemathZ
+\hfill\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline1276}%
+$\alpha 0 \bar{1} \beta \sim \alpha \bar{1} 1 \beta$%
+\lthtmlinlinemathZ
+\hfill\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline1278}%
+$\alpha 0 1 \beta \sim \alpha 1 \bar{1} \beta$%
+\lthtmlinlinemathZ
+\hfill\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline1284}%
+$1\bar{1}^\omega \equiv \bar{1}1^\omega$%
+\lthtmlinlinemathZ
+\hfill\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline1298}%
+$\mathbf{3}^{\mathbb{N}}\times \mathbf{3}^{\mathbb{N}}$%
+\lthtmlinlinemathZ
+\hfill\lthtmlcheckvsize\clearpage}
+
+\stepcounter{chapter}
+{\newpage\clearpage
+\lthtmldisplayA{displaymath769}%
+\begin{displaymath}\min(x,y)  =  \begin{cases}
+                    x & \text{if $x \leqslant y$ ,} \\
+                    y & \text{otherwise,}
+                    \end{cases}
+\end{displaymath}%
+\lthtmldisplayZ
+\hfill\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmldisplayA{displaymath770}%
+\begin{displaymath}\operatorname{cases}:[-1,1]^4 \rightharpoonup[-1,1]
+\end{displaymath}%
+\lthtmldisplayZ
+\hfill\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmldisplayA{displaymath771}%
+\begin{displaymath}\operatorname{cases}(x,t,y,z) = \begin{cases}
+                    y & \text{if $x < t$\space or $y=z$ ,} \\
+                    z & \text{if $x > t$\space or $y=z$ ,}
+                    \end{cases}
+\end{displaymath}%
+\lthtmldisplayZ
+\hfill\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline1320}%
+$ \{ (x,t,y,z) \mid \text{$x = t$\space implies $y=z$ }
+\}.  $%
+\lthtmlinlinemathZ
+\hfill\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmldisplayA{displaymath772}%
+\begin{displaymath}\operatorname{cases}(x,t,y,z) = \begin{cases}
+                    y & \text{if $x \leqslant t$ ,} \\
+                    z & \text{if $x \geqslant t$ .}
+                    \end{cases}
+\end{displaymath}%
+\lthtmldisplayZ
+\hfill\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlfigureA{proof437}%
+\begin{proof}We first consider an analogous lexicographical case-analysis operator
+$
+\operatorname{lexcases}:\left(\mathbf{3}^{\mathbb{N}}\right)^4 \rightharpoonup\mathbf{3}^{\mathbb{N}}
+$ such that
+\begin{displaymath}
+\operatorname{lexcases}(\alpha,\beta,\gamma,\delta) = \begin{cases}
+                    \gamma & \text{if $\alpha < \beta$\space or $\gamma=\delta$ ,} \\
+                    \delta & \text{if $\alpha > \beta $\space or $\gamma=\delta$ ,}
+                    \end{cases}
+\end{displaymath}
+
+with domain of definition $ \{ (\alpha,\beta,\gamma,\delta) \mid
+\text{$\alpha = \beta$\space implies $\gamma=\delta$ } \}.$   In order to compute $\operatorname{lexcases}(\alpha,\beta,\gamma,\delta)$ , we can
+  first output the greatest common prefix of $\gamma$\space and $\delta$ . If
+  it is finite then $\gamma \ne \delta$\space and hence we must have $\alpha
+  < \beta$\space or $\alpha > \beta$ . In the first case we output the
+  remainder of $\gamma$\space and in the second the remainder of $\delta$ .
+Now, a realizer for the numerical case-analysis operator is given by
+$  %
+\phi(\alpha,\beta,\gamma,\delta)  =
+  \operatorname{lexcases}(\alpha',\beta',\gamma',\delta')
+$\space %
+where 
+$(\alpha',\beta') =\operatorname{norm}(\alpha,\beta)$   and 
+$(\gamma',\delta')=\operatorname{norm}(\gamma,\delta)$ .
+\qed\end{proof}%
+\lthtmlfigureZ
+\hfill\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmldisplayA{displaymath774}%
+\begin{displaymath}\min(x,y)= \operatorname{cases}(x,y,x,y),
+\end{displaymath}%
+\lthtmldisplayZ
+\hfill\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline1364}%
+$\min$%
+\lthtmlinlinemathZ
+\hfill\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline1366}%
+$f,g:\mathbb{R}\rightarrow
+\mathbb{R}$%
+\lthtmlinlinemathZ
+\hfill\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline1370}%
+$h:\mathbb{R}\rightarrow\mathbb{R}$%
+\lthtmlinlinemathZ
+\hfill\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmldisplayA{displaymath775}%
+\begin{displaymath}h(x)  =  \begin{cases} 
+  f(x) & \text{if $x \leqslant x_0$ ,} \\
+  g(x) & \text{if $x \geqslant x_0$ }
+  \end{cases}
+\end{displaymath}%
+\lthtmldisplayZ
+\hfill\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmldisplayA{displaymath776}%
+\begin{displaymath}h(x)=\operatorname{cases}(x,x_0,f(x),g(x)).
+\end{displaymath}%
+\lthtmldisplayZ
+\hfill\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmldisplayA{displaymath777}%
+\begin{displaymath}\operatorname{sgn}(x)  =  \begin{cases}
+                    -1 & \text{if $x < 0$ ,} \\
+                    1 & \text{if $x > 0$ }
+                    \end{cases}
+\end{displaymath}%
+\lthtmldisplayZ
+\hfill\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmldisplayA{displaymath778}%
+\begin{displaymath}\operatorname{sgn}(x) = \operatorname{cases}(x,0,-1,1)
+\end{displaymath}%
+\lthtmldisplayZ
+\hfill\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline1386}%
+$y \ne z$%
+\lthtmlinlinemathZ
+\hfill\lthtmlcheckvsize\clearpage}
+
+\stepcounter{chapter}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline1394}%
+$R \to R$%
+\lthtmlinlinemathZ
+\hfill\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline1396}%
+$R \to B$%
+\lthtmlinlinemathZ
+\hfill\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline1398}%
+$N \to R$%
+\lthtmlinlinemathZ
+\hfill\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline1400}%
+$N \to (N \to R)$%
+\lthtmlinlinemathZ
+\hfill\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline1402}%
+$N \to (R
+  \to R)$%
+\lthtmlinlinemathZ
+\hfill\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline1404}%
+$(N \to R) \to R$%
+\lthtmlinlinemathZ
+\hfill\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline1406}%
+$(R \to R)
+  \to R$%
+\lthtmlinlinemathZ
+\hfill\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline1408}%
+$(R \to B) \to B$%
+\lthtmlinlinemathZ
+\hfill\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline1410}%
+$\sqrt{2}$%
+\lthtmlinlinemathZ
+\hfill\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline1416}%
+$\{\sqrt{2}\}$%
+\lthtmlinlinemathZ
+\hfill\lthtmlcheckvsize\clearpage}
+
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+{\newpage\clearpage
+\lthtmlfigureA{tex2html_wrap2738}%
+\OE%
+\lthtmlfigureZ
+\hfill\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline2694}%
+$\exists$%
+\lthtmlinlinemathZ
+\hfill\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline2696}%
+$4^{\rm
+  th}$%
+\lthtmlinlinemathZ
+\hfill\lthtmlcheckvsize\clearpage}
+
+
+\end{document}

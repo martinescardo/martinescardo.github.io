@@ -1,0 +1,344 @@
+module geometryOfConstancy where
+
+{-
+
+The geometry of constancy
+-------------------------
+
+  Thierry Coquand & Martin Escardo
+  April 2015, updated June to the new version of cubicaltt without regularity.
+
+This is in cubical type theory (ctt) 
+https://github.com/mortberg/cubicaltt
+
+Some proofs are first given in HoTT style and then directly in ctt
+style.
+
+If we have a circle-indexed family of constant functions 
+
+  f : (x : S1) -> x = base -> A x
+
+then each of them factors through ||x=base||, that is, through 1.  So
+we can define
+
+  g : (x : S1) -> A x
+
+such that g x is the constant value of f x:
+
+  f x p = g x for all p : x = base.
+
+This relies on the naturality of f on x and works by S1-induction on x.
+
+However, if for a fixed x0:S1 and some given type A we have a single
+constant function f:x0=base->A, then again we can find a point of A
+which is the constant value of f. This relies on both the above result
+and the use of a generalized circle S(-) to describe constant
+functions, defined by higher induction.
+
+Contents
+  0. Preliminaries
+  1. Factoring a family of constant functions on x = base.
+  2. Propositional truncation.
+  3. The generalized circle.
+  4. Factoring a single function on x0 = base.
+
+-}
+
+-- 0. Preliminaries.
+
+import prelude
+import circle
+
+-- We need based path induction with the second end-point fixed, which
+-- is reduced to the one with the first one fixed (J here):
+
+J' (A : U) 
+   (a : A) 
+   (C : (x : A) -> Id A x a -> U)
+   (d : C a (refl A a)) 
+   (x : A) 
+   (p : Id A x a) 
+ : C x p 
+ = J A a (\(x:A) (q:Id A a x) -> C x (<i>q@-i)) d x (<i>p@-i)
+
+-- General facts, that could be in other modules:
+
+-- Any path in U from A to B gives a function A->B:
+transp (A B : U) (p : Id U A B) (a : A) : B = comp p a []
+
+-- The function A->A corresponding to the identity path refl U A is
+-- pointwise equal to the identity function (but not judgementally
+-- equal):
+
+refl' (A:U) (a:A) : Id A (transp A A (refl U A) a) a
+      = <i>comp (refl U A) a [(i=1) -> refl A a]
+
+-- The "computation rule" for J doesn't hold judgementally, but it
+-- does hold as follows, which we use implicitly:
+Jcomputation (A : U) (a : A) (C : (x : A) -> Id A a x -> U) (c : C a (refl A a)) 
+             : Id (C a (refl A a)) (J A a C c a (refl A a)) c
+             = refl' (C a (refl A a)) c
+
+-- Heterogenous equality IdP can be expressed in terms of equality Id using transp:
+funDepTr (A:U) 
+         (P:A->U) 
+         (a0 :A) 
+       : (a1:A) (p:Id A a0 a1) (u0:P a0) (u1:P a1) 
+         -> Id U (IdP (<i> P (p@i)) u0 u1) 
+                 (Id (P a1) (transp (P a0) (P a1) (<i> P (p@i)) u0) u1) 
+       = J A a0 C rem
+ where
+   C (a1:A) (p:Id A a0 a1) : U 
+     = (u0:P a0) (u1:P a1) 
+         -> Id U (IdP (<i> P (p@i)) u0 u1) 
+                 (Id (P a1) (transp (P a0) (P a1) (<i> P (p@i)) u0) u1)
+
+   rem (u0 u1:P a0) : Id U (Id (P a0) u0 u1) 
+                           (Id (P a0) (transp (P a0) (P a0) (refl U (P a0)) u0) u1) 
+       = <i>Id (P a0) (refl' (P a0) u0@-i) u1
+
+-- This should be in the circle module.
+-- Induction on the circle:
+S1Induction (A : S1->U) 
+            (b : A base) 
+            (l : Id (A base) (subst S1 A base base loop1 b) b)
+          : (x : S1) -> A x
+          = split
+    base -> b
+    loop @ i -> (transp  (Id (A base) (subst S1 A base base loop1 b) b) 
+                             (IdP (<j> A (loop1 @ j)) b b)  
+                             (<j>funDepTr S1 A base base loop1 b b@-j) 
+                             l
+                ) @ i
+
+-- The computation rule for induction holds judgementally:
+S1InductionBase
+   (A : S1 -> U) 
+   (b : A base) 
+   (l : Id (A base) (subst S1 A base base loop1 b) b)
+ : Id (A base) (S1Induction A b l base) b
+ = refl (A base) b
+
+
+--  1. Factoring a family of constant functions 
+--     f x : x = base -> A x through 1.
+
+-- We need a general lemma with any easy proof, which doesn't depend
+-- on the circle or the constancy of f x, with a direct proof by based
+-- path induction.
+--
+-- We apply it with X=S^1 and b=b'=base, r = refl S1 base, and l=loop.
+crucialLemma 
+      (X : U)
+      (A : X -> U)
+      (b : X)
+      (r : Id X b b)
+      (f : (x : X) -> Id X x b -> A x)
+      (b': X) 
+      (l : Id X b b')
+    : (q : Id X b' b) * Id (A b') (subst X A b b' l (f b r)) (f b' q)
+    = h b' l
+ where
+  C (x : X) (l : Id X b x) : U 
+    = (q : Id X x b) * Id (A x) (subst X A b x l (f b r)) (f x q) 
+  hBase : C b (refl X b) = (r, refl' (A b) (f b r)) -- refl worked in regular ctt.
+  h : (x : X) (l : Id X b x) -> C x l = J X b C hBase
+
+
+-- The following is structure rather than property. An element of the
+-- type constant X A f may be called a modulus of constancy of the
+-- function f:X->A.
+
+constant (X A : U) (f:X->A) : U = (x y : X) -> Id A (f x) (f y)
+
+
+-- And this is the main theorem/construction, given in HoTT style first:
+factorFamily 
+   (A : S1 -> U) 
+   (f : (x : S1) -> Id S1 x base -> A x) 
+   (k : (x : S1) -> constant (Id S1 x base) (A x) (f x))
+ : (g : (x : S1) -> A x) * (x : S1) (p : Id S1 x base) -> Id (A x) (g x) (f x p)
+ = (g, c)
+ where 
+  b : A base = f base (refl S1 base)
+  qs : (q : Id S1 base base) * Id (A base) (subst S1 A base base loop1 b) (f base q)
+     = crucialLemma S1 A base (refl S1 base) f base loop1 
+  q : Id S1 base base = qs.1
+  s : Id (A base) (subst S1 A base base loop1 b) (f base q) = qs.2
+  t : Id (A base) (f base q) b = k base q (refl S1 base)
+  l : Id (A base) (subst S1 A base base loop1 b) b 
+    = compId (A base) (subst S1 A base base loop1 b) (f base q) b s t
+  g : (x : S1) -> A x = S1Induction A b l
+  C (x : S1) (p : Id S1 x base) : U = Id (A x) (g x) (f x p)
+  cbase : C base (refl S1 base) = refl (A base) b
+  c : (x : S1) (p : Id S1 x base) -> C x p = J' S1 base C cbase
+
+-- And now with a proof in ctt style:
+crucialLemma' (X : U)
+       (A : X -> U)
+       (y : X)
+       (f : (x : X) -> Id X x y -> A x)
+       (l : Id X y y)
+     : (x : X) (p : Id X y x) 
+       -> (r : Id X x y) * IdP (<i> A (p@i)) (f y l) (f x r)
+     = J X y C (l, refl (A y) (f y l))
+ where
+  C (x : X) (p : Id X y x) : U = (r : Id X x y) * IdP (<i> A (p@i)) (f y l) (f x r)
+
+factorFamily' 
+   (A : S1 -> U) 
+   (f : (x : S1) -> Id S1 x base -> A x) 
+   (k : (x : S1) -> constant (Id S1 x base) (A x) (f x))
+ : (g : (x : S1) -> A x) * (x : S1) (p : Id S1 x base) -> Id (A x) (g x) (f x p)
+ = (g, c)
+ where 
+  b : A base = f base (refl S1 base)
+  P : Id U (A base) (A base) = <i>A (loop1 @i)
+  rs : (r : Id S1 base base) * IdP P b (f base r)
+    = crucialLemma' S1 A base f (refl S1 base) base loop1
+  r  : Id S1 base base = rs.1
+  s : IdP P b (f base r) = rs.2
+  t : Id (A base) (f base r) b = k base r (refl S1 base)
+  l : IdP P b b = transp (IdP P b (f base r)) (IdP P b b) (<i> IdP P b (t@i)) s
+  g : (x:S1) -> A x = split
+        base -> b
+        loop @ i -> l @ i
+  C (x : S1) (p : Id S1 x base) : U = Id (A x) (g x) (f x p)
+  c : (x : S1) (p : Id S1 x base) -> C x p = J' S1 base C (refl (A base) (g base))
+
+
+-- 2. Propositional truncations.
+
+data inh (A : U) = inc (a : A) 
+                 | squash (u v : inh A) <i> [(i=0) -> u, (i=1) -> v]
+
+-- Redefine squash:
+squash' (A:U) (u v : inh A) : Id (inh A) u v = <i>((squash{inh A} u v)@i)
+
+inhIsProp : (A:U) -> prop (inh A) = squash'
+
+
+-- 3. The generalized circle.
+
+data S(X:U) = beta (x:X)
+            | ell (x y:X) <i> [(i=0) -> beta x, (i=1) -> beta y]
+
+-- Redefine beta and ell:
+beta' (X:U) (x : X) : S X = beta x
+
+ell' (X:U) : constant X (S X) (beta' X) = \(x y : X) -> <i> ((ell{S X} x y)@i)
+
+-- The type of constant functions ...
+Const (X A : U) : U = (f:X->A) * constant X A f
+
+-- ... is equal to the function type S X -> A:
+phiS (X A : U) (fc : Const X A) : S X -> A = split
+                                  beta x -> fc.1 x
+                                  ell x y @ i -> (fc.2 x y) @ i
+
+psiS (X A : U) (g:S X -> A) : Const X A 
+     = (\(x:X) -> g (beta x), \(x y:X) -> <i>(g ((ell' X x y)@i)))
+
+-- The above maps are mutually inverse:
+phipsi (X A : U) (g: S X -> A) : Id (S X -> A) (phiS X A (psiS X A g)) g 
+       = <i> \(u:S X) -> (rem u) @ i
+ where rem : (u : S X) -> Id A (phiS X A (psiS X A g) u) (g u) = split
+              beta x -> refl A (g (beta x))
+              ell x y @ i -> refl A (g ((ell' X x y) @ i))
+
+-- with one of the composites definitionally equal to the identity:
+psiphi (X A : U)(fc : Const X A) : Id (Const X A) (psiS X A (phiS X A fc)) fc
+       = refl (Const X A) fc
+
+-- Using isoId we get a path connecting them:
+Suniversal (X A : U) : Id U (S X -> A) (Const X A)  
+ = isoId (S X -> A) (Const X A) (psiS X A) (phiS X A) (psiphi X A) (phipsi X A) 
+
+-- The type S X is connected. We need three lemmas:
+lemPropF (A : U) 
+         (P : A -> U) 
+         (pP : (x : A) -> prop (P x)) 
+         (a : A) 
+       : (a1 : A) (p : Id A a a1) (b0 : P a) (b1 : P a1) -> IdP (<i>P (p@i)) b0 b1 
+       = J A a f rem
+ where
+   f (a1 : A) (p : Id A a a1) : U = (b0 : P a) (b1 : P a1) -> IdP (<i>P (p@i)) b0 b1
+   rem : (b0 b1:P a) -> Id (P a) b0 b1 = pP a
+
+lemPropFib (X:U) 
+           (P:S X -> U) 
+           (pP:(u:S X) -> prop (P u)) 
+           (bP:(x:X) -> P(beta x)) 
+         : (u:S X) -> P u 
+         = split
+  beta x -> bP x
+  ell x y @ i -> (lemPropF (S X) P pP (beta x) (beta y) (ell' X x y) (bP x) (bP y)) @ i
+
+lemConnect (X : U) (x:X) : (v:S X) -> inh (Id (S X) (beta x) v) 
+           = lemPropFib X (\(v:S X) -> inh (Id (S X) (beta x) v)) pP1 bP1
+    where 
+     pP1 (v:S X) : prop (inh (Id (S X) (beta x) v)) = inhIsProp (Id (S X) (beta x) v)
+     bP1 (y:X) : inh (Id (S X) (beta x) (beta y)) = inc (ell' X x y)
+
+connectS (X:U) : (u v:S X) -> inh (Id (S X) u v) 
+         = lemPropFib X (\(u:S X) -> (v:S X) -> inh (Id (S X) u v)) pP (lemConnect X)
+ where 
+   pP (u:S X) : prop ((v:S X) -> inh (Id (S X) u v)) 
+      = propPi (S X) 
+               (\(v:S X) -> inh (Id (S X) u v)) 
+               (\(v:S X) -> inhIsProp (Id (S X) u v))
+
+-- The unit beta of the universal property is a surjection:
+surjS (X:U) (u:S X) : inh ((x:X) * Id (S X) (beta x) u) = lemPropFib X P pP bP u
+ where 
+   T (u : S X) : U = (x:X) * Id (S X) (beta x) u
+   P (u : S X) : U = inh (T u)
+   pP (u:S X) : prop (P u) = inhIsProp (T u)
+   bP (x : X) : P (beta x)  = inc (x,refl (S X) (beta x))
+
+-- The unit squash : X -> inh X of the propositional truncation inh X,
+-- being constant, factors through S X:  
+factorInhBeta (X : U) : S X -> inh X = split 
+                        beta x -> inc x 
+                        ell x y @ i -> (squash' X (inc x) (inc y)) @ i
+
+
+-- 4. Factoring a single constant function f:x0=base->A through 1.
+
+-- We consider a special case of of the family of functions beta:
+Beta (x : S1) (p : Id S1 x base) : S(Id S1 x base) = beta p
+
+-- We can factor it through 1 to get a family of function Beta':
+BetaFactor : (Beta' : (x : S1) -> S(Id S1 x base)) 
+           * (x : S1) (p : Id S1 x base) -> Id (S(Id S1 x base)) (Beta' x) (Beta x p)
+ = factorFamily (\(x : S1) -> S(Id S1 x base)) Beta (\(x : S1) -> ell' (Id S1 x base))
+
+-- We extract the two compotents of the pair:
+Beta' : (x : S1) -> S(Id S1 x base) = BetaFactor.1
+
+BetaConstancy : (x : S1) (p : Id S1 x base) -> Id (S(Id S1 x base)) (Beta' x) (Beta x p)
+              = BetaFactor.2
+
+-- With this we can factor any constant function f:x0=base->A through
+-- the unit type 1, i.e. give a point of A that is the common value of
+-- f for all arguments:
+factorSingle
+   (x0 : S1)
+   (A : U)
+   (f : Id S1 x0 base -> A)
+   (k : constant (Id S1 x0 base) A f)
+ : (a : A) * (p : Id S1 x0 base) -> Id A a (f p)
+ = (a , c)
+  where
+   f': S(Id S1 x0 base) -> A = phiS (Id S1 x0 base) A (f , k) 
+   a : A = f'(Beta' x0) 
+   c (p : Id S1 x0 base) : Id A a (f'(Beta x0 p))
+     = mapOnPath (S(Id S1 x0 base)) A f' (Beta' x0) (Beta x0 p) (BetaConstancy x0 p)
+
+-- Simple-minded test for the moment:
+
+pt : S1 = transp S1 S1 (refl U S1) base
+
+test : bool = (factorSingle pt bool (\(x:Id S1 pt base) -> true) 
+                            (\(x y:Id S1 pt base) -> <i>true)).1
+

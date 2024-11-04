@@ -1,0 +1,29 @@
+For n = 13 (1.7 Ghz machine) 
+An optimal play is [0,2,4,1,8,11,9,12,3,5,7,10,6] 
+and the optimal outcome is True
+
+real	9m19.266s
+user	8m42.805s
+sys	0m0.532s
+
+For n = 14 (2.1 Ghz machine):
+An optimal play is [0,2,4,6,11,9,12,3,13,8,1,5,7,10] 
+and the optimal outcome is True
+
+real	92m11.744s
+user	92m6.961s
+sys	0m5.128s
+
+Notice that 14 ! = 87 178 291 200.
+Hence if all permutations had been checked (which they were not),
+then 15 761 759 permutations per second would have been checked. 
+
+This is interesting, because our algorithm doesn't include explicit
+euristics to cut down the number of permutations checked.
+
+Notice that the time ratio between these two experiments is ~ 10.
+It should be in theory 14 in the worst case. 
+
+For n = 15, I estimate that, 23 hours (15 * the above time) would be
+needed to compute a solution in the worst case (and at least 15 hours
+if we are lucky as above).

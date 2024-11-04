@@ -1,0 +1,78 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<!--Converted with LaTeX2HTML 98.1p1 release (March 2nd, 1998)
+originally by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>Example</TITLE>
+<META NAME="description" CONTENT="Example">
+<META NAME="keywords" CONTENT="issac">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="STYLESHEET" HREF="issac.css">
+<LINK REL="next" HREF="node19.html">
+<LINK REL="previous" HREF="node17.html">
+<LINK REL="up" HREF="node15.html">
+<LINK REL="next" HREF="node19.html">
+</HEAD>
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html260"
+ HREF="node19.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="http://www.cs.bham.ac.uk/logos/latex2html/icons.gif/next_motif.gif"></A> 
+<A NAME="tex2html257"
+ HREF="node15.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="http://www.cs.bham.ac.uk/logos/latex2html/icons.gif/up_motif.gif"></A> 
+<A NAME="tex2html251"
+ HREF="node17.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="http://www.cs.bham.ac.uk/logos/latex2html/icons.gif/previous_motif.gif"></A> 
+<A NAME="tex2html259"
+ HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="http://www.cs.bham.ac.uk/logos/latex2html/icons.gif/contents_motif.gif"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html261"
+ HREF="node19.html">Computational adequacy</A>
+<B> Up:</B> <A NAME="tex2html258"
+ HREF="node15.html">Operational and denotational semantics</A>
+<B> Previous:</B> <A NAME="tex2html252"
+ HREF="node17.html">Denotational semantics</A>
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H4><A NAME="SECTION00500030000000000000">
+Example</A>
+</H4>
+In order to make the distinction between operational and denotational
+semantics clear, consider for example the command
+<PRE>
+                  y := 4x(1-x)
+</PRE>in a typical programming language. The denotational meaning of this is
+clear: the state of the store is changed so that the location called
+<I>y</I> holds the mathematical value 4<I>x</I>(1-<I>x</I>) after execution. The
+operational meaning of this will vary. Under floating-point
+computation, this will cause some memory locations to be transfered to
+registers, some operations on the registers to be performed, and some
+registers to be transfered to memory. Under exact computation, what
+actually happens is much more complicated. To begin with, <I>x</I> isn't a
+memory location anymore; now it is a ``real number generator'', that
+is, a piece of code that generates as many digits of a given number as
+we are patient to wait for. Also, for example, the multiplication
+operation is now implemented as a procedure that builds a third real
+number generator from two given generators.
+
+<P>
+<BR><HR>
+<ADDRESS>
+<I>Martin Escardo</I>
+<BR><I>2000-10-02</I>
+</ADDRESS>
+</BODY>
+</HTML>

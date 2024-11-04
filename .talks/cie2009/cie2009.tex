@@ -1,0 +1,401 @@
+\documentclass[%dvips,% for generating postscript printouts
+%25pt,%
+a4paper,%
+landscape]{foils}
+
+\usepackage{graphicx}
+
+\newcommand{\hash}{\operatorname{\sharp}}
+
+\usepackage{diagrams}
+%\usepackage{diagrams}
+\newarrow{Into} C--->
+\newarrow{Onto} ----{>>}
+\newarrow{Mapsto} |--->
+\newarrow{Dashto} {}{dash}{}{dash}>
+
+\newcommand{\bnf}{\mathrel{::=}}
+\newcommand{\lift}[1]{#1_{\bot}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Bool}{\mathbb{B}}
+\newcommand{\Sierp}{\mathcal{S}}
+\newcommand{\pN}{\mathcal{N}}
+\newcommand{\pBool}{\mathcal{B}}
+\newcommand{\If}{\,\mathrel{\operatorname{if}}}
+\newcommand{\Then}{\mathrel{\operatorname{then}}}
+\newcommand{\Else}{\mathrel{\operatorname{else}}}
+\newcommand{\True}{1}%{\operatorname{tt}}%{\operatorname{true}}
+\newcommand{\False}{0}%{\operatorname{ff}}%{\operatorname{false}}
+\newcommand{\domain}[1]{{\D_{#1}}}
+\newcommand{\total}[1]{{\T_{#1}}}
+\newcommand{\totaleq}[1]{\sim_{#1}}
+\newcommand{\quo}[1]{\qq_{#1}}
+\newcommand{\qq}{\rho}
+\newcommand{\D}{D}
+\newcommand{\E}{E}
+\newcommand{\C}{C}
+\newcommand{\T}{T}
+\newcommand{\kk}[1]{{\C_{#1}}}
+\newcommand{\Scott}{\operatorname{Scott}}
+\newcommand{\tproduct}{\sigma \times \tau}
+\newcommand{\tfunction}{\sigma \to \tau}
+\newcommand{\rh}[1]{\rho_{#1}}
+\newcommand{\comp}{\circ}
+\newcommand{\siff}{\iff}%{\Leftrightarrow}
+\newcommand{\Search}{\operatorname{\mathcal{S}}}
+\newcommand{\g}{\operatorname{\text{\boldmath{$g$}}}}
+\newcommand{\f}{\operatorname{\text{\boldmath{$f$}}}}
+\newcommand{\x}{\operatorname{\text{\boldmath{$x$}}}}
+\newcommand{\e}{\operatorname{\text{\boldmath{$e$}}}}
+\newcommand{\sK}{\operatorname{\text{\boldmath{$K$}}}}
+\newcommand{\overhead}[1]{\foilhead{\darkblue{#1}} \vspace{-4ex}}
+\newcommand{\cons}{\hash}
+
+\input{preamble}
+
+\title{\darkblue{Computability of continuous solutions of} \\ \darkblue{higher-type equations}}
+
+\date{{\normalsize CiE 2009} \\[2ex] 
+{\normalsize Heidelberg, 19-24 July 2009}}
+
+
+\author{\darkblue{Mart\'{\i}n Escard\'o} \\[1ex]
+  {\small School of Computer Science,
+    Birmingham University, UK}\\[2ex]}
+
+
+\begin{document}
+
+%\usefont{T1}{cmfr}{m}{it}
+%\usefont{T1}{cmr}{m}{n}
+
+\raggedright
+
+\maketitle
+
+\overhead{Summary}
+
+\vfill
+
+{1.} \darkblue{Brief background.} 
+
+\qquad\qquad \darkblue{(a)} Kleene--Kreisel spaces. \\
+\qquad\qquad \darkblue{(b)} Their exhaustible subspaces ($\darkblue{\approx}$ compact subspaces).
+
+\vfill
+
+{2.} \darkblue{Computability of solutions of equations over Kleene--Kreisel spaces.} % (Speed of sound.)
+
+\vfill
+
+\qquad\qquad Enough/necessary to assume that: \\
+\qquad\qquad\darkblue{(a)} The solution is unique. \\
+\qquad\qquad\darkblue{(b)} The unknown belongs to an exhaustible space.
+
+
+{3.} \darkblue{Beyond Kleene--Kreisel spaces.}
+
+{4.} \darkblue{Interesting examples of exhaustible ranges for the unknowns}.
+
+\qquad\qquad Certain sets \darkblue{$K \subseteq \R^{[-\epsilon,\epsilon]}$} of analytic
+  functions.
+
+\overhead{Kleene--Kreisel spaces}
+
+\darkblue{Characterization.} Least collection of objects
+
+\qquad \darkblue{1.} containing the \darkblue{(discrete)} natural-number object $\darkblue{\N}$,
+
+\qquad \darkblue{2.} closed under finite products \darkblue{$X \times Y$} and exponentials \darkblue{$Y^X$},
+
+\quad in a suitable cartesian closed category of \darkblue{space-like objects}.
+
+\vfill
+
+{The following categories work, among others:} 
+
+\quad \grey{Super-categories of $\operatorname{Top}$:}
+filter spaces, limit spaces, equilogical spaces.
+
+\quad \grey{Sub-categories of $\operatorname{Top}$:}
+sequential spaces, $k$-spaces, QCB spaces. 
+
+\darkblue{Definition.} A $kk$-space is a computable retract of a Kleene--Kreisel space.
+
+
+\overhead{Exhaustible spaces}
+
+\darkblue{Idea.} Can algorithmically check all points in finite time.
+
+\vfill
+
+\darkblue{Definition.}
+A space \darkblue{$X$} is \darkblue{exhaustible} iff the functional
+   \[
+   \darkblue{\forall \colon 2^X \to 2}
+   \]
+defined by
+   \[
+   \darkblue{\forall(p)=1 \black{\iff} \text{$p(x)=1$ for all $x \in X$}}
+   \]
+is \darkblue{computable}.
+
+\vfill
+
+\darkblue{NB.}
+Any \darkblue{$p \in 2^X$} is the characteristic function of a \darkblue{clopen} set.
+
+
+
+
+\overhead{Main topological tool}
+
+\darkblue{Lemma.} For any $kk$-space \darkblue{$X$},
+
+the functional \darkblue{$\forall \colon 2^X \to 2$} is
+continuous $\iff$ \darkblue{$X$} is compact.
+
+\vfill
+
+\darkblue{Corollary} \\
+Exhaustible $kk$-spaces are compact.
+
+\darkblue{Proof.} Computable functions are continuous.
+
+\overhead{Theorems [Escard\'o 2007 (LICS) \& 2008 (LMCS)]}
+
+\darkblue{1.} Finite $kk$-spaces are exhaustible \grey{(of course)}.
+
+\darkblue{2.} Exhaustible $kk$-spaces are closed under finite and countable products.
+
+\darkblue{3.} Hence e.g.\ the Cantor space $2^\N$ is exhastible \grey{(previously Berger)}.
+
+\darkblue{4.} Computable images of exhaustible spaces are exhaustible.
+
+\darkblue{5.} Any non-empty exhaustible $kk$-space is a computable image of $2^\N$.
+
+\darkblue{6.} Any exhaustible $kk$-space is computably homeomorphic to
+\\ ~~\, an exhaustible subspace of the Baire space $\N^\N$ \grey{(and hence is a Stone space)}.
+
+\darkblue{7.} Any exhaustible non-empty subspace of a Kleene-Kreisel space is a
+\\ ~~\, computable retract \grey{(and hence a $kk$-space)}.
+
+\darkblue{8.} Arzela--Ascoli type characterization.
+
+\overhead{Computability of solutions of higher-type equations}
+
+\darkblue{Theorem.} 
+Assume: \\[1ex]
+\qquad (a) \darkblue{$X$} and \darkblue{$Y$} are $kk$-spaces, \\
+\qquad (b) \darkblue{$X$} is exhaustible, \\
+\qquad (c) \darkblue{$f\colon X \to Y$} is computable, \\
+\qquad (d) \darkblue{$y \in Y$} is computable. \\
+
+\vfill
+Then, uniformly in the above data,
+
+\vfill
+
+\qquad 1. If \darkblue{$f(x) = y$} has a unique solution
+  \darkblue{$x \in X$}, then it is computable. 
+
+\vfill
+
+\qquad 2. The non-solvability of the equation \darkblue{$f(x) = y$} 
+is semi-decidable.
+
+\vfill
+
+
+
+\overhead{}
+
+\vfill
+
+\darkblue{Corollary.}
+
+If \darkblue{$f\colon X \to Y$} is a computable bijection of
+exhaustible $kk$-spaces, then it has a computable inverse.
+
+\vfill
+
+\darkgreen{Cf:} a continuous bijection of compact Hausdorff spaces is
+a homeomorphism.
+
+\overhead{Subsummed by the above theorem}
+
+\vfill
+
+\darkblue{1.} Equations of the form \darkblue{$g(x)=h(x)$}, even with parameters.
+
+\qquad \grey{(Easy group-theoretical trick.)}
+
+\vfill
+
+\darkblue{2.} Finite systems of equations with finitely many variables. 
+
+\qquad \grey{(Because $kk$-spaces are closed under finite products.)}
+
+\vfill
+
+\darkblue{3.} Certain countable systems with countably many variables.
+
+\qquad \grey{(Because $kk$-spaces are closed under countable cartesian powers.)}
+
+
+\overhead{Applied to compute unique solutions:}
+
+\vfill
+
+\darkblue{Lemma.} Assume:
+\\[1ex]
+\qquad (a) \darkblue{$X$} is a $kk$-space. \\
+\qquad (b) \darkblue{$K_n \subseteq X$} is a sequence of sets that are
+exhaustible uniformly in \darkblue{$n$}. \\
+\qquad (c) \darkblue{$K_n \supseteq K_{n+1}$}.
+
+    If \darkblue{$\bigcap_n K_n$} is a singleton \darkblue{$\{x\}$},
+    then \darkblue{$x$} is computable, uniformly in the data.
+
+\overhead{Applied to semi-decide non-existence of solutions:}
+
+\vfill
+
+\darkblue{Lemma.} Assume:
+\\[1ex]
+\qquad (a) \darkblue{$X$} is an exhaustible $kk$-space. \\
+\qquad (b) \darkblue{$K_n \subseteq X$} is a sequence of sets that are
+decidable uniformly in \darkblue{$n$}. \\
+\qquad (c) \darkblue{$K_n  \supseteq K_{n+1}$}.
+
+Emptiness of \darkblue{$\bigcap_n K_n$} is semi-decidable, uniformly in the data.
+
+\overhead{Used to build sets \darkblue{$K_n$} suitable for the application \\ of
+the above two lemmas:}
+
+\vfill
+
+\darkblue{Lemma.}  For every $kk$-space \darkblue{$X$} there is a
+family \darkblue{$(=_n)$} of equivalence relations that are decidable
+uniformly in \darkblue{$n$} and satisfy \darkblue{
+\begin{eqnarray*}
+x=y & \iff & \forall n.\,x =_n y, \\
+x =_{n+1} y & \implies & x =_n y.
+\end{eqnarray*}
+}
+
+The proof uses the Kleene--Kreisel density theorem.
+
+\overhead{Proof of the theorem}
+
+\vfill
+
+The set \darkblue{$K_n = \{ x \in X \mid f(x) =_n y\}$} is exhaustible, 
+because it is a decidable subset of an exhaustible space.
+
+\vfill
+
+Therefore the result follows from the above lemmas, because
+
+\qquad \darkblue{$x \in \bigcap_n K_n$} $\iff$ 
+\darkblue{$\forall n.f(x) =_n y$} $\iff$ 
+\darkblue{$f(x) = y$}.
+
+\vfill
+
+
+\overhead{To go beyond $kk$-spaces, can use representations}
+
+E.g.\ The compact interval $[-1,1]$ has an exhaustible set $3^\omega$ of representatives.
+
+\vfill
+
+Binary representation with digit set $3 = \{-1,0,1\}$.
+
+\vfill
+
+\darkblue{Definition.} A represented space is \emph{exhaustible} if it
+has an exhaustible set of representatives.
+
+\overhead{Computability of solutions of higher-type equations II}
+
+\darkblue{Theorem.} 
+Assume: \\[1ex]
+\qquad (a) \darkblue{$X$} and \darkblue{$Y$} are computational metric spaces, \\
+\qquad (b) \darkblue{$X$} is computationally complete and exhaustible, \\
+\qquad (c) \darkblue{$f\colon X \to Y$} is computable, \\
+\qquad (d) \darkblue{$y \in Y$} is computable. \\
+
+\vfill
+Then, uniformly in the above data,
+
+\vfill
+
+\qquad 1. If \darkblue{$f(x) = y$} has a unique solution
+  \darkblue{$x \in X$}, then it is computable. 
+
+\vfill
+
+\qquad 2. The non-solvability of the equation \darkblue{$f(x) = y$} 
+is semi-decidable.
+
+\overhead{Example: Exhaustible spaces of analytic functions}
+
+\vfill
+
+\darkblue{Theorem.}
+  Let \darkblue{$\epsilon \in (0,1)$} and \darkblue{$b >
+  0$} be computable.
+
+\begin{quote}
+The space 
+$
+\darkblue{A} = \darkblue{A(\epsilon,b)}
+$
+of 
+analytic functions  \darkblue{$f \in \R^{[-\epsilon,\epsilon]}$} of the form
+  \[
+  \darkblue{f(x) = \sum_n a_n x^n}
+  \]
+  with \darkblue{$a_n \in [-b,b]$} is exhaustible.
+\end{quote}
+
+\overhead{Corollary.}
+
+\quad 1. The Taylor coefficients of any \darkblue{$f \in A$} can be computed from \darkblue{$f$}.
+
+\quad 2. For \darkblue{$f \in \R^{[-\epsilon,\epsilon]}$}, it is
+semi-decidable whether \darkblue{$f \not\in A$}.
+
+\overhead{References and advertisement}
+
+\vfill
+
+\small
+
+\grey{1.} Normann. \darkblue{Computing with functionals -- computability theory or computer science?} Bulletin of Symbolic logic, 12 (2006), no.~1, 43--59. 
+
+\vfill
+
+\grey{2.} Normann. \darkblue{50 years of continuous functionals.} Slides of CiE 08 invited talk.
+
+\vfill
+
+\grey{3.} Escard\'o. \darkblue{Infinite sets that admit fast exhaustive search}. LICS, IEEE, pp.443-452, 2007.
+
+\vfill
+
+\grey{4.} Escard\'o. \darkblue{Exhaustible sets in higher-type computation.}
+LMCS-4 (3:3) 2008.
+
+\vfill
+
+\grey{5.} Escard\'o and Oliva. \darkblue{Selection functions, bar recursion, and backward induction}. Preprint, 2009. 
+
+
+\vfill
+
+\darkblue{Thank you.}
+
+\end{document}
