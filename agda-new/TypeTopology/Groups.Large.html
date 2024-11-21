@@ -1,0 +1,110 @@
+<!DOCTYPE HTML>
+<html><head><meta charset="utf-8"><title>Groups.Large</title><link rel="stylesheet" href="Agda.css"><script type="text/javascript" src="highlight-hover.js"></script></head><body><pre class="Agda"><a id="1" class="Background">Martin Escardo
+15 February 2021, updated September 2023.
+
+In collaboration with Marc Bezem, Thierry Coquand and Peter Dybjer.
+
+Given any large, locally small set, we show that there is a large group.
+
+Here a type is said to be large, relative to a universe 𝓤, if it lives
+in the successor 𝓤⁺ and doesn&#39;t have an equivalent copy in 𝓤.
+
+Notice that if P is a proposition the unique map P → 𝟙 is an
+embedding, but P may be large while 𝟙 is small. Hence it is not the
+case in general that for an embedding X → Y, if Y is small then X is
+small. This is the case, however, if the embedding has small fibers
+(in which case we say that it is small).
+
+Most of the work for the conclusions of this file is done, and
+explained, in the module Groups.Free.
+
+</a><a id="746" class="Markup">\begin{code}</a>
+
+<a id="760" class="Symbol">{-#</a> <a id="764" class="Keyword">OPTIONS</a> <a id="772" class="Pragma">--safe</a> <a id="779" class="Pragma">--without-K</a> <a id="791" class="Symbol">#-}</a>
+
+<a id="796" class="Keyword">open</a> <a id="801" class="Keyword">import</a> <a id="808" href="MLTT.Spartan.html" class="Module">MLTT.Spartan</a>
+<a id="821" class="Keyword">open</a> <a id="826" class="Keyword">import</a> <a id="833" href="UF.FunExt.html" class="Module">UF.FunExt</a>
+<a id="843" class="Keyword">open</a> <a id="848" class="Keyword">import</a> <a id="855" href="UF.PropTrunc.html" class="Module">UF.PropTrunc</a>
+<a id="868" class="Keyword">open</a> <a id="873" class="Keyword">import</a> <a id="880" href="UF.Subsingletons.html" class="Module">UF.Subsingletons</a>
+
+<a id="898" class="Keyword">module</a> <a id="905" href="Groups.Large.html" class="Module">Groups.Large</a>
+        <a id="926" class="Symbol">(</a><a id="927" href="Groups.Large.html#927" class="Bound">fe</a> <a id="930" class="Symbol">:</a> <a id="932" href="UF.FunExt.html#1047" class="Function">Fun-Ext</a><a id="939" class="Symbol">)</a>
+        <a id="949" class="Symbol">(</a><a id="950" href="Groups.Large.html#950" class="Bound">pe</a> <a id="953" class="Symbol">:</a> <a id="955" href="UF.Subsingletons.html#7815" class="Function">Prop-Ext</a><a id="963" class="Symbol">)</a>
+        <a id="973" class="Symbol">(</a><a id="974" href="Groups.Large.html#974" class="Bound">pt</a> <a id="977" class="Symbol">:</a> <a id="979" href="UF.PropTrunc.html#486" class="Record">propositional-truncations-exist</a><a id="1010" class="Symbol">)</a>
+       <a id="1019" class="Keyword">where</a>
+
+<a id="1026" class="Keyword">open</a> <a id="1031" class="Keyword">import</a> <a id="1038" href="Groups.Free.html" class="Module">Groups.Free</a>
+<a id="1050" class="Keyword">open</a> <a id="1055" class="Keyword">import</a> <a id="1062" href="Groups.Type.html" class="Module">Groups.Type</a>
+<a id="1074" class="Keyword">open</a> <a id="1079" class="Keyword">import</a> <a id="1086" href="UF.Sets.html" class="Module">UF.Sets</a>
+<a id="1094" class="Keyword">open</a> <a id="1099" class="Keyword">import</a> <a id="1106" href="UF.Size.html" class="Module">UF.Size</a>
+
+<a id="1115" class="Markup">\end{code}</a><a id="1125" class="Background">
+
+Given any large, locally small set A, we can construct a large group
+with no small copy.
+
+</a><a id="1217" class="Markup">\begin{code}</a>
+
+<a id="large-group-with-no-small-copy"></a><a id="1231" href="Groups.Large.html#1231" class="Function">large-group-with-no-small-copy</a> <a id="1262" class="Symbol">:</a> <a id="1264" class="Symbol">(</a><a id="1265" href="MLTT.Sigma.html#423" class="Function">Σ</a> <a id="1267" href="Groups.Large.html#1267" class="Bound">A</a> <a id="1269" href="MLTT.Sigma.html#423" class="Function">꞉</a> <a id="1271" href="MLTT.Universes.html#3833" class="Generalizable">𝓤</a> <a id="1273" href="Agda.Primitive.html#931" class="Primitive Operator">⁺</a> <a id="1275" href="MLTT.Universes.html#3976" class="Function Operator">̇</a> <a id="1277" href="MLTT.Sigma.html#423" class="Function">,</a> <a id="1279" href="UF.Sets.html#709" class="Function">is-set</a> <a id="1286" href="Groups.Large.html#1267" class="Bound">A</a>
+                                              <a id="1334" href="MLTT.Sigma.html#558" class="Function Operator">×</a> <a id="1336" href="UF.Size.html#21237" class="Function">is-large</a> <a id="1345" href="Groups.Large.html#1267" class="Bound">A</a>
+                                              <a id="1393" href="MLTT.Sigma.html#558" class="Function Operator">×</a> <a id="1395" href="UF.Size.html#27103" class="Function">is-locally-small</a> <a id="1412" href="Groups.Large.html#1267" class="Bound">A</a><a id="1413" class="Symbol">)</a>
+                               <a id="1446" class="Symbol">→</a> <a id="1448" href="MLTT.Sigma.html#423" class="Function">Σ</a> <a id="1450" href="Groups.Large.html#1450" class="Bound">𝓕</a> <a id="1452" href="MLTT.Sigma.html#423" class="Function">꞉</a> <a id="1454" href="Groups.Type.html#3788" class="Function">Group</a> <a id="1460" class="Symbol">(</a><a id="1461" href="MLTT.Universes.html#3833" class="Generalizable">𝓤</a> <a id="1463" href="Agda.Primitive.html#931" class="Primitive Operator">⁺</a><a id="1464" class="Symbol">)</a> <a id="1466" href="MLTT.Sigma.html#423" class="Function">,</a> <a id="1468" class="Symbol">((</a><a id="1470" href="Groups.Large.html#1470" class="Bound">𝓖</a> <a id="1472" class="Symbol">:</a> <a id="1474" href="Groups.Type.html#3788" class="Function">Group</a> <a id="1480" href="MLTT.Universes.html#3833" class="Generalizable">𝓤</a><a id="1481" class="Symbol">)</a> <a id="1483" class="Symbol">→</a> <a id="1485" href="MLTT.Negation.html#278" class="Function Operator">¬</a> <a id="1487" class="Symbol">(</a><a id="1488" href="Groups.Large.html#1470" class="Bound">𝓖</a> <a id="1490" href="Groups.Type.html#10024" class="Function Operator">≅</a> <a id="1492" href="Groups.Large.html#1450" class="Bound">𝓕</a><a id="1493" class="Symbol">))</a>
+
+<a id="1497" href="Groups.Large.html#1231" class="Function">large-group-with-no-small-copy</a> <a id="1528" class="Symbol">{</a><a id="1529" href="Groups.Large.html#1529" class="Bound">𝓤</a><a id="1530" class="Symbol">}</a> <a id="1532" class="Symbol">(</a><a id="1533" href="Groups.Large.html#1533" class="Bound">A</a> <a id="1535" href="MLTT.Sigma.html#395" class="InductiveConstructor Operator">,</a> <a id="1537" href="Groups.Large.html#1537" class="Bound">A-is-set</a> <a id="1546" href="MLTT.Sigma.html#395" class="InductiveConstructor Operator">,</a> <a id="1548" href="Groups.Large.html#1548" class="Bound">A-is-large</a> <a id="1559" href="MLTT.Sigma.html#395" class="InductiveConstructor Operator">,</a> <a id="1561" href="Groups.Large.html#1561" class="Bound">A-ls</a><a id="1565" class="Symbol">)</a> <a id="1567" class="Symbol">=</a> <a id="1569" href="Groups.Free.html#3210" class="Function">𝓕</a> <a id="1571" href="MLTT.Sigma.html#395" class="InductiveConstructor Operator">,</a> <a id="1573" href="Groups.Large.html#1976" class="Function">γ</a>
+ <a id="1576" class="Keyword">where</a>
+  <a id="1584" href="Groups.Large.html#1584" class="Function">g</a> <a id="1586" class="Symbol">:</a> <a id="1588" href="Groups.Free.html#3127" class="Record">good-freely-generated-group-exists</a> <a id="1623" href="Groups.Large.html#1533" class="Bound">A</a> <a id="1625" class="Symbol">(</a><a id="1626" href="Groups.Large.html#1529" class="Bound">𝓤</a> <a id="1628" href="Agda.Primitive.html#931" class="Primitive Operator">⁺</a><a id="1629" class="Symbol">)</a> <a id="1631" href="Groups.Large.html#1529" class="Bound">𝓤</a>
+  <a id="1635" href="Groups.Large.html#1584" class="Function">g</a> <a id="1637" class="Symbol">=</a> <a id="1639" href="Groups.Free.html#9314" class="Function">Theorem₂[free-groups-of-large-locally-small-types]</a> <a id="1690" href="Groups.Large.html#974" class="Bound">pt</a> <a id="1693" href="Groups.Large.html#927" class="Bound">fe</a> <a id="1696" href="Groups.Large.html#950" class="Bound">pe</a> <a id="1699" href="Groups.Large.html#1533" class="Bound">A</a> <a id="1701" href="Groups.Large.html#1561" class="Bound">A-ls</a>
+
+  <a id="1709" class="Keyword">open</a> <a id="1714" href="Groups.Free.html#3127" class="Module">good-freely-generated-group-exists</a> <a id="1749" href="Groups.Large.html#1584" class="Function">g</a>
+
+  <a id="1754" href="Groups.Large.html#1754" class="Function">free-group-small-gives-generating-set-small</a> <a id="1798" class="Symbol">:</a> <a id="1800" href="Groups.Type.html#520" class="Function Operator">⟨</a> <a id="1802" href="Groups.Free.html#3210" class="Function">𝓕</a> <a id="1804" href="Groups.Type.html#520" class="Function Operator">⟩</a> <a id="1806" href="UF.Size.html#2097" class="Function Operator">is</a> <a id="1809" href="Groups.Large.html#1529" class="Bound">𝓤</a> <a id="1811" href="UF.Size.html#2097" class="Function Operator">small</a>
+                                              <a id="1863" class="Symbol">→</a> <a id="1865" href="Groups.Large.html#1533" class="Bound">A</a> <a id="1867" href="UF.Size.html#2097" class="Function Operator">is</a> <a id="1870" href="Groups.Large.html#1529" class="Bound">𝓤</a> <a id="1872" href="UF.Size.html#2097" class="Function Operator">small</a>
+  <a id="1880" href="Groups.Large.html#1754" class="Function">free-group-small-gives-generating-set-small</a> <a id="1924" class="Symbol">=</a>
+   <a id="1929" href="UF.Size.html#22636" class="Function">size-contravariance</a> <a id="1949" href="Groups.Free.html#3224" class="Function">η</a> <a id="1951" class="Symbol">(</a><a id="1952" href="Groups.Free.html#3463" class="Function">η-is-small</a> <a id="1963" href="Groups.Large.html#1537" class="Bound">A-is-set</a><a id="1971" class="Symbol">)</a>
+
+  <a id="1976" href="Groups.Large.html#1976" class="Function">γ</a> <a id="1978" class="Symbol">:</a> <a id="1980" class="Symbol">(</a><a id="1981" href="Groups.Large.html#1981" class="Bound">𝓖</a> <a id="1983" class="Symbol">:</a> <a id="1985" href="Groups.Type.html#3788" class="Function">Group</a> <a id="1991" href="Groups.Large.html#1529" class="Bound">𝓤</a><a id="1992" class="Symbol">)</a> <a id="1994" class="Symbol">→</a> <a id="1996" href="MLTT.Negation.html#278" class="Function Operator">¬</a> <a id="1998" class="Symbol">(</a><a id="1999" href="Groups.Large.html#1981" class="Bound">𝓖</a> <a id="2001" href="Groups.Type.html#10024" class="Function Operator">≅</a> <a id="2003" href="Groups.Free.html#3210" class="Function">𝓕</a><a id="2004" class="Symbol">)</a>
+  <a id="2008" href="Groups.Large.html#1976" class="Function">γ</a> <a id="2010" href="Groups.Large.html#2010" class="Bound">𝓖</a> <a id="2012" class="Symbol">(</a><a id="2013" href="Groups.Large.html#2013" class="Bound">g</a> <a id="2015" href="MLTT.Sigma.html#395" class="InductiveConstructor Operator">,</a> <a id="2017" href="Groups.Large.html#2017" class="Bound">g-is-equiv</a> <a id="2028" href="MLTT.Sigma.html#395" class="InductiveConstructor Operator">,</a> <a id="2030" href="Groups.Large.html#2030" class="Bound">g-is-hom</a><a id="2038" class="Symbol">)</a> <a id="2040" class="Symbol">=</a> <a id="2042" href="Groups.Large.html#2122" class="Function">α</a>
+     <a id="2049" class="Keyword">where</a>
+      <a id="2061" href="Groups.Large.html#2061" class="Function">h</a> <a id="2063" class="Symbol">:</a> <a id="2065" href="Groups.Type.html#520" class="Function Operator">⟨</a> <a id="2067" href="Groups.Free.html#3210" class="Function">𝓕</a> <a id="2069" href="Groups.Type.html#520" class="Function Operator">⟩</a> <a id="2071" href="UF.Size.html#2097" class="Function Operator">is</a> <a id="2074" href="Groups.Large.html#1529" class="Bound">𝓤</a> <a id="2076" href="UF.Size.html#2097" class="Function Operator">small</a>
+      <a id="2088" href="Groups.Large.html#2061" class="Function">h</a> <a id="2090" class="Symbol">=</a> <a id="2092" href="Groups.Type.html#520" class="Function Operator">⟨</a> <a id="2094" href="Groups.Large.html#2010" class="Bound">𝓖</a> <a id="2096" href="Groups.Type.html#520" class="Function Operator">⟩</a> <a id="2098" href="MLTT.Sigma.html#395" class="InductiveConstructor Operator">,</a> <a id="2100" href="Groups.Large.html#2013" class="Bound">g</a> <a id="2102" href="MLTT.Sigma.html#395" class="InductiveConstructor Operator">,</a> <a id="2104" href="Groups.Large.html#2017" class="Bound">g-is-equiv</a>
+
+      <a id="2122" href="Groups.Large.html#2122" class="Function">α</a> <a id="2124" class="Symbol">:</a> <a id="2126" href="MLTT.Empty-Type.html#121" class="Datatype">𝟘</a>
+      <a id="2134" href="Groups.Large.html#2122" class="Function">α</a> <a id="2136" class="Symbol">=</a> <a id="2138" href="Groups.Large.html#1548" class="Bound">A-is-large</a> <a id="2149" class="Symbol">(</a><a id="2150" href="Groups.Large.html#1754" class="Function">free-group-small-gives-generating-set-small</a> <a id="2194" href="Groups.Large.html#2061" class="Function">h</a><a id="2195" class="Symbol">)</a>
+
+<a id="2198" class="Markup">\end{code}</a><a id="2208" class="Background">
+
+In the module BuraliForti we instantiate A to the set of ordinals,
+which is large and locally small, to construct a large group with no
+small copy.
+
+Remarks.
+
+1. What can we choose for the large, locally small set?
+
+ * Our choice is the type of ordinals.
+
+ * One may wonder whether there are simpler choices such as
+
+    (i)   The function type 𝓤 → 𝟚.
+    (ii)  The function type 𝓤 → Ω 𝓤.
+    (iii) The set truncation of 𝓤.
+
+   The candidate (i) doesn&#39;t work in the absence of classical logic,
+   because there is a non-constant function 𝓤 → 𝟚 if and only if de
+   Morgan Law holds (which is equivalent to excluded middle for
+   negative propositions). https://doi.org/10.1016/j.apal.2016.04.010
+
+   The candidates (ii-iii) may work, but so far we haven&#39;t succeeded.
+
+ * Another question is whether there is a large, discrete set, as this
+   would considerably simplify the construction of the free group. One
+   of us conjectures that there isn&#39;t, in general, such a set.
+
+2. Notice that if the axiom of choice is available, we don&#39;t need to
+   use free groups as above, because the axiom of choice is equivalent
+   to the statement that any non-empty set has some group
+   structure. Although we don&#39;t get an explicit group with this
+   construction, its existence is enough in order to prove that the
+   type of groups in universe 𝓤 is not (canonically) equivalent to the
+   type of groups in the next universe 𝓤⁺.
+</a></pre></body></html>

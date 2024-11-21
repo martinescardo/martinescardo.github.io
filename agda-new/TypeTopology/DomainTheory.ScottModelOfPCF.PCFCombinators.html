@@ -1,0 +1,28 @@
+<!DOCTYPE HTML>
+<html><head><meta charset="utf-8"><title>DomainTheory.ScottModelOfPCF.PCFCombinators</title><link rel="stylesheet" href="Agda.css"><script type="text/javascript" src="highlight-hover.js"></script></head><body><pre class="Agda"><a id="1" class="Background">Tom de Jong, 27 May 2019.
+Refactored December 2021.
+
+* Continuous K and S functions. These will interpret the K and S combinators of
+  PCF in ScottModelOfPCF.lagda.
+* Continuous ifZero function specific to the lifting of the natural numbers.
+  This will then be used to interpret the ifZero combinator of PCF in
+  ScottModelOfPCF.lagda.
+
+</a><a id="339" class="Markup">\begin{code}</a>
+
+<a id="353" class="Symbol">{-#</a> <a id="357" class="Keyword">OPTIONS</a> <a id="365" class="Pragma">--safe</a> <a id="372" class="Pragma">--without-K</a> <a id="384" class="Symbol">#-}</a>
+
+<a id="389" class="Keyword">open</a> <a id="394" class="Keyword">import</a> <a id="401" href="MLTT.Spartan.html" class="Module">MLTT.Spartan</a>
+<a id="414" class="Keyword">open</a> <a id="419" class="Keyword">import</a> <a id="426" href="UF.FunExt.html" class="Module">UF.FunExt</a>
+<a id="436" class="Keyword">open</a> <a id="441" class="Keyword">import</a> <a id="448" href="UF.PropTrunc.html" class="Module">UF.PropTrunc</a>
+
+<a id="462" class="Keyword">module</a> <a id="469" href="DomainTheory.ScottModelOfPCF.PCFCombinators.html" class="Module">DomainTheory.ScottModelOfPCF.PCFCombinators</a>
+        <a id="521" class="Symbol">(</a><a id="522" href="DomainTheory.ScottModelOfPCF.PCFCombinators.html#522" class="Bound">pt</a> <a id="525" class="Symbol">:</a> <a id="527" href="UF.PropTrunc.html#486" class="Record">propositional-truncations-exist</a><a id="558" class="Symbol">)</a>
+        <a id="568" class="Symbol">(</a><a id="569" href="DomainTheory.ScottModelOfPCF.PCFCombinators.html#569" class="Bound">fe</a> <a id="572" class="Symbol">:</a> <a id="574" href="UF.FunExt.html#1047" class="Function">Fun-Ext</a><a id="581" class="Symbol">)</a>
+        <a id="591" class="Symbol">(</a><a id="592" href="DomainTheory.ScottModelOfPCF.PCFCombinators.html#592" class="Bound">𝓥</a> <a id="594" class="Symbol">:</a> <a id="596" href="Agda.Primitive.html#742" class="Postulate">Universe</a><a id="604" class="Symbol">)</a>
+       <a id="613" class="Keyword">where</a>
+
+<a id="620" class="Keyword">open</a> <a id="625" class="Keyword">import</a> <a id="632" href="PCF.Combinatory.PCFCombinators.html" class="Module">PCF.Combinatory.PCFCombinators</a> <a id="663" href="DomainTheory.ScottModelOfPCF.PCFCombinators.html#522" class="Bound">pt</a> <a id="666" href="DomainTheory.ScottModelOfPCF.PCFCombinators.html#569" class="Bound">fe</a> <a id="669" href="DomainTheory.ScottModelOfPCF.PCFCombinators.html#592" class="Bound">𝓥</a> <a id="671" class="Keyword">public</a>
+
+<a id="679" class="Markup">\end{code}</a><a id="689" class="Background">
+</a></pre></body></html>
