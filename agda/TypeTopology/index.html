@@ -1,0 +1,189 @@
+<!DOCTYPE HTML>
+<html><head><meta charset="utf-8"><title>index</title><link rel="stylesheet" href="Agda.css"><script type="text/javascript" src="highlight-hover.js"></script></head><body><pre class="Agda"><a id="1" class="Background">   TypeTopology
+
+   Various new theorems in univalent mathematics written in Agda
+   -------------------------------------------------------------
+
+   Martin Escardo and collaborators,
+   2010--2025--∞, continuously evolving.
+   https://www.cs.bham.ac.uk/~mhe/
+   https://github.com/martinescardo/TypeTopology
+
+   Tested with Agda 2.7.0.1. (It may still work with Agda 2.6.4.3.)
+
+   * Our main use of this development is as a personal blackboard or
+     notepad for our research and that of collaborators. In
+     particular, some modules have better and better results or
+     approaches, as time progresses, with the significant steps kept,
+     and with failed ideas and calculations eventually erased.
+
+   * We offer this page as a preliminary announcement of results to be
+     submitted for publication, of the kind we would get when we visit
+     a mathematician&#39;s office.
+
+   * We have also used this development for learning other people&#39;s
+     results, and so some previously known constructions and theorems
+     are included (sometimes with embellishments).
+
+   * The required material on HoTT/UF has been developed on demand
+     over the years to fulfill the needs of the above as they arise,
+     and hence is somewhat chaotic. It will continue to expand as the
+     need arises. Its form is the result of evolution rather than
+     intelligent design (paraphrasing Linus Torvalds).
+
+     Our lecture notes develop HoTT/UF in Agda in a more principled
+     way, and offers better approaches to some constructions and
+     simpler proofs of some (previously) difficult theorems.
+     (https://www.cs.bham.ac.uk/~mhe/HoTT-UF-in-Agda-Lecture-Notes/)
+
+     Our philosophy, here and in the lecture notes, is to work with a
+     minimal Martin-Löf type theory, and use principles from HoTT/UF
+     (existence of propositional truncations, function extensionality,
+     propositional extensionality, univalence, propositional resizing)
+     and classical mathematics (excluded middle, choice, LPO, WLPO) as
+     explicit assumptions for the theorems, or for the modules, that
+     require them. As a consequence, we are able to tell very
+     precisely which assumptions of HoTT/UF and classical mathematics,
+     if any, we have used for each construction, theorem or set of
+     results. We also work, deliberately, with a minimal subset of
+     Agda. See below for more about the philosophy.
+
+   * There is also a module that links some &quot;unsafe&quot; modules that use
+     type theory beyond MLTT and HoTT/UF, which cannot be included in
+     this safe-modules index: The system with type-in-type is
+     inconsistent (as is well known), countable Tychonoff, and
+     compactness of the Cantor type using countable Tychonoff.
+
+     (https://www.cs.bham.ac.uk/~mhe/TypeTopology/AllModulesIndex.html)
+
+   * In our last count, on 2025.01.14, this development has 800 Agda
+     files with 230K lines of code, including comments and blank
+     lines.
+
+Philosophy of the repository
+----------------------------
+
+   * We adopt the univalent point of view, even in modules which don&#39;t
+     assume the univalence axiom. In particular, we take seriously the
+     distinction between types that are singletons (contractible),
+     propositions, sets, 1-groupoids etc., even when the univalence
+     axiom, or its typical consequences such as function
+     extensionality and propositional extensionality, are not needed
+     to reason about them.
+
+   * We work in a minimal version of intensional Martin Löf Type
+     Theory, with very few exceptions, which we refer to as Spartan
+     MLTT. This is compatible with the UniMath approach.
+
+   * We adopt the Agda flag exact-split, so that Agda definitions by
+     pattern matching are definitional equalities, to stay as close as
+     Agda can check to the above MLTT.
+
+   * We work in a minimal subset of Agda to implement Spartan MLTT and
+     work with it. In particular, we restrict ourselves to safe
+     features (with the flags --safe --no-sized-types --no-guardedness).
+
+   * Some functions, and theorems, and definitions need HoTT/UF
+     axioms. They are always given explicitly as
+     assumptions. Postulates are not allowed in this development.
+
+   * The development is mostly constructive. A few theorems have
+     non-constructive, explicit assumptions, such as excluded middle,
+     or choice and global choice. One example is
+     Cantor-Schröder-Bernstein for arbitrary (homotopy) types, which
+     was published in the Journal of Homotopy and Related Structures
+     (written in mathematical vernacular as advanced in the HoTT book
+     and originally proposed by Peter Aczel).
+
+   * We don&#39;t assume propositional resizing as Voevodsky and UniMath
+     do. But there are some theorems whose hypotheses or conclusions
+     involve propositional resizing (as an axiom, rather than as a
+     rule of the type theory as unimath does).
+
+   * The general idea is that any theorem here should be valid in any
+     ∞-topos.
+
+   * In particular, we don&#39;t use Cubical Agda features, deliberately,
+     because at present it is not known whether (some) cubical type
+     theory has an interpretation in any ∞ topos.
+
+   * However, by fulfilling the HoTT hypotheses with Cubical-Agda
+     implementations, we should be able to run the constructions and
+     proofs given here, so that we get constructivity in the
+     computational sense (as opposed to constructivity in the sense of
+     validity in any (∞-)topos).
+
+   * Although our philosophy is based on HoTT/UF and ∞-toposes, it
+     should be emphasized that much of what we do here also holds in
+     the setoid model. In particular, this model validates function
+     extensionality, the existence of propositional truncationsm and
+     the existence of quotients, and some higher inductive types.
+
+Click at the imported module names to navigate to them:
+
+</a><a id="5868" class="Markup">\begin{code}</a>
+
+<a id="5882" class="Symbol">{-#</a> <a id="5886" class="Keyword">OPTIONS</a> <a id="5894" class="Pragma">--safe</a> <a id="5901" class="Pragma">--without-K</a> <a id="5913" class="Symbol">#-}</a>
+
+<a id="5918" class="Keyword">module</a> <a id="5925" href="index.html" class="Module">index</a> <a id="5931" class="Keyword">where</a>
+
+<a id="5938" class="Keyword">import</a> <a id="5945" href="Apartness.index.html" class="Module">Apartness.index</a>
+<a id="5961" class="Keyword">import</a> <a id="5968" href="BinarySystems.index.html" class="Module">BinarySystems.index</a>
+<a id="5988" class="Keyword">import</a> <a id="5995" href="CantorSchroederBernstein.index.html" class="Module">CantorSchroederBernstein.index</a>
+<a id="6026" class="Keyword">import</a> <a id="6033" href="Cardinals.index.html" class="Module">Cardinals.index</a>
+<a id="6049" class="Keyword">import</a> <a id="6056" href="Categories.index.html" class="Module">Categories.index</a>
+<a id="6073" class="Keyword">import</a> <a id="6080" href="Circle.index.html" class="Module">Circle.index</a>
+<a id="6093" class="Keyword">import</a> <a id="6100" href="CoNaturals.index.html" class="Module">CoNaturals.index</a>
+<a id="6117" class="Keyword">import</a> <a id="6124" href="ContinuityAxiom.index.html" class="Module">ContinuityAxiom.index</a>
+<a id="6146" class="Keyword">import</a> <a id="6153" href="Coslice.index.html" class="Module">Coslice.index</a>
+<a id="6167" class="Keyword">import</a> <a id="6174" href="CrossedModules.index.html" class="Module">CrossedModules.index</a>
+<a id="6195" class="Keyword">import</a> <a id="6202" href="DedekindReals.index.html" class="Module">DedekindReals.index</a>
+<a id="6222" class="Keyword">import</a> <a id="6229" href="DiscreteGraphicMonoids.index.html" class="Module">DiscreteGraphicMonoids.index</a>
+<a id="6258" class="Keyword">import</a> <a id="6265" href="DomainTheory.index.html" class="Module">DomainTheory.index</a>
+<a id="6284" class="Keyword">import</a> <a id="6291" href="Dominance.index.html" class="Module">Dominance.index</a>
+<a id="6307" class="Keyword">import</a> <a id="6314" href="Duploids.index.html" class="Module">Duploids.index</a>
+<a id="6329" class="Keyword">import</a> <a id="6336" href="Dyadics.index.html" class="Module">Dyadics.index</a>
+<a id="6350" class="Keyword">import</a> <a id="6357" href="DyadicsInductive.index.html" class="Module">DyadicsInductive.index</a>
+<a id="6380" class="Keyword">import</a> <a id="6387" href="EffectfulForcing.index.html" class="Module">EffectfulForcing.index</a>
+<a id="6410" class="Keyword">import</a> <a id="6417" href="Factorial.index.html" class="Module">Factorial.index</a>
+<a id="6433" class="Keyword">import</a> <a id="6440" href="Field.index.html" class="Module">Field.index</a>
+<a id="6452" class="Keyword">import</a> <a id="6459" href="Fin.index.html" class="Module">Fin.index</a>
+<a id="6469" class="Keyword">import</a> <a id="6476" href="Games.index.html" class="Module">Games.index</a>
+<a id="6488" class="Keyword">import</a> <a id="6495" href="Groups.index.html" class="Module">Groups.index</a>
+<a id="6508" class="Keyword">import</a> <a id="6515" href="InjectiveTypes.index.html" class="Module">InjectiveTypes.index</a>
+<a id="6536" class="Keyword">import</a> <a id="6543" href="Integers.index.html" class="Module">Integers.index</a>
+<a id="6558" class="Keyword">import</a> <a id="6565" href="Iterative.index.html" class="Module">Iterative.index</a>
+<a id="6581" class="Keyword">import</a> <a id="6588" href="Lifting.index.html" class="Module">Lifting.index</a>
+<a id="6602" class="Keyword">import</a> <a id="6609" href="Locales.index.html" class="Module">Locales.index</a>
+<a id="6623" class="Keyword">import</a> <a id="6630" href="MGS.index.html" class="Module">MGS.index</a>
+<a id="6640" class="Keyword">import</a> <a id="6647" href="MLTT.index.html" class="Module">MLTT.index</a>
+<a id="6658" class="Keyword">import</a> <a id="6665" href="MetricSpaces.index.html" class="Module">MetricSpaces.index</a>
+<a id="6684" class="Keyword">import</a> <a id="6691" href="Modal.index.html" class="Module">Modal.index</a>
+<a id="6703" class="Keyword">import</a> <a id="6710" href="Naturals.index.html" class="Module">Naturals.index</a>
+<a id="6725" class="Keyword">import</a> <a id="6732" href="Notation.index.html" class="Module">Notation.index</a>
+<a id="6747" class="Keyword">import</a> <a id="6754" href="NotionsOfDecidability.index.html" class="Module">NotionsOfDecidability.index</a>
+<a id="6782" class="Keyword">import</a> <a id="6789" href="OrderedTypes.index.html" class="Module">OrderedTypes.index</a>
+<a id="6808" class="Keyword">import</a> <a id="6815" href="Ordinals.index.html" class="Module">Ordinals.index</a>
+<a id="6830" class="Keyword">import</a> <a id="6837" href="PCF.index.html" class="Module">PCF.index</a>
+<a id="6847" class="Keyword">import</a> <a id="6854" href="PathSequences.index.html" class="Module">PathSequences.index</a>
+<a id="6874" class="Keyword">import</a> <a id="6881" href="Quotient.index.html" class="Module">Quotient.index</a>
+<a id="6896" class="Keyword">import</a> <a id="6903" href="Rationals.index.html" class="Module">Rationals.index</a>
+<a id="6919" class="Keyword">import</a> <a id="6926" href="Relations.index.html" class="Module">Relations.index</a>
+<a id="6942" class="Keyword">import</a> <a id="6949" href="Slice.index.html" class="Module">Slice.index</a>
+<a id="6961" class="Keyword">import</a> <a id="6968" href="TWA.index.html" class="Module">TWA.index</a>
+<a id="6978" class="Keyword">import</a> <a id="6985" href="Taboos.index.html" class="Module">Taboos.index</a>
+<a id="6998" class="Keyword">import</a> <a id="7005" href="TypeTopology.index.html" class="Module">TypeTopology.index</a>
+<a id="7024" class="Keyword">import</a> <a id="7031" href="UF.index.html" class="Module">UF.index</a>
+<a id="7040" class="Keyword">import</a> <a id="7047" href="Various.index.html" class="Module">Various.index</a>
+<a id="7061" class="Keyword">import</a> <a id="7068" href="W.index.html" class="Module">W.index</a>
+<a id="7076" class="Keyword">import</a> <a id="7083" href="WildCategories.index.html" class="Module">WildCategories.index</a>
+<a id="7104" class="Keyword">import</a> <a id="7111" href="gist.index.html" class="Module">gist.index</a>
+
+<a id="7123" class="Markup">\end{code}</a><a id="7133" class="Background">
+
+TODO. Explain what each of the above does here.
+
+The above includes only the --safe modules. A list of all modules is here:
+
+https://www.cs.bham.ac.uk/~mhe/TypeTopology/AllModulesIndex.html
+</a></pre></body></html>

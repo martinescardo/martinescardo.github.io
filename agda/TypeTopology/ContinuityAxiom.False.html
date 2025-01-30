@@ -1,0 +1,509 @@
+<!DOCTYPE HTML>
+<html><head><meta charset="utf-8"><title>ContinuityAxiom.False</title><link rel="stylesheet" href="Agda.css"><script type="text/javascript" src="highlight-hover.js"></script></head><body><pre class="Agda"><a id="1" class="Background">Martin Escardo 27th Nov 2013, last updated 4th Dec 2013, ported to
+this repository 2nd June 2023
+
+In intensional Martin-Löf type theory, if all functions (ℕ → ℕ) → ℕ
+are continuous, then 0 = 1
+
+1. Introduction
+2. Informal proof of the theorem
+3. Formal proof in Agda notation
+4. Discussion
+   References
+
+Introduction
+------------
+
+In Brouwer&#39;s intuitionistic mathematics, it can be proved that all
+functions f : (ℕ → ℕ) → ℕ are continuous [5]. This means that the
+value f(α) depends only on a finite prefix of the infinite sequence
+α : ℕ → ℕ. Then, of course, Brouwer&#39;s mathematics is incompatible with
+excluded middle, as excluded middle easily defines non-continuous
+functions.
+
+Intensional Martin-Löf type theory (MLTT) [2] is an alternative
+foundation for constructive mathematics [5]. Like Bishop&#39;s
+constructive mathematics [5], it is compatible with classical
+mathematics. It doesn&#39;t prove or disprove excluded middle, which can
+be consistently postulated, albeit with loss of computational content,
+for the purposes of developing classical mathematics.
+
+In the version of (intensional) MLTT considered here, we have identity
+types Id X x y (written x = y and called propositional equality), some
+basic types such as that of natural numbers (written ℕ) and that of
+finite sequences of natural numbers of length n (written Vec ℕ n), and
+dependent type constructors Π (written ∀) and Σ.  We have the
+eliminator J for identity types, but not Streicher&#39;s eliminator K, and
+we don&#39;t have the equality reflection rule. We don&#39;t have the axiom of
+function extensionality (any two pointwise equal functions are equal).
+
+A possible formulation of continuity in MLTT under the so-called BHK
+(Brouwer-Heyting-Kolmogorov) interpretation Σ of the quantifier ∃ is
+
+  ∀(α : ℕ → ℕ), Σ n : ℕ , ∀(β : ℕ → ℕ) , α =[n] β → f(α) = f(β),
+
+where α =[n] β means that the sequences α and β agree at the first n
+positions.
+
+We show in MLTT that, with this formulation of continuity, if all
+functions f : (ℕ → ℕ) → ℕ are continuous, then 0 = 1.
+
+We write the proof both informally and formally in Agda notation [3].
+See Bauer [1] for a related well-known phenomenon with the same proof
+ingredients used here.
+
+We emphasize that our proof doesn&#39;t use the axiom of function
+extensionality (any two pointwise equal functions are equal), which
+anyway is not available in MLTT (but is in Homotopy Type Theory
+(HoTT)). It also doesn&#39;t require universes.
+
+In HoTT [2], there is an alternative constructive existential
+quantifier, written ∃, corresponding to the topos theoretic
+existential quantifier, in which witnesses are hidden, but can be
+disclosed via unique choice, formulated as the axiom of description by
+Coquand [6].
+
+Brouwer&#39;s continuity axiom with Σ replaced by ∃ is consistent with
+MLTT, even when MLTT is extended with the axiom of function
+extensionality. Hopefully it is compatible with the HoTT extensions of
+MLTT too, but this is an open problem.
+
+
+2. Informal proof of the theorem
+--------------------------------
+
+The proof in this section is the informal rendering of the formal
+proof given in Section 3 below. It is based on a proof attributed to
+van Dalen and Troelstra by Bauer [1] for a different theorem.
+
+Write
+
+  Baire = ℕ → ℕ
+
+to denote the type of sequences, and let
+
+  0^ω = the infinite sequence of zeros,
+
+and
+
+  0^n k^ω = the sequence of n many zeros followed by infinitely many k&#39;s.
+
+Then
+
+  (0^n k^ω) =[n] 0^ω     and    (0^n k^ω)(n) = k.
+
+Assume that all functions are continuous, with the Σ-formulation of
+continuity as in the introduction:
+
+ ∀(f : Baire → ℕ). ∀(α : Baire). Σ(n : ℕ). ∀(β : Baire). α =[n] β → f(α) = f(β).
+
+By projection, with α = 0^ω, this gives a modulus-of-continuity
+function
+
+ M : (Baire → ℕ) → ℕ
+
+such that
+
+ ∀ (f : Baire → ℕ) , ∀ (β : Baire) , 0^ω =[M f] β → f(0^ω) = f(β).    (0)
+
+We use M to define a non-continuous function f : Baire → ℕ and hence
+get a contradiction. What this really says is that no such function M
+can be continuous. See the discussion in Section 4 below.  Notice also
+that if we were using ∃ rather than Σ to define continuity, as
+discussed in the introduction, we would need choice to get M.
+
+Let
+
+  m = M (λ α. 0),
+
+and define f : Baire → ℕ by
+
+  f β = M (λ α. β (α m)).
+
+Observe that, by simply expanding the definitions, with the
+understanding that 0^ω defined above is λ i. 0,
+
+  f(0^ω) = m.
+
+By the defining property (0) of M,
+
+  ∀(β : Baire). 0^ω =[ M f ] β → m = f β.    (1)
+
+
+Case 0. M f = 0.
+------
+
+By (1),
+
+  ∀(β : Baire). m = f β.
+
+The choice β i = i gives
+
+  m = f(λ i. i) = M (λ α. α m).
+
+By the defining property (0) of M, this means that
+
+  ∀(α : Baire). 0^ω =[ m ] α → 0 = α m.
+
+But this gives 0 = 1 if we choose e.g. the sequence α = 0^m 1^ω.
+
+
+Case 1. M f &gt; 0.
+------
+
+For any β : Baire, by the continuity of λ α. β (α m), by the definition
+of f, and by the defining property (0) of M, we have that
+
+  ∀(α : Baire). 0^ω =[ f β ] α → β 0 = β (α m).
+
+Considering
+
+  β = 0^(M f) 1^ω,
+
+this gives
+
+  ∀(α : Baire). 0^ω =[ m ] α → β 0 = β (α m),
+
+because f β = m as 0^ω =[ M f ] β and f(0^ω) = m. Considering
+
+  α = 0^m (M f)^ω,
+
+this in turn gives 0 = β 0 = β (α m) = β (M f) = 1. Q.E.D.
+
+
+3. Formal proof in Agda notation
+--------------------------------
+
+The main reason for giving a formal proof is to be certain that the
+above argument doesn&#39;t use function extensionality (any two pointwise
+equal functions are equal) inadvertently.
+
+3.1. Standard preliminary definitions
+-------------------------------------
+
+The option without-K is used to disable the UIP (uniqueness of
+identity proofs) principle, also known as Streicher&#39;s Axiom K, which
+is not part of MLTT:
+
+</a><a id="5645" class="Markup">\begin{code}</a>
+
+<a id="5659" class="Symbol">{-#</a> <a id="5663" class="Keyword">OPTIONS</a> <a id="5671" class="Pragma">--safe</a> <a id="5678" class="Pragma">--without-K</a> <a id="5690" class="Symbol">#-}</a>
+
+<a id="5695" class="Keyword">module</a> <a id="5702" href="ContinuityAxiom.False.html" class="Module">ContinuityAxiom.False</a> <a id="5724" class="Keyword">where</a>
+
+<a id="5731" class="Keyword">open</a> <a id="5736" class="Keyword">import</a> <a id="5743" href="MLTT.Spartan.html" class="Module">MLTT.Spartan</a>
+<a id="5756" class="Keyword">open</a> <a id="5761" class="Keyword">import</a> <a id="5768" href="MLTT.Vector.html" class="Module">MLTT.Vector</a>
+
+<a id="Baire"></a><a id="5781" href="ContinuityAxiom.False.html#5781" class="Function">Baire</a> <a id="5787" class="Symbol">:</a> <a id="5789" href="Agda.Primitive.html#915" class="Primitive">𝓤₀</a> <a id="5792" href="MLTT.Universes.html#3976" class="Function Operator">̇</a>
+<a id="5794" href="ContinuityAxiom.False.html#5781" class="Function">Baire</a> <a id="5800" class="Symbol">=</a> <a id="5802" href="MLTT.Natural-Numbers-Type.html#96" class="Datatype">ℕ</a> <a id="5804" class="Symbol">→</a> <a id="5806" href="MLTT.Natural-Numbers-Type.html#96" class="Datatype">ℕ</a>
+
+<a id="_⟦_⟧"></a><a id="5809" href="ContinuityAxiom.False.html#5809" class="Function Operator">_⟦_⟧</a> <a id="5814" class="Symbol">:</a> <a id="5816" class="Symbol">{</a><a id="5817" href="ContinuityAxiom.False.html#5817" class="Bound">X</a> <a id="5819" class="Symbol">:</a> <a id="5821" href="MLTT.Universes.html#3833" class="Generalizable">𝓤</a> <a id="5823" href="MLTT.Universes.html#3976" class="Function Operator">̇</a><a id="5824" class="Symbol">}</a> <a id="5826" class="Symbol">→</a> <a id="5828" class="Symbol">(</a><a id="5829" href="MLTT.Natural-Numbers-Type.html#96" class="Datatype">ℕ</a> <a id="5831" class="Symbol">→</a> <a id="5833" href="ContinuityAxiom.False.html#5817" class="Bound">X</a><a id="5834" class="Symbol">)</a> <a id="5836" class="Symbol">→</a> <a id="5838" class="Symbol">(</a><a id="5839" href="ContinuityAxiom.False.html#5839" class="Bound">n</a> <a id="5841" class="Symbol">:</a> <a id="5843" href="MLTT.Natural-Numbers-Type.html#96" class="Datatype">ℕ</a><a id="5844" class="Symbol">)</a> <a id="5846" class="Symbol">→</a> <a id="5848" href="MLTT.Vector.html#151" class="Datatype">Vector</a> <a id="5855" href="ContinuityAxiom.False.html#5817" class="Bound">X</a> <a id="5857" href="ContinuityAxiom.False.html#5839" class="Bound">n</a>
+<a id="5859" href="ContinuityAxiom.False.html#5859" class="Bound">α</a> <a id="5861" href="ContinuityAxiom.False.html#5809" class="Function Operator">⟦</a> <a id="5863" class="Number">0</a>      <a id="5870" href="ContinuityAxiom.False.html#5809" class="Function Operator">⟧</a> <a id="5872" class="Symbol">=</a> <a id="5874" href="MLTT.Vector.html#186" class="InductiveConstructor">[]</a>
+<a id="5877" href="ContinuityAxiom.False.html#5877" class="Bound">α</a> <a id="5879" href="ContinuityAxiom.False.html#5809" class="Function Operator">⟦</a> <a id="5881" href="MLTT.Natural-Numbers-Type.html#123" class="InductiveConstructor">succ</a> <a id="5886" href="ContinuityAxiom.False.html#5886" class="Bound">n</a> <a id="5888" href="ContinuityAxiom.False.html#5809" class="Function Operator">⟧</a> <a id="5890" class="Symbol">=</a> <a id="5892" href="ContinuityAxiom.False.html#5877" class="Bound">α</a> <a id="5894" class="Number">0</a> <a id="5896" href="MLTT.Vector.html#204" class="InductiveConstructor Operator">∷</a> <a id="5898" class="Symbol">((λ</a> <a id="5902" href="ContinuityAxiom.False.html#5902" class="Bound">i</a> <a id="5904" class="Symbol">→</a> <a id="5906" href="ContinuityAxiom.False.html#5877" class="Bound">α</a> <a id="5908" class="Symbol">(</a><a id="5909" href="MLTT.Natural-Numbers-Type.html#123" class="InductiveConstructor">succ</a> <a id="5914" href="ContinuityAxiom.False.html#5902" class="Bound">i</a><a id="5915" class="Symbol">))</a> <a id="5918" href="ContinuityAxiom.False.html#5809" class="Function Operator">⟦</a> <a id="5920" href="ContinuityAxiom.False.html#5886" class="Bound">n</a> <a id="5922" href="ContinuityAxiom.False.html#5809" class="Function Operator">⟧</a><a id="5923" class="Symbol">)</a>
+
+<a id="_＝⟦_⟧_"></a><a id="5926" href="ContinuityAxiom.False.html#5926" class="Function Operator">_＝⟦_⟧_</a> <a id="5933" class="Symbol">:</a> <a id="5935" class="Symbol">{</a><a id="5936" href="ContinuityAxiom.False.html#5936" class="Bound">X</a> <a id="5938" class="Symbol">:</a> <a id="5940" href="Agda.Primitive.html#915" class="Primitive">𝓤₀</a> <a id="5943" href="MLTT.Universes.html#3976" class="Function Operator">̇</a><a id="5944" class="Symbol">}</a> <a id="5946" class="Symbol">→</a> <a id="5948" class="Symbol">(</a><a id="5949" href="MLTT.Natural-Numbers-Type.html#96" class="Datatype">ℕ</a> <a id="5951" class="Symbol">→</a> <a id="5953" href="ContinuityAxiom.False.html#5936" class="Bound">X</a><a id="5954" class="Symbol">)</a> <a id="5956" class="Symbol">→</a> <a id="5958" href="MLTT.Natural-Numbers-Type.html#96" class="Datatype">ℕ</a> <a id="5960" class="Symbol">→</a> <a id="5962" class="Symbol">(</a><a id="5963" href="MLTT.Natural-Numbers-Type.html#96" class="Datatype">ℕ</a> <a id="5965" class="Symbol">→</a> <a id="5967" href="ContinuityAxiom.False.html#5936" class="Bound">X</a><a id="5968" class="Symbol">)</a> <a id="5970" class="Symbol">→</a> <a id="5972" href="Agda.Primitive.html#915" class="Primitive">𝓤₀</a> <a id="5975" href="MLTT.Universes.html#3976" class="Function Operator">̇</a>
+<a id="5977" href="ContinuityAxiom.False.html#5977" class="Bound">α</a> <a id="5979" href="ContinuityAxiom.False.html#5926" class="Function Operator">＝⟦</a> <a id="5982" href="ContinuityAxiom.False.html#5982" class="Bound">n</a> <a id="5984" href="ContinuityAxiom.False.html#5926" class="Function Operator">⟧</a> <a id="5986" href="ContinuityAxiom.False.html#5986" class="Bound">β</a> <a id="5988" class="Symbol">=</a> <a id="5990" href="ContinuityAxiom.False.html#5977" class="Bound">α</a> <a id="5992" href="ContinuityAxiom.False.html#5809" class="Function Operator">⟦</a> <a id="5994" href="ContinuityAxiom.False.html#5982" class="Bound">n</a> <a id="5996" href="ContinuityAxiom.False.html#5809" class="Function Operator">⟧</a> <a id="5998" href="MLTT.Id.html#193" class="Datatype Operator">＝</a> <a id="6000" href="ContinuityAxiom.False.html#5986" class="Bound">β</a> <a id="6002" href="ContinuityAxiom.False.html#5809" class="Function Operator">⟦</a> <a id="6004" href="ContinuityAxiom.False.html#5982" class="Bound">n</a> <a id="6006" href="ContinuityAxiom.False.html#5809" class="Function Operator">⟧</a>
+
+<a id="6009" class="Markup">\end{code}</a><a id="6019" class="Background">
+
+The above definitions are standard in type theory/constructive
+mathematics. The second last one takes a finite prefix of a given
+length of a given infinite sequence, and hence the last one defines
+when two given sequences agree at the first n positions.
+
+
+3.2 Formulation of the theorem
+------------------------------
+
+The following is Brouwer&#39;s definition of continuity, formulated with Σ
+rather than ∃:
+
+</a><a id="6427" class="Markup">\begin{code}</a>
+
+<a id="continuous"></a><a id="6441" href="ContinuityAxiom.False.html#6441" class="Function">continuous</a> <a id="6452" class="Symbol">:</a> <a id="6454" class="Symbol">(</a><a id="6455" href="ContinuityAxiom.False.html#5781" class="Function">Baire</a> <a id="6461" class="Symbol">→</a> <a id="6463" href="MLTT.Natural-Numbers-Type.html#96" class="Datatype">ℕ</a><a id="6464" class="Symbol">)</a> <a id="6466" class="Symbol">→</a> <a id="6468" href="Agda.Primitive.html#915" class="Primitive">𝓤₀</a> <a id="6471" href="MLTT.Universes.html#3976" class="Function Operator">̇</a>
+<a id="6473" href="ContinuityAxiom.False.html#6441" class="Function">continuous</a> <a id="6484" href="ContinuityAxiom.False.html#6484" class="Bound">f</a> <a id="6486" class="Symbol">=</a> <a id="6488" class="Symbol">(</a><a id="6489" href="ContinuityAxiom.False.html#6489" class="Bound">α</a> <a id="6491" class="Symbol">:</a> <a id="6493" href="ContinuityAxiom.False.html#5781" class="Function">Baire</a><a id="6498" class="Symbol">)</a> <a id="6500" class="Symbol">→</a> <a id="6502" href="MLTT.Sigma.html#423" class="Function">Σ</a> <a id="6504" href="ContinuityAxiom.False.html#6504" class="Bound">n</a> <a id="6506" href="MLTT.Sigma.html#423" class="Function">꞉</a> <a id="6508" href="MLTT.Natural-Numbers-Type.html#96" class="Datatype">ℕ</a> <a id="6510" href="MLTT.Sigma.html#423" class="Function">,</a> <a id="6512" class="Symbol">((</a><a id="6514" href="ContinuityAxiom.False.html#6514" class="Bound">β</a> <a id="6516" class="Symbol">:</a> <a id="6518" href="ContinuityAxiom.False.html#5781" class="Function">Baire</a><a id="6523" class="Symbol">)</a> <a id="6525" class="Symbol">→</a> <a id="6527" href="ContinuityAxiom.False.html#6489" class="Bound">α</a> <a id="6529" href="ContinuityAxiom.False.html#5926" class="Function Operator">＝⟦</a> <a id="6532" href="ContinuityAxiom.False.html#6504" class="Bound">n</a> <a id="6534" href="ContinuityAxiom.False.html#5926" class="Function Operator">⟧</a> <a id="6536" href="ContinuityAxiom.False.html#6514" class="Bound">β</a> <a id="6538" class="Symbol">→</a> <a id="6540" href="ContinuityAxiom.False.html#6484" class="Bound">f</a> <a id="6542" href="ContinuityAxiom.False.html#6489" class="Bound">α</a> <a id="6544" href="MLTT.Id.html#193" class="Datatype Operator">＝</a> <a id="6546" href="ContinuityAxiom.False.html#6484" class="Bound">f</a> <a id="6548" href="ContinuityAxiom.False.html#6514" class="Bound">β</a><a id="6549" class="Symbol">)</a>
+
+<a id="6552" class="Markup">\end{code}</a><a id="6562" class="Background">
+
+In Brouwer&#39;s mathematics, all functions are continuous, but this can&#39;t
+be true if continuity is (incorrectly) formulated with Σ as above:
+
+</a><a id="6703" class="Markup">\begin{code}</a>
+
+<a id="theorem"></a><a id="6717" href="ContinuityAxiom.False.html#6717" class="Function">theorem</a> <a id="6725" class="Symbol">:</a> <a id="6727" class="Symbol">((</a><a id="6729" href="ContinuityAxiom.False.html#6729" class="Bound">f</a> <a id="6731" class="Symbol">:</a> <a id="6733" href="ContinuityAxiom.False.html#5781" class="Function">Baire</a> <a id="6739" class="Symbol">→</a> <a id="6741" href="MLTT.Natural-Numbers-Type.html#96" class="Datatype">ℕ</a><a id="6742" class="Symbol">)</a> <a id="6744" class="Symbol">→</a> <a id="6746" href="ContinuityAxiom.False.html#6441" class="Function">continuous</a> <a id="6757" href="ContinuityAxiom.False.html#6729" class="Bound">f</a><a id="6758" class="Symbol">)</a> <a id="6760" class="Symbol">→</a> <a id="6762" class="Number">0</a> <a id="6764" href="MLTT.Id.html#193" class="Datatype Operator">＝</a> <a id="6766" class="Number">1</a>
+
+<a id="6769" class="Markup">\end{code}</a><a id="6779" class="Background">
+
+We need some preparation to prove that.
+
+3.3 Preliminary proofs and constructions
+----------------------------------------
+
+The following is standard in MLTT:
+
+For future reference, notice that all uses of ap below are for
+(first-order) functions of types
+
+  ℕ → ℕ
+  vec ℕ (succ n) → ℕ
+  vec ℕ n → vec ℕ (succ n)
+
+only.
+
+The following definition of (n zeros-and-then k) gives a sequence of n
+many zeros followed by k and then by something irrelevant (infinitely
+many k&#39;s, in fact, but we don&#39;t need to know that):
+
+</a><a id="7296" class="Markup">\begin{code}</a>
+
+<a id="_zeros-and-then_"></a><a id="7310" href="ContinuityAxiom.False.html#7310" class="Function Operator">_zeros-and-then_</a> <a id="7327" class="Symbol">:</a> <a id="7329" href="MLTT.Natural-Numbers-Type.html#96" class="Datatype">ℕ</a> <a id="7331" class="Symbol">→</a> <a id="7333" href="MLTT.Natural-Numbers-Type.html#96" class="Datatype">ℕ</a> <a id="7335" class="Symbol">→</a> <a id="7337" href="ContinuityAxiom.False.html#5781" class="Function">Baire</a>
+<a id="7343" class="Symbol">(</a> <a id="7345" class="Number">0</a>       <a id="7353" href="ContinuityAxiom.False.html#7310" class="Function Operator">zeros-and-then</a> <a id="7368" href="ContinuityAxiom.False.html#7368" class="Bound">k</a><a id="7369" class="Symbol">)</a>  <a id="7372" href="ContinuityAxiom.False.html#7372" class="Bound">i</a>       <a id="7380" class="Symbol">=</a> <a id="7382" href="ContinuityAxiom.False.html#7368" class="Bound">k</a>
+<a id="7384" class="Symbol">((</a><a id="7386" href="MLTT.Natural-Numbers-Type.html#123" class="InductiveConstructor">succ</a> <a id="7391" href="ContinuityAxiom.False.html#7391" class="Bound">n</a><a id="7392" class="Symbol">)</a> <a id="7394" href="ContinuityAxiom.False.html#7310" class="Function Operator">zeros-and-then</a> <a id="7409" href="ContinuityAxiom.False.html#7409" class="Bound">k</a><a id="7410" class="Symbol">)</a>  <a id="7413" class="Number">0</a>       <a id="7421" class="Symbol">=</a> <a id="7423" class="Number">0</a>
+<a id="7425" class="Symbol">((</a><a id="7427" href="MLTT.Natural-Numbers-Type.html#123" class="InductiveConstructor">succ</a> <a id="7432" href="ContinuityAxiom.False.html#7432" class="Bound">n</a><a id="7433" class="Symbol">)</a> <a id="7435" href="ContinuityAxiom.False.html#7310" class="Function Operator">zeros-and-then</a> <a id="7450" href="ContinuityAxiom.False.html#7450" class="Bound">k</a><a id="7451" class="Symbol">)</a> <a id="7453" class="Symbol">(</a><a id="7454" href="MLTT.Natural-Numbers-Type.html#123" class="InductiveConstructor">succ</a> <a id="7459" href="ContinuityAxiom.False.html#7459" class="Bound">i</a><a id="7460" class="Symbol">)</a> <a id="7462" class="Symbol">=</a> <a id="7464" class="Symbol">(</a><a id="7465" href="ContinuityAxiom.False.html#7432" class="Bound">n</a> <a id="7467" href="ContinuityAxiom.False.html#7310" class="Function Operator">zeros-and-then</a> <a id="7482" href="ContinuityAxiom.False.html#7450" class="Bound">k</a><a id="7483" class="Symbol">)</a> <a id="7485" href="ContinuityAxiom.False.html#7459" class="Bound">i</a>
+
+<a id="o"></a><a id="7488" href="ContinuityAxiom.False.html#7488" class="Function">o</a> <a id="7490" class="Symbol">:</a> <a id="7492" href="ContinuityAxiom.False.html#5781" class="Function">Baire</a>
+<a id="7498" href="ContinuityAxiom.False.html#7488" class="Function">o</a> <a id="7500" class="Symbol">=</a> <a id="7502" class="Symbol">λ</a> <a id="7504" href="ContinuityAxiom.False.html#7504" class="Bound">i</a> <a id="7506" class="Symbol">→</a> <a id="7508" class="Number">0</a>
+
+<a id="zeros-and-then-spec₀"></a><a id="7511" href="ContinuityAxiom.False.html#7511" class="Function">zeros-and-then-spec₀</a> <a id="7532" class="Symbol">:</a> <a id="7534" class="Symbol">(</a><a id="7535" href="ContinuityAxiom.False.html#7535" class="Bound">n</a> <a id="7537" href="ContinuityAxiom.False.html#7537" class="Bound">k</a> <a id="7539" class="Symbol">:</a> <a id="7541" href="MLTT.Natural-Numbers-Type.html#96" class="Datatype">ℕ</a><a id="7542" class="Symbol">)</a> <a id="7544" class="Symbol">→</a> <a id="7546" class="Symbol">(</a><a id="7547" href="ContinuityAxiom.False.html#7535" class="Bound">n</a> <a id="7549" href="ContinuityAxiom.False.html#7310" class="Function Operator">zeros-and-then</a> <a id="7564" href="ContinuityAxiom.False.html#7537" class="Bound">k</a><a id="7565" class="Symbol">)</a> <a id="7567" href="ContinuityAxiom.False.html#7535" class="Bound">n</a> <a id="7569" href="MLTT.Id.html#193" class="Datatype Operator">＝</a> <a id="7571" href="ContinuityAxiom.False.html#7537" class="Bound">k</a>
+<a id="7573" href="ContinuityAxiom.False.html#7511" class="Function">zeros-and-then-spec₀</a>  <a id="7595" class="Number">0</a>       <a id="7603" href="ContinuityAxiom.False.html#7603" class="Bound">k</a> <a id="7605" class="Symbol">=</a> <a id="7607" href="MLTT.Identity-Type.html#157" class="InductiveConstructor">refl</a>
+<a id="7612" href="ContinuityAxiom.False.html#7511" class="Function">zeros-and-then-spec₀</a> <a id="7633" class="Symbol">(</a><a id="7634" href="MLTT.Natural-Numbers-Type.html#123" class="InductiveConstructor">succ</a> <a id="7639" href="ContinuityAxiom.False.html#7639" class="Bound">n</a><a id="7640" class="Symbol">)</a> <a id="7642" href="ContinuityAxiom.False.html#7642" class="Bound">k</a> <a id="7644" class="Symbol">=</a> <a id="7646" href="ContinuityAxiom.False.html#7511" class="Function">zeros-and-then-spec₀</a> <a id="7667" href="ContinuityAxiom.False.html#7639" class="Bound">n</a> <a id="7669" href="ContinuityAxiom.False.html#7642" class="Bound">k</a>
+
+<a id="zeros-and-then-spec₁"></a><a id="7672" href="ContinuityAxiom.False.html#7672" class="Function">zeros-and-then-spec₁</a> <a id="7693" class="Symbol">:</a> <a id="7695" class="Symbol">(</a><a id="7696" href="ContinuityAxiom.False.html#7696" class="Bound">n</a> <a id="7698" href="ContinuityAxiom.False.html#7698" class="Bound">k</a> <a id="7700" class="Symbol">:</a> <a id="7702" href="MLTT.Natural-Numbers-Type.html#96" class="Datatype">ℕ</a><a id="7703" class="Symbol">)</a> <a id="7705" class="Symbol">→</a> <a id="7707" href="ContinuityAxiom.False.html#7488" class="Function">o</a> <a id="7709" href="ContinuityAxiom.False.html#5926" class="Function Operator">＝⟦</a> <a id="7712" href="ContinuityAxiom.False.html#7696" class="Bound">n</a> <a id="7714" href="ContinuityAxiom.False.html#5926" class="Function Operator">⟧</a> <a id="7716" class="Symbol">(</a><a id="7717" href="ContinuityAxiom.False.html#7696" class="Bound">n</a> <a id="7719" href="ContinuityAxiom.False.html#7310" class="Function Operator">zeros-and-then</a> <a id="7734" href="ContinuityAxiom.False.html#7698" class="Bound">k</a><a id="7735" class="Symbol">)</a>
+<a id="7737" href="ContinuityAxiom.False.html#7672" class="Function">zeros-and-then-spec₁</a> <a id="7758" href="ContinuityAxiom.False.html#7758" class="Bound">n</a> <a id="7760" href="ContinuityAxiom.False.html#7760" class="Bound">k</a> <a id="7762" class="Symbol">=</a> <a id="7764" href="ContinuityAxiom.False.html#7880" class="Function">zeros₀</a> <a id="7771" href="ContinuityAxiom.False.html#7758" class="Bound">n</a> <a id="7773" href="MLTT.Id.html#968" class="Function Operator">∙</a> <a id="7775" href="ContinuityAxiom.False.html#7995" class="Function">zeros₁</a> <a id="7782" href="ContinuityAxiom.False.html#7758" class="Bound">n</a> <a id="7784" href="ContinuityAxiom.False.html#7760" class="Bound">k</a>
+ <a id="7787" class="Keyword">where</a>
+  <a id="7795" href="ContinuityAxiom.False.html#7795" class="Function">zeros</a> <a id="7801" class="Symbol">:</a> <a id="7803" class="Symbol">(</a><a id="7804" href="ContinuityAxiom.False.html#7804" class="Bound">n</a> <a id="7806" class="Symbol">:</a> <a id="7808" href="MLTT.Natural-Numbers-Type.html#96" class="Datatype">ℕ</a><a id="7809" class="Symbol">)</a> <a id="7811" class="Symbol">→</a> <a id="7813" href="MLTT.Vector.html#151" class="Datatype">Vector</a> <a id="7820" href="MLTT.Natural-Numbers-Type.html#96" class="Datatype">ℕ</a> <a id="7822" href="ContinuityAxiom.False.html#7804" class="Bound">n</a>
+  <a id="7826" href="ContinuityAxiom.False.html#7795" class="Function">zeros</a>  <a id="7833" class="Number">0</a>       <a id="7841" class="Symbol">=</a> <a id="7843" href="MLTT.Vector.html#186" class="InductiveConstructor">[]</a>
+  <a id="7848" href="ContinuityAxiom.False.html#7795" class="Function">zeros</a> <a id="7854" class="Symbol">(</a><a id="7855" href="MLTT.Natural-Numbers-Type.html#123" class="InductiveConstructor">succ</a> <a id="7860" href="ContinuityAxiom.False.html#7860" class="Bound">n</a><a id="7861" class="Symbol">)</a> <a id="7863" class="Symbol">=</a> <a id="7865" class="Number">0</a> <a id="7867" href="MLTT.Vector.html#204" class="InductiveConstructor Operator">∷</a> <a id="7869" href="ContinuityAxiom.False.html#7795" class="Function">zeros</a> <a id="7875" href="ContinuityAxiom.False.html#7860" class="Bound">n</a>
+
+  <a id="7880" href="ContinuityAxiom.False.html#7880" class="Function">zeros₀</a> <a id="7887" class="Symbol">:</a> <a id="7889" class="Symbol">(</a><a id="7890" href="ContinuityAxiom.False.html#7890" class="Bound">n</a> <a id="7892" class="Symbol">:</a> <a id="7894" href="MLTT.Natural-Numbers-Type.html#96" class="Datatype">ℕ</a><a id="7895" class="Symbol">)</a> <a id="7897" class="Symbol">→</a> <a id="7899" href="ContinuityAxiom.False.html#7488" class="Function">o</a> <a id="7901" href="ContinuityAxiom.False.html#5809" class="Function Operator">⟦</a> <a id="7903" href="ContinuityAxiom.False.html#7890" class="Bound">n</a> <a id="7905" href="ContinuityAxiom.False.html#5809" class="Function Operator">⟧</a> <a id="7907" href="MLTT.Id.html#193" class="Datatype Operator">＝</a> <a id="7909" href="ContinuityAxiom.False.html#7795" class="Function">zeros</a> <a id="7915" href="ContinuityAxiom.False.html#7890" class="Bound">n</a>
+  <a id="7919" href="ContinuityAxiom.False.html#7880" class="Function">zeros₀</a>  <a id="7927" class="Number">0</a>       <a id="7935" class="Symbol">=</a> <a id="7937" href="MLTT.Identity-Type.html#157" class="InductiveConstructor">refl</a>
+  <a id="7944" href="ContinuityAxiom.False.html#7880" class="Function">zeros₀</a> <a id="7951" class="Symbol">(</a><a id="7952" href="MLTT.Natural-Numbers-Type.html#123" class="InductiveConstructor">succ</a> <a id="7957" href="ContinuityAxiom.False.html#7957" class="Bound">n</a><a id="7958" class="Symbol">)</a> <a id="7960" class="Symbol">=</a> <a id="7962" href="MLTT.Id.html#1136" class="Function">ap</a> <a id="7965" class="Symbol">(λ</a> <a id="7968" href="ContinuityAxiom.False.html#7968" class="Bound">ns</a> <a id="7971" class="Symbol">→</a> <a id="7973" class="Number">0</a> <a id="7975" href="MLTT.Vector.html#204" class="InductiveConstructor Operator">∷</a> <a id="7977" href="ContinuityAxiom.False.html#7968" class="Bound">ns</a><a id="7979" class="Symbol">)</a> <a id="7981" class="Symbol">(</a><a id="7982" href="ContinuityAxiom.False.html#7880" class="Function">zeros₀</a> <a id="7989" href="ContinuityAxiom.False.html#7957" class="Bound">n</a><a id="7990" class="Symbol">)</a>
+
+  <a id="7995" href="ContinuityAxiom.False.html#7995" class="Function">zeros₁</a> <a id="8002" class="Symbol">:</a> <a id="8004" class="Symbol">(</a><a id="8005" href="ContinuityAxiom.False.html#8005" class="Bound">n</a> <a id="8007" href="ContinuityAxiom.False.html#8007" class="Bound">k</a> <a id="8009" class="Symbol">:</a> <a id="8011" href="MLTT.Natural-Numbers-Type.html#96" class="Datatype">ℕ</a><a id="8012" class="Symbol">)</a> <a id="8014" class="Symbol">→</a> <a id="8016" href="ContinuityAxiom.False.html#7795" class="Function">zeros</a> <a id="8022" href="ContinuityAxiom.False.html#8005" class="Bound">n</a> <a id="8024" href="MLTT.Id.html#193" class="Datatype Operator">＝</a> <a id="8026" class="Symbol">(</a><a id="8027" href="ContinuityAxiom.False.html#8005" class="Bound">n</a> <a id="8029" href="ContinuityAxiom.False.html#7310" class="Function Operator">zeros-and-then</a> <a id="8044" href="ContinuityAxiom.False.html#8007" class="Bound">k</a><a id="8045" class="Symbol">)</a> <a id="8047" href="ContinuityAxiom.False.html#5809" class="Function Operator">⟦</a> <a id="8049" href="ContinuityAxiom.False.html#8005" class="Bound">n</a> <a id="8051" href="ContinuityAxiom.False.html#5809" class="Function Operator">⟧</a>
+  <a id="8055" href="ContinuityAxiom.False.html#7995" class="Function">zeros₁</a>  <a id="8063" class="Number">0</a>       <a id="8071" href="ContinuityAxiom.False.html#8071" class="Bound">k</a> <a id="8073" class="Symbol">=</a> <a id="8075" href="MLTT.Identity-Type.html#157" class="InductiveConstructor">refl</a>
+  <a id="8082" href="ContinuityAxiom.False.html#7995" class="Function">zeros₁</a> <a id="8089" class="Symbol">(</a><a id="8090" href="MLTT.Natural-Numbers-Type.html#123" class="InductiveConstructor">succ</a> <a id="8095" href="ContinuityAxiom.False.html#8095" class="Bound">n</a><a id="8096" class="Symbol">)</a> <a id="8098" href="ContinuityAxiom.False.html#8098" class="Bound">k</a> <a id="8100" class="Symbol">=</a> <a id="8102" href="MLTT.Id.html#1136" class="Function">ap</a> <a id="8105" class="Symbol">(λ</a> <a id="8108" href="ContinuityAxiom.False.html#8108" class="Bound">ns</a> <a id="8111" class="Symbol">→</a> <a id="8113" class="Number">0</a> <a id="8115" href="MLTT.Vector.html#204" class="InductiveConstructor Operator">∷</a> <a id="8117" href="ContinuityAxiom.False.html#8108" class="Bound">ns</a><a id="8119" class="Symbol">)</a> <a id="8121" class="Symbol">(</a><a id="8122" href="ContinuityAxiom.False.html#7995" class="Function">zeros₁</a> <a id="8129" href="ContinuityAxiom.False.html#8095" class="Bound">n</a> <a id="8131" href="ContinuityAxiom.False.html#8098" class="Bound">k</a><a id="8132" class="Symbol">)</a>
+
+<a id="8135" class="Markup">\end{code}</a><a id="8145" class="Background">
+
+
+3.4 Proof of the theorem
+------------------------
+
+Finally, here is the proof of the claim. It uses the modulus of
+continuity functional M such that M f is a modulus of continuity at
+the constant zero sequence o (defined above), which exists because we
+are using the existential quantifier Σ rather than ∃ in our
+(unsatisfactory) definition of continuity, in order to define a
+non-continuous function f and hence get a contradiction.
+
+Recall that our goal is to prove
+
+  theorem : ((f : Baire → ℕ) → continuous f) → 0 ＝ 1
+
+formulated above in Agda.
+
+</a><a id="8698" class="Markup">\begin{code}</a>
+
+<a id="8712" href="ContinuityAxiom.False.html#6717" class="Function">theorem</a> <a id="8720" href="ContinuityAxiom.False.html#8720" class="Bound">continuity</a> <a id="8731" class="Symbol">=</a> <a id="8733" href="ContinuityAxiom.False.html#10959" class="Function">γ</a>
+ <a id="8736" class="Keyword">where</a>
+  <a id="8744" href="ContinuityAxiom.False.html#8744" class="Function">M</a> <a id="8746" class="Symbol">:</a> <a id="8748" class="Symbol">(</a><a id="8749" href="ContinuityAxiom.False.html#5781" class="Function">Baire</a> <a id="8755" class="Symbol">→</a> <a id="8757" href="MLTT.Natural-Numbers-Type.html#96" class="Datatype">ℕ</a><a id="8758" class="Symbol">)</a> <a id="8760" class="Symbol">→</a> <a id="8762" href="MLTT.Natural-Numbers-Type.html#96" class="Datatype">ℕ</a>
+  <a id="8766" href="ContinuityAxiom.False.html#8744" class="Function">M</a> <a id="8768" href="ContinuityAxiom.False.html#8768" class="Bound">f</a> <a id="8770" class="Symbol">=</a> <a id="8772" href="MLTT.Sigma-Type.html#198" class="Field">pr₁</a> <a id="8776" class="Symbol">(</a><a id="8777" href="ContinuityAxiom.False.html#8720" class="Bound">continuity</a> <a id="8788" href="ContinuityAxiom.False.html#8768" class="Bound">f</a> <a id="8790" href="ContinuityAxiom.False.html#7488" class="Function">o</a><a id="8791" class="Symbol">)</a>
+
+  <a id="8796" href="ContinuityAxiom.False.html#8796" class="Function">continuity₀</a> <a id="8808" class="Symbol">:</a> <a id="8810" class="Symbol">(</a><a id="8811" href="ContinuityAxiom.False.html#8811" class="Bound">f</a> <a id="8813" class="Symbol">:</a> <a id="8815" href="ContinuityAxiom.False.html#5781" class="Function">Baire</a> <a id="8821" class="Symbol">→</a> <a id="8823" href="MLTT.Natural-Numbers-Type.html#96" class="Datatype">ℕ</a><a id="8824" class="Symbol">)</a> <a id="8826" class="Symbol">(</a><a id="8827" href="ContinuityAxiom.False.html#8827" class="Bound">β</a> <a id="8829" class="Symbol">:</a> <a id="8831" href="ContinuityAxiom.False.html#5781" class="Function">Baire</a><a id="8836" class="Symbol">)</a> <a id="8838" class="Symbol">→</a> <a id="8840" href="ContinuityAxiom.False.html#7488" class="Function">o</a> <a id="8842" href="ContinuityAxiom.False.html#5926" class="Function Operator">＝⟦</a> <a id="8845" href="ContinuityAxiom.False.html#8744" class="Function">M</a> <a id="8847" href="ContinuityAxiom.False.html#8811" class="Bound">f</a> <a id="8849" href="ContinuityAxiom.False.html#5926" class="Function Operator">⟧</a> <a id="8851" href="ContinuityAxiom.False.html#8827" class="Bound">β</a> <a id="8853" class="Symbol">→</a> <a id="8855" href="ContinuityAxiom.False.html#8811" class="Bound">f</a> <a id="8857" href="ContinuityAxiom.False.html#7488" class="Function">o</a> <a id="8859" href="MLTT.Id.html#193" class="Datatype Operator">＝</a> <a id="8861" href="ContinuityAxiom.False.html#8811" class="Bound">f</a> <a id="8863" href="ContinuityAxiom.False.html#8827" class="Bound">β</a>
+  <a id="8867" href="ContinuityAxiom.False.html#8796" class="Function">continuity₀</a> <a id="8879" href="ContinuityAxiom.False.html#8879" class="Bound">f</a> <a id="8881" class="Symbol">=</a> <a id="8883" href="MLTT.Sigma-Type.html#209" class="Field">pr₂</a> <a id="8887" class="Symbol">(</a><a id="8888" href="ContinuityAxiom.False.html#8720" class="Bound">continuity</a> <a id="8899" href="ContinuityAxiom.False.html#8879" class="Bound">f</a> <a id="8901" href="ContinuityAxiom.False.html#7488" class="Function">o</a><a id="8902" class="Symbol">)</a>
+
+  <a id="8907" href="ContinuityAxiom.False.html#8907" class="Function">m</a> <a id="8909" class="Symbol">:</a> <a id="8911" href="MLTT.Natural-Numbers-Type.html#96" class="Datatype">ℕ</a>
+  <a id="8915" href="ContinuityAxiom.False.html#8907" class="Function">m</a> <a id="8917" class="Symbol">=</a> <a id="8919" href="ContinuityAxiom.False.html#8744" class="Function">M</a> <a id="8921" class="Symbol">(λ</a> <a id="8924" href="ContinuityAxiom.False.html#8924" class="Bound">α</a> <a id="8926" class="Symbol">→</a> <a id="8928" class="Number">0</a><a id="8929" class="Symbol">)</a>
+
+  <a id="8934" href="ContinuityAxiom.False.html#8934" class="Function">f</a> <a id="8936" class="Symbol">:</a> <a id="8938" href="ContinuityAxiom.False.html#5781" class="Function">Baire</a> <a id="8944" class="Symbol">→</a> <a id="8946" href="MLTT.Natural-Numbers-Type.html#96" class="Datatype">ℕ</a>
+  <a id="8950" href="ContinuityAxiom.False.html#8934" class="Function">f</a> <a id="8952" href="ContinuityAxiom.False.html#8952" class="Bound">β</a> <a id="8954" class="Symbol">=</a> <a id="8956" href="ContinuityAxiom.False.html#8744" class="Function">M</a> <a id="8958" class="Symbol">(λ</a> <a id="8961" href="ContinuityAxiom.False.html#8961" class="Bound">α</a> <a id="8963" class="Symbol">→</a> <a id="8965" href="ContinuityAxiom.False.html#8952" class="Bound">β</a> <a id="8967" class="Symbol">(</a><a id="8968" href="ContinuityAxiom.False.html#8961" class="Bound">α</a> <a id="8970" href="ContinuityAxiom.False.html#8907" class="Function">m</a><a id="8971" class="Symbol">))</a>
+
+  <a id="8977" href="ContinuityAxiom.False.html#8977" class="Function">observation</a> <a id="8989" class="Symbol">:</a> <a id="8991" href="ContinuityAxiom.False.html#8934" class="Function">f</a> <a id="8993" href="ContinuityAxiom.False.html#7488" class="Function">o</a> <a id="8995" href="MLTT.Id.html#193" class="Datatype Operator">＝</a> <a id="8997" href="ContinuityAxiom.False.html#8907" class="Function">m</a>
+  <a id="9001" href="ContinuityAxiom.False.html#8977" class="Function">observation</a> <a id="9013" class="Symbol">=</a> <a id="9015" href="MLTT.Identity-Type.html#157" class="InductiveConstructor">refl</a>
+
+  <a id="9023" href="ContinuityAxiom.False.html#9023" class="Function">fact₀</a> <a id="9029" class="Symbol">:</a> <a id="9031" class="Symbol">(</a><a id="9032" href="ContinuityAxiom.False.html#9032" class="Bound">β</a> <a id="9034" class="Symbol">:</a> <a id="9036" href="ContinuityAxiom.False.html#5781" class="Function">Baire</a><a id="9041" class="Symbol">)</a> <a id="9043" class="Symbol">→</a> <a id="9045" href="ContinuityAxiom.False.html#7488" class="Function">o</a> <a id="9047" href="ContinuityAxiom.False.html#5926" class="Function Operator">＝⟦</a> <a id="9050" href="ContinuityAxiom.False.html#8744" class="Function">M</a> <a id="9052" href="ContinuityAxiom.False.html#8934" class="Function">f</a> <a id="9054" href="ContinuityAxiom.False.html#5926" class="Function Operator">⟧</a> <a id="9056" href="ContinuityAxiom.False.html#9032" class="Bound">β</a> <a id="9058" class="Symbol">→</a> <a id="9060" href="ContinuityAxiom.False.html#8907" class="Function">m</a> <a id="9062" href="MLTT.Id.html#193" class="Datatype Operator">＝</a> <a id="9064" href="ContinuityAxiom.False.html#8934" class="Function">f</a> <a id="9066" href="ContinuityAxiom.False.html#9032" class="Bound">β</a>
+  <a id="9070" href="ContinuityAxiom.False.html#9023" class="Function">fact₀</a> <a id="9076" class="Symbol">=</a> <a id="9078" href="ContinuityAxiom.False.html#8796" class="Function">continuity₀</a> <a id="9090" href="ContinuityAxiom.False.html#8934" class="Function">f</a>
+
+  <a id="9095" href="ContinuityAxiom.False.html#9095" class="Function">lemma₀</a> <a id="9102" class="Symbol">:</a> <a id="9104" href="ContinuityAxiom.False.html#8744" class="Function">M</a> <a id="9106" href="ContinuityAxiom.False.html#8934" class="Function">f</a> <a id="9108" href="MLTT.Id.html#193" class="Datatype Operator">＝</a> <a id="9110" class="Number">0</a> <a id="9112" class="Symbol">→</a> <a id="9114" class="Number">0</a> <a id="9116" href="MLTT.Id.html#193" class="Datatype Operator">＝</a> <a id="9118" class="Number">1</a>
+  <a id="9122" href="ContinuityAxiom.False.html#9095" class="Function">lemma₀</a> <a id="9129" href="ContinuityAxiom.False.html#9129" class="Bound">r</a> <a id="9131" class="Symbol">=</a>
+   <a id="9136" class="Number">0</a>   <a id="9140" href="MLTT.Id.html#2239" class="Function Operator">＝⟨</a> <a id="9143" href="ContinuityAxiom.False.html#9547" class="Function">claim₄</a> <a id="9150" href="ContinuityAxiom.False.html#9681" class="Function">α</a> <a id="9152" class="Symbol">(</a><a id="9153" href="ContinuityAxiom.False.html#7672" class="Function">zeros-and-then-spec₁</a> <a id="9174" href="ContinuityAxiom.False.html#8907" class="Function">m</a> <a id="9176" class="Number">1</a><a id="9177" class="Symbol">)</a> <a id="9179" href="MLTT.Id.html#2239" class="Function Operator">⟩</a>
+   <a id="9184" href="ContinuityAxiom.False.html#9681" class="Function">α</a> <a id="9186" href="ContinuityAxiom.False.html#8907" class="Function">m</a> <a id="9188" href="MLTT.Id.html#2239" class="Function Operator">＝⟨</a> <a id="9191" href="ContinuityAxiom.False.html#9723" class="Function">α-fact₀</a> <a id="9199" href="MLTT.Id.html#2239" class="Function Operator">⟩</a>
+   <a id="9204" class="Number">1</a>   <a id="9208" href="MLTT.Id.html#2321" class="Function Operator">∎</a>
+   <a id="9213" class="Keyword">where</a>
+    <a id="9223" href="ContinuityAxiom.False.html#9223" class="Function">claim₀</a> <a id="9230" class="Symbol">:</a> <a id="9232" class="Symbol">(</a><a id="9233" href="ContinuityAxiom.False.html#9233" class="Bound">β</a> <a id="9235" class="Symbol">:</a> <a id="9237" href="ContinuityAxiom.False.html#5781" class="Function">Baire</a><a id="9242" class="Symbol">)</a> <a id="9244" class="Symbol">→</a> <a id="9246" href="ContinuityAxiom.False.html#8907" class="Function">m</a> <a id="9248" href="MLTT.Id.html#193" class="Datatype Operator">＝</a> <a id="9250" href="ContinuityAxiom.False.html#8934" class="Function">f</a> <a id="9252" href="ContinuityAxiom.False.html#9233" class="Bound">β</a>
+    <a id="9258" href="ContinuityAxiom.False.html#9223" class="Function">claim₀</a> <a id="9265" href="ContinuityAxiom.False.html#9265" class="Bound">β</a> <a id="9267" class="Symbol">=</a> <a id="9269" href="ContinuityAxiom.False.html#9023" class="Function">fact₀</a> <a id="9275" href="ContinuityAxiom.False.html#9265" class="Bound">β</a> <a id="9277" href="ContinuityAxiom.False.html#9303" class="Function">claim₁</a>
+      <a id="9290" class="Keyword">where</a>
+       <a id="9303" href="ContinuityAxiom.False.html#9303" class="Function">claim₁</a> <a id="9310" class="Symbol">:</a> <a id="9312" href="ContinuityAxiom.False.html#7488" class="Function">o</a> <a id="9314" href="ContinuityAxiom.False.html#5926" class="Function Operator">＝⟦</a> <a id="9317" href="ContinuityAxiom.False.html#8744" class="Function">M</a> <a id="9319" href="ContinuityAxiom.False.html#8934" class="Function">f</a> <a id="9321" href="ContinuityAxiom.False.html#5926" class="Function Operator">⟧</a> <a id="9323" href="ContinuityAxiom.False.html#9265" class="Bound">β</a>
+       <a id="9332" href="ContinuityAxiom.False.html#9303" class="Function">claim₁</a> <a id="9339" class="Symbol">=</a> <a id="9341" href="MLTT.Id.html#735" class="Function">transport</a> <a id="9351" class="Symbol">(λ</a> <a id="9354" href="ContinuityAxiom.False.html#9354" class="Bound">-</a> <a id="9356" class="Symbol">→</a> <a id="9358" href="ContinuityAxiom.False.html#7488" class="Function">o</a> <a id="9360" href="ContinuityAxiom.False.html#5926" class="Function Operator">＝⟦</a> <a id="9363" href="ContinuityAxiom.False.html#9354" class="Bound">-</a> <a id="9365" href="ContinuityAxiom.False.html#5926" class="Function Operator">⟧</a> <a id="9367" href="ContinuityAxiom.False.html#9265" class="Bound">β</a><a id="9368" class="Symbol">)</a> <a id="9370" class="Symbol">(</a><a id="9371" href="ContinuityAxiom.False.html#9129" class="Bound">r</a> <a id="9373" href="MLTT.Id.html#1055" class="Function Operator">⁻¹</a><a id="9375" class="Symbol">)</a> <a id="9377" href="MLTT.Identity-Type.html#157" class="InductiveConstructor">refl</a>
+
+    <a id="9387" href="ContinuityAxiom.False.html#9387" class="Function">claim₂</a> <a id="9394" class="Symbol">:</a> <a id="9396" href="ContinuityAxiom.False.html#8907" class="Function">m</a> <a id="9398" href="MLTT.Id.html#193" class="Datatype Operator">＝</a> <a id="9400" href="ContinuityAxiom.False.html#8744" class="Function">M</a> <a id="9402" class="Symbol">(λ</a> <a id="9405" href="ContinuityAxiom.False.html#9405" class="Bound">α</a> <a id="9407" class="Symbol">→</a> <a id="9409" href="ContinuityAxiom.False.html#9405" class="Bound">α</a> <a id="9411" href="ContinuityAxiom.False.html#8907" class="Function">m</a><a id="9412" class="Symbol">)</a>
+    <a id="9418" href="ContinuityAxiom.False.html#9387" class="Function">claim₂</a> <a id="9425" class="Symbol">=</a> <a id="9427" href="ContinuityAxiom.False.html#9223" class="Function">claim₀</a> <a id="9434" class="Symbol">(λ</a> <a id="9437" href="ContinuityAxiom.False.html#9437" class="Bound">i</a> <a id="9439" class="Symbol">→</a> <a id="9441" href="ContinuityAxiom.False.html#9437" class="Bound">i</a><a id="9442" class="Symbol">)</a>
+
+    <a id="9449" href="ContinuityAxiom.False.html#9449" class="Function">claim₃</a> <a id="9456" class="Symbol">:</a> <a id="9458" class="Symbol">(</a><a id="9459" href="ContinuityAxiom.False.html#9459" class="Bound">α</a> <a id="9461" class="Symbol">:</a> <a id="9463" href="ContinuityAxiom.False.html#5781" class="Function">Baire</a><a id="9468" class="Symbol">)</a> <a id="9470" class="Symbol">→</a> <a id="9472" href="ContinuityAxiom.False.html#7488" class="Function">o</a> <a id="9474" href="ContinuityAxiom.False.html#5926" class="Function Operator">＝⟦</a> <a id="9477" href="ContinuityAxiom.False.html#8744" class="Function">M</a> <a id="9479" class="Symbol">(λ</a> <a id="9482" href="ContinuityAxiom.False.html#9482" class="Bound">α</a> <a id="9484" class="Symbol">→</a> <a id="9486" href="ContinuityAxiom.False.html#9482" class="Bound">α</a> <a id="9488" href="ContinuityAxiom.False.html#8907" class="Function">m</a><a id="9489" class="Symbol">)</a> <a id="9491" href="ContinuityAxiom.False.html#5926" class="Function Operator">⟧</a> <a id="9493" href="ContinuityAxiom.False.html#9459" class="Bound">α</a> <a id="9495" class="Symbol">→</a> <a id="9497" class="Number">0</a> <a id="9499" href="MLTT.Id.html#193" class="Datatype Operator">＝</a> <a id="9501" href="ContinuityAxiom.False.html#9459" class="Bound">α</a> <a id="9503" href="ContinuityAxiom.False.html#8907" class="Function">m</a>
+    <a id="9509" href="ContinuityAxiom.False.html#9449" class="Function">claim₃</a> <a id="9516" class="Symbol">=</a> <a id="9518" href="ContinuityAxiom.False.html#8796" class="Function">continuity₀</a> <a id="9530" class="Symbol">(λ</a> <a id="9533" href="ContinuityAxiom.False.html#9533" class="Bound">α</a> <a id="9535" class="Symbol">→</a> <a id="9537" href="ContinuityAxiom.False.html#9533" class="Bound">α</a> <a id="9539" href="ContinuityAxiom.False.html#8907" class="Function">m</a><a id="9540" class="Symbol">)</a>
+
+    <a id="9547" href="ContinuityAxiom.False.html#9547" class="Function">claim₄</a> <a id="9554" class="Symbol">:</a> <a id="9556" class="Symbol">(</a><a id="9557" href="ContinuityAxiom.False.html#9557" class="Bound">α</a> <a id="9559" class="Symbol">:</a> <a id="9561" href="ContinuityAxiom.False.html#5781" class="Function">Baire</a><a id="9566" class="Symbol">)</a> <a id="9568" class="Symbol">→</a> <a id="9570" href="ContinuityAxiom.False.html#7488" class="Function">o</a> <a id="9572" href="ContinuityAxiom.False.html#5926" class="Function Operator">＝⟦</a> <a id="9575" href="ContinuityAxiom.False.html#8907" class="Function">m</a> <a id="9577" href="ContinuityAxiom.False.html#5926" class="Function Operator">⟧</a> <a id="9579" href="ContinuityAxiom.False.html#9557" class="Bound">α</a> <a id="9581" class="Symbol">→</a> <a id="9583" class="Number">0</a> <a id="9585" href="MLTT.Id.html#193" class="Datatype Operator">＝</a> <a id="9587" href="ContinuityAxiom.False.html#9557" class="Bound">α</a> <a id="9589" href="ContinuityAxiom.False.html#8907" class="Function">m</a>
+    <a id="9595" href="ContinuityAxiom.False.html#9547" class="Function">claim₄</a> <a id="9602" class="Symbol">=</a> <a id="9604" href="MLTT.Id.html#735" class="Function">transport</a> <a id="9614" class="Symbol">(λ</a> <a id="9617" href="ContinuityAxiom.False.html#9617" class="Bound">-</a> <a id="9619" class="Symbol">→</a> <a id="9621" class="Symbol">(</a><a id="9622" href="ContinuityAxiom.False.html#9622" class="Bound">α</a> <a id="9624" class="Symbol">:</a> <a id="9626" href="ContinuityAxiom.False.html#5781" class="Function">Baire</a><a id="9631" class="Symbol">)</a> <a id="9633" class="Symbol">→</a> <a id="9635" href="ContinuityAxiom.False.html#7488" class="Function">o</a> <a id="9637" href="ContinuityAxiom.False.html#5926" class="Function Operator">＝⟦</a> <a id="9640" href="ContinuityAxiom.False.html#9617" class="Bound">-</a> <a id="9642" href="ContinuityAxiom.False.html#5926" class="Function Operator">⟧</a> <a id="9644" href="ContinuityAxiom.False.html#9622" class="Bound">α</a> <a id="9646" class="Symbol">→</a> <a id="9648" class="Number">0</a> <a id="9650" href="MLTT.Id.html#193" class="Datatype Operator">＝</a> <a id="9652" href="ContinuityAxiom.False.html#9622" class="Bound">α</a> <a id="9654" href="ContinuityAxiom.False.html#8907" class="Function">m</a><a id="9655" class="Symbol">)</a> <a id="9657" class="Symbol">(</a><a id="9658" href="ContinuityAxiom.False.html#9387" class="Function">claim₂</a> <a id="9665" href="MLTT.Id.html#1055" class="Function Operator">⁻¹</a><a id="9667" class="Symbol">)</a> <a id="9669" href="ContinuityAxiom.False.html#9449" class="Function">claim₃</a>
+
+    <a id="9681" href="ContinuityAxiom.False.html#9681" class="Function">α</a> <a id="9683" class="Symbol">:</a> <a id="9685" href="ContinuityAxiom.False.html#5781" class="Function">Baire</a>
+    <a id="9695" href="ContinuityAxiom.False.html#9681" class="Function">α</a> <a id="9697" class="Symbol">=</a> <a id="9699" href="ContinuityAxiom.False.html#8907" class="Function">m</a> <a id="9701" href="ContinuityAxiom.False.html#7310" class="Function Operator">zeros-and-then</a> <a id="9716" class="Number">1</a>
+
+    <a id="9723" href="ContinuityAxiom.False.html#9723" class="Function">α-fact₀</a> <a id="9731" class="Symbol">:</a> <a id="9733" href="ContinuityAxiom.False.html#9681" class="Function">α</a> <a id="9735" href="ContinuityAxiom.False.html#8907" class="Function">m</a> <a id="9737" href="MLTT.Id.html#193" class="Datatype Operator">＝</a> <a id="9739" class="Number">1</a>
+    <a id="9745" href="ContinuityAxiom.False.html#9723" class="Function">α-fact₀</a> <a id="9753" class="Symbol">=</a> <a id="9755" href="ContinuityAxiom.False.html#7511" class="Function">zeros-and-then-spec₀</a> <a id="9776" href="ContinuityAxiom.False.html#8907" class="Function">m</a> <a id="9778" class="Number">1</a>
+
+  <a id="9783" href="ContinuityAxiom.False.html#9783" class="Function">lemma₁</a> <a id="9790" class="Symbol">:</a> <a id="9792" class="Symbol">(</a><a id="9793" href="MLTT.Sigma.html#423" class="Function">Σ</a> <a id="9795" href="ContinuityAxiom.False.html#9795" class="Bound">n</a> <a id="9797" href="MLTT.Sigma.html#423" class="Function">꞉</a> <a id="9799" href="MLTT.Natural-Numbers-Type.html#96" class="Datatype">ℕ</a> <a id="9801" href="MLTT.Sigma.html#423" class="Function">,</a> <a id="9803" href="ContinuityAxiom.False.html#8744" class="Function">M</a> <a id="9805" href="ContinuityAxiom.False.html#8934" class="Function">f</a> <a id="9807" href="MLTT.Id.html#193" class="Datatype Operator">＝</a> <a id="9809" href="MLTT.Natural-Numbers-Type.html#123" class="InductiveConstructor">succ</a> <a id="9814" href="ContinuityAxiom.False.html#9795" class="Bound">n</a><a id="9815" class="Symbol">)</a> <a id="9817" class="Symbol">→</a> <a id="9819" class="Number">0</a> <a id="9821" href="MLTT.Id.html#193" class="Datatype Operator">＝</a> <a id="9823" class="Number">1</a>
+  <a id="9827" href="ContinuityAxiom.False.html#9783" class="Function">lemma₁</a> <a id="9834" class="Symbol">(</a><a id="9835" href="ContinuityAxiom.False.html#9835" class="Bound">n</a> <a id="9837" href="MLTT.Sigma.html#395" class="InductiveConstructor Operator">,</a> <a id="9839" href="ContinuityAxiom.False.html#9839" class="Bound">r</a><a id="9840" class="Symbol">)</a> <a id="9842" class="Symbol">=</a>
+    <a id="9848" class="Number">0</a>   <a id="9852" href="MLTT.Id.html#2239" class="Function Operator">＝⟨</a> <a id="9855" href="ContinuityAxiom.False.html#10793" class="Function">claim</a> <a id="9861" class="Symbol">(</a><a id="9862" href="MLTT.Id.html#735" class="Function">transport</a> <a id="9872" class="Symbol">(λ</a> <a id="9875" href="ContinuityAxiom.False.html#9875" class="Bound">-</a> <a id="9877" class="Symbol">→</a> <a id="9879" href="ContinuityAxiom.False.html#7488" class="Function">o</a> <a id="9881" href="ContinuityAxiom.False.html#5926" class="Function Operator">＝⟦</a> <a id="9884" href="ContinuityAxiom.False.html#9875" class="Bound">-</a> <a id="9886" href="ContinuityAxiom.False.html#5926" class="Function Operator">⟧</a> <a id="9888" href="ContinuityAxiom.False.html#9946" class="Function">β</a><a id="9889" class="Symbol">)</a> <a id="9891" href="ContinuityAxiom.False.html#9839" class="Bound">r</a> <a id="9893" href="ContinuityAxiom.False.html#10062" class="Function">β-fact₁</a><a id="9900" class="Symbol">)</a> <a id="9902" href="MLTT.Id.html#2239" class="Function Operator">⟩</a>
+    <a id="9908" href="ContinuityAxiom.False.html#9946" class="Function">β</a> <a id="9910" class="Number">0</a> <a id="9912" href="MLTT.Id.html#2239" class="Function Operator">＝⟨</a> <a id="9915" href="ContinuityAxiom.False.html#10664" class="Function">fact₄</a> <a id="9921" href="MLTT.Id.html#2239" class="Function Operator">⟩</a>
+    <a id="9927" class="Number">1</a>   <a id="9931" href="MLTT.Id.html#2321" class="Function Operator">∎</a>
+   <a id="9936" class="Keyword">where</a>
+    <a id="9946" href="ContinuityAxiom.False.html#9946" class="Function">β</a> <a id="9948" class="Symbol">:</a> <a id="9950" href="ContinuityAxiom.False.html#5781" class="Function">Baire</a>
+    <a id="9960" href="ContinuityAxiom.False.html#9946" class="Function">β</a> <a id="9962" class="Symbol">=</a> <a id="9964" class="Symbol">(</a><a id="9965" href="ContinuityAxiom.False.html#8744" class="Function">M</a> <a id="9967" href="ContinuityAxiom.False.html#8934" class="Function">f</a><a id="9968" class="Symbol">)</a> <a id="9970" href="ContinuityAxiom.False.html#7310" class="Function Operator">zeros-and-then</a> <a id="9985" class="Number">1</a>
+
+    <a id="9992" href="ContinuityAxiom.False.html#9992" class="Function">β-fact₀</a> <a id="10000" class="Symbol">:</a> <a id="10002" href="ContinuityAxiom.False.html#9946" class="Function">β</a> <a id="10004" class="Symbol">(</a><a id="10005" href="ContinuityAxiom.False.html#8744" class="Function">M</a> <a id="10007" href="ContinuityAxiom.False.html#8934" class="Function">f</a><a id="10008" class="Symbol">)</a> <a id="10010" href="MLTT.Id.html#193" class="Datatype Operator">＝</a> <a id="10012" class="Number">1</a>
+    <a id="10018" href="ContinuityAxiom.False.html#9992" class="Function">β-fact₀</a> <a id="10026" class="Symbol">=</a> <a id="10028" href="ContinuityAxiom.False.html#7511" class="Function">zeros-and-then-spec₀</a> <a id="10049" class="Symbol">(</a><a id="10050" href="ContinuityAxiom.False.html#8744" class="Function">M</a> <a id="10052" href="ContinuityAxiom.False.html#8934" class="Function">f</a><a id="10053" class="Symbol">)</a> <a id="10055" class="Number">1</a>
+
+    <a id="10062" href="ContinuityAxiom.False.html#10062" class="Function">β-fact₁</a> <a id="10070" class="Symbol">:</a> <a id="10072" href="ContinuityAxiom.False.html#7488" class="Function">o</a> <a id="10074" href="ContinuityAxiom.False.html#5926" class="Function Operator">＝⟦</a> <a id="10077" href="ContinuityAxiom.False.html#8744" class="Function">M</a> <a id="10079" href="ContinuityAxiom.False.html#8934" class="Function">f</a> <a id="10081" href="ContinuityAxiom.False.html#5926" class="Function Operator">⟧</a> <a id="10083" href="ContinuityAxiom.False.html#9946" class="Function">β</a>
+    <a id="10089" href="ContinuityAxiom.False.html#10062" class="Function">β-fact₁</a> <a id="10097" class="Symbol">=</a> <a id="10099" href="ContinuityAxiom.False.html#7672" class="Function">zeros-and-then-spec₁</a> <a id="10120" class="Symbol">(</a><a id="10121" href="ContinuityAxiom.False.html#8744" class="Function">M</a> <a id="10123" href="ContinuityAxiom.False.html#8934" class="Function">f</a><a id="10124" class="Symbol">)</a> <a id="10126" class="Number">1</a>
+
+    <a id="10133" href="ContinuityAxiom.False.html#10133" class="Function">fact₀&#39;</a> <a id="10140" class="Symbol">:</a> <a id="10142" href="ContinuityAxiom.False.html#8934" class="Function">f</a> <a id="10144" href="ContinuityAxiom.False.html#9946" class="Function">β</a> <a id="10146" href="MLTT.Id.html#193" class="Datatype Operator">＝</a> <a id="10148" href="ContinuityAxiom.False.html#8907" class="Function">m</a>
+    <a id="10154" href="ContinuityAxiom.False.html#10133" class="Function">fact₀&#39;</a> <a id="10161" class="Symbol">=</a> <a id="10163" class="Symbol">(</a><a id="10164" href="ContinuityAxiom.False.html#9023" class="Function">fact₀</a> <a id="10170" href="ContinuityAxiom.False.html#9946" class="Function">β</a> <a id="10172" href="ContinuityAxiom.False.html#10062" class="Function">β-fact₁</a><a id="10179" class="Symbol">)</a><a id="10180" href="MLTT.Id.html#1055" class="Function Operator">⁻¹</a>
+
+    <a id="10188" href="ContinuityAxiom.False.html#10188" class="Function">fact₁</a> <a id="10194" class="Symbol">:</a> <a id="10196" class="Symbol">(</a><a id="10197" href="ContinuityAxiom.False.html#10197" class="Bound">α</a> <a id="10199" class="Symbol">:</a> <a id="10201" href="ContinuityAxiom.False.html#5781" class="Function">Baire</a><a id="10206" class="Symbol">)</a> <a id="10208" class="Symbol">→</a> <a id="10210" href="ContinuityAxiom.False.html#7488" class="Function">o</a> <a id="10212" href="ContinuityAxiom.False.html#5926" class="Function Operator">＝⟦</a> <a id="10215" href="ContinuityAxiom.False.html#8934" class="Function">f</a> <a id="10217" href="ContinuityAxiom.False.html#9946" class="Function">β</a> <a id="10219" href="ContinuityAxiom.False.html#5926" class="Function Operator">⟧</a> <a id="10221" href="ContinuityAxiom.False.html#10197" class="Bound">α</a> <a id="10223" class="Symbol">→</a> <a id="10225" href="ContinuityAxiom.False.html#9946" class="Function">β</a> <a id="10227" class="Number">0</a> <a id="10229" href="MLTT.Id.html#193" class="Datatype Operator">＝</a> <a id="10231" href="ContinuityAxiom.False.html#9946" class="Function">β</a> <a id="10233" class="Symbol">(</a><a id="10234" href="ContinuityAxiom.False.html#10197" class="Bound">α</a> <a id="10236" href="ContinuityAxiom.False.html#8907" class="Function">m</a><a id="10237" class="Symbol">)</a>
+    <a id="10243" href="ContinuityAxiom.False.html#10188" class="Function">fact₁</a> <a id="10249" href="ContinuityAxiom.False.html#10249" class="Bound">α</a> <a id="10251" class="Symbol">=</a> <a id="10253" href="ContinuityAxiom.False.html#8796" class="Function">continuity₀</a> <a id="10265" class="Symbol">(λ</a> <a id="10268" href="ContinuityAxiom.False.html#10268" class="Bound">α</a> <a id="10270" class="Symbol">→</a> <a id="10272" href="ContinuityAxiom.False.html#9946" class="Function">β</a> <a id="10274" class="Symbol">(</a><a id="10275" href="ContinuityAxiom.False.html#10268" class="Bound">α</a> <a id="10277" href="ContinuityAxiom.False.html#8907" class="Function">m</a><a id="10278" class="Symbol">))</a> <a id="10281" href="ContinuityAxiom.False.html#10249" class="Bound">α</a>
+
+    <a id="10288" href="ContinuityAxiom.False.html#10288" class="Function">fact₂</a> <a id="10294" class="Symbol">:</a> <a id="10296" class="Symbol">(</a><a id="10297" href="ContinuityAxiom.False.html#10297" class="Bound">α</a> <a id="10299" class="Symbol">:</a> <a id="10301" href="ContinuityAxiom.False.html#5781" class="Function">Baire</a><a id="10306" class="Symbol">)</a> <a id="10308" class="Symbol">→</a> <a id="10310" href="ContinuityAxiom.False.html#7488" class="Function">o</a> <a id="10312" href="ContinuityAxiom.False.html#5926" class="Function Operator">＝⟦</a> <a id="10315" href="ContinuityAxiom.False.html#8907" class="Function">m</a> <a id="10317" href="ContinuityAxiom.False.html#5926" class="Function Operator">⟧</a> <a id="10319" href="ContinuityAxiom.False.html#10297" class="Bound">α</a> <a id="10321" class="Symbol">→</a> <a id="10323" href="ContinuityAxiom.False.html#9946" class="Function">β</a> <a id="10325" class="Number">0</a> <a id="10327" href="MLTT.Id.html#193" class="Datatype Operator">＝</a> <a id="10329" href="ContinuityAxiom.False.html#9946" class="Function">β</a> <a id="10331" class="Symbol">(</a><a id="10332" href="ContinuityAxiom.False.html#10297" class="Bound">α</a> <a id="10334" href="ContinuityAxiom.False.html#8907" class="Function">m</a><a id="10335" class="Symbol">)</a>
+    <a id="10341" href="ContinuityAxiom.False.html#10288" class="Function">fact₂</a> <a id="10347" class="Symbol">=</a> <a id="10349" href="MLTT.Id.html#735" class="Function">transport</a> <a id="10359" class="Symbol">(λ</a> <a id="10362" href="ContinuityAxiom.False.html#10362" class="Bound">n</a> <a id="10364" class="Symbol">→</a> <a id="10366" class="Symbol">(</a><a id="10367" href="ContinuityAxiom.False.html#10367" class="Bound">α</a> <a id="10369" class="Symbol">:</a> <a id="10371" href="ContinuityAxiom.False.html#5781" class="Function">Baire</a><a id="10376" class="Symbol">)</a> <a id="10378" class="Symbol">→</a> <a id="10380" href="ContinuityAxiom.False.html#7488" class="Function">o</a> <a id="10382" href="ContinuityAxiom.False.html#5926" class="Function Operator">＝⟦</a> <a id="10385" href="ContinuityAxiom.False.html#10362" class="Bound">n</a> <a id="10387" href="ContinuityAxiom.False.html#5926" class="Function Operator">⟧</a> <a id="10389" href="ContinuityAxiom.False.html#10367" class="Bound">α</a> <a id="10391" class="Symbol">→</a> <a id="10393" href="ContinuityAxiom.False.html#9946" class="Function">β</a> <a id="10395" class="Number">0</a> <a id="10397" href="MLTT.Id.html#193" class="Datatype Operator">＝</a> <a id="10399" href="ContinuityAxiom.False.html#9946" class="Function">β</a> <a id="10401" class="Symbol">(</a><a id="10402" href="ContinuityAxiom.False.html#10367" class="Bound">α</a> <a id="10404" href="ContinuityAxiom.False.html#8907" class="Function">m</a><a id="10405" class="Symbol">))</a> <a id="10408" href="ContinuityAxiom.False.html#10133" class="Function">fact₀&#39;</a> <a id="10415" href="ContinuityAxiom.False.html#10188" class="Function">fact₁</a>
+
+    <a id="10426" href="ContinuityAxiom.False.html#10426" class="Function">α</a> <a id="10428" class="Symbol">:</a> <a id="10430" href="ContinuityAxiom.False.html#5781" class="Function">Baire</a>
+    <a id="10440" href="ContinuityAxiom.False.html#10426" class="Function">α</a> <a id="10442" class="Symbol">=</a> <a id="10444" href="ContinuityAxiom.False.html#8907" class="Function">m</a> <a id="10446" href="ContinuityAxiom.False.html#7310" class="Function Operator">zeros-and-then</a> <a id="10461" class="Symbol">(</a><a id="10462" href="ContinuityAxiom.False.html#8744" class="Function">M</a> <a id="10464" href="ContinuityAxiom.False.html#8934" class="Function">f</a><a id="10465" class="Symbol">)</a>
+
+    <a id="10472" href="ContinuityAxiom.False.html#10472" class="Function">α-fact₀</a> <a id="10480" class="Symbol">:</a> <a id="10482" href="ContinuityAxiom.False.html#10426" class="Function">α</a> <a id="10484" href="ContinuityAxiom.False.html#8907" class="Function">m</a> <a id="10486" href="MLTT.Id.html#193" class="Datatype Operator">＝</a> <a id="10488" href="ContinuityAxiom.False.html#8744" class="Function">M</a> <a id="10490" href="ContinuityAxiom.False.html#8934" class="Function">f</a>
+    <a id="10496" href="ContinuityAxiom.False.html#10472" class="Function">α-fact₀</a> <a id="10504" class="Symbol">=</a> <a id="10506" href="ContinuityAxiom.False.html#7511" class="Function">zeros-and-then-spec₀</a> <a id="10527" href="ContinuityAxiom.False.html#8907" class="Function">m</a> <a id="10529" class="Symbol">(</a><a id="10530" href="ContinuityAxiom.False.html#8744" class="Function">M</a> <a id="10532" href="ContinuityAxiom.False.html#8934" class="Function">f</a><a id="10533" class="Symbol">)</a>
+
+    <a id="10540" href="ContinuityAxiom.False.html#10540" class="Function">α-fact₁</a> <a id="10548" class="Symbol">:</a> <a id="10550" href="ContinuityAxiom.False.html#7488" class="Function">o</a> <a id="10552" href="ContinuityAxiom.False.html#5926" class="Function Operator">＝⟦</a> <a id="10555" href="ContinuityAxiom.False.html#8907" class="Function">m</a> <a id="10557" href="ContinuityAxiom.False.html#5926" class="Function Operator">⟧</a> <a id="10559" href="ContinuityAxiom.False.html#10426" class="Function">α</a>
+    <a id="10565" href="ContinuityAxiom.False.html#10540" class="Function">α-fact₁</a> <a id="10573" class="Symbol">=</a> <a id="10575" href="ContinuityAxiom.False.html#7672" class="Function">zeros-and-then-spec₁</a> <a id="10596" href="ContinuityAxiom.False.html#8907" class="Function">m</a> <a id="10598" class="Symbol">(</a><a id="10599" href="ContinuityAxiom.False.html#8744" class="Function">M</a> <a id="10601" href="ContinuityAxiom.False.html#8934" class="Function">f</a><a id="10602" class="Symbol">)</a>
+
+    <a id="10609" href="ContinuityAxiom.False.html#10609" class="Function">fact₃</a> <a id="10615" class="Symbol">:</a> <a id="10617" href="ContinuityAxiom.False.html#9946" class="Function">β</a> <a id="10619" class="Number">0</a> <a id="10621" href="MLTT.Id.html#193" class="Datatype Operator">＝</a> <a id="10623" href="ContinuityAxiom.False.html#9946" class="Function">β</a> <a id="10625" class="Symbol">(</a><a id="10626" href="ContinuityAxiom.False.html#10426" class="Function">α</a> <a id="10628" href="ContinuityAxiom.False.html#8907" class="Function">m</a><a id="10629" class="Symbol">)</a>
+    <a id="10635" href="ContinuityAxiom.False.html#10609" class="Function">fact₃</a> <a id="10641" class="Symbol">=</a> <a id="10643" href="ContinuityAxiom.False.html#10288" class="Function">fact₂</a> <a id="10649" href="ContinuityAxiom.False.html#10426" class="Function">α</a> <a id="10651" href="ContinuityAxiom.False.html#10540" class="Function">α-fact₁</a>
+
+    <a id="10664" href="ContinuityAxiom.False.html#10664" class="Function">fact₄</a> <a id="10670" class="Symbol">:</a> <a id="10672" href="ContinuityAxiom.False.html#9946" class="Function">β</a> <a id="10674" class="Number">0</a> <a id="10676" href="MLTT.Id.html#193" class="Datatype Operator">＝</a> <a id="10678" class="Number">1</a>
+    <a id="10684" href="ContinuityAxiom.False.html#10664" class="Function">fact₄</a> <a id="10690" class="Symbol">=</a>
+     <a id="10697" href="ContinuityAxiom.False.html#9946" class="Function">β</a> <a id="10699" class="Number">0</a>     <a id="10705" href="MLTT.Id.html#2239" class="Function Operator">＝⟨</a> <a id="10708" href="ContinuityAxiom.False.html#10609" class="Function">fact₃</a> <a id="10714" href="MLTT.Id.html#2239" class="Function Operator">⟩</a>
+     <a id="10721" href="ContinuityAxiom.False.html#9946" class="Function">β</a> <a id="10723" class="Symbol">(</a><a id="10724" href="ContinuityAxiom.False.html#10426" class="Function">α</a> <a id="10726" href="ContinuityAxiom.False.html#8907" class="Function">m</a><a id="10727" class="Symbol">)</a> <a id="10729" href="MLTT.Id.html#2239" class="Function Operator">＝⟨</a> <a id="10732" href="MLTT.Id.html#1136" class="Function">ap</a> <a id="10735" href="ContinuityAxiom.False.html#9946" class="Function">β</a> <a id="10737" href="ContinuityAxiom.False.html#10472" class="Function">α-fact₀</a> <a id="10745" href="MLTT.Id.html#2239" class="Function Operator">⟩</a>
+     <a id="10752" href="ContinuityAxiom.False.html#9946" class="Function">β</a> <a id="10754" class="Symbol">(</a><a id="10755" href="ContinuityAxiom.False.html#8744" class="Function">M</a> <a id="10757" href="ContinuityAxiom.False.html#8934" class="Function">f</a><a id="10758" class="Symbol">)</a> <a id="10760" href="MLTT.Id.html#2239" class="Function Operator">＝⟨</a> <a id="10763" href="ContinuityAxiom.False.html#9992" class="Function">β-fact₀</a> <a id="10771" href="MLTT.Id.html#2239" class="Function Operator">⟩</a>
+     <a id="10778" class="Number">1</a>       <a id="10786" href="MLTT.Id.html#2321" class="Function Operator">∎</a>
+
+    <a id="10793" href="ContinuityAxiom.False.html#10793" class="Function">claim</a> <a id="10799" class="Symbol">:</a> <a id="10801" href="ContinuityAxiom.False.html#7488" class="Function">o</a> <a id="10803" href="ContinuityAxiom.False.html#5926" class="Function Operator">＝⟦</a> <a id="10806" href="MLTT.Natural-Numbers-Type.html#123" class="InductiveConstructor">succ</a> <a id="10811" href="ContinuityAxiom.False.html#9835" class="Bound">n</a> <a id="10813" href="ContinuityAxiom.False.html#5926" class="Function Operator">⟧</a> <a id="10815" href="ContinuityAxiom.False.html#9946" class="Function">β</a> <a id="10817" class="Symbol">→</a> <a id="10819" class="Number">0</a> <a id="10821" href="MLTT.Id.html#193" class="Datatype Operator">＝</a> <a id="10823" href="ContinuityAxiom.False.html#9946" class="Function">β</a> <a id="10825" class="Number">0</a>
+    <a id="10831" href="ContinuityAxiom.False.html#10793" class="Function">claim</a> <a id="10837" class="Symbol">=</a> <a id="10839" href="MLTT.Id.html#1136" class="Function">ap</a> <a id="10842" href="MLTT.Vector.html#256" class="Function">head</a>
+
+  <a id="10850" href="ContinuityAxiom.False.html#10850" class="Function">lemma</a> <a id="10856" class="Symbol">:</a> <a id="10858" class="Symbol">(</a><a id="10859" href="MLTT.Sigma.html#423" class="Function">Σ</a> <a id="10861" href="ContinuityAxiom.False.html#10861" class="Bound">n</a> <a id="10863" href="MLTT.Sigma.html#423" class="Function">꞉</a> <a id="10865" href="MLTT.Natural-Numbers-Type.html#96" class="Datatype">ℕ</a> <a id="10867" href="MLTT.Sigma.html#423" class="Function">,</a> <a id="10869" href="ContinuityAxiom.False.html#8744" class="Function">M</a> <a id="10871" href="ContinuityAxiom.False.html#8934" class="Function">f</a> <a id="10873" href="MLTT.Id.html#193" class="Datatype Operator">＝</a> <a id="10875" href="ContinuityAxiom.False.html#10861" class="Bound">n</a><a id="10876" class="Symbol">)</a> <a id="10878" class="Symbol">→</a> <a id="10880" class="Number">0</a> <a id="10882" href="MLTT.Id.html#193" class="Datatype Operator">＝</a> <a id="10884" class="Number">1</a>
+  <a id="10888" href="ContinuityAxiom.False.html#10850" class="Function">lemma</a> <a id="10894" class="Symbol">(</a><a id="10895" class="Number">0</a>      <a id="10902" href="MLTT.Sigma.html#395" class="InductiveConstructor Operator">,</a> <a id="10904" href="ContinuityAxiom.False.html#10904" class="Bound">r</a><a id="10905" class="Symbol">)</a> <a id="10907" class="Symbol">=</a> <a id="10909" href="ContinuityAxiom.False.html#9095" class="Function">lemma₀</a> <a id="10916" href="ContinuityAxiom.False.html#10904" class="Bound">r</a>
+  <a id="10920" href="ContinuityAxiom.False.html#10850" class="Function">lemma</a> <a id="10926" class="Symbol">(</a><a id="10927" href="MLTT.Natural-Numbers-Type.html#123" class="InductiveConstructor">succ</a> <a id="10932" href="ContinuityAxiom.False.html#10932" class="Bound">n</a> <a id="10934" href="MLTT.Sigma.html#395" class="InductiveConstructor Operator">,</a> <a id="10936" href="ContinuityAxiom.False.html#10936" class="Bound">r</a><a id="10937" class="Symbol">)</a> <a id="10939" class="Symbol">=</a> <a id="10941" href="ContinuityAxiom.False.html#9783" class="Function">lemma₁</a> <a id="10948" class="Symbol">(</a><a id="10949" href="ContinuityAxiom.False.html#10932" class="Bound">n</a> <a id="10951" href="MLTT.Sigma.html#395" class="InductiveConstructor Operator">,</a> <a id="10953" href="ContinuityAxiom.False.html#10936" class="Bound">r</a><a id="10954" class="Symbol">)</a>
+
+  <a id="10959" href="ContinuityAxiom.False.html#10959" class="Function">γ</a> <a id="10961" class="Symbol">:</a> <a id="10963" class="Number">0</a> <a id="10965" href="MLTT.Id.html#193" class="Datatype Operator">＝</a> <a id="10967" class="Number">1</a>
+  <a id="10971" href="ContinuityAxiom.False.html#10959" class="Function">γ</a> <a id="10973" class="Symbol">=</a> <a id="10975" href="ContinuityAxiom.False.html#10850" class="Function">lemma</a> <a id="10981" class="Symbol">(</a><a id="10982" href="ContinuityAxiom.False.html#8744" class="Function">M</a> <a id="10984" href="ContinuityAxiom.False.html#8934" class="Function">f</a> <a id="10986" href="MLTT.Sigma.html#395" class="InductiveConstructor Operator">,</a> <a id="10988" href="MLTT.Identity-Type.html#157" class="InductiveConstructor">refl</a><a id="10992" class="Symbol">)</a>
+
+<a id="10995" class="Markup">\end{code}</a><a id="11005" class="Background">
+
+4. Discussion
+-------------
+
+For a large research community, the terminology &quot;extensionality&quot;
+usually refers to the rule
+
+    x ＝ y implies f x ＝ f y,
+
+which here is called &quot;ap&quot; and defined above. This form of
+extensionality is a feature of intensional type theory, and can be
+regarded as a property of identity types.
+
+A red herring in connection with Andrej Bauer&#39;s post [1] is that the
+&quot;extensionality&quot; of M, that is, the availability of the function
+ap _ _ M of type f ＝ g → M f ＝ M g, is not used in the above proof. We
+only use the &quot;extensionality&quot; of first-order functions.  However, one
+of these functions, namely β, is defined indirectly from M, and so its
+&quot;extensionality&quot; relies on that of M, at least loosely speaking.
+
+What is important is that we don&#39;t use the so-called axiom of function
+extensionality (any two pointwise equal functions are equal), which is
+not available in intensional type theory.
+
+The fundamental reason for the contradiction is a topological
+phenomenon: there can&#39;t be any continuous modulus-of-continuity
+functional M. No finite part of a continuous function f : (ℕ → ℕ) → ℕ
+is enough to tell which finite part of α : ℕ → ℕ is sufficient to
+determine f(α).  In fact, what the above proof does is to use the
+hypothetical M to construct a non-continuous function f.
+
+In the topological topos all functions Baire → ℕ are continuous, both
+externally and internally, but there is no continuous M.
+
+The right notion of continuity, which is validated in some models, is
+
+ ∀ (f : Baire → ℕ) , ∀(α : Baire) , ∥ Σ n : ℕ , ∀ (β : Baire), α ＝⟦ n ⟧ β → f α ＝ f β ∥,
+
+where we use propositional truncation (or bracket types), which can
+be written, using HoTT notation [2], as
+
+ ∀ (f : Baire → ℕ) , ∀ (α : Baire) , ∃ n : ℕ) , ∀ (β : Baire) , α ＝⟦ n ⟧ β → f α ＝ f β.
+
+This implies the weaker statement
+
+ ∀ (f : Baire → ℕ) , ∀ (α : Baire) , ¬¬Σ n : ℕ , ∀ (β : Baire), α ＝⟦ n ⟧ β → f α ＝ f β,
+
+which can be expressed without hpropositional truncation and hence in
+MLTT. It is an interesting problem whether the ∃-formulation of
+continuity can be formulated in pure MLTT (with or without universes).
+
+Both the ∃-version and the ¬¬Σ version are validated in the
+topological topos interpretation and hence are consistent.
+
+Notice that a topos has both ∃ (via the subobject classifier) and Σ
+(via its local cartesian closed structure). What the above says is
+that continuity formulated with Σ is false in any topos, but
+continuity formulated with ∃ holds in some toposes.
+
+This is similar to the fact that the axiom of choice formulated with Σ
+holds in any topos, but often fails when formulated with ∃.
+
+Other continuity axioms that hold in Browerian mathematics do admit a
+consistent Σ formulation in MLTT, such as uniform continuity
+
+ ∀(f : Cantor → ℕ).Σ(n : ℕ).∀(α β : Cantor). α ＝⟦ n ⟧ β → f α ＝ f β,
+
+where Cantor is the type of infinite binary sequences [4].
+
+
+References
+----------
+
+[0] This file is available in two forms:
+    http://www.cs.bham.ac.uk/~mhe/continuity-false/continuity-false.lagda
+    http://www.cs.bham.ac.uk/~mhe/continuity-false/continuity-false.html
+
+[1] Andrej Bauer.
+    http://math.andrej.com/2011/07/27/definability-and-extensionality-of-the-modulus-of-continuity-functional/
+
+[2] The HoTT Book. http://homotopytypetheory.org/book/
+
+    Chapter 1 introduces intensional MLTT without its homotopical extensions.
+    The appendix gives a formal treatment of MLTT with and without the extensions.
+
+[3] The Agda Wiki. http://wiki.portal.chalmers.se/agda/pmwiki.php
+
+[4] Chuangjie Xu and M.H. Escardó.
+    A constructive model of uniform continuity.
+    M. Hasegawa (Ed.): TLCA 2013, LNCS 7941, pp. 236-249. Springer, Heidelberg 2013.
+
+[4&#39;] M.H. Escardó and Chuangjie Xu.
+    A constructive manifestation of the Kleene-Kreisel continuous functionals. Submitted.
+    http://www.cs.bham.ac.uk/~mhe/papers/kleene-kreisel.pdf
+
+[5] M. Beeson. Foundations of Constructive Mathematics:
+    Metamathematical Studies, Springer, Berlin/Heidelberg/New York, 1985.
+
+[6] T. Coquand. Type Theory and Univalent Foundation.
+    Royal Society meeting, 26 Nov 2013.
+    http://www.cse.chalmers.se/~coquand/rs.pdf
+</a></pre></body></html>
