@@ -11,16 +11,16 @@ The list monad.
 
 <a id="128" class="Keyword">open</a> <a id="133" class="Keyword">import</a> <a id="140" href="Games.Monad.html" class="Module">Games.Monad</a>
 <a id="152" class="Keyword">open</a> <a id="157" class="Keyword">import</a> <a id="164" href="MLTT.Spartan.html" class="Module">MLTT.Spartan</a> <a id="177" class="Keyword">hiding</a> <a id="184" class="Symbol">(</a><a id="185" href="MLTT.Id.html#438" class="Function">J</a><a id="186" class="Symbol">)</a>
-<a id="188" class="Keyword">open</a> <a id="193" class="Keyword">import</a> <a id="200" href="MLTT.List.html" class="Module">MLTT.List</a> <a id="210" class="Keyword">hiding</a> <a id="217" class="Symbol">(</a><a id="218" href="MLTT.List.html#2235" class="Function">map</a><a id="221" class="Symbol">)</a>
+<a id="188" class="Keyword">open</a> <a id="193" class="Keyword">import</a> <a id="200" href="MLTT.List.html" class="Module">MLTT.List</a> <a id="210" class="Keyword">hiding</a> <a id="217" class="Symbol">(</a><a id="218" href="MLTT.List.html#2236" class="Function">map</a><a id="221" class="Symbol">)</a>
 
 <a id="𝕃"></a><a id="224" href="Games.List.html#224" class="Function">𝕃</a> <a id="226" class="Symbol">:</a> <a id="228" href="Games.Monad.html#256" class="Record">Monad</a>
 <a id="234" href="Games.List.html#224" class="Function">𝕃</a> <a id="236" class="Symbol">=</a> <a id="238" class="Keyword">record</a> <a id="245" class="Symbol">{</a>
  <a id="248" href="Games.Monad.html#306" class="Field">functor</a> <a id="256" class="Symbol">=</a> <a id="258" href="MLTT.List.html#439" class="Datatype">List</a> <a id="263" class="Symbol">;</a>
- <a id="266" href="Games.Monad.html#330" class="Field">η</a>       <a id="274" class="Symbol">=</a> <a id="276" href="MLTT.List.html#1536" class="Function Operator">[_]</a> <a id="280" class="Symbol">;</a>
- <a id="283" href="Games.Monad.html#369" class="Field">ext</a>     <a id="291" class="Symbol">=</a> <a id="293" href="MLTT.List.html#14534" class="Function">List-ext</a> <a id="302" class="Symbol">;</a>
- <a id="305" href="Games.Monad.html#436" class="Field">ext-η</a>   <a id="313" class="Symbol">=</a> <a id="315" href="MLTT.List.html#13744" class="Function">concat-singletons</a> <a id="333" class="Symbol">;</a>
- <a id="336" href="Games.Monad.html#500" class="Field">unit</a>    <a id="344" class="Symbol">=</a> <a id="346" href="MLTT.List.html#14646" class="Function">List-ext-unit</a> <a id="360" class="Symbol">;</a>
- <a id="363" href="Games.Monad.html#571" class="Field">assoc</a>   <a id="371" class="Symbol">=</a> <a id="373" href="MLTT.List.html#14805" class="Function">List-ext-assoc</a>
+ <a id="266" href="Games.Monad.html#330" class="Field">η</a>       <a id="274" class="Symbol">=</a> <a id="276" href="MLTT.List.html#1537" class="Function Operator">[_]</a> <a id="280" class="Symbol">;</a>
+ <a id="283" href="Games.Monad.html#369" class="Field">ext</a>     <a id="291" class="Symbol">=</a> <a id="293" href="MLTT.List.html#14536" class="Function">List-ext</a> <a id="302" class="Symbol">;</a>
+ <a id="305" href="Games.Monad.html#436" class="Field">ext-η</a>   <a id="313" class="Symbol">=</a> <a id="315" href="MLTT.List.html#13746" class="Function">concat-singletons</a> <a id="333" class="Symbol">;</a>
+ <a id="336" href="Games.Monad.html#500" class="Field">unit</a>    <a id="344" class="Symbol">=</a> <a id="346" href="MLTT.List.html#14648" class="Function">List-ext-unit</a> <a id="360" class="Symbol">;</a>
+ <a id="363" href="Games.Monad.html#571" class="Field">assoc</a>   <a id="371" class="Symbol">=</a> <a id="373" href="MLTT.List.html#14807" class="Function">List-ext-assoc</a>
  <a id="389" class="Symbol">}</a>
 
 <a id="392" class="Keyword">module</a> <a id="List-definitions"></a><a id="399" href="Games.List.html#399" class="Module">List-definitions</a> <a id="416" class="Keyword">where</a>
