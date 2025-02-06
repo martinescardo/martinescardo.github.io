@@ -44,34 +44,34 @@ See https://agda.readthedocs.io/en/latest/language/literal-overloading.html
 
 <a id="make-decimal-with-no-constraint"></a><a id="1069" href="Notation.Decimal.html#1069" class="Function">make-decimal-with-no-constraint</a>
  <a id="1102" class="Symbol">:</a> <a id="1104" class="Symbol">{</a><a id="1105" href="Notation.Decimal.html#1105" class="Bound">A</a> <a id="1107" class="Symbol">:</a> <a id="1109" href="MLTT.Universes.html#3834" class="Generalizable">𝓤</a> <a id="1111" href="MLTT.Universes.html#3977" class="Function Operator">̇</a> <a id="1113" class="Symbol">}</a>
- <a id="1116" class="Symbol">→</a> <a id="1118" class="Symbol">((</a><a id="1120" href="Notation.Decimal.html#1120" class="Bound">n</a> <a id="1122" class="Symbol">:</a> <a id="1124" href="MLTT.Natural-Numbers-Type.html#96" class="Datatype">ℕ</a><a id="1125" class="Symbol">)</a>  <a id="1128" class="Symbol">{{</a> <a id="1131" href="Notation.Decimal.html#1131" class="Bound">_</a> <a id="1133" class="Symbol">:</a> <a id="1135" href="Notation.Decimal.html#924" class="Datatype">No-Constraint</a><a id="1148" class="Symbol">}}</a> <a id="1151" class="Symbol">→</a> <a id="1153" href="Notation.Decimal.html#1105" class="Bound">A</a><a id="1154" class="Symbol">)</a>
- <a id="1157" class="Symbol">→</a> <a id="1159" href="Notation.Decimal.html#397" class="Record">Decimal</a> <a id="1167" href="Notation.Decimal.html#1105" class="Bound">A</a>
-<a id="1169" href="Notation.Decimal.html#1069" class="Function">make-decimal-with-no-constraint</a> <a id="1201" href="Notation.Decimal.html#1201" class="Bound">f</a> <a id="1203" class="Symbol">=</a>
- <a id="1206" class="Keyword">record</a> <a id="1213" class="Symbol">{</a>
-   <a id="1218" href="Notation.Decimal.html#463" class="Field">constraint</a> <a id="1229" class="Symbol">=</a> <a id="1231" class="Symbol">λ</a> <a id="1233" href="Notation.Decimal.html#1233" class="Bound">_</a> <a id="1235" class="Symbol">→</a> <a id="1237" href="Notation.Decimal.html#924" class="Datatype">No-Constraint</a>
- <a id="1252" class="Symbol">;</a> <a id="1254" href="Notation.Decimal.html#488" class="Field">fromℕ</a> <a id="1260" class="Symbol">=</a> <a id="1262" href="Notation.Decimal.html#1201" class="Bound">f</a>
- <a id="1265" class="Symbol">}</a>
+ <a id="1116" class="Symbol">→</a> <a id="1118" class="Symbol">((</a><a id="1120" href="Notation.Decimal.html#1120" class="Bound">n</a> <a id="1122" class="Symbol">:</a> <a id="1124" href="MLTT.Natural-Numbers-Type.html#96" class="Datatype">ℕ</a><a id="1125" class="Symbol">)</a>  <a id="1128" class="Symbol">{{</a><a id="1130" href="Notation.Decimal.html#1130" class="Bound">_</a> <a id="1132" class="Symbol">:</a> <a id="1134" href="Notation.Decimal.html#924" class="Datatype">No-Constraint</a><a id="1147" class="Symbol">}}</a> <a id="1150" class="Symbol">→</a> <a id="1152" href="Notation.Decimal.html#1105" class="Bound">A</a><a id="1153" class="Symbol">)</a>
+ <a id="1156" class="Symbol">→</a> <a id="1158" href="Notation.Decimal.html#397" class="Record">Decimal</a> <a id="1166" href="Notation.Decimal.html#1105" class="Bound">A</a>
+<a id="1168" href="Notation.Decimal.html#1069" class="Function">make-decimal-with-no-constraint</a> <a id="1200" href="Notation.Decimal.html#1200" class="Bound">f</a> <a id="1202" class="Symbol">=</a>
+ <a id="1205" class="Keyword">record</a> <a id="1212" class="Symbol">{</a>
+   <a id="1217" href="Notation.Decimal.html#463" class="Field">constraint</a> <a id="1228" class="Symbol">=</a> <a id="1230" class="Symbol">λ</a> <a id="1232" href="Notation.Decimal.html#1232" class="Bound">_</a> <a id="1234" class="Symbol">→</a> <a id="1236" href="Notation.Decimal.html#924" class="Datatype">No-Constraint</a>
+ <a id="1251" class="Symbol">;</a> <a id="1253" href="Notation.Decimal.html#488" class="Field">fromℕ</a> <a id="1259" class="Symbol">=</a> <a id="1261" href="Notation.Decimal.html#1200" class="Bound">f</a>
+ <a id="1264" class="Symbol">}</a>
 
-<a id="make-negative-with-no-constraint"></a><a id="1268" href="Notation.Decimal.html#1268" class="Function">make-negative-with-no-constraint</a>
- <a id="1302" class="Symbol">:</a> <a id="1304" class="Symbol">{</a><a id="1305" href="Notation.Decimal.html#1305" class="Bound">A</a> <a id="1307" class="Symbol">:</a> <a id="1309" href="MLTT.Universes.html#3834" class="Generalizable">𝓤</a> <a id="1311" href="MLTT.Universes.html#3977" class="Function Operator">̇</a> <a id="1313" class="Symbol">}</a>
- <a id="1316" class="Symbol">→</a> <a id="1318" class="Symbol">((</a><a id="1320" href="Notation.Decimal.html#1320" class="Bound">n</a> <a id="1322" class="Symbol">:</a> <a id="1324" href="MLTT.Natural-Numbers-Type.html#96" class="Datatype">ℕ</a><a id="1325" class="Symbol">)</a>  <a id="1328" class="Symbol">{{</a><a id="1330" href="Notation.Decimal.html#1330" class="Bound">_</a> <a id="1332" class="Symbol">:</a> <a id="1334" href="Notation.Decimal.html#924" class="Datatype">No-Constraint</a><a id="1347" class="Symbol">}}</a> <a id="1350" class="Symbol">→</a> <a id="1352" href="Notation.Decimal.html#1305" class="Bound">A</a><a id="1353" class="Symbol">)</a>
- <a id="1356" class="Symbol">→</a> <a id="1358" href="Notation.Decimal.html#655" class="Record">Negative</a> <a id="1367" href="Notation.Decimal.html#1305" class="Bound">A</a>
-<a id="1369" href="Notation.Decimal.html#1268" class="Function">make-negative-with-no-constraint</a> <a id="1402" href="Notation.Decimal.html#1402" class="Bound">f</a> <a id="1404" class="Symbol">=</a>
- <a id="1407" class="Keyword">record</a> <a id="1414" class="Symbol">{</a>
-   <a id="1419" href="Notation.Decimal.html#722" class="Field">constraint</a> <a id="1430" class="Symbol">=</a> <a id="1432" class="Symbol">λ</a> <a id="1434" href="Notation.Decimal.html#1434" class="Bound">_</a> <a id="1436" class="Symbol">→</a> <a id="1438" href="Notation.Decimal.html#924" class="Datatype">No-Constraint</a>
- <a id="1453" class="Symbol">;</a> <a id="1455" href="Notation.Decimal.html#747" class="Field">fromNeg</a> <a id="1463" class="Symbol">=</a> <a id="1465" href="Notation.Decimal.html#1402" class="Bound">f</a>
- <a id="1468" class="Symbol">}</a>
+<a id="make-negative-with-no-constraint"></a><a id="1267" href="Notation.Decimal.html#1267" class="Function">make-negative-with-no-constraint</a>
+ <a id="1301" class="Symbol">:</a> <a id="1303" class="Symbol">{</a><a id="1304" href="Notation.Decimal.html#1304" class="Bound">A</a> <a id="1306" class="Symbol">:</a> <a id="1308" href="MLTT.Universes.html#3834" class="Generalizable">𝓤</a> <a id="1310" href="MLTT.Universes.html#3977" class="Function Operator">̇</a> <a id="1312" class="Symbol">}</a>
+ <a id="1315" class="Symbol">→</a> <a id="1317" class="Symbol">((</a><a id="1319" href="Notation.Decimal.html#1319" class="Bound">n</a> <a id="1321" class="Symbol">:</a> <a id="1323" href="MLTT.Natural-Numbers-Type.html#96" class="Datatype">ℕ</a><a id="1324" class="Symbol">)</a>  <a id="1327" class="Symbol">{{</a><a id="1329" href="Notation.Decimal.html#1329" class="Bound">_</a> <a id="1331" class="Symbol">:</a> <a id="1333" href="Notation.Decimal.html#924" class="Datatype">No-Constraint</a><a id="1346" class="Symbol">}}</a> <a id="1349" class="Symbol">→</a> <a id="1351" href="Notation.Decimal.html#1304" class="Bound">A</a><a id="1352" class="Symbol">)</a>
+ <a id="1355" class="Symbol">→</a> <a id="1357" href="Notation.Decimal.html#655" class="Record">Negative</a> <a id="1366" href="Notation.Decimal.html#1304" class="Bound">A</a>
+<a id="1368" href="Notation.Decimal.html#1267" class="Function">make-negative-with-no-constraint</a> <a id="1401" href="Notation.Decimal.html#1401" class="Bound">f</a> <a id="1403" class="Symbol">=</a>
+ <a id="1406" class="Keyword">record</a> <a id="1413" class="Symbol">{</a>
+   <a id="1418" href="Notation.Decimal.html#722" class="Field">constraint</a> <a id="1429" class="Symbol">=</a> <a id="1431" class="Symbol">λ</a> <a id="1433" href="Notation.Decimal.html#1433" class="Bound">_</a> <a id="1435" class="Symbol">→</a> <a id="1437" href="Notation.Decimal.html#924" class="Datatype">No-Constraint</a>
+ <a id="1452" class="Symbol">;</a> <a id="1454" href="Notation.Decimal.html#747" class="Field">fromNeg</a> <a id="1462" class="Symbol">=</a> <a id="1464" href="Notation.Decimal.html#1401" class="Bound">f</a>
+ <a id="1467" class="Symbol">}</a>
 
-<a id="1471" class="Markup">\end{code}</a><a id="1481" class="Background">
+<a id="1470" class="Markup">\end{code}</a><a id="1480" class="Background">
 
 The natural place for this would be MLTT.NaturalNumbers, but then we
 would get a circular dependency.
 
-</a><a id="1586" class="Markup">\begin{code}</a>
+</a><a id="1585" class="Markup">\begin{code}</a>
 
-<a id="1600" class="Keyword">instance</a>
- <a id="Decimal-ℕ-to-ℕ"></a><a id="1610" href="Notation.Decimal.html#1610" class="Function">Decimal-ℕ-to-ℕ</a> <a id="1625" class="Symbol">:</a> <a id="1627" href="Notation.Decimal.html#397" class="Record">Decimal</a> <a id="1635" href="MLTT.Natural-Numbers-Type.html#96" class="Datatype">ℕ</a>
- <a id="1638" href="Notation.Decimal.html#1610" class="Function">Decimal-ℕ-to-ℕ</a> <a id="1653" class="Symbol">=</a> <a id="1655" href="Notation.Decimal.html#1069" class="Function">make-decimal-with-no-constraint</a> <a id="1687" class="Symbol">(λ</a> <a id="1690" href="Notation.Decimal.html#1690" class="Bound">n</a> <a id="1692" class="Symbol">→</a> <a id="1694" href="Notation.Decimal.html#1690" class="Bound">n</a><a id="1695" class="Symbol">)</a>
+<a id="1599" class="Keyword">instance</a>
+ <a id="Decimal-ℕ-to-ℕ"></a><a id="1609" href="Notation.Decimal.html#1609" class="Function">Decimal-ℕ-to-ℕ</a> <a id="1624" class="Symbol">:</a> <a id="1626" href="Notation.Decimal.html#397" class="Record">Decimal</a> <a id="1634" href="MLTT.Natural-Numbers-Type.html#96" class="Datatype">ℕ</a>
+ <a id="1637" href="Notation.Decimal.html#1609" class="Function">Decimal-ℕ-to-ℕ</a> <a id="1652" class="Symbol">=</a> <a id="1654" href="Notation.Decimal.html#1069" class="Function">make-decimal-with-no-constraint</a> <a id="1686" class="Symbol">(λ</a> <a id="1689" href="Notation.Decimal.html#1689" class="Bound">n</a> <a id="1691" class="Symbol">→</a> <a id="1693" href="Notation.Decimal.html#1689" class="Bound">n</a><a id="1694" class="Symbol">)</a>
 
-<a id="1698" class="Markup">\end{code}</a><a id="1708" class="Background">
+<a id="1697" class="Markup">\end{code}</a><a id="1707" class="Background">
 </a></pre></body></html>
