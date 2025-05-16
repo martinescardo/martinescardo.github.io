@@ -1,14 +1,15 @@
 <!DOCTYPE HTML>
 <html><head><meta charset="utf-8"><title>Ordinals.Exponentiation.index</title><link rel="stylesheet" href="Agda.css"><script type="text/javascript" src="highlight-hover.js"></script></head><body><pre class="Agda"><a id="1" class="Background">Tom de Jong, Nicolai Kraus, Fredrik Nordvall Forsberg, Chuangjie Xu,
 November 2023 — January 2025
+With additions in April 2025, notably (9) below.
 
-</a><a id="100" class="Markup">\begin{code}</a>
+</a><a id="149" class="Markup">\begin{code}</a>
 
-<a id="114" class="Symbol">{-#</a> <a id="118" class="Keyword">OPTIONS</a> <a id="126" class="Pragma">--safe</a> <a id="133" class="Pragma">--without-K</a> <a id="145" class="Pragma">--exact-split</a> <a id="159" class="Symbol">#-}</a>
+<a id="163" class="Symbol">{-#</a> <a id="167" class="Keyword">OPTIONS</a> <a id="175" class="Pragma">--safe</a> <a id="182" class="Pragma">--without-K</a> <a id="194" class="Pragma">--exact-split</a> <a id="208" class="Symbol">#-}</a>
 
-<a id="164" class="Keyword">module</a> <a id="171" href="Ordinals.Exponentiation.index.html" class="Module">Ordinals.Exponentiation.index</a> <a id="201" class="Keyword">where</a>
+<a id="213" class="Keyword">module</a> <a id="220" href="Ordinals.Exponentiation.index.html" class="Module">Ordinals.Exponentiation.index</a> <a id="250" class="Keyword">where</a>
 
-<a id="208" class="Markup">\end{code}</a><a id="218" class="Background">
+<a id="257" class="Markup">\end{code}</a><a id="267" class="Background">
 
 OVERVIEW
 ========
@@ -25,26 +26,30 @@ OVERVIEW
 7. Auxiliary result that an ordinal α has a trichotomous least element if and
    only if it can be decomposed as 𝟙ₒ +ₒ α&#39; for a necessarily unique ordinal α&#39;.
 8. Constructive taboos involving ordinal exponentiation.
+9. An implementation of Robin Grayson&#39;s variant of the decreasing list
+   construction of exponentials and a proof that it is not, in general, an
+   ordinal.
 
-</a><a id="1039" class="Markup">\begin{code}</a>
+</a><a id="1246" class="Markup">\begin{code}</a>
 
-<a id="1053" class="Keyword">import</a> <a id="1060" href="Ordinals.Exponentiation.Specification.html" class="Module">Ordinals.Exponentiation.Specification</a>                     <a id="1118" class="Comment">-- (1)</a>
-<a id="1125" class="Keyword">import</a> <a id="1132" href="Ordinals.Exponentiation.Supremum.html" class="Module">Ordinals.Exponentiation.Supremum</a>                          <a id="1190" class="Comment">-- (2)</a>
-<a id="1197" class="Keyword">import</a> <a id="1204" href="Ordinals.Exponentiation.DecreasingList.html" class="Module">Ordinals.Exponentiation.DecreasingList</a>                    <a id="1262" class="Comment">-- (3)</a>
-<a id="1269" class="Keyword">import</a> <a id="1276" href="Ordinals.Exponentiation.DecreasingListProperties-Concrete.html" class="Module">Ordinals.Exponentiation.DecreasingListProperties-Concrete</a> <a id="1334" class="Comment">-- (4)</a>
-<a id="1341" class="Keyword">import</a> <a id="1348" href="Ordinals.Exponentiation.RelatingConstructions.html" class="Module">Ordinals.Exponentiation.RelatingConstructions</a>             <a id="1406" class="Comment">-- (5)</a>
-<a id="1413" class="Keyword">import</a> <a id="1420" href="Ordinals.Exponentiation.PropertiesViaTransport.html" class="Module">Ordinals.Exponentiation.PropertiesViaTransport</a>            <a id="1478" class="Comment">-- (6)</a>
-<a id="1485" class="Keyword">import</a> <a id="1492" href="Ordinals.Exponentiation.TrichotomousLeastElement.html" class="Module">Ordinals.Exponentiation.TrichotomousLeastElement</a>          <a id="1550" class="Comment">-- (7)</a>
-<a id="1557" class="Keyword">import</a> <a id="1564" href="Ordinals.Exponentiation.Taboos.html" class="Module">Ordinals.Exponentiation.Taboos</a>                            <a id="1622" class="Comment">-- (8)</a>
+<a id="1260" class="Keyword">import</a> <a id="1267" href="Ordinals.Exponentiation.Specification.html" class="Module">Ordinals.Exponentiation.Specification</a>                     <a id="1325" class="Comment">-- (1)</a>
+<a id="1332" class="Keyword">import</a> <a id="1339" href="Ordinals.Exponentiation.Supremum.html" class="Module">Ordinals.Exponentiation.Supremum</a>                          <a id="1397" class="Comment">-- (2)</a>
+<a id="1404" class="Keyword">import</a> <a id="1411" href="Ordinals.Exponentiation.DecreasingList.html" class="Module">Ordinals.Exponentiation.DecreasingList</a>                    <a id="1469" class="Comment">-- (3)</a>
+<a id="1476" class="Keyword">import</a> <a id="1483" href="Ordinals.Exponentiation.DecreasingListProperties-Concrete.html" class="Module">Ordinals.Exponentiation.DecreasingListProperties-Concrete</a> <a id="1541" class="Comment">-- (4)</a>
+<a id="1548" class="Keyword">import</a> <a id="1555" href="Ordinals.Exponentiation.RelatingConstructions.html" class="Module">Ordinals.Exponentiation.RelatingConstructions</a>             <a id="1613" class="Comment">-- (5)</a>
+<a id="1620" class="Keyword">import</a> <a id="1627" href="Ordinals.Exponentiation.PropertiesViaTransport.html" class="Module">Ordinals.Exponentiation.PropertiesViaTransport</a>            <a id="1685" class="Comment">-- (6)</a>
+<a id="1692" class="Keyword">import</a> <a id="1699" href="Ordinals.Exponentiation.TrichotomousLeastElement.html" class="Module">Ordinals.Exponentiation.TrichotomousLeastElement</a>          <a id="1757" class="Comment">-- (7)</a>
+<a id="1764" class="Keyword">import</a> <a id="1771" href="Ordinals.Exponentiation.Taboos.html" class="Module">Ordinals.Exponentiation.Taboos</a>                            <a id="1829" class="Comment">-- (8)</a>
+<a id="1836" class="Keyword">import</a> <a id="1843" href="Ordinals.Exponentiation.Grayson.html" class="Module">Ordinals.Exponentiation.Grayson</a>                           <a id="1901" class="Comment">-- (9)</a>
 
-<a id="1630" class="Markup">\end{code}</a><a id="1640" class="Background">
+<a id="1909" class="Markup">\end{code}</a><a id="1919" class="Background">
 
 The following file acts as an index for the paper &quot;Ordinal Exponentiation in
 Homotopy Type Theory&quot;.
 
-</a><a id="1743" class="Markup">\begin{code}</a>
+</a><a id="2022" class="Markup">\begin{code}</a>
 
-<a id="1757" class="Keyword">import</a> <a id="1764" href="Ordinals.Exponentiation.Paper.html" class="Module">Ordinals.Exponentiation.Paper</a>
+<a id="2036" class="Keyword">import</a> <a id="2043" href="Ordinals.Exponentiation.Paper.html" class="Module">Ordinals.Exponentiation.Paper</a>
 
-<a id="1795" class="Markup">\end{code}</a><a id="1805" class="Background">
+<a id="2074" class="Markup">\end{code}</a><a id="2084" class="Background">
 </a></pre></body></html>
