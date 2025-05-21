@@ -13,29 +13,20 @@ Refactored and slightly improved October 2022, and then again in April
 <a id="251" class="Keyword">import</a> <a id="258" href="Games.Constructor.html" class="Module">Games.Constructor</a>             <a id="288" class="Comment">-- For simplifying the construction of games.</a>
 <a id="334" class="Keyword">import</a> <a id="341" href="Games.Examples.html" class="Module">Games.Examples</a>                <a id="371" class="Comment">-- Miscelaneous small examples.</a>
 <a id="403" class="Keyword">import</a> <a id="410" href="Games.FiniteHistoryDependent.html" class="Module">Games.FiniteHistoryDependent</a>  <a id="440" class="Comment">-- Theory of finite history dependent games.</a>
-<a id="485" class="Keyword">import</a> <a id="492" href="Games.Transformer.html" class="Module">Games.Transformer</a>             <a id="522" class="Comment">-- With additional monad for irrational players.</a>
-<a id="571" class="Keyword">import</a> <a id="578" href="Games.J.html" class="Module">Games.J</a>                       <a id="608" class="Comment">-- Selection monad.</a>
-<a id="628" class="Keyword">import</a> <a id="635" href="Games.J-transf.html" class="Module">Games.J-transf</a>                <a id="665" class="Comment">-- A selection monad transformer.</a>
-<a id="699" class="Keyword">import</a> <a id="706" href="Games.J-transf-variation.html" class="Module">Games.J-transf-variation</a>      <a id="736" class="Comment">-- Another selection monad transformer.</a>
-<a id="776" class="Keyword">import</a> <a id="783" href="Games.K.html" class="Module">Games.K</a>                       <a id="813" class="Comment">-- Continuation (or quantifier) monad.</a>
-<a id="852" class="Keyword">import</a> <a id="859" href="Games.JK.html" class="Module">Games.JK</a>                      <a id="889" class="Comment">-- Relationship between the two mondas.</a>
-<a id="929" class="Keyword">import</a> <a id="936" href="Games.Monad.html" class="Module">Games.Monad</a>                   <a id="966" class="Comment">-- (Automatically strong, wild) monads on types.</a>
-<a id="1015" class="Keyword">import</a> <a id="1022" href="Games.Reader.html" class="Module">Games.Reader</a>                  <a id="1052" class="Comment">-- Reader monad.</a>
-<a id="1069" class="Keyword">import</a> <a id="1076" href="Games.List.html" class="Module">Games.List</a>                    <a id="1106" class="Comment">-- List monad.</a>
-<a id="1121" class="Keyword">import</a> <a id="1128" href="Games.NonEmptyList.html" class="Module">Games.NonEmptyList</a>            <a id="1158" class="Comment">-- Non-empty list monad.</a>
-<a id="1183" class="Keyword">import</a> <a id="1190" href="Games.NonEmptyListOriginal.html" class="Module">Games.NonEmptyListOriginal</a>    <a id="1220" class="Comment">-- Non-empty list monad, original version.</a>
-<a id="1263" class="Keyword">import</a> <a id="1270" href="Games.TicTacToe0.html" class="Module">Games.TicTacToe0</a>
-<a id="1287" class="Keyword">import</a> <a id="1294" href="Games.TicTacToe1.html" class="Module">Games.TicTacToe1</a>              <a id="1324" class="Comment">-- Like TicTacToe0 but using Games.Constructor.</a>
-<a id="1372" class="Keyword">import</a> <a id="1379" href="Games.TicTacToe2.html" class="Module">Games.TicTacToe2</a>              <a id="1409" class="Comment">-- More efficient and less elegant version.</a>
-<a id="1453" class="Keyword">import</a> <a id="1460" href="Games.TypeTrees.html" class="Module">Games.TypeTrees</a>               <a id="1490" class="Comment">-- Dependent type trees.</a>
-<a id="1515" class="Keyword">import</a> <a id="1522" href="Games.alpha-beta.html" class="Module">Games.alpha-beta</a>              <a id="1552" class="Comment">-- Many new things for efficiency.</a>
-<a id="1587" class="Keyword">import</a> <a id="1594" href="Games.Discussion.html" class="Module">Games.Discussion</a>
-<a id="1611" class="Keyword">import</a> <a id="1618" href="Games.OptimalPlays.html" class="Module">Games.OptimalPlays</a>            <a id="1648" class="Comment">-- Computes the list of all optimal plays of a game.</a>
+<a id="485" class="Keyword">import</a> <a id="492" href="Games.FiniteHistoryDependentMonadic.html" class="Module">Games.FiniteHistoryDependentMonadic</a>
+                                     <a id="565" class="Comment">-- With additional monad for irrational players.</a>
+<a id="614" class="Keyword">import</a> <a id="621" href="Games.TicTacToe0.html" class="Module">Games.TicTacToe0</a>
+<a id="638" class="Keyword">import</a> <a id="645" href="Games.TicTacToe1.html" class="Module">Games.TicTacToe1</a>              <a id="675" class="Comment">-- Like TicTacToe0 but using Games.Constructor.</a>
+<a id="723" class="Keyword">import</a> <a id="730" href="Games.TicTacToe2.html" class="Module">Games.TicTacToe2</a>              <a id="760" class="Comment">-- More efficient and less elegant version.</a>
+<a id="804" class="Keyword">import</a> <a id="811" href="Games.TypeTrees.html" class="Module">Games.TypeTrees</a>               <a id="841" class="Comment">-- Dependent type trees.</a>
+<a id="866" class="Keyword">import</a> <a id="873" href="Games.alpha-beta.html" class="Module">Games.alpha-beta</a>              <a id="903" class="Comment">-- Many new things for efficiency.</a>
+<a id="938" class="Keyword">import</a> <a id="945" href="Games.Discussion.html" class="Module">Games.Discussion</a>
+<a id="962" class="Keyword">import</a> <a id="969" href="Games.OptimalPlays.html" class="Module">Games.OptimalPlays</a>            <a id="999" class="Comment">-- Computes the list of all optimal plays of a game.</a>
 
-<a id="1702" class="Comment">-- import Games.Main                 -- To be able to compile for efficieny.</a>
-                                     <a id="1816" class="Comment">-- Can&#39;t be imported here as it&#39;s not --safe.</a>
-                                     <a id="1899" class="Comment">-- This is for Agda compilation to Haskell of</a>
-                                     <a id="1982" class="Comment">-- examples to be able to run them more efficiently.</a>
+<a id="1053" class="Comment">-- import Games.Main                 -- To be able to compile for efficieny.</a>
+                                     <a id="1167" class="Comment">-- Can&#39;t be imported here as it&#39;s not --safe.</a>
+                                     <a id="1250" class="Comment">-- This is for Agda compilation to Haskell of</a>
+                                     <a id="1333" class="Comment">-- examples to be able to run them more efficiently.</a>
 
-<a id="2036" class="Markup">\end{code}</a><a id="2046" class="Background">
+<a id="1387" class="Markup">\end{code}</a><a id="1397" class="Background">
 </a></pre></body></html>
