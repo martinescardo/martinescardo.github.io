@@ -1,24 +1,26 @@
 <!DOCTYPE HTML>
-<html><head><meta charset="utf-8"><title>Lifting.index</title><link rel="stylesheet" href="Agda.css"><script type="text/javascript" src="highlight-hover.js"></script></head><body><pre class="Agda"><a id="1" class="Background">Martin Escardo
+<html><head><meta charset="utf-8"><title>Lifting.index</title><link rel="stylesheet" href="Agda.css"><script type="text/javascript" src="highlight-hover.js"></script></head><body><pre class="Agda"><a id="1" class="Background">Martin Escardo, 2018-2019
 
-</a><a id="17" class="Markup">\begin{code}</a>
+The lifting (aka partial-map classifier) monad.
 
-<a id="31" class="Symbol">{-#</a> <a id="35" class="Keyword">OPTIONS</a> <a id="43" class="Pragma">--safe</a> <a id="50" class="Pragma">--without-K</a> <a id="62" class="Symbol">#-}</a>
+</a><a id="77" class="Markup">\begin{code}</a>
 
-<a id="67" class="Keyword">module</a> <a id="74" href="Lifting.index.html" class="Module">Lifting.index</a> <a id="88" class="Keyword">where</a>
+<a id="91" class="Symbol">{-#</a> <a id="95" class="Keyword">OPTIONS</a> <a id="103" class="Pragma">--safe</a> <a id="110" class="Pragma">--without-K</a> <a id="122" class="Symbol">#-}</a>
 
-<a id="95" class="Keyword">import</a> <a id="102" href="Lifting.Algebras.html" class="Module">Lifting.Algebras</a>
-<a id="119" class="Keyword">import</a> <a id="126" href="Lifting.EmbeddingDirectly.html" class="Module">Lifting.EmbeddingDirectly</a>
-<a id="152" class="Keyword">import</a> <a id="159" href="Lifting.EmbeddingViaSIP.html" class="Module">Lifting.EmbeddingViaSIP</a>
-<a id="183" class="Keyword">import</a> <a id="190" href="Lifting.IdentityViaSIP.html" class="Module">Lifting.IdentityViaSIP</a>
-<a id="213" class="Keyword">import</a> <a id="220" href="Lifting.Construction.html" class="Module">Lifting.Construction</a>
-<a id="241" class="Keyword">import</a> <a id="248" href="Lifting.Miscelanea.html" class="Module">Lifting.Miscelanea</a>
-<a id="267" class="Keyword">import</a> <a id="274" href="Lifting.Miscelanea-PropExt-FunExt.html" class="Module">Lifting.Miscelanea-PropExt-FunExt</a>
-<a id="308" class="Keyword">import</a> <a id="315" href="Lifting.Monad.html" class="Module">Lifting.Monad</a>
-<a id="329" class="Keyword">import</a> <a id="336" href="Lifting.MonadVariation.html" class="Module">Lifting.MonadVariation</a>
-<a id="359" class="Keyword">import</a> <a id="366" href="Lifting.Set.html" class="Module">Lifting.Set</a>
-<a id="378" class="Keyword">import</a> <a id="385" href="Lifting.Size.html" class="Module">Lifting.Size</a>
-<a id="398" class="Keyword">import</a> <a id="405" href="Lifting.UnivalentPrecategory.html" class="Module">Lifting.UnivalentPrecategory</a>
+<a id="127" class="Keyword">module</a> <a id="134" href="Lifting.index.html" class="Module">Lifting.index</a> <a id="148" class="Keyword">where</a>
 
-<a id="435" class="Markup">\end{code}</a><a id="445" class="Background">
+<a id="155" class="Keyword">import</a> <a id="162" href="Lifting.Algebras.html" class="Module">Lifting.Algebras</a>
+<a id="179" class="Keyword">import</a> <a id="186" href="Lifting.Construction.html" class="Module">Lifting.Construction</a>
+<a id="207" class="Keyword">import</a> <a id="214" href="Lifting.EmbeddingDirectly.html" class="Module">Lifting.EmbeddingDirectly</a>
+<a id="240" class="Keyword">import</a> <a id="247" href="Lifting.EmbeddingViaSIP.html" class="Module">Lifting.EmbeddingViaSIP</a>
+<a id="271" class="Keyword">import</a> <a id="278" href="Lifting.IdentityViaSIP.html" class="Module">Lifting.IdentityViaSIP</a>
+<a id="301" class="Keyword">import</a> <a id="308" href="Lifting.Miscelanea.html" class="Module">Lifting.Miscelanea</a>                  <a id="344" class="Comment">-- By Tom de Jong 2019</a>
+<a id="367" class="Keyword">import</a> <a id="374" href="Lifting.Miscelanea-PropExt-FunExt.html" class="Module">Lifting.Miscelanea-PropExt-FunExt</a>   <a id="410" class="Comment">-- By Tom de Jong 2019</a>
+<a id="433" class="Keyword">import</a> <a id="440" href="Lifting.Monad.html" class="Module">Lifting.Monad</a>
+<a id="454" class="Keyword">import</a> <a id="461" href="Lifting.MonadVariation.html" class="Module">Lifting.MonadVariation</a>
+<a id="484" class="Keyword">import</a> <a id="491" href="Lifting.Set.html" class="Module">Lifting.Set</a>
+<a id="503" class="Keyword">import</a> <a id="510" href="Lifting.Size.html" class="Module">Lifting.Size</a>
+<a id="523" class="Keyword">import</a> <a id="530" href="Lifting.UnivalentPrecategory.html" class="Module">Lifting.UnivalentPrecategory</a>
+
+<a id="560" class="Markup">\end{code}</a><a id="570" class="Background">
 </a></pre></body></html>
