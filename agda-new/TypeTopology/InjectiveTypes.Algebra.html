@@ -27,9 +27,8 @@ embeddings j and k, as in the following commutative diagram.
                      ➘  ↓  ↙
                         D
 
-
 Pullback naturality is expressed by the following diagram, where the
-square is a pullback.
+square is a pullback and j (and hence k) is an embedding.
 
                    k
               A ──────→ B
@@ -47,7 +46,6 @@ square is a pullback.
                      ➘  ↓
                         D
 
-
 It actually suffices to consider pullbacks of the form
 
 
@@ -58,47 +56,68 @@ It actually suffices to consider pullbacks of the form
               ↓    j    ↓
               X ──────→ Y
 
+One may wonder whether it is reasonable to consider naturality with
+respect to all commutative squares
 
-Notice that 𝓛-algebraic structure is, by definition, flabbiness
-structure plus an associativity law on this structure.
+                   k
+              A ──────→ B
+              │         │
+           g  │         │ h
+              │         │
+              ↓    j    ↓
+              X ──────→ Y
 
-</a><a id="1825" class="Markup">\begin{code}</a>
+where j and k are embeddings, but which are not necessarily
+pullbacks. However, a counter-example is the commutative square
 
-<a id="1839" class="Symbol">{-#</a> <a id="1843" class="Keyword">OPTIONS</a> <a id="1851" class="Pragma">--safe</a> <a id="1858" class="Pragma">--without-K</a> <a id="1870" class="Pragma">--lossy-unification</a> <a id="1890" class="Symbol">#-}</a>
 
-<a id="1895" class="Keyword">open</a> <a id="1900" class="Keyword">import</a> <a id="1907" href="UF.FunExt.html" class="Module">UF.FunExt</a>
+              𝟘 ──────→ 𝟙
+              │         │
+              │         │
+              │         │
+              ↓         ↓
+              𝟙 ──────→ 𝟙
 
-<a id="1918" class="Keyword">module</a> <a id="1925" href="InjectiveTypes.Algebra.html" class="Module">InjectiveTypes.Algebra</a>
-        <a id="1956" class="Symbol">(</a><a id="1957" href="InjectiveTypes.Algebra.html#1957" class="Bound">fe</a> <a id="1960" class="Symbol">:</a> <a id="1962" href="UF.FunExt.html#995" class="Function">FunExt</a><a id="1968" class="Symbol">)</a>
-       <a id="1977" class="Keyword">where</a>
+Finally, notice that 𝓛-algebraic structure is, by definition,
+flabbiness structure plus an associativity law on this structure.
 
-<a id="fe&#39;"></a><a id="1984" href="InjectiveTypes.Algebra.html#1984" class="Function">fe&#39;</a> <a id="1988" class="Symbol">:</a> <a id="1990" href="UF.FunExt.html#1047" class="Function">Fun-Ext</a>
-<a id="1998" href="InjectiveTypes.Algebra.html#1984" class="Function">fe&#39;</a> <a id="2002" class="Symbol">{</a><a id="2003" href="InjectiveTypes.Algebra.html#2003" class="Bound">𝓤</a><a id="2004" class="Symbol">}</a> <a id="2006" class="Symbol">{</a><a id="2007" href="InjectiveTypes.Algebra.html#2007" class="Bound">𝓥</a><a id="2008" class="Symbol">}</a> <a id="2010" class="Symbol">=</a> <a id="2012" href="InjectiveTypes.Algebra.html#1957" class="Bound">fe</a> <a id="2015" href="InjectiveTypes.Algebra.html#2003" class="Bound">𝓤</a> <a id="2017" href="InjectiveTypes.Algebra.html#2007" class="Bound">𝓥</a>
+</a><a id="2434" class="Markup">\begin{code}</a>
 
-<a id="2020" class="Keyword">open</a> <a id="2025" class="Keyword">import</a> <a id="2032" href="MLTT.Spartan.html" class="Module">MLTT.Spartan</a>
-<a id="2045" class="Keyword">open</a> <a id="2050" class="Keyword">import</a> <a id="2057" href="UF.Base.html" class="Module">UF.Base</a>
-<a id="2065" class="Keyword">open</a> <a id="2070" class="Keyword">import</a> <a id="2077" href="UF.Embeddings.html" class="Module">UF.Embeddings</a>
-<a id="2091" class="Keyword">open</a> <a id="2096" class="Keyword">import</a> <a id="2103" href="UF.Equiv.html" class="Module">UF.Equiv</a>
-<a id="2112" class="Keyword">open</a> <a id="2117" class="Keyword">import</a> <a id="2124" href="UF.EquivalenceExamples.html" class="Module">UF.EquivalenceExamples</a>
-<a id="2147" class="Keyword">open</a> <a id="2152" class="Keyword">import</a> <a id="2159" href="UF.Subsingletons.html" class="Module">UF.Subsingletons</a>
-<a id="2176" class="Keyword">open</a> <a id="2181" class="Keyword">import</a> <a id="2188" href="UF.Subsingletons-FunExt.html" class="Module">UF.Subsingletons-FunExt</a>
-<a id="2212" class="Keyword">open</a> <a id="2217" class="Keyword">import</a> <a id="2224" href="UF.Univalence.html" class="Module">UF.Univalence</a>
-<a id="2238" class="Keyword">open</a> <a id="2243" class="Keyword">import</a> <a id="2250" href="InjectiveTypes.Blackboard.html" class="Module">InjectiveTypes.Blackboard</a> <a id="2276" href="InjectiveTypes.Algebra.html#1957" class="Bound">fe</a> <a id="2279" class="Keyword">hiding</a> <a id="2286" class="Symbol">(</a><a id="2287" href="InjectiveTypes.Blackboard.html#6034" class="Function">ηΠ</a> <a id="2290" class="Symbol">;</a> <a id="2292" href="InjectiveTypes.Blackboard.html#6078" class="Function">ηΣ</a><a id="2294" class="Symbol">)</a>
+<a id="2448" class="Symbol">{-#</a> <a id="2452" class="Keyword">OPTIONS</a> <a id="2460" class="Pragma">--safe</a> <a id="2467" class="Pragma">--without-K</a> <a id="2479" class="Pragma">--lossy-unification</a> <a id="2499" class="Symbol">#-}</a>
 
-<a id="2297" class="Keyword">module</a> <a id="2304" href="InjectiveTypes.Algebra.html#2304" class="Module">_</a> <a id="2306" class="Symbol">{</a><a id="2307" href="InjectiveTypes.Algebra.html#2307" class="Bound">𝓤</a> <a id="2309" href="InjectiveTypes.Algebra.html#2309" class="Bound">𝓦</a> <a id="2311" class="Symbol">:</a> <a id="2313" href="Agda.Primitive.html#742" class="Postulate">Universe</a><a id="2321" class="Symbol">}</a>
-         <a id="2332" class="Symbol">(</a><a id="2333" href="InjectiveTypes.Algebra.html#2333" class="Bound">D</a> <a id="2335" class="Symbol">:</a> <a id="2337" href="InjectiveTypes.Algebra.html#2309" class="Bound">𝓦</a> <a id="2339" href="MLTT.Universes.html#3977" class="Function Operator">̇</a> <a id="2341" class="Symbol">)</a>
-         <a id="2352" class="Symbol">(</a><a id="2353" href="InjectiveTypes.Algebra.html#2353" class="Bound">D-ainj</a> <a id="2360" class="Symbol">:</a> <a id="2362" href="InjectiveTypes.Blackboard.html#15851" class="Function">ainjective-type</a> <a id="2378" href="InjectiveTypes.Algebra.html#2333" class="Bound">D</a> <a id="2380" href="InjectiveTypes.Algebra.html#2307" class="Bound">𝓤</a> <a id="2382" href="InjectiveTypes.Algebra.html#2307" class="Bound">𝓤</a><a id="2383" class="Symbol">)</a>
-       <a id="2392" class="Keyword">where</a>
+<a id="2504" class="Keyword">open</a> <a id="2509" class="Keyword">import</a> <a id="2516" href="UF.FunExt.html" class="Module">UF.FunExt</a>
 
- <a id="2400" href="InjectiveTypes.Algebra.html#2400" class="Function Operator">_∣_</a> <a id="2404" class="Symbol">:</a> <a id="2406" class="Symbol">{</a><a id="2407" href="InjectiveTypes.Algebra.html#2407" class="Bound">X</a> <a id="2409" href="InjectiveTypes.Algebra.html#2409" class="Bound">Y</a> <a id="2411" class="Symbol">:</a> <a id="2413" href="InjectiveTypes.Algebra.html#2307" class="Bound">𝓤</a> <a id="2415" href="MLTT.Universes.html#3977" class="Function Operator">̇</a> <a id="2417" class="Symbol">}</a> <a id="2419" class="Symbol">→</a> <a id="2421" class="Symbol">(</a><a id="2422" href="InjectiveTypes.Algebra.html#2407" class="Bound">X</a> <a id="2424" class="Symbol">→</a> <a id="2426" href="InjectiveTypes.Algebra.html#2333" class="Bound">D</a><a id="2427" class="Symbol">)</a> <a id="2429" class="Symbol">→</a> <a id="2431" class="Symbol">(</a><a id="2432" href="InjectiveTypes.Algebra.html#2407" class="Bound">X</a> <a id="2434" href="UF.Embeddings.html#2020" class="Function Operator">↪</a> <a id="2436" href="InjectiveTypes.Algebra.html#2409" class="Bound">Y</a><a id="2437" class="Symbol">)</a> <a id="2439" class="Symbol">→</a> <a id="2441" class="Symbol">(</a><a id="2442" href="InjectiveTypes.Algebra.html#2409" class="Bound">Y</a> <a id="2444" class="Symbol">→</a> <a id="2446" href="InjectiveTypes.Algebra.html#2333" class="Bound">D</a><a id="2447" class="Symbol">)</a>
- <a id="2450" href="InjectiveTypes.Algebra.html#2450" class="Bound">f</a> <a id="2452" href="InjectiveTypes.Algebra.html#2400" class="Function Operator">∣</a> <a id="2454" href="InjectiveTypes.Algebra.html#2454" class="Bound">𝕛</a> <a id="2456" class="Symbol">=</a> <a id="2458" href="InjectiveTypes.Blackboard.html#16604" class="Function">extension&#39;</a> <a id="2469" href="InjectiveTypes.Algebra.html#2353" class="Bound">D-ainj</a> <a id="2476" href="InjectiveTypes.Algebra.html#2454" class="Bound">𝕛</a> <a id="2478" href="InjectiveTypes.Algebra.html#2450" class="Bound">f</a>
+<a id="2527" class="Keyword">module</a> <a id="2534" href="InjectiveTypes.Algebra.html" class="Module">InjectiveTypes.Algebra</a>
+        <a id="2565" class="Symbol">(</a><a id="2566" href="InjectiveTypes.Algebra.html#2566" class="Bound">fe</a> <a id="2569" class="Symbol">:</a> <a id="2571" href="UF.FunExt.html#995" class="Function">FunExt</a><a id="2577" class="Symbol">)</a>
+       <a id="2586" class="Keyword">where</a>
 
- <a id="2482" href="InjectiveTypes.Algebra.html#2482" class="Function">stability-under-composition</a> <a id="2510" class="Symbol">:</a> <a id="2512" href="InjectiveTypes.Algebra.html#2309" class="Bound">𝓦</a> <a id="2514" href="Agda.Primitive.html#961" class="Primitive Operator">⊔</a> <a id="2516" href="InjectiveTypes.Algebra.html#2307" class="Bound">𝓤</a> <a id="2518" href="Agda.Primitive.html#931" class="Primitive Operator">⁺</a> <a id="2520" href="MLTT.Universes.html#3977" class="Function Operator">̇</a>
- <a id="2523" href="InjectiveTypes.Algebra.html#2482" class="Function">stability-under-composition</a> <a id="2551" class="Symbol">=</a>
-    <a id="2557" class="Symbol">{</a><a id="2558" href="InjectiveTypes.Algebra.html#2558" class="Bound">X</a> <a id="2560" href="InjectiveTypes.Algebra.html#2560" class="Bound">Y</a> <a id="2562" href="InjectiveTypes.Algebra.html#2562" class="Bound">Z</a> <a id="2564" class="Symbol">:</a> <a id="2566" href="InjectiveTypes.Algebra.html#2307" class="Bound">𝓤</a> <a id="2568" href="MLTT.Universes.html#3977" class="Function Operator">̇</a> <a id="2570" class="Symbol">}</a> <a id="2572" class="Symbol">(</a><a id="2573" href="InjectiveTypes.Algebra.html#2573" class="Bound">f</a> <a id="2575" class="Symbol">:</a> <a id="2577" href="InjectiveTypes.Algebra.html#2558" class="Bound">X</a> <a id="2579" class="Symbol">→</a> <a id="2581" href="InjectiveTypes.Algebra.html#2333" class="Bound">D</a><a id="2582" class="Symbol">)</a> <a id="2584" class="Symbol">(</a><a id="2585" href="InjectiveTypes.Algebra.html#2585" class="Bound">𝕛</a> <a id="2587" class="Symbol">:</a> <a id="2589" href="InjectiveTypes.Algebra.html#2558" class="Bound">X</a> <a id="2591" href="UF.Embeddings.html#2020" class="Function Operator">↪</a> <a id="2593" href="InjectiveTypes.Algebra.html#2560" class="Bound">Y</a><a id="2594" class="Symbol">)</a> <a id="2596" class="Symbol">(</a><a id="2597" href="InjectiveTypes.Algebra.html#2597" class="Bound">𝕜</a> <a id="2599" class="Symbol">:</a> <a id="2601" href="InjectiveTypes.Algebra.html#2560" class="Bound">Y</a> <a id="2603" href="UF.Embeddings.html#2020" class="Function Operator">↪</a> <a id="2605" href="InjectiveTypes.Algebra.html#2562" class="Bound">Z</a><a id="2606" class="Symbol">)</a>
-  <a id="2610" class="Symbol">→</a> <a id="2612" href="InjectiveTypes.Algebra.html#2573" class="Bound">f</a> <a id="2614" href="InjectiveTypes.Algebra.html#2400" class="Function Operator">∣</a> <a id="2616" class="Symbol">(</a><a id="2617" href="InjectiveTypes.Algebra.html#2597" class="Bound">𝕜</a> <a id="2619" href="UF.Embeddings.html#2147" class="Function Operator">∘↪</a> <a id="2622" href="InjectiveTypes.Algebra.html#2585" class="Bound">𝕛</a><a id="2623" class="Symbol">)</a> <a id="2625" href="MLTT.Id.html#1891" class="Function Operator">∼</a> <a id="2627" class="Symbol">(</a><a id="2628" href="InjectiveTypes.Algebra.html#2573" class="Bound">f</a> <a id="2630" href="InjectiveTypes.Algebra.html#2400" class="Function Operator">∣</a> <a id="2632" href="InjectiveTypes.Algebra.html#2585" class="Bound">𝕛</a><a id="2633" class="Symbol">)</a> <a id="2635" href="InjectiveTypes.Algebra.html#2400" class="Function Operator">∣</a> <a id="2637" href="InjectiveTypes.Algebra.html#2597" class="Bound">𝕜</a>
+<a id="fe&#39;"></a><a id="2593" href="InjectiveTypes.Algebra.html#2593" class="Function">fe&#39;</a> <a id="2597" class="Symbol">:</a> <a id="2599" href="UF.FunExt.html#1047" class="Function">Fun-Ext</a>
+<a id="2607" href="InjectiveTypes.Algebra.html#2593" class="Function">fe&#39;</a> <a id="2611" class="Symbol">{</a><a id="2612" href="InjectiveTypes.Algebra.html#2612" class="Bound">𝓤</a><a id="2613" class="Symbol">}</a> <a id="2615" class="Symbol">{</a><a id="2616" href="InjectiveTypes.Algebra.html#2616" class="Bound">𝓥</a><a id="2617" class="Symbol">}</a> <a id="2619" class="Symbol">=</a> <a id="2621" href="InjectiveTypes.Algebra.html#2566" class="Bound">fe</a> <a id="2624" href="InjectiveTypes.Algebra.html#2612" class="Bound">𝓤</a> <a id="2626" href="InjectiveTypes.Algebra.html#2616" class="Bound">𝓥</a>
 
-<a id="2640" class="Markup">\end{code}</a><a id="2650" class="Background">
+<a id="2629" class="Keyword">open</a> <a id="2634" class="Keyword">import</a> <a id="2641" href="MLTT.Spartan.html" class="Module">MLTT.Spartan</a>
+<a id="2654" class="Keyword">open</a> <a id="2659" class="Keyword">import</a> <a id="2666" href="UF.Base.html" class="Module">UF.Base</a>
+<a id="2674" class="Keyword">open</a> <a id="2679" class="Keyword">import</a> <a id="2686" href="UF.Embeddings.html" class="Module">UF.Embeddings</a>
+<a id="2700" class="Keyword">open</a> <a id="2705" class="Keyword">import</a> <a id="2712" href="UF.Equiv.html" class="Module">UF.Equiv</a>
+<a id="2721" class="Keyword">open</a> <a id="2726" class="Keyword">import</a> <a id="2733" href="UF.EquivalenceExamples.html" class="Module">UF.EquivalenceExamples</a>
+<a id="2756" class="Keyword">open</a> <a id="2761" class="Keyword">import</a> <a id="2768" href="UF.Subsingletons.html" class="Module">UF.Subsingletons</a>
+<a id="2785" class="Keyword">open</a> <a id="2790" class="Keyword">import</a> <a id="2797" href="UF.Subsingletons-FunExt.html" class="Module">UF.Subsingletons-FunExt</a>
+<a id="2821" class="Keyword">open</a> <a id="2826" class="Keyword">import</a> <a id="2833" href="UF.Univalence.html" class="Module">UF.Univalence</a>
+<a id="2847" class="Keyword">open</a> <a id="2852" class="Keyword">import</a> <a id="2859" href="InjectiveTypes.Blackboard.html" class="Module">InjectiveTypes.Blackboard</a> <a id="2885" href="InjectiveTypes.Algebra.html#2566" class="Bound">fe</a> <a id="2888" class="Keyword">hiding</a> <a id="2895" class="Symbol">(</a><a id="2896" href="InjectiveTypes.Blackboard.html#6034" class="Function">ηΠ</a> <a id="2899" class="Symbol">;</a> <a id="2901" href="InjectiveTypes.Blackboard.html#6078" class="Function">ηΣ</a><a id="2903" class="Symbol">)</a>
+
+<a id="2906" class="Keyword">module</a> <a id="2913" href="InjectiveTypes.Algebra.html#2913" class="Module">_</a> <a id="2915" class="Symbol">{</a><a id="2916" href="InjectiveTypes.Algebra.html#2916" class="Bound">𝓤</a> <a id="2918" href="InjectiveTypes.Algebra.html#2918" class="Bound">𝓦</a> <a id="2920" class="Symbol">:</a> <a id="2922" href="Agda.Primitive.html#742" class="Postulate">Universe</a><a id="2930" class="Symbol">}</a>
+         <a id="2941" class="Symbol">(</a><a id="2942" href="InjectiveTypes.Algebra.html#2942" class="Bound">D</a> <a id="2944" class="Symbol">:</a> <a id="2946" href="InjectiveTypes.Algebra.html#2918" class="Bound">𝓦</a> <a id="2948" href="MLTT.Universes.html#3977" class="Function Operator">̇</a> <a id="2950" class="Symbol">)</a>
+         <a id="2961" class="Symbol">(</a><a id="2962" href="InjectiveTypes.Algebra.html#2962" class="Bound">D-ainj</a> <a id="2969" class="Symbol">:</a> <a id="2971" href="InjectiveTypes.Blackboard.html#15851" class="Function">ainjective-type</a> <a id="2987" href="InjectiveTypes.Algebra.html#2942" class="Bound">D</a> <a id="2989" href="InjectiveTypes.Algebra.html#2916" class="Bound">𝓤</a> <a id="2991" href="InjectiveTypes.Algebra.html#2916" class="Bound">𝓤</a><a id="2992" class="Symbol">)</a>
+       <a id="3001" class="Keyword">where</a>
+
+ <a id="3009" href="InjectiveTypes.Algebra.html#3009" class="Function Operator">_∣_</a> <a id="3013" class="Symbol">:</a> <a id="3015" class="Symbol">{</a><a id="3016" href="InjectiveTypes.Algebra.html#3016" class="Bound">X</a> <a id="3018" href="InjectiveTypes.Algebra.html#3018" class="Bound">Y</a> <a id="3020" class="Symbol">:</a> <a id="3022" href="InjectiveTypes.Algebra.html#2916" class="Bound">𝓤</a> <a id="3024" href="MLTT.Universes.html#3977" class="Function Operator">̇</a> <a id="3026" class="Symbol">}</a> <a id="3028" class="Symbol">→</a> <a id="3030" class="Symbol">(</a><a id="3031" href="InjectiveTypes.Algebra.html#3016" class="Bound">X</a> <a id="3033" class="Symbol">→</a> <a id="3035" href="InjectiveTypes.Algebra.html#2942" class="Bound">D</a><a id="3036" class="Symbol">)</a> <a id="3038" class="Symbol">→</a> <a id="3040" class="Symbol">(</a><a id="3041" href="InjectiveTypes.Algebra.html#3016" class="Bound">X</a> <a id="3043" href="UF.Embeddings.html#2020" class="Function Operator">↪</a> <a id="3045" href="InjectiveTypes.Algebra.html#3018" class="Bound">Y</a><a id="3046" class="Symbol">)</a> <a id="3048" class="Symbol">→</a> <a id="3050" class="Symbol">(</a><a id="3051" href="InjectiveTypes.Algebra.html#3018" class="Bound">Y</a> <a id="3053" class="Symbol">→</a> <a id="3055" href="InjectiveTypes.Algebra.html#2942" class="Bound">D</a><a id="3056" class="Symbol">)</a>
+ <a id="3059" href="InjectiveTypes.Algebra.html#3059" class="Bound">f</a> <a id="3061" href="InjectiveTypes.Algebra.html#3009" class="Function Operator">∣</a> <a id="3063" href="InjectiveTypes.Algebra.html#3063" class="Bound">𝕛</a> <a id="3065" class="Symbol">=</a> <a id="3067" href="InjectiveTypes.Blackboard.html#16604" class="Function">extension&#39;</a> <a id="3078" href="InjectiveTypes.Algebra.html#2962" class="Bound">D-ainj</a> <a id="3085" href="InjectiveTypes.Algebra.html#3063" class="Bound">𝕛</a> <a id="3087" href="InjectiveTypes.Algebra.html#3059" class="Bound">f</a>
+
+ <a id="3091" href="InjectiveTypes.Algebra.html#3091" class="Function">stability-under-composition</a> <a id="3119" class="Symbol">:</a> <a id="3121" href="InjectiveTypes.Algebra.html#2918" class="Bound">𝓦</a> <a id="3123" href="Agda.Primitive.html#961" class="Primitive Operator">⊔</a> <a id="3125" href="InjectiveTypes.Algebra.html#2916" class="Bound">𝓤</a> <a id="3127" href="Agda.Primitive.html#931" class="Primitive Operator">⁺</a> <a id="3129" href="MLTT.Universes.html#3977" class="Function Operator">̇</a>
+ <a id="3132" href="InjectiveTypes.Algebra.html#3091" class="Function">stability-under-composition</a> <a id="3160" class="Symbol">=</a>
+    <a id="3166" class="Symbol">{</a><a id="3167" href="InjectiveTypes.Algebra.html#3167" class="Bound">X</a> <a id="3169" href="InjectiveTypes.Algebra.html#3169" class="Bound">Y</a> <a id="3171" href="InjectiveTypes.Algebra.html#3171" class="Bound">Z</a> <a id="3173" class="Symbol">:</a> <a id="3175" href="InjectiveTypes.Algebra.html#2916" class="Bound">𝓤</a> <a id="3177" href="MLTT.Universes.html#3977" class="Function Operator">̇</a> <a id="3179" class="Symbol">}</a> <a id="3181" class="Symbol">(</a><a id="3182" href="InjectiveTypes.Algebra.html#3182" class="Bound">f</a> <a id="3184" class="Symbol">:</a> <a id="3186" href="InjectiveTypes.Algebra.html#3167" class="Bound">X</a> <a id="3188" class="Symbol">→</a> <a id="3190" href="InjectiveTypes.Algebra.html#2942" class="Bound">D</a><a id="3191" class="Symbol">)</a> <a id="3193" class="Symbol">(</a><a id="3194" href="InjectiveTypes.Algebra.html#3194" class="Bound">𝕛</a> <a id="3196" class="Symbol">:</a> <a id="3198" href="InjectiveTypes.Algebra.html#3167" class="Bound">X</a> <a id="3200" href="UF.Embeddings.html#2020" class="Function Operator">↪</a> <a id="3202" href="InjectiveTypes.Algebra.html#3169" class="Bound">Y</a><a id="3203" class="Symbol">)</a> <a id="3205" class="Symbol">(</a><a id="3206" href="InjectiveTypes.Algebra.html#3206" class="Bound">𝕜</a> <a id="3208" class="Symbol">:</a> <a id="3210" href="InjectiveTypes.Algebra.html#3169" class="Bound">Y</a> <a id="3212" href="UF.Embeddings.html#2020" class="Function Operator">↪</a> <a id="3214" href="InjectiveTypes.Algebra.html#3171" class="Bound">Z</a><a id="3215" class="Symbol">)</a>
+  <a id="3219" class="Symbol">→</a> <a id="3221" href="InjectiveTypes.Algebra.html#3182" class="Bound">f</a> <a id="3223" href="InjectiveTypes.Algebra.html#3009" class="Function Operator">∣</a> <a id="3225" class="Symbol">(</a><a id="3226" href="InjectiveTypes.Algebra.html#3206" class="Bound">𝕜</a> <a id="3228" href="UF.Embeddings.html#2147" class="Function Operator">∘↪</a> <a id="3231" href="InjectiveTypes.Algebra.html#3194" class="Bound">𝕛</a><a id="3232" class="Symbol">)</a> <a id="3234" href="MLTT.Id.html#1891" class="Function Operator">∼</a> <a id="3236" class="Symbol">(</a><a id="3237" href="InjectiveTypes.Algebra.html#3182" class="Bound">f</a> <a id="3239" href="InjectiveTypes.Algebra.html#3009" class="Function Operator">∣</a> <a id="3241" href="InjectiveTypes.Algebra.html#3194" class="Bound">𝕛</a><a id="3242" class="Symbol">)</a> <a id="3244" href="InjectiveTypes.Algebra.html#3009" class="Function Operator">∣</a> <a id="3246" href="InjectiveTypes.Algebra.html#3206" class="Bound">𝕜</a>
+
+<a id="3249" class="Markup">\end{code}</a><a id="3259" class="Background">
 
 To be continued, following gist.InjectivesVersusAlgebras.
 </a></pre></body></html>

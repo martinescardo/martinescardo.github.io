@@ -1,23 +1,23 @@
 <!DOCTYPE HTML>
-<html><head><meta charset="utf-8"><title>MonadOnTypes.index</title><link rel="stylesheet" href="Agda.css"><script type="text/javascript" src="highlight-hover.js"></script></head><body><pre class="Agda"><a id="1" class="Background">Martin Escardo and Paulo Oliva
+<html><head><meta charset="utf-8"><title>MonadOnTypes.index</title><link rel="stylesheet" href="Agda.css"><script type="text/javascript" src="highlight-hover.js"></script></head><body><pre class="Agda"><a id="1" class="Background">Martin Escardo and Paulo Oliva, 2023-2024
 
 
-</a><a id="34" class="Markup">\begin{code}</a>
+</a><a id="45" class="Markup">\begin{code}</a>
 
-<a id="48" class="Symbol">{-#</a> <a id="52" class="Keyword">OPTIONS</a> <a id="60" class="Pragma">--safe</a> <a id="67" class="Pragma">--without-K</a> <a id="79" class="Symbol">#-}</a>
+<a id="59" class="Symbol">{-#</a> <a id="63" class="Keyword">OPTIONS</a> <a id="71" class="Pragma">--safe</a> <a id="78" class="Pragma">--without-K</a> <a id="90" class="Symbol">#-}</a>
 
-<a id="84" class="Keyword">module</a> <a id="91" href="MonadOnTypes.index.html" class="Module">MonadOnTypes.index</a> <a id="110" class="Keyword">where</a>
+<a id="95" class="Keyword">module</a> <a id="102" href="MonadOnTypes.index.html" class="Module">MonadOnTypes.index</a> <a id="121" class="Keyword">where</a>
 
-<a id="117" class="Keyword">import</a> <a id="124" href="MonadOnTypes.J.html" class="Module">MonadOnTypes.J</a>                       <a id="161" class="Comment">-- Selection monad.</a>
-<a id="181" class="Keyword">import</a> <a id="188" href="MonadOnTypes.J-transf.html" class="Module">MonadOnTypes.J-transf</a>                <a id="225" class="Comment">-- A selection monad transformer.</a>
-<a id="259" class="Keyword">import</a> <a id="266" href="MonadOnTypes.J-transf-variation.html" class="Module">MonadOnTypes.J-transf-variation</a>      <a id="303" class="Comment">-- Another selection monad transformer.</a>
-<a id="343" class="Keyword">import</a> <a id="350" href="MonadOnTypes.K.html" class="Module">MonadOnTypes.K</a>                       <a id="387" class="Comment">-- Continuation (or quantifier) monad.</a>
-<a id="426" class="Keyword">import</a> <a id="433" href="MonadOnTypes.JK.html" class="Module">MonadOnTypes.JK</a>                      <a id="470" class="Comment">-- Relationship between the two mondas.</a>
-<a id="510" class="Keyword">import</a> <a id="517" href="MonadOnTypes.Monad.html" class="Module">MonadOnTypes.Monad</a>                   <a id="554" class="Comment">-- (Automatically strong, wild) monads on types.</a>
-<a id="603" class="Keyword">import</a> <a id="610" href="MonadOnTypes.Reader.html" class="Module">MonadOnTypes.Reader</a>                  <a id="647" class="Comment">-- Reader monad.</a>
-<a id="664" class="Keyword">import</a> <a id="671" href="MonadOnTypes.List.html" class="Module">MonadOnTypes.List</a>                    <a id="708" class="Comment">-- List monad.</a>
-<a id="723" class="Keyword">import</a> <a id="730" href="MonadOnTypes.NonEmptyList.html" class="Module">MonadOnTypes.NonEmptyList</a>            <a id="767" class="Comment">-- Non-empty list monad.</a>
-<a id="792" class="Keyword">import</a> <a id="799" href="MonadOnTypes.NonEmptyListOriginal.html" class="Module">MonadOnTypes.NonEmptyListOriginal</a>    <a id="836" class="Comment">-- Non-empty list monad, original version.</a>
+<a id="128" class="Keyword">import</a> <a id="135" href="MonadOnTypes.J.html" class="Module">MonadOnTypes.J</a>                       <a id="172" class="Comment">-- Selection monad.</a>
+<a id="192" class="Keyword">import</a> <a id="199" href="MonadOnTypes.J-transf.html" class="Module">MonadOnTypes.J-transf</a>                <a id="236" class="Comment">-- A selection monad transformer.</a>
+<a id="270" class="Keyword">import</a> <a id="277" href="MonadOnTypes.J-transf-variation.html" class="Module">MonadOnTypes.J-transf-variation</a>      <a id="314" class="Comment">-- Another selection monad transformer.</a>
+<a id="354" class="Keyword">import</a> <a id="361" href="MonadOnTypes.K.html" class="Module">MonadOnTypes.K</a>                       <a id="398" class="Comment">-- Continuation (or quantifier) monad.</a>
+<a id="437" class="Keyword">import</a> <a id="444" href="MonadOnTypes.JK.html" class="Module">MonadOnTypes.JK</a>                      <a id="481" class="Comment">-- Relationship between the two mondas.</a>
+<a id="521" class="Keyword">import</a> <a id="528" href="MonadOnTypes.Monad.html" class="Module">MonadOnTypes.Monad</a>                   <a id="565" class="Comment">-- (Automatically strong, wild) monads on types.</a>
+<a id="614" class="Keyword">import</a> <a id="621" href="MonadOnTypes.Reader.html" class="Module">MonadOnTypes.Reader</a>                  <a id="658" class="Comment">-- Reader monad.</a>
+<a id="675" class="Keyword">import</a> <a id="682" href="MonadOnTypes.List.html" class="Module">MonadOnTypes.List</a>                    <a id="719" class="Comment">-- List monad.</a>
+<a id="734" class="Keyword">import</a> <a id="741" href="MonadOnTypes.NonEmptyList.html" class="Module">MonadOnTypes.NonEmptyList</a>            <a id="778" class="Comment">-- Non-empty list monad.</a>
+<a id="803" class="Keyword">import</a> <a id="810" href="MonadOnTypes.NonEmptyListOriginal.html" class="Module">MonadOnTypes.NonEmptyListOriginal</a>    <a id="847" class="Comment">-- Non-empty list monad, original version.</a>
 
-<a id="880" class="Markup">\end{code}</a><a id="890" class="Background">
+<a id="891" class="Markup">\end{code}</a><a id="901" class="Background">
 </a></pre></body></html>
