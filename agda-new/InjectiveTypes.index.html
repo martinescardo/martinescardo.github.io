@@ -38,16 +38,21 @@ Injectivity plays a major role in the construction of &quot;searchable&quot; or
 
 <a id="895" class="Markup">\end{code}</a><a id="905" class="Background">
 
-The following has applications to (in)decomposability.  Injective
+The following has an application to (in)decomposability.  Injective
 types have non-trivial decidable properties if and only if weak
 excluded middle (the decidability of all negative propositions) holds.
 
-</a><a id="1109" class="Markup">\begin{code}</a>
+It also has an application to get a characterization of the
+algebraically injective types as the restracts of the algebras of the
+lifting monad (also known as the partial-map classifier monad).
 
-<a id="1123" class="Keyword">import</a> <a id="1130" href="InjectiveTypes.OverSmallMaps.html" class="Module">InjectiveTypes.OverSmallMaps</a>
-<a id="1159" class="Keyword">import</a> <a id="1166" href="Taboos.Decomposability.html" class="Module">Taboos.Decomposability</a>
+</a><a id="1306" class="Markup">\begin{code}</a>
 
-<a id="1190" class="Markup">\end{code}</a><a id="1200" class="Background">
+<a id="1320" class="Keyword">import</a> <a id="1327" href="InjectiveTypes.OverSmallMaps.html" class="Module">InjectiveTypes.OverSmallMaps</a>
+<a id="1356" class="Keyword">import</a> <a id="1363" href="Taboos.Decomposability.html" class="Module">Taboos.Decomposability</a>
+<a id="1386" class="Keyword">import</a> <a id="1393" href="InjectiveTypes.CharacterizationViaLifting.html" class="Module">InjectiveTypes.CharacterizationViaLifting</a>
+
+<a id="1436" class="Markup">\end{code}</a><a id="1446" class="Background">
 
 Since the above publication, a number of new examples of injective
 types have been found, including the following:
@@ -63,28 +68,51 @@ types have been found, including the following:
 (And the type of iterative ordinals is injective, simply because it is
 equivalent to that of ordinals.)
 
-</a><a id="1628" class="Markup">\begin{code}</a>
+</a><a id="1874" class="Markup">\begin{code}</a>
 
-<a id="1642" class="Keyword">import</a> <a id="1649" href="Ordinals.Injectivity.html" class="Module">Ordinals.Injectivity</a>
-<a id="1670" class="Keyword">import</a> <a id="1677" href="Iterative.Multisets-Addendum.html" class="Module">Iterative.Multisets-Addendum</a>
-<a id="1706" class="Keyword">import</a> <a id="1713" href="Iterative.Sets-Addendum.html" class="Module">Iterative.Sets-Addendum</a>
-<a id="1737" class="Keyword">import</a> <a id="1744" href="Iterative.Ordinals.html" class="Module">Iterative.Ordinals</a>
-<a id="1763" class="Keyword">import</a> <a id="1770" href="InjectiveTypes.MathematicalStructures.html" class="Module">InjectiveTypes.MathematicalStructures</a>
-<a id="1808" class="Keyword">import</a> <a id="1815" href="InjectiveTypes.Sigma.html" class="Module">InjectiveTypes.Sigma</a>
-<a id="1836" class="Keyword">import</a> <a id="1843" href="InjectiveTypes.MathematicalStructuresMoreGeneral.html" class="Module">InjectiveTypes.MathematicalStructuresMoreGeneral</a>
-<a id="1892" class="Keyword">import</a> <a id="1899" href="InjectiveTypes.PointedDcpos.html" class="Module">InjectiveTypes.PointedDcpos</a>
-<a id="1927" class="Keyword">import</a> <a id="1934" href="InjectiveTypes.Subtypes.html" class="Module">InjectiveTypes.Subtypes</a>
+<a id="1888" class="Keyword">import</a> <a id="1895" href="Ordinals.Injectivity.html" class="Module">Ordinals.Injectivity</a>
+<a id="1916" class="Keyword">import</a> <a id="1923" href="Iterative.Multisets-Addendum.html" class="Module">Iterative.Multisets-Addendum</a>
+<a id="1952" class="Keyword">import</a> <a id="1959" href="Iterative.Sets-Addendum.html" class="Module">Iterative.Sets-Addendum</a>
+<a id="1983" class="Keyword">import</a> <a id="1990" href="Iterative.Ordinals.html" class="Module">Iterative.Ordinals</a>
+<a id="2009" class="Keyword">import</a> <a id="2016" href="InjectiveTypes.MathematicalStructures.html" class="Module">InjectiveTypes.MathematicalStructures</a>
+<a id="2054" class="Keyword">import</a> <a id="2061" href="InjectiveTypes.Sigma.html" class="Module">InjectiveTypes.Sigma</a>
+<a id="2082" class="Keyword">import</a> <a id="2089" href="InjectiveTypes.MathematicalStructuresMoreGeneral.html" class="Module">InjectiveTypes.MathematicalStructuresMoreGeneral</a>
+<a id="2138" class="Keyword">import</a> <a id="2145" href="InjectiveTypes.PointedDcpos.html" class="Module">InjectiveTypes.PointedDcpos</a>
+<a id="2173" class="Keyword">import</a> <a id="2180" href="InjectiveTypes.Subtypes.html" class="Module">InjectiveTypes.Subtypes</a>
 
-<a id="1959" class="Markup">\end{code}</a><a id="1969" class="Background">
+<a id="2205" class="Markup">\end{code}</a><a id="2215" class="Background">
 
 With Tom de Jong we prove more things about resizing, and in
 particular we show that previous results about injectivity are tight
 with respect to the universe levels, and that no small type with two
 distinct points can be injective without Ω¬¬-resizing.
 
-</a><a id="2226" class="Markup">\begin{code}</a>
+</a><a id="2472" class="Markup">\begin{code}</a>
 
-<a id="2240" class="Keyword">import</a> <a id="2247" href="InjectiveTypes.Resizing.html" class="Module">InjectiveTypes.Resizing</a>
+<a id="2486" class="Keyword">import</a> <a id="2493" href="InjectiveTypes.Resizing.html" class="Module">InjectiveTypes.Resizing</a>
 
-<a id="2272" class="Markup">\end{code}</a><a id="2282" class="Background">
+<a id="2518" class="Markup">\end{code}</a><a id="2528" class="Background">
+
+We explore a factorization system of embeddings and fiberwise algebraically
+injective maps in the following file.
+
+</a><a id="2645" class="Markup">\begin{code}</a>
+
+<a id="2659" class="Keyword">import</a> <a id="2666" href="InjectiveTypes.WeakFactorizationSystem.html" class="Module">InjectiveTypes.WeakFactorizationSystem</a>
+
+<a id="2706" class="Markup">\end{code}</a><a id="2716" class="Background">
+
+And Martin Escardo explores a closer relation between algebraic
+injectivity and algebras of the partial-map classifier (aka lifting)
+monad in these two files.
+
+</a><a id="2878" class="Markup">\begin{code}</a>
+
+<a id="2892" class="Keyword">import</a> <a id="2899" href="InjectiveTypes.Algebra.html" class="Module">InjectiveTypes.Algebra</a>
+<a id="2922" class="Keyword">import</a> <a id="2929" href="gist.InjectivesVersusAlgebras.html" class="Module">gist.InjectivesVersusAlgebras</a>
+
+<a id="2960" class="Markup">\end{code}</a><a id="2970" class="Background">
+
+Eventually the second file will be deleted after it is moved to the
+first, in a suitable form.
 </a></pre></body></html>

@@ -5,8 +5,10 @@
    -------------------------------------------------------------
 
    Martin Escardo and collaborators,
-   2010--2024--∞, continuously evolving.
+   2010--2025--∞, continuously evolving.
+
    https://www.cs.bham.ac.uk/~mhe/
+   https://www.cs.bham.ac.uk/~mhe/TypeTopology/
    https://github.com/martinescardo/TypeTopology
 
    Tested with Agda 2.7.0.1. (It may still work with Agda 2.6.4.3.)
@@ -56,8 +58,8 @@
 
      (https://www.cs.bham.ac.uk/~mhe/TypeTopology/AllModulesIndex.html)
 
-   * In our last count, on 2024.10.15, this development has 793 Agda
-     files with 228K lines of code, including comments and blank
+   * In our last count, on 2025.05.26, this development has 834 Agda
+     files with 248K lines of code, including comments and blank
      lines.
 
 Philosophy of the repository
@@ -121,65 +123,66 @@ Philosophy of the repository
 
 Click at the imported module names to navigate to them:
 
-</a><a id="5868" class="Markup">\begin{code}</a>
+</a><a id="5917" class="Markup">\begin{code}</a>
 
-<a id="5882" class="Symbol">{-#</a> <a id="5886" class="Keyword">OPTIONS</a> <a id="5894" class="Pragma">--safe</a> <a id="5901" class="Pragma">--without-K</a> <a id="5913" class="Symbol">#-}</a>
+<a id="5931" class="Symbol">{-#</a> <a id="5935" class="Keyword">OPTIONS</a> <a id="5943" class="Pragma">--safe</a> <a id="5950" class="Pragma">--without-K</a> <a id="5962" class="Symbol">#-}</a>
 
-<a id="5918" class="Keyword">module</a> <a id="5925" href="index.html" class="Module">index</a> <a id="5931" class="Keyword">where</a>
+<a id="5967" class="Keyword">module</a> <a id="5974" href="index.html" class="Module">index</a> <a id="5980" class="Keyword">where</a>
 
-<a id="5938" class="Keyword">import</a> <a id="5945" href="Apartness.index.html" class="Module">Apartness.index</a>
-<a id="5961" class="Keyword">import</a> <a id="5968" href="BinarySystems.index.html" class="Module">BinarySystems.index</a>
-<a id="5988" class="Keyword">import</a> <a id="5995" href="CantorSchroederBernstein.index.html" class="Module">CantorSchroederBernstein.index</a>
-<a id="6026" class="Keyword">import</a> <a id="6033" href="Cardinals.index.html" class="Module">Cardinals.index</a>
-<a id="6049" class="Keyword">import</a> <a id="6056" href="Categories.index.html" class="Module">Categories.index</a>
-<a id="6073" class="Keyword">import</a> <a id="6080" href="Circle.index.html" class="Module">Circle.index</a>
-<a id="6093" class="Keyword">import</a> <a id="6100" href="CoNaturals.index.html" class="Module">CoNaturals.index</a>
-<a id="6117" class="Keyword">import</a> <a id="6124" href="ContinuityAxiom.index.html" class="Module">ContinuityAxiom.index</a>
-<a id="6146" class="Keyword">import</a> <a id="6153" href="Coslice.index.html" class="Module">Coslice.index</a>
-<a id="6167" class="Keyword">import</a> <a id="6174" href="CrossedModules.index.html" class="Module">CrossedModules.index</a>
-<a id="6195" class="Keyword">import</a> <a id="6202" href="DedekindReals.index.html" class="Module">DedekindReals.index</a>
-<a id="6222" class="Keyword">import</a> <a id="6229" href="DiscreteGraphicMonoids.index.html" class="Module">DiscreteGraphicMonoids.index</a>
-<a id="6258" class="Keyword">import</a> <a id="6265" href="DomainTheory.index.html" class="Module">DomainTheory.index</a>
-<a id="6284" class="Keyword">import</a> <a id="6291" href="Dominance.index.html" class="Module">Dominance.index</a>
-<a id="6307" class="Keyword">import</a> <a id="6314" href="Duploids.index.html" class="Module">Duploids.index</a>
-<a id="6329" class="Keyword">import</a> <a id="6336" href="Dyadics.index.html" class="Module">Dyadics.index</a>
-<a id="6350" class="Keyword">import</a> <a id="6357" href="DyadicsInductive.index.html" class="Module">DyadicsInductive.index</a>
-<a id="6380" class="Keyword">import</a> <a id="6387" href="EffectfulForcing.index.html" class="Module">EffectfulForcing.index</a>
-<a id="6410" class="Keyword">import</a> <a id="6417" href="Factorial.index.html" class="Module">Factorial.index</a>
-<a id="6433" class="Keyword">import</a> <a id="6440" href="Field.index.html" class="Module">Field.index</a>
-<a id="6452" class="Keyword">import</a> <a id="6459" href="Fin.index.html" class="Module">Fin.index</a>
-<a id="6469" class="Keyword">import</a> <a id="6476" href="Games.index.html" class="Module">Games.index</a>
-<a id="6488" class="Keyword">import</a> <a id="6495" href="Groups.index.html" class="Module">Groups.index</a>
-<a id="6508" class="Keyword">import</a> <a id="6515" href="InjectiveTypes.index.html" class="Module">InjectiveTypes.index</a>
-<a id="6536" class="Keyword">import</a> <a id="6543" href="Integers.index.html" class="Module">Integers.index</a>
-<a id="6558" class="Keyword">import</a> <a id="6565" href="Iterative.index.html" class="Module">Iterative.index</a>
-<a id="6581" class="Keyword">import</a> <a id="6588" href="Lifting.index.html" class="Module">Lifting.index</a>
-<a id="6602" class="Keyword">import</a> <a id="6609" href="Locales.index.html" class="Module">Locales.index</a>
-<a id="6623" class="Keyword">import</a> <a id="6630" href="MGS.index.html" class="Module">MGS.index</a>
-<a id="6640" class="Keyword">import</a> <a id="6647" href="MLTT.index.html" class="Module">MLTT.index</a>
-<a id="6658" class="Keyword">import</a> <a id="6665" href="MetricSpaces.index.html" class="Module">MetricSpaces.index</a>
-<a id="6684" class="Keyword">import</a> <a id="6691" href="Modal.index.html" class="Module">Modal.index</a>
-<a id="6703" class="Keyword">import</a> <a id="6710" href="Naturals.index.html" class="Module">Naturals.index</a>
-<a id="6725" class="Keyword">import</a> <a id="6732" href="Notation.index.html" class="Module">Notation.index</a>
-<a id="6747" class="Keyword">import</a> <a id="6754" href="NotionsOfDecidability.index.html" class="Module">NotionsOfDecidability.index</a>
-<a id="6782" class="Keyword">import</a> <a id="6789" href="OrderedTypes.index.html" class="Module">OrderedTypes.index</a>
-<a id="6808" class="Keyword">import</a> <a id="6815" href="Ordinals.index.html" class="Module">Ordinals.index</a>
-<a id="6830" class="Keyword">import</a> <a id="6837" href="PCF.index.html" class="Module">PCF.index</a>
-<a id="6847" class="Keyword">import</a> <a id="6854" href="PathSequences.index.html" class="Module">PathSequences.index</a>
-<a id="6874" class="Keyword">import</a> <a id="6881" href="Quotient.index.html" class="Module">Quotient.index</a>
-<a id="6896" class="Keyword">import</a> <a id="6903" href="Rationals.index.html" class="Module">Rationals.index</a>
-<a id="6919" class="Keyword">import</a> <a id="6926" href="Relations.index.html" class="Module">Relations.index</a>
-<a id="6942" class="Keyword">import</a> <a id="6949" href="Slice.index.html" class="Module">Slice.index</a>
-<a id="6961" class="Keyword">import</a> <a id="6968" href="TWA.index.html" class="Module">TWA.index</a>
-<a id="6978" class="Keyword">import</a> <a id="6985" href="Taboos.index.html" class="Module">Taboos.index</a>
-<a id="6998" class="Keyword">import</a> <a id="7005" href="TypeTopology.index.html" class="Module">TypeTopology.index</a>
-<a id="7024" class="Keyword">import</a> <a id="7031" href="UF.index.html" class="Module">UF.index</a>
-<a id="7040" class="Keyword">import</a> <a id="7047" href="Various.index.html" class="Module">Various.index</a>
-<a id="7061" class="Keyword">import</a> <a id="7068" href="W.index.html" class="Module">W.index</a>
-<a id="7076" class="Keyword">import</a> <a id="7083" href="WildCategories.index.html" class="Module">WildCategories.index</a>
-<a id="7104" class="Keyword">import</a> <a id="7111" href="gist.index.html" class="Module">gist.index</a>
+<a id="5987" class="Keyword">import</a> <a id="5994" href="Apartness.index.html" class="Module">Apartness.index</a>
+<a id="6010" class="Keyword">import</a> <a id="6017" href="BinarySystems.index.html" class="Module">BinarySystems.index</a>
+<a id="6037" class="Keyword">import</a> <a id="6044" href="CantorSchroederBernstein.index.html" class="Module">CantorSchroederBernstein.index</a>
+<a id="6075" class="Keyword">import</a> <a id="6082" href="Cardinals.index.html" class="Module">Cardinals.index</a>
+<a id="6098" class="Keyword">import</a> <a id="6105" href="Categories.index.html" class="Module">Categories.index</a>
+<a id="6122" class="Keyword">import</a> <a id="6129" href="Circle.index.html" class="Module">Circle.index</a>
+<a id="6142" class="Keyword">import</a> <a id="6149" href="CoNaturals.index.html" class="Module">CoNaturals.index</a>
+<a id="6166" class="Keyword">import</a> <a id="6173" href="ContinuityAxiom.index.html" class="Module">ContinuityAxiom.index</a>
+<a id="6195" class="Keyword">import</a> <a id="6202" href="Coslice.index.html" class="Module">Coslice.index</a>
+<a id="6216" class="Keyword">import</a> <a id="6223" href="CrossedModules.index.html" class="Module">CrossedModules.index</a>
+<a id="6244" class="Keyword">import</a> <a id="6251" href="DedekindReals.index.html" class="Module">DedekindReals.index</a>
+<a id="6271" class="Keyword">import</a> <a id="6278" href="DiscreteGraphicMonoids.index.html" class="Module">DiscreteGraphicMonoids.index</a>
+<a id="6307" class="Keyword">import</a> <a id="6314" href="DomainTheory.index.html" class="Module">DomainTheory.index</a>
+<a id="6333" class="Keyword">import</a> <a id="6340" href="Dominance.index.html" class="Module">Dominance.index</a>
+<a id="6356" class="Keyword">import</a> <a id="6363" href="Duploids.index.html" class="Module">Duploids.index</a>
+<a id="6378" class="Keyword">import</a> <a id="6385" href="Dyadics.index.html" class="Module">Dyadics.index</a>
+<a id="6399" class="Keyword">import</a> <a id="6406" href="DyadicsInductive.index.html" class="Module">DyadicsInductive.index</a>
+<a id="6429" class="Keyword">import</a> <a id="6436" href="EffectfulForcing.index.html" class="Module">EffectfulForcing.index</a>
+<a id="6459" class="Keyword">import</a> <a id="6466" href="Factorial.index.html" class="Module">Factorial.index</a>
+<a id="6482" class="Keyword">import</a> <a id="6489" href="Field.index.html" class="Module">Field.index</a>
+<a id="6501" class="Keyword">import</a> <a id="6508" href="Fin.index.html" class="Module">Fin.index</a>
+<a id="6518" class="Keyword">import</a> <a id="6525" href="Games.index.html" class="Module">Games.index</a>
+<a id="6537" class="Keyword">import</a> <a id="6544" href="Groups.index.html" class="Module">Groups.index</a>
+<a id="6557" class="Keyword">import</a> <a id="6564" href="InjectiveTypes.index.html" class="Module">InjectiveTypes.index</a>
+<a id="6585" class="Keyword">import</a> <a id="6592" href="Integers.index.html" class="Module">Integers.index</a>
+<a id="6607" class="Keyword">import</a> <a id="6614" href="Iterative.index.html" class="Module">Iterative.index</a>
+<a id="6630" class="Keyword">import</a> <a id="6637" href="Lifting.index.html" class="Module">Lifting.index</a>
+<a id="6651" class="Keyword">import</a> <a id="6658" href="Locales.index.html" class="Module">Locales.index</a>
+<a id="6672" class="Keyword">import</a> <a id="6679" href="MGS.index.html" class="Module">MGS.index</a>
+<a id="6689" class="Keyword">import</a> <a id="6696" href="MLTT.index.html" class="Module">MLTT.index</a>
+<a id="6707" class="Keyword">import</a> <a id="6714" href="MetricSpaces.index.html" class="Module">MetricSpaces.index</a>
+<a id="6733" class="Keyword">import</a> <a id="6740" href="Modal.index.html" class="Module">Modal.index</a>
+<a id="6752" class="Keyword">import</a> <a id="6759" href="MonadOnTypes.index.html" class="Module">MonadOnTypes.index</a>
+<a id="6778" class="Keyword">import</a> <a id="6785" href="Naturals.index.html" class="Module">Naturals.index</a>
+<a id="6800" class="Keyword">import</a> <a id="6807" href="Notation.index.html" class="Module">Notation.index</a>
+<a id="6822" class="Keyword">import</a> <a id="6829" href="NotionsOfDecidability.index.html" class="Module">NotionsOfDecidability.index</a>
+<a id="6857" class="Keyword">import</a> <a id="6864" href="OrderedTypes.index.html" class="Module">OrderedTypes.index</a>
+<a id="6883" class="Keyword">import</a> <a id="6890" href="Ordinals.index.html" class="Module">Ordinals.index</a>
+<a id="6905" class="Keyword">import</a> <a id="6912" href="PCF.index.html" class="Module">PCF.index</a>
+<a id="6922" class="Keyword">import</a> <a id="6929" href="PathSequences.index.html" class="Module">PathSequences.index</a>
+<a id="6949" class="Keyword">import</a> <a id="6956" href="Quotient.index.html" class="Module">Quotient.index</a>
+<a id="6971" class="Keyword">import</a> <a id="6978" href="Rationals.index.html" class="Module">Rationals.index</a>
+<a id="6994" class="Keyword">import</a> <a id="7001" href="Relations.index.html" class="Module">Relations.index</a>
+<a id="7017" class="Keyword">import</a> <a id="7024" href="Slice.index.html" class="Module">Slice.index</a>
+<a id="7036" class="Keyword">import</a> <a id="7043" href="TWA.index.html" class="Module">TWA.index</a>
+<a id="7053" class="Keyword">import</a> <a id="7060" href="Taboos.index.html" class="Module">Taboos.index</a>
+<a id="7073" class="Keyword">import</a> <a id="7080" href="TypeTopology.index.html" class="Module">TypeTopology.index</a>
+<a id="7099" class="Keyword">import</a> <a id="7106" href="UF.index.html" class="Module">UF.index</a>
+<a id="7115" class="Keyword">import</a> <a id="7122" href="Various.index.html" class="Module">Various.index</a>
+<a id="7136" class="Keyword">import</a> <a id="7143" href="W.index.html" class="Module">W.index</a>
+<a id="7151" class="Keyword">import</a> <a id="7158" href="WildCategories.index.html" class="Module">WildCategories.index</a>
+<a id="7179" class="Keyword">import</a> <a id="7186" href="gist.index.html" class="Module">gist.index</a>
 
-<a id="7123" class="Markup">\end{code}</a><a id="7133" class="Background">
+<a id="7198" class="Markup">\end{code}</a><a id="7208" class="Background">
 
 TODO. Explain what each of the above does here.
 
