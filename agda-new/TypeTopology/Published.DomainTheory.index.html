@@ -1,0 +1,221 @@
+<!DOCTYPE HTML>
+<html><head><meta charset="utf-8"><title>DomainTheory.index</title><link rel="stylesheet" href="Agda.css"><script type="text/javascript" src="highlight-hover.js"></script></head><body><pre class="Agda"><a id="1" class="Background">Tom de Jong, 4 June 2019
+Updated 23 December 2021
+Updated 12 and 14 June 2022
+Updated 30 October 2023 (by Ayberk Tosun)
+Updated 6 November 2023 (by Ayberk Tosun)
+Updated 31 May 2024 (by Tom de Jong)
+Updated 23 June 2024 (by Tom de Jong)
+Updated 3 and 8 July 2024 (by Tom de Jong)
+
+Index for the formalization of domain theory, briefly describing the contents of
+each directory, ordered almost¹ alphabetically by directory name.
+(¹ Basics is first.)
+
+Several additional domain-theoretic formalization targets are listed at the end.
+
+─────────────────────────────────────────────────────────────────────
+This accompanies the PhD thesis
+  Domain Theory in Constructive and Predicative Univalent Foundations
+  Tom de Jong
+  School of Computer Science, University of Birmingham
+  https://etheses.bham.ac.uk/id/eprint/13401/
+
+  Updated versions:
+  https://arxiv.org/abs/2301.12405
+  https://tdejong.com/writings/phd-thesis.pdf
+
+  Submitted: 30 September 2022
+  Defended:  20 December  2022
+  Accepted:   1 February  2023
+─────────────────────────────────────────────────────────────────────
+
+</a><a id="1087" class="Markup">\begin{code}</a>
+
+<a id="1101" class="Symbol">{-#</a> <a id="1105" class="Keyword">OPTIONS</a> <a id="1113" class="Pragma">--safe</a> <a id="1120" class="Pragma">--without-K</a> <a id="1132" class="Symbol">#-}</a>
+
+<a id="1137" class="Keyword">module</a> <a id="1144" href="DomainTheory.index.html" class="Module">DomainTheory.index</a> <a id="1163" class="Keyword">where</a>
+
+<a id="1170" class="Comment">{- Basics
+
+1. Basic definitions of directed complete posets and Scott continuous maps
+2. Exponentials of (pointed) dcpos
+3. Least fixed points of Scott continuous maps
+4. Various general definitions and facts on directed complete posets and Scott
+   continuous maps, e.g. embedding-projection pairs, locally small dcpos, etc.
+5. Definitions and properties of pointed dcpos and strict Scott continuous maps
+6. Useful facts about sup-complete dcpos, e.g. the directification of families
+7. Definitions and basic properties of the way-below relation, including
+   compactness
+
+(B1)─(B4) These files are due to Brendan Hart and were ported to TypeTopology by
+          Martín Escardó, cf. PCF.Lambda.index.lagda.
+-}</a>
+
+<a id="1883" class="Keyword">import</a> <a id="1890" href="DomainTheory.Basics.Dcpo.html" class="Module">DomainTheory.Basics.Dcpo</a>            <a id="1926" class="Comment">-- (1)</a>
+<a id="1933" class="Keyword">import</a> <a id="1940" href="DomainTheory.Basics.Exponential.html" class="Module">DomainTheory.Basics.Exponential</a>     <a id="1976" class="Comment">-- (2)</a>
+<a id="1983" class="Keyword">import</a> <a id="1990" href="DomainTheory.Basics.LeastFixedPoint.html" class="Module">DomainTheory.Basics.LeastFixedPoint</a> <a id="2026" class="Comment">-- (3)</a>
+<a id="2033" class="Keyword">import</a> <a id="2040" href="DomainTheory.Basics.Miscelanea.html" class="Module">DomainTheory.Basics.Miscelanea</a>      <a id="2076" class="Comment">-- (4)</a>
+<a id="2083" class="Keyword">import</a> <a id="2090" href="DomainTheory.Basics.Pointed.html" class="Module">DomainTheory.Basics.Pointed</a>         <a id="2126" class="Comment">-- (5)</a>
+<a id="2133" class="Keyword">import</a> <a id="2140" href="DomainTheory.Basics.SupComplete.html" class="Module">DomainTheory.Basics.SupComplete</a>     <a id="2176" class="Comment">-- (6)</a>
+<a id="2183" class="Keyword">import</a> <a id="2190" href="DomainTheory.Basics.WayBelow.html" class="Module">DomainTheory.Basics.WayBelow</a>        <a id="2226" class="Comment">-- (7)</a>
+
+<a id="2234" class="Keyword">import</a> <a id="2241" href="DomainTheory.Basics.Curry.html" class="Module">DomainTheory.Basics.Curry</a>               <a id="2281" class="Comment">-- (B1)</a>
+<a id="2289" class="Keyword">import</a> <a id="2296" href="DomainTheory.Basics.FunctionComposition.html" class="Module">DomainTheory.Basics.FunctionComposition</a> <a id="2336" class="Comment">-- (B2)</a>
+<a id="2344" class="Keyword">import</a> <a id="2351" href="DomainTheory.Basics.Products.html" class="Module">DomainTheory.Basics.Products</a>            <a id="2391" class="Comment">-- (B3)</a>
+<a id="2399" class="Keyword">import</a> <a id="2406" href="DomainTheory.Basics.ProductsContinuity.html" class="Module">DomainTheory.Basics.ProductsContinuity</a>  <a id="2446" class="Comment">-- (B4)</a>
+
+
+<a id="2456" class="Comment">{- BasesAndContinuity
+
+1. The theory of small (compact) bases
+2. With univalence and set replacement, the type of small compact bases has
+   split support (j.w.w. Ayberk Tosun; added 4 &amp; 5 October 2023)
+3. The theory of continuous/algebraic dcpos
+4. A discussion on possible definitions of continuous dcpo
+5. Continuous/algebraic dcpos in an impredicative setting (Simcha van Collem;
+   added October 2023)
+6. The Ind-completion is used to discuss the notion of (structurally/pseudo-)
+   continuous dcpos
+7. Using step functions we show that sup-complete dcpos with small compact
+   bases are closed under exponentials
+8. Definition of the notion of a Scott domain (by Ayberk Tosun)
+-}</a>
+
+<a id="3143" class="Keyword">import</a> <a id="3150" href="DomainTheory.BasesAndContinuity.Bases.html" class="Module">DomainTheory.BasesAndContinuity.Bases</a>                   <a id="3206" class="Comment">-- (1)</a>
+<a id="3213" class="Keyword">import</a> <a id="3220" href="DomainTheory.BasesAndContinuity.CompactBasis.html" class="Module">DomainTheory.BasesAndContinuity.CompactBasis</a>            <a id="3276" class="Comment">-- (2)</a>
+<a id="3283" class="Keyword">import</a> <a id="3290" href="DomainTheory.BasesAndContinuity.Continuity.html" class="Module">DomainTheory.BasesAndContinuity.Continuity</a>              <a id="3346" class="Comment">-- (3)</a>
+<a id="3353" class="Keyword">import</a> <a id="3360" href="DomainTheory.BasesAndContinuity.ContinuityDiscussion.html" class="Module">DomainTheory.BasesAndContinuity.ContinuityDiscussion</a>    <a id="3416" class="Comment">-- (4)</a>
+<a id="3423" class="Keyword">import</a> <a id="3430" href="DomainTheory.BasesAndContinuity.ContinuityImpredicative.html" class="Module">DomainTheory.BasesAndContinuity.ContinuityImpredicative</a> <a id="3486" class="Comment">-- (5)</a>
+<a id="3493" class="Keyword">import</a> <a id="3500" href="DomainTheory.BasesAndContinuity.IndCompletion.html" class="Module">DomainTheory.BasesAndContinuity.IndCompletion</a>           <a id="3556" class="Comment">-- (6)</a>
+<a id="3563" class="Keyword">import</a> <a id="3570" href="DomainTheory.BasesAndContinuity.StepFunctions.html" class="Module">DomainTheory.BasesAndContinuity.StepFunctions</a>           <a id="3626" class="Comment">-- (7)</a>
+<a id="3633" class="Keyword">import</a> <a id="3640" href="DomainTheory.BasesAndContinuity.ScottDomain.html" class="Module">DomainTheory.BasesAndContinuity.ScottDomain</a>             <a id="3696" class="Comment">-- (8)</a>
+
+<a id="3704" class="Comment">{- Bilimits
+
+1. Bilimits of directed diagrams
+2. Specializing to bilimits of ℕ-indexed diagrams
+3. Scott&#39;s famous D∞ that is isomorphic to its own function space
+-}</a>
+
+<a id="3870" class="Keyword">import</a> <a id="3877" href="DomainTheory.Bilimits.Directed.html" class="Module">DomainTheory.Bilimits.Directed</a>   <a id="3910" class="Comment">-- (1)</a>
+<a id="3917" class="Keyword">import</a> <a id="3924" href="DomainTheory.Bilimits.Sequential.html" class="Module">DomainTheory.Bilimits.Sequential</a> <a id="3957" class="Comment">-- (2)</a>
+<a id="3964" class="Keyword">import</a> <a id="3971" href="DomainTheory.Bilimits.Dinfinity.html" class="Module">DomainTheory.Bilimits.Dinfinity</a>  <a id="4004" class="Comment">-- (3)</a>
+
+<a id="4012" class="Comment">{- Examples
+
+1. The ideal completion of the dyadics is a nice example of a continuous dcpo
+   (with a small basis) that cannot be algebraic as it has no compact elements
+   at all.
+2. The lifting of a large proposition P is an algebraic dcpo that has a small
+   (compact) basis if and only if P is suitably small.
+3. The type Ω of propositions is an example of a pointed algebraic dcpo with
+   the booleans giving a small compact basis
+4. The large poset of small ordinals is an example of an algebraic dcpo with no
+   small compact basis
+   [Added 31 May 2024]
+5. The powerset is an examples of a pointed algebraic dcpo with lists giving a
+   small compact basis (through Kuratowski finite subsets)
+-}</a>
+
+<a id="4716" class="Keyword">import</a> <a id="4723" href="DomainTheory.Examples.IdlDyadics.html" class="Module">DomainTheory.Examples.IdlDyadics</a>              <a id="4769" class="Comment">-- (1)</a>
+<a id="4776" class="Keyword">import</a> <a id="4783" href="DomainTheory.Examples.LiftingLargeProposition.html" class="Module">DomainTheory.Examples.LiftingLargeProposition</a> <a id="4829" class="Comment">-- (2)</a>
+<a id="4836" class="Keyword">import</a> <a id="4843" href="DomainTheory.Examples.Omega.html" class="Module">DomainTheory.Examples.Omega</a>                   <a id="4889" class="Comment">-- (3)</a>
+<a id="4896" class="Keyword">import</a> <a id="4903" href="DomainTheory.Examples.Ordinals.html" class="Module">DomainTheory.Examples.Ordinals</a>                <a id="4949" class="Comment">-- (4)</a>
+<a id="4956" class="Keyword">import</a> <a id="4963" href="DomainTheory.Examples.Powerset.html" class="Module">DomainTheory.Examples.Powerset</a>                <a id="5009" class="Comment">-- (5)</a>
+
+<a id="5017" class="Comment">{- IdealCompletion
+
+1. Construction of the rounded ideal completion of an abstract basis
+2. Properties of the ideal completion, e.g. it has a small compact basis
+3. Through the ideal completion, every continuous dcpo with a small basis is a
+   continuous retract of an algebraic dcpo with a small compact basis
+-}</a>
+
+<a id="5332" class="Keyword">import</a> <a id="5339" href="DomainTheory.IdealCompletion.IdealCompletion.html" class="Module">DomainTheory.IdealCompletion.IdealCompletion</a> <a id="5384" class="Comment">-- (1)</a>
+<a id="5391" class="Keyword">import</a> <a id="5398" href="DomainTheory.IdealCompletion.Properties.html" class="Module">DomainTheory.IdealCompletion.Properties</a>      <a id="5443" class="Comment">-- (2)</a>
+<a id="5450" class="Keyword">import</a> <a id="5457" href="DomainTheory.IdealCompletion.Retracts.html" class="Module">DomainTheory.IdealCompletion.Retracts</a>        <a id="5502" class="Comment">-- (3)</a>
+
+<a id="5510" class="Comment">{- Lifting
+
+1. Freely adding a least element to a dcpo
+2. The lifting is the free pointed dcpo on a set
+3. The lifting of a set is algebraic with a small compact basis
+-}</a>
+
+<a id="5682" class="Keyword">import</a> <a id="5689" href="DomainTheory.Lifting.LiftingDcpo.html" class="Module">DomainTheory.Lifting.LiftingDcpo</a>         <a id="5730" class="Comment">-- (1)</a>
+<a id="5737" class="Keyword">import</a> <a id="5744" href="DomainTheory.Lifting.LiftingSet.html" class="Module">DomainTheory.Lifting.LiftingSet</a>          <a id="5785" class="Comment">-- (2)</a>
+<a id="5792" class="Keyword">import</a> <a id="5799" href="DomainTheory.Lifting.LiftingSetAlgebraic.html" class="Module">DomainTheory.Lifting.LiftingSetAlgebraic</a> <a id="5840" class="Comment">-- (3)</a>
+
+<a id="5848" class="Comment">{- ScottModelOfPCF
+
+0. Combinatory version of PCF
+1. Denotational semantics of the K, S and ifZero combinators of PCF
+2. The Scott model of the typed programming language PCF
+-}</a>
+
+<a id="6027" class="Keyword">import</a> <a id="6034" href="DomainTheory.ScottModelOfPCF.PCF.html" class="Module">DomainTheory.ScottModelOfPCF.PCF</a>             <a id="6079" class="Comment">-- (0)</a>
+<a id="6086" class="Keyword">import</a> <a id="6093" href="DomainTheory.ScottModelOfPCF.PCFCombinators.html" class="Module">DomainTheory.ScottModelOfPCF.PCFCombinators</a>  <a id="6138" class="Comment">-- (1)</a>
+<a id="6145" class="Keyword">import</a> <a id="6152" href="DomainTheory.ScottModelOfPCF.ScottModelOfPCF.html" class="Module">DomainTheory.ScottModelOfPCF.ScottModelOfPCF</a> <a id="6197" class="Comment">-- (2)</a>
+
+<a id="6205" class="Comment">{- Taboos (added 23 June 2024)
+
+1. If the flat poset with carrier 𝟙 + ℕ is ω-complete/directed complete, then
+   LPO holds.
+-}</a>
+
+<a id="6333" class="Keyword">import</a> <a id="6340" href="DomainTheory.Taboos.ClassicalLiftingOfNaturalNumbers.html" class="Module">DomainTheory.Taboos.ClassicalLiftingOfNaturalNumbers</a>
+
+<a id="6394" class="Comment">{- Topology (by Ayberk Tosun)
+
+0. The definition of the Scott topology of a dcpo
+1. Some properties of the Scott topology of a dcpo
+
+-}</a>
+
+<a id="6531" class="Keyword">import</a> <a id="6538" href="DomainTheory.Topology.ScottTopology.html" class="Module">DomainTheory.Topology.ScottTopology</a>           <a id="6584" class="Comment">-- (0)</a>
+<a id="6591" class="Keyword">import</a> <a id="6598" href="DomainTheory.Topology.ScottTopologyProperties.html" class="Module">DomainTheory.Topology.ScottTopologyProperties</a> <a id="6644" class="Comment">-- (1)</a>
+
+<a id="6652" class="Comment">{-
+  In the locale theory development, some results on the pointfree topology of
+  domains have been proved by Ayberk Tosun. Most importantly, the fact that the
+  Scott locale of a Scott domain is a spectral locale has been proved, which was
+  previously listed as an additional formalization target in the list at the
+  bottom of this module.
+
+  Such results on the pointfree topology of domains can be found in the
+  directory `Locales/ScottLocale`. The proof of spectrality is in the module
+  `Locales.ScottLocale.ScottLocalesOfScottDomains`.
+-}</a>
+
+<a id="7202" class="Comment">{- Index files for papers -}</a>
+
+<a id="7232" class="Keyword">import</a> <a id="7239" href="DomainTheory.Continuous-and-algebraic-domains.html" class="Module">DomainTheory.Continuous-and-algebraic-domains</a>
+<a id="7285" class="Keyword">import</a> <a id="7292" href="DomainTheory.Part-I.html" class="Module">DomainTheory.Part-I</a>
+<a id="7312" class="Keyword">import</a> <a id="7319" href="DomainTheory.Part-II.html" class="Module">DomainTheory.Part-II</a>
+
+<a id="7341" class="Markup">\end{code}</a><a id="7351" class="Background">
+
+Additional formalization targets
+────────────────────────────────
+
+The Formalization chapter in the aforementioned PhD thesis
+(https://arxiv.org/abs/2301.12405) details a few things (in the form of specific
+lemmas) that have been left unformalized.
+
+We present a succinct list of domain-theoretic formalization targets here:
+
+1. Complete the formalization that bounded complete (continuous) dcpos with a
+   small basis are closed under exponentials. It follows from the case of
+   algebraic domains through a lemma that is left unformalized.
+   See DomainTheory.BasesAndContinuity.StepFunctions for details.
+
+2. Formalize the untyped λ-calculus and its interpretation in Scott&#39;s D∞.
+   See DomainTheory.Bilimits.Dinfinity for the construction of D∞.
+
+3. Formalize the results in reverse mathematics and delta-complete posets.
+   See Chapter 6 of the PhD thesis for details.
+
+Item 2 should be a fun challenge for a student with an interest in
+(domain-theoretic semantics of) programming languages.
+</a></pre></body></html>
