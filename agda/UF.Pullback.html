@@ -25,11 +25,11 @@ This is loosely based on
 We assume a cospan
 
                  Y
-                 |
-                 | g
-                 |
-                 v
-      X -------&gt; C
+                 │
+                 │ g
+                 │
+                 ↓
+      X ───────→ C
            f
 
 </a><a id="619" class="Markup">\begin{code}</a>
@@ -45,12 +45,12 @@ We assume a cospan
 And we consider commutative squares of the form
 
            q
-      A -------&gt; X
-      |          |
-    p |          | g
-      |          |
-      v          v
-      Y -------&gt; Z
+      A ───────→ X
+      │          │
+    p │          │ g
+      │          │
+      ↓          ↓
+      Y ───────→ Z
             f
 
 completing the cospan.
@@ -90,23 +90,23 @@ type.
 If we have a cone
 
             q
-      P -------&gt; Y
-      |          |
-    p |          | g
-      |          |
-      v          v
-      X -------&gt; Z
+      P ───────→ Y
+      │          │
+    p │          │ g
+      │          │
+      ↓          ↓
+      X ───────→ Z
             f
 
 and a map u : A → P, we get a cone
 
           q ∘ u
-      A -------&gt; Y
-      |          |
-p ∘ u |          | g
-      |          |
-      v          v
-      X -------&gt; Z
+      A ───────→ Y
+      │          │
+p ∘ u │          │ g
+      │          │
+      ↓          ↓
+      X ───────→ Z
             f
 
 </a><a id="1928" class="Markup">\begin{code}</a>
@@ -119,12 +119,12 @@ p ∘ u |          | g
 We say that a cone
 
             q
-      P -------&gt; Y
-      |          |
-    p |          | g
-      |          |
-      v          v
-      X -------&gt; Z
+      P ───────→ Y
+      │          │
+    p │          │ g
+      │          │
+      ↓          ↓
+      X ───────→ Z
             f
 
 is a (homotopy) pullback if the cone map is an equivalence for every A.
@@ -189,12 +189,12 @@ pullbacks.
 The construction is illustrated in the following diagram.
 
                                    pb₂
- Σ (x , y) ꞉ X × Y , f x ＝ g y  -------&gt; Y
-           |                              |
-      pb₁  |                              | g
-           |                              |
-           v                              v
-           X ---------------------------&gt; Z
+ Σ (x , y) ꞉ X × Y , f x ＝ g y  ───────→ Y
+           │                              │
+      pb₁  │                              │ g
+           │                              │
+           ↓                              ↓
+           X --------------------───────→ Z
                                   f
 </a><a id="4115" class="Markup">\begin{code}</a>
 
@@ -263,12 +263,12 @@ Pullbacks of embeddings are embeddings.
 
 We have a pullback
 
-           fiber f c ----&gt; 𝟙
-              |            |
-  fiber-point |            | c
-              |            |
-              v            v
-              X ---------&gt; Z
+           fiber f c ────→ 𝟙
+              │            │
+  fiber-point │            │ c
+              │            │
+              ↓            ↓
+              X --───────→ Z
                      f
 
 </a><a id="5924" class="Markup">\begin{code}</a>
