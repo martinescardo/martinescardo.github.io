@@ -25,36 +25,36 @@ Example. The type Ω 𝓤 of propositions is Dedekind finite.
 
 </a><a id="578" class="Markup">\begin{code}</a>
 
-<a id="592" class="Keyword">open</a> <a id="597" class="Keyword">import</a> <a id="604" href="UF.FunExt.html" class="Module">UF.FunExt</a>
-<a id="614" class="Keyword">open</a> <a id="619" class="Keyword">import</a> <a id="626" href="UF.HiggsInvolutionTheorem.html" class="Module">UF.HiggsInvolutionTheorem</a>
-<a id="652" class="Keyword">open</a> <a id="657" class="Keyword">import</a> <a id="664" href="UF.Subsingletons.html" class="Module">UF.Subsingletons</a>
-<a id="681" class="Keyword">open</a> <a id="686" class="Keyword">import</a> <a id="693" href="UF.SubtypeClassifier.html" class="Module">UF.SubtypeClassifier</a>
+<a id="592" class="Keyword">open</a> <a id="597" class="Keyword">import</a> <a id="604" href="Higgs.InvolutionTheorem.html" class="Module">Higgs.InvolutionTheorem</a>
+<a id="628" class="Keyword">open</a> <a id="633" class="Keyword">import</a> <a id="640" href="UF.FunExt.html" class="Module">UF.FunExt</a>
+<a id="650" class="Keyword">open</a> <a id="655" class="Keyword">import</a> <a id="662" href="UF.Subsingletons.html" class="Module">UF.Subsingletons</a>
+<a id="679" class="Keyword">open</a> <a id="684" class="Keyword">import</a> <a id="691" href="UF.SubtypeClassifier.html" class="Module">UF.SubtypeClassifier</a>
 
-<a id="Ω-is-Dedekind-finite"></a><a id="715" href="Fin.Dedekind.html#715" class="Function">Ω-is-Dedekind-finite</a> <a id="736" class="Symbol">:</a> <a id="738" href="UF.FunExt.html#1047" class="Function">Fun-Ext</a> <a id="746" class="Symbol">→</a> <a id="748" href="UF.Subsingletons.html#7814" class="Function">Prop-Ext</a> <a id="757" class="Symbol">→</a> <a id="759" href="Fin.Dedekind.html#188" class="Function">is-Dedekind-finite</a> <a id="778" class="Symbol">(</a><a id="779" href="UF.SubtypeClassifier.html#422" class="Function">Ω</a> <a id="781" href="MLTT.Universes.html#3834" class="Generalizable">𝓤</a><a id="782" class="Symbol">)</a>
-<a id="784" href="Fin.Dedekind.html#715" class="Function">Ω-is-Dedekind-finite</a> <a id="805" href="Fin.Dedekind.html#805" class="Bound">fe</a> <a id="808" href="Fin.Dedekind.html#808" class="Bound">pe</a> <a id="811" class="Symbol">=</a> <a id="813" href="UF.HiggsInvolutionTheorem.html#3117" class="Function">autoembeddings-of-Ω-are-equivs</a> <a id="844" href="Fin.Dedekind.html#805" class="Bound">fe</a> <a id="847" href="Fin.Dedekind.html#808" class="Bound">pe</a>
+<a id="Ω-is-Dedekind-finite"></a><a id="713" href="Fin.Dedekind.html#713" class="Function">Ω-is-Dedekind-finite</a> <a id="734" class="Symbol">:</a> <a id="736" href="UF.FunExt.html#1047" class="Function">Fun-Ext</a> <a id="744" class="Symbol">→</a> <a id="746" href="UF.Subsingletons.html#7814" class="Function">Prop-Ext</a> <a id="755" class="Symbol">→</a> <a id="757" href="Fin.Dedekind.html#188" class="Function">is-Dedekind-finite</a> <a id="776" class="Symbol">(</a><a id="777" href="UF.SubtypeClassifier.html#422" class="Function">Ω</a> <a id="779" href="MLTT.Universes.html#3834" class="Generalizable">𝓤</a><a id="780" class="Symbol">)</a>
+<a id="782" href="Fin.Dedekind.html#713" class="Function">Ω-is-Dedekind-finite</a> <a id="803" href="Fin.Dedekind.html#803" class="Bound">fe</a> <a id="806" href="Fin.Dedekind.html#806" class="Bound">pe</a> <a id="809" class="Symbol">=</a> <a id="811" href="Higgs.InvolutionTheorem.html#3115" class="Function">autoembeddings-of-Ω-are-equivs</a> <a id="842" href="Fin.Dedekind.html#803" class="Bound">fe</a> <a id="845" href="Fin.Dedekind.html#806" class="Bound">pe</a>
 
-<a id="851" class="Markup">\end{code}</a><a id="861" class="Background">
+<a id="849" class="Markup">\end{code}</a><a id="859" class="Background">
 
 Example. A weakly connected type (a type that is (1-)connected if it
 is inhabited), is Dedekind finite, so, for instance, the circle S¹ is
 Dedekind finite.
 
-</a><a id="1020" class="Markup">\begin{code}</a>
+</a><a id="1018" class="Markup">\begin{code}</a>
 
-<a id="1034" class="Keyword">open</a> <a id="1039" class="Keyword">import</a> <a id="1046" href="CantorSchroederBernstein.CSB.html" class="Module">CantorSchroederBernstein.CSB</a>
-<a id="1075" class="Keyword">open</a> <a id="1080" class="Keyword">import</a> <a id="1087" href="UF.PropTrunc.html" class="Module">UF.PropTrunc</a>
+<a id="1032" class="Keyword">open</a> <a id="1037" class="Keyword">import</a> <a id="1044" href="CantorSchroederBernstein.CSB.html" class="Module">CantorSchroederBernstein.CSB</a>
+<a id="1073" class="Keyword">open</a> <a id="1078" class="Keyword">import</a> <a id="1085" href="UF.PropTrunc.html" class="Module">UF.PropTrunc</a>
 
-<a id="1101" class="Keyword">module</a> <a id="1108" href="Fin.Dedekind.html#1108" class="Module">_</a> <a id="1110" class="Symbol">(</a><a id="1111" href="Fin.Dedekind.html#1111" class="Bound">pt</a> <a id="1114" class="Symbol">:</a> <a id="1116" href="UF.PropTrunc.html#486" class="Record">propositional-truncations-exist</a><a id="1147" class="Symbol">)</a> <a id="1149" class="Keyword">where</a>
+<a id="1099" class="Keyword">module</a> <a id="1106" href="Fin.Dedekind.html#1106" class="Module">_</a> <a id="1108" class="Symbol">(</a><a id="1109" href="Fin.Dedekind.html#1109" class="Bound">pt</a> <a id="1112" class="Symbol">:</a> <a id="1114" href="UF.PropTrunc.html#486" class="Record">propositional-truncations-exist</a><a id="1145" class="Symbol">)</a> <a id="1147" class="Keyword">where</a>
 
- <a id="1157" class="Keyword">open</a> <a id="1162" class="Keyword">import</a> <a id="1169" href="UF.Connected.html" class="Module">UF.Connected</a> <a id="1182" href="Fin.Dedekind.html#1111" class="Bound">pt</a>
+ <a id="1155" class="Keyword">open</a> <a id="1160" class="Keyword">import</a> <a id="1167" href="UF.Connected.html" class="Module">UF.Connected</a> <a id="1180" href="Fin.Dedekind.html#1109" class="Bound">pt</a>
 
- <a id="1187" href="Fin.Dedekind.html#1187" class="Function">wconnected-types-are-Dedekind-finite</a> <a id="1224" class="Symbol">:</a> <a id="1226" class="Symbol">{</a><a id="1227" href="Fin.Dedekind.html#1227" class="Bound">X</a> <a id="1229" class="Symbol">:</a> <a id="1231" href="MLTT.Universes.html#3834" class="Generalizable">𝓤</a> <a id="1233" href="MLTT.Universes.html#3977" class="Function Operator">̇</a> <a id="1235" class="Symbol">}</a>
-                                      <a id="1275" class="Symbol">→</a> <a id="1277" href="UF.Connected.html#591" class="Function">is-wconnected</a> <a id="1291" href="Fin.Dedekind.html#1227" class="Bound">X</a>
-                                      <a id="1331" class="Symbol">→</a> <a id="1333" href="Fin.Dedekind.html#188" class="Function">is-Dedekind-finite</a> <a id="1352" href="Fin.Dedekind.html#1227" class="Bound">X</a>
- <a id="1355" href="Fin.Dedekind.html#1187" class="Function">wconnected-types-are-Dedekind-finite</a> <a id="1392" class="Symbol">=</a>
-  <a id="1396" href="CantorSchroederBernstein.CSB.html#21527" class="Function">CSB-for-connected-types-without-EM.wconnected-types-are-Dedekind-finite</a> <a id="1468" href="Fin.Dedekind.html#1111" class="Bound">pt</a>
+ <a id="1185" href="Fin.Dedekind.html#1185" class="Function">wconnected-types-are-Dedekind-finite</a> <a id="1222" class="Symbol">:</a> <a id="1224" class="Symbol">{</a><a id="1225" href="Fin.Dedekind.html#1225" class="Bound">X</a> <a id="1227" class="Symbol">:</a> <a id="1229" href="MLTT.Universes.html#3834" class="Generalizable">𝓤</a> <a id="1231" href="MLTT.Universes.html#3977" class="Function Operator">̇</a> <a id="1233" class="Symbol">}</a>
+                                      <a id="1273" class="Symbol">→</a> <a id="1275" href="UF.Connected.html#591" class="Function">is-wconnected</a> <a id="1289" href="Fin.Dedekind.html#1225" class="Bound">X</a>
+                                      <a id="1329" class="Symbol">→</a> <a id="1331" href="Fin.Dedekind.html#188" class="Function">is-Dedekind-finite</a> <a id="1350" href="Fin.Dedekind.html#1225" class="Bound">X</a>
+ <a id="1353" href="Fin.Dedekind.html#1185" class="Function">wconnected-types-are-Dedekind-finite</a> <a id="1390" class="Symbol">=</a>
+  <a id="1394" href="CantorSchroederBernstein.CSB.html#21527" class="Function">CSB-for-connected-types-without-EM.wconnected-types-are-Dedekind-finite</a> <a id="1466" href="Fin.Dedekind.html#1109" class="Bound">pt</a>
 
-<a id="1472" class="Markup">\end{code}</a><a id="1482" class="Background">
+<a id="1470" class="Markup">\end{code}</a><a id="1480" class="Background">
 
 TODO. Relate this to the other notions of finiteness.
 </a></pre></body></html>
