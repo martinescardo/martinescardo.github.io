@@ -195,57 +195,60 @@ closed under products and retracts.
 
 <a id="5122" class="Markup">\end{code}</a><a id="5132" class="Background">
 
-This shows that 𝟚-injecting map doesn&#39;t need to be an
+This shows that a 𝟚-injecting map doesn&#39;t need to be an
 embedding. Indeed, we have seen that the map η : X → K X is always
 𝟚-injecting, but we also know that it is an embedding if and only if X
 is totally separated.
 
-</a><a id="5349" class="Markup">\begin{code}</a>
+</a><a id="5351" class="Markup">\begin{code}</a>
 
-<a id="5363" href="gist.2-injective-types.html#5363" class="Function">_</a> <a id="5365" class="Symbol">:</a> <a id="5367" class="Symbol">{</a><a id="5368" href="gist.2-injective-types.html#5368" class="Bound">X</a> <a id="5370" class="Symbol">:</a> <a id="5372" href="MLTT.Universes.html#3834" class="Generalizable">𝓤</a> <a id="5374" href="MLTT.Universes.html#3977" class="Function Operator">̇</a> <a id="5376" class="Symbol">}</a> <a id="5378" class="Symbol">→</a> <a id="5380" href="UF.Embeddings.html#625" class="Function">is-embedding</a> <a id="5393" class="Symbol">(</a><a id="5394" href="gist.2-injective-types.html#1213" class="Function">η</a> <a id="5396" class="Symbol">{</a><a id="5397" href="MLTT.Universes.html#3834" class="Generalizable">𝓤</a><a id="5398" class="Symbol">}</a> <a id="5400" class="Symbol">{</a><a id="5401" href="gist.2-injective-types.html#5368" class="Bound">X</a><a id="5402" class="Symbol">})</a> <a id="5405" href="Notation.General.html#2690" class="Function Operator">↔</a> <a id="5407" href="TypeTopology.TotallySeparated.html#3866" class="Function">is-totally-separated</a> <a id="5428" href="gist.2-injective-types.html#5368" class="Bound">X</a>
-<a id="5430" class="Symbol">_</a> <a id="5432" class="Symbol">=</a> <a id="5434" href="TypeTopology.TotallySeparated.html#16803" class="Function">totally-separated₂-gives-totally-separated</a> <a id="5477" href="gist.2-injective-types.html#967" class="Function">fe&#39;</a> <a id="5481" href="MLTT.Sigma.html#395" class="InductiveConstructor Operator">,</a>
-    <a id="5487" href="TypeTopology.TotallySeparated.html#16072" class="Function">totally-separated-gives-totally-separated₂</a> <a id="5530" href="gist.2-injective-types.html#967" class="Function">fe&#39;</a>
+<a id="5365" href="gist.2-injective-types.html#5365" class="Function">_</a> <a id="5367" class="Symbol">:</a> <a id="5369" class="Symbol">{</a><a id="5370" href="gist.2-injective-types.html#5370" class="Bound">X</a> <a id="5372" class="Symbol">:</a> <a id="5374" href="MLTT.Universes.html#3834" class="Generalizable">𝓤</a> <a id="5376" href="MLTT.Universes.html#3977" class="Function Operator">̇</a> <a id="5378" class="Symbol">}</a> <a id="5380" class="Symbol">→</a> <a id="5382" href="UF.Embeddings.html#625" class="Function">is-embedding</a> <a id="5395" class="Symbol">(</a><a id="5396" href="gist.2-injective-types.html#1213" class="Function">η</a> <a id="5398" class="Symbol">{</a><a id="5399" href="MLTT.Universes.html#3834" class="Generalizable">𝓤</a><a id="5400" class="Symbol">}</a> <a id="5402" class="Symbol">{</a><a id="5403" href="gist.2-injective-types.html#5370" class="Bound">X</a><a id="5404" class="Symbol">})</a> <a id="5407" href="Notation.General.html#2690" class="Function Operator">↔</a> <a id="5409" href="TypeTopology.TotallySeparated.html#3866" class="Function">is-totally-separated</a> <a id="5430" href="gist.2-injective-types.html#5370" class="Bound">X</a>
+<a id="5432" class="Symbol">_</a> <a id="5434" class="Symbol">=</a> <a id="5436" href="TypeTopology.TotallySeparated.html#16803" class="Function">totally-separated₂-gives-totally-separated</a> <a id="5479" href="gist.2-injective-types.html#967" class="Function">fe&#39;</a> <a id="5483" href="MLTT.Sigma.html#395" class="InductiveConstructor Operator">,</a>
+    <a id="5489" href="TypeTopology.TotallySeparated.html#16072" class="Function">totally-separated-gives-totally-separated₂</a> <a id="5532" href="gist.2-injective-types.html#967" class="Function">fe&#39;</a>
 
-<a id="5535" class="Markup">\end{code}</a><a id="5545" class="Background">
+<a id="5537" class="Markup">\end{code}</a><a id="5547" class="Background">
 
 The extension property really is property, even though the choice of
 extension is data.
 
-</a><a id="5636" class="Markup">\begin{code}</a>
+</a><a id="5638" class="Markup">\begin{code}</a>
 
-<a id="5650" class="Keyword">module</a> <a id="5657" href="gist.2-injective-types.html#5657" class="Module">_</a>
-         <a id="5668" class="Symbol">{</a><a id="5669" href="gist.2-injective-types.html#5669" class="Bound">D</a> <a id="5671" class="Symbol">:</a> <a id="5673" href="MLTT.Universes.html#3834" class="Generalizable">𝓤</a> <a id="5675" href="MLTT.Universes.html#3977" class="Function Operator">̇</a> <a id="5677" class="Symbol">}</a> <a id="5679" class="Symbol">{</a><a id="5680" href="gist.2-injective-types.html#5680" class="Bound">X</a> <a id="5682" class="Symbol">:</a> <a id="5684" href="MLTT.Universes.html#3834" class="Generalizable">𝓤</a> <a id="5686" href="MLTT.Universes.html#3977" class="Function Operator">̇</a> <a id="5688" class="Symbol">}</a> <a id="5690" class="Symbol">{</a><a id="5691" href="gist.2-injective-types.html#5691" class="Bound">Y</a> <a id="5693" class="Symbol">:</a> <a id="5695" href="MLTT.Universes.html#3834" class="Generalizable">𝓤</a> <a id="5697" href="MLTT.Universes.html#3977" class="Function Operator">̇</a> <a id="5699" class="Symbol">}</a>
-         <a id="5710" class="Symbol">(</a><a id="5711" href="gist.2-injective-types.html#5711" class="Bound">i</a> <a id="5713" class="Symbol">:</a> <a id="5715" href="gist.2-injective-types.html#2268" class="Function">𝟚-injective</a> <a id="5727" href="gist.2-injective-types.html#5669" class="Bound">D</a> <a id="5729" href="MLTT.Universes.html#3834" class="Generalizable">𝓤</a> <a id="5731" href="MLTT.Universes.html#3834" class="Generalizable">𝓤</a><a id="5732" class="Symbol">)</a>
-         <a id="5743" class="Symbol">(</a><a id="5744" href="gist.2-injective-types.html#5744" class="Bound">j</a> <a id="5746" class="Symbol">:</a> <a id="5748" href="gist.2-injective-types.html#5680" class="Bound">X</a> <a id="5750" class="Symbol">→</a> <a id="5752" href="gist.2-injective-types.html#5691" class="Bound">Y</a><a id="5753" class="Symbol">)</a>
-         <a id="5764" class="Symbol">(</a><a id="5765" href="gist.2-injective-types.html#5765" class="Bound">k</a> <a id="5767" class="Symbol">:</a> <a id="5769" href="gist.2-injective-types.html#2046" class="Function">𝟚-injecting</a> <a id="5781" href="gist.2-injective-types.html#5744" class="Bound">j</a><a id="5782" class="Symbol">)</a>
-         <a id="5793" class="Symbol">(</a><a id="5794" href="gist.2-injective-types.html#5794" class="Bound">f</a> <a id="5796" class="Symbol">:</a> <a id="5798" href="gist.2-injective-types.html#5680" class="Bound">X</a> <a id="5800" class="Symbol">→</a> <a id="5802" href="gist.2-injective-types.html#5669" class="Bound">D</a><a id="5803" class="Symbol">)</a>
-       <a id="5812" class="Keyword">where</a>
+<a id="5652" class="Keyword">module</a> <a id="5659" href="gist.2-injective-types.html#5659" class="Module">_</a>
+         <a id="5670" class="Symbol">{</a><a id="5671" href="gist.2-injective-types.html#5671" class="Bound">D</a> <a id="5673" class="Symbol">:</a> <a id="5675" href="MLTT.Universes.html#3834" class="Generalizable">𝓤</a> <a id="5677" href="MLTT.Universes.html#3977" class="Function Operator">̇</a> <a id="5679" class="Symbol">}</a> <a id="5681" class="Symbol">{</a><a id="5682" href="gist.2-injective-types.html#5682" class="Bound">X</a> <a id="5684" class="Symbol">:</a> <a id="5686" href="MLTT.Universes.html#3834" class="Generalizable">𝓤</a> <a id="5688" href="MLTT.Universes.html#3977" class="Function Operator">̇</a> <a id="5690" class="Symbol">}</a> <a id="5692" class="Symbol">{</a><a id="5693" href="gist.2-injective-types.html#5693" class="Bound">Y</a> <a id="5695" class="Symbol">:</a> <a id="5697" href="MLTT.Universes.html#3834" class="Generalizable">𝓤</a> <a id="5699" href="MLTT.Universes.html#3977" class="Function Operator">̇</a> <a id="5701" class="Symbol">}</a>
+         <a id="5712" class="Symbol">(</a><a id="5713" href="gist.2-injective-types.html#5713" class="Bound">i</a> <a id="5715" class="Symbol">:</a> <a id="5717" href="gist.2-injective-types.html#2268" class="Function">𝟚-injective</a> <a id="5729" href="gist.2-injective-types.html#5671" class="Bound">D</a> <a id="5731" href="MLTT.Universes.html#3834" class="Generalizable">𝓤</a> <a id="5733" href="MLTT.Universes.html#3834" class="Generalizable">𝓤</a><a id="5734" class="Symbol">)</a>
+         <a id="5745" class="Symbol">(</a><a id="5746" href="gist.2-injective-types.html#5746" class="Bound">j</a> <a id="5748" class="Symbol">:</a> <a id="5750" href="gist.2-injective-types.html#5682" class="Bound">X</a> <a id="5752" class="Symbol">→</a> <a id="5754" href="gist.2-injective-types.html#5693" class="Bound">Y</a><a id="5755" class="Symbol">)</a>
+         <a id="5766" class="Symbol">(</a><a id="5767" href="gist.2-injective-types.html#5767" class="Bound">k</a> <a id="5769" class="Symbol">:</a> <a id="5771" href="gist.2-injective-types.html#2046" class="Function">𝟚-injecting</a> <a id="5783" href="gist.2-injective-types.html#5746" class="Bound">j</a><a id="5784" class="Symbol">)</a>
+         <a id="5795" class="Symbol">(</a><a id="5796" href="gist.2-injective-types.html#5796" class="Bound">f</a> <a id="5798" class="Symbol">:</a> <a id="5800" href="gist.2-injective-types.html#5682" class="Bound">X</a> <a id="5802" class="Symbol">→</a> <a id="5804" href="gist.2-injective-types.html#5671" class="Bound">D</a><a id="5805" class="Symbol">)</a>
+       <a id="5814" class="Keyword">where</a>
 
- <a id="5820" href="gist.2-injective-types.html#5820" class="Function">extension-property-is-prop</a> <a id="5847" class="Symbol">:</a> <a id="5849" href="UF.Subsingletons.html#469" class="Function">is-prop</a> <a id="5857" class="Symbol">(</a><a id="5858" href="gist.2-injective-types.html#2802" class="Function">extension</a> <a id="5868" href="gist.2-injective-types.html#5711" class="Bound">i</a> <a id="5870" href="gist.2-injective-types.html#5744" class="Bound">j</a> <a id="5872" href="gist.2-injective-types.html#5765" class="Bound">k</a> <a id="5874" href="gist.2-injective-types.html#5794" class="Bound">f</a> <a id="5876" href="MLTT.Pi.html#513" class="Function Operator">∘</a> <a id="5878" href="gist.2-injective-types.html#5744" class="Bound">j</a> <a id="5880" href="MLTT.Id.html#1891" class="Function Operator">∼</a> <a id="5882" href="gist.2-injective-types.html#5794" class="Bound">f</a><a id="5883" class="Symbol">)</a>
- <a id="5886" href="gist.2-injective-types.html#5820" class="Function">extension-property-is-prop</a> <a id="5913" class="Symbol">=</a>
-  <a id="5917" href="UF.Subsingletons-FunExt.html#614" class="Function">Π-is-prop</a> <a id="5927" href="gist.2-injective-types.html#967" class="Function">fe&#39;</a>
-   <a id="5934" class="Symbol">(λ</a> <a id="5937" href="gist.2-injective-types.html#5937" class="Bound">x</a> <a id="5939" class="Symbol">→</a> <a id="5941" href="TypeTopology.TotallySeparated.html#8113" class="Function">totally-separated-types-are-sets</a> <a id="5974" href="gist.2-injective-types.html#967" class="Function">fe&#39;</a> <a id="5978" href="gist.2-injective-types.html#5669" class="Bound">D</a>
-           <a id="5991" class="Symbol">(</a><a id="5992" href="gist.2-injective-types.html#4818" class="Function">𝟚-injectives-are-totally-separated</a> <a id="6027" href="gist.2-injective-types.html#5711" class="Bound">i</a><a id="6028" class="Symbol">))</a>
+ <a id="5822" href="gist.2-injective-types.html#5822" class="Function">extension-property-is-prop</a> <a id="5849" class="Symbol">:</a> <a id="5851" href="UF.Subsingletons.html#469" class="Function">is-prop</a> <a id="5859" class="Symbol">(</a><a id="5860" href="gist.2-injective-types.html#2802" class="Function">extension</a> <a id="5870" href="gist.2-injective-types.html#5713" class="Bound">i</a> <a id="5872" href="gist.2-injective-types.html#5746" class="Bound">j</a> <a id="5874" href="gist.2-injective-types.html#5767" class="Bound">k</a> <a id="5876" href="gist.2-injective-types.html#5796" class="Bound">f</a> <a id="5878" href="MLTT.Pi.html#513" class="Function Operator">∘</a> <a id="5880" href="gist.2-injective-types.html#5746" class="Bound">j</a> <a id="5882" href="MLTT.Id.html#1891" class="Function Operator">∼</a> <a id="5884" href="gist.2-injective-types.html#5796" class="Bound">f</a><a id="5885" class="Symbol">)</a>
+ <a id="5888" href="gist.2-injective-types.html#5822" class="Function">extension-property-is-prop</a> <a id="5915" class="Symbol">=</a>
+  <a id="5919" href="UF.Subsingletons-FunExt.html#614" class="Function">Π-is-prop</a> <a id="5929" href="gist.2-injective-types.html#967" class="Function">fe&#39;</a>
+   <a id="5936" class="Symbol">(λ</a> <a id="5939" href="gist.2-injective-types.html#5939" class="Bound">x</a> <a id="5941" class="Symbol">→</a> <a id="5943" href="TypeTopology.TotallySeparated.html#8113" class="Function">totally-separated-types-are-sets</a> <a id="5976" href="gist.2-injective-types.html#967" class="Function">fe&#39;</a> <a id="5980" href="gist.2-injective-types.html#5671" class="Bound">D</a>
+           <a id="5993" class="Symbol">(</a><a id="5994" href="gist.2-injective-types.html#4818" class="Function">𝟚-injectives-are-totally-separated</a> <a id="6029" href="gist.2-injective-types.html#5713" class="Bound">i</a><a id="6030" class="Symbol">))</a>
 
-<a id="6032" class="Markup">\end{code}</a><a id="6042" class="Background">
+<a id="6034" class="Markup">\end{code}</a><a id="6044" class="Background">
 
-TODO. Can we generalize the universes in `𝟚-injectives-are-totally-separated`
-and (hence) the above?
+TODO.
 
-Can we show that every totally separated type A is 𝟚-injective? I
-can&#39;t even show, at the time of writing, that ℕ, a totally separated
-type, is 𝟚-injective.
+  (1) Can we generalize the universes in
+      `𝟚-injectives-are-totally-separated` and (hence) the above?
 
-Do totally separated types &quot;think that 𝟚-injective types are
-embeddings&quot;? Formulate this question precisely.
+  (2) Can we show that every totally separated type is 𝟚-injective? I
+      can&#39;t even show, at the time of writing, that ℕ, a totally
+      separated type, is 𝟚-injective.
 
-Can we show that the totally separated types are precisely the
-algebras of the 𝟚-based double dualization monad?
+  (3) Do totally separated types &quot;think that 𝟚-injective types are
+      embeddings&quot;? Formulate this question precisely, and maybe answer
+      it.
 
-Now let&#39;s go back to (algebraic) injectivity with respect to all
-embeddings. Say that a map j : X → Y is injecting if all algebraically
-injective types with respect to embeddings are injective with respect
-to j. Question. Can we show that j is necessarily an embedding?
-Perhaps an embedding is precisely the same thing as an Ω-injecting
-map.
+  (4) Can we show that the totally separated types are precisely the
+      algebras of the 𝟚-based double dualization monad?
+
+  (5) Now let&#39;s go back to (algebraic) injectivity with respect to all
+      embeddings. Say that a map j : X → Y is injecting if all
+      algebraically injective types with respect to embeddings are
+      injective with respect to j. Question. Can we show that j is
+      necessarily an embedding?  Perhaps an embedding is precisely the
+      same thing as an Ω-injecting map.
 </a></pre></body></html>
