@@ -1,6 +1,6 @@
 \documentstyle{Not quite LaTeX, but definitely literate Haskell}
 
-\title{Real number computation in Haskell 
+\title{Real number computation in Haskell
        with real numbers represented as
        infinite sequences of digits}
 
@@ -29,8 +29,8 @@ keyword "example"):
 
 > {-# LANGUAGE NPlusKPatterns #-}
 > import System.IO
-  
-> main = do  
+
+> main = do
 >  hSetBuffering stdout NoBuffering
 >  putStr ((show (take 500 example4)) ++ "\n")
 
@@ -62,7 +62,7 @@ the result.  We need a crystal ball to compute the first digit.
 Continuity is violated.  Continuity says that finitely many digits of
 the result depend only on finitely many digits of the argument.  To
 regain continuity, alternative representations of real numbers are
-used (see e.g. Plume's (1997) report). 
+used (see e.g. Plume's (1997) report).
 
 
 
@@ -77,7 +77,7 @@ Alphabet of digits -1,0,1:
 
 Representation of the space I=[-1,1]:
 
-> type I  = [Digit]   
+> type I  = [Digit]
 
 A sequence ds = [d_0, d_1, ..., d_n, ...] represents the number
 
@@ -108,23 +108,23 @@ the algorithms.
 We still use base 2, but allow more digits, and then convert back to
 the three digits -1,0,1.
 
-Type of digits -2,-1,0,1,2: 
+Type of digits -2,-1,0,1,2:
 
-> type Digit2  = Int  
+> type Digit2  = Int
 
 Type of digits -4,-3,-2,-1,0,1,2,3,4:
 
-> type Digit4  = Int  
+> type Digit4  = Int
 
-More generally, type of digits |d|<=n. 
+More generally, type of digits |d|<=n.
 
 > type Digitn = Int
 
 Type of interval spaces [-2,2], [-4,4], and [-n,n]:
 
-> type I2 = [Digit2]  
-> type I4 = [Digit4]  
-> type In = [Digitn]     
+> type I2 = [Digit2]
+> type I4 = [Digit4]
+> type In = [Digitn]
 
 Dependent types would be handy! Maybe the next version will be in
 Agda.
@@ -139,23 +139,23 @@ lookahead complexity.
 
 > divideBy :: Int -> In -> I
 > divideBy n (0:x) = 0 : divideBy n x -- Added 5 Feb 2015. Makes everything way faster.
-> divideBy n (a:x) | abs a == n 
+> divideBy n (a:x) | abs a == n
 >   = (if a < 0 then -1 else 1) : divideBy n x
-> divideBy n (a:b:x) = 
+> divideBy n (a:b:x) =
 >   let d = 2 * a + b
 >   in if      d < -n then -1 : divideBy n (d+2*n:x)
 >      else if d >  n then  1 : divideBy n (d-2*n:x)
->                     else  0 : divideBy n (d:x)               
+>                     else  0 : divideBy n (d:x)
 
 > divideBy2 :: I2 -> I -- Added 5 Feb 2015 again to make things faster.
 > divideBy2 ( 0:x) =  0 : divideBy2 x
-> divideBy2 ( 2:x) =  1 : divideBy2 x 
-> divideBy2 (-2:x) = -1 : divideBy2 x 
-> divideBy2 (a:b:x) = 
+> divideBy2 ( 2:x) =  1 : divideBy2 x
+> divideBy2 (-2:x) = -1 : divideBy2 x
+> divideBy2 (a:b:x) =
 >   let d = 2*a+b
 >   in if      d < -2 then -1 : divideBy2 (d+4:x)
 >      else if d >  2 then  1 : divideBy2 (d-4:x)
->                     else  0 : divideBy2 (d:x)               
+>                     else  0 : divideBy2 (d:x)
 
 
 \section{Some very basic operations on I=[-1,1]}
@@ -187,7 +187,7 @@ Division by a positive integer:
 
 > divByInt :: I -> Int -> I
 > divByInt x n = f x 0
->    where f (a:x) s = let t = a + 2 * s 
+>    where f (a:x) s = let t = a + 2 * s
 >                      in if t >=  n then  1 : f x (t - n)
 >                    else if t <= -n then -1 : f x (t + n)
 >                                    else  0 : f x t
@@ -195,10 +195,10 @@ Division by a positive integer:
 
 \section{Infinitary operations}
 
-Given a sequence x0,x1,x2,...,xn,... of points of [-1,1], 
-compute 
+Given a sequence x0,x1,x2,...,xn,... of points of [-1,1],
+compute
 
-     M_i x_i 
+     M_i x_i
           = x0 / 2 + x1 / 4 + x2 / 8 + ... +  xn / 2^(n+1) + ...
           = sum_n xn / 2^(n-1)
           = mid(x0, mid(x1, mid(x2, ...)))
@@ -216,11 +216,11 @@ doesn't work, because mid needs two digits of input from each argument
 to produce one digit of output, and hence (*) cannot produce any
 digit.
 
-We use Scriven's algorithm (in his 2008 MSc thesis (MFPS'2009)).  
-It uses the auxiliary representation I4 to compute 
+We use Scriven's algorithm (in his 2008 MSc thesis (MFPS'2009)).
+It uses the auxiliary representation I4 to compute
 bigMid' :: [I] -> [I4], and then converts back to I by division by 4:
 
-> bigMid :: [I] -> I 
+> bigMid :: [I] -> I
 > bigMid = (divideBy 4).bigMid'
 >  where bigMid'((a:b:x):(c:y):zs) = 2*a + b + c : bigMid'((mid x y):zs)
 
@@ -229,7 +229,7 @@ Although bigMid cannot be defined using (*), it does satisfy (*).
 
 \section{Truncated operations}
 
-Some truncated operations are also useful. The truncation retraction 
+Some truncated operations are also useful. The truncation retraction
 truncate: R -> [-1,1] is mathematically defined as:
 
       truncate(x) = max(-1,min(x,1))
@@ -281,8 +281,8 @@ Truncated multiplication of a number by non-negative integer:
 > tMulByInt :: I -> Int -> I
 > tMulByInt x 0 = zero
 > tMulByInt x 1 = x
-> tMulByInt x n = if even n 
->                 then mulBy2(tMulByInt x (n `div` 2)) 
+> tMulByInt x n = if even n
+>                 then mulBy2(tMulByInt x (n `div` 2))
 >                 else add x (mulBy2(tMulByInt x (n `div` 2)))
 
 Truncated addition as a function [-1,1] x [-1,1] -> [-1,1],
@@ -301,7 +301,7 @@ We have
    divideBy :: Int -> In -> I
    add2 :: I -> I -> I2
    mid :: I -> I -> I
-   bigMid :: [I] -> I 
+   bigMid :: [I] -> I
    compl :: I -> I
    divByInt :: I -> Int -> I
 
@@ -325,8 +325,8 @@ Using Bailey, Borwein & Plouffe 1997, we get:
 (http://en.wikipedia.org/wiki/Bailey%E2%80%93Borwein%E2%80%93Plouffe_formula).
 
 > piDividedBy32 :: I
-> piDividedBy32 = 
->  bigMid 
+> piDividedBy32 =
+>  bigMid
 >   [f k (mid (mid (g1 k) (g2 k))(mid (g3 k) (g4 k))) | k <- [0..]]
 >  where f k x = if k == 0 then x else 0:0:0: f (k-1) x
 >        g1 k = divByInt (repeat  1)      (8*k+1)
@@ -383,7 +383,7 @@ and hence convert to decimal (with a caveat - see below).
 >        f n = let (a,u) = f (n `div` 2)
 >                  d:y = u
 >                  b = 2*a+d
->              in if even n 
+>              in if even n
 >                 then (b,y)
 >                 else let e:t = (mid x y)
 >                      in (b+e,t)
@@ -401,12 +401,12 @@ computability, requirements.
 We consider conversion using negative decimal digits first. The
 alphabet of positive and negative (and zero) decimal digits is:
 
-> type Decimal = [Int] 
+> type Decimal = [Int]
 
 The conversion allowing negative decimal digits is defined by:
 
 > signedDecimal :: I -> Decimal
-> signedDecimal x = let (d,y) = mulByInt x 10 
+> signedDecimal x = let (d,y) = mulByInt x 10
 >                   in d : signedDecimal y
 
 We now get rid of negative decimal digits. Only works for positive,
@@ -423,14 +423,14 @@ auxiliary function:
 >        g(d:x) = if wpositive x
 >                 then (10+d) : f x
 >                 else (10+d-1) : g x
->        wpositive (d:x) = 
->                 if d > 0 
->                  then True 
->                  else if d < 0 
->                       then False 
->                       else wpositive x 
+>        wpositive (d:x) =
+>                 if d > 0
+>                  then True
+>                  else if d < 0
+>                       then False
+>                       else wpositive x
 
-We now convert a positive, non 10-adic, number to decimal 
+We now convert a positive, non 10-adic, number to decimal
 notation using only non-negative digits:
 
 > decimal :: I -> Decimal
@@ -555,7 +555,7 @@ up.
 A computation which is well-known to go wrong if care is not taken is
 the orbit of the logistic map
 
-   f(x) = ax(1-x).  
+   f(x) = ax(1-x).
 
 The orbit is the sequence x0, f(x0), f(f(x0)), and so on. A
 particularly bad case takes place when a=4. In this case we have a
@@ -576,10 +576,10 @@ doubles:
     float const  a = 4.0;
     float const x0 = 0.671875;  float   xs = x0;
     float const  n = 60;        double  xd = x0;
-    
+
     for (int i = 0; i <= n; i++) {
          xs = a * xs * (1.0 - xs);
-         xd = a * xd * (1.0 - xd); 
+         xd = a * xd * (1.0 - xd);
         }
 
     printf("xs = %f     xd = %f \n", xs, xd);
@@ -598,15 +598,15 @@ Let's see. Make the program print intermediate results:
   float const  a = 4.0;
   float const x0 = 0.671875;  float   xs = x0;
   float const  n = 60;        double  xd = x0;
-  
+
   for (int i = 0; i <= n; i++) {
     xs = a * xs * (1.0 - xs);
-    xd = a * xd * (1.0 - xd); 
+    xd = a * xd * (1.0 - xd);
     printf("%d \t %f \t %f \n", i, xs, xd);
     }
  }
 
-We get: 
+We get:
 
  i        xs           xd
 -----------------------------
@@ -630,19 +630,19 @@ We now use a different, equivalent formula:
 
  n      exact       double 1    double 2
 ----------------------------------------
- 0    0.671875    0.671875    0.671875        
- 5    0.384327    0.384327    0.384327        
-10    0.313037    0.313035    0.313033        
-15    0.022735    0.022720    0.022700        
-20    0.982892    0.983326    0.983864        
-25    0.757549    0.709991    0.646726 <--      
-30    0.481445    0.367818    0.997196        
-35    0.313159    0.824940    0.984603        
-40    0.024009    0.899100    0.553930        
-45    0.930881    0.632135    0.975145        
-50    0.625028    0.823770    0.880008        
-55    0.615752    0.926760    0.898787        
-60    0.315445    0.371371    0.648129        
+ 0    0.671875    0.671875    0.671875
+ 5    0.384327    0.384327    0.384327
+10    0.313037    0.313035    0.313033
+15    0.022735    0.022720    0.022700
+20    0.982892    0.983326    0.983864
+25    0.757549    0.709991    0.646726 <--
+30    0.481445    0.367818    0.997196
+35    0.313159    0.824940    0.984603
+40    0.024009    0.899100    0.553930
+45    0.930881    0.632135    0.975145
+50    0.625028    0.823770    0.880008
+55    0.615752    0.926760    0.898787
+60    0.315445    0.371371    0.648129
 
 Let's briefly discuss how the exact entry was \emph{not} computed.
 Notice that if a and x are rational, then so is
@@ -661,12 +661,12 @@ play with the several ways of defining multiplication, and I have):
 
 > logistic, logistic' :: I -> I
 
-> logistic  x = mulBy4 (mul x (oneMinus x))    
+> logistic  x = mulBy4 (mul x (oneMinus x))
 
 The following is more efficient (faster) when it is iterated:
 
 > logistic' x = oneMinus (sqr(g x))       -- 1-(2x-1)^2
->       where g ( 1 : x) = x              -- g(x)= max(-1,2x-1) 
+>       where g ( 1 : x) = x              -- g(x)= max(-1,2x-1)
 >             g ( 0 : x) = subOne x
 >             g (-1 : x) = minusOne
 
@@ -727,7 +727,7 @@ functions, we can apply the usual Taylor series from calculus.
 > msin :: I -> I
 > msin x = bigMid(series x 2)
 >  where x2 = compl(sqr x)
->        series y n = zero : y : 
+>        series y n = zero : y :
 >                     series(divByInt(mul x2 y)(n*(n+1)))(n+2)
 
 
@@ -737,7 +737,7 @@ functions, we can apply the usual Taylor series from calculus.
 > mcos :: I -> I
 > mcos x = bigMid(series one 1)
 >  where x2 = compl(sqr x)
->        series y n = y : zero : 
+>        series y n = y : zero :
 >                     series(divByInt(mul x2 y)(n*(n+1)))(n+2)
 
 
@@ -747,7 +747,7 @@ functions, we can apply the usual Taylor series from calculus.
 > marctan :: I -> I
 > marctan x = bigMid(series x 1)
 >  where x2 = compl(sqr x)
->        series y n = zero : divByInt y n : 
+>        series y n = zero : divByInt y n :
 >                     series (mul x2 y) (n+2)
 
 
@@ -756,14 +756,14 @@ functions, we can apply the usual Taylor series from calculus.
 
 Use K. Takano 1982:
 
-   pi/4 = 12 arctan(1/49) 
-        + 32 arctan1/57) 
-        -  5 arctan(1/239) 
+   pi/4 = 12 arctan(1/49)
+        + 32 arctan1/57)
+        -  5 arctan(1/239)
         + 12 arctan(1/110443)
 
 > piDividedBy4 :: I
 > piDividedBy4 = let inverse n = divByInt one n
->                    arctan = mulBy2.marctan.mulBy2 
+>                    arctan = mulBy2.marctan.mulBy2
 >                    y1 = tMulByInt (arctan(inverse 49)) 12
 >                    y2 = tMulByInt (arctan(inverse 57)) 32
 >                    y3 = compl(tMulByInt (arctan(inverse 239)) 5)
@@ -777,11 +777,11 @@ Use K. Takano 1982:
 \section{Trigonometric function 1/2 arcsin(x/2)/2}
 
 > marcsin :: I -> I
->
+
 > marcsin x = bigMid(series x 1)
 >  where x2 = sqr x
->        series y n = zero : divByInt y n : 
->                     series (tMulByInt (divByInt (mul x2 y) 
+>        series y n = zero : divByInt y n :
+>                     series (tMulByInt (divByInt (mul x2 y)
 >                                           (n+1)) n) (n+2)
 
 
@@ -791,7 +791,7 @@ Use K. Takano 1982:
 When x = 0 we get the limit, namely 1/2.
 
 > mlni :: I -> I
->
+
 > mlni x = bigMid(series one 1)
 >  where x2 = compl x
 >        series y n = divByInt y n : series (mul x2 y) (n+1)
@@ -819,31 +819,31 @@ The inverse function 1 / (2 - x) using power series:
 The expression (affine a b), defined below, gives the unique affine
 map
 
-    f(x)=px+q 
+    f(x)=px+q
 
-with 
+with
 
     f(-1)=a,
-    f( 1)=b.  
+    f( 1)=b.
 
-That is, with 
+That is, with
 
-    p = (b-a)/2, 
-    q = (b+a)/2. 
+    p = (b-a)/2,
+    q = (b+a)/2.
 
-Notice that 
+Notice that
 
-    f(0) = (a+b)/2 
+    f(0) = (a+b)/2
 
-and more generally 
+and more generally
 
-    f((x+y)/2) =(f(x) + f(y)) /2, 
+    f((x+y)/2) =(f(x) + f(y)) /2,
 
-and even more generally 
+and even more generally
 
     f(M_i x_i) = M_i f(x_i).
 
-That is, f is a (big) midpoint homomorphism. 
+That is, f is a (big) midpoint homomorphism.
 See Escardo and Simpson (2001).
 
 > affine :: I -> I -> I -> I
@@ -885,7 +885,7 @@ only. Hence we only check such sequences of digits.
 > forSomeI p = p(findI p)
 > forEveryI p = not(forSomeI(not.p))
 
-Several applications are given in the following sections. 
+Several applications are given in the following sections.
 
 But we continue a bit in this section, because one application towards
 the end of this file (program verification), requires checking all
@@ -914,9 +914,9 @@ are needed to correctly compute the output with a given precision?
 This algorithm is due to Berger (1990).
 
 > modulus :: (I -> I) -> (Int -> Int)
-> modulus f 0 = 0 
+> modulus f 0 = 0
 > modulus f n = if forEveryI(\x -> head(f x) == head (f zero))
->              then modulus (tail.f) (n-1) 
+>              then modulus (tail.f) (n-1)
 >              else 1 + max (modulus (f.((-1):)) n) (modulus (f.(1:)) n)
 
 This is very close to the lookahead complexity of the function (also
@@ -927,7 +927,7 @@ How many digits of x are needed to get two correct digits of x^2?
 
 > example11 = modulus sqr 2
 
-The answer is 5. 
+The answer is 5.
 
 
 
@@ -937,7 +937,7 @@ We use Simpson's (1998) algorithm.
 
 > supremum :: (I -> I) -> I
 
-> supremum f = 
+> supremum f =
 >  let h = head(f zero)
 >  in if forEveryI(\x -> head(f x) == h)
 >     then h : supremum(tail.f)
@@ -946,7 +946,7 @@ We use Simpson's (1998) algorithm.
 Similarly,
 
 > infimum :: (I -> I) -> I
-> infimum f = 
+> infimum f =
 >   let h = head(f zero)
 >  in if forEveryI(\x -> head(f x) == h)
 >     then h : infimum(tail.f)
@@ -971,7 +971,7 @@ crystal balls).
 > imin ( a : x) ( b : y) | a == b = a : imin x y
 > imin (-1 : x) ( 1 : y) = -1 : x
 > imin ( 1 : x) (-1 : y) = -1 : y
-> imin (-1 : x) ( 0 : y) = -1 : imin           x     (oneMinus y) 
+> imin (-1 : x) ( 0 : y) = -1 : imin           x     (oneMinus y)
 > imin ( 0 : x) (-1 : y) = -1 : imin (oneMinus x)              y
 > imin ( 1 : x) ( 0 : y) =  0 : imin (addOne   x)              y
 > imin ( 0 : x) ( 1 : y) =  0 : imin           x       (addOne y)
@@ -981,7 +981,7 @@ The maximum function by "cheating"
 > imax :: I -> I -> I
 > imax x y = compl (imin (compl x) (compl y))
 
-The absolute-value function 
+The absolute-value function
 
 > iabs :: I -> I
 > iabs x = imax (compl x) x
@@ -1003,8 +1003,8 @@ Compute integral of f from -1 to 1 divided by 2, first using the above
 representation for the output:
 
 > halfIntegral' :: (I -> I) -> [I]
->
-> halfIntegral' f = 
+
+> halfIntegral' f =
 >  let h = head(f zero)
 >  in if forEveryI(\x -> head(f x) == h)
 >     then (repeat h) : halfIntegral'(tail.f)
@@ -1025,13 +1025,13 @@ The number zero has countably many distinct representations. The
 following procedure "normalizes towards zero":
 
 The sequence y = znorm x has the following properties:
-  
+
   1. y denotes the same number as x, and y = norm y.
 
   2. If x denotes zero, then y = repeat 0
 
   3. If x doesn't denote zero, then we can read off the
-     the sign of the denoted number by looking at the 
+     the sign of the denoted number by looking at the
      the first non-zero digit of y.
 
 We exploit the rewrite rules
@@ -1071,17 +1071,17 @@ This is not used anywhere else:
 The following works only if f is strictly increasing, f(-1) < f(1),
 and the unique root of f is not dyadic (of the form m/2^n with m,n
 integer). In other case it usually diverges.
-        
+
 > bisection :: (I -> I) -> I
 > bisection f =
 >  if negative(f zero)
 >  then  1 : bisection(f.( 1:))
 >  else -1 : bisection(f.(-1:))
- 
+
 
 Divergence can be avoided using trisection (an old algorithm in
 constructive mathematics with a tendency to be rediscovered again and
-again). 
+again).
 
 Assuming either x < 0 or 0 < y, we tell which one holds, where True is
 for x and False for y. Will diverge if x=y=0. This is a particular
@@ -1096,14 +1096,14 @@ case of the trichotomy law x < a or a < y, where a=0.
 Assume that f is strictly increasing and that f(-1) < f(1).
 
 > trisection :: (I -> I) -> I
-> trisection f = 
+> trisection f =
 >  let l = f minusHalf
 >      c = f zero
 >      r = f half
->  in if (ztrichot c r)                     
+>  in if (ztrichot c r)
 >     then 1 : trisection(f.(1:))       -- f(0) < 0,      so root in [0,1]
 >     else if (ztrichot l c)            -- 0 < f(1/2),    so root in [-1,  1/2]
->          then  0: trisection(f.( 0:)) --    f(-1/2) < 0,so root in [-1/2,1/2] 
+>          then  0: trisection(f.( 0:)) --    f(-1/2) < 0,so root in [-1/2,1/2]
 >          else -1: trisection(f.(-1:)) --    0 < f(0),   so root in [-1,0]
 
 A bijection I->I is therefore invertible:
@@ -1113,7 +1113,7 @@ A bijection I->I is therefore invertible:
 
 The function x^2 is not a bijection, but it is a bijection on [0,1],
 and the above can be applied. But don't use it for negative numbers,
-unless you want to get unproductive loops. 
+unless you want to get unproductive loops.
 
 > squareRoot :: I -> I
 > squareRoot = inverse sqr
@@ -1126,7 +1126,7 @@ takes longer to produce the next digit. A related example is this:
 > example7 = trisection f
 >  where tiny n = if n == 0 then one else 0 : tiny(n-1)
 >        epsilon = tiny (10^3)
->        f = affine (compl epsilon) epsilon 
+>        f = affine (compl epsilon) epsilon
 
 If we want a root of f in a given interval [a,b], we find the unique
 affine map g such that g(-1)=a and g(1)=b. We then solve h(x)=0, where
@@ -1153,17 +1153,17 @@ As mentioned above, (in)equality of real numbers is not decible
 (continuity fails, crystal balls would be needed). However this is not
 as bad as it seems at a first sight.
 
-The following is a partial function defined on pairs 
+The following is a partial function defined on pairs
 
-  (x,y) such that if x=0 then y=0, 
+  (x,y) such that if x=0 then y=0,
 
-that is, undefined on 
+that is, undefined on
 
-  (0,y) with y /= 0. 
+  (0,y) with y /= 0.
 
 The classical mathematical definition is
 
-   zppif x y = if x < 0 then 0 else y. 
+   zppif x y = if x < 0 then 0 else y.
 
 A constructive definition is
 
@@ -1178,11 +1178,11 @@ If x=0 and y/=0 is close to zero, the answer is a partial number close
 to zero.
 
 Although this function is partial, it can be used to define total
-functions, e.g. 
+functions, e.g.
 
     f(x) = zppif x x = if x < 0 then 0 else x.
 
-Application: we can define 
+Application: we can define
 
   (ppif x < y then u else v) = u + if (x-y) < 0 then 0 else v-u.
 
@@ -1190,10 +1190,10 @@ Except that + and - are not available. Hence we need a little bit
 more work.
 
 > ppif :: I -> I -> I -> I -> I
-> ppif x y u v = 
+> ppif x y u v =
 >    mulBy4(mid (0:u) (zppif (mid x (compl y)) (mid (compl u) v)))
 
-We have that 
+We have that
 
   ppif x y u v = u      if x < y,
   ppif x y u v = v      if x > y,
@@ -1214,7 +1214,7 @@ efficient definition:
 
 
 These partial functions can be used to define total functions.
-Examples: absolute value, maximum. 
+Examples: absolute value, maximum.
 
 > pabs :: I -> I
 > pabs x = ppifz x (compl x) x
