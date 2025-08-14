@@ -432,4 +432,17 @@ the (non-dependent) universal property.
       <a id="17005" href="MLTT.Id.html#2068" class="Function">∼-sym</a> <a id="17011" class="Symbol">(</a><a id="17012" href="UF.Pushouts.html#11211" class="Function">pushout-rec-comp-glue</a> <a id="17034" href="UF.Pushouts.html#16855" class="Bound">l</a> <a id="17036" href="UF.Pushouts.html#16859" class="Bound">r</a> <a id="17038" href="UF.Pushouts.html#16863" class="Bound">G</a><a id="17039" class="Symbol">))</a>
    
 <a id="17046" class="Markup">\end{code}</a><a id="17056" class="Background">
+
+We now provide a record that asserts the existence of pushouts of arbitrary
+spans.
+
+</a><a id="17142" class="Markup">\begin{code}</a>
+
+<a id="17156" class="Keyword">record</a> <a id="pushouts-exist"></a><a id="17163" href="UF.Pushouts.html#17163" class="Record">pushouts-exist</a> <a id="17178" class="Symbol">:</a> <a id="17180" href="Agda.Primitive.html#512" class="Primitive">𝓤ω</a>
+ <a id="17184" class="Keyword">where</a>
+ <a id="17191" class="Keyword">field</a>
+  <a id="pushouts-exist.push-ex"></a><a id="17199" href="UF.Pushouts.html#17199" class="Field">push-ex</a> <a id="17207" class="Symbol">:</a> <a id="17209" class="Symbol">{</a><a id="17210" href="UF.Pushouts.html#17210" class="Bound">A</a> <a id="17212" class="Symbol">:</a> <a id="17214" href="MLTT.Universes.html#3834" class="Generalizable">𝓤</a> <a id="17216" href="MLTT.Universes.html#3977" class="Function Operator">̇</a><a id="17217" class="Symbol">}</a> <a id="17219" class="Symbol">{</a><a id="17220" href="UF.Pushouts.html#17220" class="Bound">B</a> <a id="17222" class="Symbol">:</a> <a id="17224" href="MLTT.Universes.html#3836" class="Generalizable">𝓥</a> <a id="17226" href="MLTT.Universes.html#3977" class="Function Operator">̇</a><a id="17227" class="Symbol">}</a> <a id="17229" class="Symbol">{</a><a id="17230" href="UF.Pushouts.html#17230" class="Bound">C</a> <a id="17232" class="Symbol">:</a> <a id="17234" href="MLTT.Universes.html#3838" class="Generalizable">𝓦</a> <a id="17236" href="MLTT.Universes.html#3977" class="Function Operator">̇</a><a id="17237" class="Symbol">}</a> <a id="17239" class="Symbol">(</a><a id="17240" href="UF.Pushouts.html#17240" class="Bound">f</a> <a id="17242" class="Symbol">:</a> <a id="17244" href="UF.Pushouts.html#17230" class="Bound">C</a> <a id="17246" class="Symbol">→</a> <a id="17248" href="UF.Pushouts.html#17210" class="Bound">A</a><a id="17249" class="Symbol">)</a> <a id="17251" class="Symbol">(</a><a id="17252" href="UF.Pushouts.html#17252" class="Bound">g</a> <a id="17254" class="Symbol">:</a> <a id="17256" href="UF.Pushouts.html#17230" class="Bound">C</a> <a id="17258" class="Symbol">→</a> <a id="17260" href="UF.Pushouts.html#17220" class="Bound">B</a><a id="17261" class="Symbol">)</a>
+          <a id="17273" class="Symbol">→</a> <a id="17275" href="UF.Pushouts.html#5714" class="Record">pushout-exists</a> <a id="17290" href="UF.Pushouts.html#17240" class="Bound">f</a> <a id="17292" href="UF.Pushouts.html#17252" class="Bound">g</a>
+
+<a id="17295" class="Markup">\end{code}</a><a id="17305" class="Background">
 </a></pre></body></html>
