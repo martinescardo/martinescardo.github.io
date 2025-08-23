@@ -14,23 +14,83 @@
    Tested with Agda 2.8.0
    (it will probably work with Agda 2.7.0.1, and it may still work with Agda 2.6.4.3).
 
-</a><a id="394" class="Markup">\begin{code}</a>
+This file hereditarily imports all TypeTopology files. Most of them
+are --safe. All of them are --without-K. See discussion below for
+details, and also the following Agda manual entries.
 
-<a id="408" class="Symbol">{-#</a> <a id="412" class="Keyword">OPTIONS</a> <a id="420" class="Pragma">--without-K</a> <a id="432" class="Pragma">--type-in-type</a> <a id="447" class="Pragma">--no-level-universe</a> <a id="467" class="Pragma">--no-termination-check</a> <a id="490" class="Pragma">--guardedness</a> <a id="504" class="Symbol">#-}</a>
+https://agda.readthedocs.io/en/latest/language/safe-agda.html
 
-<a id="509" class="Keyword">import</a> <a id="516" href="index.html" class="Module">index</a>                                <a id="553" class="Comment">-- (1)</a>
-<a id="560" class="Keyword">import</a> <a id="567" href="GamesMGU.index.html" class="Module">GamesMGU.index</a>                       <a id="604" class="Comment">-- (2)</a>
-<a id="611" class="Keyword">import</a> <a id="618" href="MonadOnTypesMGU.index.html" class="Module">MonadOnTypesMGU.index</a>                <a id="655" class="Comment">-- (2)</a>
-<a id="662" class="Keyword">import</a> <a id="669" href="RelativeMonadOnStructuredTypes.index.html" class="Module">RelativeMonadOnStructuredTypes.index</a> <a id="706" class="Comment">-- (2)</a>
-<a id="713" class="Keyword">import</a> <a id="720" href="Unsafe.index.html" class="Module">Unsafe.index</a>                         <a id="757" class="Comment">-- (3)</a>
-<a id="764" class="Keyword">import</a> <a id="771" href="InfinitePigeon.index.html" class="Module">InfinitePigeon.index</a>                 <a id="808" class="Comment">-- (4)</a>
+https://agda.readthedocs.io/en/latest/tools/command-line-options.html#cmdoption-without-K
 
-<a id="816" class="Markup">\end{code}</a><a id="826" class="Background">
+https://agda.readthedocs.io/en/latest/tools/command-line-options.html#consistency-checking-options
 
-(1) Of --safe modules using --level-universe.
-(2) With --safe but --no-level-universe.
+See the module (2) below for an explanation of the philosophy of
+TypeTopology, and in particular which type theory is adopted.
+
+</a><a id="964" class="Markup">\begin{code}</a>
+
+<a id="978" class="Symbol">{-#</a> <a id="982" class="Keyword">OPTIONS</a> <a id="990" class="Pragma">--without-K</a> <a id="1002" class="Pragma">--no-level-universe</a> <a id="1022" class="Pragma">--guardedness</a> <a id="1036" class="Symbol">#-}</a>
+
+<a id="1041" class="Keyword">import</a> <a id="1048" href="index.html" class="Module">index</a>                                <a id="1085" class="Comment">-- (1)</a>
+<a id="1092" class="Keyword">import</a> <a id="1099" href="GamesMGU.index.html" class="Module">GamesMGU.index</a>                       <a id="1136" class="Comment">-- (2)</a>
+<a id="1143" class="Keyword">import</a> <a id="1150" href="MonadOnTypesMGU.index.html" class="Module">MonadOnTypesMGU.index</a>                <a id="1187" class="Comment">-- (2)</a>
+<a id="1194" class="Keyword">import</a> <a id="1201" href="RelativeMonadOnStructuredTypes.index.html" class="Module">RelativeMonadOnStructuredTypes.index</a> <a id="1238" class="Comment">-- (2)</a>
+<a id="1245" class="Keyword">import</a> <a id="1252" href="Unsafe.index.html" class="Module">Unsafe.index</a>                         <a id="1289" class="Comment">-- (3)</a>
+<a id="1296" class="Keyword">import</a> <a id="1303" href="InfinitePigeon.index.html" class="Module">InfinitePigeon.index</a>                 <a id="1340" class="Comment">-- (4)</a>
+
+<a id="1348" class="Markup">\end{code}</a><a id="1358" class="Background">
+
+(1) Of --safe modules using --without-K and --level-universe.
+(2) Of modules with --safe and --without-K but --no-level-universe.
 (3) Of unsafe modules.
-(4) Disables termination check for bar recursion.
+(4) Of modules that disable termination check for bar recursion.
+    These modules *should* be safe in some sense, but Agda can&#39;t tell this,
+    and so the checking needs to be done by mathematicians and/or logicians.
 
-See the module index for an explanation of the philosophy of TypeTopology.
+Notice that, currently, all modules use --without-K.
+
+The default options for all modules are (as listed in
+typetopology.agda-lib, which should be taken as the authoritative
+source of information)
+
+  --auto-inline
+  --exact-split
+  --keep-pattern-variables
+  --level-universe
+  --no-cohesion
+  --no-cumulativity
+  --no-erasure
+  --no-guardedness
+  --no-print-pattern-synonyms
+  --no-prop
+  --no-rewriting
+  --no-save-metas
+  --no-sized-types
+  --no-two-level
+  --without-K
+
+But all modules should add the option --without-K, to emphasize an
+essential point in the philosophy of TypeTopology, which is to be
+compatible with univalent type theory.
+
+An option is *coinfective* if whenever it is used in a module, it must
+be used in all modules imported by that module. The following options
+are coinfective:
+
+  --safe
+  --without-K
+  --no-universe-polymorphism
+  --no-sized-types
+  --no-guardedness
+  --level-universe
+
+An option is *infective* if whenever it is used in one module, it must
+be used in all modules that import module. At the moment, TypeTopology
+infective options are
+
+  --no-termination-check
+  --guardedness
+
+Navigate to the corresponding files to see which (infective or
+coinfective) options they use.
 </a></pre></body></html>
