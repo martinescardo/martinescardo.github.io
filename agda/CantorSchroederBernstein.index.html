@@ -1,16 +1,42 @@
 <!DOCTYPE HTML>
-<html><head><meta charset="utf-8"><title>CantorSchroederBernstein.index</title><link rel="stylesheet" href="Agda.css"><script type="text/javascript" src="highlight-hover.js"></script></head><body><pre class="Agda"><a id="1" class="Background">Martin Escardo
+<html><head><meta charset="utf-8"><title>CantorSchroederBernstein.index</title><link rel="stylesheet" href="Agda.css"><script type="text/javascript" src="highlight-hover.js"></script></head><body><pre class="Agda"><a id="1" class="Background">Martin Escardo, January 2020.
 
-https://doi.org/10.1007/s40062-021-00284-6
+The Cantor-Schröder-Berntein Theorem, under the assumption of excluded
+middle, generalized from sets to (homotopy) types. The result holds in
+any boolean ∞-topos.
 
-</a><a id="61" class="Markup">\begin{code}</a>
+This says that if there is an embedding of a type X to a type Y, and
+also from Y to X, then the types X and Y are equivalent.
 
-<a id="75" class="Symbol">{-#</a> <a id="79" class="Keyword">OPTIONS</a> <a id="87" class="Pragma">--safe</a> <a id="94" class="Pragma">--without-K</a> <a id="106" class="Symbol">#-}</a>
+The file CSB led to the publication
 
-<a id="111" class="Keyword">module</a> <a id="118" href="CantorSchroederBernstein.index.html" class="Module">CantorSchroederBernstein.index</a> <a id="149" class="Keyword">where</a>
+ [1] M. H. Escardo. The Cantor–Schröder–Bernstein Theorem for
+     ∞-groupoids. Journal of Homotopy and Related Structures.
+     June 2021, https://doi.org/10.1007/s40062-021-00284-6
 
-<a id="156" class="Keyword">import</a> <a id="163" href="CantorSchroederBernstein.CSB.html" class="Module">CantorSchroederBernstein.CSB</a>
-<a id="192" class="Keyword">import</a> <a id="199" href="CantorSchroederBernstein.CSB-TheoryLabLunch.html" class="Module">CantorSchroederBernstein.CSB-TheoryLabLunch</a>
+After that, in 2025, Fredrik Bakke added the last two files, with a
+version of CSB that
 
-<a id="244" class="Markup">\end{code}</a><a id="254" class="Background">
+ 1. weakens the assumption of excluded middle to WLPO, and
+ 2. on the other hand, requires stronger assumptions on the two embeddings.
+
+Notice that (2) is absolutely necessary, in the presence of (1),
+because Pradic and Brouwn previously showed that CSB for (even just
+sets) implies excluded middle
+
+ [2] Cécilia Pradic, Chad E. Brown. Cantor-Bernstein implies Excluded
+     Middle. 2019, with later updates, https://arxiv.org/abs/1904.09193
+
+</a><a id="1076" class="Markup">\begin{code}</a>
+
+<a id="1090" class="Symbol">{-#</a> <a id="1094" class="Keyword">OPTIONS</a> <a id="1102" class="Pragma">--safe</a> <a id="1109" class="Pragma">--without-K</a> <a id="1121" class="Symbol">#-}</a>
+
+<a id="1126" class="Keyword">module</a> <a id="1133" href="CantorSchroederBernstein.index.html" class="Module">CantorSchroederBernstein.index</a> <a id="1164" class="Keyword">where</a>
+
+<a id="1171" class="Keyword">import</a> <a id="1178" href="CantorSchroederBernstein.CSB.html" class="Module">CantorSchroederBernstein.CSB</a>
+<a id="1207" class="Keyword">import</a> <a id="1214" href="CantorSchroederBernstein.CSB-TheoryLabLunch.html" class="Module">CantorSchroederBernstein.CSB-TheoryLabLunch</a>
+<a id="1258" class="Keyword">import</a> <a id="1265" href="CantorSchroederBernstein.CSB-WLPO.html" class="Module">CantorSchroederBernstein.CSB-WLPO</a>
+<a id="1299" class="Keyword">import</a> <a id="1306" href="CantorSchroederBernstein.PerfectImages.html" class="Module">CantorSchroederBernstein.PerfectImages</a>
+
+<a id="1346" class="Markup">\end{code}</a><a id="1356" class="Background">
 </a></pre></body></html>
