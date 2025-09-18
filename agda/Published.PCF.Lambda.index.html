@@ -2,9 +2,9 @@
 <html><head><meta charset="utf-8"><title>PCF.Lambda.index</title><link rel="stylesheet" href="Agda.css"><script type="text/javascript" src="highlight-hover.js"></script></head><body><pre class="Agda"><a id="1" class="Background">Brendan Hart 2019-2020
 
 Ported from https://github.com/BrendanHart/Investigating-Properties-of-PCF/
-by Martin Escardo, 17-18 May 2023. This is Brendan&#39;s final-year UG
-project at the School of Computer Science, University of Birmingham,
-UK, jointly supervised by Martin Escardo and Tom de Jong.
+by Martin Escardo, 17-18 May 2023. This is Brendan&#39;s MSci project at
+the School of Computer Science, University of Birmingham, UK, jointly
+supervised by Martin Escardo and Tom de Jong.
 
 Tom de Jong, in work reported in this repository, defines the Scott
 model of PCF in the combinary version of PCF. Brendan extends the
@@ -16,27 +16,27 @@ extend Tom&#39;s work on domain theory.
 
 A full report in pdf is available in the above link.
 
-</a><a id="794" class="Markup">\begin{code}</a>
+</a><a id="785" class="Markup">\begin{code}</a>
 
-<a id="808" class="Symbol">{-#</a> <a id="812" class="Keyword">OPTIONS</a> <a id="820" class="Pragma">--safe</a> <a id="827" class="Pragma">--without-K</a> <a id="839" class="Symbol">#-}</a>
+<a id="799" class="Symbol">{-#</a> <a id="803" class="Keyword">OPTIONS</a> <a id="811" class="Pragma">--safe</a> <a id="818" class="Pragma">--without-K</a> <a id="830" class="Symbol">#-}</a>
 
-<a id="844" class="Keyword">module</a> <a id="851" href="PCF.Lambda.index.html" class="Module">PCF.Lambda.index</a> <a id="868" class="Keyword">where</a>
+<a id="835" class="Keyword">module</a> <a id="842" href="PCF.Lambda.index.html" class="Module">PCF.Lambda.index</a> <a id="859" class="Keyword">where</a>
 
-<a id="875" class="Keyword">import</a> <a id="882" href="DomainTheory.Basics.Curry.html" class="Module">DomainTheory.Basics.Curry</a>
-<a id="908" class="Keyword">import</a> <a id="915" href="DomainTheory.Basics.FunctionComposition.html" class="Module">DomainTheory.Basics.FunctionComposition</a>
-<a id="955" class="Keyword">import</a> <a id="962" href="DomainTheory.Basics.Products.html" class="Module">DomainTheory.Basics.Products</a>
-<a id="991" class="Keyword">import</a> <a id="998" href="DomainTheory.Basics.ProductsContinuity.html" class="Module">DomainTheory.Basics.ProductsContinuity</a>
-<a id="1037" class="Keyword">import</a> <a id="1044" href="PCF.Lambda.AbstractSyntax.html" class="Module">PCF.Lambda.AbstractSyntax</a>
-<a id="1070" class="Keyword">import</a> <a id="1077" href="PCF.Lambda.Adequacy.html" class="Module">PCF.Lambda.Adequacy</a>
-<a id="1097" class="Keyword">import</a> <a id="1104" href="PCF.Lambda.ApplicativeApproximation.html" class="Module">PCF.Lambda.ApplicativeApproximation</a>
-<a id="1140" class="Keyword">import</a> <a id="1147" href="PCF.Lambda.BigStep.html" class="Module">PCF.Lambda.BigStep</a>
-<a id="1166" class="Keyword">import</a> <a id="1173" href="PCF.Lambda.Correctness.html" class="Module">PCF.Lambda.Correctness</a>
-<a id="1196" class="Keyword">import</a> <a id="1203" href="PCF.Lambda.ScottModelOfContexts.html" class="Module">PCF.Lambda.ScottModelOfContexts</a>
-<a id="1235" class="Keyword">import</a> <a id="1242" href="PCF.Lambda.ScottModelOfIfZero.html" class="Module">PCF.Lambda.ScottModelOfIfZero</a>
-<a id="1272" class="Keyword">import</a> <a id="1279" href="PCF.Lambda.ScottModelOfTerms.html" class="Module">PCF.Lambda.ScottModelOfTerms</a>
-<a id="1308" class="Keyword">import</a> <a id="1315" href="PCF.Lambda.ScottModelOfTypes.html" class="Module">PCF.Lambda.ScottModelOfTypes</a>
-<a id="1344" class="Keyword">import</a> <a id="1351" href="PCF.Lambda.Substitution.html" class="Module">PCF.Lambda.Substitution</a>
-<a id="1375" class="Keyword">import</a> <a id="1382" href="PCF.Lambda.SubstitutionDenotational.html" class="Module">PCF.Lambda.SubstitutionDenotational</a>
+<a id="866" class="Keyword">import</a> <a id="873" href="DomainTheory.Basics.Curry.html" class="Module">DomainTheory.Basics.Curry</a>
+<a id="899" class="Keyword">import</a> <a id="906" href="DomainTheory.Basics.FunctionComposition.html" class="Module">DomainTheory.Basics.FunctionComposition</a>
+<a id="946" class="Keyword">import</a> <a id="953" href="DomainTheory.Basics.Products.html" class="Module">DomainTheory.Basics.Products</a>
+<a id="982" class="Keyword">import</a> <a id="989" href="DomainTheory.Basics.ProductsContinuity.html" class="Module">DomainTheory.Basics.ProductsContinuity</a>
+<a id="1028" class="Keyword">import</a> <a id="1035" href="PCF.Lambda.AbstractSyntax.html" class="Module">PCF.Lambda.AbstractSyntax</a>
+<a id="1061" class="Keyword">import</a> <a id="1068" href="PCF.Lambda.Adequacy.html" class="Module">PCF.Lambda.Adequacy</a>
+<a id="1088" class="Keyword">import</a> <a id="1095" href="PCF.Lambda.ApplicativeApproximation.html" class="Module">PCF.Lambda.ApplicativeApproximation</a>
+<a id="1131" class="Keyword">import</a> <a id="1138" href="PCF.Lambda.BigStep.html" class="Module">PCF.Lambda.BigStep</a>
+<a id="1157" class="Keyword">import</a> <a id="1164" href="PCF.Lambda.Correctness.html" class="Module">PCF.Lambda.Correctness</a>
+<a id="1187" class="Keyword">import</a> <a id="1194" href="PCF.Lambda.ScottModelOfContexts.html" class="Module">PCF.Lambda.ScottModelOfContexts</a>
+<a id="1226" class="Keyword">import</a> <a id="1233" href="PCF.Lambda.ScottModelOfIfZero.html" class="Module">PCF.Lambda.ScottModelOfIfZero</a>
+<a id="1263" class="Keyword">import</a> <a id="1270" href="PCF.Lambda.ScottModelOfTerms.html" class="Module">PCF.Lambda.ScottModelOfTerms</a>
+<a id="1299" class="Keyword">import</a> <a id="1306" href="PCF.Lambda.ScottModelOfTypes.html" class="Module">PCF.Lambda.ScottModelOfTypes</a>
+<a id="1335" class="Keyword">import</a> <a id="1342" href="PCF.Lambda.Substitution.html" class="Module">PCF.Lambda.Substitution</a>
+<a id="1366" class="Keyword">import</a> <a id="1373" href="PCF.Lambda.SubstitutionDenotational.html" class="Module">PCF.Lambda.SubstitutionDenotational</a>
 
-<a id="1419" class="Markup">\end{code}</a><a id="1429" class="Background">
+<a id="1410" class="Markup">\end{code}</a><a id="1420" class="Background">
 </a></pre></body></html>
