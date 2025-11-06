@@ -1,0 +1,67 @@
+<!DOCTYPE HTML>
+<html><head><meta charset="utf-8"><title>Ordinals.Exponentiation.index</title><link rel="stylesheet" href="Agda.css"><script type="text/javascript" src="highlight-hover.js"></script></head><body><pre class="Agda"><a id="1" class="Background">Tom de Jong, Nicolai Kraus, Fredrik Nordvall Forsberg, Chuangjie Xu,
+November 2023 — January 2025
+With additions in April 2025, notably (9) below.
+
+</a><a id="149" class="Markup">\begin{code}</a>
+
+<a id="163" class="Symbol">{-#</a> <a id="167" class="Keyword">OPTIONS</a> <a id="175" class="Pragma">--safe</a> <a id="182" class="Pragma">--without-K</a> <a id="194" class="Pragma">--exact-split</a> <a id="208" class="Symbol">#-}</a>
+
+<a id="213" class="Keyword">module</a> <a id="220" href="Ordinals.Exponentiation.index.html" class="Module">Ordinals.Exponentiation.index</a> <a id="250" class="Keyword">where</a>
+
+<a id="257" class="Markup">\end{code}</a><a id="267" class="Background">
+
+OVERVIEW
+========
+
+1.  Specification of ordinal exponentiation.
+2.  An abstract construction of ordinal exponentiation using suprema of
+    ordinals.
+3.  A concrete construction of ordinal exponentiation using decreasing lists.
+4.  Direct proofs of a few properties of the concrete construction of
+    exponentiation, including that the construction meets the specification.
+5.  Relating the abstract and concrete constructions with an equivalence for
+    base ordinals with a trichotomous least element.
+6.  Properties of both the abstract and concrete constructions (via transport
+    and the above equivalence).
+7.  Auxiliary result that an ordinal α has a trichotomous least element if and
+    only if it can be decomposed as 𝟙ₒ +ₒ α&#39; for a necessarily unique ordinal α&#39;.
+8.  Constructive taboos involving ordinal exponentiation.
+9.  An implementation of Robin Grayson&#39;s variant of the decreasing list
+    construction of exponentials and a proof that it is not, in general, an
+    ordinal.
+10. Miscellaneous properties of exponentiation.
+
+</a><a id="1313" class="Markup">\begin{code}</a>
+
+<a id="1327" class="Keyword">import</a> <a id="1334" href="Ordinals.Exponentiation.Specification.html" class="Module">Ordinals.Exponentiation.Specification</a>                     <a id="1392" class="Comment">-- (1)</a>
+<a id="1399" class="Keyword">import</a> <a id="1406" href="Ordinals.Exponentiation.Supremum.html" class="Module">Ordinals.Exponentiation.Supremum</a>                          <a id="1464" class="Comment">-- (2)</a>
+<a id="1471" class="Keyword">import</a> <a id="1478" href="Ordinals.Exponentiation.DecreasingList.html" class="Module">Ordinals.Exponentiation.DecreasingList</a>                    <a id="1536" class="Comment">-- (3)</a>
+<a id="1543" class="Keyword">import</a> <a id="1550" href="Ordinals.Exponentiation.DecreasingListProperties-Concrete.html" class="Module">Ordinals.Exponentiation.DecreasingListProperties-Concrete</a> <a id="1608" class="Comment">-- (4)</a>
+<a id="1615" class="Keyword">import</a> <a id="1622" href="Ordinals.Exponentiation.RelatingConstructions.html" class="Module">Ordinals.Exponentiation.RelatingConstructions</a>             <a id="1680" class="Comment">-- (5)</a>
+<a id="1687" class="Keyword">import</a> <a id="1694" href="Ordinals.Exponentiation.PropertiesViaTransport.html" class="Module">Ordinals.Exponentiation.PropertiesViaTransport</a>            <a id="1752" class="Comment">-- (6)</a>
+<a id="1759" class="Keyword">import</a> <a id="1766" href="Ordinals.Exponentiation.TrichotomousLeastElement.html" class="Module">Ordinals.Exponentiation.TrichotomousLeastElement</a>          <a id="1824" class="Comment">-- (7)</a>
+<a id="1831" class="Keyword">import</a> <a id="1838" href="Ordinals.Exponentiation.Taboos.html" class="Module">Ordinals.Exponentiation.Taboos</a>                            <a id="1896" class="Comment">-- (8)</a>
+<a id="1903" class="Keyword">import</a> <a id="1910" href="Ordinals.Exponentiation.Grayson.html" class="Module">Ordinals.Exponentiation.Grayson</a>                           <a id="1968" class="Comment">-- (9)</a>
+<a id="1975" class="Keyword">import</a> <a id="1982" href="Ordinals.Exponentiation.Miscellaneous.html" class="Module">Ordinals.Exponentiation.Miscellaneous</a>                     <a id="2040" class="Comment">-- (10)</a>
+
+<a id="2049" class="Markup">\end{code}</a><a id="2059" class="Background">
+
+The following file acts as an index for the paper &quot;Ordinal Exponentiation in
+Homotopy Type Theory&quot;.
+
+</a><a id="2162" class="Markup">\begin{code}</a>
+
+<a id="2176" class="Keyword">import</a> <a id="2183" href="Ordinals.Exponentiation.Paper.html" class="Module">Ordinals.Exponentiation.Paper</a>
+
+<a id="2214" class="Markup">\end{code}</a><a id="2224" class="Background">
+
+And the following file acts as an index for the paper &quot;Constructive Ordinal
+Exponentiation&quot;.
+
+</a><a id="2320" class="Markup">\begin{code}</a>
+
+<a id="2334" class="Keyword">import</a> <a id="2341" href="Ordinals.Exponentiation.PaperJournal.html" class="Module">Ordinals.Exponentiation.PaperJournal</a>
+
+<a id="2379" class="Markup">\end{code}</a><a id="2389" class="Background">
+</a></pre></body></html>
