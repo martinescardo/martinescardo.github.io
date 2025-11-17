@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Universes (Introduction to Univalent Foundations of Mathematics with Agda) </title>
+    <link rel="stylesheet" type="text/css" href="css/Agda.css">
+  </head>
+  <body>
+	<style>
+	body, html {
+        width: 800px;
+        margin:0 auto;
+	}
+	code {
+	color: MidnightBlue;
+	}
+	</style>
+    <div class="container">
+      <h2 id="introduction-to-univalent-foundations-of-mathematics-with-agda"><a name="lecturenotes">Introduction to Univalent Foundations of Mathematics with Agda</a></h2>
+
+<p><a href="HoTT-UF-Agda.html#contents"><sub>Table of contents ⇑</sub></a></p>
+<h2 id="universes">Universes</h2>
+
+<p>We define our notation for type universes used in these notes, which
+is different from the <a href="https://agda.readthedocs.io/en/latest/language/universe-levels.html">standard Agda notation</a>, but closer to the
+standard notation in HoTT/UF.</p>
+
+<p>Readers unfamiliar with Agda should probably try to understand this
+only after doing some <a href="HoTT-UF-Agda.html#mlttinagda">MLTT in Agda</a> and <a href="HoTT-UF-Agda.html#uminagda">HoTT/UF in
+Agda</a>.</p>
+
+<pre class="Agda">
+<a id="730" class="Symbol">{-#</a> <a id="734" class="Keyword">OPTIONS</a> <a id="742" class="Pragma">--without-K</a> <a id="754" class="Pragma">--exact-split</a> <a id="768" class="Pragma">--safe</a> <a id="775" class="Pragma">--auto-inline</a> <a id="789" class="Symbol">#-}</a>
+
+<a id="794" class="Keyword">module</a> <a id="801" href="Universes.html" class="Module">Universes</a> <a id="811" class="Keyword">where</a>
+
+<a id="818" class="Keyword">open</a> <a id="823" class="Keyword">import</a> <a id="830" href="Agda.Primitive.html" class="Module">Agda.Primitive</a> <a id="845" class="Keyword">public</a>
+ <a id="853" class="Keyword">renaming</a> <a id="862" class="Symbol">(</a>
+            <a id="876" href="Agda.Primitive.html#742" class="Postulate">Level</a> <a id="882" class="Symbol">to</a> <a id="885" class="Postulate">Universe</a> <a id="894" class="Comment">-- We speak of universes rather than of levels.</a>
+          <a id="952" class="Symbol">;</a> <a id="954" href="Agda.Primitive.html#915" class="Primitive">lzero</a> <a id="960" class="Symbol">to</a> <a id="963" class="Primitive">𝓤₀</a>       <a id="972" class="Comment">-- Our first universe is called 𝓤₀</a>
+          <a id="1017" class="Symbol">;</a> <a id="1019" href="Agda.Primitive.html#931" class="Primitive">lsuc</a> <a id="1024" class="Symbol">to</a> <a id="1027" class="Primitive">_⁺</a>        <a id="1037" class="Comment">-- The universe after 𝓤 is 𝓤 ⁺</a>
+          <a id="1078" class="Symbol">;</a> <a id="1080" href="Agda.Primitive.html#512" class="Primitive">Setω</a> <a id="1085" class="Symbol">to</a> <a id="1088" class="Primitive">𝓤ω</a>        <a id="1098" class="Comment">-- There is a universe 𝓤ω strictly above 𝓤₀, 𝓤₁, ⋯ , 𝓤ₙ, ⋯</a>
+          <a id="1167" class="Symbol">)</a>
+ <a id="1170" class="Keyword">using</a>    <a id="1179" class="Symbol">(</a><a id="1180" href="Agda.Primitive.html#961" class="Primitive Operator">_⊔_</a><a id="1183" class="Symbol">)</a>               <a id="1199" class="Comment">-- Least upper bound of two universes, e.g. 𝓤₀ ⊔ 𝓤₁ is 𝓤₁</a>
+</pre>
+
+<p>The elements of <code class="language-plaintext highlighter-rouge">Universe</code> are universe names. Given a name <code class="language-plaintext highlighter-rouge">𝓤</code>, the
+universe itself will be written <code class="language-plaintext highlighter-rouge">𝓤 ̇</code>   in these notes, with a
+deliberately almost invisible superscript dot.</p>
+
+<p>We actually need to define this notation, because traditionally in
+Agda if one uses <code class="language-plaintext highlighter-rouge">ℓ</code> for a universe level, then <code class="language-plaintext highlighter-rouge">Set ℓ</code> is the type of
+types of level <code class="language-plaintext highlighter-rouge">ℓ</code>. However, this notation is not good for univalent
+foundations, because not all types are sets. Also the terminology
+“level” is not good, because the hlevels in univalent type theory
+refer to the complexity of equality rather than size.</p>
+
+<p>The following should be the only use of the Agda keyword <code class="language-plaintext highlighter-rouge">Set</code> in
+these notes.</p>
+
+<pre class="Agda">
+<a id="Type"></a><a id="1941" href="Universes.html#1941" class="Function">Type</a> <a id="1946" class="Symbol">=</a> <a id="1948" class="Symbol">λ</a> <a id="1950" href="Universes.html#1950" class="Bound">ℓ</a> <a id="1952" class="Symbol">→</a> <a id="1954" href="Agda.Primitive.html#388" class="Primitive">Set</a> <a id="1958" href="Universes.html#1950" class="Bound">ℓ</a>
+
+<a id="_̇"></a><a id="1961" href="Universes.html#1961" class="Function Operator">_̇</a>   <a id="1966" class="Symbol">:</a> <a id="1968" class="Symbol">(</a><a id="1969" href="Universes.html#1969" class="Bound">𝓤</a> <a id="1971" class="Symbol">:</a> <a id="1973" href="Universes.html#885" class="Postulate">Universe</a><a id="1981" class="Symbol">)</a> <a id="1983" class="Symbol">→</a> <a id="1985" href="Universes.html#1941" class="Function">Type</a> <a id="1990" class="Symbol">(</a><a id="1991" href="Universes.html#1969" class="Bound">𝓤</a> <a id="1993" href="Universes.html#1027" class="Primitive Operator">⁺</a><a id="1994" class="Symbol">)</a>
+
+<a id="1997" href="Universes.html#1997" class="Bound">𝓤</a> <a id="1999" href="Universes.html#1961" class="Function Operator">̇</a>  <a id="2002" class="Symbol">=</a> <a id="2004" href="Universes.html#1941" class="Function">Type</a> <a id="2009" href="Universes.html#1997" class="Bound">𝓤</a>
+</pre>
+
+<p>This says that given the universe level <code class="language-plaintext highlighter-rouge">𝓤</code>, we get the type universe
+<code class="language-plaintext highlighter-rouge">𝓤 ̇</code> , which lives in the next next type universe universe <code class="language-plaintext highlighter-rouge">𝓤 ⁺</code>. So
+the superscript dot notation is just a (postfix) synonym for (prefix)
+<code class="language-plaintext highlighter-rouge">Type</code>, which is just a synonym for <code class="language-plaintext highlighter-rouge">Set</code>, which means type in Agda.</p>
+
+<p>We name a few of the initial universes:</p>
+
+<pre class="Agda">
+<a id="𝓤₁"></a><a id="2362" href="Universes.html#2362" class="Function">𝓤₁</a> <a id="2365" class="Symbol">=</a> <a id="2367" href="Universes.html#963" class="Primitive">𝓤₀</a> <a id="2370" href="Universes.html#1027" class="Primitive Operator">⁺</a>
+<a id="𝓤₂"></a><a id="2372" href="Universes.html#2372" class="Function">𝓤₂</a> <a id="2375" class="Symbol">=</a> <a id="2377" href="Universes.html#2362" class="Function">𝓤₁</a> <a id="2380" href="Universes.html#1027" class="Primitive Operator">⁺</a>
+<a id="𝓤₃"></a><a id="2382" href="Universes.html#2382" class="Function">𝓤₃</a> <a id="2385" class="Symbol">=</a> <a id="2387" href="Universes.html#2372" class="Function">𝓤₂</a> <a id="2390" href="Universes.html#1027" class="Primitive Operator">⁺</a>
+</pre>
+
+<p>For notational convenience, we also define:</p>
+
+<pre class="Agda">
+<a id="_⁺⁺"></a><a id="2462" href="Universes.html#2462" class="Function Operator">_⁺⁺</a> <a id="2466" class="Symbol">:</a> <a id="2468" href="Universes.html#885" class="Postulate">Universe</a> <a id="2477" class="Symbol">→</a> <a id="2479" href="Universes.html#885" class="Postulate">Universe</a>
+<a id="2488" href="Universes.html#2488" class="Bound">𝓤</a> <a id="2490" href="Universes.html#2462" class="Function Operator">⁺⁺</a> <a id="2493" class="Symbol">=</a> <a id="2495" href="Universes.html#2488" class="Bound">𝓤</a> <a id="2497" href="Universes.html#1027" class="Primitive Operator">⁺</a> <a id="2499" href="Universes.html#1027" class="Primitive Operator">⁺</a>
+</pre>
+
+<p>The following is sometimes useful:</p>
+
+<pre class="Agda">
+<a id="universe-of"></a><a id="2562" href="Universes.html#2562" class="Function">universe-of</a> <a id="2574" class="Symbol">:</a> <a id="2576" class="Symbol">{</a><a id="2577" href="Universes.html#2577" class="Bound">𝓤</a> <a id="2579" class="Symbol">:</a> <a id="2581" href="Universes.html#885" class="Postulate">Universe</a><a id="2589" class="Symbol">}</a> <a id="2591" class="Symbol">(</a><a id="2592" href="Universes.html#2592" class="Bound">X</a> <a id="2594" class="Symbol">:</a> <a id="2596" href="Universes.html#2577" class="Bound">𝓤</a> <a id="2598" href="Universes.html#1961" class="Function Operator">̇</a> <a id="2600" class="Symbol">)</a> <a id="2602" class="Symbol">→</a> <a id="2604" href="Universes.html#885" class="Postulate">Universe</a>
+<a id="2613" href="Universes.html#2562" class="Function">universe-of</a> <a id="2625" class="Symbol">{</a><a id="2626" href="Universes.html#2626" class="Bound">𝓤</a><a id="2627" class="Symbol">}</a> <a id="2629" href="Universes.html#2629" class="Bound">X</a> <a id="2631" class="Symbol">=</a> <a id="2633" href="Universes.html#2626" class="Bound">𝓤</a>
+</pre>
+
+<p>Fixities:</p>
+
+<pre class="Agda">
+<a id="2671" class="Keyword">infix</a>  <a id="2678" class="Number">1</a> <a id="2680" href="Universes.html#1961" class="Function Operator">_̇</a>
+</pre>
+
+<p><a href="HoTT-UF-Agda.html#contents"><sub>Table of contents ⇑</sub></a></p>
+
+    </div><!-- /.container -->
+  </body>
+</html>
