@@ -141,14 +141,32 @@ Standard syntax for equality chain reasoning:
 
 <a id="3030" class="Markup">\end{code}</a><a id="3040" class="Background">
 
+Added by Carlo Angiuli on November 20, 2025.
+
+Special syntax for definitional steps in equality chain reasoning:
+
+</a><a id="3156" class="Markup">\begin{code}</a>
+
+<a id="_＝⟨refl⟩_"></a><a id="3170" href="MLTT.Id.html#3170" class="Function Operator">_＝⟨refl⟩_</a> <a id="3180" class="Symbol">:</a> <a id="3182" class="Symbol">{</a><a id="3183" href="MLTT.Id.html#3183" class="Bound">X</a> <a id="3185" class="Symbol">:</a> <a id="3187" href="MLTT.Universes.html#3833" class="Generalizable">𝓤</a> <a id="3189" href="MLTT.Universes.html#3976" class="Function Operator">̇</a> <a id="3191" class="Symbol">}</a> <a id="3193" class="Symbol">(</a><a id="3194" href="MLTT.Id.html#3194" class="Bound">x</a> <a id="3196" class="Symbol">:</a> <a id="3198" href="MLTT.Id.html#3183" class="Bound">X</a><a id="3199" class="Symbol">)</a> <a id="3201" class="Symbol">{</a><a id="3202" href="MLTT.Id.html#3202" class="Bound">y</a> <a id="3204" class="Symbol">:</a> <a id="3206" href="MLTT.Id.html#3183" class="Bound">X</a><a id="3207" class="Symbol">}</a> <a id="3209" class="Symbol">→</a> <a id="3211" href="MLTT.Id.html#3194" class="Bound">x</a> <a id="3213" href="MLTT.Id.html#193" class="Datatype Operator">＝</a> <a id="3215" href="MLTT.Id.html#3202" class="Bound">y</a> <a id="3217" class="Symbol">→</a> <a id="3219" href="MLTT.Id.html#3194" class="Bound">x</a> <a id="3221" href="MLTT.Id.html#193" class="Datatype Operator">＝</a> <a id="3223" href="MLTT.Id.html#3202" class="Bound">y</a>
+<a id="3225" class="Symbol">_</a> <a id="3227" href="MLTT.Id.html#3170" class="Function Operator">＝⟨refl⟩</a> <a id="3235" href="MLTT.Id.html#3235" class="Bound">p</a> <a id="3237" class="Symbol">=</a> <a id="3239" href="MLTT.Id.html#3235" class="Bound">p</a>
+
+<a id="_＝⟨by-definition⟩_"></a><a id="3242" href="MLTT.Id.html#3242" class="Function Operator">_＝⟨by-definition⟩_</a> <a id="3261" class="Symbol">:</a> <a id="3263" class="Symbol">{</a><a id="3264" href="MLTT.Id.html#3264" class="Bound">X</a> <a id="3266" class="Symbol">:</a> <a id="3268" href="MLTT.Universes.html#3833" class="Generalizable">𝓤</a> <a id="3270" href="MLTT.Universes.html#3976" class="Function Operator">̇</a> <a id="3272" class="Symbol">}</a> <a id="3274" class="Symbol">(</a><a id="3275" href="MLTT.Id.html#3275" class="Bound">x</a> <a id="3277" class="Symbol">:</a> <a id="3279" href="MLTT.Id.html#3264" class="Bound">X</a><a id="3280" class="Symbol">)</a> <a id="3282" class="Symbol">{</a><a id="3283" href="MLTT.Id.html#3283" class="Bound">y</a> <a id="3285" class="Symbol">:</a> <a id="3287" href="MLTT.Id.html#3264" class="Bound">X</a><a id="3288" class="Symbol">}</a> <a id="3290" class="Symbol">→</a> <a id="3292" href="MLTT.Id.html#3275" class="Bound">x</a> <a id="3294" href="MLTT.Id.html#193" class="Datatype Operator">＝</a> <a id="3296" href="MLTT.Id.html#3283" class="Bound">y</a> <a id="3298" class="Symbol">→</a> <a id="3300" href="MLTT.Id.html#3275" class="Bound">x</a> <a id="3302" href="MLTT.Id.html#193" class="Datatype Operator">＝</a> <a id="3304" href="MLTT.Id.html#3283" class="Bound">y</a>
+<a id="3306" href="MLTT.Id.html#3242" class="Function Operator">_＝⟨by-definition⟩_</a> <a id="3325" class="Symbol">=</a> <a id="3327" href="MLTT.Id.html#3170" class="Function Operator">_＝⟨refl⟩_</a>
+
+<a id="3338" class="Markup">\end{code}</a><a id="3348" class="Background">
+
+End of addition.
+
 Fixities:
 
-</a><a id="3053" class="Markup">\begin{code}</a>
+</a><a id="3379" class="Markup">\begin{code}</a>
 
-<a id="3067" class="Keyword">infix</a>  <a id="3074" class="Number">3</a>  <a id="3077" href="MLTT.Id.html#1055" class="Function Operator">_⁻¹</a>
-<a id="3081" class="Keyword">infix</a>  <a id="3088" class="Number">1</a> <a id="3090" href="MLTT.Id.html#2785" class="Function Operator">_∎</a>
-<a id="3093" class="Keyword">infixr</a> <a id="3100" class="Number">0</a> <a id="3102" href="MLTT.Id.html#2703" class="Function Operator">_＝⟨_⟩_</a>
-<a id="3109" class="Keyword">infixl</a> <a id="3116" class="Number">2</a> <a id="3118" href="MLTT.Id.html#968" class="Function Operator">_∙_</a>
+<a id="3393" class="Keyword">infix</a>  <a id="3400" class="Number">3</a>  <a id="3403" href="MLTT.Id.html#1055" class="Function Operator">_⁻¹</a>
+<a id="3407" class="Keyword">infix</a>  <a id="3414" class="Number">1</a> <a id="3416" href="MLTT.Id.html#2785" class="Function Operator">_∎</a>
+<a id="3419" class="Keyword">infixr</a> <a id="3426" class="Number">0</a> <a id="3428" href="MLTT.Id.html#2703" class="Function Operator">_＝⟨_⟩_</a>
+<a id="3435" class="Keyword">infixr</a> <a id="3442" class="Number">0</a> <a id="3444" href="MLTT.Id.html#3170" class="Function Operator">_＝⟨refl⟩_</a>
+<a id="3454" class="Keyword">infixr</a> <a id="3461" class="Number">0</a> <a id="3463" href="MLTT.Id.html#3242" class="Function Operator">_＝⟨by-definition⟩_</a>
+<a id="3482" class="Keyword">infixl</a> <a id="3489" class="Number">2</a> <a id="3491" href="MLTT.Id.html#968" class="Function Operator">_∙_</a>
 
-<a id="3123" class="Markup">\end{code}</a><a id="3133" class="Background">
+<a id="3496" class="Markup">\end{code}</a><a id="3506" class="Background">
 </a></pre></body></html>
