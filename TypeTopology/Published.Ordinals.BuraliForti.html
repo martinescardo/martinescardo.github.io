@@ -129,7 +129,7 @@ As discussed above, we assume univalence as a hypothesis:
 
 <a id="3644" class="Keyword">open</a> <a id="3649" class="Keyword">import</a> <a id="3656" href="UF.Subsingletons.html" class="Module">UF.Subsingletons</a>
 <a id="3673" class="Keyword">open</a> <a id="3678" class="Keyword">import</a> <a id="3685" href="UF.Retracts.html" class="Module">UF.Retracts</a>
-<a id="3697" class="Keyword">open</a> <a id="3702" class="Keyword">import</a> <a id="3709" href="UF.Equiv.html" class="Module">UF.Equiv</a> <a id="3718" class="Keyword">hiding</a> <a id="3725" class="Symbol">(</a><a id="3726" href="UF.Equiv.html#24910" class="Function Operator">_≅_</a><a id="3729" class="Symbol">)</a>
+<a id="3697" class="Keyword">open</a> <a id="3702" class="Keyword">import</a> <a id="3709" href="UF.Equiv.html" class="Module">UF.Equiv</a> <a id="3718" class="Keyword">hiding</a> <a id="3725" class="Symbol">(</a><a id="3726" href="UF.Equiv.html#24902" class="Function Operator">_≅_</a><a id="3729" class="Symbol">)</a>
 <a id="3731" class="Keyword">open</a> <a id="3736" class="Keyword">import</a> <a id="3743" href="UF.UniverseEmbedding.html" class="Module">UF.UniverseEmbedding</a>
 <a id="3764" class="Keyword">open</a> <a id="3769" class="Keyword">import</a> <a id="3776" href="UF.UA-FunExt.html" class="Module">UF.UA-FunExt</a>
 <a id="3789" class="Keyword">open</a> <a id="3794" class="Keyword">import</a> <a id="3801" href="UF.FunExt.html" class="Module">UF.FunExt</a>
@@ -138,10 +138,10 @@ As discussed above, we assume univalence as a hypothesis:
 <a id="3832" class="Keyword">private</a>
 
  <a id="fe"></a><a id="3842" href="Ordinals.BuraliForti.html#3842" class="Function">fe</a> <a id="3845" class="Symbol">:</a> <a id="3847" href="UF.FunExt.html#995" class="Function">FunExt</a>
- <a id="3855" href="Ordinals.BuraliForti.html#3842" class="Function">fe</a> <a id="3858" class="Symbol">=</a> <a id="3860" href="UF.UA-FunExt.html#2380" class="Function">Univalence-gives-FunExt</a> <a id="3884" href="Ordinals.BuraliForti.html#3613" class="Bound">ua</a>
+ <a id="3855" href="Ordinals.BuraliForti.html#3842" class="Function">fe</a> <a id="3858" class="Symbol">=</a> <a id="3860" href="UF.UA-FunExt.html#2372" class="Function">Univalence-gives-FunExt</a> <a id="3884" href="Ordinals.BuraliForti.html#3613" class="Bound">ua</a>
 
  <a id="fe&#39;"></a><a id="3889" href="Ordinals.BuraliForti.html#3889" class="Function">fe&#39;</a> <a id="3893" class="Symbol">:</a> <a id="3895" href="UF.FunExt.html#1047" class="Function">Fun-Ext</a>
- <a id="3904" href="Ordinals.BuraliForti.html#3889" class="Function">fe&#39;</a> <a id="3908" class="Symbol">=</a> <a id="3910" href="UF.UA-FunExt.html#2577" class="Function">Univalence-gives-Fun-Ext</a> <a id="3935" href="Ordinals.BuraliForti.html#3613" class="Bound">ua</a>
+ <a id="3904" href="Ordinals.BuraliForti.html#3889" class="Function">fe&#39;</a> <a id="3908" class="Symbol">=</a> <a id="3910" href="UF.UA-FunExt.html#2569" class="Function">Univalence-gives-Fun-Ext</a> <a id="3935" href="Ordinals.BuraliForti.html#3613" class="Bound">ua</a>
 
  <a id="pe"></a><a id="3940" href="Ordinals.BuraliForti.html#3940" class="Function">pe</a> <a id="3943" class="Symbol">:</a> <a id="3945" href="UF.Subsingletons.html#7814" class="Function">Prop-Ext</a>
  <a id="3955" href="Ordinals.BuraliForti.html#3940" class="Function">pe</a> <a id="3958" class="Symbol">=</a> <a id="3960" href="UF.Univalence.html#11461" class="Function">Univalence-gives-Prop-Ext</a> <a id="3986" href="Ordinals.BuraliForti.html#3613" class="Bound">ua</a>
@@ -181,7 +181,7 @@ universe 𝓤 equivalent to the ordinal of all ordinals in the universe 𝓤.
   <a id="4735" href="Ordinals.BuraliForti.html#4717" class="Function">e</a> <a id="4737" class="Symbol">=</a> <a id="4739" href="Ordinals.BuraliForti.html#4451" class="Bound">α</a> <a id="4741" href="MLTT.Sigma.html#395" class="InductiveConstructor Operator">,</a> <a id="4743" href="Ordinals.BuraliForti.html#4643" class="Function">d</a>
 
   <a id="4748" href="Ordinals.BuraliForti.html#4748" class="Function">γ</a> <a id="4750" class="Symbol">:</a> <a id="4752" href="MLTT.Empty-Type.html#121" class="Datatype">𝟘</a>
-  <a id="4756" href="Ordinals.BuraliForti.html#4748" class="Function">γ</a> <a id="4758" class="Symbol">=</a> <a id="4760" href="Ordinals.Notions.html#9848" class="Function">irreflexive</a> <a id="4772" href="Ordinals.OrdinalOfOrdinals.html#7687" class="Function Operator">_⊲_</a> <a id="4776" class="Symbol">(</a><a id="4777" href="Ordinals.OrdinalOfOrdinals.html#14320" class="Function">OO</a> <a id="4780" href="Ordinals.BuraliForti.html#4447" class="Bound">𝓤</a><a id="4781" class="Symbol">)</a> <a id="4783" class="Symbol">(</a><a id="4784" href="Ordinals.OrdinalOfOrdinals.html#11660" class="Function">⊲-is-well-founded</a> <a id="4802" class="Symbol">(</a><a id="4803" href="Ordinals.OrdinalOfOrdinals.html#14320" class="Function">OO</a> <a id="4806" href="Ordinals.BuraliForti.html#4447" class="Bound">𝓤</a><a id="4807" class="Symbol">))</a> <a id="4810" href="Ordinals.BuraliForti.html#4717" class="Function">e</a>
+  <a id="4756" href="Ordinals.BuraliForti.html#4748" class="Function">γ</a> <a id="4758" class="Symbol">=</a> <a id="4760" href="Ordinals.Notions.html#9846" class="Function">irreflexive</a> <a id="4772" href="Ordinals.OrdinalOfOrdinals.html#7687" class="Function Operator">_⊲_</a> <a id="4776" class="Symbol">(</a><a id="4777" href="Ordinals.OrdinalOfOrdinals.html#14320" class="Function">OO</a> <a id="4780" href="Ordinals.BuraliForti.html#4447" class="Bound">𝓤</a><a id="4781" class="Symbol">)</a> <a id="4783" class="Symbol">(</a><a id="4784" href="Ordinals.OrdinalOfOrdinals.html#11660" class="Function">⊲-is-well-founded</a> <a id="4802" class="Symbol">(</a><a id="4803" href="Ordinals.OrdinalOfOrdinals.html#14320" class="Function">OO</a> <a id="4806" href="Ordinals.BuraliForti.html#4447" class="Bound">𝓤</a><a id="4807" class="Symbol">))</a> <a id="4810" href="Ordinals.BuraliForti.html#4717" class="Function">e</a>
 
 <a id="4813" class="Markup">\end{code}</a><a id="4823" class="Background">
 
