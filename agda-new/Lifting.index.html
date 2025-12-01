@@ -1,1 +1,37 @@
-redirect.html
+<!DOCTYPE HTML>
+<html><head><meta charset="utf-8"><title>Lifting.index</title><link rel="stylesheet" href="Agda.css"><script type="text/javascript" src="highlight-hover.js"></script></head><body><pre class="Agda"><a id="1" class="Background">Martin Escardo, 2018-2019 with later additions.
+
+The lifting (aka partial-map classifier) monad.
+
+</a><a id="99" class="Markup">\begin{code}</a>
+
+<a id="113" class="Symbol">{-#</a> <a id="117" class="Keyword">OPTIONS</a> <a id="125" class="Pragma">--safe</a> <a id="132" class="Pragma">--without-K</a> <a id="144" class="Symbol">#-}</a>
+
+<a id="149" class="Keyword">module</a> <a id="156" href="Lifting.index.html" class="Module">Lifting.index</a> <a id="170" class="Keyword">where</a>
+
+<a id="177" class="Keyword">import</a> <a id="184" href="Lifting.Algebras.html" class="Module">Lifting.Algebras</a>
+<a id="201" class="Keyword">import</a> <a id="208" href="Lifting.Construction.html" class="Module">Lifting.Construction</a>
+<a id="229" class="Keyword">import</a> <a id="236" href="Lifting.EmbeddingDirectly.html" class="Module">Lifting.EmbeddingDirectly</a>
+<a id="262" class="Keyword">import</a> <a id="269" href="Lifting.EmbeddingViaSIP.html" class="Module">Lifting.EmbeddingViaSIP</a>
+<a id="293" class="Keyword">import</a> <a id="300" href="Lifting.Identity.html" class="Module">Lifting.Identity</a>
+<a id="317" class="Keyword">import</a> <a id="324" href="Lifting.IdentityViaSIP.html" class="Module">Lifting.IdentityViaSIP</a>
+<a id="347" class="Keyword">import</a> <a id="354" href="Lifting.Miscelanea.html" class="Module">Lifting.Miscelanea</a>                               <a id="403" class="Comment">-- By Tom de Jong 2019</a>
+<a id="426" class="Keyword">import</a> <a id="433" href="Lifting.Miscelanea-PropExt-FunExt.html" class="Module">Lifting.Miscelanea-PropExt-FunExt</a>                <a id="482" class="Comment">-- By Tom de Jong 2019</a>
+<a id="505" class="Keyword">import</a> <a id="512" href="Lifting.Monad.html" class="Module">Lifting.Monad</a>
+<a id="526" class="Keyword">import</a> <a id="533" href="Lifting.MonadVariation.html" class="Module">Lifting.MonadVariation</a>
+<a id="556" class="Keyword">import</a> <a id="563" href="Lifting.Set.html" class="Module">Lifting.Set</a>
+<a id="575" class="Keyword">import</a> <a id="582" href="Lifting.Size.html" class="Module">Lifting.Size</a>
+<a id="595" class="Keyword">import</a> <a id="602" href="Lifting.UnivalentWildCategory.html" class="Module">Lifting.UnivalentWildCategory</a>
+<a id="632" class="Keyword">import</a> <a id="639" href="Lifting.TwoAlgebrasOnOmega.html" class="Module">Lifting.TwoAlgebrasOnOmega</a>
+<a id="666" class="Keyword">import</a> <a id="673" href="Lifting.AnAlgebraWhichIsNotAlwaysFree.html" class="Module">Lifting.AnAlgebraWhichIsNotAlwaysFree</a>
+<a id="711" class="Keyword">import</a> <a id="718" href="Lifting.AnAlgebraWhichIsNotAlwaysFree-blackboard.html" class="Module">Lifting.AnAlgebraWhichIsNotAlwaysFree-blackboard</a> <a id="767" class="Comment">-- (*)</a>
+
+<a id="775" class="Markup">\end{code}</a><a id="785" class="Background">
+
+(*) This file is almost superseded by
+    Lifting.AnAlgebraWhichIsNotAlwaysFree, which has a stronger result
+    with a simpler proof. It is still interesting because (1) it has
+    additional information, and (2) it illustrates how we use
+    TypeTopology as a blackboard to think about mathematical ideas and
+    develop them.
+</a></pre></body></html>

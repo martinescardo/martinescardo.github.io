@@ -1,1 +1,44 @@
-redirect.html
+<!DOCTYPE HTML>
+<html><head><meta charset="utf-8"><title>TypeTopology.index</title><link rel="stylesheet" href="Agda.css"><script type="text/javascript" src="highlight-hover.js"></script></head><body><pre class="Agda"><a id="1" class="Background">Martin Escardo, from about 2010 to today.
+
+A motivation for what is done here can be found in three blog
+posts by Chris Groassack from July 2024:
+https://grossack.site/tags/life-in-the-topological-topos/
+
+</a><a id="206" class="Markup">\begin{code}</a>
+
+<a id="220" class="Symbol">{-#</a> <a id="224" class="Keyword">OPTIONS</a> <a id="232" class="Pragma">--safe</a> <a id="239" class="Pragma">--without-K</a> <a id="251" class="Symbol">#-}</a>
+
+<a id="256" class="Keyword">module</a> <a id="263" href="TypeTopology.index.html" class="Module">TypeTopology.index</a> <a id="282" class="Keyword">where</a>
+
+<a id="289" class="Keyword">import</a> <a id="296" href="TypeTopology.ADecidableQuantificationOverTheNaturals.html" class="Module">TypeTopology.ADecidableQuantificationOverTheNaturals</a>
+<a id="349" class="Keyword">import</a> <a id="356" href="TypeTopology.AbsolutenessOfCompactness.html" class="Module">TypeTopology.AbsolutenessOfCompactness</a> <a id="395" class="Comment">-- by Andrew Swan</a>
+<a id="413" class="Keyword">import</a> <a id="420" href="TypeTopology.AbsolutenessOfCompactnessExample.html" class="Module">TypeTopology.AbsolutenessOfCompactnessExample</a> <a id="466" class="Comment">-- by Andrew Swan</a>
+<a id="484" class="Keyword">import</a> <a id="491" href="TypeTopology.Cantor.html" class="Module">TypeTopology.Cantor</a>
+<a id="511" class="Keyword">import</a> <a id="518" href="TypeTopology.CantorMinusPoint.html" class="Module">TypeTopology.CantorMinusPoint</a>
+<a id="548" class="Keyword">import</a> <a id="555" href="TypeTopology.CantorSearch.html" class="Module">TypeTopology.CantorSearch</a>
+<a id="581" class="Keyword">import</a> <a id="588" href="TypeTopology.CompactTypes.html" class="Module">TypeTopology.CompactTypes</a>
+<a id="614" class="Keyword">import</a> <a id="621" href="TypeTopology.ConvergentSequenceHasInf.html" class="Module">TypeTopology.ConvergentSequenceHasInf</a>
+<a id="659" class="Keyword">import</a> <a id="666" href="TypeTopology.DecidabilityOfNonContinuity.html" class="Module">TypeTopology.DecidabilityOfNonContinuity</a>
+<a id="707" class="Keyword">import</a> <a id="714" href="TypeTopology.Density.html" class="Module">TypeTopology.Density</a>
+<a id="735" class="Keyword">import</a> <a id="742" href="TypeTopology.DenseMapsProperties.html" class="Module">TypeTopology.DenseMapsProperties</a> <a id="775" class="Comment">-- by Fredrik Bakke</a>
+<a id="795" class="Keyword">import</a> <a id="802" href="TypeTopology.DisconnectedTypes.html" class="Module">TypeTopology.DisconnectedTypes</a>
+<a id="833" class="Keyword">import</a> <a id="840" href="TypeTopology.ExtendedSumCompact.html" class="Module">TypeTopology.ExtendedSumCompact</a>
+<a id="872" class="Keyword">import</a> <a id="879" href="TypeTopology.FailureOfTotalSeparatedness.html" class="Module">TypeTopology.FailureOfTotalSeparatedness</a>
+<a id="920" class="Keyword">import</a> <a id="927" href="TypeTopology.GenericConvergentSequenceCompactness.html" class="Module">TypeTopology.GenericConvergentSequenceCompactness</a>
+<a id="977" class="Keyword">import</a> <a id="984" href="TypeTopology.LimitPoints.html" class="Module">TypeTopology.LimitPoints</a>
+<a id="1009" class="Keyword">import</a> <a id="1016" href="TypeTopology.PropInfTychonoff.html" class="Module">TypeTopology.PropInfTychonoff</a>
+<a id="1046" class="Keyword">import</a> <a id="1053" href="TypeTopology.PropTychonoff.html" class="Module">TypeTopology.PropTychonoff</a>
+<a id="1080" class="Keyword">import</a> <a id="1087" href="TypeTopology.RicesTheoremForTheUniverse.html" class="Module">TypeTopology.RicesTheoremForTheUniverse</a>
+<a id="1127" class="Keyword">import</a> <a id="1134" href="TypeTopology.SequentiallyHausdorff.html" class="Module">TypeTopology.SequentiallyHausdorff</a>
+<a id="1169" class="Keyword">import</a> <a id="1176" href="TypeTopology.SigmaDiscreteAndTotallySeparated.html" class="Module">TypeTopology.SigmaDiscreteAndTotallySeparated</a>
+<a id="1222" class="Keyword">import</a> <a id="1229" href="TypeTopology.SimpleTypes.html" class="Module">TypeTopology.SimpleTypes</a>
+<a id="1254" class="Keyword">import</a> <a id="1261" href="TypeTopology.SquashedCantor.html" class="Module">TypeTopology.SquashedCantor</a>
+<a id="1289" class="Keyword">import</a> <a id="1296" href="TypeTopology.SquashedSum.html" class="Module">TypeTopology.SquashedSum</a>
+<a id="1321" class="Keyword">import</a> <a id="1328" href="TypeTopology.TheTopologyOfTheUniverse.html" class="Module">TypeTopology.TheTopologyOfTheUniverse</a>
+<a id="1366" class="Keyword">import</a> <a id="1373" href="TypeTopology.TotallySeparated.html" class="Module">TypeTopology.TotallySeparated</a>
+<a id="1403" class="Keyword">import</a> <a id="1410" href="TypeTopology.UniformSearch.html" class="Module">TypeTopology.UniformSearch</a> <a id="1437" class="Comment">-- by Ayberk Tosun</a>
+<a id="1456" class="Keyword">import</a> <a id="1463" href="TypeTopology.WeaklyCompactTypes.html" class="Module">TypeTopology.WeaklyCompactTypes</a>
+
+<a id="1496" class="Markup">\end{code}</a><a id="1506" class="Background">
+</a></pre></body></html>

@@ -1,1 +1,59 @@
-redirect.html
+<!DOCTYPE HTML>
+<html><head><meta charset="utf-8"><title>RelativeMonadOnStructuredTypes.index</title><link rel="stylesheet" href="Agda.css"><script type="text/javascript" src="highlight-hover.js"></script></head><body><pre class="Agda"><a id="1" class="Background">Martin Escardo and Paulo Oliva, May-August 2024.
+
+For some applications to combinatorial game theory, we need affine
+monads, namely monads T such that
+
+ η : 𝟙 → T 𝟙
+
+is an isomorphism.
+
+Counter-examples include the list monad. But if we restrict to
+non-empty lists without repetitions, we do get an affine monad.
+
+However, to work with a monad of lists without repetitions we need
+decidable equality on the types under consideration. This leads us to
+consider relative monads on strutured types, were in this example the
+structure is actually property, namely decidability of equality. In
+this example, we need decidable equality on X to be able to form T X,
+but we don&#39;t need to consider decidable equality on T X, so our monads
+don&#39;t need to be endofunctors, in the sense of [1].
+
+[1] Thorsten Altenkirch, James Chapman, Tarmo Uustalu, Monads need not
+    be endofunctors, Logical Methods in Computer Science 11 1:3 (2015)
+    1–40 [arXiv:1412.7148, doi:10.2168/LMCS-11(1:3)2015]
+
+</a><a id="984" class="Markup">\begin{code}</a>
+
+<a id="998" class="Symbol">{-#</a> <a id="1002" class="Keyword">OPTIONS</a> <a id="1010" class="Pragma">--safe</a> <a id="1017" class="Pragma">--without-K</a> <a id="1029" class="Pragma">--no-level-universe</a> <a id="1049" class="Symbol">#-}</a>
+
+<a id="1054" class="Keyword">module</a> <a id="1061" href="RelativeMonadOnStructuredTypes.index.html" class="Module">RelativeMonadOnStructuredTypes.index</a> <a id="1098" class="Keyword">where</a>
+
+<a id="1105" class="Keyword">import</a> <a id="1112" href="RelativeMonadOnStructuredTypes.OneSigmaStructure.html" class="Module">RelativeMonadOnStructuredTypes.OneSigmaStructure</a> <a id="1161" class="Comment">-- (1)</a>
+<a id="1168" class="Keyword">import</a> <a id="1175" href="RelativeMonadOnStructuredTypes.Monad.html" class="Module">RelativeMonadOnStructuredTypes.Monad</a>             <a id="1224" class="Comment">-- (2)</a>
+<a id="1231" class="Keyword">import</a> <a id="1238" href="RelativeMonadOnStructuredTypes.NELWR.html" class="Module">RelativeMonadOnStructuredTypes.NELWR</a>             <a id="1287" class="Comment">-- (3)</a>
+<a id="1294" class="Keyword">import</a> <a id="1301" href="RelativeMonadOnStructuredTypes.J-transf.html" class="Module">RelativeMonadOnStructuredTypes.J-transf</a>          <a id="1350" class="Comment">-- (4)</a>
+
+<a id="1358" class="Markup">\end{code}</a><a id="1368" class="Background">
+
+(1) This defines the notion of structure we consider, which is
+    required to be closed under 𝟙 and Σ.
+
+(2) This defines relative monads on types equipped with the structure
+    defined in (1).  Because we also want to eventually consider
+    relative monads such as e.g. non-empty powersets over types with
+    some structure, which changes universe level, our monads are
+    parametrized by a function ℓ : Universe → Universe (this requires
+    using the Agda flag no-level-universe). For example, for lists
+    without repetitions, we have ℓ 𝓤 = 𝓤, but for powersets we have
+    ℓ 𝓤 = 𝓤⁺.
+
+(3) This defines an affine relative monad of non-empty lists withoutu
+    repetitions on types with decidable equality. This crucially
+    relies on a file that considers discrete graphic monoids in the
+    sense of Lawvere.
+
+(4) This defines a (relative) monad transformer which given a monad T
+    and a notion of structured type, produces a new monad JT by
+    JT X = (X → T R) → T X.
+</a></pre></body></html>

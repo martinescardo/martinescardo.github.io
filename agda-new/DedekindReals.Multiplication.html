@@ -1,1 +1,131 @@
-redirect.html
+<!DOCTYPE HTML>
+<html><head><meta charset="utf-8"><title>DedekindReals.Multiplication</title><link rel="stylesheet" href="Agda.css"><script type="text/javascript" src="highlight-hover.js"></script></head><body><pre class="Agda"><a id="1" class="Background">Andrew Sneap
+
+</a><a id="15" class="Markup">\begin{code}</a>
+<a id="28" class="Symbol">{-#</a> <a id="32" class="Keyword">OPTIONS</a> <a id="40" class="Pragma">--safe</a> <a id="47" class="Pragma">--without-K</a> <a id="59" class="Symbol">#-}</a>
+
+
+<a id="65" class="Keyword">open</a> <a id="70" class="Keyword">import</a> <a id="77" href="UF.PropTrunc.html" class="Module">UF.PropTrunc</a>
+<a id="90" class="Keyword">open</a> <a id="95" class="Keyword">import</a> <a id="102" href="UF.Subsingletons.html" class="Module">UF.Subsingletons</a>
+<a id="119" class="Keyword">open</a> <a id="124" class="Keyword">import</a> <a id="131" href="UF.FunExt.html" class="Module">UF.FunExt</a>
+
+
+<a id="143" class="Keyword">module</a> <a id="150" href="DedekindReals.Multiplication.html" class="Module">DedekindReals.Multiplication</a>
+         <a id="188" class="Symbol">(</a><a id="189" href="DedekindReals.Multiplication.html#189" class="Bound">fe</a> <a id="192" class="Symbol">:</a> <a id="194" href="UF.FunExt.html#1047" class="Function">Fun-Ext</a><a id="201" class="Symbol">)</a>
+         <a id="212" class="Symbol">(</a><a id="213" href="DedekindReals.Multiplication.html#213" class="Bound">pe</a> <a id="216" class="Symbol">:</a> <a id="218" href="UF.Subsingletons.html#7814" class="Function">Prop-Ext</a><a id="226" class="Symbol">)</a>
+         <a id="237" class="Symbol">(</a><a id="238" href="DedekindReals.Multiplication.html#238" class="Bound">pt</a> <a id="241" class="Symbol">:</a> <a id="243" href="UF.PropTrunc.html#486" class="Record">propositional-truncations-exist</a><a id="274" class="Symbol">)</a>
+       <a id="283" class="Keyword">where</a>
+
+<a id="290" class="Keyword">open</a> <a id="295" href="UF.PropTrunc.html#792" class="Module">PropositionalTruncation</a> <a id="319" href="DedekindReals.Multiplication.html#238" class="Bound">pt</a>
+
+
+<a id="324" class="Markup">\end{code}</a><a id="334" class="Background">
+
+Multiplication is defined as in the HoTT Book. It reminds of interval multiplication of rational numbers.
+
+Inhabitedness: by inhabitedness of x and y, we find values
+on both sides of each. Then using the property that rationals have no
+least element, then using the relevant min/max calculation we
+trivially find a p which inhabits each cut of the product.
+
+Roundedness: roundedness in the left to right direction follows
+directly from density of rationals, and transitivity of rationals
+order. In the right to left, transivity alone completes the proof.
+
+</a><a id="892" class="Markup">\begin{code}</a>
+<a id="905" class="Comment">{-
+_*_ : ℝ → ℝ → ℝ
+_*_ ((Lx , Rx) , inhabited-left-x , inhabited-right-x , rounded-left-x , rounded-right-x , disjoint-x , located-x)
+    ((Ly , Ry) , inhabited-left-y , inhabited-right-y , rounded-left-y , rounded-right-y , disjoint-y , located-y)
+  = (L , R) , inhabited-L , {!!} , rounded-left-L , {!!} , is-disjoint , {!!}
+ where
+  L : 𝓟 ℚ
+  L p = (∃ (a , b , c , d) ꞉ ℚ × ℚ × ℚ × ℚ , a ∈ Lx × b ∈ Rx × c ∈ Ly × d ∈ Ry × p &lt; min₄ (a ℚ* c) (a ℚ* d) (b ℚ* c) (b ℚ* d)) , ∃-is-prop
+  R : 𝓟 ℚ
+  R q = (∃ (a , b , c , d) ꞉ ℚ × ℚ × ℚ × ℚ , a ∈ Lx × b ∈ Rx × c ∈ Ly × d ∈ Ry × max₄ (a ℚ* c) (a ℚ* d) (b ℚ* c) (b ℚ* d) &lt; q) , ∃-is-prop
+
+  x-values : ∥ (Σ a ꞉ ℚ , a ∈ Lx) × (Σ b ꞉ ℚ , b ∈ Rx) ∥
+  x-values = binary-choice inhabited-left-x inhabited-right-x
+
+  y-values : ∥ (Σ c ꞉ ℚ , c ∈ Ly) × (Σ d ꞉ ℚ , d ∈ Ry) ∥
+  y-values = binary-choice inhabited-left-y inhabited-right-y
+
+  xy-values : ∥ ((Σ a ꞉ ℚ , a ∈ Lx) × (Σ b ꞉ ℚ , b ∈ Rx)) × ((Σ c ꞉ ℚ , c ∈ Ly) × (Σ d ꞉ ℚ , d ∈ Ry)) ∥
+  xy-values = binary-choice x-values y-values
+
+  inhabited-L : inhabited-left L
+  inhabited-L = ∥∥-rec ∃-is-prop I xy-values
+   where
+    I : ((Σ a ꞉ ℚ , a ∈ Lx) × (Σ b ꞉ ℚ , b ∈ Rx)) × ((Σ c ꞉ ℚ , c ∈ Ly) × (Σ d ꞉ ℚ , d ∈ Ry))
+      → ∃ p ꞉ ℚ , ∃ (a , b , c , d) ꞉ ℚ × ℚ × ℚ × ℚ , a ∈ Lx × b ∈ Rx × c ∈ Ly × d ∈ Ry × p &lt; min₄ (a ℚ* c) (a ℚ* d) (b ℚ* c) (b ℚ* d)
+    I (((a , a&lt;x) , (b , x&lt;b)) , ((c , c&lt;y) , (d , y&lt;d))) = II (ℚ-no-least-element (min₄ (a ℚ* c) (a ℚ* d) (b ℚ* c) (b ℚ* d)))
+     where
+      II : Σ p ꞉ ℚ , p &lt; min₄ (a ℚ* c) (a ℚ* d) (b ℚ* c) (b ℚ* d)
+         → _
+      II (p , p&lt;MIN) = ∣ p , ∣ (a , b , c , d) , a&lt;x , x&lt;b , c&lt;y , y&lt;d , p&lt;MIN ∣ ∣
+
+  rounded-left-L : rounded-left L
+  rounded-left-L p = ltr , rtl
+   where
+    ltr : p ∈ L → ∃ p&#39; ꞉ ℚ , (p &lt; p&#39;) × p&#39; ∈ L
+    ltr p&lt;xy = ∥∥-functor I p&lt;xy
+     where
+      I : (Σ (a , b , c , d) ꞉ ℚ × ℚ × ℚ × ℚ , a ∈ Lx × b ∈ Rx × c ∈ Ly × d ∈ Ry × p &lt; min₄ (a ℚ* c) (a ℚ* d) (b ℚ* c) (b ℚ* d))
+        → Σ p&#39; ꞉ ℚ , p &lt; p&#39; × p&#39; ∈ L
+      I ((a , b , c , d) , a&lt;x , x&lt;b , c&lt;y , y&lt;d , p&lt;MIN) = II (ℚ-dense fe p (min₄ (a ℚ* c) (a ℚ* d) (b ℚ* c) (b ℚ* d)) p&lt;MIN)
+       where
+        II : (Σ p&#39; ꞉ ℚ , p &lt; p&#39; × p&#39; &lt; min₄ (a ℚ* c) (a ℚ* d) (b ℚ* c) (b ℚ* d))
+           → Σ p&#39; ꞉ ℚ , p &lt; p&#39; × p&#39; ∈ L
+        II (p&#39; , p&lt;p&#39; , p&#39;&lt;MIN) = p&#39; , (p&lt;p&#39; , ∣ (a , b , c , d) , (a&lt;x , x&lt;b , c&lt;y , y&lt;d , p&#39;&lt;MIN) ∣)
+    rtl : ∃ p&#39; ꞉ ℚ , (p &lt; p&#39;) × p&#39; ∈ L → p ∈ L
+    rtl p&#39;-info = ∥∥-rec ∃-is-prop I p&#39;-info
+     where
+      I : Σ p&#39; ꞉ ℚ , (p &lt; p&#39;) × p&#39; ∈ L → p ∈ L
+      I (p&#39; , p&lt;p&#39; , p&#39;&lt;xy) = ∥∥-functor II p&#39;&lt;xy
+       where
+        II : Σ (a , b , c , d) ꞉ ℚ × ℚ × ℚ × ℚ , a ∈ Lx × b ∈ Rx × c ∈ Ly × d ∈ Ry × p&#39; &lt; min₄ (a ℚ* c) (a ℚ* d) (b ℚ* c) (b ℚ* d)
+           → Σ (a , b , c , d) ꞉ ℚ × ℚ × ℚ × ℚ , a ∈ Lx × b ∈ Rx × c ∈ Ly × d ∈ Ry × p  &lt; min₄ (a ℚ* c) (a ℚ* d) (b ℚ* c) (b ℚ* d)
+        II ((a , b , c , d) , a&lt;x , x&lt;b , c&lt;x , x&lt;d , p&#39;&lt;MIN) = (a , b , c , d) , a&lt;x , x&lt;b , c&lt;x , x&lt;d , ℚ&lt;-trans p p&#39; (min₄ (a ℚ* c) (a ℚ* d) (b ℚ* c) (b ℚ* d)) p&lt;p&#39; p&#39;&lt;MIN
+
+  is-disjoint : disjoint L R
+  is-disjoint p q (p&lt;xy , xy&lt;q) = ∥∥-rec (ℚ&lt;-is-prop p q) I (binary-choice p&lt;xy xy&lt;q)
+   where
+    I : (Σ (a₁ , b₁ , c₁ , d₁) ꞉ ℚ × ℚ × ℚ × ℚ , a₁ ∈ Lx × b₁ ∈ Rx × c₁ ∈ Ly × d₁ ∈ Ry × p &lt; min₄ (a₁ ℚ* c₁) (a₁ ℚ* d₁) (b₁ ℚ* c₁) (b₁ ℚ* d₁))
+      × (Σ (a₂ , b₂ , c₂ , d₂) ꞉ ℚ × ℚ × ℚ × ℚ , a₂ ∈ Lx × b₂ ∈ Rx × c₂ ∈ Ly × d₂ ∈ Ry × max₄ (a₂ ℚ* c₂) (a₂ ℚ* d₂) (b₂ ℚ* c₂) (b₂ ℚ* d₂) &lt; q)
+      → p &lt; q
+    I ( ((a₁ , b₁ , c₁ , d₁) , a₁&lt;x , x&lt;b₁ , c₁&lt;x , x&lt;d₁ , p&lt;MIN₁) ,
+        ((a₂ , b₂ , c₂ , d₂) , a₂&lt;x , x&lt;b₂ , c₂&lt;x , x&lt;d₂ , MAX₁&lt;q) )
+     = ℚ&lt;-≤-trans fe p MIN₂ q p&lt;MIN₂ (ℚ≤-trans fe MIN₂ MAX₂ q MIN₂≤MAX₂ MAX₂≤q)
+     where
+      a₃ b₃ c₃ d₃ : ℚ
+      a₃ = max a₁ a₂
+      b₃ = min b₁ b₂
+      c₃ = max c₁ c₂
+      d₃ = min d₁ d₂
+
+      MIN₁ MAX₁ MIN₂ MAX₂ : ℚ
+      MIN₁ = min₄ (a₁ ℚ* c₁) (a₁ ℚ* d₁) (b₁ ℚ* c₁) (b₁ ℚ* d₁)
+      MAX₁ = max₄ (a₂ ℚ* c₂) (a₂ ℚ* d₂) (b₂ ℚ* c₂) (b₂ ℚ* d₂)
+      MIN₂ = min₄ (a₃ ℚ* c₃) (a₃ ℚ* d₃) (b₃ ℚ* c₃) (b₃ ℚ* d₃)
+      MAX₂ = max₄ (a₃ ℚ* c₃) (a₃ ℚ* d₃) (b₃ ℚ* c₃) (b₃ ℚ* d₃)
+
+      MIN₁≤MIN₂ : MIN₁ ≤ MIN₂
+      MIN₁≤MIN₂ = {!!}
+
+      MAX₂≤MAX₁ : MAX₂ ≤ MAX₁
+      MAX₂≤MAX₁ = {!!}
+
+      p&lt;MIN₂ : p &lt; MIN₂
+      p&lt;MIN₂ = ℚ&lt;-≤-trans fe p MIN₁ MIN₂ p&lt;MIN₁ MIN₁≤MIN₂
+
+      MIN₂≤MAX₂ : MIN₂ ≤ MAX₂
+      MIN₂≤MAX₂ = min₄≤max₄ (a₃ ℚ* c₃) (a₃ ℚ* d₃) (b₃ ℚ* c₃) (b₃ ℚ* d₃)
+
+      MAX₂&lt;q : MAX₂ &lt; q
+      MAX₂&lt;q = ℚ≤-&lt;-trans fe MAX₂ MAX₁ q MAX₂≤MAX₁ MAX₁&lt;q
+
+      MAX₂≤q : MAX₂ ≤ q
+      MAX₂≤q = ℚ&lt;-coarser-than-≤ MAX₂ q MAX₂&lt;q
+-}</a>
+<a id="5382" class="Markup">\end{code}</a><a id="5392" class="Background">
+</a></pre></body></html>

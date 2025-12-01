@@ -1,1 +1,24 @@
-redirect.html
+<!DOCTYPE HTML>
+<html><head><meta charset="utf-8"><title>MonadOnTypesMGU.index</title><link rel="stylesheet" href="Agda.css"><script type="text/javascript" src="highlight-hover.js"></script></head><body><pre class="Agda"><a id="1" class="Background">Martin Escardo and Paulo Oliva, originally 2-27 July 2021, with the
+generalization performed in March 2024.
+
+Same as MonadOnTypes but with more general universes (MGU), and also
+using the flag no-level-universe, so that we can have a type X in a
+universe 𝓤 with T X in a universe ℓ 𝓤. For example, for the list
+monad, we have ℓ 𝓤 = 𝓤, but for the powerset monad we have ℓ 𝓤 = 𝓤⁺.
+
+</a><a id="382" class="Markup">\begin{code}</a>
+
+<a id="396" class="Symbol">{-#</a> <a id="400" class="Keyword">OPTIONS</a> <a id="408" class="Pragma">--safe</a> <a id="415" class="Pragma">--without-K</a> <a id="427" class="Pragma">--no-level-universe</a> <a id="447" class="Symbol">#-}</a>
+
+<a id="452" class="Keyword">module</a> <a id="459" href="MonadOnTypesMGU.index.html" class="Module">MonadOnTypesMGU.index</a> <a id="481" class="Keyword">where</a>
+
+<a id="488" class="Keyword">import</a> <a id="495" href="MonadOnTypesMGU.J.html" class="Module">MonadOnTypesMGU.J</a>             <a id="525" class="Comment">-- Selection monad.</a>
+<a id="545" class="Keyword">import</a> <a id="552" href="MonadOnTypesMGU.K.html" class="Module">MonadOnTypesMGU.K</a>             <a id="582" class="Comment">-- Continuation (or quantifier) monad.</a>
+<a id="621" class="Keyword">import</a> <a id="628" href="MonadOnTypesMGU.JK.html" class="Module">MonadOnTypesMGU.JK</a>            <a id="658" class="Comment">-- Relationship between the two mondas.</a>
+<a id="698" class="Keyword">import</a> <a id="705" href="MonadOnTypesMGU.Monad.html" class="Module">MonadOnTypesMGU.Monad</a>         <a id="735" class="Comment">-- (Automatically strong, wild) monads on suitable types.</a>
+<a id="793" class="Keyword">import</a> <a id="800" href="MonadOnTypesMGU.Reader.html" class="Module">MonadOnTypesMGU.Reader</a>
+<a id="823" class="Keyword">import</a> <a id="830" href="MonadOnTypesMGU.NonEmptyList.html" class="Module">MonadOnTypesMGU.NonEmptyList</a>
+
+<a id="860" class="Markup">\end{code}</a><a id="870" class="Background">
+</a></pre></body></html>
