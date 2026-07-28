@@ -47,6 +47,10 @@
  .f { padding-left: 1rem; }
  .tog { color: var(--hi); cursor: pointer; display: inline-block; margin-left: 1rem; }
  .none { color: var(--dim); padding: 1rem 0; }
+ #browse-label { color: var(--hi); font-weight: 600; }
+ #browse { display: flex; flex-wrap: wrap; gap: .4rem .9rem; }
+ #browse a { color: var(--dim); }
+ #browse a:hover { color: var(--hi); }
 </style></head><body>
 <h1>Search <a href="https://martinescardo.github.io/TypeTopology/" title="Go to the TypeTopology web pages"
    >TypeTopology</a></h1>
@@ -64,16 +68,19 @@
 </div>
 <div id="help">
 <ul class="sub">
-<li>Type a name, a fragment of one, a concept, or a contributor.</li>
+<li>Type a <b>name</b>, a <b>fragment</b> of one, a <b>concept</b>, or a
+    <b>contributor</b>.</li>
 <li>Several words must all match, so <code>compact ordinal</code> asks for both.</li>
-<li>Wildcards: <code>*</code> for any run of characters, <code>?</code> for one,
+<li><b>Wildcards</b>: <code>*</code> for any run of characters, <code>?</code> for one,
     <code>\*</code> for a literal star.</li>
-<li><code>compact in TypeTopology.We</code> stays inside one directory or
-    file, even typed one segment at a time.</li>
+<li>"compact <b>in</b> TypeTopology.Weak", using the keyword <b>in</b>, stays
+    inside one directory or file.</li>
 </ul>
 <p class="sub">20,967 definitions in 890 of the 988 modules
 (the rest define no name of their own, being index modules),
 and 236 concepts.</p>
+<p id="browse-label" class="sub">Currently indexed concepts:</p>
+<div id="browse"></div>
 </div>
 <div id="out"></div>
 <script>
@@ -89,8 +96,22 @@ const GENERIC=new Set(["type","types","space","spaces","theory","principle",
 const SIDELINE=/^(MGS|gist|deprecated|Unsafe|TWA)\./;
 const q=document.getElementById("q"), out=document.getElementById("out"),
       useMods=document.getElementById("mods"), exact=document.getElementById("exact"),
-      clr=document.getElementById("clr"), help=document.getElementById("help");
+      clr=document.getElementById("clr"), help=document.getElementById("help"),
+      browse=document.getElementById("browse");
 const esc=s=>s.replace(/[&<>]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;"}[c]));
+// The concepts, alphabetically, as a browsable list: since #browse sits
+// inside #help it hides on the first keystroke exactly like the bullets do,
+// and clicking one runs it as a search, which is a gentle way to learn what
+// terms the page answers to.
+const CNAMES=CONS.map(c=>c[0]).sort((a,b)=>a.localeCompare(b));
+browse.innerHTML=CNAMES.map((n,i)=>'<a href="#" data-i="'+i+'">'+esc(n)+'</a>').join("");
+browse.addEventListener("click",e=>{
+  if(e.target.tagName!=="A") return;
+  e.preventDefault();
+  q.value=CNAMES[e.target.dataset.i];
+  search();
+  q.focus();
+});
 // Every site of every name, so that a concept's definitions can be linked.
 // DEFS is ordered by use, so a name's sites come most-used first.
 const SITEOF=new Map();
