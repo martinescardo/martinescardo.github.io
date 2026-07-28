@@ -116,9 +116,16 @@ browse.addEventListener("click",e=>{
 // DEFS is ordered by use, so a name's sites come most-used first.
 const SITEOF=new Map();
 for(const r of DEFS){ const s=SITEOF.get(r[0]); if(s) s.push(r); else SITEOF.set(r[0],[r]); }
-// With OWN_AREA, a concept links the first of its own modules to define the
-// name, rather than the most used site anywhere: is-compact then leads to
-// CompactTypes under compactness, not to the domain-theoretic one.
+// A very small number of names are defined for genuinely unrelated notions
+// that both mention the concept and are close in usage, so nothing below
+// can tell them apart -- checked against what actually imports the name,
+// not against usage or spelling. is-compact is defined four times: domain
+// theory's way-below compactness (149 uses), locale compactness (32), the
+// general exhaustibility notion (30), and locale regularity (15); the
+// second edges out the third on both counts, but Ordinals.CompactnessOfSuprema
+// and Ordinals.InfProperty both open TypeTopology.CompactTypes for it, not
+// Locales.Compactness.
+const HOME=new Map([["is-compact","TypeTopology.CompactTypes"]]);
 function deflink(n,label,inPath){
   let ss=SITEOF.get(n); const code='<code>'+esc(n)+'</code>';
   if(!ss) return code;
@@ -126,12 +133,16 @@ function deflink(n,label,inPath){
   // than the best site anywhere -- "compact in TypeTopology" should not
   // send is-compact to Locales.Compactness.
   if(inPath){ const within=ss.filter(x=>inPath(x[1])); if(within.length) ss=within; }
+  if(HOME.has(n)){
+    const home=ss.find(x=>MODS[x[1]]===HOME.get(n));
+    if(home) return '<a href="'+SITE+MODS[home[1]]+'.html#'+home[2]+'">'+code+'</a>';
+  }
   // The most used site, but a --safe one in preference to an unsafe one.
   const safe=x=>!UNSAFE.has(x[1]);
   let r=ss.find(safe) || ss[0];
   // With OWN_AREA, prefer a site whose MODULE NAME carries a word of the
-  // concept, so that compactness leads to Locales.Compactness rather than to
-  // whichever is-compact happens to be used most. Three guards, each of which
+  // concept, so that egroup leads to a module about EGroups rather than to
+  // whichever egroup happens to be used most. Three guards, each of which
   // a plainer version of this rule got wrong: generic words like "type" are
   // ignored, since "identity" alone would send ap to
   // FalseWithoutIdentityTypes; lecture notes, gists and superseded code are
