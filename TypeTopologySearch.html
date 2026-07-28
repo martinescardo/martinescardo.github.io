@@ -97,9 +97,13 @@ for(const r of DEFS){ const s=SITEOF.get(r[0]); if(s) s.push(r); else SITEOF.set
 // With OWN_AREA, a concept links the first of its own modules to define the
 // name, rather than the most used site anywhere: is-compact then leads to
 // CompactTypes under compactness, not to the domain-theoretic one.
-function deflink(n,label){
-  const ss=SITEOF.get(n), code='<code>'+esc(n)+'</code>';
+function deflink(n,label,inPath){
+  let ss=SITEOF.get(n); const code='<code>'+esc(n)+'</code>';
   if(!ss) return code;
+  // With a path, link within it if the name has any site there, rather
+  // than the best site anywhere -- "compact in TypeTopology" should not
+  // send is-compact to Locales.Compactness.
+  if(inPath){ const within=ss.filter(x=>inPath(x[1])); if(within.length) ss=within; }
   // The most used site, but a --safe one in preference to an unsafe one.
   const safe=x=>!UNSAFE.has(x[1]);
   let r=ss.find(safe) || ss[0];
@@ -157,13 +161,13 @@ function modules(idx,label){
       +'<a class="tog" href="#">and '+(idx.length-6)+' more</a>';
   return d+'</div>';
 }
-function render(rows,concepts,people){
+function render(rows,concepts,people,inPath){
   if(!rows.length && !concepts.length && !people.length){
     out.innerHTML='<p class="none">Nothing found.</p>'; return; }
   let h='<table>';
   for(const c of concepts){
     h+='<tr class="concept"><td class="n">'+esc(c[0])+'</td><td class="m">concept — '
-      +c[1].map(n=>deflink(n,c[0])).join(", ")
+      +c[1].map(n=>deflink(n,c[0],inPath)).join(", ")
       +modules(c[2],"discussed in")+'</td><td class="u"></td></tr>';
   }
   for(const p of people){
@@ -235,7 +239,7 @@ function search(){
              .map(c=>[c[0],c[1],c[2].filter(inPath),c[3]]);
     ppl=ppl.filter(p=>p[2].some(inPath)).map(p=>[p[0],p[1],p[2].filter(inPath)]);
   }
-  render(hits.slice(0,400).map(h=>h[2]),cons,ppl);
+  render(hits.slice(0,400).map(h=>h[2]),cons,ppl,inPath);
 }
 out.addEventListener("click",e=>{
   if(!e.target.classList.contains("tog")) return;
