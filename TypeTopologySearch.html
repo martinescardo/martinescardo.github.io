@@ -66,6 +66,7 @@
 </div>
 <div class="opts">
  <label><input type="checkbox" id="mods" checked> search module names too</label>
+ <label><input type="checkbox" id="sigs"> search within type signatures too</label>
  <label><input type="checkbox" id="exact"> whole word</label>
 </div>
 <div id="help">
@@ -104,7 +105,8 @@ const GENERIC=new Set(["type","types","space","spaces","theory","principle",
 // not where a concept should be said to live.
 const SIDELINE=/^(MGS|gist|deprecated|Unsafe|TWA)\./;
 const q=document.getElementById("q"), out=document.getElementById("out"),
-      useMods=document.getElementById("mods"), exact=document.getElementById("exact"),
+      useMods=document.getElementById("mods"), useSigs=document.getElementById("sigs"),
+      exact=document.getElementById("exact"),
       clr=document.getElementById("clr"), help=document.getElementById("help"),
       browse=document.getElementById("browse");
 const esc=s=>s.replace(/[&<>]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;"}[c]));
@@ -230,7 +232,7 @@ function modules(idx,label){
       +'<a class="tog" href="#">and '+(idx.length-6)+' more</a>';
   return d+'</div>';
 }
-function render(rows,concepts,people,inPath,terms,wantMods){
+function render(rows,concepts,people,inPath,terms,wantMods,wantSigs){
   if(!rows.length && !concepts.length && !people.length){
     out.innerHTML='<p class="none">Nothing found.</p>'; return; }
   let h='<table>';
@@ -247,7 +249,7 @@ function render(rows,concepts,people,inPath,terms,wantMods){
   for(const r of rows){
     const m=MODS[r[1]];
     h+='<tr><td class="n"><a href="'+SITE+m+'.html#'+r[2]+'">'+highlight(r[0],terms)+'</a>'
-      +(r[4]?'<div class="sig">'+esc(r[4])+'</div>':'')+'</td>'
+      +(r[4]?'<div class="sig">'+(wantSigs?highlight(r[4],terms):esc(r[4]))+'</div>':'')+'</td>'
       +'<td class="m"><a href="'+SITE+m+'.html">'+(wantMods?highlight(m,terms):esc(m))+'</a></td>'
       +'<td class="u">'+(r[3]||"")+'</td></tr>';
   }
@@ -258,7 +260,7 @@ function search(){
   clr.hidden=!q.value;
   help.hidden=!!raw;   // the counts and the instructions give way to results
   if(!raw){ out.innerHTML=''; return; }
-  const whole=exact.checked, wantMods=useMods.checked;
+  const whole=exact.checked, wantMods=useMods.checked, wantSigs=useSigs.checked;
   // "compact in Ordinals" stays inside one directory or file: the word
   // after a standalone "in" is a dotted module path, matched segment by
   // segment against the front of a module's own dotted name. Every
@@ -285,11 +287,13 @@ function search(){
   for(const r of DEFS){
     if(inPath && !inPath(r[1])) continue;
     const mod=MODS[r[1]].toLowerCase();
+    const sig=wantSigs && r[4] ? r[4].toLowerCase() : null;
     let worst=0;
     for(const t of terms){
       let s=score(r[0],t.w,t.rx);
       if(whole && !t.rx && s>2) s=-1;
       if(s<0 && wantMods && has(mod,t)) s=4;   // this word matched the module
+      if(s<0 && sig && has(sig,t)) s=5;        // this word matched the type
       if(s<0){ worst=-1; break; }
       if(s>worst) worst=s;                     // a hit is only as good as its weakest word
     }
@@ -314,7 +318,7 @@ function search(){
              .map(c=>[c[0],c[1].filter(ownSiteInPath),c[2].filter(inPath),c[3]]);
     ppl=ppl.filter(p=>p[2].some(inPath)).map(p=>[p[0],p[1],p[2].filter(inPath)]);
   }
-  render(hits.slice(0,400).map(h=>h[2]),cons,ppl,inPath,terms,wantMods);
+  render(hits.slice(0,400).map(h=>h[2]),cons,ppl,inPath,terms,wantMods,wantSigs);
 }
 // Emacs Agda-mode style escape sequences, e.g. \to for "→" and \MCU for
 // "𝓤". Runs on every keystroke rather than waiting for a trigger key,
@@ -360,6 +364,7 @@ out.addEventListener("click",e=>{
 clr.addEventListener("click",()=>{ q.value=""; q.focus(); search(); });
 q.addEventListener("input",()=>{ escapeExpand(); search(); });
 useMods.addEventListener("change",search);
+useSigs.addEventListener("change",search);
 exact.addEventListener("change",search);
 search();
 </script></body></html>
