@@ -9,7 +9,9 @@
  body { font: 15px/1.5 -apple-system, "Segoe UI", sans-serif; margin: 0 auto; padding: 1rem;
         max-width: 60rem; color: var(--fg); background: var(--bg); }
  h1 { font-size: 1.2rem; font-weight: 600; margin: 0 0 .2rem; }
- p.sub { color: var(--dim); margin: 0 0 1rem; }
+ p.sub { color: var(--dim); margin: 0 0 .4rem; }
+ ul.sub { color: var(--dim); margin: 0 0 1rem; padding-left: 1.1rem; }
+ ul.sub li { margin: .15rem 0; }
  input { width: 100%; box-sizing: border-box; font: inherit; font-size: 1.1rem;
          padding: .5rem .7rem; border: 1px solid var(--line); border-radius: .4rem;
          background: var(--bg); color: var(--fg); }
@@ -37,11 +39,13 @@
    >TypeTopology</a></h1>
 <p class="sub">20,967 definitions in 890 of the 988 modules
 (the rest define no name of their own, being index modules),
-and 233 concepts.
-<br>Type a name, a fragment of one, a concept, or a contributor.
-Several words must all match, so <code>compact ordinal</code> asks for both.
-Wildcards: <code>*</code> for any run of characters, <code>?</code> for one,
-<code>\*</code> for a literal star.</p>
+and 233 concepts.</p>
+<ul class="sub">
+<li>Type a name, a fragment of one, a concept, or a contributor.</li>
+<li>Several words must all match, so <code>compact ordinal</code> asks for both.</li>
+<li>Wildcards: <code>*</code> for any run of characters, <code>?</code> for one,
+    <code>\*</code> for a literal star.</li>
+</ul>
 <input id="q" autofocus autocomplete="off" spellcheck="false"
        placeholder="compact, ainjective, is-*-compact, ordinal exponentiation ...">
 <div class="opts">
