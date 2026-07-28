@@ -190,15 +190,19 @@ function search(){
   if(!raw){ out.innerHTML=''; return; }
   const whole=exact.checked, wantMods=useMods.checked;
   // "compact in Ordinals" stays inside one directory or file: the word
-  // after a standalone "in" is a dotted module path, matched as itself or
-  // as a leading segment of a longer one, so "Ordinals" reaches
-  // Ordinals.Notions but not Ordinalss.Anything.
+  // after a standalone "in" is a dotted module path, matched segment by
+  // segment against the front of a module's own dotted name. Every
+  // segment but the last has to match in full, since a dot means the user
+  // has moved on to the next one, but the last is a prefix, so it also
+  // narrows while still being typed -- "TypeT" already reaches TypeTopology.
   const inMatch=raw.match(/^(.*?)\s+in\s+(\S+)$/i);
   const needle=(inMatch?inMatch[1]:raw).toLowerCase();
-  const pathLc=inMatch?inMatch[2].toLowerCase():null;
-  const inPath=pathLc?i=>{
-    const mo=MODS[i].toLowerCase();
-    return mo===pathLc || mo.startsWith(pathLc+".");
+  const pathParts=inMatch?inMatch[2].toLowerCase().split("."):null;
+  const inPath=pathParts?i=>{
+    const mp=MODS[i].toLowerCase().split(".");
+    if(mp.length<pathParts.length) return false;
+    for(let j=0;j<pathParts.length-1;j++) if(mp[j]!==pathParts[j]) return false;
+    return mp[pathParts.length-1].startsWith(pathParts[pathParts.length-1]);
   }:null;
   // Several words intersect: every one of them must match, each on its own.
   // An Agda name never contains a space, so splitting on whitespace loses
@@ -228,15 +232,16 @@ function search(){
                           || (c[3] && new RegExp(c[3],"i").test(needle)));
   let ppl=PEOPLE.filter(p=>all(p[1]));
   // With a path, a concept or contributor only survives if one of its own
-  // definitions or one of its modules lies within it, and only those
-  // modules are shown.
+  // definitions or one of its modules lies within it, and only those names
+  // and modules are shown -- a bold name with no site in the path would
+  // otherwise still link outside it, which is not what was asked for.
   if(inPath){
     const ownSiteInPath=n=>{
       const ss=SITEOF.get(n);
       return !!ss && ss.some(x=>inPath(x[1]));
     };
     cons=cons.filter(c=>c[1].some(ownSiteInPath) || c[2].some(inPath))
-             .map(c=>[c[0],c[1],c[2].filter(inPath),c[3]]);
+             .map(c=>[c[0],c[1].filter(ownSiteInPath),c[2].filter(inPath),c[3]]);
     ppl=ppl.filter(p=>p[2].some(inPath)).map(p=>[p[0],p[1],p[2].filter(inPath)]);
   }
   render(hits.slice(0,400).map(h=>h[2]),cons,ppl,inPath);
