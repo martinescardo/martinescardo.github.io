@@ -39,6 +39,7 @@
 (the rest define no name of their own, being index modules),
 and 233 concepts.
 <br>Type a name, a fragment of one, a concept, or a contributor.
+Several words must all match, so <code>compact ordinal</code> asks for both.
 Wildcards: <code>*</code> for any run of characters, <code>?</code> for one,
 <code>\*</code> for a literal star.</p>
 <input id="q" autofocus autocomplete="off" spellcheck="false"
@@ -117,21 +118,32 @@ function search(){
   const needle=q.value.trim().toLowerCase();
   if(!needle){ out.innerHTML='<p class="none">Start typing.</p>'; return; }
   const whole=exact.checked, wantMods=useMods.checked;
-  const rx=wildcard(needle,whole);
-  const has=s=>rx?rx.test(s):s.includes(needle);
+  // Several words intersect: every one of them must match, each on its own.
+  // An Agda name never contains a space, so splitting on whitespace loses
+  // nothing, and it lets a query name a definition and its home at once --
+  // "compact ordinal" asks for compactness within the ordinals.
+  const terms=needle.split(/\s+/).map(w=>({w:w, rx:wildcard(w,whole)}));
+  const has=(s,t)=>t.rx?t.rx.test(s):s.includes(t.w);
+  const all=s=>terms.every(t=>has(s,t));
   const hits=[];
   for(const r of DEFS){
-    let s=score(r[0],needle,rx);
-    if(whole && !rx && s>2) s=-1;
-    if(s<0 && wantMods && has(MODS[r[1]].toLowerCase())) s=4;
-    if(s>=0) hits.push([s,-(r[3]||0),r]);
+    const mod=MODS[r[1]].toLowerCase();
+    let worst=0;
+    for(const t of terms){
+      let s=score(r[0],t.w,t.rx);
+      if(whole && !t.rx && s>2) s=-1;
+      if(s<0 && wantMods && has(mod,t)) s=4;   // this word matched the module
+      if(s<0){ worst=-1; break; }
+      if(s>worst) worst=s;                     // a hit is only as good as its weakest word
+    }
+    if(worst>=0) hits.push([worst,-(r[3]||0),r]);
   }
   hits.sort((a,b)=>a[0]-b[0]||a[1]-b[1]);
   // A concept also answers to the words its prose pattern knows, so that
   // "exhaustible" finds compactness even though no label says it.
-  const cons=CONS.filter(c=>has(c[0].toLowerCase())
+  const cons=CONS.filter(c=>all(c[0].toLowerCase())
                             || (c[3] && new RegExp(c[3],"i").test(needle)));
-  const ppl=PEOPLE.filter(p=>has(p[1]));
+  const ppl=PEOPLE.filter(p=>all(p[1]));
   render(hits.slice(0,400).map(h=>h[2]),cons,ppl);
 }
 out.addEventListener("click",e=>{
