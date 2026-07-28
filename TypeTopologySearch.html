@@ -52,7 +52,7 @@
    >TypeTopology</a></h1>
 <div class="box">
 <input id="q" autofocus autocomplete="off" spellcheck="false"
-       placeholder="compact, ainjective, is-*-compact, ordinal exponentiation ...">
+       placeholder="compact, ainjective, is-*-compact, compact in Ordinals ...">
 <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"
      aria-hidden="true"><circle cx="8.5" cy="8.5" r="5.5"/><path d="M12.8 12.8 18 18"
      stroke-linecap="round"/></svg>
@@ -68,6 +68,7 @@
 <li>Several words must all match, so <code>compact ordinal</code> asks for both.</li>
 <li>Wildcards: <code>*</code> for any run of characters, <code>?</code> for one,
     <code>\*</code> for a literal star.</li>
+<li><code>compact in Ordinals</code> stays inside one directory or file.</li>
 </ul>
 <p class="sub">20,967 definitions in 890 of the 988 modules
 (the rest define no name of their own, being index modules),
@@ -179,11 +180,22 @@ function render(rows,concepts,people){
   out.innerHTML=h+'</table>';
 }
 function search(){
-  const needle=q.value.trim().toLowerCase();
+  const raw=q.value.trim();
   clr.hidden=!q.value;
-  help.hidden=!!needle;   // the counts and the instructions give way to results
-  if(!needle){ out.innerHTML=''; return; }
+  help.hidden=!!raw;   // the counts and the instructions give way to results
+  if(!raw){ out.innerHTML=''; return; }
   const whole=exact.checked, wantMods=useMods.checked;
+  // "compact in Ordinals" stays inside one directory or file: the word
+  // after a standalone "in" is a dotted module path, matched as itself or
+  // as a leading segment of a longer one, so "Ordinals" reaches
+  // Ordinals.Notions but not Ordinalss.Anything.
+  const inMatch=raw.match(/^(.*?)\s+in\s+(\S+)$/i);
+  const needle=(inMatch?inMatch[1]:raw).toLowerCase();
+  const pathLc=inMatch?inMatch[2].toLowerCase():null;
+  const inPath=pathLc?i=>{
+    const mo=MODS[i].toLowerCase();
+    return mo===pathLc || mo.startsWith(pathLc+".");
+  }:null;
   // Several words intersect: every one of them must match, each on its own.
   // An Agda name never contains a space, so splitting on whitespace loses
   // nothing, and it lets a query name a definition and its home at once --
@@ -193,6 +205,7 @@ function search(){
   const all=s=>terms.every(t=>has(s,t));
   const hits=[];
   for(const r of DEFS){
+    if(inPath && !inPath(r[1])) continue;
     const mod=MODS[r[1]].toLowerCase();
     let worst=0;
     for(const t of terms){
@@ -207,9 +220,21 @@ function search(){
   hits.sort((a,b)=>a[0]-b[0]||a[1]-b[1]);
   // A concept also answers to the words its prose pattern knows, so that
   // "exhaustible" finds compactness even though no label says it.
-  const cons=CONS.filter(c=>all(c[0].toLowerCase())
-                            || (c[3] && new RegExp(c[3],"i").test(needle)));
-  const ppl=PEOPLE.filter(p=>all(p[1]));
+  let cons=CONS.filter(c=>all(c[0].toLowerCase())
+                          || (c[3] && new RegExp(c[3],"i").test(needle)));
+  let ppl=PEOPLE.filter(p=>all(p[1]));
+  // With a path, a concept or contributor only survives if one of its own
+  // definitions or one of its modules lies within it, and only those
+  // modules are shown.
+  if(inPath){
+    const ownSiteInPath=n=>{
+      const ss=SITEOF.get(n);
+      return !!ss && ss.some(x=>inPath(x[1]));
+    };
+    cons=cons.filter(c=>c[1].some(ownSiteInPath) || c[2].some(inPath))
+             .map(c=>[c[0],c[1],c[2].filter(inPath),c[3]]);
+    ppl=ppl.filter(p=>p[2].some(inPath)).map(p=>[p[0],p[1],p[2].filter(inPath)]);
+  }
   render(hits.slice(0,400).map(h=>h[2]),cons,ppl);
 }
 out.addEventListener("click",e=>{
