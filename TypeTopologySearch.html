@@ -48,6 +48,7 @@
  .tog { color: var(--hi); cursor: pointer; display: inline-block; margin-left: 1rem; }
  .none { color: var(--dim); padding: 1rem 0; }
  #browse-label { color: var(--hi); font-weight: 600; }
+ .hl { color: var(--hi); font-weight: 600; }
  #browse { display: flex; flex-wrap: wrap; gap: .4rem .9rem; }
  #browse a { color: var(--dim); }
  #browse a:hover { color: var(--hi); }
@@ -180,6 +181,33 @@ function score(name,needle,rx){
   if(/[-_.\[]/.test(name[i-1])) return 2;   // start of a word within the name
   return 3;
 }
+// Marks, within a displayed name, the span each search word matched -- the
+// same position score() found, so what lights up is exactly what counted,
+// wildcards included. Several words landing in the same name is why spans
+// are merged rather than wrapped one at a time.
+function highlight(name,terms){
+  const lc=name.toLowerCase();
+  const spans=[];
+  for(const t of terms){
+    let i,len;
+    if(t.rx){ const m=t.rx.exec(lc); if(!m) continue; i=m.index; len=m[0].length; }
+    else     { i=lc.indexOf(t.w); if(i<0) continue; len=t.w.length; }
+    if(len>0) spans.push([i,i+len]);
+  }
+  if(!spans.length) return esc(name);
+  spans.sort((a,b)=>a[0]-b[0]);
+  const merged=[spans[0]];
+  for(const s of spans.slice(1)){
+    const last=merged[merged.length-1];
+    if(s[0]<=last[1]) last[1]=Math.max(last[1],s[1]); else merged.push(s);
+  }
+  let out="", pos=0;
+  for(const [s,e] of merged){
+    out+=esc(name.slice(pos,s))+'<b class="hl">'+esc(name.slice(s,e))+'</b>';
+    pos=e;
+  }
+  return out+esc(name.slice(pos));
+}
 // The modules of a concept or of a contributor, one per line, the tail of
 // the list folded away.
 function modules(idx,label){
@@ -192,12 +220,12 @@ function modules(idx,label){
       +'<a class="tog" href="#">and '+(idx.length-6)+' more</a>';
   return d+'</div>';
 }
-function render(rows,concepts,people,inPath){
+function render(rows,concepts,people,inPath,terms,wantMods){
   if(!rows.length && !concepts.length && !people.length){
     out.innerHTML='<p class="none">Nothing found.</p>'; return; }
   let h='<table>';
   for(const c of concepts){
-    h+='<tr class="concept"><td class="n">'+esc(c[0])+'</td><td class="m">concept — '
+    h+='<tr class="concept"><td class="n">'+highlight(c[0],terms)+'</td><td class="m">concept — '
       +c[1].map(n=>deflink(n,c[0],inPath)).join(", ")
       +modules(c[2],"discussed in")+'</td><td class="u"></td></tr>';
   }
@@ -208,8 +236,8 @@ function render(rows,concepts,people,inPath){
   }
   for(const r of rows){
     const m=MODS[r[1]];
-    h+='<tr><td class="n"><a href="'+SITE+m+'.html#'+r[2]+'">'+esc(r[0])+'</a></td>'
-      +'<td class="m"><a href="'+SITE+m+'.html">'+esc(m)+'</a></td>'
+    h+='<tr><td class="n"><a href="'+SITE+m+'.html#'+r[2]+'">'+highlight(r[0],terms)+'</a></td>'
+      +'<td class="m"><a href="'+SITE+m+'.html">'+(wantMods?highlight(m,terms):esc(m))+'</a></td>'
       +'<td class="u">'+(r[3]||"")+'</td></tr>';
   }
   out.innerHTML=h+'</table>';
@@ -275,7 +303,7 @@ function search(){
              .map(c=>[c[0],c[1].filter(ownSiteInPath),c[2].filter(inPath),c[3]]);
     ppl=ppl.filter(p=>p[2].some(inPath)).map(p=>[p[0],p[1],p[2].filter(inPath)]);
   }
-  render(hits.slice(0,400).map(h=>h[2]),cons,ppl,inPath);
+  render(hits.slice(0,400).map(h=>h[2]),cons,ppl,inPath,terms,wantMods);
 }
 out.addEventListener("click",e=>{
   if(!e.target.classList.contains("tog")) return;
