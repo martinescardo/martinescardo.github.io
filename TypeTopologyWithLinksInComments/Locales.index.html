@@ -1,0 +1,469 @@
+<!DOCTYPE HTML>
+<html><head><meta charset="utf-8"><title>Locales.index</title><link rel="stylesheet" href="Agda.css"></head><body><pre class="Agda"><span id="1" class="Background">---
+author: Ayberk Tosun
+---
+
+─────────────────────────────────────────────────────────────────────
+This formalization accompanies Ayberk Tosun&#39;s PhD thesis:
+  Constructive and Predicative Locale Theory in Univalent Foundations
+  Ayberk Tosun
+  School of Computer Science, University of Birmingham
+  <a href="https://etheses.bham.ac.uk/id/eprint/16416/">https://etheses.bham.ac.uk/id/eprint/16416/</a>
+
+  Updated versions:
+  <a href="https://arxiv.org/abs/2603.01308">https://arxiv.org/abs/2603.01308</a>
+
+  Submitted: 30 November 2024
+  Defended:  27 February 2025
+  Accepted:   3 June     2025
+─────────────────────────────────────────────────────────────────────
+
+</span><a id="563" class="Markup">\begin{code}</a>
+
+<a id="577" class="Symbol">{-#</a> <a id="581" class="Keyword">OPTIONS</a> <a id="589" class="Pragma">--safe</a> <a id="596" class="Pragma">--without-K</a> <a id="608" class="Symbol">#-}</a>
+
+<a id="613" class="Keyword">module</a> <a id="620" href="Locales.index.html" class="Module">Locales.index</a> <a id="634" class="Keyword">where</a>
+
+<a id="641" class="Markup">\end{code}</a><a id="651" class="Background">
+
+\section{Table of contents}
+
+* Basic point-free topology
+  - Terminal locale
+  - Sierpiński locale
+  - The discrete locale
+  - Continuous maps and frame homomorphisms
+  - Sublocales and nuclei
+  - Compactness and the way-below relation
+  - Clopens and the well-inside relation
+  - Bases
+  - Adjoint functor theorem for frames
+* Spectral and Stone locales
+  - Spectral locales
+  - Distributive lattices
+  - Zero-dimensional and regular locales
+  - Stone locales
+  - Stone duality
+* The patch locale
+  - Examples of patch
+* Point-free topology of domains
+  - Construction of the Scott locale
+  - Scott continuity
+  - Spectral points of the Scott locale
+* Miscellaneous
+
+\section{Basic point-free topology}
+
+The code under this section corresponds roughly to Chapter 3 of the thesis.
+
+The `Locales.Frame` module contains preliminary definitions of locale theory.
+
+</a><a id="1514" class="Markup">\begin{code}</a>
+
+<a id="1528" class="Keyword">import</a> <a id="1535" href="Locales.Frame.html" class="Module">Locales.Frame</a>
+<a id="1549" class="Keyword">import</a> <a id="1556" href="Locales.SIP.FrameSIP.html" class="Module">Locales.SIP.FrameSIP</a>
+
+<a id="1578" class="Markup">\end{code}</a><a id="1588" class="Background">
+
+\subsection{Terminal locale}
+
+The modules below contain:
+
+  1. Definition of the initial frame (i.e. the terminal locale)
+  2. Properties of the terminal locale.
+
+</a><a id="1753" class="Markup">\begin{code}</a>
+
+<a id="1767" class="Keyword">import</a> <a id="1774" href="Locales.InitialFrame.html" class="Module">Locales.InitialFrame</a>              <a id="1808" class="Comment">-- (1)</a>
+<a id="1815" class="Keyword">import</a> <a id="1822" href="Locales.TerminalLocale.Properties.html" class="Module">Locales.TerminalLocale.Properties</a> <a id="1856" class="Comment">-- (2)</a>
+
+<a id="1864" class="Markup">\end{code}</a><a id="1874" class="Background">
+
+\subsection{Sierpiński locale}
+
+The modules below contain:
+
+  1. Definition of the Sierpinski locale
+  2. Properties of the Sierpinski locale
+  3. Universal property of the Sierpinski locale
+
+</a><a id="2068" class="Markup">\begin{code}</a>
+
+<a id="2082" class="Keyword">import</a> <a id="2089" href="Locales.Sierpinski.Definition.html" class="Module">Locales.Sierpinski.Definition</a>         <a id="2127" class="Comment">-- (1)</a>
+<a id="2134" class="Keyword">import</a> <a id="2141" href="Locales.Sierpinski.Properties.html" class="Module">Locales.Sierpinski.Properties</a>         <a id="2179" class="Comment">-- (2)</a>
+<a id="2186" class="Keyword">import</a> <a id="2193" href="Locales.Sierpinski.UniversalProperty.html" class="Module">Locales.Sierpinski.UniversalProperty</a>  <a id="2231" class="Comment">-- (3)</a>
+
+<a id="2239" class="Markup">\end{code}</a><a id="2249" class="Background">
+
+\subsection{The discrete locale}
+
+The modules below contain:
+
+  1. Definition of the discrete locale over a set
+  2. Construction of a directed basis for the discrete locale
+  3. The discrete locale on the type of Booleans
+  4. Properties of the discrete locale on the type of Booleans
+
+</a><a id="2538" class="Markup">\begin{code}</a>
+
+<a id="2552" class="Keyword">import</a> <a id="2559" href="Locales.DiscreteLocale.Definition.html" class="Module">Locales.DiscreteLocale.Definition</a>     <a id="2597" class="Comment">-- (1)</a>
+<a id="2604" class="Keyword">import</a> <a id="2611" href="Locales.DiscreteLocale.Basis.html" class="Module">Locales.DiscreteLocale.Basis</a>          <a id="2649" class="Comment">-- (2)</a>
+<a id="2656" class="Keyword">import</a> <a id="2663" href="Locales.DiscreteLocale.Two.html" class="Module">Locales.DiscreteLocale.Two</a>            <a id="2701" class="Comment">-- (3)</a>
+<a id="2708" class="Keyword">import</a> <a id="2715" href="Locales.DiscreteLocale.Two-Properties.html" class="Module">Locales.DiscreteLocale.Two-Properties</a> <a id="2753" class="Comment">-- (4)</a>
+
+<a id="2761" class="Markup">\end{code}</a><a id="2771" class="Background">
+
+\subsection{Continuous maps and frame homomorphisms}
+
+The `ContinuousMap` subdirectory contains:
+
+  1. Definition of the notion of frame homomorphism
+  2. Properties of frame homomorphisms
+  3. Definition of continuous maps of locales
+  4. Properties of continuous maps
+  5. Definition of frame isomorphisms
+  6. Definition of locale homeomorphisms
+  7. Properties of homeomorphisms, including the characterization of the
+     identity type for locales
+
+</a><a id="3227" class="Markup">\begin{code}</a>
+
+<a id="3241" class="Keyword">import</a> <a id="3248" href="Locales.ContinuousMap.FrameHomomorphism-Definition.html" class="Module">Locales.ContinuousMap.FrameHomomorphism-Definition</a>  <a id="3300" class="Comment">-- (1)</a>
+<a id="3307" class="Keyword">import</a> <a id="3314" href="Locales.ContinuousMap.FrameHomomorphism-Properties.html" class="Module">Locales.ContinuousMap.FrameHomomorphism-Properties</a>  <a id="3366" class="Comment">-- (2)</a>
+<a id="3373" class="Keyword">import</a> <a id="3380" href="Locales.ContinuousMap.Definition.html" class="Module">Locales.ContinuousMap.Definition</a>                    <a id="3432" class="Comment">-- (3)</a>
+<a id="3439" class="Keyword">import</a> <a id="3446" href="Locales.ContinuousMap.Properties.html" class="Module">Locales.ContinuousMap.Properties</a>                    <a id="3498" class="Comment">-- (4)</a>
+<a id="3505" class="Keyword">import</a> <a id="3512" href="Locales.ContinuousMap.FrameIsomorphism-Definition.html" class="Module">Locales.ContinuousMap.FrameIsomorphism-Definition</a>   <a id="3564" class="Comment">-- (5)</a>
+<a id="3571" class="Keyword">import</a> <a id="3578" href="Locales.ContinuousMap.Homeomorphism-Definition.html" class="Module">Locales.ContinuousMap.Homeomorphism-Definition</a>      <a id="3630" class="Comment">-- (6)</a>
+<a id="3637" class="Keyword">import</a> <a id="3644" href="Locales.ContinuousMap.Homeomorphism-Properties.html" class="Module">Locales.ContinuousMap.Homeomorphism-Properties</a>      <a id="3696" class="Comment">-- (7)</a>
+
+<a id="3704" class="Markup">\end{code}</a><a id="3714" class="Background">
+
+\subsection{Sublocales and nuclei}
+
+The `Sublocale` subdirectory contains:
+
+  1. Definition of the notion of nucleus along with some properties
+  2. Properties of the image of a nucleus
+
+</a><a id="3903" class="Markup">\begin{code}</a>
+
+<a id="3917" class="Keyword">import</a> <a id="3924" href="Locales.Sublocale.Nucleus.html" class="Module">Locales.Sublocale.Nucleus</a>      <a id="3955" class="Comment">-- (1)</a>
+<a id="3962" class="Keyword">import</a> <a id="3969" href="Locales.Sublocale.NucleusImage.html" class="Module">Locales.Sublocale.NucleusImage</a> <a id="4000" class="Comment">-- (2)</a>
+
+<a id="4008" class="Markup">\end{code}</a><a id="4018" class="Background">
+
+\subsection{Compactness and the way-below relation}
+
+Compact opens.
+
+The modules below contain:
+
+  1. Definition of compact opens
+  2. Properties of compact opens
+  3. Characterization of compact locales
+
+</a><a id="4225" class="Markup">\begin{code}</a>
+
+<a id="4239" class="Keyword">import</a> <a id="4246" href="Locales.Compactness.Definition.html" class="Module">Locales.Compactness.Definition</a>                        <a id="4300" class="Comment">-- (1)</a>
+<a id="4307" class="Keyword">import</a> <a id="4314" href="Locales.Compactness.Properties.html" class="Module">Locales.Compactness.Properties</a>                        <a id="4368" class="Comment">-- (2)</a>
+<a id="4375" class="Keyword">import</a> <a id="4382" href="Locales.Compactness.CharacterizationOfCompactLocales.html" class="Module">Locales.Compactness.CharacterizationOfCompactLocales</a>  <a id="4436" class="Comment">-- (3)</a>
+
+<a id="4444" class="Markup">\end{code}</a><a id="4454" class="Background">
+
+The way-below relation.
+
+The modules below contain:
+
+  1. Definition of the way-below relation
+  2. Properties of the way-below relation
+
+</a><a id="4594" class="Markup">\begin{code}</a>
+
+<a id="4608" class="Keyword">import</a> <a id="4615" href="Locales.WayBelowRelation.Definition.html" class="Module">Locales.WayBelowRelation.Definition</a>  <a id="4652" class="Comment">-- (1)</a>
+<a id="4659" class="Keyword">import</a> <a id="4666" href="Locales.WayBelowRelation.Properties.html" class="Module">Locales.WayBelowRelation.Properties</a>  <a id="4703" class="Comment">-- (2)</a>
+
+<a id="4711" class="Markup">\end{code}</a><a id="4721" class="Background">
+
+\subsection{Clopens and the well-inside relation}
+
+The modules below contain:
+
+  1. Definition of clopens via Boolean complements, and basic closure properties
+  2. Boolean complementation in frames, including preservation by frame
+     homomorphisms
+  3. Definition of the well-inside relation and basic order-theoretic properties
+
+</a><a id="5056" class="Markup">\begin{code}</a>
+
+<a id="5070" class="Keyword">import</a> <a id="5077" href="Locales.Clopen.html" class="Module">Locales.Clopen</a>        <a id="5099" class="Comment">-- (1)</a>
+<a id="5106" class="Keyword">import</a> <a id="5113" href="Locales.Complements.html" class="Module">Locales.Complements</a>   <a id="5135" class="Comment">-- (2)</a>
+<a id="5142" class="Keyword">import</a> <a id="5149" href="Locales.WellInside.html" class="Module">Locales.WellInside</a>    <a id="5171" class="Comment">-- (3)</a>
+
+<a id="5179" class="Markup">\end{code}</a><a id="5189" class="Background">
+
+\subsection{Bases}
+
+Notions of base for locales
+
+</a><a id="5240" class="Markup">\begin{code}</a>
+
+<a id="5254" class="Keyword">import</a> <a id="5261" href="Locales.SmallBasis.html" class="Module">Locales.SmallBasis</a>
+
+<a id="5281" class="Markup">\end{code}</a><a id="5291" class="Background">
+
+\subsection{Adjoint functor theorem for frames}
+
+The modules below contain:
+
+  1. Definition of posetal adjunctions
+  2. General properties of adjunctions in the posetal setting
+  3. Posetal adjoint functor theorem for frames
+  4. Adjunction properties specialized to distributive lattices
+  5. Heyting implication
+  6. Heyting complementation
+
+</a><a id="5638" class="Markup">\begin{code}</a>
+
+<a id="5652" class="Keyword">import</a> <a id="5659" href="Locales.PosetalAdjunction.html" class="Module">Locales.PosetalAdjunction</a>                          <a id="5710" class="Comment">-- (1)</a>
+<a id="5717" class="Keyword">import</a> <a id="5724" href="Locales.Adjunctions.Properties.html" class="Module">Locales.Adjunctions.Properties</a>                     <a id="5775" class="Comment">-- (2)</a>
+<a id="5782" class="Keyword">import</a> <a id="5789" href="Locales.AdjointFunctorTheoremForFrames.html" class="Module">Locales.AdjointFunctorTheoremForFrames</a>             <a id="5840" class="Comment">-- (3)</a>
+<a id="5847" class="Keyword">import</a> <a id="5854" href="Locales.Adjunctions.Properties-DistributiveLattice.html" class="Module">Locales.Adjunctions.Properties-DistributiveLattice</a> <a id="5905" class="Comment">-- (4)</a>
+<a id="5912" class="Keyword">import</a> <a id="5919" href="Locales.HeytingImplication.html" class="Module">Locales.HeytingImplication</a>                         <a id="5970" class="Comment">-- (5)</a>
+<a id="5977" class="Keyword">import</a> <a id="5984" href="Locales.HeytingComplementation.html" class="Module">Locales.HeytingComplementation</a>                     <a id="6035" class="Comment">-- (6)</a>
+
+<a id="6043" class="Markup">\end{code}</a><a id="6053" class="Background">
+
+\section{Spectral and Stone locales}
+
+his section corresponds roughly to Chapter 4 of the thesis.
+
+\subsection{Spectral locales}
+
+The modules below contain:
+
+  1. Definition of spectral locales
+  2. Properties of spectral locales
+  3. Definition of spectral maps
+  4. Spectrality of the terminal locale
+  5. Directification of bases
+  6. Lattice of compact opens
+
+</a><a id="6419" class="Markup">\begin{code}</a>
+
+<a id="6433" class="Keyword">import</a> <a id="6440" href="Locales.Spectrality.SpectralLocale.html" class="Module">Locales.Spectrality.SpectralLocale</a>         <a id="6483" class="Comment">-- (1)</a>
+<a id="6490" class="Keyword">import</a> <a id="6497" href="Locales.Spectrality.Properties.html" class="Module">Locales.Spectrality.Properties</a>             <a id="6540" class="Comment">-- (2)</a>
+<a id="6547" class="Keyword">import</a> <a id="6554" href="Locales.Spectrality.SpectralMap.html" class="Module">Locales.Spectrality.SpectralMap</a>            <a id="6597" class="Comment">-- (3)</a>
+<a id="6604" class="Keyword">import</a> <a id="6611" href="Locales.Spectrality.SpectralityOfOmega.html" class="Module">Locales.Spectrality.SpectralityOfOmega</a>     <a id="6654" class="Comment">-- (4)</a>
+<a id="6661" class="Keyword">import</a> <a id="6668" href="Locales.Spectrality.BasisDirectification.html" class="Module">Locales.Spectrality.BasisDirectification</a>   <a id="6711" class="Comment">-- (5)</a>
+<a id="6718" class="Keyword">import</a> <a id="6725" href="Locales.Spectrality.LatticeOfCompactOpens.html" class="Module">Locales.Spectrality.LatticeOfCompactOpens</a>  <a id="6768" class="Comment">-- (6)</a>
+
+<a id="6776" class="Markup">\end{code}</a><a id="6786" class="Background">
+
+\subsection{Distributive lattices}
+
+The modules below contain:
+
+  1.  Definition of distributive lattices
+  2.  Σ-type-based definition of distributive lattices
+  3.  Basic properties of distributive lattices
+  4.  Homomorphisms of distributive lattices
+  5.  Isomorphisms of distributive lattices
+  6.  Properties of distributive lattice isomorphisms
+  7.  Ideals of distributive lattices
+  8.  Properties of ideals of distributive lattices
+  9.  Resizing for distributive lattices
+  10. Spectrum of a distributive lattice
+  11. Properties of the frame of ideals over a distributive lattice
+  12. Structure identity principle for distributive lattices
+
+</a><a id="7442" class="Markup">\begin{code}</a>
+
+<a id="7456" class="Keyword">import</a> <a id="7463" href="Locales.DistributiveLattice.Definition.html" class="Module">Locales.DistributiveLattice.Definition</a>             <a id="7514" class="Comment">-- (1)</a>
+<a id="7521" class="Keyword">import</a> <a id="7528" href="Locales.DistributiveLattice.Definition-SigmaBased.html" class="Module">Locales.DistributiveLattice.Definition-SigmaBased</a>  <a id="7579" class="Comment">-- (2)</a>
+<a id="7586" class="Keyword">import</a> <a id="7593" href="Locales.DistributiveLattice.Properties.html" class="Module">Locales.DistributiveLattice.Properties</a>             <a id="7644" class="Comment">-- (3)</a>
+<a id="7651" class="Keyword">import</a> <a id="7658" href="Locales.DistributiveLattice.Homomorphism.html" class="Module">Locales.DistributiveLattice.Homomorphism</a>           <a id="7709" class="Comment">-- (4)</a>
+<a id="7716" class="Keyword">import</a> <a id="7723" href="Locales.DistributiveLattice.Isomorphism.html" class="Module">Locales.DistributiveLattice.Isomorphism</a>            <a id="7774" class="Comment">-- (5)</a>
+<a id="7781" class="Keyword">import</a> <a id="7788" href="Locales.DistributiveLattice.Isomorphism-Properties.html" class="Module">Locales.DistributiveLattice.Isomorphism-Properties</a> <a id="7839" class="Comment">-- (6)</a>
+<a id="7846" class="Keyword">import</a> <a id="7853" href="Locales.DistributiveLattice.Ideal.html" class="Module">Locales.DistributiveLattice.Ideal</a>                  <a id="7904" class="Comment">-- (7)</a>
+<a id="7911" class="Keyword">import</a> <a id="7918" href="Locales.DistributiveLattice.Ideal-Properties.html" class="Module">Locales.DistributiveLattice.Ideal-Properties</a>       <a id="7969" class="Comment">-- (8)</a>
+<a id="7976" class="Keyword">import</a> <a id="7983" href="Locales.DistributiveLattice.Resizing.html" class="Module">Locales.DistributiveLattice.Resizing</a>               <a id="8034" class="Comment">-- (9)</a>
+<a id="8041" class="Keyword">import</a> <a id="8048" href="Locales.DistributiveLattice.Spectrum.html" class="Module">Locales.DistributiveLattice.Spectrum</a>               <a id="8099" class="Comment">-- (10)</a>
+<a id="8107" class="Keyword">import</a> <a id="8114" href="Locales.DistributiveLattice.Spectrum-Properties.html" class="Module">Locales.DistributiveLattice.Spectrum-Properties</a>    <a id="8165" class="Comment">-- (11)</a>
+<a id="8173" class="Keyword">import</a> <a id="8180" href="Locales.SIP.DistributiveLatticeSIP.html" class="Module">Locales.SIP.DistributiveLatticeSIP</a>                 <a id="8231" class="Comment">-- (12)</a>
+
+<a id="8240" class="Markup">\end{code}</a><a id="8250" class="Background">
+
+\subsection{Zero-dimensional and regular locales}
+
+The modules below contain:
+
+  1. Definition of regular locales and some properties
+  2. Definition of zero-dimensional locale and some properties
+
+</a><a id="8450" class="Markup">\begin{code}</a>
+
+<a id="8464" class="Keyword">import</a> <a id="8471" href="Locales.Regular.html" class="Module">Locales.Regular</a>            <a id="8498" class="Comment">-- (1)</a>
+<a id="8505" class="Keyword">import</a> <a id="8512" href="Locales.ZeroDimensionality.html" class="Module">Locales.ZeroDimensionality</a> <a id="8539" class="Comment">-- (2)</a>
+
+<a id="8547" class="Markup">\end{code}</a><a id="8557" class="Background">
+
+\subsection{Stone locales}
+
+The modules below contain:
+
+  1. Stone locales
+  2. Boolean algebras
+  3. Inclusion of Stone locales into spectral locales
+
+</a><a id="8711" class="Markup">\begin{code}</a>
+
+<a id="8725" class="Keyword">import</a> <a id="8732" href="Locales.Stone.html" class="Module">Locales.Stone</a>                <a id="8761" class="Comment">-- (1)</a>
+<a id="8768" class="Keyword">import</a> <a id="8775" href="Locales.BooleanAlgebra.html" class="Module">Locales.BooleanAlgebra</a>       <a id="8804" class="Comment">-- (2)</a>
+<a id="8811" class="Keyword">import</a> <a id="8818" href="Locales.StoneImpliesSpectral.html" class="Module">Locales.StoneImpliesSpectral</a> <a id="8847" class="Comment">-- (3)</a>
+
+<a id="8855" class="Markup">\end{code}</a><a id="8865" class="Background">
+
+\subsection{Stone duality}
+
+The modules below contain:
+
+  1. Lattice duality for compact opens
+  2. The map from spectral maps to lattice homomorphisms
+  3. Perfect maps in the spectral setting
+  4. Stone duality for spectral locales
+
+</a><a id="9102" class="Markup">\begin{code}</a>
+
+<a id="9116" class="Keyword">import</a> <a id="9123" href="Locales.Spectrality.LatticeOfCompactOpens-Duality.html" class="Module">Locales.Spectrality.LatticeOfCompactOpens-Duality</a>     <a id="9177" class="Comment">-- (1)</a>
+<a id="9184" class="Keyword">import</a> <a id="9191" href="Locales.Spectrality.SpectralMapToLatticeHomomorphism.html" class="Module">Locales.Spectrality.SpectralMapToLatticeHomomorphism</a>  <a id="9245" class="Comment">-- (2)</a>
+<a id="9252" class="Keyword">import</a> <a id="9259" href="Locales.PerfectMaps.html" class="Module">Locales.PerfectMaps</a>                                   <a id="9313" class="Comment">-- (3)</a>
+<a id="9320" class="Keyword">import</a> <a id="9327" href="Locales.StoneDuality.ForSpectralLocales.html" class="Module">Locales.StoneDuality.ForSpectralLocales</a>               <a id="9381" class="Comment">-- (4)</a>
+
+<a id="9389" class="Markup">\end{code}</a><a id="9399" class="Background">
+
+\section{The patch locale}
+
+The modules below contain:
+
+  1. Construction of the patch locale (following Escardó&#39;s construction from
+     previous work)
+  2. Properties of the patch locale
+  3. The universal property of the patch locale (with contributions by
+     Igor Arrieta)
+
+</a><a id="9681" class="Markup">\begin{code}</a>
+
+<a id="9695" class="Keyword">import</a> <a id="9702" href="Locales.PatchLocale.html" class="Module">Locales.PatchLocale</a>              <a id="9735" class="Comment">-- (1)</a>
+<a id="9742" class="Keyword">import</a> <a id="9749" href="Locales.PatchProperties.html" class="Module">Locales.PatchProperties</a>          <a id="9782" class="Comment">-- (2)</a>
+<a id="9789" class="Keyword">import</a> <a id="9796" href="Locales.UniversalPropertyOfPatch.html" class="Module">Locales.UniversalPropertyOfPatch</a> <a id="9829" class="Comment">-- (3)</a>
+
+<a id="9837" class="Markup">\end{code}</a><a id="9847" class="Background">
+
+\subsection{Examples of patch}
+
+The modules below contain:
+
+  1. Patch locale of the terminal locale
+  2. Patch locale of the Sierpiński locale
+
+</a><a id="9994" class="Markup">\begin{code}</a>
+
+<a id="10008" class="Keyword">import</a> <a id="10015" href="Locales.PatchOfOmega.html" class="Module">Locales.PatchOfOmega</a>     <a id="10040" class="Comment">-- (1)</a>
+<a id="10047" class="Keyword">import</a> <a id="10054" href="Locales.Sierpinski.Patch.html" class="Module">Locales.Sierpinski.Patch</a> <a id="10079" class="Comment">-- (2)</a>
+
+<a id="10087" class="Markup">\end{code}</a><a id="10097" class="Background">
+
+\section{Point-free topology of domains}
+
+\subsection{Construction of the Scott locale}
+
+The modules below contain:
+
+  1. Definition of the Scott locale
+  2. Properties of the Scott locale
+  3. Scott locales of algebraic dcpos
+  4. Scott locales of Scott domains
+
+</a><a id="10363" class="Markup">\begin{code}</a>
+
+<a id="10377" class="Keyword">import</a> <a id="10384" href="Locales.ScottLocale.Definition.html" class="Module">Locales.ScottLocale.Definition</a>                    <a id="10434" class="Comment">-- (1)</a>
+<a id="10441" class="Keyword">import</a> <a id="10448" href="Locales.ScottLocale.Properties.html" class="Module">Locales.ScottLocale.Properties</a>                    <a id="10498" class="Comment">-- (2)</a>
+<a id="10505" class="Keyword">import</a> <a id="10512" href="Locales.ScottLocale.ScottLocalesOfAlgebraicDcpos.html" class="Module">Locales.ScottLocale.ScottLocalesOfAlgebraicDcpos</a>  <a id="10562" class="Comment">-- (3)</a>
+<a id="10569" class="Keyword">import</a> <a id="10576" href="Locales.ScottLocale.ScottLocalesOfScottDomains.html" class="Module">Locales.ScottLocale.ScottLocalesOfScottDomains</a>    <a id="10626" class="Comment">-- (4)</a>
+
+<a id="10634" class="Markup">\end{code}</a><a id="10644" class="Background">
+
+\subsection{Scott continuity}
+
+The modules below contain:
+
+  1. Scott continuity
+  2. Characterization of continuity
+  3. Classification of Scott opens
+
+</a><a id="10799" class="Markup">\begin{code}</a>
+
+<a id="10813" class="Keyword">import</a> <a id="10820" href="Locales.ScottContinuity.html" class="Module">Locales.ScottContinuity</a>               <a id="10858" class="Comment">-- (1)</a>
+<a id="10865" class="Keyword">import</a> <a id="10872" href="Locales.CharacterisationOfContinuity.html" class="Module">Locales.CharacterisationOfContinuity</a>  <a id="10910" class="Comment">-- (2)</a>
+<a id="10917" class="Keyword">import</a> <a id="10924" href="Locales.ClassificationOfScottOpens.html" class="Module">Locales.ClassificationOfScottOpens</a>    <a id="10962" class="Comment">-- (3)</a>
+
+<a id="10970" class="Markup">\end{code}</a><a id="10980" class="Background">
+
+\subsection{Spectral points of the Scott locale}
+
+The modules below contain:
+
+  1. Definition of the notion of point of a locale
+  2. Properties of points
+  3. Definition of spectral point
+
+</a><a id="11172" class="Markup">\begin{code}</a>
+
+<a id="11186" class="Keyword">import</a> <a id="11193" href="Locales.Point.Definition.html" class="Module">Locales.Point.Definition</a>                <a id="11233" class="Comment">-- (1)</a>
+<a id="11240" class="Keyword">import</a> <a id="11247" href="Locales.Point.Properties.html" class="Module">Locales.Point.Properties</a>                <a id="11287" class="Comment">-- (2)</a>
+<a id="11294" class="Keyword">import</a> <a id="11301" href="Locales.Point.SpectralPoint-Definition.html" class="Module">Locales.Point.SpectralPoint-Definition</a>  <a id="11341" class="Comment">-- (3)</a>
+
+<a id="11349" class="Markup">\end{code}</a><a id="11359" class="Background">
+
+The modules below contain:
+
+  1. Compact elements of a point
+  2. Sharp elements coincide with spectral points
+  3. Points of the patch locale
+
+</a><a id="11505" class="Markup">\begin{code}</a>
+
+<a id="11519" class="Keyword">import</a> <a id="11526" href="Locales.LawsonLocale.CompactElementsOfPoint.html" class="Module">Locales.LawsonLocale.CompactElementsOfPoint</a>                  <a id="11587" class="Comment">-- (1)</a>
+<a id="11594" class="Keyword">import</a> <a id="11601" href="Locales.LawsonLocale.SharpElementsCoincideWithSpectralPoints.html" class="Module">Locales.LawsonLocale.SharpElementsCoincideWithSpectralPoints</a> <a id="11662" class="Comment">-- (2)</a>
+<a id="11669" class="Keyword">import</a> <a id="11676" href="Locales.LawsonLocale.PointsOfPatch.html" class="Module">Locales.LawsonLocale.PointsOfPatch</a>                           <a id="11737" class="Comment">-- (3)</a>
+
+<a id="11745" class="Markup">\end{code}</a><a id="11755" class="Background">
+
+\section{Miscellaneous}
+
+The modules below contain:
+
+  1. Notational conventions for spectral locales
+  2. Directed families
+  3. Directed families on posets
+
+</a><a id="11916" class="Markup">\begin{code}</a>
+
+<a id="11930" class="Keyword">import</a> <a id="11937" href="Locales.NotationalConventions.html" class="Module">Locales.NotationalConventions</a>  <a id="11968" class="Comment">-- (1)</a>
+<a id="11975" class="Keyword">import</a> <a id="11982" href="Locales.DirectedFamily.html" class="Module">Locales.DirectedFamily</a>         <a id="12013" class="Comment">-- (2)</a>
+<a id="12020" class="Keyword">import</a> <a id="12027" href="Locales.DirectedFamily-Poset.html" class="Module">Locales.DirectedFamily-Poset</a>   <a id="12058" class="Comment">-- (3)</a>
+
+<a id="12066" class="Markup">\end{code}</a><a id="12076" class="Background">
+
+The module `Locales.CompactRegular` is legacy code that will soon be removed
+once I untangle the dependency graph. Please DO NOT use these modules for new
+developments.
+
+</a><a id="12248" class="Markup">\begin{code}</a>
+
+<a id="12262" class="Comment">-- ↓ DEPRECATED DO NOT USE ↓ --</a>
+<a id="12294" class="Keyword">import</a> <a id="12301" href="Locales.CompactRegular.html" class="Module">Locales.CompactRegular</a>
+<a id="12324" class="Comment">-- ↑ DEPRECATED DO NOT USE ↑ --</a>
+
+<a id="12357" class="Markup">\end{code}</a><a id="12367" class="Background">
+</a></pre></body></html>

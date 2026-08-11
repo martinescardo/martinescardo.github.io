@@ -1,0 +1,38 @@
+<!DOCTYPE HTML>
+<html><head><meta charset="utf-8"><title>InfinitePigeon.J-PigeonProgram</title><link rel="stylesheet" href="Agda.css"></head><body><pre class="Agda"><a id="1" class="Background">Martin Escardo and Paulo Oliva 2011
+
+</a><a id="38" class="Markup">\begin{code}</a>
+
+<a id="52" class="Symbol">{-#</a> <a id="56" class="Keyword">OPTIONS</a> <a id="64" class="Pragma">--without-K</a> <a id="76" class="Symbol">#-}</a>
+
+<a id="81" class="Keyword">module</a> <a id="88" href="InfinitePigeon.J-PigeonProgram.html" class="Module">InfinitePigeon.J-PigeonProgram</a> <a id="119" class="Keyword">where</a>
+
+<a id="126" class="Keyword">open</a> <a id="131" class="Keyword">import</a> <a id="138" href="InfinitePigeon.Cantor.html" class="Module">InfinitePigeon.Cantor</a>
+<a id="160" class="Keyword">open</a> <a id="165" class="Keyword">import</a> <a id="172" href="InfinitePigeon.DataStructures.html" class="Module">InfinitePigeon.DataStructures</a>
+<a id="202" class="Keyword">open</a> <a id="207" class="Keyword">import</a> <a id="214" href="InfinitePigeon.J-FinitePigeon.html" class="Module">InfinitePigeon.J-FinitePigeon</a>
+<a id="244" class="Keyword">open</a> <a id="249" class="Keyword">import</a> <a id="256" href="InfinitePigeon.Logic.html" class="Module">InfinitePigeon.Logic</a>
+<a id="277" class="Keyword">open</a> <a id="282" class="Keyword">import</a> <a id="289" href="InfinitePigeon.Naturals.html" class="Module">InfinitePigeon.Naturals</a>
+<a id="313" class="Keyword">open</a> <a id="318" class="Keyword">import</a> <a id="325" href="InfinitePigeon.Two.html" class="Module">InfinitePigeon.Two</a>
+
+<a id="345" class="Markup">\end{code}</a><a id="355" class="Background">
+
+Given an infinite boolean sequence α and a natural number m, find a
+boolean b and a finite list of length n with the indices of a
+finite constant subsequence of α with value b at all
+positions.
+
+This is usually how such programs are specified in functional
+programming (if they are at all). Here Theorem (defined in the
+module FinitePigeon) is the program with the formal specification,
+also formally checked. Once this is done we can erase the
+specification.
+
+</a><a id="818" class="Markup">\begin{code}</a>
+
+<a id="pigeon-program"></a><a id="832" href="InfinitePigeon.J-PigeonProgram.html#832" class="Function">pigeon-program</a> <a id="847" class="Symbol">:</a> <a id="849" href="InfinitePigeon.Cantor.html#192" class="Function">₂ℕ</a> <a id="852" class="Symbol">→</a>  <a id="855" href="MLTT.Natural-Numbers-Type.html#96" class="Datatype">ℕ</a>  <a id="858" class="Symbol">→</a>  <a id="861" href="InfinitePigeon.Two.html#126" class="Datatype">₂</a>  <a id="864" href="InfinitePigeon.DataStructures.html#731" class="Datatype Operator">×</a>  <a id="867" href="InfinitePigeon.DataStructures.html#380" class="Datatype">List</a> <a id="872" href="MLTT.Natural-Numbers-Type.html#96" class="Datatype">ℕ</a>
+<a id="874" href="InfinitePigeon.J-PigeonProgram.html#832" class="Function">pigeon-program</a> <a id="889" href="InfinitePigeon.J-PigeonProgram.html#889" class="Bound">α</a> <a id="891" href="InfinitePigeon.J-PigeonProgram.html#891" class="Bound">m</a> <a id="893" class="Symbol">=</a> <a id="895" href="InfinitePigeon.J-PigeonProgram.html#917" class="Function">f</a><a id="896" class="Symbol">(</a><a id="897" href="InfinitePigeon.J-FinitePigeon.html#2650" class="Function">Theorem</a> <a id="905" href="InfinitePigeon.J-PigeonProgram.html#889" class="Bound">α</a> <a id="907" href="InfinitePigeon.J-PigeonProgram.html#891" class="Bound">m</a><a id="908" class="Symbol">)</a>
+ <a id="911" class="Keyword">where</a> <a id="917" href="InfinitePigeon.J-PigeonProgram.html#917" class="Function">f</a> <a id="919" class="Symbol">:</a> <a id="921" href="InfinitePigeon.J-FinitePigeon.html#686" class="Function">Finite-Pigeonhole</a> <a id="939" href="InfinitePigeon.J-PigeonProgram.html#889" class="Bound">α</a> <a id="941" href="InfinitePigeon.J-PigeonProgram.html#891" class="Bound">m</a> <a id="943" class="Symbol">→</a> <a id="945" href="InfinitePigeon.Two.html#126" class="Datatype">₂</a> <a id="947" href="InfinitePigeon.DataStructures.html#731" class="Datatype Operator">×</a> <a id="949" href="InfinitePigeon.DataStructures.html#380" class="Datatype">List</a> <a id="954" href="MLTT.Natural-Numbers-Type.html#96" class="Datatype">ℕ</a>
+       <a id="963" href="InfinitePigeon.J-PigeonProgram.html#917" class="Function">f</a><a id="964" class="Symbol">(</a><a id="965" href="InfinitePigeon.Logic.html#1206" class="InductiveConstructor">∃-intro</a> <a id="973" href="InfinitePigeon.J-PigeonProgram.html#973" class="Bound">b</a> <a id="975" class="Symbol">(</a><a id="976" href="InfinitePigeon.Logic.html#1206" class="InductiveConstructor">∃-intro</a> <a id="984" href="InfinitePigeon.J-PigeonProgram.html#984" class="Bound">s</a> <a id="986" href="InfinitePigeon.J-PigeonProgram.html#986" class="Bound">proof</a><a id="991" class="Symbol">))</a> <a id="994" class="Symbol">=</a> <a id="996" class="Symbol">(</a><a id="997" href="InfinitePigeon.J-PigeonProgram.html#973" class="Bound">b</a> <a id="999" href="InfinitePigeon.DataStructures.html#760" class="InductiveConstructor Operator">,</a> <a id="1001" href="InfinitePigeon.DataStructures.html#563" class="Function">list</a> <a id="1006" href="InfinitePigeon.J-PigeonProgram.html#984" class="Bound">s</a><a id="1007" class="Symbol">)</a>
+
+<a id="1010" class="Markup">\end{code}</a><a id="1020" class="Background">
+</a></pre></body></html>

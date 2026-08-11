@@ -1,0 +1,34 @@
+<!DOCTYPE HTML>
+<html><head><meta charset="utf-8"><title>InfinitePigeon.J-Shift</title><link rel="stylesheet" href="Agda.css"></head><body><pre class="Agda"><a id="1" class="Background">Martin Escardo and Paulo Oliva 2011
+
+</a><a id="38" class="Markup">\begin{code}</a>
+
+<a id="52" class="Symbol">{-#</a> <a id="56" class="Keyword">OPTIONS</a> <a id="64" class="Pragma">--without-K</a> <a id="76" class="Symbol">#-}</a>
+
+<a id="81" class="Keyword">module</a> <a id="88" href="InfinitePigeon.J-Shift.html" class="Module">InfinitePigeon.J-Shift</a> <a id="111" class="Keyword">where</a>
+
+<a id="118" class="Markup">\end{code}</a><a id="128" class="Background">
+
+Import Pigeon.one of J-Shift-BBC or J-Shift-Selection.
+
+</a><a id="186" class="Markup">\begin{code}</a>
+
+<a id="200" class="Keyword">open</a> <a id="205" class="Keyword">import</a> <a id="212" href="InfinitePigeon.J-Shift-Selection.html" class="Module">InfinitePigeon.J-Shift-Selection</a>        <a id="252" class="Comment">-- Choose here...</a>
+<a id="270" class="Keyword">open</a> <a id="275" class="Keyword">import</a> <a id="282" href="InfinitePigeon.JK-Monads.html" class="Module">InfinitePigeon.JK-Monads</a>
+<a id="307" class="Keyword">open</a> <a id="312" class="Keyword">import</a> <a id="319" href="InfinitePigeon.Logic.html" class="Module">InfinitePigeon.Logic</a>
+<a id="340" class="Keyword">open</a> <a id="345" class="Keyword">import</a> <a id="352" href="InfinitePigeon.Naturals.html" class="Module">InfinitePigeon.Naturals</a>
+
+<a id="377" class="Markup">\end{code}</a><a id="387" class="Background">
+
+Use one of K-∀-shift-bbc or K-∀-shift-mbr or K-∀-shift-selection:
+
+</a><a id="456" class="Markup">\begin{code}</a>
+
+<a id="J-∀-shift"></a><a id="470" href="InfinitePigeon.J-Shift.html#470" class="Function">J-∀-shift</a> <a id="480" class="Symbol">:</a> <a id="482" class="Symbol">{</a><a id="483" href="InfinitePigeon.J-Shift.html#483" class="Bound">R</a> <a id="485" class="Symbol">:</a> <a id="487" href="InfinitePigeon.Logic.html#201" class="Function">Ω</a><a id="488" class="Symbol">}</a>
+            <a id="502" class="Symbol">{</a><a id="503" href="InfinitePigeon.J-Shift.html#503" class="Bound">A</a> <a id="505" class="Symbol">:</a> <a id="507" href="MLTT.Natural-Numbers-Type.html#96" class="Datatype">ℕ</a> <a id="509" class="Symbol">→</a> <a id="511" href="InfinitePigeon.Logic.html#201" class="Function">Ω</a><a id="512" class="Symbol">}</a>
+          <a id="524" class="Symbol">→</a> <a id="526" class="Symbol">(∀(</a><a id="529" href="InfinitePigeon.J-Shift.html#529" class="Bound">n</a> <a id="531" class="Symbol">:</a> <a id="533" href="MLTT.Natural-Numbers-Type.html#96" class="Datatype">ℕ</a><a id="534" class="Symbol">)</a> <a id="536" class="Symbol">→</a> <a id="538" href="InfinitePigeon.JK-Monads.html#504" class="Function">J</a><a id="539" class="Symbol">(</a><a id="540" href="InfinitePigeon.J-Shift.html#503" class="Bound">A</a> <a id="542" href="InfinitePigeon.J-Shift.html#529" class="Bound">n</a><a id="543" class="Symbol">))</a>
+          <a id="556" class="Symbol">→</a> <a id="558" href="InfinitePigeon.JK-Monads.html#504" class="Function">J</a> <a id="560" class="Symbol">{</a><a id="561" href="InfinitePigeon.J-Shift.html#483" class="Bound">R</a><a id="562" class="Symbol">}</a> <a id="564" class="Symbol">(∀(</a><a id="567" href="InfinitePigeon.J-Shift.html#567" class="Bound">n</a> <a id="569" class="Symbol">:</a> <a id="571" href="MLTT.Natural-Numbers-Type.html#96" class="Datatype">ℕ</a><a id="572" class="Symbol">)</a> <a id="574" class="Symbol">→</a> <a id="576" href="InfinitePigeon.J-Shift.html#503" class="Bound">A</a> <a id="578" href="InfinitePigeon.J-Shift.html#567" class="Bound">n</a><a id="579" class="Symbol">)</a>
+<a id="581" href="InfinitePigeon.J-Shift.html#470" class="Function">J-∀-shift</a> <a id="591" class="Symbol">=</a> <a id="593" href="InfinitePigeon.J-Shift-Selection.html#561" class="Function">J-∀-shift-selection</a>     <a id="617" class="Comment">-- ... and here accordingly.</a>
+
+<a id="647" class="Markup">\end{code}</a><a id="657" class="Background">
+</a></pre></body></html>

@@ -1,0 +1,84 @@
+<!DOCTYPE HTML>
+<html><head><meta charset="utf-8"><title>Categories.index</title><link rel="stylesheet" href="Agda.css"></head><body><pre class="Agda"><a id="1" class="Background">Anna Williams, 17 October 2025
+
+Formalisation of some 1-category theory with univalent foundations.
+Included are definitions of wild categories, precategories,
+(univalent) categories, functors and natural transformations.
+
+</a><a id="224" class="Markup">\begin{code}</a>
+
+<a id="238" class="Symbol">{-#</a> <a id="242" class="Keyword">OPTIONS</a> <a id="250" class="Pragma">--safe</a> <a id="257" class="Pragma">--without-K</a> <a id="269" class="Symbol">#-}</a>
+
+<a id="274" class="Keyword">module</a> <a id="281" href="Categories.index.html" class="Module">Categories.index</a> <a id="298" class="Keyword">where</a>
+
+<a id="305" class="Markup">\end{code}</a><span id="315" class="Background">
+
+We follow the naming conventions of the HoTT Book [1] and [2]. The properties of
+the different types of category are given in the table below.
+
+                ┌──────┬──────┬────────────┐
+                │ obj  │ hom  │ univalence │
+┌───────────────┼──────┼──────┼────────────┤
+│ wild-category │ type │ type │ no         │
+├───────────────┼──────┼──────┼────────────┤
+│ pre-category  │ type │ set  │ no         │
+├───────────────┼──────┼──────┼────────────┤
+│ category      │ type │ set  │ yes        │
+└───────────────┴──────┴──────┴────────────┘
+
+[1] The Univalent Foundations Program (2013), Homotopy Type Theory: Univalent
+Foundations of Mathematics. Institute for Advanced Study:
+<a href="https://homotopytypetheory.org/book">https://homotopytypetheory.org/book</a>.
+
+[2] Capriotti, Paolo and Nicolai Kraus (2017). Univalent Higher Categories via
+Complete Semi-Segal Type. <a href="https://arxiv.org/abs/1707.03693">https://arxiv.org/abs/1707.03693</a>.
+
+[3] Williams, Anna (2026). Formalising Displayed Categories with Univalent
+Foundations. MSci project, University of Birmingham:
+<a href="https://anna-maths.xyz/assets/papers/disp-categories.pdf">https://anna-maths.xyz/assets/papers/disp-categories.pdf</a>.
+
+</span><a id="1368" class="Markup">\begin{code}</a>
+
+<a id="1382" class="Keyword">import</a> <a id="1389" href="Categories.Wild.html" class="Module">Categories.Wild</a>
+<a id="1405" class="Keyword">import</a> <a id="1412" href="Categories.Pre.html" class="Module">Categories.Pre</a>
+<a id="1427" class="Keyword">import</a> <a id="1434" href="Categories.Univalent.html" class="Module">Categories.Univalent</a>
+
+<a id="1456" class="Keyword">import</a> <a id="1463" href="Categories.Functor.html" class="Module">Categories.Functor</a>
+<a id="1482" class="Keyword">import</a> <a id="1489" href="Categories.Functor-Composition.html" class="Module">Categories.Functor-Composition</a>
+<a id="1520" class="Keyword">import</a> <a id="1527" href="Categories.NaturalTransformation.html" class="Module">Categories.NaturalTransformation</a>
+<a id="1560" class="Keyword">import</a> <a id="1567" href="Categories.Adjoint.html" class="Module">Categories.Adjoint</a>
+
+<a id="1587" class="Keyword">import</a> <a id="1594" href="Categories.Notation.index.html" class="Module">Categories.Notation.index</a>
+<a id="1620" class="Keyword">import</a> <a id="1627" href="Categories.Examples.index.html" class="Module">Categories.Examples.index</a>
+
+<a id="1654" class="Markup">\end{code}</a><a id="1664" class="Background">
+
+The above defines notation for working with categories, we use this so that
+we can write the following and have the category fields be public.
+
+`open WildCategoryNotation C`
+`open PrecategoryNotation C`
+`open CategoryNotation C`
+`open FunctorNotation F renaming (functor-map to F&#39;)`
+`open NaturalTNotation N`
+
+We use this notation throughout the definitions, so for more concrete examples
+please look there.
+
+Displayed Categories.
+
+</a><a id="2098" class="Markup">\begin{code}</a>
+
+<a id="2112" class="Keyword">import</a> <a id="2119" href="Categories.Displayed.index.html" class="Module">Categories.Displayed.index</a>
+
+<a id="2147" class="Markup">\end{code}</a><a id="2157" class="Background">
+
+A listing relating to the masters project of Anna Williams, which formalizes
+the paper [3] above.
+
+</a><a id="2258" class="Markup">\begin{code}</a>
+
+<a id="2272" class="Keyword">import</a> <a id="2279" href="Categories.AW-MSciProject.html" class="Module">Categories.AW-MSciProject</a>
+
+<a id="2306" class="Markup">\end{code}</a><a id="2316" class="Background">
+</a></pre></body></html>

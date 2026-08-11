@@ -1,0 +1,91 @@
+<!DOCTYPE HTML>
+<html><head><meta charset="utf-8"><title>Groups.ModularGroup.Group</title><link rel="stylesheet" href="Agda.css"></head><body><pre class="Agda"><a id="1" class="Background">Lane Biocini
+21 January 2026
+
+PSL2Z packaged as a Group in the sense of Groups.Type. This module
+collects the group-theoretic characterizations: 𝓜 denotes PSL(2,ℤ)
+as a group, and we establish:
+
+  - The standard presentation relations S² = E and R³ = E
+  - twist : 𝓜 ≅ 𝓜 (the outer automorphism)
+  - transpose : 𝓜 ≅ 𝓜ᵒᵖ (opposite group isomorphism)
+
+</a><a id="351" class="Markup">\begin{code}</a>
+
+<a id="365" class="Symbol">{-#</a> <a id="369" class="Keyword">OPTIONS</a> <a id="377" class="Pragma">--safe</a> <a id="384" class="Pragma">--without-K</a> <a id="396" class="Symbol">#-}</a>
+
+<a id="401" class="Keyword">module</a> <a id="408" href="Groups.ModularGroup.Group.html" class="Module">Groups.ModularGroup.Group</a> <a id="434" class="Keyword">where</a>
+
+<a id="441" class="Keyword">open</a> <a id="446" class="Keyword">import</a> <a id="453" href="MLTT.Spartan.html" class="Module">MLTT.Spartan</a>
+<a id="466" class="Keyword">open</a> <a id="471" class="Keyword">import</a> <a id="478" href="UF.Equiv.html" class="Module">UF.Equiv</a>
+<a id="487" class="Keyword">open</a> <a id="492" class="Keyword">import</a> <a id="499" href="Groups.Type.html" class="Module">Groups.Type</a> <a id="511" class="Keyword">hiding</a> <a id="518" class="Symbol">(</a><a id="519" href="Groups.Type.html#5257" class="Function">inv</a><a id="522" class="Symbol">)</a> <a id="524" class="Keyword">renaming</a> <a id="533" class="Symbol">(</a><a id="534" href="Groups.Type.html#10041" class="Function Operator">_≅_</a> <a id="538" class="Symbol">to</a> <a id="541" class="Function Operator">_≣_</a><a id="544" class="Symbol">)</a>
+<a id="546" class="Keyword">open</a> <a id="551" class="Keyword">import</a> <a id="558" href="Groups.Opposite.html" class="Module">Groups.Opposite</a>
+<a id="574" class="Keyword">open</a> <a id="579" class="Keyword">import</a> <a id="586" href="Groups.ModularGroup.Type.html" class="Module">Groups.ModularGroup.Type</a>
+<a id="611" class="Keyword">open</a> <a id="616" class="Keyword">import</a> <a id="623" href="Groups.ModularGroup.Properties.html" class="Module">Groups.ModularGroup.Properties</a>
+<a id="654" class="Keyword">open</a> <a id="659" class="Keyword">import</a> <a id="666" href="Groups.ModularGroup.Multiplication.html" class="Module">Groups.ModularGroup.Multiplication</a>
+
+<a id="702" class="Keyword">open</a> <a id="707" class="Keyword">import</a> <a id="714" href="Groups.ModularGroup.Inverse.html" class="Module">Groups.ModularGroup.Inverse</a>
+<a id="742" class="Keyword">open</a> <a id="747" class="Keyword">import</a> <a id="754" href="Groups.ModularGroup.Twist.html" class="Module">Groups.ModularGroup.Twist</a>
+<a id="780" class="Keyword">open</a> <a id="785" class="Keyword">import</a> <a id="792" href="Groups.ModularGroup.Transposition.html" class="Module">Groups.ModularGroup.Transposition</a>
+
+<a id="PSL2Z-group-axioms"></a><a id="827" href="Groups.ModularGroup.Group.html#827" class="Function">PSL2Z-group-axioms</a> <a id="846" class="Symbol">:</a> <a id="848" href="Groups.Type.html#1072" class="Function">group-axioms</a> <a id="861" href="Groups.ModularGroup.Type.html#1169" class="Function">PSL2Z</a> <a id="867" href="Groups.ModularGroup.Multiplication.html#841" class="Function Operator">_·_</a>
+<a id="871" href="Groups.ModularGroup.Group.html#827" class="Function">PSL2Z-group-axioms</a> <a id="890" class="Symbol">=</a> <a id="892" href="Groups.ModularGroup.Properties.html#8679" class="Function">PSL2Z-is-set</a>
+                   <a id="924" href="MLTT.Sigma.html#395" class="InductiveConstructor Operator">,</a> <a id="926" href="Groups.ModularGroup.Multiplication.html#3359" class="Function">·-assoc</a>
+                   <a id="953" href="MLTT.Sigma.html#395" class="InductiveConstructor Operator">,</a> <a id="955" href="Groups.ModularGroup.Type.html#1804" class="Function">E</a>
+                   <a id="976" href="MLTT.Sigma.html#395" class="InductiveConstructor Operator">,</a> <a id="978" class="Symbol">(λ</a> <a id="981" href="Groups.ModularGroup.Group.html#981" class="Bound">_</a> <a id="983" class="Symbol">→</a> <a id="985" href="MLTT.Identity-Type.html#166" class="InductiveConstructor">refl</a><a id="989" class="Symbol">)</a>
+                   <a id="1010" href="MLTT.Sigma.html#395" class="InductiveConstructor Operator">,</a> <a id="1012" href="Groups.ModularGroup.Multiplication.html#2591" class="Function">·-E-right</a>
+                   <a id="1041" href="MLTT.Sigma.html#395" class="InductiveConstructor Operator">,</a> <a id="1043" class="Symbol">λ</a> <a id="1045" href="Groups.ModularGroup.Group.html#1045" class="Bound">x</a> <a id="1047" class="Symbol">→</a> <a id="1049" href="Groups.ModularGroup.Inverse.html#1132" class="Function">inv</a> <a id="1053" href="Groups.ModularGroup.Group.html#1045" class="Bound">x</a>
+                         <a id="1080" href="MLTT.Sigma.html#395" class="InductiveConstructor Operator">,</a> <a id="1082" href="Groups.ModularGroup.Inverse.html#6293" class="Function">·-inv-left</a> <a id="1093" href="Groups.ModularGroup.Group.html#1045" class="Bound">x</a>
+                         <a id="1120" href="MLTT.Sigma.html#395" class="InductiveConstructor Operator">,</a> <a id="1122" href="Groups.ModularGroup.Inverse.html#7846" class="Function">·-inv-right</a> <a id="1134" href="Groups.ModularGroup.Group.html#1045" class="Bound">x</a>
+
+<a id="𝓜"></a><a id="1137" href="Groups.ModularGroup.Group.html#1137" class="Function">𝓜</a> <a id="1139" class="Symbol">:</a> <a id="1141" href="Groups.Type.html#3789" class="Function">Group</a> <a id="1147" href="MLTT.Universes.html#3731" class="Primitive">𝓤₀</a>
+<a id="1150" href="Groups.ModularGroup.Group.html#1137" class="Function">𝓜</a> <a id="1152" class="Symbol">=</a> <a id="1154" href="Groups.ModularGroup.Type.html#1169" class="Function">PSL2Z</a> <a id="1160" href="MLTT.Sigma.html#395" class="InductiveConstructor Operator">,</a> <a id="1162" class="Symbol">(</a><a id="1163" href="Groups.ModularGroup.Multiplication.html#841" class="Function Operator">_·_</a> <a id="1167" href="MLTT.Sigma.html#395" class="InductiveConstructor Operator">,</a> <a id="1169" href="Groups.ModularGroup.Group.html#827" class="Function">PSL2Z-group-axioms</a><a id="1187" class="Symbol">)</a>
+
+<a id="1190" class="Markup">\end{code}</a><a id="1200" class="Background">
+
+The generators S and R satisfy the standard presentation relations.
+
+</a><a id="1271" class="Markup">\begin{code}</a>
+
+<a id="S-order-2"></a><a id="1285" href="Groups.ModularGroup.Group.html#1285" class="Function">S-order-2</a> <a id="1295" class="Symbol">:</a> <a id="1297" href="Groups.ModularGroup.Type.html#1806" class="Function">S</a> <a id="1299" href="Groups.ModularGroup.Multiplication.html#841" class="Function Operator">·</a> <a id="1301" href="Groups.ModularGroup.Type.html#1806" class="Function">S</a> <a id="1303" href="MLTT.Id.html#193" class="Datatype Operator">＝</a> <a id="1305" href="Groups.ModularGroup.Type.html#1804" class="Function">E</a>
+<a id="1307" href="Groups.ModularGroup.Group.html#1285" class="Function">S-order-2</a> <a id="1317" class="Symbol">=</a> <a id="1319" href="Groups.ModularGroup.Properties.html#965" class="Function">s²</a> <a id="1322" href="Groups.ModularGroup.Type.html#1804" class="Function">E</a>
+
+<a id="R-order-3"></a><a id="1325" href="Groups.ModularGroup.Group.html#1325" class="Function">R-order-3</a> <a id="1335" class="Symbol">:</a> <a id="1337" href="Groups.ModularGroup.Type.html#1808" class="Function">R</a> <a id="1339" href="Groups.ModularGroup.Multiplication.html#841" class="Function Operator">·</a> <a id="1341" class="Symbol">(</a><a id="1342" href="Groups.ModularGroup.Type.html#1808" class="Function">R</a> <a id="1344" href="Groups.ModularGroup.Multiplication.html#841" class="Function Operator">·</a> <a id="1346" href="Groups.ModularGroup.Type.html#1808" class="Function">R</a><a id="1347" class="Symbol">)</a> <a id="1349" href="MLTT.Id.html#193" class="Datatype Operator">＝</a> <a id="1351" href="Groups.ModularGroup.Type.html#1804" class="Function">E</a>
+<a id="1353" href="Groups.ModularGroup.Group.html#1325" class="Function">R-order-3</a> <a id="1363" class="Symbol">=</a> <a id="1365" href="Groups.ModularGroup.Properties.html#1069" class="Function">r³</a> <a id="1368" href="Groups.ModularGroup.Type.html#1804" class="Function">E</a>
+
+<a id="R²-·-R"></a><a id="1371" href="Groups.ModularGroup.Group.html#1371" class="Function">R²-·-R</a> <a id="1378" class="Symbol">:</a> <a id="1380" href="Groups.ModularGroup.Type.html#1810" class="Function">R²</a> <a id="1383" href="Groups.ModularGroup.Multiplication.html#841" class="Function Operator">·</a> <a id="1385" href="Groups.ModularGroup.Type.html#1808" class="Function">R</a> <a id="1387" href="MLTT.Id.html#193" class="Datatype Operator">＝</a> <a id="1389" href="Groups.ModularGroup.Type.html#1804" class="Function">E</a>
+<a id="1391" href="Groups.ModularGroup.Group.html#1371" class="Function">R²-·-R</a> <a id="1398" class="Symbol">=</a> <a id="1400" href="Groups.ModularGroup.Multiplication.html#3359" class="Function">·-assoc</a> <a id="1408" href="Groups.ModularGroup.Type.html#1808" class="Function">R</a> <a id="1410" href="Groups.ModularGroup.Type.html#1808" class="Function">R</a> <a id="1412" href="Groups.ModularGroup.Type.html#1808" class="Function">R</a> <a id="1414" href="MLTT.Id.html#967" class="Function Operator">∙</a> <a id="1416" href="Groups.ModularGroup.Group.html#1325" class="Function">R-order-3</a>
+
+<a id="R-·-R²"></a><a id="1427" href="Groups.ModularGroup.Group.html#1427" class="Function">R-·-R²</a> <a id="1434" class="Symbol">:</a> <a id="1436" href="Groups.ModularGroup.Type.html#1808" class="Function">R</a> <a id="1438" href="Groups.ModularGroup.Multiplication.html#841" class="Function Operator">·</a> <a id="1440" href="Groups.ModularGroup.Type.html#1810" class="Function">R²</a> <a id="1443" href="MLTT.Id.html#193" class="Datatype Operator">＝</a> <a id="1445" href="Groups.ModularGroup.Type.html#1804" class="Function">E</a>
+<a id="1447" href="Groups.ModularGroup.Group.html#1427" class="Function">R-·-R²</a> <a id="1454" class="Symbol">=</a> <a id="1456" href="Groups.ModularGroup.Group.html#1325" class="Function">R-order-3</a>
+
+<a id="1467" class="Markup">\end{code}</a><a id="1477" class="Background">
+
+Twist is an automorphism of 𝓜 (swaps r ↔ r²).
+
+</a><a id="1526" class="Markup">\begin{code}</a>
+
+<a id="twist-is-equiv"></a><a id="1540" href="Groups.ModularGroup.Group.html#1540" class="Function">twist-is-equiv</a> <a id="1555" class="Symbol">:</a> <a id="1557" href="UF.Equiv.html#402" class="Function">is-equiv</a> <a id="1566" href="Groups.ModularGroup.Twist.html#1060" class="Function">twist</a>
+<a id="1572" href="Groups.ModularGroup.Group.html#1540" class="Function">twist-is-equiv</a> <a id="1587" class="Symbol">=</a> <a id="1589" href="UF.Equiv.html#27446" class="Function">involutions-are-equivs</a> <a id="1612" href="Groups.ModularGroup.Twist.html#1060" class="Function">twist</a> <a id="1618" href="Groups.ModularGroup.Twist.html#1933" class="Function">twist-involute</a>
+
+<a id="twist-auto"></a><a id="1634" href="Groups.ModularGroup.Group.html#1634" class="Function">twist-auto</a> <a id="1645" class="Symbol">:</a> <a id="1647" href="Groups.ModularGroup.Group.html#1137" class="Function">𝓜</a> <a id="1649" href="Groups.ModularGroup.Group.html#541" class="Function Operator">≣</a> <a id="1651" href="Groups.ModularGroup.Group.html#1137" class="Function">𝓜</a>
+<a id="1653" href="Groups.ModularGroup.Group.html#1634" class="Function">twist-auto</a> <a id="1664" class="Symbol">=</a> <a id="1666" href="Groups.ModularGroup.Twist.html#1060" class="Function">twist</a> <a id="1672" href="MLTT.Sigma.html#395" class="InductiveConstructor Operator">,</a> <a id="1674" href="Groups.ModularGroup.Group.html#1540" class="Function">twist-is-equiv</a> <a id="1689" href="MLTT.Sigma.html#395" class="InductiveConstructor Operator">,</a> <a id="1691" class="Symbol">(λ</a> <a id="1694" class="Symbol">{</a><a id="1695" href="Groups.ModularGroup.Group.html#1695" class="Bound">x</a><a id="1696" class="Symbol">}</a> <a id="1698" class="Symbol">{</a><a id="1699" href="Groups.ModularGroup.Group.html#1699" class="Bound">y</a><a id="1700" class="Symbol">}</a> <a id="1702" class="Symbol">→</a> <a id="1704" href="Groups.ModularGroup.Twist.html#3086" class="Function">twist-product</a> <a id="1718" href="Groups.ModularGroup.Group.html#1695" class="Bound">x</a> <a id="1720" href="Groups.ModularGroup.Group.html#1699" class="Bound">y</a><a id="1721" class="Symbol">)</a>
+
+<a id="1724" class="Markup">\end{code}</a><a id="1734" class="Background">
+
+Transposition gives an isomorphism to the opposite group.
+
+</a><a id="1795" class="Markup">\begin{code}</a>
+
+<a id="transpose-is-op-hom"></a><a id="1809" href="Groups.ModularGroup.Group.html#1809" class="Function">transpose-is-op-hom</a> <a id="1829" class="Symbol">:</a> <a id="1831" href="Groups.Type.html#5625" class="Function">is-hom</a> <a id="1838" href="Groups.ModularGroup.Group.html#1137" class="Function">𝓜</a> <a id="1840" class="Symbol">(</a><a id="1841" href="Groups.ModularGroup.Group.html#1137" class="Function">𝓜</a> <a id="1843" href="Groups.Opposite.html#473" class="Function Operator">ᵒᵖ</a><a id="1845" class="Symbol">)</a> <a id="1847" href="Groups.ModularGroup.Transposition.html#1112" class="Function Operator">_ᵀ</a>
+<a id="1850" href="Groups.ModularGroup.Group.html#1809" class="Function">transpose-is-op-hom</a> <a id="1870" class="Symbol">{</a><a id="1871" href="Groups.ModularGroup.Group.html#1871" class="Bound">x</a><a id="1872" class="Symbol">}</a> <a id="1874" class="Symbol">{</a><a id="1875" href="Groups.ModularGroup.Group.html#1875" class="Bound">y</a><a id="1876" class="Symbol">}</a> <a id="1878" class="Symbol">=</a> <a id="1880" href="Groups.ModularGroup.Transposition.html#2775" class="Function">transpose-product</a> <a id="1898" href="Groups.ModularGroup.Group.html#1871" class="Bound">x</a> <a id="1900" href="Groups.ModularGroup.Group.html#1875" class="Bound">y</a>
+
+<a id="transpose-is-equiv"></a><a id="1903" href="Groups.ModularGroup.Group.html#1903" class="Function">transpose-is-equiv</a> <a id="1922" class="Symbol">:</a> <a id="1924" href="UF.Equiv.html#402" class="Function">is-equiv</a> <a id="1933" href="Groups.ModularGroup.Transposition.html#1112" class="Function Operator">_ᵀ</a>
+<a id="1936" href="Groups.ModularGroup.Group.html#1903" class="Function">transpose-is-equiv</a> <a id="1955" class="Symbol">=</a> <a id="1957" href="UF.Equiv.html#27446" class="Function">involutions-are-equivs</a> <a id="1980" href="Groups.ModularGroup.Transposition.html#1112" class="Function Operator">_ᵀ</a> <a id="1983" href="Groups.ModularGroup.Transposition.html#5811" class="Function">transpose-involutive</a>
+
+<a id="transpose-op-iso"></a><a id="2005" href="Groups.ModularGroup.Group.html#2005" class="Function">transpose-op-iso</a> <a id="2022" class="Symbol">:</a> <a id="2024" href="Groups.ModularGroup.Group.html#1137" class="Function">𝓜</a> <a id="2026" href="Groups.ModularGroup.Group.html#541" class="Function Operator">≣</a> <a id="2028" href="Groups.ModularGroup.Group.html#1137" class="Function">𝓜</a> <a id="2030" href="Groups.Opposite.html#473" class="Function Operator">ᵒᵖ</a>
+<a id="2033" href="Groups.ModularGroup.Group.html#2005" class="Function">transpose-op-iso</a> <a id="2050" class="Symbol">=</a>
+ <a id="2053" href="Groups.ModularGroup.Transposition.html#1112" class="Function Operator">_ᵀ</a> <a id="2056" href="MLTT.Sigma.html#395" class="InductiveConstructor Operator">,</a> <a id="2058" href="Groups.ModularGroup.Group.html#1903" class="Function">transpose-is-equiv</a> <a id="2077" href="MLTT.Sigma.html#395" class="InductiveConstructor Operator">,</a> <a id="2079" class="Symbol">(λ</a> <a id="2082" class="Symbol">{</a><a id="2083" href="Groups.ModularGroup.Group.html#2083" class="Bound">x</a><a id="2084" class="Symbol">}</a> <a id="2086" class="Symbol">{</a><a id="2087" href="Groups.ModularGroup.Group.html#2087" class="Bound">y</a><a id="2088" class="Symbol">}</a> <a id="2090" class="Symbol">→</a> <a id="2092" href="Groups.ModularGroup.Group.html#1809" class="Function">transpose-is-op-hom</a> <a id="2112" class="Symbol">{</a><a id="2113" href="Groups.ModularGroup.Group.html#2083" class="Bound">x</a><a id="2114" class="Symbol">}</a> <a id="2116" class="Symbol">{</a><a id="2117" href="Groups.ModularGroup.Group.html#2087" class="Bound">y</a><a id="2118" class="Symbol">})</a>
+
+<a id="2122" class="Markup">\end{code}</a><a id="2132" class="Background">
+</a></pre></body></html>

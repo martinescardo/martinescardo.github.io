@@ -1,0 +1,44 @@
+<!DOCTYPE HTML>
+<html><head><meta charset="utf-8"><title>Ordinals.CompactnessOfSuprema</title><link rel="stylesheet" href="Agda.css"></head><body><pre class="Agda"><a id="1" class="Background">Martin Escardo, 10 Jun 2026.
+
+A supremum of a compact-indexed family of compact ordinals is
+compact. I knew this years ago, and it is used implicitly in some
+files.
+
+</a><a id="167" class="Markup">\begin{code}</a>
+
+<a id="181" class="Symbol">{-#</a> <a id="185" class="Keyword">OPTIONS</a> <a id="193" class="Pragma">--safe</a> <a id="200" class="Pragma">--without-K</a> <a id="212" class="Symbol">#-}</a>
+
+<a id="217" class="Keyword">open</a> <a id="222" class="Keyword">import</a> <a id="229" href="UF.Univalence.html" class="Module">UF.Univalence</a>
+<a id="243" class="Keyword">open</a> <a id="248" class="Keyword">import</a> <a id="255" href="UF.PropTrunc.html" class="Module">UF.PropTrunc</a>
+
+<a id="269" class="Keyword">module</a> <a id="276" href="Ordinals.CompactnessOfSuprema.html" class="Module">Ordinals.CompactnessOfSuprema</a>
+        <a id="314" class="Symbol">(</a><a id="315" href="Ordinals.CompactnessOfSuprema.html#315" class="Bound">ua</a> <a id="318" class="Symbol">:</a> <a id="320" href="UF.Univalence.html#494" class="Function">Univalence</a><a id="330" class="Symbol">)</a>
+        <a id="340" class="Symbol">(</a><a id="341" href="Ordinals.CompactnessOfSuprema.html#341" class="Bound">pt</a> <a id="344" class="Symbol">:</a> <a id="346" href="UF.PropTrunc.html#486" class="Record">propositional-truncations-exist</a><a id="377" class="Symbol">)</a>
+       <a id="386" class="Keyword">where</a>
+
+<a id="393" class="Keyword">open</a> <a id="398" href="UF.PropTrunc.html#792" class="Module">PropositionalTruncation</a> <a id="422" href="Ordinals.CompactnessOfSuprema.html#341" class="Bound">pt</a>
+
+<a id="426" class="Keyword">open</a> <a id="431" class="Keyword">import</a> <a id="438" href="MLTT.Spartan.html" class="Module">MLTT.Spartan</a>
+<a id="451" class="Keyword">open</a> <a id="456" class="Keyword">import</a> <a id="463" href="Ordinals.OrdinalOfOrdinalsSuprema.html" class="Module">Ordinals.OrdinalOfOrdinalsSuprema</a> <a id="497" href="Ordinals.CompactnessOfSuprema.html#315" class="Bound">ua</a>
+<a id="500" class="Keyword">open</a> <a id="505" class="Keyword">import</a> <a id="512" href="Ordinals.Type.html" class="Module">Ordinals.Type</a>
+<a id="526" class="Keyword">open</a> <a id="531" class="Keyword">import</a> <a id="538" href="Ordinals.Underlying.html" class="Module">Ordinals.Underlying</a>
+<a id="558" class="Keyword">open</a> <a id="563" class="Keyword">import</a> <a id="570" href="TypeTopology.CompactTypes.html" class="Module">TypeTopology.CompactTypes</a>
+<a id="596" class="Keyword">open</a> <a id="601" class="Keyword">import</a> <a id="608" href="UF.Size.html" class="Module">UF.Size</a>
+
+<a id="617" class="Keyword">module</a> <a id="624" href="Ordinals.CompactnessOfSuprema.html#624" class="Module">_</a> <a id="626" class="Symbol">(</a><a id="627" href="Ordinals.CompactnessOfSuprema.html#627" class="Bound">sr</a> <a id="630" class="Symbol">:</a> <a id="632" href="UF.Size.html#37489" class="Function">Set-Replacement</a> <a id="648" href="Ordinals.CompactnessOfSuprema.html#341" class="Bound">pt</a><a id="650" class="Symbol">)</a> <a id="652" class="Keyword">where</a>
+
+ <a id="660" class="Keyword">open</a> <a id="665" href="Ordinals.OrdinalOfOrdinalsSuprema.html#36398" class="Module">suprema</a> <a id="673" href="Ordinals.CompactnessOfSuprema.html#341" class="Bound">pt</a> <a id="676" href="Ordinals.CompactnessOfSuprema.html#627" class="Bound">sr</a>
+
+ <a id="681" href="Ordinals.CompactnessOfSuprema.html#681" class="Function">sup-is-compact∙</a> <a id="697" class="Symbol">:</a> <a id="699" class="Symbol">{</a><a id="700" href="Ordinals.CompactnessOfSuprema.html#700" class="Bound">I</a> <a id="702" class="Symbol">:</a> <a id="704" href="MLTT.Universes.html#3833" class="Generalizable">𝓤</a> <a id="706" href="MLTT.Universes.html#4011" class="Function Operator">̇</a> <a id="708" class="Symbol">}</a> <a id="710" class="Symbol">{</a><a id="711" href="Ordinals.CompactnessOfSuprema.html#711" class="Bound">α</a> <a id="713" class="Symbol">:</a> <a id="715" href="Ordinals.CompactnessOfSuprema.html#700" class="Bound">I</a> <a id="717" class="Symbol">→</a> <a id="719" href="Ordinals.Type.html#600" class="Function">Ordinal</a> <a id="727" href="MLTT.Universes.html#3833" class="Generalizable">𝓤</a><a id="728" class="Symbol">}</a>
+                 <a id="747" class="Symbol">→</a> <a id="749" href="TypeTopology.CompactTypes.html#4305" class="Function">is-compact∙</a> <a id="761" href="Ordinals.CompactnessOfSuprema.html#700" class="Bound">I</a>
+                 <a id="780" class="Symbol">→</a> <a id="782" class="Symbol">((</a><a id="784" href="Ordinals.CompactnessOfSuprema.html#784" class="Bound">i</a> <a id="786" class="Symbol">:</a> <a id="788" href="Ordinals.CompactnessOfSuprema.html#700" class="Bound">I</a><a id="789" class="Symbol">)</a> <a id="791" class="Symbol">→</a> <a id="793" href="TypeTopology.CompactTypes.html#4305" class="Function">is-compact∙</a> <a id="805" href="Ordinals.Underlying.html#315" class="Field Operator">⟨</a> <a id="807" href="Ordinals.CompactnessOfSuprema.html#711" class="Bound">α</a> <a id="809" href="Ordinals.CompactnessOfSuprema.html#784" class="Bound">i</a> <a id="811" href="Ordinals.Underlying.html#315" class="Field Operator">⟩</a><a id="812" class="Symbol">)</a>
+                 <a id="831" class="Symbol">→</a> <a id="833" href="TypeTopology.CompactTypes.html#4305" class="Function">is-compact∙</a> <a id="845" href="Ordinals.Underlying.html#315" class="Field Operator">⟨</a> <a id="847" href="Ordinals.OrdinalOfOrdinalsSuprema.html#36762" class="Function">sup</a> <a id="851" href="Ordinals.CompactnessOfSuprema.html#711" class="Bound">α</a> <a id="853" href="Ordinals.Underlying.html#315" class="Field Operator">⟩</a>
+ <a id="856" href="Ordinals.CompactnessOfSuprema.html#681" class="Function">sup-is-compact∙</a> <a id="872" class="Symbol">{</a><a id="873" href="Ordinals.CompactnessOfSuprema.html#873" class="Bound">𝓤</a><a id="874" class="Symbol">}</a> <a id="876" class="Symbol">{</a><a id="877" href="Ordinals.CompactnessOfSuprema.html#877" class="Bound">I</a><a id="878" class="Symbol">}</a> <a id="880" class="Symbol">{</a><a id="881" href="Ordinals.CompactnessOfSuprema.html#881" class="Bound">α</a><a id="882" class="Symbol">}</a> <a id="884" href="Ordinals.CompactnessOfSuprema.html#884" class="Bound">I-compact∙</a> <a id="895" href="Ordinals.CompactnessOfSuprema.html#895" class="Bound">α-compact∙</a>
+  <a id="908" class="Symbol">=</a> <a id="910" href="TypeTopology.CompactTypes.html#18359" class="Function">codomain-of-surjection-is-compact∙</a> <a id="945" href="Ordinals.CompactnessOfSuprema.html#341" class="Bound">pt</a>
+     <a id="953" class="Symbol">(</a><a id="954" href="Ordinals.OrdinalOfOrdinalsSuprema.html#38759" class="Function">sum-to-sup</a> <a id="965" href="Ordinals.CompactnessOfSuprema.html#881" class="Bound">α</a><a id="966" class="Symbol">)</a>
+     <a id="973" class="Symbol">(</a><a id="974" href="Ordinals.OrdinalOfOrdinalsSuprema.html#38882" class="Function">sum-to-sup-is-surjection</a> <a id="999" href="Ordinals.CompactnessOfSuprema.html#881" class="Bound">α</a><a id="1000" class="Symbol">)</a>
+     <a id="1007" class="Symbol">(</a><a id="1008" href="TypeTopology.CompactTypes.html#14811" class="Function">Σ-is-compact∙</a> <a id="1022" href="Ordinals.CompactnessOfSuprema.html#884" class="Bound">I-compact∙</a> <a id="1033" href="Ordinals.CompactnessOfSuprema.html#895" class="Bound">α-compact∙</a><a id="1043" class="Symbol">)</a>
+
+<a id="1046" class="Markup">\end{code}</a><a id="1056" class="Background">
+</a></pre></body></html>

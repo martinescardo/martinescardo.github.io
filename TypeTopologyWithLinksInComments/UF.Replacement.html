@@ -1,0 +1,118 @@
+<!DOCTYPE HTML>
+<html><head><meta charset="utf-8"><title>UF.Replacement</title><link rel="stylesheet" href="Agda.css"></head><body><pre class="Agda"><span id="1" class="Background">Ian Ray, 17th August 2025.
+
+The type theoretic axiom of replacement (section 24.5 of Introduction to
+Homotopy Type Theory by Egbert Rijke:
+<a href="https://ulrikbuchholtz.dk/hott1920/hott-intro.pdf">https://ulrikbuchholtz.dk/hott1920/hott-intro.pdf</a>)
+is a statement about the size of the image of a function when certain smallness
+assumptions are imposed on the domain and codomain. The nomenclature is derived
+from the set-theoretic axiom of replacement, where the set vs class distinction
+provides a notion of size. In type theory, this statement may be assumed or
+proven depending on the context (see discussion below for details about the
+strength of type replacement). We also mention that the file UF/Size.lagda
+defines &#39;set replacement&#39; which restricts type replacement to those maps whose
+codomain is a set (in the sense of univalent foundations). We will drop the word
+&#39;axiom&#39; and write &#39;type replacement&#39;, or simply &#39;replacement&#39; when there is no
+risk of confusion with set replacement.
+
+The statement of type replacement is as follows:
+The image of a map f : A → X, from a small type A to a locally small type X, is
+itself small.
+
+Note: some authors use the term &#39;essentially small&#39; for what the TypeTopology
+library refers to as simply &#39;small&#39;. Additionally, we often wish to consider
+size relative to an explicit universe.
+
+The reader may be cautious about the strength of type replacement due to its
+&#39;apparent&#39; connection with the axiom of replacement of set theory; the latter
+is a rather strong assumption critical for more advanced set-theoretic results.
+In contrast, type replacement is a rather modest assumption. Indeed it follows
+from the existence of a restricted class of Higher Inductive Types (HITs). For
+details see &quot;The Join Construction&quot; by Egbert Rijke
+(<a href="https://arxiv.org/abs/1701.07538">https://arxiv.org/abs/1701.07538</a>) where &#39;graph quotients&#39; are used to give an
+alternative construction of the image; from which type replacement can be
+proven. Additionally, one may carry out this construction simply with pushouts
+(which can be shown to be equivalent to graph quotients). The join construction
+via pushouts is being actively explored in files not yet publicly available.
+Additionally, set replacement (see above) is equivalent to the existence of set
+quotients, another modest assumption.
+
+It is worth noting that the status of type replacements strength relative to
+the strength of adding certain HITs is not completely understood, but it
+appears to be even weaker than the assumption that pushouts exist (this
+observation will follow from a forthcoming write up by Reid Barton). In light
+of this, it is reasonable to explore type replacement and use it as an
+independent assumption when necessary.
+
+</span><a id="2641" class="Markup">\begin{code}</a>
+
+<a id="2655" class="Symbol">{-#</a> <a id="2659" class="Keyword">OPTIONS</a> <a id="2667" class="Pragma">--safe</a> <a id="2674" class="Pragma">--without-K</a> <a id="2686" class="Symbol">#-}</a>
+
+<a id="2691" class="Keyword">open</a> <a id="2696" class="Keyword">import</a> <a id="2703" href="UF.PropTrunc.html" class="Module">UF.PropTrunc</a>
+
+<a id="2717" class="Keyword">module</a> <a id="2724" href="UF.Replacement.html" class="Module">UF.Replacement</a> <a id="2739" class="Symbol">(</a><a id="2740" href="UF.Replacement.html#2740" class="Bound">pt</a> <a id="2743" class="Symbol">:</a> <a id="2745" href="UF.PropTrunc.html#486" class="Record">propositional-truncations-exist</a><a id="2776" class="Symbol">)</a>
+                       <a id="2801" class="Keyword">where</a>
+
+<a id="2808" class="Keyword">open</a> <a id="2813" class="Keyword">import</a> <a id="2820" href="MLTT.Spartan.html" class="Module">MLTT.Spartan</a>
+<a id="2833" class="Keyword">open</a> <a id="2838" class="Keyword">import</a> <a id="2845" href="UF.Equiv.html" class="Module">UF.Equiv</a>
+<a id="2854" class="Keyword">open</a> <a id="2859" class="Keyword">import</a> <a id="2866" href="UF.ImageAndSurjection.html" class="Module">UF.ImageAndSurjection</a> <a id="2888" href="UF.Replacement.html#2740" class="Bound">pt</a>
+<a id="2891" class="Keyword">open</a> <a id="2896" class="Keyword">import</a> <a id="2903" href="UF.Size.html" class="Module">UF.Size</a>
+<a id="2911" class="Keyword">open</a> <a id="2916" class="Keyword">import</a> <a id="2923" href="UF.SmallnessProperties.html" class="Module">UF.SmallnessProperties</a>
+
+<a id="2947" class="Keyword">open</a> <a id="2952" href="UF.PropTrunc.html#486" class="Module">propositional-truncations-exist</a> <a id="2984" href="UF.Replacement.html#2740" class="Bound">pt</a>
+
+<a id="2988" class="Markup">\end{code}</a><a id="2998" class="Background">
+
+We begin by giving a precise statement of type replacement.
+
+</a><a id="3061" class="Markup">\begin{code}</a>
+
+<a id="3075" class="Keyword">module</a> <a id="3082" href="UF.Replacement.html#3082" class="Module">_</a> <a id="3084" class="Symbol">{</a><a id="3085" href="UF.Replacement.html#3085" class="Bound">𝓥</a> <a id="3087" class="Symbol">:</a> <a id="3089" href="MLTT.Universes.html#3778" class="Postulate">Universe</a><a id="3097" class="Symbol">}</a> <a id="3099" class="Keyword">where</a>
+
+ <a id="3107" href="UF.Replacement.html#3107" class="Function">Replacement</a> <a id="3119" class="Symbol">:</a> <a id="3121" class="Symbol">{</a><a id="3122" href="UF.Replacement.html#3122" class="Bound">𝓤</a> <a id="3124" href="UF.Replacement.html#3124" class="Bound">𝓦</a> <a id="3126" class="Symbol">:</a> <a id="3128" href="MLTT.Universes.html#3778" class="Postulate">Universe</a><a id="3136" class="Symbol">}</a> <a id="3138" class="Symbol">→</a> <a id="3140" class="Symbol">(</a><a id="3141" href="UF.Replacement.html#3085" class="Bound">𝓥</a> <a id="3143" href="Agda.Primitive.html#961" class="Primitive Operator">⊔</a> <a id="3145" href="UF.Replacement.html#3122" class="Bound">𝓤</a> <a id="3147" href="Agda.Primitive.html#961" class="Primitive Operator">⊔</a> <a id="3149" href="UF.Replacement.html#3124" class="Bound">𝓦</a><a id="3150" class="Symbol">)</a><a id="3151" href="MLTT.Universes.html#3754" class="Primitive Operator">⁺</a> <a id="3153" href="MLTT.Universes.html#4011" class="Function Operator">̇</a>
+ <a id="3156" href="UF.Replacement.html#3107" class="Function">Replacement</a> <a id="3168" class="Symbol">{</a><a id="3169" href="UF.Replacement.html#3169" class="Bound">𝓤</a><a id="3170" class="Symbol">}</a> <a id="3172" class="Symbol">{</a><a id="3173" href="UF.Replacement.html#3173" class="Bound">𝓦</a><a id="3174" class="Symbol">}</a> <a id="3176" class="Symbol">=</a> <a id="3178" class="Symbol">{</a><a id="3179" href="UF.Replacement.html#3179" class="Bound">A</a> <a id="3181" class="Symbol">:</a> <a id="3183" href="UF.Replacement.html#3169" class="Bound">𝓤</a> <a id="3185" href="MLTT.Universes.html#4011" class="Function Operator">̇</a> <a id="3187" class="Symbol">}</a> <a id="3189" class="Symbol">{</a><a id="3190" href="UF.Replacement.html#3190" class="Bound">X</a> <a id="3192" class="Symbol">:</a> <a id="3194" href="UF.Replacement.html#3173" class="Bound">𝓦</a> <a id="3196" href="MLTT.Universes.html#4011" class="Function Operator">̇</a> <a id="3198" class="Symbol">}</a> <a id="3200" class="Symbol">(</a><a id="3201" href="UF.Replacement.html#3201" class="Bound">f</a> <a id="3203" class="Symbol">:</a> <a id="3205" href="UF.Replacement.html#3179" class="Bound">A</a> <a id="3207" class="Symbol">→</a> <a id="3209" href="UF.Replacement.html#3190" class="Bound">X</a><a id="3210" class="Symbol">)</a>
+                     <a id="3233" class="Symbol">→</a> <a id="3235" href="UF.Replacement.html#3179" class="Bound">A</a> <a id="3237" href="UF.Size.html#2097" class="Function Operator">is</a> <a id="3240" href="UF.Replacement.html#3085" class="Bound">𝓥</a> <a id="3242" href="UF.Size.html#2097" class="Function Operator">small</a>
+                     <a id="3269" class="Symbol">→</a> <a id="3271" href="UF.Replacement.html#3190" class="Bound">X</a> <a id="3273" href="UF.Size.html#30116" class="Function Operator">is-locally</a> <a id="3284" href="UF.Replacement.html#3085" class="Bound">𝓥</a> <a id="3286" href="UF.Size.html#30116" class="Function Operator">small</a>
+                     <a id="3313" class="Symbol">→</a> <a id="3315" href="UF.ImageAndSurjection.html#939" class="Function">image</a> <a id="3321" href="UF.Replacement.html#3201" class="Bound">f</a> <a id="3323" href="UF.Size.html#2097" class="Function Operator">is</a> <a id="3326" href="UF.Replacement.html#3085" class="Bound">𝓥</a> <a id="3328" href="UF.Size.html#2097" class="Function Operator">small</a>
+
+<a id="3335" class="Markup">\end{code}</a><a id="3345" class="Background">
+
+We can also give a variation of this statement when f is surjective.
+
+</a><a id="3417" class="Markup">\begin{code}</a>
+
+ <a id="3432" href="UF.Replacement.html#3432" class="Function">Replacement&#39;</a> <a id="3445" class="Symbol">:</a> <a id="3447" class="Symbol">{</a><a id="3448" href="UF.Replacement.html#3448" class="Bound">𝓤</a> <a id="3450" href="UF.Replacement.html#3450" class="Bound">𝓦</a> <a id="3452" class="Symbol">:</a> <a id="3454" href="MLTT.Universes.html#3778" class="Postulate">Universe</a><a id="3462" class="Symbol">}</a> <a id="3464" class="Symbol">→</a> <a id="3466" class="Symbol">(</a><a id="3467" href="UF.Replacement.html#3085" class="Bound">𝓥</a> <a id="3469" href="Agda.Primitive.html#961" class="Primitive Operator">⊔</a> <a id="3471" href="UF.Replacement.html#3448" class="Bound">𝓤</a> <a id="3473" href="Agda.Primitive.html#961" class="Primitive Operator">⊔</a> <a id="3475" href="UF.Replacement.html#3450" class="Bound">𝓦</a><a id="3476" class="Symbol">)</a><a id="3477" href="MLTT.Universes.html#3754" class="Primitive Operator">⁺</a> <a id="3479" href="MLTT.Universes.html#4011" class="Function Operator">̇</a>
+ <a id="3482" href="UF.Replacement.html#3432" class="Function">Replacement&#39;</a> <a id="3495" class="Symbol">{</a><a id="3496" href="UF.Replacement.html#3496" class="Bound">𝓤</a><a id="3497" class="Symbol">}</a> <a id="3499" class="Symbol">{</a><a id="3500" href="UF.Replacement.html#3500" class="Bound">𝓦</a><a id="3501" class="Symbol">}</a> <a id="3503" class="Symbol">=</a> <a id="3505" class="Symbol">{</a><a id="3506" href="UF.Replacement.html#3506" class="Bound">A</a> <a id="3508" class="Symbol">:</a> <a id="3510" href="UF.Replacement.html#3496" class="Bound">𝓤</a> <a id="3512" href="MLTT.Universes.html#4011" class="Function Operator">̇</a> <a id="3514" class="Symbol">}</a> <a id="3516" class="Symbol">{</a><a id="3517" href="UF.Replacement.html#3517" class="Bound">X</a> <a id="3519" class="Symbol">:</a> <a id="3521" href="UF.Replacement.html#3500" class="Bound">𝓦</a> <a id="3523" href="MLTT.Universes.html#4011" class="Function Operator">̇</a> <a id="3525" class="Symbol">}</a> <a id="3527" class="Symbol">(</a><a id="3528" href="UF.Replacement.html#3528" class="Bound">f</a> <a id="3530" class="Symbol">:</a> <a id="3532" href="UF.Replacement.html#3506" class="Bound">A</a> <a id="3534" class="Symbol">→</a> <a id="3536" href="UF.Replacement.html#3517" class="Bound">X</a><a id="3537" class="Symbol">)</a>
+                      <a id="3561" class="Symbol">→</a> <a id="3563" href="UF.Replacement.html#3506" class="Bound">A</a> <a id="3565" href="UF.Size.html#2097" class="Function Operator">is</a> <a id="3568" href="UF.Replacement.html#3085" class="Bound">𝓥</a> <a id="3570" href="UF.Size.html#2097" class="Function Operator">small</a>
+                      <a id="3598" class="Symbol">→</a> <a id="3600" href="UF.Replacement.html#3517" class="Bound">X</a> <a id="3602" href="UF.Size.html#30116" class="Function Operator">is-locally</a> <a id="3613" href="UF.Replacement.html#3085" class="Bound">𝓥</a> <a id="3615" href="UF.Size.html#30116" class="Function Operator">small</a>
+                      <a id="3643" class="Symbol">→</a> <a id="3645" href="UF.ImageAndSurjection.html#1587" class="Function">is-surjection</a> <a id="3659" href="UF.Replacement.html#3528" class="Bound">f</a>
+                      <a id="3683" class="Symbol">→</a> <a id="3685" href="UF.Replacement.html#3517" class="Bound">X</a> <a id="3687" href="UF.Size.html#2097" class="Function Operator">is</a> <a id="3690" href="UF.Replacement.html#3085" class="Bound">𝓥</a> <a id="3692" href="UF.Size.html#2097" class="Function Operator">small</a>
+
+<a id="3699" class="Markup">\end{code}</a><a id="3709" class="Background">
+
+Of course the two statements are inter-derivable.
+
+</a><a id="3762" class="Markup">\begin{code}</a>
+
+ <a id="3777" href="UF.Replacement.html#3777" class="Function">Replacement-to-Replacement&#39;</a> <a id="3805" class="Symbol">:</a> <a id="3807" class="Symbol">{</a><a id="3808" href="UF.Replacement.html#3808" class="Bound">𝓤</a> <a id="3810" href="UF.Replacement.html#3810" class="Bound">𝓦</a> <a id="3812" class="Symbol">:</a> <a id="3814" href="MLTT.Universes.html#3778" class="Postulate">Universe</a><a id="3822" class="Symbol">}</a>
+                             <a id="3853" class="Symbol">→</a> <a id="3855" href="UF.Replacement.html#3107" class="Function">Replacement</a> <a id="3867" class="Symbol">{</a><a id="3868" href="UF.Replacement.html#3808" class="Bound">𝓤</a><a id="3869" class="Symbol">}</a> <a id="3871" class="Symbol">{</a><a id="3872" href="UF.Replacement.html#3810" class="Bound">𝓦</a><a id="3873" class="Symbol">}</a> <a id="3875" class="Symbol">→</a> <a id="3877" href="UF.Replacement.html#3432" class="Function">Replacement&#39;</a> <a id="3890" class="Symbol">{</a><a id="3891" href="UF.Replacement.html#3808" class="Bound">𝓤</a><a id="3892" class="Symbol">}</a> <a id="3894" class="Symbol">{</a><a id="3895" href="UF.Replacement.html#3810" class="Bound">𝓦</a><a id="3896" class="Symbol">}</a>
+ <a id="3899" href="UF.Replacement.html#3777" class="Function">Replacement-to-Replacement&#39;</a> <a id="3927" href="UF.Replacement.html#3927" class="Bound">𝓡</a> <a id="3929" class="Symbol">{_}</a> <a id="3933" class="Symbol">{</a><a id="3934" href="UF.Replacement.html#3934" class="Bound">X</a><a id="3935" class="Symbol">}</a> <a id="3937" href="UF.Replacement.html#3937" class="Bound">f</a> <a id="3939" href="UF.Replacement.html#3939" class="Bound">A-small</a> <a id="3947" href="UF.Replacement.html#3947" class="Bound">X-loc-small</a> <a id="3959" href="UF.Replacement.html#3959" class="Bound">f-surj</a>
+  <a id="3968" class="Symbol">=</a> <a id="3970" href="UF.SmallnessProperties.html#513" class="Function">smallness-closed-under-≃</a> <a id="3995" href="UF.Replacement.html#4011" class="Function">I</a> <a id="3997" href="UF.Replacement.html#4068" class="Function">II</a>
+  <a id="4002" class="Keyword">where</a>
+   <a id="4011" href="UF.Replacement.html#4011" class="Function">I</a> <a id="4013" class="Symbol">:</a> <a id="4015" href="UF.ImageAndSurjection.html#939" class="Function">image</a> <a id="4021" href="UF.Replacement.html#3937" class="Bound">f</a> <a id="4023" href="UF.Size.html#2097" class="Function Operator">is</a> <a id="4026" href="UF.Replacement.html#3085" class="Bound">𝓥</a> <a id="4028" href="UF.Size.html#2097" class="Function Operator">small</a>
+   <a id="4037" href="UF.Replacement.html#4011" class="Function">I</a> <a id="4039" class="Symbol">=</a> <a id="4041" href="UF.Replacement.html#3927" class="Bound">𝓡</a> <a id="4043" href="UF.Replacement.html#3937" class="Bound">f</a> <a id="4045" href="UF.Replacement.html#3939" class="Bound">A-small</a> <a id="4053" href="UF.Replacement.html#3947" class="Bound">X-loc-small</a>
+   <a id="4068" href="UF.Replacement.html#4068" class="Function">II</a> <a id="4071" class="Symbol">:</a> <a id="4073" href="UF.ImageAndSurjection.html#939" class="Function">image</a> <a id="4079" href="UF.Replacement.html#3937" class="Bound">f</a> <a id="4081" href="UF.Equiv.html#1318" class="Function Operator">≃</a> <a id="4083" href="UF.Replacement.html#3934" class="Bound">X</a>
+   <a id="4088" href="UF.Replacement.html#4068" class="Function">II</a> <a id="4091" class="Symbol">=</a> <a id="4093" href="UF.ImageAndSurjection.html#14512" class="Function">surjection-≃-image</a> <a id="4112" href="UF.Replacement.html#3937" class="Bound">f</a> <a id="4114" href="UF.Replacement.html#3959" class="Bound">f-surj</a>
+
+ <a id="4123" href="UF.Replacement.html#4123" class="Function">Replacement&#39;-to-Replacement</a> <a id="4151" class="Symbol">:</a> <a id="4153" class="Symbol">{</a><a id="4154" href="UF.Replacement.html#4154" class="Bound">𝓤</a> <a id="4156" href="UF.Replacement.html#4156" class="Bound">𝓦</a> <a id="4158" class="Symbol">:</a> <a id="4160" href="MLTT.Universes.html#3778" class="Postulate">Universe</a><a id="4168" class="Symbol">}</a>
+                             <a id="4199" class="Symbol">→</a> <a id="4201" href="UF.Replacement.html#3432" class="Function">Replacement&#39;</a> <a id="4214" class="Symbol">{</a><a id="4215" href="UF.Replacement.html#4154" class="Bound">𝓤</a><a id="4216" class="Symbol">}</a> <a id="4218" class="Symbol">{</a><a id="4219" href="UF.Replacement.html#4154" class="Bound">𝓤</a> <a id="4221" href="Agda.Primitive.html#961" class="Primitive Operator">⊔</a> <a id="4223" href="UF.Replacement.html#4156" class="Bound">𝓦</a><a id="4224" class="Symbol">}</a> <a id="4226" class="Symbol">→</a> <a id="4228" href="UF.Replacement.html#3107" class="Function">Replacement</a> <a id="4240" class="Symbol">{</a><a id="4241" href="UF.Replacement.html#4154" class="Bound">𝓤</a><a id="4242" class="Symbol">}</a> <a id="4244" class="Symbol">{</a><a id="4245" href="UF.Replacement.html#4156" class="Bound">𝓦</a><a id="4246" class="Symbol">}</a>
+ <a id="4249" href="UF.Replacement.html#4123" class="Function">Replacement&#39;-to-Replacement</a> <a id="4277" href="UF.Replacement.html#4277" class="Bound">𝓡&#39;</a> <a id="4280" class="Symbol">{</a><a id="4281" href="UF.Replacement.html#4281" class="Bound">A</a><a id="4282" class="Symbol">}</a> <a id="4284" class="Symbol">{</a><a id="4285" href="UF.Replacement.html#4285" class="Bound">X</a><a id="4286" class="Symbol">}</a> <a id="4288" href="UF.Replacement.html#4288" class="Bound">f</a> <a id="4290" href="UF.Replacement.html#4290" class="Bound">A-small</a> <a id="4298" href="UF.Replacement.html#4298" class="Bound">X-loc-small</a>
+  <a id="4312" class="Symbol">=</a> <a id="4314" href="UF.Replacement.html#4277" class="Bound">𝓡&#39;</a> <a id="4317" class="Symbol">(</a><a id="4318" href="UF.ImageAndSurjection.html#1131" class="Function">corestriction</a> <a id="4332" href="UF.Replacement.html#4288" class="Bound">f</a><a id="4333" class="Symbol">)</a> <a id="4335" href="UF.Replacement.html#4290" class="Bound">A-small</a> <a id="4343" href="UF.Replacement.html#4359" class="Function">I</a> <a id="4345" href="UF.Replacement.html#4457" class="Function">II</a>
+  <a id="4350" class="Keyword">where</a>
+   <a id="4359" href="UF.Replacement.html#4359" class="Function">I</a> <a id="4361" class="Symbol">:</a> <a id="4363" href="UF.ImageAndSurjection.html#939" class="Function">image</a> <a id="4369" href="UF.Replacement.html#4288" class="Bound">f</a> <a id="4371" href="UF.Size.html#30116" class="Function Operator">is-locally</a> <a id="4382" href="UF.Replacement.html#3085" class="Bound">𝓥</a> <a id="4384" href="UF.Size.html#30116" class="Function Operator">small</a>
+   <a id="4393" href="UF.Replacement.html#4359" class="Function">I</a> <a id="4395" class="Symbol">=</a> <a id="4397" href="UF.Size.html#35102" class="Function">subtype-is-locally-small&#39;</a> <a id="4423" href="UF.Replacement.html#4298" class="Bound">X-loc-small</a> <a id="4435" class="Symbol">(λ</a> <a id="4438" href="UF.Replacement.html#4438" class="Bound">-</a> <a id="4440" class="Symbol">→</a> <a id="4442" href="UF.PropTrunc.html#573" class="Field">∥∥-is-prop</a><a id="4452" class="Symbol">)</a>
+   <a id="4457" href="UF.Replacement.html#4457" class="Function">II</a> <a id="4460" class="Symbol">:</a> <a id="4462" href="UF.ImageAndSurjection.html#1587" class="Function">is-surjection</a> <a id="4476" class="Symbol">(</a><a id="4477" href="UF.ImageAndSurjection.html#1131" class="Function">corestriction</a> <a id="4491" href="UF.Replacement.html#4288" class="Bound">f</a><a id="4492" class="Symbol">)</a>
+   <a id="4497" href="UF.Replacement.html#4457" class="Function">II</a> <a id="4500" class="Symbol">=</a> <a id="4502" href="UF.ImageAndSurjection.html#1921" class="Function">corestrictions-are-surjections</a> <a id="4533" href="UF.Replacement.html#4288" class="Bound">f</a>
+
+<a id="4536" class="Markup">\end{code}</a><a id="4546" class="Background">
+</a></pre></body></html>

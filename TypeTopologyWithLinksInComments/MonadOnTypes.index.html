@@ -1,0 +1,30 @@
+<!DOCTYPE HTML>
+<html><head><meta charset="utf-8"><title>MonadOnTypes.index</title><link rel="stylesheet" href="Agda.css"></head><body><pre class="Agda"><a id="1" class="Background">Martin Escardo and Paulo Oliva, originally 2-27 July 2021, with
+generalizations and additions 2024-2026.
+
+(Wild) monads on types, with a parameter ℓ : Universe → Universe, so that we
+can have a type X in a universe 𝓤 with T X in a universe ℓ 𝓤. For
+example, for the list monad, we have ℓ 𝓤 = 𝓤, but for the powerset
+monad we have ℓ 𝓤 = 𝓤⁺.
+
+They are wild because we don&#39;t consider coherence conditions in the
+sense of HoTT/UF or higher category theory.
+
+</a><a id="455" class="Markup">\begin{code}</a>
+
+<a id="469" class="Symbol">{-#</a> <a id="473" class="Keyword">OPTIONS</a> <a id="481" class="Pragma">--safe</a> <a id="488" class="Pragma">--without-K</a> <a id="500" class="Symbol">#-}</a>
+
+<a id="505" class="Keyword">module</a> <a id="512" href="MonadOnTypes.index.html" class="Module">MonadOnTypes.index</a> <a id="531" class="Keyword">where</a>
+
+<a id="538" class="Keyword">import</a> <a id="545" href="MonadOnTypes.Definition.html" class="Module">MonadOnTypes.Definition</a>         <a id="577" class="Comment">-- (Automatically strong, wild) monads on types.</a>
+<a id="626" class="Keyword">import</a> <a id="633" href="MonadOnTypes.J.html" class="Module">MonadOnTypes.J</a>                  <a id="665" class="Comment">-- Selection monad.</a>
+<a id="685" class="Keyword">import</a> <a id="692" href="MonadOnTypes.J-transf.html" class="Module">MonadOnTypes.J-transf</a>           <a id="724" class="Comment">-- A selection monad transformer.</a>
+<a id="758" class="Keyword">import</a> <a id="765" href="MonadOnTypes.J-transf-variation.html" class="Module">MonadOnTypes.J-transf-variation</a> <a id="797" class="Comment">-- More general selection monad transformer</a>
+<a id="841" class="Keyword">import</a> <a id="848" href="MonadOnTypes.K.html" class="Module">MonadOnTypes.K</a>                  <a id="880" class="Comment">-- Continuation (or quantifier) monad.</a>
+<a id="919" class="Keyword">import</a> <a id="926" href="MonadOnTypes.JK.html" class="Module">MonadOnTypes.JK</a>                 <a id="958" class="Comment">-- Relationship between the two monads.</a>
+<a id="998" class="Keyword">import</a> <a id="1005" href="MonadOnTypes.List.html" class="Module">MonadOnTypes.List</a>               <a id="1037" class="Comment">-- The list monad.</a>
+<a id="1056" class="Keyword">import</a> <a id="1063" href="MonadOnTypes.NonEmptyList.html" class="Module">MonadOnTypes.NonEmptyList</a>       <a id="1095" class="Comment">-- The monad of non-empty lists.</a>
+<a id="1128" class="Keyword">import</a> <a id="1135" href="MonadOnTypes.Reader.html" class="Module">MonadOnTypes.Reader</a>             <a id="1167" class="Comment">-- The reader monad.</a>
+
+<a id="1189" class="Markup">\end{code}</a><a id="1199" class="Background">
+</a></pre></body></html>

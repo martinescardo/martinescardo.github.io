@@ -1,0 +1,72 @@
+<!DOCTYPE HTML>
+<html><head><meta charset="utf-8"><title>Ordinals.index</title><link rel="stylesheet" href="Agda.css"></head><body><pre class="Agda"><a id="1" class="Background">Martin Escardo, with additions by others, indicated below.
+
+</a><a id="61" class="Markup">\begin{code}</a>
+
+<a id="75" class="Symbol">{-#</a> <a id="79" class="Keyword">OPTIONS</a> <a id="87" class="Pragma">--safe</a> <a id="94" class="Pragma">--without-K</a> <a id="106" class="Symbol">#-}</a>
+
+<a id="111" class="Keyword">module</a> <a id="118" href="Ordinals.index.html" class="Module">Ordinals.index</a> <a id="133" class="Keyword">where</a>
+
+<a id="140" class="Keyword">import</a> <a id="147" href="Ordinals.AdditionProperties.html" class="Module">Ordinals.AdditionProperties</a>
+<a id="175" class="Keyword">import</a> <a id="182" href="Ordinals.Arithmetic.html" class="Module">Ordinals.Arithmetic</a>
+<a id="202" class="Keyword">import</a> <a id="209" href="Ordinals.ArithmeticReflection.html" class="Module">Ordinals.ArithmeticReflection</a>          <a id="248" class="Comment">-- by [2]</a>
+<a id="258" class="Keyword">import</a> <a id="265" href="Ordinals.BoundedOperations.html" class="Module">Ordinals.BoundedOperations</a>             <a id="304" class="Comment">-- by [2]</a>
+<a id="314" class="Keyword">import</a> <a id="321" href="Ordinals.BrouwerCodes.html" class="Module">Ordinals.BrouwerCodes</a>
+<a id="343" class="Keyword">import</a> <a id="350" href="Ordinals.BrouwerCodesInterpretations.html" class="Module">Ordinals.BrouwerCodesInterpretations</a>
+<a id="387" class="Keyword">import</a> <a id="394" href="Ordinals.BrouwerCodesVariationInterpretations.html" class="Module">Ordinals.BrouwerCodesVariationInterpretations</a>
+<a id="440" class="Keyword">import</a> <a id="447" href="Ordinals.BuraliForti.html" class="Module">Ordinals.BuraliForti</a>                   <a id="486" class="Comment">-- by [1]</a>
+<a id="496" class="Keyword">import</a> <a id="503" href="Ordinals.ChurchEncoding.html" class="Module">Ordinals.ChurchEncoding</a>
+<a id="527" class="Keyword">import</a> <a id="534" href="Ordinals.Closure.html" class="Module">Ordinals.Closure</a>
+<a id="551" class="Keyword">import</a> <a id="558" href="Ordinals.CompactnessOfSuprema.html" class="Module">Ordinals.CompactnessOfSuprema</a>
+<a id="588" class="Keyword">import</a> <a id="595" href="Ordinals.ConvergentSequence.html" class="Module">Ordinals.ConvergentSequence</a>
+<a id="623" class="Keyword">import</a> <a id="630" href="Ordinals.CumulativeHierarchy.html" class="Module">Ordinals.CumulativeHierarchy</a>           <a id="669" class="Comment">-- by [2]</a>
+<a id="679" class="Keyword">import</a> <a id="686" href="Ordinals.CumulativeHierarchy-Addendum.html" class="Module">Ordinals.CumulativeHierarchy-Addendum</a>  <a id="725" class="Comment">-- by [2]</a>
+<a id="735" class="Keyword">import</a> <a id="742" href="Ordinals.Equivalence.html" class="Module">Ordinals.Equivalence</a>
+<a id="763" class="Keyword">import</a> <a id="770" href="Ordinals.Exponentiation.index.html" class="Module">Ordinals.Exponentiation.index</a>          <a id="809" class="Comment">-- by [2]</a>
+<a id="819" class="Keyword">import</a> <a id="826" href="Ordinals.FailureOfTotalSeparatedness.html" class="Module">Ordinals.FailureOfTotalSeparatedness</a>
+<a id="863" class="Keyword">import</a> <a id="870" href="Ordinals.FailureOfTrichotomy.html" class="Module">Ordinals.FailureOfTrichotomy</a>
+<a id="899" class="Keyword">import</a> <a id="906" href="Ordinals.Fin.html" class="Module">Ordinals.Fin</a>                           <a id="945" class="Comment">-- by [5] with additions by [2]</a>
+<a id="977" class="Keyword">import</a> <a id="984" href="Ordinals.IdentifyingEquivalentOrdinals.html" class="Module">Ordinals.IdentifyingEquivalentOrdinals</a> <a id="1023" class="Comment">-- by [3]</a>
+<a id="1033" class="Keyword">import</a> <a id="1040" href="Ordinals.Indecomposable.html" class="Module">Ordinals.Indecomposable</a>
+<a id="1064" class="Keyword">import</a> <a id="1071" href="Ordinals.InductiveRecursiveCodesInterpretations.html" class="Module">Ordinals.InductiveRecursiveCodesInterpretations</a>
+<a id="1119" class="Keyword">import</a> <a id="1126" href="Ordinals.InfProperty.html" class="Module">Ordinals.InfProperty</a>
+<a id="1147" class="Keyword">import</a> <a id="1154" href="Ordinals.Injectivity.html" class="Module">Ordinals.Injectivity</a>
+<a id="1175" class="Keyword">import</a> <a id="1182" href="Ordinals.LexicographicCompactness.html" class="Module">Ordinals.LexicographicCompactness</a>
+<a id="1216" class="Keyword">import</a> <a id="1223" href="Ordinals.LexicographicOrder.html" class="Module">Ordinals.LexicographicOrder</a>
+<a id="1251" class="Keyword">import</a> <a id="1258" href="Ordinals.Limit.html" class="Module">Ordinals.Limit</a>
+<a id="1273" class="Keyword">import</a> <a id="1280" href="Ordinals.Maps.html" class="Module">Ordinals.Maps</a>
+<a id="1294" class="Keyword">import</a> <a id="1301" href="Ordinals.MultiplicationProperties.html" class="Module">Ordinals.MultiplicationProperties</a>      <a id="1340" class="Comment">-- by [2]</a>
+<a id="1350" class="Keyword">import</a> <a id="1357" href="Ordinals.NotationInterpretation.html" class="Module">Ordinals.NotationInterpretation</a>
+<a id="1389" class="Keyword">import</a> <a id="1396" href="Ordinals.Notions.html" class="Module">Ordinals.Notions</a>
+<a id="1413" class="Keyword">import</a> <a id="1420" href="Ordinals.Omega.html" class="Module">Ordinals.Omega</a>                         <a id="1459" class="Comment">-- by [2]</a>
+<a id="1469" class="Keyword">import</a> <a id="1476" href="Ordinals.OrdinalOfOrdinals.html" class="Module">Ordinals.OrdinalOfOrdinals</a>
+<a id="1503" class="Keyword">import</a> <a id="1510" href="Ordinals.OrdinalOfOrdinalsInfima.html" class="Module">Ordinals.OrdinalOfOrdinalsInfima</a>       <a id="1549" class="Comment">-- by [6]</a>
+<a id="1559" class="Keyword">import</a> <a id="1566" href="Ordinals.OrdinalOfOrdinalsSuprema.html" class="Module">Ordinals.OrdinalOfOrdinalsSuprema</a>     <a id="1604" class="Comment">-- by [3]</a>
+<a id="1614" class="Keyword">import</a> <a id="1621" href="Ordinals.OrdinalOfTruthValues.html" class="Module">Ordinals.OrdinalOfTruthValues</a>
+<a id="1651" class="Keyword">import</a> <a id="1658" href="Ordinals.Propositions.html" class="Module">Ordinals.Propositions</a>
+<a id="1680" class="Keyword">import</a> <a id="1687" href="Ordinals.ShulmanTaboo.html" class="Module">Ordinals.ShulmanTaboo</a>
+<a id="1709" class="Keyword">import</a> <a id="1716" href="Ordinals.SupSum.html" class="Module">Ordinals.SupSum</a>
+<a id="1732" class="Keyword">import</a> <a id="1739" href="Ordinals.Taboos.html" class="Module">Ordinals.Taboos</a>                        <a id="1778" class="Comment">-- by [3]</a>
+<a id="1788" class="Keyword">import</a> <a id="1795" href="Ordinals.ToppedArithmetic.html" class="Module">Ordinals.ToppedArithmetic</a>
+<a id="1821" class="Keyword">import</a> <a id="1828" href="Ordinals.ToppedType.html" class="Module">Ordinals.ToppedType</a>
+<a id="1848" class="Keyword">import</a> <a id="1855" href="Ordinals.TotallySeparated.html" class="Module">Ordinals.TotallySeparated</a>
+<a id="1881" class="Keyword">import</a> <a id="1888" href="Ordinals.TrichotomousArithmetic.html" class="Module">Ordinals.TrichotomousArithmetic</a>
+<a id="1920" class="Keyword">import</a> <a id="1927" href="Ordinals.TrichotomousType.html" class="Module">Ordinals.TrichotomousType</a>
+<a id="1953" class="Keyword">import</a> <a id="1960" href="Ordinals.Two.html" class="Module">Ordinals.Two</a>
+<a id="1973" class="Keyword">import</a> <a id="1980" href="Ordinals.Type.html" class="Module">Ordinals.Type</a>
+<a id="1994" class="Keyword">import</a> <a id="2001" href="Ordinals.Underlying.html" class="Module">Ordinals.Underlying</a>
+<a id="2021" class="Keyword">import</a> <a id="2028" href="Ordinals.WellOrderArithmetic.html" class="Module">Ordinals.WellOrderArithmetic</a>
+<a id="2057" class="Keyword">import</a> <a id="2064" href="Ordinals.WellOrderExtension.html" class="Module">Ordinals.WellOrderExtension</a>
+<a id="2092" class="Keyword">import</a> <a id="2099" href="Ordinals.WellOrderTransport.html" class="Module">Ordinals.WellOrderTransport</a>
+<a id="2127" class="Keyword">import</a> <a id="2134" href="Ordinals.WellOrderingPrinciple.html" class="Module">Ordinals.WellOrderingPrinciple</a>
+<a id="2165" class="Keyword">import</a> <a id="2172" href="Ordinals.WellOrderingTaboo.html" class="Module">Ordinals.WellOrderingTaboo</a>             <a id="2211" class="Comment">-- by [4]</a>
+
+<a id="2222" class="Markup">\end{code}</a><a id="2232" class="Background">
+
+[1] Bezem, Coquand, Dybjer and Escardo.
+[2] de Jong, Kraus, Nordvall Forsberg, and Xu.
+[3] Tom de Jong
+[4] Tom de Jong (after Andrew Swan)
+[5] Alice Laroche
+[6] Nicolai Kraus
+</a></pre></body></html>

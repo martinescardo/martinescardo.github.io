@@ -1,0 +1,91 @@
+<!DOCTYPE HTML>
+<html><head><meta charset="utf-8"><title>InfinitePigeon.J-Examples</title><link rel="stylesheet" href="Agda.css"></head><body><pre class="Agda"><a id="1" class="Background">Martin Escardo and Paulo Oliva 2011
+
+</a><a id="38" class="Markup">\begin{code}</a>
+
+<a id="52" class="Symbol">{-#</a> <a id="56" class="Keyword">OPTIONS</a> <a id="64" class="Pragma">--without-K</a> <a id="76" class="Symbol">#-}</a>
+
+<a id="81" class="Keyword">module</a> <a id="88" href="InfinitePigeon.J-Examples.html" class="Module">InfinitePigeon.J-Examples</a> <a id="114" class="Keyword">where</a>
+
+<a id="121" class="Markup">\end{code}</a><a id="131" class="Background">
+
+To perform experiments, evaluate &quot;example1&quot; or &quot;example2&quot; to normal
+form. It is easy to create your own examples.
+
+Also, if you wish, choose another implementation of the K-shift in
+the wrapper module K-Shift following the instructions, and which
+proof of the infinite pigeonhole theorem is used in the module
+FinitePigeon, by importing a different module.
+
+</a><a id="491" class="Markup">\begin{code}</a>
+
+<a id="505" class="Keyword">open</a> <a id="510" class="Keyword">import</a> <a id="517" href="InfinitePigeon.J-PigeonProgram.html" class="Module">InfinitePigeon.J-PigeonProgram</a>
+<a id="548" class="Keyword">open</a> <a id="553" class="Keyword">import</a> <a id="560" href="InfinitePigeon.Naturals.html" class="Module">InfinitePigeon.Naturals</a>
+<a id="584" class="Keyword">open</a> <a id="589" class="Keyword">import</a> <a id="596" href="InfinitePigeon.Two.html" class="Module">InfinitePigeon.Two</a>
+<a id="615" class="Keyword">open</a> <a id="620" class="Keyword">import</a> <a id="627" href="InfinitePigeon.Cantor.html" class="Module">InfinitePigeon.Cantor</a>
+<a id="649" class="Keyword">open</a> <a id="654" class="Keyword">import</a> <a id="661" href="InfinitePigeon.DataStructures.html" class="Module">InfinitePigeon.DataStructures</a>
+
+<a id="692" class="Markup">\end{code}</a><a id="702" class="Background">
+
+Some randomly chosen examples of elements of the Cantor space to
+play with:
+
+</a><a id="781" class="Markup">\begin{code}</a>
+
+<a id="α¹"></a><a id="795" href="InfinitePigeon.J-Examples.html#795" class="Function">α¹</a> <a id="798" class="Symbol">:</a> <a id="800" href="InfinitePigeon.Cantor.html#192" class="Function">₂ℕ</a>
+<a id="803" href="InfinitePigeon.J-Examples.html#795" class="Function">α¹</a> <a id="806" class="Number">0</a> <a id="808" class="Symbol">=</a> <a id="810" href="InfinitePigeon.Two.html#148" class="InductiveConstructor">₁</a>
+<a id="812" href="InfinitePigeon.J-Examples.html#795" class="Function">α¹</a><a id="814" class="Symbol">(</a><a id="815" href="MLTT.Natural-Numbers-Type.html#123" class="InductiveConstructor">succ</a> <a id="820" href="InfinitePigeon.J-Examples.html#820" class="Bound">n</a><a id="821" class="Symbol">)</a> <a id="823" class="Symbol">=</a> <a id="825" href="InfinitePigeon.Two.html#155" class="Function">not</a><a id="828" class="Symbol">(</a><a id="829" href="InfinitePigeon.J-Examples.html#795" class="Function">α¹</a> <a id="832" href="InfinitePigeon.J-Examples.html#820" class="Bound">n</a><a id="833" class="Symbol">)</a>
+
+<a id="α²"></a><a id="836" href="InfinitePigeon.J-Examples.html#836" class="Function">α²</a> <a id="839" class="Symbol">:</a> <a id="841" href="InfinitePigeon.Cantor.html#192" class="Function">₂ℕ</a>
+<a id="844" href="InfinitePigeon.J-Examples.html#836" class="Function">α²</a> <a id="847" class="Symbol">=</a> <a id="849" class="Number">0</a> <a id="851" href="InfinitePigeon.DataStructures.html#930" class="Function Operator">^</a> <a id="853" class="Number">0</a> <a id="855" href="InfinitePigeon.DataStructures.html#930" class="Function Operator">^</a> <a id="857" class="Number">0</a> <a id="859" href="InfinitePigeon.DataStructures.html#930" class="Function Operator">^</a> <a id="861" class="Number">1</a> <a id="863" href="InfinitePigeon.DataStructures.html#930" class="Function Operator">^</a> <a id="865" class="Number">1</a> <a id="867" href="InfinitePigeon.DataStructures.html#930" class="Function Operator">^</a> <a id="869" class="Number">1</a> <a id="871" href="InfinitePigeon.DataStructures.html#930" class="Function Operator">^</a> <a id="873" class="Number">1</a> <a id="875" href="InfinitePigeon.DataStructures.html#930" class="Function Operator">^</a> <a id="877" class="Number">1</a> <a id="879" href="InfinitePigeon.DataStructures.html#930" class="Function Operator">^</a> <a id="881" href="InfinitePigeon.J-Examples.html#795" class="Function">α¹</a>
+
+<a id="α³"></a><a id="885" href="InfinitePigeon.J-Examples.html#885" class="Function">α³</a> <a id="888" class="Symbol">:</a> <a id="890" href="InfinitePigeon.Cantor.html#192" class="Function">₂ℕ</a>
+<a id="893" href="InfinitePigeon.J-Examples.html#885" class="Function">α³</a> <a id="896" href="InfinitePigeon.J-Examples.html#896" class="Bound">i</a> <a id="898" class="Symbol">=</a> <a id="900" href="InfinitePigeon.Two.html#155" class="Function">not</a><a id="903" class="Symbol">(</a><a id="904" href="InfinitePigeon.J-Examples.html#836" class="Function">α²</a> <a id="907" href="InfinitePigeon.J-Examples.html#896" class="Bound">i</a><a id="908" class="Symbol">)</a>
+
+<a id="α⁴"></a><a id="911" href="InfinitePigeon.J-Examples.html#911" class="Function">α⁴</a> <a id="914" class="Symbol">:</a> <a id="916" href="InfinitePigeon.Cantor.html#192" class="Function">₂ℕ</a>
+<a id="919" href="InfinitePigeon.J-Examples.html#911" class="Function">α⁴</a> <a id="922" class="Symbol">=</a>  <a id="925" class="Number">0</a> <a id="927" href="InfinitePigeon.DataStructures.html#930" class="Function Operator">^</a> <a id="929" class="Number">1</a> <a id="931" href="InfinitePigeon.DataStructures.html#930" class="Function Operator">^</a> <a id="933" class="Number">0</a> <a id="935" href="InfinitePigeon.DataStructures.html#930" class="Function Operator">^</a> <a id="937" class="Number">1</a> <a id="939" href="InfinitePigeon.DataStructures.html#930" class="Function Operator">^</a> <a id="941" class="Number">1</a> <a id="943" href="InfinitePigeon.DataStructures.html#930" class="Function Operator">^</a> <a id="945" class="Number">0</a> <a id="947" href="InfinitePigeon.DataStructures.html#930" class="Function Operator">^</a> <a id="949" class="Number">1</a> <a id="951" href="InfinitePigeon.DataStructures.html#930" class="Function Operator">^</a> <a id="953" class="Number">1</a> <a id="955" href="InfinitePigeon.DataStructures.html#930" class="Function Operator">^</a> <a id="957" class="Number">1</a> <a id="959" href="InfinitePigeon.DataStructures.html#930" class="Function Operator">^</a> <a id="961" href="InfinitePigeon.J-Examples.html#885" class="Function">α³</a>
+
+<a id="α⁵"></a><a id="965" href="InfinitePigeon.J-Examples.html#965" class="Function">α⁵</a> <a id="968" class="Symbol">:</a> <a id="970" href="InfinitePigeon.Cantor.html#192" class="Function">₂ℕ</a>
+<a id="973" href="InfinitePigeon.J-Examples.html#965" class="Function">α⁵</a> <a id="976" class="Symbol">=</a>  <a id="979" class="Number">0</a> <a id="981" href="InfinitePigeon.DataStructures.html#930" class="Function Operator">^</a> <a id="983" class="Number">0</a> <a id="985" href="InfinitePigeon.DataStructures.html#930" class="Function Operator">^</a> <a id="987" class="Number">0</a> <a id="989" href="InfinitePigeon.DataStructures.html#930" class="Function Operator">^</a> <a id="991" class="Number">0</a> <a id="993" href="InfinitePigeon.DataStructures.html#930" class="Function Operator">^</a> <a id="995" class="Number">0</a> <a id="997" href="InfinitePigeon.DataStructures.html#930" class="Function Operator">^</a> <a id="999" class="Number">0</a> <a id="1001" href="InfinitePigeon.DataStructures.html#930" class="Function Operator">^</a> <a id="1003" class="Number">0</a> <a id="1005" href="InfinitePigeon.DataStructures.html#930" class="Function Operator">^</a> <a id="1007" class="Number">1</a> <a id="1009" href="InfinitePigeon.DataStructures.html#930" class="Function Operator">^</a> <a id="1011" href="InfinitePigeon.J-Examples.html#911" class="Function">α⁴</a>
+
+<a id="α⁶"></a><a id="1015" href="InfinitePigeon.J-Examples.html#1015" class="Function">α⁶</a> <a id="1018" class="Symbol">:</a> <a id="1020" href="InfinitePigeon.Cantor.html#192" class="Function">₂ℕ</a>
+<a id="1023" href="InfinitePigeon.J-Examples.html#1015" class="Function">α⁶</a> <a id="1026" class="Symbol">=</a>  <a id="1029" class="Number">0</a> <a id="1031" href="InfinitePigeon.DataStructures.html#930" class="Function Operator">^</a> <a id="1033" class="Number">1</a> <a id="1035" href="InfinitePigeon.DataStructures.html#930" class="Function Operator">^</a> <a id="1037" class="Number">1</a> <a id="1039" href="InfinitePigeon.DataStructures.html#930" class="Function Operator">^</a> <a id="1041" class="Number">0</a> <a id="1043" href="InfinitePigeon.DataStructures.html#930" class="Function Operator">^</a> <a id="1045" class="Number">0</a> <a id="1047" href="InfinitePigeon.DataStructures.html#930" class="Function Operator">^</a> <a id="1049" class="Number">0</a> <a id="1051" href="InfinitePigeon.DataStructures.html#930" class="Function Operator">^</a> <a id="1053" class="Number">1</a> <a id="1055" href="InfinitePigeon.DataStructures.html#930" class="Function Operator">^</a> <a id="1057" class="Number">0</a> <a id="1059" href="InfinitePigeon.DataStructures.html#930" class="Function Operator">^</a> <a id="1061" class="Number">1</a> <a id="1063" href="InfinitePigeon.DataStructures.html#930" class="Function Operator">^</a> <a id="1065" class="Number">0</a> <a id="1067" href="InfinitePigeon.DataStructures.html#930" class="Function Operator">^</a> <a id="1069" class="Number">0</a> <a id="1071" href="InfinitePigeon.DataStructures.html#930" class="Function Operator">^</a> <a id="1073" class="Number">0</a> <a id="1075" href="InfinitePigeon.DataStructures.html#930" class="Function Operator">^</a> <a id="1077" class="Number">0</a> <a id="1079" href="InfinitePigeon.DataStructures.html#930" class="Function Operator">^</a> <a id="1081" href="InfinitePigeon.J-Examples.html#965" class="Function">α⁵</a>
+
+<a id="1085" class="Markup">\end{code}</a><a id="1095" class="Background">
+
+To run an experiment, normalize the term &quot;pigeon-program α m&quot; for
+suitable α and m:
+
+</a><a id="1182" class="Markup">\begin{code}</a>
+
+<a id="example1"></a><a id="1196" href="InfinitePigeon.J-Examples.html#1196" class="Function">example1</a> <a id="1205" class="Symbol">:</a> <a id="1207" href="InfinitePigeon.Two.html#126" class="Datatype">₂</a> <a id="1209" href="InfinitePigeon.DataStructures.html#731" class="Datatype Operator">×</a> <a id="1211" href="InfinitePigeon.DataStructures.html#380" class="Datatype">List</a> <a id="1216" href="MLTT.Natural-Numbers-Type.html#96" class="Datatype">ℕ</a>
+<a id="1218" href="InfinitePigeon.J-Examples.html#1196" class="Function">example1</a> <a id="1227" class="Symbol">=</a> <a id="1229" href="InfinitePigeon.J-PigeonProgram.html#832" class="Function">pigeon-program</a> <a id="1244" href="InfinitePigeon.J-Examples.html#965" class="Function">α⁵</a> <a id="1247" class="Number">6</a>
+
+<a id="example2"></a><a id="1250" href="InfinitePigeon.J-Examples.html#1250" class="Function">example2</a> <a id="1259" class="Symbol">:</a> <a id="1261" href="InfinitePigeon.Two.html#126" class="Datatype">₂</a> <a id="1263" href="InfinitePigeon.DataStructures.html#731" class="Datatype Operator">×</a> <a id="1265" href="InfinitePigeon.DataStructures.html#380" class="Datatype">List</a> <a id="1270" href="MLTT.Natural-Numbers-Type.html#96" class="Datatype">ℕ</a>
+<a id="1272" href="InfinitePigeon.J-Examples.html#1250" class="Function">example2</a> <a id="1281" class="Symbol">=</a> <a id="1283" href="InfinitePigeon.J-PigeonProgram.html#832" class="Function">pigeon-program</a> <a id="1298" href="InfinitePigeon.J-Examples.html#965" class="Function">α⁵</a> <a id="1301" class="Number">12</a>
+
+<a id="1305" class="Markup">\end{code}</a><a id="1315" class="Background">
+
+Alternatively, calculate b and s using the Theorem:
+
+</a><a id="1370" class="Markup">\begin{code}</a>
+
+<a id="1384" class="Keyword">open</a> <a id="1389" class="Keyword">import</a> <a id="1396" href="InfinitePigeon.Addition.html" class="Module">InfinitePigeon.Addition</a>
+<a id="1420" class="Keyword">open</a> <a id="1425" class="Keyword">import</a> <a id="1432" href="InfinitePigeon.Finite.html" class="Module">InfinitePigeon.Finite</a>
+<a id="1454" class="Keyword">open</a> <a id="1459" class="Keyword">import</a> <a id="1466" href="InfinitePigeon.FinitePigeon.html" class="Module">InfinitePigeon.FinitePigeon</a>
+<a id="1494" class="Keyword">open</a> <a id="1499" class="Keyword">import</a> <a id="1506" href="InfinitePigeon.Logic.html" class="Module">InfinitePigeon.Logic</a>
+
+<a id="b"></a><a id="1528" href="InfinitePigeon.J-Examples.html#1528" class="Function">b</a> <a id="1530" class="Symbol">:</a> <a id="1532" href="InfinitePigeon.Two.html#126" class="Datatype">₂</a>
+<a id="1534" href="InfinitePigeon.J-Examples.html#1528" class="Function">b</a> <a id="1536" class="Symbol">=</a> <a id="1538" href="InfinitePigeon.Logic.html#1252" class="Function">∃-witness</a><a id="1547" class="Symbol">(</a><a id="1548" href="InfinitePigeon.FinitePigeon.html#2843" class="Function">Theorem</a> <a id="1556" href="InfinitePigeon.J-Examples.html#965" class="Function">α⁵</a> <a id="1559" class="Number">12</a><a id="1561" class="Symbol">)</a>
+
+<a id="s"></a><a id="1564" href="InfinitePigeon.J-Examples.html#1564" class="Function">s</a> <a id="1566" class="Symbol">:</a> <a id="1568" href="InfinitePigeon.Finite.html#356" class="Datatype">smaller</a><a id="1575" class="Symbol">(</a><a id="1576" class="Number">12</a> <a id="1579" href="InfinitePigeon.Addition.html#528" class="Function Operator">+</a> <a id="1581" class="Number">1</a><a id="1582" class="Symbol">)</a> <a id="1584" class="Symbol">→</a> <a id="1586" href="MLTT.Natural-Numbers-Type.html#96" class="Datatype">ℕ</a>
+<a id="1588" href="InfinitePigeon.J-Examples.html#1564" class="Function">s</a> <a id="1590" class="Symbol">=</a> <a id="1592" href="InfinitePigeon.Logic.html#1252" class="Function">∃-witness</a><a id="1601" class="Symbol">(</a><a id="1602" href="InfinitePigeon.Logic.html#1340" class="Function">∃-elim</a><a id="1608" class="Symbol">(</a><a id="1609" href="InfinitePigeon.FinitePigeon.html#2843" class="Function">Theorem</a> <a id="1617" href="InfinitePigeon.J-Examples.html#965" class="Function">α⁵</a> <a id="1620" class="Number">12</a><a id="1622" class="Symbol">))</a>
+
+<a id="1626" class="Markup">\end{code}</a><a id="1636" class="Background">
+
+Warning: depending on the example you build, and on the chosen
+proof term for the K-shift, this module will take a long time to
+compile (and then to run) when this alternative code is
+enabled. The term &quot;pigeon-program&quot; defined in the module
+PigeonProgram avoids the long compilation time.
+</a></pre></body></html>

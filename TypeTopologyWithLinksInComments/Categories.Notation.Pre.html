@@ -1,0 +1,36 @@
+<!DOCTYPE HTML>
+<html><head><meta charset="utf-8"><title>Categories.Notation.Pre</title><link rel="stylesheet" href="Agda.css"></head><body><pre class="Agda"><a id="1" class="Background">Anna Williams 29 January 2026
+
+</a><a id="32" class="Markup">\begin{code}</a>
+
+<a id="46" class="Symbol">{-#</a> <a id="50" class="Keyword">OPTIONS</a> <a id="58" class="Pragma">--safe</a> <a id="65" class="Pragma">--without-K</a> <a id="77" class="Symbol">#-}</a>
+
+<a id="82" class="Keyword">open</a> <a id="87" class="Keyword">import</a> <a id="94" href="MLTT.Spartan.html" class="Module">MLTT.Spartan</a>
+<a id="107" class="Keyword">open</a> <a id="112" class="Keyword">import</a> <a id="119" href="Categories.Pre.html" class="Module">Categories.Pre</a>
+<a id="134" class="Keyword">open</a> <a id="139" class="Keyword">import</a> <a id="146" href="Notation.UnderlyingType.html" class="Module">Notation.UnderlyingType</a>
+
+<a id="171" class="Keyword">module</a> <a id="178" href="Categories.Notation.Pre.html" class="Module">Categories.Notation.Pre</a> <a id="202" class="Keyword">where</a>
+
+<a id="209" class="Keyword">open</a> <a id="214" class="Keyword">import</a> <a id="221" href="Categories.Notation.Wild.html" class="Module">Categories.Notation.Wild</a> <a id="246" class="Keyword">public</a>
+
+<a id="254" class="Keyword">module</a> <a id="261" href="Categories.Notation.Pre.html#261" class="Module">_</a> <a id="263" class="Symbol">{</a><a id="264" href="Categories.Notation.Pre.html#264" class="Bound">𝓤</a> <a id="266" href="Categories.Notation.Pre.html#266" class="Bound">𝓥</a> <a id="268" class="Symbol">:</a> <a id="270" href="MLTT.Universes.html#3778" class="Postulate">Universe</a><a id="278" class="Symbol">}</a> <a id="280" class="Keyword">where</a>
+ <a id="287" class="Keyword">record</a> <a id="294" href="Categories.Notation.Pre.html#294" class="Record">PrecatNotation</a> <a id="309" class="Symbol">(</a><a id="310" href="Categories.Notation.Pre.html#310" class="Bound">P</a> <a id="312" class="Symbol">:</a> <a id="314" href="Categories.Pre.html#996" class="Function">Precategory</a> <a id="326" href="Categories.Notation.Pre.html#264" class="Bound">𝓤</a> <a id="328" href="Categories.Notation.Pre.html#266" class="Bound">𝓥</a><a id="329" class="Symbol">)</a> <a id="331" class="Symbol">:</a> <a id="333" href="Categories.Notation.Pre.html#264" class="Bound">𝓤</a> <a id="335" href="Agda.Primitive.html#961" class="Primitive Operator">⊔</a> <a id="337" href="Categories.Notation.Pre.html#266" class="Bound">𝓥</a> <a id="339" href="MLTT.Universes.html#4011" class="Function Operator">̇</a> <a id="341" class="Keyword">where</a>
+  <a id="349" class="Keyword">open</a> <a id="354" href="Categories.Notation.Wild.html#3157" class="Module">WildCategoryNotation</a> <a id="375" href="Notation.UnderlyingType.html#272" class="Field Operator">⟨</a> <a id="377" href="Categories.Notation.Pre.html#310" class="Bound">P</a> <a id="379" href="Notation.UnderlyingType.html#272" class="Field Operator">⟩</a>
+
+  <a id="384" class="Keyword">field</a>
+   <a id="393" href="Categories.Notation.Pre.html#393" class="Field">to-≅-＝</a> <a id="400" class="Symbol">:</a> <a id="402" class="Symbol">{</a><a id="403" href="Categories.Notation.Pre.html#403" class="Bound">a</a> <a id="405" href="Categories.Notation.Pre.html#405" class="Bound">b</a> <a id="407" class="Symbol">:</a> <a id="409" href="Categories.Notation.Wild.html#508" class="Field">obj</a> <a id="413" href="Categories.Notation.Pre.html#310" class="Bound">P</a><a id="414" class="Symbol">}</a>
+           <a id="427" class="Symbol">→</a> <a id="429" class="Symbol">{</a><a id="430" href="Categories.Notation.Pre.html#430" class="Bound">f</a> <a id="432" href="Categories.Notation.Pre.html#432" class="Bound">f&#39;</a> <a id="435" class="Symbol">:</a> <a id="437" href="Categories.Notation.Pre.html#403" class="Bound">a</a> <a id="439" href="Categories.Notation.Wild.html#2677" class="Field Operator">≅</a> <a id="441" href="Categories.Notation.Pre.html#405" class="Bound">b</a><a id="442" class="Symbol">}</a>
+           <a id="455" class="Symbol">→</a> <a id="457" href="Categories.Notation.Wild.html#2706" class="Field Operator">⌜</a> <a id="459" href="Categories.Notation.Pre.html#430" class="Bound">f</a> <a id="461" href="Categories.Notation.Wild.html#2706" class="Field Operator">⌝</a> <a id="463" href="MLTT.Id.html#193" class="Datatype Operator">＝</a> <a id="465" href="Categories.Notation.Wild.html#2706" class="Field Operator">⌜</a> <a id="467" href="Categories.Notation.Pre.html#432" class="Bound">f&#39;</a> <a id="470" href="Categories.Notation.Wild.html#2706" class="Field Operator">⌝</a>
+           <a id="483" class="Symbol">→</a> <a id="485" href="Categories.Notation.Pre.html#430" class="Bound">f</a> <a id="487" href="MLTT.Id.html#193" class="Datatype Operator">＝</a> <a id="489" href="Categories.Notation.Pre.html#432" class="Bound">f&#39;</a>
+
+ <a id="494" class="Keyword">open</a> <a id="499" href="Categories.Notation.Pre.html#294" class="Module">PrecatNotation</a> <a id="514" class="Symbol">{{...}}</a> <a id="522" class="Keyword">public</a>
+
+<a id="530" class="Keyword">module</a> <a id="PrecategoryNotation"></a><a id="537" href="Categories.Notation.Pre.html#537" class="Module">PrecategoryNotation</a> <a id="557" class="Symbol">{</a><a id="558" href="Categories.Notation.Pre.html#558" class="Bound">𝓤</a> <a id="560" href="Categories.Notation.Pre.html#560" class="Bound">𝓥</a> <a id="562" class="Symbol">:</a> <a id="564" href="MLTT.Universes.html#3778" class="Postulate">Universe</a><a id="572" class="Symbol">}</a> <a id="574" class="Symbol">(</a><a id="575" href="Categories.Notation.Pre.html#575" class="Bound">P</a> <a id="577" class="Symbol">:</a> <a id="579" href="Categories.Pre.html#996" class="Function">Precategory</a> <a id="591" href="Categories.Notation.Pre.html#558" class="Bound">𝓤</a> <a id="593" href="Categories.Notation.Pre.html#560" class="Bound">𝓥</a><a id="594" class="Symbol">)</a> <a id="596" class="Keyword">where</a>
+ <a id="603" class="Keyword">instance</a>
+  <a id="PrecategoryNotation.precat-not"></a><a id="614" href="Categories.Notation.Pre.html#614" class="Function">precat-not</a> <a id="625" class="Symbol">:</a> <a id="627" href="Categories.Notation.Pre.html#294" class="Record">PrecatNotation</a> <a id="642" href="Categories.Notation.Pre.html#575" class="Bound">P</a>
+  <a id="646" href="Categories.Notation.Pre.html#393" class="Field">to-≅-＝</a> <a id="653" class="Symbol">{{</a><a id="655" href="Categories.Notation.Pre.html#614" class="Function">precat-not</a><a id="665" class="Symbol">}}</a> <a id="668" class="Symbol">=</a> <a id="670" href="Categories.Pre.html#3236" class="Function">isomorphism-properties.to-≅-＝</a> <a id="700" href="Categories.Notation.Pre.html#575" class="Bound">P</a>
+
+ <a id="704" class="Keyword">open</a> <a id="709" href="Categories.Notation.Wild.html#3157" class="Module">WildCategoryNotation</a> <a id="730" href="Notation.UnderlyingType.html#272" class="Field Operator">⟨</a> <a id="732" href="Categories.Notation.Pre.html#575" class="Bound">P</a> <a id="734" href="Notation.UnderlyingType.html#272" class="Field Operator">⟩</a> <a id="736" class="Keyword">public</a>
+
+<a id="744" class="Markup">\end{code}</a><a id="754" class="Background">
+</a></pre></body></html>

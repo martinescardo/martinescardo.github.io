@@ -1,0 +1,62 @@
+<!DOCTYPE HTML>
+<html><head><meta charset="utf-8"><title>C-Spaces.UsingNotNotFunExt.index</title><link rel="stylesheet" href="Agda.css"></head><body><pre class="Agda"><a id="1" class="Background">Chuangjie Xu 2025 (ported to TypeTopology in 2026)
+
+By adding a suitable probe axiom, the double negation of function
+extensionality becomes sufficient for developing the theory of C-spaces.
+
+This module serves as the entry point to the branch of the C-space development
+that assumes `¬¬ FunExt` as an explicit parameter, making each use of that
+assumption visible in the Agda code.
+
+Although the double negation of function extensionality is not derivable
+in Spartan MLTT, it occurs only under negation. Assuming it therefore does not
+compromise the computational content of the development. In particular, moduli
+of uniform continuity extracted from the interpretation of System-T–definable
+functions in C-spaces can still normalize to numerals as closed Agda terms.
+
+</a><a id="771" class="Markup">\begin{code}</a>
+
+<a id="785" class="Symbol">{-#</a> <a id="789" class="Keyword">OPTIONS</a> <a id="797" class="Pragma">--safe</a> <a id="804" class="Pragma">--without-K</a> <a id="816" class="Symbol">#-}</a>
+
+<a id="821" class="Keyword">module</a> <a id="828" href="C-Spaces.UsingNotNotFunExt.index.html" class="Module">C-Spaces.UsingNotNotFunExt.index</a> <a id="861" class="Keyword">where</a>
+
+<a id="868" class="Markup">\end{code}</a><a id="878" class="Background">
+
+The first group of imports develops the category of C-spaces and its basic
+structure.
+
+</a><a id="967" class="Markup">\begin{code}</a>
+
+<a id="981" class="Keyword">import</a> <a id="988" href="C-Spaces.UsingNotNotFunExt.Space.html" class="Module">C-Spaces.UsingNotNotFunExt.Space</a>
+<a id="1021" class="Keyword">import</a> <a id="1028" href="C-Spaces.UsingNotNotFunExt.CartesianClosedness.html" class="Module">C-Spaces.UsingNotNotFunExt.CartesianClosedness</a>
+<a id="1075" class="Keyword">import</a> <a id="1082" href="C-Spaces.UsingNotNotFunExt.DiscreteSpace.html" class="Module">C-Spaces.UsingNotNotFunExt.DiscreteSpace</a>
+
+<a id="1124" class="Markup">\end{code}</a><a id="1134" class="Background">
+
+The next group of imports constructs the Fan functional, which continuously
+computes least moduli of uniform continuity.
+
+</a><a id="1258" class="Markup">\begin{code}</a>
+
+<a id="1272" class="Keyword">import</a> <a id="1279" href="C-Spaces.UsingNotNotFunExt.YonedaLemma.html" class="Module">C-Spaces.UsingNotNotFunExt.YonedaLemma</a>
+<a id="1318" class="Keyword">import</a> <a id="1325" href="C-Spaces.UsingNotNotFunExt.Fan.html" class="Module">C-Spaces.UsingNotNotFunExt.Fan</a>
+
+<a id="1357" class="Markup">\end{code}</a><a id="1367" class="Background">
+
+The following module validates the uniform-continuity principle in System T.
+
+</a><a id="1447" class="Markup">\begin{code}</a>
+
+<a id="1461" class="Keyword">import</a> <a id="1468" href="C-Spaces.UsingNotNotFunExt.UCinT.html" class="Module">C-Spaces.UsingNotNotFunExt.UCinT</a>
+
+<a id="1502" class="Markup">\end{code}</a><a id="1512" class="Background">
+
+Finally, the computation experiment records explicit examples in which the
+extracted moduli do normalize to numerals as closed Agda terms.
+
+</a><a id="1654" class="Markup">\begin{code}</a>
+
+<a id="1668" class="Keyword">import</a> <a id="1675" href="C-Spaces.UsingNotNotFunExt.ComputationExperiments.html" class="Module">C-Spaces.UsingNotNotFunExt.ComputationExperiments</a>
+
+<a id="1726" class="Markup">\end{code}</a><a id="1736" class="Background">
+</a></pre></body></html>
