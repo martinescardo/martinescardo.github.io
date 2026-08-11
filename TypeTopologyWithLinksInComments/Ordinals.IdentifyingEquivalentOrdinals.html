@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html><head><meta charset="utf-8"><title>Ordinals.IdentifyingEquivalentOrdinals</title><link rel="stylesheet" href="Agda.css"></head><body><pre class="Agda"><a id="1" class="Background">Written 26 March 2023 by Tom de Jong, following a discussion with Nicolai Kraus
+<html><head><meta charset="utf-8"><title>Ordinals.IdentifyingEquivalentOrdinals</title><link rel="stylesheet" href="Agda.css"></head><body><pre class="Agda"><span id="1" class="Background">Written 26 March 2023 by Tom de Jong, following a discussion with Nicolai Kraus
 on 24 March 2023, but not completed and merged into TypeTopology master then.
 Revisited and updated on 17 February 2026.
 
@@ -7,7 +7,7 @@ Revisited and updated on 17 February 2026.
 We show that having an identification of the ordinals (𝟚 , ₀ ≺ ₁) and
 (𝟚 , ₁ ≺ ₀) contradicts the K-axiom. It follows that preunivalence, while
 sufficient to show that the type of ordinals is a set
-(cf. Ordinal-is-set-under-preunivalence in Ordinals.Equivalence), is not enough
+(cf. Ordinal-is-set-under-preunivalence in <a href="Ordinals.Equivalence.html">Ordinals.Equivalence</a>), is not enough
 to show that the simulation ordering on the type of ordinals is
 antisymmetric. Indeed, the ordinals (𝟚 , ₀ ≺ ₁) and (𝟚 , ₁ ≺ ₀) are equivalent,
 while preunivalence is derivable from the K-axiom.
@@ -38,7 +38,7 @@ K-axiom, applying idtoeq to any such element always yields the identity map.
 Hence, the commutativity of the diagram then tells us that identifying α and β
 must contradict the K-axiom.
 
-</a><a id="1773" class="Markup">\begin{code}</a>
+</span><a id="1773" class="Markup">\begin{code}</a>
 
 <a id="1787" class="Symbol">{-#</a> <a id="1791" class="Keyword">OPTIONS</a> <a id="1799" class="Pragma">--safe</a> <a id="1806" class="Pragma">--without-K</a> <a id="1818" class="Symbol">#-}</a>
 
@@ -110,15 +110,15 @@ Note that it is equivalent to 𝟙ₒ +ₒ 𝟙ₒ, but we prefer to work direct
    <a id="3271" href="Ordinals.IdentifyingEquivalentOrdinals.html#3132" class="Function">t</a> <a id="3273" href="MLTT.Two.html#147" class="InductiveConstructor">₁</a> <a id="3275" href="MLTT.Two.html#140" class="InductiveConstructor">₀</a> <a id="3277" href="MLTT.Two.html#147" class="InductiveConstructor">₁</a> <a id="3279" href="Ordinals.IdentifyingEquivalentOrdinals.html#3279" class="Bound">k</a> <a id="3281" href="Ordinals.IdentifyingEquivalentOrdinals.html#3281" class="Bound">l</a> <a id="3283" class="Symbol">=</a> <a id="3285" href="Ordinals.IdentifyingEquivalentOrdinals.html#3279" class="Bound">k</a>
    <a id="3290" href="Ordinals.IdentifyingEquivalentOrdinals.html#3132" class="Function">t</a> <a id="3292" href="MLTT.Two.html#147" class="InductiveConstructor">₁</a> <a id="3294" href="MLTT.Two.html#147" class="InductiveConstructor">₁</a> <a id="3296" href="MLTT.Two.html#147" class="InductiveConstructor">₁</a> <a id="3298" href="Ordinals.IdentifyingEquivalentOrdinals.html#3298" class="Bound">k</a> <a id="3300" href="Ordinals.IdentifyingEquivalentOrdinals.html#3300" class="Bound">l</a> <a id="3302" class="Symbol">=</a> <a id="3304" href="Ordinals.IdentifyingEquivalentOrdinals.html#3300" class="Bound">l</a>
 
-<a id="3307" class="Markup">\end{code}</a><a id="3317" class="Background">
+<a id="3307" class="Markup">\end{code}</a><span id="3317" class="Background">
 
 We now construct the ordinal 𝟚₀&#39; = (𝟚 , ₁ ≺ ₀).
 There is some repetition of code which we could avoid by using
-transport-well-order (on the complement map) from Ordinals.WellOrderTransport,
+transport-well-order (on the complement map) from <a href="Ordinals.WellOrderTransport.html">Ordinals.WellOrderTransport</a>,
 but that module requires function extensionality which we prefer not to assume
 here for foundational minimalism.
 
-</a><a id="3623" class="Markup">\begin{code}</a>
+</span><a id="3623" class="Markup">\begin{code}</a>
 
  <a id="𝟚ₒ&#39;"></a><a id="3638" href="Ordinals.IdentifyingEquivalentOrdinals.html#3638" class="Function">𝟚ₒ&#39;</a> <a id="3642" class="Symbol">:</a> <a id="3644" href="Ordinals.Type.html#600" class="Function">Ordinal</a> <a id="3652" href="MLTT.Universes.html#3731" class="Primitive">𝓤₀</a>
  <a id="3656" href="Ordinals.IdentifyingEquivalentOrdinals.html#3638" class="Function">𝟚ₒ&#39;</a> <a id="3660" class="Symbol">=</a> <a id="3662" href="MLTT.Two.html#124" class="Datatype">𝟚</a> <a id="3664" href="MLTT.Sigma.html#395" class="InductiveConstructor Operator">,</a> <a id="3666" class="Symbol">(</a><a id="3667" href="Ordinals.IdentifyingEquivalentOrdinals.html#3699" class="Function Operator">_≺_</a> <a id="3671" href="MLTT.Sigma.html#395" class="InductiveConstructor Operator">,</a> <a id="3673" href="Ordinals.IdentifyingEquivalentOrdinals.html#3773" class="Function">p</a> <a id="3675" href="MLTT.Sigma.html#395" class="InductiveConstructor Operator">,</a> <a id="3677" href="Ordinals.IdentifyingEquivalentOrdinals.html#3883" class="Function">w</a> <a id="3679" href="MLTT.Sigma.html#395" class="InductiveConstructor Operator">,</a> <a id="3681" href="Ordinals.IdentifyingEquivalentOrdinals.html#4137" class="Function">e</a> <a id="3683" href="MLTT.Sigma.html#395" class="InductiveConstructor Operator">,</a> <a id="3685" href="Ordinals.IdentifyingEquivalentOrdinals.html#4263" class="Function">t</a><a id="3686" class="Symbol">)</a>
@@ -251,14 +251,14 @@ As announced, identifying the ordinals 𝟚₀ and 𝟚ₒ&#39; contradicts the 
       <a id="7221" href="Ordinals.IdentifyingEquivalentOrdinals.html#6757" class="Function">f&#39;</a> <a id="7224" href="MLTT.Two.html#140" class="InductiveConstructor">₀</a>                  <a id="7243" href="MLTT.Id.html#2702" class="Function Operator">＝⟨</a> <a id="7246" href="Ordinals.IdentifyingEquivalentOrdinals.html#6900" class="Function">II</a> <a id="7249" href="MLTT.Two.html#140" class="InductiveConstructor">₀</a> <a id="7251" href="MLTT.Id.html#2702" class="Function Operator">⟩</a>
       <a id="7259" href="MLTT.Two.html#147" class="InductiveConstructor">₁</a>                     <a id="7281" href="MLTT.Id.html#2784" class="Function Operator">∎</a><a id="7282" class="Symbol">)</a>
 
-<a id="7285" class="Markup">\end{code}</a><a id="7295" class="Background">
+<a id="7285" class="Markup">\end{code}</a><span id="7295" class="Background">
 
 In particular, antisymmetry of the simulation preorder contradicts the K-axiom.
 Note that we copied the definition of the simulation preorder ⊴ here from
-Ordinals.OrdinalOfOrdinals since that module assumes univalence which we wish to
+<a href="Ordinals.OrdinalOfOrdinals.html">Ordinals.OrdinalOfOrdinals</a> since that module assumes univalence which we wish to
 avoid here.
 
-</a><a id="7545" class="Markup">\begin{code}</a>
+</span><a id="7545" class="Markup">\begin{code}</a>
 
  <a id="_⊴_"></a><a id="7560" href="Ordinals.IdentifyingEquivalentOrdinals.html#7560" class="Function Operator">_⊴_</a> <a id="7564" class="Symbol">:</a> <a id="7566" href="Ordinals.Type.html#600" class="Function">Ordinal</a> <a id="7574" href="MLTT.Universes.html#3833" class="Generalizable">𝓤</a> <a id="7576" class="Symbol">→</a> <a id="7578" href="Ordinals.Type.html#600" class="Function">Ordinal</a> <a id="7586" href="MLTT.Universes.html#3835" class="Generalizable">𝓥</a> <a id="7588" class="Symbol">→</a> <a id="7590" href="MLTT.Universes.html#3833" class="Generalizable">𝓤</a> <a id="7592" href="Agda.Primitive.html#961" class="Primitive Operator">⊔</a> <a id="7594" href="MLTT.Universes.html#3835" class="Generalizable">𝓥</a> <a id="7596" href="MLTT.Universes.html#4011" class="Function Operator">̇</a>
  <a id="7599" href="Ordinals.IdentifyingEquivalentOrdinals.html#7599" class="Bound">α</a> <a id="7601" href="Ordinals.IdentifyingEquivalentOrdinals.html#7560" class="Function Operator">⊴</a> <a id="7603" href="Ordinals.IdentifyingEquivalentOrdinals.html#7603" class="Bound">β</a> <a id="7605" class="Symbol">=</a> <a id="7607" href="MLTT.Sigma.html#423" class="Function">Σ</a> <a id="7609" href="Ordinals.IdentifyingEquivalentOrdinals.html#7609" class="Bound">f</a> <a id="7611" href="MLTT.Sigma.html#423" class="Function">꞉</a> <a id="7613" class="Symbol">(</a><a id="7614" href="Ordinals.Underlying.html#315" class="Field Operator">⟨</a> <a id="7616" href="Ordinals.IdentifyingEquivalentOrdinals.html#7599" class="Bound">α</a> <a id="7618" href="Ordinals.Underlying.html#315" class="Field Operator">⟩</a> <a id="7620" class="Symbol">→</a> <a id="7622" href="Ordinals.Underlying.html#315" class="Field Operator">⟨</a> <a id="7624" href="Ordinals.IdentifyingEquivalentOrdinals.html#7603" class="Bound">β</a> <a id="7626" href="Ordinals.Underlying.html#315" class="Field Operator">⟩</a><a id="7627" class="Symbol">)</a> <a id="7629" href="MLTT.Sigma.html#423" class="Function">,</a> <a id="7631" href="Ordinals.Maps.html#664" class="Function">is-simulation</a> <a id="7645" href="Ordinals.IdentifyingEquivalentOrdinals.html#7599" class="Bound">α</a> <a id="7647" href="Ordinals.IdentifyingEquivalentOrdinals.html#7603" class="Bound">β</a> <a id="7649" href="Ordinals.IdentifyingEquivalentOrdinals.html#7609" class="Bound">f</a>
@@ -279,18 +279,18 @@ avoid here.
      <a id="8110" href="Ordinals.IdentifyingEquivalentOrdinals.html#8110" class="Function">I₂</a> <a id="8113" class="Symbol">:</a> <a id="8115" href="Ordinals.IdentifyingEquivalentOrdinals.html#3638" class="Function">𝟚ₒ&#39;</a> <a id="8119" href="Ordinals.IdentifyingEquivalentOrdinals.html#7560" class="Function Operator">⊴</a> <a id="8121" href="Ordinals.IdentifyingEquivalentOrdinals.html#2509" class="Function">𝟚ₒ</a>
      <a id="8129" href="Ordinals.IdentifyingEquivalentOrdinals.html#8110" class="Function">I₂</a> <a id="8132" class="Symbol">=</a> <a id="8134" class="Symbol">(</a><a id="8135" href="MLTT.Two-Properties.html#3573" class="Function">complement</a> <a id="8146" href="MLTT.Sigma.html#395" class="InductiveConstructor Operator">,</a> <a id="8148" href="Ordinals.Equivalence.html#5122" class="Function">order-equivs-are-simulations</a> <a id="8177" href="Ordinals.IdentifyingEquivalentOrdinals.html#3638" class="Function">𝟚ₒ&#39;</a> <a id="8181" href="Ordinals.IdentifyingEquivalentOrdinals.html#2509" class="Function">𝟚ₒ</a> <a id="8184" href="MLTT.Two-Properties.html#3573" class="Function">complement</a>
                           <a id="8221" class="Symbol">(</a><a id="8222" href="MLTT.Sigma-Type.html#209" class="Field">pr₂</a> <a id="8226" class="Symbol">(</a><a id="8227" href="Ordinals.Equivalence.html#4680" class="Function">≃ₒ-sym</a> <a id="8234" href="Ordinals.IdentifyingEquivalentOrdinals.html#2509" class="Function">𝟚ₒ</a> <a id="8237" href="Ordinals.IdentifyingEquivalentOrdinals.html#3638" class="Function">𝟚ₒ&#39;</a> <a id="8241" class="Symbol">(</a><a id="8242" href="Ordinals.IdentifyingEquivalentOrdinals.html#4596" class="Function">𝟚ₒ-≃ₒ-𝟚ₒ&#39;</a><a id="8251" class="Symbol">))))</a>
-<a id="8256" class="Markup">\end{code}</a><a id="8266" class="Background">
+<a id="8256" class="Markup">\end{code}</a><span id="8266" class="Background">
 
 Finally, we show that preunivalence cannot prove that ⊴ is antisymmetric.
 The argument uses that the K-axiom is not false (in the absence of univalence),
 but of course it is not provable either, so we add ¬¬ K-axiom as a hypothesis.
 
 We also need a small technical lemma, K-axiom-lower, that is perhaps better
-placed in UF.Sets-Properties which it can&#39;t right now because of cyclic module
+placed in <a href="UF.Sets-Properties.html">UF.Sets-Properties</a> which it can&#39;t right now because of cyclic module
 dependencies (which we could avoid by replacing ≃-Lift with an inline
 construction).
 
-</a><a id="8743" class="Markup">\begin{code}</a>
+</span><a id="8743" class="Markup">\begin{code}</a>
 
 <a id="K-axiom-lower"></a><a id="8757" href="Ordinals.IdentifyingEquivalentOrdinals.html#8757" class="Function">K-axiom-lower</a> <a id="8771" class="Symbol">:</a> <a id="8773" href="UF.Sets.html#2309" class="Function">K-axiom</a> <a id="8781" class="Symbol">(</a><a id="8782" href="MLTT.Universes.html#3833" class="Generalizable">𝓤</a> <a id="8784" href="MLTT.Universes.html#3754" class="Primitive Operator">⁺</a><a id="8785" class="Symbol">)</a> <a id="8787" class="Symbol">→</a> <a id="8789" href="UF.Sets.html#2309" class="Function">K-axiom</a> <a id="8797" href="MLTT.Universes.html#3833" class="Generalizable">𝓤</a>
 <a id="8799" href="Ordinals.IdentifyingEquivalentOrdinals.html#8757" class="Function">K-axiom-lower</a> <a id="8813" class="Symbol">{</a><a id="8814" href="Ordinals.IdentifyingEquivalentOrdinals.html#8814" class="Bound">𝓤</a><a id="8815" class="Symbol">}</a> <a id="8817" href="Ordinals.IdentifyingEquivalentOrdinals.html#8817" class="Bound">K</a> <a id="8819" href="Ordinals.IdentifyingEquivalentOrdinals.html#8819" class="Bound">X</a> <a id="8821" class="Symbol">=</a> <a id="8823" href="Ordinals.IdentifyingEquivalentOrdinals.html#8902" class="Function">I</a>
@@ -298,7 +298,7 @@ construction).
   <a id="8834" class="Keyword">open</a> <a id="8839" class="Keyword">import</a> <a id="8846" href="UF.Sets-Properties.html" class="Module">UF.Sets-Properties</a>
   <a id="8867" class="Keyword">open</a> <a id="8872" class="Keyword">import</a> <a id="8879" href="UF.UniverseEmbedding.html" class="Module">UF.UniverseEmbedding</a>
   <a id="8902" href="Ordinals.IdentifyingEquivalentOrdinals.html#8902" class="Function">I</a> <a id="8904" class="Symbol">:</a> <a id="8906" href="UF.Sets.html#709" class="Function">is-set</a> <a id="8913" href="Ordinals.IdentifyingEquivalentOrdinals.html#8819" class="Bound">X</a>
-  <a id="8917" href="Ordinals.IdentifyingEquivalentOrdinals.html#8902" class="Function">I</a> <a id="8919" class="Symbol">=</a> <a id="8921" href="UF.Sets-Properties.html#1626" class="Function">equiv-to-set</a> <a id="8934" class="Symbol">(</a><a id="8935" href="UF.UniverseEmbedding.html#3638" class="Function">≃-Lift</a> <a id="8942" class="Symbol">(</a><a id="8943" href="Ordinals.IdentifyingEquivalentOrdinals.html#8814" class="Bound">𝓤</a> <a id="8945" href="MLTT.Universes.html#3754" class="Primitive Operator">⁺</a><a id="8946" class="Symbol">)</a> <a id="8948" href="Ordinals.IdentifyingEquivalentOrdinals.html#8819" class="Bound">X</a><a id="8949" class="Symbol">)</a> <a id="8951" class="Symbol">(</a><a id="8952" href="Ordinals.IdentifyingEquivalentOrdinals.html#8817" class="Bound">K</a> <a id="8954" class="Symbol">(</a><a id="8955" href="UF.UniverseEmbedding.html#2936" class="Function">Lift</a> <a id="8960" class="Symbol">(</a><a id="8961" href="Ordinals.IdentifyingEquivalentOrdinals.html#8814" class="Bound">𝓤</a> <a id="8963" href="MLTT.Universes.html#3754" class="Primitive Operator">⁺</a><a id="8964" class="Symbol">)</a> <a id="8966" href="Ordinals.IdentifyingEquivalentOrdinals.html#8819" class="Bound">X</a><a id="8967" class="Symbol">))</a>
+  <a id="8917" href="Ordinals.IdentifyingEquivalentOrdinals.html#8902" class="Function">I</a> <a id="8919" class="Symbol">=</a> <a id="8921" href="UF.Sets-Properties.html#1626" class="Function">equiv-to-set</a> <a id="8934" class="Symbol">(</a><a id="8935" href="UF.UniverseEmbedding.html#3639" class="Function">≃-Lift</a> <a id="8942" class="Symbol">(</a><a id="8943" href="Ordinals.IdentifyingEquivalentOrdinals.html#8814" class="Bound">𝓤</a> <a id="8945" href="MLTT.Universes.html#3754" class="Primitive Operator">⁺</a><a id="8946" class="Symbol">)</a> <a id="8948" href="Ordinals.IdentifyingEquivalentOrdinals.html#8819" class="Bound">X</a><a id="8949" class="Symbol">)</a> <a id="8951" class="Symbol">(</a><a id="8952" href="Ordinals.IdentifyingEquivalentOrdinals.html#8817" class="Bound">K</a> <a id="8954" class="Symbol">(</a><a id="8955" href="UF.UniverseEmbedding.html#2937" class="Function">Lift</a> <a id="8960" class="Symbol">(</a><a id="8961" href="Ordinals.IdentifyingEquivalentOrdinals.html#8814" class="Bound">𝓤</a> <a id="8963" href="MLTT.Universes.html#3754" class="Primitive Operator">⁺</a><a id="8964" class="Symbol">)</a> <a id="8966" href="Ordinals.IdentifyingEquivalentOrdinals.html#8819" class="Bound">X</a><a id="8967" class="Symbol">))</a>
 
 <a id="preunivalence-cannot-show-antisymmetry-of-⊴"></a><a id="8971" href="Ordinals.IdentifyingEquivalentOrdinals.html#8971" class="Function">preunivalence-cannot-show-antisymmetry-of-⊴</a>
  <a id="9016" class="Symbol">:</a> <a id="9018" href="MLTT.Negation.html#1040" class="Function Operator">¬¬</a> <a id="9021" href="UF.Sets.html#2309" class="Function">K-axiom</a> <a id="9029" href="MLTT.Universes.html#4056" class="Function">𝓤₁</a>

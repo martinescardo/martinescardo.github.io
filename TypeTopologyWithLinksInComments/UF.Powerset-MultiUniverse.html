@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html><head><meta charset="utf-8"><title>UF.Powerset-MultiUniverse</title><link rel="stylesheet" href="Agda.css"></head><body><pre class="Agda"><a id="1" class="Background">Martin Escardo, 5th September 2018. Modified 27 September 2023 to
+<html><head><meta charset="utf-8"><title>UF.Powerset-MultiUniverse</title><link rel="stylesheet" href="Agda.css"></head><body><pre class="Agda"><span id="1" class="Background">Martin Escardo, 5th September 2018. Modified 27 September 2023 to
 support the object of truth values to live in a different universe
 than that of which the powerset is taken.
 
@@ -12,12 +12,12 @@ of a given type.
 
 A subset of a type X in a universe 𝓤 is an embedding of some given
 type into X, or, equivalently, a map of X into the subtype classifier
-Ω 𝓤 of the universe 𝓤 (see the module UF.Classifiers).
+Ω 𝓤 of the universe 𝓤 (see the module <a href="UF.Classifiers.html">UF.Classifiers</a>).
 
 We generalize this to allow the powerset to have values in Ω 𝓥. The
-module UF.Powerset specializes this module to the case 𝓤=𝓥.
+module <a href="UF.Powerset.html">UF.Powerset</a> specializes this module to the case 𝓤=𝓥.
 
-</a><a id="789" class="Markup">\begin{code}</a>
+</span><a id="789" class="Markup">\begin{code}</a>
 
 <a id="803" class="Symbol">{-#</a> <a id="807" class="Keyword">OPTIONS</a> <a id="815" class="Pragma">--safe</a> <a id="822" class="Pragma">--without-K</a> <a id="834" class="Symbol">#-}</a>
 
@@ -240,14 +240,14 @@ module UF.Powerset specializes this module to the case 𝓤=𝓥.
 <a id="7549" href="UF.Powerset-MultiUniverse.html#7417" class="Function">subset-extensionality&#39;</a> <a id="7572" class="Symbol">{</a><a id="7573" href="UF.Powerset-MultiUniverse.html#7573" class="Bound">𝓤</a><a id="7574" class="Symbol">}</a> <a id="7576" href="UF.Powerset-MultiUniverse.html#7576" class="Bound">ua</a> <a id="7579" class="Symbol">=</a> <a id="7581" href="UF.Powerset-MultiUniverse.html#7159" class="Function">subset-extensionality</a>
                                  <a id="7636" class="Symbol">(</a><a id="7637" href="UF.Univalence.html#11165" class="Function">univalence-gives-propext</a> <a id="7662" class="Symbol">(</a><a id="7663" href="UF.Powerset-MultiUniverse.html#7576" class="Bound">ua</a> <a id="7666" href="UF.Powerset-MultiUniverse.html#7573" class="Bound">𝓤</a><a id="7667" class="Symbol">))</a>
                                  <a id="7703" class="Symbol">(</a><a id="7704" href="UF.UA-FunExt.html#1996" class="Function">univalence-gives-funext&#39;</a> <a id="7729" href="UF.Powerset-MultiUniverse.html#7573" class="Bound">𝓤</a> <a id="7731" class="Symbol">(</a><a id="7732" href="UF.Powerset-MultiUniverse.html#7573" class="Bound">𝓤</a> <a id="7734" href="MLTT.Universes.html#3754" class="Primitive Operator">⁺</a><a id="7735" class="Symbol">)</a> <a id="7737" class="Symbol">(</a><a id="7738" href="UF.Powerset-MultiUniverse.html#7576" class="Bound">ua</a> <a id="7741" href="UF.Powerset-MultiUniverse.html#7573" class="Bound">𝓤</a><a id="7742" class="Symbol">)</a> <a id="7744" class="Symbol">(</a><a id="7745" href="UF.Powerset-MultiUniverse.html#7576" class="Bound">ua</a> <a id="7748" class="Symbol">(</a><a id="7749" href="UF.Powerset-MultiUniverse.html#7573" class="Bound">𝓤</a> <a id="7751" href="MLTT.Universes.html#3754" class="Primitive Operator">⁺</a><a id="7752" class="Symbol">)))</a>
-<a id="7756" class="Markup">\end{code}</a><a id="7766" class="Background">
+<a id="7756" class="Markup">\end{code}</a><span id="7766" class="Background">
 
 Tom de Jong, 24 January 2022
-(Based on code from FreeJoinSemiLattice.lagda written 18-24 December 2020.)
+(Based on code from <a href="OrderedTypes.FreeJoinSemiLattice.html">FreeJoinSemiLattice.lagda</a> written 18-24 December 2020.)
 
 Notation for the &quot;total space&quot; of a subset.
 
-</a><a id="7919" class="Markup">\begin{code}</a>
+</span><a id="7919" class="Markup">\begin{code}</a>
 
 <a id="7933" class="Keyword">module</a> <a id="7940" href="UF.Powerset-MultiUniverse.html#7940" class="Module">_</a>
         <a id="7950" class="Symbol">{</a><a id="7951" href="UF.Powerset-MultiUniverse.html#7951" class="Bound">X</a> <a id="7953" class="Symbol">:</a> <a id="7955" href="MLTT.Universes.html#3833" class="Generalizable">𝓤</a> <a id="7957" href="MLTT.Universes.html#4011" class="Function Operator">̇</a> <a id="7959" class="Symbol">}</a>

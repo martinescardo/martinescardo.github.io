@@ -55,16 +55,16 @@ modulus computed for `t` by the Fan functional:
 <a id="F₀-interpretation"></a><a id="1652" href="C-Spaces.UsingFunExt.ComputationExperiments.html#1652" class="Function">F₀-interpretation</a> <a id="1670" class="Symbol">:</a> <a id="1672" href="C-Spaces.UsingFunExt.ComputationExperiments.html#1340" class="Function Operator">⟦</a> <a id="1674" href="C-Spaces.UsingFunExt.ComputationExperiments.html#1567" class="Function">F₀</a> <a id="1677" href="C-Spaces.UsingFunExt.ComputationExperiments.html#1340" class="Function Operator">⟧</a> <a id="1679" href="MLTT.Id.html#193" class="Datatype Operator">＝</a> <a id="1681" class="Symbol">λ</a> <a id="1683" href="C-Spaces.UsingFunExt.ComputationExperiments.html#1683" class="Bound">α</a> <a id="1685" class="Symbol">→</a> <a id="1687" href="C-Spaces.Preliminaries.Booleans.Functions.html#373" class="Function">if</a> <a id="1690" class="Symbol">(</a><a id="1691" href="C-Spaces.UsingFunExt.ComputationExperiments.html#1683" class="Bound">α</a> <a id="1693" class="Number">0</a><a id="1694" class="Symbol">)</a> <a id="1696" class="Number">0</a> <a id="1698" class="Number">0</a>
 <a id="1700" href="C-Spaces.UsingFunExt.ComputationExperiments.html#1652" class="Function">F₀-interpretation</a> <a id="1718" class="Symbol">=</a> <a id="1720" href="MLTT.Identity-Type.html#166" class="InductiveConstructor">refl</a>
 
-<a id="1726" class="Markup">\end{code}</a><a id="1736" class="Background">
+<a id="1726" class="Markup">\end{code}</a><span id="1736" class="Background">
 
 Although the least modulus of `F₀` is mathematically `0`, the closed Agda term
 `modu F₀` does not normalize to a numeral under the assumption of function
 extensionality. Its unreduced form is the following:
 
-C-Spaces.UniformContinuity.LM _＝_
-UF.DiscreteAndSeparated.ℕ-is-discrete (λ α → 𝟚-induction 0 0 (α 0))
-(1 Naturals.Addition.+
- C-Spaces.Preliminaries.Naturals.Order.max
+<a href="C-Spaces.UniformContinuity.html">C-Spaces.UniformContinuity</a>.LM _＝_
+<a href="UF.DiscreteAndSeparated.html">UF.DiscreteAndSeparated</a>.ℕ-is-discrete (λ α → 𝟚-induction 0 0 (α 0))
+(1 <a href="Naturals.Addition.html">Naturals.Addition</a>.+
+ <a href="C-Spaces.Preliminaries.Naturals.Order.html">C-Spaces.Preliminaries.Naturals.Order</a>.max
  (pr₁
   (transport
    (λ x →
@@ -75,7 +75,7 @@ UF.DiscreteAndSeparated.ℕ-is-discrete (λ α → 𝟚-induction 0 0 (α 0))
             (n&#39; : ℕ) →
             ((α β : ℕ → 𝟚) →
              α ＝⟦ n&#39; ⟧ β → 𝟚-induction 0 0 (x α 0) ＝ 𝟚-induction 0 0 (x β 0)) →
-            n C-Spaces.Preliminaries.Naturals.Order.≤ n&#39;)))
+            n <a href="C-Spaces.Preliminaries.Naturals.Order.html">C-Spaces.Preliminaries.Naturals.Order</a>.≤ n&#39;)))
    (transport (_＝ (λ x → cons (₀ ∷ ⟨⟩) x))
     (fe
      (λ α →
@@ -93,7 +93,7 @@ UF.DiscreteAndSeparated.ℕ-is-discrete (λ α → 𝟚-induction 0 0 (α 0))
           (λ x₁ →
              (n&#39; : ℕ) →
              ((α β : ℕ → 𝟚) → α ＝⟦ n&#39; ⟧ β → p α ＝ p β) →
-             n C-Spaces.Preliminaries.Naturals.Order.≤ n&#39;)) →
+             n <a href="C-Spaces.Preliminaries.Naturals.Order.html">C-Spaces.Preliminaries.Naturals.Order</a>.≤ n&#39;)) →
        (t : (ℕ → 𝟚) → ℕ → 𝟚) →
        ((m : ℕ) →
         Σ
@@ -102,7 +102,7 @@ UF.DiscreteAndSeparated.ℕ-is-discrete (λ α → 𝟚-induction 0 0 (α 0))
            (λ x₁ →
               (n&#39; : ℕ) →
               ((α β : ℕ → 𝟚) → α ＝⟦ n&#39; ⟧ β → t α ＝⟦ m ⟧ t β) →
-              n C-Spaces.Preliminaries.Naturals.Order.≤ n&#39;))) →
+              n <a href="C-Spaces.Preliminaries.Naturals.Order.html">C-Spaces.Preliminaries.Naturals.Order</a>.≤ n&#39;))) →
        Σ
        (λ n →
           Σ
@@ -112,7 +112,7 @@ UF.DiscreteAndSeparated.ℕ-is-discrete (λ α → 𝟚-induction 0 0 (α 0))
               α ＝⟦ n&#39; ⟧ β →
               𝟚-induction 0 (p α) (x (t α) 0) ＝
               𝟚-induction 0 (p β) (x (t β) 0)) →
-             n C-Spaces.Preliminaries.Naturals.Order.≤ n&#39;)))
+             n <a href="C-Spaces.Preliminaries.Naturals.Order.html">C-Spaces.Preliminaries.Naturals.Order</a>.≤ n&#39;)))
     (transport (_＝ (λ x → cons (₀ ∷ ⟨⟩) x))
      (fe
       (λ α →
@@ -130,7 +130,7 @@ UF.DiscreteAndSeparated.ℕ-is-discrete (λ α → 𝟚-induction 0 0 (α 0))
            (λ x →
               (n&#39; : ℕ) →
               ((α β : ℕ → 𝟚) → α ＝⟦ n&#39; ⟧ β → p α ＝ p β) →
-              n C-Spaces.Preliminaries.Naturals.Order.≤ n&#39;)) →
+              n <a href="C-Spaces.Preliminaries.Naturals.Order.html">C-Spaces.Preliminaries.Naturals.Order</a>.≤ n&#39;)) →
         (t : (ℕ → 𝟚) → ℕ → 𝟚) →
         ((m : ℕ) →
          Σ
@@ -139,7 +139,7 @@ UF.DiscreteAndSeparated.ℕ-is-discrete (λ α → 𝟚-induction 0 0 (α 0))
             (λ x →
                (n&#39; : ℕ) →
                ((α β : ℕ → 𝟚) → α ＝⟦ n&#39; ⟧ β → t α ＝⟦ m ⟧ t β) →
-               n C-Spaces.Preliminaries.Naturals.Order.≤ n&#39;))) →
+               n <a href="C-Spaces.Preliminaries.Naturals.Order.html">C-Spaces.Preliminaries.Naturals.Order</a>.≤ n&#39;))) →
         (p₁ : (ℕ → 𝟚) → ℕ) →
         Σ
         (λ n →
@@ -147,7 +147,7 @@ UF.DiscreteAndSeparated.ℕ-is-discrete (λ α → 𝟚-induction 0 0 (α 0))
            (λ x →
               (n&#39; : ℕ) →
               ((α β : ℕ → 𝟚) → α ＝⟦ n&#39; ⟧ β → p₁ α ＝ p₁ β) →
-              n C-Spaces.Preliminaries.Naturals.Order.≤ n&#39;)) →
+              n <a href="C-Spaces.Preliminaries.Naturals.Order.html">C-Spaces.Preliminaries.Naturals.Order</a>.≤ n&#39;)) →
         (t₁ : (ℕ → 𝟚) → ℕ → 𝟚) →
         ((m : ℕ) →
          Σ
@@ -156,7 +156,7 @@ UF.DiscreteAndSeparated.ℕ-is-discrete (λ α → 𝟚-induction 0 0 (α 0))
             (λ x →
                (n&#39; : ℕ) →
                ((α β : ℕ → 𝟚) → α ＝⟦ n&#39; ⟧ β → t₁ α ＝⟦ m ⟧ t₁ β) →
-               n C-Spaces.Preliminaries.Naturals.Order.≤ n&#39;))) →
+               n <a href="C-Spaces.Preliminaries.Naturals.Order.html">C-Spaces.Preliminaries.Naturals.Order</a>.≤ n&#39;))) →
         Σ
         (λ n →
            Σ
@@ -166,23 +166,23 @@ UF.DiscreteAndSeparated.ℕ-is-discrete (λ α → 𝟚-induction 0 0 (α 0))
                α ＝⟦ n&#39; ⟧ β →
                pr₁ (pr₁ (r (t (t₁ α))) (p (t₁ α))) (p₁ α) ＝
                pr₁ (pr₁ (r (t (t₁ β))) (p (t₁ β))) (p₁ β)) →
-              n C-Spaces.Preliminaries.Naturals.Order.≤ n&#39;)))
+              n <a href="C-Spaces.Preliminaries.Naturals.Order.html">C-Spaces.Preliminaries.Naturals.Order</a>.≤ n&#39;)))
      (fe (λ α → refl))
      (λ p pP t uc q qA t₁ tC →
-        C-Spaces.UniformContinuity.LM _＝_
-        UF.DiscreteAndSeparated.ℕ-is-discrete (λ x → p (t₁ x))
+        <a href="C-Spaces.UniformContinuity.html">C-Spaces.UniformContinuity</a>.LM _＝_
+        <a href="UF.DiscreteAndSeparated.html">UF.DiscreteAndSeparated</a>.ℕ-is-discrete (λ x → p (t₁ x))
         (pr₁ (tC (pr₁ pP)))
         ,
-        C-Spaces.UniformContinuity.Lemma[LM-modulus] _＝_
-        UF.DiscreteAndSeparated.ℕ-is-discrete
+        <a href="C-Spaces.UniformContinuity.html">C-Spaces.UniformContinuity</a>.Lemma[LM-modulus] _＝_
+        <a href="UF.DiscreteAndSeparated.html">UF.DiscreteAndSeparated</a>.ℕ-is-discrete
         (λ p₁ → transport (_＝ z) p₁ refl)
         (λ p₁ q₁ → transport (_＝_ z) q₁ p₁) (λ x → p (t₁ x))
         (pr₁ (tC (pr₁ pP)))
         (λ α β en →
            pr₁ (pr₂ pP) (t₁ α) (t₁ β) (pr₁ (pr₂ (tC (pr₁ pP))) α β en))
         ,
-        C-Spaces.UniformContinuity.Lemma[LM-least] _＝_
-        UF.DiscreteAndSeparated.ℕ-is-discrete
+        <a href="C-Spaces.UniformContinuity.html">C-Spaces.UniformContinuity</a>.Lemma[LM-least] _＝_
+        <a href="UF.DiscreteAndSeparated.html">UF.DiscreteAndSeparated</a>.ℕ-is-discrete
         (λ p₁ → transport (_＝ z) p₁ refl)
         (λ p₁ q₁ → transport (_＝_ z) q₁ p₁) (λ x → p (t₁ x))
         (pr₁ (tC (pr₁ pP)))
@@ -191,31 +191,31 @@ UF.DiscreteAndSeparated.ℕ-is-discrete (λ α → 𝟚-induction 0 0 (α 0))
      (λ x → 0)
      (0 ,
       (λ α β e → refl) ,
-      (λ k prk → C-Spaces.Preliminaries.Naturals.Order._≤_.≤-zero))
+      (λ k prk → <a href="C-Spaces.Preliminaries.Naturals.Order.html">C-Spaces.Preliminaries.Naturals.Order</a>._≤_.≤-zero))
      (λ α x → α x)
      (λ k →
-        C-Spaces.UniformContinuity.LM (λ α → _＝⟦_⟧_ α k)
+        <a href="C-Spaces.UniformContinuity.html">C-Spaces.UniformContinuity</a>.LM (λ α → _＝⟦_⟧_ α k)
         Lemma[＝⟦⟧-decidable] (λ α x → α x)
-        (C-Spaces.UniformContinuity.LM (λ α → _＝⟦_⟧_ α (succ k))
+        (<a href="C-Spaces.UniformContinuity.html">C-Spaces.UniformContinuity</a>.LM (λ α → _＝⟦_⟧_ α (succ k))
          (λ α β →
             dep-cases
             (λ em →
                dep-cases (λ e → inl (＝⟦succ⟧ em e))
                (λ f → inr (λ e → f (Lemma[＝⟦succ⟧]₁ e)))
-               (UF.DiscreteAndSeparated.𝟚-is-discrete (α k) (β k)))
+               (<a href="UF.DiscreteAndSeparated.html">UF.DiscreteAndSeparated</a>.𝟚-is-discrete (α k) (β k)))
             (λ f → inr (λ e → f (Lemma[＝⟦succ⟧]₀ e)))
             (Lemma[＝⟦⟧-decidable] α β))
          (λ x → cons (₀ ∷ ⟨⟩) x) k)
         ,
-        C-Spaces.UniformContinuity.Lemma[LM-modulus] (λ α → _＝⟦_⟧_ α k)
+        <a href="C-Spaces.UniformContinuity.html">C-Spaces.UniformContinuity</a>.Lemma[LM-modulus] (λ α → _＝⟦_⟧_ α k)
         Lemma[＝⟦⟧-decidable] ＝⟦⟧-sym ＝⟦⟧-trans (λ α x → α x)
-        (C-Spaces.UniformContinuity.LM (λ α → _＝⟦_⟧_ α (succ k))
+        (<a href="C-Spaces.UniformContinuity.html">C-Spaces.UniformContinuity</a>.LM (λ α → _＝⟦_⟧_ α (succ k))
          (λ α β →
             dep-cases
             (λ em →
                dep-cases (λ e → inl (＝⟦succ⟧ em e))
                (λ f → inr (λ e → f (Lemma[＝⟦succ⟧]₁ e)))
-               (UF.DiscreteAndSeparated.𝟚-is-discrete (α k) (β k)))
+               (<a href="UF.DiscreteAndSeparated.html">UF.DiscreteAndSeparated</a>.𝟚-is-discrete (α k) (β k)))
             (λ f → inr (λ e → f (Lemma[＝⟦succ⟧]₀ e)))
             (Lemma[＝⟦⟧-decidable] α β))
          (λ x → cons (₀ ∷ ⟨⟩) x) k)
@@ -225,14 +225,14 @@ UF.DiscreteAndSeparated.ℕ-is-discrete (λ α → 𝟚-induction 0 0 (α 0))
               transport (_＝_ (α i))
               (Lemma[＝⟦⟧-&lt;]
                (Lemma[＝⟦⟧-succ]
-                (C-Spaces.UniformContinuity.Lemma[LM-modulus]
+                (<a href="C-Spaces.UniformContinuity.html">C-Spaces.UniformContinuity</a>.Lemma[LM-modulus]
                  (λ α₁ → _＝⟦_⟧_ α₁ (succ k))
                  (λ α₁ β₁ →
                     dep-cases
                     (λ em →
                        dep-cases (λ e → inl (＝⟦succ⟧ em e))
                        (λ f → inr (λ e → f (Lemma[＝⟦succ⟧]₁ e)))
-                       (UF.DiscreteAndSeparated.𝟚-is-discrete (α₁ k) (β₁ k)))
+                       (<a href="UF.DiscreteAndSeparated.html">UF.DiscreteAndSeparated</a>.𝟚-is-discrete (α₁ k) (β₁ k)))
                     (λ f → inr (λ e → f (Lemma[＝⟦succ⟧]₀ e)))
                     (Lemma[＝⟦⟧-decidable] α₁ β₁))
                  ＝⟦⟧-sym ＝⟦⟧-trans (λ x → cons (₀ ∷ ⟨⟩) x) k
@@ -240,25 +240,25 @@ UF.DiscreteAndSeparated.ℕ-is-discrete (λ α → 𝟚-induction 0 0 (α 0))
                     ＝⟦succ⟧
                     (Lemma[&lt;-＝⟦⟧]
                      (λ i₁ r →
-                        C-Spaces.UniformContinuity.claim₀ ₀ ⟨⟩ k α₁ β₁ e e i₁
-                        (C-Spaces.Preliminaries.Naturals.Order.≤-trans r
-                         (C-Spaces.Preliminaries.Naturals.Order.Lemma[n≤n+1] k))))
-                    (C-Spaces.UniformContinuity.claim₀ ₀ ⟨⟩ k α₁ β₁ e e k
-                     (C-Spaces.Preliminaries.Naturals.Order._≤_.≤-succ
-                      C-Spaces.Preliminaries.Naturals.Order.≤-refl)))
+                        <a href="C-Spaces.UniformContinuity.html">C-Spaces.UniformContinuity</a>.claim₀ ₀ ⟨⟩ k α₁ β₁ e e i₁
+                        (<a href="C-Spaces.Preliminaries.Naturals.Order.html">C-Spaces.Preliminaries.Naturals.Order</a>.≤-trans r
+                         (<a href="C-Spaces.Preliminaries.Naturals.Order.html">C-Spaces.Preliminaries.Naturals.Order</a>.Lemma[n≤n+1] k))))
+                    (<a href="C-Spaces.UniformContinuity.html">C-Spaces.UniformContinuity</a>.claim₀ ₀ ⟨⟩ k α₁ β₁ e e k
+                     (<a href="C-Spaces.Preliminaries.Naturals.Order.html">C-Spaces.Preliminaries.Naturals.Order</a>._≤_.≤-succ
+                      <a href="C-Spaces.Preliminaries.Naturals.Order.html">C-Spaces.Preliminaries.Naturals.Order</a>.≤-refl)))
                  α β el))
                i i&lt;k)
               refl))
         ,
-        C-Spaces.UniformContinuity.Lemma[LM-least] (λ α → _＝⟦_⟧_ α k)
+        <a href="C-Spaces.UniformContinuity.html">C-Spaces.UniformContinuity</a>.Lemma[LM-least] (λ α → _＝⟦_⟧_ α k)
         Lemma[＝⟦⟧-decidable] ＝⟦⟧-sym ＝⟦⟧-trans (λ α x → α x)
-        (C-Spaces.UniformContinuity.LM (λ α → _＝⟦_⟧_ α (succ k))
+        (<a href="C-Spaces.UniformContinuity.html">C-Spaces.UniformContinuity</a>.LM (λ α → _＝⟦_⟧_ α (succ k))
          (λ α β →
             dep-cases
             (λ em →
                dep-cases (λ e → inl (＝⟦succ⟧ em e))
                (λ f → inr (λ e → f (Lemma[＝⟦succ⟧]₁ e)))
-               (UF.DiscreteAndSeparated.𝟚-is-discrete (α k) (β k)))
+               (<a href="UF.DiscreteAndSeparated.html">UF.DiscreteAndSeparated</a>.𝟚-is-discrete (α k) (β k)))
             (λ f → inr (λ e → f (Lemma[＝⟦succ⟧]₀ e)))
             (Lemma[＝⟦⟧-decidable] α β))
          (λ x → cons (₀ ∷ ⟨⟩) x) k)
@@ -268,14 +268,14 @@ UF.DiscreteAndSeparated.ℕ-is-discrete (λ α → 𝟚-induction 0 0 (α 0))
               transport (_＝_ (α i))
               (Lemma[＝⟦⟧-&lt;]
                (Lemma[＝⟦⟧-succ]
-                (C-Spaces.UniformContinuity.Lemma[LM-modulus]
+                (<a href="C-Spaces.UniformContinuity.html">C-Spaces.UniformContinuity</a>.Lemma[LM-modulus]
                  (λ α₁ → _＝⟦_⟧_ α₁ (succ k))
                  (λ α₁ β₁ →
                     dep-cases
                     (λ em →
                        dep-cases (λ e → inl (＝⟦succ⟧ em e))
                        (λ f → inr (λ e → f (Lemma[＝⟦succ⟧]₁ e)))
-                       (UF.DiscreteAndSeparated.𝟚-is-discrete (α₁ k) (β₁ k)))
+                       (<a href="UF.DiscreteAndSeparated.html">UF.DiscreteAndSeparated</a>.𝟚-is-discrete (α₁ k) (β₁ k)))
                     (λ f → inr (λ e → f (Lemma[＝⟦succ⟧]₀ e)))
                     (Lemma[＝⟦⟧-decidable] α₁ β₁))
                  ＝⟦⟧-sym ＝⟦⟧-trans (λ x → cons (₀ ∷ ⟨⟩) x) k
@@ -283,43 +283,43 @@ UF.DiscreteAndSeparated.ℕ-is-discrete (λ α → 𝟚-induction 0 0 (α 0))
                     ＝⟦succ⟧
                     (Lemma[&lt;-＝⟦⟧]
                      (λ i₁ r →
-                        C-Spaces.UniformContinuity.claim₀ ₀ ⟨⟩ k α₁ β₁ e e i₁
-                        (C-Spaces.Preliminaries.Naturals.Order.≤-trans r
-                         (C-Spaces.Preliminaries.Naturals.Order.Lemma[n≤n+1] k))))
-                    (C-Spaces.UniformContinuity.claim₀ ₀ ⟨⟩ k α₁ β₁ e e k
-                     (C-Spaces.Preliminaries.Naturals.Order._≤_.≤-succ
-                      C-Spaces.Preliminaries.Naturals.Order.≤-refl)))
+                        <a href="C-Spaces.UniformContinuity.html">C-Spaces.UniformContinuity</a>.claim₀ ₀ ⟨⟩ k α₁ β₁ e e i₁
+                        (<a href="C-Spaces.Preliminaries.Naturals.Order.html">C-Spaces.Preliminaries.Naturals.Order</a>.≤-trans r
+                         (<a href="C-Spaces.Preliminaries.Naturals.Order.html">C-Spaces.Preliminaries.Naturals.Order</a>.Lemma[n≤n+1] k))))
+                    (<a href="C-Spaces.UniformContinuity.html">C-Spaces.UniformContinuity</a>.claim₀ ₀ ⟨⟩ k α₁ β₁ e e k
+                     (<a href="C-Spaces.Preliminaries.Naturals.Order.html">C-Spaces.Preliminaries.Naturals.Order</a>._≤_.≤-succ
+                      <a href="C-Spaces.Preliminaries.Naturals.Order.html">C-Spaces.Preliminaries.Naturals.Order</a>.≤-refl)))
                  α β el))
                i i&lt;k)
               refl))))
     (λ x → 0)
     (0 ,
      (λ α β e → refl) ,
-     (λ k prk → C-Spaces.Preliminaries.Naturals.Order._≤_.≤-zero))
+     (λ k prk → <a href="C-Spaces.Preliminaries.Naturals.Order.html">C-Spaces.Preliminaries.Naturals.Order</a>._≤_.≤-zero))
     (λ α x → α x)
     (λ k →
-       C-Spaces.UniformContinuity.LM (λ α → _＝⟦_⟧_ α k)
+       <a href="C-Spaces.UniformContinuity.html">C-Spaces.UniformContinuity</a>.LM (λ α → _＝⟦_⟧_ α k)
        Lemma[＝⟦⟧-decidable] (λ α x → α x)
-       (C-Spaces.UniformContinuity.LM (λ α → _＝⟦_⟧_ α (succ k))
+       (<a href="C-Spaces.UniformContinuity.html">C-Spaces.UniformContinuity</a>.LM (λ α → _＝⟦_⟧_ α (succ k))
         (λ α β →
            dep-cases
            (λ em →
               dep-cases (λ e → inl (＝⟦succ⟧ em e))
               (λ f → inr (λ e → f (Lemma[＝⟦succ⟧]₁ e)))
-              (UF.DiscreteAndSeparated.𝟚-is-discrete (α k) (β k)))
+              (<a href="UF.DiscreteAndSeparated.html">UF.DiscreteAndSeparated</a>.𝟚-is-discrete (α k) (β k)))
            (λ f → inr (λ e → f (Lemma[＝⟦succ⟧]₀ e)))
            (Lemma[＝⟦⟧-decidable] α β))
         (λ x → cons (₀ ∷ ⟨⟩) x) k)
        ,
-       C-Spaces.UniformContinuity.Lemma[LM-modulus] (λ α → _＝⟦_⟧_ α k)
+       <a href="C-Spaces.UniformContinuity.html">C-Spaces.UniformContinuity</a>.Lemma[LM-modulus] (λ α → _＝⟦_⟧_ α k)
        Lemma[＝⟦⟧-decidable] ＝⟦⟧-sym ＝⟦⟧-trans (λ α x → α x)
-       (C-Spaces.UniformContinuity.LM (λ α → _＝⟦_⟧_ α (succ k))
+       (<a href="C-Spaces.UniformContinuity.html">C-Spaces.UniformContinuity</a>.LM (λ α → _＝⟦_⟧_ α (succ k))
         (λ α β →
            dep-cases
            (λ em →
               dep-cases (λ e → inl (＝⟦succ⟧ em e))
               (λ f → inr (λ e → f (Lemma[＝⟦succ⟧]₁ e)))
-              (UF.DiscreteAndSeparated.𝟚-is-discrete (α k) (β k)))
+              (<a href="UF.DiscreteAndSeparated.html">UF.DiscreteAndSeparated</a>.𝟚-is-discrete (α k) (β k)))
            (λ f → inr (λ e → f (Lemma[＝⟦succ⟧]₀ e)))
            (Lemma[＝⟦⟧-decidable] α β))
         (λ x → cons (₀ ∷ ⟨⟩) x) k)
@@ -329,14 +329,14 @@ UF.DiscreteAndSeparated.ℕ-is-discrete (λ α → 𝟚-induction 0 0 (α 0))
              transport (_＝_ (α i))
              (Lemma[＝⟦⟧-&lt;]
               (Lemma[＝⟦⟧-succ]
-               (C-Spaces.UniformContinuity.Lemma[LM-modulus]
+               (<a href="C-Spaces.UniformContinuity.html">C-Spaces.UniformContinuity</a>.Lemma[LM-modulus]
                 (λ α₁ → _＝⟦_⟧_ α₁ (succ k))
                 (λ α₁ β₁ →
                    dep-cases
                    (λ em →
                       dep-cases (λ e → inl (＝⟦succ⟧ em e))
                       (λ f → inr (λ e → f (Lemma[＝⟦succ⟧]₁ e)))
-                      (UF.DiscreteAndSeparated.𝟚-is-discrete (α₁ k) (β₁ k)))
+                      (<a href="UF.DiscreteAndSeparated.html">UF.DiscreteAndSeparated</a>.𝟚-is-discrete (α₁ k) (β₁ k)))
                    (λ f → inr (λ e → f (Lemma[＝⟦succ⟧]₀ e)))
                    (Lemma[＝⟦⟧-decidable] α₁ β₁))
                 ＝⟦⟧-sym ＝⟦⟧-trans (λ x → cons (₀ ∷ ⟨⟩) x) k
@@ -344,25 +344,25 @@ UF.DiscreteAndSeparated.ℕ-is-discrete (λ α → 𝟚-induction 0 0 (α 0))
                    ＝⟦succ⟧
                    (Lemma[&lt;-＝⟦⟧]
                     (λ i₁ r →
-                       C-Spaces.UniformContinuity.claim₀ ₀ ⟨⟩ k α₁ β₁ e e i₁
-                       (C-Spaces.Preliminaries.Naturals.Order.≤-trans r
-                        (C-Spaces.Preliminaries.Naturals.Order.Lemma[n≤n+1] k))))
-                   (C-Spaces.UniformContinuity.claim₀ ₀ ⟨⟩ k α₁ β₁ e e k
-                    (C-Spaces.Preliminaries.Naturals.Order._≤_.≤-succ
-                     C-Spaces.Preliminaries.Naturals.Order.≤-refl)))
+                       <a href="C-Spaces.UniformContinuity.html">C-Spaces.UniformContinuity</a>.claim₀ ₀ ⟨⟩ k α₁ β₁ e e i₁
+                       (<a href="C-Spaces.Preliminaries.Naturals.Order.html">C-Spaces.Preliminaries.Naturals.Order</a>.≤-trans r
+                        (<a href="C-Spaces.Preliminaries.Naturals.Order.html">C-Spaces.Preliminaries.Naturals.Order</a>.Lemma[n≤n+1] k))))
+                   (<a href="C-Spaces.UniformContinuity.html">C-Spaces.UniformContinuity</a>.claim₀ ₀ ⟨⟩ k α₁ β₁ e e k
+                    (<a href="C-Spaces.Preliminaries.Naturals.Order.html">C-Spaces.Preliminaries.Naturals.Order</a>._≤_.≤-succ
+                     <a href="C-Spaces.Preliminaries.Naturals.Order.html">C-Spaces.Preliminaries.Naturals.Order</a>.≤-refl)))
                 α β el))
               i i&lt;k)
              refl))
        ,
-       C-Spaces.UniformContinuity.Lemma[LM-least] (λ α → _＝⟦_⟧_ α k)
+       <a href="C-Spaces.UniformContinuity.html">C-Spaces.UniformContinuity</a>.Lemma[LM-least] (λ α → _＝⟦_⟧_ α k)
        Lemma[＝⟦⟧-decidable] ＝⟦⟧-sym ＝⟦⟧-trans (λ α x → α x)
-       (C-Spaces.UniformContinuity.LM (λ α → _＝⟦_⟧_ α (succ k))
+       (<a href="C-Spaces.UniformContinuity.html">C-Spaces.UniformContinuity</a>.LM (λ α → _＝⟦_⟧_ α (succ k))
         (λ α β →
            dep-cases
            (λ em →
               dep-cases (λ e → inl (＝⟦succ⟧ em e))
               (λ f → inr (λ e → f (Lemma[＝⟦succ⟧]₁ e)))
-              (UF.DiscreteAndSeparated.𝟚-is-discrete (α k) (β k)))
+              (<a href="UF.DiscreteAndSeparated.html">UF.DiscreteAndSeparated</a>.𝟚-is-discrete (α k) (β k)))
            (λ f → inr (λ e → f (Lemma[＝⟦succ⟧]₀ e)))
            (Lemma[＝⟦⟧-decidable] α β))
         (λ x → cons (₀ ∷ ⟨⟩) x) k)
@@ -372,14 +372,14 @@ UF.DiscreteAndSeparated.ℕ-is-discrete (λ α → 𝟚-induction 0 0 (α 0))
              transport (_＝_ (α i))
              (Lemma[＝⟦⟧-&lt;]
               (Lemma[＝⟦⟧-succ]
-               (C-Spaces.UniformContinuity.Lemma[LM-modulus]
+               (<a href="C-Spaces.UniformContinuity.html">C-Spaces.UniformContinuity</a>.Lemma[LM-modulus]
                 (λ α₁ → _＝⟦_⟧_ α₁ (succ k))
                 (λ α₁ β₁ →
                    dep-cases
                    (λ em →
                       dep-cases (λ e → inl (＝⟦succ⟧ em e))
                       (λ f → inr (λ e → f (Lemma[＝⟦succ⟧]₁ e)))
-                      (UF.DiscreteAndSeparated.𝟚-is-discrete (α₁ k) (β₁ k)))
+                      (<a href="UF.DiscreteAndSeparated.html">UF.DiscreteAndSeparated</a>.𝟚-is-discrete (α₁ k) (β₁ k)))
                    (λ f → inr (λ e → f (Lemma[＝⟦succ⟧]₀ e)))
                    (Lemma[＝⟦⟧-decidable] α₁ β₁))
                 ＝⟦⟧-sym ＝⟦⟧-trans (λ x → cons (₀ ∷ ⟨⟩) x) k
@@ -387,12 +387,12 @@ UF.DiscreteAndSeparated.ℕ-is-discrete (λ α → 𝟚-induction 0 0 (α 0))
                    ＝⟦succ⟧
                    (Lemma[&lt;-＝⟦⟧]
                     (λ i₁ r →
-                       C-Spaces.UniformContinuity.claim₀ ₀ ⟨⟩ k α₁ β₁ e e i₁
-                       (C-Spaces.Preliminaries.Naturals.Order.≤-trans r
-                        (C-Spaces.Preliminaries.Naturals.Order.Lemma[n≤n+1] k))))
-                   (C-Spaces.UniformContinuity.claim₀ ₀ ⟨⟩ k α₁ β₁ e e k
-                    (C-Spaces.Preliminaries.Naturals.Order._≤_.≤-succ
-                     C-Spaces.Preliminaries.Naturals.Order.≤-refl)))
+                       <a href="C-Spaces.UniformContinuity.html">C-Spaces.UniformContinuity</a>.claim₀ ₀ ⟨⟩ k α₁ β₁ e e i₁
+                       (<a href="C-Spaces.Preliminaries.Naturals.Order.html">C-Spaces.Preliminaries.Naturals.Order</a>.≤-trans r
+                        (<a href="C-Spaces.Preliminaries.Naturals.Order.html">C-Spaces.Preliminaries.Naturals.Order</a>.Lemma[n≤n+1] k))))
+                   (<a href="C-Spaces.UniformContinuity.html">C-Spaces.UniformContinuity</a>.claim₀ ₀ ⟨⟩ k α₁ β₁ e e k
+                    (<a href="C-Spaces.Preliminaries.Naturals.Order.html">C-Spaces.Preliminaries.Naturals.Order</a>._≤_.≤-succ
+                     <a href="C-Spaces.Preliminaries.Naturals.Order.html">C-Spaces.Preliminaries.Naturals.Order</a>.≤-refl)))
                 α β el))
               i i&lt;k)
              refl))))))
@@ -406,7 +406,7 @@ UF.DiscreteAndSeparated.ℕ-is-discrete (λ α → 𝟚-induction 0 0 (α 0))
             (n&#39; : ℕ) →
             ((α β : ℕ → 𝟚) →
              α ＝⟦ n&#39; ⟧ β → 𝟚-induction 0 0 (x α 0) ＝ 𝟚-induction 0 0 (x β 0)) →
-            n C-Spaces.Preliminaries.Naturals.Order.≤ n&#39;)))
+            n <a href="C-Spaces.Preliminaries.Naturals.Order.html">C-Spaces.Preliminaries.Naturals.Order</a>.≤ n&#39;)))
    (transport (_＝ (λ x → cons (₁ ∷ ⟨⟩) x))
     (fe
      (λ α →
@@ -424,7 +424,7 @@ UF.DiscreteAndSeparated.ℕ-is-discrete (λ α → 𝟚-induction 0 0 (α 0))
           (λ x₁ →
              (n&#39; : ℕ) →
              ((α β : ℕ → 𝟚) → α ＝⟦ n&#39; ⟧ β → p α ＝ p β) →
-             n C-Spaces.Preliminaries.Naturals.Order.≤ n&#39;)) →
+             n <a href="C-Spaces.Preliminaries.Naturals.Order.html">C-Spaces.Preliminaries.Naturals.Order</a>.≤ n&#39;)) →
        (t : (ℕ → 𝟚) → ℕ → 𝟚) →
        ((m : ℕ) →
         Σ
@@ -433,7 +433,7 @@ UF.DiscreteAndSeparated.ℕ-is-discrete (λ α → 𝟚-induction 0 0 (α 0))
            (λ x₁ →
               (n&#39; : ℕ) →
               ((α β : ℕ → 𝟚) → α ＝⟦ n&#39; ⟧ β → t α ＝⟦ m ⟧ t β) →
-              n C-Spaces.Preliminaries.Naturals.Order.≤ n&#39;))) →
+              n <a href="C-Spaces.Preliminaries.Naturals.Order.html">C-Spaces.Preliminaries.Naturals.Order</a>.≤ n&#39;))) →
        Σ
        (λ n →
           Σ
@@ -443,7 +443,7 @@ UF.DiscreteAndSeparated.ℕ-is-discrete (λ α → 𝟚-induction 0 0 (α 0))
               α ＝⟦ n&#39; ⟧ β →
               𝟚-induction 0 (p α) (x (t α) 0) ＝
               𝟚-induction 0 (p β) (x (t β) 0)) →
-             n C-Spaces.Preliminaries.Naturals.Order.≤ n&#39;)))
+             n <a href="C-Spaces.Preliminaries.Naturals.Order.html">C-Spaces.Preliminaries.Naturals.Order</a>.≤ n&#39;)))
     (transport (_＝ (λ x → cons (₁ ∷ ⟨⟩) x))
      (fe
       (λ α →
@@ -461,7 +461,7 @@ UF.DiscreteAndSeparated.ℕ-is-discrete (λ α → 𝟚-induction 0 0 (α 0))
            (λ x →
               (n&#39; : ℕ) →
               ((α β : ℕ → 𝟚) → α ＝⟦ n&#39; ⟧ β → p α ＝ p β) →
-              n C-Spaces.Preliminaries.Naturals.Order.≤ n&#39;)) →
+              n <a href="C-Spaces.Preliminaries.Naturals.Order.html">C-Spaces.Preliminaries.Naturals.Order</a>.≤ n&#39;)) →
         (t : (ℕ → 𝟚) → ℕ → 𝟚) →
         ((m : ℕ) →
          Σ
@@ -470,7 +470,7 @@ UF.DiscreteAndSeparated.ℕ-is-discrete (λ α → 𝟚-induction 0 0 (α 0))
             (λ x →
                (n&#39; : ℕ) →
                ((α β : ℕ → 𝟚) → α ＝⟦ n&#39; ⟧ β → t α ＝⟦ m ⟧ t β) →
-               n C-Spaces.Preliminaries.Naturals.Order.≤ n&#39;))) →
+               n <a href="C-Spaces.Preliminaries.Naturals.Order.html">C-Spaces.Preliminaries.Naturals.Order</a>.≤ n&#39;))) →
         (p₁ : (ℕ → 𝟚) → ℕ) →
         Σ
         (λ n →
@@ -478,7 +478,7 @@ UF.DiscreteAndSeparated.ℕ-is-discrete (λ α → 𝟚-induction 0 0 (α 0))
            (λ x →
               (n&#39; : ℕ) →
               ((α β : ℕ → 𝟚) → α ＝⟦ n&#39; ⟧ β → p₁ α ＝ p₁ β) →
-              n C-Spaces.Preliminaries.Naturals.Order.≤ n&#39;)) →
+              n <a href="C-Spaces.Preliminaries.Naturals.Order.html">C-Spaces.Preliminaries.Naturals.Order</a>.≤ n&#39;)) →
         (t₁ : (ℕ → 𝟚) → ℕ → 𝟚) →
         ((m : ℕ) →
          Σ
@@ -487,7 +487,7 @@ UF.DiscreteAndSeparated.ℕ-is-discrete (λ α → 𝟚-induction 0 0 (α 0))
             (λ x →
                (n&#39; : ℕ) →
                ((α β : ℕ → 𝟚) → α ＝⟦ n&#39; ⟧ β → t₁ α ＝⟦ m ⟧ t₁ β) →
-               n C-Spaces.Preliminaries.Naturals.Order.≤ n&#39;))) →
+               n <a href="C-Spaces.Preliminaries.Naturals.Order.html">C-Spaces.Preliminaries.Naturals.Order</a>.≤ n&#39;))) →
         Σ
         (λ n →
            Σ
@@ -497,35 +497,35 @@ UF.DiscreteAndSeparated.ℕ-is-discrete (λ α → 𝟚-induction 0 0 (α 0))
                α ＝⟦ n&#39; ⟧ β →
                pr₁ (pr₁ (r (t (t₁ α))) (p (t₁ α))) (p₁ α) ＝
                pr₁ (pr₁ (r (t (t₁ β))) (p (t₁ β))) (p₁ β)) →
-              n C-Spaces.Preliminaries.Naturals.Order.≤ n&#39;)))
+              n <a href="C-Spaces.Preliminaries.Naturals.Order.html">C-Spaces.Preliminaries.Naturals.Order</a>.≤ n&#39;)))
      (fe (λ α → refl)) (λ p pP t uc q qA t₁ tC → qA) (λ x → 0)
      (0 ,
       (λ α β e → refl) ,
-      (λ k prk → C-Spaces.Preliminaries.Naturals.Order._≤_.≤-zero))
+      (λ k prk → <a href="C-Spaces.Preliminaries.Naturals.Order.html">C-Spaces.Preliminaries.Naturals.Order</a>._≤_.≤-zero))
      (λ α x → α x)
      (λ k →
-        C-Spaces.UniformContinuity.LM (λ α → _＝⟦_⟧_ α k)
+        <a href="C-Spaces.UniformContinuity.html">C-Spaces.UniformContinuity</a>.LM (λ α → _＝⟦_⟧_ α k)
         Lemma[＝⟦⟧-decidable] (λ α x → α x)
-        (C-Spaces.UniformContinuity.LM (λ α → _＝⟦_⟧_ α (succ k))
+        (<a href="C-Spaces.UniformContinuity.html">C-Spaces.UniformContinuity</a>.LM (λ α → _＝⟦_⟧_ α (succ k))
          (λ α β →
             dep-cases
             (λ em →
                dep-cases (λ e → inl (＝⟦succ⟧ em e))
                (λ f → inr (λ e → f (Lemma[＝⟦succ⟧]₁ e)))
-               (UF.DiscreteAndSeparated.𝟚-is-discrete (α k) (β k)))
+               (<a href="UF.DiscreteAndSeparated.html">UF.DiscreteAndSeparated</a>.𝟚-is-discrete (α k) (β k)))
             (λ f → inr (λ e → f (Lemma[＝⟦succ⟧]₀ e)))
             (Lemma[＝⟦⟧-decidable] α β))
          (λ x → cons (₁ ∷ ⟨⟩) x) k)
         ,
-        C-Spaces.UniformContinuity.Lemma[LM-modulus] (λ α → _＝⟦_⟧_ α k)
+        <a href="C-Spaces.UniformContinuity.html">C-Spaces.UniformContinuity</a>.Lemma[LM-modulus] (λ α → _＝⟦_⟧_ α k)
         Lemma[＝⟦⟧-decidable] ＝⟦⟧-sym ＝⟦⟧-trans (λ α x → α x)
-        (C-Spaces.UniformContinuity.LM (λ α → _＝⟦_⟧_ α (succ k))
+        (<a href="C-Spaces.UniformContinuity.html">C-Spaces.UniformContinuity</a>.LM (λ α → _＝⟦_⟧_ α (succ k))
          (λ α β →
             dep-cases
             (λ em →
                dep-cases (λ e → inl (＝⟦succ⟧ em e))
                (λ f → inr (λ e → f (Lemma[＝⟦succ⟧]₁ e)))
-               (UF.DiscreteAndSeparated.𝟚-is-discrete (α k) (β k)))
+               (<a href="UF.DiscreteAndSeparated.html">UF.DiscreteAndSeparated</a>.𝟚-is-discrete (α k) (β k)))
             (λ f → inr (λ e → f (Lemma[＝⟦succ⟧]₀ e)))
             (Lemma[＝⟦⟧-decidable] α β))
          (λ x → cons (₁ ∷ ⟨⟩) x) k)
@@ -535,14 +535,14 @@ UF.DiscreteAndSeparated.ℕ-is-discrete (λ α → 𝟚-induction 0 0 (α 0))
               transport (_＝_ (α i))
               (Lemma[＝⟦⟧-&lt;]
                (Lemma[＝⟦⟧-succ]
-                (C-Spaces.UniformContinuity.Lemma[LM-modulus]
+                (<a href="C-Spaces.UniformContinuity.html">C-Spaces.UniformContinuity</a>.Lemma[LM-modulus]
                  (λ α₁ → _＝⟦_⟧_ α₁ (succ k))
                  (λ α₁ β₁ →
                     dep-cases
                     (λ em →
                        dep-cases (λ e → inl (＝⟦succ⟧ em e))
                        (λ f → inr (λ e → f (Lemma[＝⟦succ⟧]₁ e)))
-                       (UF.DiscreteAndSeparated.𝟚-is-discrete (α₁ k) (β₁ k)))
+                       (<a href="UF.DiscreteAndSeparated.html">UF.DiscreteAndSeparated</a>.𝟚-is-discrete (α₁ k) (β₁ k)))
                     (λ f → inr (λ e → f (Lemma[＝⟦succ⟧]₀ e)))
                     (Lemma[＝⟦⟧-decidable] α₁ β₁))
                  ＝⟦⟧-sym ＝⟦⟧-trans (λ x → cons (₁ ∷ ⟨⟩) x) k
@@ -550,25 +550,25 @@ UF.DiscreteAndSeparated.ℕ-is-discrete (λ α → 𝟚-induction 0 0 (α 0))
                     ＝⟦succ⟧
                     (Lemma[&lt;-＝⟦⟧]
                      (λ i₁ r →
-                        C-Spaces.UniformContinuity.claim₀ ₁ ⟨⟩ k α₁ β₁ e e i₁
-                        (C-Spaces.Preliminaries.Naturals.Order.≤-trans r
-                         (C-Spaces.Preliminaries.Naturals.Order.Lemma[n≤n+1] k))))
-                    (C-Spaces.UniformContinuity.claim₀ ₁ ⟨⟩ k α₁ β₁ e e k
-                     (C-Spaces.Preliminaries.Naturals.Order._≤_.≤-succ
-                      C-Spaces.Preliminaries.Naturals.Order.≤-refl)))
+                        <a href="C-Spaces.UniformContinuity.html">C-Spaces.UniformContinuity</a>.claim₀ ₁ ⟨⟩ k α₁ β₁ e e i₁
+                        (<a href="C-Spaces.Preliminaries.Naturals.Order.html">C-Spaces.Preliminaries.Naturals.Order</a>.≤-trans r
+                         (<a href="C-Spaces.Preliminaries.Naturals.Order.html">C-Spaces.Preliminaries.Naturals.Order</a>.Lemma[n≤n+1] k))))
+                    (<a href="C-Spaces.UniformContinuity.html">C-Spaces.UniformContinuity</a>.claim₀ ₁ ⟨⟩ k α₁ β₁ e e k
+                     (<a href="C-Spaces.Preliminaries.Naturals.Order.html">C-Spaces.Preliminaries.Naturals.Order</a>._≤_.≤-succ
+                      <a href="C-Spaces.Preliminaries.Naturals.Order.html">C-Spaces.Preliminaries.Naturals.Order</a>.≤-refl)))
                  α β el))
                i i&lt;k)
               refl))
         ,
-        C-Spaces.UniformContinuity.Lemma[LM-least] (λ α → _＝⟦_⟧_ α k)
+        <a href="C-Spaces.UniformContinuity.html">C-Spaces.UniformContinuity</a>.Lemma[LM-least] (λ α → _＝⟦_⟧_ α k)
         Lemma[＝⟦⟧-decidable] ＝⟦⟧-sym ＝⟦⟧-trans (λ α x → α x)
-        (C-Spaces.UniformContinuity.LM (λ α → _＝⟦_⟧_ α (succ k))
+        (<a href="C-Spaces.UniformContinuity.html">C-Spaces.UniformContinuity</a>.LM (λ α → _＝⟦_⟧_ α (succ k))
          (λ α β →
             dep-cases
             (λ em →
                dep-cases (λ e → inl (＝⟦succ⟧ em e))
                (λ f → inr (λ e → f (Lemma[＝⟦succ⟧]₁ e)))
-               (UF.DiscreteAndSeparated.𝟚-is-discrete (α k) (β k)))
+               (<a href="UF.DiscreteAndSeparated.html">UF.DiscreteAndSeparated</a>.𝟚-is-discrete (α k) (β k)))
             (λ f → inr (λ e → f (Lemma[＝⟦succ⟧]₀ e)))
             (Lemma[＝⟦⟧-decidable] α β))
          (λ x → cons (₁ ∷ ⟨⟩) x) k)
@@ -578,14 +578,14 @@ UF.DiscreteAndSeparated.ℕ-is-discrete (λ α → 𝟚-induction 0 0 (α 0))
               transport (_＝_ (α i))
               (Lemma[＝⟦⟧-&lt;]
                (Lemma[＝⟦⟧-succ]
-                (C-Spaces.UniformContinuity.Lemma[LM-modulus]
+                (<a href="C-Spaces.UniformContinuity.html">C-Spaces.UniformContinuity</a>.Lemma[LM-modulus]
                  (λ α₁ → _＝⟦_⟧_ α₁ (succ k))
                  (λ α₁ β₁ →
                     dep-cases
                     (λ em →
                        dep-cases (λ e → inl (＝⟦succ⟧ em e))
                        (λ f → inr (λ e → f (Lemma[＝⟦succ⟧]₁ e)))
-                       (UF.DiscreteAndSeparated.𝟚-is-discrete (α₁ k) (β₁ k)))
+                       (<a href="UF.DiscreteAndSeparated.html">UF.DiscreteAndSeparated</a>.𝟚-is-discrete (α₁ k) (β₁ k)))
                     (λ f → inr (λ e → f (Lemma[＝⟦succ⟧]₀ e)))
                     (Lemma[＝⟦⟧-decidable] α₁ β₁))
                  ＝⟦⟧-sym ＝⟦⟧-trans (λ x → cons (₁ ∷ ⟨⟩) x) k
@@ -593,43 +593,43 @@ UF.DiscreteAndSeparated.ℕ-is-discrete (λ α → 𝟚-induction 0 0 (α 0))
                     ＝⟦succ⟧
                     (Lemma[&lt;-＝⟦⟧]
                      (λ i₁ r →
-                        C-Spaces.UniformContinuity.claim₀ ₁ ⟨⟩ k α₁ β₁ e e i₁
-                        (C-Spaces.Preliminaries.Naturals.Order.≤-trans r
-                         (C-Spaces.Preliminaries.Naturals.Order.Lemma[n≤n+1] k))))
-                    (C-Spaces.UniformContinuity.claim₀ ₁ ⟨⟩ k α₁ β₁ e e k
-                     (C-Spaces.Preliminaries.Naturals.Order._≤_.≤-succ
-                      C-Spaces.Preliminaries.Naturals.Order.≤-refl)))
+                        <a href="C-Spaces.UniformContinuity.html">C-Spaces.UniformContinuity</a>.claim₀ ₁ ⟨⟩ k α₁ β₁ e e i₁
+                        (<a href="C-Spaces.Preliminaries.Naturals.Order.html">C-Spaces.Preliminaries.Naturals.Order</a>.≤-trans r
+                         (<a href="C-Spaces.Preliminaries.Naturals.Order.html">C-Spaces.Preliminaries.Naturals.Order</a>.Lemma[n≤n+1] k))))
+                    (<a href="C-Spaces.UniformContinuity.html">C-Spaces.UniformContinuity</a>.claim₀ ₁ ⟨⟩ k α₁ β₁ e e k
+                     (<a href="C-Spaces.Preliminaries.Naturals.Order.html">C-Spaces.Preliminaries.Naturals.Order</a>._≤_.≤-succ
+                      <a href="C-Spaces.Preliminaries.Naturals.Order.html">C-Spaces.Preliminaries.Naturals.Order</a>.≤-refl)))
                  α β el))
                i i&lt;k)
               refl))))
     (λ x → 0)
     (0 ,
      (λ α β e → refl) ,
-     (λ k prk → C-Spaces.Preliminaries.Naturals.Order._≤_.≤-zero))
+     (λ k prk → <a href="C-Spaces.Preliminaries.Naturals.Order.html">C-Spaces.Preliminaries.Naturals.Order</a>._≤_.≤-zero))
     (λ α x → α x)
     (λ k →
-       C-Spaces.UniformContinuity.LM (λ α → _＝⟦_⟧_ α k)
+       <a href="C-Spaces.UniformContinuity.html">C-Spaces.UniformContinuity</a>.LM (λ α → _＝⟦_⟧_ α k)
        Lemma[＝⟦⟧-decidable] (λ α x → α x)
-       (C-Spaces.UniformContinuity.LM (λ α → _＝⟦_⟧_ α (succ k))
+       (<a href="C-Spaces.UniformContinuity.html">C-Spaces.UniformContinuity</a>.LM (λ α → _＝⟦_⟧_ α (succ k))
         (λ α β →
            dep-cases
            (λ em →
               dep-cases (λ e → inl (＝⟦succ⟧ em e))
               (λ f → inr (λ e → f (Lemma[＝⟦succ⟧]₁ e)))
-              (UF.DiscreteAndSeparated.𝟚-is-discrete (α k) (β k)))
+              (<a href="UF.DiscreteAndSeparated.html">UF.DiscreteAndSeparated</a>.𝟚-is-discrete (α k) (β k)))
            (λ f → inr (λ e → f (Lemma[＝⟦succ⟧]₀ e)))
            (Lemma[＝⟦⟧-decidable] α β))
         (λ x → cons (₁ ∷ ⟨⟩) x) k)
        ,
-       C-Spaces.UniformContinuity.Lemma[LM-modulus] (λ α → _＝⟦_⟧_ α k)
+       <a href="C-Spaces.UniformContinuity.html">C-Spaces.UniformContinuity</a>.Lemma[LM-modulus] (λ α → _＝⟦_⟧_ α k)
        Lemma[＝⟦⟧-decidable] ＝⟦⟧-sym ＝⟦⟧-trans (λ α x → α x)
-       (C-Spaces.UniformContinuity.LM (λ α → _＝⟦_⟧_ α (succ k))
+       (<a href="C-Spaces.UniformContinuity.html">C-Spaces.UniformContinuity</a>.LM (λ α → _＝⟦_⟧_ α (succ k))
         (λ α β →
            dep-cases
            (λ em →
               dep-cases (λ e → inl (＝⟦succ⟧ em e))
               (λ f → inr (λ e → f (Lemma[＝⟦succ⟧]₁ e)))
-              (UF.DiscreteAndSeparated.𝟚-is-discrete (α k) (β k)))
+              (<a href="UF.DiscreteAndSeparated.html">UF.DiscreteAndSeparated</a>.𝟚-is-discrete (α k) (β k)))
            (λ f → inr (λ e → f (Lemma[＝⟦succ⟧]₀ e)))
            (Lemma[＝⟦⟧-decidable] α β))
         (λ x → cons (₁ ∷ ⟨⟩) x) k)
@@ -639,14 +639,14 @@ UF.DiscreteAndSeparated.ℕ-is-discrete (λ α → 𝟚-induction 0 0 (α 0))
              transport (_＝_ (α i))
              (Lemma[＝⟦⟧-&lt;]
               (Lemma[＝⟦⟧-succ]
-               (C-Spaces.UniformContinuity.Lemma[LM-modulus]
+               (<a href="C-Spaces.UniformContinuity.html">C-Spaces.UniformContinuity</a>.Lemma[LM-modulus]
                 (λ α₁ → _＝⟦_⟧_ α₁ (succ k))
                 (λ α₁ β₁ →
                    dep-cases
                    (λ em →
                       dep-cases (λ e → inl (＝⟦succ⟧ em e))
                       (λ f → inr (λ e → f (Lemma[＝⟦succ⟧]₁ e)))
-                      (UF.DiscreteAndSeparated.𝟚-is-discrete (α₁ k) (β₁ k)))
+                      (<a href="UF.DiscreteAndSeparated.html">UF.DiscreteAndSeparated</a>.𝟚-is-discrete (α₁ k) (β₁ k)))
                    (λ f → inr (λ e → f (Lemma[＝⟦succ⟧]₀ e)))
                    (Lemma[＝⟦⟧-decidable] α₁ β₁))
                 ＝⟦⟧-sym ＝⟦⟧-trans (λ x → cons (₁ ∷ ⟨⟩) x) k
@@ -654,25 +654,25 @@ UF.DiscreteAndSeparated.ℕ-is-discrete (λ α → 𝟚-induction 0 0 (α 0))
                    ＝⟦succ⟧
                    (Lemma[&lt;-＝⟦⟧]
                     (λ i₁ r →
-                       C-Spaces.UniformContinuity.claim₀ ₁ ⟨⟩ k α₁ β₁ e e i₁
-                       (C-Spaces.Preliminaries.Naturals.Order.≤-trans r
-                        (C-Spaces.Preliminaries.Naturals.Order.Lemma[n≤n+1] k))))
-                   (C-Spaces.UniformContinuity.claim₀ ₁ ⟨⟩ k α₁ β₁ e e k
-                    (C-Spaces.Preliminaries.Naturals.Order._≤_.≤-succ
-                     C-Spaces.Preliminaries.Naturals.Order.≤-refl)))
+                       <a href="C-Spaces.UniformContinuity.html">C-Spaces.UniformContinuity</a>.claim₀ ₁ ⟨⟩ k α₁ β₁ e e i₁
+                       (<a href="C-Spaces.Preliminaries.Naturals.Order.html">C-Spaces.Preliminaries.Naturals.Order</a>.≤-trans r
+                        (<a href="C-Spaces.Preliminaries.Naturals.Order.html">C-Spaces.Preliminaries.Naturals.Order</a>.Lemma[n≤n+1] k))))
+                   (<a href="C-Spaces.UniformContinuity.html">C-Spaces.UniformContinuity</a>.claim₀ ₁ ⟨⟩ k α₁ β₁ e e k
+                    (<a href="C-Spaces.Preliminaries.Naturals.Order.html">C-Spaces.Preliminaries.Naturals.Order</a>._≤_.≤-succ
+                     <a href="C-Spaces.Preliminaries.Naturals.Order.html">C-Spaces.Preliminaries.Naturals.Order</a>.≤-refl)))
                 α β el))
               i i&lt;k)
              refl))
        ,
-       C-Spaces.UniformContinuity.Lemma[LM-least] (λ α → _＝⟦_⟧_ α k)
+       <a href="C-Spaces.UniformContinuity.html">C-Spaces.UniformContinuity</a>.Lemma[LM-least] (λ α → _＝⟦_⟧_ α k)
        Lemma[＝⟦⟧-decidable] ＝⟦⟧-sym ＝⟦⟧-trans (λ α x → α x)
-       (C-Spaces.UniformContinuity.LM (λ α → _＝⟦_⟧_ α (succ k))
+       (<a href="C-Spaces.UniformContinuity.html">C-Spaces.UniformContinuity</a>.LM (λ α → _＝⟦_⟧_ α (succ k))
         (λ α β →
            dep-cases
            (λ em →
               dep-cases (λ e → inl (＝⟦succ⟧ em e))
               (λ f → inr (λ e → f (Lemma[＝⟦succ⟧]₁ e)))
-              (UF.DiscreteAndSeparated.𝟚-is-discrete (α k) (β k)))
+              (<a href="UF.DiscreteAndSeparated.html">UF.DiscreteAndSeparated</a>.𝟚-is-discrete (α k) (β k)))
            (λ f → inr (λ e → f (Lemma[＝⟦succ⟧]₀ e)))
            (Lemma[＝⟦⟧-decidable] α β))
         (λ x → cons (₁ ∷ ⟨⟩) x) k)
@@ -682,14 +682,14 @@ UF.DiscreteAndSeparated.ℕ-is-discrete (λ α → 𝟚-induction 0 0 (α 0))
              transport (_＝_ (α i))
              (Lemma[＝⟦⟧-&lt;]
               (Lemma[＝⟦⟧-succ]
-               (C-Spaces.UniformContinuity.Lemma[LM-modulus]
+               (<a href="C-Spaces.UniformContinuity.html">C-Spaces.UniformContinuity</a>.Lemma[LM-modulus]
                 (λ α₁ → _＝⟦_⟧_ α₁ (succ k))
                 (λ α₁ β₁ →
                    dep-cases
                    (λ em →
                       dep-cases (λ e → inl (＝⟦succ⟧ em e))
                       (λ f → inr (λ e → f (Lemma[＝⟦succ⟧]₁ e)))
-                      (UF.DiscreteAndSeparated.𝟚-is-discrete (α₁ k) (β₁ k)))
+                      (<a href="UF.DiscreteAndSeparated.html">UF.DiscreteAndSeparated</a>.𝟚-is-discrete (α₁ k) (β₁ k)))
                    (λ f → inr (λ e → f (Lemma[＝⟦succ⟧]₀ e)))
                    (Lemma[＝⟦⟧-decidable] α₁ β₁))
                 ＝⟦⟧-sym ＝⟦⟧-trans (λ x → cons (₁ ∷ ⟨⟩) x) k
@@ -697,13 +697,13 @@ UF.DiscreteAndSeparated.ℕ-is-discrete (λ α → 𝟚-induction 0 0 (α 0))
                    ＝⟦succ⟧
                    (Lemma[&lt;-＝⟦⟧]
                     (λ i₁ r →
-                       C-Spaces.UniformContinuity.claim₀ ₁ ⟨⟩ k α₁ β₁ e e i₁
-                       (C-Spaces.Preliminaries.Naturals.Order.≤-trans r
-                        (C-Spaces.Preliminaries.Naturals.Order.Lemma[n≤n+1] k))))
-                   (C-Spaces.UniformContinuity.claim₀ ₁ ⟨⟩ k α₁ β₁ e e k
-                    (C-Spaces.Preliminaries.Naturals.Order._≤_.≤-succ
-                     C-Spaces.Preliminaries.Naturals.Order.≤-refl)))
+                       <a href="C-Spaces.UniformContinuity.html">C-Spaces.UniformContinuity</a>.claim₀ ₁ ⟨⟩ k α₁ β₁ e e i₁
+                       (<a href="C-Spaces.Preliminaries.Naturals.Order.html">C-Spaces.Preliminaries.Naturals.Order</a>.≤-trans r
+                        (<a href="C-Spaces.Preliminaries.Naturals.Order.html">C-Spaces.Preliminaries.Naturals.Order</a>.Lemma[n≤n+1] k))))
+                   (<a href="C-Spaces.UniformContinuity.html">C-Spaces.UniformContinuity</a>.claim₀ ₁ ⟨⟩ k α₁ β₁ e e k
+                    (<a href="C-Spaces.Preliminaries.Naturals.Order.html">C-Spaces.Preliminaries.Naturals.Order</a>._≤_.≤-succ
+                     <a href="C-Spaces.Preliminaries.Naturals.Order.html">C-Spaces.Preliminaries.Naturals.Order</a>.≤-refl)))
                 α β el))
               i i&lt;k)
              refl)))))))
-</a></pre></body></html>
+</span></pre></body></html>

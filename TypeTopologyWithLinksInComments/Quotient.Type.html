@@ -1,10 +1,10 @@
 <!DOCTYPE HTML>
-<html><head><meta charset="utf-8"><title>Quotient.Type</title><link rel="stylesheet" href="Agda.css"></head><body><pre class="Agda"><a id="1" class="Background">Martin Escardo and Tom de Jong, August 2018, April 2022, September 2023.
+<html><head><meta charset="utf-8"><title>Quotient.Type</title><link rel="stylesheet" href="Agda.css"></head><body><pre class="Agda"><span id="1" class="Background">Martin Escardo and Tom de Jong, August 2018, April 2022, September 2023.
 
 Quotients. Much of this material is moved from or abstracted from the
-earlier 2018 module Quotient.Large by Martin Escardo.
+earlier 2018 module <a href="Quotient.Large.html">Quotient.Large</a> by Martin Escardo.
 
-</a><a id="200" class="Markup">\begin{code}</a>
+</span><a id="200" class="Markup">\begin{code}</a>
 
 <a id="214" class="Symbol">{-#</a> <a id="218" class="Keyword">OPTIONS</a> <a id="226" class="Pragma">--safe</a> <a id="233" class="Pragma">--without-K</a> <a id="245" class="Symbol">#-}</a>
 
@@ -42,14 +42,14 @@ earlier 2018 module Quotient.Large by Martin Escardo.
                           <a id="1218" class="Symbol">→</a> <a id="1220" class="Symbol">(</a><a id="1221" href="Quotient.Type.html#1099" class="Bound">X</a> <a id="1223" class="Symbol">→</a> <a id="1225" href="Quotient.Type.html#1182" class="Bound">Y</a><a id="1226" class="Symbol">)</a> <a id="1228" class="Symbol">→</a> <a id="1230" href="MLTT.Universes.html#3833" class="Generalizable">𝓤</a> <a id="1232" href="Agda.Primitive.html#961" class="Primitive Operator">⊔</a> <a id="1234" href="MLTT.Universes.html#3835" class="Generalizable">𝓥</a> <a id="1236" href="Agda.Primitive.html#961" class="Primitive Operator">⊔</a> <a id="1238" href="MLTT.Universes.html#3837" class="Generalizable">𝓦</a> <a id="1240" href="MLTT.Universes.html#4011" class="Function Operator">̇</a>
 <a id="1242" href="Quotient.Type.html#1070" class="Function">identifies-related-points</a> <a id="1268" class="Symbol">(</a><a id="1269" href="Quotient.Type.html#1269" class="Bound Operator">_≈_</a> <a id="1273" href="MLTT.Sigma.html#395" class="InductiveConstructor Operator">,</a> <a id="1275" class="Symbol">_)</a> <a id="1278" href="Quotient.Type.html#1278" class="Bound">f</a> <a id="1280" class="Symbol">=</a> <a id="1282" class="Symbol">∀</a> <a id="1284" class="Symbol">{</a><a id="1285" href="Quotient.Type.html#1285" class="Bound">x</a> <a id="1287" href="Quotient.Type.html#1287" class="Bound">x&#39;</a><a id="1289" class="Symbol">}</a> <a id="1291" class="Symbol">→</a> <a id="1293" href="Quotient.Type.html#1285" class="Bound">x</a> <a id="1295" href="Quotient.Type.html#1269" class="Bound Operator">≈</a> <a id="1297" href="Quotient.Type.html#1287" class="Bound">x&#39;</a> <a id="1300" class="Symbol">→</a> <a id="1302" href="Quotient.Type.html#1278" class="Bound">f</a> <a id="1304" href="Quotient.Type.html#1285" class="Bound">x</a> <a id="1306" href="MLTT.Id.html#193" class="Datatype Operator">＝</a> <a id="1308" href="Quotient.Type.html#1278" class="Bound">f</a> <a id="1310" href="Quotient.Type.html#1287" class="Bound">x&#39;</a>
 
-<a id="1314" class="Markup">\end{code}</a><a id="1324" class="Background">
+<a id="1314" class="Markup">\end{code}</a><span id="1324" class="Background">
 
-To account for the module Quotient.Large, and, at the same time, usual
+To account for the module <a href="Quotient.Large.html">Quotient.Large</a>, and, at the same time, usual
 (small) quotients, we introduce a parametric definion of existence of
 quotients. For small quotients we take ℓ = id, and for large quotients
 we take ℓ = (_⁺) (see below).
 
-</a><a id="1569" class="Markup">\begin{code}</a>
+</span><a id="1569" class="Markup">\begin{code}</a>
 
 <a id="1583" class="Keyword">record</a> <a id="general-set-quotients-exist"></a><a id="1590" href="Quotient.Type.html#1590" class="Record">general-set-quotients-exist</a> <a id="1618" class="Symbol">(</a><a id="1619" href="Quotient.Type.html#1619" class="Bound">ℓ</a> <a id="1621" class="Symbol">:</a> <a id="1623" href="MLTT.Universes.html#3778" class="Postulate">Universe</a> <a id="1632" class="Symbol">→</a> <a id="1634" href="MLTT.Universes.html#3778" class="Postulate">Universe</a><a id="1642" class="Symbol">)</a> <a id="1644" class="Symbol">:</a> <a id="1646" href="MLTT.Universes.html#3807" class="Primitive">𝓤ω</a> <a id="1649" class="Keyword">where</a>
  <a id="1656" class="Keyword">field</a>
@@ -103,17 +103,17 @@ The induction principle follows from the universal property.
       <a id="3684" href="Quotient.Type.html#3684" class="Function">h</a> <a id="3686" class="Symbol">:</a> <a id="3688" href="MLTT.Sigma-Type.html#198" class="Field">pr₁</a> <a id="3692" href="MLTT.Pi.html#513" class="Function Operator">∘</a> <a id="3694" href="Quotient.Type.html#3242" class="Function">f̅</a> <a id="3697" href="MLTT.Pi.html#513" class="Function Operator">∘</a> <a id="3699" href="Quotient.Type.html#1730" class="Field">η/</a> <a id="3702" href="Quotient.Type.html#2657" class="Bound">≋</a> <a id="3704" href="MLTT.Id.html#1888" class="Function Operator">∼</a> <a id="3706" href="Quotient.Type.html#1730" class="Field">η/</a> <a id="3709" href="Quotient.Type.html#2657" class="Bound">≋</a>
       <a id="3717" href="Quotient.Type.html#3684" class="Function">h</a> <a id="3719" href="Quotient.Type.html#3719" class="Bound">x</a> <a id="3721" class="Symbol">=</a> <a id="3723" href="MLTT.Id.html#1135" class="Function">ap</a> <a id="3726" href="MLTT.Sigma-Type.html#198" class="Field">pr₁</a> <a id="3730" class="Symbol">(</a><a id="3731" href="Quotient.Type.html#3285" class="Function">f̅-after-η-is-f</a> <a id="3747" href="Quotient.Type.html#3719" class="Bound">x</a><a id="3748" class="Symbol">)</a>
 
-<a id="3751" class="Markup">\end{code}</a><a id="3761" class="Background">
+<a id="3751" class="Markup">\end{code}</a><span id="3761" class="Background">
 
 Paying attention to universe levels, it is important to note that the quotient
 of X : 𝓤 by a 𝓥-valued equivalence relation is assumed to live in 𝓤 ⊔ 𝓥. In
 particular, the quotient of type in 𝓤 by a 𝓤-valued equivalence relation lives
 in 𝓤 again.
 
-The following are facts about quotients, moved from Quotient.Large as
+The following are facts about quotients, moved from <a href="Quotient.Large.html">Quotient.Large</a> as
 they are of general use.
 
-</a><a id="4106" class="Markup">\begin{code}</a>
+</span><a id="4106" class="Markup">\begin{code}</a>
 
  <a id="4121" class="Keyword">module</a> <a id="4128" href="Quotient.Type.html#4128" class="Module">_</a>
          <a id="4139" class="Symbol">{</a><a id="4140" href="Quotient.Type.html#4140" class="Bound">X</a> <a id="4142" class="Symbol">:</a> <a id="4144" href="MLTT.Universes.html#3833" class="Generalizable">𝓤</a> <a id="4146" href="MLTT.Universes.html#4011" class="Function Operator">̇</a> <a id="4148" class="Symbol">}</a>
@@ -380,21 +380,21 @@ We now define the existence of small and large quotients:
 <a id="12818" href="Quotient.Type.html#12767" class="Function">set-quotients-exist</a>       <a id="12844" class="Symbol">=</a> <a id="12846" href="Quotient.Type.html#1590" class="Record">general-set-quotients-exist</a> <a id="12874" class="Symbol">(λ</a> <a id="12877" href="Quotient.Type.html#12877" class="Bound">𝓤</a> <a id="12879" class="Symbol">→</a> <a id="12881" href="Quotient.Type.html#12877" class="Bound">𝓤</a><a id="12882" class="Symbol">)</a>
 <a id="12884" href="Quotient.Type.html#12787" class="Function">large-set-quotients-exist</a> <a id="12910" class="Symbol">=</a> <a id="12912" href="Quotient.Type.html#1590" class="Record">general-set-quotients-exist</a> <a id="12940" class="Symbol">(</a><a id="12941" href="MLTT.Universes.html#3754" class="Primitive Operator">_⁺</a><a id="12943" class="Symbol">)</a>
 
-<a id="12946" class="Markup">\end{code}</a><a id="12956" class="Background">
+<a id="12946" class="Markup">\end{code}</a><span id="12956" class="Background">
 
 It turns out that quotients, if they exist, are necessarily
-effective. This is proved the module Quotient.Effective. But we need
-to include the definition here.
+effective. This is proved in the module <a href="Quotient.Effectivity.html">Quotient.Effectivity</a>. But we
+need to include the definition here.
 
-</a><a id="13120" class="Markup">\begin{code}</a>
+</span><a id="13125" class="Markup">\begin{code}</a>
 
-<a id="are-effective"></a><a id="13134" href="Quotient.Type.html#13134" class="Function">are-effective</a> <a id="13148" class="Symbol">:</a> <a id="13150" class="Symbol">{</a><a id="13151" href="Quotient.Type.html#13151" class="Bound">ℓ</a> <a id="13153" class="Symbol">:</a> <a id="13155" href="MLTT.Universes.html#3778" class="Postulate">Universe</a> <a id="13164" class="Symbol">→</a> <a id="13166" href="MLTT.Universes.html#3778" class="Postulate">Universe</a><a id="13174" class="Symbol">}</a> <a id="13176" class="Symbol">→</a> <a id="13178" href="Quotient.Type.html#1590" class="Record">general-set-quotients-exist</a> <a id="13206" href="Quotient.Type.html#13151" class="Bound">ℓ</a> <a id="13208" class="Symbol">→</a> <a id="13210" href="MLTT.Universes.html#3807" class="Primitive">𝓤ω</a>
-<a id="13213" href="Quotient.Type.html#13134" class="Function">are-effective</a> <a id="13227" href="Quotient.Type.html#13227" class="Bound">sq</a> <a id="13230" class="Symbol">=</a> <a id="13232" class="Symbol">{</a><a id="13233" href="Quotient.Type.html#13233" class="Bound">𝓤</a> <a id="13235" href="Quotient.Type.html#13235" class="Bound">𝓥</a> <a id="13237" class="Symbol">:</a> <a id="13239" href="MLTT.Universes.html#3778" class="Postulate">Universe</a><a id="13247" class="Symbol">}</a> <a id="13249" class="Symbol">{</a><a id="13250" href="Quotient.Type.html#13250" class="Bound">X</a> <a id="13252" class="Symbol">:</a> <a id="13254" href="Quotient.Type.html#13233" class="Bound">𝓤</a> <a id="13256" href="MLTT.Universes.html#4011" class="Function Operator">̇</a> <a id="13258" class="Symbol">}</a>
-                   <a id="13279" class="Symbol">(</a><a id="13280" href="Quotient.Type.html#13280" class="Bound">R</a> <a id="13282" class="Symbol">:</a> <a id="13284" href="Quotient.Type.html#893" class="Function">EqRel</a> <a id="13290" class="Symbol">{</a><a id="13291" href="Quotient.Type.html#13233" class="Bound">𝓤</a><a id="13292" class="Symbol">}</a> <a id="13294" class="Symbol">{</a><a id="13295" href="Quotient.Type.html#13235" class="Bound">𝓥</a><a id="13296" class="Symbol">}</a> <a id="13298" href="Quotient.Type.html#13250" class="Bound">X</a><a id="13299" class="Symbol">)</a>
-                   <a id="13320" class="Symbol">{</a><a id="13321" href="Quotient.Type.html#13321" class="Bound">x</a> <a id="13323" href="Quotient.Type.html#13323" class="Bound">y</a> <a id="13325" class="Symbol">:</a> <a id="13327" href="Quotient.Type.html#13250" class="Bound">X</a><a id="13328" class="Symbol">}</a>
-                 <a id="13347" class="Symbol">→</a> <a id="13349" href="Quotient.Type.html#1730" class="Field">η/</a> <a id="13352" href="Quotient.Type.html#13280" class="Bound">R</a> <a id="13354" href="Quotient.Type.html#13321" class="Bound">x</a> <a id="13356" href="MLTT.Id.html#193" class="Datatype Operator">＝</a> <a id="13358" href="Quotient.Type.html#1730" class="Field">η/</a> <a id="13361" href="Quotient.Type.html#13280" class="Bound">R</a> <a id="13363" href="Quotient.Type.html#13323" class="Bound">y</a> <a id="13365" class="Symbol">→</a> <a id="13367" href="Quotient.Type.html#13321" class="Bound">x</a> <a id="13369" href="Quotient.Type.html#1000" class="Function Operator">≈[</a> <a id="13372" href="Quotient.Type.html#13280" class="Bound">R</a> <a id="13374" href="Quotient.Type.html#1000" class="Function Operator">]</a> <a id="13376" href="Quotient.Type.html#13323" class="Bound">y</a>
- <a id="13379" class="Keyword">where</a>
-  <a id="13387" class="Keyword">open</a> <a id="13392" href="Quotient.Type.html#1590" class="Module">general-set-quotients-exist</a> <a id="13420" href="Quotient.Type.html#13227" class="Bound">sq</a>
+<a id="are-effective"></a><a id="13139" href="Quotient.Type.html#13139" class="Function">are-effective</a> <a id="13153" class="Symbol">:</a> <a id="13155" class="Symbol">{</a><a id="13156" href="Quotient.Type.html#13156" class="Bound">ℓ</a> <a id="13158" class="Symbol">:</a> <a id="13160" href="MLTT.Universes.html#3778" class="Postulate">Universe</a> <a id="13169" class="Symbol">→</a> <a id="13171" href="MLTT.Universes.html#3778" class="Postulate">Universe</a><a id="13179" class="Symbol">}</a> <a id="13181" class="Symbol">→</a> <a id="13183" href="Quotient.Type.html#1590" class="Record">general-set-quotients-exist</a> <a id="13211" href="Quotient.Type.html#13156" class="Bound">ℓ</a> <a id="13213" class="Symbol">→</a> <a id="13215" href="MLTT.Universes.html#3807" class="Primitive">𝓤ω</a>
+<a id="13218" href="Quotient.Type.html#13139" class="Function">are-effective</a> <a id="13232" href="Quotient.Type.html#13232" class="Bound">sq</a> <a id="13235" class="Symbol">=</a> <a id="13237" class="Symbol">{</a><a id="13238" href="Quotient.Type.html#13238" class="Bound">𝓤</a> <a id="13240" href="Quotient.Type.html#13240" class="Bound">𝓥</a> <a id="13242" class="Symbol">:</a> <a id="13244" href="MLTT.Universes.html#3778" class="Postulate">Universe</a><a id="13252" class="Symbol">}</a> <a id="13254" class="Symbol">{</a><a id="13255" href="Quotient.Type.html#13255" class="Bound">X</a> <a id="13257" class="Symbol">:</a> <a id="13259" href="Quotient.Type.html#13238" class="Bound">𝓤</a> <a id="13261" href="MLTT.Universes.html#4011" class="Function Operator">̇</a> <a id="13263" class="Symbol">}</a>
+                   <a id="13284" class="Symbol">(</a><a id="13285" href="Quotient.Type.html#13285" class="Bound">R</a> <a id="13287" class="Symbol">:</a> <a id="13289" href="Quotient.Type.html#893" class="Function">EqRel</a> <a id="13295" class="Symbol">{</a><a id="13296" href="Quotient.Type.html#13238" class="Bound">𝓤</a><a id="13297" class="Symbol">}</a> <a id="13299" class="Symbol">{</a><a id="13300" href="Quotient.Type.html#13240" class="Bound">𝓥</a><a id="13301" class="Symbol">}</a> <a id="13303" href="Quotient.Type.html#13255" class="Bound">X</a><a id="13304" class="Symbol">)</a>
+                   <a id="13325" class="Symbol">{</a><a id="13326" href="Quotient.Type.html#13326" class="Bound">x</a> <a id="13328" href="Quotient.Type.html#13328" class="Bound">y</a> <a id="13330" class="Symbol">:</a> <a id="13332" href="Quotient.Type.html#13255" class="Bound">X</a><a id="13333" class="Symbol">}</a>
+                 <a id="13352" class="Symbol">→</a> <a id="13354" href="Quotient.Type.html#1730" class="Field">η/</a> <a id="13357" href="Quotient.Type.html#13285" class="Bound">R</a> <a id="13359" href="Quotient.Type.html#13326" class="Bound">x</a> <a id="13361" href="MLTT.Id.html#193" class="Datatype Operator">＝</a> <a id="13363" href="Quotient.Type.html#1730" class="Field">η/</a> <a id="13366" href="Quotient.Type.html#13285" class="Bound">R</a> <a id="13368" href="Quotient.Type.html#13328" class="Bound">y</a> <a id="13370" class="Symbol">→</a> <a id="13372" href="Quotient.Type.html#13326" class="Bound">x</a> <a id="13374" href="Quotient.Type.html#1000" class="Function Operator">≈[</a> <a id="13377" href="Quotient.Type.html#13285" class="Bound">R</a> <a id="13379" href="Quotient.Type.html#1000" class="Function Operator">]</a> <a id="13381" href="Quotient.Type.html#13328" class="Bound">y</a>
+ <a id="13384" class="Keyword">where</a>
+  <a id="13392" class="Keyword">open</a> <a id="13397" href="Quotient.Type.html#1590" class="Module">general-set-quotients-exist</a> <a id="13425" href="Quotient.Type.html#13232" class="Bound">sq</a>
 
-<a id="13424" class="Markup">\end{code}</a><a id="13434" class="Background">
+<a id="13429" class="Markup">\end{code}</a><a id="13439" class="Background">
 </a></pre></body></html>

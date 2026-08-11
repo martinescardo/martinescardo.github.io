@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html><head><meta charset="utf-8"><title>UF.Groupoids</title><link rel="stylesheet" href="Agda.css"></head><body><pre class="Agda"><a id="1" class="Background">--------------------------------------------------------------------------------
+<html><head><meta charset="utf-8"><title>UF.Groupoids</title><link rel="stylesheet" href="Agda.css"></head><body><pre class="Agda"><span id="1" class="Background">--------------------------------------------------------------------------------
 Ettore Aldrovandi, ealdrovandi@fsu.edu
 
 September 2022
@@ -10,10 +10,10 @@ propositions are at level zero, sets are at level one and groupoids
 are at level two.
 
 We define is-groupoid as an analog of is-set and is-prop,
-independently of hlevels. Since UF.hlevels uses global univalence,
+independently of hlevels. Since <a href="UF.HLevels.html">UF.HLevels</a> uses global univalence,
 hlevel stuff is confined in a submodule below.
 
-</a><a id="550" class="Markup">\begin{code}</a>
+</span><a id="550" class="Markup">\begin{code}</a>
 
 <a id="564" class="Symbol">{-#</a> <a id="568" class="Keyword">OPTIONS</a> <a id="576" class="Pragma">--safe</a> <a id="583" class="Pragma">--without-K</a> <a id="595" class="Symbol">#-}</a>
 
@@ -46,11 +46,11 @@ Sets are Groupoids.
 <a id="sets-are-groupoids"></a><a id="1232" href="UF.Groupoids.html#1232" class="Function">sets-are-groupoids</a> <a id="1251" class="Symbol">:</a> <a id="1253" class="Symbol">{</a><a id="1254" href="UF.Groupoids.html#1254" class="Bound">X</a> <a id="1256" class="Symbol">:</a> <a id="1258" href="MLTT.Universes.html#3833" class="Generalizable">𝓤</a> <a id="1260" href="MLTT.Universes.html#4011" class="Function Operator">̇</a> <a id="1262" class="Symbol">}</a> <a id="1264" class="Symbol">→</a> <a id="1266" href="UF.Sets.html#709" class="Function">is-set</a> <a id="1273" href="UF.Groupoids.html#1254" class="Bound">X</a> <a id="1275" class="Symbol">→</a> <a id="1277" href="UF.Groupoids.html#904" class="Function">is-groupoid</a> <a id="1289" href="UF.Groupoids.html#1254" class="Bound">X</a>
 <a id="1291" href="UF.Groupoids.html#1232" class="Function">sets-are-groupoids</a> <a id="1310" href="UF.Groupoids.html#1310" class="Bound">i</a> <a id="1312" class="Symbol">=</a> <a id="1314" href="UF.Subsingletons-Properties.html#345" class="Function">props-are-sets</a> <a id="1329" href="UF.Groupoids.html#1310" class="Bound">i</a>
 
-<a id="1332" class="Markup">\end{code}</a><a id="1342" class="Background">
+<a id="1332" class="Markup">\end{code}</a><span id="1342" class="Background">
 
-UF.hlevels uses global univalence.
+<a href="UF.HLevels.html">UF.HLevels</a> uses global univalence.
 
-</a><a id="1380" class="Markup">\begin{code}</a>
+</span><a id="1380" class="Markup">\begin{code}</a>
 
 <a id="1394" class="Keyword">module</a> <a id="hleveltwo"></a><a id="1401" href="UF.Groupoids.html#1401" class="Module">hleveltwo</a> <a id="1411" class="Symbol">(</a><a id="1412" href="UF.Groupoids.html#1412" class="Bound">ua</a> <a id="1415" class="Symbol">:</a> <a id="1417" href="UF.Univalence.html#494" class="Function">Univalence</a><a id="1427" class="Symbol">)</a>  <a id="1430" class="Keyword">where</a>
 

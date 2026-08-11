@@ -1,20 +1,20 @@
 <!DOCTYPE HTML>
-<html><head><meta charset="utf-8"><title>deprecated.EGroups.FromGroup</title><link rel="stylesheet" href="Agda.css"></head><body><pre class="Agda"><a id="1" class="Background">Martin Escardo, July 2026.
+<html><head><meta charset="utf-8"><title>deprecated.EGroups.FromGroup</title><link rel="stylesheet" href="Agda.css"></head><body><pre class="Agda"><span id="1" class="Background">Martin Escardo, July 2026.
 
 Every group is an egroup.
 
-An ordinary group (Groups.Type) is a set with a group operation whose
+An ordinary group (<a href="Groups.Type.html">Groups.Type</a>) is a set with a group operation whose
 laws hold up to the identity type _＝_. It is in particular an egroup:
 take the underlying setoid to be the carrier with its identity type as
 the equivalence relation (which is an equivalence relation, given by
 refl, _⁻¹ and _∙_), and the operation is a congruence for _＝_ via ap₂.
 
 Note that we do not use that the carrier is a set: the identity type
-is an equivalence relation in the sense of deprecated.EGroups.Setoid,
+is an equivalence relation in the sense of <a href="deprecated.EGroups.Setoid.html">deprecated.EGroups.Setoid</a>,
 whether or not it is proposition-valued, and egroups do not require
 the equivalence relation to be proposition-valued.
 
-</a><a id="667" class="Markup">\begin{code}</a>
+</span><a id="667" class="Markup">\begin{code}</a>
 
 <a id="681" class="Symbol">{-#</a> <a id="685" class="Keyword">OPTIONS</a> <a id="693" class="Pragma">--safe</a> <a id="700" class="Pragma">--without-K</a> <a id="712" class="Symbol">#-}</a>
 

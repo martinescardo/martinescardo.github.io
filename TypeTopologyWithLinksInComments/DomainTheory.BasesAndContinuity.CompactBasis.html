@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html><head><meta charset="utf-8"><title>DomainTheory.BasesAndContinuity.CompactBasis</title><link rel="stylesheet" href="Agda.css"></head><body><pre class="Agda"><a id="1" class="Background">Tom de Jong and Ayberk Tosun, 4 &amp; 5 October 2023
+<html><head><meta charset="utf-8"><title>DomainTheory.BasesAndContinuity.CompactBasis</title><link rel="stylesheet" href="Agda.css"></head><body><pre class="Agda"><span id="1" class="Background">Tom de Jong and Ayberk Tosun, 4 &amp; 5 October 2023
 
 
 Given an algebraic dcpo 𝓓, the subset K of compact elements forms a basis for 𝓓.
@@ -24,7 +24,7 @@ that exponentials are locally small.
 The split support observation is due to Ayberk Tosun (23 September 2023) and was
 formalised, with the addition of many explanatory comments, by Tom de Jong.
 Ayberk previously formalised the result for spectrality in the context of locale
-theory in Locales.SmallBasis (truncated-spectralᴰ-implies-spectral).
+theory in <a href="Locales.SmallBasis.html">Locales.SmallBasis</a> (truncated-spectralᴰ-implies-spectral).
 
 Towards the end, we also clarify how the fact that K is the unique basis (as a
 subset) consisting of compact elements fits in to our framework.
@@ -32,9 +32,9 @@ subset) consisting of compact elements fits in to our framework.
 
 ¹ Set replacement says: if f : X → Y is a map from a small type to a locally
   small set, then the image of f is small.
-  It is equivalent to having small set quotients, see Quotient.index.
+  It is equivalent to having small set quotients, see <a href="Quotient.index.html">Quotient.index</a>.
 
-</a><a id="1603" class="Markup">\begin{code}</a>
+</span><a id="1603" class="Markup">\begin{code}</a>
 
 <a id="1617" class="Symbol">{-#</a> <a id="1621" class="Keyword">OPTIONS</a> <a id="1629" class="Pragma">--safe</a> <a id="1636" class="Pragma">--without-K</a> <a id="1648" class="Symbol">#-}</a>
 
@@ -255,16 +255,16 @@ is a small type.
      <a id="9458" href="DomainTheory.BasesAndContinuity.CompactBasis.html#9458" class="Function">loc-small</a> <a id="9468" class="Symbol">:</a> <a id="9470" href="DomainTheory.Basics.Miscelanea.html#25785" class="Record">is-locally-small</a> <a id="9487" href="DomainTheory.BasesAndContinuity.CompactBasis.html#2888" class="Bound">𝓓</a>
      <a id="9494" href="DomainTheory.BasesAndContinuity.CompactBasis.html#9458" class="Function">loc-small</a> <a id="9504" class="Symbol">=</a> <a id="9506" href="DomainTheory.BasesAndContinuity.Bases.html#15836" class="Function">locally-small-if-small-compact-basis</a> <a id="9543" href="DomainTheory.BasesAndContinuity.CompactBasis.html#2888" class="Bound">𝓓</a> <a id="9545" href="DomainTheory.BasesAndContinuity.CompactBasis.html#7858" class="Bound">β</a> <a id="9547" href="DomainTheory.BasesAndContinuity.CompactBasis.html#7862" class="Bound">scb</a>
 
-<a id="9552" class="Markup">\end{code}</a><a id="9562" class="Background">
+<a id="9552" class="Markup">\end{code}</a><span id="9562" class="Background">
 
 If we additionally assume univalence, then we can prove that K is small from
 assuming an *unspecified* small compact basis.
 
 The need for univalence lies in the fact that it implies that smallness is a
 property (being-small-is-prop).
-(In fact, univalence is equivalent to this, in some precise sense, see UF.Size.)
+(In fact, univalence is equivalent to this, in some precise sense, see <a href="UF.Size.html">UF.Size</a>.)
 
-</a><a id="9880" class="Markup">\begin{code}</a>
+</span><a id="9880" class="Markup">\begin{code}</a>
 
  <a id="9895" class="Keyword">module</a> <a id="9902" href="DomainTheory.BasesAndContinuity.CompactBasis.html#9902" class="Module">_</a>
          <a id="9913" class="Symbol">(</a><a id="9914" href="DomainTheory.BasesAndContinuity.CompactBasis.html#9914" class="Bound">ua</a> <a id="9917" class="Symbol">:</a> <a id="9919" href="UF.Univalence.html#494" class="Function">Univalence</a><a id="9929" class="Symbol">)</a>

@@ -1,8 +1,8 @@
 <!DOCTYPE HTML>
-<html><head><meta charset="utf-8"><title>UF.FunExt-from-Naive-FunExt</title><link rel="stylesheet" href="Agda.css"></head><body><pre class="Agda"><a id="1" class="Background">Cory Knapp, 6th June 2018.
+<html><head><meta charset="utf-8"><title>UF.FunExt-from-Naive-FunExt</title><link rel="stylesheet" href="Agda.css"></head><body><pre class="Agda"><span id="1" class="Background">Cory Knapp, 6th June 2018.
 
 This is an alternative version of naive-funext-gives-funext from
-UF.FunExt-Properties.lagda (by Martin Escardo, 19th May 2018);
+<a href="UF.FunExt-Properties.html">UF.FunExt-Properties.lagda</a> (by Martin Escardo, 19th May 2018);
 
 here we split the proof that naive function extensionality into two parts:
 
@@ -12,9 +12,9 @@ here we split the proof that naive function extensionality into two parts:
 2. If naive-function extensionality holds, then the antecedent of the
    above holds.
 
-Point 2. is already proved in UF.Equiv-Funext.lagda
+Point 2. is already proved in <a href="UF.Equiv-FunExt.html">UF.Equiv-FunExt.lagda</a>
 
-</a><a id="482" class="Markup">\begin{code}</a>
+</span><a id="482" class="Markup">\begin{code}</a>
 
 <a id="496" class="Symbol">{-#</a> <a id="500" class="Keyword">OPTIONS</a> <a id="508" class="Pragma">--safe</a> <a id="515" class="Pragma">--without-K</a> <a id="527" class="Symbol">#-}</a>
 
@@ -57,7 +57,7 @@ Point 2. is already proved in UF.Equiv-Funext.lagda
    <a id="1701" href="UF.FunExt-from-Naive-FunExt.html#1675" class="Function">rs</a> <a id="1704" href="UF.FunExt-from-Naive-FunExt.html#1704" class="Bound">φ</a> <a id="1706" class="Symbol">=</a> <a id="1708" href="MLTT.Identity-Type.html#166" class="InductiveConstructor">refl</a>
 
 <a id="naive-funext-gives-funext&#39;"></a><a id="1714" href="UF.FunExt-from-Naive-FunExt.html#1714" class="Function">naive-funext-gives-funext&#39;</a> <a id="1741" class="Symbol">:</a> <a id="1743" href="UF.FunExt.html#640" class="Function">naive-funext</a> <a id="1756" href="MLTT.Universes.html#3833" class="Generalizable">𝓤</a> <a id="1758" class="Symbol">(</a><a id="1759" href="MLTT.Universes.html#3833" class="Generalizable">𝓤</a> <a id="1761" href="Agda.Primitive.html#961" class="Primitive Operator">⊔</a> <a id="1763" href="MLTT.Universes.html#3835" class="Generalizable">𝓥</a><a id="1764" class="Symbol">)</a> <a id="1766" class="Symbol">→</a> <a id="1768" href="UF.FunExt.html#640" class="Function">naive-funext</a> <a id="1781" href="MLTT.Universes.html#3833" class="Generalizable">𝓤</a> <a id="1783" href="MLTT.Universes.html#3833" class="Generalizable">𝓤</a> <a id="1785" class="Symbol">→</a> <a id="1787" href="UF.FunExt.html#850" class="Function">funext</a> <a id="1794" href="MLTT.Universes.html#3833" class="Generalizable">𝓤</a> <a id="1796" href="MLTT.Universes.html#3835" class="Generalizable">𝓥</a>
-<a id="1798" href="UF.FunExt-from-Naive-FunExt.html#1714" class="Function">naive-funext-gives-funext&#39;</a> <a id="1825" href="UF.FunExt-from-Naive-FunExt.html#1825" class="Bound">nfe</a> <a id="1829" href="UF.FunExt-from-Naive-FunExt.html#1829" class="Bound">nfe&#39;</a> <a id="1834" class="Symbol">=</a> <a id="1836" href="UF.FunExt-from-Naive-FunExt.html#976" class="Function">equiv-post-gives-funext&#39;</a> <a id="1861" class="Symbol">(</a><a id="1862" href="UF.Equiv-FunExt.html#1862" class="Function">equiv-post</a> <a id="1873" href="UF.FunExt-from-Naive-FunExt.html#1825" class="Bound">nfe</a> <a id="1877" href="UF.FunExt-from-Naive-FunExt.html#1829" class="Bound">nfe&#39;</a><a id="1881" class="Symbol">)</a>
+<a id="1798" href="UF.FunExt-from-Naive-FunExt.html#1714" class="Function">naive-funext-gives-funext&#39;</a> <a id="1825" href="UF.FunExt-from-Naive-FunExt.html#1825" class="Bound">nfe</a> <a id="1829" href="UF.FunExt-from-Naive-FunExt.html#1829" class="Bound">nfe&#39;</a> <a id="1834" class="Symbol">=</a> <a id="1836" href="UF.FunExt-from-Naive-FunExt.html#976" class="Function">equiv-post-gives-funext&#39;</a> <a id="1861" class="Symbol">(</a><a id="1862" href="UF.Equiv-FunExt.html#1859" class="Function">equiv-post</a> <a id="1873" href="UF.FunExt-from-Naive-FunExt.html#1825" class="Bound">nfe</a> <a id="1877" href="UF.FunExt-from-Naive-FunExt.html#1829" class="Bound">nfe&#39;</a><a id="1881" class="Symbol">)</a>
 
 <a id="naive-funext-gives-funext"></a><a id="1884" href="UF.FunExt-from-Naive-FunExt.html#1884" class="Function">naive-funext-gives-funext</a> <a id="1910" class="Symbol">:</a> <a id="1912" href="UF.FunExt.html#640" class="Function">naive-funext</a> <a id="1925" href="MLTT.Universes.html#3833" class="Generalizable">𝓤</a> <a id="1927" href="MLTT.Universes.html#3833" class="Generalizable">𝓤</a> <a id="1929" class="Symbol">→</a> <a id="1931" href="UF.FunExt.html#850" class="Function">funext</a> <a id="1938" href="MLTT.Universes.html#3833" class="Generalizable">𝓤</a> <a id="1940" href="MLTT.Universes.html#3833" class="Generalizable">𝓤</a>
 <a id="1942" href="UF.FunExt-from-Naive-FunExt.html#1884" class="Function">naive-funext-gives-funext</a> <a id="1968" href="UF.FunExt-from-Naive-FunExt.html#1968" class="Bound">fe</a> <a id="1971" class="Symbol">=</a> <a id="1973" href="UF.FunExt-from-Naive-FunExt.html#1714" class="Function">naive-funext-gives-funext&#39;</a> <a id="2000" href="UF.FunExt-from-Naive-FunExt.html#1968" class="Bound">fe</a> <a id="2003" href="UF.FunExt-from-Naive-FunExt.html#1968" class="Bound">fe</a>

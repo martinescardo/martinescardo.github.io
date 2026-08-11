@@ -220,7 +220,7 @@ Get rid of this:
 
 <a id="5179" class="Keyword">infixr</a> <a id="5186" class="Number">-1</a> <a id="5189" href="Notation.General.html#5073" class="Function">Sigma!</a>
 
-<a id="5197" class="Markup">\end{code}</a><a id="5207" class="Background">
+<a id="5197" class="Markup">\end{code}</a><span id="5207" class="Background">
 
 Note: Σ! is to be avoided, in favour of the contractibility of Σ,
 following univalent mathematics.
@@ -229,7 +229,7 @@ Ian Ray, 3rd December 2025.
 
 We add a new syntax where we reason with functions chained in sequence which is
 analogous to reasoning by chains of equations or equivalences (see
-MLTT/Id.lagda and UF/Equiv.lagda to review these ideas). We will include both
+<a href="MLTT.Id.html">MLTT/Id.lagda</a> and <a href="UF.Equiv.html">UF/Equiv.lagda</a> to review these ideas). We will include both
 compostional and diagrammatic order.
 
 Notice that reasoning in compositional order with g : B → C and f : A → B
@@ -247,7 +247,7 @@ from B to C) and then proving B by observing it suffices to prove A (and
 supplying a map from A to B). For this reason we provide notation that allows
 us to display proofs of this sort.
 
-</a><a id="6265" class="Markup">\begin{code}</a>
+</span><a id="6265" class="Markup">\begin{code}</a>
 
 <a id="_→⟨_⟩_"></a><a id="6279" href="Notation.General.html#6279" class="Function Operator">_→⟨_⟩_</a> <a id="6286" class="Symbol">:</a> <a id="6288" class="Symbol">(</a><a id="6289" href="Notation.General.html#6289" class="Bound">X</a> <a id="6291" class="Symbol">:</a> <a id="6293" href="MLTT.Universes.html#3833" class="Generalizable">𝓤</a> <a id="6295" href="MLTT.Universes.html#4011" class="Function Operator">̇</a> <a id="6297" class="Symbol">)</a> <a id="6299" class="Symbol">{</a><a id="6300" href="Notation.General.html#6300" class="Bound">Y</a> <a id="6302" class="Symbol">:</a> <a id="6304" href="MLTT.Universes.html#3835" class="Generalizable">𝓥</a> <a id="6306" href="MLTT.Universes.html#4011" class="Function Operator">̇</a> <a id="6308" class="Symbol">}</a> <a id="6310" class="Symbol">{</a><a id="6311" href="Notation.General.html#6311" class="Bound">Z</a> <a id="6313" class="Symbol">:</a> <a id="6315" href="MLTT.Universes.html#3837" class="Generalizable">𝓦</a> <a id="6317" href="MLTT.Universes.html#4011" class="Function Operator">̇</a> <a id="6319" class="Symbol">}</a> <a id="6321" class="Symbol">→</a> <a id="6323" class="Symbol">(</a><a id="6324" href="Notation.General.html#6289" class="Bound">X</a> <a id="6326" class="Symbol">→</a> <a id="6328" href="Notation.General.html#6300" class="Bound">Y</a><a id="6329" class="Symbol">)</a> <a id="6331" class="Symbol">→</a> <a id="6333" class="Symbol">(</a><a id="6334" href="Notation.General.html#6300" class="Bound">Y</a> <a id="6336" class="Symbol">→</a> <a id="6338" href="Notation.General.html#6311" class="Bound">Z</a><a id="6339" class="Symbol">)</a> <a id="6341" class="Symbol">→</a> <a id="6343" class="Symbol">(</a><a id="6344" href="Notation.General.html#6289" class="Bound">X</a> <a id="6346" class="Symbol">→</a> <a id="6348" href="Notation.General.html#6311" class="Bound">Z</a><a id="6349" class="Symbol">)</a>
 <a id="6351" class="Symbol">_</a> <a id="6353" href="Notation.General.html#6279" class="Function Operator">→⟨</a> <a id="6356" href="Notation.General.html#6356" class="Bound">f</a> <a id="6358" href="Notation.General.html#6279" class="Function Operator">⟩</a> <a id="6360" href="Notation.General.html#6360" class="Bound">g</a> <a id="6362" class="Symbol">=</a> <a id="6364" href="Notation.General.html#6360" class="Bound">g</a> <a id="6366" href="MLTT.Pi.html#513" class="Function Operator">∘</a> <a id="6368" href="Notation.General.html#6356" class="Bound">f</a>

@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html><head><meta charset="utf-8"><title>Quotient.Effectivity</title><link rel="stylesheet" href="Agda.css"></head><body><pre class="Agda"><a id="1" class="Background">Martin Escardo and Tom de Jong, written in Agda 12 September 2023, done in 2022.
+<html><head><meta charset="utf-8"><title>Quotient.Effectivity</title><link rel="stylesheet" href="Agda.css"></head><body><pre class="Agda"><span id="1" class="Background">Martin Escardo and Tom de Jong, written in Agda 12 September 2023, done in 2022.
 
 A quotient is said to be effective if for every x, y : X, we have
 x ≈ y whenever η/ x ＝ ‌η/ y. Notice that we didn&#39;t include effectivity
@@ -12,12 +12,12 @@ extensionality. The proof is as follows:
      quotients.
 
  (2) Construct another (large) quotient as described in
-     Quotient.Large.
+     <a href="Quotient.Large.html">Quotient.Large</a>.
 
  (3) This large quotient is effective, but has to be isomorphic to the assumed
      set quotient, hence this quotient has to be effective as well.
 
-</a><a id="751" class="Markup">\begin{code}</a>
+</span><a id="751" class="Markup">\begin{code}</a>
 
 <a id="765" class="Symbol">{-#</a> <a id="769" class="Keyword">OPTIONS</a> <a id="777" class="Pragma">--safe</a> <a id="784" class="Pragma">--without-K</a> <a id="796" class="Symbol">#-}</a>
 
@@ -36,19 +36,19 @@ extensionality. The proof is as follows:
 <a id="1056" class="Keyword">open</a> <a id="1061" class="Keyword">import</a> <a id="1068" href="UF.PropTrunc.html" class="Module">UF.PropTrunc</a>
 
 <a id="effectivity"></a><a id="1082" href="Quotient.Effectivity.html#1082" class="Function">effectivity</a> <a id="1094" class="Symbol">:</a> <a id="1096" class="Symbol">(</a><a id="1097" href="Quotient.Effectivity.html#1097" class="Bound">sq</a> <a id="1100" class="Symbol">:</a> <a id="1102" href="Quotient.Type.html#12767" class="Function">set-quotients-exist</a><a id="1121" class="Symbol">)</a>
-            <a id="1135" class="Symbol">→</a> <a id="1137" href="Quotient.Type.html#13134" class="Function">are-effective</a> <a id="1151" href="Quotient.Effectivity.html#1097" class="Bound">sq</a>
+            <a id="1135" class="Symbol">→</a> <a id="1137" href="Quotient.Type.html#13139" class="Function">are-effective</a> <a id="1151" href="Quotient.Effectivity.html#1097" class="Bound">sq</a>
 <a id="1154" href="Quotient.Effectivity.html#1082" class="Function">effectivity</a> <a id="1166" href="Quotient.Effectivity.html#1166" class="Bound">sq</a> <a id="1169" class="Symbol">=</a> <a id="1171" href="Quotient.Effectivity.html#1457" class="Function">sq-effective</a>
  <a id="1185" class="Keyword">where</a>
   <a id="1193" href="Quotient.Effectivity.html#1193" class="Function">pt</a> <a id="1196" class="Symbol">:</a> <a id="1198" href="UF.PropTrunc.html#486" class="Record">propositional-truncations-exist</a>
   <a id="1232" href="Quotient.Effectivity.html#1193" class="Function">pt</a> <a id="1235" class="Symbol">=</a> <a id="1237" href="Quotient.GivesPropTrunc.html#1270" class="Function">propositional-truncations-from-set-quotients</a> <a id="1282" href="Quotient.Effectivity.html#1166" class="Bound">sq</a> <a id="1285" href="Quotient.Effectivity.html#890" class="Bound">fe</a>
 
   <a id="1291" href="Quotient.Effectivity.html#1291" class="Function">lsq</a> <a id="1295" class="Symbol">:</a> <a id="1297" href="Quotient.Type.html#12787" class="Function">large-set-quotients-exist</a>
-  <a id="1325" href="Quotient.Effectivity.html#1291" class="Function">lsq</a> <a id="1329" class="Symbol">=</a> <a id="1331" href="Quotient.Large.html#7388" class="Function">large-set-quotients</a> <a id="1351" href="Quotient.Effectivity.html#1193" class="Function">pt</a> <a id="1354" href="Quotient.Effectivity.html#890" class="Bound">fe</a> <a id="1357" href="Quotient.Effectivity.html#913" class="Bound">pe</a>
+  <a id="1325" href="Quotient.Effectivity.html#1291" class="Function">lsq</a> <a id="1329" class="Symbol">=</a> <a id="1331" href="Quotient.Large.html#7385" class="Function">large-set-quotients</a> <a id="1351" href="Quotient.Effectivity.html#1193" class="Function">pt</a> <a id="1354" href="Quotient.Effectivity.html#890" class="Bound">fe</a> <a id="1357" href="Quotient.Effectivity.html#913" class="Bound">pe</a>
 
-  <a id="1363" href="Quotient.Effectivity.html#1363" class="Function">lsq-effective</a> <a id="1377" class="Symbol">:</a> <a id="1379" href="Quotient.Type.html#13134" class="Function">are-effective</a> <a id="1393" href="Quotient.Effectivity.html#1291" class="Function">lsq</a>
-  <a id="1399" href="Quotient.Effectivity.html#1363" class="Function">lsq-effective</a> <a id="1413" class="Symbol">=</a> <a id="1415" href="Quotient.Large.html#7996" class="Function">large-effective-set-quotients</a> <a id="1445" href="Quotient.Effectivity.html#1193" class="Function">pt</a> <a id="1448" href="Quotient.Effectivity.html#890" class="Bound">fe</a> <a id="1451" href="Quotient.Effectivity.html#913" class="Bound">pe</a>
+  <a id="1363" href="Quotient.Effectivity.html#1363" class="Function">lsq-effective</a> <a id="1377" class="Symbol">:</a> <a id="1379" href="Quotient.Type.html#13139" class="Function">are-effective</a> <a id="1393" href="Quotient.Effectivity.html#1291" class="Function">lsq</a>
+  <a id="1399" href="Quotient.Effectivity.html#1363" class="Function">lsq-effective</a> <a id="1413" class="Symbol">=</a> <a id="1415" href="Quotient.Large.html#7993" class="Function">large-effective-set-quotients</a> <a id="1445" href="Quotient.Effectivity.html#1193" class="Function">pt</a> <a id="1448" href="Quotient.Effectivity.html#890" class="Bound">fe</a> <a id="1451" href="Quotient.Effectivity.html#913" class="Bound">pe</a>
 
-  <a id="1457" href="Quotient.Effectivity.html#1457" class="Function">sq-effective</a> <a id="1470" class="Symbol">:</a> <a id="1472" href="Quotient.Type.html#13134" class="Function">are-effective</a> <a id="1486" href="Quotient.Effectivity.html#1166" class="Bound">sq</a>
+  <a id="1457" href="Quotient.Effectivity.html#1457" class="Function">sq-effective</a> <a id="1470" class="Symbol">:</a> <a id="1472" href="Quotient.Type.html#13139" class="Function">are-effective</a> <a id="1486" href="Quotient.Effectivity.html#1166" class="Bound">sq</a>
   <a id="1491" href="Quotient.Effectivity.html#1457" class="Function">sq-effective</a> <a id="1504" class="Symbol">{</a><a id="1505" href="Quotient.Effectivity.html#1505" class="Bound">𝓤</a><a id="1506" class="Symbol">}</a> <a id="1508" class="Symbol">{</a><a id="1509" href="Quotient.Effectivity.html#1509" class="Bound">𝓥</a><a id="1510" class="Symbol">}</a> <a id="1512" class="Symbol">{</a><a id="1513" href="Quotient.Effectivity.html#1513" class="Bound">X</a><a id="1514" class="Symbol">}</a> <a id="1516" href="Quotient.Effectivity.html#1516" class="Bound">R</a> <a id="1518" class="Symbol">{</a><a id="1519" href="Quotient.Effectivity.html#1519" class="Bound">x</a><a id="1520" class="Symbol">}</a> <a id="1522" class="Symbol">{</a><a id="1523" href="Quotient.Effectivity.html#1523" class="Bound">y</a><a id="1524" class="Symbol">}</a> <a id="1526" href="Quotient.Effectivity.html#1526" class="Bound">p</a> <a id="1528" class="Symbol">=</a> <a id="1530" href="Quotient.Effectivity.html#2169" class="Function">γ</a>
    <a id="1535" class="Keyword">where</a>
     <a id="1545" class="Keyword">module</a> <a id="1552" href="Quotient.Effectivity.html#1552" class="Module">s</a> <a id="1554" class="Symbol">=</a> <a id="1556" href="Quotient.Type.html#1590" class="Module">general-set-quotients-exist</a> <a id="1584" href="Quotient.Effectivity.html#1166" class="Bound">sq</a>

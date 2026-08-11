@@ -37,19 +37,19 @@ continuous is preserved by taking continuous retracts.
 
 <a id="1071" class="Keyword">open</a> <a id="1076" class="Keyword">import</a> <a id="1083" href="DomainTheory.BasesAndContinuity.IndCompletion.html" class="Module">DomainTheory.BasesAndContinuity.IndCompletion</a> <a id="1129" href="DomainTheory.BasesAndContinuity.Continuity.html#615" class="Bound">pt</a> <a id="1132" href="DomainTheory.BasesAndContinuity.Continuity.html#662" class="Bound">fe</a> <a id="1135" href="DomainTheory.BasesAndContinuity.Continuity.html#685" class="Bound">𝓥</a>
 
-<a id="1138" class="Markup">\end{code}</a><a id="1148" class="Background">
+<a id="1138" class="Markup">\end{code}</a><span id="1148" class="Background">
 
 We first define an untruncated, non-propositional, version of continuity for
 dcpos, which we call continuity data. The notion of a continuous dcpo will
 then be given by truncating the type of continuity data.
 
 The motivation for our definition of continuity is discussed in
-ContinuityDiscussion.lagda.
+<a href="DomainTheory.BasesAndContinuity.ContinuityDiscussion.html">ContinuityDiscussion.lagda</a>.
 
 We use record syntax to have descriptively named projections available without
 having to add them as boilerplate.
 
-</a><a id="1568" class="Markup">\begin{code}</a>
+</span><a id="1568" class="Markup">\begin{code}</a>
 
 <a id="1582" class="Keyword">record</a> <a id="continuity-data"></a><a id="1589" href="DomainTheory.BasesAndContinuity.Continuity.html#1589" class="Record">continuity-data</a>  <a id="1606" class="Symbol">(</a><a id="1607" href="DomainTheory.BasesAndContinuity.Continuity.html#1607" class="Bound">𝓓</a> <a id="1609" class="Symbol">:</a> <a id="1611" href="DomainTheory.Basics.Dcpo.html#6369" class="Function">DCPO</a> <a id="1616" class="Symbol">{</a><a id="1617" href="MLTT.Universes.html#3833" class="Generalizable">𝓤</a><a id="1618" class="Symbol">}</a> <a id="1620" class="Symbol">{</a><a id="1621" href="MLTT.Universes.html#3839" class="Generalizable">𝓣</a><a id="1622" class="Symbol">})</a> <a id="1625" class="Symbol">:</a> <a id="1627" href="DomainTheory.BasesAndContinuity.Continuity.html#685" class="Bound">𝓥</a> <a id="1629" href="MLTT.Universes.html#3754" class="Primitive Operator">⁺</a> <a id="1631" href="Agda.Primitive.html#961" class="Primitive Operator">⊔</a> <a id="1633" href="DomainTheory.BasesAndContinuity.Continuity.html#1617" class="Bound">𝓤</a> <a id="1635" href="Agda.Primitive.html#961" class="Primitive Operator">⊔</a> <a id="1637" href="DomainTheory.BasesAndContinuity.Continuity.html#1621" class="Bound">𝓣</a> <a id="1639" href="MLTT.Universes.html#4011" class="Function Operator">̇</a> <a id="1641" class="Keyword">where</a>
  <a id="1648" class="Keyword">field</a>

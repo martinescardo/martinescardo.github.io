@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html><head><meta charset="utf-8"><title>InjectiveTypes.CounterExamples</title><link rel="stylesheet" href="Agda.css"></head><body><pre class="Agda"><a id="1" class="Background">Martin Escardo, 23rd August 2023.
+<html><head><meta charset="utf-8"><title>InjectiveTypes.CounterExamples</title><link rel="stylesheet" href="Agda.css"></head><body><pre class="Agda"><span id="1" class="Background">Martin Escardo, 23rd August 2023.
 
 Some counterexamples to injectivity.
 
@@ -23,10 +23,10 @@ its truncated version (injectivity), but this doesn&#39;t matter because
 most of our conclusions are propositions, and when they are not we can
 consider their truncations, which are also constructive taboos.
 
-More counter-examples are in the module InjectiveTypes.Resizing and in
-the module InjectiveTypes.InhabitedTypesTaboo.
+More counter-examples are in the module <a href="InjectiveTypes.Resizing.html">InjectiveTypes.Resizing</a> and in
+the module <a href="InjectiveTypes.InhabitedTypesTaboo.html">InjectiveTypes.InhabitedTypesTaboo</a>.
 
-</a><a id="1201" class="Markup">\begin{code}</a>
+</span><a id="1201" class="Markup">\begin{code}</a>
 
 <a id="1215" class="Symbol">{-#</a> <a id="1219" class="Keyword">OPTIONS</a> <a id="1227" class="Pragma">--safe</a> <a id="1234" class="Pragma">--without-K</a> <a id="1246" class="Pragma">--lossy-unification</a> <a id="1266" class="Symbol">#-}</a>
 
@@ -457,7 +457,7 @@ In particular, we have the following.
        <a id="13086" class="Symbol">(</a><a id="13087" href="UF.Size.html#30593" class="Function">Ω-is-locally-small</a> <a id="13106" href="InjectiveTypes.CounterExamples.html#12825" class="Bound">pe</a> <a id="13109" href="InjectiveTypes.CounterExamples.html#12828" class="Bound">fe</a><a id="13111" class="Symbol">)</a>
        <a id="13120" class="Symbol">((</a><a id="13122" href="UF.SubtypeClassifier.html#1732" class="Function">⊥</a> <a id="13124" href="MLTT.Sigma.html#395" class="InductiveConstructor Operator">,</a> <a id="13126" href="UF.SubtypeClassifier.html#1734" class="Function">⊤</a><a id="13127" class="Symbol">)</a> <a id="13129" href="MLTT.Sigma.html#395" class="InductiveConstructor Operator">,</a> <a id="13131" href="UF.SubtypeClassifier.html#1891" class="Function">⊥-is-not-⊤</a><a id="13141" class="Symbol">)</a>
 
-<a id="13144" class="Markup">\end{code}</a><a id="13154" class="Background">
+<a id="13144" class="Markup">\end{code}</a><span id="13154" class="Background">
 
 Notice that ainjective-type-with-non-trivial-apartness-gives-WEM
 subsumes all the previous examples: the type 𝟚, which is a simple
@@ -473,11 +473,11 @@ TODO. Maybe we can list a few more interesting examples?
 Added 27 January 2025 by Tom de Jong. Revised 6 February 2025.
 
 We generalize non-trivial-totally-separated-ainjective-type-gives-¬¬-WEM from
-Taboos.Decomposability, where the notion of total separatedness is exploited
+<a href="Taboos.Decomposability.html">Taboos.Decomposability</a>, where the notion of total separatedness is exploited
 directly, to derive ¬¬ WEM from the assumption of a non-trivial injective type
 with a tight apartness.
 
-</a><a id="13878" class="Markup">\begin{code}</a>
+</span><a id="13878" class="Markup">\begin{code}</a>
 
 <a id="non-trivial-ainjective-type-with-tight-apartness-gives-¬¬-WEM"></a><a id="13892" href="InjectiveTypes.CounterExamples.html#13892" class="Function">non-trivial-ainjective-type-with-tight-apartness-gives-¬¬-WEM</a>
  <a id="13955" class="Symbol">:</a> <a id="13957" class="Symbol">(</a><a id="13958" href="MLTT.Sigma.html#423" class="Function">Σ</a> <a id="13960" href="InjectiveTypes.CounterExamples.html#13960" class="Bound">X</a> <a id="13962" href="MLTT.Sigma.html#423" class="Function">꞉</a> <a id="13964" href="MLTT.Universes.html#3833" class="Generalizable">𝓤</a> <a id="13966" href="MLTT.Universes.html#4011" class="Function Operator">̇</a> <a id="13968" href="MLTT.Sigma.html#423" class="Function">,</a> <a id="13970" class="Symbol">((</a><a id="13972" href="MLTT.Negation.html#278" class="Function Operator">¬</a> <a id="13974" href="UF.Subsingletons.html#469" class="Function">is-prop</a> <a id="13982" href="InjectiveTypes.CounterExamples.html#13960" class="Bound">X</a><a id="13983" class="Symbol">)</a> <a id="13985" href="MLTT.Sigma.html#558" class="Function Operator">×</a> <a id="13987" href="InjectiveTypes.Blackboard.html#15851" class="Function">ainjective-type</a> <a id="14003" href="InjectiveTypes.CounterExamples.html#13960" class="Bound">X</a> <a id="14005" href="MLTT.Universes.html#3835" class="Generalizable">𝓥</a> <a id="14007" href="MLTT.Universes.html#3837" class="Generalizable">𝓦</a> <a id="14009" href="MLTT.Sigma.html#558" class="Function Operator">×</a> <a id="14011" href="Apartness.Definition.html#3691" class="Function">Tight-Apartness</a> <a id="14027" href="InjectiveTypes.CounterExamples.html#13960" class="Bound">X</a> <a id="14029" href="MLTT.Universes.html#3839" class="Generalizable">𝓣</a><a id="14030" class="Symbol">))</a>

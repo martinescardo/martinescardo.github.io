@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html><head><meta charset="utf-8"><title>DomainTheory.BasesAndContinuity.ContinuityDiscussion</title><link rel="stylesheet" href="Agda.css"></head><body><pre class="Agda"><a id="1" class="Background">Tom de Jong, early January 2022.
+<html><head><meta charset="utf-8"><title>DomainTheory.BasesAndContinuity.ContinuityDiscussion</title><link rel="stylesheet" href="Agda.css"></head><body><pre class="Agda"><span id="1" class="Background">Tom de Jong, early January 2022.
 
 Inspired by the paper &quot;Continuous categories and exponentiable toposes&quot; by Peter
 Johnstone and André Joyal, we discuss the notions
@@ -8,7 +8,7 @@ Johnstone and André Joyal, we discuss the notions
 (2) continuity of a dcpo;
 (3) pseudocontinuity of a dcpo.
 
-(1) and (2) are defined in Continuity.lagda and (3) is defined and examined here.
+(1) and (2) are defined in <a href="DomainTheory.BasesAndContinuity.Continuity.html">Continuity.lagda</a> and (3) is defined and examined here.
 The notions (1)-(3) have the following shapes:
 
 (1)   Π (x : D) →   Σ I : 𝓥 ̇ , Σ α : I → D , α is-directed × ... × ...
@@ -17,7 +17,7 @@ The notions (1)-(3) have the following shapes:
 
 So (2) and (3) are propositions, but (1) isn&#39;t. We illustrate (1)-(3) by
 discussion them in terms of left adjoints. In these discussions, the
-Ind-completion, as defined in IndCompletion.lagda plays an important role.
+Ind-completion, as defined in <a href="DomainTheory.BasesAndContinuity.IndCompletion.html">IndCompletion.lagda</a> plays an important role.
 
 We show that (1) for a dcpo D is equivalent to asserting that the map
 ∐ : Ind(D) → D (which takes a directed family to its supremum) has a specified
@@ -35,7 +35,7 @@ We could take the poset reflection Ind(D)/≈ of Ind(D) and ask that the map
 type that is a proposition. We show that this amounts precisely to
 pseudocontinuity.
 
-</a><a id="1560" class="Markup">\begin{code}</a>
+</span><a id="1560" class="Markup">\begin{code}</a>
 
 <a id="1574" class="Symbol">{-#</a> <a id="1578" class="Keyword">OPTIONS</a> <a id="1586" class="Pragma">--safe</a> <a id="1593" class="Pragma">--without-K</a> <a id="1605" class="Symbol">#-}</a>
 
@@ -112,7 +112,7 @@ using Σ-types.
                                     <a id="4123" class="Symbol">((</a><a id="4125" href="DomainTheory.BasesAndContinuity.ContinuityDiscussion.html#3297" class="Function">structurally-continuous-from-Σ</a> <a id="4156" href="DomainTheory.BasesAndContinuity.ContinuityDiscussion.html#4043" class="Bound">𝓓</a><a id="4157" class="Symbol">)</a> <a id="4159" href="MLTT.Sigma.html#395" class="InductiveConstructor Operator">,</a>
                                      <a id="4198" class="Symbol">((λ</a> <a id="4202" href="DomainTheory.BasesAndContinuity.ContinuityDiscussion.html#4202" class="Bound">x</a> <a id="4204" class="Symbol">→</a> <a id="4206" href="MLTT.Identity-Type.html#166" class="InductiveConstructor">refl</a><a id="4210" class="Symbol">)</a> <a id="4212" href="MLTT.Sigma.html#395" class="InductiveConstructor Operator">,</a> <a id="4214" class="Symbol">(λ</a> <a id="4217" href="DomainTheory.BasesAndContinuity.ContinuityDiscussion.html#4217" class="Bound">x</a> <a id="4219" class="Symbol">→</a> <a id="4221" href="MLTT.Identity-Type.html#166" class="InductiveConstructor">refl</a><a id="4225" class="Symbol">)))</a>
 
-<a id="4230" class="Markup">\end{code}</a><a id="4240" class="Background">
+<a id="4230" class="Markup">\end{code}</a><span id="4240" class="Background">
 
 In &quot;Continuous categories and exponentiable toposes&quot;, Peter Johnstone and André
 Joyal show in Lemma 2.1 that a dcpo D is continuous if and only if the map
@@ -123,9 +123,9 @@ We show that the type expressing that the ∐-map has a left adjoint is equivale
 to the type expressing structural continuity of D.
 
 The proof below is fairly short, but only because we already characterized when
-∐-map has a left adjoint in IndCompletion.lagda.
+∐-map has a left adjoint in <a href="DomainTheory.BasesAndContinuity.IndCompletion.html">IndCompletion.lagda</a>.
 
-</a><a id="4780" class="Markup">\begin{code}</a>
+</span><a id="4780" class="Markup">\begin{code}</a>
 
 <a id="4794" class="Keyword">module</a> <a id="4801" href="DomainTheory.BasesAndContinuity.ContinuityDiscussion.html#4801" class="Module">_</a>
         <a id="4811" class="Symbol">(</a><a id="4812" href="DomainTheory.BasesAndContinuity.ContinuityDiscussion.html#4812" class="Bound">𝓓</a> <a id="4814" class="Symbol">:</a> <a id="4816" href="DomainTheory.Basics.Dcpo.html#6369" class="Function">DCPO</a> <a id="4821" class="Symbol">{</a><a id="4822" href="MLTT.Universes.html#3833" class="Generalizable">𝓤</a><a id="4823" class="Symbol">}</a> <a id="4825" class="Symbol">{</a><a id="4826" href="MLTT.Universes.html#3839" class="Generalizable">𝓣</a><a id="4827" class="Symbol">})</a>
@@ -214,7 +214,7 @@ unspecified left adjoint.
  <a id="7837" href="DomainTheory.BasesAndContinuity.ContinuityDiscussion.html#7715" class="Function">is-continuous-dcpo-iff-∐-map-has-unspecified-left-adjoint</a> <a id="7895" class="Symbol">=</a>
   <a id="7899" href="UF.EquivalenceExamples.html#35419" class="Function">∥∥-cong</a> <a id="7907" href="DomainTheory.BasesAndContinuity.ContinuityDiscussion.html#1763" class="Bound">pt</a> <a id="7910" class="Symbol">(</a><a id="7911" href="DomainTheory.BasesAndContinuity.ContinuityDiscussion.html#6453" class="Function">specified-left-adjoint-structurally-continuous-≃</a> <a id="7960" href="DomainTheory.BasesAndContinuity.ContinuityDiscussion.html#7530" class="Bound">𝓓</a><a id="7961" class="Symbol">)</a>
 
-<a id="7964" class="Markup">\end{code}</a><a id="7974" class="Background">
+<a id="7964" class="Markup">\end{code}</a><span id="7974" class="Background">
 
 Finally, we consider pseudocontinuity. It is similar to structural continuity,
 but instead of asking that for every x : D, we have a specified directed family
@@ -224,12 +224,12 @@ approximating x.
 On first sight, pseudocontinuity is arguably how one would expect us to define
 contuinity of a dcpo while ensuring the notion is property as opposed to
 structure. It is however weaker than continuity (as defined in
-Continuity.lagda) and structural continuity. More importantly, with
+<a href="DomainTheory.BasesAndContinuity.Continuity.html">Continuity.lagda</a>) and structural continuity. More importantly, with
 pseudocontinuity we would need some instances of the axiom of choice when
 proving the interpolation properties for the way-below relation, at least when
-trying to mimic the proof in Continuity.lagda.
+trying to mimic the proof in <a href="DomainTheory.BasesAndContinuity.Continuity.html">Continuity.lagda</a>.
 
-</a><a id="8712" class="Markup">\begin{code}</a>
+</span><a id="8712" class="Markup">\begin{code}</a>
 
 <a id="is-pseudocontinuous-dcpo"></a><a id="8726" href="DomainTheory.BasesAndContinuity.ContinuityDiscussion.html#8726" class="Function">is-pseudocontinuous-dcpo</a> <a id="8751" class="Symbol">:</a> <a id="8753" class="Symbol">(</a><a id="8754" href="DomainTheory.BasesAndContinuity.ContinuityDiscussion.html#8754" class="Bound">𝓓</a> <a id="8756" class="Symbol">:</a> <a id="8758" href="DomainTheory.Basics.Dcpo.html#6369" class="Function">DCPO</a> <a id="8763" class="Symbol">{</a><a id="8764" href="MLTT.Universes.html#3833" class="Generalizable">𝓤</a><a id="8765" class="Symbol">}</a> <a id="8767" class="Symbol">{</a><a id="8768" href="MLTT.Universes.html#3839" class="Generalizable">𝓣</a><a id="8769" class="Symbol">})</a> <a id="8772" class="Symbol">→</a> <a id="8774" href="DomainTheory.BasesAndContinuity.ContinuityDiscussion.html#1833" class="Bound">𝓥</a> <a id="8776" href="MLTT.Universes.html#3754" class="Primitive Operator">⁺</a> <a id="8778" href="Agda.Primitive.html#961" class="Primitive Operator">⊔</a> <a id="8780" href="MLTT.Universes.html#3833" class="Generalizable">𝓤</a> <a id="8782" href="Agda.Primitive.html#961" class="Primitive Operator">⊔</a> <a id="8784" href="MLTT.Universes.html#3839" class="Generalizable">𝓣</a> <a id="8786" href="MLTT.Universes.html#4011" class="Function Operator">̇</a>
 <a id="8788" href="DomainTheory.BasesAndContinuity.ContinuityDiscussion.html#8726" class="Function">is-pseudocontinuous-dcpo</a> <a id="8813" href="DomainTheory.BasesAndContinuity.ContinuityDiscussion.html#8813" class="Bound">𝓓</a> <a id="8815" class="Symbol">=</a>
@@ -272,7 +272,7 @@ choosing representatives of equivalence classes.
 
  <a id="10168" class="Keyword">open</a> <a id="10173" class="Keyword">import</a> <a id="10180" href="Quotient.Type.html" class="Module">Quotient.Type</a>
  <a id="10195" class="Keyword">open</a> <a id="10200" class="Keyword">import</a> <a id="10207" href="Quotient.Large.html" class="Module">Quotient.Large</a> <a id="10222" href="DomainTheory.BasesAndContinuity.ContinuityDiscussion.html#1763" class="Bound">pt</a> <a id="10225" href="DomainTheory.BasesAndContinuity.ContinuityDiscussion.html#1810" class="Bound">fe</a> <a id="10228" href="DomainTheory.BasesAndContinuity.ContinuityDiscussion.html#10111" class="Bound">pe</a>
- <a id="10232" class="Keyword">open</a> <a id="10237" href="Quotient.Type.html#1590" class="Module">general-set-quotients-exist</a> <a id="10265" href="Quotient.Large.html#7388" class="Function">large-set-quotients</a>
+ <a id="10232" class="Keyword">open</a> <a id="10237" href="Quotient.Type.html#1590" class="Module">general-set-quotients-exist</a> <a id="10265" href="Quotient.Large.html#7385" class="Function">large-set-quotients</a>
 
  <a id="10287" class="Keyword">open</a> <a id="10292" href="DomainTheory.BasesAndContinuity.IndCompletion.html#1440" class="Module">Ind-completion</a> <a id="10307" href="DomainTheory.BasesAndContinuity.ContinuityDiscussion.html#10135" class="Bound">𝓓</a>
  <a id="10310" class="Keyword">open</a> <a id="10315" href="DomainTheory.BasesAndContinuity.IndCompletion.html#12220" class="Module">Ind-completion-poset-reflection</a> <a id="10347" href="DomainTheory.BasesAndContinuity.ContinuityDiscussion.html#10111" class="Bound">pe</a> <a id="10350" href="DomainTheory.BasesAndContinuity.ContinuityDiscussion.html#10135" class="Bound">𝓓</a>

@@ -68,14 +68,14 @@ We get function extensionality from univalence:
 <a id="fe"></a><a id="1888" href="Games.Discussion.html#1888" class="Function">fe</a> <a id="1891" class="Symbol">:</a> <a id="1893" href="UF.FunExt.html#1047" class="Function">Fun-Ext</a>
 <a id="1901" href="Games.Discussion.html#1888" class="Function">fe</a> <a id="1904" class="Symbol">=</a> <a id="1906" href="UF.UA-FunExt.html#2569" class="Function">Univalence-gives-Fun-Ext</a> <a id="1931" href="Games.Discussion.html#1644" class="Bound">ua</a>
 
-<a id="1935" class="Markup">\end{code}</a><a id="1945" class="Background">
+<a id="1935" class="Markup">\end{code}</a><span id="1945" class="Background">
 
 To make this file self-contained, we will repeat some definitions of
-the module Games.TypeTrees. We import the module here, but using
+the module <a href="Games.TypeTrees.html">Games.TypeTrees</a>. We import the module here, but using
 nothing, so that the reader can click at the link to see what is
 there.
 
-</a><a id="2154" class="Markup">\begin{code}</a>
+</span><a id="2154" class="Markup">\begin{code}</a>
 
 <a id="2168" class="Keyword">open</a> <a id="2173" class="Keyword">import</a> <a id="2180" href="UF.Base.html" class="Module">UF.Base</a>
 <a id="2188" class="Keyword">open</a> <a id="2193" class="Keyword">import</a> <a id="2200" href="UF.Equiv.html" class="Module">UF.Equiv</a>
@@ -699,7 +699,7 @@ And, of course:
 <a id="[]-property₂"></a><a id="19904" href="Games.Discussion.html#19904" class="Function">[]-property₂</a> <a id="19917" class="Symbol">:</a> <a id="19919" class="Symbol">(</a><a id="19920" href="Games.Discussion.html#19920" class="Bound">Xt</a> <a id="19923" class="Symbol">:</a> <a id="19925" href="Games.Discussion.html#2589" class="Datatype">𝕋</a><a id="19926" class="Symbol">)</a> <a id="19928" class="Symbol">→</a> <a id="19930" href="Games.Discussion.html#3501" class="Function">is-[]-free</a> <a id="19941" href="Games.Discussion.html#19920" class="Bound">Xt</a> <a id="19944" class="Symbol">→</a> <a id="19946" href="MLTT.Negation.html#278" class="Function Operator">¬</a> <a id="19948" href="UF.PropTrunc.html#538" class="Field Operator">∥</a> <a id="19950" href="Games.Discussion.html#2765" class="Function">Path</a> <a id="19955" href="Games.Discussion.html#19920" class="Bound">Xt</a> <a id="19958" href="UF.PropTrunc.html#538" class="Field Operator">∥</a>
 <a id="19960" href="Games.Discussion.html#19904" class="Function">[]-property₂</a> <a id="19973" href="Games.Discussion.html#19973" class="Bound">Xt</a> <a id="19976" href="Games.Discussion.html#19976" class="Bound">f</a> <a id="19978" class="Symbol">=</a> <a id="19980" href="MLTT.Negation.html#1240" class="Function">contrapositive</a> <a id="19995" class="Symbol">(</a><a id="19996" href="Games.Discussion.html#18862" class="Function">path-gives-at-least-one-[]</a> <a id="20023" href="Games.Discussion.html#19973" class="Bound">Xt</a><a id="20025" class="Symbol">)</a> <a id="20027" class="Symbol">(</a><a id="20028" href="Games.Discussion.html#19663" class="Function">[]-property</a> <a id="20040" href="Games.Discussion.html#19973" class="Bound">Xt</a> <a id="20043" href="Games.Discussion.html#19976" class="Bound">f</a><a id="20044" class="Symbol">)</a>
 
-<a id="20047" class="Markup">\end{code}</a><a id="20057" class="Background">
+<a id="20047" class="Markup">\end{code}</a><span id="20057" class="Background">
 
 We remark that the developent of game theory here using 𝕋 doesn&#39;t
 actually require us to restrict to hereditarily inhabited
@@ -711,12 +711,12 @@ of the original development using 𝕋 is that it works in pure MLTT,
 whereas the approach using 𝔾 or ℍ requires propositional truncation
 and function extensionality.
 
-We now show how the file Games.FiniteHistoryDependent could have been
+We now show how the file <a href="Games.FiniteHistoryDependent.html">Games.FiniteHistoryDependent</a> could have been
 written using ℍ instead of 𝕋, for the sake of illustration, including
 a few of the original definitions with 𝕋 alongside the required
 modification needed to use ℍ instead:
 
-</a><a id="20872" class="Markup">\begin{code}</a>
+</span><a id="20872" class="Markup">\begin{code}</a>
 
 <a id="20886" class="Keyword">module</a> <a id="illustration"></a><a id="20893" href="Games.Discussion.html#20893" class="Module">illustration</a> <a id="20906" class="Symbol">(</a><a id="20907" href="Games.Discussion.html#20907" class="Bound">R</a> <a id="20909" class="Symbol">:</a> <a id="20911" href="Games.Discussion.html#1621" class="Bound">𝓤</a> <a id="20913" href="MLTT.Universes.html#4011" class="Function Operator">̇</a> <a id="20915" class="Symbol">)</a> <a id="20917" class="Keyword">where</a>
 
@@ -767,7 +767,7 @@ type of all ordinals into 𝔸, and then some kinds of ordinals in 𝔾, followi
 
    <a href="https://arxiv.org/abs/2301.10696">https://arxiv.org/abs/2301.10696</a>
 
-This paper is formalized in Ordinals.CumulativeHierarchy. We redefine
+This paper is formalized in <a href="Ordinals.CumulativeHierarchy.html">Ordinals.CumulativeHierarchy</a>. We redefine
 the function Ord-to-𝔸 below.
 
 </span><a id="22628" class="Markup">\begin{code}</a>
@@ -915,7 +915,7 @@ So Conway&#39;s games allow only win-or-lose. In particular, there is no
 draw, such as in tic-tac-toe or chess. Or outcomes more general than
 win, draw or lose, such as in poker.
 
-Our conception of game, defined in Games.FiniteHistoryDependent,
+Our conception of game, defined in <a href="Games.FiniteHistoryDependent.html">Games.FiniteHistoryDependent</a>,
 allows for two-person games of the above kind, but in general is
 defined for multiple-person games, with outcomes (or &quot;pay offs&quot;) in
 any type, for example the real numbers.

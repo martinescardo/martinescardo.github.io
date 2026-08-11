@@ -1,8 +1,8 @@
 <!DOCTYPE HTML>
-<html><head><meta charset="utf-8"><title>TypeTopology.LimitPoints</title><link rel="stylesheet" href="Agda.css"></head><body><pre class="Agda"><a id="1" class="Background">Martin Escardo 2023 and 2024.
+<html><head><meta charset="utf-8"><title>TypeTopology.LimitPoints</title><link rel="stylesheet" href="Agda.css"></head><body><pre class="Agda"><span id="1" class="Background">Martin Escardo 2023 and 2024.
 
 Notions of limit point moved from FailureofTotalSeparatedness and
-Ordinals.InductiveRecursiveCodesInterpretations to this module
+<a href="Ordinals.InductiveRecursiveCodesInterpretations.html">Ordinals.InductiveRecursiveCodesInterpretations</a> to this module
 14th October 2024.
 
 In classical topology, a limit point is a point that is not
@@ -17,10 +17,10 @@ it is not possible to exhibit any limit point. This changes if we
 assume anticlassical principles, such as &quot;all functions (of some kind)
 are continuous&quot;. One of the weakest continuity principle is the
 negation of WLPO, as discussed in the module
-TypeTopology.DecidabilityOfNonContinuity. So, in order to remain
+<a href="TypeTopology.DecidabilityOfNonContinuity.html">TypeTopology.DecidabilityOfNonContinuity</a>. So, in order to remain
 agnostic, we define the notion of limit point as follows.
 
-</a><a id="1009" class="Markup">\begin{code}</a>
+</span><a id="1009" class="Markup">\begin{code}</a>
 
 <a id="1023" class="Symbol">{-#</a> <a id="1027" class="Keyword">OPTIONS</a> <a id="1035" class="Pragma">--safe</a> <a id="1042" class="Pragma">--without-K</a> <a id="1054" class="Symbol">#-}</a>
 
@@ -33,21 +33,21 @@ agnostic, we define the notion of limit point as follows.
 <a id="is-limit-point"></a><a id="1184" href="TypeTopology.LimitPoints.html#1184" class="Function">is-limit-point</a> <a id="1199" class="Symbol">:</a> <a id="1201" class="Symbol">{</a><a id="1202" href="TypeTopology.LimitPoints.html#1202" class="Bound">X</a> <a id="1204" class="Symbol">:</a> <a id="1206" href="MLTT.Universes.html#3833" class="Generalizable">𝓤</a> <a id="1208" href="MLTT.Universes.html#4011" class="Function Operator">̇</a> <a id="1210" class="Symbol">}</a> <a id="1212" class="Symbol">→</a> <a id="1214" href="TypeTopology.LimitPoints.html#1202" class="Bound">X</a> <a id="1216" class="Symbol">→</a> <a id="1218" href="MLTT.Universes.html#3833" class="Generalizable">𝓤</a> <a id="1220" href="MLTT.Universes.html#4011" class="Function Operator">̇</a>
 <a id="1222" href="TypeTopology.LimitPoints.html#1184" class="Function">is-limit-point</a> <a id="1237" href="TypeTopology.LimitPoints.html#1237" class="Bound">x</a> <a id="1239" class="Symbol">=</a> <a id="1241" href="UF.DiscreteAndSeparated.html#615" class="Function">is-isolated</a> <a id="1253" href="TypeTopology.LimitPoints.html#1237" class="Bound">x</a> <a id="1255" class="Symbol">→</a> <a id="1257" href="Taboos.WLPO.html#1337" class="Function">WLPO</a>
 
-<a id="1263" class="Markup">\end{code}</a><a id="1273" class="Background">
+<a id="1263" class="Markup">\end{code}</a><span id="1273" class="Background">
 
 But it turns out that there is a strengthening of this notion that
 arises in practice in two places in this development, in the modules
-FailureOfTotalSeparatedness and Ordinals.InductiveRecursiveCodesInterpretations.
+FailureOfTotalSeparatedness and <a href="Ordinals.InductiveRecursiveCodesInterpretations.html">Ordinals.InductiveRecursiveCodesInterpretations</a>.
 
-</a><a id="1493" class="Markup">\begin{code}</a>
+</span><a id="1493" class="Markup">\begin{code}</a>
 
 <a id="is-limit-point⁺"></a><a id="1507" href="TypeTopology.LimitPoints.html#1507" class="Function">is-limit-point⁺</a> <a id="1523" class="Symbol">:</a> <a id="1525" class="Symbol">{</a><a id="1526" href="TypeTopology.LimitPoints.html#1526" class="Bound">X</a> <a id="1528" class="Symbol">:</a> <a id="1530" href="MLTT.Universes.html#3833" class="Generalizable">𝓤</a> <a id="1532" href="MLTT.Universes.html#4011" class="Function Operator">̇</a> <a id="1534" class="Symbol">}</a> <a id="1536" class="Symbol">→</a> <a id="1538" href="TypeTopology.LimitPoints.html#1526" class="Bound">X</a> <a id="1540" class="Symbol">→</a> <a id="1542" href="MLTT.Universes.html#3833" class="Generalizable">𝓤</a> <a id="1544" href="MLTT.Universes.html#4011" class="Function Operator">̇</a>
-<a id="1546" href="TypeTopology.LimitPoints.html#1507" class="Function">is-limit-point⁺</a> <a id="1562" href="TypeTopology.LimitPoints.html#1562" class="Bound">x</a> <a id="1564" class="Symbol">=</a> <a id="1566" href="UF.DiscreteAndSeparated.html#25708" class="Function">is-weakly-isolated</a> <a id="1585" href="TypeTopology.LimitPoints.html#1562" class="Bound">x</a> <a id="1587" class="Symbol">→</a> <a id="1589" href="Taboos.WLPO.html#1337" class="Function">WLPO</a>
+<a id="1546" href="TypeTopology.LimitPoints.html#1507" class="Function">is-limit-point⁺</a> <a id="1562" href="TypeTopology.LimitPoints.html#1562" class="Bound">x</a> <a id="1564" class="Symbol">=</a> <a id="1566" href="UF.DiscreteAndSeparated.html#25689" class="Function">is-weakly-isolated</a> <a id="1585" href="TypeTopology.LimitPoints.html#1562" class="Bound">x</a> <a id="1587" class="Symbol">→</a> <a id="1589" href="Taboos.WLPO.html#1337" class="Function">WLPO</a>
 
 <a id="limit-points⁺-are-limit-points"></a><a id="1595" href="TypeTopology.LimitPoints.html#1595" class="Function">limit-points⁺-are-limit-points</a> <a id="1626" class="Symbol">:</a> <a id="1628" class="Symbol">{</a><a id="1629" href="TypeTopology.LimitPoints.html#1629" class="Bound">X</a> <a id="1631" class="Symbol">:</a> <a id="1633" href="MLTT.Universes.html#3833" class="Generalizable">𝓤</a> <a id="1635" href="MLTT.Universes.html#4011" class="Function Operator">̇</a> <a id="1637" class="Symbol">}</a> <a id="1639" class="Symbol">(</a><a id="1640" href="TypeTopology.LimitPoints.html#1640" class="Bound">x</a> <a id="1642" class="Symbol">:</a> <a id="1644" href="TypeTopology.LimitPoints.html#1629" class="Bound">X</a><a id="1645" class="Symbol">)</a>
                                <a id="1678" class="Symbol">→</a> <a id="1680" href="TypeTopology.LimitPoints.html#1507" class="Function">is-limit-point⁺</a> <a id="1696" href="TypeTopology.LimitPoints.html#1640" class="Bound">x</a>
                                <a id="1729" class="Symbol">→</a> <a id="1731" href="TypeTopology.LimitPoints.html#1184" class="Function">is-limit-point</a> <a id="1746" href="TypeTopology.LimitPoints.html#1640" class="Bound">x</a>
-<a id="1748" href="TypeTopology.LimitPoints.html#1595" class="Function">limit-points⁺-are-limit-points</a> <a id="1779" href="TypeTopology.LimitPoints.html#1779" class="Bound">x</a> <a id="1781" href="TypeTopology.LimitPoints.html#1781" class="Bound">ℓ</a> <a id="1783" href="TypeTopology.LimitPoints.html#1783" class="Bound">i</a> <a id="1785" class="Symbol">=</a> <a id="1787" href="TypeTopology.LimitPoints.html#1781" class="Bound">ℓ</a> <a id="1789" class="Symbol">(</a><a id="1790" href="UF.DiscreteAndSeparated.html#25807" class="Function">isolated-gives-weakly-isolated</a> <a id="1821" href="TypeTopology.LimitPoints.html#1779" class="Bound">x</a> <a id="1823" href="TypeTopology.LimitPoints.html#1783" class="Bound">i</a><a id="1824" class="Symbol">)</a>
+<a id="1748" href="TypeTopology.LimitPoints.html#1595" class="Function">limit-points⁺-are-limit-points</a> <a id="1779" href="TypeTopology.LimitPoints.html#1779" class="Bound">x</a> <a id="1781" href="TypeTopology.LimitPoints.html#1781" class="Bound">ℓ</a> <a id="1783" href="TypeTopology.LimitPoints.html#1783" class="Bound">i</a> <a id="1785" class="Symbol">=</a> <a id="1787" href="TypeTopology.LimitPoints.html#1781" class="Bound">ℓ</a> <a id="1789" class="Symbol">(</a><a id="1790" href="UF.DiscreteAndSeparated.html#25788" class="Function">isolated-gives-weakly-isolated</a> <a id="1821" href="TypeTopology.LimitPoints.html#1779" class="Bound">x</a> <a id="1823" href="TypeTopology.LimitPoints.html#1783" class="Bound">i</a><a id="1824" class="Symbol">)</a>
 
 <a id="1827" class="Markup">\end{code}</a><a id="1837" class="Background">
 </a></pre></body></html>

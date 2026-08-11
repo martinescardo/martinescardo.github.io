@@ -1,15 +1,15 @@
 <!DOCTYPE HTML>
-<html><head><meta charset="utf-8"><title>deprecated.EGroups.Type</title><link rel="stylesheet" href="Agda.css"></head><body><pre class="Agda"><a id="1" class="Background">Martin Escardo, July 2026.
+<html><head><meta charset="utf-8"><title>deprecated.EGroups.Type</title><link rel="stylesheet" href="Agda.css"></head><body><pre class="Agda"><span id="1" class="Background">Martin Escardo, July 2026.
 
 The type of egroups.
 
-An egroup is a setoid (defined in deprecated.EGroups.Setoid) equipped with a
+An egroup is a setoid (defined in <a href="deprecated.EGroups.Setoid.html">deprecated.EGroups.Setoid</a>) equipped with a
 compatible group structure, that is, an operation that is a congruence
 for the equivalence relation, whose group laws hold up to the
 equivalence relation rather than up to the identity type _＝_.
 
-This is the analogue, for setoids, of the module Groups.Type. Compared
-with Groups.Type:
+This is the analogue, for setoids, of the module <a href="Groups.Type.html">Groups.Type</a>. Compared
+with <a href="Groups.Type.html">Groups.Type</a>:
 
  * The requirement &quot;is-set X&quot; is removed, as all types are considered
    to be sets in the setoid world.
@@ -19,7 +19,7 @@ with Groups.Type:
  * Every remaining occurrence of the identity type becomes the
    equivalence relation.
 
-</a><a id="659" class="Markup">\begin{code}</a>
+</span><a id="659" class="Markup">\begin{code}</a>
 
 <a id="673" class="Symbol">{-#</a> <a id="677" class="Keyword">OPTIONS</a> <a id="685" class="Pragma">--safe</a> <a id="692" class="Pragma">--without-K</a> <a id="704" class="Symbol">#-}</a>
 
@@ -28,14 +28,14 @@ with Groups.Type:
 <a id="747" class="Keyword">open</a> <a id="752" class="Keyword">import</a> <a id="759" href="MLTT.Spartan.html" class="Module">MLTT.Spartan</a>
 <a id="772" class="Keyword">open</a> <a id="777" class="Keyword">import</a> <a id="784" href="deprecated.EGroups.Setoid.html" class="Module">deprecated.EGroups.Setoid</a>
 
-<a id="811" class="Markup">\end{code}</a><a id="821" class="Background">
+<a id="811" class="Markup">\end{code}</a><span id="821" class="Background">
 
 The axioms of a compatible group structure on a setoid S, and the
-structure and type of deprecated.EGroups. As in Groups.Type, the
+structure and type of deprecated.EGroups. As in <a href="Groups.Type.html">Groups.Type</a>, the
 inverse is given existentially, as part of the axioms, where Σ is used
 for existence in the setoid world.
 
-</a><a id="1061" class="Markup">\begin{code}</a>
+</span><a id="1061" class="Markup">\begin{code}</a>
 
 <a id="egroup-axioms"></a><a id="1075" href="deprecated.EGroups.Type.html#1075" class="Function">egroup-axioms</a> <a id="1089" class="Symbol">:</a> <a id="1091" class="Symbol">(</a><a id="1092" href="deprecated.EGroups.Type.html#1092" class="Bound">S</a> <a id="1094" class="Symbol">:</a> <a id="1096" href="deprecated.EGroups.Setoid.html#1008" class="Function">Setoid</a> <a id="1103" href="MLTT.Universes.html#3833" class="Generalizable">𝓤</a> <a id="1105" href="MLTT.Universes.html#3835" class="Generalizable">𝓥</a><a id="1106" class="Symbol">)</a> <a id="1108" class="Symbol">→</a> <a id="1110" class="Symbol">(</a><a id="1111" href="deprecated.EGroups.Setoid.html#1247" class="Function Operator">∣</a> <a id="1113" href="deprecated.EGroups.Type.html#1092" class="Bound">S</a> <a id="1115" href="deprecated.EGroups.Setoid.html#1247" class="Function Operator">∣</a> <a id="1117" class="Symbol">→</a> <a id="1119" href="deprecated.EGroups.Setoid.html#1247" class="Function Operator">∣</a> <a id="1121" href="deprecated.EGroups.Type.html#1092" class="Bound">S</a> <a id="1123" href="deprecated.EGroups.Setoid.html#1247" class="Function Operator">∣</a> <a id="1125" class="Symbol">→</a> <a id="1127" href="deprecated.EGroups.Setoid.html#1247" class="Function Operator">∣</a> <a id="1129" href="deprecated.EGroups.Type.html#1092" class="Bound">S</a> <a id="1131" href="deprecated.EGroups.Setoid.html#1247" class="Function Operator">∣</a><a id="1132" class="Symbol">)</a> <a id="1134" class="Symbol">→</a> <a id="1136" href="MLTT.Universes.html#3833" class="Generalizable">𝓤</a> <a id="1138" href="Agda.Primitive.html#961" class="Primitive Operator">⊔</a> <a id="1140" href="MLTT.Universes.html#3835" class="Generalizable">𝓥</a> <a id="1142" href="MLTT.Universes.html#4011" class="Function Operator">̇</a>
 <a id="1144" href="deprecated.EGroups.Type.html#1075" class="Function">egroup-axioms</a> <a id="1158" href="deprecated.EGroups.Type.html#1158" class="Bound">S</a> <a id="1160" href="deprecated.EGroups.Type.html#1160" class="Bound Operator">_·_</a> <a id="1164" class="Symbol">=</a>
@@ -112,14 +112,14 @@ equivalence relation.
 <a id="E-inv-right"></a><a id="3621" href="deprecated.EGroups.Type.html#3621" class="Function">E-inv-right</a> <a id="3633" class="Symbol">:</a> <a id="3635" class="Symbol">(</a><a id="3636" href="deprecated.EGroups.Type.html#3636" class="Bound">G</a> <a id="3638" class="Symbol">:</a> <a id="3640" href="deprecated.EGroups.Type.html#1629" class="Function">EGroup</a> <a id="3647" href="MLTT.Universes.html#3833" class="Generalizable">𝓤</a> <a id="3649" href="MLTT.Universes.html#3835" class="Generalizable">𝓥</a><a id="3650" class="Symbol">)</a> <a id="3652" class="Symbol">(</a><a id="3653" href="deprecated.EGroups.Type.html#3653" class="Bound">x</a> <a id="3655" class="Symbol">:</a> <a id="3657" href="deprecated.EGroups.Type.html#1907" class="Function Operator">⟨</a> <a id="3659" href="deprecated.EGroups.Type.html#3636" class="Bound">G</a> <a id="3661" href="deprecated.EGroups.Type.html#1907" class="Function Operator">⟩</a><a id="3662" class="Symbol">)</a> <a id="3664" class="Symbol">→</a> <a id="3666" class="Symbol">(</a><a id="3667" href="deprecated.EGroups.Type.html#3653" class="Bound">x</a> <a id="3669" href="deprecated.EGroups.Type.html#2459" class="Function">·⟨</a> <a id="3672" href="deprecated.EGroups.Type.html#3636" class="Bound">G</a> <a id="3674" href="deprecated.EGroups.Type.html#2459" class="Function">⟩</a> <a id="3676" href="deprecated.EGroups.Type.html#3332" class="Function">E-inv</a> <a id="3682" href="deprecated.EGroups.Type.html#3636" class="Bound">G</a> <a id="3684" href="deprecated.EGroups.Type.html#3653" class="Bound">x</a><a id="3685" class="Symbol">)</a> <a id="3687" href="deprecated.EGroups.Type.html#1963" class="Function">≈⟨</a> <a id="3690" href="deprecated.EGroups.Type.html#3636" class="Bound">G</a> <a id="3692" href="deprecated.EGroups.Type.html#1963" class="Function">⟩</a> <a id="3694" href="deprecated.EGroups.Type.html#2900" class="Function">E-unit</a> <a id="3701" href="deprecated.EGroups.Type.html#3636" class="Bound">G</a>
 <a id="3703" href="deprecated.EGroups.Type.html#3621" class="Function">E-inv-right</a> <a id="3715" class="Symbol">(</a><a id="3716" href="deprecated.EGroups.Type.html#3716" class="Bound">S</a> <a id="3718" href="MLTT.Sigma.html#395" class="InductiveConstructor Operator">,</a> <a id="3720" href="deprecated.EGroups.Type.html#3720" class="Bound Operator">_·_</a> <a id="3724" href="MLTT.Sigma.html#395" class="InductiveConstructor Operator">,</a> <a id="3726" href="deprecated.EGroups.Type.html#3726" class="Bound">cong</a> <a id="3731" href="MLTT.Sigma.html#395" class="InductiveConstructor Operator">,</a> <a id="3733" href="deprecated.EGroups.Type.html#3733" class="Bound">assoc</a> <a id="3739" href="MLTT.Sigma.html#395" class="InductiveConstructor Operator">,</a> <a id="3741" href="deprecated.EGroups.Type.html#3741" class="Bound">e</a> <a id="3743" href="MLTT.Sigma.html#395" class="InductiveConstructor Operator">,</a> <a id="3745" href="deprecated.EGroups.Type.html#3745" class="Bound">ln</a> <a id="3748" href="MLTT.Sigma.html#395" class="InductiveConstructor Operator">,</a> <a id="3750" href="deprecated.EGroups.Type.html#3750" class="Bound">rn</a> <a id="3753" href="MLTT.Sigma.html#395" class="InductiveConstructor Operator">,</a> <a id="3755" href="deprecated.EGroups.Type.html#3755" class="Bound">inverses</a><a id="3763" class="Symbol">)</a> <a id="3765" href="deprecated.EGroups.Type.html#3765" class="Bound">x</a> <a id="3767" class="Symbol">=</a> <a id="3769" href="MLTT.Sigma-Type.html#209" class="Field">pr₂</a> <a id="3773" class="Symbol">(</a><a id="3774" href="MLTT.Sigma-Type.html#209" class="Field">pr₂</a> <a id="3778" class="Symbol">(</a><a id="3779" href="deprecated.EGroups.Type.html#3755" class="Bound">inverses</a> <a id="3788" href="deprecated.EGroups.Type.html#3765" class="Bound">x</a><a id="3789" class="Symbol">))</a>
 
-<a id="3793" class="Markup">\end{code}</a><a id="3803" class="Background">
+<a id="3793" class="Markup">\end{code}</a><span id="3803" class="Background">
 
 Homomorphisms of egroups: maps of the underlying types that respect the
 equivalence relations and are multiplicative up to the equivalence
-relation of the codomain. As in Groups.Type, preservation of the unit
+relation of the codomain. As in <a href="Groups.Type.html">Groups.Type</a>, preservation of the unit
 and of inverses is not required but is derivable.
 
-</a><a id="4065" class="Markup">\begin{code}</a>
+</span><a id="4065" class="Markup">\begin{code}</a>
 
 <a id="is-hom"></a><a id="4079" href="deprecated.EGroups.Type.html#4079" class="Function">is-hom</a> <a id="4086" class="Symbol">:</a> <a id="4088" class="Symbol">(</a><a id="4089" href="deprecated.EGroups.Type.html#4089" class="Bound">G</a> <a id="4091" class="Symbol">:</a> <a id="4093" href="deprecated.EGroups.Type.html#1629" class="Function">EGroup</a> <a id="4100" href="MLTT.Universes.html#3833" class="Generalizable">𝓤</a> <a id="4102" href="MLTT.Universes.html#3835" class="Generalizable">𝓥</a><a id="4103" class="Symbol">)</a> <a id="4105" class="Symbol">(</a><a id="4106" href="deprecated.EGroups.Type.html#4106" class="Bound">H</a> <a id="4108" class="Symbol">:</a> <a id="4110" href="deprecated.EGroups.Type.html#1629" class="Function">EGroup</a> <a id="4117" href="MLTT.Universes.html#3843" class="Generalizable">𝓤&#39;</a> <a id="4120" href="MLTT.Universes.html#3846" class="Generalizable">𝓥&#39;</a><a id="4122" class="Symbol">)</a>
        <a id="4131" class="Symbol">→</a> <a id="4133" class="Symbol">(</a><a id="4134" href="deprecated.EGroups.Type.html#1907" class="Function Operator">⟨</a> <a id="4136" href="deprecated.EGroups.Type.html#4089" class="Bound">G</a> <a id="4138" href="deprecated.EGroups.Type.html#1907" class="Function Operator">⟩</a> <a id="4140" class="Symbol">→</a> <a id="4142" href="deprecated.EGroups.Type.html#1907" class="Function Operator">⟨</a> <a id="4144" href="deprecated.EGroups.Type.html#4106" class="Bound">H</a> <a id="4146" href="deprecated.EGroups.Type.html#1907" class="Function Operator">⟩</a><a id="4147" class="Symbol">)</a> <a id="4149" class="Symbol">→</a> <a id="4151" href="MLTT.Universes.html#3833" class="Generalizable">𝓤</a> <a id="4153" href="Agda.Primitive.html#961" class="Primitive Operator">⊔</a> <a id="4155" href="MLTT.Universes.html#3835" class="Generalizable">𝓥</a> <a id="4157" href="Agda.Primitive.html#961" class="Primitive Operator">⊔</a> <a id="4159" href="MLTT.Universes.html#3846" class="Generalizable">𝓥&#39;</a> <a id="4162" href="MLTT.Universes.html#4011" class="Function Operator">̇</a>
@@ -127,15 +127,15 @@ and of inverses is not required but is derivable.
    <a id="4182" class="Symbol">({</a><a id="4184" href="deprecated.EGroups.Type.html#4184" class="Bound">x</a> <a id="4186" href="deprecated.EGroups.Type.html#4186" class="Bound">y</a> <a id="4188" class="Symbol">:</a> <a id="4190" href="deprecated.EGroups.Type.html#1907" class="Function Operator">⟨</a> <a id="4192" href="deprecated.EGroups.Type.html#4171" class="Bound">G</a> <a id="4194" href="deprecated.EGroups.Type.html#1907" class="Function Operator">⟩</a><a id="4195" class="Symbol">}</a> <a id="4197" class="Symbol">→</a> <a id="4199" href="deprecated.EGroups.Type.html#4184" class="Bound">x</a> <a id="4201" href="deprecated.EGroups.Type.html#1963" class="Function">≈⟨</a> <a id="4204" href="deprecated.EGroups.Type.html#4171" class="Bound">G</a> <a id="4206" href="deprecated.EGroups.Type.html#1963" class="Function">⟩</a> <a id="4208" href="deprecated.EGroups.Type.html#4186" class="Bound">y</a> <a id="4210" class="Symbol">→</a> <a id="4212" href="deprecated.EGroups.Type.html#4175" class="Bound">f</a> <a id="4214" href="deprecated.EGroups.Type.html#4184" class="Bound">x</a> <a id="4216" href="deprecated.EGroups.Type.html#1963" class="Function">≈⟨</a> <a id="4219" href="deprecated.EGroups.Type.html#4173" class="Bound">H</a> <a id="4221" href="deprecated.EGroups.Type.html#1963" class="Function">⟩</a> <a id="4223" href="deprecated.EGroups.Type.html#4175" class="Bound">f</a> <a id="4225" href="deprecated.EGroups.Type.html#4186" class="Bound">y</a><a id="4226" class="Symbol">)</a>
  <a id="4229" href="MLTT.Sigma.html#558" class="Function Operator">×</a> <a id="4231" class="Symbol">({</a><a id="4233" href="deprecated.EGroups.Type.html#4233" class="Bound">x</a> <a id="4235" href="deprecated.EGroups.Type.html#4235" class="Bound">y</a> <a id="4237" class="Symbol">:</a> <a id="4239" href="deprecated.EGroups.Type.html#1907" class="Function Operator">⟨</a> <a id="4241" href="deprecated.EGroups.Type.html#4171" class="Bound">G</a> <a id="4243" href="deprecated.EGroups.Type.html#1907" class="Function Operator">⟩</a><a id="4244" class="Symbol">}</a> <a id="4246" class="Symbol">→</a> <a id="4248" href="deprecated.EGroups.Type.html#4175" class="Bound">f</a> <a id="4250" class="Symbol">(</a><a id="4251" href="deprecated.EGroups.Type.html#4233" class="Bound">x</a> <a id="4253" href="deprecated.EGroups.Type.html#2459" class="Function">·⟨</a> <a id="4256" href="deprecated.EGroups.Type.html#4171" class="Bound">G</a> <a id="4258" href="deprecated.EGroups.Type.html#2459" class="Function">⟩</a> <a id="4260" href="deprecated.EGroups.Type.html#4235" class="Bound">y</a><a id="4261" class="Symbol">)</a> <a id="4263" href="deprecated.EGroups.Type.html#1963" class="Function">≈⟨</a> <a id="4266" href="deprecated.EGroups.Type.html#4173" class="Bound">H</a> <a id="4268" href="deprecated.EGroups.Type.html#1963" class="Function">⟩</a> <a id="4270" class="Symbol">(</a><a id="4271" href="deprecated.EGroups.Type.html#4175" class="Bound">f</a> <a id="4273" href="deprecated.EGroups.Type.html#4233" class="Bound">x</a> <a id="4275" href="deprecated.EGroups.Type.html#2459" class="Function">·⟨</a> <a id="4278" href="deprecated.EGroups.Type.html#4173" class="Bound">H</a> <a id="4280" href="deprecated.EGroups.Type.html#2459" class="Function">⟩</a> <a id="4282" href="deprecated.EGroups.Type.html#4175" class="Bound">f</a> <a id="4284" href="deprecated.EGroups.Type.html#4235" class="Bound">y</a><a id="4285" class="Symbol">))</a>
 
-<a id="4289" class="Markup">\end{code}</a><a id="4299" class="Background">
+<a id="4289" class="Markup">\end{code}</a><span id="4299" class="Background">
 
 Some minimal group theory up to the equivalence relation, needed for
 the universal property of free deprecated.EGroups. This is a transcription of the
-relevant parts of Groups.Type, with the identity type replaced by the
+relevant parts of <a href="Groups.Type.html">Groups.Type</a>, with the identity type replaced by the
 equivalence relation and with the congruence of the operation used
 explicitly.
 
-</a><a id="4602" class="Markup">\begin{code}</a>
+</span><a id="4602" class="Markup">\begin{code}</a>
 
 <a id="4616" class="Keyword">module</a> <a id="E-group-theory"></a><a id="4623" href="deprecated.EGroups.Type.html#4623" class="Module">E-group-theory</a> <a id="4638" class="Symbol">(</a><a id="4639" href="deprecated.EGroups.Type.html#4639" class="Bound">G</a> <a id="4641" class="Symbol">:</a> <a id="4643" href="deprecated.EGroups.Type.html#1629" class="Function">EGroup</a> <a id="4650" href="MLTT.Universes.html#3833" class="Generalizable">𝓤</a> <a id="4652" href="MLTT.Universes.html#3835" class="Generalizable">𝓥</a><a id="4653" class="Symbol">)</a> <a id="4655" class="Keyword">where</a>
 
@@ -174,12 +174,12 @@ explicitly.
                       <a id="5921" href="deprecated.EGroups.Type.html#4747" class="Function">inv</a> <a id="5925" href="deprecated.EGroups.Type.html#5778" class="Bound">x</a> <a id="5927" href="deprecated.EGroups.Type.html#4703" class="Function Operator">*</a> <a id="5929" href="deprecated.EGroups.Type.html#5778" class="Bound">x</a> <a id="5931" href="deprecated.EGroups.Setoid.html#2895" class="Function Operator">≈[</a> <a id="5934" href="deprecated.EGroups.Type.html#3451" class="Function">E-inv-left</a> <a id="5945" href="deprecated.EGroups.Type.html#4639" class="Bound">G</a> <a id="5947" href="deprecated.EGroups.Type.html#5778" class="Bound">x</a> <a id="5949" href="deprecated.EGroups.Setoid.html#2895" class="Function Operator">]</a>
                       <a id="5973" href="deprecated.EGroups.Type.html#4730" class="Function">e</a>         <a id="5983" href="deprecated.EGroups.Setoid.html#2975" class="Function Operator">≈∎</a><a id="5985" class="Symbol">)</a>
 
-<a id="5988" class="Markup">\end{code}</a><a id="5998" class="Background">
+<a id="5988" class="Markup">\end{code}</a><span id="5998" class="Background">
 
-Homomorphisms preserve the unit and inverses. As in Groups.Type, these
+Homomorphisms preserve the unit and inverses. As in <a href="Groups.Type.html">Groups.Type</a>, these
 are derived from the definition of homomorphism.
 
-</a><a id="6121" class="Markup">\begin{code}</a>
+</span><a id="6121" class="Markup">\begin{code}</a>
 
 <a id="homs-preserve-unit"></a><a id="6135" href="deprecated.EGroups.Type.html#6135" class="Function">homs-preserve-unit</a> <a id="6154" class="Symbol">:</a> <a id="6156" class="Symbol">(</a><a id="6157" href="deprecated.EGroups.Type.html#6157" class="Bound">G</a> <a id="6159" class="Symbol">:</a> <a id="6161" href="deprecated.EGroups.Type.html#1629" class="Function">EGroup</a> <a id="6168" href="MLTT.Universes.html#3833" class="Generalizable">𝓤</a> <a id="6170" href="MLTT.Universes.html#3835" class="Generalizable">𝓥</a><a id="6171" class="Symbol">)</a> <a id="6173" class="Symbol">(</a><a id="6174" href="deprecated.EGroups.Type.html#6174" class="Bound">H</a> <a id="6176" class="Symbol">:</a> <a id="6178" href="deprecated.EGroups.Type.html#1629" class="Function">EGroup</a> <a id="6185" href="MLTT.Universes.html#3843" class="Generalizable">𝓤&#39;</a> <a id="6188" href="MLTT.Universes.html#3846" class="Generalizable">𝓥&#39;</a><a id="6190" class="Symbol">)</a>
                      <a id="6213" class="Symbol">(</a><a id="6214" href="deprecated.EGroups.Type.html#6214" class="Bound">f</a> <a id="6216" class="Symbol">:</a> <a id="6218" href="deprecated.EGroups.Type.html#1907" class="Function Operator">⟨</a> <a id="6220" href="deprecated.EGroups.Type.html#6157" class="Bound">G</a> <a id="6222" href="deprecated.EGroups.Type.html#1907" class="Function Operator">⟩</a> <a id="6224" class="Symbol">→</a> <a id="6226" href="deprecated.EGroups.Type.html#1907" class="Function Operator">⟨</a> <a id="6228" href="deprecated.EGroups.Type.html#6174" class="Bound">H</a> <a id="6230" href="deprecated.EGroups.Type.html#1907" class="Function Operator">⟩</a><a id="6231" class="Symbol">)</a>

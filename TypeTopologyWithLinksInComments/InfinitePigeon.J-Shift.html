@@ -7,28 +7,29 @@
 
 <a id="81" class="Keyword">module</a> <a id="88" href="InfinitePigeon.J-Shift.html" class="Module">InfinitePigeon.J-Shift</a> <a id="111" class="Keyword">where</a>
 
-<a id="118" class="Markup">\end{code}</a><a id="128" class="Background">
+<a id="118" class="Markup">\end{code}</a><span id="128" class="Background">
 
-Import Pigeon.one of J-Shift-BBC or J-Shift-Selection.
+Import one of <a href="InfinitePigeon.J-Shift-BBC.html">InfinitePigeon.J-Shift-BBC</a> or
+<a href="InfinitePigeon.J-Shift-Selection.html">InfinitePigeon.J-Shift-Selection</a>.
 
-</a><a id="186" class="Markup">\begin{code}</a>
+</span><a id="209" class="Markup">\begin{code}</a>
 
-<a id="200" class="Keyword">open</a> <a id="205" class="Keyword">import</a> <a id="212" href="InfinitePigeon.J-Shift-Selection.html" class="Module">InfinitePigeon.J-Shift-Selection</a>        <a id="252" class="Comment">-- Choose here...</a>
-<a id="270" class="Keyword">open</a> <a id="275" class="Keyword">import</a> <a id="282" href="InfinitePigeon.JK-Monads.html" class="Module">InfinitePigeon.JK-Monads</a>
-<a id="307" class="Keyword">open</a> <a id="312" class="Keyword">import</a> <a id="319" href="InfinitePigeon.Logic.html" class="Module">InfinitePigeon.Logic</a>
-<a id="340" class="Keyword">open</a> <a id="345" class="Keyword">import</a> <a id="352" href="InfinitePigeon.Naturals.html" class="Module">InfinitePigeon.Naturals</a>
+<a id="223" class="Keyword">open</a> <a id="228" class="Keyword">import</a> <a id="235" href="InfinitePigeon.J-Shift-Selection.html" class="Module">InfinitePigeon.J-Shift-Selection</a>        <a id="275" class="Comment">-- Choose here...</a>
+<a id="293" class="Keyword">open</a> <a id="298" class="Keyword">import</a> <a id="305" href="InfinitePigeon.JK-Monads.html" class="Module">InfinitePigeon.JK-Monads</a>
+<a id="330" class="Keyword">open</a> <a id="335" class="Keyword">import</a> <a id="342" href="InfinitePigeon.Logic.html" class="Module">InfinitePigeon.Logic</a>
+<a id="363" class="Keyword">open</a> <a id="368" class="Keyword">import</a> <a id="375" href="InfinitePigeon.Naturals.html" class="Module">InfinitePigeon.Naturals</a>
 
-<a id="377" class="Markup">\end{code}</a><a id="387" class="Background">
+<a id="400" class="Markup">\end{code}</a><a id="410" class="Background">
 
 Use one of K-∀-shift-bbc or K-∀-shift-mbr or K-∀-shift-selection:
 
-</a><a id="456" class="Markup">\begin{code}</a>
+</a><a id="479" class="Markup">\begin{code}</a>
 
-<a id="J-∀-shift"></a><a id="470" href="InfinitePigeon.J-Shift.html#470" class="Function">J-∀-shift</a> <a id="480" class="Symbol">:</a> <a id="482" class="Symbol">{</a><a id="483" href="InfinitePigeon.J-Shift.html#483" class="Bound">R</a> <a id="485" class="Symbol">:</a> <a id="487" href="InfinitePigeon.Logic.html#201" class="Function">Ω</a><a id="488" class="Symbol">}</a>
-            <a id="502" class="Symbol">{</a><a id="503" href="InfinitePigeon.J-Shift.html#503" class="Bound">A</a> <a id="505" class="Symbol">:</a> <a id="507" href="MLTT.Natural-Numbers-Type.html#96" class="Datatype">ℕ</a> <a id="509" class="Symbol">→</a> <a id="511" href="InfinitePigeon.Logic.html#201" class="Function">Ω</a><a id="512" class="Symbol">}</a>
-          <a id="524" class="Symbol">→</a> <a id="526" class="Symbol">(∀(</a><a id="529" href="InfinitePigeon.J-Shift.html#529" class="Bound">n</a> <a id="531" class="Symbol">:</a> <a id="533" href="MLTT.Natural-Numbers-Type.html#96" class="Datatype">ℕ</a><a id="534" class="Symbol">)</a> <a id="536" class="Symbol">→</a> <a id="538" href="InfinitePigeon.JK-Monads.html#504" class="Function">J</a><a id="539" class="Symbol">(</a><a id="540" href="InfinitePigeon.J-Shift.html#503" class="Bound">A</a> <a id="542" href="InfinitePigeon.J-Shift.html#529" class="Bound">n</a><a id="543" class="Symbol">))</a>
-          <a id="556" class="Symbol">→</a> <a id="558" href="InfinitePigeon.JK-Monads.html#504" class="Function">J</a> <a id="560" class="Symbol">{</a><a id="561" href="InfinitePigeon.J-Shift.html#483" class="Bound">R</a><a id="562" class="Symbol">}</a> <a id="564" class="Symbol">(∀(</a><a id="567" href="InfinitePigeon.J-Shift.html#567" class="Bound">n</a> <a id="569" class="Symbol">:</a> <a id="571" href="MLTT.Natural-Numbers-Type.html#96" class="Datatype">ℕ</a><a id="572" class="Symbol">)</a> <a id="574" class="Symbol">→</a> <a id="576" href="InfinitePigeon.J-Shift.html#503" class="Bound">A</a> <a id="578" href="InfinitePigeon.J-Shift.html#567" class="Bound">n</a><a id="579" class="Symbol">)</a>
-<a id="581" href="InfinitePigeon.J-Shift.html#470" class="Function">J-∀-shift</a> <a id="591" class="Symbol">=</a> <a id="593" href="InfinitePigeon.J-Shift-Selection.html#561" class="Function">J-∀-shift-selection</a>     <a id="617" class="Comment">-- ... and here accordingly.</a>
+<a id="J-∀-shift"></a><a id="493" href="InfinitePigeon.J-Shift.html#493" class="Function">J-∀-shift</a> <a id="503" class="Symbol">:</a> <a id="505" class="Symbol">{</a><a id="506" href="InfinitePigeon.J-Shift.html#506" class="Bound">R</a> <a id="508" class="Symbol">:</a> <a id="510" href="InfinitePigeon.Logic.html#201" class="Function">Ω</a><a id="511" class="Symbol">}</a>
+            <a id="525" class="Symbol">{</a><a id="526" href="InfinitePigeon.J-Shift.html#526" class="Bound">A</a> <a id="528" class="Symbol">:</a> <a id="530" href="MLTT.Natural-Numbers-Type.html#96" class="Datatype">ℕ</a> <a id="532" class="Symbol">→</a> <a id="534" href="InfinitePigeon.Logic.html#201" class="Function">Ω</a><a id="535" class="Symbol">}</a>
+          <a id="547" class="Symbol">→</a> <a id="549" class="Symbol">(∀(</a><a id="552" href="InfinitePigeon.J-Shift.html#552" class="Bound">n</a> <a id="554" class="Symbol">:</a> <a id="556" href="MLTT.Natural-Numbers-Type.html#96" class="Datatype">ℕ</a><a id="557" class="Symbol">)</a> <a id="559" class="Symbol">→</a> <a id="561" href="InfinitePigeon.JK-Monads.html#504" class="Function">J</a><a id="562" class="Symbol">(</a><a id="563" href="InfinitePigeon.J-Shift.html#526" class="Bound">A</a> <a id="565" href="InfinitePigeon.J-Shift.html#552" class="Bound">n</a><a id="566" class="Symbol">))</a>
+          <a id="579" class="Symbol">→</a> <a id="581" href="InfinitePigeon.JK-Monads.html#504" class="Function">J</a> <a id="583" class="Symbol">{</a><a id="584" href="InfinitePigeon.J-Shift.html#506" class="Bound">R</a><a id="585" class="Symbol">}</a> <a id="587" class="Symbol">(∀(</a><a id="590" href="InfinitePigeon.J-Shift.html#590" class="Bound">n</a> <a id="592" class="Symbol">:</a> <a id="594" href="MLTT.Natural-Numbers-Type.html#96" class="Datatype">ℕ</a><a id="595" class="Symbol">)</a> <a id="597" class="Symbol">→</a> <a id="599" href="InfinitePigeon.J-Shift.html#526" class="Bound">A</a> <a id="601" href="InfinitePigeon.J-Shift.html#590" class="Bound">n</a><a id="602" class="Symbol">)</a>
+<a id="604" href="InfinitePigeon.J-Shift.html#493" class="Function">J-∀-shift</a> <a id="614" class="Symbol">=</a> <a id="616" href="InfinitePigeon.J-Shift-Selection.html#561" class="Function">J-∀-shift-selection</a>     <a id="640" class="Comment">-- ... and here accordingly.</a>
 
-<a id="647" class="Markup">\end{code}</a><a id="657" class="Background">
+<a id="670" class="Markup">\end{code}</a><a id="680" class="Background">
 </a></pre></body></html>

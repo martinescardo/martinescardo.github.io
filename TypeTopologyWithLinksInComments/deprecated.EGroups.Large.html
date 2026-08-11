@@ -1,12 +1,12 @@
 <!DOCTYPE HTML>
-<html><head><meta charset="utf-8"><title>deprecated.EGroups.Large</title><link rel="stylesheet" href="Agda.css"></head><body><pre class="Agda"><a id="1" class="Background">Martin Escardo, July 2026.
+<html><head><meta charset="utf-8"><title>deprecated.EGroups.Large</title><link rel="stylesheet" href="Agda.css"></head><body><pre class="Agda"><span id="1" class="Background">Martin Escardo, July 2026.
 
-This is the egroup counterpart of Groups.Large. For a large, locally
+This is the egroup counterpart of <a href="Groups.Large.html">Groups.Large</a>. For a large, locally
 small type A of generators, the free egroup on A is large: no egroup
 with a small carrier is isomorphic to it. This is developed in an
 Spartan MLTT.
 
-</a><a id="248" class="Markup">\begin{code}</a>
+</span><a id="248" class="Markup">\begin{code}</a>
 
 <a id="262" class="Symbol">{-#</a> <a id="266" class="Keyword">OPTIONS</a> <a id="274" class="Pragma">--safe</a> <a id="281" class="Pragma">--without-K</a> <a id="293" class="Symbol">#-}</a>
 
@@ -126,11 +126,11 @@ local smalless of A.
   <a id="3792" href="deprecated.EGroups.Large.html#3679" class="Function">large-egroup-with-no-small-copy</a> <a id="3824" href="deprecated.EGroups.Large.html#3824" class="Bound">A-is-large</a>
    <a id="3838" class="Symbol">=</a> <a id="3840" href="deprecated.EGroups.FreeOnType.html#1653" class="Function">free-egroup</a> <a id="3852" href="deprecated.EGroups.Large.html#919" class="Bound">A</a> <a id="3854" href="MLTT.Sigma.html#395" class="InductiveConstructor Operator">,</a> <a id="3856" href="deprecated.EGroups.Large.html#3491" class="Function">no-small-copy</a> <a id="3870" href="deprecated.EGroups.Large.html#3824" class="Bound">A-is-large</a>
 
-<a id="3882" class="Markup">\end{code}</a><a id="3892" class="Background">
+<a id="3882" class="Markup">\end{code}</a><span id="3892" class="Background">
 
 We are not done yet. The objective is to show that there are more
 egroups in the next universe in a Spartan MLTT. Large types can be
-constructed in a Spartan MLTT, as shown in Various.LawvereFPT in the
+constructed in a Spartan MLTT, as shown in <a href="Various.LawvereFPT.html">Various.LawvereFPT</a> in the
 module generalized-Coquand, where the universe 𝓤 ̇ is shown to be
 large. What is missing in a Spartan MLTT is local smallness: the
 universe is locally small under univalence, but I don&#39;t see how to
@@ -142,7 +142,7 @@ assumptions is the following conditional statement: if there is a
 large, locally small type, then there is an egroup in the next universe
 with no small copy.
 
-</a><a id="4628" class="Markup">\begin{code}</a>
+</span><a id="4628" class="Markup">\begin{code}</a>
 
 <a id="there-is-a-large-egroup-if-there-is-a-large-type"></a><a id="4642" href="deprecated.EGroups.Large.html#4642" class="Function">there-is-a-large-egroup-if-there-is-a-large-type</a>
  <a id="4692" class="Symbol">:</a> <a id="4694" class="Symbol">{</a><a id="4695" href="deprecated.EGroups.Large.html#4695" class="Bound">𝓤</a> <a id="4697" class="Symbol">:</a> <a id="4699" href="MLTT.Universes.html#3778" class="Postulate">Universe</a><a id="4707" class="Symbol">}</a>

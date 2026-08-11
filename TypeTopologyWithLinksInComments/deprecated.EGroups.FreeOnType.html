@@ -1,17 +1,17 @@
 <!DOCTYPE HTML>
-<html><head><meta charset="utf-8"><title>deprecated.EGroups.FreeOnType</title><link rel="stylesheet" href="Agda.css"></head><body><pre class="Agda"><a id="1" class="Background">Martin Escardo, July 2026.
+<html><head><meta charset="utf-8"><title>deprecated.EGroups.FreeOnType</title><link rel="stylesheet" href="Agda.css"></head><body><pre class="Agda"><span id="1" class="Background">Martin Escardo, July 2026.
 
 Free egroups, in pure MLTT.
 
 For a type A of generators, we construct the free egroup on A and
 prove its universal property. Unlike the HoTT/UF construction in
-Groups.Free, this needs no function extensionality, propositional
+<a href="Groups.Free.html">Groups.Free</a>, this needs no function extensionality, propositional
 truncation, quotients or univalence. The underlying type of the free
 egroup is simply the type FA of words, and its equivalence relation is
 _∿_, the symmetric-reflexive-transitive closure of the reduction
 relation. There is no quotient because we are working with setoids:
 the mediating map into a target egroup is the map h of
-deprecated.EGroups.MediatingMap directly, and its invariance under _∿_
+<a href="deprecated.EGroups.MediatingMap.html">deprecated.EGroups.MediatingMap</a> directly, and its invariance under _∿_
 is established from the Church-Rosser property, with no propositional
 truncation.
 
@@ -20,7 +20,7 @@ along the insertion of generators is a setoid isomorphism between the
 setoid of homomorphisms out of the free egroup and the setoid of
 functions from the generators into the underlying setoid of the target.
 
-</a><a id="1017" class="Markup">\begin{code}</a>
+</span><a id="1017" class="Markup">\begin{code}</a>
 
 <a id="1031" class="Symbol">{-#</a> <a id="1035" class="Keyword">OPTIONS</a> <a id="1043" class="Pragma">--safe</a> <a id="1050" class="Pragma">--without-K</a> <a id="1062" class="Symbol">#-}</a>
 
@@ -34,14 +34,14 @@ functions from the generators into the underlying setoid of the target.
 <a id="1318" class="Keyword">open</a> <a id="1323" class="Keyword">import</a> <a id="1330" href="deprecated.EGroups.Type.html" class="Module">deprecated.EGroups.Type</a>
 <a id="1354" class="Keyword">open</a> <a id="1359" class="Keyword">import</a> <a id="1366" href="deprecated.EGroups.MediatingMap.html" class="Module">deprecated.EGroups.MediatingMap</a>
 
-<a id="1399" class="Markup">\end{code}</a><a id="1409" class="Background">
+<a id="1399" class="Markup">\end{code}</a><span id="1409" class="Background">
 
 The free egroup on A. The underlying setoid is (FA , _∿_); the operation
 is concatenation, with the empty word as unit and finv as inverse. All
-the data comes from Groups.Free, imported directly, and is developed in
+the data comes from <a href="Groups.Free.html">Groups.Free</a>, imported directly, and is developed in
 pure MLTT.
 
-</a><a id="1639" class="Markup">\begin{code}</a>
+</span><a id="1639" class="Markup">\begin{code}</a>
 
 <a id="free-egroup"></a><a id="1653" href="deprecated.EGroups.FreeOnType.html#1653" class="Function">free-egroup</a> <a id="1665" class="Symbol">:</a> <a id="1667" class="Symbol">(</a><a id="1668" href="deprecated.EGroups.FreeOnType.html#1668" class="Bound">A</a> <a id="1670" class="Symbol">:</a> <a id="1672" href="MLTT.Universes.html#3833" class="Generalizable">𝓤</a> <a id="1674" href="MLTT.Universes.html#4011" class="Function Operator">̇</a> <a id="1676" class="Symbol">)</a> <a id="1678" class="Symbol">→</a> <a id="1680" href="deprecated.EGroups.Type.html#1629" class="Function">EGroup</a> <a id="1687" href="MLTT.Universes.html#3833" class="Generalizable">𝓤</a> <a id="1689" href="MLTT.Universes.html#3833" class="Generalizable">𝓤</a>
 <a id="1691" href="deprecated.EGroups.FreeOnType.html#1653" class="Function">free-egroup</a> <a id="1703" href="deprecated.EGroups.FreeOnType.html#1703" class="Bound">A</a> <a id="1705" class="Symbol">=</a>
@@ -56,13 +56,13 @@ pure MLTT.
  <a id="2003" class="Keyword">where</a>
   <a id="2011" class="Keyword">open</a> <a id="2016" href="Groups.Free.html#11509" class="Module">free-group-construction</a> <a id="2040" href="deprecated.EGroups.FreeOnType.html#1703" class="Bound">A</a>
 
-<a id="2043" class="Markup">\end{code}</a><a id="2053" class="Background">
+<a id="2043" class="Markup">\end{code}</a><span id="2053" class="Background">
 
 The universal property. Given a target egroup 𝓖 and a map f : A → ⟨ 𝓖 ⟩,
-the extension is the mediating map h of deprecated.EGroups.MediatingMap, and it is the
+the extension is the mediating map h of <a href="deprecated.EGroups.MediatingMap.html">deprecated.EGroups.MediatingMap</a>, and it is the
 unique homomorphism extending f, up to the equivalence relation.
 
-</a><a id="2281" class="Markup">\begin{code}</a>
+</span><a id="2281" class="Markup">\begin{code}</a>
 
 <a id="2295" class="Keyword">module</a> <a id="free-egroup-universal-property"></a><a id="2302" href="deprecated.EGroups.FreeOnType.html#2302" class="Module">free-egroup-universal-property</a>
         <a id="2341" class="Symbol">{</a><a id="2342" href="deprecated.EGroups.FreeOnType.html#2342" class="Bound">𝓤</a> <a id="2344" class="Symbol">:</a> <a id="2346" href="MLTT.Universes.html#3778" class="Postulate">Universe</a><a id="2354" class="Symbol">}</a>
@@ -98,13 +98,13 @@ unique homomorphism extending f, up to the equivalence relation.
  <a id="free-egroup-universal-property.free-map-triangle"></a><a id="3180" href="deprecated.EGroups.FreeOnType.html#3180" class="Function">free-map-triangle</a> <a id="3198" class="Symbol">:</a> <a id="3200" class="Symbol">(</a><a id="3201" href="deprecated.EGroups.FreeOnType.html#3201" class="Bound">a</a> <a id="3203" class="Symbol">:</a> <a id="3205" href="deprecated.EGroups.FreeOnType.html#2365" class="Bound">A</a><a id="3206" class="Symbol">)</a> <a id="3208" class="Symbol">→</a> <a id="3210" href="deprecated.EGroups.FreeOnType.html#2964" class="Function">free-map</a> <a id="3219" class="Symbol">(</a><a id="3220" href="Groups.Free.html#12054" class="Function">η</a> <a id="3222" href="deprecated.EGroups.FreeOnType.html#3201" class="Bound">a</a><a id="3223" class="Symbol">)</a> <a id="3225" href="deprecated.EGroups.Type.html#1963" class="Function">≈⟨</a> <a id="3228" href="deprecated.EGroups.FreeOnType.html#2409" class="Bound">𝓖</a> <a id="3230" href="deprecated.EGroups.Type.html#1963" class="Function">⟩</a> <a id="3232" href="deprecated.EGroups.FreeOnType.html#2434" class="Bound">f</a> <a id="3234" href="deprecated.EGroups.FreeOnType.html#3201" class="Bound">a</a>
  <a id="3237" href="deprecated.EGroups.FreeOnType.html#3180" class="Function">free-map-triangle</a> <a id="3255" href="deprecated.EGroups.FreeOnType.html#3255" class="Bound">a</a> <a id="3257" class="Symbol">=</a> <a id="3259" href="deprecated.EGroups.Type.html#3151" class="Function">E-unit-right</a> <a id="3272" href="deprecated.EGroups.FreeOnType.html#2409" class="Bound">𝓖</a> <a id="3274" class="Symbol">(</a><a id="3275" href="deprecated.EGroups.FreeOnType.html#2434" class="Bound">f</a> <a id="3277" href="deprecated.EGroups.FreeOnType.html#3255" class="Bound">a</a><a id="3278" class="Symbol">)</a>
 
-<a id="3281" class="Markup">\end{code}</a><a id="3291" class="Background">
+<a id="3281" class="Markup">\end{code}</a><span id="3291" class="Background">
 
 Uniqueness: any homomorphism g extending f agrees with the extension up
-to the equivalence relation. As in Groups.Free, the argument derives
+to the equivalence relation. As in <a href="Groups.Free.html">Groups.Free</a>, the argument derives
 preservation of the unit and inverses from the other assumptions.
 
-</a><a id="3501" class="Markup">\begin{code}</a>
+</span><a id="3501" class="Markup">\begin{code}</a>
 
  <a id="free-egroup-universal-property.free-map-is-unique"></a><a id="3516" href="deprecated.EGroups.FreeOnType.html#3516" class="Function">free-map-is-unique</a> <a id="3535" class="Symbol">:</a> <a id="3537" class="Symbol">(</a><a id="3538" href="deprecated.EGroups.FreeOnType.html#3538" class="Bound">g</a> <a id="3540" class="Symbol">:</a> <a id="3542" href="deprecated.EGroups.Type.html#1907" class="Function Operator">⟨</a> <a id="3544" href="deprecated.EGroups.FreeOnType.html#1653" class="Function">free-egroup</a> <a id="3556" href="deprecated.EGroups.FreeOnType.html#2365" class="Bound">A</a> <a id="3558" href="deprecated.EGroups.Type.html#1907" class="Function Operator">⟩</a> <a id="3560" class="Symbol">→</a> <a id="3562" href="deprecated.EGroups.Type.html#1907" class="Function Operator">⟨</a> <a id="3564" href="deprecated.EGroups.FreeOnType.html#2409" class="Bound">𝓖</a> <a id="3566" href="deprecated.EGroups.Type.html#1907" class="Function Operator">⟩</a><a id="3567" class="Symbol">)</a>
                     <a id="3589" class="Symbol">→</a> <a id="3591" href="deprecated.EGroups.Type.html#4079" class="Function">is-hom</a> <a id="3598" class="Symbol">(</a><a id="3599" href="deprecated.EGroups.FreeOnType.html#1653" class="Function">free-egroup</a> <a id="3611" href="deprecated.EGroups.FreeOnType.html#2365" class="Bound">A</a><a id="3612" class="Symbol">)</a> <a id="3614" href="deprecated.EGroups.FreeOnType.html#2409" class="Bound">𝓖</a> <a id="3616" href="deprecated.EGroups.FreeOnType.html#3538" class="Bound">g</a>

@@ -38,11 +38,11 @@ subsets of X.
 <a id="874" class="Keyword">open</a> <a id="879" href="UF.PropTrunc.html#792" class="Module">PropositionalTruncation</a> <a id="903" href="OrderedTypes.FreeJoinSemiLattice.html#335" class="Bound">pt</a> <a id="906" class="Keyword">hiding</a> <a id="913" class="Symbol">(</a><a id="914" href="UF.PropTrunc.html#3271" class="Function Operator">_∨_</a><a id="917" class="Symbol">)</a>
 <a id="919" class="Keyword">open</a> <a id="924" href="UF.Powerset-MultiUniverse.html#10240" class="Module">binary-unions-of-subsets</a> <a id="949" href="OrderedTypes.FreeJoinSemiLattice.html#335" class="Bound">pt</a>
 
-<a id="953" class="Markup">\end{code}</a><a id="963" class="Background">
+<a id="953" class="Markup">\end{code}</a><span id="963" class="Background">
 
 The proof that the Kuratowski finite subsets of X denoted by 𝓚 X and ordered by
 subset inclusion is a join-semilattice (with joins given by unions) is given in
-UF.Powerset-Fin.lagda.
+<a href="UF.Powerset-Fin.html">UF.Powerset-Fin.lagda</a>.
 
 So we proceed directly to showing that 𝓚 X is the *free* join-semilattice on a
 set X. Concretely, if L is a join-semilattice and f : X → L is any function,
@@ -80,7 +80,7 @@ to construct the desired mapping.
     In Logical Methods in Computer Science, volume 13, issue 1.
     2017.
 
-</a><a id="2506" class="Markup">\begin{code}</a>
+</span><a id="2506" class="Markup">\begin{code}</a>
 
 <a id="2520" class="Keyword">module</a> <a id="2527" href="OrderedTypes.FreeJoinSemiLattice.html#2527" class="Module">_</a>
         <a id="2537" class="Symbol">(</a><a id="2538" href="OrderedTypes.FreeJoinSemiLattice.html#2538" class="Bound">𝓛</a> <a id="2540" class="Symbol">:</a> <a id="2542" href="OrderedTypes.JoinSemiLattices.html#470" class="Record">JoinSemiLattice</a> <a id="2558" href="MLTT.Universes.html#3835" class="Generalizable">𝓥</a> <a id="2560" href="MLTT.Universes.html#3839" class="Generalizable">𝓣</a><a id="2561" class="Symbol">)</a>
@@ -325,13 +325,13 @@ We show (ii) and then (i) now.
                 <a id="11702" href="OrderedTypes.FreeJoinSemiLattice.html#11702" class="Function">u₄&#39;</a> <a id="11706" class="Symbol">=</a> <a id="11708" href="OrderedTypes.JoinSemiLattices.html#1421" class="Function">＝-to-⊒</a> <a id="11715" class="Symbol">(</a><a id="11716" href="OrderedTypes.FreeJoinSemiLattice.html#4494" class="Function">f♭-in-terms-of-fₛ</a> <a id="11734" href="Notation.UnderlyingType.html#272" class="Field Operator">⟨</a> <a id="11736" href="OrderedTypes.FreeJoinSemiLattice.html#8360" class="Bound">B</a> <a id="11738" href="Notation.UnderlyingType.html#272" class="Field Operator">⟩</a> <a id="11740" href="OrderedTypes.FreeJoinSemiLattice.html#9056" class="Bound">σ&#39;</a> <a id="11743" href="UF.Powerset-Fin.html#4910" class="Function Operator">⟨</a> <a id="11745" href="OrderedTypes.FreeJoinSemiLattice.html#8360" class="Bound">B</a> <a id="11747" href="UF.Powerset-Fin.html#4910" class="Function Operator">⟩₂</a><a id="11749" class="Symbol">)</a>
                 <a id="11767" href="OrderedTypes.FreeJoinSemiLattice.html#11767" class="Function">u₅&#39;</a> <a id="11771" class="Symbol">=</a> <a id="11773" href="OrderedTypes.JoinSemiLattices.html#899" class="Field">∨-is-upperbound₂</a> <a id="11790" class="Symbol">(</a><a id="11791" href="OrderedTypes.FreeJoinSemiLattice.html#4354" class="Function">f♭</a> <a id="11794" href="OrderedTypes.FreeJoinSemiLattice.html#8358" class="Bound">A</a><a id="11795" class="Symbol">)</a> <a id="11797" class="Symbol">(</a><a id="11798" href="OrderedTypes.FreeJoinSemiLattice.html#4354" class="Function">f♭</a> <a id="11801" href="OrderedTypes.FreeJoinSemiLattice.html#8360" class="Bound">B</a><a id="11802" class="Symbol">)</a>
 
-<a id="11805" class="Markup">\end{code}</a><a id="11815" class="Background">
+<a id="11805" class="Markup">\end{code}</a><span id="11815" class="Background">
 
 Finally we prove that f♭ is the unique map with the above properties (i) &amp; (ii).
 We do so by using the induction principle for Kuratowski finite subsets, which
-is proved in UF.Powerset-Fin.lagda.
+is proved in <a href="UF.Powerset-Fin.html">UF.Powerset-Fin.lagda</a>.
 
-</a><a id="12014" class="Markup">\begin{code}</a>
+</span><a id="12014" class="Markup">\begin{code}</a>
 
   <a id="12030" class="Keyword">module</a> <a id="12037" href="OrderedTypes.FreeJoinSemiLattice.html#12037" class="Module">_</a>
           <a id="12049" class="Symbol">(</a><a id="12050" href="OrderedTypes.FreeJoinSemiLattice.html#12050" class="Bound">pe</a> <a id="12053" class="Symbol">:</a> <a id="12055" href="UF.Subsingletons.html#7674" class="Function">propext</a> <a id="12063" href="OrderedTypes.FreeJoinSemiLattice.html#2626" class="Bound">𝓤</a><a id="12064" class="Symbol">)</a>
@@ -420,13 +420,13 @@ Added 17th March 2021 by Martin Escardo. Alternative definition of 𝓚:
 <a id="𝓚&#39;"></a><a id="15049" href="OrderedTypes.FreeJoinSemiLattice.html#15049" class="Function">𝓚&#39;</a> <a id="15052" class="Symbol">:</a> <a id="15054" href="MLTT.Universes.html#3833" class="Generalizable">𝓤</a> <a id="15056" href="MLTT.Universes.html#4011" class="Function Operator">̇</a> <a id="15058" class="Symbol">→</a> <a id="15060" href="MLTT.Universes.html#3833" class="Generalizable">𝓤</a> <a id="15062" href="MLTT.Universes.html#3754" class="Primitive Operator">⁺</a> <a id="15064" href="MLTT.Universes.html#4011" class="Function Operator">̇</a>
 <a id="15066" href="OrderedTypes.FreeJoinSemiLattice.html#15049" class="Function">𝓚&#39;</a> <a id="15069" class="Symbol">{</a><a id="15070" href="OrderedTypes.FreeJoinSemiLattice.html#15070" class="Bound">𝓤</a><a id="15071" class="Symbol">}</a> <a id="15073" href="OrderedTypes.FreeJoinSemiLattice.html#15073" class="Bound">X</a> <a id="15075" class="Symbol">=</a> <a id="15077" href="MLTT.Sigma.html#423" class="Function">Σ</a> <a id="15079" href="OrderedTypes.FreeJoinSemiLattice.html#15079" class="Bound">A</a> <a id="15081" href="MLTT.Sigma.html#423" class="Function">꞉</a> <a id="15083" href="OrderedTypes.FreeJoinSemiLattice.html#15070" class="Bound">𝓤</a> <a id="15085" href="MLTT.Universes.html#4011" class="Function Operator">̇</a> <a id="15087" href="MLTT.Sigma.html#423" class="Function">,</a> <a id="15089" class="Symbol">(</a><a id="15090" href="OrderedTypes.FreeJoinSemiLattice.html#15079" class="Bound">A</a> <a id="15092" href="UF.Embeddings.html#2053" class="Function Operator">↪</a> <a id="15094" href="OrderedTypes.FreeJoinSemiLattice.html#15073" class="Bound">X</a><a id="15095" class="Symbol">)</a> <a id="15097" href="MLTT.Sigma.html#558" class="Function Operator">×</a> <a id="15099" href="Fin.Kuratowski.html#1009" class="Function">is-Kuratowski-finite</a> <a id="15120" href="OrderedTypes.FreeJoinSemiLattice.html#15079" class="Bound">A</a>
 
-<a id="15123" class="Markup">\end{code}</a><a id="15133" class="Background">
+<a id="15123" class="Markup">\end{code}</a><span id="15133" class="Background">
 
-TODO. Show that 𝓚&#39; X is equivalent to 𝓚 X (using UF.Classifiers).
+TODO. Show that 𝓚&#39; X is equivalent to 𝓚 X (using <a href="UF.Classifiers.html">UF.Classifiers</a>).
 
 Tom de Jong, 27 August 2021. We implement this TODO.
 
-</a><a id="15256" class="Markup">\begin{code}</a>
+</span><a id="15256" class="Markup">\begin{code}</a>
 
 <a id="15270" class="Keyword">open</a> <a id="15275" class="Keyword">import</a> <a id="15282" href="UF.Univalence.html" class="Module">UF.Univalence</a>
 

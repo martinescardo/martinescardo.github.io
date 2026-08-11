@@ -10,7 +10,7 @@ Grayson&#39;s construction is published as [1] which is essentially Chapter IX o
 Grayson&#39;s PhD thesis [2].
 
 The &quot;concrete&quot; list-based exponentiation that we consider in
-Ordinals.Exponentiation.DecreasingList is essentially Grayson&#39;s construction,
+<a href="Ordinals.Exponentiation.DecreasingList.html">Ordinals.Exponentiation.DecreasingList</a> is essentially Grayson&#39;s construction,
 except that Grayson does not require the base ordinal α to have a trichotomous
 least element. In fact, he does not even require α to have a least element and
 consequently restricts to those elements x of α for which there exists an a ≺ x.
@@ -28,18 +28,18 @@ always an ordinal).
 Grayson moreover claims that his construction satisfies the recursive equation:
    α ^ₒ β ＝ sup (α ^ₒ (β ↓ b) ×ₒ α) ∨ 𝟙ₒ
 which we used to define abstract exponentiation in
-Ordinals.Exponentiation.Supremum.
+<a href="Ordinals.Exponentiation.Supremum.html">Ordinals.Exponentiation.Supremum</a>.
 Since this recursive equation uniquely specifies the operation ^ₒ, this implies
 that Grayson&#39;s construction satisfies the equation precisely when it coincides
 with abstract exponentiation.
 Now, Grayson&#39;s construction is easily to seen have a trichotomous least element,
 namely the empty list. But given an ordinal α with a least element, we show in
-Ordinals.Exponentiation.Supremum that if the least element of abstract
+<a href="Ordinals.Exponentiation.Supremum.html">Ordinals.Exponentiation.Supremum</a> that if the least element of abstract
 exponentiation of α by 𝟙ₒ is trichotomous, then the least element of α must be
 too. Hence, the recursive equation cannot hold for Grayson&#39;s construction (even
 in the very simple case where β ＝ 𝟙ₒ) unless α has a trichotomous least
 element, in which case the equation holds indeed, as proved in
-Ordinals.Exponentiation.RelatingConstructions.
+<a href="Ordinals.Exponentiation.RelatingConstructions.html">Ordinals.Exponentiation.RelatingConstructions</a>.
 
 [1] Robin J. Grayson
     Constructive Well-Orderings
@@ -227,13 +227,13 @@ assumptions only as we need them.
  <a id="7831" href="Ordinals.Exponentiation.Grayson.html#7831" class="Function">GraysonList-⊥</a> <a id="7845" class="Symbol">:</a> <a id="7847" href="Ordinals.Exponentiation.Grayson.html#6378" class="Function">GraysonList</a>
  <a id="7860" href="Ordinals.Exponentiation.Grayson.html#7831" class="Function">GraysonList-⊥</a> <a id="7874" class="Symbol">=</a> <a id="7876" href="MLTT.List.html#521" class="InductiveConstructor">[]</a> <a id="7879" href="MLTT.Sigma.html#395" class="InductiveConstructor Operator">,</a> <a id="7881" class="Symbol">(</a><a id="7882" href="Ordinals.Exponentiation.DecreasingList.html#3552" class="InductiveConstructor">[]-decr</a> <a id="7890" href="MLTT.Sigma.html#395" class="InductiveConstructor Operator">,</a> <a id="7892" href="MLTT.List.html#19080" class="InductiveConstructor">[]</a><a id="7894" class="Symbol">)</a>
 
-<a id="7897" class="Markup">\end{code}</a><a id="7907" class="Background">
+<a id="7897" class="Markup">\end{code}</a><span id="7907" class="Background">
 
-For comparison with Ordinals.Exponentiation.DecreasingList, it is
+For comparison with <a href="Ordinals.Exponentiation.DecreasingList.html">Ordinals.Exponentiation.DecreasingList</a>, it is
 convenient to reformulate the type of Grayson lists slightly in an
 equivalent way:
 
-</a><a id="8059" class="Markup">\begin{code}</a>
+</span><a id="8059" class="Markup">\begin{code}</a>
 
  <a id="8074" href="Ordinals.Exponentiation.Grayson.html#8074" class="Function">GraysonList&#39;</a> <a id="8087" class="Symbol">:</a> <a id="8089" href="Ordinals.Exponentiation.Grayson.html#5942" class="Bound">𝓤</a> <a id="8091" href="Agda.Primitive.html#961" class="Primitive Operator">⊔</a> <a id="8093" href="Ordinals.Exponentiation.Grayson.html#5962" class="Bound">𝓥</a> <a id="8095" href="MLTT.Universes.html#4011" class="Function Operator">̇</a>
  <a id="8098" href="Ordinals.Exponentiation.Grayson.html#8074" class="Function">GraysonList&#39;</a> <a id="8111" class="Symbol">=</a>
@@ -469,15 +469,15 @@ Assuming that the order on Grayson lists is a well-order, so is the order on A�
  <a id="16518" href="Ordinals.Exponentiation.Grayson.html#16465" class="Function">R⁺-wellorder</a> <a id="16531" class="Symbol">(</a><a id="16532" href="Ordinals.Exponentiation.Grayson.html#16532" class="Bound">p</a> <a id="16534" href="MLTT.Sigma.html#395" class="InductiveConstructor Operator">,</a> <a id="16536" href="Ordinals.Exponentiation.Grayson.html#16536" class="Bound">w</a> <a id="16538" href="MLTT.Sigma.html#395" class="InductiveConstructor Operator">,</a> <a id="16540" href="Ordinals.Exponentiation.Grayson.html#16540" class="Bound">e</a> <a id="16542" href="MLTT.Sigma.html#395" class="InductiveConstructor Operator">,</a> <a id="16544" href="Ordinals.Exponentiation.Grayson.html#16544" class="Bound">t</a><a id="16545" class="Symbol">)</a> <a id="16547" class="Symbol">=</a>
   <a id="16551" href="Ordinals.Exponentiation.Grayson.html#14945" class="Function">R⁺-propvalued</a> <a id="16565" href="Ordinals.Exponentiation.Grayson.html#16532" class="Bound">p</a> <a id="16567" href="MLTT.Sigma.html#395" class="InductiveConstructor Operator">,</a> <a id="16569" href="Ordinals.Exponentiation.Grayson.html#15251" class="Function">R⁺-wellfounded</a> <a id="16584" href="Ordinals.Exponentiation.Grayson.html#16536" class="Bound">w</a> <a id="16586" href="MLTT.Sigma.html#395" class="InductiveConstructor Operator">,</a> <a id="16588" href="Ordinals.Exponentiation.Grayson.html#15506" class="Function">R⁺-extensional</a> <a id="16603" href="Ordinals.Exponentiation.Grayson.html#16540" class="Bound">e</a> <a id="16605" href="MLTT.Sigma.html#395" class="InductiveConstructor Operator">,</a> <a id="16607" href="Ordinals.Exponentiation.Grayson.html#16133" class="Function">R⁺-transitive</a> <a id="16621" href="Ordinals.Exponentiation.Grayson.html#16544" class="Bound">t</a>
 
-<a id="16624" class="Markup">\end{code}</a><a id="16634" class="Background">
+<a id="16624" class="Markup">\end{code}</a><span id="16634" class="Background">
 
 However, it is a constructive taboo that the subtype of positively non-minimal
 elements is always an ordinal, with essentially the same proof as for
 subtype-of-positive-elements-an-ordinal-implies-EM in
-Ordinals.Exponentiation.Taboos.
+<a href="Ordinals.Exponentiation.Taboos.html">Ordinals.Exponentiation.Taboos</a>.
 Note that we can even restrict to ordinals with a least element.
 
-</a><a id="16937" class="Markup">\begin{code}</a>
+</span><a id="16937" class="Markup">\begin{code}</a>
 
 <a id="subtype-of-positively-non-minimal-elements-an-ordinal-implies-EM"></a><a id="16951" href="Ordinals.Exponentiation.Grayson.html#16951" class="Function">subtype-of-positively-non-minimal-elements-an-ordinal-implies-EM</a>
  <a id="17017" class="Symbol">:</a> <a id="17019" class="Symbol">((</a><a id="17021" href="Ordinals.Exponentiation.Grayson.html#17021" class="Bound">α</a> <a id="17023" class="Symbol">:</a> <a id="17025" href="Ordinals.Type.html#600" class="Function">Ordinal</a> <a id="17033" class="Symbol">(</a><a id="17034" href="MLTT.Universes.html#3833" class="Generalizable">𝓤</a> <a id="17036" href="MLTT.Universes.html#4077" class="Function Operator">⁺⁺</a><a id="17038" class="Symbol">))</a>
@@ -546,7 +546,7 @@ Note that we can even restrict to ordinals with a least element.
 
   <a id="19164" href="Ordinals.Exponentiation.Grayson.html#19164" class="Function">III</a> <a id="19168" class="Symbol">:</a> <a id="19170" href="UF.ClassicalLogic.html#988" class="Function">EM</a> <a id="19173" href="Ordinals.Exponentiation.Grayson.html#17225" class="Bound">𝓤</a>
   <a id="19177" href="Ordinals.Exponentiation.Grayson.html#19164" class="Function">III</a> <a id="19181" class="Symbol">=</a> <a id="19183" href="UF.SubtypeClassifier.html#6876" class="Function">Ω-discrete-gives-EM</a> <a id="19203" href="Ordinals.Exponentiation.Grayson.html#2962" class="Function">fe&#39;</a> <a id="19207" href="Ordinals.Exponentiation.Grayson.html#3000" class="Function">pe</a>
-         <a id="19219" class="Symbol">(</a><a id="19220" href="UF.DiscreteAndSeparated.html#22682" class="Function">equiv-to-discrete</a>
+         <a id="19219" class="Symbol">(</a><a id="19220" href="UF.DiscreteAndSeparated.html#22663" class="Function">equiv-to-discrete</a>
            <a id="19249" class="Symbol">(</a><a id="19250" href="UF.Equiv.html#3719" class="Function">idtoeq</a> <a id="19257" class="Symbol">(</a><a id="19258" href="MLTT.Unit.html#129" class="Record">𝟙</a> <a id="19260" href="MLTT.Plus.html#174" class="Datatype Operator">+</a> <a id="19262" href="MLTT.Unit.html#129" class="Record">𝟙</a><a id="19263" class="Symbol">)</a> <a id="19265" class="Symbol">(</a><a id="19266" href="UF.SubtypeClassifier.html#422" class="Function">Ω</a> <a id="19268" href="Ordinals.Exponentiation.Grayson.html#17225" class="Bound">𝓤</a><a id="19269" class="Symbol">)</a> <a id="19271" class="Symbol">(</a><a id="19272" href="Ordinals.Exponentiation.Grayson.html#19106" class="Function">II</a> <a id="19275" href="MLTT.Id.html#1054" class="Function Operator">⁻¹</a><a id="19277" class="Symbol">))</a>
            <a id="19291" class="Symbol">(</a><a id="19292" href="UF.DiscreteAndSeparated.html#3721" class="Function">+-is-discrete</a> <a id="19306" href="UF.DiscreteAndSeparated.html#2121" class="Function">𝟙-is-discrete</a> <a id="19320" href="UF.DiscreteAndSeparated.html#2121" class="Function">𝟙-is-discrete</a><a id="19333" class="Symbol">))</a>
 

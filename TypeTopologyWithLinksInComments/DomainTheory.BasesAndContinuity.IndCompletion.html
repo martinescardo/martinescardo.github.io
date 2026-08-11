@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html><head><meta charset="utf-8"><title>DomainTheory.BasesAndContinuity.IndCompletion</title><link rel="stylesheet" href="Agda.css"></head><body><pre class="Agda"><a id="1" class="Background">Tom de Jong, early January 2022.
+<html><head><meta charset="utf-8"><title>DomainTheory.BasesAndContinuity.IndCompletion</title><link rel="stylesheet" href="Agda.css"></head><body><pre class="Agda"><span id="1" class="Background">Tom de Jong, early January 2022.
 
 In category theory, the Ind-completion freely adds filtered colimits. For a
 poset, the Ind-completion can be described as the preorder of directed families
@@ -11,10 +11,10 @@ have a left adjoint. We also consider the poset reflection Ind/≈ of Ind and
 define what it means for the induced map Ind/≈ → 𝓓 to have a left adjoint.
 
 This development is used in exploring possible notions of continuous dcpo in
-ContinuityDiscussion.lagda. In particular, the observation that the
+<a href="DomainTheory.BasesAndContinuity.ContinuityDiscussion.html">ContinuityDiscussion.lagda</a>. In particular, the observation that the
 Ind-completion is a preorder and not a poset is seen to be important there.
 
-</a><a id="762" class="Markup">\begin{code}</a>
+</span><a id="762" class="Markup">\begin{code}</a>
 
 <a id="776" class="Symbol">{-#</a> <a id="780" class="Keyword">OPTIONS</a> <a id="788" class="Pragma">--safe</a> <a id="795" class="Pragma">--without-K</a> <a id="807" class="Symbol">#-}</a>
 
@@ -182,17 +182,17 @@ also have a map in the other direction which comes in useful at times.
  <a id="Ind-completion.ι"></a><a id="6331" href="DomainTheory.BasesAndContinuity.IndCompletion.html#6331" class="Function">ι</a> <a id="6333" class="Symbol">:</a> <a id="6335" href="DomainTheory.Basics.Dcpo.html#6439" class="Function Operator">⟨</a> <a id="6337" href="DomainTheory.BasesAndContinuity.IndCompletion.html#1464" class="Bound">𝓓</a> <a id="6339" href="DomainTheory.Basics.Dcpo.html#6439" class="Function Operator">⟩</a> <a id="6341" class="Symbol">→</a> <a id="6343" href="DomainTheory.BasesAndContinuity.IndCompletion.html#1497" class="Function">Ind</a>
  <a id="6348" href="DomainTheory.BasesAndContinuity.IndCompletion.html#6331" class="Function">ι</a> <a id="6350" href="DomainTheory.BasesAndContinuity.IndCompletion.html#6350" class="Bound">x</a> <a id="6352" class="Symbol">=</a> <a id="6354" href="MLTT.Unit.html#129" class="Record">𝟙</a> <a id="6356" href="MLTT.Sigma.html#395" class="InductiveConstructor Operator">,</a> <a id="6358" href="DomainTheory.BasesAndContinuity.IndCompletion.html#6085" class="Function Operator">⌞</a> <a id="6360" href="DomainTheory.BasesAndContinuity.IndCompletion.html#6350" class="Bound">x</a> <a id="6362" href="DomainTheory.BasesAndContinuity.IndCompletion.html#6085" class="Function Operator">⌟</a> <a id="6364" href="MLTT.Sigma.html#395" class="InductiveConstructor Operator">,</a> <a id="6366" href="DomainTheory.BasesAndContinuity.IndCompletion.html#6133" class="Function">⌞⌟-is-directed</a> <a id="6381" href="DomainTheory.BasesAndContinuity.IndCompletion.html#6350" class="Bound">x</a>
 
-<a id="6384" class="Markup">\end{code}</a><a id="6394" class="Background">
+<a id="6384" class="Markup">\end{code}</a><span id="6394" class="Background">
 
 In our discussions on the notion of continuous dcpo we will be interested in
-∐-map having a left adjoint, see ContinuityDiscussion.lagda.
+∐-map having a left adjoint, see <a href="DomainTheory.BasesAndContinuity.ContinuityDiscussion.html">ContinuityDiscussion.lagda</a>.
 
 We define what that means here and note that it is helpful to consider an
 auxiliary relation between Ind(D) and D that we call &quot;being left adjunct to&quot;,
 because a map L : D → Ind(D) is a left adjoint to ∐-map precisely when L(x) is
 left adjunct to x for every x : D.
 
-</a><a id="6802" class="Markup">\begin{code}</a>
+</span><a id="6802" class="Markup">\begin{code}</a>
 
  <a id="Ind-completion._is-left-adjunct-to_"></a><a id="6817" href="DomainTheory.BasesAndContinuity.IndCompletion.html#6817" class="Function Operator">_is-left-adjunct-to_</a> <a id="6838" class="Symbol">:</a> <a id="6840" href="DomainTheory.BasesAndContinuity.IndCompletion.html#1497" class="Function">Ind</a> <a id="6844" class="Symbol">→</a> <a id="6846" href="DomainTheory.Basics.Dcpo.html#6439" class="Function Operator">⟨</a> <a id="6848" href="DomainTheory.BasesAndContinuity.IndCompletion.html#1464" class="Bound">𝓓</a> <a id="6850" href="DomainTheory.Basics.Dcpo.html#6439" class="Function Operator">⟩</a> <a id="6852" class="Symbol">→</a> <a id="6854" href="DomainTheory.BasesAndContinuity.IndCompletion.html#1028" class="Bound">𝓥</a> <a id="6856" href="MLTT.Universes.html#3754" class="Primitive Operator">⁺</a> <a id="6858" href="Agda.Primitive.html#961" class="Primitive Operator">⊔</a> <a id="6860" href="DomainTheory.BasesAndContinuity.IndCompletion.html#1474" class="Bound">𝓤</a> <a id="6862" href="Agda.Primitive.html#961" class="Primitive Operator">⊔</a> <a id="6864" href="DomainTheory.BasesAndContinuity.IndCompletion.html#1478" class="Bound">𝓣</a> <a id="6866" href="MLTT.Universes.html#4011" class="Function Operator">̇</a>
  <a id="6869" href="DomainTheory.BasesAndContinuity.IndCompletion.html#6869" class="Bound">α</a> <a id="6871" href="DomainTheory.BasesAndContinuity.IndCompletion.html#6817" class="Function Operator">is-left-adjunct-to</a> <a id="6890" href="DomainTheory.BasesAndContinuity.IndCompletion.html#6890" class="Bound">x</a> <a id="6892" class="Symbol">=</a> <a id="6894" class="Symbol">(</a><a id="6895" href="DomainTheory.BasesAndContinuity.IndCompletion.html#6895" class="Bound">β</a> <a id="6897" class="Symbol">:</a> <a id="6899" href="DomainTheory.BasesAndContinuity.IndCompletion.html#1497" class="Function">Ind</a><a id="6902" class="Symbol">)</a> <a id="6904" class="Symbol">→</a> <a id="6906" class="Symbol">(</a><a id="6907" href="DomainTheory.BasesAndContinuity.IndCompletion.html#6869" class="Bound">α</a> <a id="6909" href="DomainTheory.BasesAndContinuity.IndCompletion.html#1755" class="Function Operator">≲</a> <a id="6911" href="DomainTheory.BasesAndContinuity.IndCompletion.html#6895" class="Bound">β</a><a id="6912" class="Symbol">)</a> <a id="6914" href="Notation.General.html#2690" class="Function Operator">↔</a> <a id="6916" class="Symbol">(</a><a id="6917" href="DomainTheory.BasesAndContinuity.IndCompletion.html#6890" class="Bound">x</a> <a id="6919" href="DomainTheory.Basics.Dcpo.html#6479" class="Function">⊑⟨</a> <a id="6922" href="DomainTheory.BasesAndContinuity.IndCompletion.html#1464" class="Bound">𝓓</a> <a id="6924" href="DomainTheory.Basics.Dcpo.html#6479" class="Function">⟩</a> <a id="6926" href="DomainTheory.BasesAndContinuity.IndCompletion.html#5449" class="Function">∐-map</a> <a id="6932" href="DomainTheory.BasesAndContinuity.IndCompletion.html#6895" class="Bound">β</a><a id="6933" class="Symbol">)</a>
@@ -312,7 +312,7 @@ now.
        <a id="11520" href="DomainTheory.BasesAndContinuity.IndCompletion.html#11520" class="Function">approx</a> <a id="11527" class="Symbol">:</a> <a id="11529" href="DomainTheory.BasesAndContinuity.IndCompletion.html#11204" class="Bound">L</a> <a id="11531" href="DomainTheory.BasesAndContinuity.IndCompletion.html#11223" class="Bound">y</a> <a id="11533" href="DomainTheory.BasesAndContinuity.IndCompletion.html#7829" class="Function Operator">approximates</a> <a id="11546" href="DomainTheory.BasesAndContinuity.IndCompletion.html#11223" class="Bound">y</a>
        <a id="11555" href="DomainTheory.BasesAndContinuity.IndCompletion.html#11520" class="Function">approx</a> <a id="11562" class="Symbol">=</a> <a id="11564" href="DomainTheory.BasesAndContinuity.IndCompletion.html#9094" class="Function">approximates-if-left-adjunct-to</a> <a id="11596" class="Symbol">(</a><a id="11597" href="DomainTheory.BasesAndContinuity.IndCompletion.html#11204" class="Bound">L</a> <a id="11599" href="DomainTheory.BasesAndContinuity.IndCompletion.html#11223" class="Bound">y</a><a id="11600" class="Symbol">)</a> <a id="11602" href="DomainTheory.BasesAndContinuity.IndCompletion.html#11223" class="Bound">y</a> <a id="11604" class="Symbol">(</a><a id="11605" href="DomainTheory.BasesAndContinuity.IndCompletion.html#11206" class="Bound">L-left-adjoint</a> <a id="11620" href="DomainTheory.BasesAndContinuity.IndCompletion.html#11223" class="Bound">y</a><a id="11621" class="Symbol">)</a>
 
-<a id="11624" class="Markup">\end{code}</a><a id="11634" class="Background">
+<a id="11624" class="Markup">\end{code}</a><span id="11634" class="Background">
 
 Because Ind is a preorder and not a poset, the type expressing that ∐-map has a
 specified left adjoint is not a proposition, as the supposed left adjoint can
@@ -323,9 +323,9 @@ induced by the supremum-map Ind → 𝓓 has a left adjoint to obtain a type tha
 a proposition. We describe that process here.
 
 This is *not* the same as asking that ∐-map : Ind → 𝓓 has an unspecified left
-adjoint, as we explain in ContinuityDiscussion.lagda.
+adjoint, as we explain in <a href="DomainTheory.BasesAndContinuity.ContinuityDiscussion.html">ContinuityDiscussion.lagda</a>.
 
-</a><a id="12199" class="Markup">\begin{code}</a>
+</span><a id="12199" class="Markup">\begin{code}</a>
 
 <a id="12213" class="Keyword">module</a> <a id="Ind-completion-poset-reflection"></a><a id="12220" href="DomainTheory.BasesAndContinuity.IndCompletion.html#12220" class="Module">Ind-completion-poset-reflection</a>
         <a id="12260" class="Symbol">(</a><a id="12261" href="DomainTheory.BasesAndContinuity.IndCompletion.html#12261" class="Bound">pe</a> <a id="12264" class="Symbol">:</a> <a id="12266" href="UF.Subsingletons.html#7814" class="Function">Prop-Ext</a><a id="12274" class="Symbol">)</a>

@@ -1,11 +1,11 @@
 <!DOCTYPE HTML>
-<html><head><meta charset="utf-8"><title>EGroups.Reduction</title><link rel="stylesheet" href="Agda.css"></head><body><pre class="Agda"><a id="1" class="Background">Martin Escardo, July 2026.
+<html><head><meta charset="utf-8"><title>EGroups.Reduction</title><link rel="stylesheet" href="Agda.css"></head><body><pre class="Agda"><span id="1" class="Background">Martin Escardo, July 2026.
 
 The reduction underlying the free egroup on a setoid.
 
 A word over an alphabet A is a list of letters, each an element of A
 tagged with a sign that marks whether it is formally inverted, as in
-Groups.Free. Two adjacent letters cancel when the second is the
+<a href="Groups.Free.html">Groups.Free</a>. Two adjacent letters cancel when the second is the
 inverse of the first up to the setoid relation _≈_, rather than only
 when they are equal. As a consequence the reducts of a word agree only
 up to the letter-wise relation _≈[FA]_, so that confluence becomes
@@ -13,13 +13,13 @@ confluence modulo _≈_ in the sense of the module ChurchRosserModulo.
 
 We define the reduction relation, prove local confluence and hence,
 via that module, the Church-Rosser property, and then adapt the
-size-reduction of Groups.Free. The idea there is to keep redexes and
+size-reduction of <a href="Groups.Free.html">Groups.Free</a>. The idea there is to keep redexes and
 reducts structural, so that the type of generators of a word stays
 𝓤-small even when the underlying type A of generators is large. The
 type A lives in 𝓤⁺ and its relation _≈_ is valued in 𝓤, as needed for
 the universe setoid formed by 𝓤 and type equivalence.
 
-</a><a id="1024" class="Markup">\begin{code}</a>
+</span><a id="1024" class="Markup">\begin{code}</a>
 
 <a id="1038" class="Symbol">{-#</a> <a id="1042" class="Keyword">OPTIONS</a> <a id="1050" class="Pragma">--safe</a> <a id="1057" class="Pragma">--without-K</a> <a id="1069" class="Pragma">--no-exact-split</a> <a id="1086" class="Symbol">#-}</a>
 
@@ -41,11 +41,11 @@ the universe setoid formed by 𝓤 and type equivalence.
 <a id="1477" class="Keyword">open</a> <a id="1482" class="Keyword">import</a> <a id="1489" href="UF.SmallnessProperties.html" class="Module">UF.SmallnessProperties</a>
 <a id="1512" class="Keyword">open</a> <a id="1517" class="Keyword">import</a> <a id="1524" href="Relations.SRTclosure.html" class="Module">Relations.SRTclosure</a>
 
-<a id="1546" class="Markup">\end{code}</a><a id="1556" class="Background">
+<a id="1546" class="Markup">\end{code}</a><span id="1556" class="Background">
 
-The letters and their formal inverse are exactly as in Groups.Free.
+The letters and their formal inverse are exactly as in <a href="Groups.Free.html">Groups.Free</a>.
 
-</a><a id="1627" class="Markup">\begin{code}</a>
+</span><a id="1627" class="Markup">\begin{code}</a>
 
 <a id="X"></a><a id="1641" href="EGroups.Reduction.html#1641" class="Function">X</a> <a id="1643" class="Symbol">:</a> <a id="1645" href="EGroups.Reduction.html#1151" class="Bound">𝓤</a> <a id="1647" href="MLTT.Universes.html#3754" class="Primitive Operator">⁺</a> <a id="1649" href="MLTT.Universes.html#4011" class="Function Operator">̇</a>
 <a id="1651" href="EGroups.Reduction.html#1641" class="Function">X</a> <a id="1653" class="Symbol">=</a> <a id="1655" href="MLTT.Two.html#124" class="Datatype">𝟚</a> <a id="1657" href="MLTT.Sigma.html#558" class="Function Operator">×</a> <a id="1659" href="EGroups.Reduction.html#1174" class="Bound">A</a>
@@ -217,14 +217,14 @@ confluence.
  <a id="6889" href="EGroups.Reduction.html#1972" class="Function">≈[X]-sym</a> <a id="6898" class="Symbol">(</a><a id="6899" href="EGroups.Reduction.html#6880" class="Bound">x</a> <a id="6901" href="EGroups.Reduction.html#1662" class="Function Operator">⁻</a><a id="6902" class="Symbol">)</a> <a id="6904" href="EGroups.Reduction.html#6882" class="Bound">y</a>
   <a id="6908" class="Symbol">(</a><a id="6909" href="EGroups.Reduction.html#2069" class="Function">≈[X]-trans</a> <a id="6920" class="Symbol">(</a><a id="6921" href="EGroups.Reduction.html#6880" class="Bound">x</a> <a id="6923" href="EGroups.Reduction.html#1662" class="Function Operator">⁻</a><a id="6924" class="Symbol">)</a> <a id="6926" class="Symbol">((</a><a id="6928" href="EGroups.Reduction.html#6882" class="Bound">y</a> <a id="6930" href="EGroups.Reduction.html#1662" class="Function Operator">⁻</a><a id="6931" class="Symbol">)</a> <a id="6933" href="EGroups.Reduction.html#1662" class="Function Operator">⁻</a><a id="6934" class="Symbol">)</a> <a id="6936" href="EGroups.Reduction.html#6882" class="Bound">y</a> <a id="6938" class="Symbol">(</a><a id="6939" href="EGroups.Reduction.html#2208" class="Function">⁻-cong</a> <a id="6946" href="EGroups.Reduction.html#6880" class="Bound">x</a> <a id="6948" class="Symbol">(</a><a id="6949" href="EGroups.Reduction.html#6882" class="Bound">y</a> <a id="6951" href="EGroups.Reduction.html#1662" class="Function Operator">⁻</a><a id="6952" class="Symbol">)</a> <a id="6954" href="EGroups.Reduction.html#6884" class="Bound">c</a><a id="6955" class="Symbol">)</a> <a id="6957" class="Symbol">(</a><a id="6958" href="EGroups.Reduction.html#6522" class="Function">to-≈[X]</a> <a id="6966" class="Symbol">(</a><a id="6967" href="EGroups.Reduction.html#6431" class="Function">inv-invol</a> <a id="6977" href="EGroups.Reduction.html#6882" class="Bound">y</a><a id="6978" class="Symbol">)))</a>
 
-<a id="6983" class="Markup">\end{code}</a><a id="6993" class="Background">
+<a id="6983" class="Markup">\end{code}</a><span id="6993" class="Background">
 
 We prove local confluence modulo _≈_, the setoid counterpart of
-Lemma[Church-Rosser] of Groups.Free. Two redexes of a common word
+Lemma[Church-Rosser] of <a href="Groups.Free.html">Groups.Free</a>. Two redexes of a common word
 either collapse to ≈[FA]-related contractums, when they coincide or
 overlap, or have a common reduct, when they are disjoint.
 
-</a><a id="7252" class="Markup">\begin{code}</a>
+</span><a id="7252" class="Markup">\begin{code}</a>
 
 <a id="are-joinable"></a><a id="7266" href="EGroups.Reduction.html#7266" class="Function">are-joinable</a> <a id="7279" class="Symbol">:</a> <a id="7281" href="EGroups.Reduction.html#1705" class="Function">FA</a> <a id="7284" class="Symbol">→</a> <a id="7286" href="EGroups.Reduction.html#1705" class="Function">FA</a> <a id="7289" class="Symbol">→</a> <a id="7291" href="EGroups.Reduction.html#1151" class="Bound">𝓤</a> <a id="7293" href="MLTT.Universes.html#3754" class="Primitive Operator">⁺</a> <a id="7295" href="MLTT.Universes.html#4011" class="Function Operator">̇</a>
 <a id="7297" href="EGroups.Reduction.html#7266" class="Function">are-joinable</a> <a id="7310" href="EGroups.Reduction.html#7310" class="Bound">r₀</a> <a id="7313" href="EGroups.Reduction.html#7313" class="Bound">r₁</a> <a id="7316" class="Symbol">=</a> <a id="7318" class="Symbol">(</a><a id="7319" href="EGroups.Reduction.html#7310" class="Bound">r₀</a> <a id="7322" href="EGroups.Reduction.html#2311" class="Function Operator">≈[FA]</a> <a id="7328" href="EGroups.Reduction.html#7313" class="Bound">r₁</a><a id="7330" class="Symbol">)</a>
@@ -379,11 +379,11 @@ and its consequence for generators.
  <a id="12347" href="EGroups.ChurchRosserModulo.html#6169" class="Function">irreducibles-related-by-∿-are-≈</a> <a id="12379" href="EGroups.Reduction.html#10446" class="Function">Theorem[Church-Rosser≈]</a> <a id="12403" href="EGroups.Reduction.html#5020" class="Function">▷-respects-≈</a>
   <a id="12418" class="Symbol">(</a><a id="12419" href="EGroups.Reduction.html#1729" class="Function">η</a> <a id="12421" href="EGroups.Reduction.html#12340" class="Bound">a</a><a id="12422" class="Symbol">)</a> <a id="12424" class="Symbol">(</a><a id="12425" href="EGroups.Reduction.html#1729" class="Function">η</a> <a id="12427" href="EGroups.Reduction.html#12342" class="Bound">b</a><a id="12428" class="Symbol">)</a> <a id="12430" class="Symbol">(</a><a id="12431" href="EGroups.Reduction.html#11861" class="Function">η-irreducible</a> <a id="12445" href="EGroups.Reduction.html#12340" class="Bound">a</a><a id="12446" class="Symbol">)</a> <a id="12448" class="Symbol">(</a><a id="12449" href="EGroups.Reduction.html#11861" class="Function">η-irreducible</a> <a id="12463" href="EGroups.Reduction.html#12342" class="Bound">b</a><a id="12464" class="Symbol">)</a>
 
-<a id="12467" class="Markup">\end{code}</a><a id="12477" class="Background">
+<a id="12467" class="Markup">\end{code}</a><span id="12477" class="Background">
 
-We adapt the size-reduction of Groups.Free to the setoid reduction.
+We adapt the size-reduction of <a href="Groups.Free.html">Groups.Free</a> to the setoid reduction.
 
-</a><a id="12548" class="Markup">\begin{code}</a>
+</span><a id="12548" class="Markup">\begin{code}</a>
 
 <a id="redex"></a><a id="12562" href="EGroups.Reduction.html#12562" class="Function">redex</a> <a id="12568" class="Symbol">:</a> <a id="12570" href="EGroups.Reduction.html#1705" class="Function">FA</a> <a id="12573" class="Symbol">→</a> <a id="12575" href="EGroups.Reduction.html#1151" class="Bound">𝓤</a> <a id="12577" href="MLTT.Universes.html#4011" class="Function Operator">̇</a>
 <a id="12579" href="EGroups.Reduction.html#12562" class="Function">redex</a> <a id="12585" href="MLTT.List.html#521" class="InductiveConstructor">[]</a>          <a id="12597" class="Symbol">=</a> <a id="12599" href="MLTT.Empty-Type.html#121" class="Datatype">𝟘</a>
@@ -413,11 +413,11 @@ We adapt the size-reduction of Groups.Free to the setoid reduction.
                                   <a id="13495" href="EGroups.Reduction.html#12790" class="Function">reduct-gives-▷</a> <a id="13510" href="EGroups.Reduction.html#13427" class="Bound">s</a> <a id="13512" href="EGroups.Reduction.html#13439" class="Bound">r</a> <a id="13514" href="MLTT.Sigma.html#395" class="InductiveConstructor Operator">,</a>
                                   <a id="13550" href="EGroups.Reduction.html#13267" class="Function">chain-lemma→</a> <a id="13563" class="Symbol">(</a><a id="13564" href="EGroups.Reduction.html#12675" class="Function">reduct</a> <a id="13571" href="EGroups.Reduction.html#13427" class="Bound">s</a> <a id="13573" href="EGroups.Reduction.html#13439" class="Bound">r</a><a id="13574" class="Symbol">)</a> <a id="13576" href="EGroups.Reduction.html#13435" class="Bound">n</a> <a id="13578" href="EGroups.Reduction.html#13443" class="Bound">ρ</a>
 
-<a id="13581" class="Markup">\end{code}</a><a id="13591" class="Background">
+<a id="13581" class="Markup">\end{code}</a><span id="13591" class="Background">
 
-The following also mimics the development of Groups.Free.
+The following also mimics the development of <a href="Groups.Free.html">Groups.Free</a>.
 
-</a><a id="13652" class="Markup">\begin{code}</a>
+</span><a id="13652" class="Markup">\begin{code}</a>
 
 <a id="_◗_"></a><a id="13666" href="EGroups.Reduction.html#13666" class="Function Operator">_◗_</a> <a id="13670" class="Symbol">:</a> <a id="13672" href="EGroups.Reduction.html#1705" class="Function">FA</a> <a id="13675" class="Symbol">→</a> <a id="13677" href="EGroups.Reduction.html#1705" class="Function">FA</a> <a id="13680" class="Symbol">→</a> <a id="13682" href="EGroups.Reduction.html#1151" class="Bound">𝓤</a> <a id="13684" href="MLTT.Universes.html#3754" class="Primitive Operator">⁺</a> <a id="13686" href="MLTT.Universes.html#4011" class="Function Operator">̇</a>
 <a id="13688" href="MLTT.List.html#521" class="InductiveConstructor">[]</a>          <a id="13700" href="EGroups.Reduction.html#13666" class="Function Operator">◗</a> <a id="13702" href="EGroups.Reduction.html#13702" class="Bound">t</a> <a id="13704" class="Symbol">=</a> <a id="13706" href="MLTT.Empty-Type.html#121" class="Datatype">𝟘</a>
@@ -473,15 +473,15 @@ The following also mimics the development of Groups.Free.
 <a id="underlying-generator"></a><a id="15583" href="EGroups.Reduction.html#15583" class="Function">underlying-generator</a> <a id="15604" class="Symbol">:</a> <a id="15606" class="Symbol">{</a><a id="15607" href="EGroups.Reduction.html#15607" class="Bound">s</a> <a id="15609" class="Symbol">:</a> <a id="15611" href="EGroups.Reduction.html#1705" class="Function">FA</a><a id="15613" class="Symbol">}</a> <a id="15615" class="Symbol">→</a> <a id="15617" href="EGroups.Reduction.html#15482" class="Function">generator</a> <a id="15627" href="EGroups.Reduction.html#15607" class="Bound">s</a> <a id="15629" class="Symbol">→</a> <a id="15631" href="EGroups.Reduction.html#1174" class="Bound">A</a>
 <a id="15633" href="EGroups.Reduction.html#15583" class="Function">underlying-generator</a> <a id="15654" class="Symbol">(</a><a id="15655" href="EGroups.Reduction.html#15655" class="Bound">n</a> <a id="15657" href="MLTT.Sigma.html#395" class="InductiveConstructor Operator">,</a> <a id="15659" href="EGroups.Reduction.html#15659" class="Bound">ρ</a> <a id="15661" href="MLTT.Sigma.html#395" class="InductiveConstructor Operator">,</a> <a id="15663" href="EGroups.Reduction.html#15663" class="Bound">a</a> <a id="15665" href="MLTT.Sigma.html#395" class="InductiveConstructor Operator">,</a> <a id="15667" href="EGroups.Reduction.html#15667" class="Bound">p</a><a id="15668" class="Symbol">)</a> <a id="15670" class="Symbol">=</a> <a id="15672" href="EGroups.Reduction.html#15663" class="Bound">a</a>
 
-<a id="15675" class="Markup">\end{code}</a><a id="15685" class="Background">
+<a id="15675" class="Markup">\end{code}</a><span id="15685" class="Background">
 
-Unlike in Groups.Free, we don&#39;t assume that A is a set, and, like in
-Groups.Free, we don&#39;t assume decidable equality on it. But η is the
+Unlike in <a href="Groups.Free.html">Groups.Free</a>, we don&#39;t assume that A is a set, and, like in
+<a href="Groups.Free.html">Groups.Free</a>, we don&#39;t assume decidable equality on it. But η is the
 composite of pairing with the sign ₀ and the formation of a singleton
 list, and hence a decidable embedding, so that its fibers have any
 size, which is what keeps generator s small when A is large.
 
-</a><a id="16023" class="Markup">\begin{code}</a>
+</span><a id="16023" class="Markup">\begin{code}</a>
 
 <a id="η-is-embedding"></a><a id="16037" href="EGroups.Reduction.html#16037" class="Function">η-is-embedding</a> <a id="16052" class="Symbol">:</a> <a id="16054" href="UF.Embeddings.html#625" class="Function">is-embedding</a> <a id="16067" href="EGroups.Reduction.html#1729" class="Function">η</a>
 <a id="16069" href="EGroups.Reduction.html#16037" class="Function">η-is-embedding</a> <a id="16084" class="Symbol">=</a> <a id="16086" href="UF.Embeddings.html#1142" class="Function">∘-is-embedding</a> <a id="16101" href="UF.SmallnessProperties.html#5397" class="Function">pair₀-is-embedding</a> <a id="16120" href="UF.SmallnessProperties.html#5942" class="Function">[]-is-embedding</a>

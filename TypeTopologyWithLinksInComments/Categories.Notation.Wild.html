@@ -10,14 +10,14 @@
 
 <a id="148" class="Keyword">module</a> <a id="155" href="Categories.Notation.Wild.html" class="Module">Categories.Notation.Wild</a> <a id="180" class="Keyword">where</a>
 
-<a id="187" class="Markup">\end{code}</a><a id="197" class="Background">
+<a id="187" class="Markup">\end{code}</a><span id="197" class="Background">
 
 We define an object notation such that we can write obj W, obj P and obj C where
 W, P and C are wild categories, precategories and categories respectively.
 
-This works similarly to the method used in Notation.UnderlyingType.
+This works similarly to the method used in <a href="Notation.UnderlyingType.html">Notation.UnderlyingType</a>.
 
-</a><a id="425" class="Markup">\begin{code}</a>
+</span><a id="425" class="Markup">\begin{code}</a>
 
 <a id="439" class="Keyword">record</a> <a id="OBJ"></a><a id="446" href="Categories.Notation.Wild.html#446" class="Record">OBJ</a> <a id="450" class="Symbol">{</a><a id="451" href="Categories.Notation.Wild.html#451" class="Bound">𝓤</a><a id="452" class="Symbol">}</a> <a id="454" class="Symbol">{</a><a id="455" href="Categories.Notation.Wild.html#455" class="Bound">𝓥</a><a id="456" class="Symbol">}</a> <a id="458" class="Symbol">(</a><a id="459" href="Categories.Notation.Wild.html#459" class="Bound">A</a> <a id="461" class="Symbol">:</a> <a id="463" href="Categories.Notation.Wild.html#451" class="Bound">𝓤</a> <a id="465" href="MLTT.Universes.html#4011" class="Function Operator">̇</a> <a id="467" class="Symbol">)</a> <a id="469" class="Symbol">(</a><a id="470" href="Categories.Notation.Wild.html#470" class="Bound">B</a> <a id="472" class="Symbol">:</a> <a id="474" href="Categories.Notation.Wild.html#455" class="Bound">𝓥</a> <a id="476" href="MLTT.Universes.html#4011" class="Function Operator">̇</a> <a id="478" class="Symbol">)</a> <a id="480" class="Symbol">:</a> <a id="482" href="Categories.Notation.Wild.html#451" class="Bound">𝓤</a> <a id="484" href="Agda.Primitive.html#961" class="Primitive Operator">⊔</a> <a id="486" href="Categories.Notation.Wild.html#455" class="Bound">𝓥</a> <a id="488" href="MLTT.Universes.html#3754" class="Primitive Operator">⁺</a> <a id="490" href="MLTT.Universes.html#4011" class="Function Operator">̇</a>  <a id="493" class="Keyword">where</a>
  <a id="500" class="Keyword">field</a>
@@ -29,17 +29,17 @@ This works similarly to the method used in Notation.UnderlyingType.
  <a id="wildcatobj"></a><a id="556" href="Categories.Notation.Wild.html#556" class="Function">wildcatobj</a> <a id="567" class="Symbol">:</a> <a id="569" class="Symbol">{</a><a id="570" href="Categories.Notation.Wild.html#570" class="Bound">𝓤</a> <a id="572" href="Categories.Notation.Wild.html#572" class="Bound">𝓥</a> <a id="574" class="Symbol">:</a> <a id="576" href="MLTT.Universes.html#3778" class="Postulate">Universe</a><a id="584" class="Symbol">}</a> <a id="586" class="Symbol">→</a> <a id="588" href="Categories.Notation.Wild.html#446" class="Record">OBJ</a> <a id="592" class="Symbol">(</a><a id="593" href="Categories.Wild.html#1134" class="Record">WildCategory</a> <a id="606" href="Categories.Notation.Wild.html#570" class="Bound">𝓤</a> <a id="608" href="Categories.Notation.Wild.html#572" class="Bound">𝓥</a><a id="609" class="Symbol">)</a> <a id="611" class="Symbol">(</a><a id="612" href="Categories.Notation.Wild.html#570" class="Bound">𝓤</a> <a id="614" href="MLTT.Universes.html#4011" class="Function Operator">̇</a> <a id="616" class="Symbol">)</a>
  <a id="619" href="Categories.Notation.Wild.html#508" class="Field">obj</a> <a id="623" class="Symbol">{{</a><a id="625" href="Categories.Notation.Wild.html#556" class="Function">wildcatobj</a><a id="635" class="Symbol">}}</a> <a id="638" class="Symbol">=</a> <a id="640" href="Categories.Wild.html#1219" class="Field">WildCategory.obj</a>
 
-<a id="658" class="Markup">\end{code}</a><a id="668" class="Background">
+<a id="658" class="Markup">\end{code}</a><span id="668" class="Background">
 
 We now define some notation for categories. This way, if we are working with
 wild categories C and D. We can simply write &quot;open WildCategoryNotation C&quot; and
 &quot;open WildCategoryNotation D&quot; to have all operations available.
 
-This works similarly to Notation.UnderlyingType, where we define records for
+This works similarly to <a href="Notation.UnderlyingType.html">Notation.UnderlyingType</a>, where we define records for
 each different field. We then define instances of each of the fields we want
 specific to the wild category used as input.
 
-</a><a id="1091" class="Markup">\begin{code}</a>
+</span><a id="1091" class="Markup">\begin{code}</a>
 
 <a id="1105" class="Keyword">module</a> <a id="1112" href="Categories.Notation.Wild.html#1112" class="Module">_</a> <a id="1114" class="Symbol">{</a><a id="1115" href="Categories.Notation.Wild.html#1115" class="Bound">𝓤</a> <a id="1117" href="Categories.Notation.Wild.html#1117" class="Bound">𝓥</a> <a id="1119" class="Symbol">:</a> <a id="1121" href="MLTT.Universes.html#3778" class="Postulate">Universe</a><a id="1129" class="Symbol">}</a> <a id="1131" class="Symbol">(</a><a id="1132" href="Categories.Notation.Wild.html#1132" class="Bound">W</a> <a id="1134" class="Symbol">:</a> <a id="1136" href="Categories.Wild.html#1134" class="Record">WildCategory</a> <a id="1149" href="Categories.Notation.Wild.html#1115" class="Bound">𝓤</a> <a id="1151" href="Categories.Notation.Wild.html#1117" class="Bound">𝓥</a><a id="1152" class="Symbol">)</a> <a id="1154" class="Keyword">where</a>
  <a id="1161" class="Keyword">record</a> <a id="1168" href="Categories.Notation.Wild.html#1168" class="Record">HOM</a> <a id="1172" class="Symbol">:</a> <a id="1174" href="Categories.Notation.Wild.html#1117" class="Bound">𝓥</a> <a id="1176" href="MLTT.Universes.html#3754" class="Primitive Operator">⁺</a> <a id="1178" href="Agda.Primitive.html#961" class="Primitive Operator">⊔</a> <a id="1180" href="Categories.Notation.Wild.html#1115" class="Bound">𝓤</a> <a id="1182" href="MLTT.Universes.html#4011" class="Function Operator">̇</a>  <a id="1185" class="Keyword">where</a>

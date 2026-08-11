@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html><head><meta charset="utf-8"><title>InjectiveTypes.MathematicalStructuresMoreGeneral</title><link rel="stylesheet" href="Agda.css"></head><body><pre class="Agda"><a id="1" class="Background">Martin Escardo, 16th August 2023, with more improvements 18th June 2025.
+<html><head><meta charset="utf-8"><title>InjectiveTypes.MathematicalStructuresMoreGeneral</title><link rel="stylesheet" href="Agda.css"></head><body><pre class="Agda"><span id="1" class="Background">Martin Escardo, 16th August 2023, with more improvements 18th June 2025.
 
 Injectivity of types of mathematical structures, such as pointed
 types, ∞-magmas, magmas, monoids, groups etc.
@@ -7,16 +7,16 @@ types, ∞-magmas, magmas, monoids, groups etc.
 We give a sufficient condition for types of mathematical structures to
 be injective, and we apply it to examples such as the above.
 
-This file generalizes InjectiveTypes.MathematicalStructures at the
+This file generalizes <a href="InjectiveTypes.MathematicalStructures.html">InjectiveTypes.MathematicalStructures</a> at the
 cost of perhaps being harder to understand. It relies on the file
-InjectiveTypes.Sigma, which also arises as a generalization of the
+<a href="InjectiveTypes.Sigma.html">InjectiveTypes.Sigma</a>, which also arises as a generalization of the
 above original file.
 
 Added 5 November 2025 by Tom de Jong: The type of metric spaces is
 injective and this relies on the generalizations developed here. This
 is the first example that make uses of the added generality of this file.
 
-</a><a id="754" class="Markup">\begin{code}</a>
+</span><a id="754" class="Markup">\begin{code}</a>
 
 <a id="768" class="Symbol">{-#</a> <a id="772" class="Keyword">OPTIONS</a> <a id="780" class="Pragma">--safe</a> <a id="787" class="Pragma">--without-K</a> <a id="799" class="Pragma">--lossy-unification</a> <a id="819" class="Symbol">#-}</a>
 
@@ -132,66 +132,66 @@ operation.
 
 <a id="3772" class="Keyword">module</a> <a id="3779" href="InjectiveTypes.MathematicalStructuresMoreGeneral.html#3779" class="Module">_</a> <a id="3781" class="Symbol">(</a><a id="3782" href="InjectiveTypes.MathematicalStructuresMoreGeneral.html#3782" class="Bound">S</a> <a id="3784" class="Symbol">:</a> <a id="3786" href="MLTT.Universes.html#3833" class="Generalizable">𝓤</a> <a id="3788" href="MLTT.Universes.html#4011" class="Function Operator">̇</a> <a id="3790" class="Symbol">→</a> <a id="3792" href="MLTT.Universes.html#3835" class="Generalizable">𝓥</a> <a id="3794" href="MLTT.Universes.html#4011" class="Function Operator">̇</a> <a id="3796" class="Symbol">)</a> <a id="3798" class="Keyword">where</a>
 
-<a id="3805" class="Markup">\end{code}</a><a id="3815" class="Background">
+<a id="3805" class="Markup">\end{code}</a><span id="3815" class="Background">
 
-By the results of InjectiveTypes.Sigma, we get that Σ S is aflabby in
+By the results of <a href="InjectiveTypes.Sigma.html">InjectiveTypes.Sigma</a>, we get that Σ S is aflabby in
 two ways, assuming the compatibility condition for the flabbiness
 data.
 
-</a><a id="3960" class="Markup">\begin{code}</a>
+</span><a id="3960" class="Markup">\begin{code}</a>
 
  <a id="3975" class="Keyword">module</a> <a id="3982" href="InjectiveTypes.MathematicalStructuresMoreGeneral.html#3982" class="Module">_</a> <a id="3984" class="Symbol">(</a><a id="3985" href="InjectiveTypes.MathematicalStructuresMoreGeneral.html#3985" class="Bound">ϕ</a> <a id="3987" class="Symbol">:</a> <a id="3989" href="InjectiveTypes.Blackboard.html#31602" class="Function">aflabby</a> <a id="3997" class="Symbol">(</a><a id="3998" href="InjectiveTypes.MathematicalStructuresMoreGeneral.html#3786" class="Bound">𝓤</a> <a id="4000" href="MLTT.Universes.html#4011" class="Function Operator">̇</a> <a id="4002" class="Symbol">)</a> <a id="4004" href="InjectiveTypes.MathematicalStructuresMoreGeneral.html#3786" class="Bound">𝓤</a><a id="4005" class="Symbol">)</a> <a id="4007" class="Keyword">where</a>
 
   <a id="4016" href="InjectiveTypes.MathematicalStructuresMoreGeneral.html#4016" class="Function">aflabbiness-of-type-of-structured-types</a> <a id="4056" class="Symbol">:</a> <a id="4058" href="InjectiveTypes.Sigma.html#3274" class="Function">compatibility-data</a> <a id="4077" href="InjectiveTypes.MathematicalStructuresMoreGeneral.html#3782" class="Bound">S</a> <a id="4079" href="InjectiveTypes.MathematicalStructuresMoreGeneral.html#3985" class="Bound">ϕ</a>
                                           <a id="4123" class="Symbol">→</a> <a id="4125" href="InjectiveTypes.Blackboard.html#31602" class="Function">aflabby</a> <a id="4133" class="Symbol">(</a><a id="4134" href="MLTT.Sigma-Type.html#116" class="Record">Σ</a> <a id="4136" href="InjectiveTypes.MathematicalStructuresMoreGeneral.html#3782" class="Bound">S</a><a id="4137" class="Symbol">)</a> <a id="4139" href="InjectiveTypes.MathematicalStructuresMoreGeneral.html#3786" class="Bound">𝓤</a>
-  <a id="4143" href="InjectiveTypes.MathematicalStructuresMoreGeneral.html#4016" class="Function">aflabbiness-of-type-of-structured-types</a> <a id="4183" class="Symbol">=</a> <a id="4185" href="InjectiveTypes.Sigma.html#4357" class="Function">Σ-is-aflabby</a> <a id="4198" href="InjectiveTypes.MathematicalStructuresMoreGeneral.html#3782" class="Bound">S</a> <a id="4200" href="InjectiveTypes.MathematicalStructuresMoreGeneral.html#3985" class="Bound">ϕ</a>
+  <a id="4143" href="InjectiveTypes.MathematicalStructuresMoreGeneral.html#4016" class="Function">aflabbiness-of-type-of-structured-types</a> <a id="4183" class="Symbol">=</a> <a id="4185" href="InjectiveTypes.Sigma.html#4358" class="Function">Σ-is-aflabby</a> <a id="4198" href="InjectiveTypes.MathematicalStructuresMoreGeneral.html#3782" class="Bound">S</a> <a id="4200" href="InjectiveTypes.MathematicalStructuresMoreGeneral.html#3985" class="Bound">ϕ</a>
 
   <a id="4205" href="InjectiveTypes.MathematicalStructuresMoreGeneral.html#4205" class="Function">ainjectivity-of-type-of-structures</a> <a id="4240" class="Symbol">:</a> <a id="4242" href="InjectiveTypes.Sigma.html#3274" class="Function">compatibility-data</a> <a id="4261" href="InjectiveTypes.MathematicalStructuresMoreGeneral.html#3782" class="Bound">S</a> <a id="4263" href="InjectiveTypes.MathematicalStructuresMoreGeneral.html#3985" class="Bound">ϕ</a>
                                      <a id="4302" class="Symbol">→</a> <a id="4304" href="InjectiveTypes.Blackboard.html#15851" class="Function">ainjective-type</a> <a id="4320" class="Symbol">(</a><a id="4321" href="MLTT.Sigma-Type.html#116" class="Record">Σ</a> <a id="4323" href="InjectiveTypes.MathematicalStructuresMoreGeneral.html#3782" class="Bound">S</a><a id="4324" class="Symbol">)</a> <a id="4326" href="InjectiveTypes.MathematicalStructuresMoreGeneral.html#3786" class="Bound">𝓤</a> <a id="4328" href="InjectiveTypes.MathematicalStructuresMoreGeneral.html#3786" class="Bound">𝓤</a>
   <a id="4332" href="InjectiveTypes.MathematicalStructuresMoreGeneral.html#4205" class="Function">ainjectivity-of-type-of-structures</a> <a id="4367" class="Symbol">=</a> <a id="4369" href="InjectiveTypes.Blackboard.html#32591" class="Function">aflabby-types-are-ainjective</a> <a id="4398" class="Symbol">(</a><a id="4399" href="MLTT.Sigma-Type.html#116" class="Record">Σ</a> <a id="4401" href="InjectiveTypes.MathematicalStructuresMoreGeneral.html#3782" class="Bound">S</a><a id="4402" class="Symbol">)</a>
                                        <a id="4443" href="MLTT.Pi.html#513" class="Function Operator">∘</a> <a id="4445" href="InjectiveTypes.MathematicalStructuresMoreGeneral.html#4016" class="Function">aflabbiness-of-type-of-structured-types</a>
 
-<a id="4486" class="Markup">\end{code}</a><a id="4496" class="Background">
+<a id="4486" class="Markup">\end{code}</a><span id="4496" class="Background">
 
 We will apply this to get our desired examples with ϕ taken to be the
 above canonical Π-flabby structure on the universe in most cases, and
 at least one with the canonical Σ-flabby structure.
 
 Next we want to simplify working with compatibility data (as defined
-in the module InjectiveTypes.Sigma), where we avoid transports by
+in the module <a href="InjectiveTypes.Sigma.html">InjectiveTypes.Sigma</a>), where we avoid transports by
 working with the following function treq and suitable choices of T and
 T-refl in the examples below. Notice that the definition of treq uses
 univalence. The point of T and T-refl below is that they won&#39;t use
 univalence in our examples of interest, so that they will have a
 better computational behaviour than treq.
 
-</a><a id="5142" class="Markup">\begin{code}</a>
+</span><a id="5142" class="Markup">\begin{code}</a>
 
  <a id="5157" href="InjectiveTypes.MathematicalStructuresMoreGeneral.html#5157" class="Function">treq</a> <a id="5162" class="Symbol">:</a> <a id="5164" class="Symbol">{</a><a id="5165" href="InjectiveTypes.MathematicalStructuresMoreGeneral.html#5165" class="Bound">X</a> <a id="5167" href="InjectiveTypes.MathematicalStructuresMoreGeneral.html#5167" class="Bound">Y</a> <a id="5169" class="Symbol">:</a> <a id="5171" href="InjectiveTypes.MathematicalStructuresMoreGeneral.html#3786" class="Bound">𝓤</a> <a id="5173" href="MLTT.Universes.html#4011" class="Function Operator">̇</a> <a id="5175" class="Symbol">}</a> <a id="5177" class="Symbol">→</a> <a id="5179" href="InjectiveTypes.MathematicalStructuresMoreGeneral.html#5165" class="Bound">X</a> <a id="5181" href="UF.Equiv.html#1318" class="Function Operator">≃</a> <a id="5183" href="InjectiveTypes.MathematicalStructuresMoreGeneral.html#5167" class="Bound">Y</a> <a id="5185" class="Symbol">→</a> <a id="5187" href="InjectiveTypes.MathematicalStructuresMoreGeneral.html#3782" class="Bound">S</a> <a id="5189" href="InjectiveTypes.MathematicalStructuresMoreGeneral.html#5165" class="Bound">X</a> <a id="5191" class="Symbol">→</a> <a id="5193" href="InjectiveTypes.MathematicalStructuresMoreGeneral.html#3782" class="Bound">S</a> <a id="5195" href="InjectiveTypes.MathematicalStructuresMoreGeneral.html#5167" class="Bound">Y</a>
  <a id="5198" href="InjectiveTypes.MathematicalStructuresMoreGeneral.html#5157" class="Function">treq</a> <a id="5203" class="Symbol">{</a><a id="5204" href="InjectiveTypes.MathematicalStructuresMoreGeneral.html#5204" class="Bound">X</a><a id="5205" class="Symbol">}</a> <a id="5207" class="Symbol">{</a><a id="5208" href="InjectiveTypes.MathematicalStructuresMoreGeneral.html#5208" class="Bound">Y</a><a id="5209" class="Symbol">}</a> <a id="5211" href="InjectiveTypes.MathematicalStructuresMoreGeneral.html#5211" class="Bound">𝕗</a> <a id="5213" class="Symbol">=</a> <a id="5215" href="MLTT.Id.html#734" class="Function">transport</a> <a id="5225" href="InjectiveTypes.MathematicalStructuresMoreGeneral.html#3782" class="Bound">S</a> <a id="5227" class="Symbol">(</a><a id="5228" href="UF.Univalence.html#905" class="Function">eqtoid</a> <a id="5235" class="Symbol">(</a><a id="5236" href="InjectiveTypes.MathematicalStructuresMoreGeneral.html#1164" class="Bound">ua</a> <a id="5239" href="InjectiveTypes.MathematicalStructuresMoreGeneral.html#3786" class="Bound">𝓤</a><a id="5240" class="Symbol">)</a> <a id="5242" href="InjectiveTypes.MathematicalStructuresMoreGeneral.html#5204" class="Bound">X</a> <a id="5244" href="InjectiveTypes.MathematicalStructuresMoreGeneral.html#5208" class="Bound">Y</a> <a id="5246" href="InjectiveTypes.MathematicalStructuresMoreGeneral.html#5211" class="Bound">𝕗</a><a id="5247" class="Symbol">)</a>
 
-<a id="5250" class="Markup">\end{code}</a><a id="5260" class="Background">
+<a id="5250" class="Markup">\end{code}</a><span id="5260" class="Background">
 
-The main additional work in this file on top of InjectiveTypes.Sigma
+The main additional work in this file on top of <a href="InjectiveTypes.Sigma.html">InjectiveTypes.Sigma</a>
 is to make it easier to work with the compatibility condition for the
 purpose of injectivity of types of mathematical structures.
 
 We work with hypothetical T and T-refl with the following types.
 
-</a><a id="5528" class="Markup">\begin{code}</a>
+</span><a id="5528" class="Markup">\begin{code}</a>
 
  <a id="5543" class="Keyword">module</a> <a id="5550" href="InjectiveTypes.MathematicalStructuresMoreGeneral.html#5550" class="Module">_</a> <a id="5552" class="Symbol">(</a><a id="5553" href="InjectiveTypes.MathematicalStructuresMoreGeneral.html#5553" class="Bound">T</a>      <a id="5560" class="Symbol">:</a> <a id="5562" class="Symbol">{</a><a id="5563" href="InjectiveTypes.MathematicalStructuresMoreGeneral.html#5563" class="Bound">X</a> <a id="5565" href="InjectiveTypes.MathematicalStructuresMoreGeneral.html#5565" class="Bound">Y</a> <a id="5567" class="Symbol">:</a> <a id="5569" href="InjectiveTypes.MathematicalStructuresMoreGeneral.html#3786" class="Bound">𝓤</a> <a id="5571" href="MLTT.Universes.html#4011" class="Function Operator">̇</a> <a id="5573" class="Symbol">}</a> <a id="5575" class="Symbol">→</a> <a id="5577" href="InjectiveTypes.MathematicalStructuresMoreGeneral.html#5563" class="Bound">X</a> <a id="5579" href="UF.Equiv.html#1318" class="Function Operator">≃</a> <a id="5581" href="InjectiveTypes.MathematicalStructuresMoreGeneral.html#5565" class="Bound">Y</a> <a id="5583" class="Symbol">→</a> <a id="5585" href="InjectiveTypes.MathematicalStructuresMoreGeneral.html#3782" class="Bound">S</a> <a id="5587" href="InjectiveTypes.MathematicalStructuresMoreGeneral.html#5563" class="Bound">X</a> <a id="5589" class="Symbol">→</a> <a id="5591" href="InjectiveTypes.MathematicalStructuresMoreGeneral.html#3782" class="Bound">S</a> <a id="5593" href="InjectiveTypes.MathematicalStructuresMoreGeneral.html#5565" class="Bound">Y</a><a id="5594" class="Symbol">)</a>
           <a id="5606" class="Symbol">(</a><a id="5607" href="InjectiveTypes.MathematicalStructuresMoreGeneral.html#5607" class="Bound">T-refl</a> <a id="5614" class="Symbol">:</a> <a id="5616" class="Symbol">{</a><a id="5617" href="InjectiveTypes.MathematicalStructuresMoreGeneral.html#5617" class="Bound">X</a> <a id="5619" class="Symbol">:</a> <a id="5621" href="InjectiveTypes.MathematicalStructuresMoreGeneral.html#3786" class="Bound">𝓤</a> <a id="5623" href="MLTT.Universes.html#4011" class="Function Operator">̇</a> <a id="5625" class="Symbol">}</a> <a id="5627" class="Symbol">→</a> <a id="5629" href="InjectiveTypes.MathematicalStructuresMoreGeneral.html#5553" class="Bound">T</a> <a id="5631" class="Symbol">(</a><a id="5632" href="UF.Equiv.html#1517" class="Function">≃-refl</a> <a id="5639" href="InjectiveTypes.MathematicalStructuresMoreGeneral.html#5617" class="Bound">X</a><a id="5640" class="Symbol">)</a> <a id="5642" href="MLTT.Id.html#1888" class="Function Operator">∼</a> <a id="5644" href="MLTT.Pi.html#444" class="Function">id</a><a id="5646" class="Symbol">)</a>
         <a id="5656" class="Keyword">where</a>
 
-<a id="5663" class="Markup">\end{code}</a><a id="5673" class="Background">
+<a id="5663" class="Markup">\end{code}</a><span id="5673" class="Background">
 
 The point is that any such T can be equivalently expressed as a
 transport and hence we may apply the theorems of the imported file
-InjectiveTypes.Sigma, but it may be easier to check the compatibility
+<a href="InjectiveTypes.Sigma.html">InjectiveTypes.Sigma</a>, but it may be easier to check the compatibility
 condition using T rather than transport (see examples below).
 
-</a><a id="5939" class="Markup">\begin{code}</a>
+</span><a id="5939" class="Markup">\begin{code}</a>
 
   <a id="5955" href="InjectiveTypes.MathematicalStructuresMoreGeneral.html#5955" class="Function">T-is-treq</a> <a id="5965" class="Symbol">:</a> <a id="5967" class="Symbol">{</a><a id="5968" href="InjectiveTypes.MathematicalStructuresMoreGeneral.html#5968" class="Bound">X</a> <a id="5970" href="InjectiveTypes.MathematicalStructuresMoreGeneral.html#5970" class="Bound">Y</a> <a id="5972" class="Symbol">:</a> <a id="5974" href="InjectiveTypes.MathematicalStructuresMoreGeneral.html#3786" class="Bound">𝓤</a> <a id="5976" href="MLTT.Universes.html#4011" class="Function Operator">̇</a> <a id="5978" class="Symbol">}</a> <a id="5980" class="Symbol">(</a><a id="5981" href="InjectiveTypes.MathematicalStructuresMoreGeneral.html#5981" class="Bound">𝕗</a> <a id="5983" class="Symbol">:</a> <a id="5985" href="InjectiveTypes.MathematicalStructuresMoreGeneral.html#5968" class="Bound">X</a> <a id="5987" href="UF.Equiv.html#1318" class="Function Operator">≃</a> <a id="5989" href="InjectiveTypes.MathematicalStructuresMoreGeneral.html#5970" class="Bound">Y</a><a id="5990" class="Symbol">)</a>
             <a id="6004" class="Symbol">→</a> <a id="6006" href="InjectiveTypes.MathematicalStructuresMoreGeneral.html#5553" class="Bound">T</a> <a id="6008" href="InjectiveTypes.MathematicalStructuresMoreGeneral.html#5981" class="Bound">𝕗</a> <a id="6010" href="MLTT.Id.html#1888" class="Function Operator">∼</a> <a id="6012" href="InjectiveTypes.MathematicalStructuresMoreGeneral.html#5157" class="Function">treq</a> <a id="6017" href="InjectiveTypes.MathematicalStructuresMoreGeneral.html#5981" class="Bound">𝕗</a>
@@ -209,14 +209,14 @@ condition using T rather than transport (see examples below).
       <a id="6481" class="Keyword">where</a>
        <a id="6494" href="InjectiveTypes.MathematicalStructuresMoreGeneral.html#6494" class="Function">II</a> <a id="6497" class="Symbol">=</a> <a id="6499" class="Symbol">(</a><a id="6500" href="MLTT.Id.html#1135" class="Function">ap</a> <a id="6503" class="Symbol">(λ</a> <a id="6506" href="InjectiveTypes.MathematicalStructuresMoreGeneral.html#6506" class="Bound">-</a> <a id="6508" class="Symbol">→</a> <a id="6510" href="MLTT.Id.html#734" class="Function">transport</a> <a id="6520" href="InjectiveTypes.MathematicalStructuresMoreGeneral.html#3782" class="Bound">S</a> <a id="6522" href="InjectiveTypes.MathematicalStructuresMoreGeneral.html#6506" class="Bound">-</a> <a id="6524" href="InjectiveTypes.MathematicalStructuresMoreGeneral.html#6041" class="Bound">s</a><a id="6525" class="Symbol">)</a> <a id="6527" class="Symbol">(</a><a id="6528" href="UF.Univalence.html#1273" class="Function">eqtoid-refl</a> <a id="6540" class="Symbol">(</a><a id="6541" href="InjectiveTypes.MathematicalStructuresMoreGeneral.html#1164" class="Bound">ua</a> <a id="6544" href="InjectiveTypes.MathematicalStructuresMoreGeneral.html#3786" class="Bound">𝓤</a><a id="6545" class="Symbol">)</a> <a id="6547" href="InjectiveTypes.MathematicalStructuresMoreGeneral.html#6032" class="Bound">X</a><a id="6548" class="Symbol">))</a><a id="6550" href="MLTT.Id.html#1054" class="Function Operator">⁻¹</a>
 
-<a id="6554" class="Markup">\end{code}</a><a id="6564" class="Background">
+<a id="6554" class="Markup">\end{code}</a><span id="6564" class="Background">
 
-In order to be able to apply the results of InjectiveTypes.Sigma, we
+In order to be able to apply the results of <a href="InjectiveTypes.Sigma.html">InjectiveTypes.Sigma</a>, we
 perform the following construction. That file requires compatibility
 data of a certain kind, which we reduce to compatibility of another
 kind, which will be easier to produce in our sample applications.
 
-</a><a id="6839" class="Markup">\begin{code}</a>
+</span><a id="6839" class="Markup">\begin{code}</a>
 
   <a id="6855" class="Keyword">module</a> <a id="6862" href="InjectiveTypes.MathematicalStructuresMoreGeneral.html#6862" class="Module">compatibility-data-construction</a> <a id="6894" class="Symbol">(</a><a id="6895" href="InjectiveTypes.MathematicalStructuresMoreGeneral.html#6895" class="Bound">ϕ</a><a id="6896" class="Symbol">@(</a><a id="6898" href="InjectiveTypes.MathematicalStructuresMoreGeneral.html#6898" class="Bound">⨆</a> <a id="6900" href="MLTT.Sigma.html#395" class="InductiveConstructor Operator">,</a> <a id="6902" href="InjectiveTypes.MathematicalStructuresMoreGeneral.html#6902" class="Bound">ε</a><a id="6903" class="Symbol">)</a> <a id="6905" class="Symbol">:</a> <a id="6907" href="InjectiveTypes.MathematicalStructuresMoreGeneral.html#1867" class="Function">Flabby</a> <a id="6914" href="InjectiveTypes.MathematicalStructuresMoreGeneral.html#3786" class="Bound">𝓤</a><a id="6915" class="Symbol">)</a> <a id="6917" class="Keyword">where</a>
 
@@ -498,7 +498,7 @@ Example. The type of pointed ∞-magmas is injective.
                              <a id="14700" class="Symbol">(</a><a id="14701" href="InjectiveTypes.MathematicalStructuresMoreGeneral.html#14554" class="Function">∞-Magma∙-structure</a> <a id="14720" class="Symbol">{</a><a id="14721" href="MLTT.Universes.html#3833" class="Generalizable">𝓤</a><a id="14722" class="Symbol">})</a>
                              <a id="14754" href="InjectiveTypes.MathematicalStructuresMoreGeneral.html#3140" class="Function">universes-are-flabby-Π</a>
 <a id="14777" href="InjectiveTypes.MathematicalStructuresMoreGeneral.html#14624" class="Function">∞-Magma∙-structure-Π-data</a> <a id="14803" class="Symbol">=</a>
- <a id="14806" href="InjectiveTypes.Sigma.html#7093" class="Function">compatibility-data-×</a>
+ <a id="14806" href="InjectiveTypes.Sigma.html#7094" class="Function">compatibility-data-×</a>
   <a id="14829" href="InjectiveTypes.MathematicalStructuresMoreGeneral.html#3140" class="Function">universes-are-flabby-Π</a>
   <a id="14854" href="InjectiveTypes.MathematicalStructuresMoreGeneral.html#12258" class="Function">∞-Magma-structure-Π-data</a>
   <a id="14881" href="InjectiveTypes.MathematicalStructuresMoreGeneral.html#11189" class="Function">Pointed-Π-data</a>
@@ -521,7 +521,7 @@ the monoid axioms are closed under Π.
                  <a id="15288" class="Symbol">(λ</a> <a id="15291" href="InjectiveTypes.MathematicalStructuresMoreGeneral.html#15291" class="Bound">X</a> <a id="15293" class="Symbol">→</a> <a id="15295" href="MLTT.Sigma.html#423" class="Function">Σ</a> <a id="15297" href="InjectiveTypes.MathematicalStructuresMoreGeneral.html#15297" class="Bound">s</a> <a id="15299" href="MLTT.Sigma.html#423" class="Function">꞉</a> <a id="15301" href="UF.SIP-Examples.html#4996" class="Function">monoid-structure</a> <a id="15318" href="InjectiveTypes.MathematicalStructuresMoreGeneral.html#15291" class="Bound">X</a> <a id="15320" href="MLTT.Sigma.html#423" class="Function">,</a> <a id="15322" href="UF.SIP-Examples.html#5065" class="Function">monoid-axioms</a> <a id="15336" href="InjectiveTypes.MathematicalStructuresMoreGeneral.html#15291" class="Bound">X</a> <a id="15338" href="InjectiveTypes.MathematicalStructuresMoreGeneral.html#15297" class="Bound">s</a><a id="15339" class="Symbol">)</a>
                  <a id="15358" href="InjectiveTypes.MathematicalStructuresMoreGeneral.html#3140" class="Function">universes-are-flabby-Π</a>
 <a id="15381" href="InjectiveTypes.MathematicalStructuresMoreGeneral.html#15230" class="Function">Monoid-Π-data</a> <a id="15395" class="Symbol">{</a><a id="15396" href="InjectiveTypes.MathematicalStructuresMoreGeneral.html#15396" class="Bound">𝓤</a><a id="15397" class="Symbol">}</a> <a id="15399" class="Symbol">=</a>
- <a id="15402" href="InjectiveTypes.Sigma.html#12448" class="Function">compatibility-data-with-axioms</a>
+ <a id="15402" href="InjectiveTypes.Sigma.html#12449" class="Function">compatibility-data-with-axioms</a>
   <a id="15435" href="InjectiveTypes.MathematicalStructuresMoreGeneral.html#3140" class="Function">universes-are-flabby-Π</a>
   <a id="15460" href="UF.SIP-Examples.html#4996" class="Function">monoid-structure</a>
   <a id="15479" href="InjectiveTypes.MathematicalStructuresMoreGeneral.html#14624" class="Function">∞-Magma∙-structure-Π-data</a>
@@ -816,7 +816,7 @@ As a consequence, we get the injectivity of the type of posets.
                  <a id="24407" class="Symbol">(λ</a> <a id="24410" href="InjectiveTypes.MathematicalStructuresMoreGeneral.html#24410" class="Bound">X</a> <a id="24412" class="Symbol">→</a> <a id="24414" href="MLTT.Sigma.html#423" class="Function">Σ</a> <a id="24416" href="InjectiveTypes.MathematicalStructuresMoreGeneral.html#24416" class="Bound">s</a> <a id="24418" href="MLTT.Sigma.html#423" class="Function">꞉</a> <a id="24420" href="InjectiveTypes.MathematicalStructuresMoreGeneral.html#20833" class="Function">graph-structure</a> <a id="24436" href="InjectiveTypes.MathematicalStructuresMoreGeneral.html#24410" class="Bound">X</a> <a id="24438" href="MLTT.Sigma.html#423" class="Function">,</a> <a id="24440" href="InjectiveTypes.MathematicalStructuresMoreGeneral.html#23508" class="Function">poset-axioms</a> <a id="24453" href="InjectiveTypes.MathematicalStructuresMoreGeneral.html#24410" class="Bound">X</a> <a id="24455" href="InjectiveTypes.MathematicalStructuresMoreGeneral.html#24416" class="Bound">s</a><a id="24456" class="Symbol">)</a>
                  <a id="24475" href="InjectiveTypes.MathematicalStructuresMoreGeneral.html#3140" class="Function">universes-are-flabby-Π</a>
 <a id="24498" href="InjectiveTypes.MathematicalStructuresMoreGeneral.html#24350" class="Function">Poset-Π-data</a> <a id="24511" class="Symbol">{</a><a id="24512" href="InjectiveTypes.MathematicalStructuresMoreGeneral.html#24512" class="Bound">𝓤</a><a id="24513" class="Symbol">}</a> <a id="24515" class="Symbol">=</a>
- <a id="24518" href="InjectiveTypes.Sigma.html#12448" class="Function">compatibility-data-with-axioms</a>
+ <a id="24518" href="InjectiveTypes.Sigma.html#12449" class="Function">compatibility-data-with-axioms</a>
   <a id="24551" href="InjectiveTypes.MathematicalStructuresMoreGeneral.html#3140" class="Function">universes-are-flabby-Π</a>
   <a id="24576" href="InjectiveTypes.MathematicalStructuresMoreGeneral.html#20833" class="Function">graph-structure</a>
   <a id="24594" href="InjectiveTypes.MathematicalStructuresMoreGeneral.html#20901" class="Function">Graph-Π-data</a>
@@ -879,7 +879,7 @@ As a consequence, we get the injectivity of the type of posets.
   <a id="26180" href="InjectiveTypes.MathematicalStructuresMoreGeneral.html#3140" class="Function">universes-are-flabby-Π</a>
   <a id="26205" href="InjectiveTypes.MathematicalStructuresMoreGeneral.html#24350" class="Function">Poset-Π-data</a>
 
-<a id="26219" class="Markup">\end{code}</a><a id="26229" class="Background">
+<a id="26219" class="Markup">\end{code}</a><span id="26229" class="Background">
 
 Notice that, just as in the case for monoids, the proof amounts to
 showing that posets are closed under prop-indexed products. Using the
@@ -898,16 +898,16 @@ laws, associativity, univalence).
 
 Added 24 July 2025 by Tom de Jong.
 
-In InjectiveTypes.InhabitedTypesTaboo we showed that the type of nonempty types
+In <a href="InjectiveTypes.InhabitedTypesTaboo.html">InjectiveTypes.InhabitedTypesTaboo</a> we showed that the type of nonempty types
 is injective by exhibiting it as a retract of the universe. In line with the
-condition from InjectiveTypes.Subtypes, the argument there shows that a type is
+condition from <a href="InjectiveTypes.Subtypes.html">InjectiveTypes.Subtypes</a>, the argument there shows that a type is
 nonempty if and only if it is a fixed point of the map X ↦ (¬¬ X → X).
 
 Here is an alternative proof, using that
    (Π (p : P) , ¬¬ A p)   →   ¬¬ Π (p : P) , A p
 holds when P is a proposition.
 
-</a><a id="27408" class="Markup">\begin{code}</a>
+</span><a id="27408" class="Markup">\begin{code}</a>
 
 <a id="Nonempty-Π-data"></a><a id="27422" href="InjectiveTypes.MathematicalStructuresMoreGeneral.html#27422" class="Function">Nonempty-Π-data</a> <a id="27438" class="Symbol">:</a> <a id="27440" href="InjectiveTypes.Sigma.html#3274" class="Function">compatibility-data</a> <a id="27459" class="Symbol">(</a><a id="27460" href="MLTT.Negation.html#1107" class="Function">is-nonempty</a> <a id="27472" class="Symbol">{</a><a id="27473" href="MLTT.Universes.html#3833" class="Generalizable">𝓤</a><a id="27474" class="Symbol">})</a> <a id="27477" href="InjectiveTypes.MathematicalStructuresMoreGeneral.html#3140" class="Function">universes-are-flabby-Π</a>
 <a id="27500" href="InjectiveTypes.MathematicalStructuresMoreGeneral.html#27422" class="Function">Nonempty-Π-data</a> <a id="27516" class="Symbol">{</a><a id="27517" href="InjectiveTypes.MathematicalStructuresMoreGeneral.html#27517" class="Bound">𝓤</a><a id="27518" class="Symbol">}</a> <a id="27520" class="Symbol">=</a> <a id="27522" href="InjectiveTypes.MathematicalStructuresMoreGeneral.html#9931" class="Function">Π-construction</a> <a id="27537" href="MLTT.Negation.html#1107" class="Function">is-nonempty</a> <a id="27549" href="InjectiveTypes.MathematicalStructuresMoreGeneral.html#27588" class="Function">T</a> <a id="27551" href="InjectiveTypes.MathematicalStructuresMoreGeneral.html#27655" class="Function">T-refl</a> <a id="27558" href="InjectiveTypes.MathematicalStructuresMoreGeneral.html#28003" class="Function">c</a>
@@ -1047,7 +1047,7 @@ This mirrors the above construction for the type of posets.
                         <a id="31029" class="Symbol">(λ</a> <a id="31032" href="InjectiveTypes.MathematicalStructuresMoreGeneral.html#31032" class="Bound">M</a> <a id="31034" class="Symbol">→</a> <a id="31036" href="MLTT.Sigma.html#423" class="Function">Σ</a> <a id="31038" href="InjectiveTypes.MathematicalStructuresMoreGeneral.html#31038" class="Bound">d</a> <a id="31040" href="MLTT.Sigma.html#423" class="Function">꞉</a> <a id="31042" class="Symbol">(</a><a id="31043" href="InjectiveTypes.MathematicalStructuresMoreGeneral.html#31032" class="Bound">M</a> <a id="31045" class="Symbol">→</a> <a id="31047" href="InjectiveTypes.MathematicalStructuresMoreGeneral.html#31032" class="Bound">M</a> <a id="31049" class="Symbol">→</a> <a id="31051" href="DedekindReals.Type.html#1494" class="Function">ℝ</a><a id="31052" class="Symbol">)</a> <a id="31054" href="MLTT.Sigma.html#423" class="Function">,</a> <a id="31056" href="MetricSpaces.StandardDefinition.html#1071" class="Function">metric-axioms</a> <a id="31070" href="InjectiveTypes.MathematicalStructuresMoreGeneral.html#31032" class="Bound">M</a> <a id="31072" href="InjectiveTypes.MathematicalStructuresMoreGeneral.html#31038" class="Bound">d</a><a id="31073" class="Symbol">)</a>
                         <a id="31099" href="InjectiveTypes.MathematicalStructuresMoreGeneral.html#3495" class="Function">universes-are-flabby-Σ</a>
  <a id="31123" href="InjectiveTypes.MathematicalStructuresMoreGeneral.html#30951" class="Function">Metric-Space-Σ-data</a> <a id="31143" class="Symbol">=</a>
-  <a id="31147" href="InjectiveTypes.Sigma.html#12448" class="Function">compatibility-data-with-axioms</a>
+  <a id="31147" href="InjectiveTypes.Sigma.html#12449" class="Function">compatibility-data-with-axioms</a>
    <a id="31181" href="InjectiveTypes.MathematicalStructuresMoreGeneral.html#3495" class="Function">universes-are-flabby-Σ</a>
    <a id="31207" class="Symbol">(</a><a id="31208" href="InjectiveTypes.MathematicalStructuresMoreGeneral.html#29099" class="Function">graph&#39;-structure</a> <a id="31225" href="DedekindReals.Type.html#1494" class="Function">ℝ</a><a id="31226" class="Symbol">)</a>
    <a id="31231" class="Symbol">(</a><a id="31232" href="InjectiveTypes.MathematicalStructuresMoreGeneral.html#29169" class="Function">Graph&#39;-Σ-data</a> <a id="31246" href="DedekindReals.Type.html#1494" class="Function">ℝ</a><a id="31247" class="Symbol">)</a>
