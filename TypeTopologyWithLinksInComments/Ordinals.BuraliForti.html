@@ -360,7 +360,7 @@ larger than that of sets in 𝓤, as we wanted to show:
 <a id="Lift-hSet-is-not-equiv"></a><a id="9220" href="Ordinals.BuraliForti.html#9220" class="Function">Lift-hSet-is-not-equiv</a> <a id="9243" class="Symbol">:</a> <a id="9245" href="MLTT.Negation.html#278" class="Function Operator">¬</a> <a id="9247" href="UF.Equiv.html#402" class="Function">is-equiv</a> <a id="9256" class="Symbol">(</a><a id="9257" href="UF.UniverseEmbedding.html#7615" class="Function">Lift-hSet</a> <a id="9267" class="Symbol">{</a><a id="9268" href="MLTT.Universes.html#3833" class="Generalizable">𝓤</a><a id="9269" class="Symbol">}</a> <a id="9271" class="Symbol">(</a><a id="9272" href="MLTT.Universes.html#3833" class="Generalizable">𝓤</a> <a id="9274" href="MLTT.Universes.html#3754" class="Primitive Operator">⁺</a><a id="9275" class="Symbol">))</a>
 <a id="9278" href="Ordinals.BuraliForti.html#9220" class="Function">Lift-hSet-is-not-equiv</a> <a id="9301" class="Symbol">{</a><a id="9302" href="Ordinals.BuraliForti.html#9302" class="Bound">𝓤</a><a id="9303" class="Symbol">}</a> <a id="9305" href="Ordinals.BuraliForti.html#9305" class="Bound">e</a> <a id="9307" class="Symbol">=</a> <a id="9309" href="Ordinals.BuraliForti.html#8552" class="Function">Lift-hSet-doesnt-have-section</a>
                                 <a id="9371" class="Symbol">(</a><a id="9372" href="UF.Equiv.html#604" class="Function">equivs-have-sections</a> <a id="9393" class="Symbol">(</a><a id="9394" href="UF.UniverseEmbedding.html#7615" class="Function">Lift-hSet</a> <a id="9404" class="Symbol">(</a><a id="9405" href="Ordinals.BuraliForti.html#9302" class="Bound">𝓤</a> <a id="9407" href="MLTT.Universes.html#3754" class="Primitive Operator">⁺</a><a id="9408" class="Symbol">))</a> <a id="9411" href="Ordinals.BuraliForti.html#9305" class="Bound">e</a><a id="9412" class="Symbol">)</a>
-<a id="9414" class="Markup">\end{code}</a><a id="9424" class="Background">
+<a id="9414" class="Markup">\end{code}</a><span id="9424" class="Background">
 
 This doesn&#39;t show that ¬ (hSet 𝓤 ≃ hSet 𝓤⁺), as in principle there may
 be an equivalence that is not an hSet embedding in the sense defined
@@ -375,7 +375,7 @@ but this shouldn&#39;t be the case, of course.
 Similarly, the above also doesn&#39;t show that ¬ (𝓤 ≃ 𝓤⁺), but we know
 that this is the case by a different argument, which generalizes
 Thierry Coquand&#39;s &quot;paradox of trees&quot;, developed in the module
-LawvereFPT.
+<a href="Various.LawvereFPT.html">LawvereFPT</a>.
 
 We also wish to know that e.g. the types of groups in the universes 𝓤
 and 𝓤⁺ are not equivalent.
@@ -389,7 +389,7 @@ Lift-hSet-is-not-equiv.
 In the following, A generalizes is-set, and A-lifts generalizes the
 fact that the lift of a set is a set.
 
-</a><a id="10635" class="Markup">\begin{code}</a>
+</span><a id="10635" class="Markup">\begin{code}</a>
 
 <a id="10649" class="Keyword">module</a> <a id="10656" href="Ordinals.BuraliForti.html#10656" class="Module">_</a> <a id="10658" class="Symbol">(</a><a id="10659" href="Ordinals.BuraliForti.html#10659" class="Bound">A</a> <a id="10661" class="Symbol">:</a> <a id="10663" class="Symbol">{</a><a id="10664" href="Ordinals.BuraliForti.html#10664" class="Bound">𝓤</a> <a id="10666" class="Symbol">:</a> <a id="10668" href="MLTT.Universes.html#3778" class="Postulate">Universe</a><a id="10676" class="Symbol">}</a> <a id="10678" class="Symbol">→</a> <a id="10680" href="Ordinals.BuraliForti.html#10664" class="Bound">𝓤</a> <a id="10682" href="MLTT.Universes.html#4011" class="Function Operator">̇</a> <a id="10684" class="Symbol">→</a> <a id="10686" href="Ordinals.BuraliForti.html#10664" class="Bound">𝓤</a> <a id="10688" href="MLTT.Universes.html#4011" class="Function Operator">̇</a> <a id="10690" class="Symbol">)</a>
          <a id="10701" class="Symbol">(</a><a id="10702" href="Ordinals.BuraliForti.html#10702" class="Bound">A-lifts</a> <a id="10710" class="Symbol">:</a> <a id="10712" class="Symbol">∀</a> <a id="10714" class="Symbol">{</a><a id="10715" href="Ordinals.BuraliForti.html#10715" class="Bound">𝓤</a><a id="10716" class="Symbol">}</a> <a id="10718" href="Ordinals.BuraliForti.html#10718" class="Bound">𝓥</a> <a id="10720" class="Symbol">{</a><a id="10721" href="Ordinals.BuraliForti.html#10721" class="Bound">X</a> <a id="10723" class="Symbol">:</a> <a id="10725" href="Ordinals.BuraliForti.html#10715" class="Bound">𝓤</a> <a id="10727" href="MLTT.Universes.html#4011" class="Function Operator">̇</a> <a id="10729" class="Symbol">}</a> <a id="10731" class="Symbol">→</a> <a id="10733" href="Ordinals.BuraliForti.html#10659" class="Bound">A</a> <a id="10735" href="Ordinals.BuraliForti.html#10721" class="Bound">X</a> <a id="10737" class="Symbol">→</a> <a id="10739" href="Ordinals.BuraliForti.html#10659" class="Bound">A</a> <a id="10741" class="Symbol">(</a><a id="10742" href="UF.UniverseEmbedding.html#2937" class="Function">Lift</a> <a id="10747" href="Ordinals.BuraliForti.html#10718" class="Bound">𝓥</a> <a id="10749" href="Ordinals.BuraliForti.html#10721" class="Bound">X</a><a id="10750" class="Symbol">))</a>
