@@ -1,0 +1,91 @@
+# Rebuild https://martinescardo.github.io/TypeTopologySearch.html whenever
+# TypeTopology publishes a new rendering of itself. The search page is built
+# from that rendering by agda-index.py, which lives in TypeTopologySearch, so
+# no Agda runs here and a run that finds nothing new takes a few seconds.
+
+name: Search page
+
+on:
+  schedule:
+    - cron: '*/15 * * * *'
+  workflow_dispatch:
+
+concurrency:
+  group: search-page
+
+jobs:
+  update:
+    name: Rebuild TypeTopologySearch.html
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Check out this website
+        uses: actions/checkout@v4
+
+      - name: Check out TypeTopologySearch
+        uses: actions/checkout@v4
+        with:
+          repository: martinescardo/TypeTopologySearch
+          path: _tooling/TypeTopologySearch
+
+      # The deployed rendering says which version of the library it is of,
+      # and the published page says which version it indexes, so comparing
+      # the two decides whether there is anything to do without downloading
+      # anything. A page with no version at all, as the hand-built ones are,
+      # is rebuilt.
+      - name: Compare the deployed version with the published page
+        id: version
+        run: |
+          version=$(_tooling/TypeTopologySearch/deployed-version)
+          echo "version=$version" >> "$GITHUB_OUTPUT"
+          if grep -q "commit/$version\"" TypeTopologySearch.html; then
+            echo "The page already indexes version $version."
+          else
+            echo "Rebuilding the page for version $version."
+            echo "rebuild=yes" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Check out TypeTopology
+        if: steps.version.outputs.rebuild
+        uses: actions/checkout@v4
+        with:
+          repository: martinescardo/TypeTopology
+          path: _tooling/TypeTopology
+          fetch-depth: 100
+
+      # The sources have to be the ones the rendering is of, which is the
+      # last version that type checked and so is not always the newest.
+      # A hundred versions of history is enough to find it by all but the
+      # longest run of failures, and the whole history is there to fall
+      # back on.
+      - name: Take the version the rendering is of
+        if: steps.version.outputs.rebuild
+        working-directory: _tooling/TypeTopology
+        run: |
+          version=${{ steps.version.outputs.version }}
+          git checkout --quiet "$version" ||
+            { git fetch --unshallow --quiet &&
+              git checkout --quiet "$version"; }
+
+      - name: Download the rendering
+        if: steps.version.outputs.rebuild
+        run: |
+          _tooling/TypeTopologySearch/fetch-rendering \
+            _tooling/TypeTopology _tooling/html
+
+      - name: Build the page
+        if: steps.version.outputs.rebuild
+        run: |
+          _tooling/TypeTopologySearch/agda-index.py \
+            --typetopology _tooling/TypeTopology \
+            --html _tooling/html \
+            --commit ${{ steps.version.outputs.version }} \
+            --out .
+
+      - name: Publish the page
+        if: steps.version.outputs.rebuild
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: update TypeTopologySearch.html
+          file_pattern: TypeTopologySearch.html
