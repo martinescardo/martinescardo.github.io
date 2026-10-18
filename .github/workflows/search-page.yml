@@ -30,19 +30,23 @@ jobs:
           path: _tooling/TypeTopologySearch
 
       # The deployed rendering says which version of the library it is of,
-      # and the published page says which version it indexes, so comparing
-      # the two decides whether there is anything to do without downloading
-      # anything. A page with no version at all, as the hand-built ones are,
-      # is rebuilt.
-      - name: Compare the deployed version with the published page
+      # and the published page says in its footer which versions it was
+      # built from, so comparing them decides whether there is anything to
+      # do without downloading anything. Either one having moved is a reason
+      # to rebuild, since the page changes when the indexer changes and not
+      # only when the library does. A page with no versions at all, as the
+      # hand-built ones are, is rebuilt.
+      - name: Compare the published page with what it would be built from
         id: version
         run: |
           version=$(_tooling/TypeTopologySearch/deployed-version)
+          indexer=$(git -C _tooling/TypeTopologySearch rev-parse --short=7 HEAD)
           echo "version=$version" >> "$GITHUB_OUTPUT"
-          if grep -q "commit/$version\"" TypeTopologySearch.html; then
-            echo "The page already indexes version $version."
+          if grep -q "TypeTopology/commit/$version\">$version<" TypeTopologySearch.html &&
+             grep -q "TypeTopologySearch/commit/$indexer\">$indexer<" TypeTopologySearch.html; then
+            echo "The page already indexes version $version, built by $indexer."
           else
-            echo "Rebuilding the page for version $version."
+            echo "Rebuilding the page for version $version, by indexer $indexer."
             echo "rebuild=yes" >> "$GITHUB_OUTPUT"
           fi
 
