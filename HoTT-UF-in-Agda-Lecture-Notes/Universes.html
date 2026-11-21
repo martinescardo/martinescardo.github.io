@@ -35,12 +35,12 @@ Agda</a>.</p>
 
 <a id="818" class="Keyword">open</a> <a id="823" class="Keyword">import</a> <a id="830" href="Agda.Primitive.html" class="Module">Agda.Primitive</a> <a id="845" class="Keyword">public</a>
  <a id="853" class="Keyword">renaming</a> <a id="862" class="Symbol">(</a>
-            <a id="876" href="Agda.Primitive.html#742" class="Postulate">Level</a> <a id="882" class="Symbol">to</a> <a id="885" class="Postulate">Universe</a> <a id="894" class="Comment">-- We speak of universes rather than of levels.</a>
-          <a id="952" class="Symbol">;</a> <a id="954" href="Agda.Primitive.html#915" class="Primitive">lzero</a> <a id="960" class="Symbol">to</a> <a id="963" class="Primitive">𝓤₀</a>       <a id="972" class="Comment">-- Our first universe is called 𝓤₀</a>
-          <a id="1017" class="Symbol">;</a> <a id="1019" href="Agda.Primitive.html#931" class="Primitive">lsuc</a> <a id="1024" class="Symbol">to</a> <a id="1027" class="Primitive">_⁺</a>        <a id="1037" class="Comment">-- The universe after 𝓤 is 𝓤 ⁺</a>
-          <a id="1078" class="Symbol">;</a> <a id="1080" href="Agda.Primitive.html#512" class="Primitive">Setω</a> <a id="1085" class="Symbol">to</a> <a id="1088" class="Primitive">𝓤ω</a>        <a id="1098" class="Comment">-- There is a universe 𝓤ω strictly above 𝓤₀, 𝓤₁, ⋯ , 𝓤ₙ, ⋯</a>
+            <a id="876" href="Agda.Primitive.html#800" class="Postulate">Level</a> <a id="882" class="Symbol">to</a> <a id="885" class="Postulate">Universe</a> <a id="894" class="Comment">-- We speak of universes rather than of levels.</a>
+          <a id="952" class="Symbol">;</a> <a id="954" href="Agda.Primitive.html#973" class="Primitive">lzero</a> <a id="960" class="Symbol">to</a> <a id="963" class="Primitive">𝓤₀</a>       <a id="972" class="Comment">-- Our first universe is called 𝓤₀</a>
+          <a id="1017" class="Symbol">;</a> <a id="1019" href="Agda.Primitive.html#989" class="Primitive">lsuc</a> <a id="1024" class="Symbol">to</a> <a id="1027" class="Primitive Operator">_⁺</a>        <a id="1037" class="Comment">-- The universe after 𝓤 is 𝓤 ⁺</a>
+          <a id="1078" class="Symbol">;</a> <a id="1080" href="Agda.Primitive.html#570" class="Primitive">Setω</a> <a id="1085" class="Symbol">to</a> <a id="1088" class="Primitive">𝓤ω</a>        <a id="1098" class="Comment">-- There is a universe 𝓤ω strictly above 𝓤₀, 𝓤₁, ⋯ , 𝓤ₙ, ⋯</a>
           <a id="1167" class="Symbol">)</a>
- <a id="1170" class="Keyword">using</a>    <a id="1179" class="Symbol">(</a><a id="1180" href="Agda.Primitive.html#961" class="Primitive Operator">_⊔_</a><a id="1183" class="Symbol">)</a>               <a id="1199" class="Comment">-- Least upper bound of two universes, e.g. 𝓤₀ ⊔ 𝓤₁ is 𝓤₁</a>
+ <a id="1170" class="Keyword">using</a>    <a id="1179" class="Symbol">(</a><a id="1180" href="Agda.Primitive.html#1019" class="Primitive Operator">_⊔_</a><a id="1183" class="Symbol">)</a>               <a id="1199" class="Comment">-- Least upper bound of two universes, e.g. 𝓤₀ ⊔ 𝓤₁ is 𝓤₁</a>
 </pre>
 
 <p>The elements of <code class="language-plaintext highlighter-rouge">Universe</code> are universe names. Given a name <code class="language-plaintext highlighter-rouge">𝓤</code>, the
@@ -58,7 +58,7 @@ refer to the complexity of equality rather than size.</p>
 these notes.</p>
 
 <pre class="Agda">
-<a id="Type"></a><a id="1941" href="Universes.html#1941" class="Function">Type</a> <a id="1946" class="Symbol">=</a> <a id="1948" class="Symbol">λ</a> <a id="1950" href="Universes.html#1950" class="Bound">ℓ</a> <a id="1952" class="Symbol">→</a> <a id="1954" href="Agda.Primitive.html#388" class="Primitive">Set</a> <a id="1958" href="Universes.html#1950" class="Bound">ℓ</a>
+<a id="Type"></a><a id="1941" href="Universes.html#1941" class="Function">Type</a> <a id="1946" class="Symbol">=</a> <a id="1948" class="Symbol">λ</a> <a id="1950" href="Universes.html#1950" class="Bound">ℓ</a> <a id="1952" class="Symbol">→</a> <a id="1954" href="Agda.Primitive.html#446" class="Primitive">Set</a> <a id="1958" href="Universes.html#1950" class="Bound">ℓ</a>
 
 <a id="_̇"></a><a id="1961" href="Universes.html#1961" class="Function Operator">_̇</a>   <a id="1966" class="Symbol">:</a> <a id="1968" class="Symbol">(</a><a id="1969" href="Universes.html#1969" class="Bound">𝓤</a> <a id="1971" class="Symbol">:</a> <a id="1973" href="Universes.html#885" class="Postulate">Universe</a><a id="1981" class="Symbol">)</a> <a id="1983" class="Symbol">→</a> <a id="1985" href="Universes.html#1941" class="Function">Type</a> <a id="1990" class="Symbol">(</a><a id="1991" href="Universes.html#1969" class="Bound">𝓤</a> <a id="1993" href="Universes.html#1027" class="Primitive Operator">⁺</a><a id="1994" class="Symbol">)</a>
 
