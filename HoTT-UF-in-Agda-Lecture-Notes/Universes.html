@@ -34,13 +34,13 @@ Agda</a>.</p>
 <a id="794" class="Keyword">module</a> <a id="801" href="Universes.html" class="Module">Universes</a> <a id="811" class="Keyword">where</a>
 
 <a id="818" class="Keyword">open</a> <a id="823" class="Keyword">import</a> <a id="830" href="Agda.Primitive.html" class="Module">Agda.Primitive</a> <a id="845" class="Keyword">public</a>
- <a id="853" class="Keyword">renaming</a> <a id="862" class="Symbol">(</a>
-            <a id="876" href="Agda.Primitive.html#800" class="Postulate">Level</a> <a id="882" class="Symbol">to</a> <a id="885" class="Postulate">Universe</a> <a id="894" class="Comment">-- We speak of universes rather than of levels.</a>
-          <a id="952" class="Symbol">;</a> <a id="954" href="Agda.Primitive.html#973" class="Primitive">lzero</a> <a id="960" class="Symbol">to</a> <a id="963" class="Primitive">𝓤₀</a>       <a id="972" class="Comment">-- Our first universe is called 𝓤₀</a>
-          <a id="1017" class="Symbol">;</a> <a id="1019" href="Agda.Primitive.html#989" class="Primitive">lsuc</a> <a id="1024" class="Symbol">to</a> <a id="1027" class="Primitive Operator">_⁺</a>        <a id="1037" class="Comment">-- The universe after 𝓤 is 𝓤 ⁺</a>
-          <a id="1078" class="Symbol">;</a> <a id="1080" href="Agda.Primitive.html#570" class="Primitive">Setω</a> <a id="1085" class="Symbol">to</a> <a id="1088" class="Primitive">𝓤ω</a>        <a id="1098" class="Comment">-- There is a universe 𝓤ω strictly above 𝓤₀, 𝓤₁, ⋯ , 𝓤ₙ, ⋯</a>
-          <a id="1167" class="Symbol">)</a>
- <a id="1170" class="Keyword">using</a>    <a id="1179" class="Symbol">(</a><a id="1180" href="Agda.Primitive.html#1019" class="Primitive Operator">_⊔_</a><a id="1183" class="Symbol">)</a>               <a id="1199" class="Comment">-- Least upper bound of two universes, e.g. 𝓤₀ ⊔ 𝓤₁ is 𝓤₁</a>
+ <a id="853" class="Keyword">renaming</a>
+  <a id="864" class="Symbol">(</a> <a id="866" href="Agda.Primitive.html#800" class="Postulate">Level</a> <a id="872" class="Symbol">to</a> <a id="875" class="Postulate">Universe</a> <a id="884" class="Comment">-- We speak of universes rather than of levels.</a>
+  <a id="934" class="Symbol">;</a> <a id="936" href="Agda.Primitive.html#973" class="Primitive">lzero</a> <a id="942" class="Symbol">to</a> <a id="945" class="Primitive">𝓤₀</a>       <a id="954" class="Comment">-- Our first universe is called 𝓤₀</a>
+  <a id="991" class="Symbol">;</a> <a id="993" href="Agda.Primitive.html#989" class="Primitive">lsuc</a> <a id="998" class="Symbol">to</a> <a id="1001" class="Primitive Operator">_⁺</a>        <a id="1011" class="Comment">-- The universe after 𝓤 is 𝓤 ⁺</a>
+  <a id="1044" class="Symbol">;</a> <a id="1046" href="Agda.Primitive.html#570" class="Primitive">Setω</a> <a id="1051" class="Symbol">to</a> <a id="1054" class="Primitive">𝓤ω</a>        <a id="1064" class="Comment">-- There is a universe 𝓤ω strictly above 𝓤₀, 𝓤₁, ⋯ , 𝓤ₙ, ⋯</a>
+  <a id="1125" class="Symbol">)</a>
+ <a id="1128" class="Keyword">using</a> <a id="1134" class="Symbol">(</a><a id="1135" href="Agda.Primitive.html#1019" class="Primitive Operator">_⊔_</a><a id="1138" class="Symbol">)</a>          <a id="1149" class="Comment">-- Least upper bound of two universes, e.g. 𝓤₀ ⊔ 𝓤₁ is 𝓤₁</a>
 </pre>
 
 <p>The elements of <code class="language-plaintext highlighter-rouge">Universe</code> are universe names. Given a name <code class="language-plaintext highlighter-rouge">𝓤</code>, the
@@ -58,44 +58,44 @@ refer to the complexity of equality rather than size.</p>
 these notes.</p>
 
 <pre class="Agda">
-<a id="Type"></a><a id="1941" href="Universes.html#1941" class="Function">Type</a> <a id="1946" class="Symbol">=</a> <a id="1948" class="Symbol">λ</a> <a id="1950" href="Universes.html#1950" class="Bound">ℓ</a> <a id="1952" class="Symbol">→</a> <a id="1954" href="Agda.Primitive.html#446" class="Primitive">Set</a> <a id="1958" href="Universes.html#1950" class="Bound">ℓ</a>
+<a id="Type"></a><a id="1891" href="Universes.html#1891" class="Function">Type</a> <a id="1896" class="Symbol">=</a> <a id="1898" class="Symbol">λ</a> <a id="1900" href="Universes.html#1900" class="Bound">ℓ</a> <a id="1902" class="Symbol">→</a> <a id="1904" href="Agda.Primitive.html#446" class="Primitive">Set</a> <a id="1908" href="Universes.html#1900" class="Bound">ℓ</a>
 
-<a id="_̇"></a><a id="1961" href="Universes.html#1961" class="Function Operator">_̇</a>   <a id="1966" class="Symbol">:</a> <a id="1968" class="Symbol">(</a><a id="1969" href="Universes.html#1969" class="Bound">𝓤</a> <a id="1971" class="Symbol">:</a> <a id="1973" href="Universes.html#885" class="Postulate">Universe</a><a id="1981" class="Symbol">)</a> <a id="1983" class="Symbol">→</a> <a id="1985" href="Universes.html#1941" class="Function">Type</a> <a id="1990" class="Symbol">(</a><a id="1991" href="Universes.html#1969" class="Bound">𝓤</a> <a id="1993" href="Universes.html#1027" class="Primitive Operator">⁺</a><a id="1994" class="Symbol">)</a>
+<a id="_̇"></a><a id="1911" href="Universes.html#1911" class="Function Operator">_̇</a> <a id="1914" class="Symbol">:</a> <a id="1916" class="Symbol">(</a><a id="1917" href="Universes.html#1917" class="Bound">𝓤</a> <a id="1919" class="Symbol">:</a> <a id="1921" href="Universes.html#875" class="Postulate">Universe</a><a id="1929" class="Symbol">)</a> <a id="1931" class="Symbol">→</a> <a id="1933" href="Universes.html#1891" class="Function">Type</a> <a id="1938" class="Symbol">(</a><a id="1939" href="Universes.html#1917" class="Bound">𝓤</a> <a id="1941" href="Universes.html#1001" class="Primitive Operator">⁺</a><a id="1942" class="Symbol">)</a>
 
-<a id="1997" href="Universes.html#1997" class="Bound">𝓤</a> <a id="1999" href="Universes.html#1961" class="Function Operator">̇</a>  <a id="2002" class="Symbol">=</a> <a id="2004" href="Universes.html#1941" class="Function">Type</a> <a id="2009" href="Universes.html#1997" class="Bound">𝓤</a>
+<a id="1945" href="Universes.html#1945" class="Bound">𝓤</a> <a id="1947" href="Universes.html#1911" class="Function Operator">̇</a> <a id="1949" class="Symbol">=</a> <a id="1951" href="Universes.html#1891" class="Function">Type</a> <a id="1956" href="Universes.html#1945" class="Bound">𝓤</a>
 </pre>
 
 <p>This says that given the universe level <code class="language-plaintext highlighter-rouge">𝓤</code>, we get the type universe
-<code class="language-plaintext highlighter-rouge">𝓤 ̇</code> , which lives in the next next type universe universe <code class="language-plaintext highlighter-rouge">𝓤 ⁺</code>. So
+<code class="language-plaintext highlighter-rouge">𝓤 ̇</code> , which lives in the next next type universe universe <code class="language-plaintext highlighter-rouge">𝓤 ⁺</code>. So
 the superscript dot notation is just a (postfix) synonym for (prefix)
 <code class="language-plaintext highlighter-rouge">Type</code>, which is just a synonym for <code class="language-plaintext highlighter-rouge">Set</code>, which means type in Agda.</p>
 
 <p>We name a few of the initial universes:</p>
 
 <pre class="Agda">
-<a id="𝓤₁"></a><a id="2362" href="Universes.html#2362" class="Function">𝓤₁</a> <a id="2365" class="Symbol">=</a> <a id="2367" href="Universes.html#963" class="Primitive">𝓤₀</a> <a id="2370" href="Universes.html#1027" class="Primitive Operator">⁺</a>
-<a id="𝓤₂"></a><a id="2372" href="Universes.html#2372" class="Function">𝓤₂</a> <a id="2375" class="Symbol">=</a> <a id="2377" href="Universes.html#2362" class="Function">𝓤₁</a> <a id="2380" href="Universes.html#1027" class="Primitive Operator">⁺</a>
-<a id="𝓤₃"></a><a id="2382" href="Universes.html#2382" class="Function">𝓤₃</a> <a id="2385" class="Symbol">=</a> <a id="2387" href="Universes.html#2372" class="Function">𝓤₂</a> <a id="2390" href="Universes.html#1027" class="Primitive Operator">⁺</a>
+<a id="𝓤₁"></a><a id="2309" href="Universes.html#2309" class="Function">𝓤₁</a> <a id="2312" class="Symbol">=</a> <a id="2314" href="Universes.html#945" class="Primitive">𝓤₀</a> <a id="2317" href="Universes.html#1001" class="Primitive Operator">⁺</a>
+<a id="𝓤₂"></a><a id="2319" href="Universes.html#2319" class="Function">𝓤₂</a> <a id="2322" class="Symbol">=</a> <a id="2324" href="Universes.html#2309" class="Function">𝓤₁</a> <a id="2327" href="Universes.html#1001" class="Primitive Operator">⁺</a>
+<a id="𝓤₃"></a><a id="2329" href="Universes.html#2329" class="Function">𝓤₃</a> <a id="2332" class="Symbol">=</a> <a id="2334" href="Universes.html#2319" class="Function">𝓤₂</a> <a id="2337" href="Universes.html#1001" class="Primitive Operator">⁺</a>
 </pre>
 
 <p>For notational convenience, we also define:</p>
 
 <pre class="Agda">
-<a id="_⁺⁺"></a><a id="2462" href="Universes.html#2462" class="Function Operator">_⁺⁺</a> <a id="2466" class="Symbol">:</a> <a id="2468" href="Universes.html#885" class="Postulate">Universe</a> <a id="2477" class="Symbol">→</a> <a id="2479" href="Universes.html#885" class="Postulate">Universe</a>
-<a id="2488" href="Universes.html#2488" class="Bound">𝓤</a> <a id="2490" href="Universes.html#2462" class="Function Operator">⁺⁺</a> <a id="2493" class="Symbol">=</a> <a id="2495" href="Universes.html#2488" class="Bound">𝓤</a> <a id="2497" href="Universes.html#1027" class="Primitive Operator">⁺</a> <a id="2499" href="Universes.html#1027" class="Primitive Operator">⁺</a>
+<a id="_⁺⁺"></a><a id="2409" href="Universes.html#2409" class="Function Operator">_⁺⁺</a> <a id="2413" class="Symbol">:</a> <a id="2415" href="Universes.html#875" class="Postulate">Universe</a> <a id="2424" class="Symbol">→</a> <a id="2426" href="Universes.html#875" class="Postulate">Universe</a>
+<a id="2435" href="Universes.html#2435" class="Bound">𝓤</a> <a id="2437" href="Universes.html#2409" class="Function Operator">⁺⁺</a> <a id="2440" class="Symbol">=</a> <a id="2442" href="Universes.html#2435" class="Bound">𝓤</a> <a id="2444" href="Universes.html#1001" class="Primitive Operator">⁺</a> <a id="2446" href="Universes.html#1001" class="Primitive Operator">⁺</a>
 </pre>
 
 <p>The following is sometimes useful:</p>
 
 <pre class="Agda">
-<a id="universe-of"></a><a id="2562" href="Universes.html#2562" class="Function">universe-of</a> <a id="2574" class="Symbol">:</a> <a id="2576" class="Symbol">{</a><a id="2577" href="Universes.html#2577" class="Bound">𝓤</a> <a id="2579" class="Symbol">:</a> <a id="2581" href="Universes.html#885" class="Postulate">Universe</a><a id="2589" class="Symbol">}</a> <a id="2591" class="Symbol">(</a><a id="2592" href="Universes.html#2592" class="Bound">X</a> <a id="2594" class="Symbol">:</a> <a id="2596" href="Universes.html#2577" class="Bound">𝓤</a> <a id="2598" href="Universes.html#1961" class="Function Operator">̇</a> <a id="2600" class="Symbol">)</a> <a id="2602" class="Symbol">→</a> <a id="2604" href="Universes.html#885" class="Postulate">Universe</a>
-<a id="2613" href="Universes.html#2562" class="Function">universe-of</a> <a id="2625" class="Symbol">{</a><a id="2626" href="Universes.html#2626" class="Bound">𝓤</a><a id="2627" class="Symbol">}</a> <a id="2629" href="Universes.html#2629" class="Bound">X</a> <a id="2631" class="Symbol">=</a> <a id="2633" href="Universes.html#2626" class="Bound">𝓤</a>
+<a id="universe-of"></a><a id="2509" href="Universes.html#2509" class="Function">universe-of</a> <a id="2521" class="Symbol">:</a> <a id="2523" class="Symbol">{</a><a id="2524" href="Universes.html#2524" class="Bound">𝓤</a> <a id="2526" class="Symbol">:</a> <a id="2528" href="Universes.html#875" class="Postulate">Universe</a><a id="2536" class="Symbol">}</a> <a id="2538" class="Symbol">(</a><a id="2539" href="Universes.html#2539" class="Bound">X</a> <a id="2541" class="Symbol">:</a> <a id="2543" href="Universes.html#2524" class="Bound">𝓤</a> <a id="2545" href="Universes.html#1911" class="Function Operator">̇</a> <a id="2547" class="Symbol">)</a> <a id="2549" class="Symbol">→</a> <a id="2551" href="Universes.html#875" class="Postulate">Universe</a>
+<a id="2560" href="Universes.html#2509" class="Function">universe-of</a> <a id="2572" class="Symbol">{</a><a id="2573" href="Universes.html#2573" class="Bound">𝓤</a><a id="2574" class="Symbol">}</a> <a id="2576" href="Universes.html#2576" class="Bound">X</a> <a id="2578" class="Symbol">=</a> <a id="2580" href="Universes.html#2573" class="Bound">𝓤</a>
 </pre>
 
 <p>Fixities:</p>
 
 <pre class="Agda">
-<a id="2671" class="Keyword">infix</a>  <a id="2678" class="Number">1</a> <a id="2680" href="Universes.html#1961" class="Function Operator">_̇</a>
+<a id="2618" class="Keyword">infix</a>  <a id="2625" class="Number">1</a> <a id="2627" href="Universes.html#1911" class="Function Operator">_̇</a>
 </pre>
 
 <p><a href="HoTT-UF-Agda.html#contents"><sub>Table of contents ⇑</sub></a></p>
