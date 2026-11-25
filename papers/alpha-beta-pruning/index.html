@@ -1,0 +1,41 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+<head>
+<meta charset="utf-8">
+<TITLE>Alpha-Beta Pruning via Monadic Continuations</TITLE>
+</head>
+<BODY>
+
+<H3><a href="https://arxiv.org/abs/2611.32320">Alpha-Beta Pruning via Monadic Continuations</a></H3>
+<hr>
+Haskell programs for the paper by Martin Escardo and <a href="https://paulooliva.github.io">Paulo Oliva</a>,
+<a href="https://arxiv.org/abs/2611.32320">arXiv:2611.32320</a>, November 2026.
+There is also an <a href="https://martinescardo.github.io/TypeTopology/Games.AlphaBeta.index.html">Agda companion</a>.
+<hr>
+
+There is one program for each section of the paper with code, following
+the paper's code in the paper's order, and the two appendices are the
+modules <a href="Utils.hs">Utils.hs</a> and <a href="K.hs">K.hs</a>,
+copied verbatim from the paper. Every addition to the paper's code is
+marked by a comment <code>ADDED</code>.
+
+<p>
+Each program traces the plays it evaluates on standard error and
+prints its result on standard output:
+
+<ul>
+<li><a href="Section2.hs">Section2.hs</a>, exhaustive search via the continuation monad: 36 plays, then 6.</li>
+<li><a href="Section3.hs">Section3.hs</a>, alpha-beta pruning via the reader monad: 18 plays, then 6.</li>
+<li><a href="Section5.hs">Section5.hs</a>, optimal plays: 18 plays, then (6,[1,0,0,0]).</li>
+<li><a href="Section6.hs">Section6.hs</a>, Tic-Tac-Toe: 9335 plays, then (0,[0,4,1,2,6,3,5,7,8]).</li>
+</ul>
+
+<p>
+For example, <code>runghc Section6.hs</code> runs the last one. The
+programs use the package <code>transformers</code>, which comes with
+GHC.
+
+<hr>
+<A HREF="../index.html">Martin Escardo's publications and preprints</A>
+</BODY>
+</HTML>
